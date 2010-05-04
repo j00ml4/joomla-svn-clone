@@ -42,6 +42,7 @@ class UsersModelRemind extends JModelForm
 	 * Override preprocessForm to load the user plugin group instead of content.
 	 *
 	 * @param	object	A form object.
+	 * @param	mixed	The data expected for the form.
 	 * @throws	Exception if there is an error in the form event.
 	 * @since	1.6
 	 */

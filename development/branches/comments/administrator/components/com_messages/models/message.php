@@ -112,23 +112,21 @@ class MessagesModelMessage extends JModelAdmin
 	}
 
 	/**
-	 * Method to load the form data.
+	 * Method to get the data that should be injected in the form.
 	 *
-	 * @param	JForm	The form object.
-	 * @throws	Exception if there is an error in the data load.
+	 * @return	mixed	The data for the form.
 	 * @since	1.6
 	 */
-	protected function loadFormData(JForm $form)
+	protected function getFormData()
 	{
 		// Check the session for previously entered form data.
 		$data = JFactory::getApplication()->getUserState('com_messages.edit.message.data', array());
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+		if (empty($data)) {
+			$data = $this->getItem();
 		}
+
+		return $data;
 	}
 
 	/**

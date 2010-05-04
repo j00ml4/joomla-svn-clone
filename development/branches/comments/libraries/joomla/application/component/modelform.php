@@ -128,11 +128,15 @@ class JModelForm extends JModel
 		try {
 			$form = JForm::getInstance($name, $data, $options, false, $xpath);
 
-			// Allow for additional modification of the form, and events to be triggered.
-			$this->preprocessForm($form);
+			// Get the data for the form.
+			$data = $this->getFormData();
 
-			// Load the data into the form.
-			$this->loadFormData($form);
+			// Allow for additional modification of the form, and events to be triggered.
+			// We pass the data because plugins may require it.
+			$this->preprocessForm($form, $data);
+
+			// Load the data into the form after the plugins have operated.
+			$form->bind($data);
 
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
@@ -146,24 +150,26 @@ class JModelForm extends JModel
 	}
 
 	/**
-	 * Method to load the form data.
+	 * Method to get the data that should be injected in the form.
 	 *
-	 * @param	JForm	The form object.
-	 * @throws	Exception if there is an error in the data load.
+	 * @return	array	The default data is an empty array.
+	 * @since	1.6
 	 */
-	protected function loadFormData(JForm $form)
+	protected function getFormData()
 	{
+		return array();
 	}
 
 	/**
 	 * Method to allow derived classes to preprocess the form.
 	 *
 	 * @param	object	A form object.
+	 * @param	mixed	The data expected for the form.
 	 * @param	string	The name of the plugin group to import (defaults to "content").
 	 * @throws	Exception if there is an error in the form event.
 	 * @since	1.6
 	 */
-	protected function preprocessForm(JForm $form, $group = 'content')
+	protected function preprocessForm(JForm $form, $data, $group = 'content')
 	{
 		// Import the approriate plugin group.
 		JPluginHelper::importPlugin($group);
@@ -172,7 +178,7 @@ class JModelForm extends JModel
 		$dispatcher	= JDispatcher::getInstance();
 
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onContentPrepareForm', array($form));
+		$results = $dispatcher->trigger('onContentPrepareForm', array($form, $data));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true)) {

@@ -56,13 +56,12 @@ class BannersModelDownload extends JModelForm
 	}
 
 	/**
-	 * Method to load the form data.
+	 * Method to get the data that should be injected in the form.
 	 *
-	 * @param	JForm	The form object.
-	 * @throws	Exception if there is an error in the data load.
+	 * @return	mixed	The data for the form.
 	 * @since	1.6
 	 */
-	protected function loadFormData(JForm $form)
+	protected function getFormData()
 	{
 		$form->setValue('basename',		$this->getState('basename'));
 		$form->setValue('compressed',	$this->getState('compressed'));
