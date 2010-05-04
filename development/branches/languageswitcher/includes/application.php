@@ -56,7 +56,7 @@ final class JSite extends JApplication
 		if (empty($options['language'])) {
 			$sef = JRequest::getString('lang',null);
 			$table = JTable::getInstance('Language');
-			if ($table->load(array('sef'=>$sef))) {
+			if (!empty($sef) && $table->load(array('sef'=>$sef))) {
 				$lang = $table->lang_code;
 				// Make sure that the sef's language exists
 				if ($lang && JLanguage::exists($lang)) {
