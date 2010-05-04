@@ -11,7 +11,8 @@ defined('JPATH_BASE') or die;
 
 /**
  * JForm's helper class.
- * Provides a storage for filesystem's paths where JForm's entities resides and methods for working with them.
+ * Provides a storage for filesystem's paths where JForm's entities resides and methods for creating this entities.
+ * Also stores objects with entities' prototypes for further reusing.
  *
  * @package		Joomla.Framework
  * @subpackage	Form
@@ -35,6 +36,85 @@ class JFormHelper
 	 *
 	 */
 	protected static $paths;
+
+	/**
+	 * Static array of JForm's entity objects for re-use.
+	 * All field's and rule's prototypes are here.
+	 *
+	 * Array's structure:
+	 * <code>
+	 * entities:
+	 * 	{ENTITY_NAME}:
+	 *			{KEY}: {OBJECT}
+	 * </code>
+	 *
+	 * @var		array
+	 * @since	1.6
+	 */
+	protected static $entities = array();
+
+	/**
+	 * Method to load a form field object given a type.
+	 *
+	 * @param	string	$type	The field type.
+	 * @param	boolean	$new	Flag to toggle whether we should get a new instance of the object.
+	 *
+	 * @return	mixed	JFormField object on success, false otherwise.
+	 * @since	1.6
+	 */
+	public static function loadFieldType($type, $new = true)
+	{
+		return self::loadType('field', $type, $new);
+	}
+
+	/**
+	 * Method to load a form rule object given a type.
+	 *
+	 * @param	string	$type	The rule type.
+	 * @param	boolean	$new	Flag to toggle whether we should get a new instance of the object.
+	 *
+	 * @return	mixed	JFormRule object on success, false otherwise.
+	 * @since	1.6
+	 */
+	public static function loadRuleType($type, $new = true)
+	{
+		return self::loadType('rule', $type, $new);
+	}
+
+	/**
+	 * Method to load a form entity object given a type.
+	 * Each type is loaded only once and then used as a prototype for other objects of same type.
+	 * Please, use this method only with those entities which support types (forms aren't support them).
+	 *
+	 * @param	string	$type	The entity type.
+	 * @param	boolean	$new	Flag to toggle whether we should get a new instance of the object.
+	 *
+	 * @return	mixed	Entity object on success, false otherwise.
+	 * @since	1.6
+	 */
+	protected static function loadType($entity, $type, $new = true)
+	{
+		// Reference to an array with current entity's type instances
+		$types =& self::$entities[$entity];
+
+		// Initialize variables.
+		$key	= md5($type);
+		$class	= '';
+
+		// Return an entity object if it already exists and we don't need a new one.
+		if (isset($types[$key]) && $new === false) {
+			return $types[$key];
+		}
+
+		if ( ($class = self::loadClass($entity, $type)) !== false) {
+			// Instantiate a new type object.
+			$types[$key] = new $class();
+			return $types[$key];
+		}
+		else {
+			return false;
+		}
+	}
 
 	/**
 	 * Attempt to import the JFormField class file if it isn't already imported.
@@ -72,7 +152,7 @@ class JFormHelper
 	 *
 	 * @return	mixed	Class name on success or false otherwise.
 	 */
-	public static function loadClass($entity, $type)
+	protected static function loadClass($entity, $type)
 	{
 		$class = 'JForm'.ucfirst($entity).ucfirst($type);
 		if (class_exists($class)) return $class;

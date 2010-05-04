@@ -68,20 +68,12 @@ class JForm
 	protected $xml;
 
 	/**
-	 * Static array of JForm's entity objects for re-use.
-	 * All form's instances, field's and rule's prototypes are here.
-	 *
-	 * Array's structure:
-	 * <code>
-	 * entities:
-	 * 	{ENTITY_NAME}:
-	 *			{KEY}: {OBJECT}
-	 * </code>
+	 * Form instances.
 	 *
 	 * @var		array
 	 * @since	1.6
 	 */
-	protected static $entities = array();
+	protected static $forms = array();
 
 	/**
 	 * Method to instantiate the form object.
@@ -1146,16 +1138,15 @@ class JForm
 	 * @return	mixed	The XML element object for the field or boolean false on error.
 	 * @since	1.6
 	 */
-	protected function & findField($name, $group = null)
+	protected function findField($name, $group = null)
 	{
 		// Initialize variables.
-		$false		= false;
 		$element	= false;
 		$fields		= array();
 
 		// Make sure there is a valid JForm XML document.
 		if (!$this->xml instanceof JXMLElement) {
-			return $false;
+			return false;
 		}
 
 		// Let's get the appropriate field element based on the method arguments.
@@ -1174,7 +1165,7 @@ class JForm
 
 			// Make sure something was found.
 			if (!$fields) {
-				return $false;
+				return false;
 			}
 
 			// Use the first correct match in the given group.
@@ -1198,7 +1189,7 @@ class JForm
 
 			// Make sure something was found.
 			if (!$fields) {
-				return $false;
+				return false;
 			}
 
 			// Search through the fields for the right one.
@@ -1433,7 +1424,7 @@ class JForm
 	}
 
 	/**
-	 * Method to load a form field object given a type.
+	 * Proxy for {@link JFormHelper::loadFieldType()}.
 	 *
 	 * @param	string	$type	The field type.
 	 * @param	boolean	$new	Flag to toggle whether we should get a new instance of the object.
@@ -1441,13 +1432,13 @@ class JForm
 	 * @return	mixed	JFormField object on success, false otherwise.
 	 * @since	1.6
 	 */
-	protected function & loadFieldType($type, $new = true)
+	protected function loadFieldType($type, $new = true)
 	{
-		return self::loadType('field', $type, $new);
+		return JFormHelper::loadFieldType($type, $new);
 	}
 
 	/**
-	 * Method to load a form rule object given a type.
+	 * Proxy for {@link JFormHelper::loadRuleType()}.
 	 *
 	 * @param	string	$type	The rule type.
 	 * @param	boolean	$new	Flag to toggle whether we should get a new instance of the object.
@@ -1455,45 +1446,9 @@ class JForm
 	 * @return	mixed	JFormRule object on success, false otherwise.
 	 * @since	1.6
 	 */
-	protected function & loadRuleType($type, $new = true)
+	protected function loadRuleType($type, $new = true)
 	{
-		return self::loadType('rule', $type, $new);
-	}
-
-	/**
-	 * Method to load a form entity object given a type.
-	 * Each type is loaded only once and then used as a prototype for other objects of same type.
-	 * Please, use this method only with those entities which support types (forms aren't support them).
-	 *
-	 * @param	string	$type	The entity type.
-	 * @param	boolean	$new	Flag to toggle whether we should get a new instance of the object.
-	 *
-	 * @return	mixed	Entity object on success, false otherwise.
-	 * @since	1.6
-	 */
-	protected function & loadType($entity, $type, $new = true)
-	{
-		// Reference to an array with current entity's type instances
-		$types =& self::$entities[$entity];
-
-		// Initialize variables.
-		$key	= md5($type);
-		$false	= false;
-		$class	= '';
-
-		// Return an entity object if it already exists and we don't need a new one.
-		if (isset($types[$key]) && $new === false) {
-			return $types[$key];
-		}
-
-		if ( ($class = JFormHelper::loadClass($entity, $type)) !== false) {
-			// Instantiate a new type object.
-			$types[$key] = new $class();
-			return $types[$key];
-		}
-		else {
-			return $false;
-		}
+		return JFormHelper::loadRuleType($type, $new);
 	}
 
 	/**
@@ -1672,7 +1627,7 @@ class JForm
 	public static function getInstance($name, $data = null, $options = array(), $replace = true, $xpath = false)
 	{
 		// Reference to array with form instances
-		$forms =& self::$entities['form'];
+		$forms =& self::$forms;
 
 		// Only instantiate the form if it does not already exist.
 		if (!isset($forms[$name])) {
