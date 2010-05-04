@@ -56,6 +56,9 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->form->getLabel('language'); ?>
 			<?php echo $this->form->getInput('language'); ?>
 
+			<?php echo $this->form->getLabel('featured'); ?>
+			<?php echo $this->form->getInput('featured'); ?>
+
 			<?php echo $this->form->getLabel('id'); ?>
 			<?php echo $this->form->getInput('id'); ?>
 
@@ -73,7 +76,6 @@ JHtml::_('behavior.formvalidation');
 				<p><?php echo empty($this->item->id) ? JText::_('COM_CONTACT_DETAILS') : JText::sprintf('COM_CONTACT_EDIT_DETAILS', $this->item->id); ?></p>
 				<?php echo $this->form->getLabel('image'); ?>
 				<?php echo $this->form->getInput('image'); ?>
-
 
 				<?php echo $this->form->getLabel('con_position'); ?>
 				<?php echo $this->form->getInput('con_position'); ?>
@@ -101,6 +103,9 @@ JHtml::_('behavior.formvalidation');
 
 				<?php echo $this->form->getLabel('mobile'); ?>
 				<?php echo $this->form->getInput('mobile'); ?>
+
+				<?php echo $this->form->getLabel('fax'); ?>
+				<?php echo $this->form->getInput('fax'); ?>
 
 				<?php echo $this->form->getLabel('webpage'); ?>
 				<?php echo $this->form->getInput('webpage'); ?>

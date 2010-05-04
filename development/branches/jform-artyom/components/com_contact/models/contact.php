@@ -70,14 +70,14 @@ class ContactModelContact extends JModelItem
 
 				$query->select($this->getState('item.select', 'a.*'));
 				$query->from('#__contact_details AS a');
-				
+
 				// Filter by start and end dates.
 				$nullDate = $db->Quote($db->getNullDate());
 				$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
-				
+
 				$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
 				$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
-				
+
 				// Join on category table.
 				$query->select('c.title AS category_title, c.alias AS category_alias, c.access AS category_access');
 				$query->join('LEFT', '#__categories AS c on c.id = a.catid');
@@ -105,7 +105,7 @@ class ContactModelContact extends JModelItem
 				}
 
 				if (empty($data)) {
-					throw new Exception(JText::_('Contact_Error_Contact_not_found'), 404);
+					throw new Exception(JText::_('COM_CONTACT_ERROR_CONTACT_NOT_FOUND'), 404);
 				}
 
 
