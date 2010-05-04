@@ -61,7 +61,7 @@ class UsersModelRegistration extends JModelForm
 		// Activate the user.
 		$user = JFactory::getUser($userId);
 
-		if ($config->get('useradminactivation'))
+		if ($config->get('useractivation') == 2)
 		{
 			// Compile the admin notification mail values.
 			$data = $user->getProperties();
@@ -285,9 +285,10 @@ class UsersModelRegistration extends JModelForm
 		// Prepare the data for the user object.
 		$data['email']		= $data['email1'];
 		$data['password']	= $data['password1'];
+		$useractivation = $params->get('useractivation');
 
 		// Check if the user needs to activate their account.
-		if ($params->get('useractivation') || $params->get('useradminactivation')) {
+		if (($useractivation == 1) || ($useractivation == 2)) {
 			jimport('joomla.user.helper');
 			$data['activation'] = JUtility::getHash(JUserHelper::genRandomPassword());
 			$data['block'] = 1;
@@ -316,7 +317,7 @@ class UsersModelRegistration extends JModelForm
 		$data['siteurl']	= JUri::base();
 
 		// Handle account activation/confirmation e-mails.
-		if ($params->get('useradminactivation'))
+		if ($useractivation == 2)
 		{
 			// Set the link to confirm the user email.
 			$uri = JURI::getInstance();
@@ -339,7 +340,7 @@ class UsersModelRegistration extends JModelForm
 				$data['password_clear']
 			);
 		}
-		else if ($params->get('useractivation'))
+		else if ($useractivation == 1)
 		{
 			// Set the link to activate the user account.
 			$uri = JURI::getInstance();
@@ -390,7 +391,7 @@ class UsersModelRegistration extends JModelForm
 			return false;
 		}
 
-		return ($params->get('useradminactivation')) ? 'adminactivate' : (($params->get('useractivation')) ? 'useractivate' : $user->id);
+		return ($useractivation == 2) ? 'adminactivate' : (($useractivation == 1) ? 'useractivate' : $user->id);
 	}
 
 }
