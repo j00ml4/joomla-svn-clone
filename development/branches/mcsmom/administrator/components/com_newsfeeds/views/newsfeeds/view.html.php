@@ -60,16 +60,11 @@ class NewsfeedsViewNewsfeeds extends JView
 			JToolBarHelper::editList('newsfeed.edit','JTOOLBAR_EDIT');
 		}
 		if ($canDo->get('core.edit.state')) {
-
-				JToolBarHelper::divider();
-				JToolBarHelper::custom('newsfeeds.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
-				JToolBarHelper::custom('newsfeeds.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
-
-
-				JToolBarHelper::divider();
-
-					JToolBarHelper::archiveList('newsfeeds.archive','JTOOLBAR_ARCHIVE');
-
+			JToolBarHelper::divider();
+			JToolBarHelper::custom('newsfeeds.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::custom('newsfeeds.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+			JToolBarHelper::divider();
+			JToolBarHelper::archiveList('newsfeeds.archive','JTOOLBAR_ARCHIVE');
 		}
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'newsfeeds.delete','JTOOLBAR_EMPTY_TRASH');

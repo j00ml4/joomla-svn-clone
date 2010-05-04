@@ -96,25 +96,22 @@ class ContentViewArticle extends JView
 		// Process the content plugins.
 		//
 		JPluginHelper::importPlugin('content');
-		//$results = $dispatcher->trigger('onPrepareContent', array (& $article, & $params, $limitstart));
-		if ($item->params->get('show_intro', 1) == 1)
-		{
+		$results = $dispatcher->trigger('onContentPrepare', array ('com_content.article', $item, $params, $offset));
+		if ($item->params->get('show_intro', 1) == 1) {
 			$item->text = $item->introtext . ' ' . $item->fulltext;
-		}
-		else
-		{
+		} else {
 			$item->text = $item->fulltext;
 		}
 		$item->text = JHtml::_('content.prepare', $item->text);
 
 		$item->event = new stdClass();
-		$results = $dispatcher->trigger('onAfterDisplayTitle', array(&$item, &$params, $offset));
+		$results = $dispatcher->trigger('onContentAfterTitle', array('com_content.article', &$item, &$params, $offset));
 		$item->event->afterDisplayTitle = trim(implode("\n", $results));
 
-		$results = $dispatcher->trigger('onBeforeDisplayContent', array(&$item, &$params, $offset));
+		$results = $dispatcher->trigger('onContentBeforeDisplay', array('com_content.article', &$item, &$params, $offset));
 		$item->event->beforeDisplayContent = trim(implode("\n", $results));
 
-		$results = $dispatcher->trigger('onAfterDisplayContent', array(&$item, &$params, $offset));
+		$results = $dispatcher->trigger('onContentAfterDisplay', array('com_content.article', &$item, &$params, $offset));
 		$item->event->afterDisplayContent = trim(implode("\n", $results));
 
 		$this->assignRef('state', $state);

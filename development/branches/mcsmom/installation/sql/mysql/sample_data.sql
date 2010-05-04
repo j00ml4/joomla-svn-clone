@@ -160,7 +160,6 @@ INSERT IGNORE INTO `#__banner_clients` VALUES
 --
 
 INSERT IGNORE INTO `#__categories` VALUES
-
 (1, 0, 0, 0, 121, 0, '', 'system', 'ROOT', 'root', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{}', '', '', '', 0, '2010-04-30 20:26:56', 0, '0000-00-00 00:00:00', 0, ''),
 (11, 28, 29, 36, 37, 2, 'sample-data-content/news', 'com_content', 'News', 'news', '', 'The top articles category.', 1, 0, '0000-00-00 00:00:00', 1, '{"target":"","image":"-1"}', '', '', '{"page_title":"","author":"","robots":""}', 0, '2010-01-24 11:25:26', 0, '0000-00-00 00:00:00', 0, ''),
 (12, 29, 29, 28, 35, 2, 'sample-data-content/countries', 'com_content', 'Countries', 'countries', '', 'The latest news from the Joomla! Team', 1, 0, '0000-00-00 00:00:00', 1, '{"target":"","image":"-1"}', '', '', '{"page_title":"","author":"","robots":""}', 0, '2010-01-24 11:25:26', 0, '0000-00-00 00:00:00', 0, ''),
@@ -221,6 +220,7 @@ INSERT IGNORE INTO `#__categories` VALUES
 (74, 110, 49, 108, 109, 4, 'contacts/shop-site/fruit/z', 'com_contact', 'Z', 'z', '', '', 1, 0, '0000-00-00 00:00:00', 1, '{"target":"","image":"-1"}', '', '', '{"page_title":"","author":"","robots":"","rights":""}', 0, '2010-03-22 00:36:41', 0, '0000-00-00 00:00:00', 0, ''),
 (75, 111, 29, 48, 51, 2, 'sample-data-content/fruit-shop-site', 'com_content', 'Fruit Shop Site', 'fruit-shop-site', '', 'This category will hold all articles and article categories for the shop sample site.', 1, 0, '0000-00-00 00:00:00', 1, '{"target":"","image":"-1"}', '', '', '{"page_title":"","author":"","robots":"","rights":""}', 0, '2010-03-22 00:36:41', 0, '0000-00-00 00:00:00', 0, ''),
 (76, 113, 75, 49, 50, 3, 'sample-data-content/fruit-shop-site/growers', 'com_content', 'Growers', 'growers', '', 'Each supplier will have a page that can be edited. To see this in action you will need to create users who are suppliers and assign them as authors to the suppliers articles.', 1, 0, '0000-00-00 00:00:00', 1, '{"target":"","image":"-1"}', '', '', '{"page_title":"","author":"","robots":"","rights":""}', 0, '2010-03-26 13:06:45', 0, '0000-00-00 00:00:00', 0, '');
+
 --
 -- Update rgt value of root category row
 --
@@ -834,7 +834,6 @@ INSERT INTO `#__social_threads` VALUES
 --
 
 INSERT INTO `#__template_styles` (`id`, `template`, `client_id`, `home`, `title`, `params`) VALUES
-
 (100, 'rhuk_milkyway', 0, 0, 'rhuk_milkyway Green', '{"colorVariation":"green","backgroundVariation":"green","widthStyle":"fmax"}'),
 (111, 'rhuk_milkyway', 0, 0, 'rhuk_milkyway Red', '{"colorVariation":"orange","backgroundVariation":"orange","widthStyle":"small"}'),
 (113, 'beez_20', 0, 0, 'Default Nature', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"-1","navposition":"left","templatecolor":"nature","html5":"0"}');
