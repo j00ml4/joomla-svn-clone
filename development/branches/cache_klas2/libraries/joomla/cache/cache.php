@@ -60,7 +60,7 @@ class JCache extends JObject
 
 		// Overwrite default options with given options
 		foreach ($options AS $option=>$value) {
-			if (isset($options[$option])) {
+			if (isset($options[$option]) && $options[$option] !=='') {
 				$this->_options[$option] = $options[$option];
 			}
 		}
