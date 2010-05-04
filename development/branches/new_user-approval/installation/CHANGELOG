@@ -27,6 +27,11 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+04-May-2010 Jean-Marie Simonet
+$ Refactored ini files structure for test alphas
+$ ^ A few fixes for Hathor
+# Bug fixes
+
 04-May-2010 Andrew Eddie
  ^ Merge patched to cache the query building in JModelList (Christophe Demko).
  + Merge Hathor administrator template by Andrea Tarr.
@@ -42,7 +47,10 @@ $ -> Language fix or change
  ^ Add better form and data handling support to JModelForm.
  # Fix issue with forms and profile in frontend com_users.
  # Fix issue with forms and profile in backend com_users.
- ^ Rename onPrepareContent event to onContentPrepare.
+ ^ Renamed onPrepareContent event to onContentPrepare.
+ ^ Renamed onBeforeContentSave and onAfterContentSave events to onContentBeforeSave and onContentAfterSave.
+ ^ Renamed onAfterDisplayTitle, onBeforeDisplayContent and onAfterDisplayContent events
+   to onContentAfterTitle, onContentBeforeDisplay, onContentAfterDisplay.
 
 3-May-2010 Jean-Marie Simonet
 # Fixed [20314] (Thanks Phil Snell). Added/consolidated some strings in com_messages
