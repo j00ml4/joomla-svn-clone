@@ -263,7 +263,7 @@ class ContentModelCategory extends JModelItem
 	}
 
 	/**
-	 * Get the parent categorie.
+	 * Get the parent category.
 	 *
 	 * @param	int		An optional category id. If not supplied, the model state 'category.id' will be used.
 	 *

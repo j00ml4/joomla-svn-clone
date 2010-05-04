@@ -81,11 +81,32 @@ class ContentModelCategories extends JModel
 
 		return parent::getStoreId($id);
 	}
+	public function getCategory()
+	{
+		if(!is_object($this->_item))
+		{
+			$app = JFactory::getApplication();
+			$menu = $app->getMenu();
+			$active = $menu->getActive();
+			$params = new JRegistry();
+			if($active)
+			{
+				$params->loadJSON($active->params);
+			}
+			$options = array();
+			$options['countItems'] = $params->get('show_item_count', 0) || $params->get('show_empty_categories', 0);
+			$categories = JCategories::getInstance('Content', $options);
+			$this->_item = $categories->get($this->getState('category.id', 'root'));
 
+		}
+
+		return $this->_item;
+	}
+	
 	/**
-	 * redefine the function an add some properties to make the styling more easy
+	 * redefine the function and add some properties to make the styling more easy
 	 *
-	 * @return mixed An array of data items on success, false on failure.
+	 * @return mixed  array of data items on success, false on failure.
 	 */
 	public function getItems()
 	{
