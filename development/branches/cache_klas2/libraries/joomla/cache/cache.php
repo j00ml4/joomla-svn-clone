@@ -31,7 +31,7 @@ JLoader::register('JCacheController', dirname(__FILE__).DS.'controller.php');
 class JCache extends JObject
 {
 
-	public $_handler;
+	public static $_handler;
 	public $_options;
 
 
@@ -371,13 +371,13 @@ class JCache extends JObject
 	 * @since	1.5
 	 */
 	public function _getStorage()
-	{
-		if (is_a($this->_handler, 'JCacheStorage')) {
-			return $this->_handler;
+	{	
+		if (isset(self::$_handler[$this->_options['storage']]) && is_a(self::$_handler[$this->_options['storage']], 'JCacheStorage')) {
+			return self::$_handler[$this->_options['storage']];
 		}
 
-		$this->_handler = &JCacheStorage::getInstance($this->_options['storage'], $this->_options);
-		return $this->_handler;
+		self::$_handler[$this->_options['storage']] = &JCacheStorage::getInstance($this->_options['storage'], $this->_options);
+		return self::$_handler[$this->_options['storage']];
 	}
 
 	/**
