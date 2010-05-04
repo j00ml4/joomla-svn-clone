@@ -86,7 +86,7 @@ abstract class JHtmlMenu
 
 			$db->setQuery($query);
 			$items = $db->loadObjectList();
-var_dump("coucou$items");
+
 			// Collate menu items based on menutype
 			$lookup = array();
 			foreach ($items as &$item) {
