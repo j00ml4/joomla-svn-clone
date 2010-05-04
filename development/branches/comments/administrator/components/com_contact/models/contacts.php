@@ -143,6 +143,7 @@ class ContactModelContacts extends JModelList
 		}
 		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
 
+		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
 	}
 }

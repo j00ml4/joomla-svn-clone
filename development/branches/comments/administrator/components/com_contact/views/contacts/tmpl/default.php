@@ -13,12 +13,8 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 JHTML::_('script','multiselect.js');
-$user		= JFactory::getUser();
-$userId		= $user->get('id');
-$orderCol	= $this->state->get('list.ordering');
-$orderDirn	= $this->state->get('list.direction');
-$orderDirUp = $orderDirn == 'asc' ? 'contacts.orderup' : 'contacts.orderdown';
-$orderDirDown = $orderDirn == 'asc' ? 'contacts.orderdown' : 'contacts.orderup';
+$user	= &JFactory::getUser();
+$userId	= $user->get('id');
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 ?>
