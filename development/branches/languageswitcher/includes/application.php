@@ -56,15 +56,16 @@ final class JSite extends JApplication
 		if (empty($options['language'])) {
 			$sef = JRequest::getString('lang',null);
 			$table = JTable::getInstance('Language');
-			$table->load(array('sef'=>$sef));
-			$lang = $table->lang_code;
-			// Make sure that the sef's language exists
-			if ($lang && JLanguage::exists($lang)) {
-				$config = JFactory::getConfig();
-				$cookie_domain = $config->get('config.cookie_domain', '');
-				$cookie_path = $config->get('config.cookie_path', '/');
-				setcookie(JUtility::getHash('language'), $lang, time() + 365 * 86400, $cookie_path, $cookie_domain);
-				$options['language'] = $lang;
+			if ($table->load(array('sef'=>$sef))) {
+				$lang = $table->lang_code;
+				// Make sure that the sef's language exists
+				if ($lang && JLanguage::exists($lang)) {
+					$config = JFactory::getConfig();
+					$cookie_domain = $config->get('config.cookie_domain', '');
+					$cookie_path = $config->get('config.cookie_path', '/');
+					setcookie(JUtility::getHash('language'), $lang, time() + 365 * 86400, $cookie_path, $cookie_domain);
+					$options['language'] = $lang;
+				}
 			}
 		}
 
