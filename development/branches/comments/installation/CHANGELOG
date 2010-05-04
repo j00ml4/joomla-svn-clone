@@ -27,8 +27,91 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+04-May-2010 Andrew Eddie
+ ^ Merge patched to cache the query building in JModelList (Christophe Demko).
+ + Merge Hathor administrator template by Andrea Tarr.
+ # Fixed [#20319] beez2 overides
+ ^ Merge patch [#20330] mod_status show / hide params (Phil Snell).
+
+3-May-2010 Jean-Marie Simonet
+# Fixed [20314] (Thanks Phil Snell). Added/consolidated some strings in com_messages
+
+03-May-2010 Christophe Demko
+ ^ Add an xml attribute to editor field: 'hide' to specify which buttons to hide
+
+03-May-2010 Andrew Eddie
+ ^ Merge fixes to media fields (Elin Waring)
+ + Merge addition of featured contacts view (Elin Waring)
+ + Merge extra fields for user profile plugin (Elin Waring)
+ ^ Merge various fixes to HTML filtering of and buttons of rich textareas (Elin Waring)
+ ^ Merge changes/fixes to sample data: fruit shop style fix; articles category module (Elin Waring)
+ ^ Accepted patch [#20161] Caching of plugins query + JPluginHelper refactoring to JDatabaseQuery (Dennis Hermacki)
+
+2-May-2010 Christophe Demko
+# Correcting a bug I have introduced on commit #16536
+
+2-May-2010 Jean-Marie Simonet
+$ Consolidating some categories, contact, newsfeeds, weblinks,content strings
+$ Refactoring com_contacts frontend ini/keys
+$ Added calendar image in front-end (Thanks Bill)
+$ Moving icons for com_contact to new folder in media/contacts/images/
+$ Correcting/consolidating strings
+^ Adding fax in contact edit
+# Correcting mod_banners [20301](thanks Phil Snell)
+
+01-May-2010 Hannes Papenberg
+# Fixing base-tag for SEF mode without mod_rewrite
+
+1-May-2010 Jean-Marie Simonet
+$ Refactoring com_contents back-end ini/keys
+$ Refactoring com_contents front-end ini/keys (WIP)
+$ Completing what can be done refactoring com_contents front-end ini/keys
+
+30-Apr-2010 Christophe Demko & Jean-Marie Simonet
+# Fixed problems in com_banners
+
+30-Apr-2010 Andrew Eddie
+ # Fixed [#20230] Filter in session impacts modals elsewhere.
+ # Fixed [#20283] State Filter field in newsfeeds admin view is misbehaving.
+ # Fixed [#17020] Refactoring com_login component: error on at the end of inactivity period.
+
+30-Apr-2010 Jean-Marie Simonet
+$ Refactored com_categories ini/keys
+$ Refactored com_users frontend ini/keys + loading plg_profile ini in front end
+$ Refactoring com_content back-end ini/keys (WIP)
+
+29-Apr-2010 Jean-Marie Simonet & Christophe Demko
+$ Customizing Save success all over the UI
+
+29-Apr-2010 Hannes Papenberg
+# Fixed parameters in install SQL and sampledata from INI to JSON
+# Fixed errors in JFilterInput
+
+29-Apr-2010 Christophe Demko
+# Fixed [#20232] Discovery method of installing templates doesn't insert a style (thanks Omar Ramos)
+# Saving and loading image banner (thanks Jonathan cheung)
++ Add metadesc and metakey fields to the #__language table (http://groups.google.com/group/joomla-dev-cms/browse_thread/thread/828869eb50004b97)
+# Fixed warning deprecated function ereg in php 5.3 libraries/joomla/client/ftp.php
+# Fixed warning date(): It is not safe to rely on the system's timezone settings (php 5.3). libraries/joomla/utilities/date.php
+
+29-Apr-2010 Andrew Eddie
+ # Fixed [#20102] Powered By 1.5 image
+ ^ Improve permission (allow/deny) select list titles for better accessibility.
+
+28-Apr-2010 Hannes Papenberg
+# Fixed some bugs in beez 2.0 and added font - Thanks Angie Radtke!
+
+28-Apr-2010 Jean-Marie Simonet
+# Loading plg_user_profile ini in User edit.
+$ Sorting com_users back-end in/keys
+
+28-Apr-2010 Andrew Eddie
+ + Accepted patch [#19659] JApplication::_create session() expires sessions on each page load and creates additional load (Dennis Hermacki)
+ + Accepted patch [#19660] Database session handler optimization (Dennis Hermacki)
+ # Fixed [#20231] You can save two default menu items
+
 27-Apr-2010 Mark Dexter
-# Make sure archive is consisently value = 2 (Elin Waring)
+# Make sure archive is consistently value = 2 (Elin Waring)
 # Update search plugins (Elin Waring)
 # Sample data fixes (Elin Waring)
 # String for templates view (Elin Waring)
