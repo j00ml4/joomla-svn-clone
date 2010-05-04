@@ -54,8 +54,8 @@ class BannersModelBanners extends JModelList
 	 */
 	function getListQuery()
 	{
-		$db		= $this->getDbo();
-		$query	= $db->getQuery(true);
+		$db			= $this->getDbo();
+		$query		= $db->getQuery(true);
 		$ordering	= $this->getState('filter.ordering');
 		$tagSearch	= $this->getState('filter.tag_search');
 		$cid		= $this->getState('filter.client_id');
@@ -86,10 +86,10 @@ class BannersModelBanners extends JModelList
 			$query->where('cl.state = 1');
 		}
 
-		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 		if ($catid) {
 			$query->where('a.catid = ' . (int) $catid);
-			$query->where('c.published = 1');
+			$query->join('LEFT', '#__categories AS cat ON cat.id = a.catid');
+			$query->where('cat.published = 1');
 		}
 
 		if ($tagSearch) {
@@ -109,7 +109,7 @@ class BannersModelBanners extends JModelList
 						$condition2.=" OR cl.metakey REGEXP '[[:<:]]".$db->getEscaped($keyword) . "[[:>:]]'";
 					}
 					if ($catid) {
-						$condition2.=" OR c.metakey REGEXP '[[:<:]]".$db->getEscaped($keyword) . "[[:>:]]'";
+						$condition2.=" OR cat.metakey REGEXP '[[:<:]]".$db->getEscaped($keyword) . "[[:>:]]'";
 					}
 					$temp[]="($condition1) AND ($condition2)";
 				}
