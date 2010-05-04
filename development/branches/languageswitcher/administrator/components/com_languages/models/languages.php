@@ -29,19 +29,14 @@ class LanguagesModelLanguages extends JModelList
 	protected function populateState()
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication();
-		$filters = JRequest::getVar('filters');
-		if (empty($filters)) {
-			$data = $app->getUserState($this->context.'.data');
-			$filters = $data['filters'];
-		}
-		else {
-			$app->setUserState($this->context.'.data', array('filters'=>$filters));
-		}
+		$app = JFactory::getApplication('administrator');
 
-		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
+		// Load the filter state.
+		$search = $app->getUserStateFromRequest($this->context.'.search', 'filter_search');
+		$this->setState('filter.search', $search);
 
-		$this->setState('filter.state', isset($filters['state']) ? $filters['state'] : '');
+		$published = $app->getUserStateFromRequest($this->context.'.published', 'filter_published', '');
+		$this->setState('filter.published', $published);
 
 		// Load the parameters.
 		$params		= JComponentHelper::getParams('com_languages');
@@ -66,7 +61,7 @@ class LanguagesModelLanguages extends JModelList
 	{
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
-		$id	.= ':'.$this->getState('filter.state');
+		$id	.= ':'.$this->getState('filter.published');
 
 		return parent::getStoreId($id);
 	}
@@ -88,7 +83,7 @@ class LanguagesModelLanguages extends JModelList
 		$query->from('`#__languages` AS a');
 
 		// Filter on the published state.
-		$published = $this->getState('filter.state');
+		$published = $this->getState('filter.published');
 		if (is_numeric($published)) {
 			$query->where('a.published = '.(int) $published);
 		} else if ($published === '') {
@@ -139,37 +134,5 @@ class LanguagesModelLanguages extends JModelList
 		}
 
 		return true;
-	}
-
-	/**
-	 * Method to get the row form.
-	 *
-	 * @return	mixed	JForm object on success, false on failure.
-	 */
-	public function getForm() {
-
-		// Initialise variables.
-		$app = & JFactory::getApplication();
-
-		// Get the form.
-		jimport('joomla.form.form');
-		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
-		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance($this->context, 'languages', array('event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
-			return false;
-		}
-
-		// Check the session for previously entered form data.
-		$data = $app->getUserState($this->context.'.data', array());
-
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		}
-		return $form;
 	}
 }

@@ -33,22 +33,23 @@ class BannersModelTracks extends JModelList
 	protected function populateState()
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication();
-		$filters = JRequest::getVar('filters');
-		if (empty($filters)) {
-			$data = $app->getUserState($this->context.'.data');
-			$filters = $data['filters'];
-		}
-		else {
-			$app->setUserState($this->context.'.data', array('filters'=>$filters));
-		}
+		$app = JFactory::getApplication('administrator');
 
-		$this->setState('filter.begin', isset($filters['begin']) ? $filters['begin'] : '');
-		$this->setState('filter.end', isset($filters['end']) ? $filters['end'] : '');
+		// Load the filter state.
+		$type = $app->getUserStateFromRequest($this->context.'.filter.type', 'filter_type');
+		$this->setState('filter.type', $type);
 
-		$this->setState('filter.type', isset($filters['type']) ? $filters['type'] : '');
-		$this->setState('filter.category_id', isset($filters['category']) ? $filters['category'] : '');
-		$this->setState('filter.client_id', isset($filters['client']) ? $filters['client'] : '');
+		$begin = $app->getUserStateFromRequest($this->context.'.filter.begin', 'filter_begin', '', 'string');
+		$this->setState('filter.begin', $begin);
+
+		$end = $app->getUserStateFromRequest($this->context.'.filter.end', 'filter_end', '', 'string');
+		$this->setState('filter.end', $end);
+
+		$categoryId = $app->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id', '');
+		$this->setState('filter.category_id', $categoryId);
+
+		$clientId = $app->getUserStateFromRequest($this->context.'.filter.client_id', 'filter_client_id', '');
+		$this->setState('filter.client_id', $clientId);
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_banners');
@@ -419,37 +420,5 @@ class BannersModelTracks extends JModelList
 			}
 		}
 		return $this->content;
-	}
-
-	/**
-	 * Method to get the row form.
-	 *
-	 * @return	mixed	JForm object on success, false on failure.
-	 */
-	public function getForm() {
-
-		// Initialise variables.
-		$app = & JFactory::getApplication();
-
-		// Get the form.
-		jimport('joomla.form.form');
-		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
-		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance($this->context, 'tracks', array('event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
-			return false;
-		}
-
-		// Check the session for previously entered form data.
-		$data = $app->getUserState($this->context.'.data', array());
-
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		}
-		return $form;
 	}
 }

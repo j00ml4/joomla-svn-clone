@@ -28,26 +28,27 @@ class MenusModelItems extends JModelList
 	protected function populateState()
 	{
 		$app = JFactory::getApplication('administrator');
-		$filters = JRequest::getVar('filters');
-		if (empty($filters)) {
-			$data = $app->getUserState($this->context.'.data');
-			$filters = $data['filters'];
-			if ($menutype = JRequest::getVar('menutype')) {
-				$filters['menutype']=$menutype;
-			}
-		}
-		$app->setUserState($this->context.'.data', array('filters'=>$filters));
-		
-		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
 
-		$this->setState('filter.published', isset($filters['published']) ? $filters['published'] : '');
-		$this->setState('filter.access', isset($filters['access']) ? $filters['access'] : '');
-		$this->setState('filter.menutype', isset($filters['menutype']) ? $filters['menutype'] : 'mainmenu');
-		$this->setState('filter.level', isset($filters['level']) ? $filters['level'] : '');
-		$this->setState('filter.language', isset($filters['language']) ? $filters['language'] : '');
+		$search = $app->getUserStateFromRequest($this->context.'.search', 'filter_search');
+		$this->setState('filter.search', $search);
 
-//		$parentId = $app->getUserStateFromRequest($this->context.'.filter.parent_id', 'filter_parent_id', 0, 'int');
-//		$this->setState('filter.parent_id',	$parentId);
+		$published = $app->getUserStateFromRequest($this->context.'.published', 'filter_published', '');
+		$this->setState('filter.published', $published);
+
+		$access = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', 0, 'int');
+		$this->setState('filter.access', $access);
+
+		$parentId = $app->getUserStateFromRequest($this->context.'.filter.parent_id', 'filter_parent_id', 0, 'int');
+		$this->setState('filter.parent_id',	$parentId);
+
+		$level = $app->getUserStateFromRequest($this->context.'.filter.level', 'filter_level', 0, 'int');
+		$this->setState('filter.level', $level);
+
+		$menuType = $app->getUserStateFromRequest($this->context.'.filter.menutype', 'menutype', 'mainmenu');
+		$this->setState('filter.menutype', $menuType);
+
+		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
+		$this->setState('filter.language', $language);
 
 		// Component parameters.
 		$params	= JComponentHelper::getParams('com_menus');
@@ -169,37 +170,5 @@ class MenusModelItems extends JModelList
 
 		//echo nl2br(str_replace('#__','jos_',(string)$query)).'<hr/>';
 		return $query;
-	}
-
-	/**
-	 * Method to get the row form.
-	 *
-	 * @return	mixed	JForm object on success, false on failure.
-	 */
-	public function getForm() {
-
-		// Initialise variables.
-		$app = & JFactory::getApplication();
-
-		// Get the form.
-		jimport('joomla.form.form');
-		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
-		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance($this->context, 'items', array('event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
-			return false;
-		}
-
-		// Check the session for previously entered form data.
-		$data = $app->getUserState($this->context.'.data', array());
-
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		}
-		return $form;
 	}
 }

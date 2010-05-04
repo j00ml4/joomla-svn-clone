@@ -50,11 +50,6 @@ class LanguagesViewInstalled extends JView
 	protected $user = null;
 
 	/**
-	 * @var object form object
-	 */
-	protected $form = null;
-
-	/**
 	 * Display the view
 	 */
 	function display($tpl = null)
@@ -66,7 +61,6 @@ class LanguagesViewInstalled extends JView
 		$this->pagination	= $this->get('Pagination');
 		$this->rows			= $this->get('Data');
 		$this->state		= $this->get('State');
-		$this->form			= $this->get('Form');
 
 		$this->addToolbar();
 		parent::display($tpl);

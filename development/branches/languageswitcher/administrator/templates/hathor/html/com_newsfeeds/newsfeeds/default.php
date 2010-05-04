@@ -56,6 +56,12 @@ $listDirn	= $this->state->get('list.direction');
 				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_newsfeeds'), 'value', 'text', $this->state->get('filter.category_id'));?>
 			</select>
 
+			<label class="selectlabel" for="filter_language"><?php echo JText::_('JOPTION_SELECT_LANGUAGE'); ?></label>
+			<select name="filter_language" class="inputbox" id="filter_language">
+				<option value=""><?php echo JText::_('JOPTION_SELECT_LANGUAGE');?></option>
+				<?php echo JHtml::_('select.options', JHtml::_('contentlanguage.published', true, true), 'value', 'text', $this->state->get('filter.language'));?>
+			</select>
+
 			<button type="button" id="filter-go" onclick="this.form.submit();">
 				<?php echo JText::_('GO'); ?></button>
 
@@ -91,8 +97,8 @@ $listDirn	= $this->state->get('list.direction');
 				<th class="width-5">
 					<?php echo JHtml::_('grid.sort', 'COM_NEWSFEEDS_CACHE_TIME_HEADING', 'a.hits', $listDirn, $listOrder); ?>
 				</th>
-				<th class="width-5">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'a.language', $listDirn, $listOrder); ?>
+				<th class="language-col">
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'language', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap id-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
@@ -150,7 +156,11 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo (int) $item->cache_time; ?>
 				</td>
 				<td class="center">
-					<?php echo $this->escape($item->language); ?>
+					<?php if ($item->language=='*'):?>
+						<?php echo JText::_('JOPTION_ALL_LANGUAGES'); ?>
+					<?php else:?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JOPTION_UNDEFINED_LANGUAGE'); ?>
+					<?php endif;?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>

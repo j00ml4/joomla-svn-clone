@@ -51,6 +51,45 @@ class PluginsHelper
 		return $result;
 	}
 
+	/**
+	 * Returns an array of standard published state filter options.
+	 *
+	 * @return	string			The HTML code for the select tag
+	 */
+	public static function stateOptions()
+	{
+		// Build the active state filter options.
+		$options	= array();
+		$options[]	= JHtml::_('select.option', '1', 'JENABLED');
+		$options[]	= JHtml::_('select.option', '0', 'JDISABLED');
+
+		return $options;
+	}
+
+	/**
+	 * Returns an array of standard published state filter options.
+	 *
+	 * @return	string			The HTML code for the select tag
+	 */
+	public static function folderOptions()
+	{
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
+
+		$query->select('DISTINCT(folder) AS value, folder AS text');
+		$query->from('#__extensions');
+		$query->where('`type` = '.$db->quote('plugin'));
+		$query->order('name');
+
+		$db->setQuery($query);
+		$options = $db->loadObjectList();
+
+		if ($error = $db->getErrorMsg()) {
+			JError::raiseWarning(500, $error);
+		}
+
+		return $options;
+	}
 	function parseXMLTemplateFile($templateBaseDir, $templateDir)
 	{
 		$data = new JObject;

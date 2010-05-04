@@ -22,7 +22,6 @@ class WeblinksViewWeblinks extends JView
 	protected $state;
 	protected $items;
 	protected $pagination;
-	protected $form;
 
 	/**
 	 * Display the view
@@ -32,7 +31,6 @@ class WeblinksViewWeblinks extends JView
 		$this->state		= $this->get('State');
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
-		$this->form	= $this->get('Form');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {

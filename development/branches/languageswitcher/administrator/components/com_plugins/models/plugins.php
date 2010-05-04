@@ -29,22 +29,23 @@ class PluginsModelPlugins extends JModelList
 	protected function populateState()
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication();
-		$filters = JRequest::getVar('filters');
-		if (empty($filters)) {
-			$data = $app->getUserState($this->context.'.data');
-			$filters = $data['filters'];
-		}
-		else {
-			$app->setUserState($this->context.'.data', array('filters'=>$filters));
-		}
+		$app = JFactory::getApplication('administrator');
 
-		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
+		// Load the filter state.
+		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
+		$this->setState('filter.search', $search);
 
-		$this->setState('filter.state', isset($filters['state']) ? $filters['state'] : '');
-		$this->setState('filter.access', isset($filters['access']) ? $filters['access'] : '');
-		$this->setState('filter.language', isset($filters['language']) ? $filters['language'] : '');
-		$this->setState('filter.folder', isset($filters['folder']) ? $filters['folder'] : '');
+		$accessId = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', null, 'int');
+		$this->setState('filter.access', $accessId);
+
+		$state = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
+		$this->setState('filter.state', $state);
+
+		$folder = $app->getUserStateFromRequest($this->context.'.filter.folder', 'filter_folder', null, 'cmd');
+		$this->setState('filter.folder', $folder);
+
+		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
+		$this->setState('filter.language', $language);
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_plugins');
@@ -198,37 +199,5 @@ class PluginsModelPlugins extends JModelList
 		}
 
 		return $query;
-	}
-
-	/**
-	 * Method to get the row form.
-	 *
-	 * @return	mixed	JForm object on success, false on failure.
-	 */
-	public function getForm() {
-
-		// Initialise variables.
-		$app = & JFactory::getApplication();
-
-		// Get the form.
-		jimport('joomla.form.form');
-		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
-		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = & JForm::getInstance($this->context, 'plugins', array('event' => 'onPrepareForm'));
-
-		// Check for an error.
-		if (JError::isError($form)) {
-			$this->setError($form->getMessage());
-			return false;
-		}
-
-		// Check the session for previously entered form data.
-		$data = $app->getUserState($this->context.'.data', array());
-
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		}
-		return $form;
 	}
 }

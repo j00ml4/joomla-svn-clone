@@ -42,7 +42,10 @@ abstract class JHtmlJGrid
 	/**
 	 * Returns an array of standard published state filter options.
 	 *
-	 * @param	array			An array of configuration options
+	 * @param	array			An array of configuration options.
+	 *							This array can contain a list of key/value pairs where values are boolean
+	 *							and keys can be taken from 'published', 'unpublished', 'archived', 'trash', 'all'.
+	 *							These pairs determine which values are displayed.
 	 * @return	string			The HTML code for the select tag
 	 * @since	1.6
 	 */
