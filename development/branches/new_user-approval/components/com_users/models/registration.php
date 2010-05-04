@@ -38,6 +38,7 @@ class UsersModelRegistration extends JModelForm
 	public function activate($token)
 	{
 		$config	= JFactory::getConfig();
+		$userParams	= JComponentHelper::getParams('com_users');
 		$db		= $this->getDbo();
 
 		// Get the user id based on the token.
@@ -61,7 +62,7 @@ class UsersModelRegistration extends JModelForm
 		// Activate the user.
 		$user = JFactory::getUser($userId);
 
-		if ($config->get('useractivation') == 2)
+		if ($userParams->get('useractivation') == 2)
 		{
 			// Compile the admin notification mail values.
 			$data = $user->getProperties();
