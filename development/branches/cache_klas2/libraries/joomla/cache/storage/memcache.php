@@ -57,6 +57,11 @@ class JCacheStorageMemcache extends JCacheStorage
 			// Create the memcache connection
 			self::$_db = new Memcache;
 				self::$_db->addServer($server['host'], $server['port'], $this->_persistent);
+				
+				$memcachetest = @self::$_db->connect($host, $port);
+				if($memcachetest == false) {
+					return JError::raiseError(404, "Could not connect to memcache server");
+				}
 				//$db->connect($server['host'], $server['port']) or die ("Could not connect");
 
 

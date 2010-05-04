@@ -137,7 +137,7 @@ class JCacheController
 	 * @since	1.6
 	 */
 	public function get($id, $group=null)
-	{	$data = unserialize($this->cache->get($id, $group=null));
+	{	$data = unserialize($this->cache->get($id, $group));
 		return $data;
 	}
 
@@ -152,7 +152,7 @@ class JCacheController
 	 */
 	public function store($data, $id, $group=null)
 	{
-		return $this->cache->store(serialize($data), $id, $group=null);
+		return $this->cache->store(serialize($data), $id, $group);
 	}
 
 }

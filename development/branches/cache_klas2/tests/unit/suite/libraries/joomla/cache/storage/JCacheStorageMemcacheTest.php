@@ -38,8 +38,22 @@ class JCacheStorageMemcacheTest extends PHPUnit_Framework_TestCase
 	{
 		include_once JPATH_BASE.'/libraries/joomla/cache/storage.php';
 		include_once JPATH_BASE.'/libraries/joomla/cache/storage/memcache.php';
-
-		$this->memcacheAvailable = JCacheStorageMemcache::test();
+		
+		if(extension_loaded('memcache') && class_exists('Memcache') == false ) $this->memcacheAvailable = false;
+		
+			$config = &JFactory::getConfig();	
+			$host = $config->get('memcache_server_host', 'localhost');
+			$port = $config->get('memcache_server_port',11211);
+			
+			$memcache = new Memcache;
+			$memcachetest = @$memcache->connect($host, $port);
+  
+			 if (!$memcachetest)
+			 {
+			 		$this->memcacheAvailable = false;
+			 } else $this->memcacheAvailable = true;
+		
+		
 		if ($this->memcacheAvailable)
 		{
 			$this->object = JCacheStorage::getInstance('memcache');
