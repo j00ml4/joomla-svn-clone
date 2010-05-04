@@ -1,5 +1,5 @@
 <?php // no direct access
-defined('_JEXEC') or die; ?>
+defined('_JEXEC') or die('Restricted access'); ?>
 <div>
 	<strong><?php echo JText::_( 'MORE_ARTICLES' ); ?></strong>
 </div>

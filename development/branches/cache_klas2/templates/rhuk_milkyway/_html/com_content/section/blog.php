@@ -1,5 +1,5 @@
 <?php
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access');
 $cparams =& JComponentHelper::getParams('com_media');
 ?>
 <?php if ($this->params->get('show_page_heading')) : ?>

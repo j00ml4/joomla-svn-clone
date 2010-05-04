@@ -1,4 +1,4 @@
-<?php defined('_JEXEC') or die; ?>
+<?php defined('_JEXEC') or die('Restricted access'); ?>
 <?php if(JPluginHelper::isEnabled('authentication', 'openid')) :
 		$lang = &JFactory::getLanguage();
 		$lang->load( 'plg_authentication_openid', JPATH_ADMINISTRATOR );

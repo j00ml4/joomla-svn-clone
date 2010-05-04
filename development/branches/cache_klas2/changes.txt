@@ -1,0 +1,2 @@
+Fix memcache test function to return false if memcached is not running
+eaccelerator_list_keys() is sometimes returning empty array, causing foreach to fail.. test is_array.

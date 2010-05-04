@@ -13,14 +13,10 @@ defined('_JEXEC') or die;
 $output = array();
 
 // Print the logged in users.
-if ($params->get('show_loggedin_users', 1)) :
 	$output[] = "<span class=\"loggedin-users\">".$online_num. " " . JText::_('MOD_STATUS_USERS') . "</span>";
-endif;
 
 //  Print the inbox message.
-if ($params->get('show_messages', 1)) :
 	$output[] = "<span class=\"$inboxClass\"><a href=\"$inboxLink\">". $unread . " " . JText::_('MOD_STATUS_MESSAGES'). "</a></span>";
-endif;
 
 // Print the Preview link to Main site.
 	$output[] = "<span class=\"viewsite\"><a href=\"".JURI::root()."\" target=\"_blank\">".JText::_('MOD_STATUS_VIEW_SITE')."</a></span>";
@@ -29,16 +25,14 @@ endif;
 	$output[] = "<span class=\"logout\"><a href=\"$logoutLink\">".JText::_('MOD_STATUS_LOG_OUT')."</a></span>";
 
 // Print the back-end logged in users.
-if ($params->get('show_loggedin_users_admin', 1)) :
 	$output[] = "<span class=\"loggedin-users\">".$count. " " . JText::_('MOD_STATUS_BACKEND_USERS') . "</span>";
-endif;
 
 // Reverse rendering order for rtl display.
-if ($lang->isRTL()) :
+if ($lang->isRTL()) {
 	$output = array_reverse($output);
-endif;
+}
 
 // Output the items.
-foreach ($output as $item) :
+foreach ($output as $item){
 	echo $item;
-endforeach;
+}
