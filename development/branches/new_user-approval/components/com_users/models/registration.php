@@ -71,11 +71,11 @@ class UsersModelRegistration extends JModelForm
 
 			$emailBody = JText::sprintf(
 				'COM_USERS_EMAIL_ACTIVATE_WITH_ADMIN_ACTIVATION_BODY',
-				$data['name'],
 				$data['sitename'],
-				$data['siteurl'].'index.php?option=com_user&task=activate&activation='.$data['activation'],
-				$data['siteurl'],
+				$data['name'],
+				$data['mailfrom'],
 				$data['username']
+				//$data['siteurl'].'index.php?option=com_users&task=registration.activate&activation='.$token
 			);
 
 			// get all admin users
@@ -314,7 +314,7 @@ class UsersModelRegistration extends JModelForm
 				'COM_USERS_EMAIL_REGISTERED_WITH_ADMIN_ACTIVATION_BODY',
 				$data['name'],
 				$data['sitename'],
-				$data['siteurl'].'index.php?option=com_user&task=activate&activation='.$data['activation'],
+				$data['siteurl'].'index.php?option=com_users&task=registration.activate&token='.$data['activation'],
 				$data['siteurl'],
 				$data['username'],
 				$data['password_clear']
@@ -337,7 +337,7 @@ class UsersModelRegistration extends JModelForm
 				'COM_USERS_EMAIL_REGISTERED_WITH_ACTIVATION_BODY',
 				$data['name'],
 				$data['sitename'],
-				$data['siteurl'].'index.php?option=com_user&task=activate&activation='.$data['activation'],
+				$data['siteurl'].'index.php?option=com_users&task=registration.activate&token='.$data['activation'],
 				$data['siteurl'],
 				$data['username'],
 				$data['password_clear']
@@ -371,7 +371,7 @@ class UsersModelRegistration extends JModelForm
 			return false;
 		}
 
-		return $user->id;
+		return ($params->get('useradminactivation')) ? 'adminactivate' : (($params->get('useractivation')) ? 'useractivate' : $user->id);
 	}
 
 }
