@@ -1116,16 +1116,71 @@ class Gantry {
 			$template = $app->getTemplate();
 		}
 		else {
-            if (array_key_exists('cid',$_REQUEST)){
-			    $template = $_REQUEST['cid'][0];
-            }
-            else {
-                $template = $session->get('gantry-current-template');
-                }
-            }
-        $session->set('gantry-current-template', $template);
+            $app = JFactory::getApplication('administrator');
+            // Load the User state.
+            if (!($pk = (int) $app->getUserState('com_templates.edit.style.id'))) {
+                $pk = (int) JRequest::getInt('id');
+		    }
+
+            $table = $this->_getTemplate($pk);
+            $template = $table->template;
+            $session->set('gantry-current-template', $template);
+        }
         return $template;
     }
+
+
+    	/**
+	 * Method to get a single record.
+	 *
+	 * @param	integer	The id of the primary key.
+	 *
+	 * @return	mixed	Object on success, false on failure.
+	 */
+	public function &_getTemplate($pk = null)
+	{
+		// Initialise variables.
+		//$pk = (!empty($pk)) ? $pk : (int) $this->getState('style.id');
+
+		if (!isset($this->_cache[$pk])) {
+			$false	= false;
+
+			// Get a row instance.
+			$table = &$this->getTable();
+
+			// Attempt to load the row.
+			$return = $table->load($pk);
+
+			// Check for a table object error.
+			if ($return === false && $table->getError()) {
+				$this->setError($table->getError());
+				return $false;
+			}
+
+			// Convert to the JObject before adding other data.
+			$this->_cache[$pk] = JArrayHelper::toObject($table->getProperties(1), 'JObject');
+
+			// Convert the params field to an array.
+			$registry = new JRegistry;
+			$registry->loadJSON($table->params);
+			$this->_cache[$pk]->params = $registry->toArray();
+		}
+
+		return $this->_cache[$pk];
+	}
+
+    /**
+	 * Returns a reference to the a Table object, always creating it.
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	*/
+	public function getTable($type = 'Style', $prefix = 'TemplatesTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
 
     /**
      * @param  $condition
