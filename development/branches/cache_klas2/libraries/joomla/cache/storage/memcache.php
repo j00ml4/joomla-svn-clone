@@ -43,6 +43,8 @@ class JCacheStorageMemcache extends JCacheStorage
 	 * @return object memcache connection object
 	 */
 	private function getConnection() {
+		
+			if ((extension_loaded('memcache') && class_exists('Memcache')) != true ) return false;
 
 			$config = &JFactory::getConfig();
 			$this->_persistent	= $config->get('memcache_persist', true);
@@ -241,7 +243,7 @@ class JCacheStorageMemcache extends JCacheStorage
 	 */
 	public static function test()
 	{	
-		if(extension_loaded('memcache') && class_exists('Memcache') == false ) return false;
+		if ((extension_loaded('memcache') && class_exists('Memcache')) != true ) return false;
 		
 			$config = &JFactory::getConfig();	
 			$host = $config->get('memcache_server_host', 'localhost');

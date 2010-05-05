@@ -213,7 +213,7 @@ class JCacheStorageTest extends PHPUnit_Framework_TestCase
 					'lifetime'		=> null,
 					'now'		=> time(),
 				),
-				'JCacheStorageXCache',
+				'JCacheStorageXcache',
 			),
 		);
 	}
