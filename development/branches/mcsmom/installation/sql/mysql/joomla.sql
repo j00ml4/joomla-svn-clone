@@ -521,11 +521,11 @@ CREATE TABLE `#__languages` (
   UNIQUE `idx_sef` (`sef`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `#__languages` (`lang_id`,`lang_code`,`title`,`title_native`,`description`,`metakey`,`metadesc`,`published`)
+INSERT INTO `#__languages` (`lang_id`,`lang_code`,`title`,`title_native`,`sef`,`image`,`description`,`published`)
 VALUES
-	(1,'en-GB','English (UK)','English (UK)','','','',1),
-	(2,'en-US','English (US)','English (US)','','','',1),
-	(3,'xx-XX','xx (Test)','xx (Test)','','','',1);
+	(1, 'en-GB', 'English (UK)', 'English (UK)', 'uk', '', 'en', 1),
+	(2, 'en-US', 'English (US)', 'English (US)', 'us', '', 'en', 0),
+	(3, 'xx-XX', 'xx (test)', 'xx (test)', 'xx', '', 'xx', 1);
 
 #
 # Table structure for table `#__menu`
