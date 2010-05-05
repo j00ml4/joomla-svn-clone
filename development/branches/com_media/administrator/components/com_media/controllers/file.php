@@ -20,7 +20,6 @@ jimport('joomla.filesystem.folder');
  */
 class MediaControllerFile extends JController
 {
-
 	/**
 	 * Upload a file
 	 *
