@@ -64,11 +64,19 @@ class UsersModelRegistration extends JModelForm
 
 		if ($userParams->get('useractivation') == 2)
 		{
+			$uri = JURI::getInstance();
+			jimport('joomla.user.helper');
+
 			// Compile the admin notification mail values.
 			$data = $user->getProperties();
+			$data['activation'] = JUtility::getHash(JUserHelper::genRandomPassword());
+			$data['siteurl']	= JUri::base();
+			$base = $uri->toString(array('scheme', 'user', 'pass', 'host', 'port'));
+			$data['activate'] = $base.JRoute::_('index.php?option=com_users&task=registration.activate&token='.$data['activation'], false);
 			$data['fromname'] = $config->get('fromname');
 			$data['mailfrom'] = $config->get('mailfrom');
 			$data['sitename'] = $config->get('sitename');
+			$data['username'] = $config->get('username');
 
 			$emailSubject	= JText::sprintf(
 				'COM_USERS_EMAIL_ACTIVATE_WITH_ADMIN_ACTIVATION_SUBJECT',
@@ -81,8 +89,8 @@ class UsersModelRegistration extends JModelForm
 				$data['sitename'],
 				$data['name'],
 				$data['mailfrom'],
-				$data['username']
-				//$data['siteurl'].'index.php?option=com_users&task=registration.activate&activation='.$token
+				$data['username'],
+				$data['siteurl'].'index.php?option=com_users&task=registration.activate&token='.$data['activation']
 			);
 
 			// get all admin users
@@ -95,7 +103,21 @@ class UsersModelRegistration extends JModelForm
 
 			// Send mail to all superadministrators id
 			foreach( $rows as $row )
-				JUtility::sendMail($data['mailfrom'], $data['fromname'], $row->email, $emailSubject, $emailBody);
+			{
+				$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $row->email, $emailSubject, $emailBody);
+
+				// Check for an error.
+				if ($return !== true) {
+					$this->setError(JText::_('COM_USERS_REGISTRATION_ADMINACTIVATION_NOTIFY_SEND_MAIL_FAILED'));
+					return false;
+				}
+			}
+
+			// Bind the data.
+			if (!$user->bind($data)) {
+				$this->setError(JText::sprintf('COM_USERS_REGISTRATION_BIND_FAILED', $user->getError()));
+				return false;
+			}
 		} 
 		else
 		{
@@ -103,10 +125,9 @@ class UsersModelRegistration extends JModelForm
 			$user->set('block', '0');
 		}
 		
-
 		// Store the user object.
 		if (!$user->save()) {
-			$this->setError($user->getError());
+			$this->setError(JText::sprintf('COM_USERS_REGISTRATION_ADMINACTIVATION_SAVE_FAILED', $user->getError()));
 			return false;
 		}
 
@@ -297,7 +318,7 @@ class UsersModelRegistration extends JModelForm
 
 		// Bind the data.
 		if (!$user->bind($data)) {
-			$this->setError(JText::sprintf('USERS REGISTRATION BIND FAILED', $user->getError()));
+			$this->setError(JText::sprintf('COM_USERS_REGISTRATION_BIND_FAILED', $user->getError()));
 			return false;
 		}
 
@@ -306,7 +327,7 @@ class UsersModelRegistration extends JModelForm
 
 		// Store the data.
 		if (!$user->save()) {
-			$this->setError($user->getError());
+			$this->setError(JText::sprintf('COM_USERS_REGISTRATION_SAVE_FAILED', $user->getError()));
 			return false;
 		}
 
@@ -388,7 +409,7 @@ class UsersModelRegistration extends JModelForm
 
 		// Check for an error.
 		if ($return !== true) {
-			$this->setError(JText::_('USERS REGISTRATION SEND MAIL FAILED'));
+			$this->setError(JText::_('COM_USERS_REGISTRATION_SEND_MAIL_FAILED'));
 			return false;
 		}
 
