@@ -215,6 +215,8 @@ class ModulesModelModule extends JModelAdmin
 			return false;
 		}
 
+		$form->setFieldAttribute('position', 'client', $this->getState('item.client_id') == 0 ? 'site' : 'administrator');
+		
 		return $form;
 	}
 
@@ -426,7 +428,7 @@ class ModulesModelModule extends JModelAdmin
 		$isNew		= true;
 
 		// Include the content modules for the onSave events.
-		JPluginHelper::importPlugin('content');
+		JPluginHelper::importPlugin('extension');
 
 		// Load the row if saving an existing record.
 		if ($pk > 0) {
@@ -449,8 +451,8 @@ class ModulesModelModule extends JModelAdmin
 			return false;
 		}
 
-		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger('onContentBeforeSave', array('com_modules.module', &$table, $isNew));
+		// Trigger the onExtensionBeforeSave event.
+		$result = $dispatcher->trigger('onExtensionBeforeSave', array('com_modules.module', &$table, $isNew));
 		if (in_array(false, $result, true)) {
 			$this->setError($table->getError());
 			return false;
@@ -536,8 +538,8 @@ class ModulesModelModule extends JModelAdmin
 		$cache->clean();
 		$cache->clean('mod_menu');
 
-		// Trigger the onContentAfterSave event.
-		$dispatcher->trigger('onContentAfterSave', array('com_modules.module', &$table, $isNew));
+		// Trigger the onExtensionAfterSave event.
+		$dispatcher->trigger('onExtensionAfterSave', array('com_modules.module', &$table, $isNew));
 
 		$this->setState('module.id', $table->id);
 
