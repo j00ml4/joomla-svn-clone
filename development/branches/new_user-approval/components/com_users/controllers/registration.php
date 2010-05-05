@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * @version		$Id$
  * @package		Joomla.Site
@@ -63,17 +63,30 @@ class UsersControllerRegistration extends UsersController
 			return false;
 		}
 
-		// Redirect to the login screen.
-		$useractivation = $uParams->get('useractivation', 1);
+		$user		= JFactory::getUser($return);
+		$useractivation = $uParams->get('useractivation');
 		
+		// Redirect to the login screen.
 		if ($useractivation == 0)
+		{
 			$this->setMessage(JText::_('COM_USERS_REGISTRATION_SAVE_SUCCESS'));
+			$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false));
+		}
 		else if ($useractivation == 1)
+		{
 			$this->setMessage(JText::_('COM_USERS_REGISTRATION_ACTIVATE_SUCCESS'));
+			$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false));
+		}
+		else if ($user->getParam('activate'))
+		{
+			$this->setMessage(JText::_('COM_USERS_REGISTRATION_VERIFY_SUCCESS')."   useractivation=".$useractivation."    activate=".$user->getParam('activate'));
+			$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=complete', false));
+		}
 		else
-			$this->setMessage(JText::_('COM_USERS_REGISTRATION_VERIFY_SUCCESS'));
-			
-		$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false));
+		{
+			$this->setMessage(JText::_('COM_USERS_REGISTRATION_ADMINACTIVATE_SUCCESS')."   useractivation=".$useractivation."    activate=".$user->getParam('activate'));
+			$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=complete', false));
+		}
 		return true;
 	}
 

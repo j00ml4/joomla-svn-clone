@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * @version		$Id$
  * @package		Joomla.Site
@@ -32,7 +32,7 @@ class UsersModelRegistration extends JModelForm
 	 * Method to activate a user account.
 	 *
 	 * @param	string		The activation token.
-	 * @return	boolean		True on success, false on failure.
+	 * @return	mixed		True on success, user_id on failure.
 	 * @since	1.6
 	 */
 	public function activate($token)
@@ -63,7 +63,7 @@ class UsersModelRegistration extends JModelForm
 		$user = JFactory::getUser($userId);
 
 		// Admin activation is on and user is verifying their email
-		if (($userParams->get('useractivation') == 2) && !$userParams->get('activate', 0))
+		if (($userParams->get('useractivation') == 2) && !$user->getParam('activate', 0))
 		{
 			$uri = JURI::getInstance();
 			jimport('joomla.user.helper');
@@ -71,6 +71,7 @@ class UsersModelRegistration extends JModelForm
 			// Compile the admin notification mail values.
 			$data = $user->getProperties();
 			$data['activation'] = JUtility::getHash(JUserHelper::genRandomPassword());
+			$user->set('activation', $data['activation']);
 			$data['siteurl']	= JUri::base();
 			$base = $uri->toString(array('scheme', 'user', 'pass', 'host', 'port'));
 			$data['activate'] = $base.JRoute::_('index.php?option=com_users&task=registration.activate&token='.$data['activation'], false);
@@ -112,16 +113,10 @@ class UsersModelRegistration extends JModelForm
 					return false;
 				}
 			}
-
-			// Bind the data.
-			if (!$user->bind($data)) {
-				$this->setError(JText::sprintf('COM_USERS_REGISTRATION_BIND_FAILED', $user->getError()));
-				return false;
-			}
 		}
 
 		//Admin activation is on and admin is activating the account
-		else if (($userParams->get('useractivation') == 2) && $userParams->get('activate', 0))
+		else if (($userParams->get('useractivation') == 2) && $user->getParam('activate', 0))
 		{
 			$user->set('activation', '');
 			$user->set('block', '0');
@@ -131,6 +126,7 @@ class UsersModelRegistration extends JModelForm
 
 			// Compile the user activated notification mail values.
 			$data = $user->getProperties();
+			$user->setParam('activate', 0);
 			$data['fromname'] = $config->get('fromname');
 			$data['mailfrom'] = $config->get('mailfrom');
 			$data['sitename'] = $config->get('sitename');
@@ -143,8 +139,8 @@ class UsersModelRegistration extends JModelForm
 			$emailBody = JText::sprintf(
 				'COM_USERS_EMAIL_ACTIVATED_BY_ADMIN_ACTIVATION_BODY',
 				$data['name'],
-				$data['username'],
-				$data['sitename']
+				$data['sitename'],
+				$data['username']
 			);
 
 			$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $data['email'], $emailSubject, $emailBody);
@@ -190,7 +186,7 @@ class UsersModelRegistration extends JModelForm
 		}
 		*/
 
-		return true;
+		return $userID;
 	}
 
 	/**
