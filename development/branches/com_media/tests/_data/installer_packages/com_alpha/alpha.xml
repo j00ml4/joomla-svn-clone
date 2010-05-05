@@ -13,7 +13,7 @@
 	<license>License Info</license>
 	<version>1.2</version>
 	<creationDate>March 2006</creationDate>
-	<description>COM_ALPHA_EXTENSION_DESCRIPTION</description>
+	<description>COM_ALPHA_XML_DESCRIPTION</description>
 
 	<!-- Installer Hooks -->
 	<installfile>file.install.php</installfile> <!-- Deprecated in 1.6 -->
@@ -25,19 +25,17 @@
 	<install> <!-- Runs on install -->
 		<sql>
 			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
-			<file driver="mysql">sql/install.mysql.nonutf8.sql</file>
 		</sql>
 	</install>
 	<uninstall> <!-- Runs on uninstall -->
 		<sql>
 			<file driver="mysql" charset="utf8" folder="sql">sql/uninstall.mysql.utf8.sql</file>
-			<file driver="mysql" folder="sql">sql/uninstall.mysql.nonutf8.sql</file>
 		</sql>
 	</uninstall>
 	<update> <!-- Runs on update; New in 1.6 -->
 		<schemas>
 			<schemapath type="mysql">sql/updates/mysql</schemapath>
-			<schemapath type="sqlsrv">sql/updates/sqlsrv</schemapath>		
+			<schemapath type="sqlsrv">sql/updates/sqlsrv</schemapath>
 		</schemas>
 	</update>
 
@@ -86,14 +84,9 @@
 
 	<!-- Extension Update Specification -->
 	<updateservers>
-		<server type="extension" priority="1" name="Something JM will want to translate">http://jsitepoint.com/update/component/com_alpha/extension.xml</server> <!-- useful for single extensions -->
-		<server type="collection" priority="2" name="Another thing JM will probably want to translate">http://jsitepoint.com/update/update.xml</server><!-- useful for collections of extensions -->
+		<server type="extension" priority="1" name="Extension Update Site">http://jsitepoint.com/update/component/com_alpha/extension.xml</server> <!-- useful for single extensions -->
+		<server type="collection" priority="2" name="Collection Update Site">http://jsitepoint.com/update/update.xml</server><!-- useful for collections of extensions -->
 	</updateservers>
-
-	<!-- Extension Params; deprecated 1.5 style -->
-	<params>
-		<param name="example" type="text" default="" label="Example Param" description="EXAMPLEPARAMDESC" />
-	</params>
 
 	<!-- Tables -->
 	<!-- These are used for backups to determine which tables to backup; ones marked optional are only backed up if they exist -->

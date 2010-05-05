@@ -25,7 +25,7 @@ class plgSearchWeblinks extends JPlugin
 	/**
 	 * @return array An array of search areas
 	 */
-	function onSearchAreas() {
+	function onContentSearchAreas() {
 		static $areas = array(
 			'weblinks' => 'Weblinks'
 			);
@@ -42,16 +42,17 @@ class plgSearchWeblinks extends JPlugin
 	 * @param string ordering option, newest|oldest|popular|alpha|category
 	 * @param mixed An array if the search it to be restricted to areas, null if search all
 	 */
-	function onSearch($text, $phrase='', $ordering='', $areas=null)
+	function onContentSearch($text, $phrase='', $ordering='', $areas=null)
 	{
 		$db		= &JFactory::getDbo();
+		$app	= &JFactory::getApplication();
 		$user	= &JFactory::getUser();
 		$groups	= implode(',', $user->authorisedLevels());
 
 		$searchText = $text;
 
 		if (is_array($areas)) {
-			if (!array_intersect($areas, array_keys($this->onSearchAreas()))) {
+			if (!array_intersect($areas, array_keys($this->onContentSearchAreas()))) {
 				return array();
 			}
 		}
@@ -109,7 +110,7 @@ class plgSearchWeblinks extends JPlugin
 				break;
 
 			case 'category':
-				$order = 'b.title ASC, a.title ASC';
+				$order = 'c.title ASC, a.title ASC';
 				break;
 
 			case 'newest':
@@ -120,12 +121,17 @@ class plgSearchWeblinks extends JPlugin
 		$query	= $db->getQuery(true);
 		$query->select('a.title AS title, a.description AS text, a.date AS created, a.url, '
 					.'CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
-					.'CASE WHEN CHAR_LENGTH(b.alias) THEN CONCAT_WS(\':\', b.id, b.alias) ELSE b.id END as catslug, '
-					.'CONCAT_WS(" / ", '.$db->Quote($section).', b.title) AS section, "1" AS browsernav');
+					.'CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(\':\', c.id, c.alias) ELSE c.id END as catslug, '
+					.'CONCAT_WS(" / ", '.$db->Quote($section).', c.title) AS section, "1" AS browsernav');
 		$query->from('#__weblinks AS a');
-		$query->innerJoin('#__categories AS b ON b.id = a.catid');
-		$query->where('('.$where.')' . ' AND a.state=1 AND  b.published=1 AND  b.access IN ('.$groups.')');
+		$query->innerJoin('#__categories AS c ON c.id = a.catid');
+		$query->where('('.$where.')' . ' AND a.state=1 AND  c.published=1 AND  c.access IN ('.$groups.')');
 		$query->order($order);
+
+		// Filter by language
+		if ($app->getLanguageFilter()) {
+			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+		}
 
 		$db->setQuery($query, 0, $limit);
 		$rows = $db->loadObjectList();

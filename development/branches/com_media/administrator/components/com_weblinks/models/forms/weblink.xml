@@ -52,7 +52,7 @@
 			<option
 				value="0">JUNPUBLISHED</option>
 			<option
-				value="2">JARCHIVED</option>				
+				value="2">JARCHIVED</option>
 			<option
 				value="-3">COM_WEBLINKS_FIELD_VALUE_REPORTED</option>
 			<option
@@ -67,11 +67,14 @@
 			description="JFIELD_ACCESS_DESC" class="inputbox" size="1"
 			default="" />
 
-		<field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
-			description="COM_WEBLINKS_FIELD_LANGUAGE_DESC" class="inputbox"
-			default=""
-		>
-			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
+		<field
+			name="language"
+			type="contentlanguage"
+			label="JFIELD_LANGUAGE_LABEL"
+			description="COM_WEBLINKS_FIELD_LANGUAGE_DESC"
+			class="inputbox"
+			default="">
+			<option value="*">JOPTION_ALL_LANGUAGES</option>
 		</field>
 
 		<field id="approved" name="approved" type="radio"
@@ -132,7 +135,7 @@
 			<option value="2">JGLOBAL_INDEX_NOFOLLOW</option>
 			<option value="3">JGLOBAL_NOINDEX_NOFOLLOW</option>
 			<option value="4">JGLOBAL_NO_ROBOTS_TAG</option>
-		</field>	
+		</field>
 
 		<field name="author" type="text"
 			label="JAUTHOR" description="JField_Metadata_Author_Desc"

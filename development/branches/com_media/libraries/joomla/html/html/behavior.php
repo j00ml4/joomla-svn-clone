@@ -253,18 +253,16 @@ abstract class JHtmlBehavior
 
 		$onFileSuccess = '\\function(file, response) {
 			var json = new Hash(JSON.decode(response, true) || {});
- 
+
 			if (json.get(\'status\') == \'1\') {
 				file.element.addClass(\'file-success\');
 				file.info.set(\'html\', \'<strong>\' + Joomla.JText._(\'JLIB_HTML_BEHAVIOR_UPLOADER_FILE_SUCCESSFULLY_UPLOADED\') + \'</strong>\');
 			} else {
 				file.element.addClass(\'file-failed\');
-				file.info.set(\'html\', \'<strong>\' + 
+				file.info.set(\'html\', \'<strong>\' +
 					Joomla.JText._(\'JLIB_HTML_BEHAVIOR_UPLOADER_ERROR_OCCURRED\', \'An Error Occurred\').substitute({ error: json.get(\'error\') }) + \'</strong>\');
 			}
 		}';
-
-
 
 		// Setup options object
 		$opt['verbose']				= true;
