@@ -224,26 +224,26 @@ abstract class JHtmlBehavior
 		if (!isset($uploaders)) {
 			$uploaders = array();
 
-			JText::script('JUPLOADER_FILENAME');
-			JText::script('JUPLOADER_UPLOAD_COMPLETED');
-			JText::script('JUPLOADER_ERROR_OCCURRED');
-			JText::script('JUPLOADER_ALL_FILES');
-			JText::script('JUPLOADER_PROGRESS_OVERALL');
-			JText::script('JUPLOADER_CURRENT_TITLE');
-			JText::script('JUPLOADER_REMOVE');
-			JText::script('JUPLOADER_REMOVE_TITLE');
-			JText::script('JUPLOADER_CURRENT_FILE');
-			JText::script('JUPLOADER_CURRENT_PROGRESS');
-			JText::script('JUPLOADER_FILE_ERROR');
-			JText::script('JUPLOADER_FILE_SUCCESSFULLY_UPLOADED');
-			JText::script('JUPLOADER_VALIDATION_ERROR_DUPLICATE');
-			JText::script('JUPLOADER_VALIDATION_ERROR_SIZELIMITMIN');
-			JText::script('JUPLOADER_VALIDATION_ERROR_SIZELIMITMAX');
-			JText::script('JUPLOADER_VALIDATION_ERROR_FILELISTMAX');
-			JText::script('JUPLOADER_VALIDATION_ERROR_FILELISTSIZEMAX');
-			JText::script('JUPLOADER_ERROR_HTTPSTATUS');
-			JText::script('JUPLOADER_ERROR_SECURITYERROR');
-			JText::script('JUPLOADER_ERROR_IOERROR');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_FILENAME');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_UPLOAD_COMPLETED');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_ERROR_OCCURRED');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_ALL_FILES');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_PROGRESS_OVERALL');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_CURRENT_TITLE');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_REMOVE');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_REMOVE_TITLE');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_CURRENT_FILE');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_CURRENT_PROGRESS');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_FILE_ERROR');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_FILE_SUCCESSFULLY_UPLOADED');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_VALIDATION_ERROR_DUPLICATE');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_VALIDATION_ERROR_SIZELIMITMIN');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_VALIDATION_ERROR_SIZELIMITMAX');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_VALIDATION_ERROR_FILELISTMAX');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_VALIDATION_ERROR_FILELISTSIZEMAX');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_ERROR_HTTPSTATUS');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_ERROR_SECURITYERROR');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_ERROR_IOERROR');
 		}
 
 
@@ -256,11 +256,11 @@ abstract class JHtmlBehavior
  
 			if (json.get(\'status\') == \'1\') {
 				file.element.addClass(\'file-success\');
-				file.info.set(\'html\', \'<strong>\' + Joomla.JText._(\'JUPLOADER_FILE_SUCCESSFULLY_UPLOADED\') + \'</strong>\');
+				file.info.set(\'html\', \'<strong>\' + Joomla.JText._(\'JLIB_HTML_BEHAVIOR_UPLOADER_FILE_SUCCESSFULLY_UPLOADED\') + \'</strong>\');
 			} else {
 				file.element.addClass(\'file-failed\');
 				file.info.set(\'html\', \'<strong>\' + 
-					Joomla.JText._(\'JUPLOADER_ERROR_OCCURRED\', \'An Error Occurred\').substitute({ error: json.get(\'error\') }) + \'</strong>\');
+					Joomla.JText._(\'JLIB_HTML_BEHAVIOR_UPLOADER_ERROR_OCCURRED\', \'An Error Occurred\').substitute({ error: json.get(\'error\') }) + \'</strong>\');
 			}
 		}';
 
