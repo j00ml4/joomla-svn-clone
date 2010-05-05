@@ -62,7 +62,8 @@ class UsersModelRegistration extends JModelForm
 		// Activate the user.
 		$user = JFactory::getUser($userId);
 
-		if ($userParams->get('useractivation') == 2)
+		// Admin activation is on and user is verifying their email
+		if (($userParams->get('useractivation') == 2) && !$userParams->get('activate', 0))
 		{
 			$uri = JURI::getInstance();
 			jimport('joomla.user.helper');
@@ -76,8 +77,7 @@ class UsersModelRegistration extends JModelForm
 			$data['fromname'] = $config->get('fromname');
 			$data['mailfrom'] = $config->get('mailfrom');
 			$data['sitename'] = $config->get('sitename');
-			$data['username'] = $config->get('username');
-
+			$user->setParam('activate', 1);
 			$emailSubject	= JText::sprintf(
 				'COM_USERS_EMAIL_ACTIVATE_WITH_ADMIN_ACTIVATION_SUBJECT',
 				$data['name'],
@@ -88,7 +88,7 @@ class UsersModelRegistration extends JModelForm
 				'COM_USERS_EMAIL_ACTIVATE_WITH_ADMIN_ACTIVATION_BODY',
 				$data['sitename'],
 				$data['name'],
-				$data['mailfrom'],
+				$data['email'],
 				$data['username'],
 				$data['siteurl'].'index.php?option=com_users&task=registration.activate&token='.$data['activation']
 			);
@@ -108,7 +108,7 @@ class UsersModelRegistration extends JModelForm
 
 				// Check for an error.
 				if ($return !== true) {
-					$this->setError(JText::_('COM_USERS_REGISTRATION_ADMINACTIVATION_NOTIFY_SEND_MAIL_FAILED'));
+					$this->setError(JText::_('COM_USERS_REGISTRATION_ACTIVATION_NOTIFY_SEND_MAIL_FAILED'));
 					return false;
 				}
 			}
@@ -116,6 +116,42 @@ class UsersModelRegistration extends JModelForm
 			// Bind the data.
 			if (!$user->bind($data)) {
 				$this->setError(JText::sprintf('COM_USERS_REGISTRATION_BIND_FAILED', $user->getError()));
+				return false;
+			}
+		}
+
+		//Admin activation is on and admin is activating the account
+		else if (($userParams->get('useractivation') == 2) && $userParams->get('activate', 0))
+		{
+			$user->set('activation', '');
+			$user->set('block', '0');
+			
+			$uri = JURI::getInstance();
+			jimport('joomla.user.helper');
+
+			// Compile the user activated notification mail values.
+			$data = $user->getProperties();
+			$data['fromname'] = $config->get('fromname');
+			$data['mailfrom'] = $config->get('mailfrom');
+			$data['sitename'] = $config->get('sitename');
+			$emailSubject	= JText::sprintf(
+				'COM_USERS_EMAIL_ACTIVATED_BY_ADMIN_ACTIVATION_SUBJECT',
+				$data['name'],
+				$data['sitename']
+			);
+
+			$emailBody = JText::sprintf(
+				'COM_USERS_EMAIL_ACTIVATED_BY_ADMIN_ACTIVATION_BODY',
+				$data['name'],
+				$data['username'],
+				$data['sitename']
+			);
+
+			$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $data['email'], $emailSubject, $emailBody);
+
+			// Check for an error.
+			if ($return !== true) {
+				$this->setError(JText::_('COM_USERS_REGISTRATION_ACTIVATION_NOTIFY_SEND_MAIL_FAILED'));
 				return false;
 			}
 		} 
@@ -127,7 +163,7 @@ class UsersModelRegistration extends JModelForm
 		
 		// Store the user object.
 		if (!$user->save()) {
-			$this->setError(JText::sprintf('COM_USERS_REGISTRATION_ADMINACTIVATION_SAVE_FAILED', $user->getError()));
+			$this->setError(JText::sprintf('COM_USERS_REGISTRATION_ACTIVATION_SAVE_FAILED', $user->getError()));
 			return false;
 		}
 
