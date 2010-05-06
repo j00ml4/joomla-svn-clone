@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
-JHTML::_('script','multiselect.js');
+JHTML::_('script','system/multiselect.js',false,true);
 $client = $this->state->get('filter.client_id') ? 'administrator' : 'site';
 $user = JFactory::getUser();
 $listOrder	= $this->state->get('list.ordering');
@@ -54,7 +54,7 @@ $listDirn	= $this->state->get('list.direction');
 
 			<select name="filter_language" class="inputbox" onchange="this.form.submit()">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_LANGUAGE');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('contentlanguage.published', true, true), 'value', 'text', $this->state->get('filter.language'));?>
+				<?php echo JHtml::_('select.options', JHtml::_('contentlanguage.existing', true, true), 'value', 'text', $this->state->get('filter.language'));?>
 			</select>
 		</div>
 	</fieldset>

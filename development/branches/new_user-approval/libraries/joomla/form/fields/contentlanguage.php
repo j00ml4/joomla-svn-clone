@@ -11,7 +11,8 @@ defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
+jimport('joomla.form.helper');
+JFormHelper::loadFieldClass('list');
 
 /**
  * Form Field class for the Joomla Framework.
@@ -39,6 +40,6 @@ class JFormFieldContentLanguage extends JFormFieldList
 	protected function getOptions()
 	{
 		// Merge any additional options in the XML definition.
-		return array_merge(parent::getOptions(), JHtml::_('contentlanguage.published'));
+		return array_merge(parent::getOptions(), JHtml::_('contentlanguage.existing'));
 	}
 }
