@@ -32,7 +32,7 @@ class UsersModelRegistration extends JModelForm
 	 * Method to activate a user account.
 	 *
 	 * @param	string		The activation token.
-	 * @return	mixed		True on success, user_id on failure.
+	 * @return	mixed		False on failure, user object on success.
 	 * @since	1.6
 	 */
 	public function activate($token)
@@ -130,6 +130,7 @@ class UsersModelRegistration extends JModelForm
 			$data['fromname'] = $config->get('fromname');
 			$data['mailfrom'] = $config->get('mailfrom');
 			$data['sitename'] = $config->get('sitename');
+			$data['siteurl']	= JUri::base();
 			$emailSubject	= JText::sprintf(
 				'COM_USERS_EMAIL_ACTIVATED_BY_ADMIN_ACTIVATION_SUBJECT',
 				$data['name'],
