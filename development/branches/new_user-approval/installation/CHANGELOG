@@ -27,6 +27,30 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+06-May-2010 Mark Dexter
+# Fix problem with sample data duplicate mainmenu (Elin Waring)
+# Show edit icon on frontpage and category blog when print and email icons disabled
+
+06-May-2010 Christophe Demko
+ # Fixed bug in the JObservable::attach method when the observer is an array: it did not use the correct key
+ #$ Fixed ordering with image field in languages view (Thanks Dennis Hermacki)
+ # Fix ordering with folder field in plugins view
+ # [#20350] [patch] Core components fail in attempt to add multiselect.js in back-end list views.
+ $ Change the description of the sef language field
+ ^ Change the JHtmlContentLanguage::published function to JHtmlContentLanguage::existing
+
+05-May-2010 Andrew Eddie
+ ^ Accept patch [#20167] Caching of template query + JSite::getTemplate() refactoring to JDatabaseQuery (Dennis Hermacki).
+ # Fix bug in the menu batch template which didn't show the menu items to copy or move to; fix bug in display of menu name (Júlio Pontes).
+ # Fix bug in JApplicationSite::addClientInfo (Júlio Pontes).
+
+05-May-2010 Christophe Demko
+# Correcting a bug in the com_installer manage view
+$ Change a string in com_languages
+
+05-May-2010 Jean-Marie Simonet
+$ Adding delete strings and code to Menu type deleting.
+
 05-May-2010 Andrew Eddie
  ^ Renamed "installer" plugin group to "extension".
  ^ Added onExtensionBeforeSave and onExtensionAfterSave events to languages, modules, plugins, template styles and source.
