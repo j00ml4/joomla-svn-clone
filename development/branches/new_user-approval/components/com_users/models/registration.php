@@ -139,7 +139,7 @@ class UsersModelRegistration extends JModelForm
 			$emailBody = JText::sprintf(
 				'COM_USERS_EMAIL_ACTIVATED_BY_ADMIN_ACTIVATION_BODY',
 				$data['name'],
-				$data['sitename'],
+				$data['siteurl'],
 				$data['username']
 			);
 
@@ -186,7 +186,7 @@ class UsersModelRegistration extends JModelForm
 		}
 		*/
 
-		return $userID;
+		return $user;
 	}
 
 	/**
