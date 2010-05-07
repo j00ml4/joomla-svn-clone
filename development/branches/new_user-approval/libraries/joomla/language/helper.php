@@ -58,27 +58,46 @@ class JLanguageHelper
 	{
 		if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
 		{
-			$systemLangs	= JLanguage::getKnownLanguages();
 			$browserLangs	= explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-
+			
 			foreach ($browserLangs as $browserLang)
 			{
 				// slice out the part before ; on first step, the part before - on second, place into array
 				$browserLang = substr($browserLang, 0, strcspn($browserLang, ';'));
 				$primary_browserLang = substr($browserLang, 0, 2);
-
-				foreach($systemLangs as $systemLang => $metadata)
-				{
-				// take off 3 letters iso code languages as they can't match browsers' languages and default them to en
-					$Jinstall_lang = $metadata['tag'];
-
-					if (strlen($Jinstall_lang) < 6)
+				$systemLangssystemLangs	= self::getLanguages();
+				if (empty($systemLangs)) {
+					$systemLangs = JLanguage::getKnownLanguages(JPATH_BASE);
+					foreach($systemLangs as $systemLang => $metadata)
 					{
-						if (strtolower($browserLang) == strtolower(substr($metadata['tag'], 0, strlen($browserLang)))) {
-							return $systemLang;
+						// take off 3 letters iso code languages as they can't match browsers' languages and default them to en
+						$Jinstall_lang = $metadata['tag'];
+
+						if (strlen($Jinstall_lang) < 6)
+						{
+							if (strtolower($browserLang) == strtolower(substr($metadata['tag'], 0, strlen($browserLang)))) {
+								return $systemLang;
+							}
+							else if ($primary_browserLang == substr($metadata['tag'], 0, 2)) {
+								$primaryDetectedLang = $systemLang;
+							}
 						}
-						else if ($primary_browserLang == substr($metadata['tag'], 0, 2)) {
-							$primaryDetectedLang = $systemLang;
+					}
+				}
+				else {
+					foreach($systemLangs as $systemLang)
+					{
+						// take off 3 letters iso code languages as they can't match browsers' languages and default them to en
+						$Jinstall_lang = $systemLang->lang_code;
+
+						if (strlen($Jinstall_lang) < 6)
+						{
+							if (strtolower($browserLang) == strtolower(substr($systemLang->lang_code, 0, strlen($browserLang)))) {
+								return $systemLang->lang_code;
+							}
+							else if ($primary_browserLang == substr($systemLang->lang_code, 0, 2)) {
+								$primaryDetectedLang = $systemLang->lang_code;
+							}
 						}
 					}
 				}
@@ -90,5 +109,41 @@ class JLanguageHelper
 		}
 
 		return null;
+	}
+
+	/**
+	 * Get available languages
+	 *
+	 * @param	string array key
+	 * @return	array of published languages
+	 * @since	1.6
+	 */
+	public static function getLanguages($key='default')
+	{
+		static $languages;
+		
+		if (empty($languages)) {
+			$cache = JFactory::getCache('com_languages', '');
+			if (!$languages = $cache->get('languages')) {
+				$db 	= JFactory::getDBO();
+				$query	= $db->getQuery(true);
+				$query->select('*')->from('#__languages')->where('published=1');
+				$db->setQuery($query);
+				
+				$languages['default'] 	= $db->loadObjectList();
+				$languages['sef']		= array();
+				$languages['lang_code']	= array();
+				
+				if (isset($languages['default'][0])) {
+					foreach($languages['default'] as $lang) {
+						$languages['sef'][$lang->sef] 				= $lang; 
+						$languages['lang_code'][$lang->lang_code] 	= $lang; 
+					}
+				}
+				
+				$cache->store($languages, 'languages');
+			}
+		}
+		return $languages[$key];
 	}
 }
