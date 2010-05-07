@@ -108,7 +108,7 @@ class JText
 	 * @param	string			The string to translate.
 	 * @param	boolean|array	boolean: Make the result javascript safe. array an array of option as described in the JText::sprintf function
 	 * @param	boolean			To interprete backslashes (\\=\, \n=carriage return, \t=tabulation)
-	 * @param	boolean			To indicate that the string will be push in the javascript array strings
+	 * @param	boolean			To indicate that the string will be push in the javascript language store
 	 * @return	string			The translated string or the key is $script is true
 	 * @example	<script>alert(Joomla.JText._('<?php echo JText::_("JDEFAULT", array("script"=>true));?>'));</script> will generate an alert message containing 'Default'
 	 * @example	<?php echo JText::_("JDEFAULT");?> it will generate a 'Default' string	 
@@ -127,6 +127,9 @@ class JText
 			}
 			if (array_key_exists('jsSafe', $jsSafe)) {
 				$jsSafe = (boolean) $jsSafe['jsSafe'];
+			}
+			else {
+				$jsSafe = false;
 			}
 		}
 		if ($script) {
@@ -147,7 +150,7 @@ class JText
 	 * @param	array	optional Array of option array('jsSafe'=>boolean, 'interpreteBackSlashes'=>boolean, 'script'=>boolean) where
 	 *					-jsSafe is a boolean to generate a javascript safe string
 	 *					-interpreteBackSlashes is a boolean to interprete backslashes \\->\, \n->new line, \t->tabulation
-	 *					-script is a boolean to indicate that the string will be push in the javascript array strings
+	 *					-script is a boolean to indicate that the string will be push in the javascript language store
 	 * @return	string	The translated strings or the key if 'script' is true in the array of options
 	 * @example	<script>alert(Joomla.JText._('<?php echo JText::plural("COM_PLUGINS_N_ITEMS_UNPUBLISHED", 1, array("script"=>true));?>'));</script> will generate an alert message containing '1 plugin successfully disabled'
 	 * @example	<?php echo JText::plural("COM_PLUGINS_N_ITEMS_UNPUBLISHED", 1);?> it will generate a '1 plugin successfully disabled' string	 
@@ -165,7 +168,7 @@ class JText
 			$found = false;
 			$suffixes = $lang->getPluralSuffices((int)$n);
 			foreach ($suffixes as $suffix) {
-				$key = $args[0].'_'.$suffix;
+				$key = $string.'_'.$suffix;
 				if ($lang->hasKey($key)) {
 					$found = true;
 					break;
@@ -173,7 +176,7 @@ class JText
 			}
 			if (!$found) {
 				// Not found so revert to the original.
-				$key = $args[0];
+				$key = $string;
 			}
 			if (is_array($args[$count-1])) {
 				$args[0] = $lang->_($key, array_key_exists('jsSafe', $args[$count-1]) ? $args[$count-1]['jsSafe'] : false, array_key_exists('interpreteBackSlashes', $args[$count-1]) ? $args[$count-1]['interpreteBackSlashes'] : true);
@@ -190,7 +193,7 @@ class JText
 		elseif ($count > 0) {
 
 			// Default to the normal sprintf handling.
-			$args[0] = $lang->_($args[0]);
+			$args[0] = $lang->_($string);
 			return call_user_func_array('sprintf', $args);
 		}
 
@@ -205,7 +208,7 @@ class JText
 	 * @param	array	optional Array of option array('jsSafe'=>boolean, 'interpreteBackSlashes'=>boolean, 'script'=>boolean) where
 	 *					-jsSafe is a boolean to generate a javascript safe strings
 	 *					-interpreteBackSlashes is a boolean to interprete backslashes \\->\, \n->new line, \t->tabulation
-	 *					-script is a boolean to indicate that the string will be push in the javascript array strings
+	 *					-script is a boolean to indicate that the string will be push in the javascript language store
 	 * @return	string	The translated strings or the key if 'script' is true in the array of options
 	 * @since	1.5
 	 */
@@ -215,16 +218,15 @@ class JText
 		$args = func_get_args();
 		$count = count($args);
 		if ($count > 0) {
-			$key = $args[0];
 			if (is_array($args[$count-1])) {
-				$args[0] = $lang->_($key, array_key_exists('jsSafe', $args[$count-1]) ? $args[$count-1]['jsSafe'] : false, array_key_exists('interpreteBackSlashes', $args[$count-1]) ? $args[$count-1]['interpreteBackSlashes'] : true);
+				$args[0] = $lang->_($string, array_key_exists('jsSafe', $args[$count-1]) ? $args[$count-1]['jsSafe'] : false, array_key_exists('interpreteBackSlashes', $args[$count-1]) ? $args[$count-1]['interpreteBackSlashes'] : true);
 				if (array_key_exists('script', $args[$count-1]) && $args[$count-1]['script']) {
-					self::$strings[$key] = call_user_func_array('sprintf', $args);
-					return $key;
+					self::$strings[$string] = call_user_func_array('sprintf', $args);
+					return $string;
 				}
 			}
 			else {
-				$args[0] = $lang->_($key);
+				$args[0] = $lang->_($string);
 			}
 			return call_user_func_array('sprintf', $args);
 		}
@@ -245,10 +247,10 @@ class JText
 		$count	= count($args);
 		if ($count > 0) {
 			if (is_array($args[$count-1])) {
-				$args[0] = $lang->_($args[0], array_key_exists('jsSafe', $args[$count-1]) ? $args[$count-1]['jsSafe'] : false, array_key_exists('interpreteBackSlashes', $args[$count-1]) ? $args[$count-1]['interpreteBackSlashes'] : true);
+				$args[0] = $lang->_($string, array_key_exists('jsSafe', $args[$count-1]) ? $args[$count-1]['jsSafe'] : false, array_key_exists('interpreteBackSlashes', $args[$count-1]) ? $args[$count-1]['interpreteBackSlashes'] : true);
 			}
 			else {
-				$args[0] = $lang->_($args[0]);
+				$args[0] = $lang->_($string);
 			}
 			return call_user_func_array('printf', $args);
 		}
@@ -263,6 +265,17 @@ class JText
 	 */
 	public static function script($string = null, $jsSafe = false, $interpreteBackSlashes = true)
 	{
+		if (is_array($jsSafe)) {
+			if (array_key_exists('interpreteBackSlashes', $jsSafe)) {
+				$interpreteBackSlashes = (boolean) $jsSafe['interpreteBackSlashes'];
+			}
+			if (array_key_exists('jsSafe', $jsSafe)) {
+				$jsSafe = (boolean) $jsSafe['jsSafe'];
+			}
+			else {
+				$jsSafe = false;
+			}
+		}
 
 		// Add the string to the array if not null.
 		if ($string !== null) {
