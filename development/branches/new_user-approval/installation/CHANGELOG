@@ -27,12 +27,21 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+06-May-2010 Jean-Marie Simonet
+#Fixed [20344] menu item alias . thanks Dennis and Elin
++ Adding language column in menu items view
+
 06-May-2010 Mark Dexter
 # Fix problem with sample data duplicate mainmenu (Elin Waring)
 # Show edit icon on frontpage and category blog when print and email icons disabled
 
 06-May-2010 Christophe Demko
- # Fixed bug in the JObservable::attach method when the observer is an array: it did not use the correct key
+ # Corrected a bug in #16862 (lack of languages table during installation)
+ + Change the way the JLanguage::_ works: \t and \n and interpreted as 'tabulation' and 'carriage return' in ini strings (as it was in 1.5). Added a third optional parameter to the function to disable this behavior.
+ ^ Improve performance (Thanks Klac Berlic and Dennis Hermatski) of JLanguagesHelper::detectLanguages
+ # Verifying array observer has not been already attached
+ #^ Accept Dennis Hermatski patch concerning language improvements
+ # Fixed bug in caching in various controller ('language'->'lang') # Fixed bug in the JObservable::attach method when the observer is an array: it did not use the correct key
  #$ Fixed ordering with image field in languages view (Thanks Dennis Hermacki)
  # Fix ordering with folder field in plugins view
  # [#20350] [patch] Core components fail in attempt to add multiselect.js in back-end list views.
