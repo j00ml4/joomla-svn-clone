@@ -373,7 +373,7 @@ class JCache extends JObject
 	 */
 	public function _getStorage()
 	{	
-		if (isset(self::$_handler[$this->_options['storage']]) && self::$_handler[$this->_options['storage'] instanceof JCacheStorage) {
+		if (isset(self::$_handler[$this->_options['storage']]) && self::$_handler[$this->_options['storage']] instanceof JCacheStorage) {
 			return self::$_handler[$this->_options['storage']];
 		}
 
