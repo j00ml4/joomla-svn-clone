@@ -27,6 +27,53 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+07-May-2010 Jean-Marie Simonet
+# Fixing installation issue _ Thank you Dennis Hermatski
+$ Deleting unused strings in main ini file
+$ Changed toolbar to "Delete" in com_users
+# Fixed [20365] Config modal error display. Thank you Artyom.
+# Fixed Translation of memcache/file in cache handler (Thanks Dennis)
+
+07-May-2010 Ian MacLennan
+ # Fixing unit tests to reflect database changes
+
+07-May-2010 Christophe Demko
+ # Fix [#20311] Can change the name of a menu but this doesn't change the items in the menu table.
+ # Fix [#16103] SEF enabled sites require the menu alias for each menu to be unique but there is no checking or attempt to ensure this
+ # Ensure menutype is unique
+ # Fix missing language_title field in newsfeeds view
+ # Fix escaping javascript string in JHtmlBehavior::_calendarTranslation
+ # Fix link menu item disabled when type is not url
+ # Fix [#19878] Global Config/Site Name in titles not working
+ # Fix [#20006] Invalid Token if install sample data twice 
+ + Change the second parameter of JText::script to be a boolean or an array of options
+ + Add two optional parameter at the end of JText::_ function to interprete backslashes and to indicate a string to push into the javascript strings
+ + Add an optional array parameter at the end of JText::plural and JText::sprintf.
+
+07-May-2010 Andrew Eddie
+ - Removing stubbed comments support.
+
+06-May-2010 Jean-Marie Simonet
+#Fixed [20344] menu item alias . thanks Dennis and Elin
++ Adding language column in menu items view
+
+06-May-2010 Mark Dexter
+# Fix problem with sample data duplicate mainmenu (Elin Waring)
+# Show edit icon on frontpage and category blog when print and email icons disabled
+
+06-May-2010 Christophe Demko
+ # Corrected a bug in #16862 (lack of languages table during installation)
+ + Change the way the JLanguage::_ works: \t and \n and interpreted as 'tabulation' and 'carriage return' in ini strings (as it was in 1.5). Added a third optional parameter to the function to disable this behavior.
+ ^ Improve performance (Thanks Klac Berlic and Dennis Hermatski) of JLanguagesHelper::detectLanguages
+ # Verifying array observer has not been already attached
+ #^ Accept Dennis Hermatski patch concerning language improvements
+ # Fixed bug in caching in various controller ('language'->'lang') # Fixed bug in the JObservable::attach method when the observer is an array: it did not use the correct key
+ #$ Fixed ordering with image field in languages view (Thanks Dennis Hermacki)
+ # Fix ordering with folder field in plugins view
+ # [#20350] [patch] Core components fail in attempt to add multiselect.js in back-end list views.
+ $ Change the description of the sef language field
+ ^ Change the JHtmlContentLanguage::published function to JHtmlContentLanguage::existing
+
 05-May-2010 Andrew Eddie
  ^ Accept patch [#20167] Caching of template query + JSite::getTemplate() refactoring to JDatabaseQuery (Dennis Hermacki).
  # Fix bug in the menu batch template which didn't show the menu items to copy or move to; fix bug in display of menu name (Júlio Pontes).
