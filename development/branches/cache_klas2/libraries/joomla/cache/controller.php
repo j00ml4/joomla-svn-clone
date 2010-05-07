@@ -3,13 +3,12 @@
  * @version		$Id:storage.php 6961 2007-03-15 16:06:53Z tcp $
  * @package		Joomla.Framework
  * @subpackage	Cache
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access
 defined('JPATH_BASE') or die;
-
-
 
 /**
  * Public cache handler
@@ -20,19 +19,25 @@ defined('JPATH_BASE') or die;
  * @since		1.6
  */
 class JCacheController
-
 {
+	/**
+	 * @since	1.6
+	 */
 	public $cache;
+
+	/**
+	 * @since	1.6
+	 */
 	public $options;
 
 	/**
 	 * Constructor
 	 *
 	 * @param	array	$options	options
-	*/
-
-	public function __construct($options) {
-
+	 * @since	1.6
+	 */
+	public function __construct($options)
+	{
 		$this->cache = new JCache($options);
 		$this->options = $this->cache->_options;
 
@@ -44,8 +49,11 @@ class JCacheController
 		}
 	}
 
-	public function __call ($name, $arguments) {
-
+	/**
+	 * @since	1.6
+	 */
+	public function __call ($name, $arguments)
+	{
 		$nazaj = call_user_func_array (array ($this->cache,$name),$arguments);
 		return $nazaj;
 	}
@@ -65,10 +73,10 @@ class JCacheController
 
 		$class = 'JCacheController'.ucfirst($type);
 
-		if (!class_exists($class))
-		{
+		if (!class_exists($class)) {
 			// Search for the class file in the JCache include paths.
 			jimport('joomla.filesystem.path');
+
 			if ($path = JPath::find(JCacheController::addIncludePath(), strtolower($type).'.php')) {
 				require_once $path;
 			} else {
@@ -95,7 +103,7 @@ class JCacheController
 	/**
 	 * Set cache lifetime
 	 *
-	 * @param	int	$lt	Cache lifetime
+	 * @param	int		$lt	Cache lifetime
 	 * @return	void
 	 * @since	1.6
 	 */
@@ -112,7 +120,6 @@ class JCacheController
 	 * @return	array	An array with directory elements
 	 * @since	1.6
 	 */
-
 	public static function addIncludePath($path='')
 	{
 		static $paths;
@@ -154,5 +161,4 @@ class JCacheController
 	{
 		return $this->cache->store(serialize($data), $id, $group);
 	}
-
 }
