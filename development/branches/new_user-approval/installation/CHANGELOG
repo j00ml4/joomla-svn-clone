@@ -27,7 +27,25 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+07-May-2010 Jean-Marie Simonet
+# Fixing installation issue _ Thank you Dennis Hermatski
+$ Deleting unused strings in main ini file
+$ Changed toolbar to "Delete" in com_users
+# Fixed [20365] Config modal error display. Thank you Artyom.
+# Fixed Translation of memcache/file in cache handler (Thanks Dennis)
+
+07-May-2010 Ian MacLennan
+ # Fixing unit tests to reflect database changes
+
 07-May-2010 Christophe Demko
+ # Fix [#16103] SEF enabled sites require the menu alias for each menu to be unique but there is no checking or attempt to ensure this
+ # Ensure menutype is unique
+ # Fix missing language_title field in newsfeeds view
+ # Fix escaping javascript string in JHtmlBehavior::_calendarTranslation
+ # Fix link menu item disabled when type is not url
+ # Fix [#19878] Global Config/Site Name in titles not working
+ # Fix [#20006] Invalid Token if install sample data twice 
+ + Change the second parameter of JText::script to be a boolean or an array of options
  + Add two optional parameter at the end of JText::_ function to interprete backslashes and to indicate a string to push into the javascript strings
  + Add an optional array parameter at the end of JText::plural and JText::sprintf.
 
