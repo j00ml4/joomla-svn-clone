@@ -27,6 +27,13 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+07-May-2010 Christophe Demko
+ + Add two optional parameter at the end of JText::_ function to interprete backslashes and to indicate a string to push into the javascript strings
+ + Add an optional array parameter at the end of JText::plural and JText::sprintf.
+
+07-May-2010 Andrew Eddie
+ - Removing stubbed comments support.
+
 06-May-2010 Jean-Marie Simonet
 #Fixed [20344] menu item alias . thanks Dennis and Elin
 + Adding language column in menu items view
