@@ -59,7 +59,7 @@
 	<field
 		name="title"
 		type="text"
-		label="JFIELD_TITLE_LABEL"
+		label="JGLOBAL_TITLE"
 		description="JFIELD_TITLE_DESC"
 		class="inputbox"
 		size="40"
@@ -97,7 +97,7 @@
 		class="inputbox"
 		default="1"
 		size="1"
-		label="JFIELD_PUBLISHED_LABEL"
+		label="JGLOBAL_STATE"
 		description="JFIELD_PUBLISHED_DESC">
 		<option
 			value="1">
@@ -180,7 +180,7 @@
 		description="COM_CATEGORIES_FIELD_LANGUAGE_DESC"
 		class="inputbox"
 		default="">
-		<option value="*">JOPTION_ALL_LANGUAGES</option>
+		<option value="*">JALL</option>
 	</field>
 
 	<field

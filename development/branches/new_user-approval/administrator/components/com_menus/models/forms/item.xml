@@ -13,7 +13,7 @@
 		<field
 			name="title"
 			type="text"
-			label="COM_MENUS_ITEM_FIELD_TITLE_LABEL"
+			label="JGLOBAL_TITLE"
 			description="COM_MENUS_ITEM_FIELD_TITLE_DESC"
 			class="inputbox"
 			size="40"
@@ -72,7 +72,7 @@
 			type="list"
 			id="published"
 			class="inputbox"
-			label="JFIELD_PUBLISHED_LABEL"
+			label="JGLOBAL_STATE"
 			description="JFIELD_PUBLISHED_DESC"
 			size="1"
 			default="1"
@@ -169,7 +169,7 @@
 			description="JFIELD_MODULE_LANGUAGE_DESC"
 			class="inputbox"
 			default="">
-			<option value="*">JOPTION_ALL_LANGUAGES</option>
+			<option value="*">JALL</option>
 		</field>
 
 		<field
