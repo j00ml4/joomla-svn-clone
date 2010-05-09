@@ -19,10 +19,6 @@ $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 
 
-// Get additional language strings prefixed with TPL_HATHOR
-$lang =& JFactory::getLanguage();
-$lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
-|| $lang->load('tpl_hathor', JPATH_ADMINISTRATOR.DS.'templates/hathor');
 
 ?>
 
@@ -38,15 +34,15 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 		<div class="filter-select">
 			<label class="selectlabel" for="filter_published">
 				<?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?>
-			</label> 
+			</label>
 			<select name="filter_published" id="filter_published" class="inputbox">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('languages.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
 			</select>
-			
+
 			<button type="button" id="filter-go" onclick="this.form.submit();">
 				<?php echo JText::_('GO'); ?></button>
-			
+
 		</div>
 	</fieldset>
 
@@ -60,13 +56,19 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(<?php echo count($this->items); ?>);" />
 				</th>
 				<th class="title">
-					<?php echo JHtml::_('grid.sort',  'COM_LANGS_HEADING_TITLE', 'a.title', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
 				</th>
 				<th class="title">
-					<?php echo JHtml::_('grid.sort',  'COM_LANGS_HEADING_TITLE_NATIVE', 'a.title_native', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_LANGUAGES_HEADING_TITLE_NATIVE', 'a.title_native', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap width-5">
-					<?php echo JHtml::_('grid.sort',  'COM_LANGS_HEADING_LANG_CODE', 'a.lang_code', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'COM_LANGUAGES_HEADING_LANG_CODE', 'a.lang_code', $listDirn, $listOrder); ?>
+				</th>
+				<th class="nowrap width-5">
+					<?php echo JHtml::_('grid.sort',  'COM_LANGUAGES_HEADING_LANG_SEF', 'a.sef', $listDirn, $listOrder); ?>
+				</th>
+				<th class="nowrap width-5">
+					<?php echo JHtml::_('grid.sort',  'COM_LANGUAGES_HEADING_LANG_IMAGE', 'a.image', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap width-5">
 					<?php echo JHtml::_('grid.sort',  'JPUBLISHED', 'a.published', $listDirn, $listOrder); ?>
@@ -76,7 +78,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				</th>
 			</tr>
 		</thead>
-		
+
 		<tbody>
 		<?php
 		foreach ($this->items as $i => $item) :
@@ -99,6 +101,12 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				<td class="center">
 					<?php echo $item->lang_code; ?>
 				</td>
+				<td align="center">
+					<?php echo $item->sef; ?>
+				</td>
+				<td align="center">
+					<?php echo $item->image; ?>
+				</td>
 				<td class="center">
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'languages.');?>
 				</td>
@@ -109,7 +117,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 			<?php endforeach; ?>
 		</tbody>
 	</table>
-	
+
 	<?php echo $this->pagination->getListFooter(); ?>
 
 	<input type="hidden" name="task" value="" />
