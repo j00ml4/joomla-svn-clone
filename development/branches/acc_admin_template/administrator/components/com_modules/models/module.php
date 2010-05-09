@@ -26,7 +26,7 @@ class ModulesModelModule extends JModelAdmin
 	 * @since	1.6
 	 */
 	protected $text_prefix = 'COM_MODULES';
-	
+
 	/**
 	 * Method to auto-populate the model state.
 	 *
@@ -195,9 +195,6 @@ class ModulesModelModule extends JModelAdmin
 	 */
 	public function getForm($data = null)
 	{
-		// Initialise variables.
-		$app = JFactory::getApplication();
-
 		// The folder and element vars are passed when saving the form.
 		if (empty($data)) {
 			$item		= $this->getItem();
@@ -218,17 +215,27 @@ class ModulesModelModule extends JModelAdmin
 			return false;
 		}
 
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_modules.edit.module.data', array());
+		$form->setFieldAttribute('position', 'client', $this->getState('item.client_id') == 0 ? 'site' : 'administrator');
+		
+		return $form;
+	}
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function getFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_modules.edit.module.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
 		}
 
-		return $form;
+		return $data;
 	}
 
 	/**
@@ -373,11 +380,11 @@ class ModulesModelModule extends JModelAdmin
 
 	/**
 	 * @param	object	A form object.
-	 *
+	 * @param	mixed	The data expected for the form.
 	 * @throws	Exception if there is an error loading the form.
 	 * @since	1.6
 	 */
-	protected function preprocessForm($form)
+	protected function preprocessForm($form, $data)
 	{
 		jimport('joomla.filesystem.file');
 		jimport('joomla.filesystem.folder');
@@ -403,7 +410,7 @@ class ModulesModelModule extends JModelAdmin
 		}
 
 		// Trigger the default form events.
-		parent::preprocessForm($form);
+		parent::preprocessForm($form, $data);
 	}
 
 	/**
@@ -421,7 +428,7 @@ class ModulesModelModule extends JModelAdmin
 		$isNew		= true;
 
 		// Include the content modules for the onSave events.
-		JPluginHelper::importPlugin('content');
+		JPluginHelper::importPlugin('extension');
 
 		// Load the row if saving an existing record.
 		if ($pk > 0) {
@@ -444,8 +451,8 @@ class ModulesModelModule extends JModelAdmin
 			return false;
 		}
 
-		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger('onBeforeContentSave', array(&$table, $isNew));
+		// Trigger the onExtensionBeforeSave event.
+		$result = $dispatcher->trigger('onExtensionBeforeSave', array('com_modules.module', &$table, $isNew));
 		if (in_array(false, $result, true)) {
 			$this->setError($table->getError());
 			return false;
@@ -531,8 +538,8 @@ class ModulesModelModule extends JModelAdmin
 		$cache->clean();
 		$cache->clean('mod_menu');
 
-		// Trigger the onAfterContentSave event.
-		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
+		// Trigger the onExtensionAfterSave event.
+		$dispatcher->trigger('onExtensionAfterSave', array('com_modules.module', &$table, $isNew));
 
 		$this->setState('module.id', $table->id);
 

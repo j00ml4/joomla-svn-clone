@@ -53,18 +53,20 @@ class JFormFieldEditor extends JFormField
 
 		// Build the buttons array.
 		$buttons = (string) $this->element['buttons'];
-		if ($buttons == 'true' || $buttons == 'yes' || $buttons == '1') {
+		if ($buttons == 'true' || $buttons == 'yes' || $buttons == 1) {
 			$buttons = true;
-		} else if ($buttons == 'false' || $buttons == 'no' || $buttons == '0') {
+		} else if ($buttons == 'false' || $buttons == 'no' || $buttons == 0) {
 			$buttons = false;
 		} else {
 			$buttons = explode(',', $buttons);
 		}
 
+		$hide		= ((string) $this->element['hide']) ? explode(',',(string) $this->element['hide']) : array();
+
 		// Get an editor object.
 		$editor = $this->getEditor();
 
-		return $editor->display($this->name, htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8'), $width, $height, $cols, $rows, $buttons, $this->id);
+		return $editor->display($this->name, htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8'), $width, $height, $cols, $rows, $buttons ? (is_array($buttons) ? array_merge($buttons,$hide) : $hide) : false, $this->id);
 	}
 
 	/**

@@ -60,7 +60,7 @@ class UsersViewGroups extends JView
 			JToolBarHelper::custom('group.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
 		}
 		if ($canDo->get('core.delete')) {
-			JToolBarHelper::deleteList('', 'groups.delete','JTOOLBAR_TRASH');
+			JToolBarHelper::deleteList('', 'groups.delete','JTOOLBAR_DELETE');
 		}
 
 		JToolBarHelper::divider();
@@ -69,6 +69,6 @@ class UsersViewGroups extends JView
 			JToolBarHelper::preferences('com_users');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.users.groups','JTOOLBAR_HELP');
+		JToolBarHelper::help('JHELP_USERS_GROUPS');
 	}
 }

@@ -619,7 +619,7 @@
 			<value>1</value>
 			<value>0</value>
 			<value></value>
-			<value>{&quot;show_contact_list&quot;:&quot;0&quot;,&quot;show_name&quot;:&quot;1&quot;,&quot;show_position&quot;:&quot;1&quot;,&quot;show_email&quot;:&quot;0&quot;,&quot;show_street_address&quot;:&quot;1&quot;,&quot;show_suburb&quot;:&quot;1&quot;,&quot;show_state&quot;:&quot;1&quot;,&quot;show_postcode&quot;:&quot;1&quot;,&quot;show_country&quot;:&quot;1&quot;,&quot;show_telephone&quot;:&quot;1&quot;,&quot;show_mobile&quot;:&quot;1&quot;,&quot;show_fax&quot;:&quot;1&quot;,&quot;show_webpage&quot;:&quot;1&quot;,&quot;show_misc&quot;:&quot;1&quot;,&quot;show_image&quot;:&quot;1&quot;,&quot;allow_vcard&quot;:&quot;0&quot;,&quot;show_articles&quot;:&quot;1&quot;,&quot;show_profile&quot;:&quot;1&quot;,&quot;show_links&quot;:&quot;1&quot;,&quot;linka_name&quot;:&quot;&quot;,&quot;linkb_name&quot;:&quot;&quot;,&quot;linkc_name&quot;:&quot;&quot;,&quot;linkd_name&quot;:&quot;&quot;,&quot;linke_name&quot;:&quot;&quot;,&quot;contact_icons&quot;:&quot;0&quot;,&quot;icon_address&quot;:&quot;&quot;,&quot;icon_email&quot;:&quot;&quot;,&quot;icon_telephone&quot;:&quot;&quot;,&quot;icon_mobile&quot;:&quot;&quot;,&quot;icon_fax&quot;:&quot;&quot;,&quot;icon_misc&quot;:&quot;&quot;,&quot;show_headings&quot;:&quot;1&quot;,&quot;show_position_headings&quot;:&quot;1&quot;,&quot;show_email_headings&quot;:&quot;0&quot;,&quot;show_telephone_headings&quot;:&quot;1&quot;,&quot;show_mobile_headings&quot;:&quot;1&quot;,&quot;show_fax_headings&quot;:&quot;1&quot;,&quot;allow_vcard_headings&quot;:&quot;0&quot;,&quot;show_email_form&quot;:&quot;1&quot;,&quot;email_description&quot;:&quot;&quot;,&quot;show_email_copy&quot;:&quot;1&quot;,&quot;banned_email&quot;:&quot;&quot;,&quot;banned_subject&quot;:&quot;&quot;,&quot;banned_text&quot;:&quot;&quot;,&quot;validate_session&quot;:&quot;1&quot;,&quot;custom_reply&quot;:&quot;0&quot;,&quot;redirect&quot;:&quot;&quot;,&quot;show_category_crumb&quot;:&quot;0&quot;,&quot;article_allow_ratings&quot;:&quot;0&quot;,&quot;article_allow_comments&quot;:&quot;0&quot;,&quot;metakey&quot;:&quot;&quot;,&quot;metadesc&quot;:&quot;&quot;,&quot;robots&quot;:&quot;&quot;,&quot;author&quot;:&quot;&quot;,&quot;rights&quot;:&quot;&quot;,&quot;xreference&quot;:&quot;&quot;}</value>
+			<value>{&quot;show_contact_list&quot;:&quot;0&quot;,&quot;show_name&quot;:&quot;1&quot;,&quot;show_position&quot;:&quot;1&quot;,&quot;show_email&quot;:&quot;0&quot;,&quot;show_street_address&quot;:&quot;1&quot;,&quot;show_suburb&quot;:&quot;1&quot;,&quot;show_state&quot;:&quot;1&quot;,&quot;show_postcode&quot;:&quot;1&quot;,&quot;show_country&quot;:&quot;1&quot;,&quot;show_telephone&quot;:&quot;1&quot;,&quot;show_mobile&quot;:&quot;1&quot;,&quot;show_fax&quot;:&quot;1&quot;,&quot;show_webpage&quot;:&quot;1&quot;,&quot;show_misc&quot;:&quot;1&quot;,&quot;show_image&quot;:&quot;1&quot;,&quot;allow_vcard&quot;:&quot;0&quot;,&quot;show_articles&quot;:&quot;1&quot;,&quot;show_profile&quot;:&quot;1&quot;,&quot;show_links&quot;:&quot;1&quot;,&quot;linka_name&quot;:&quot;&quot;,&quot;linkb_name&quot;:&quot;&quot;,&quot;linkc_name&quot;:&quot;&quot;,&quot;linkd_name&quot;:&quot;&quot;,&quot;linke_name&quot;:&quot;&quot;,&quot;contact_icons&quot;:&quot;0&quot;,&quot;icon_address&quot;:&quot;&quot;,&quot;icon_email&quot;:&quot;&quot;,&quot;icon_telephone&quot;:&quot;&quot;,&quot;icon_mobile&quot;:&quot;&quot;,&quot;icon_fax&quot;:&quot;&quot;,&quot;icon_misc&quot;:&quot;&quot;,&quot;show_headings&quot;:&quot;1&quot;,&quot;show_position_headings&quot;:&quot;1&quot;,&quot;show_email_headings&quot;:&quot;0&quot;,&quot;show_telephone_headings&quot;:&quot;1&quot;,&quot;show_mobile_headings&quot;:&quot;1&quot;,&quot;show_fax_headings&quot;:&quot;1&quot;,&quot;allow_vcard_headings&quot;:&quot;0&quot;,&quot;show_email_form&quot;:&quot;1&quot;,&quot;email_description&quot;:&quot;&quot;,&quot;show_email_copy&quot;:&quot;1&quot;,&quot;banned_email&quot;:&quot;&quot;,&quot;banned_subject&quot;:&quot;&quot;,&quot;banned_text&quot;:&quot;&quot;,&quot;validate_session&quot;:&quot;1&quot;,&quot;custom_reply&quot;:&quot;0&quot;,&quot;redirect&quot;:&quot;&quot;,&quot;show_category_crumb&quot;:&quot;0&quot;,&quot;metakey&quot;:&quot;&quot;,&quot;metadesc&quot;:&quot;&quot;,&quot;robots&quot;:&quot;&quot;,&quot;author&quot;:&quot;&quot;,&quot;rights&quot;:&quot;&quot;,&quot;xreference&quot;:&quot;&quot;}</value>
 			<value></value>
 			<value></value>
 			<value>0</value>
@@ -2400,6 +2400,7 @@
 		<column>lang_code</column>
 		<column>title</column>
 		<column>title_native</column>
+		<column>sef</column>
 		<column>description</column>
 		<column>published</column>
 		<row>
@@ -2407,6 +2408,7 @@
 			<value>en-GB</value>
 			<value>English (UK)</value>
 			<value>English (UK)</value>
+			<value>en-GB</value>
 			<value></value>
 			<value>1</value>
 		</row>
@@ -2415,6 +2417,7 @@
 			<value>en-US</value>
 			<value>English (US)</value>
 			<value>English (US)</value>
+			<value>en-US</value>
 			<value></value>
 			<value>1</value>
 		</row>
@@ -2423,6 +2426,7 @@
 			<value>xx-XX</value>
 			<value>xx (Test)</value>
 			<value>xx (Test)</value>
+			<value>xx-XX</value>
 			<value></value>
 			<value>1</value>
 		</row>
@@ -3444,63 +3448,6 @@ separator=
 		<column>userid</column>
 		<column>username</column>
 		<column>usertype</column>
-	</table>
-	<table name="jos_social_blocked_ips">
-		<column>id</column>
-		<column>start_ip</column>
-		<column>end_ip</column>
-	</table>
-	<table name="jos_social_blocked_users">
-		<column>id</column>
-		<column>user_id</column>
-		<column>email</column>
-	</table>
-	<table name="jos_social_comments">
-		<column>id</column>
-		<column>thread_id</column>
-		<column>user_id</column>
-		<column>context</column>
-		<column>context_id</column>
-		<column>trackback</column>
-		<column>notify</column>
-		<column>score</column>
-		<column>referer</column>
-		<column>page</column>
-		<column>name</column>
-		<column>url</column>
-		<column>email</column>
-		<column>subject</column>
-		<column>body</column>
-		<column>created_date</column>
-		<column>published</column>
-		<column>address</column>
-		<column>link</column>
-	</table>
-	<table name="jos_social_ratings">
-		<column>thread_id</column>
-		<column>context</column>
-		<column>context_id</column>
-		<column>referer</column>
-		<column>page</column>
-		<column>pscore_total</column>
-		<column>pscore_count</column>
-		<column>pscore</column>
-		<column>mscore_total</column>
-		<column>mscore_count</column>
-		<column>mscore</column>
-		<column>used_ips</column>
-		<column>updated_date</column>
-	</table>
-	<table name="jos_social_threads">
-		<column>id</column>
-		<column>context</column>
-		<column>context_id</column>
-		<column>page_url</column>
-		<column>page_route</column>
-		<column>page_title</column>
-		<column>created_date</column>
-		<column>status</column>
-		<column>pings</column>
 	</table>
 	<table name="jos_template_styles">
 		<column>id</column>

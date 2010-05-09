@@ -22,11 +22,17 @@ class PluginsModelPlugin extends JModelAdmin
 	protected $_cache;
 
 	/**
-	 * @var		string	The prefix to use with controller messages.
+	 * @var		string	The event to trigger after saving the data.
 	 * @since	1.6
 	 */
-	protected $text_prefix = 'COM_PLUGINS';
-	
+	protected $event_after_save = 'onExtensionAfterSave';
+
+	/**
+	 * @var		string	The event to trigger after before the data.
+	 * @since	1.6
+	 */
+	protected $event_before_save = 'onExtensionBeforeSave';
+
 	/**
 	 * Method to get the record form.
 	 *
@@ -36,9 +42,6 @@ class PluginsModelPlugin extends JModelAdmin
 	 */
 	public function getForm($data = null)
 	{
-		// Initialise variables.
-		$app = JFactory::getApplication();
-
 		// The folder and element vars are passed when saving the form.
 		if (empty($data)) {
 			$item		= $this->getItem();
@@ -59,17 +62,25 @@ class PluginsModelPlugin extends JModelAdmin
 			return false;
 		}
 
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_plugins.edit.plugin.data', array());
+		return $form;
+	}
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function getFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_plugins.edit.plugin.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
 		}
 
-		return $form;
+		return $data;
 	}
 
 	/**
@@ -136,12 +147,12 @@ class PluginsModelPlugin extends JModelAdmin
 
 	/**
 	 * @param	object	A form object.
-	 *
+	 * @param	mixed	The data expected for the form.
 	 * @return	mixed	True if successful.
 	 * @throws	Exception if there is an error in the form event.
 	 * @since	1.6
 	 */
-	protected function preprocessForm($form)
+	protected function preprocessForm($form, $data)
 	{
 		jimport('joomla.filesystem.file');
 		jimport('joomla.filesystem.folder');
@@ -177,7 +188,7 @@ class PluginsModelPlugin extends JModelAdmin
 		}
 
 		// Trigger the default form events.
-		parent::preprocessForm($form);
+		parent::preprocessForm($form, $data);
 	}
 
 	/**
@@ -193,5 +204,20 @@ class PluginsModelPlugin extends JModelAdmin
 		$condition[] = 'type = '. $this->_db->Quote($table->type);
 		$condition[] = 'folder = '. $this->_db->Quote($table->folder);
 		return $condition;
+	}
+
+	/**
+	 * Override method to save the form data.
+	 *
+	 * @param	array	The form data.
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function save($data)
+	{
+		// Load the extension plugin group.
+		JPluginHelper::importPlugin('extension');
+
+		return parent::save($data);
 	}
 }

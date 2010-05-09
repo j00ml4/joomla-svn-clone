@@ -77,7 +77,7 @@ class RedirectViewLinks extends JView
 				else if ($state->get('filter.state') == 2) {
 					JToolBarHelper::unarchiveList('links.publish', 'JTOOLBAR_UNARCHIVE');
 				}
-			}	
+			}
 		}
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'links.delete','JTOOLBAR_EMPTY_TRASH');
@@ -89,6 +89,6 @@ class RedirectViewLinks extends JView
 			JToolBarHelper::preferences('com_redirect');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.redirect','JTOOLBAR_HELP');
+		JToolBarHelper::help('JHELP_COMPONENTS_REDIRECT_MANAGER');
 	}
 }

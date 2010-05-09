@@ -43,6 +43,7 @@
 			label="COM_MENUS_ITEM_FIELD_LINK_LABEL"
 			description="COM_MENUS_ITEM_FIELD_LINK_DESC"
 			default=""
+			readonly="true"
 			class="inputbox"
 			size="50"/>
 
@@ -71,7 +72,7 @@
 			type="list"
 			id="published"
 			class="inputbox"
-			label="JFIELD_PUBLISHED_LABEL"
+			label="JGLOBAL_STATE"
 			description="JFIELD_PUBLISHED_DESC"
 			size="1"
 			default="1"
@@ -159,6 +160,16 @@
 				value="0">JNO</option>
 			<option
 				value="1">JYES</option>
+		</field>
+
+		<field
+			name="language"
+			type="contentlanguage"
+			label="JFIELD_LANGUAGE_LABEL"
+			description="JFIELD_MODULE_LANGUAGE_DESC"
+			class="inputbox"
+			default="">
+			<option value="*">JALL</option>
 		</field>
 
 		<field

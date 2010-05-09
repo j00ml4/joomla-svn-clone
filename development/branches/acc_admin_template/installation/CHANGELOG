@@ -27,8 +27,143 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+08-May-2010 Christophe Demko
+ #^ Allowing languages to use specified lower/upper limit and length of displayed result for text search (http://groups.google.fr/group/joomla-dev-cms/browse_thread/thread/3b0ecd3ba64e973e)
+ # Correcting a bug for unique menu item alias
+
+08-May-2010 Jean-Marie Simonet
+# Correcting 16193 (Thanks Elin)
+
+08-May-2010 Sam Moffatt
+ ^ [#20348] Patch for renumbering of core extensions in extensions table (Thanks Elin!)
+ ^ Updated jos_schemas table to fix field names
+ + Added extension plugin to ensure update sites are maintained
+ ^ Altered SQL handling for component/module/plugin update handling
+
+08-May-2010 Jean-Marie Simonet
+$ Consolidated some strings
+# Corrected double translation in jgrid
+
+07-May-2010 Ian MacLennan
+# Fixed error in JString::strspn that caused unit tests to fail on systems without mbstring
+
+07-May-2010 Jean-Marie Simonet
+$ Consolidated some strings
+# Fixing installation issue _ Thank you Dennis Hermatski
+$ Deleting unused strings in main ini file
+$ Changed toolbar to "Delete" in com_users
+# Fixed [20365] Config modal error display. Thank you Artyom.
+# Fixed Translation of memcache/file in cache handler (Thanks Dennis)
+
+07-May-2010 Ian MacLennan
+ # Fixing unit tests to reflect database changes
+
+07-May-2010 Christophe Demko
+ # Fix [#20311] Can change the name of a menu but this doesn't change the items in the menu table.
+ # Fix [#16103] SEF enabled sites require the menu alias for each menu to be unique but there is no checking or attempt to ensure this
+ # Ensure menutype is unique
+ # Fix missing language_title field in newsfeeds view
+ # Fix escaping javascript string in JHtmlBehavior::_calendarTranslation
+ # Fix link menu item disabled when type is not url
+ # Fix [#19878] Global Config/Site Name in titles not working
+ # Fix [#20006] Invalid Token if install sample data twice 
+ + Change the second parameter of JText::script to be a boolean or an array of options
+ + Add two optional parameter at the end of JText::_ function to interprete backslashes and to indicate a string to push into the javascript strings
+ + Add an optional array parameter at the end of JText::plural and JText::sprintf.
+
+07-May-2010 Andrew Eddie
+ - Removing stubbed comments support.
+
+06-May-2010 Jean-Marie Simonet
+#Fixed [20344] menu item alias . thanks Dennis and Elin
++ Adding language column in menu items view
+
+06-May-2010 Mark Dexter
+# Fix problem with sample data duplicate mainmenu (Elin Waring)
+# Show edit icon on frontpage and category blog when print and email icons disabled
+
+06-May-2010 Christophe Demko
+ # Corrected a bug in #16862 (lack of languages table during installation)
+ + Change the way the JLanguage::_ works: \t and \n and interpreted as 'tabulation' and 'carriage return' in ini strings (as it was in 1.5). Added a third optional parameter to the function to disable this behavior.
+ ^ Improve performance (Thanks Klac Berlic and Dennis Hermatski) of JLanguagesHelper::detectLanguages
+ # Verifying array observer has not been already attached
+ #^ Accept Dennis Hermatski patch concerning language improvements
+ # Fixed bug in caching in various controller ('language'->'lang') # Fixed bug in the JObservable::attach method when the observer is an array: it did not use the correct key
+ #$ Fixed ordering with image field in languages view (Thanks Dennis Hermacki)
+ # Fix ordering with folder field in plugins view
+ # [#20350] [patch] Core components fail in attempt to add multiselect.js in back-end list views.
+ $ Change the description of the sef language field
+ ^ Change the JHtmlContentLanguage::published function to JHtmlContentLanguage::existing
+
+05-May-2010 Andrew Eddie
+ ^ Accept patch [#20167] Caching of template query + JSite::getTemplate() refactoring to JDatabaseQuery (Dennis Hermacki).
+ # Fix bug in the menu batch template which didn't show the menu items to copy or move to; fix bug in display of menu name (Júlio Pontes).
+ # Fix bug in JApplicationSite::addClientInfo (Júlio Pontes).
+
+05-May-2010 Christophe Demko
+# Correcting a bug in the com_installer manage view
+$ Change a string in com_languages
+
+05-May-2010 Jean-Marie Simonet
+$ Adding delete strings and code to Menu type deleting.
+
+05-May-2010 Andrew Eddie
+ ^ Renamed "installer" plugin group to "extension".
+ ^ Added onExtensionBeforeSave and onExtensionAfterSave events to languages, modules, plugins, template styles and source.
+ ^ Merged language switcher branch (Jean-Marie Simonet & Christophe Demko).
+ # Fixed bugs in flash uploader (Ian MacLennan is da man!).
+ + Added stanard support for onContentBeforeDelete, onContentAfterDelete and onContentChangeState events in JModelAdmin.
+
+04-May-2010 Jean-Marie Simonet
+$ Refactored ini files structure for test alphas
+$ ^ A few fixes for Hathor
+# Bug fixes
+
+04-May-2010 Andrew Eddie
+ ^ Merge patched to cache the query building in JModelList (Christophe Demko).
+ + Merge Hathor administrator template by Andrea Tarr.
+ # Fixed [#20319] beez2 overides
+ ^ Merge patch [#20330] mod_status show / hide params (Phil Snell).
+ ^ Added chaining support to JMail.
+ ^ Renamed extension events to onExtension*
+ ^ Renamed search events to onContentSearch*
+ ^ Simplified JForm email and username rules.
+ ^ Fix some installation controller problems.
+ ^ Rename authentication events to onUserAuthenticate.
+ ^ Rename user events to onUser*.
+ ^ Add better form and data handling support to JModelForm.
+ # Fix issue with forms and profile in frontend com_users.
+ # Fix issue with forms and profile in backend com_users.
+ ^ Renamed onPrepareContent event to onContentPrepare.
+ ^ Renamed onBeforeContentSave and onAfterContentSave events to onContentBeforeSave and onContentAfterSave.
+ ^ Renamed onAfterDisplayTitle, onBeforeDisplayContent and onAfterDisplayContent events
+   to onContentAfterTitle, onContentBeforeDisplay, onContentAfterDisplay.
+
+3-May-2010 Jean-Marie Simonet
+# Fixed [20314] (Thanks Phil Snell). Added/consolidated some strings in com_messages
+
+03-May-2010 Christophe Demko
+ ^ Add an xml attribute to editor field: 'hide' to specify which buttons to hide
+
+03-May-2010 Andrew Eddie
+ ^ Merge fixes to media fields (Elin Waring)
+ + Merge addition of featured contacts view (Elin Waring)
+ + Merge extra fields for user profile plugin (Elin Waring)
+ ^ Merge various fixes to HTML filtering of and buttons of rich textareas (Elin Waring)
+ ^ Merge changes/fixes to sample data: fruit shop style fix; articles category module (Elin Waring)
+ ^ Accepted patch [#20161] Caching of plugins query + JPluginHelper refactoring to JDatabaseQuery (Dennis Hermacki)
+
+2-May-2010 Christophe Demko
+# Correcting a bug I have introduced on commit #16536
+
 2-May-2010 Jean-Marie Simonet
 $ Consolidating some categories, contact, newsfeeds, weblinks,content strings
+$ Refactoring com_contacts frontend ini/keys
+$ Added calendar image in front-end (Thanks Bill)
+$ Moving icons for com_contact to new folder in media/contacts/images/
+$ Correcting/consolidating strings
+^ Adding fax in contact edit
+# Correcting mod_banners [20301](thanks Phil Snell)
 
 01-May-2010 Hannes Papenberg
 # Fixing base-tag for SEF mode without mod_rewrite
@@ -1205,7 +1340,6 @@ $ Change the language string JOption_Access_Show_All_Sections to JOption_Access_
 05-Jan-2010 Hannes Papenberg
  ^ Removed #__components and moved the admin menu information to #__menu. Thanks Jonnathan!
 
->>>>>>> .r14052
 05-Jan-2010 Andrew Eddie
  ^ Accepted [#19268] Refactoring mod_popular in the BackEnd.
  ^ Added support for layout and modal forms in JControllerForm::edit method.

@@ -66,7 +66,7 @@ class UsersViewUsers extends JView
 			JToolBarHelper::custom('user.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
 		}
 		if ($canDo->get('core.delete')) {
-			JToolBarHelper::deleteList('', 'users.delete','JTOOLBAR_TRASH');
+			JToolBarHelper::deleteList('', 'users.delete','JTOOLBAR_DELETE');
 		}
 
 		JToolBarHelper::divider();
@@ -75,6 +75,6 @@ class UsersViewUsers extends JView
 			JToolBarHelper::preferences('com_users');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.users.users','JTOOLBAR_HELP');
+		JToolBarHelper::help('JHELP_USERS_USER_MANAGER');
 	}
 }

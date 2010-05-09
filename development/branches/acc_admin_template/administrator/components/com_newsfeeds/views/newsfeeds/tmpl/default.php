@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 
-JHTML::_('script','multiselect.js');
+JHTML::_('script','system/multiselect.js',false,true);
 $user	= JFactory::getUser();
 $userId	= $user->get('id');
 $listOrder	= $this->state->get('list.ordering');
@@ -43,6 +43,11 @@ $listDirn	= $this->state->get('list.direction');
 			<select name="filter_category_id" class="inputbox" onchange="this.form.submit()">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_CATEGORY');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_newsfeeds'), 'value', 'text', $this->state->get('filter.category_id'));?>
+			</select>
+
+			<select name="filter_language" class="inputbox" onchange="this.form.submit()">
+				<option value=""><?php echo JText::_('JOPTION_SELECT_LANGUAGE');?></option>
+				<?php echo JHtml::_('select.options', JHtml::_('contentlanguage.existing', true, true), 'value', 'text', $this->state->get('filter.language'));?>
 			</select>
 		</div>
 	</fieldset>
@@ -141,7 +146,11 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo (int) $item->cache_time; ?>
 				</td>
 				<td class="center">
-					<?php echo $this->escape($item->language); ?>
+					<?php if ($item->language=='*'):?>
+						<?php echo JText::_('JALL'); ?>
+					<?php else:?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JOPTION_UNDEFINED_LANGUAGE'); ?>
+					<?php endif;?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>

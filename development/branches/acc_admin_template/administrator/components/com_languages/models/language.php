@@ -20,12 +20,6 @@ jimport('joomla.application.component.modeladmin');
 class LanguagesModelLanguage extends JModelAdmin
 {
 	/**
-	 * @var		string	The prefix to use with controller messages.
-	 * @since	1.6
-	 */
-	protected $text_prefix = 'COM_LANGUAGES';
-	
-	/**
 	 * Override to get the table
 	 */
 	public function getTable()
@@ -42,17 +36,14 @@ class LanguagesModelLanguage extends JModelAdmin
 	 */
 	protected function populateState()
 	{
-		$app		= &JFactory::getApplication('administrator');
-		$params		= &JComponentHelper::getParams('com_languages');
+		$app		= JFactory::getApplication('administrator');
+		$params		= JComponentHelper::getParams('com_languages');
 
 		// Load the User state.
-		if (JRequest::getWord('layout') === 'edit')
-		{
+		if (JRequest::getWord('layout') === 'edit') {
 			$langId = (int) $app->getUserState('com_languages.edit.language.id');
 			$this->setState('language.id', $langId);
-		}
-		else
-		{
+		} else {
 			$langId = (int) JRequest::getInt('id');
 			$this->setState('language.id', $langId);
 		}
@@ -98,35 +89,47 @@ class LanguagesModelLanguage extends JModelAdmin
 	 */
 	public function getForm()
 	{
-		// Initialise variables.
-		$app	= JFactory::getApplication();
-
 		// Get the form.
 		$form = parent::getForm('com_languages.language', 'language', array('control' => 'jform'));
 		if (empty($form)) {
 			return false;
 		}
 
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_languages.edit.language.data', array());
-
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
-		}
-
 		return $form;
 	}
 
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function getFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_languages.edit.language.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Method to save the form data.
+	 *
+	 * @param	array	The form data.
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
 	public function save($data)
 	{
 		$langId	= (int) $this->getState('language.id');
-		$isNew		= true;
+		$isNew	= true;
 
 		$dispatcher = &JDispatcher::getInstance();
-		JPluginHelper::importPlugin('content');
+		JPluginHelper::importPlugin('extension');
 
 		$table = &$this->getTable();
 
@@ -148,8 +151,8 @@ class LanguagesModelLanguage extends JModelAdmin
 			return false;
 		}
 
-		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger('onBeforeContentSave', array(&$table, $isNew));
+		// Trigger the onExtensionBeforeSave event.
+		$result = $dispatcher->trigger('onExtensionBeforeSave', array('com_langauges.language', &$table, $isNew));
 
 		// Check the event responses.
 		if (in_array(false, $result, true)) {
@@ -163,8 +166,8 @@ class LanguagesModelLanguage extends JModelAdmin
 			return false;
 		}
 
-		// Trigger the onAfterContentSave event.
-		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
+		// Trigger the onExtensionAfterSave event.
+		$dispatcher->trigger('onExtensionAfterSave', array('com_langauges.language', &$table, $isNew));
 
 		$this->setState('language.id', $table->lang_id);
 

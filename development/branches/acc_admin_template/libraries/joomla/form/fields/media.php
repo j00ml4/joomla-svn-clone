@@ -88,7 +88,7 @@ class JFormFieldMedia extends JFormField
 			$folder = explode ('/',$this->value);
 			array_shift($folder);
 			array_pop($folder);
-			$folder = implode('/',$folder);			
+			$folder = implode('/',$folder);
 		}
 		elseif (file_exists(JPATH_ROOT . '/images/' . $directory)) {
 			$folder = $directory;
@@ -99,10 +99,10 @@ class JFormFieldMedia extends JFormField
 		// The button.
 		$html[] = '<div class="button2-left">';
 		$html[] = '	<div class="blank">';
-		$html[] = '		<a class="modal" title="'.JText::_('JGLOBAL_SELECT').'"' .
+		$html[] = '		<a class="modal" title="'.JText::_('JSELECT').'"' .
 					' href="'.($this->element['readonly'] ? '' : ($link ? $link : 'index.php?option=com_media&view=images&tmpl=component') . '&fieldid='.$this->id.'&folder='.$folder).'"' .
 					' rel="{handler: \'iframe\', size: {x: 650, y: 375}}">';
-		$html[] = '			'.JText::_('JGLOBAL_SELECT').'</a>';
+		$html[] = '			'.JText::_('JSELECT').'</a>';
 		$html[] = '	</div>';
 		$html[] = '</div>';
 

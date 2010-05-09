@@ -46,6 +46,9 @@ class ContactModelContacts extends JModelList
 		$categoryId = $app->getUserStateFromRequest($this->context.'.category_id', 'filter_category_id');
 		$this->setState('filter.category_id', $categoryId);
 
+		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
+		$this->setState('filter.language', $language);
+
 		// List state information.
 		parent::populateState('a.name', 'asc');
 	}
@@ -64,8 +67,11 @@ class ContactModelContacts extends JModelList
 	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
-		$id	.= ':'.$this->getState('filter.search');
-		$id	.= ':'.$this->getState('filter.published');
+		$id.= ':' . $this->getState('filter.search');
+		$id.= ':' . $this->getState('filter.access');
+		$id.= ':' . $this->getState('filter.published');
+		$id.= ':' . $this->getState('filter.category_id');
+		$id.= ':' . $this->getState('filter.language');
 
 		return parent::getStoreId($id);
 	}
@@ -75,7 +81,7 @@ class ContactModelContacts extends JModelList
 	 *
 	 * @return	string
 	 */
-	function getListQuery($resolveFKs = true)
+	protected function getListQuery($resolveFKs = true)
 	{
 		// Create a new query object.
 		$db = $this->getDbo();
@@ -85,10 +91,14 @@ class ContactModelContacts extends JModelList
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.id, a.name, a.alias, a.checked_out, a.checked_out_time, a.published, a.access, a.ordering, a.catid')
+				'a.id, a.name, a.alias, a.checked_out, a.checked_out_time, a.published, a.access, a.ordering, a.catid, a.language')
 		);
 		$query->from('#__contact_details AS a');
 
+		// Join over the language
+		$query->select('l.title AS language_title');
+		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
+		
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');
 		$query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
@@ -135,13 +145,18 @@ class ContactModelContacts extends JModelList
 			}
 		}
 
-			if($this->getState('list.ordering', 'ordering') == 'a.ordering')
-		{
-			$query->order('a.catid, '.$db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-		} else {
-			// Add the list ordering clause.
-			$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).', ordering '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		// Filter on the language.
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = ' . $db->quote($language));
 		}
+
+		// Add the list ordering clause.
+		$orderCol	= $this->state->get('list.ordering');
+		$orderDirn	= $this->state->get('list.direction');
+		if ($orderCol == 'a.ordering' || $orderCol == 'category_title') {
+			$orderCol = 'category_title '.$orderDirn.', a.ordering';
+		}
+		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;

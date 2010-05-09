@@ -20,7 +20,7 @@ Install.sampleData = function(el) {
 	var req = new Request({
 		method: 'get',
 		url: 'index.php?'+document.id(el.form).toQueryString(),
-		data: {'task':'setup.loadSampleData', 'protocol':'json'},
+		data: {'task':'setup.loadSampleData', 'format':'json'},
 		onRequest: function() { el.set('disabled', 'disabled'); },
 		onComplete: function(response) {
 			var r = JSON.decode(response);
@@ -29,6 +29,7 @@ Install.sampleData = function(el) {
 				Joomla.replaceTokens(r.token)
 				if (r.error == false) {
 					el.set('value', r.data.text);
+					el.set('onclick','');
 				}
 			}
 			el.set('disabled', '');

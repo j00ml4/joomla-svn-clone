@@ -21,7 +21,7 @@
 			label="COM_CONTENT_FIELD_ARTICLETEXT_LABEL" description="COM_CONTENT_FIELD_ARTICLETEXT_DESC"
 			filter="safehtml" buttons="true" />
 
-		<field name="state" type="list" label="JFIELD_PUBLISHED_LABEL"
+		<field name="state" type="list" label="JGLOBAL_STATE"
 			description="JFIELD_PUBLISHED_DESC" class="inputbox"
 			filter="intval" size="1" default="1"
 		>
@@ -104,11 +104,11 @@
 		<field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
 			description="COM_CONTENT_FIELD_LANGUAGE_DESC" class="inputbox"
 		>
-			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
+			<option value="*">JALL</option>
 		</field>
 
 		<field name="featured" type="radio"
-			label="COM_CONTENT_FIELD_FEATURED_LABEL" 
+			label="COM_CONTENT_FIELD_FEATURED_LABEL"
 			description="COM_CONTENT_FIELD_FEATURED_DESC"
 			default="0"
 		>
@@ -250,30 +250,15 @@
 			<field name="page_title" type="text"
 				label="JFIELD_ALT_PAGE_TITLE_LABEL" description="JFIELD_ALT_PAGE_TITLE_DESC"
 				size="25" />
-				
+
 			<field name="alternative_readmore" type="inputbox"
 				label="JFIELD_READMORE_LABEL" description="JFIELD_READMORE_DESC"
 				class="inputbox" size="25" />
-				
+
 			<field name="layout" type="componentlayout" label="JFIELD_ALT_LAYOUT_LABEL"
 				description="JFIELD_ALT_COMPONENT_LAYOUT_DESC"
 				extension="com_content" view="article" />
 
-			<field name="article-allow_ratings" type="list"
-				label="JGLOBAL_ALLOW_RATINGS_LABEL" description="JGLOBAL_ALLOW_RATINGS_DESC"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">JHIDE</option>
-				<option value="1">JSHOW</option>
-			</field>
-
-			<field name="article-allow_comments" type="list"
-				label="JGLOBAL_ALLOW_COMMENTS_LABEL" description="JGLOBAL_ALLOW_COMMENTS_DESC"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">JHIDE</option>
-				<option value="1">JSHOW</option>
-			</field>
 		</fieldset>
 
 	</fields>
