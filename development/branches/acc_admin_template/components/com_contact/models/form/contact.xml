@@ -3,7 +3,7 @@
 	<fieldset>
 		<field name="id" type="hidden"
 			default="0"
-			label="Contact_Id_Label"
+			label="COM_CONTACT_ID_LABEL"
 			readonly="true"
 			required="true"
 			size="10"
@@ -139,7 +139,8 @@
 		/>
 
 		<field name="misc" type="editor"
-			buttons="pagebreak,readmore"
+			buttons="true"
+			hide="pagebreak,readmore"
 			description="Contact_Information_Misc_Desc"
 			filter="safehtml"
 			label="Contact_Information_Misc_Label"
@@ -177,7 +178,7 @@
 			description="JField_Contact_Language_Desc"
 			label="JField_Language_Label"
 		>
-			<option value="">JOption_Default_Language</option>
+			<option value="">JALL</option>
 		</field>
 
 

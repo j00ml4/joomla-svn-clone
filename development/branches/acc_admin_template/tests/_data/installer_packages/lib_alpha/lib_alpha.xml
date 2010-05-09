@@ -2,7 +2,7 @@
 <extension type="library" version="1.6" method="upgrade">
 	<name>Alpha</name>
 	<libraryname>alpha</libraryname>
-	<description>Alpha Demonstration Library</description>
+	<description>LIB_ALPHA_XML_DESCRIPTION</description>
 	<creationDate>July 2008</creationDate>
 	<author>John Doe</author>
 	<authorEmail>john.doe@example.org</authorEmail>
@@ -12,7 +12,7 @@
 	<version>1.6</version>
 	<packager>Joomla!</packager>
 	<packagerurl>http://www.joomla.org</packagerurl>
-	<update>http://update.joomla.org/libraries/alpha</update>
+	<updateservers>http://update.joomla.org/libraries/alpha</updateservers>
 	<files folder="files">
 		<file>alpha.php</file>
 	</files>

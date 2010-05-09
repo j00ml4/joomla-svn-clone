@@ -27,6 +27,11 @@ final class JSite extends JApplication
 	private $template = null;
 
 	/**
+	 * Option to filter by language
+	 */
+	private $_language_filter = false;
+
+	/**
 	 * Class constructor
 	 *
 	 * @param	array An optional associative array of configuration settings.
@@ -45,29 +50,68 @@ final class JSite extends JApplication
 	 */
 	public function initialise($options = array())
 	{
-		$config =& JFactory::getConfig();
+		$config = JFactory::getConfig();
+		
+		jimport('joomla.language.helper');
+
 		// if a language was specified it has priority
 		// otherwise use user or default language settings
-		if (empty($options['language']))
-		{
-			$user = & JFactory::getUser();
-			$lang	= $user->getParam('language');
+		if (empty($options['language'])) {
+			$sef = JRequest::getString('lang', null);
+			if (!empty($sef)) {
+				$languages = JLanguageHelper::getLanguages('sef');
+				if (isset($languages[$sef])) {
+					$lang = $languages[$sef]->lang_code;
+					// Make sure that the sef's language exists
+					if ($lang && JLanguage::exists($lang)) {
+						$config = JFactory::getConfig();
+						$cookie_domain 	= $config->get('config.cookie_domain', '');
+						$cookie_path 	= $config->get('config.cookie_path', '/');
+						setcookie(JUtility::getHash('language'), $lang, time() + 365 * 86400, $cookie_path, $cookie_domain);
+						$options['language'] = $lang;
+					}
+				}
+			}
+		}
+
+		if (empty($options['language'])) {
+			// Detect cookie language
+			jimport('joomla.utilities.utility');
+			$lang = JRequest::getString(JUtility::getHash('language'), null ,'cookie');
 
 			// Make sure that the user's language exists
 			if ($lang && JLanguage::exists($lang)) {
 				$options['language'] = $lang;
 			}
-			else
-			{
-				$params =  JComponentHelper::getParams('com_languages');
-				$client	= &JApplicationHelper::getClientInfo($this->getClientId());
-				$options['language'] = $params->get($client->name, $config->get('language','en-GB'));
+		}
+
+		if (empty($options['language'])) {
+			// Detect user language
+			$lang = JFactory::getUser()->getParam('language');
+			// Make sure that the user's language exists
+			if ($lang && JLanguage::exists($lang)) {
+				$options['language'] = $lang;
 			}
 		}
 
+		if (empty($options['language'])) {
+			// Detect browser language
+			$lang = JLanguageHelper::detectLanguage();
+			// Make sure that the user's language exists
+			if ($lang && JLanguage::exists($lang)) {
+				$options['language'] = $lang;
+			}
+		}
+
+		if (empty($options['language'])) {
+			// Detect default language
+			$params =  JComponentHelper::getParams('com_languages');
+			$client	= JApplicationHelper::getClientInfo($this->getClientId());
+			$options['language'] = $params->get($client->name, $config->get('language', 'en-GB'));
+		}
+
 		// One last check to make sure we have something
-		if (!JLanguage::exists($options['language']))
-		{
+		if (!JLanguage::exists($options['language'])) {
 			$lang = $config->get('language','en-GB');
 			if (JLanguage::exists($lang)) {
 				$options['language'] = $lang;
@@ -104,19 +148,20 @@ final class JSite extends JApplication
 			$component = JRequest::getCmd('option');
 		}
 
-		$document	= &JFactory::getDocument();
-		$user		= &JFactory::getUser();
-		$router		= &$this->getRouter();
-		$params		= &$this->getParams();
+		$document	= JFactory::getDocument();
+		$user		= JFactory::getUser();
+		$router		= $this->getRouter();
+		$params		= $this->getParams();
 
 		switch($document->getType())
 		{
 			case 'html':
-				//set metadata
-				$table = JTable::getInstance('Language');
-				$lang = JFactory::getLanguage();
-				$table->load(array('lang_code'=>$lang->getTag()));
-				$document->setMetaData('keywords', $this->getCfg('MetaKeys').($table->metakey ? (', '.$table->metakey):''));
+				// Get language
+				$lang_code = JFactory::getLanguage()->getTag();
+				$languages = JLanguageHelper::getLanguages('lang_code');
+				
+				// Set metadata
+				$document->setMetaData('keywords', $this->getCfg('MetaKeys') . ($languages[$lang_code]->metakey ? (', ' . $languages[$lang_code]->metakey) : ''));
 				$document->setMetaData('rights', $this->getCfg('MetaRights'));
 				$document->setBase(JURI::root());
 				break;
@@ -142,8 +187,8 @@ final class JSite extends JApplication
 	 */
 	public function render()
 	{
-		$document	= &JFactory::getDocument();
-		$user		= &JFactory::getUser();
+		$document	= JFactory::getDocument();
+		$user		= JFactory::getUser();
 
 		// get the format to render
 		$format = $document->getType();
@@ -175,7 +220,7 @@ final class JSite extends JApplication
 		}
 
 		// Parse the document.
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 		$document->parse($params);
 
 		// Trigger the onBeforeRender event.
@@ -215,8 +260,8 @@ final class JSite extends JApplication
 	 */
 	public function authorize($itemid)
 	{
-		$menus	= &JSite::getMenu();
-		$user	= &JFactory::getUser();
+		$menus	= JSite::getMenu();
+		$user	= JFactory::getUser();
 
 		if (!$menus->authorise($itemid))
 		{
@@ -246,7 +291,7 @@ final class JSite extends JApplication
 	 * @return	object	The parameters object
 	 * @since	1.5
 	 */
-	public function &getParams($option = null)
+	public function getParams($option = null)
 	{
 		static $params = array();
 
@@ -264,15 +309,16 @@ final class JSite extends JApplication
 			$params[$hash] = clone JComponentHelper::getParams($option);
 
 			// Get menu parameters
-			$menus	= &JSite::getMenu();
+			$menus	= JSite::getMenu();
 			$menu	= $menus->getActive();
 
-			$title = htmlspecialchars_decode($this->getCfg('sitename'));
-			$table = JTable::getInstance('Language');
-			$lang = JFactory::getLanguage();
-			$table->load(array('lang_code'=>$lang->getTag()));
-			$description = $this->getCfg('MetaDesc').$table->metadesc;
-			$rights=$this->getCfg('MetaRights');
+			// Get language
+			$lang_code = JFactory::getLanguage()->getTag();
+			$languages = JLanguageHelper::getLanguages('lang_code');
+			
+			$title 			= htmlspecialchars_decode($this->getCfg('sitename'));
+			$description	= $this->getCfg('MetaDesc') . $languages[$lang_code]->metadesc;
+			$rights			= $this->getCfg('MetaRights');
 			// Lets cascade the parameters if we have menu item parameters
 			if (is_object($menu)) {
 				$temp = new JRegistry;
@@ -297,7 +343,7 @@ final class JSite extends JApplication
 	 * @return	object	The parameters object
 	 * @since	1.5
 	 */
-	public function &getPageParameters($option = null)
+	public function getPageParameters($option = null)
 	{
 		return $this->getParams($option);
 	}
@@ -318,7 +364,7 @@ final class JSite extends JApplication
 			return $this->template->template;
 		}
 		// Get the id of the active menu item
-		$menu = &$this->getMenu();
+		$menu = $this->getMenu();
 		$item = $menu->getActive();
 
 		$id = 0;
@@ -337,16 +383,34 @@ final class JSite extends JApplication
 		else {
 			$condition = 'id = '.(int) $id;
 		}
+		
+		$cache = JFactory::getCache('com_templates', '');
+		if (!$templates = $cache->get('0')) {
+			// Load styles
+			$db = JFactory::getDbo();
+			$query = $db->getQuery(true);
+			$query->select('id, home, template, params');
+			$query->from('#__template_styles');
+			$query->where('client_id = 0');
+			
+			$db->setQuery($query);
+			$templates = $db->loadObjectList('id');
+			
+			foreach($templates as &$template) {
+				$registry = new JRegistry;
+				$registry->loadJSON($template->params);
+				$template->params = $registry;
 
-		// Load template entries for the active menuid and the default template
-		$db = &JFactory::getDbo();
-		$query = 'SELECT template, params'
-			. ' FROM #__template_styles'
-			. ' WHERE client_id = 0 AND '.$condition
-			;
-		$db->setQuery($query, 0, 1);
-		$template = $db->loadObject();
-
+				// Create home element
+				if ($template->home) {
+					$templates[0] = clone $template;
+				}
+			}
+			$cache->store($templates, '0');
+		}
+		
+		$template = $templates[$id];
+		
 		// Allows for overriding the active template from the request
 		$template->template = JRequest::getCmd('template', $template->template);
 		$template->template = JFilterInput::getInstance()->clean($template->template, 'cmd'); // need to filter the default value as well
@@ -355,10 +419,6 @@ final class JSite extends JApplication
 		if (!file_exists(JPATH_THEMES.DS.$template->template.DS.'index.php')) {
 			$template->template = 'rhuk_milkyway';
 		}
-
-		$registry = new JRegistry;
-		$registry->loadJSON($template->params);
-		$template->params = $registry;
 
 		// Cache the result
 		$this->template = $template;
@@ -388,10 +448,10 @@ final class JSite extends JApplication
 	 * @return object JPathway.
 	 * @since 1.5
 	 */
-	public function &getMenu()
+	public function getMenu()
 	{
 		$options	= array();
-		$menu		= &parent::getMenu('site', $options);
+		$menu		= parent::getMenu('site', $options);
 		return $menu;
 	}
 
@@ -401,10 +461,10 @@ final class JSite extends JApplication
 	 * @return object JPathway.
 	 * @since 1.5
 	 */
-	public function &getPathWay()
+	public function getPathWay()
 	{
 		$options = array();
-		$pathway = &parent::getPathway('site', $options);
+		$pathway = parent::getPathway('site', $options);
 		return $pathway;
 	}
 
@@ -414,11 +474,35 @@ final class JSite extends JApplication
 	 * @return	JRouter.
 	 * @since	1.5
 	 */
-	static public function &getRouter()
+	static public function getRouter()
 	{
-		$config = &JFactory::getConfig();
+		$config = JFactory::getConfig();
 		$options['mode'] = $config->get('sef');
-		$router = &parent::getRouter('site', $options);
+		$router = parent::getRouter('site', $options);
 		return $router;
+	}
+
+	/**
+	 * Return the current state of the language filter.
+	 *
+	 * @return	boolean
+	 * @since	1.6
+	 */
+	public function getLanguageFilter()
+	{
+		return $this->_language_filter;
+	}
+
+	/**
+	 * Set the current state of the language filter.
+	 *
+	 * @return	boolean	The old state
+	 * @since	1.6
+	 */
+	public function setLanguageFilter($state=false)
+	{
+		$old = $this->_language_filter;
+		$this->_language_filter=$state;
+		return $old;
 	}
 }

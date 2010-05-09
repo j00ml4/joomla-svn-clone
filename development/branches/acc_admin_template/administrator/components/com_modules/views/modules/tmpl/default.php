@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
-JHTML::_('script','multiselect.js');
+JHTML::_('script','system/multiselect.js',false,true);
 $client = $this->state->get('filter.client_id') ? 'administrator' : 'site';
 $user = JFactory::getUser();
 $listOrder	= $this->state->get('list.ordering');
@@ -50,6 +50,11 @@ $listDirn	= $this->state->get('list.direction');
 			<select name="filter_module" class="inputbox" onchange="this.form.submit()">
 				<option value=""><?php echo JText::_('COM_MODULES_OPTION_SELECT_MODULE');?></option>
 				<?php echo JHtml::_('select.options', ModulesHelper::getModules($this->state->get('filter.client_id')), 'value', 'text', $this->state->get('filter.module'));?>
+			</select>
+
+			<select name="filter_language" class="inputbox" onchange="this.form.submit()">
+				<option value=""><?php echo JText::_('JOPTION_SELECT_LANGUAGE');?></option>
+				<?php echo JHtml::_('select.options', JHtml::_('contentlanguage.existing', true, true), 'value', 'text', $this->state->get('filter.language'));?>
 			</select>
 		</div>
 	</fieldset>
@@ -130,13 +135,13 @@ $listDirn	= $this->state->get('list.direction');
 				<td class="center">
 					<?php
 						if (is_null($item->pages)) {
-							echo JText::_('COM_MODULES_ASSIGNED_NONE');
+							echo JText::_('JNONE');
 						} else if ($item->pages < 0) {
 							echo JText::_('COM_MODULES_ASSIGNED_VARIES_EXCEPT');
 						} else if ($item->pages > 0) {
 							echo JText::_('COM_MODULES_ASSIGNED_VARIES_ONLY');
 						} else {
-							echo JText::_('COM_MODULES_ASSIGNED_ALL');
+							echo JText::_('JALL');
 						}
 					?>
 				</td>
@@ -160,7 +165,13 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo $this->escape($item->access_level); ?>
 				</td>
 				<td class="center">
-					<?php echo $item->language ? $this->escape($item->language) : JText::_('JDEFAULT'); ?>
+					<?php if ($item->language==''):?>
+						<?php echo JText::_('JDEFAULT'); ?>
+					<?php elseif ($item->language=='*'):?>
+						<?php echo JText::_('JALL'); ?>
+					<?php else:?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
+					<?php endif;?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>

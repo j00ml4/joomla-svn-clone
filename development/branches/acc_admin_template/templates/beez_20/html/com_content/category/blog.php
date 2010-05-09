@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: blog.php 14164 2010-01-14 11:06:21Z a.radtke $
+ * @version		$Id$
  * @package		Joomla.Site
  * @subpackage	com_content
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
@@ -81,7 +81,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 		$row = $counter / $this->columns ;
 
 		if($rowcount==1) : ?>
-	<div class="items-row cols-<?php echo (int) $this->columns;?> <? echo 'row-'.$row ; ?>">
+	<div class="items-row cols-<?php echo (int) $this->columns;?> <?php echo 'row-'.$row ; ?>">
 	<?php endif; ?>
 	<article class="item column-<?php echo $rowcount;?><?php echo $item->state == 0 ? ' system-unpublished' : null; ?>">
 		<?php

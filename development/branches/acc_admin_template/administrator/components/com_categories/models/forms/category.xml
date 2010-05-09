@@ -87,7 +87,9 @@
 		label="COM_CATEGORIES_DESCRIPTION_LABEL"
 		description="COM_CATEGORIES_DESCRIPTION_DESC"
 		class="inputbox"
-		buttons="image,readmore,pagebreak"/>
+		filter="safehtml"
+		buttons="true"
+		hide="readmore,pagebreak"/>
 
 	<field
 		name="published"
@@ -95,7 +97,7 @@
 		class="inputbox"
 		default="1"
 		size="1"
-		label="JFIELD_PUBLISHED_LABEL"
+		label="JGLOBAL_STATE"
 		description="JFIELD_PUBLISHED_DESC">
 		<option
 			value="1">
@@ -178,7 +180,7 @@
 		description="COM_CATEGORIES_FIELD_LANGUAGE_DESC"
 		class="inputbox"
 		default="">
-		<option value="">JOPTION_DEFAULT_LANGUAGE</option>
+		<option value="*">JALL</option>
 	</field>
 
 	<field
@@ -207,9 +209,7 @@
 
 			<field
 				name="image"
-				type="imagelist"
-				directory="/images"
-				hide_default="1"
+				type="media"
 				label="COM_CATEGORIES_FIELD_IMAGE_LABEL"
 				description="COM_CATEGORIES_FIELD_IMAGE_DESC" />
 		</fieldset>

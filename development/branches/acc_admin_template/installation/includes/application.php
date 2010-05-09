@@ -76,7 +76,7 @@ class JInstallation extends JApplication
 		require_once JPATH_COMPONENT.'/controller.php';
 
 		// Execute the task.
-		$controller	= &JInstallationController::getInstance();
+		$controller	= JController::getInstance('JInstallation');
 		$controller->execute(JRequest::getVar('task'));
 		$controller->redirect();
 
@@ -136,6 +136,9 @@ class JInstallation extends JApplication
 			} else {
 				jimport('joomla.language.helper');
 				$options['language'] = JLanguageHelper::detectLanguage();
+				if (empty($options['language'])) {
+					$options['language'] = 'en-GB';
+				}
 			}
 		}
 

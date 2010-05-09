@@ -8,7 +8,7 @@
  */
 
 // no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 require_once JPATH_ROOT . '/components/com_banners/helpers/banner.php';
 $baseurl = JURI::base();
@@ -43,9 +43,10 @@ $baseurl = JURI::base();
 							title="<?php echo htmlspecialchars($item->name, ENT_QUOTES, 'UTF-8');?>">
 							<img
 								src="<?php echo $baseurl . $imageurl;?>"
-								alt="<?php echo $alt;?>" 
+								alt="<?php echo $alt;?>"
 								<?php if (!empty($width)) echo 'witdh ="'. $width.'"';?>
 								<?php if (!empty($height)) echo 'height ="'. $height.'"';?>
+							/>
 						</a>
 					<?php elseif ($target == 2):?>
 						<?php // open in a popup window?>
@@ -56,9 +57,10 @@ $baseurl = JURI::base();
 							title="<?php echo htmlspecialchars($item->name, ENT_QUOTES, 'UTF-8');?>">
 							<img
 								src="<?php echo $baseurl . $imageurl;?>"
-								alt="<?php echo $alt;?>" 
+								alt="<?php echo $alt;?>"
 								<?php if (!empty($width)) echo 'witdh ="'. $width.'"';?>
 								<?php if (!empty($height)) echo 'height ="'. $height.'"';?>
+							/>
 						</a>
 					<?php else :?>
 						<?php // open in parent window?>
@@ -67,9 +69,10 @@ $baseurl = JURI::base();
 							title="<?php echo htmlspecialchars($item->name, ENT_QUOTES, 'UTF-8');?>">
 							<img
 								src="<?php echo $baseurl . $imageurl;?>"
-								alt="<?php echo $alt;?>" 
+								alt="<?php echo $alt;?>"
 								<?php if (!empty($width)) echo 'witdh ="'. $width.'"';?>
 								<?php if (!empty($height)) echo 'height ="'. $height.'"';?>
+							/>
 						</a>
 					<?php endif;?>
 				<?php else :?>
@@ -79,6 +82,7 @@ $baseurl = JURI::base();
 						alt="<?php echo $alt;?>"
 						<?php if (!empty($width)) echo 'witdh ="'. $width.'"';?>
 						<?php if (!empty($height)) echo 'height ="'. $height.'"';?>
+					/>
 				<?php endif;?>
 			<?php elseif (BannerHelper::isFlash($imageurl)) :?>
 				<object

@@ -25,6 +25,8 @@
 		/>
 
 		<field name="description" type="editor"
+			buttons="true"
+			hide="pagebreak,readmore"
 			description="COM_WEBLINKS_FIELD_DESCRIPTION_DESC"
 			filter="safehtml"
 			label="COM_WEBLINKS_FIELD_DESCRIPTION_LABEL"
@@ -33,7 +35,7 @@
 		<field name="state" type="list"
 			default="1"
 			description="JFIELD_PUBLISHED_DESC"
-			label="JFIELD_PUBLISHED_LABEL"
+			label="JGLOBAL_STATE"
 			size="1"
 		>
 			<option value="1">JPUBLISHED</option>
