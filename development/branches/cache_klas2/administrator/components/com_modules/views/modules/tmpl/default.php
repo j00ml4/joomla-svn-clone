@@ -67,7 +67,7 @@ $listDirn	= $this->state->get('list.direction');
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_TITLE', 'title', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'title', $listDirn, $listOrder); ?>
 				</th>
 				<th width="20%">
 					<?php echo JHtml::_('grid.sort',  'COM_MODULES_HEADING_POSITION', 'position', $listDirn, $listOrder); ?>
@@ -135,13 +135,13 @@ $listDirn	= $this->state->get('list.direction');
 				<td class="center">
 					<?php
 						if (is_null($item->pages)) {
-							echo JText::_('COM_MODULES_ASSIGNED_NONE');
+							echo JText::_('JNONE');
 						} else if ($item->pages < 0) {
 							echo JText::_('COM_MODULES_ASSIGNED_VARIES_EXCEPT');
 						} else if ($item->pages > 0) {
 							echo JText::_('COM_MODULES_ASSIGNED_VARIES_ONLY');
 						} else {
-							echo JText::_('COM_MODULES_ASSIGNED_ALL');
+							echo JText::_('JALL');
 						}
 					?>
 				</td>

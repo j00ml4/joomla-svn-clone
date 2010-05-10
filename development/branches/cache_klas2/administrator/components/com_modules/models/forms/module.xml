@@ -12,7 +12,7 @@
 
 		<field name="title" type="text"
 			description="COM_MODULES_FIELD_TITLE_DESC"
-			label="COM_MODULES_FIELD_TITLE_LABEL"
+			label="JGLOBAL_TITLE"
 			maxlength="100"
 			required="true"
 			size="35"
@@ -32,7 +32,7 @@
 			size="20"
 		/>
 
-		<field name="showtitle" type="list"
+		<field name="showtitle" type="radio"
 			default="1"
 			description="COM_MODULES_FIELD_SHOWTITLE_DESC"
 			label="COM_MODULES_FIELD_SHOWTITLE_LABEL"
@@ -112,7 +112,7 @@
 			description="JFIELD_MODULE_LANGUAGE_DESC"
 			label="JFIELD_LANGUAGE_LABEL"
 		>
-			<option value="*">JOPTION_ALL_LANGUAGES</option>
+			<option value="*">JALL</option>
 		</field>
 
 		<field name="params" type="hidden" />

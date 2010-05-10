@@ -10,7 +10,7 @@
 
 		<field name="asset_id" type="hidden" filter="unset" />
 
-		<field name="title" type="text" label="JFIELD_TITLE_LABEL"
+		<field name="title" type="text" label="JGLOBAL_TITLE"
 			description="JFIELD_TITLE_DESC" class="inputbox" size="30"
 			required="true" />
 
@@ -21,7 +21,7 @@
 			label="COM_CONTENT_FIELD_ARTICLETEXT_LABEL" description="COM_CONTENT_FIELD_ARTICLETEXT_DESC"
 			filter="safehtml" buttons="true" />
 
-		<field name="state" type="list" label="JFIELD_PUBLISHED_LABEL"
+		<field name="state" type="list" label="JGLOBAL_STATE"
 			description="JFIELD_PUBLISHED_DESC" class="inputbox"
 			filter="intval" size="1" default="1"
 		>
@@ -104,7 +104,7 @@
 		<field name="language" type="contentlanguage" label="JFIELD_LANGUAGE_LABEL"
 			description="COM_CONTENT_FIELD_LANGUAGE_DESC" class="inputbox"
 		>
-			<option value="*">JOPTION_ALL_LANGUAGES</option>
+			<option value="*">JALL</option>
 		</field>
 
 		<field name="featured" type="radio"

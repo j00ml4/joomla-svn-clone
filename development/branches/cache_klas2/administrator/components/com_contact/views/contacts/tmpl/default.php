@@ -58,10 +58,10 @@ $listDirn	= $this->state->get('list.direction');
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->items); ?>);" />
 				</th>
 				<th>
-					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_TITLE', 'a.name', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'JGLOBAL_TITLE', 'a.name', $listDirn, $listOrder); ?>
 				</th>
 				<th width="5%" class="nowrap">
-					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_STATE', 'a.state', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'JPUBLISHED', 'a.state', $listDirn, $listOrder); ?>
 				</th>
 				<th width="10%" class="nowrap">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'a.ordering', $listDirn, $listOrder); ?>
@@ -131,7 +131,7 @@ $listDirn	= $this->state->get('list.direction');
 				</td>
 				<td class="center">
 					<?php if ($item->language=='*'):?>
-						<?php echo JText::_('JOPTION_ALL_LANGUAGES'); ?>
+						<?php echo JText::_('JALL'); ?>
 					<?php else:?>
 						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JOPTION_UNDEFINED_LANGUAGE'); ?>
 					<?php endif;?>
