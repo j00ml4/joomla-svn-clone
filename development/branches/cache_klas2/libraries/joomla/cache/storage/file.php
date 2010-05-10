@@ -238,14 +238,13 @@ class JCacheStorageFile extends JCacheStorage
 	 */
 	function _checkExpire($id, $group)
 	{
-		jimport('joomla.filesystem.file');
 		$path = $this->_getFilePath($id, $group);
 
 		// check prune period
 		if (file_exists($path)) {
 			$time = @filemtime($path);
 			if (($time + $this->_lifetime) < $this->_now || empty($time)) {
-				JFile::delete($path);
+				@unlink($path);
 				return false;
 			}
 			return true;
