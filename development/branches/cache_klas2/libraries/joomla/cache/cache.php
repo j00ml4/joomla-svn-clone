@@ -435,8 +435,13 @@ class JCache extends JObject
 	 * @return	string	$cached		Data to be cached
 	 * @since	1.6
 	 */
-	public static function setWorkarounds($data)
-	{
+	public static function setWorkarounds($data,$options=array())
+	{	
+		$loptions=array();
+		$loptions['nopathway'] = 0;
+		if(isset($options['nopathway'])) {
+			$loptions['nopathway'] = $options['nopathway'];
+		}
 		// Initialise variables.
 		$app = &JFactory::getApplication();
 		$document	= &JFactory::getDocument();
@@ -456,8 +461,8 @@ class JCache extends JObject
 		$cached['head'] = $document->getHeadData();
 
 		// Pathway data
-		$pathway			= &$app->getPathWay();
-		if (isset($pathway)) {
+		if ($app->getName() == 'site' && $loptions['nopathway'] != 1) {
+			$pathway			= &$app->getPathWay();
 			$cached['pathway'] = $pathway->getPathway();
 		}
 
