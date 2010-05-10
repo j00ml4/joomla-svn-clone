@@ -119,7 +119,9 @@ class JCacheControllerCallback extends JCacheController
 			ob_end_clean();
 
 			$cached = array();
-			$cached['output'] = $wrkarounds==false ? $output : JCache::setWorkarounds($output);
+			$coptions= array();
+			$coptions['nopathway'] = 1;
+			$cached['output'] = $wrkarounds==false ? $output : JCache::setWorkarounds($output,$coptions);
 			$cached['result'] = $result;
 			// Store the cache data
 			$this->cache->store(serialize($cached), $id);
