@@ -50,18 +50,18 @@ class JCache extends JObject
 	{
 		$conf = &JFactory::getConfig();
 
-		$caching = $conf->get('caching', 1);
+		$caching = (int)$conf->get('caching', 1);
 
 		$this->_options = array(
 			'cachebase'		=> $conf->get('cache_path',JPATH_ROOT.DS.'cache'),
 			'lifetime'		=> $conf->get('cachetime'),	// minutes to seconds
 			'language'		=> $conf->get('language','en-GB'),
 			'storage'		=> $conf->get('cache_handler', 'file'),
-			'defaultgroup'=>'default',
-			'locking'=>true,
-			'locktime'=>15,
-			'checkTime' => true,
-			'caching'	=> $caching == 1 ? true : false
+			'defaultgroup'	=>'default',
+			'locking'		=>true,
+			'locktime'		=>15,
+			'checkTime' 	=> true,
+			'caching'		=> $caching == 1 ? true : false
 		);
 
 		// Overwrite default options with given options
@@ -286,7 +286,9 @@ class JCache extends JObject
 		$handler = &$this->_getStorage();
 		if (!JError::isError($handler) && $this->_options['locking'] == true && $this->_options['caching'] == true) {
 			$locked = $handler->lock($id,$group,$locktime);
-			if ($locked !== false) return $locked;
+			if ($locked !== false) {
+				return $locked;
+			}
 		}
 
 		// fallback

@@ -109,7 +109,7 @@ class JCacheControllerCallback extends JCacheController
 			if (!is_array($args)) {
 				$args = (array) $args;
 			}
-			if ($locktest->locked == false) $locktest = $this->cache->lock($id,null);
+			if ($locktest->locked == false) $locktest = $this->cache->lock($id);
 			ob_start();
 			ob_implicit_flush(false);
 

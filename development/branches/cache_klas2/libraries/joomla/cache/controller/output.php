@@ -52,8 +52,9 @@ class JCacheControllerOutput extends JCacheController
 
 		if ($data === false) {
 			$this->_locktest = $this->cache->lock($id, $group);
-			if ($this->_locktest->locked == true && $this->_locktest->locklooped == true) $data = $this->cache->get($id, $group);
-
+			if ($this->_locktest->locked == true && $this->_locktest->locklooped == true) {
+				$data = $this->cache->get($id, $group);
+			}
 		}
 
 		if ($data !== false) {
@@ -97,6 +98,7 @@ class JCacheControllerOutput extends JCacheController
 
 		// Get the storage handler and store the cached data
 		$this->cache->store($data, $id, $group);
+		
 		if ($this->_locktest->locked == true) {
 			$this->cache->unlock($id, $group);
 		}
