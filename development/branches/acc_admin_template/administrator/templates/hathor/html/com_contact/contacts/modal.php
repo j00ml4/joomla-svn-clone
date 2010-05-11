@@ -100,16 +100,16 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<a class="pointer" onclick="if (window.parent) window.parent.<?php echo $function;?>('<?php echo $item->id; ?>', '<?php echo $this->escape($item->name); ?>');">
 						<?php echo $this->escape($item->name); ?></a>
 				</td>
-				<td align="center">
+				<td class="center">
 					<?php echo $this->escape($item->category_title); ?>
 				</td>
-				<td align="center">
+				<td class="center">
 					<?php echo $this->escape($item->access_level); ?>
 				</td>
-				<td align="center">
+				<td class="center">
 
 				</td>
-				<td align="center">
+				<td class="center">
 					<?php echo (int) $item->id; ?>
 				</td>
 			</tr>
