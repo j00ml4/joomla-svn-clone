@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
-JHtml::_('script','multiselect.js');
+JHtml::_('script','system/multiselect.js',false,true);
 $user	= &JFactory::getUser();
 $userId	= $user->get('id');
 $listOrder	= $this->state->get('list.ordering');
@@ -40,23 +40,29 @@ $listDirn	= $this->state->get('list.direction');
 
 			<label class="selectlabel" for="filter_published">
 				<?php echo JText::_('Filter_State'); ?>
-			</label> 
+			</label>
 			<select name="filter_published" id="filter_published" class="inputbox">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
 			</select>
-			
+
 			<label class="selectlabel" for="filter_category_id">
-				<?php echo JText::_('Filter_Category'); ?>
+				<?php echo JText::_('JOPTION_SELECT_CATEGORY'); ?>
 			</label>
 			<select name="filter_category_id" id="filter_category_id" class="inputbox">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_CATEGORY');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_weblinks'), 'value', 'text', $this->state->get('filter.category_id'));?>
 			</select>
-			
+			<label class="selectlabel" for="filter_language">
+				<?php echo JText::_('JOPTION_SELECT_LANGUAGE'); ?>
+			</label>
+			<select name="filter_language" id="filter_language" class="inputbox">
+				<option value=""><?php echo JText::_('JOPTION_SELECT_LANGUAGE');?></option>
+				<?php echo JHtml::_('select.options', JHtml::_('contentlanguage.existing', true, true), 'value', 'text', $this->state->get('filter.language'));?>
+			</select>
 			<button type="button" id="filter-go" onclick="this.form.submit();">
 				<?php echo JText::_('Go'); ?></button>
-			
+
 		</div>
 	</fieldset>
 	<div class="clr"> </div>
@@ -97,7 +103,7 @@ $listDirn	= $this->state->get('list.direction');
 				</th>
 			</tr>
 		</thead>
-		
+
 		<tbody>
 		<?php
 		$n = count($this->items);
@@ -151,7 +157,11 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo $item->hits; ?>
 				</td>
 				<td class="center">
-					<?php echo $item->language ? $this->escape($item->language) : JText::_('JDEFAULT'); ?>
+					<?php if ($item->language=='*'):?>
+						<?php echo JText::_('JALL'); ?>
+					<?php else:?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JOPTION_UNDEFINED_LANGUAGE'); ?>
+					<?php endif;?>
 				</td>
 				<td class="center">
 					<?php echo $item->id; ?>

@@ -27,6 +27,39 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+11-May-2010 Christophe Demko
+ # Fix Pb saving editors-xtd group plugins
+ + Add default mini buttons on styles view
+ # Fix buttons option for editor form field
+ # Fix [#20217] For plugins
+ # Fix [#20217] Edit Module +Session Timeout and Re-Login Error
+ ^ Enhancing the menu items view
+ # Fix [#20260] Menu items list missing the "Set Default" toolbar icon.
+ # Fix [#20327] Contact fatal error
+
+10-May-2010 Jean-Marie Simonet
++ Adding new user admin approval registration (Thanks Airton Torres)
+# Enabling editors-xtd buttons in com_content
+^ Hathor's views (20384]
+^ Hathor's mod_status params [20385]
+$ Adding missing string
+
+09-May-2010 Ron Severdia
+# BlueStork UI fixes
+# CSS cleanup
+# Language fixes
++ New icons
+
+10-May-2010 Christophe Demko
+ + Reinsert mod_languages and plg_systemlanguage filter extension
+ # Fix [#20388] • Superuser admin/password not recognized when in offline.php
+ # Fix bug in libraries/joomla/form/fields/imagelist.php
+ ^ Change slightly the manage view on hathor template
+ + Add language filter on some hathor views
+
+09-May-2010 Hannes Papenberg
+# Some fixes to beez 2.0 - Thanks Angie Radtke
+
 09-May-2010 Christophe Demko
  ^ Adding login position in administrator templates
  ^ Fix #17020

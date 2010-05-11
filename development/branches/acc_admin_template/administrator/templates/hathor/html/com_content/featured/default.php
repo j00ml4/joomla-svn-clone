@@ -21,10 +21,6 @@ $listDirn	= $this->state->get('list.direction');
 
 $n = count($this->items);
 
-// Get additional language strings prefixed with TPL_HATHOR
-$lang =& JFactory::getLanguage();
-$lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
-|| $lang->load('tpl_hathor', JPATH_ADMINISTRATOR.DS.'templates/hathor');
 
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_content&view=featured');?>" method="post" name="adminForm">
@@ -43,19 +39,25 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				<option value=""><?php echo JText::_('JOPTION_SELECT_ACCESS');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
 			</select>
-			
-			<label class="selectlabel" for="filter_published"><?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?></label> 
+
+			<label class="selectlabel" for="filter_published"><?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?></label>
 			<select name="filter_published" class="inputbox" id="filter_published">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
 			</select>
 			
+			<label class="selectlabel" for="filter_language"><?php echo JText::_('JOPTION_SELECT_LANGUAGE'); ?></label>
+			<select name="filter_language" id="filter_language" class="inputbox">
+				<option value=""><?php echo JText::_('JOPTION_SELECT_LANGUAGE');?></option>
+				<?php echo JHtml::_('select.options', JHtml::_('contentlanguage.existing', true, true), 'value', 'text', $this->state->get('filter.language'));?>
+			</select>
+
 			<button type="button" id="filter-go" onclick="this.form.submit();">
 				<?php echo JText::_('GO'); ?></button>
 		</div>
 	</fieldset>
 	<div class="clr"> </div>
-	
+
 	<table class="adminlist">
 		<thead>
 			<tr>
@@ -87,12 +89,15 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				<th class="hits-col">
 					<?php echo JHtml::_('grid.sort', 'JGLOBAL_HITS', 'a.hits', $listDirn, $listOrder); ?>
 				</th>
+				<th class="language-col">
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'language', $listDirn, $listOrder); ?>
+				</th>
 				<th class="nowrap id-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
 		</thead>
-		
+
 		<tbody>
 		<?php foreach ($this->items as $i => $item) :
 			$item->max_ordering = 0; //??
@@ -146,6 +151,13 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				</td>
 				<td class="center">
 					<?php echo (int) $item->hits; ?>
+				</td>
+				<td class="center">
+					<?php if ($item->language=='*'):?>
+						<?php echo JText::_('JALL'); ?>
+					<?php else:?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JOPTION_UNDEFINED_LANGUAGE'); ?>
+					<?php endif;?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>
