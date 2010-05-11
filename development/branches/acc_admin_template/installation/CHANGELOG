@@ -27,6 +27,10 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+12-May-2010 Jean-Marie Simonet
+^ Correcting extension/example xml plugin
+^ Hathor's update [Andrea Tarr]
+
 11-May-2010 Christophe Demko
  # Fix Pb saving editors-xtd group plugins
  + Add default mini buttons on styles view
