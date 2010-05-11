@@ -80,8 +80,8 @@ class JCacheControllerPage extends JCacheController
 		$this->_locktest->locklooped = null;
 
 		if ($data === false) {
-			$this->_locktest = $this->cache->lock($id,null);
-			if ($this->_locktest->locked == true && $this->_locktest->locklooped == true) $data = $this->cache->get($id);
+			$this->_locktest = $this->cache->lock($id, $group);
+			if ($this->_locktest->locked == true && $this->_locktest->locklooped == true) $data = $this->cache->get($id, $group);
 
 		}
 
@@ -93,7 +93,7 @@ class JCacheControllerPage extends JCacheController
 
 			$this->_setEtag($id);
 			if ($this->_locktest->locked == true) {
-				$this->cache->unlock($id);
+				$this->cache->unlock($id, $group);
 			}
 			return $data;
 		}
@@ -124,9 +124,9 @@ class JCacheControllerPage extends JCacheController
 		// Only attempt to store if page data exists
 		if ($data) {
 			$data = $wrkarounds==false ? $data : JCache::setWorkarounds($data);
-			if ($this->_locktest->locked == false) $this->_locktest = $this->cache->lock($id,null);
+			if ($this->_locktest->locked == false) $this->_locktest = $this->cache->lock($id, $group);
 			$sucess = $this->cache->store($data, $id, $group);
-			if ($this->_locktest->locked == true) $this->cache->unlock($id);
+			if ($this->_locktest->locked == true) $this->cache->unlock($id, $group);
 			return $sucess;
 		}
 		return false;
