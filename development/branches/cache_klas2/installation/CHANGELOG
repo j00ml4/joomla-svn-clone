@@ -27,7 +27,16 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+12-May-2010 Jean-Marie Simonet
+^ Correcting extension/example xml plugin
+^ Hathor's update [Andrea Tarr]
+
 11-May-2010 Christophe Demko
+ # Fix Pb saving editors-xtd group plugins
+ + Add default mini buttons on styles view
+ # Fix buttons option for editor form field
+ # Fix [#20217] For plugins
+ # Fix [#20217] Edit Module +Session Timeout and Re-Login Error
  ^ Enhancing the menu items view
  # Fix [#20260] Menu items list missing the "Set Default" toolbar icon.
  # Fix [#20327] Contact fatal error
@@ -45,6 +54,7 @@ $ Adding missing string
 # Language fixes
 + New icons
 
+10-May-2010 Christophe Demko
  + Reinsert mod_languages and plg_systemlanguage filter extension
  # Fix [#20388] • Superuser admin/password not recognized when in offline.php
  # Fix bug in libraries/joomla/form/fields/imagelist.php
