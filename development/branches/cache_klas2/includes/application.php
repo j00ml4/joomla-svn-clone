@@ -163,11 +163,13 @@ final class JSite extends JApplication
 				// Set metadata
 				$document->setMetaData('keywords', $this->getCfg('MetaKeys') . ($languages[$lang_code]->metakey ? (', ' . $languages[$lang_code]->metakey) : ''));
 				$document->setMetaData('rights', $this->getCfg('MetaRights'));
-				$document->setBase(JURI::root());
+				if ($router->getMode() == JROUTER_MODE_SEF) {
+					$document->setBase(JURI::current());
+				}
 				break;
 
 			case 'feed':
-				$document->setBase(JURI::root());
+				$document->setBase(JURI::current());
 				break;
 		}
 
@@ -204,7 +206,10 @@ final class JSite extends JApplication
 				$template	= $this->getTemplate(true);
 				$file		= JRequest::getCmd('tmpl', 'index');
 
-				if ($this->getCfg('offline') && $user->get('gid') < '23') {
+				if ($this->getCfg('offline') && !$user->authorise('core.admin')) {
+					$uri		= JFactory::getURI();
+					$return		= (string)$uri;
+					$this->setUserState('users.login.form.data',array( 'return' => $return ) );
 					$file = 'offline';
 				}
 				if (!is_dir(JPATH_THEMES.DS.$template->template) && !$this->getCfg('offline')) {
