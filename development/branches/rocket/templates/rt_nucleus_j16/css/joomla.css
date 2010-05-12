@@ -1,0 +1,19 @@
+/* @override http://localhost:8888/1.6nucleus/templates/rt_nucleus_j16/css/joomla.css */
+/**
+ * @package   Nucleus Template - RocketTheme
+ * @version   ${project.version} ${build_date}
+ * @author    RocketTheme http://www.rockettheme.com
+ * @copyright Copyright (C) 2007 - ${copyright_year} RocketTheme, LLC
+ * @license   http://www.rockettheme.com/legal/license.php RocketTheme Proprietary Use License
+ */
+
+/* Article Information */
+#rt-main .actions {float: right;}
+#rt-main .actions li {float: right;}
+#rt-main .actions li a {background: none;padding: 0;margin-left: 5px;}
+#rt-main .article-info {display: block;margin-bottom: 15px;}
+
+/* Pagination */
+#rt-main .pagination {}
+#rt-main .pagination li {float: left;margin-right: 5px;}
+#rt-main .pagination li a {padding: 0;margin: 0;line-height: auto;height: auto;background: none;}

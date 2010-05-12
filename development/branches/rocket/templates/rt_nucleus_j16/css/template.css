@@ -1,0 +1,103 @@
+/* @override http://localhost:8888/1.6nucleus/templates/rt_nucleus_j16/css/template.css */
+/**
+ * @package   Nucleus Template - RocketTheme
+ * @version   ${project.version} ${build_date}
+ * @author    RocketTheme http://www.rockettheme.com
+ * @copyright Copyright (C) 2007 - ${copyright_year} RocketTheme, LLC
+ * @license   http://www.rockettheme.com/legal/license.php RocketTheme Proprietary Use License
+ */
+/* Core */
+body {font-family: Helvetica,Arial,sans-serif;min-width: 960px;}
+.font-family-optima {font-family: Optima, Lucida, 'MgOpen Cosmetica', 'Lucida Sans Unicode', sans-serif;}
+.font-family-geneva {font-family: Geneva, Tahoma, "Nimbus Sans L", sans-serif;}
+.font-family-helvetica, .font-family-default {font-family: Helvetica, Arial, FreeSans, sans-serif;}
+.font-family-lucida {font-family: "Lucida Grande",Helvetica,Verdana,sans-serif;}
+.font-family-georgia {font-family: Georgia, sans-serif;}
+.font-family-trebuchet {font-family: "Trebuchet MS", sans-serif;}
+.font-family-palatino {font-family: "Palatino Linotype", "Book Antiqua", Palatino, "Times New Roman", Times, serif;}
+.font-family-default .title, .font-family-default .rt-article-title {font-family: Georgia, sans-serif;}
+.rt-container .module-title, .rt-container .rt-headline {margin-top: 0;}
+.rt-container, #rt-sidebar-a, #rt-sidebar-b, #rt-sidebar-c {background: transparent;}
+ul {list-style: none;padding-left: 0;}
+ul li {list-style: square;margin-left: 15px;}
+.rt-block {padding: 10px;margin-top: 10px;}
+
+/* Header */
+#rt-header {position: relative;z-index: 2;padding: 5px 0;}
+#rt-logo {width: 172px;height: 31px;display: block;}
+
+/* Top Menu */
+#rt-navigation ul {margin: 0 15px;padding: 0;position: relative;z-index: 1000;font-family: helvetica;font-size: 12px;}
+#rt-navigation ul li {padding: 0;list-style: none;float: left;position: relative;margin: 0 30px 0 0;}
+#rt-navigation ul li > a, #rt-navigation ul li > .separator {display: block;cursor: pointer;z-index: 100;position: relative;line-height: 40px;font-size: 130%;height: 50px;padding: 0;}
+#rt-navigation ul li:hover > a, #rt-navigation ul li.active > a {}
+
+/* Menu Dropdowns */
+#rt-navigation li ul {position: absolute;width: 200px;top: -999em;left: auto;padding: 10px 0;margin: 0;}
+#rt-navigation ul li ul ul {margin: 0;}
+#rt-navigation li:hover ul, #rt-navigation li:hover ul ul, #rt-navigation li:hover ul ul ul {top: -999em;left: auto;}
+#rt-navigation li li {margin: 0;padding: 0 10px 0 18px;height:auto;width:172px;}
+#rt-navigation li li > a, #rt-navigation li li.active > a, #rt-navigation li li > a:hover, #rt-navigation li li > .separator, #rt-navigation li li.active > .separator, #rt-navigation li li:hover > .separator {margin:0;padding: 0;float: none;width: auto;line-height: 100%;display: block;}
+#rt-navigation li:hover ul {left: 0;top: 31px;}
+#rt-navigation li li:hover ul, #rt-navigation li li li:hover ul, #rt-navigation li li li li:hover ul {left:200px;top: -11px;}
+
+/* Showcase */
+#rt-showcase {position: relative;z-index: 1;margin-top: -9px;}
+#rt-showcase2 {padding-top: 9px;}
+#rt-showcase .rt-block {margin-top: 0;}
+
+/* Utility */
+#rt-utility .rt-block {margin-bottom: 0;}
+
+/* Main Body */
+#rt-main-surround .rt-article-title {text-transform: none;margin: 0;display: block;font-size: 220%;letter-spacing: normal;font-weight: normal;}
+#rt-sidebar-a, #rt-sidebar-b, #rt-sidebar-c {background-color: transparent;}
+#rt-main-surround {overflow: hidden;}
+
+/* Side Menus */
+#rt-main-surround ul {padding-left: 0;}
+#rt-main-surround ul li {list-style: none;margin-left: 0;}
+#rt-main-surround ul a, #rt-main-surround ul.menu .separator {display: block;text-indent: 0;overflow: hidden;font-size: 110%;padding: 2px 0 2px 18px;}
+#rt-main-surround ul li.active > a, #rt-main-surround ul.menu li.active > .separator, #rt-main-surround ul.menu li.active > .item {font-weight: bold;}
+#rt-main-surround ul li li {padding: 0;margin: 0;font-size: 95%;background: none;border: none;}
+#rt-main-surround ul li a:hover, #rt-main-surround ul li .separator:hover, #rt-main-surround ul li.active > a, #rt-main-surround ul li.active > .separator {background-position: 0 -645px;}
+
+/* Modules */
+.module-title {margin: 15px 0;}
+h2.title {display: block;letter-spacing: normal;line-height: 130%;margin: 0;font-size: 180%;font-weight: normal;}
+.flush .rt-block {padding: 0;}
+.number1 .module-title, .number2 .module-title, .number3 .module-title {padding-left: 58px;min-height: 50px}
+.box1 .rt-block {border-radius: 4px;}
+
+/* Bottom */
+#rt-bottom .rt-container {border: 0;}
+
+/* Footer */
+#powered-by {margin:10px 0;}
+#rocket {display:inline-block;width: 148px;height: 23px;margin:0 20px 0 5px;vertical-align:middle;}
+#gantry-logo {display:inline-block;width: 102px;height: 27px;margin:0 10px 0 0px;vertical-align:middle;background-position: 0 -24px;}
+#rt-copyright {text-align: left;}
+#gantry-totop, #gantry-totop span {height: 34px;display: inline-block;position: absolute;bottom: 0;right: 0;cursor: pointer;}
+#gantry-totop span {padding: 0 25px;line-height: 34px;text-align: center;white-space: nowrap;}
+#gantry-resetsettings {margin-left:15px;margin-bottom:5px;display:block;float:left;}
+
+/* Typography */
+#rt-navigation .search {float: right;padding-top: 5px;}
+.search .inputbox {width: 198px;line-height: 100%;padding: 5px;border-radius: 4px;}
+.search {text-align: right;}
+.readon {display: inline-block;border-radius: 4px;padding: 5px 6px;cursor: pointer;line-height: 100%;font-size: 100%;}
+.readon .button {border: 0;background: none;padding: 0;margin: -1px 0;font-size: 100%;cursor: pointer;}
+#rt-accessibility .rt-desc {float: left;font-size: 120%;line-height: 20px;margin-right: 5px;}
+#rt-accessibility .button {display: block;width: 20px;height: 20px;float: left;}
+#rt-accessibility a.small .button {background-position: 0 0;background-repeat: no-repeat;}
+#rt-accessibility a.small:hover .button {background-position: 0 -24px;background-repeat: no-repeat;}
+#rt-accessibility a.large .button {background-position: -25px 0;background-repeat: no-repeat;}
+#rt-accessibility a.large:hover .button {background-position: -25px -24px;background-repeat: no-repeat;}
+.date-block .date {font-size: 120%;}
+.rt-breadcrumb-surround {padding: 15px 20px;}
+#breadcrumbs h3, .leading_separator {display: none;}
+span.breadcrumbs {display: block;font-size: 110%;font-weight: bold;overflow: hidden;}
+span.breadcrumbs img {width: 10px;height: 23px;float: left;margin-right: 10px;}
+span.breadcrumbs a, span.no-link {padding: 0 10px 0 0;float: left;display: block;height: 23px;line-height: 20px;}
+.floatleft {float: left;margin-right: 25px;margin-bottom: 25px;}
+.floatright {float: right;margin-left: 25px;margin-bottom: 25px;}

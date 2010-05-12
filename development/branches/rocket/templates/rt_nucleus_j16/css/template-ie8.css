@@ -1,0 +1,13 @@
+/**
+ * @package   Nucleus Template - RocketTheme
+ * @version   ${project.version} ${build_date}
+ * @author    RocketTheme http://www.rockettheme.com
+ * @copyright Copyright (C) 2007 - ${copyright_year} RocketTheme, LLC
+ * @license   http://www.rockettheme.com/legal/license.php RocketTheme Proprietary Use License
+ */
+ 
+ /* Header */
+#rt-header {filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#333333', EndColorStr='#191919', GradientType=0);}
+
+ /* Menu */
+body.rtl h2.title {direction: ltr;text-align: right;}
