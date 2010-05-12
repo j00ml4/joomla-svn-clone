@@ -1,9 +1,10 @@
 /**
- * @version   ${project.version} ${build_date}
- * @author    RocketTheme http://www.rockettheme.com
- * @copyright Copyright (C) 2007 - ${copyright_year} RocketTheme, LLC
- * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
- */
+ * @package		Gantry Template Framework - RocketTheme
+ * @version		${project.version} ${build_date}
+ * @author		RocketTheme http://www.rockettheme.com
+ * @copyright 	Copyright (C) 2007 - ${copyright_year} RocketTheme, LLC
+ * @license		http://www.rockettheme.com/legal/license.php RocketTheme Proprietary Use License
+ */ 
 
 /* Menu specific formatting */
 #g-menu-inner table.admintable td.paramlist_key{ vertical-align:top;padding-top:25px;}
@@ -75,8 +76,11 @@ table.admintable td.paramlist_key {padding-right:10px;}
 /* Chained Elements */
 .chain {float:left;margin-right:10px;}
 .chain-selectbox, .chain-position, .chain-menuitem {margin-right:34px;}
-.chain-label {font-size:100%;display:block;color:#666;text-align:center;margin-bottom:5px;height:12px;}
+.chain-label {font-size:100%;display:block;color:#666;text-align:center;margin-bottom:5px;}
 .chain-showmax select {margin-left:15px;}
+#g-settings-inner .chain-text span, #g-settings-inner .date-formats span.chain-label {display:none;}
+#g-settings-inner .chain-text .text-long, #g-settings-inner .date-formats .selectbox-wrapper {margin-top:17px;}
+.ie6warn-delay span.chain-label {display:block !important;}
 
 /* Intro elements */
 

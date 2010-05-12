@@ -115,16 +115,16 @@
 			<fieldset name="basic" addfieldpath="libraries/gantry/admin/fields">
 				<field name="gantry" type="gantry" label="" default="coresettings, presets, layouts"/>
                 
-				<field name="diagnostic" type="diagnostic"/>
-				<field name="grid_system" type="hidden" default="12"/>
-				<field name="template_prefix" type="hidden" default="gantry-"/>
-				<field name="cookie_time" type="hidden" default="31536000"/>
-				<field name="bgcolor" type="hidden" default="foo"/>
-				<field name="copy_lang_files_if_diff" type="hidden" default="1"/>
-				<field name="menuids" type="menuitemhead" default="1" label="" description="MENUITEMSIDS_DESC"/>
-				<field name="presets" type="gspacer" default="" description="" label=" " preset-saver="true" glabel="PRESETS"/>
-				<field name="presets" type="preset" mode="scroller" default="preset1" label="STYLE_PRESETS" description="STYLE_PRESETS_DESC" setbyurl="true" setinsession="true" setbysession="true" setbycookie="true" setinmenuitem="false"/>
-				<field name="coresettings" type="gspacer" default="" description="" label=" " glabel="SETTINGS"/>
+				<!--<field name="diagnostic" type="diagnostic"/>-->
+				<field name="grid_system" type="hidden" default="12" label=""/>
+				<field name="template_prefix" type="hidden" default="gantry-" label=""/>
+				<field name="cookie_time" type="hidden" default="31536000" label=""/>
+				<field name="bgcolor" type="hidden" default="foo" label=""/>
+				<field name="copy_lang_files_if_diff" type="hidden" default="1" label=""/>
+				<!--<field name="menuids" type="menuitemhead" default="1" label="" description="MENUITEMSIDS_DESC"/>-->
+				<!--<field name="presets" type="gspacer" default="" description="" label="" preset-saver="true" glabel="PRESETS"/>-->
+				<!--<field name="presets" type="preset" mode="scroller" default="preset1" label="STYLE_PRESETS" description="STYLE_PRESETS_DESC" setbyurl="true" setinsession="true" setbysession="true" setbycookie="true" setinmenuitem="false"/>-->
+				<!--<field name="coresettings" type="gspacer" default="" description="" label="" glabel="SETTINGS"/>-->
 				<field name="backgroundlevel" default="high" type="slider" class="graphic-level" label="BG_LEVEL" description="BG_LEVEL_DESC" setbyurl="true" setinsession="true" setbysession="true" setincookie="true" setbycookie="true" isbodyclass="true">
 					<option>low</option>
 					<option>med</option>
@@ -163,7 +163,7 @@
 						<option value="xlarge">F_XLARGE</option>
 					</field>
 				</field>
-				<field name="settings" type="gspacer" default="" description="" label=" " glabel="FEATURES"/>
+				<!--<field name="settings" type="gspacer" default="" description="" label="" glabel="FEATURES"/>-->
 				<field name="styledeclaration-enabled" type="hidden" default="1"/>
 				<field name="logo" type="chain" label="LOGO" description="LOGO_DESC">
 					<field name="enabled" type="toggle" default="1" label="SHOW"/>
@@ -219,7 +219,7 @@
 					<field name="enabled" type="toggle" default="1" label="SHOW"/>
 					<field name="delay" type="text" default="2000" label="DELAY" class="text-short"/>
 				</field>
-				<field name="layouts" type="gspacer" default="" description="" label=" " glabel="LAYOUTS"/>
+				<!--<field name="layouts" type="gspacer" default="" description="" label="" glabel="LAYOUTS"/>-->
 				<field name="topPosition" type="positions" default="5,7" label="TOP_POS" description="POS_DESC">
 					<schemas>1,2,3,4,5,6</schemas>
 					<words>2,3,4,5,6,7,8,9,10</words>
@@ -257,7 +257,7 @@
 					<schemas>1,2,3,4,5,6</schemas>
 					<words>2,3,4,5,6,7,8,9,10</words>
 				</field>
-				<field name="advancedsettings" type="gspacer" default="" description="" label=" " glabel="ADVANCED"/>
+				<!--<field name="advancedsettings" type="gspacer" default="" description="" label=" " glabel="ADVANCED"/>-->
 				<field name="cache" type="chain" label="GANTRY_CACHE" description="GANTRY_CACHE_DESC">
 					<field name="enabled" type="toggle" default="1" label="ENABLED" setinmenuitem="false"/>
 					<field name="time" type="text" default="900" label="CACHE_TIME" class="text-short" description="Cache timeout in ms" setinmenuitem="false"/>

@@ -1,8 +1,9 @@
 /**
- * @version   ${project.version} ${build_date}
- * @author    RocketTheme http://www.rockettheme.com
- * @copyright Copyright (C) 2007 - ${copyright_year} RocketTheme, LLC
- * @license   http://www.gnu.org/licenses/gpl-2.0.html GNU/GPLv2 only
+ * @package		Gantry Template Framework - RocketTheme
+ * @version		${project.version} ${build_date}
+ * @author		RocketTheme http://www.rockettheme.com
+ * @copyright 	Copyright (C) 2007 - ${copyright_year} RocketTheme, LLC
+ * @license		http://www.rockettheme.com/legal/license.php RocketTheme Proprietary Use License
  */
 
 var InputsExclusion = ['.content_vote'];
@@ -10,7 +11,7 @@ var InputsExclusion = ['.content_vote'];
 var InputsMorph = {
 	version: 1.7,
 	init: function() {
-		InputsMorph.rtl = $(document.body).getStyle('direction') == 'rtl';
+		InputsMorph.rtl = document.id(document.body).getStyle('direction') == 'rtl';
 		InputsMorph.list = new Hash({
 			'all': []
 		});

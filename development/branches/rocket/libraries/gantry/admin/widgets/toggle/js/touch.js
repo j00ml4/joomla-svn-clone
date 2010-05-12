@@ -12,7 +12,7 @@
 var Touch = new Class({
 	
 	initialize: function(element){
-		this.element = $(element);
+		this.element = document.id(element);
 		
 		this.bound = {
 			start: this.start.bind(this),
