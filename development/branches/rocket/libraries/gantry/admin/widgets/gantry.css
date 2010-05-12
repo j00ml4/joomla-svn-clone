@@ -163,7 +163,7 @@ img.template-thumb {background:url(../../../../template_thumbnail.png);width:206
 .checkbox {height: 23px;}
 .chain-enabled {height: 50px;}
 .checkbox span {display: none;}
-.rok-iphone-container {width: 73px;height: 23px;margin: 0;padding: 0;position: relative;}
+.rok-iphone-container {width: 73px;height: 23px;margin: 0;padding: 0;position: relative;float:left;}
 .rok-iphone-sides {width: 73px;height: 23px;margin: 0;padding: 0;position: relative;background: url(toggle/images/toggle.png) 0 -81px no-repeat;}
 .rok-iphone-wrapper {overflow: hidden;margin: 0;padding: 0;width: 68px;height: 23px;position: relative;top: 0;left: 3px;}
 .rok-iphone-switch {background: url(toggle/images/toggle.png) 0 0 no-repeat;position: relative;top: 0;left: -55px;width: 118px;height: 23px;}
