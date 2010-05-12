@@ -13,14 +13,18 @@
 .group-fusionmenu, .group-splitmenu {margin-top:50px !important;margin-left:-166px !important;position:relative;
 z-index:181;}
 .inherited-span {text-transform:normal;font-weight:bold;font-size:80%;display:block;background:#619FC2;padding:3px;text-shadow:none;color:#fff;-moz-border-radius:3px;-webkit-border-radius: 3px;}
+
 /* Joomla Overrides */
 .clr {clear: both;}
-legend[value=Parameters] + table.admintable {margin-top:30px;}
-.admintable {width: 100%}
-table.admintable td.paramlist_key {padding-right:10px;}
-.paramlist_key {font-size: 95%;text-shadow: 1px 1px #fff;white-space: nowrap;font-weight: normal !important;color: #888 !important;text-transform: uppercase}
-.paramlist_value {padding: 10px 5px 10px 10px!important;}
-.paramlist_value .wrapper {position: relative;}
+#content-box .fltlft {width: 100%;}
+#content-box .fltrt {width: 100%;}
+#content-box .fltrt .pane-sliders {margin:10px}
+.fltlft fieldset.adminform label, .fltlft .clr {clear:none;}
+.fltlft label, .fltlft input, .fltlft select {float:left;}
+.fltlft input, .fltlft select {margin:0 30px 0 0;}
+.fltlft fieldset.adminform label {min-width: 150px;margin:0;border-bottom: 1px solid #efefef;padding: 5px;}
+.fltlft fieldset.adminform input, .fltlft fieldset.adminform select {width:150px;margin-top:30px;margin-left: -155px;font-size:16px;}
+.fltlft fieldset.adminform select {font-size:14px;}
 #menuitemhead .selectbox-dropdown {z-index: 2000 !important;}
 #toolbar-save.disabled span, #toolbar-apply.disabled span {background-position: bottom left;}
 #toolbar-save.disabled a, #toolbar-apply.disabled a {border: none; color: #999;outline: none;}
