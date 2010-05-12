@@ -315,12 +315,6 @@
 					<field name="menuitem" type="menuitem" label="SELECT_MENU_ITEM" setinmenuitem="false"/>
 				</field>
 			</fieldset>
-            <fieldset name="foo" addfieldpath="libraries/gantry/admin/fields">
-                <field name="footer" type="chain" label="FOOTER_POS" description="ADVANCED_DESC">
-					<field name="showall" type="toggle" default="0" label="FORCE_POS"/>
-					<field name="showmax" type="showmax" default="6" label="POS_COUNT"/>
-				</field>
-            </fieldset>
 		</fields>
 	</config>
 </install>
