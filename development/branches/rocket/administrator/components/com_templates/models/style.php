@@ -24,7 +24,7 @@ class TemplatesModelStyle extends JModelForm
 	 */
 	private $_cache = array();
 
-	/**
+	/**a
 	 * Method to auto-populate the model state.
 	 *
 	 * Note. Calling getState in this method will result in recursion.
