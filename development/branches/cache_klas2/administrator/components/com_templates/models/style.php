@@ -69,10 +69,12 @@ class TemplatesModelStyle extends JModelForm
 				}
 
 				if (!$table->delete($pk)) {
-					throw new Exception($table->getError());
+					$this->setError($table->getError());
+					return false;
 				}
 			} else {
-				throw new Exception($table->getError());
+				$this->setError($table->getError());
+				return false;
 			}
 		}
 
@@ -271,6 +273,11 @@ class TemplatesModelStyle extends JModelForm
 			}
 		}
 
+		// Disable home field if it is default style
+		if(is_array($data) && $data['home'] || is_object($data) && $data->home) {
+			$form->setFieldAttribute('home','readonly','true');
+		}
+
 		// Trigger the default form events.
 		parent::preprocessForm($form, $data);
 	}
@@ -324,6 +331,37 @@ class TemplatesModelStyle extends JModelForm
 		if (!$table->store()) {
 			$this->setError($table->getError());
 			return false;
+		}
+		
+		$user = JFactory::getUser();
+		if ($user->authorise('core.edit','com_menus') && $this->item->client_id==0) {
+			$n=0;
+
+			$db = JFactory::getDbo();
+			$user = JFactory::getUser();
+			$app = JFactory::getApplication();
+			$query=$db->getQuery(true);
+			$query->update('#__menu');
+			$query->set('template_style_id='.(int)$table->id);
+			$query->where('id IN ('.implode(',',$data['assigned']).')');
+			$query->where('template_style_id!='.(int)$table->id);
+			$query->where('checked_out in (0,'.(int)$user->id.')');
+			$db->setQuery($query);
+			$db->query();
+			$n = $n + $db->getAffectedRows();
+
+			$query=$db->getQuery(true);
+			$query->update('#__menu');
+			$query->set('template_style_id=0');
+			$query->where('id NOT IN ('.implode(',',$data['assigned']).')');
+			$query->where('template_style_id='.(int)$table->id);
+			$query->where('checked_out in (0,'.(int)$user->id.')');
+			$db->setQuery($query);
+			$db->query();
+			$n = $n + $db->getAffectedRows();
+			if ($n>0) {
+				$app->enQueueMessage(JText::plural('COM_TEMPLATES_MENU_CHANGED',$n));
+			}
 		}
 
 		// Clean the cache.
