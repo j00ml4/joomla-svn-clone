@@ -34,7 +34,7 @@ class JCache extends JObject
 	 * @var		object	Storage Handler
 	 * @since	1.5
 	 */
-	public static $_handler;
+	public static $_handler = array();
 
 	/**
 	 * @since	1.6
@@ -295,8 +295,6 @@ class JCache extends JObject
 		$curentlifetime = $this->_options['lifetime'];
 		// set lifetime to locktime for storing in children
 		$this->_options['lifetime'] = $locktime;
-
-		//$lock = $this->store(1, $id.'_lock', $group);
 
 		$looptime = $locktime * 10;
 		$id2 = $id.'_lock';
