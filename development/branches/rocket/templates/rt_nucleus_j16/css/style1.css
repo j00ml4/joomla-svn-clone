@@ -1,0 +1,89 @@
+/* @override http://localhost:8888/1.6nucleus/templates/rt_nucleus_j16/css/style1.css */
+/**
+ * @package   Nucleus Template - RocketTheme
+ * @version   ${project.version} ${build_date}
+ * @author    RocketTheme http://www.rockettheme.com
+ * @copyright Copyright (C) 2007 - ${copyright_year} RocketTheme, LLC
+ * @license   http://www.rockettheme.com/legal/license.php RocketTheme Proprietary Use License
+ */
+/* Core */
+body {background: #434343;color: #444;}
+h1, h2, h3, h4, h5 {color: #444;}
+a, .button {color: #CC4D17;}
+a:hover, .button:hover {color: #000;}
+.title, .title span {color: #3F729A;}
+
+/* Header */
+#rt-logo {background: url(../images/logo/style1/logo.png) 0 0 no-repeat;}
+#rt-header {background: #bbb url(../images/header/style1/header-bg.png) 50% 0 repeat-x;}
+
+/* Top Menu */
+#rt-navigation ul li > a, #rt-navigation ul li > .separator {color: #ccc;text-shadow: 1px 1px 1px #000;}
+#rt-navigation ul li.active > a, #rt-navigation ul li.active > .separator {background: url(../images/header/style1/nav-active.png) 50% 100% no-repeat;color: #fff;}
+#rt-navigation ul li:hover > a, #rt-navigation ul li:hover > .separator {color: #fff;}
+
+/* Menu Dropdowns */
+#rt-navigation li ul {background: #222;border: 1px solid #333;}
+#rt-navigation li ul li.parent {background: url(../images/parent.png) 97% 12px no-repeat;}
+
+/* Navigation */
+#rt-navigation {background: #555 url(../images/header/style1/nav-bg.png) 50% 0 repeat-x;}
+
+/* Showcase */
+#rt-showcase {background: #333 url(../images/header/style1/showcase-bg.png) 50% 0 repeat-x;color: #ddd;text-shadow: -1px -1px 1px #333;}
+#rt-showcase2 {background: url(../images/header/style1/showcase-pattern.jpg) 50% 0 no-repeat;}
+#rt-showcase a {color: #F2592D;}
+#rt-showcase a:hover {color: #fff;}
+#rt-showcase .title {color: #fff;}
+#rt-showcase .title span {color: #ececec;}
+#rt-showcase .readon {background: #555;border: 1px solid #666;color: #fff;}
+#rt-showcase .readon:hover {background: #616161;}
+
+/* Utility */
+
+/* Feature */
+#rt-feature {background: #0f0f0f;color: #aaa;}
+#rt-feature .title span {color: #ccc;}
+
+/* Main Body */
+#rt-main-surround {background: #eee url(../images/background/main-bg.png) 50% 0 repeat-x;}
+#rt-main-surround .rt-container {background: #fff;}
+
+/* Side Menu */
+#rt-main-surround ul li a, #rt-main-surround ul li .separator {background: url(../images/header/style1/bullets.png) 0 10px no-repeat;color: #666;}
+#rt-main-surround ul li.active > a span, #rt-main-surround ul li > a:hover, #rt-main-surround ul li.active > .separator, #rt-main-surround ul li.active > .separator:hover {color: #CC4D17;}
+
+/* Modules */
+.number1 .module-title {background: url(../images/body/style1/module-icon1.png) 0 3px no-repeat;}
+.number2 .module-title {background: url(../images/body/style1/module-icon2.png) 0 3px no-repeat;}
+.number3 .module-title {background: url(../images/body/style1/module-icon3.png) 0 3px no-repeat;}
+.box1 .rt-block {background: #f8f8f8;border: 1px solid #f2f2f2;}
+
+/* Bottom */
+#rt-bottom {background: #999 url(../images/body/style1/bottom-bg.png) 50% 0 repeat-x;color: #eee;}
+#rt-bottom .title {color: #eee;}
+#rt-bottom a {color: #fff;}
+#rt-bottom a:hover {color: #fff;}
+#rt-bottom .title span {color: #ddd;}
+#rt-bottom .readon {background: #888;border: 1px solid #aaa;color: #fff;}
+#rt-bottom .readon:hover {background: #919191;}
+
+/* Footer */
+#rt-footer {color: #666;}
+#rt-footer a:hover {color: #333;}
+#rt-footer .title {color: #777;}
+#rt-footer .title span {color: #333;}
+#rt-copyright {background: #434343;color: #999;}
+#rt-copyright a:hover {color: #333;}
+#rocket, #gantry-logo {background: url(../images/body/style1/footer-assets.png) 0 0 no-repeat;}
+
+/* Typography */
+#rt-navigation .search .inputbox {background: #494949 url(../images/header/style1/search-icon.png) 100% 50% no-repeat;border: 1px solid #666;color: #ccc;}
+.readon {background: #eee;border: 1px solid #ccc;}
+.readon:hover {background: #fff;border: 1px solid #ccc;}
+#rt-accessibility a.small .button, #rt-accessibility a.large .button, #rt-accessibility a.small:hover .button, #rt-accessibility a.large:hover .button {background-image: url(../images/body/style1/fontsizer.png);background-repeat: no-repeat;}
+#rt-breadcrumbs {background: #eee;}
+span.breadcrumbs img {background: url(../images/header/style1/bullets.png) 0 5px no-repeat;}
+
+/* Joomla Specific */
+.rt-joomla .icon {background-image: url(../images/body/style1/typography.png);}

@@ -1,0 +1,22 @@
+/**
+ * @package   Nucleus Template - RocketTheme
+ * @version   ${project.version} ${build_date}
+ * @author    RocketTheme http://www.rockettheme.com
+ * @copyright Copyright (C) 2007 - ${copyright_year} RocketTheme, LLC
+ * @license   http://www.rockettheme.com/legal/license.php RocketTheme Proprietary Use License
+ */
+ 
+ /* Header */
+#rt-header {filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#ffffff', EndColorStr='#D5DEE3', GradientType=0);}
+
+/* Showcase */
+#rt-showcase, .round1 .rt-block {filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#9CAB66', EndColorStr='#7D8B4E', GradientType=0);}
+
+/* Utility */
+#rt-utility {filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#ffffff', EndColorStr='#eeeeee', GradientType=0);}
+
+/* Bottom */
+#rt-bottom, .round2 .rt-block {filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#E2EAED', EndColorStr='#D5DEE3', GradientType=0);}
+
+/* Modules */
+.round3 .rt-block {filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#f7f7f7', EndColorStr='#dddddd', GradientType=0);}
