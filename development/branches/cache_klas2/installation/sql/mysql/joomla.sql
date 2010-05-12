@@ -364,7 +364,7 @@ CREATE TABLE `#__extensions` (
   INDEX `element_clientid`(`element`, `client_id`),
   INDEX `element_folder_clientid`(`element`, `folder`, `client_id`),
   INDEX `extension`(`type`,`element`,`folder`,`client_id`)
-) TYPE=MyISAM CHARACTER SET `utf8`;
+) TYPE=MyISAM AUTO_INCREMENT=10000 CHARACTER SET `utf8`;
 
 # Components
 INSERT INTO `#__extensions` (`extension_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
@@ -585,7 +585,7 @@ INSERT INTO `#__menu` VALUES
 	(13,'_adminmenu','com_newsfeeds','News Feeds','','News Feeds','index.php?option=com_newsfeeds','component',0,1,1,17,0,0,'0000-00-00 00:00:00',0,0,'class:newsfeeds',0,'',23,28,0,'*'),
 	(14,'_adminmenu','com_newsfeeds_feeds','Feeds','','News Feeds/Feeds','index.php?option=com_newsfeeds','component',0,13,2,17,0,0,'0000-00-00 00:00:00',0,0,'class:newsfeeds',0,'',24,25,0,'*'),
 	(15,'_adminmenu','com_newsfeeds_categories','Categories','','News Feeds/Categories','index.php?option=com_categories&extension=com_newsfeeds','component',0,13,2,6,0,0,'0000-00-00 00:00:00',0,0,'class:newsfeeds-cat',0,'',26,27,0,'*'),
-	(16,'_adminmenu','com_redirect','Redirect','','Redirect','index.php?option=com_redirect','component',0,1,1,100,0,0,'0000-00-00 00:00:00',0,0,'class:redirect',0,'',37,38,0,'*'),
+	(16,'_adminmenu','com_redirect','Redirect','','Redirect','index.php?option=com_redirect','component',0,1,1,24,0,0,'0000-00-00 00:00:00',0,0,'class:redirect',0,'',37,38,0,'*'),
 	(17,'_adminmenu','com_search','Search','','Search','index.php?option=com_search','component',0,1,1,19,0,0,'0000-00-00 00:00:00',0,0,'class:search',0,'',29,30,0,'*'),
 	(18,'_adminmenu','com_weblinks','Weblinks','','Weblinks','index.php?option=com_weblinks','component',0,1,1,21,0,0,'0000-00-00 00:00:00',0,0,'class:weblinks',0,'',31,36,0,'*'),
 	(19,'_adminmenu','com_weblinks_links','Links','','Weblinks/Links','index.php?option=com_weblinks','component',0,18,2,21,0,0,'0000-00-00 00:00:00',0,0,'class:weblinks',0,'',32,33,0,'*'),
@@ -890,10 +890,10 @@ CREATE TABLE IF NOT EXISTS `#__template_styles` (
   KEY `idx_home` (`home`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
-INSERT INTO `#__template_styles` VALUES (1, 'rhuk_milkyway', '0', '1', 'Milkyway - Default', '{"colorVariation":"blue","backgroundVariation":"blue","widthStyle":"fmax"}');
+INSERT INTO `#__template_styles` VALUES (1, 'rhuk_milkyway', '0', '0', 'Milkyway - Default', '{"colorVariation":"blue","backgroundVariation":"blue","widthStyle":"fmax"}');
 INSERT INTO `#__template_styles` VALUES (2, 'bluestork', '1', '1', 'Bluestork - Default', '{"useRoundedCorners":"1","showSiteName":"0"}');
 INSERT INTO `#__template_styles` VALUES (3, 'atomic', '0', '0', 'Atomic - Default', '{}');
-INSERT INTO `#__template_styles` VALUES (4, 'beez_20', '0', '0', 'Beez2 - Default', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"-1","navposition":"left","templatecolor":"nature","html5":"0"}');
+INSERT INTO `#__template_styles` VALUES (4, 'beez_20', '0', '1', 'Beez2 - Default', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"-1","navposition":"left","templatecolor":"nature","html5":"0"}');
 INSERT INTO `#__template_styles` VALUES (5, 'hathor', '1', '0', 'Hathor - Default', '{"showSiteName":"0","highContrast":"0","boldText":"0","altMenu":"0"}');
 
 # -------------------------------------------------------

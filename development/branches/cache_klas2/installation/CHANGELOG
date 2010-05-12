@@ -27,7 +27,25 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+12-May-2010 Christophe Demko
+ $ Correcting some strings/language in beez
+ # Ensure that there exists at least one style for a template
+ # Ensure that there exists only one default template style
+
 12-May-2010 Jean-Marie Simonet
+# Corrected com_redirect component_id in jos_menu table
++ Added Global configuration button in Control panel [20407] Thanks Ronald de Vries.
+$ Corrected/added keys/strings all over admin
+$ Removed 1.5 legacy strings from main ini files
+
+12-May-2010 Andrew Eddie
+ ^ Set Beez2 as the default template (awesome work by Angie Radtke).
+ ^ Set AUTO_INCREMENT on jos_extensions table to start at 10000, allowing for more core plugins to be added at a later date.
+ ^ Fixing hardcoded $app->redirects to JController setRedirect in com_media subcontrollers.
+ # Fix bug in com_content archives model - still referencing -1 instead of 2 for the archived state.
+ # Fixed [#20393] creating an editor with buttons=true does not show any buttons
+
+11-May-2010 Jean-Marie Simonet
 ^ Correcting extension/example xml plugin
 ^ Hathor's update [Andrea Tarr]
 
@@ -220,6 +238,7 @@ $ Correcting/consolidating strings
 $ Refactoring com_contents back-end ini/keys
 $ Refactoring com_contents front-end ini/keys (WIP)
 $ Completing what can be done refactoring com_contents front-end ini/keys
+
 
 30-Apr-2010 Christophe Demko & Jean-Marie Simonet
 # Fixed problems in com_banners
