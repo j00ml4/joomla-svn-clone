@@ -43,7 +43,7 @@ ul li {list-style: square;margin-left: 15px;}
 
 /* Showcase */
 #rt-showcase {position: relative;z-index: 1;margin-top: -9px;}
-#rt-showcase2 {padding-top: 9px;}
+#rt-showcase2 {padding-top: 9px;margin-bottom: 10px;}
 #rt-showcase .rt-block {margin-top: 0;}
 
 /* Utility */
@@ -52,7 +52,7 @@ ul li {list-style: square;margin-left: 15px;}
 /* Main Body */
 #rt-main-surround .rt-article-title {text-transform: none;margin: 0;display: block;font-size: 220%;letter-spacing: normal;font-weight: normal;}
 #rt-sidebar-a, #rt-sidebar-b, #rt-sidebar-c {background-color: transparent;}
-#rt-main-surround {overflow: hidden;}
+#rt-main-surround {overflow: hidden;margin-top: -10px;}
 
 /* Side Menus */
 #rt-main-surround ul {padding-left: 0;}
@@ -85,8 +85,7 @@ h2.title {display: block;letter-spacing: normal;line-height: 130%;margin: 0;font
 #rt-navigation .search {float: right;padding-top: 5px;}
 .search .inputbox {width: 198px;line-height: 100%;padding: 5px;border-radius: 4px;}
 .search {text-align: right;}
-.readon {display: inline-block;border-radius: 4px;padding: 5px 6px;cursor: pointer;line-height: 100%;font-size: 100%;}
-.readon .button {border: 0;background: none;padding: 0;margin: -1px 0;font-size: 100%;cursor: pointer;}
+.readon, input.button, button.button {display: inline-block;border-radius: 4px;padding: 5px 6px;cursor: pointer;line-height: 100%;font-size: 100%;}
 #rt-accessibility .rt-desc {float: left;font-size: 120%;line-height: 20px;margin-right: 5px;}
 #rt-accessibility .button {display: block;width: 20px;height: 20px;float: left;}
 #rt-accessibility a.small .button {background-position: 0 0;background-repeat: no-repeat;}

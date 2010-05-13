@@ -11,4 +11,4 @@
 
 /* Typography */
 .search .inputbox {-webkit-border-radius: 4px;}
-.readon {-webkit-border-radius: 4px;}
+.readon, input.button, button.button {-webkit-border-radius: 4px;}

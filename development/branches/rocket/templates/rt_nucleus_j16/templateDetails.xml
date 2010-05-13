@@ -193,7 +193,7 @@
 						</field>
 					</field>
 					<field name="fontsizer" type="chain" label="FONTSIZE" description="FONTSIZE_DESC">
-						<field name="enabled" type="toggle" default="1" label="SHOW"/>
+						<field name="enabled" type="toggle" default="0" label="SHOW"/>
 						<field name="position" type="position" default="utility-b" label="POSITION"/>
 					</field>
 					<field name="copyright" type="chain" label="COPYRIGHT" description="COPYRIGHT_DESC">

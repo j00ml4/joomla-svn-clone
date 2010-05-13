@@ -43,10 +43,16 @@ $gantry->init();
 		</div>
 		<?php /** End Header **/ endif; ?>
 		<?php /** Begin Navigation **/ if ($gantry->countModules('navigation')) : ?>
-		<div id="rt-navigation" class="rt-menu">
-			<div class="rt-container">
-				<?php echo $gantry->displayModules('navigation','standard','basic'); ?>
-				<div class="clear"></div>
+		<div id="rt-navigation">
+			<?php if ($gantry->countModules('showcase')) : ?>
+			<div id="rt-navigation2">
+			<?php else: ?>
+			<div id="rt-navigation3">
+			<?php endif; ?>
+				<div class="rt-container">
+					<?php echo $gantry->displayModules('navigation','standard','basic'); ?>
+					<div class="clear"></div>
+				</div>
 			</div>
 		</div>
 		<?php /** End Header **/ endif; ?>
