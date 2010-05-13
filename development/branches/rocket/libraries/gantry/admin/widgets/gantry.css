@@ -32,19 +32,22 @@ z-index:181;}
 #toolbar-save.spinner span, #toolbar-apply.spinner span {background: none;}
 
 /* Gantry */
+
 /* Tabs (G 3.0) */
-#gantry-tabs {list-style:none;margin:0 2px -1px;padding:0;border: 1px solid #ccc;background: -moz-linear-gradient(bottom, #e9e9e9, #f4f4f4 21%);background: -webkit-gradient(linear, left bottom, left top, from(#e9e9e9), to(#f4f4f4), color-stop(0.21, #f4f4f4)); }
-#gantry-tabs li {display: inline-block;font-size: 14px;color:#888;padding: 8px 25px;border-right: 1px solid #ddd; border-left: 1px solid #fff;text-shadow:1px 1px 1px #fff;}
-#gantry-tabs li.active span {color: #1578B9; padding: 12px 15px 9px;margin: -12px -15px -15px;border: 1px solid #ccc;border-bottom: none;}
+#gantry-tabs {position:relative;list-style:none;margin:0 2px -1px;padding:0;border: 1px solid #ccc;background: -moz-linear-gradient(bottom, #e9e9e9, #f4f4f4 21%);background: -webkit-gradient(linear, left bottom, left top, from(#e9e9e9), to(#f4f4f4), color-stop(0.21, #f4f4f4)); }
+#gantry-tabs li {cursor:pointer;display: inline-block;font-size: 14px;color:#888;padding: 8px 25px;border-right: 1px solid #ddd; border-left: 1px solid #fff;text-shadow:1px 1px 1px #fff;}
+#gantry-tabs li span {padding: 0 1px;}
+#gantry-tabs li.active span {position:relative;z-index:2;color: #1578B9; padding: 12px 15px 9px;margin: -12px -14px -15px;border: 1px solid #ccc;border-bottom: none;}
 #gantry-tabs li.active span.outer {background: -moz-linear-gradient(top, #e2e2e2, #fafafa 70%);background: -webkit-gradient(linear, left top, left bottom, from(#e2e2e2), to(#fafafa), color-stop(0.70, #fafafa));}
 #gantry-tabs li.active span.inner {margin:-12px -15px -15px;padding:11px 14px 9px;border: 1px solid #fff;border-bottom: 1px solid #fafafa;}
 #gantry-tabs li.first {border-left: none;}
 #gantry-panel {background: #fafafa;border: 1px solid #ccc;margin: 0 2px;}
 #gantry-panel .panelform {margin:25px 15px 35px;border: 1px solid #ececec;}
 
+#gantry-panel {position:relative;}
 #gantry-panel h1 {font-family: helvetica, sans-serif;font-size: 36px;color: #262626;font-weight:normal;margin: 30px 0 15px;}
 #gantry-panel h1 span, #gantry-panel a {color: #1578B9;text-decoration: none;}
-#gantry-panel a {border-bottom: 1px solid #1578B9;padding-bottom: 2px;}
+#gantry-panel a {border-bottom: 1px solid #1578B9;}
 #gantry-panel a:hover {color:#146295;}
 #gantry-panel h2 {font-size: 24px;font-weight: normal;margin:30px 0 15px;}
 #gantry-panel p, #gantry-panel ol {color: #666;font-size: 14px;}
@@ -57,7 +60,8 @@ z-index:181;}
 
 .gantry-panel-left, .gantry-panel-right {float: left;}
 .gantry-panel-left {width: 60%;}
-.gantry-panel-right {width: 30%;margin: 25px 0 35px 30px;}
+.gantry-panel-right {width: 40%;}
+.gantry-panel-right .right-panel {margin:0 30px 0 15px;}
 
 
 /* h3 headers*/
@@ -70,24 +74,24 @@ z-index:181;}
 .presets-wrapper input[type=checkbox] {position: absolute;top:40%;}
 
 /* Diagnostic */
-/*#diagnostic {padding-bottom: 1px;margin: 0px -5px 0px -10px;}
-#diagnostic-wrapper { padding-top: 8px !important; }
-#diagnostic-bar {background: transparent url(images/integrity-header.png) 0 100% repeat-x;padding:0 20px 0 8px; !important;height:33px;line-height:33px;font-size:14px;color:#fff;text-shadow:#000 1px 1px 0px;position:relative;}
-#diagnostic.errors #diagnostic-bar {background-position: 0 0;}
-#diagnostic-desc {padding:10px 10px 10px 80px;background:#D6E991 url(images/integrity-good.png) 25px 10px no-repeat;border:1px solid #8BBA27;color:#365A0C;text-shadow:1px 1px 1px #fff;font-size:120%;min-height:25px;}
-#diagnostic.errors #diagnostic-desc  {background: #F4B1AC url(images/integrity-bad.png) 25px 10px no-repeat; border: 1px solid #CB372D; color: #751A13;}
-#diagnostic span {font-weight: bold;}*/
+diagnostic {padding-bottom: 1px;margin: 0px -5px 0px -10px;}
+diagnostic-wrapper { padding-top: 8px !important; }
+diagnostic-bar {background: transparent url(images/integrity-header.png) 0 100% repeat-x;padding:0 20px 0 8px; !important;height:33px;line-height:33px;font-size:14px;color:#fff;text-shadow:#000 1px 1px 0px;position:relative;}
+diagnostic.errors #diagnostic-bar {background-position: 0 0;}
+diagnostic-desc {padding:10px 10px 10px 80px;background:#D6E991 url(images/integrity-good.png) 25px 10px no-repeat;border:1px solid #8BBA27;color:#365A0C;text-shadow:1px 1px 1px #fff;font-size:120%;min-height:25px;}
+diagnostic.errors #diagnostic-desc  {background: #F4B1AC url(images/integrity-bad.png) 25px 10px no-repeat; border: 1px solid #CB372D; color: #751A13;}
+diagnostic span {font-weight: bold;}
 
 #diagnostic {padding: 15px 25px 25px;background: -moz-linear-gradient(bottom, #BEE455, #EFFFAC);border: 1px solid #EFFFAC;-moz-box-shadow: 1px 3px 15px rgba(0, 0, 0, 0.25); background: -webkit-gradient(linear, left bottom, left top, from(#bef455), to(#efffac));-webkit-box-shadow: 1px 3px 15px rgba(0, 0, 0, 0.25);}
 #diagnostic-bar {background: url(images/integrity-good.png) 0 0 no-repeat;height: 33px;padding-left: 40px;color: #333;text-shadow: 1px 1px 1px #fff;font-size: 22px;font-weight: normal;line-height: 32px;margin-bottom: 15px;}
 #diagnostic-bar span {font-weight: bold;}
-#diagnostic-desc {color:#365A0C;text-shadow:1px 1px 1px #fff;font-size:120%;min-height:25px;}
+#diagnostic-desc {color:#365A0C;text-shadow:1px 1px 1px #fff;font-size:120%;min-height:25px;font-weight:normal;}
 
 
 #updater {padding: 15px 25px 25px;margin: 20px 0;}
 #updater-bar {background: url(images/gantry-gears.jpg) no-repeat;height: 30px;padding-left: 46px;color: #333; text-shadow: 1px 1px 1px #fff;font-size: 22px;font-weight: normal;line-height: 32px;margin-bottom:5px;}
 #updater-bar span {color: #1578B9;}
-#updater-desc, #updater-desc a {color:#CC0000;font-size:13px;border-color: #cc0000;text-align: center;}
+#updater-desc, #updater-desc a {color:#CC0000;font-size:13px;border-color: #cc0000;text-align: left;text-indent:50px;}
 #updater-desc a:hover {color: #980000;}
 
 /* Master Bar */
