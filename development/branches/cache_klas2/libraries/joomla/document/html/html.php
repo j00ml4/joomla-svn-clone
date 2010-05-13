@@ -202,9 +202,18 @@ class JDocumentHTML extends JDocument
 
 		$renderer = $this->loadRenderer($type);
 		
-		$cache = JFactory::getCache('template','callback');
 			if ($this->_caching == 1) {
-				$this->setBuffer($cache->get(array($renderer,'render'), array($name, $attribs, $result), false, false), $type, $name);
+				$cache = JFactory::getCache('template','');
+				$hash = md5(serialize(array($name, $attribs, $result, $renderer)));
+				$cbuffer = $cache->get('cbuffer');
+				if (isset($cbuffer[$hash])) {
+					return $cbuffer[$hash];
+				} else {
+					$this->setBuffer($renderer->render($name, $attribs, $result), $type, $name);
+					$cbuffer[$hash] = parent::$_buffer[$type][$name];
+					$cache->store($cbuffer, 'cbuffer');
+				}
+				
 			} else {
 				$this->setBuffer($renderer->render($name, $attribs, $result), $type, $name);
 			}
