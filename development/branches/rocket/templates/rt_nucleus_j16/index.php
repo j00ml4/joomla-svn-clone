@@ -26,127 +26,129 @@ $gantry->init();
 	?>
 </head>
 	<body <?php echo $gantry->displayBodyTag(array('backgroundLevel','bodyLevel')); ?>>
-		<?php /** Begin Top **/ if ($gantry->countModules('top')) : ?>
-		<div id="rt-top">
-			<div class="rt-container">
-				<?php echo $gantry->displayModules('top','standard','standard'); ?>
-				<div class="clear"></div>
-			</div>
-		</div>
-		<?php /** End Top **/ endif; ?>
-		<?php /** Begin Header **/ if ($gantry->countModules('header')) : ?>
-		<div id="rt-header">
-			<div class="rt-container">
-				<?php echo $gantry->displayModules('header','standard','standard'); ?>
-				<div class="clear"></div>
-			</div>
-		</div>
-		<?php /** End Header **/ endif; ?>
-		<?php /** Begin Navigation **/ if ($gantry->countModules('navigation')) : ?>
-		<div id="rt-navigation">
-			<?php if ($gantry->countModules('showcase')) : ?>
-			<div id="rt-navigation2">
-			<?php else: ?>
-			<div id="rt-navigation3">
-			<?php endif; ?>
+		<div id="rt-main-container">
+			<?php /** Begin Top **/ if ($gantry->countModules('top')) : ?>
+			<div id="rt-top">
 				<div class="rt-container">
-					<?php echo $gantry->displayModules('navigation','standard','basic'); ?>
+					<?php echo $gantry->displayModules('top','standard','standard'); ?>
 					<div class="clear"></div>
 				</div>
 			</div>
-		</div>
-		<?php /** End Header **/ endif; ?>
-		<?php /** Begin Showcase **/ if ($gantry->countModules('showcase')) : ?>
-		<div id="rt-showcase"><div id="rt-showcase2">
-			<div class="rt-container">
-				<?php echo $gantry->displayModules('showcase','standard','standard'); ?>
-				<div class="clear"></div>
-			</div>
-		</div></div>
-		<?php /** End Showcase **/ endif; ?>
-		<?php /** Begin Feature **/ if ($gantry->countModules('feature')) : ?>
-		<div id="rt-feature">
-			<div class="rt-container">
-				<?php echo $gantry->displayModules('feature','standard','standard'); ?>
-				<div class="clear"></div>
-			</div>
-		</div>
-		<?php /** End Feature **/ endif; ?>
-		<?php /** Begin Main Body **/ ?>
-		<div id="rt-main-surround">
-			<?php /** Begin Utility **/ if ($gantry->countModules('utility')) : ?>
-			<div id="rt-utility">
+			<?php /** End Top **/ endif; ?>
+			<?php /** Begin Header **/ if ($gantry->countModules('header')) : ?>
+			<div id="rt-header">
 				<div class="rt-container">
-					<?php echo $gantry->displayModules('utility','standard','standard'); ?>
+					<?php echo $gantry->displayModules('header','standard','standard'); ?>
 					<div class="clear"></div>
 				</div>
 			</div>
-			<?php /** End Utility **/ endif; ?>
-			<?php /** Begin Main Top **/ if ($gantry->countModules('maintop')) : ?>
-			<div id="rt-maintop">
+			<?php /** End Header **/ endif; ?>
+			<?php /** Begin Navigation **/ if ($gantry->countModules('navigation')) : ?>
+			<div id="rt-navigation">
+				<?php if ($gantry->countModules('showcase')) : ?>
+				<div id="rt-navigation2">
+				<?php else: ?>
+				<div id="rt-navigation3">
+				<?php endif; ?>
+					<div class="rt-container">
+						<?php echo $gantry->displayModules('navigation','standard','basic'); ?>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+			<?php /** End Header **/ endif; ?>
+			<?php /** Begin Showcase **/ if ($gantry->countModules('showcase')) : ?>
+			<div id="rt-showcase"><div id="rt-showcase2">
 				<div class="rt-container">
-					<?php echo $gantry->displayModules('maintop','standard','standard'); ?>
+					<?php echo $gantry->displayModules('showcase','standard','standard'); ?>
+					<div class="clear"></div>
+				</div>
+			</div></div>
+			<?php /** End Showcase **/ endif; ?>
+			<?php /** Begin Feature **/ if ($gantry->countModules('feature')) : ?>
+			<div id="rt-feature">
+				<div class="rt-container">
+					<?php echo $gantry->displayModules('feature','standard','standard'); ?>
 					<div class="clear"></div>
 				</div>
 			</div>
-			<?php /** End Main Top **/ endif; ?>
-			<?php /** Begin Breadcrumbs **/ if ($gantry->countModules('breadcrumb')) : ?>
-			<div id="rt-breadcrumbs">
+			<?php /** End Feature **/ endif; ?>
+			<?php /** Begin Main Body **/ ?>
+			<div id="rt-main-surround">
+				<?php /** Begin Utility **/ if ($gantry->countModules('utility')) : ?>
+				<div id="rt-utility">
+					<div class="rt-container">
+						<?php echo $gantry->displayModules('utility','standard','standard'); ?>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<?php /** End Utility **/ endif; ?>
+				<?php /** Begin Main Top **/ if ($gantry->countModules('maintop')) : ?>
+				<div id="rt-maintop">
+					<div class="rt-container">
+						<?php echo $gantry->displayModules('maintop','standard','standard'); ?>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<?php /** End Main Top **/ endif; ?>
+				<?php /** Begin Breadcrumbs **/ if ($gantry->countModules('breadcrumb')) : ?>
+				<div id="rt-breadcrumbs">
+					<div class="rt-container">
+						<?php echo $gantry->displayModules('breadcrumb','basic','breadcrumbs'); ?>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<?php /** End Breadcrumbs **/ endif; ?>
+				<?php /** Begin Main Body Columns **/ ?>
+			    <?php echo $gantry->displayMainbody('mainbody','sidebar','standard','standard','standard','standard','standard'); ?>
+				<?php /** End Main Body Columns **/ ?>
+				<?php /** Begin Main Bottom **/ if ($gantry->countModules('mainbottom')) : ?>
+				<div id="rt-mainbottom">
+					<div class="rt-container">
+						<?php echo $gantry->displayModules('mainbottom','standard','standard'); ?>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<?php /** End Main Bottom **/ endif; ?>
+			</div>
+			<div class="clear"></div>
+			<?php /** End Main Body **/ ?>
+			<?php /** Begin Bottom **/ if ($gantry->countModules('bottom')) : ?>
+			<div id="rt-bottom">
 				<div class="rt-container">
-					<?php echo $gantry->displayModules('breadcrumb','basic','breadcrumbs'); ?>
+					<?php echo $gantry->displayModules('bottom','standard','standard'); ?>
 					<div class="clear"></div>
 				</div>
 			</div>
-			<?php /** End Breadcrumbs **/ endif; ?>
-			<?php /** Begin Main Body Columns **/ ?>
-		    <?php echo $gantry->displayMainbody('mainbody','sidebar','standard','standard','standard','standard','standard'); ?>
-			<?php /** End Main Body Columns **/ ?>
-			<?php /** Begin Main Bottom **/ if ($gantry->countModules('mainbottom')) : ?>
-			<div id="rt-mainbottom">
+			<?php /** End Bottom **/ endif; ?>
+			<?php /** Begin Footer **/ if ($gantry->countModules('footer')) : ?>
+			<div id="rt-footer">
 				<div class="rt-container">
-					<?php echo $gantry->displayModules('mainbottom','standard','standard'); ?>
+					<?php echo $gantry->displayModules('footer','standard','standard'); ?>
 					<div class="clear"></div>
 				</div>
 			</div>
-			<?php /** End Main Bottom **/ endif; ?>
-		</div>
-		<div class="clear"></div>
-		<?php /** End Main Body **/ ?>
-		<?php /** Begin Bottom **/ if ($gantry->countModules('bottom')) : ?>
-		<div id="rt-bottom">
-			<div class="rt-container">
-				<?php echo $gantry->displayModules('bottom','standard','standard'); ?>
-				<div class="clear"></div>
+			<?php /** End Footer **/ endif; ?>
+			<?php /** Begin Copyright **/ if ($gantry->countModules('copyright')) : ?>
+			<div id="rt-copyright">
+				<div class="rt-container">
+					<?php echo $gantry->displayModules('copyright','standard','standard'); ?>
+					<div class="clear"></div>
+				</div>
 			</div>
-		</div>
-		<?php /** End Bottom **/ endif; ?>
-		<?php /** Begin Footer **/ if ($gantry->countModules('footer')) : ?>
-		<div id="rt-footer">
-			<div class="rt-container">
-				<?php echo $gantry->displayModules('footer','standard','standard'); ?>
-				<div class="clear"></div>
+			<?php /** End Copyright **/ endif; ?>
+			<?php /** Begin Debug **/ if ($gantry->countModules('debug')) : ?>
+			<div id="rt-debug">
+				<div class="rt-container">
+					<?php echo $gantry->displayModules('debug','standard','standard'); ?>
+					<div class="clear"></div>
+				</div>
 			</div>
+			<?php /** End Debug **/ endif; ?>
+			<?php /** Begin Popup **/ 
+			echo $gantry->displayModules('popup','popup','popup'); 
+			/** End Popup **/ ?>
 		</div>
-		<?php /** End Footer **/ endif; ?>
-		<?php /** Begin Copyright **/ if ($gantry->countModules('copyright')) : ?>
-		<div id="rt-copyright">
-			<div class="rt-container">
-				<?php echo $gantry->displayModules('copyright','standard','standard'); ?>
-				<div class="clear"></div>
-			</div>
-		</div>
-		<?php /** End Copyright **/ endif; ?>
-		<?php /** Begin Debug **/ if ($gantry->countModules('debug')) : ?>
-		<div id="rt-debug">
-			<div class="rt-container">
-				<?php echo $gantry->displayModules('debug','standard','standard'); ?>
-				<div class="clear"></div>
-			</div>
-		</div>
-		<?php /** End Debug **/ endif; ?>
-		<?php /** Begin Popup **/ 
-		echo $gantry->displayModules('popup','popup','popup'); 
-		/** End Popup **/ ?>
 	</body>
 </html>
 <?php 

@@ -150,6 +150,10 @@
 						<option value="style5">Style 5</option>
 						<option value="style6">Style 6</option>
 					</field>
+					<field name="headertype" type="selectbox" default="fluid" label="HEADER_TYPE" description="HEADER_TYPE_DESC" isbodyclass="true" setbyurl="true" setinsession="true" setbysession="true" setincookie="true" setbycookie="true">
+						<option value="fluid">FLUID</option>
+						<option value="fixed">FIXED</option>
+					</field>
 					<field name="font" type="chain" label="FONT_SETTINGS" description="FONT_SETTINGS_DESC">
 						<field name="family" type="selectbox" default="default" label="FONT_FAMILY" description="" isbodyclass="true" setbyurl="true" setinsession="true" setbysession="true" setincookie="true" setbycookie="true">
 							<option value="default">Default</option>
