@@ -18,6 +18,7 @@ body {font-family: Helvetica,Arial,sans-serif;min-width: 960px;}
 .font-family-default .title, .font-family-default .rt-article-title {font-family: Georgia, sans-serif;}
 .rt-container .module-title, .rt-container .rt-headline {margin-top: 0;}
 .rt-container, #rt-sidebar-a, #rt-sidebar-b, #rt-sidebar-c {background: transparent;}
+.headertype-fixed #rt-main-container {width: 960px;margin: 0 auto;}
 ul {list-style: none;padding-left: 0;}
 ul li {list-style: square;margin-left: 15px;}
 .rt-block {padding: 10px;margin-top: 10px;}
