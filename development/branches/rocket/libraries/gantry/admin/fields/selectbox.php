@@ -15,10 +15,12 @@ defined('JPATH_BASE') or die();
  * @package     gantry
  * @subpackage  admin.elements
  */
-class JFormFieldSelectBox extends JFormField {
-	
 
-	protected function getInput(){
+gantry_import('core.gantryformfield');
+
+class JFormFieldSelectBox extends GantryFormField {
+
+	public function getGantryInput(){
         global $gantry;
 		$document =& JFactory::getDocument();
 

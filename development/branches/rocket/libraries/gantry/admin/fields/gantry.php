@@ -19,7 +19,79 @@ jimport('joomla.form.formfield');
  * @subpackage  admin.elements
  */
 class JFormFieldGantry extends JFormField {
-	
+
+    public function __construct($form = null){
+        parent::__construct($form);
+        
+        global $gantry;
+
+        $output = "";
+        $document =& JFactory::getDocument();
+
+        $arrayList = "'" . implode("', '", explode(",", str_replace(" ", "", $this->element['default']))) . "'";
+
+        if (!defined('GANTRY_ADMIN')) {
+            include_once(dirname(dirname(__FILE__)) . '/../gantry.php');
+
+            gantry_import('core.gantrybrowser');
+            $browser = new GantryBrowser();
+
+            $gantry_created_dirs = array(
+                $gantry->custom_dir,
+                $gantry->custom_menuitemparams_dir
+            );
+
+            $this->template = end(explode(DS, $gantry->templatePath));
+
+            $gantry->addStyle($gantry->gantryUrl.'/admin/widgets/gantry.css');
+            if ($browser->name == 'ie' && $browser->version == '7' && file_exists($gantry->gantryPath . DS . 'admin' . DS . 'widgets' . DS . 'gantry-ie7.css')) {
+                $gantry->addStyle($gantry->gantryUrl.'/admin/widgets/gantry-ie7.css');
+            }
+            $document->addScript($gantry->gantryUrl.'/admin/widgets/gantry.js');
+            $gantry->addInlineScript("var GantrySlideList = [".$arrayList."];var AdminURI = '".JURI::base()."';var UnallowedParams = ['" . implode("', '", $gantry->dontsetinmenuitem) . '\'];');
+            $gantry->addInlineScript($this->gantryLang());
+
+            // fixes Firefox < 3.7 input line-height issue
+
+            if (($browser->name == 'firefox' && $browser->version < '3.7') || ($browser->name == 'ie' && $browser->version > '6')) {
+                $css = ".text-short, .text-medium, .text-long, .text-color {padding-top: 4px;height:19px;}";
+                $gantry->addInlineStyle($css);
+            }
+
+            if ($browser->name == 'ie' && $browser->shortversion == '7') {
+                $css = "
+                    .g-surround, .g-inner, .g-surround > div {zoom: 1;position: relative;}
+                    .text-short, .text-medium, .text-long, .text-color {border:0 !important;}
+                    .selectbox {z-index:500;position:relative;}
+                    .group-fusionmenu, .group-splitmenu {position:relative;margin-top:0 !important;zoom:1;}
+                    .scroller .inner {position:relative;}
+                    .moor-hexLabel {display:inline-block;zoom:1;float:left;}
+                    .moor-hexLabel input {float:left;}
+                ";
+                $gantry->addInlineStyle($css);
+            }
+
+
+            //create dirs needed by gantry
+            foreach($gantry_created_dirs as $dir){
+                if (is_readable(dirname($dir)) && is_writeable(dirname($dir)) &&!JFolder::exists($dir)){
+                    JFolder::create($dir);
+                }
+            }
+
+            $this->checkAjaxTool();
+
+            define('GANTRY_ADMIN', 1);
+        }
+        if (file_exists($gantry->templatePath."/gantry.scripts.php") && is_readable($gantry->templatePath."/gantry.scripts.php")){
+            include_once($gantry->templatePath."/gantry.scripts.php");
+            if (function_exists('gantry_params_init')){
+                gantry_params_init();
+            }
+        }
+        JForm::addFieldPath($gantry->templatePath.DS.'fields');        
+    }
+
     /**
      * @global gantry used to access the core Gantry class
      * @param  $name
@@ -30,75 +102,6 @@ class JFormFieldGantry extends JFormField {
      */
     protected function getInput()
 	{
-		global $gantry;
-		
-		$output = "";
-        $document =& JFactory::getDocument();
-
-		$arrayList = "'" . implode("', '", explode(",", str_replace(" ", "", $this->element['default']))) . "'";
-
-
-
-		if (!defined('GANTRY_ADMIN')) {
-			include_once(dirname(dirname(__FILE__)) . '/../gantry.php');
-
-			gantry_import('core.gantrybrowser');
-			$browser = new GantryBrowser();
-
-            $gantry_created_dirs = array(
-                $gantry->custom_dir,
-                $gantry->custom_menuitemparams_dir
-            );
-
-			$this->template = end(explode(DS, $gantry->templatePath));
-
-			$document->addStyleSheet($gantry->gantryUrl.'/admin/widgets/gantry.css');
-			if ($browser->name == 'ie' && $browser->version == '7' && file_exists($gantry->gantryPath . DS . 'admin' . DS . 'widgets' . DS . 'gantry-ie7.css')) {
-				$document->addStyleSheet($gantry->gantryUrl.'/admin/widgets/gantry-ie7.css');
-			}
-			$document->addScript($gantry->gantryUrl.'/admin/widgets/gantry.js');
-			$document->addScriptDeclaration("var GantrySlideList = [".$arrayList."];var AdminURI = '".JURI::base()."';var UnallowedParams = ['" . implode("', '", $gantry->dontsetinmenuitem) . '\'];');
-			$document->addScriptDeclaration($this->gantryLang());
-			
-			// fixes Firefox < 3.7 input line-height issue
-			
-			if (($browser->name == 'firefox' && $browser->version < '3.7') || ($browser->name == 'ie' && $browser->version > '6')) {
-				$css = ".text-short, .text-medium, .text-long, .text-color {padding-top: 4px;height:19px;}";
-				$document->addStyleDeclaration($css);
-			}
-			
-			if ($browser->name == 'ie' && $browser->shortversion == '7') {
-				$css = "
-					.g-surround, .g-inner, .g-surround > div {zoom: 1;position: relative;}
-					.text-short, .text-medium, .text-long, .text-color {border:0 !important;}
-					.selectbox {z-index:500;position:relative;}
-					.group-fusionmenu, .group-splitmenu {position:relative;margin-top:0 !important;zoom:1;}
-					.scroller .inner {position:relative;}
-					.moor-hexLabel {display:inline-block;zoom:1;float:left;}
-					.moor-hexLabel input {float:left;}
-				";
-				$document->addStyleDeclaration($css);
-			}
-
-
-            //create dirs needed by gantry
-            foreach($gantry_created_dirs as $dir){
-                if (is_readable(dirname($dir)) && is_writeable(dirname($dir)) &&!JFolder::exists($dir)){
-                    JFolder::create($dir);
-                }
-            }
-            
-			$this->checkAjaxTool();
-			
-			define('GANTRY_ADMIN', 1);
-		}
-        if (file_exists($gantry->templatePath."/gantry.scripts.php") && is_readable($gantry->templatePath."/gantry.scripts.php")){
-            include_once($gantry->templatePath."/gantry.scripts.php");
-            if (function_exists('gantry_params_init')){
-                gantry_params_init();
-            }
-        }
-        JForm::addFieldPath($gantry->templatePath.DS.'fields');
         return '';
 	}
 	

@@ -19,10 +19,11 @@ defined('JPATH_BASE') or die();
  * @package     gantry
  * @subpackage  admin.elements
  */
-class JFormFieldToggle extends JFormField {
+gantry_import('core.gantryformfield');
 
-	protected function getInput()
-	{
+class JFormFieldToggle extends GantryFormField {
+
+	public function getGantryInput(){
 		global $gantry;
 		$hidden = '<input type="hidden" name="'.$this->name.'" value="_" />';
 		
