@@ -416,12 +416,13 @@ class JCacheTest extends PHPUnit_Framework_TestCase
 	{
 		$this->object = JCache::getInstance($handler, $options);
 		$this->object->setCaching(true);
-		$test = $this->object->store($data, $id, $group);
+
 		$this->assertThat(
-			$test,
+			$this->object->store($data, $id, $group),
 			$this->isTrue(),
 			'Should store the data properly'
 		);
+
 		$this->assertThat(
 			$this->object->get($id, $group),
 			$this->equalTo($data),
