@@ -33,13 +33,14 @@ abstract class GantryFormField extends JFormField
         $output='';
         $output = $this->getGantryLabel();
         if (!empty($output)){
-             $output = "<div class=\"gantry-field\">" . $output;
+             $output = '<div class="gantry-field">' . $output;
         }
 		return $output;
 	}
 
     protected function getInput(){
         $output = $this->getGantryInput();
+        $output .= '<div class="clr"></div>';
         $output .= '</div>';
         return $output;
     }
