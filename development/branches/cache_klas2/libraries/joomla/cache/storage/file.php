@@ -23,12 +23,6 @@ class JCacheStorageFile extends JCacheStorage
 	 * @since	1.6
 	 */
 	private $_root;
-	
-	/**
-	 * @since	1.6
-	 */
-	
-	static $_fileopen = array();
 
 	/**
 	 * Constructor
@@ -120,20 +114,15 @@ class JCacheStorageFile extends JCacheStorage
 		// Prepend a die string
 		$data		= $die.$data;
 		
-		$hash = md5($path);
-
-		if (!isset(self::$_fileopen[$hash])) {
-			self::$_fileopen[$hash] = @fopen($path, "wb");
-		}
+		$_fileopen = @fopen($path, "wb");
 		
-		if (self::$_fileopen[$hash]) {
+		if ($_fileopen) {
 			$len = strlen($data);
-			@fwrite(self::$_fileopen[$hash], $data, $len);
-			@fclose(self::$_fileopen[$hash]);
-			unset (self::$_fileopen[$hash]);
+			@fwrite($_fileopen, $data, $len);
+			//@fclose($_fileopen);
 			$written = true;
 		}
-		
+
 		// Data integrity check
 		if ($written && ($data == file_get_contents($path))) {
 			return true;
@@ -245,14 +234,11 @@ class JCacheStorageFile extends JCacheStorage
 		$returning->locklooped = false;
 		$looptime = $locktime * 10;	
 		$path		= $this->_getFilePath($id, $group);		
-		$hash = md5($path);
 
-		if (!isset(self::$_fileopen[$hash])) {
-			self::$_fileopen[$hash] = @fopen($path, "ab");
-		}
+		$_fileopen = @fopen($path, "r+b");
 		
-		if (self::$_fileopen[$hash]) {
-				$data_lock = @flock(self::$_fileopen[$hash], LOCK_EX);
+		if ($_fileopen) {
+				$data_lock = @flock($_fileopen, LOCK_EX);
 		} else {
 			$data_lock = false;
 		}
@@ -271,7 +257,7 @@ class JCacheStorageFile extends JCacheStorage
 				}
 
 				usleep(100);
-				$data_lock =  @flock(self::$_fileopen[$hash], LOCK_EX);
+				$data_lock =  @flock($_fileopen, LOCK_EX);
 				$lock_counter++;
 			}
 
@@ -292,16 +278,12 @@ class JCacheStorageFile extends JCacheStorage
 	public function unlock($id,$group)
 	{	
 		$path		= $this->_getFilePath($id, $group);		
-		$hash = md5($path);
 
-		if (!isset(self::$_fileopen[$hash])) {
-			self::$_fileopen[$hash] = @fopen($path, "ab");
-		}
-		
-		if (self::$_fileopen[$hash]) {			
-				$ret = @flock(self::$_fileopen[$hash], LOCK_UN);
-				@fclose(self::$_fileopen[$hash]);
-				unset (self::$_fileopen[$hash]);
+		$_fileopen = @fopen($path, "r+b");
+	
+		if ($_fileopen) {			
+				$ret = @flock($_fileopen, LOCK_UN);
+				@fclose($_fileopen);
 		}
 
 
