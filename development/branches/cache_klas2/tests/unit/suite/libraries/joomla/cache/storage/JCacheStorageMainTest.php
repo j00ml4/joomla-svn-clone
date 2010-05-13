@@ -46,7 +46,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		}
 		
 		$id = 'randomTestID';
-		$group = 'testing';
+		$group = '_testing';
 		$data = 'testData';
 		$cache =& JCache::getInstance('', array('storage'=>$store));
 		$cache->setCaching(true);
@@ -69,7 +69,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		}
 		
 		$id = 'randomTestID2423423';
-		$group = 'testing';
+		$group = '_testing';
 		$data = 'testData';
 		$cache =& JCache::getInstance('', array('storage'=>$store));
 		$cache->setCaching(true);
@@ -91,7 +91,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 			$this->markTestSkipped('Due to an xcache "bug/feature", this test will not function as expected, skipped');
 		}*/
 		$id = 'randomTestID';
-		$group = 'testing';
+		$group = '_testing';
 		$data = 'testData';
 		$cache =& JCache::getInstance('', array('storage'=>$store));
 		$cache->setCaching(true);
@@ -116,7 +116,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		}
 		
 		$id = 'randomTestID';
-		$group = 'testing';
+		$group = '_testing';
 		$data = 'testData';
 		$cache =& JCache::getInstance('', array('storage'=>$store));
 		$cache->setCaching(true);
@@ -144,7 +144,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		}
 		
 		$id = 'randomTestID';
-		$group = 'testing';
+		$group = '_testing';
 		$data = 'testData';
 		$cache =& JCache::getInstance('', array('storage'=>$store));
 		$cache->setCaching(true);
@@ -171,7 +171,7 @@ class JCacheStorageTest_Main extends PHPUnit_Framework_TestCase
 		}
 		
 		$id = 'randomTestID';
-		$group = 'testing';
+		$group = '_testing';
 		$data = 'testData';
 		$cache =& JCache::getInstance('', array('storage'=>$store));
 		$cache->setCaching(true);
