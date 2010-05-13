@@ -7,7 +7,7 @@
  */
  
 /* Modules */
-.box1 .rt-block {-webkit-border-radius: 4px;}
+.box1 .rt-block, .box2 .rt-block, .box3 .rt-block, .box4 .rt-block {-webkit-border-radius: 4px;}
 
 /* Typography */
 .search .inputbox {-webkit-border-radius: 4px;}

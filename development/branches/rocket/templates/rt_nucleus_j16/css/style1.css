@@ -34,12 +34,12 @@ a:hover, input.button:hover, button.button:hover {color: #000;}
 /* Showcase */
 #rt-showcase {background: #333 url(../images/header/style1/showcase-bg.png) 50% 0 repeat-x;color: #ddd;text-shadow: -1px -1px 1px #333;}
 #rt-showcase2 {background: url(../images/header/style1/showcase-pattern.jpg) 50% 0 no-repeat;}
-#rt-showcase a {color: #F2592D;}
-#rt-showcase a:hover {color: #fff;}
-#rt-showcase .title {color: #fff;}
-#rt-showcase .title span {color: #ececec;}
-#rt-showcase .readon, #rt-showcase input.button, #rt-showcase button.button {background: #555;border: 1px solid #666;color: #fff;}
-#rt-showcase .readon:hover, #rt-showcase input.button:hover, #rt-showcase button.button:hover {background: #616161;}
+#rt-showcase a, .box3 a {color: #F2592D;}
+#rt-showcase a:hover, .box3 a:hover {color: #fff;}
+#rt-showcase .title, .box3 .title {color: #fff;}
+#rt-showcase .title span, .box3 .title span {color: #ececec;}
+#rt-showcase .readon, #rt-showcase input.button, #rt-showcase button.button, .box3 .readon, .box3 input.button, .box3 button.button {background: #555;border: 1px solid #666;color: #fff;}
+#rt-showcase .readon:hover, #rt-showcase input.button:hover, #rt-showcase button.button:hover, .box3 .readon:hover, .box3 input.button:hover, .box3 button.button:hover {background: #616161;border: 1px solid #666;}
 
 /* Utility */
 
@@ -60,15 +60,18 @@ a:hover, input.button:hover, button.button:hover {color: #000;}
 .number2 .module-title {background: url(../images/body/style1/module-icon2.png) 0 3px no-repeat;}
 .number3 .module-title {background: url(../images/body/style1/module-icon3.png) 0 3px no-repeat;}
 .box1 .rt-block {background: #f8f8f8;border: 1px solid #f2f2f2;}
+.box2 .rt-block {background: #999;border: 1px solid #898989;color: #eee;}
+.box3 .rt-block {background: #444;border: 1px solid #393939;color: #ddd;text-shadow: -1px -1px 1px #333;}
+.box4 .rt-block {background: #fff;border: 1px solid #f2f2f2;}
 
 /* Bottom */
 #rt-bottom {background: #999 url(../images/body/style1/bottom-bg.png) 50% 0 repeat-x;color: #eee;}
-#rt-bottom .title {color: #eee;}
-#rt-bottom a {color: #fff;}
-#rt-bottom a:hover {color: #fff;}
-#rt-bottom .title span {color: #ddd;}
-#rt-bottom .readon, #rt-bottom input.button, #rt-bottom button.button {background: #888;border: 1px solid #aaa;color: #fff;}
-#rt-bottom .readon:hover, #rt-bottom input.button:hover, #rt-bottom button.button:hover {background: #919191;}
+#rt-bottom .title, .box2 .title {color: #eee;}
+#rt-bottom a, .box2 a {color: #fff;}
+#rt-bottom a:hover, .box2 a:hover {color: #fff;}
+#rt-bottom .title span, .box2 .title span {color: #ddd;}
+#rt-bottom .readon, #rt-bottom input.button, #rt-bottom button.button, .box2 .readon, .box2 input.button, .box2 button.button {background: #888;border: 1px solid #aaa;color: #fff;}
+#rt-bottom .readon:hover, #rt-bottom input.button:hover, #rt-bottom button.button:hover, .box2 .readon:hover, .box2 input.button:hover, .box2 button.button:hover {background: #919191;border: 1px solid #aaa;}
 
 /* Footer */
 #rt-footer {color: #666;}
