@@ -24,14 +24,17 @@ abstract class GantryFormField extends JFormField
 {
     public abstract function getGantryInput();
 
-    function getGantryLabel(){
+    public function getGantryLabel(){
         return parent::getLabel();
     }
 
     protected function getLabel()
 	{
-        $output = "<div class='gantry-field'>";
-        $output .= $this->getGantryLabel();
+        $output='';
+        $output = $this->getGantryLabel();
+        if (!empty($output)){
+             $output = "<div class='gantry-foo'>" . $output;
+        }
 		return $output;
 	}
 

@@ -57,7 +57,7 @@ class JFormFieldGSpacer extends GantryFormField {
 		return $output;
 		
 	}
-    protected function getLabel(){
+    protected function getGantryLabel(){
         return "";
     }
 }
