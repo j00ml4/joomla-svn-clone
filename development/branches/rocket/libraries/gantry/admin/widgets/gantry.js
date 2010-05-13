@@ -10,9 +10,10 @@ var Gantry = {
 	init: function() {
 		Gantry.cookie = Cookie.read('gantry-admin');
 		Gantry.cleanance();
-		Gantry.slides();
-		Gantry.inputs();
-		Gantry.menu();
+		Gantry.initTabs();
+		//Gantry.slides();
+		//Gantry.inputs();
+		//Gantry.menu();
 		Gantry.Overlay = new Gantry.Layer();
 	},
 	
@@ -86,6 +87,78 @@ var Gantry = {
 	},
 	
 	cleanance: function() {
+		Gantry.tabs = [];
+		Gantry.panels = [];
+		var paneSlider = document.getElement('.pane-sliders');
+		var items = paneSlider.getChildren();
+		var h3s = items.getElement('h3');
+		var fieldsets = items.getElement('.panelform');
+		var titles = h3s.getElement('span').get('text');
+		$$(h3s, items).setStyle('display', 'none');
+		
+		var wrapper = new Element('div', {'class': 'gantry-wrapper'}).inject(paneSlider);
+		var list = new Element('ul', {'id': 'gantry-tabs'}).inject(wrapper);
+		titles.each(function(title, i) {
+			var li = new Element('li').set('html', '<span class="outer"><span class="inner">'+title+'</span></span>').inject(list);
+			if (!i) li.addClass('first').addClass('active');
+			if (i == titles.length - 1) li.addClass('last');
+			Gantry.tabs.push(li);
+		});
+		
+		var container = new Element('div', {'id': 'gantry-panel'}).inject(wrapper);
+		fieldsets.each(function(item, i) {
+			var innerContainer = new Element('div', {'class': 'gantry-panel'}).inject(container);
+			item.inject(innerContainer);
+			Gantry.panels.push(innerContainer);
+			innerContainer.store('gantry:height', innerContainer.getSize().y);
+			
+			
+			var left = new Element('div', {'class': 'gantry-panel-left'}).inject(innerContainer).wraps(item);
+			var right = new Element('div', {'class': 'gantry-panel-right'}).inject(innerContainer);
+			
+			var rights = item.getElements('.right-panel');
+			if (rights.length) rights.inject(right);
+			else {
+				right.dispose();
+				left.setStyle('width', '100%');
+			}
+		});
+		
+		Gantry.wrapper = wrapper;
+		Gantry.container = container;
+		Gantry.panels = $$(Gantry.panels);
+		Gantry.tabs = $$(Gantry.tabs);
+	},
+	
+	initTabs: function() {
+		var max = 0;
+		Gantry.panels.setStyle('position', 'absolute');
+		Gantry.panels.set('tween', {duration: 'short', onComplete: function() {
+			//if (!this.to[0].value) this.element.setStyle('display', 'none');
+		}});
+		
+		Gantry.panels.each(function(panel, i) {
+			var height = panel.retrieve('gantry:height');
+			if (!i) Gantry.container.setStyle('height', height);
+			else panel.setStyles({'visibility': 'hidden', 'opacity': 0});//, 'display': 'none'});
+			
+			Gantry.tabs[i].addEvents({
+				'mouseenter': function() {this.addClass('hover');},
+				'mouseleave': function() {this.removeClass('hover');},
+				'click': function() {
+					Gantry.panels.fade('out');
+					panel.setStyle('display', 'block').fade('in');
+					Gantry.container.tween('height', panel.retrieve('gantry:height'));
+					Gantry.tabs.removeClass('active');
+					this.addClass('active');
+				}
+			})
+		});
+		
+		
+	},
+	
+	cleananceOld: function() {
 		var empties = $$('table.paramlist tr'), tips = $$('.hasTip');
 		empties.each(function(empty) {
 			var children = empty.getChildren();
