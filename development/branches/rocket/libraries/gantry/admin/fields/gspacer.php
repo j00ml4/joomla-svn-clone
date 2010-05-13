@@ -15,10 +15,11 @@ defined('JPATH_BASE') or die();
  * @package     gantry
  * @subpackage  admin.elements
  */
-class JFormFieldGSpacer extends JFormField {
-	
+gantry_import('core.gantryformfield');
 
-	protected function getInput()
+class JFormFieldGSpacer extends GantryFormField {
+
+	public function getGantryInput()
 	{
 		global $gantry;
 		

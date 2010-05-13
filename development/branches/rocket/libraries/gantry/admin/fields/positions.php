@@ -17,11 +17,13 @@ defined('JPATH_BASE') or die();
  * @package     gantry
  * @subpackage  admin.elements
  */
-class JFormFieldPositions extends JFormField {
+gantry_import('core.gantryformfield');
+
+class JFormFieldPositions extends GantryFormField {
 	
     var $schemas = array("1", "2", "3", "4", "5", "6"), $words = array("2", "3", "4", "5", "6", "7", "8", "9"), $combinations, $customCombinations, $settings, $keyName = "";
 
-	protected function getInput(){
+	public function getGantryInput(){
 		global $gantry;
 		gantry_import('core.gantrypositions');
 		

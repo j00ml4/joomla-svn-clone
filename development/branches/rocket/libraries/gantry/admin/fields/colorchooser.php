@@ -16,11 +16,11 @@ defined('JPATH_BASE') or die();
  * @package     gantry
  * @subpackage  admin.elements
  */
-class JFormFieldColorChooser extends JFormField {
-	
+gantry_import('core.gantryformfield');
 
+class JFormFieldColorChooser extends GantryFormField {
 
-	protected function getInput(){
+	public function getGantryInput(){
         //($name, $value, &$node, $control_name)
 		//global $stylesList;
         /**

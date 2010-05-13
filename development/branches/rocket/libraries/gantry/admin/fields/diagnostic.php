@@ -15,9 +15,11 @@ defined('JPATH_BASE') or die();
  * @package     gantry
  * @subpackage  admin.elements
  */
-class JFormFieldDiagnostic extends JFormField {
+gantry_import('core.gantryformfield');
 
-	protected function getInput(){
+class JFormFieldDiagnostic extends GantryFormField {
+
+	public function getGantryInput(){
 
 		global $gantry;
 		
