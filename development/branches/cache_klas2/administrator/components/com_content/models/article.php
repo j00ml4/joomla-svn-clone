@@ -106,13 +106,15 @@ class ContentModelArticle extends JModelAdmin
 	/**
 	 * Method to get the record form.
 	 *
-	 * @return	mixed	JForm object on success, false on failure.
+	 * @param	array	$data		Data for the form.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	mixed	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = parent::getForm('com_content.article', 'article', array('control' => 'jform'));
+		$form = $this->loadForm('com_content.article', 'article', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
@@ -135,7 +137,7 @@ class ContentModelArticle extends JModelAdmin
 	 * @return	mixed	The data for the form.
 	 * @since	1.6
 	 */
-	protected function getFormData()
+	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
 		$data = JFactory::getApplication()->getUserState('com_content.edit.article.data', array());
@@ -188,42 +190,43 @@ class ContentModelArticle extends JModelAdmin
 		$table = $this->getTable('Featured', 'ContentTable');
 
 		try {
-			$this->_db->setQuery(
+			$db = $this->getDbo();
+
+			$db->setQuery(
 				'UPDATE #__content AS a' .
 				' SET a.featured = '.(int) $value.
 				' WHERE a.id IN ('.implode(',', $pks).')'
 			);
-			if (!$this->_db->query()) {
-				throw new Exception($this->_db->getErrorMsg());
+			if (!$db->query()) {
+				throw new Exception($db->getErrorMsg());
 			}
 
 			// Adjust the mapping table.
-			if ($value == 0) {
-				// Unfeaturing.
-				$this->_db->setQuery(
-					'DELETE FROM #__content_frontpage' .
-					' WHERE content_id IN ('.implode(',', $pks).')'
-				);
-				if (!$this->_db->query()) {
-					throw new Exception($this->_db->getErrorMsg());
-				}
-			} else {
+			// Clear the existing features settings.
+			$db->setQuery(
+				'DELETE FROM #__content_frontpage' .
+				' WHERE content_id IN ('.implode(',', $pks).')'
+			);
+			if (!$db->query()) {
+				throw new Exception($db->getErrorMsg());
+			}
+
+			if ($value == 1) {
 				// Featuring.
 				$tuples = array();
 				foreach ($pks as $i => $pk) {
 					$tuples[] = '('.$pk.', '.(int)($i + 1).')';
 				}
-				if ($isNew){
-					$this->_db->setQuery(
-						'INSERT INTO #__content_frontpage (`content_id`, `ordering`)' .
-						' VALUES '.implode(',', $tuples)
+				$db->setQuery(
+					'INSERT INTO #__content_frontpage (`content_id`, `ordering`)' .
+					' VALUES '.implode(',', $tuples)
 				);
-				}
-				if (!$this->_db->query()) {
-					$this->setError($this->_db->getErrorMsg());
+				if (!$db->query()) {
+					$this->setError($db->getErrorMsg());
 					return false;
 				}
 			}
+
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;
