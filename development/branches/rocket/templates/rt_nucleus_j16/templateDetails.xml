@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <install version="1.5" type="template">
     <name>rt_nucleus_j16</name>
-	<version>.9a</version>
+	<version>0.9a</version>
 	<creationDate>4/1/2010</creationDate>
 	<author>RocketTheme</author>
 	<authorEmail>support@rockettheme.com</authorEmail>
@@ -119,19 +119,44 @@
 		</administration>
 		<config>
 			<fields name="params" >
-				<fieldset name="basic" addfieldpath="libraries/gantry/admin/fields">
+				<fieldset name="basic" label="Overview" addfieldpath="libraries/gantry/admin/fields">
 					<field name="gantry" type="gantry" label="" default="coresettings, presets, layouts"/>
 
-				<!--<field name="diagnostic" type="diagnostic"/>-->
+				<field name="updater" type="updater"/>
+				<field name="diagnostic" type="diagnostic"/>
 				<field name="grid_system" type="hidden" default="12" label=""/>
 				<field name="template_prefix" type="hidden" default="nucleus-" label=""/>
 				<field name="cookie_time" type="hidden" default="31536000" label=""/>
 				<field name="bgcolor" type="hidden" default="foo" label=""/>
 				<field name="copy_lang_files_if_diff" type="hidden" default="1" label=""/>
+				<field name="overview" type="html">
+					<html><![CDATA[
+					<img src="{template_preview}" width="206" height="150" class="template-preview" />
+					<h1>Nucleus <span>v{template_version}</span></h1>
+					<p>Nucleus is a GPL Joomla Template created for Joomla! 1.6. Nucleus uses the revolutionary GPL <strong>Gantry Joomla Template Framework</strong>, developed exclusively by RocketTheme to enable flexible and highly extensible template development.</p>
+					
+					<h2>Definition of Gantry</h2>
+					<p><strong>gan&#183;try</strong> (gan&prime;tr&#x113;) <em>noun</em>
+						<ol>
+							<li>(RocketTheme) A framework used for assembling, <br />
+						         building and maintaining a RocketTheme template
+							</li>
+						</ol>
+					</p>
+					
+					<h2>Overview of the Gantry Framework</h2>
+
+					<p>Gantry is a sophisticated Joomla template framework with the sole intention of being the best platform to build a solid template with. Gantry takes all the lessons learned during the development of many RocketTheme templates and distills that knowledge into a single super-flexible framework that is easy to configure, simple to extend, and powerful enough to handle anything we want to throw at it.</p>
+
+					<p>Get more help and find out more at <a href="http://www.gantry-framework.org">http://www.gantry-framework.org</a></p>
+					]]></html>
+				</field>
 				<!--<field name="menuids" type="menuitemhead" default="1" label="" description="MENUITEMSIDS_DESC"/>-->
 				<!--<field name="presets" type="gspacer" default="" description="" label="" preset-saver="true" glabel="PRESETS"/>-->
 				<!--<field name="presets" type="preset" mode="scroller" default="preset1" label="STYLE_PRESETS" description="STYLE_PRESETS_DESC" setbyurl="true" setinsession="true" setbysession="true" setbycookie="true" setinmenuitem="false"/>-->
 				<!--<field name="coresettings" type="gspacer" default="" description="" label="" glabel="SETTINGS"/>-->
+				</fieldset>
+					<fieldset name="presets" label="Presets">
 					<field name="backgroundlevel" default="high" type="slider" class="graphic-level" label="BG_LEVEL" description="BG_LEVEL_DESC" setbyurl="true" setinsession="true" setbysession="true" setincookie="true" setbycookie="true" isbodyclass="true">
 						<option>low</option>
 						<option>med</option>
@@ -174,7 +199,9 @@
 							<option value="xlarge">F_XLARGE</option>
 						</field>
 					</field>
+					</fieldset>
 					<!--<field name="settings" type="gspacer" default="" description="" label=" " glabel="FEATURES"/>-->
+					<fieldset name="FEATURES" label="Features">
 					<field name="styledeclaration-enabled" type="hidden" default="1"/>
 					<field name="logo" type="chain" label="LOGO" description="LOGO_DESC">
 						<field name="enabled" type="toggle" default="1" label="SHOW"/>

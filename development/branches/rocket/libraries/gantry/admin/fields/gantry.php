@@ -102,6 +102,10 @@ class JFormFieldGantry extends JFormField {
         return '';
 	}
 	
+	protected function getLabel(){
+        return "";
+    }
+	
 	function gantryLang() {
 		return "
 			GantryLang = {
