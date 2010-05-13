@@ -23,6 +23,12 @@ class JCacheStorageFile extends JCacheStorage
 	 * @since	1.6
 	 */
 	private $_root;
+	
+	/**
+	 * @since	1.6
+	 */
+	
+	static $_fileopen = array();
 
 	/**
 	 * Constructor
@@ -113,20 +119,21 @@ class JCacheStorageFile extends JCacheStorage
 
 		// Prepend a die string
 		$data		= $die.$data;
+		
+		$hash = md5($path);
 
-		$fp = @fopen($path, "wb");
-		if ($fp) {
-			if ($this->_locking) {
-				@flock($fp, LOCK_EX);
-			}
+		if (!isset(self::$_fileopen[$hash])) {
+			self::$_fileopen[$hash] = @fopen($path, "wb");
+		}
+		
+		if (self::$_fileopen[$hash]) {
 			$len = strlen($data);
-			@fwrite($fp, $data, $len);
-			if ($this->_locking) {
-				@flock($fp, LOCK_UN);
-			}
-			@fclose($fp);
+			@fwrite(self::$_fileopen[$hash], $data, $len);
+			@fclose(self::$_fileopen[$hash]);
+			unset (self::$_fileopen[$hash]);
 			$written = true;
 		}
+		
 		// Data integrity check
 		if ($written && ($data == file_get_contents($path))) {
 			return true;
@@ -222,6 +229,86 @@ class JCacheStorageFile extends JCacheStorage
 		$conf	= &JFactory::getConfig();
 		return is_writable($conf->get('cache_path',JPATH_ROOT.DS.'cache'));
 	}
+	
+	/**
+	 * Lock cached item
+	 *
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @param	integer	$locktime Cached item max lock time
+	 * @return	boolean	True on success, false otherwise.
+	 * @since	1.6
+	 */
+	public function lock($id,$group,$locktime)
+	{
+		$returning = new stdClass();
+		$returning->locklooped = false;
+		$looptime = $locktime * 10;	
+		$path		= $this->_getFilePath($id, $group);		
+		$hash = md5($path);
+
+		if (!isset(self::$_fileopen[$hash])) {
+			self::$_fileopen[$hash] = @fopen($path, "ab");
+		}
+		
+		if (self::$_fileopen[$hash]) {
+				$data_lock = @flock(self::$_fileopen[$hash], LOCK_EX);
+		} else {
+			$data_lock = false;
+		}
+		
+		if ($data_lock === false) {
+
+			$lock_counter = 0;
+
+			// loop until you find that the lock has been released.  that implies that data get from other thread has finished
+			while ($data_lock === false) {
+
+				if ($lock_counter > $looptime) {
+					$returning->locked = false;
+					$returning->locklooped = true;
+					break;
+				}
+
+				usleep(100);
+				$data_lock =  @flock(self::$_fileopen[$hash], LOCK_EX);
+				$lock_counter++;
+			}
+
+		}
+		$returning->locked = $data_lock;
+
+		return $returning;
+	}
+
+	/**
+	 * Unlock cached item
+	 *
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @return	boolean	True on success, false otherwise.
+	 * @since	1.6
+	 */
+	public function unlock($id,$group)
+	{	
+		$path		= $this->_getFilePath($id, $group);		
+		$hash = md5($path);
+
+		if (!isset(self::$_fileopen[$hash])) {
+			self::$_fileopen[$hash] = @fopen($path, "ab");
+		}
+		
+		if (self::$_fileopen[$hash]) {			
+				$ret = @flock(self::$_fileopen[$hash], LOCK_UN);
+				@fclose(self::$_fileopen[$hash]);
+				unset (self::$_fileopen[$hash]);
+		}
+
+
+		return $ret;
+	}
+	
+	
 
 	/**
 	 * Check to make sure cache is still valid, if not, delete it.
