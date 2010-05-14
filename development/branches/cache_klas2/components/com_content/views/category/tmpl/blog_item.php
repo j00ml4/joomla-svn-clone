@@ -85,7 +85,7 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.category.' . $this->
 <?php endif; ?>
 <?php if ($params->get('show_create_date')) : ?>
 		<dd class="create">
-		<?php echo JText::sprintf('COM_CONTENT_CREATED_DATE', JHTML::_('date',$this->item->created, JText::_('DATE_FORMAT_LC2'))); ?>
+		<?php echo JText::sprintf('COM_CONTENT_CREATED_DATE_ON', JHTML::_('date',$this->item->created, JText::_('DATE_FORMAT_LC2'))); ?>
 		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_modify_date')) : ?>
@@ -102,7 +102,7 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.category.' . $this->
 	<dd class="createdby">
 		<?php $author = $this->params->get('link_author', 0) ? JHTML::_('link',JRoute::_('index.php?option=com_users&view=profile&member_id='.$this->item->created_by),$this->item->author_name) : $this->item->author_name; ?>
 		<?php $author = ($this->item->created_by_alias ? $this->item->created_by_alias : $author); ?>
-	<?php echo JText::sprintf('Written_by', $author); ?>
+	<?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', $author); ?>
 		</dd>
 	<?php endif; ?>
 <?php if ($params->get('show_hits')) : ?>

@@ -27,7 +27,11 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+14-May-2010 Mark Dexter
+^ Minor tweak to beez_20 to fix Eclipse validation
+
 14-May-2010 Christophe Demko
+ + Enabling new icons in admin menu
  + Add a divider for checkin task
  + Consolidate checkin task
  + Add checkin task
@@ -36,7 +40,9 @@ $ -> Language fix or change
 $ Deleting legacy strings and sorting ini strings in files [1]
 $ Deleting legacy strings and sorting ini strings in files [2]
 $ Deleting legacy strings and sorting ini strings in files [3]
-
+$ Deleting legacy strings and sorting ini strings in files front-end [4]
+$ Adding a string in com_content
+$ Deleting legacy strings and sorting ini strings in files front-end [5]
 
 14-May-2010 Andrew Eddie
  ^ Updated the language descriptions for permissions.
