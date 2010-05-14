@@ -461,7 +461,7 @@ class JCache extends JObject
 		$cached['head'] = $document->getHeadData();
 
 		// Pathway data
-		if ($app->getName() == 'site' && $loptions['nopathway'] != 1) {
+		if ($app->isSite() && $loptions['nopathway'] != 1) {
 			$pathway			= &$app->getPathWay();
 			$cached['pathway'] = $pathway->getPathway();
 		}
