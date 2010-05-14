@@ -27,6 +27,17 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+14-May-2010 Christophe Demko
+ + Add a divider for checkin task
+ + Consolidate checkin task
+ + Add checkin task
+
+14-May-2010 Jean-Marie Simonet
+$ Deleting legacy strings and sorting ini strings in files [1]
+$ Deleting legacy strings and sorting ini strings in files [2]
+$ Deleting legacy strings and sorting ini strings in files [3]
+
+
 14-May-2010 Andrew Eddie
  ^ Updated the language descriptions for permissions.
 
