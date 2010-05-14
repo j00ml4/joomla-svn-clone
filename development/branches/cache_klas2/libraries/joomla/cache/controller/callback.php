@@ -91,7 +91,7 @@ class JCacheControllerCallback extends JCacheController
 		$locktest->locklooped = null;
 
 		if ($data === false) {
-			$locktest = $this->cache->lock($id,null);
+			$locktest = $this->cache->lock($id);
 			if ($locktest->locked == true && $locktest->locklooped == true) {
 				$data = $this->cache->get($id);
 			}
