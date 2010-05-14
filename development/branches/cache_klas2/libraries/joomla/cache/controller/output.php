@@ -70,9 +70,11 @@ class JCacheControllerOutput extends JCacheController
 			}
 			ob_start();
 			ob_implicit_flush(false);
+			
 			// Set id and group placeholders
 			$this->_id		= $id;
 			$this->_group	= $group;
+			
 			return false;
 		}
 	}
@@ -97,10 +99,12 @@ class JCacheControllerOutput extends JCacheController
 		$this->_group	= null;
 
 		// Get the storage handler and store the cached data
-		$this->cache->store($data, $id, $group);
+		$ret = $this->cache->store($data, $id, $group);
 		
 		if ($this->_locktest->locked == true) {
 			$this->cache->unlock($id, $group);
 		}
+		
+		return $ret;
 	}
 }

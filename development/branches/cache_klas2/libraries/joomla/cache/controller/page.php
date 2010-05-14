@@ -25,7 +25,7 @@ class JCacheControllerPage extends JCacheController
 	 * @var		integer
 	 * @since	1.6
 	 */
-	private $id;
+	private $_id;
 
 	/**
 	 * Cache group
@@ -33,7 +33,7 @@ class JCacheControllerPage extends JCacheController
 	 * @var		string
 	 * @since	1.6
 	 */
-	private $group;
+	private $_group;
 
 	/**
 	 * Cache lock test
@@ -100,8 +100,8 @@ class JCacheControllerPage extends JCacheController
 		}
 
 		// Set id and group placeholders
-		$this->id		= $id;
-		$this->group	= $group;
+		$this->_id		= $id;
+		$this->_group	= $group;
 		return false;
 	}
 
@@ -117,10 +117,10 @@ class JCacheControllerPage extends JCacheController
 		$data = JResponse::getBody();
 
 		// Get id and group and reset them placeholders
-		$id		= $this->id;
-		$group	= $this->group;
-		$this->id		= null;
-		$this->group	= null;
+		$id		= $this->_id;
+		$group	= $this->_group;
+		$this->_id		= null;
+		$this->_group	= null;
 
 		// Only attempt to store if page data exists
 		if ($data) {
