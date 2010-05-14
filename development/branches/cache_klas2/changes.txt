@@ -8,7 +8,7 @@ Optimizations
 
 Bugfixes
 * Fix memcache test function to return false if memcached is not running
-* Add option to skip pathway workaround - this was causing incorrect patway to appear with module cache
+* Add option to skip pathway workaround - this was causing incorrect patway to appear with module cache. Disable by default on admin pages.
 * Fix cache unit tests - the whole directory of cache tests now works ok
 * Fix installation and sample SQL to activate module caching
 * Lock/unlock was missing in direct get and store (in JCacheController)
