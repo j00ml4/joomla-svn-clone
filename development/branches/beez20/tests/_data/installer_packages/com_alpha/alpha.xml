@@ -5,13 +5,13 @@
 	behave like an install but upgrades will be treated appropriately even
 	if the interface doesn't support it properly -->
 	<!-- Generic Metadata -->
-	<name>Alpha</name>
+	<name>com_alpha</name>
 	<author>John Doe</author>
 	<authorEmail>john.doe@example.org</authorEmail>
 	<authorUrl>http://www.example.org</authorUrl>
 	<copyright>(C) 2008 Copyright Info</copyright>
 	<license>License Info</license>
-	<version>1.2</version>
+	<version>1.0</version>
 	<creationDate>March 2006</creationDate>
 	<description>COM_ALPHA_XML_DESCRIPTION</description>
 
