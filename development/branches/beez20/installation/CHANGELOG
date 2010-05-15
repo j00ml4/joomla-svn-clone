@@ -27,6 +27,25 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+15-May-2010 Mark Dexter
+# Fix issues with sample data (Elin Waring)
+
+15-May-2010 Christophe Demko
+ ^ Consolidate JHtmlJGrid functions
+ ^ Consolidate icons and hathor template
+
+15-May-2010 Jean-Marie Simonet
+$ Added missing string
+^ Changed id to author name in edit icon overlib
+$ Consolidated string
+# Fixed language saving bug in com_contacts
+^ Implemented JText::plural in mod_whosonline
+$ Completed deleting legacy strings and sorting ini strings in files front-end [6]
+
+15-May-2010 Sam Moffatt
+ + Added setRedirect to JInstaller to permit extensions to flag that they want to redirect the user post install
+ # Ensuring the new script tag permits the same features as the old com_install/com_uninstall triggers (e.g. can abort install on false)
+
 14-May-2010 Mark Dexter
 ^ Minor tweak to beez_20 to fix Eclipse validation
 
