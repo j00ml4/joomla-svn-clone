@@ -21,7 +21,7 @@ div.taskBar
         padding-top:2px;
         height:22px;
         list-style:none;
-        width:650px;
+        width:auto;
         font-size:1.4em;
         z-index:999;
     }
@@ -44,6 +44,8 @@ div.taskBar
                 padding-right:10px;
                 color:#FFFFFF;
                 text-decoration:none;
+                background-position:right;
+                background-repeat:no-repeat;
             }
             
             div.taskBar ul li a:hover
@@ -262,6 +264,7 @@ div.taskBar
     {
         margin-top:0px;
         float:right;
+        width:auto;
         color:#999999;
         font-size:1em;
         padding-right:10px;

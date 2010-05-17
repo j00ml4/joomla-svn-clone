@@ -50,6 +50,12 @@ div#header h1
 	color:#CCCCFF;
 }
 
+    div#header h1 div
+    {
+        background-repeat:no-repeat;
+        background-position:right center;
+    }
+
 div.toolbar
 {
 	float:right;
