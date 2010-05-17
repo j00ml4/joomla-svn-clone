@@ -43,3 +43,4 @@
             <div id="dynamic-icons"></div>
         </div> 
     </div>
+    <jdoc:include type="modules" name="debug" />
