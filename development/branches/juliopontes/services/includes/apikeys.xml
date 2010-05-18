@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<apikeys>
+	<apikey>
+		<id>1</id>
+		<client>Júlio Pontes</client>
+		<url>http://noix.com.br</url>
+		<key>d0cdcc54fd49ed0b8a3f05ad8e44d3b1</key>
+	</apikey>
+	<apikey>
+		<id>2</id>
+		<client>Louis Landry</client>
+		<url>http://webimagery.net/</url>
+		<key>8aeebbbd0da30ee2ec71475df42b5ca2</key>
+	</apikey>
+	<apikey>
+		<id>3</id>
+		<client>Andrew Eddie</client>
+		<url>http://www.newlifeinit.com</url>
+		<key>440917c897b494351487b5aafb469f51</key>
+	</apikey>
+</apikeys>
