@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
-	<version>1.5</version>
+	<version>1.6.0</version>
 	<description>PLG_SEARCH_CATEGORIES_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="categories">categories.php</filename>
@@ -22,9 +22,6 @@
 					description="JFIELD_PLG_SEARCH_SEARCHLIMIT_DESC"
 					label="JFIELD_PLG_SEARCH_SEARCHLIMIT_LABEL"
 					size="5"
-				/>
-				<field name="spacer1" type="spacer"
-					hr="true"
 				/>
 
 				<field name="search_content" type="radio"

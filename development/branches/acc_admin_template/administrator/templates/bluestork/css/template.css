@@ -176,12 +176,12 @@ p.error {
 }
 
 .allow,
-span.writable { 
+span.writable {
 	color: green;
 }
 
 .deny,
-span.unwritable  { 
+span.unwritable  {
 	color: red;
 }
 
@@ -679,6 +679,27 @@ div.current table#acl-config th.acl-groups {
 	text-align: left;
 }
 
+li.acl-editgroups,
+li.acl-resetbtn {
+	display:block;
+	float:left;
+	margin:14px !important;
+	width:auto;
+	background:none repeat scroll 0 0 #FFFFFF;
+	border:1px solid #CCCCCC;
+	text-decoration:none;
+	font-size: .909em;
+	padding: 3px !important;
+}
+
+li.acl-editgroups:hover,
+li.acl-resetbtn:hover {
+	background:none repeat scroll 0 0 #E8f6f3;
+	border:1px solid #AAA;
+	cursor:pointer;
+}
+	
+	
 p.tab-description {
 	font-size: 1.091em;
 	margin-left: 0;
@@ -773,10 +794,10 @@ div.width-100 fieldset	{
 
 fieldset.adminform {
 	margin: 10px;
-	
+
 }
 
-fieldset.adminform legend { 
+fieldset.adminform legend {
 	margin: 0;
 	padding: 0;
 }
@@ -785,8 +806,9 @@ ul.adminformlist,
 ul.adminformlist li {
 	margin: 0;
 	padding: 0;
+	list-style: none;
 }
-/* Testing this 
+/* Testing this
 fieldset  {
 	border: 0 none !important;
 }
@@ -813,11 +835,11 @@ fieldset select,
 fieldset img,
 fieldset button {
 	float: left;
-	width: auto; 
+	width: auto;
 	margin: 5px 5px 5px 0px;
 }
 
-fieldset.adminform textarea { 
+fieldset.adminform textarea {
 	width: 355px;
 }
 
@@ -864,6 +886,11 @@ span.readonly {
 	display:block;
 	color: #666;
 }
+
+
+#jform-imp {
+	width: 70px;
+}
 .mod-desc { margin-left: 140px !important;}
 
 input.required {
@@ -887,7 +914,7 @@ input.readonly {
 	width: 50px;
 }
 
-#jform_id { 
+#jform_id {
 	width: 50px;
 	background-color:#FFFFFF;
 	border: 0 none;
@@ -953,7 +980,7 @@ fieldset.adminform.long label {
 }
 
 fieldset.adminform.long input {
-	
+
 }
 
 div#menu-assignment {
@@ -974,14 +1001,14 @@ div#menu-assignment h3 {
 	width: 90%;
 	line-height: 1.182em;
 }
-div#menu-assignment ul.menu-links li:last-child label { 
+div#menu-assignment ul.menu-links li:last-child label {
 	margin-bottom: 20px;
 }
 
 fieldset.adminform .menu-links label {
 	width:400px;
 }
-fieldset.adminform .menu-links input { 
+fieldset.adminform .menu-links input {
 	margin-top: 1px;
 }
 button.jform-rightbtn { float:right;margin-right: 0; }
@@ -1284,8 +1311,8 @@ ul#legend li {
 }
 
 #jform_params_target { width: 190px;}
-	
-	
+
+
 
 /* -- TABLE STYLES ----------------------------- */
 table.adminlist {
@@ -1919,6 +1946,7 @@ a.jgrid:hover {	text-decoration: none;}
 .icon-16-newsfeeds					{	background-image: url(../images/menu/icon-16-newsfeeds.png);	}
 .icon-16-newsfeeds-cat				{	background-image: url(../images/menu/icon-16-newsfeeds-cat.png);	}
 .icon-16-weblinks					{	background-image: url(../images/menu/icon-16-links.png);	}
+.icon-16-weblinks-cat				{	background-image: url(../images/menu/icon-16-links-cat.png);	}
 
 /* -- TOOLBAR ICON STYLES ----------------------------- */
 .icon-32-send						{	background-image: url(../images/toolbar/icon-32-send.png);	}
@@ -2708,7 +2736,11 @@ table#acl-config td select {
 	font-weight: normal;
 }
 
-/* Disabled until verified 
+label#jform_rules-lbl {
+	float: none;
+}
+
+/* Disabled until verified
 label#jform_rules-lbl {
 	display: none;
 }

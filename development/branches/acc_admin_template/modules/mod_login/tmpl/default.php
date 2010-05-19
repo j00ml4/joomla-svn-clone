@@ -22,7 +22,7 @@ defined('_JEXEC') or die;
 	</div>
 <?php endif; ?>
 	<div align="center">
-		<input type="submit" name="Submit" class="button" value="<?php echo JText::_('MOD_LOGIN_BUTTON_LOGOUT'); ?>" />
+		<input type="submit" name="Submit" class="button" value="<?php echo JText::_('JLOGOUT'); ?>" />
 	</div>
 
 	<input type="hidden" name="option" value="com_users" />
@@ -49,7 +49,7 @@ endif; ?>
 		<input id="modlgn_username" type="text" name="username" class="inputbox"  size="18" />
 	</p>
 	<p id="form-login-password">
-		<label for="modlgn_passwd"><?php echo JText::_('MOD_LOGIN_PASSWORD') ?></label>
+		<label for="modlgn_passwd"><?php echo JText::_('JGLOBAL_PASSWORD') ?></label>
 		<input id="modlgn_passwd" type="password" name="password" class="inputbox" size="18"  />
 	</p>
 	<?php if (JPluginHelper::isEnabled('system', 'remember')) : ?>
@@ -58,7 +58,7 @@ endif; ?>
 		<input id="modlgn_remember" type="checkbox" name="remember" class="inputbox" value="yes"/>
 	</p>
 	<?php endif; ?>
-	<input type="submit" name="Submit" class="button" value="<?php echo JText::_('MOD_LOGIN_BUTTON_LOGIN') ?>" />
+	<input type="submit" name="Submit" class="button" value="<?php echo JText::_('JLOGIN') ?>" />
 	</fieldset>
 	<ul>
 		<li>

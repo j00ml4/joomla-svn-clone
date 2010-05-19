@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
-	<version>1.5</version>
+	<version>1.6.0</version>
 	<description>PLG_CONTACTCREATOR_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="contactcreator">contactcreator.php</filename>
@@ -29,7 +29,7 @@
 				<field name="category" type="category"
 					description="PLG_CONTACTCREATOR_FIELD_CATEGORY_DESC"
 					extension="com_contact"
-					label="PLG_CONTACTCREATOR_FIELD_CATEGORY_LABEL"
+					label="JCATEGORY"
 				/>
 
 				<field name="autopublish" type="radio"

@@ -49,7 +49,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 			</label> 
 			<select name="filter_published" id="filter_published" class="inputbox">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
+				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions', array('archived' => false)), 'value', 'text', $this->state->get('filter.published'), true);?>
 			</select>
 			
 			<label class="selectlabel" for="menutype">

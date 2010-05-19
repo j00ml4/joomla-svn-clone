@@ -32,7 +32,7 @@
 					type="category"
 					extension="com_weblinks"
 					default="0"
-					label="MOD_WEBLINKS_FIELD_CATEGORY_LABEL"
+					label="JCATEGORY"
 					description="MOD_WEBLINKS_FIELD_CATEGORY_DESC" />
 				<field
 					name="count"
@@ -71,11 +71,11 @@
 					label="MOD_WEBLINKS_FIELD_TARGET_LABEL"
 					description="MOD_WEBLINKS_FIELD_TARGET_DESC">
 					<option
-						value="1">MOD_WEBLINKS_FIELD_VALUE_NEW_WINDOW</option>
+						value="1">JBROWSERTARGET_NEW</option>
 					<option
-						value="2">MOD_WEBLINKS_FIELD_VALUE_POPUP_WINDOW</option>
+						value="2">JBROWSERTARGET_POPUP</option>
 					<option
-						value="3">MOD_WEBLINKS_FIELD_VALUE_SAME_WINDOW</option>
+						value="3">JBROWSERTARGET_PARENT</option>
 				</field>
 				<field
 					name="follow"
@@ -135,7 +135,6 @@
 				<field
 					name="moduleclass_sfx"
 					type="text"
-					default=""
 					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
 					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 				<field
@@ -158,7 +157,6 @@
 				<field
 					name="cachemode"
 					type="hidden"
-					label=""
 					default="static">
 					<option
 						value="static"></option>

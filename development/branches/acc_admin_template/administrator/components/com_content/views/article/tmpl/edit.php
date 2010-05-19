@@ -74,28 +74,28 @@ JHtml::_('behavior.formvalidation');
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('created_by'); ?>
 				<?php echo $this->form->getInput('created_by'); ?></li>
-	
+
 				<li><?php echo $this->form->getLabel('created_by_alias'); ?>
 				<?php echo $this->form->getInput('created_by_alias'); ?></li>
-	
+
 				<li><?php echo $this->form->getLabel('created'); ?>
 				<?php echo $this->form->getInput('created'); ?></li>
-	
+
 				<li><?php echo $this->form->getLabel('publish_up'); ?>
 				<?php echo $this->form->getInput('publish_up'); ?></li>
-	
+
 				<li><?php echo $this->form->getLabel('publish_down'); ?>
 				<?php echo $this->form->getInput('publish_down'); ?></li>
-	
+
 				<li><?php echo $this->form->getLabel('modified'); ?>
 				<?php echo $this->form->getInput('modified'); ?></li>
-	
+
 				<li><?php echo $this->form->getLabel('version'); ?>
 				<?php echo $this->form->getInput('version'); ?></li>
-	
+
 				<li><?php echo $this->form->getLabel('hits'); ?>
 				<?php echo $this->form->getInput('hits'); ?></li>
-	
+
 				<li><?php echo $this->form->getLabel('id'); ?>
 				<?php echo $this->form->getInput('id'); ?></li>
 			</ul>
@@ -121,10 +121,8 @@ JHtml::_('behavior.formvalidation');
 
 		<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTENT_FIELDSET_RULES'), 'access-rules'); ?>
 		<fieldset class="panelform">
-		<ul class="adminformlist">
-			<li><?php echo $this->form->getLabel('rules'); ?>
-			<?php echo $this->form->getInput('rules'); ?></li>
-			</ul>
+			<?php echo $this->form->getLabel('rules'); ?>
+			<?php echo $this->form->getInput('rules'); ?>
 		</fieldset>
 
 		<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTENT_FIELDSET_METADATA'), 'meta-options'); ?>
@@ -132,13 +130,13 @@ JHtml::_('behavior.formvalidation');
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('metadesc'); ?>
 				<?php echo $this->form->getInput('metadesc'); ?></li>
-	
+
 				<li><?php echo $this->form->getLabel('metakey'); ?>
 				<?php echo $this->form->getInput('metakey'); ?></li>
-	
+
 				<?php
 				$fieldSets = $this->form->getFieldsets('metadata');
-	
+
 				foreach ($fieldSets as $name => $fieldSet) :
 					echo JHtml::_('sliders.panel',JText::_($label), $name.'-options');
 						if (isset($fieldSet->description) && trim($fieldSet->description)) :
@@ -154,7 +152,7 @@ JHtml::_('behavior.formvalidation');
 						</ul>
 					</fieldset>
 				<?php endforeach; ?>
-	
+
 				<li><?php echo $this->form->getLabel('xreference'); ?>
 				<?php echo $this->form->getInput('xreference'); ?></li>
 			</ul>
