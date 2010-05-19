@@ -65,18 +65,27 @@ class ModulesViewModules extends JView
 			JToolBarHelper::custom('modules.duplicate', 'copy.png', 'copy_f2.png','JTOOLBAR_DUPLICATE', true);
 		}
 		if ($canDo->get('core.edit')) {
+			JToolBarHelper::divider();
 			JToolBarHelper::custom('modules.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
 			JToolBarHelper::custom('modules.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
 		}
+	if(JFactory::getUser()->authorise('core.manage','com_checkin')) {
+			JToolBarHelper::divider();
+			JToolBarHelper::custom('modules.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+		}
+		
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'modules.delete','JTOOLBAR_EMPTY_TRASH');
 		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('modules.trash','JTOOLBAR_TRASH');
 		}
+		
 
 		if ($canDo->get('core.admin')) {
+			JToolBarHelper::divider();			
 			JToolBarHelper::preferences('com_modules');
 		}
+		JToolBarHelper::divider();
 		JToolBarHelper::help('JHELP_EXTENSIONS_MODULE_MANAGER');
 	}
 }

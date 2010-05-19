@@ -76,7 +76,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 		$rowcount=( ((int)$key-1) %	(int) $this->columns) +1;
 		$row = $counter / $this->columns ;
 
-		if($rowcount==1) : ?>
+		if ($rowcount==1) : ?>
 	<div class="items-row cols-<?php echo (int) $this->columns;?> <?php echo 'row-'.$row ; ?>">
 	<?php endif; ?>
 	<div class="item column-<?php echo $rowcount;?><?php echo $item->state == 0 ? ' system-unpublished' : null; ?>">
@@ -106,7 +106,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php if (is_array($this->children[$this->category->id]) && count($this->children[$this->category->id]) > 0 && $this->params->get('maxLevel') !=0) : ?>
 		<div class="cat-children">
 		<h3>
-<?php echo JTEXT::_('COM_CONTENT_CHILDREN'); ?>
+<?php echo JTEXT::_('JGLOBAL_SUBCATEGORIES'); ?>
 </h3>
 			<?php echo $this->loadTemplate('children'); ?>
 		</div>

@@ -55,23 +55,30 @@ class ContentViewArticle extends JView
 
 		// Merge article params. If this is single-article view, menu params override article params
 		// Otherwise, article params override menu item params
-		$currentLink = $app->getMenu()->getActive()->link;
 		$params =& $state->get('params');
 		$article_params = new JRegistry;
 		$article_params->loadJSON($item->attribs);
+		$active = $app->getMenu()->getActive();
 		$temp = clone ($params);
-		if (strpos($currentLink, 'view=article'))
+		if ($active)
 		{
-			$article_params->merge($temp);
-			$item->params = $article_params;
-		}
-		else
-		{
+			$currentLink = $active->link;
+			if (strpos($currentLink, 'view=article'))
+			{
+				$article_params->merge($temp);
+				$item->params = $article_params;
+			}
+			else
+			{
+				$temp->merge($article_params);
+				$item->params = $temp;
+			}
+		} else {
 			$temp->merge($article_params);
 			$item->params = $temp;
 		}
 
-		$offset = $state->get('page.offset');
+		$offset = $state->get('list.offset');
 
 		// Check the access to the article
 		$levels = $user->authorisedLevels();
@@ -102,7 +109,8 @@ class ContentViewArticle extends JView
 		} else {
 			$item->text = $item->fulltext;
 		}
-		$item->text = JHtml::_('content.prepare', $item->text);
+
+		$results = $dispatcher->trigger('onContentPrepare', array ('com_content.article', &$item, &$params, $offset));
 
 		$item->event = new stdClass();
 		$results = $dispatcher->trigger('onContentAfterTitle', array('com_content.article', &$item, &$params, $offset));
@@ -224,8 +232,8 @@ class ContentViewArticle extends JView
 		// If there is a pagebreak heading or title, add it to the page title
 		if (!empty($this->item->page_title))
 		{
-			$article->title = $article->title . ' - ' . $article->page_title;
-			$this->document->setTitle($article->page_title . ' - ' . JText::sprintf('PLG_CONTENT_PAGEBREAK_PAGE_NUM', $this->state->get('page.offset') + 1));
+			$this->item->title = $this->item->title . ' - ' . $this->item->page_title;
+			$this->document->setTitle($this->item->page_title . ' - ' . JText::sprintf('PLG_CONTENT_PAGEBREAK_PAGE_NUM', $this->state->get('list.offset') + 1));
 		}
 
 		//

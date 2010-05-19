@@ -109,6 +109,8 @@ class AdminModelHelp extends JModel
 				{
 					$title = trim($m[1]);
 					if ($title) {
+						// Translate the page title
+						$title = JText::_($title);
 						// strip the extension
 						$file = preg_replace('#\.xml$|\.html$#', '', $file);
 						if ($help_search)
@@ -139,9 +141,8 @@ class AdminModelHelp extends JModel
 	function &getLatestVersionCheck()
 	{
 		if (!$this->latest_version_check) {
-			$keyref = 'Joomla_Version_';
-			$override = 'http://help.joomla.org/proxy/index.php?option=com_help&amp;keyref=Help{major}{minor}:{keyref}{major}_{minor}_{maintenance}';
-			$this->latest_version_check = JHelp::createUrl($keyref, false, $override);
+			$override = 'http://help.joomla.org/proxy/index.php?option=com_help&amp;keyref=Help{major}{minor}:Joomla_Version_{major}_{minor}_{maintenance}';
+			$this->latest_version_check = JHelp::createUrl('JVERSION', false, $override);
 		}
 		return $this->latest_version_check;
 	}

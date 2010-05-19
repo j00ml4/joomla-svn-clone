@@ -55,14 +55,14 @@ $listDirn	= $this->state->get('list.direction');
 	<table class="adminlist">
 		<thead>
 			<tr>
-				<th width="20">
+				<th width="1%">
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->items);?>)" />
 				</th>
 				<th class="left">
 					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_NAME', 'a.name', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_USERNAME', 'a.username', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'JGLOBAL_USERNAME', 'a.username', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap" width="5%">
 					<?php echo JHtml::_('grid.sort', 'JENABLED', 'a.block', $listDirn, $listOrder); ?>

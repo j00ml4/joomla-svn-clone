@@ -52,7 +52,7 @@ $listDirn	= $this->state->get('list.direction');
 	<table class="adminlist">
 		<thead>
 			<tr>
-				<th width="20">
+				<th width="1%">
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this)" />
 				</th>
 				<th>
@@ -61,14 +61,14 @@ $listDirn	= $this->state->get('list.direction');
 				<th width="5%">
 					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'a.published', $listDirn, $listOrder); ?>
 				</th>
-				<th width="5%" class="nowrap">
+				<th width="10%" class="nowrap">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ORDERING', 'a.lft', $listDirn, $listOrder); ?>
 					<?php echo JHtml::_('grid.order',  $this->items); ?>
 				</th>
 				<th width="10%">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ACCESS', 'access_level', $listDirn, $listOrder); ?>
 				</th>
-				<th width="5%">
+				<th width="5%" class="nowrap">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'language', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th width="1%" class="nowrap">
@@ -88,6 +88,8 @@ $listDirn	= $this->state->get('list.direction');
 			foreach ($this->items as $i => $item) :
 				$ordering = ($listOrder == 'a.lft');
 				$orderkey = array_search($item->id, $this->ordering[$item->parent_id]);
+				$canCheckin	= $user->authorise('core.manage',		'com_checkin') || $item->checked_out==$user->get('id');
+				$canChange = $canCheckin;
 				?>
 				<tr class="row<?php echo $i % 2; ?>">
 					<td class="center">
@@ -95,20 +97,21 @@ $listDirn	= $this->state->get('list.direction');
 					</td>
 					<td class="indent-<?php echo intval(($item->level-1)*15)+4; ?>">
 						<?php if ($item->checked_out) : ?>
-							<?php echo JHtml::_('jgrid.checkedout', $item->editor, $item->checked_out_time); ?>
+							<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canCheckin); ?>
 						<?php endif; ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_categories&task=category.edit&cid[]='.$item->id.'&extension='.$extension);?>">
 							<?php echo $this->escape($item->title); ?></a>
 						<p class="smallsub" title="<?php echo $this->escape($item->path);?>">
 						<?php if (!empty($item->note)) : ?>
 							(<span><?php echo JText::_('JFIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>,
-								   <?php echo '<span>'.JText::_('JFIELD_NOTE_LABEL') . ':</span> ' . $this->escape($item->note); ?>)</p>
+								   <?php echo '<span>'.JText::_('JFIELD_NOTE_LABEL') . ':</span> ' . $this->escape($item->note); ?>)
 						<?php else : ?>
-							(<span><?php echo JText::_('JFIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>)</p>
+							(<span><?php echo JText::_('JFIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>)
 						<?php endif; ?>
+						</p>
 					</td>
 					<td class="center">
-						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'categories.');?>
+						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'categories.', $canChange);?>
 					</td>
 					<td class="order">
 						<span><?php echo $this->pagination->orderUpIcon($i, isset($this->ordering[$item->parent_id][$orderkey - 1]), 'categories.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
@@ -119,11 +122,11 @@ $listDirn	= $this->state->get('list.direction');
 					<td class="center">
 						<?php echo $this->escape($item->access_level); ?>
 					</td>
-					<td class="center">
+					<td class="center nowrap">
 					<?php if ($item->language=='*'):?>
 						<?php echo JText::_('JALL'); ?>
 					<?php else:?>
-						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JOPTION_UNDEFINED_LANGUAGE'); ?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
 					<?php endif;?>
 					</td>
 					<td class="center">

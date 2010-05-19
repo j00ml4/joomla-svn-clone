@@ -130,10 +130,7 @@ class MenusViewItems extends JView
 	{
 		JToolBarHelper::title(JText::_('COM_MENUS_VIEW_ITEMS_TITLE'), 'menumgr.png');
 
-		JToolBarHelper::makeDefault('items.setDefault', 'COM_MENUS_TOOLBAR_SET_HOME');
-
-		JToolBarHelper::divider();
-
+		
 		JToolBarHelper::custom('item.add', 'new.png', 'new_f2.png','JTOOLBAR_NEW', false);
 		JToolBarHelper::custom('item.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
 
@@ -142,15 +139,21 @@ class MenusViewItems extends JView
 		JToolBarHelper::custom('items.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
 		JToolBarHelper::custom('items.unpublish', 'unpublish.png', 'unpublish_f2.png','JTOOLBAR_UNPUBLISH', true);
 		if ($this->state->get('filter.published') == -2) {
+			JToolBarHelper::divider();
 			JToolBarHelper::deleteList('', 'items.delete','JTOOLBAR_EMPTY_TRASH');
 		} else {
+			JToolBarHelper::divider();
 			JToolBarHelper::trash('items.trash','JTOOLBAR_TRASH');
 		}
+		if(JFactory::getUser()->authorise('core.manage','com_checkin')) {
+			JToolBarHelper::custom('items.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+		}
+		JToolBarHelper::makeDefault('items.setDefault', 'COM_MENUS_TOOLBAR_SET_HOME');
+
 		JToolBarHelper::divider();
 		JToolBarHelper::custom('items.rebuild', 'refresh.png', 'refresh_f2.png', 'JToolbar_Rebuild', false);
+
 		JToolBarHelper::divider();
-
-
 		JToolBarHelper::help('JHELP_MENUS_MENU_ITEM_MANAGER');
 	}
 }

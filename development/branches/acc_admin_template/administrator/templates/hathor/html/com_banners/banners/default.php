@@ -130,7 +130,8 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 			$item->cat_link = JRoute::_('index.php?option=com_categories&extension=com_banners&task=edit&type=other&cid[]='. $item->catid);
 			$canCreate	= $user->authorise('core.create',		'com_banners.category.'.$item->catid);
 			$canEdit	= $user->authorise('core.edit',			'com_banners.category.'.$item->catid);
-			$canChange	= $user->authorise('core.edit.state',	'com_banners.category.'.$item->catid);
+			$canCheckin	= $user->authorise('core.manage',		'com_checkin') || $item->checked_out==$user->get('id') || $item->checked_out==0;
+			$canChange	= $user->authorise('core.edit.state',	'com_banners.category.'.$item->catid) && $canCheckin;
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td>
@@ -138,7 +139,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				</td>
 				<td>
 					<?php if ($item->checked_out) : ?>
-						<?php echo JHtml::_('jgrid.checkedout', $item->editor, $item->checked_out_time); ?>
+						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'banners.', $canCheckin); ?>
 					<?php endif; ?>
 					<?php if ($canCreate || $canEdit) : ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_banners&task=banner.edit&id='.(int) $item->id); ?>">
@@ -192,7 +193,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php if ($item->language=='*'):?>
 						<?php echo JText::_('JALL'); ?>
 					<?php else:?>
-						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JOPTION_UNDEFINED_LANGUAGE'); ?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
 					<?php endif;?>
 				</td>
 				<td class="center">

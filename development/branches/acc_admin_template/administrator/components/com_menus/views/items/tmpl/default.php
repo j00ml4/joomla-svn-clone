@@ -60,7 +60,7 @@ $listDirn	= $this->state->get('list.direction');
 	<table class="adminlist">
 		<thead>
 			<tr>
-				<th width="20">
+				<th width="1%">
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
@@ -69,7 +69,7 @@ $listDirn	= $this->state->get('list.direction');
 				<th width="5%">
 					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'a.published', $listDirn, $listOrder); ?>
 				</th>
-				<th width="10%" class="nowrap">
+				<th width="13%" class="nowrap">
 					<?php echo JHtml::_('grid.sort', 'JGrid_Heading_Ordering', 'a.lft', $listDirn, $listOrder); ?>
 					<?php echo JHtml::_('grid.order',  $this->items); ?>
 				</th>
@@ -103,7 +103,8 @@ $listDirn	= $this->state->get('list.direction');
 		foreach ($this->items as $i => $item) :
 			$ordering = ($listOrder == 'a.lft');
 			$orderkey = array_search($item->id, $this->ordering[$item->parent_id]);
-			$canChange	= $user->authorise('core.edit.state',	'com_menus');
+			$canCheckin	= $user->authorise('core.manage',		'com_checkin') || $item->checked_out==$user->get('id')|| $item->checked_out==0;
+			$canChange	= $user->authorise('core.edit.state',	'com_menus') && $canCheckin;
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
@@ -112,7 +113,7 @@ $listDirn	= $this->state->get('list.direction');
 				<td class="indent-<?php echo intval(($item->level-1)*15)+4; ?>">
 
 					<?php if ($item->checked_out) : ?>
-						<?php echo JHtml::_('jgrid.checkedout', $item->editor, $item->checked_out_time); ?>
+						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'items.', $canCheckin); ?>
 					<?php endif; ?>
 					<a href="<?php echo JRoute::_('index.php?option=com_menus&task=item.edit&cid[]='.$item->id);?>">
 						<?php echo $this->escape($item->title); ?></a>
@@ -122,7 +123,7 @@ $listDirn	= $this->state->get('list.direction');
 
 				</td>
 				<td class="center">
-					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'items.');?>
+					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'items.', $canChange);?>
 				</td>
 				<td class="order">
 					<span><?php echo $this->pagination->orderUpIcon($i, isset($this->ordering[$item->parent_id][$orderkey - 1]), 'items.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
@@ -138,7 +139,7 @@ $listDirn	= $this->state->get('list.direction');
 						<?php echo $this->escape($item->item_type); ?></span>
 				</td>
 				<td class="center">
-					<?php echo JHtml::_('jgrid.makedefault', $item->home, $i, 'items.', ($item->language != '*' || !$item->home) && $canChange);?>
+					<?php echo JHtml::_('jgrid.isdefault', $item->home, $i, 'items.', ($item->language != '*' || !$item->home) && $canChange);?>
 				</td>
 				<td class="center">
 					<?php if ($item->language==''):?>

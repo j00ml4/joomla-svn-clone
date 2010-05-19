@@ -16,7 +16,7 @@ $params = &$this->item->params;
 $app = JFactory::getApplication();
 $templateparams =$app->getTemplate(true)->params;
 
-if($templateparams->get('html5')!=1)
+if ($templateparams->get('html5')!=1)
 {
 	require(JPATH_BASE.'/components/com_content/views/featured/tmpl/default_item.php');
 	//evtl. ersetzen durch JPATH_COMPONENT.'/views/...'
@@ -97,7 +97,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 <?php endif; ?>
 <?php if ($params->get('show_create_date')) : ?>
 		<dd class="create">
-		<?php echo JText::sprintf('COM_CONTENT_CREATED_DATE', JHTML::_('date',$this->item->created, JText::_('DATE_FORMAT_LC2'))); ?>
+		<?php echo JText::sprintf('COM_CONTENT_CREATED_DATE_ON', JHTML::_('date',$this->item->created, JText::_('DATE_FORMAT_LC2'))); ?>
 		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_modify_date')) : ?>

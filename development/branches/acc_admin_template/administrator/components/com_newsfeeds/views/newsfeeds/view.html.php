@@ -71,6 +71,10 @@ class NewsfeedsViewNewsfeeds extends JView
 		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('newsfeeds.trash','JTOOLBAR_TRASH');
 		}
+		if(JFactory::getUser()->authorise('core.manage','com_checkin')) {
+			JToolBarHelper::divider();
+			JToolBarHelper::custom('newsfeeds.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+		}
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::divider();
 			JToolBarHelper::preferences('com_newsfeeds');

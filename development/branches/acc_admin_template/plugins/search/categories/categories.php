@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 
 jimport('joomla.plugin.plugin');
 
-require_once(JPATH_SITE.'/components/com_content/helpers/route.php');
+require_once JPATH_SITE.'/components/com_content/helpers/route.php';
 
 /**
  * Categories Search plugin
@@ -28,7 +28,7 @@ class plgSearchCategories extends JPlugin
 	function onContentSearchAreas()
 	{
 		static $areas = array(
-		'categories' => 'Categories'
+		'categories' => 'PLG_SEARCH_CATEGORIES_CATEGORIES'
 		);
 		return $areas;
 	}

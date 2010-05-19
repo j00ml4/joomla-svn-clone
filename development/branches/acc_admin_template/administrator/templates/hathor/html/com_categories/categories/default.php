@@ -99,6 +99,8 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 			foreach ($this->items as $i => $item) :
 				$ordering = ($listOrder == 'a.lft');
 				$orderkey = array_search($item->id, $this->ordering[$item->parent_id]);
+				$canCheckin	= $user->authorise('core.manage',		'com_checkin') || $item->checked_out==$user->get('id')  || $item->checked_out==0;
+				$canChange = $canCheckin;
 				?>
 				<tr class="row<?php echo $i % 2; ?>">
 					<th class="center">
@@ -106,7 +108,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					</th>
 					<td class="indent-<?php echo intval(($item->level-1)*15)+4; ?>">
 						<?php if ($item->checked_out) : ?>
-							<?php echo JHtml::_('jgrid.checkedout', $item->editor, $item->checked_out_time); ?>
+							<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canCheckin); ?>
 						<?php endif; ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_categories&task=category.edit&cid[]='.$item->id.'&extension='.$extension);?>">
 							<?php echo $this->escape($item->title); ?></a>
@@ -114,7 +116,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 							(<span><?php echo JText::_('JFIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>)</p>
 					</td>
 					<td class="center">
-						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'categories.');?>
+						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'categories.', $canChange);?>
 					</td>
 					<td class="order">
 						<span><?php echo $this->pagination->orderUpIcon($i, isset($this->ordering[$item->parent_id][$orderkey - 1]), 'categories.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
@@ -129,7 +131,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php if ($item->language=='*'):?>
 						<?php echo JText::_('JALL'); ?>
 					<?php else:?>
-						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JOPTION_UNDEFINED_LANGUAGE'); ?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
 					<?php endif;?>
 					</td>
 					<td class="center">

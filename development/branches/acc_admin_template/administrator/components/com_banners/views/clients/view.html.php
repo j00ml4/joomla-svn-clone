@@ -54,7 +54,7 @@ class BannersViewClients extends JView
 
 		$canDo	= BannersHelper::getActions();
 
-		JToolBarHelper::title(JText::_('COM_BANNERS_MANAGER_CLIENTS'), 'generic.png');
+		JToolBarHelper::title(JText::_('COM_BANNERS_MANAGER_CLIENTS'), 'banners-clients.png');
 		if ($canDo->get('core.create')) {
 			JToolBarHelper::addNew('client.add','JTOOLBAR_NEW');
 		}
@@ -81,6 +81,10 @@ class BannersViewClients extends JView
 			JToolBarHelper::deleteList('', 'clients.delete','JTOOLBAR_EMPTY_TRASH');
 		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('clients.trash','JTOOLBAR_TRASH');
+		}
+		if(JFactory::getUser()->authorise('core.manage','com_checkin')) {
+			JToolBarHelper::divider();
+			JToolBarHelper::custom('clients.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
 		}
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::divider();

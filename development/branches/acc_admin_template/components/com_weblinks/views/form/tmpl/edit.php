@@ -20,7 +20,7 @@ $params = $this->state->get('params');
 
 <script language="javascript" type="text/javascript">
 function submitbutton(task) {
-	if (task == 'weblink.cancel' OR document.formvalidator.isValid(document.id('adminForm'))) {
+	if (task == 'weblink.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
 		submitform(task);
 	}
 }
@@ -43,7 +43,7 @@ function submitbutton(task) {
 			<?php echo $this->form->getLabel('url'); ?>
 			<?php echo $this->form->getInput('url'); ?>
 			<br />
-			<?php var_dump($this->item);if ($this->user->authorise('core.edit.state', 'com_weblinks.weblink.'.$this->item->id)): ?>
+			<?php if ($this->user->authorise('core.edit.state', 'com_weblinks.weblink.'.$this->item->id)): ?>
 				<?php echo $this->form->getLabel('state'); ?>
 				<?php echo $this->form->getInput('state'); ?>
 				<br />
