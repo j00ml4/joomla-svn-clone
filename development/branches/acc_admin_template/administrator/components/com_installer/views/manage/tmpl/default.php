@@ -29,7 +29,6 @@ $listDirn	= $this->state->get('list.direction');
 	<table class="adminlist">
 		<thead>
 			<tr>
-				<th width="10"><?php echo JText::_('COM_INSTALLER_HEADING_NUM'); ?></th>
 				<th width="20"><input type="checkbox" name="toggle" value="" onclick="checkAll(this)" /></th>
 				<th class="nowrap"><?php echo JHTML::_('grid.sort', 'COM_INSTALLER_HEADING_NAME', 'name', $listDirn, $listOrder); ?></th>
 				<th ><?php echo JHTML::_('grid.sort', 'COM_INSTALLER_HEADING_TYPE', 'type', $listDirn, $listOrder); ?></th>
@@ -37,7 +36,7 @@ $listDirn	= $this->state->get('list.direction');
 				<th width="10%" class="center"><?php echo JText::_('JVERSION'); ?></th>
 				<th width="10%"><?php echo JText::_('JDATE'); ?></th>
 				<th><?php echo JHTML::_('grid.sort', 'COM_INSTALLER_HEADING_FOLDER', 'folder', $listDirn, $listOrder); ?></th>
-				<th><?php echo JHTML::_('grid.sort', 'COM_INSTALLER_HEADING_CLIENT', 'client_id', $listDirn, $listOrder); ?></th>
+				<th><?php echo JHTML::_('grid.sort', 'COM_INSTALLER_HEADING_LOCATION', 'client_id', $listDirn, $listOrder); ?></th>
 				<th width="15%"><?php echo JText::_('JAUTHOR'); ?></th>
 				<th width="10"><?php echo JHTML::_('grid.sort', 'COM_INSTALLER_HEADING_ID', 'extension_id', $listDirn, $listOrder); ?></th>
 			</tr>
@@ -46,7 +45,6 @@ $listDirn	= $this->state->get('list.direction');
 		<tbody>
 		<?php foreach ($this->items as $i => $item): ?>
 			<tr class="row<?php echo $i%2;?>" style="<?php if ($item->protected) echo 'color:#999999;';?>">
-				<td><?php echo $this->pagination->getRowOffset($i); ?></td>
 				<td><?php echo JHtml::_('grid.id', $i, $item->extension_id); ?></td>
 				<td><span class="bold hasTip" title="<?php echo htmlspecialchars($item->name.'::'.$item->description); ?>"><?php echo $item->name; ?></span></td>
 				<td class="center"><?php echo JText::_('COM_INSTALLER_TYPE_' . $item->type); ?></td>

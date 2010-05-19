@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 $app = JFactory::getApplication();
 $templateparams = $app->getTemplate(true)->params;
 
-if(!$templateparams->get('html5', 0))
+if (!$templateparams->get('html5', 0))
 {
 	require(JPATH_BASE.'/components/com_content/views/archive/tmpl/default_items.php');
 	//evtl. ersetzen durch JPATH_COMPONENT.'/views/...'
@@ -39,48 +39,48 @@ $params =& $this->params;
 <?php endif; ?>
 
 <?php if ($params->get('show_category')) : ?>
-        <dd class="category-name">
-            <?php $title = $this->escape($item->category_title);
-                    $url = '<a href="' . JRoute::_(ContentRoute::category($this->item->catslug)) . '">' . $title . '</a>'; ?>
-            <?php if ($params->get('link_category')) : ?>
-                <?php echo JText::sprintf('CONTENT_CATEGORY', $url); ?>
-                <?php else : ?>
-                <?php echo JText::sprintf('CONTENT_CATEGORY', $title); ?>
-            <?php endif; ?>
-        </dd>
+		<dd class="category-name">
+			<?php $title = $this->escape($item->category_title);
+					$url = '<a href="' . JRoute::_(ContentRoute::category($this->item->catslug)) . '">' . $title . '</a>'; ?>
+			<?php if ($params->get('link_category')) : ?>
+				<?php echo JText::sprintf('CONTENT_CATEGORY', $url); ?>
+				<?php else : ?>
+				<?php echo JText::sprintf('CONTENT_CATEGORY', $title); ?>
+			<?php endif; ?>
+		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_create_date')) : ?>
-        <dd class="create">
-        <?php echo JText::sprintf('CONTENT_CREATED_DATE', JHTML::_('date',$this->item->created, JText::_('DATE_FORMAT_LC2'))); ?>
-        </dd>
+		<dd class="create">
+		<?php echo JText::sprintf('CONTENT_CREATED_DATE', JHTML::_('date',$this->item->created, JText::_('DATE_FORMAT_LC2'))); ?>
+		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_modify_date')) : ?>
-        <dd class="modified">
-        <?php echo JText::sprintf('LAST_UPDATED2', JHTML::_('date',$this->item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
-        </dd>
+		<dd class="modified">
+		<?php echo JText::sprintf('COM_CONTENT_LAST_UPDATED', JHTML::_('date',$this->item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
+		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_publish_date')) : ?>
-        <dd class="published">
-        <?php echo JText::sprintf('PUBLISHED_DATE', JHTML::_('date',$this->item->publish_up, JText::_('DATE_FORMAT_LC2'))); ?>
-        </dd>
+		<dd class="published">
+		<?php echo JText::sprintf('COM_CONTENT_PUBLISHED_DATE', JHTML::_('date',$this->item->publish_up, JText::_('DATE_FORMAT_LC2'))); ?>
+		</dd>
 <?php endif; ?>
 <?php if ($params->get('show_author') && !empty($item->author_name)) : ?>
-    <dd class="createdby">
-        <?php $author = $params->get('link_author', 0) ? JHTML::_('link',JRoute::_('index.php?option=com_users&view=profile&member_id='.$item->created_by),$item->author_name) : $item->author_name; ?>
-        <?php $author = ($item->created_by_alias ? $item->created_by_alias : $author); ?>
-    <?php echo JText::sprintf('Written_by', $author); ?>
-        </dd>
-    <?php endif; ?>
+	<dd class="createdby">
+		<?php $author = $params->get('link_author', 0) ? JHTML::_('link',JRoute::_('index.php?option=com_users&view=profile&member_id='.$item->created_by),$item->author_name) : $item->author_name; ?>
+		<?php $author = ($item->created_by_alias ? $item->created_by_alias : $author); ?>
+	<?php echo JText::sprintf('Written_by', $author); ?>
+		</dd>
+	<?php endif; ?>
 <?php if ($params->get('show_hits')) : ?>
-        <dd class="hits">
-        <?php echo JText::sprintf('CONTENT_ARTICLE_HITS', $item->hits); ?>
-        </dd>
+		<dd class="hits">
+		<?php echo JText::sprintf('CONTENT_ARTICLE_HITS', $item->hits); ?>
+		</dd>
 <?php endif; ?>
 <?php if (($params->get('show_author')) or ($params->get('show_category')) or ($params->get('show_create_date')) or ($params->get('show_modify_date')) or ($params->get('show_publish_date'))  or ($params->get('show_hits'))) :?>
-     </dl>
+	</dl>
 <?php endif; ?>
 
-<?php  if($params->get('show_intro')) :?>
+<?php  if ($params->get('show_intro')) :?>
 		<div class="intro">
 			<?php echo substr($item->introtext, 0, 255); echo JText::_('  ...') ?>
 		</div>

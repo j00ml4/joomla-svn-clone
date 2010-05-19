@@ -55,19 +55,22 @@ $listDirn	= $this->state->get('list.direction');
 	<table class="adminlist">
 		<thead>
 			<tr>
-				<th width="20">
+				<th width="1%">
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort',  'COM_BANNERS_HEADING_NAME', 'name', $listDirn, $listOrder); ?>
 				</th>
-				<th width="10%" class="nowrap">
-					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CLIENT', 'client_name', $listDirn, $listOrder); ?>
-				</th>
 				<th width="5%">
 					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'state', $listDirn, $listOrder); ?>
 				</th>
-				<th width="20%">
+				<th width="5%" class="nowrap">
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_STICKY', 'sticky', $listDirn, $listOrder); ?>
+				</th>
+				<th width="10%" class="nowrap">
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CLIENT', 'client_name', $listDirn, $listOrder); ?>
+				</th>
+				<th width="10%">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_CATEGORY', 'category_title', $listDirn, $listOrder); ?>
 				</th>
 				<th width="10%" nowrap="nowrap">
@@ -75,9 +78,6 @@ $listDirn	= $this->state->get('list.direction');
 					<?php if ($listOrder=='ordering'): ?>
 						<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'banners.saveorder'); ?>
 					<?php endif;?>
-				</th>
-				<th width="5%" class="nowrap">
-					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_STICKY', 'sticky', $listDirn, $listOrder); ?>
 				</th>
 				<th width="5%" class="nowrap">
 					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_IMPRESSIONS', 'impmade', $listDirn, $listOrder); ?>
@@ -112,7 +112,8 @@ $listDirn	= $this->state->get('list.direction');
 			$item->cat_link = JRoute::_('index.php?option=com_categories&extension=com_banners&task=edit&type=other&cid[]='. $item->catid);
 			$canCreate	= $user->authorise('core.create',		'com_banners.category.'.$item->catid);
 			$canEdit	= $user->authorise('core.edit',			'com_banners.category.'.$item->catid);
-			$canChange	= $user->authorise('core.edit.state',	'com_banners.category.'.$item->catid);
+			$canCheckin	= $user->authorise('core.manage',		'com_checkin') || $item->checked_out==$user->get('id') || $item->checked_out==0;
+			$canChange	= $user->authorise('core.edit.state',	'com_banners.category.'.$item->catid) && $canCheckin;
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
@@ -120,7 +121,7 @@ $listDirn	= $this->state->get('list.direction');
 				</td>
 				<td>
 					<?php if ($item->checked_out) : ?>
-						<?php echo JHtml::_('jgrid.checkedout', $item->editor, $item->checked_out_time); ?>
+						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'banners.', $canCheckin); ?>
 					<?php endif; ?>
 					<?php if ($canCreate || $canEdit) : ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_banners&task=banner.edit&id='.(int) $item->id); ?>">
@@ -132,10 +133,13 @@ $listDirn	= $this->state->get('list.direction');
 						(<span><?php echo JText::_('JFIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>)</p>
 				</td>
 				<td class="center">
-					<?php echo $item->client_name;?>
+					<?php echo JHtml::_('jgrid.published', $item->state, $i, 'banners.', $canChange);?>
 				</td>
 				<td class="center">
-					<?php echo JHtml::_('jgrid.published', $item->state, $i, 'banners.', $canChange);?>
+					<?php echo JHtml::_('jgrid.published', $item->sticky, $i, 'banners.sticky_', $canChange);?>
+				</td>
+				<td class="center">
+					<?php echo $item->client_name;?>
 				</td>
 				<td class="center">
 					<?php echo $this->escape($item->category_title); ?>
@@ -149,9 +153,6 @@ $listDirn	= $this->state->get('list.direction');
 					<?php else : ?>
 						<?php echo $item->ordering; ?>
 					<?php endif; ?>
-				</td>
-				<td class="center">
-					<?php echo JHtml::_('jgrid.published', $item->sticky, $i, 'banners.sticky_', $canChange);?>
 				</td>
 				<td class="center">
 					<?php echo JText::sprintf('COM_BANNERS_IMPRESSIONS', $item->impmade, $item->imptotal ? $item->imptotal : JText::_('COM_BANNERS_UNLIMITED'));?>
@@ -170,11 +171,11 @@ $listDirn	= $this->state->get('list.direction');
 						<?php echo JText::_('COM_BANNERS_FIELD_VALUE_'.$item->purchase_type);?>
 					<?php endif;?>
 				</td>
-				<td class="center">
+				<td class="center nowrap">
 					<?php if ($item->language=='*'):?>
 						<?php echo JText::_('JALL'); ?>
 					<?php else:?>
-						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JOPTION_UNDEFINED_LANGUAGE'); ?>
+						<?php echo $item->language_title ? $this->escape($item->language_title) : JText::_('JUNDEFINED'); ?>
 					<?php endif;?>
 				</td>
 				<td class="center">

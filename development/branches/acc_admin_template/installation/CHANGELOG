@@ -27,7 +27,142 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+17-May-2010 Mark Dexter
+# Fix language strings in New Menu Item
+
+17-May-2010 Andrew Eddie
+ ^ Fixed issue [#20431] Module cache not activated in defult installation and sample data module parameters (Klas Berlič)
+ # Fixed issue [#20445] The pagebreak plugin produces a fatal error.
+ # Fixed issue [#20452] Turn off module debugging by default (Elin Waring).
+ # Fixed issue [#20430] Multiple cache and performance related optimizations and bugfixes - results in 30% decrease on load times (Klas Berlič).
+ # Fixed issue [#20318] Change confusing language in installer (Elin Waring).
+ # Fixed issue [#20386] [patch] update Hathor overrides with changes made to com_menu default_batch.php (Andrea Tarr).
+
+16-May-2010 Mark Dexter
+# [#20312] Access Control not implemented in menus
+# [#20450] Missing modal and field for single news feed selection
+# Sample data fixes (Elin Waring)
+# Fix default component parameters (Elin Waring)
+# Partial fix of system tests
+
+16-May-2010 Chris Davenport
+$ Translate help screen titles in com_admin
+
+16-May-2010 Ron Severdia
+# Fixed CSS and bug in admin login
+# IE compatibility fixes
+
+16-May-2010 Sam Moffatt
+ # Fixed issue with front end router and invalid menu items
+ # Fixed [#20449] Web link submit form is broken (thanks Elin)
+
+16-May-2010 Christophe Demko
+ # Fix [#20428] Deleting A Menu Does Not Delete Menu Items
+ # Reenabling filters in manage view
+ # fix some ACL
+
+16-May-2010 Ron Severdia
+# BlueStork fixes, new icons, language fixes
+
+16-May-2010 Jean-Marie Simonet
+$ Fixed some Beez language keys
+^ Fixed Beez sitedescription
+$ Fixed and consolidate some language strings
+# Fixed base category description [20447]. Thanks Elin.
+$ Fixed some language strings
+
+15-May-2010 Ron Severdia
+# Fixed CSS issues with BlueStork
+$ Corrected language strings
+# Fixed UI exceptions
++ New BlueStork icons
+
+15-May-2010 Chris Davenport
+# Fix [20375] Undefined variable in com_admin
+# Fixed bad translation of help key references in com_admin
+
+15-May-2010 Mark Dexter
+# Fixed issues with sample data (Elin Waring)
+^ Added title and subtitle to the params (Angie Radtke)
+^ Added joomla_logos (Angie Radtke)
+# Updated language file (Angie Radtke)
+# Deleted unused image (Angie Radtke)
+# Fixed language string (Angie Radtke)
+# Fixed problem with root category description [#20296] (Elin Waring)
+# More sample data fixes (Elin Waring)
+
+15-May-2010 Christophe Demko
+ ^ Consolidate JHtmlJGrid functions
+ ^ Consolidate icons and hathor template
+
+15-May-2010 Jean-Marie Simonet
+$ Added missing string
+^ Changed id to author name in edit icon overlib
+$ Consolidated string
+# Fixed language saving bug in com_contacts
+^ Implemented JText::plural in mod_whosonline
+$ Completed deleting legacy strings and sorting ini strings in files front-end [6]
+
+15-May-2010 Sam Moffatt
+ + Added setRedirect to JInstaller to permit extensions to flag that they want to redirect the user post install
+ # Ensuring the new script tag permits the same features as the old com_install/com_uninstall triggers (e.g. can abort install on false)
+
+14-May-2010 Mark Dexter
+^ Minor tweak to beez_20 to fix Eclipse validation
+
+14-May-2010 Christophe Demko
+ + Enabling new icons in admin menu
+ + Add a divider for checkin task
+ + Consolidate checkin task
+ + Add checkin task
+
+14-May-2010 Jean-Marie Simonet
+$ Deleting legacy strings and sorting ini strings in files [1]
+$ Deleting legacy strings and sorting ini strings in files [2]
+$ Deleting legacy strings and sorting ini strings in files [3]
+$ Deleting legacy strings and sorting ini strings in files front-end [4]
+$ Adding a string in com_content
+$ Deleting legacy strings and sorting ini strings in files front-end [5]
+
+14-May-2010 Andrew Eddie
+ ^ Updated the language descriptions for permissions.
+
+13-May-2010 Jean-Marie Simonet
+$ Consolidated some strings
+
+13-May-2010 Hannes Papenberg
+ # Fixed several HTML errors
+
+13-May-2010 Christophe Demko
+ ^ Consolidate JHtmlJGrid class
+
+13-May-2010 Andrew Eddie
+ # Fixed bug that prevented saving a module.
+ ^ Related to above, reworked JModelForm and made getForm abstract and replaced it with loadForm, renamed getFormData to loadFormData.
+ ^ Reworked forms in frontend user component.
+ # Fix rouge short-tags.
+ # Fix bug in backend user edit form where custom user profile would not save for a new user.
+ # Fixed bug in backend com_content where featured setting in the article would not take. 
+
+12-May-2010 Christophe Demko
+ $ Correcting some strings/language in beez
+ # Ensure that there exists at least one style for a template
+ # Ensure that there exists only one default template style
+
 12-May-2010 Jean-Marie Simonet
+# Corrected com_redirect component_id in jos_menu table
++ Added Global configuration button in Control panel [20407] Thanks Ronald de Vries.
+$ Corrected/added keys/strings all over admin
+$ Removed 1.5 legacy strings from main ini files
+
+12-May-2010 Andrew Eddie
+ ^ Set Beez2 as the default template (awesome work by Angie Radtke).
+ ^ Set AUTO_INCREMENT on jos_extensions table to start at 10000, allowing for more core plugins to be added at a later date.
+ ^ Fixing hardcoded $app->redirects to JController setRedirect in com_media subcontrollers.
+ # Fix bug in com_content archives model - still referencing -1 instead of 2 for the archived state.
+ # Fixed [#20393] creating an editor with buttons=true does not show any buttons
+
+11-May-2010 Jean-Marie Simonet
 ^ Correcting extension/example xml plugin
 ^ Hathor's update [Andrea Tarr]
 
@@ -220,6 +355,7 @@ $ Correcting/consolidating strings
 $ Refactoring com_contents back-end ini/keys
 $ Refactoring com_contents front-end ini/keys (WIP)
 $ Completing what can be done refactoring com_contents front-end ini/keys
+
 
 30-Apr-2010 Christophe Demko & Jean-Marie Simonet
 # Fixed problems in com_banners

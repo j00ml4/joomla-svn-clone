@@ -59,11 +59,11 @@ class WeblinksModelForm extends JModelForm
 	 * @param	boolean		$clear		Optional argument to force load a new form.
 	 * @return	mixed		JForm object on success, False on error.
 	 */
-	public function &getForm($xml = 'weblink', $name = 'com_weblinks.weblink', $options = array(), $clear = false)
+	public function getForm($xml = 'weblink', $name = 'com_weblinks.weblink', $options = array(), $clear = false)
 	{
 		$options += array('control' => 'jform');
 
-		$form = parent::getForm($name, $xml, $options);
+		$form = $this->loadForm($name, $xml, $options);
 		if (empty($form)) {
 			return false;
 		}

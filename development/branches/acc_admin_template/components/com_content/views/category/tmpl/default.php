@@ -20,7 +20,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
-<?php if($this->params->get('show_category_title', 1) OR $this->params->get('page_subheading')) : ?>
+<?php if ($this->params->get('show_category_title', 1) OR $this->params->get('page_subheading')) : ?>
 <h2>
 	<?php echo $this->escape($this->params->get('page_subheading')); ?>
 	<?php if ($this->params->get('show_category_title'))
@@ -46,7 +46,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php if (is_array($this->children) && count($this->children) > 0 && $this->params->get('maxLevel') !=0)  : ?>
 		<div class="jcat-children">
 				<h3>
-<?php echo JTEXT::_('COM_CONTENT_CHILDREN'); ?>
+<?php echo JTEXT::_('JGLOBAL_SUBCATEGORIES'); ?>
 </h3>
 			<?php echo $this->loadTemplate('children'); ?>
 		</div>

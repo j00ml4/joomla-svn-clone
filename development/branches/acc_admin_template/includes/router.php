@@ -1,6 +1,8 @@
 <?php
 /**
  * @version		$Id$
+ * @package		Joomla.Site
+ * @subpackage	Application
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -126,10 +128,12 @@ class JRouterSite extends JRouter
 		//Get the itemid, if it hasn't been set force it to null
 		$this->setVar('Itemid', JRequest::getInt('Itemid', null));
 
-		//Only an Itemid ? Get the full information from the itemid
+		// Only an Itemid ? Get the full information from the itemid
 		if (count($this->getVars()) == 1) {
 			$item = $menu->getItem($this->getVar('Itemid'));
-			$vars = $vars + $item->query;
+			if ($item !== NULL && is_array($item->query)) {
+				$vars = $vars + $item->query;
+			}
 		}
 
 		// Set the active menu item

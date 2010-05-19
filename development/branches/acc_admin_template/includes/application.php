@@ -281,7 +281,7 @@ final class JSite extends JApplication
 				$url	= 'index.php?option=com_users&view=login';
 				$url	= JRoute::_($url, false);
 
-				$this->redirect($url, JText::_('YOU_MUST_LOGIN_FIRST'));
+				$this->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'));
 			}
 			else {
 				JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
@@ -378,19 +378,14 @@ final class JSite extends JApplication
 		}
 		$condition = '';
 
-		$tid = JRequest::getInt('template', 0);
-		if ((int) $tid > 0) {
+		$tid = JRequest::getVar('template', 0);
+		if (is_int($tid) && $tid > 0) {
 			$id = (int) $tid;
 		}
-		if ($id == 0) {
-			$condition = 'home = 1';
-		}
-		else {
-			$condition = 'id = '.(int) $id;
-		}
+
 		
 		$cache = JFactory::getCache('com_templates', '');
-		if (!$templates = $cache->get('0')) {
+		if (!$templates = $cache->get('templates0')) {
 			// Load styles
 			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
@@ -400,18 +395,17 @@ final class JSite extends JApplication
 			
 			$db->setQuery($query);
 			$templates = $db->loadObjectList('id');
-			
 			foreach($templates as &$template) {
 				$registry = new JRegistry;
 				$registry->loadJSON($template->params);
 				$template->params = $registry;
 
 				// Create home element
-				if ($template->home) {
+				if ($template->home == 1) {
 					$templates[0] = clone $template;
 				}
 			}
-			$cache->store($templates, '0');
+			$cache->store($templates, 'templates0');
 		}
 		
 		$template = $templates[$id];
