@@ -103,7 +103,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				</th>
 				<th class="language-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'language', $listDirn, $listOrder); ?>
-				</th>				
+				</th>
 				<th class="nowrap id-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 				</th>

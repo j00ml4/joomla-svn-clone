@@ -41,7 +41,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 		<fieldset class="adminform">
 			<legend><?php echo JText::_('JDETAILS'); ?></legend>
 			<ul class="adminformlist">
-			
+
 			<li><?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?></li>
 
@@ -56,7 +56,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 
 			<li><?php echo $this->form->getLabel('access'); ?>
 			<?php echo $this->form->getInput('access'); ?></li>
-			
+
 			<li><?php echo $this->form->getLabel('ordering'); ?>
 			<?php echo $this->form->getInput('ordering'); ?></li>
 
@@ -73,7 +73,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 
 			<li><?php echo $this->form->getLabel('language'); ?>
 			<?php echo $this->form->getInput('language'); ?></li>
-			
+
 			<li><?php echo $this->form->getLabel('note'); ?>
 			<?php echo $this->form->getInput('note'); ?></li>
 
@@ -87,7 +87,9 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<input type="text" size="35" value="<?php if ($this->item->xml) echo ($text = (string) $this->item->xml->name) ? JText::_($text) : $this->item->module;else echo JText::_(MODULES_ERR_XML);?>" class="readonly" readonly="readonly" /></li>
 
 			<li><?php echo $this->form->getLabel('client_id'); ?>
-			<input type="text" size="35" value="<?php echo $this->item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>	" class="readonly" readonly="readonly" /></li>
+			<input type="text" size="35" value="<?php echo $this->item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>	" class="readonly" readonly="readonly" />
+			<?php echo $this->form->getInput('client_id'); ?>
+			</li>
 			</ul>
 			<div class="clr" /></div>
 			<?php if ($this->item->xml) : ?>
@@ -114,9 +116,11 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 	<?php echo JHtml::_('sliders.end'); ?>
 	</div>
 
+	<?php if ($this->item->client_id == 0) :?>
 	<div class="width-60 fltlft">
 		<?php echo $this->loadTemplate('assignment'); ?>
 	</div>
+	<?php endif; ?>
 
 	<div class="clr"></div>
 	<?php if ($hasContent) : ?>

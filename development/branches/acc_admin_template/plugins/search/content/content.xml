@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
-	<version>1.5</version>
+	<version>1.6.0</version>
 	<description>PLG_SEARCH_CONTENT_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="content">content.php</filename>
@@ -22,10 +22,6 @@
 					description="PLG_SEARCH_CONTENT_FIELD_SEARCHLIMIT_DESC"
 					label="PLG_SEARCH_CONTENT_FIELD_SEARCHLIMIT_LABEL"
 					size="5"
-				/>
-
-				<field name="spacer1" type="spacer"
-					hr="true"
 				/>
 
 				<field name="search_content" type="radio"

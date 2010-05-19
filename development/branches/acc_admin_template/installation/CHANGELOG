@@ -27,6 +27,49 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+18-May-2010 Christophe Demko
+ ^ Change template default style when installing
+ # Fixed issue [#20488] Small CSS issue in config modal (Viet Vu Hoang)
+
+18-May-2010 Jean-Marie Simonet
+# Config fieldset description patch (Thanks you Dennis)
+# Consolidated some strings
+
+
+-------------------- 1.6.0 Beta Release [17-May-2010] ------------------
+
+17-May-2010 Ron Severdia
+# Fixed UI in Menu Manager and ACL widget
+
+17-May-2010 Mark Dexter
+# Fix display error in Parks image gallery
+
+17-May-2010 Jean-Marie Simonet
+$ Fixed some beez language strings + a CSS in bluestork
+$ Fixed some com_users language issues
+$ Adding missing strings in com_users (WIP)
+
+17-May-2010 Ron Severdia
+# Fix CSS & language strings for Weblinks UI
++ Added missing icon
+$ Language fixes
+
+17-May-2010 Christophe Demko
+ $ Fix one string
+ # Fix xml files
+ # Fix PHP Notice:  Undefined variable: file in libraries/joomla/installer/adapters/component.php on line 1328
+ # Fix [#20429] Last Visit Date -1-11-30 00:00:00 When Creating New User (Matt Thomas)
+ # Fix PHP Warning:  date(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set()
+ # Fix some css for administrator login
+ # Ensure there exists a default published menu item when changing home
+ # Ensure there exists a default menu item while deleting menu items
+ # Ensure there exists a default menu item while deleting menus
+ # Fix display modules linked to a menu (menus view)
+ # Fix sample_data.sql
+ # Rename bad named images
+ # Fix [#20300] Article archive
+ ^ Ordering of toolbar icons for some views
+
 17-May-2010 Mark Dexter
 # Fix language strings in New Menu Item
 
@@ -37,6 +80,16 @@ $ -> Language fix or change
  # Fixed issue [#20430] Multiple cache and performance related optimizations and bugfixes - results in 30% decrease on load times (Klas Berlič).
  # Fixed issue [#20318] Change confusing language in installer (Elin Waring).
  # Fixed issue [#20386] [patch] update Hathor overrides with changes made to com_menu default_batch.php (Andrea Tarr).
+ # Fixed issue [#20163] Media Manager Max Upload Size displaying incorrectly (Anthony McLin, Elin Waring).
+ # Fixed issue [#20435] single newsfeed error.
+ # Fixed issue [#20287] Rendering config.xml files generates php warning [patch included] (Jonatas Braganca).
+ # Fixed issue [#20410] Module Manager for Admin modules includes Site only options (Elin Waring).
+ # Fixed issue [#20292] Cannot change a menu type that is set to alias.
+ # Fixed issue [#20172] Various errors during module saving in backend.
+ # Fixed bug where you could not add a new Adminstrator module.
+ # Fixed issue [#20454] Menu item filter includes archived state (Elin Waring).
+ # Fixed bug in com_content category view, default layouts where date was not honouring option settings.
+ # Fixed issue [#20316] jhtml category warning (Phil Snell).
 
 16-May-2010 Mark Dexter
 # [#20312] Access Control not implemented in menus

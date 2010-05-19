@@ -43,7 +43,7 @@
 		<field name="catid" type="category"
 			description="JField_Category_Desc"
 			extension="com_contact"
-			label="JField_Category_Label"
+			label="JCATEGORY"
 			required="true"
 		/>
 
@@ -237,7 +237,7 @@
 	</fieldset>
 
 	<fields name="metadata">
-		<fieldset name="metadata" label="">
+		<fieldset name="metadata">
 
 			<field name="robots" type="text"
 				description="JField_Metadata_Robots_Desc"
