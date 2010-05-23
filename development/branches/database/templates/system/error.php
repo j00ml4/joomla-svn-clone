@@ -9,7 +9,22 @@
 defined('_JEXEC') or die;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>"><?php
+		//Send proper error headers 
+		if (($this->error->code) == '403') { 
+				header("HTTP/1.0 403 Forbidden"); 
+				$cusTitle = "Forbidden"; 
+		} 
+
+		if (($this->error->code) == '404') { 
+				header("HTTP/1.0 404 Not Found"); 
+				$cusTitle = "Page Not Found"; 
+		} 
+
+		if (($this->error->code) == '500') { 
+				header("HTTP/1.0 500 Internal Server Error"); 
+				$cusTitle = "Internal Server Error"; 
+		} ?>
 <head>
 	<title><?php echo $this->error->getCode(); ?> - <?php echo $this->title; ?></title>
 	<link rel="stylesheet" href="<?php echo $this->baseurl; ?>/templates/system/css/error.css" type="text/css" />
