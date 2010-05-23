@@ -80,7 +80,7 @@ JHtml::_('behavior.formvalidation');
 						<?php echo JText::_('
 							<p>Setting up Joomla! to run on your server involves 4 simple steps...</p>
 							<p>Please enter the hostname of the server Joomla! is to be installed on.</p>
-							<p>Enter the MySQL username, password and database name you wish to use with Joomla.</p>
+							<p>Enter the DB (Mysql, PSQl, Oracle...) username, password and database name you wish to use with Joomla.</p>
 							<p>Enter a prefix to be used by tables for this Joomla! installation. Select how to handle exisitng tables from a previous installation.</p>
 							<p>Install the samples unless you are experienced want to start with a virtually empty site.</p>
 						'); ?>
@@ -110,7 +110,7 @@ JHtml::_('behavior.formvalidation');
 									</td>
 									<td>
 										<em>
-										<?php echo JText::_('This is probably "mysql"'); ?>
+										<?php echo JText::_('Supported databases "mysql, oracle"'); ?>
 										</em>
 									</td>
 								</tr>
@@ -162,6 +162,58 @@ JHtml::_('behavior.formvalidation');
 										</em>
 									</td>
 								</tr>
+							</table>
+							<br /><br />
+						</div>
+
+						<h3 class="title-smenu" title="<?php echo JText::_('Advanced DB'); ?>">
+							<?php echo JText::_('ADVANCED_DB_SETTINGS'); ?>
+						</h3>
+						<div class="section-smenu">
+							<table class="content2">
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+								
+								<tr>
+									<td colspan="2">
+										<?php echo $this->form->getLabel('db_slave_host'); ?>
+										<br />
+										<?php echo $this->form->getInput('db_slave_host'); ?>
+									</td>
+									<td>
+										<em>
+										<?php echo JText::_('This could be slave - a master replicated db or a read only database host'); ?>
+										</em>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<?php echo $this->form->getLabel('db_slave_user'); ?>
+										<br />
+										<?php echo $this->form->getInput('db_slave_user'); ?>
+									</td>
+									<td>
+										<em>
+										<?php echo JText::_('Either something as "root" or a username given by the hoster'); ?>
+										</em>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<?php echo $this->form->getLabel('db_slave_pass'); ?>
+										<br />
+										<?php echo $this->form->getInput('db_slave_pass'); ?>
+									</td>
+									<td>
+										<em>
+										<?php echo JText::_('For site security using a password for the database account is mandatory'); ?>
+										</em>
+									</td>
+								</tr>
+								
 							</table>
 							<br /><br />
 						</div>

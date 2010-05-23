@@ -153,7 +153,7 @@ class JDatabaseMySQLi extends JDatabase
 		if (!mysqli_select_db($this->_connection, $database))
 		{
 			$this->_errorNum = 3;
-			$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_DATABASE_CONNECT');
+			$this->_errorMsg = JText::_('JLIB_MASTER_DATABASE_ERROR_DATABASE_CONNECT');
 			return false;
 		}
 

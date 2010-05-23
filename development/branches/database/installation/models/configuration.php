@@ -23,6 +23,8 @@ class JInstallationModelConfiguration extends JModel
 {
 	function setup($options)
 	{
+		//echo '<pre>';
+		//print_r($options);die();
 		// Get the options as a JObject for easier handling.
 		$options = JArrayHelper::toObject($options, 'JObject');
 
@@ -64,6 +66,9 @@ class JInstallationModelConfiguration extends JModel
 		$registry->set('host', $options->db_host);
 		$registry->set('user', $options->db_user);
 		$registry->set('password', $options->db_pass);
+		$registry->set('slave_host', $options->db_slave_host);
+		$registry->set('slave_user', $options->db_slave_user);
+		$registry->set('slave_password', $options->db_slave_pass);
 		$registry->set('db', $options->db_name);
 		$registry->set('dbprefix', $options->db_prefix);
 

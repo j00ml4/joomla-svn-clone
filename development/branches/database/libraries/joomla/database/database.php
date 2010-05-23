@@ -60,6 +60,15 @@ abstract class JDatabase extends JObject
 	protected $_connection = '';
 
 	/**
+	 * The connector Slave resource
+	 *
+	 * @var slave resource
+	 */
+	protected $_slave_connection		= '';
+
+	protected $_stmt_type = 0;
+
+	/**
 	 * The last query cursor
 	 *
 	 * @var resource
@@ -268,6 +277,8 @@ abstract class JDatabase extends JObject
 	 * @since	1.5
 	 */
 	abstract public function connected();
+	
+	abstract public function slave_connected();
 
 	/**
 	 * Determines UTF support
