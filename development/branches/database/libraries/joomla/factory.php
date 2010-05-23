@@ -26,6 +26,7 @@ abstract class JFactory
 	public static $document = null;
 	public static $acl = null;
 	public static $database = null;
+	public static $slave_database = null;
 	public static $mailer = null;
 
 	/**
@@ -236,6 +237,29 @@ abstract class JFactory
 			self::$database->debug($debug);
 		}
 		return self::$database;
+	}
+
+	/**
+	 * Get a slave/Read only database object
+	 *
+	 * Returns the global {@link JDatabase} object, only creating it
+	 * if it doesn't already exist.
+	 *
+	 * @return object JDatabase
+	 */
+	public static function getSlaveRODbo()
+	{
+
+		if (!self::$slave_database)
+		{
+			//get the debug configuration setting
+			$conf = &self::getConfig();
+			$debug = $conf->get('debug');
+
+			self::$slave_database = self::_createSlaveRODbo();
+			self::$slave_database->debug($debug);
+		}
+		return self::$slave_database;
 	}
 
 	/**
@@ -526,11 +550,11 @@ abstract class JFactory
 		$user		= $conf->get('user');
 		$password	= $conf->get('password');
 		$database	= $conf->get('db');
-		$prefix	= $conf->get('dbprefix');
-		$driver	= $conf->get('dbtype');
+		$prefix		= $conf->get('dbprefix');
+		$driver		= $conf->get('dbtype');
 		$debug		= $conf->get('debug');
 
-		$options	= array ('driver' => $driver, 'host' => $host, 'user' => $user, 'password' => $password, 'database' => $database, 'prefix' => $prefix);
+		$options	= array ('driver' => $driver, 'host' => $host, 'user' => $user, 'password' => $password, 'database' => $database, 'prefix' => $prefix, 'connection_type' => 'M' );
 
 		$db = &JDatabase::getInstance($options);
 
@@ -539,13 +563,101 @@ abstract class JFactory
 		}
 
 		if ($db->getErrorNum() > 0) {
-			JError::raiseError(500 , JText::sprintf('JLIB_UTIL_ERROR_CONNECT_DATABASE', $db->getErrorNum(), $db->getErrorMsg()));
+			//JError::raiseError(500 , JText::sprintf('JLIB_UTIL_ERROR_CONNECT_DATABASE', $db->getErrorNum(), $db->getErrorMsg()));
+			//Implement a Fail Whale 
+			//jexit('Database Error: ' . $db->toString() ); 
+			header("HTTP/1.0 500 Internal Server Error"); 
+			print("<html>"); 
+			print("<head>"); 
+			print("<title>Whoops! We will be right back...</title>"); 
+			print("<link rel='StyleSheet' type='text/css' href=JURI::base().'templates/system/ 
+			css/fail.css' />"); 
+			print("</head>"); 
+			print("<body>"); 
+			print("<div id='fail-wrap'>"); 
+			print( "<div class='fail'>"); 
+			print("<h2>500 Internal Server Error</h2>"); 
+			print("<img src=".JURI::base().'templates/system/images/error500-screen.jpg'.">"); 
+			print( "<div class='fail-error'>"); 
+			print("Database Error: " . $db->toString()."<br>Check Database 
+			settings..."); 
+			print( "</div>"); 
+			print("</div>" ); 
+			print("</div>"); 
+			print("</body>"); 
+			print("</html>"); 
+			exit; 
 		}
 
 		$db->debug($debug);
 		return $db;
 	}
 
+	/**
+	* Create an database object
+	 *
+	 * @access private
+	 * @return object JDatabase
+	 * @since 1.5
+	 */
+	private static function _createSlaveRODbo()
+	{
+		jimport('joomla.database.database');
+		jimport('joomla.database.table');
+
+		$conf = &JFactory::getConfig();
+
+		$host		= $conf->get('slave_host');
+		$user		= $conf->get('slave_user');
+		$password	= $conf->get('slave_password');
+		$database	= $conf->get('db');
+		$prefix		= $conf->get('dbprefix');
+		$driver		= $conf->get('dbtype');
+		$debug		= $conf->get('debug');
+
+		if( empty($host) || empty($user) || empty($password)) {
+			$host 		= $conf->get('host');
+			$user 		= $conf->get('user');
+			$password 	= $conf->get('password');
+		}
+		$options	= array ('driver' => $driver, 'host' => $host, 'user' => $user, 'password' => $password, 'database' => $database, 'prefix' => $prefix, 'connection_type' => 'S');
+
+		$db = &JDatabase::getInstance($options);
+
+		if (JError::isError($db)) {
+			jexit('Database Error: ' . (string)$db);
+		}
+
+		if ($db->getErrorNum() > 0) {
+			//JError::raiseError(500 , JText::sprintf('JLIB_UTIL_ERROR_CONNECT_DATABASE', $db->getErrorNum(), $db->getErrorMsg()));
+			//Implement a Fail Whale 
+			//jexit('Database Error: ' . $db->toString() ); 
+			header("HTTP/1.0 500 Internal Server Error"); 
+			print("<html>"); 
+			print("<head>"); 
+			print("<title>Whoops! We will be right back...</title>"); 
+			print("<link rel='StyleSheet' type='text/css' href=JURI::base().'templates/system/ 
+			css/fail.css' />"); 
+			print("</head>"); 
+			print("<body>"); 
+			print("<div id='fail-wrap'>"); 
+			print( "<div class='fail'>"); 
+			print("<h2>500 Internal Server Error</h2>"); 
+			print("<img src=JURI::base().'templates/system/images/error500-screen.jpg'>"); 
+			print( "<div class='fail-error'>"); 
+			print("Database Error: " . $db->toString()."<br>Check Database 
+			settings..."); 
+			print( "</div>"); 
+			print("</div>" ); 
+			print("</div>"); 
+			print("</body>"); 
+			print("</html>"); 
+			exit; 
+		}
+
+		$db->debug($debug);
+		return $db;
+	}
 	/**
 	 * Create a mailer object
 	 *
