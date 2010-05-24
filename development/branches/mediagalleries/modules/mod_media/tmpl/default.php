@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 ?>
 <div>
 <?php
-echo "Video URL : ".$media;
+echo "Media URL : ".$media;
 echo "<br/>Width:".$width;
 echo "<br/>Height:".$height;
 echo "<br/>And autostart is ";
