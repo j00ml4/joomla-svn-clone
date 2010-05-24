@@ -570,14 +570,14 @@ abstract class JFactory
 			print("<html>"); 
 			print("<head>"); 
 			print("<title>Whoops! We will be right back...</title>"); 
-			print("<link rel='StyleSheet' type='text/css' href=JURI::base().'templates/system/ 
-			css/fail.css' />"); 
+			print("<link rel='StyleSheet' type='text/css' href=\'".JURI::base().'../templates/system/css/fail.css'." />"); 
 			print("</head>"); 
 			print("<body>"); 
 			print("<div id='fail-wrap'>"); 
 			print( "<div class='fail'>"); 
 			print("<h2>500 Internal Server Error</h2>"); 
-			print("<img src=".JURI::base().'templates/system/images/error500-screen.jpg'.">"); 
+			$link = JURI::base().'../templates/system/images/error500-screen.jpg';
+			print("<img src=".$link.">"); 
 			print( "<div class='fail-error'>"); 
 			print("Database Error: " . $db->toString()."<br>Check Database 
 			settings..."); 
@@ -636,14 +636,14 @@ abstract class JFactory
 			print("<html>"); 
 			print("<head>"); 
 			print("<title>Whoops! We will be right back...</title>"); 
-			print("<link rel='StyleSheet' type='text/css' href=JURI::base().'templates/system/ 
-			css/fail.css' />"); 
+			print("<link rel='StyleSheet' type='text/css' href=\'".JURI::base().'../templates/system/css/fail.css'." />");  
 			print("</head>"); 
 			print("<body>"); 
 			print("<div id='fail-wrap'>"); 
 			print( "<div class='fail'>"); 
 			print("<h2>500 Internal Server Error</h2>"); 
-			print("<img src=JURI::base().'templates/system/images/error500-screen.jpg'>"); 
+			$link = JURI::base().'../templates/system/images/error500-screen.jpg';
+			print("<img src=".$link.">"); 
 			print( "<div class='fail-error'>"); 
 			print("Database Error: " . $db->toString()."<br>Check Database 
 			settings..."); 

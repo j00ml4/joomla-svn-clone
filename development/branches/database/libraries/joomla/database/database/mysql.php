@@ -68,8 +68,29 @@ class JDatabaseMySQL extends JDatabase
 		//	$password . "<br>";
 		// Connect to the server
 		if (!($this->_connection = @mysql_connect($host, $user, $password, true))) {
-			$this->_errorNum = 2;
-			$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_CONNECT_MYSQL');
+			//$this->_errorNum = 2;
+			//$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_CONNECT_MYSQL');
+			header("HTTP/1.0 500 Internal Server Error"); 
+			print("<html>"); 
+			print("<head>"); 
+			print("<title>Whoops! We will be right back...</title>"); 
+			print("<link rel='StyleSheet' type='text/css' href=\'".JURI::base().'../templates/system/css/fail.css'." />"); 
+			print("</head>"); 
+			print("<body>"); 
+			print("<div id='fail-wrap'>"); 
+			print( "<div class='fail'>"); 
+			print("<h2>500 Internal Server Error</h2>"); 
+			$link = JURI::base().'../templates/system/images/error500-screen.jpg';
+			print("<img src=".$link.">"); 
+			//print("<img src=".JURI::base().'templates/system/images/error500-screen.jpg'.">"); 
+			print( "<div class='fail-error'>"); 
+			print("Database Error:<br>Check Database settings..."); 
+			print( "</div>"); 
+			print("</div>" ); 
+			print("</div>"); 
+			print("</body>"); 
+			print("</html>"); 
+			exit; 
 			return;
 		}
 
@@ -94,8 +115,29 @@ class JDatabaseMySQL extends JDatabase
 		if ($slave_host != "" && $slave_user != "" && $slave_password != "")
 		{
 			if (!($this->_slave_connection = @mysql_connect( $slave_host, $slave_user, $slave_password, true ))) {
-				$this->_errorNum = 2;
-				$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_CONNECT_MYSQL');
+				//$this->_errorNum = 2;
+				//$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_CONNECT_MYSQL');
+				header("HTTP/1.0 500 Internal Server Error"); 
+				print("<html>"); 
+				print("<head>"); 
+				print("<title>Whoops! We will be right back...</title>"); 
+				print("<link rel='StyleSheet' type='text/css' href=\'".JURI::base().'../templates/system/css/fail.css'." />"); 
+				print("</head>"); 
+				print("<body>"); 
+				print("<div id='fail-wrap'>"); 
+				print( "<div class='fail'>"); 
+				print("<h2>500 Internal Server Error</h2>"); 
+				$link = JURI::base().'../templates/system/images/error500-screen.jpg';
+				print("<img src=".$link.">"); 
+				//print("<img src=".JURI::base().'templates/system/images/error500-screen.jpg'.">"); 
+				print( "<div class='fail-error'>"); 
+				print("Database Error:<br>Check Database settings..."); 
+				print( "</div>"); 
+				print("</div>" ); 
+				print("</div>"); 
+				print("</body>"); 
+				print("</html>"); 
+				exit; 
 	
 				return;
 			}
@@ -188,17 +230,17 @@ class JDatabaseMySQL extends JDatabase
 			print("<html>"); 
 			print("<head>"); 
 			print("<title>Whoops! We will be right back...</title>"); 
-			print("<link rel='StyleSheet' type='text/css' href=JURI::base().'templates/system/ 
-			css/fail.css' />"); 
+			print("<link rel='StyleSheet' type='text/css' href=\'".JURI::base().'../templates/system/css/fail.css'." />"); 
 			print("</head>"); 
 			print("<body>"); 
 			print("<div id='fail-wrap'>"); 
 			print( "<div class='fail'>"); 
 			print("<h2>500 Internal Server Error</h2>"); 
-			print("<img src=".JURI::base().'templates/system/images/error500-screen.jpg'.">"); 
+			$link = JURI::base().'../templates/system/images/error500-screen.jpg';
+			print("<img src=".$link.">"); 
+			//print("<img src=".JURI::base().'templates/system/images/error500-screen.jpg'.">"); 
 			print( "<div class='fail-error'>"); 
-			print("Database Error:<br>Check Database 
-			settings..."); 
+			print("Database Error:<br>Check Database settings..."); 
 			print( "</div>"); 
 			print("</div>" ); 
 			print("</div>"); 
@@ -235,14 +277,14 @@ class JDatabaseMySQL extends JDatabase
 			print("<html>"); 
 			print("<head>"); 
 			print("<title>Whoops! We will be right back...</title>"); 
-			print("<link rel='StyleSheet' type='text/css' href=JURI::base().'templates/system/ 
-			css/fail.css' />"); 
+			print("<link rel='StyleSheet' type='text/css' href=\'".JURI::base().'../templates/system/css/fail.css'." />"); 
 			print("</head>"); 
 			print("<body>"); 
 			print("<div id='fail-wrap'>"); 
 			print( "<div class='fail'>"); 
 			print("<h2>500 Internal Server Error</h2>"); 
-			print("<img src=".JURI::base().'templates/system/images/error500-screen.jpg'.">"); 
+			$link = JURI::base().'../templates/system/images/error500-screen.jpg';
+			print("<img src=".$link.">"); 
 			print( "<div class='fail-error'>"); 
 			print("Database Error: <br>Check Database 
 			settings..."); 
