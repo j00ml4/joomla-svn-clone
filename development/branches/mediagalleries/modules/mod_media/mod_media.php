@@ -20,19 +20,5 @@ $height		= $params->get('height');
 $autostart 	= $params->get('autostart');
 
 
-// every think that you print here is the out put of the module
-/* you could 
-
-echo '<p>video = '.$video.'</p>';
-echo '<p>width = '.$width.'</p>';
-// But dont do this!
-*/
-
-
-
 // You just forgot this magical line
 require JModuleHelper::getLayoutPath('mod_media', $params->get('layout', 'default'));
-/* this is the best think for designers, 
-if if find on your template  /html/mod_media/layoutname.php it replace the core layout witout hacks
-if not it you the core layout on /tmpl/layoutname.php
-*/
