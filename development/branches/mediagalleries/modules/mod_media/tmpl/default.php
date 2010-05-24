@@ -13,11 +13,11 @@ defined('_JEXEC') or die;
 
 ?>
 <div>
-<?php
-echo "Media URL : ".$media;
+<b><?php
+echo "MEDIA URL : ".$media;
 echo "<br/>Width:".$width;
 echo "<br/>Height:".$height;
 echo "<br/>And autostart is ";
 echo $autostart==0? "OFF":  "ON";
-?>
+?></b>
 </div>
