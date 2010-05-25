@@ -36,6 +36,10 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+25-May-2010 Ian MacLennan
+ # [#20424] Revert issue 19859 (Graceful handling of Apache plugin failures)
+ ! [#19859] Reverted 19859.
+
 -------------------- 1.5.17 Stable Release [27-April-2010] ------------------
 
 26-Apr-2010 Mark Dexter
