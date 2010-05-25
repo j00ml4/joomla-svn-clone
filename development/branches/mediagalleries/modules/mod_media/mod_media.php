@@ -19,6 +19,7 @@ $width		= $params->get('width');
 $height		= $params->get('height');
 $autostart 	= $params->get('autostart');
 
+//Just trying to if it's working alright or not...I guess it should
 
 // You just forgot this magical line
 require JModuleHelper::getLayoutPath('mod_media', $params->get('layout', 'default'));
