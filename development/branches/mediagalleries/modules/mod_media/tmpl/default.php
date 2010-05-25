@@ -14,6 +14,7 @@ defined('_JEXEC') or die;
 ?>
 <div>
 <b><?php
+
 echo "MEDIA URL : ".$media;
 echo "<br/>Width:".$width;
 echo "<br/>Height:".$height;
