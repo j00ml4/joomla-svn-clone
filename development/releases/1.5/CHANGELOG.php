@@ -36,6 +36,8 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+-------------------- 1.5.18 Stable Release [TBA] ------------------
+
 25-May-2010 Ian MacLennan
  # [#20424] Revert issue 19859 (Graceful handling of Apache plugin failures)
  ! [#19859] Reverted 19859.
