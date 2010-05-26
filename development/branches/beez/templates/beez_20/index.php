@@ -229,19 +229,22 @@ $templateparams	= $app->getTemplate(true)->params;
 
 		<div id="footer-outer">
 
+		<?php if ($showbottom) : ?>
 			<div id="footer-inner">
 
-				<?php if ($showbottom) : ?>
 				<div id="bottom">
+				   <?php if ($this->countModules('position-9')): ?>
 					<div class="box box1"> <jdoc:include type="modules" name="position-9" style="beezDivision" headerlevel="3" /></div>
+					<?php endif; ?>
+					   <?php if ($this->countModules('position-10')): ?>
 					<div class="box box2"> <jdoc:include type="modules" name="position-10" style="beezDivision" headerlevel="3" /></div>
+					<?php endif; ?>
+					   <?php if ($this->countModules('position-11')): ?>
 					<div class="box box3"> <jdoc:include type="modules" name="position-11" style="beezDivision" headerlevel="3" /></div>
+					<?php endif ; ?>
 				</div>
-				<?php endif ; ?>
-
-				<jdoc:include type="modules" name="debug" />
-
-			</div>
+            </div>
+      <?php endif ; ?>
 
 			<div id="footer-sub">
 
@@ -265,6 +268,6 @@ $templateparams	= $app->getTemplate(true)->params;
 			</div>
 
 		</div>
-
+			<jdoc:include type="modules" name="debug" />
 	</body>
 </html>
