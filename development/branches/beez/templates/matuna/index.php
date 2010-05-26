@@ -123,8 +123,8 @@ $templateparams	= $app->getTemplate(true)->params;
 
 
 								<jdoc:include type="modules" name="position-7" style="beezDivision" headerLevel="3" />
-								<jdoc:include type="modules" name="position-4" style="beezHide" headerLevel="3" state="0 " />
-								<jdoc:include type="modules" name="position-5" style="beezTabs" headerLevel="2"  id="3" />
+								<jdoc:include type="modules" name="position-4" style="beezDivision" headerLevel="3" state="0 " />
+								<jdoc:include type="modules" name="position-5" style="beezDivision" headerLevel="2"  id="3" />
 
 
 							</div><!-- end navi -->
@@ -183,8 +183,8 @@ $templateparams	= $app->getTemplate(true)->params;
 
 
 						<jdoc:include type="modules" name="position-7"  style="beezDivision" headerLevel="3" />
-						<jdoc:include type="modules" name="position-4" style="beezHide" headerLevel="3" state="0 " />
-						<jdoc:include type="modules" name="position-5" style="beezTabs" headerLevel="2"  id="3" />
+						<jdoc:include type="modules" name="position-4" style="beezDivision" headerLevel="3" state="0 " />
+						<jdoc:include type="modules" name="position-5" style="beezDivision" headerLevel="2"  id="3" />
 
 
 					</div><!-- end navi -->
@@ -198,43 +198,37 @@ $templateparams	= $app->getTemplate(true)->params;
 			</div><!-- back -->
 
 		</div><!-- all -->
-
-		<div id="footer-outer">
-
+<div id="footer-outer">
+	<?php if ($showbottom) : ?>
 			<div id="footer-inner">
 
-				<?php if ($showbottom) : ?>
 				<div id="bottom">
+				   <?php if ($this->countModules('position-9')): ?>
 					<div class="box box1"> <jdoc:include type="modules" name="position-9" style="beezDivision" headerlevel="3" /></div>
+					<?php endif; ?>
+					   <?php if ($this->countModules('position-10')): ?>
 					<div class="box box2"> <jdoc:include type="modules" name="position-10" style="beezDivision" headerlevel="3" /></div>
+					<?php endif; ?>
+					   <?php if ($this->countModules('position-11')): ?>
 					<div class="box box3"> <jdoc:include type="modules" name="position-11" style="beezDivision" headerlevel="3" /></div>
+					<?php endif ; ?>
 				</div>
-				<?php endif ; ?>
-
-				<jdoc:include type="modules" name="debug" />
-
-			</div>
+            </div>
+      <?php endif ; ?>
 
 			<div id="footer-sub">
-
-
 				<div id="footer">
-
-
 					<jdoc:include type="modules" name="position-14" />
 					<p>
 						<?php echo JText::_('TPL_MATUNA_POWERED_BY');?> <a href="http://www.joomla.org/">Joomla!</a>
 					</p>
 
-			<?php if (!$templateparams->get('html5', 0)): ?>
+
 				</div><!-- end footer -->
-			<?php else: ?>
-				</footer>
-			<?php endif; ?>
 
 			</div>
 
 		</div>
-
+			<jdoc:include type="modules" name="debug" />
 	</body>
 </html>
