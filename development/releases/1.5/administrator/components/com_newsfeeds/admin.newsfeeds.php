@@ -91,7 +91,10 @@ function showNewsFeeds(  )
 	$filter_state		= $mainframe->getUserStateFromRequest( "$option.filter_state",		'filter_state',		'',				'word' );
 	$filter_catid		= $mainframe->getUserStateFromRequest( "$option.filter_catid",		'filter_catid',		0,				'int' );
 	$search				= $mainframe->getUserStateFromRequest( "$option.search",			'search',			'',				'string' );
-	$search				= JString::strtolower( $search );
+	if (strpos($search, '"') !== false) {
+		$search = str_replace(array('=', '<'), '', $search);
+	}
+	$search = JString::strtolower($search);
 
 	$limit		= $mainframe->getUserStateFromRequest( 'global.list.limit', 'limit', $mainframe->getCfg('list_limit'), 'int' );
 	$limitstart	= $mainframe->getUserStateFromRequest( $option.'.limitstart', 'limitstart', 0, 'int' );
