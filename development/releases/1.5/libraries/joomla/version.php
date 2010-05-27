@@ -32,9 +32,9 @@ class JVersion
 	/** @var string Codename */
 	var $CODENAME 	= 'wojmamni ama wojnaiki';
 	/** @var string Date */
-	var $RELDATE 	= 'TBA';
+	var $RELDATE 	= '27-May-2010';
 	/** @var string Time */
-	var $RELTIME 	= '04:00';
+	var $RELTIME 	= '18:00';
 	/** @var string Timezone */
 	var $RELTZ 	= 'GMT';
 	/** @var string Copyright Text */
