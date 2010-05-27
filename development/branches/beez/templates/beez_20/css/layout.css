@@ -1469,6 +1469,12 @@ ul.newsflash-horiz li h4
 
 /* ++++++++++++++  latest, popular  ++++++++++++++ */
 
+#nav .module_content ul.latestnews,
+#nav .module_content ul.mostread
+{
+	margin:10px 0 0 0
+}
+
 ul.latestnews,
 ul.mostread
 {
@@ -1588,7 +1594,7 @@ button.button
 .module_content #form-login-password label
 {
             float:left;
-            width:5em
+            width:5.2em
 }
 
 .login-fields
