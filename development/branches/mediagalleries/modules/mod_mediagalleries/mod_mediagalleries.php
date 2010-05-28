@@ -18,6 +18,7 @@ $gallery['layout']=$params->get('layout','compact');
 $gallery['count']=$params->get('count',5);
 $gallery['filter_category']=$params->get('filter_category',1);
 
+
 // Display
 //$layout =  $params->get('layout', 'default' );
 include( JModuleHelper::getLayoutPath('mod_mediagalleries', 'default') );

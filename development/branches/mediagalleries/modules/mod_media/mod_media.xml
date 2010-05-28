@@ -19,12 +19,11 @@
 			module="mod_media">mod_media.php</filename>
 		<filename>index.html</filename>
 		<filename>mod_media.xml</filename>
-		<folder>lang</folder>
+		<folder>language</folder>
 		<folder>tmpl</folder>
 	</files>
 	<languages>
-		<language
-			tag="en-GB">lang/en-GB.mod_media.ini</language>
+		<language tag="en-GB">language/en-GB.mod_media.ini</language>
 	</languages>
 	
 	<config>
