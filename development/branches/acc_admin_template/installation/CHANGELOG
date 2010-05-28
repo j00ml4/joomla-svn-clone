@@ -27,6 +27,34 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+27-May-2010 Jean-Marie Simonet
+$ [#20659] Converting strings to the new format in installation. Thanks Johnathan Lima.
+# [#20658] Sample data install leads to bad error in cas of inactivity period. Thanks Christophe.
+$ Consolidating some strings
+$ Refactoring Installation keys/ini files (WIP)
+
+27-May-2010 Sam Moffatt
+ # Applied [#20263] E_WARNING Error in JInstallerTemplate::loadLanguage() and
+ JInstaller::parseFiles(), thanks to Nikolai Plath
+
+26-May-2010 Christophe Demko
+ # Fixed [#20575] missing menu items (thanks Jean-Marie Simonet, bill richardson, Airton Torres)
+ # Fixed [#20577] Boxes of meta description and meta-tags do not appear (thanks Dennis Hermacki, Elin Waring and Pierre Gazzola)
+
+26-May-2010 Jean-Marie Simonet
+# [#20630] Changing site language does not work if the same content one does not exist (Thanks Christophe)
+# [#20644] [PATCH] Fix a small comment error. Thanks Rouven.
+# [#20513] Can't override default_ftp in com_install (Thanks Christophe)
+# [#20498] mod_menu default renderer adds "Menu Tag ID" to class name (Thanks Bill)
+# [#20472] Error: Article Saved Successfully (Beez)
+# [#20649] ID property is translated in "Templates Manager: Edit Style" page. Thanks Dennis
+$ Consolidated some strings.
+#+ [#20479] Install Sample Data button does not become 'un-clickable' after install. Thanks Nicholas.
+$ Added some strings missing in 20479
+
+25-May-2010 Mark Dexter
+# Fixed names of sample data images
+
 25-May-2010 Christophe Demko
  # Fixed [#20567] Com_Redirect save as copy does not work (tries to save with same name) (thanks Elin Waring, Tim Plummer,Christopher Garvis and Amy Stephen) 
  # Fixed autodetect ftp path in installation

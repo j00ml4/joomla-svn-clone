@@ -32,13 +32,13 @@ class JInstallationControllerSetup extends JController
 
 		if ($session->isNew()) {
 			JError::setErrorHandling(E_ERROR, 'message');
-			JError::raise(E_ERROR, 500, JText::_('WARNCOOKIESNOTENABLED'));
+			JError::raise(E_ERROR, 500, JText::_('INSTL_COOKIES_NOT_ENABLED'));
 
 			return false;
 		}
 
 		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get the setup model.
 		$model = $this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
@@ -81,7 +81,7 @@ class JInstallationControllerSetup extends JController
 	function database()
 	{
 		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get the application object.
 		$app = JFactory::getApplication();
@@ -128,6 +128,12 @@ class JInstallationControllerSetup extends JController
 			$this->setMessage($database->getError(), 'notice');
 			$this->setRedirect('index.php?view=database');
 		} else {
+			// Mark sample content as not installed yet
+			$data = array(
+				'sample_installed' => '0'
+			);
+			$dummy = $model->storeOptions($data);
+
 			$this->setRedirect('index.php?view=filesystem');
 		}
 	}
@@ -138,7 +144,7 @@ class JInstallationControllerSetup extends JController
 	function filesystem()
 	{
 		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get the application object.
 		$app = JFactory::getApplication();
@@ -183,7 +189,7 @@ class JInstallationControllerSetup extends JController
 	function saveconfig()
 	{
 		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get the application object.
 		$app = JFactory::getApplication();
@@ -194,6 +200,12 @@ class JInstallationControllerSetup extends JController
 		// Get the posted values from the request and validate them.
 		$data = JRequest::getVar('jform', array(), 'post', 'array');
 		$return	= $model->validate($data, 'site');
+
+		// Attempt to save the data before validation
+		$form = &$model->getForm();
+		$data = $form->filter($data);
+		unset($data['admin_password2']);
+		$model->storeOptions($data);
 
 		// Check for validation errors.
 		if ($return === false) {
