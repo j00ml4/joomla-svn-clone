@@ -885,8 +885,8 @@ VALUES
 INSERT INTO `#__template_styles` (`id`, `template`, `client_id`, `home`, `title`, `params`) VALUES
 (100, 'rhuk_milkyway', 0, 0, 'rhuk_milkyway Green', '{"colorVariation":"green","backgroundVariation":"green","widthStyle":"fmax"}'),
 (111, 'rhuk_milkyway', 0, 0, 'rhuk_milkyway Red', '{"colorVariation":"orange","backgroundVariation":"orange","widthStyle":"small"}'),
-(113, 'beez_20', 0, 0, 'Beez - Fruit Shop Site', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"fruits.gif","sitetitle":"Fruit Shop","sitedescription":"Fruit Shop Sample Site","navposition":"left","templatecolor":"nature","html5":"1"}'),
-(114, 'beez_20', 0, 0, 'Beez2 - Parks Site', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"parks.gif","sitetitle":"Australian Parks","sitedescription":"Parks Sample Site","navposition":"center","templatecolor":"nature","html5":"1"}');
+(113, 'beez_20', 0, 0, 'Beez - Fruit Shop Site', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/fruits.gif","sitetitle":"Matuna Market ","sitedescription":"Fruit Shop Sample Site","navposition":"left","templatecolor":"nature","html5":"1"}'),
+(114, 'beez_20', 0, 0, 'Beez2 - Parks Site', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/parks.gif","sitetitle":"Australian Parks","sitedescription":"Parks Sample Site","navposition":"center","templatecolor":"nature","html5":"1"}');
 
 
 
