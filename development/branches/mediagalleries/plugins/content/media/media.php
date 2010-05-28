@@ -26,276 +26,14 @@ include_once dirname(__FILE__) .DS.'media'.DS.'htmlembed.php';
 class plgContentMedia extends JPlugin
 {
 	
-/**
+		
+	/**
 	 * Example prepare content method
 	 *
 	 * Method is called by the view
 	 *
 	 * @param	string	The context of the content being passed to the plugin.
-	 * @param	object	The content objec	/**
-	 * Show denVideo
-	 * @return str
-	 * @param string $video Media URL
-	 * @param int $width [optional]
-	 * @param int $width [optional]
-	 * @param boolean $autoplay True if yes [optional]
-	 */
-	function showDenVideo( $video, $width=0, $height =0, $autostart=0 ){	
-		// PARAMs
-		$pparams =& getDenVideoParams();
-		
-		// Fix Video UrL
-		$video = eregi('http://', $video)? 
-			$video: // Custom PATH
-			$pparams->get('uri_img').$video; // Default PATH
-		
-		// Size Style
-		if( $width ){			
-			$height = ($height)?
-				'height:'. $height .'px;': // Manual H
-					'height:'. $width .'px;';// Auto H		
-							
-			$width = 'width:'. $width .'px;';
-		}elseif( $height ){		
-			$height = 'height:'. $height .'px;';
-			$width = 'width:'. $height .'px;';
-		}else{ 
-			$height=''; 
-			$width ='';
-		}
-		
-		// AutoStart
-		$autostart = (boolean)$autostart;
-		
-		
-		/* ***************************************************
-		 * The Show Begins
-		 *****************************************************/	
-		 
-		/* YouTube Video 
-		*****************************************************/
-		if( eregi('youtube.com', $video) ){
-			$vparams = array();
-			$vparams[] = 'autoplay='.$autostart;
-			$vparams[] = 'rel='.$pparams->get('youtube_rel');//, 'advanced');
-			$vparams[] = 'loop='.$pparams->get('youtube_loop');//, 'advanced');
-		//	$vparams[] = 'enablejsapi='.$pparams->get('youtube_enablejsapi', '', 'advanced');
-		//	$vparams[] = 'playerapiid='.$pparams->get('youtube_playerapiid', 'advanced');
-			$vparams[] = 'disablekb='.$pparams->get('youtube_disablekb');//, 'advanced');
-			$vparams[] = 'egm='.$pparams->get('youtube_egm');//, 'advanced');
-			$vparams[] = 'border='.$pparams->get('youtube_border');//, 'advanced');
-			$vparams[] = 'color1=0x'.$pparams->get('youtube_color1');//, 'advanced');
-			$vparams[] = 'color2=0x'.$pparams->get('youtube_color2');//, 'advanced');
-	
-			$replace = addVideoYoutube($video, $width, $height, $vparams );
-		}
-		
-		/* Yahoo Video 
-		*****************************************************/
-		elseif( eregi('video.yahoo', $video) ){	
-			
-			$replace = addVideoYahoo($video, $width, $height, $autostart );
-		}
-		
-		/* Google Video 
-		*****************************************************/
-		elseif( eregi('video.google',$video) ){
-			
-			$replace = addVideoGoogle($video, $width, $height, $autostart);
-			
-		}
-		
-		/* Brightcove Video 
-		*****************************************************/
-		elseif( eregi('brightcove.tv', $video) ){
-	
-			$replace = addVideoBrightcove( $video, $width, $height, $autostart );
-		}
-	
-		/* Metacafe.com
-		*****************************************************/
-		elseif( eregi('metacafe.com', $video) ){
-	
-			$replace = addVideoMetacafe($video, $width, $height, $autostart );
-		}
-		
-		/* Tangle.com
-		*****************************************************/
-		elseif( eregi('tangle.com', $video) ){
-	
-			$replace = addVideoTangle($video, $width, $height, $autostart );
-		}
-		
-		/* Megavideo.com
-		*****************************************************/
-		elseif( eregi('megavideo.com', $video) ){
-	
-			$replace = addVideoMegavideo($video, $width, $height, $autostart );
-		}
-		
-		/* Video from files
-		******************************************************/ 
-		else{			
-			$type = substr( $video, strrpos($video, '.') );			
-			$type = strtolower($type);
-			switch( $type ){
-				
-			/* Flash .SWF 
-			*****************************************************/
-			case '.swf':		    
-				$replace = addMediaSWF($video, $width, $height);
-				break;				
-			
-			/* Music .MP3
-			*****************************************************/
-			case '.mp3': 	
-				$vparams = array();
-				$vparams['path_player'] = $pparams->get('uri_plg');
-				switch( $pparams->get('mp3_player') ){
-					case 'jwplayer':// Play with JWPLAYER
-						$vparams['flashvars'][] = 'autostart='. ( ($autostart)? 'true': 'false' );
-						$vparams['flashvars'][] = 'showeq=true';
-						$vparams['flashvars'][] = 'showstop=true';
-						$vparams['flashvars'][] = 'fullscreen=false';
-						$vparams['flashvars'][] = 'quality='. ( $pparams->get('jw_quality')? 'true': 'false' );
-						$vparams['flashvars'][] = 'backcolor=0x'. $pparams->get('jw_backcolor');//, 'advanced');
-						$vparams['flashvars'][] = 'frontcolor=0x'. $pparams->get('jw_frontcolor');//, 'advanced');
-						$vparams['flashvars'][] = 'lightcolor=0x'. $pparams->get('jw_lightcolor');//, 'advanced');
-						$vparams['flashvars'][] = 'screencolor=0x'. $pparams->get('jw_screencolor');//, 'advanced');
-						if( $pparams->get('jw_logo') )	{		
-							$vparams['flashvars'][] = 'logo='. JURI::base().'images/'.$pparams->get('jw_logo', 'advanced');
-						}
-								
-						$height = 'height:100px;';
-						//$width = 'width: 290px;';		
-						$replace = addVideoJWPlayer($video, $width, $height, $vparams);
-						break;
-					
-					case '1pixelout':// Play with 1PIXELOUT
-					default:
-						$vparams['autostart'] = ($autostart)? 'yes': 'no';
-						$height = 'height:24px;';
-						//$width = 'width: 290px;';	
-						$replace = addMusic1Pixelout($video, $width, $height, $vparams);
-						break;
-						
-				}			
-				break;
-			
-			/* JPG, GIF, PNG
-			*****************************************************/
-			case '.jpg':
-			case '.gif':
-			case '.png':
-				$replace = addPicture($video, $width, $height);
-			 	break;
-				
-			/* JPG, GIF, PNG, H264
-			*****************************************************/
-			case '.h264':
-				$vparams = array();
-				$vparams['path_player'] = $pparams->get('uri_plg');
-				// JW PLAYER
-				$vparams['flashvars'][] = 'autostart='. ( ($autostart)? 'true': 'false' );
-				$vparams['flashvars'][] = 'showstop=true';
-				$vparams['flashvars'][] = 'stretching=fill';
-				$vparams['flashvars'][] = 'fullscreen=true';
-				$vparams['flashvars'][] = 'quality='. ( $pparams->get('jw_quality')? 'true': 'false' );
-				$vparams['flashvars'][] = 'backcolor=0x'. $pparams->get('jw_backcolor');//, 'advanced');
-				$vparams['flashvars'][] = 'frontcolor=0x'. $pparams->get('jw_frontcolor');//, 'advanced');
-				$vparams['flashvars'][] = 'lightcolor=0x'. $pparams->get('jw_lightcolor');//, 'advanced');
-				$vparams['flashvars'][] = 'screencolor=0x'. $pparams->get('jw_screencolor');//, 'advanced');
-				if( $pparams->get('jw_logo', '') )	{		
-					$vparams['flashvars'][] = 'logo='. JURI::base().'images/'.$pparams->get('jw_logo', 'advanced');
-				}
-				
-				$replace = addVideoJWPlayer($video, $width, $height, $vparams);
-				break;
-				
-			/* Video .FLV
-			*****************************************************/
-			case '.flv': 	
-				$vparams = array();
-				$vparams['path_player'] = $pparams->get('uri_plg');
-				switch( $pparams->get('flv_player') ){
-					case 'jwplayer':// Play with JWPLAYER
-						$vparams['flashvars'][] = 'autostart='. ( ($autostart)? 'true': 'false' );
-						$vparams['flashvars'][] = 'showstop=true';
-						$vparams['flashvars'][] = 'stretching=fill';
-						$vparams['flashvars'][] = 'fullscreen=true';
-						$vparams['flashvars'][] = 'quality='. ( $pparams->get('jw_quality')? 'true': 'false' );
-						$vparams['flashvars'][] = 'backcolor=0x'. $pparams->get('jw_backcolor');//, 'advanced');
-						$vparams['flashvars'][] = 'frontcolor=0x'. $pparams->get('jw_frontcolor');//, 'advanced');
-						$vparams['flashvars'][] = 'lightcolor=0x'. $pparams->get('jw_lightcolor');//, 'advanced');
-						$vparams['flashvars'][] = 'screencolor=0x'. $pparams->get('jw_screencolor');//, 'advanced');
-						if( $pparams->get('jw_logo', '') )	{		
-							$vparams['flashvars'][] = 'logo='. JURI::base().'images/'.$pparams->get('jw_logo', 'advanced');
-						}
-						
-						$replace = addVideoJWPlayer($video, $width, $height, $vparams);
-						break;
-						
-					case '2kplayer':// Play with simple FLVPlayer
-					default:
-						$vparams['autostart'] = ($autostart)? '1': '0';
-						
-						$replace = addVideo2KPlayer($video, $width, $height, $vparams);
-						break;
-				}			
-				break;				
-	
-						
-			/* Quicktime MOV,  MP4
-			************************************************/
-			case '.mov':
-			case '.3gp':		
-			case '.mp4':
-				$replace = addVideoQuicktime($video, $width, $height, $autostart);
-				break;
-				
-			/* Realmedia .RM & .RAM
-			*****************************************************/
-			case '.rm':
-			case '.rmvb':
-			case '.ram': 	
-				$replace = addVideoRealmedia($video, $width, $height, $autostart);
-				break;
-				
-			/* Applet .CLASS
-			*****************************************************/
-			case '.class':				
-				$replace = addAppletJava( $video, $width, $height);
-				break;
-			
-			/* DivX
-			*****************************************************/
-			case '.div':
-			case '.avi':
-			case '.divx':
-				$replace = addVideoDivx($video, $width, $height,  $autostart);
-				break;
-			
-			/* Windows Media
-			*****************************************************/
-			case '.asx':
-			case '.wma':
-			case '.wmv':
-			case '.mpg':
-			case '.mpeg':
-				$replace =addVideoWindows($video, $width, $height,  $autostart);
-				break;
-	
-			/* Error
-			*****************************************************/
-			default: 
-				$replace = addVideoError($video, 'Invalid Video');
-				break;
-			}
-		}
-			
-		// Return video
-		return $replace;
-	}t.  Note $article->text is also available
+	 * @param	object	The content objec	
 	 * @param	object	The content params
 	 * @param	int		The 'page' number
 	 * @since	1.6
@@ -316,6 +54,7 @@ class plgContentMedia extends JPlugin
 		
 		// PARAMs
 		$plgParams =& getDenVideoParams(); // no needed
+		
 		
 		// Default	
 		$w = (int)$params->get('width', 400);
@@ -368,7 +107,7 @@ class plgContentMedia extends JPlugin
 		}
 		return true;
 	}	
-
+	
 
 	/** The most important function! 
 	 * Show denVideo
@@ -641,7 +380,7 @@ class plgContentMedia extends JPlugin
 	 *
 	 * @param $params
 	 */
-	protected function _getParams(&$params){
+	protected function _getParams(){
 		// PARAMs
 		$plugin =& JPluginHelper::getPlugin('content', 'denvideo');
 		$plgParams = new JParameter( $plugin->params );
@@ -665,12 +404,13 @@ class plgContentMedia extends JPlugin
 }
 
 
+
 // this goes to the onContentPreparplgContentMediae
 function plgContentDenVideo( &$row, &$params, $page=0 ){		
 	
 }
 
-/** is this needed?
+/** 
  * Get denVideo params object
  * 
  * @return JParameter
