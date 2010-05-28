@@ -670,7 +670,7 @@ function plgContentDenVideo( &$row, &$params, $page=0 ){
 	
 }
 
-/**
+/** is this needed?
  * Get denVideo params object
  * 
  * @return JParameter
