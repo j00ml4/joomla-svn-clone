@@ -81,7 +81,7 @@ $templateparams	= $app->getTemplate(true)->params;
 					<h1 id="logo">
 
 					<?php if ($logo != '-1' ): ?>
-					<img src="<?php echo $this->baseurl ?>/images/<?php echo $logo; ?>"  alt="<?php echo JText::_('TPL_BEEZ2_LOGO'); ?>" />
+					<img src="<?php echo $this->baseurl ?>/<?php echo $logo; ?>"  alt="<?php echo JText::_('TPL_BEEZ2_LOGO'); ?>" />
 					<?php endif;?>
 					<?php if ($logo == '-1' ): ?>
 					<?php echo $templateparams->get('sitetitle');?>
@@ -161,7 +161,7 @@ $templateparams	= $app->getTemplate(true)->params;
 						<?php if ($this->getBuffer('message')) : ?>
 							<div class="error">
 								<h2>
-									<?php echo JText::_('JNOTICE'); ?>
+									<?php echo JText::_('TPL_BEEZ2_SYSTEM_MESSAGE'); ?>
 								</h2>
 								<jdoc:include type="message" />
 							</div>

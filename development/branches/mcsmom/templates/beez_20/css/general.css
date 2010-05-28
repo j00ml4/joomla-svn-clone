@@ -6,7 +6,7 @@ label.invalid { color: #ff0000; }
 
 /* -- buttons */
 #editor-xtd-buttons {
-        padding: 5px;
+        padding: 0px;
 }
 
 .button2-left,
@@ -21,10 +21,10 @@ label.invalid { color: #ff0000; }
 .button2-left span,
 .button2-right span {
         display: block;
-        height: 22px;
+
         float: left;
-        line-height: 22px;
-        font-size: 11px;
+
+
         color: #666;
         cursor: pointer;
 }
@@ -163,11 +163,11 @@ a img.calendar {
 #system-message
 {
         margin:10px 0 20px 0;
-		background:url(../images/nature/nav_level_1.gif) repeat-x;
-		border:solid 2px #ccc;
-		border-left:0;
-		border-right:0;
-		padding:10px
+                background:url(../images/nature/nav_level_1.gif) repeat-x;
+                border:solid 2px #ccc;
+                border-left:0;
+                border-right:0;
+                padding:10px
 }
 
 #system-message dt { font-weight: bold; }

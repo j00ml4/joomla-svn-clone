@@ -81,7 +81,7 @@ fieldset
 #logo span
 {
         color:#fff !important;
-		margin-top:6px
+                margin-top:6px
 }
 
 .logoheader
@@ -121,7 +121,7 @@ h1#logo
 
 #header ul.menu li
 {
-	border:0
+        border:0
 }
 
 #header ul li a:link,
@@ -472,9 +472,9 @@ ul.menu li.active ul li.active ul li.active a:visited
 ul.menu li ul li ul li ul
 {
         border:solid 1px #eee !important;
-		padding-top:10px !important;
-		padding-bottom:10px !important;
-		background:#fff url(../images/nature/level4.png) repeat-x !important;
+                padding-top:10px !important;
+                padding-bottom:10px !important;
+                background:#fff url(../images/nature/level4.png) repeat-x !important;
 }
 
 
@@ -559,13 +559,13 @@ ul#archive-items li
 .image-left
 {
         border:solid 1px #ddd;
-		padding:2px
+                padding:2px
 }
 
 .image-right
 {
           border:solid 1px #ddd;
-		padding:2px
+                padding:2px
 }
 
 
