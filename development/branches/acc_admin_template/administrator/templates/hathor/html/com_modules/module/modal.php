@@ -87,49 +87,53 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 		<fieldset class="adminform">
 			<?php if ($this->item->id) : ?>
 			<legend><?php echo JText::sprintf('JGLOBAL_RECORD_NUMBER', $this->item->id); ?></legend>
+			<?php else : ?>
+			<legend><?php echo JText::_('JDETAILS');?>	</legend>
 			<?php endif; ?>
 			
-			<?php echo $this->form->getLabel('title'); ?>
-			<?php echo $this->form->getInput('title'); ?>
-			
-			<?php echo $this->form->getLabel('module'); ?>
-			<?php echo $this->form->getInput('module'); ?>
-			
-			<?php echo $this->form->getLabel('showtitle'); ?>
-			<?php echo $this->form->getInput('showtitle'); ?>
-			
-			<?php echo $this->form->getLabel('published'); ?>
-			<?php echo $this->form->getInput('published'); ?>
-			
-			<?php echo $this->form->getLabel('position'); ?>
-			<?php echo $this->form->getInput('position'); ?>
-			
-			<?php echo $this->form->getLabel('ordering'); ?>
-			<div id="jform_ordering" class="fltlft"><?php echo $this->form->getInput('ordering'); ?></div>
-			
-			<?php echo $this->form->getLabel('access'); ?><br />
-			<?php echo $this->form->getInput('access'); ?>
-			
-			<?php echo $this->form->getLabel('client_id'); ?>
-			<?php echo $this->form->getInput('client_id'); ?>
-			
-			<?php echo $this->form->getLabel('language'); ?>
-			<?php echo $this->form->getInput('language'); ?>
-			
-			
+			<ul class="adminformlist">
+			<li><?php echo $this->form->getLabel('title'); ?>
+			<?php echo $this->form->getInput('title'); ?></li>
+
+			<li><?php echo $this->form->getLabel('module'); ?>
+			<?php echo $this->form->getInput('module'); ?></li>
+
+			<li><?php echo $this->form->getLabel('showtitle'); ?>
+			<?php echo $this->form->getInput('showtitle'); ?></li>
+
+			<li><?php echo $this->form->getLabel('published'); ?>
+			<?php echo $this->form->getInput('published'); ?></li>
+
+			<li><?php echo $this->form->getLabel('position'); ?>
+			<?php echo $this->form->getInput('position'); ?></li>
+
+			<li><?php echo $this->form->getLabel('ordering'); ?>
+			<?php echo $this->form->getInput('ordering'); ?></li>
+
+			<li><?php echo $this->form->getLabel('access'); ?><br />
+			<?php echo $this->form->getInput('access'); ?></li>
+
+			<li><?php echo $this->form->getLabel('client_id'); ?>
+			<?php echo $this->form->getInput('client_id'); ?></li>
+
+			<li><?php echo $this->form->getLabel('language'); ?>
+			<?php echo $this->form->getInput('language'); ?></li>
+
+
 			<!-- Module metadata -->
 			<?php if ($this->item->xml) : ?>
 				<?php if ($text = trim($this->item->xml->description)) : ?>
-					<label>
+					<li><label>
 						<?php echo JText::_('COM_MODULES_MODULE_DESCRIPTION'); ?>
 					</label>
-					<?php echo $this->escape($text); ?>
+					<?php echo $this->escape($text); ?></li>
 				<?php endif; ?>
 			<?php else : ?>
-				<?php echo JText::_('COM_MODULES_ERR_XML'); ?>
+				<li><?php echo JText::_('COM_MODULES_ERR_XML'); ?></li>
 			<?php endif; ?>
-		</fieldset>	
-		
+			</ul>
+		</fieldset>
+
 	</div>
 
 	<div class="fltrt options-section">
@@ -139,21 +143,21 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 
 		<?php echo $pane->endPane(); ?>
 	</div>
-	
+
 	<div class="col main-section">
 		<?php echo $this->loadTemplate('assignment'); ?>
 	</div>
-	
+
 	<div class="clr"></div>
-		
+
 
 	<?php if ($hasContent) : ?>
 		<fieldset class="adminform">
 			<legend><?php echo JText::_('COM_MODULES_CUSTOM_OUTPUT'); ?></legend>
-
-			<?php echo $this->form->getLabel('content'); ?>
-			<?php echo $this->form->getInput('content'); ?>
-
+			<ul class="adminformlist">
+				<li><?php echo $this->form->getLabel('content'); ?>
+				<?php echo $this->form->getInput('content'); ?></li>
+			</ul>
 		</fieldset>	endif;
 	<?php endif; ?>
 

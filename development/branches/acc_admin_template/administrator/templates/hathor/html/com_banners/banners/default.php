@@ -70,7 +70,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 			</select>
 
 			<button type="button" id="filter-go" onclick="this.form.submit();">
-				<?php echo JText::_('Go'); ?></button>
+				<?php echo JText::_('TPL_HATHOR_GO'); ?></button>
 			
 		</div>
 	</fieldset>

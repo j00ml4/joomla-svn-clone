@@ -62,7 +62,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 			</select>
 
 			<button type="button" id="filter-go" onclick="this.form.submit();">
-				<?php echo JText::_('GO'); ?></button>
+				<?php echo JText::_('TPL_HATHOR_GO'); ?></button>
 		</div>
 	</fieldset>
 	<div class="clr"> </div>
@@ -162,7 +162,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 					<?php echo $this->escape($item->author_name); ?>
 				</td>
 				<td class="center">
-					<?php echo JHTML::_('date',$item->created, '%Y.%m.%d'); ?>
+					<?php echo JHTML::_('date',$item->created, 'Y-m-d'); ?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->hits; ?>
