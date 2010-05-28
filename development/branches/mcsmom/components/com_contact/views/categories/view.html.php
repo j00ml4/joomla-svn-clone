@@ -61,6 +61,9 @@ class ContactViewCategories extends JView
 		$this->assignRef('parent',		$parent);
 		$this->assignRef('items',		$items);
 
+		
+		
+		
 		$this->_prepareDocument();
 
 		parent::display($tpl);
