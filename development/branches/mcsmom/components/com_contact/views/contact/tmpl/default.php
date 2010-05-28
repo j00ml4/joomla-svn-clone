@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 
-$cparams = JComponentHelper::getParams ('com_media');var_dump($this->params->get('presentation_style'));
+$cparams = JComponentHelper::getParams ('com_media');
 ?>
 <div class="contact<?php echo $this->params->get('pageclass_sfx')?>">
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
