@@ -4,7 +4,7 @@
 	version="1.6.0"
 	client="site">
 	<name>Media Galleries</name>
-	<author>Aman Gautam</author>
+	<author>Aman Gautam, Marcelo Eden</author>
 	<creationDate>May 2010</creationDate>
 	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
@@ -21,10 +21,10 @@
       <filename>helper.php</filename>	  
       <filename>index.html</filename>
       <folder>tmpl</folder>
+	  <folder>language</folder>
 	</files>	
 	<languages>
-		<language
-			tag="en-GB">lang/en-GB.mod_mediagalleries.ini</language>
+		<language tag="en-GB">language/en-GB.mod_mediagalleries.ini</language>
 	</languages>
 		
 	<config>
