@@ -394,7 +394,6 @@ INSERT INTO `#__extensions` (`extension_id`, `name`, `type`, `element`, `folder`
 (24, 'com_redirect', 'component', 'com_redirect', '', 1, 1, 0, 0, '', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (25, 'com_users', 'component', 'com_users', '', 1, 1, 0, 1, '', '{"allowUserRegistration":"1","new_usertype":"2","useractivation":"1","frontend_userparams":"1","mailSubjectPrefix":"","mailBodySuffix":""}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
-
 # Libraries
 INSERT INTO `#__extensions` (`extension_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) VALUES
 (100, 'Joomla! Web Application Framework', 'library', 'joomla', '', 0, 1, 1, 0, '', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
@@ -523,11 +522,11 @@ CREATE TABLE `#__languages` (
   UNIQUE `idx_sef` (`sef`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO `#__languages` (`lang_id`,`lang_code`,`title`,`title_native`,`sef`,`image`,`description`,`published`)
+INSERT INTO `#__languages` (`lang_id`,`lang_code`,`title`,`title_native`,`sef`,`image`,`description`,`metakey`,`metadesc`,`published`)
 VALUES
-	(1,'en-GB','English (UK)','English (UK)','en','en','',1),
-	(2,'en-US','English (US)','English (US)','us','en','',0),
-	(3,'xx-XX','xx (Test)','xx (Test)','xx','br','',1);
+	(1,'en-GB','English (UK)','English (UK)','en','en','','','',1),
+	(2,'en-US','English (US)','English (US)','us','en','','','',0),
+	(3,'xx-XX','xx (Test)','xx (Test)','xx','br','','','',1);
 
 #
 # Table structure for table `#__menu`
@@ -928,13 +927,13 @@ CREATE TABLE IF NOT EXISTS `#__usergroups` (
 INSERT INTO `#__usergroups` (`id` ,`parent_id` ,`lft` ,`rgt` ,`title`)
 VALUES
 	(1,0,1,20,'Public'),
-	(2,1,8,19,'Registered'),
-	(3,2,11,16,'Author'),
-	(4,3,12,15,'Editor'),
-	(5,4,13,14,'Publisher'),
-	(6,1,2,7,'Manager'),
-	(7,6,3,6,'Administrator'),
-	(8,7,4,5,'Super Users');
+		(2,1,8,19,'Registered'),
+			(3,2,9,16,'Author'),
+				(4,3,10,13,'Editor'),
+					(5,4,11,12,'Publisher'),
+		(6,1,2,7,'Manager'),
+			(7,6,3,6,'Administrator'),
+				(8,7,4,5,'Super Users');
 
 # -------------------------------------------------------
 
