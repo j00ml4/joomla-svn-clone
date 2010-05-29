@@ -224,6 +224,27 @@ h1#logo
 
 }
 
+/* ++++++++++++++  button for closing right column  ++++++++++++++ */
+
+#close
+{
+        margin-right:0px;
+        font-size:0.85em;
+        text-transform:uppercase;
+}
+
+#close span
+{
+        position:absolute;
+        right: 20px;
+    z-index:10000;
+    top:5px;
+    width:7em;
+    font-weight:bold;
+    text-align:right;
+    line-height:1.5em;
+    padding:5px 2px 5px 5px
+}
 
 
 /* ###################### main ###################### */
