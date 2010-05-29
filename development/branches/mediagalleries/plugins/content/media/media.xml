@@ -8,7 +8,7 @@
 	<authorEmail>amangautam@ymail.com</authorEmail>
 	<authorUrl>www.3den.org</authorUrl>
 	<version>1.0</version>
-	<description>PLG_CONTENT_MEDIA_XML_DESCRIPTION</description>
+	<description>PLG_MEDIA_XML_DESCRIPTION</description>
 
 	<files>
 		<filename plugin="media">media.php</filename>
@@ -16,7 +16,7 @@
 		<folder>language</folder>
 		<folder>media</folder>
 	</files>
-	<languages>
+	<languages folder="language">
 		<!-- Make everything multilanguage -->
 		<language tag="en-GB">en-GB.plg_content_media.ini</language>
 	</languages>
