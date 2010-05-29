@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 
 
 jimport('joomla.plugin.plugin');
+jimport( 'joomla.html.parameter' );
 
 // This lib adds the media 
 include_once dirname(__FILE__) .DS.'media'.DS.'htmlembed.php';
@@ -54,7 +55,7 @@ class plgContentMedia extends JPlugin
 		}
 		
 		// PARAMs
-		$plgParams =& getDenVideoParams(); // no needed
+		$plgParams =& self::getParams(); // no needed
 		
 		
 		// Default	
@@ -97,11 +98,11 @@ class plgContentMedia extends JPlugin
 			}
 			
 			// Video Display
-			$video = $parts[0];
+			$media = $parts[0];
 	
 			// Put Video inside the content
-			$replace = self::addMedia( $video, $width, $height, $autostart );
-			$replace = '<span id="denvideo_'. $x .'" class="denvideo" style="position:relative">'
+			$replace = self::addMedia( $media, $width, $height, $autostart );
+			$replace = '<span id="Media_'. $x .'" class="Media" style="position:relative">'
 				. $replace
 			. '</span>';
 			$row->text = str_replace( $matches[0][$x], $replace, $row->text );
@@ -111,24 +112,22 @@ class plgContentMedia extends JPlugin
 	
 
 	/** The most important function! 
-	 * Show denVideo
+	 * Show Media
 	 * @return str
-	 * @param string $video Media URL // Rename to media
+	 * @param string $media Media URL // Rename to media
 	 * @param int $width [optional]
 	 * @param int $width [optional]
 	 * @param boolean $autoplay True if yes [optional]
 	 */
-	public function addMedia( $video, $width=0, $height =0, $autostart=0 )
+	public function addMedia( $media, $width=0, $height =0, $autostart=0 )
 	{	
-		
-		
 		// The propose of this is to get the defaults set by the admin 
-		$pparams = self::getParams(); // make it work
+		$pparams =& self::getParams(); // make it work
 		
 		// Fix Video UrL
-		$video = preg_match("http:'/'/", $video)? 
-			$video: // Custom PATH
-			$pparams->get('uri_img').$video; // Default PATH
+		$media = strpos($media,"http://")? 
+			$media: // Custom PATH
+			$pparams->get('uri_img').$media; // Default PATH
 		
 		// Size Style
 		if( $width ){			
@@ -155,8 +154,8 @@ class plgContentMedia extends JPlugin
 		 
 		/* YouTube Video 
 		*****************************************************/
-		//preg_match('@^(?:youtube.com)?([^/]+)@i',$video);
-		if ( @(preg_match('/youtube\.com/i', $video)) ){
+		//preg_match('@^(?:youtube.com)?([^/]+)@i',$media);
+		if ( stripos($media, 'youtube.com' )){
 			$vparams = array();
 			$vparams[] = 'autoplay='.$autostart;
 			$vparams[] = 'rel='.$pparams->get('youtube_rel');//, 'advanced');
@@ -169,63 +168,63 @@ class plgContentMedia extends JPlugin
 			$vparams[] = 'color1=0x'.$pparams->get('youtube_color1');//, 'advanced');
 			$vparams[] = 'color2=0x'.$pparams->get('youtube_color2');//, 'advanced');
 	
-			$replace = addVideoYoutube($video, $width, $height, $vparams );
+			$replace = addVideoYoutube($media, $width, $height, $vparams );
 		}
 		
 		/* Yahoo Video 
 		*****************************************************/
-		elseif( eregi('video.yahoo', $video) ){	
+		elseif( stripos($media,'video.yahoo') ){	
 			
-			$replace = addVideoYahoo($video, $width, $height, $autostart );
+			$replace = addVideoYahoo($media, $width, $height, $autostart );
 		}
 		
 		/* Google Video 
 		*****************************************************/
-		elseif( eregi('video.google',$video) ){
+		elseif( stripos($media,'video.google') ){
 			
-			$replace = addVideoGoogle($video, $width, $height, $autostart);
+			$replace = addVideoGoogle($media, $width, $height, $autostart);
 			
 		}
 		
 		/* Brightcove Video 
 		*****************************************************/
-		elseif( eregi('brightcove.tv', $video) ){
+		elseif( stripos( $media,'brightcove.tv') ){
 	
-			$replace = addVideoBrightcove( $video, $width, $height, $autostart );
+			$replace = addVideoBrightcove( $media, $width, $height, $autostart );
 		}
 	
 		/* Metacafe.com
 		*****************************************************/
-		elseif( eregi('metacafe.com', $video) ){
+		elseif( stripos( $media,'metacafe.com') ){
 	
-			$replace = addVideoMetacafe($video, $width, $height, $autostart );
+			$replace = addVideoMetacafe($media, $width, $height, $autostart );
 		}
 		
 		/* Tangle.com
 		*****************************************************/
-		elseif( eregi('tangle.com', $video) ){
+		elseif( stripos( $media,'tangle.com') ){
 	
-			$replace = addVideoTangle($video, $width, $height, $autostart );
+			$replace = addVideoTangle($media, $width, $height, $autostart );
 		}
 		
 		/* Megavideo.com
 		*****************************************************/
-		elseif( eregi('megavideo.com', $video) ){
+		elseif( stripos( $media,'megavideo.com') ){
 	
-			$replace = addVideoMegavideo($video, $width, $height, $autostart );
+			$replace = addVideoMegavideo($media, $width, $height, $autostart );
 		}
 		
 		/* Video from files
 		******************************************************/ 
 		else{			
-			$type = substr( $video, strrpos($video, '.') );			
+			$type = substr( $media, strrpos($media, '.') );			
 			$type = strtolower($type);
 			switch( $type ){
 				
 			/* Flash .SWF 
 			*****************************************************/
 			case '.swf':		    
-				$replace = addMediaSWF($video, $width, $height);
+				$replace = addMediaSWF($media, $width, $height);
 				break;				
 			
 			/* Music .MP3
@@ -251,7 +250,7 @@ class plgContentMedia extends JPlugin
 								
 						$height = 'height:100px;';
 						//$width = 'width: 290px;';		
-						$replace = addVideoJWPlayer($video, $width, $height, $vparams);
+						$replace = addVideoJWPlayer($media, $width, $height, $vparams);
 						break;
 					
 					case '1pixelout':// Play with 1PIXELOUT
@@ -259,7 +258,7 @@ class plgContentMedia extends JPlugin
 						$vparams['autostart'] = ($autostart)? 'yes': 'no';
 						$height = 'height:24px;';
 						//$width = 'width: 290px;';	
-						$replace = addMusic1Pixelout($video, $width, $height, $vparams);
+						$replace = addMusic1Pixelout($media, $width, $height, $vparams);
 						break;
 						
 				}			
@@ -270,7 +269,7 @@ class plgContentMedia extends JPlugin
 			case '.jpg':
 			case '.gif':
 			case '.png':
-				$replace = addPicture($video, $width, $height);
+				$replace = addPicture($media, $width, $height);
 			 	break;
 				
 			/* JPG, GIF, PNG, H264
@@ -292,7 +291,7 @@ class plgContentMedia extends JPlugin
 					$vparams['flashvars'][] = 'logo='. JURI::base().'images/'.$pparams->get('jw_logo', 'advanced');
 				}
 				
-				$replace = addVideoJWPlayer($video, $width, $height, $vparams);
+				$replace = addVideoJWPlayer($media, $width, $height, $vparams);
 				break;
 				
 			/* Video .FLV
@@ -315,14 +314,14 @@ class plgContentMedia extends JPlugin
 							$vparams['flashvars'][] = 'logo='. JURI::base().'images/'.$pparams->get('jw_logo', 'advanced');
 						}
 						
-						$replace = addVideoJWPlayer($video, $width, $height, $vparams);
+						$replace = addVideoJWPlayer($media, $width, $height, $vparams);
 						break;
 						
 					case '2kplayer':// Play with simple FLVPlayer
 					default:
 						$vparams['autostart'] = ($autostart)? '1': '0';
 						
-						$replace = addVideo2KPlayer($video, $width, $height, $vparams);
+						$replace = addVideo2KPlayer($media, $width, $height, $vparams);
 						break;
 				}			
 				break;				
@@ -333,7 +332,7 @@ class plgContentMedia extends JPlugin
 			case '.mov':
 			case '.3gp':		
 			case '.mp4':
-				$replace = addVideoQuicktime($video, $width, $height, $autostart);
+				$replace = addVideoQuicktime($media, $width, $height, $autostart);
 				break;
 				
 			/* Realmedia .RM & .RAM
@@ -341,13 +340,13 @@ class plgContentMedia extends JPlugin
 			case '.rm':
 			case '.rmvb':
 			case '.ram': 	
-				$replace = addVideoRealmedia($video, $width, $height, $autostart);
+				$replace = addVideoRealmedia($media, $width, $height, $autostart);
 				break;
 				
 			/* Applet .CLASS
 			*****************************************************/
 			case '.class':				
-				$replace = addAppletJava( $video, $width, $height);
+				$replace = addAppletJava( $media, $width, $height);
 				break;
 			
 			/* DivX
@@ -355,7 +354,7 @@ class plgContentMedia extends JPlugin
 			case '.div':
 			case '.avi':
 			case '.divx':
-				$replace = addVideoDivx($video, $width, $height,  $autostart);
+				$replace = addVideoDivx($media, $width, $height,  $autostart);
 				break;
 			
 			/* Windows Media
@@ -365,13 +364,13 @@ class plgContentMedia extends JPlugin
 			case '.wmv':
 			case '.mpg':
 			case '.mpeg':
-				$replace =addVideoWindows($video, $width, $height,  $autostart);
+				$replace =addVideoWindows($media, $width, $height,  $autostart);
 				break;
 	
 			/* Error
 			*****************************************************/
 			default: 
-				$replace = addVideoError($video, 'Invalid Video');
+				$replace = addVideoError($media, 'Invalid Video');
 				break;
 			}
 		}
@@ -411,5 +410,3 @@ class plgContentMedia extends JPlugin
 		return $params;
 	}
 }
-
-?>
