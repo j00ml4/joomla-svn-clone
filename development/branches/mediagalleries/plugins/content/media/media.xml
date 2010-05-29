@@ -1,72 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <install version="1.6" type="plugin" group="content">
 	<name>plg_content_media</name>
-	<author>Aman Gautam</author>
+	<author>Aman Gautam, Marcelo Eden</author>
 	<creationDate>May 2010</creationDate>
 	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>amangautam@ymail.com</authorEmail>
-	<authorUrl>www.joomla.org</authorUrl>
+	<authorUrl>www.3den.org</authorUrl>
 	<version>1.0</version>
 	<description>PLG_CONTENT_MEDIA_XML_DESCRIPTION</description>
 
 	<files>
 		<filename plugin="media">media.php</filename>
+		<filename>index.html</filename>
 		<folder>language</folder>
 		<folder>media</folder>
-		<!--
-			if you want to install the language files in the plugin folder.
-			Create a "language" folder at the root of the pack i.e
-			language/en-GB/en-GB.plg_content_example.ini
-		-->
 	</files>
 	<languages>
-		<!--
-			these files will be installed in the administrator/language folder.
-		-->
+		<!-- Make everything multilanguage -->
 		<language tag="en-GB">en-GB.plg_content_media.ini</language>
 	</languages>
 
 	<config>
 		<fields name="params">
-			<fieldset name="Plugin">
-			<field name="defaultdir" 
-				type="text" 
-				size="20" 
-				default="images/stories/" 
-				label="PLG_CONTENT_PAGEBREAK_SITE_TITLE_DESC"
-				description="PLG_CONTENT_PAGEBREAK_SITE_TITLE_DESC" />
-			
-			<field name="width" 
-				type="text" 
-				size="5" 
-				default="400" 
-				label="Default Width" 
-				description="Default width"/>
-			
-			
-			<field name="height" 
-				type="text" 
-				size="5" 
-				default="340" 
-				label="Default Height" 
-				description="Default height"/>
-			
-			<field name="autostart" 
-				type="radio" 
-				default="0" 
-				label="Default  AutoStart" 
-				description="Automatically Start video"
-			>
-				<option value="0">JNO</option>
-				<option value="1">JYES</option>
-			</field>
+			<fieldset name="basic">
+				<!-- Make everything multilanguage -->
+				<field name="defaultdir" 
+					type="text" 
+					size="20" 
+					default="images/stories/" 
+					label="PLG_MEDIA_FIELD_DEFAULTPATH_LABEL"
+					description="PLG_MEDIA_FIELD_DEFAULTPATH_DESC" />
+				
+				<field name="width" 
+					type="text" 
+					size="5" 
+					default="400" 
+					label="Default Width" 
+					description="Default width"/>
+				
+				
+				<field name="height" 
+					type="text" 
+					size="5" 
+					default="340" 
+					label="Default Height" 
+					description="Default height"/>
+				
+				<field name="autostart" 
+					type="radio" 
+					default="0" 
+					label="Default  AutoStart" 
+					description="Automatically Start video">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
 			</fieldset>
 
 
-
-			<fieldset name="advanced">
-			
+			<fieldset name="advanced">		
 				<!--Media Players -->
 				<field name="flv_player" 
 					type="list" 
@@ -215,16 +207,14 @@
 					description="Color of the display area, in HEX format. With the rotator, change this to your HTML page's color make images of different sizes blend nicely."/>
 				
 				<field name="jw_quality" 
-				type="radio" 
-				default="1" 
-				label="JW Quality" 
-				description="enables high-quality playback. This sets the smoothing of videos on/off, the deblocking of videos on/off and the dimensions of the camera small/large. Is saved as cookie.">
+					type="radio" 
+					default="1" 
+					label="JW Quality" 
+					description="enables high-quality playback. This sets the smoothing of videos on/off, the deblocking of videos on/off and the dimensions of the camera small/large. Is saved as cookie.">
 					<option value="0">Nomal</option>
 					<option value="1">High</option>
 				</field>
-				
 			</fieldset>
-
 		</fields>
 	</config>
 </install>
