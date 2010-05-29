@@ -83,7 +83,6 @@
                                 >
 
                                         <option value="nature">TPL_BEEZ2_OPTION_NATURE</option>
-                                        <option value="fruits">TPL_BEEZ2_OPTION_MATUNA</option>
                                         <option value="personal">TPL_BEEZ2_OPTION_PERSONAL</option>
                                 </field>
 
