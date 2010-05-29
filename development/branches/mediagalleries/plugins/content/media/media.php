@@ -123,7 +123,7 @@ class plgContentMedia extends JPlugin
 		
 		
 		// The propose of this is to get the defaults set by the admin 
-		$pparams =$this; // make it work
+		$pparams = self::getParams(); // make it work
 		
 		// Fix Video UrL
 		$video = preg_match("http:'/'/", $video)? 
@@ -385,64 +385,31 @@ class plgContentMedia extends JPlugin
 	 *
 	 * @param $params
 	 */
-	protected function _getParams(){
+	protected function getParams(){
+		static $params;
+		if ($params){
+			return $params;
+		}
 		// PARAMs
-		$plugin =& JPluginHelper::getPlugin('content', 'denvideo');
-		$plgParams = new JParameter( $plugin->params );
+		$plugin =& JPluginHelper::getPlugin( 'content', 'media' );
+		$params = new JParameter( $plugin->params );
 		
 		// Path to plugin folder
-		$plgParams->set('dir_plg', 
+		$params->set('dir_plg', 
 			 JPATH_PLUGINS.DS.'content'.DS.'denvideo' .DS );			
-		$plgParams->set( 'uri_plg', 
+		$params->set( 'uri_plg', 
 			JURI::base().'plugins/content/denvideo/' );
 	
 		// Path to default videos folder	
-		$defdir = $plgParams->get('defaultdir', 'images/stories');
-		if(!eregi('http://', $defdir)){
+		$defdir = $params->get('defaultdir', 'images/stories');
+		if(!stripos($defdir, 'http://')){
 			$defdir = JURI::base().$defdir;
-			$plgParams->get('defaultdir', $defdir);
+			$params->set('defaultdir', $defdir);
 		}	
-		$plgParams->set('uri_img', $defdir);
+		$params->set('uri_img', $defdir);
 	
-		return $plgParams;
+		return $params;
 	}
 }
 
-
-
-// this goes to the onContentPreparplgContentMediae
-function plgContentDenVideo( &$row, &$params, $page=0 ){		
-	
-}
-
-/** 
- * Get denVideo params object
- * 
- * @return JParameter
- */
-function & getDenVideoParams(){
-	return $this;
-}
-
-/** do we need this?
- * Get one single param:defined by the $key
- *
- * 'uri_plg' =  Path to denvideo plugin folder
- * 'path_img' = Path to denvideo default video folder * 
- * 'width' = default widht value
- * 'height' = default height value
- * 'autostart' = defalt autostart value (true/false)
- * 
- * @return String
- * @param $key String
- * @param $default String[optional]
- * @param $group String[optional]
- */
-function getDenVideoParam($key, $default='', $group = '_default'){
-	$plgParams =& getDenVideoParams();
-	return $plgParams->get( $key, $default, $group = '_default' );
-}
-
-function ShowDenVideo($video, $width, $height, $autostart)
-	{}
 ?>
