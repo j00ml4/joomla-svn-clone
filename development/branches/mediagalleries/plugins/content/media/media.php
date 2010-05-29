@@ -113,7 +113,7 @@ class plgContentMedia extends JPlugin
 	 * Show denVideo
 	 * @return str
 	 * @param string $video Media URL // Rename to media
-	 * @param int $width [optional]
+	 * @param int $width [optional]To install:
 	 * @param int $width [optional]
 	 * @param boolean $autoplay True if yes [optional]
 	 */
