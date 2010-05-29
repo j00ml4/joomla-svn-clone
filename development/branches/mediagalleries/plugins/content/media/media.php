@@ -23,6 +23,7 @@ include_once dirname(__FILE__) .DS.'media'.DS.'htmlembed.php';
  * @subpackage	Content
  * @since		1.6
  */
+ 
 class plgContentMedia extends JPlugin
 {
 	
@@ -41,12 +42,12 @@ class plgContentMedia extends JPlugin
 	public function onContentPrepare($context, &$article, &$params, $limitstart)
 	{
 		$app = JFactory::getApplication();
-		
+		echo $this->get('width');
 		// make it better 
 		$row =& $article;
 			
 		// Regular Expression
-		$regex = '/\{denvideo(.*?)}/i';
+		$regex = '/\{media(.*?)}/i';
 		$total = preg_match_all( $regex, $row->text, $matches );
 		if ( !$total ){
 			return false;
@@ -99,7 +100,7 @@ class plgContentMedia extends JPlugin
 			$video = $parts[0];
 	
 			// Put Video inside the content
-			$replace = showDenVideo( $video, $width, $height, $autostart );
+			$replace = self::addMedia( $video, $width, $height, $autostart );
 			$replace = '<span id="denvideo_'. $x .'" class="denvideo" style="position:relative">'
 				. $replace
 			. '</span>';
@@ -113,17 +114,19 @@ class plgContentMedia extends JPlugin
 	 * Show denVideo
 	 * @return str
 	 * @param string $video Media URL // Rename to media
-	 * @param int $width [optional]To install:
+	 * @param int $width [optional]
 	 * @param int $width [optional]
 	 * @param boolean $autoplay True if yes [optional]
 	 */
-	public function addMedia( $video, $width=0, $height =0, $autostart=0 ){	
+	public function addMedia( $video, $width=0, $height =0, $autostart=0 )
+	{	
+		
 		
 		// The propose of this is to get the defaults set by the admin 
-		$pparams =& getDenVideoParams(); // make it work
+		$pparams =$this; // make it work
 		
 		// Fix Video UrL
-		$video = eregi('http://', $video)? 
+		$video = preg_match("http:'/'/", $video)? 
 			$video: // Custom PATH
 			$pparams->get('uri_img').$video; // Default PATH
 		
@@ -152,13 +155,14 @@ class plgContentMedia extends JPlugin
 		 
 		/* YouTube Video 
 		*****************************************************/
-		if( eregi('youtube.com', $video) ){
+		//preg_match('@^(?:youtube.com)?([^/]+)@i',$video);
+		if ( @(preg_match('/youtube\.com/i', $video)) ){
 			$vparams = array();
 			$vparams[] = 'autoplay='.$autostart;
 			$vparams[] = 'rel='.$pparams->get('youtube_rel');//, 'advanced');
 			$vparams[] = 'loop='.$pparams->get('youtube_loop');//, 'advanced');
-		//	$vparams[] = 'enablejsapi='.$pparams->get('youtube_enablejsapi', '', 'advanced');
-		//	$vparams[] = 'playerapiid='.$pparams->get('youtube_playerapiid', 'advanced');
+			$vparams[] = 'enablejsapi='.$pparams->get('youtube_enablejsapi', '', 'advanced');
+			$vparams[] = 'playerapiid='.$pparams->get('youtube_playerapiid', 'advanced');
 			$vparams[] = 'disablekb='.$pparams->get('youtube_disablekb');//, 'advanced');
 			$vparams[] = 'egm='.$pparams->get('youtube_egm');//, 'advanced');
 			$vparams[] = 'border='.$pparams->get('youtube_border');//, 'advanced');
@@ -237,6 +241,7 @@ class plgContentMedia extends JPlugin
 						$vparams['flashvars'][] = 'fullscreen=false';
 						$vparams['flashvars'][] = 'quality='. ( $pparams->get('jw_quality')? 'true': 'false' );
 						$vparams['flashvars'][] = 'backcolor=0x'. $pparams->get('jw_backcolor');//, 'advanced');
+
 						$vparams['flashvars'][] = 'frontcolor=0x'. $pparams->get('jw_frontcolor');//, 'advanced');
 						$vparams['flashvars'][] = 'lightcolor=0x'. $pparams->get('jw_lightcolor');//, 'advanced');
 						$vparams['flashvars'][] = 'screencolor=0x'. $pparams->get('jw_screencolor');//, 'advanced');
@@ -304,7 +309,7 @@ class plgContentMedia extends JPlugin
 						$vparams['flashvars'][] = 'quality='. ( $pparams->get('jw_quality')? 'true': 'false' );
 						$vparams['flashvars'][] = 'backcolor=0x'. $pparams->get('jw_backcolor');//, 'advanced');
 						$vparams['flashvars'][] = 'frontcolor=0x'. $pparams->get('jw_frontcolor');//, 'advanced');
-						$vparams['flashvars'][] = 'lightcolor=0x'. $pparams->get('jw_lightcolor');//, 'advanced');
+						$vparams['flashvars'][] = 'lightcolor=0x'.$pparams->get('jw_lightcolor');//, 'advanced');
 						$vparams['flashvars'][] = 'screencolor=0x'. $pparams->get('jw_screencolor');//, 'advanced');
 						if( $pparams->get('jw_logo', '') )	{		
 							$vparams['flashvars'][] = 'logo='. JURI::base().'images/'.$pparams->get('jw_logo', 'advanced');
@@ -416,7 +421,7 @@ function plgContentDenVideo( &$row, &$params, $page=0 ){
  * @return JParameter
  */
 function & getDenVideoParams(){
-	
+	return $this;
 }
 
 /** do we need this?
@@ -438,4 +443,6 @@ function getDenVideoParam($key, $default='', $group = '_default'){
 	return $plgParams->get( $key, $default, $group = '_default' );
 }
 
-
+function ShowDenVideo($video, $width, $height, $autostart)
+	{}
+?>
