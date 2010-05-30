@@ -29,59 +29,60 @@
 					type="text" 
 					size="20" 
 					default="images/stories/" 
-					label="PLG_CONTENT_PAGEBREAK_DEFAULT_DIR_LABEL"
-					description="PLG_CONTENT_PAGEBREAK_DEFAULT_DIR_DESC" />
+					label="PLG_CONTENT_MEDIA_DEFAULT_DIR_LABEL"
+					description="PLG_CONTENT_MEDIA_DEFAULT_DIR_DESC" />
 				
 				<field name="width" 
 					type="text" 
 					size="5" 
 					default="400" 
-					label="PLG_CONTENT_PAGEBREAK_WIDTH_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_WIDTH_DESC"/>
+					label="PLG_CONTENT_MEDIA_WIDTH_LABEL" 
+					description="PLG_CONTENT_MEDIA_WIDTH_DESC"/>
 				
 				
 				<field name="height" 
 					type="text" 
 					size="5" 
 					default="340" 
-					label="PLG_CONTENT_PAGEBREAK_HEIGHT_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_HEIGHT_DESC"/>
+					label="PLG_CONTENT_MEDIA_HEIGHT_LABEL" 
+					description="PLG_CONTENT_MEDIA_HEIGHT_DESC"/>
 				
 				<field name="autostart" 
 					type="radio" 
 					default="0" 
-					label="PLG_CONTENT_PAGEBREAK_AUTOSTART_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_AUTOSTART_DESC">
+					label="PLG_CONTENT_MEDIA_AUTOSTART_LABEL" 
+					description="PLG_CONTENT_MEDIA_AUTOSTART_DESC">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
 			</fieldset>
 
 
-			<fieldset name="advanced">		
+			<fieldset name="players">		
 				<!--Media Players -->
 				<field name="flv_player" 
 					type="list" 
 					default="2kplayer" 
-					label="PLG_CONTENT_PAGEBREAK_FLV_PLAYER_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_FLV_PLAYER_DESC">
+					label="PLG_CONTENT_MEDIA_FLV_PLAYER_LABEL" 
+					description="PLG_CONTENT_MEDIA_FLV_PLAYER_DESC">
 						
-						<option value="jwplayer">PLG_CONTENT_PAGEBREAK_FLV_PLAYER_JWPPLAYER</option>			
-						<option value="2kplayer">PLG_CONTENT_PAGEBREAK_FLV_PLAYER_3K_FLV_PLAYER</option>
+						<option value="jwplayer">PLG_CONTENT_MEDIA_FLV_PLAYER_JWPPLAYER</option>			
+						<option value="2kplayer">PLG_CONTENT_MEDIA_FLV_PLAYER_3K_FLV_PLAYER</option>
 				
 				</field>
 				
 				<field name="mp3_player" 
 					type="list" 
 					default="1pixelout" 
-					label="PLG_CONTENT_PAGEBREAK_MP3_PLAYER_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_MP3_PLAYER_DESC" >
+					label="PLG_CONTENT_MEDIA_MP3_PLAYER_LABEL" 
+					description="PLG_CONTENT_MEDIA_MP3_PLAYER_DESC" >
 						
-						<option value="jwplayer">PLG_CONTENT_PAGEBREAK_MP3_PLAYER_JWPLAYER</option>			
-						<option value="1pixelout">PLG_CONTENT_PAGEBREAK_MP3_PLAYER_1PIXELOUT</option>
+						<option value="jwplayer">PLG_CONTENT_MEDIA_MP3_PLAYER_JWPLAYER</option>			
+						<option value="1pixelout">PLG_CONTENT_MEDIA_MP3_PLAYER_1PIXELOUT</option>
 				
 				</field>
-				
+			</fieldset>
+			<fieldset name="Youtube">	
 				<!--Youtube API-->
 				<field name="@spacer" 
 					type="spacer" 
@@ -92,8 +93,8 @@
 				<field name="youtube_rel" 
 					type="radio" 
 					default="1" 
-					label="PLG_CONTENT_PAGEBREAK_YOUTUBE_RELATED_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_YOUTUBE_RELATED_DESC" >
+					label="PLG_CONTENT_MEDIA_YOUTUBE_RELATED_LABEL" 
+					description="PLG_CONTENT_MEDIA_YOUTUBE_RELATED_DESC" >
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -103,8 +104,8 @@
 				<field name="youtube_loop" 
 					type="radio" 
 					default="0" 
-					label="PLG_CONTENT_PAGEBREAK_YOUTUBE_LOOP_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_YOUTUBE_LOOP_DESC" >
+					label="PLG_CONTENT_MEDIA_YOUTUBE_LOOP_LABEL" 
+					description="PLG_CONTENT_MEDIA_YOUTUBE_LOOP_DESC" >
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -114,8 +115,8 @@
 				<field name="youtube_disablekb" 
 					type="radio" 
 					default="0" 
-					label="PLG_CONTENT_PAGEBREAK_YOUTUBE_DISABLE_KEYBOARD_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_YOUTUBE_DISABLE_KEYBOARD_DESC" >
+					label="PLG_CONTENT_MEDIA_YOUTUBE_DISABLE_KEYBOARD_LABEL" 
+					description="PLG_CONTENT_MEDIA_YOUTUBE_DISABLE_KEYBOARD_DESC" >
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -125,8 +126,8 @@
 				<field name="youtube_egm" 
 					type="radio" 
 					default="0" 
-					label="PLG_CONTENT_PAGEBREAK_YOUTUBE_ENHANCED_GENIE_MENU_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_YOUTUBE_ENHANCED_GENIE_MENU_DESC">
+					label="PLG_CONTENT_MEDIA_YOUTUBE_ENHANCED_GENIE_MENU_LABEL" 
+					description="PLG_CONTENT_MEDIA_YOUTUBE_ENHANCED_GENIE_MENU_DESC">
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -136,8 +137,8 @@
 				<field name="youtube_border" 
 				type="radio" 
 				default="0" 
-				label="PLG_CONTENT_PAGEBREAK_YOUTUBE_BORDER_LABEL" 
-				description="PLG_CONTENT_PAGEBREAK_YOUTUBE_BORDER_DESC">
+				label="PLG_CONTENT_MEDIA_YOUTUBE_BORDER_LABEL" 
+				description="PLG_CONTENT_MEDIA_YOUTUBE_BORDER_DESC">
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -148,20 +149,20 @@
 					type="text" 
 					size="6" 
 					default="CCCCCC" 
-					label="PLG_CONTENT_PAGEBREAK_YOUTUBE_COLOR1_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_YOUTUBE_COLOR1_DESC">
+					label="PLG_CONTENT_MEDIA_YOUTUBE_COLOR1_LABEL" 
+					description="PLG_CONTENT_MEDIA_YOUTUBE_COLOR1_DESC">
 				</field>
 				
 				<field name="youtube_color2" 
 					type="text" 
 					size="6" 
 					default="CCCCCC" 
-					label="PLG_CONTENT_PAGEBREAK_YOUTUBE_COLOR2_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_YOUTUBE_COLOR2_DESC">
+					label="PLG_CONTENT_MEDIA_YOUTUBE_COLOR2_LABEL" 
+					description="PLG_CONTENT_MEDIA_YOUTUBE_COLOR2_DESC">
 				</field>
-				
+			</fieldset>
 				<!--JW-->
-				
+			<fieldset name="jwPlayer">	
 				<field name="@spacer"
 				 	type="spacer" 
 					default="" 
@@ -172,47 +173,47 @@
 				<field name="jw_logo" 
 					type="imagelist" 
 					default="" 
-					label="PLG_CONTENT_PAGEBREAK_JW_LOGO_LABEL" 
+					label="PLG_CONTENT_MEDIA_JW_LOGO_LABEL" 
 					directory="images" 
 					exclude="" 
 					stripext="" 
-					description="PLG_CONTENT_PAGEBREAK_JW_LOGO_DESC" />
+					description="PLG_CONTENT_MEDIA_JW_LOGO_DESC" />
 				
 				<field name="jw_backcolor" 
 					type="text" 
 					size="6" 
 					default="FFFFFF" 
-					label="PLG_CONTENT_PAGEBREAK_JW_BACKCOLOR_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_JW_BACKCOLOR_DESC" />
+					label="PLG_CONTENT_MEDIA_JW_BACKCOLOR_LABEL" 
+					description="PLG_CONTENT_MEDIA_JW_BACKCOLOR_DESC" />
 				
 				<field name="jw_frontcolor" 
 					type="text" 
 					size="6" 
 					default="000000" 
-					label="PLG_CONTENT_PAGEBREAK_JW_FRONTCOLOR_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_JW_FRONTCOLOR_DESC"/>
+					label="PLG_CONTENT_MEDIA_JW_FRONTCOLOR_LABEL" 
+					description="PLG_CONTENT_MEDIA_JW_FRONTCOLOR_DESC"/>
 				
 				<field name="jw_lightcolor" 
 					type="text" 
 					size="6" 
 					default="000000" 
-					label="PLG_CONTENT_PAGEBREAK_JW_LIGHTCOLOR_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_JW_LIGHTCOLOR_DESC"/>
+					label="PLG_CONTENT_MEDIA_JW_LIGHTCOLOR_LABEL" 
+					description="PLG_CONTENT_MEDIA_JW_LIGHTCOLOR_DESC"/>
 				
 				<field name="jw_screencolor" 
 					type="text" 
 					size="6" 
 					default="000000" 
-					label="PLG_CONTENT_PAGEBREAK_JW_SCREENCOLOR_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_JW_SCREENCOLOR_DESC"/>
+					label="PLG_CONTENT_MEDIA_JW_SCREENCOLOR_LABEL" 
+					description="PLG_CONTENT_MEDIA_JW_SCREENCOLOR_DESC"/>
 				
 				<field name="jw_quality" 
 					type="radio" 
 					default="1" 
-					label="PLG_CONTENT_PAGEBREAK_JW_QUALITY_LABEL" 
-					description="PLG_CONTENT_PAGEBREAK_JW_QUALITY_DESC">
-					<option value="0">PLG_CONTENT_PAGEBREAK_NORMAL</option>
-					<option value="1">PLG_CONTENT_PAGEBREAK_HIGH</option>
+					label="PLG_CONTENT_MEDIA_JW_QUALITY_LABEL" 
+					description="PLG_CONTENT_MEDIA_JW_QUALITY_DESC">
+					<option value="0">PLG_CONTENT_MEDIA_NORMAL</option>
+					<option value="1">PLG_CONTENT_MEDIA_HIGH</option>
 				</field>
 			</fieldset>
 		</fields>
