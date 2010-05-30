@@ -29,29 +29,29 @@
 					type="text" 
 					size="20" 
 					default="images/stories/" 
-					label="PLG_MEDIA_FIELD_DEFAULTPATH_LABEL"
-					description="PLG_MEDIA_FIELD_DEFAULTPATH_DESC" />
+					label="PLG_CONTENT_PAGEBREAK_DEFAULT_DIR_LABEL"
+					description="PLG_CONTENT_PAGEBREAK_DEFAULT_DIR_DESC" />
 				
 				<field name="width" 
 					type="text" 
 					size="5" 
 					default="400" 
-					label="Default Width" 
-					description="Default width"/>
+					label="PLG_CONTENT_PAGEBREAK_WIDTH" 
+					description="PLG_CONTENT_PAGEBREAK_WIDTH"/>
 				
 				
 				<field name="height" 
 					type="text" 
 					size="5" 
 					default="340" 
-					label="Default Height" 
-					description="Default height"/>
+					label="PLG_CONTENT_PAGEBREAK_HEIGHT" 
+					description="PLG_CONTENT_PAGEBREAK_HEIGHT"/>
 				
 				<field name="autostart" 
 					type="radio" 
 					default="0" 
-					label="Default  AutoStart" 
-					description="Automatically Start video">
+					label="PLG_CONTENT_PAGEBREAK_AUTOSTART" 
+					description="PLG_CONTENT_PAGEBREAK_AUTOSTART">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
@@ -63,22 +63,22 @@
 				<field name="flv_player" 
 					type="list" 
 					default="2kplayer" 
-					label="FLV Player" 
-					description="Select FLV Player">
+					label="PLG_CONTENT_PAGEBREAK_FLV_PLAYER" 
+					description="PLG_CONTENT_PAGEBREAK_FLV_PLAYER">
 						
-						<option value="jwplayer">Use JWPlayer</option>			
-						<option value="2kplayer">Use 3k FLV Player</option>
+						<option value="jwplayer">PLG_CONTENT_PAGEBREAK_FLV_PLAYER_JWPPLAYER</option>			
+						<option value="2kplayer">PLG_CONTENT_PAGEBREAK_FLV_PLAYER_3K_FLV_PLAYER</option>
 				
 				</field>
 				
 				<field name="mp3_player" 
 					type="list" 
 					default="1pixelout" 
-					label="Audio Player" 
-					description="Select MP3 Player" >
+					label="PLG_CONTENT_PAGEBREAK_MP3_PLAYER" 
+					description="PLG_CONTENT_PAGEBREAK_MP3_PLAYER" >
 						
-						<option value="jwplayer">Use JWPlayer</option>			
-						<option value="1pixelout">Use 1PixelOutPlayer</option>
+						<option value="jwplayer">PLG_CONTENT_PAGEBREAK_MP3_PLAYER_JWPLAYER</option>			
+						<option value="1pixelout">PLG_CONTENT_PAGEBREAK_MP3_PLAYER_1PIXELOUT</option>
 				
 				</field>
 				
