@@ -16,7 +16,7 @@ function addVideoYoutube( $video, $width='', $height='',  $params=array() ){
 		substr( strstr( $video, 'v=' ), 2 ) ; // Else, Old way
 	
 	$embed = '<object style="'.$width . $height.'">'.
-		'<param name="movie" value="http://www.youtube.com/v/'.$video.'&'. implode('')$ .'" />'.
+		'<param name="movie" value="http://www.youtube.com/v/'.$video.'&'. implode('') .'" />'.
 		'<param name="wmode" value="transparent" />'.
 		'<embed class="denvideo" style="'.$width . $height.'" 
 			src="http://www.youtube.com/v/'.$video.'&autoplay='. $autostart .'"  
