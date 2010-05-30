@@ -36,22 +36,22 @@
 					type="text" 
 					size="5" 
 					default="400" 
-					label="PLG_CONTENT_PAGEBREAK_WIDTH" 
-					description="PLG_CONTENT_PAGEBREAK_WIDTH"/>
+					label="PLG_CONTENT_PAGEBREAK_WIDTH_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_WIDTH_DESC"/>
 				
 				
 				<field name="height" 
 					type="text" 
 					size="5" 
 					default="340" 
-					label="PLG_CONTENT_PAGEBREAK_HEIGHT" 
-					description="PLG_CONTENT_PAGEBREAK_HEIGHT"/>
+					label="PLG_CONTENT_PAGEBREAK_HEIGHT_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_HEIGHT_DESC"/>
 				
 				<field name="autostart" 
 					type="radio" 
 					default="0" 
-					label="PLG_CONTENT_PAGEBREAK_AUTOSTART" 
-					description="PLG_CONTENT_PAGEBREAK_AUTOSTART">
+					label="PLG_CONTENT_PAGEBREAK_AUTOSTART_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_AUTOSTART_DESC">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
@@ -63,8 +63,8 @@
 				<field name="flv_player" 
 					type="list" 
 					default="2kplayer" 
-					label="PLG_CONTENT_PAGEBREAK_FLV_PLAYER" 
-					description="PLG_CONTENT_PAGEBREAK_FLV_PLAYER">
+					label="PLG_CONTENT_PAGEBREAK_FLV_PLAYER_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_FLV_PLAYER_DESC">
 						
 						<option value="jwplayer">PLG_CONTENT_PAGEBREAK_FLV_PLAYER_JWPPLAYER</option>			
 						<option value="2kplayer">PLG_CONTENT_PAGEBREAK_FLV_PLAYER_3K_FLV_PLAYER</option>
@@ -74,8 +74,8 @@
 				<field name="mp3_player" 
 					type="list" 
 					default="1pixelout" 
-					label="PLG_CONTENT_PAGEBREAK_MP3_PLAYER" 
-					description="PLG_CONTENT_PAGEBREAK_MP3_PLAYER" >
+					label="PLG_CONTENT_PAGEBREAK_MP3_PLAYER_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_MP3_PLAYER_DESC" >
 						
 						<option value="jwplayer">PLG_CONTENT_PAGEBREAK_MP3_PLAYER_JWPLAYER</option>			
 						<option value="1pixelout">PLG_CONTENT_PAGEBREAK_MP3_PLAYER_1PIXELOUT</option>
@@ -92,8 +92,8 @@
 				<field name="youtube_rel" 
 					type="radio" 
 					default="1" 
-					label="youTube Related" 
-					description="Related videos are displayed when the menu button is pressed" >
+					label="PLG_CONTENT_PAGEBREAK_YOUTUBE_RELATED_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_YOUTUBE_RELATED_DESC" >
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -103,8 +103,8 @@
 				<field name="youtube_loop" 
 					type="radio" 
 					default="0" 
-					label="youTube Loop" 
-					description="Play the initial video or playlist again and again" >
+					label="PLG_CONTENT_PAGEBREAK_YOUTUBE_LOOP_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_YOUTUBE_LOOP_DESC" >
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -114,8 +114,8 @@
 				<field name="youtube_disablekb" 
 					type="radio" 
 					default="0" 
-					label="youTube Disable Keyboard" 
-					description="Disable the player keyboard controls" >
+					label="PLG_CONTENT_PAGEBREAK_YOUTUBE_DISABLE_KEYBOARD_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_YOUTUBE_DISABLE_KEYBOARD_DESC" >
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -125,8 +125,8 @@
 				<field name="youtube_egm" 
 					type="radio" 
 					default="0" 
-					label="youTube Enhanced Genie Menu" 
-					description="This behavior causes the genie menu (if present) to appear when the user's mouse enters the video display area">
+					label="PLG_CONTENT_PAGEBREAK_YOUTUBE_ENHANCED_GENIE_MENU_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_YOUTUBE_ENHANCED_GENIE_MENU_DESC">
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -136,8 +136,8 @@
 				<field name="youtube_border" 
 				type="radio" 
 				default="0" 
-				label="youTube Border" 
-				description="Enables a border around the entire video player">
+				label="PLG_CONTENT_PAGEBREAK_YOUTUBE_BORDER_LABEL" 
+				description="PLG_CONTENT_PAGEBREAK_YOUTUBE_BORDER_DESC">
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -148,16 +148,16 @@
 					type="text" 
 					size="6" 
 					default="CCCCCC" 
-					label="youTube Color 1: #" 
-					description="The border's primary color. RGB Hexadecimal (22FF00)">
+					label="PLG_CONTENT_PAGEBREAK_YOUTUBE_COLOR1_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_YOUTUBE_COLOR1_DESC">
 				</field>
 				
 				<field name="youtube_color2" 
 					type="text" 
 					size="6" 
 					default="CCCCCC" 
-					label="youTube Color 2: #" 
-					description="Control bar background color and secondary border color. RGB Hexadecimal (22FF00)">
+					label="PLG_CONTENT_PAGEBREAK_YOUTUBE_COLOR2_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_YOUTUBE_COLOR2_DESC">
 				</field>
 				
 				<!--JW-->
@@ -172,47 +172,47 @@
 				<field name="jw_logo" 
 					type="imagelist" 
 					default="" 
-					label="JW Watermark Logo " 
+					label="PLG_CONTENT_PAGEBREAK_JW_LOGO_LABEL" 
 					directory="images" 
 					exclude="" 
 					stripext="" 
-					description="Set this to an image that can be put as a watermark logo in the top right corner of the display. Transparent PNG files give the best results" />
+					description="PLG_CONTENT_PAGEBREAK_JW_LOGO_DESC" />
 				
 				<field name="jw_backcolor" 
 					type="text" 
 					size="6" 
 					default="FFFFFF" 
-					label="JW Backcolor" 
-					description="Backgroundcolor of the controls, in HEX format" />
+					label="PLG_CONTENT_PAGEBREAK_JW_BACKCOLOR_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_JW_BACKCOLOR_DESC" />
 				
 				<field name="jw_frontcolor" 
 					type="text" 
 					size="6" 
 					default="000000" 
-					label="JW Frontcolor" 
-					description="Texts and buttons color of the controls, in HEX format"/>
+					label="PLG_CONTENT_PAGEBREAK_JW_FRONTCOLOR_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_JW_FRONTCOLOR_DESC"/>
 				
 				<field name="jw_lightcolor" 
 					type="text" 
 					size="6" 
 					default="000000" 
-					label="JW Lightcolor" 
-					description="Rollover color of the controls, in HEX format"/>
+					label="PLG_CONTENT_PAGEBREAK_JW_LIGHTCOLOR_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_JW_LIGHTCOLOR_DESC"/>
 				
 				<field name="jw_screencolor" 
 					type="text" 
 					size="6" 
 					default="000000" 
-					label="JW Screencolor" 
-					description="Color of the display area, in HEX format. With the rotator, change this to your HTML page's color make images of different sizes blend nicely."/>
+					label="PLG_CONTENT_PAGEBREAK_JW_SCREENCOLOR_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_JW_SCREENCOLOR_DESC"/>
 				
 				<field name="jw_quality" 
 					type="radio" 
 					default="1" 
-					label="JW Quality" 
-					description="enables high-quality playback. This sets the smoothing of videos on/off, the deblocking of videos on/off and the dimensions of the camera small/large. Is saved as cookie.">
-					<option value="0">Nomal</option>
-					<option value="1">High</option>
+					label="PLG_CONTENT_PAGEBREAK_JW_QUALITY_LABEL" 
+					description="PLG_CONTENT_PAGEBREAK_JW_QUALITY_DESC">
+					<option value="0">PLG_CONTENT_PAGEBREAK_NORMAL</option>
+					<option value="1">PLG_CONTENT_PAGEBREAK_HIGH</option>
 				</field>
 			</fieldset>
 		</fields>
