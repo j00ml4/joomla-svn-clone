@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <install version="1.6" type="plugin" group="content">
-	<name>plg_content_media</name>
+	<name>Media</name>
 	<author>Aman Gautam, Marcelo Eden</author>
 	<creationDate>May 2010</creationDate>
 	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
@@ -58,7 +58,7 @@
 			</fieldset>
 
 
-			<fieldset name="players">		
+			<fieldset name="players" label="Players">		
 				<!--Media Players -->
 				<field name="flv_player" 
 					type="list" 
@@ -82,7 +82,7 @@
 				
 				</field>
 			</fieldset>
-			<fieldset name="Youtube">	
+			<fieldset name="Youtube" label="Youtube">	
 				<!--Youtube API-->
 				<field name="@spacer" 
 					type="spacer" 
@@ -162,7 +162,7 @@
 				</field>
 			</fieldset>
 				<!--JW-->
-			<fieldset name="jwPlayer">	
+			<fieldset name="jwPlayer" label="JW Player">	
 				<field name="@spacer"
 				 	type="spacer" 
 					default="" 
