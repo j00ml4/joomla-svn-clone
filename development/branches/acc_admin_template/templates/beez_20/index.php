@@ -80,10 +80,10 @@ $templateparams	= $app->getTemplate(true)->params;
 				<div class="logoheader">
 					<h1 id="logo">
 
-					<?php if ($logo != '-1' ): ?>
-					<img src="<?php echo $this->baseurl ?>/images/<?php echo $logo; ?>"  alt="<?php echo JText::_('TPL_BEEZ2_LOGO'); ?>" />
+					<?php if ($logo): ?>
+					<img src="<?php echo $this->baseurl ?>/<?php echo $logo; ?>"  alt="<?php echo $templateparams->get('sitetitle');?>" />
 					<?php endif;?>
-					<?php if ($logo == '-1' ): ?>
+					<?php if (!$logo ): ?>
 					<?php echo $templateparams->get('sitetitle');?>
 					<?php endif; ?>
 					<span class="header1">
@@ -98,7 +98,7 @@ $templateparams	= $app->getTemplate(true)->params;
 					    <li><a href="#additional" class="u2"><?php echo JText::_('TPL_BEEZ2_JUMP_TO_INFO'); ?></a></li>
 					   <?php endif; ?>
 					</ul>
-                   	<h2 class="unseen"><?php echo JText::_('TPL_BEEZ2_NAV_VIEW_SEARCH'); ?></h2>
+					<h2 class="unseen"><?php echo JText::_('TPL_BEEZ2_NAV_VIEW_SEARCH'); ?></h2>
 					<h3 class="unseen"><?php echo JText::_('TPL_BEEZ2_NAVIGATION'); ?></h3>
 					<jdoc:include type="modules" name="position-1" />
 					<div id="line">
