@@ -43,7 +43,7 @@ class plgContentMedia extends JPlugin
 	{
 		// What is this for?
 		//$app = JFactory::getApplication();
-			
+		
 		// Regular Expression
 		$regex = '/\{media(.*?)}/i';
 		$total = preg_match_all( $regex, $row->text, $matches );
