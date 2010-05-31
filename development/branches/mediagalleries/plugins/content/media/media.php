@@ -28,7 +28,6 @@ include_once dirname(__FILE__) .DS.'media'.DS.'htmlembed.php';
 class plgContentMedia extends JPlugin
 {
 	
-		
 	/**
 	 * Example prepare content method
 	 *
@@ -40,12 +39,10 @@ class plgContentMedia extends JPlugin
 	 * @param	int		The 'page' number
 	 * @since	1.6
 	 */
-	public function onContentPrepare($context, &$article, &$params, $limitstart)
+	public function onContentPrepare($context, &$row, &$params, $limitstart)
 	{
-		$app = JFactory::getApplication();
-		echo $this->get('width');
-		// make it better 
-		$row =& $article;
+		// What is this for?
+		//$app = JFactory::getApplication();
 			
 		// Regular Expression
 		$regex = '/\{media(.*?)}/i';
@@ -53,10 +50,6 @@ class plgContentMedia extends JPlugin
 		if ( !$total ){
 			return false;
 		}
-		
-		// PARAMs
-		$plgParams =& self::getParams(); // no needed
-		
 		
 		// Default	
 		$w = (int)$params->get('width', 400);
@@ -102,7 +95,7 @@ class plgContentMedia extends JPlugin
 	
 			// Put Video inside the content
 			$replace = self::addMedia( $media, $width, $height, $autostart );
-			$replace = '<span id="Media_'. $x .'" class="Media" style="position:relative">'
+			$replace = '<span id="media_'. $x .'" class="media" style="position:relative">'
 				. $replace
 			. '</span>';
 			$row->text = str_replace( $matches[0][$x], $replace, $row->text );
