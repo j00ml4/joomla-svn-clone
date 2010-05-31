@@ -266,7 +266,7 @@ h3.js_heading a
         font-size:1.4em;
         margin:5px 0 6px 0;
         font-weight:normal;
-		line-height:1.19em
+                line-height:1.19em
 }
 
 
@@ -395,7 +395,7 @@ ul.menu li.active ul li.active ul li a:link,
         margin:0 0 10px 0;
         padding: 5px;
         font-size:1.4em;
-		line-height:1.19em;
+                line-height:1.19em;
         font-weight:normal;
 }
 
@@ -784,8 +784,8 @@ dd.createdby
         display:inline;
         padding:2px 5px 0 !important;
         text-align:left;
-		border:solid 1px #eee;
-		margin:0 2px
+                border:solid 1px #eee;
+                margin:0 2px
 }
 
 
@@ -815,7 +815,7 @@ p.counter
 #right h3
 {
         font-size:1.2em;
-		line-height:1.4em;
+                line-height:1.4em;
         margin:5px 0 0 0;
         font-weight:normal !important;
 }
@@ -989,7 +989,7 @@ fieldset.phrases label
 
 form .search label
 {
-	display:none
+        display:none
 }
 
 /* ++++++++++++++  selects  ++++++++++++++ */
@@ -1381,8 +1381,19 @@ form#adminForm .formelm_area label
 
 .button2-left
 {
-        margin:5px 0
+
 }
+
+a.modal-button,
+.button2-left .blank a,
+.button2-left a,
+.button2-left div.readmore a
+{background:#eee;
+padding:4px !important;
+margin:0 !important;
+line-height:1.2em; border:solid 1px #ddd;
+font-weight:bold; text-decoration:none;
+margin-top:10px !important}
 
 /* ++++++++++++++  tooltip  ++++++++++++++ */
 .tip
@@ -1458,6 +1469,12 @@ ul.newsflash-horiz li h4
 
 /* ++++++++++++++  latest, popular  ++++++++++++++ */
 
+#nav .module_content ul.latestnews,
+#nav .module_content ul.mostread
+{
+	margin:10px 0 0 0
+}
+
 ul.latestnews,
 ul.mostread
 {
@@ -1505,7 +1522,7 @@ ul.newsfeed
 dl.newsfeed-count dt,
 dl.newsfeed-count dd
 {
-	display:inline
+        display:inline
 }
 
 /* ++++++++++++++  weblinks  ++++++++++++++ */
@@ -1513,8 +1530,8 @@ dl.newsfeed-count dd
 dl.weblink-count dt,
 dl.weblink-count dd
 {
-	display:inline;
-	font-size:0.85em
+        display:inline;
+        font-size:0.85em
 }
 
 /* ++++++++++++++  login  ++++++++++++++ */
@@ -1577,36 +1594,36 @@ button.button
 .module_content #form-login-password label
 {
             float:left;
-            width:5em
+            width:5.2em
 }
 
 .login-fields
 {
-	margin:10px 0
+        margin:10px 0
 }
 
 .login-fields label
 {
-	float:left;
-	width:6em
+        float:left;
+        width:6em
 }
 
 .login-description img,
 .logout-description img
 {
-	float:left;
-	margin-right:20px
+        float:left;
+        margin-right:20px
 }
 
 .login-description,
 .logout-description
 {
-	overflow:hidden
+        overflow:hidden
 }
 
 .logout-description
 {
-	margin-bottom:20px
+        margin-bottom:20px
 }
 
 
