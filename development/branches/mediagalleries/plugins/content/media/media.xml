@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <install version="1.6" type="plugin" group="content">
-	<name>Media</name>
+	<name>PLG_CONTENT_MEDIA</name>
 	<author>Aman Gautam, Marcelo Eden</author>
 	<creationDate>May 2010</creationDate>
 	<copyright>Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.</copyright>
@@ -8,7 +8,7 @@
 	<authorEmail>amangautam@ymail.com</authorEmail>
 	<authorUrl>www.3den.org</authorUrl>
 	<version>1.0</version>
-	<description>PLG_MEDIA_XML_DESCRIPTION</description>
+	<description>PLG_CONTENT_MEDIA_XML_DESCRIPTION</description>
 
 	<files>
 		<filename plugin="media">media.php</filename>
