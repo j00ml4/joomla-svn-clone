@@ -36,6 +36,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+02-June-2010 Sam Moffat
+ ! Line ending fix for some XML/HTML files
+
 -------------------- 1.5.18 Stable Release [27-May-2010] ------------------
 
 25-May-2010 Ian MacLennan
