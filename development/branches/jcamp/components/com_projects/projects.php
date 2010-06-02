@@ -14,5 +14,5 @@ jimport('joomla.application.component.controller');
 
 // Execute the task.
 $controller	= &JController::getInstance('projects');
-$controller->execute(JRequest::getVar('task','list'));
+$controller->execute(JRequest::getVar('task'));
 $controller->redirect(); 

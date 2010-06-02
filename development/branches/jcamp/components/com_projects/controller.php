@@ -11,30 +11,50 @@ defined("_JEXEC") or die("Restricted access");
 
 jimport('joomla.application.component.controller');
 
+/**
+ * Projects Controller
+ * @author eden
+ *
+ */
 class ProjectsController extends JController {
-
+	/**
+	 * To DRY
+	 * @var string
+	 */
+	protected $view;
+	
+	/**
+	 * Constructor.
+	 *
+	 * @param	array An optional associative array of configuration settings.
+	 * @see		JController
+	 * @since	1.6
+	 */
+	public function __construct($config = array())
+	{
+		parent::__construct($config);
+		
+		// Set view
+		$this->view	= JRequest::getWord('view', $this->default_view);
+		JRequest::setVar('view', $this->view);
+	}
+	
+	/**
+	 * Method to show a view
+	 *
+	 * @access	public
+	 * @since	1.5
+	 */
 	function display()
 	{
-		// Get the document object.
-		$document	= JFactory::getDocument();
+		$cachable = true;	
 
-		// Set the default view name and format from the Request.
-		$vName		= JRequest::getWord('view', 'hello');
-		$vFormat	= $document->getType();
-
-		// Get and render the view.
-		if ($view = &$this->getView($vName, $vFormat))
-		{
-			// Get the model for the view.
-			$model = &$this->getModel($vName);
-
-			// Push the model into the view (as default).
-			$view->setModel($model, true);
-
-			// Push document object into the view.
-			$view->assignRef('document', $document);
-
-			$view->display();
+		$user = &JFactory::getUser();
+		if ( $user->get('id') || ($_SERVER['REQUEST_METHOD'] == 'POST') ) {
+			$cachable = false;
 		}
+		$safeurlparams = array('id'=>'INT','limit'=>'INT','limitstart'=>'INT','filter_order'=>'CMD','filter_order_Dir'=>'CMD','lang'=>'CMD');
+
+		parent::display($cachable, $safeurlparams);
 	}
 }
