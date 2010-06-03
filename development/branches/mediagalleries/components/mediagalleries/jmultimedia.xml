@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5.0">
+	<name>JMultimedia</name>
+	<author>3DEN</author>
+	<copyright>Copyright (C) 2008 3DEN Open Software. All rights reserved</copyright>
+	<creationDate>April 2008</creationDate>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>edendroid@gmail.com</authorEmail>	<authorUrl>http://jmultimedia.3den.org</authorUrl>
+	<version>1.1</version>	<description>EXTREMAL MEDIA SOLUTION</description>
+	
+	<!-- Custom Install Script to execute -->
+	<installfile>install.jmultimedia.php</installfile>
+	<!-- Custom Uninstall Script to execute -->
+	<uninstallfile>uninstall.jmultimedia.php</uninstallfile>
+	
+	<!-- Install Database Section -->
+	<install>
+		<sql>
+			<file charset="utf8" driver="mysql">install.mysql.sql</file>
+			<file driver="mysql">install.mysql.sql</file>
+		</sql>
+	</install>
+	<!-- Uninstall Database Section -->
+	<uninstall>
+		<sql>
+			<file charset="utf8" driver="mysql">uninstall.mysql.sql</file>
+			<file driver="mysql">uninstall.mysql.sql</file>
+		</sql>
+	</uninstall>
+
+	<!-- Site Main File Copy Section -->
+	<files folder="site">
+		<filename>jmultimedia.php</filename>
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<folder>helpers</folder>
+		<folder>assets</folder>
+		<folder>models</folder>				
+		<folder>views</folder>
+	</files>
+	
+	<!-- Site Main Language File Copy Section -->
+	<languages folder="site/lang">
+		<language tag="en-GB">en-GB.com_jmultimedia.ini</language>
+		<language tag="pt-BR">pt-BR.com_jmultimedia.ini</language>
+	</languages>
+	
+	<administration>	
+		<!-- Administration Menu Section -->
+		<menu>JMultimedia</menu>
+		<submenu>
+			<menu img="" view="jmultimedia">Medias</menu>
+			<menu img="" link="option=com_categories&amp;section=com_jmultimedia">Categories</menu>
+			<menu img="" link="option=com_comments&amp;section=com_jmultimedia">Comments</menu>
+		</submenu>
+		
+		<!-- Administration Main File Copy Section -->
+		<files folder="admin">
+			<filename component="jmultimedia">jmultimedia.php</filename>
+			<filename>controller.php</filename>
+			<filename>config.xml</filename>
+			<filename>index.html</filename>	
+			<folder>help</folder>
+			<folder>tables</folder>
+			<folder>models</folder>
+			<folder>views</folder>
+			<!-- Install files -->
+			<filename>install.mysql.sql</filename>
+      <filename>uninstall.mysql.sql</filename>
+      <filename>install.jmultimedia.php</filename>
+			<filename>uninstall.jmultimedia.php</filename>			
+		</files>
+		
+		<!-- Administration Language File Copy Section -->
+		<languages folder="admin/lang">
+			<language tag="en-GB">en-GB.com_jmultimedia.ini</language>
+			<language tag="pt-BR">pt-BR.com_jmultimedia.ini</language>
+		</languages>	
+	</administration>
+	
+	<params>	
+	</params>
+</install>
