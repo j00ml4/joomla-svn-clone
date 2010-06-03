@@ -10,7 +10,7 @@
 defined("_JEXEC") or die("Restricted access");
 jimport('joomla.application.component.controller');
 
-class ProjectsController extends JController {
+class ProjectsController extends JControllerAdmin {
 
 	public function display()
 	{
@@ -18,7 +18,7 @@ class ProjectsController extends JController {
 		$document	= JFactory::getDocument();
 
 		// Set the default view name and format from the Request.
-		$vName		= JRequest::getWord('view', 'hello');
+		$vName		= JRequest::getWord('view', 'config');
 		$vFormat	= $document->getType();
 
 		// Get and render the view.
