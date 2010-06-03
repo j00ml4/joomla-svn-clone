@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modellist');
 
-class ProjectsModelHello extends JModel
+class ProjectsModelProject extends JModelForm
 {
 }
 ?>
