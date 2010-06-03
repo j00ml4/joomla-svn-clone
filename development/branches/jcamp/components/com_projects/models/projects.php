@@ -10,11 +10,14 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.view');
+jimport('joomla.application.component.modellist');
 
-class ProjectsViewPortfolio extends JView
+/**
+ * Portifolio gallery view to display all projects within a portifolio
+ * @author eden
+ *
+ */
+class ProjectsModelProjects extends JModelList
 {
-	public function display($tpl = null) {
-		parent::display($tpl);
-	}
 }
+?>
