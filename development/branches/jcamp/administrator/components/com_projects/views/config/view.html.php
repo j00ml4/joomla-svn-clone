@@ -12,9 +12,7 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 
-class ProjectsViewHello extends JView
+class ProjectsViewConfig extends JView
 {
-	public function display($tpl = null) {
-		parent::display($tpl);
-	}
+
 }
