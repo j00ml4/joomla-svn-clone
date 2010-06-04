@@ -28,7 +28,7 @@ class ProjectsViewProject extends JView
 	public function display($tpl = null) 
 	{
 		//$this->params = $this->state->get('params');
-		echo 'ProjectsViewProject2';
+		$this->params = 'a';
 		
 		// Display the view
 		parent::display($tpl);
