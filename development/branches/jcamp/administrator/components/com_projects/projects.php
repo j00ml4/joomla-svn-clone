@@ -10,14 +10,12 @@
 defined("_JEXEC") or die("Restricted access");
 
 // Access check.
-if (!JFactory::getUser()->authorise('core.manage', JRequest::getCmd('extension'))) {
-	return JError::raiseWarning(404, JText::_('ALERTNOTAUTH'));
+if (!JFactory::getUser()->authorise('core.manage', 'com_projects')) {
+	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
 // Include dependancies
 jimport('joomla.application.component.controller'); 
-JTable::addIncludePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_projects'.DS.'tables'); 
-
 
 // Execute the task.
 $controller	= &JController::getInstance('projects');

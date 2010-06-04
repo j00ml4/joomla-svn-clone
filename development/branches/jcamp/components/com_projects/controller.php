@@ -25,16 +25,18 @@ class ProjectsController extends JController {
 	 * @since	1.5
 	 */
 	function display()
-	{
-		$cachable = false;	
+	{	
+		$user =& JFactory::getUser();
+		$cachable = true;
 		
-		/*	
 		if ( $user->get('id') || ($_SERVER['REQUEST_METHOD'] == 'POST') ) {
 			$cachable = false;
 		}
-		*/
-		$safeurlparams = array('id'=>'INT','cid'=>'INT','limit'=>'INT',
-			'limitstart'=>'INT','filter_order'=>'CMD','filter_order_Dir'=>'CMD','lang'=>'CMD');
+		
+		$safeurlparams = array(	'id'=>'INT','cid'=>'INT',
+								'limit'=>'INT',	'limitstart'=>'INT',
+								'filter_order'=>'CMD','filter_order_Dir'=>'CMD',
+								'lang'=>'CMD');
 
 		parent::display($cachable, $safeurlparams);
 	}
