@@ -28,7 +28,6 @@ class ProjectsController extends JController {
 	{
 		$cachable = false;	
 		
-		echo "ProjectsController";
 		/*	
 		if ( $user->get('id') || ($_SERVER['REQUEST_METHOD'] == 'POST') ) {
 			$cachable = false;

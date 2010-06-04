@@ -10,23 +10,11 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<div class="item-page<?php echo $params->get('pageclass_sfx')?>">
-<?php if ($this->params->get('show_page_heading', 1)) : ?>
-<h1>
-	<?php echo $this->escape($this->params->get('page_heading')); ?>
-</h1>
-<?php endif; ?>
-pica
 
-<?php if ($params->get('show_title')|| $params->get('access-edit')) : ?>
-		<h2>
-				<?php if ($params->get('link_titles') && !empty($this->item->readmore_link)) : ?>
-				<a href="<?php echo $this->item->readmore_link; ?>">
-						<?php echo $this->escape($this->item->title); ?></a>
-				<?php else : ?>
-						<?php echo $this->escape($this->item->title); ?>
-				<?php endif; ?>
-		</h2>
-<?php endif; ?>
+<div class="item-page">
+	<h1><?php echo $this->params ?></h1>
 
+	<h2></h2>
+	
+	<pre><?php print_r($this); ?></pre>
 </div>
