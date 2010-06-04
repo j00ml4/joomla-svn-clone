@@ -12,6 +12,10 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 
+/**
+ * Display project view
+ * @author eden
+ */
 class ProjectsViewProject extends JView
 {
 	protected $item;
@@ -23,7 +27,8 @@ class ProjectsViewProject extends JView
 	 */
 	public function display($tpl = null) 
 	{
-		$this->params = $this->state->get('params');
+		//$this->params = $this->state->get('params');
+		echo 'ProjectsViewProject2';
 		
 		// Display the view
 		parent::display($tpl);
