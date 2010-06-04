@@ -8,6 +8,7 @@
  */
 
 defined("_JEXEC") or die("Restricted access");
+// my comment - elf :)
 
 // Access check.
 if (!JFactory::getUser()->authorise('core.manage', 'com_projects')) {
