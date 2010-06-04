@@ -32,11 +32,12 @@ class ProjectsController extends JController {
 	 */
 	public function __construct($config = array())
 	{
-		parent::__construct($config);
-		
 		// Set view
 		$this->view	= JRequest::getWord('view', $this->default_view);
 		JRequest::setVar('view', $this->view);
+		
+		// Constructor
+		parent::__construct($config);
 	}
 	
 	/**
@@ -47,6 +48,7 @@ class ProjectsController extends JController {
 	 */
 	function display()
 	{
+		$document = &JFactory::getDocument();
 		$cachable = true;	
 
 		$user = &JFactory::getUser();

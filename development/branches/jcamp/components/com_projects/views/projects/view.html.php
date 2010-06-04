@@ -19,36 +19,43 @@ jimport('joomla.application.component.view');
  * @subpackage	com_weblinks
  * @since		1.5
  */
-class WeblinksViewCategory extends JView
+class ProjectsViewProjects extends JView
 {
-	protected $state;
 	protected $items;
 	protected $category;
 	protected $children;
+	protected $parent;
+	protected $maxLevel;
+	protected $state;
+	protected $params;
 	protected $pagination;
-
+	
+	/**
+	 * Display View
+	 * @param $tpl
+	 */
 	function display($tpl = null)
 	{
 		$app		= &JFactory::getApplication();
 		$params		= &$app->getParams();
-
+	
+		// Layout
+		//$this->setLayout(JRequest::getWord('layout', 'gallery'));
+		
 		// Get some data from the models
-		$state		= &$this->get('State');
-		$items		= &$this->get('Items');
-		$category	= &$this->get('Category');
-		$children	= &$this->get('Children');
-		$parent 	= &$this->get('Parent');
-		$pagination	= &$this->get('Pagination');
+		$this->state		= &$this->get('State');
+		$this->items		= &$this->get('Items');
+		$this->pagination	= &$this->get('Pagination');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
-			JError::raiseError(500, implode("\n", $errors));
-			return false;
+			//JError::raiseError(500, implode("\n", $errors));
+			//return false;
 		}
 
 		if($category == false)
 		{
-			return JError::raiseWarning(404, JText::_('JGLOBAL_CATEGORY_NOT_FOUND'));
+			//return JError::raiseWarning(404, JText::_('JGLOBAL_CATEGORY_NOT_FOUND'));
 		}
 
 		if($parent == false)
@@ -60,37 +67,8 @@ class WeblinksViewCategory extends JView
 		$user	= &JFactory::getUser();
 		$groups	= $user->authorisedLevels();
 		if (!in_array($category->access, $groups)) {
-			return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));
+			//return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));
 		}
-
-		// Prepare the data.
-		// Compute the weblink slug & link url.
-		for ($i = 0, $n = count($items); $i < $n; $i++)
-		{
-			$item		= &$items[$i];
-			$item->slug	= $item->alias ? ($item->id.':'.$item->alias) : $item->id;
-			if ($item->params->get('count_clicks', $params->get('count_clicks')) == 1) {
-				$item->link = JRoute::_('index.php?task=weblink.go&&id='. $item->id);
-			} else {
-				$item->link = $item->url;
-			}
-			$temp		= new JRegistry();
-			$temp->loadJSON($item->params);
-			$item->params = clone($params);
-			$item->params->merge($temp);
-		}
-
-		$children = array($category->id => $children);
-
-		$this->assignRef('maxLevel',	$params->get('maxLevel', -1));
-		$this->assignRef('state',		$state);
-		$this->assignRef('items',		$items);
-		$this->assignRef('category',	$category);
-		$this->assignRef('children',	$children);
-		$this->assignRef('params',		$params);
-		$this->assignRef('parent',		$parent);
-		$this->assignRef('pagination',	$pagination);
-
 		$this->_prepareDocument();
 
 		parent::display($tpl);

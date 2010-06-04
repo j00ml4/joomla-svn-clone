@@ -14,7 +14,18 @@ jimport('joomla.application.component.view');
 
 class ProjectsViewProject extends JView
 {
-	public function display($tpl = null) {
+	protected $item;
+	protected $form;
+	protected $params;
+	
+	/**
+	 * Display project
+	 */
+	public function display($tpl = null) 
+	{
+		$this->params = $this->state->get('params');
+		
+		// Display the view
 		parent::display($tpl);
 	}
 }
