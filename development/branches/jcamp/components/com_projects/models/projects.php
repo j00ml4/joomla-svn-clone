@@ -19,5 +19,6 @@ jimport('joomla.application.component.modellist');
  */
 class ProjectsModelProjects extends JModelList
 {
+	
 }
 ?>

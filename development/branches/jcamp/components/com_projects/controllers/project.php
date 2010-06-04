@@ -15,7 +15,7 @@ jimport('joomla.application.component.controllerform');
  * @subpackage	com_weblinks
  * @since		1.5
  */
-class ProjectsControllerProject extends JControllerForm
+class ProjectsControllerProject extends JController
 {
 	/**
 	 * Overload Context
@@ -30,7 +30,7 @@ class ProjectsControllerProject extends JControllerForm
 	/**
 	 * @since	1.6
 	 */
-	protected $view_list = 'portfolio';
+	protected $view_list = 'projects';
 
 	/**
 	 * @var		string	The prefix to use with controller messages.
@@ -38,13 +38,4 @@ class ProjectsControllerProject extends JControllerForm
 	 */
 	protected $text_prefix;
 	
-	/**
-	 * Constructor
-	 *
-	 * @since	1.6
-	 */
-	public function __construct($config = array())
-	{
-		parent::__construct($config);
-	}
 }
