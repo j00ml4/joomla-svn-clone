@@ -1,18 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-        <fieldset
-                group="greetings"
-                label="com_helloworld_Config_Greeting_Settings_Label"
-                description="com_helloworld_Config_Greeting_Settings_Desc">
- 
-                <field
-                        name="show_category"
-                        type="radio"
-                        label="com_helloworld_Params_Show_Category_Label"
-                        description="com_helloworld_Params_Show_Category_Desc"
-                        default="0">
-                        <option value="0">Hide</option>
-                        <option value="1">Show</option>
-                </field>
-        </fieldset>
+	<fieldset name="display"
+		label="JCONFIG_DISPLAY_LABEL"
+		description="COM_PROJECTS_DISPLAY_DESC">
+			
+	</fieldset>		
+	
+	<fieldset name="permissions"
+		label="JCONFIG_PERMISSIONS_LABEL"
+		description="COM_PROJECTS_PERMISSIONS_DESC">
+		<field name="rules"
+			type="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			filter="rules"
+			component="com_projects"
+			section="component">
+			
+			<action name="projects.view"
+				title="COM_PROJECTS_PERMISSIONS_VIEW_PROJECTS_TITLE"
+				description="COM_PROJECTS_PERMISSIONS_VIEW_PROJECTS_DESC" />			
+			<action name="projects.manage"
+				title="COM_PROJECTS_PERMISSIONS_MANAGE_PROJECTS_TITLE"
+				description="COM_PROJECTS_PERMISSIONS_MANAGE_PROJECTS_DESC" />
+			<action name="projects.submit"
+				title="COM_PROJECTS_PERMISSIONS_SUBMIT_PROJECTS_TITLE"
+				description="COM_PROJECTS_PERMISSIONS_SUBMIT_PROJECTS_DESC" />	
+			
+			<action name="project.tasks.view"
+				title="COM_PROJECTS_PERMISSIONS_VIEW_TASKS_TITLE"
+				description="COM_PROJECTS_PERMISSIONS_VIEW_TASKS_DESC" />	
+			<action name="project.tasks.manage"
+				title="COM_PROJECTS_PERMISSIONS_MANAGE_TASKS_TITLE"
+				description="COM_PROJECTS_PERMISSIONS_MANAGE_TASKS_DESC" />			
+							
+			<action name="project.tickets.view"
+				title="COM_PROJECTS_PERMISSIONS_VIEW_TICKETS_TITLE"
+				description="COM_PROJECTS_PERMISSIONS_VIEW_TICKETS_DESC" />	
+			<action name="project.tickets.submit"
+				title="COM_PROJECTS_PERMISSIONS_SUBMIT_TICKETS_TITLE"
+				description="COM_PROJECTS_PERMISSIONS_SUBMIT_TICKETS_DESC" />	
+			
+			<action name="project.activities.view"
+				title="COM_PROJECTS_PERMISSIONS_VIEW_ACTIVITIES_TITLE"
+				description="COM_PROJECTS_PERMISSIONS_VIEW_ACTIVITIES_DESC" />	
+			<action name="project.activities.submit"
+				title="COM_PROJECTS_PERMISSIONS_SUBMIT_ACTIVITIES_TITLE"
+				description="COM_PROJECTS_PERMISSIONS_SUBMIT_ACTIVITIES_DESC" />	
+			<action name="project.activities.manage"
+				title="COM_PROJECTS_PERMISSIONS_MANAGE_ACTIVITIES_TITLE"
+				description="COM_PROJECTS_PERMISSIONS_MANAGE_ACTIVITIES_DESC" />	
+		</field>
+	</fieldset>
 </config>

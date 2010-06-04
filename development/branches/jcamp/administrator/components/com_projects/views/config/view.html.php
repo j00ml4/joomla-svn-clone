@@ -14,5 +14,36 @@ jimport('joomla.application.component.view');
 
 class ProjectsViewConfig extends JView
 {
-
+       /**
+         * HelloWorldList view display method
+         * @return void
+         */
+        function display($tpl = null)
+        {
+			// Set the toolbar
+            $this->setToolBar();
+            
+            // Set the document
+            $this->setDocument();
+            
+            // Display the template
+            parent::display($tpl);
+        }
+        /**
+         * Setting the toolbar
+         */
+        protected function setToolBar()
+        {
+            JToolBarHelper::title(JText::_('COM_PROJECTS'));
+            JToolBarHelper::preferences('com_projects');
+        }
+        /**
+         * Method to set up the document properties
+         *
+         * @return void
+         */
+        protected function setDocument() 
+        {
+        	
+        }
 }
