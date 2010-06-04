@@ -34,8 +34,7 @@ class ProjectsViewConfig extends JView
          */
         protected function setToolBar()
         {
-            JToolBarHelper::title(JText::_('COM_PROJECTS'));
-            JToolBarHelper::preferences('com_projects');
+        	// Do Nothing
         }
         /**
          * Method to set up the document properties
@@ -44,6 +43,6 @@ class ProjectsViewConfig extends JView
          */
         protected function setDocument() 
         {
-        	
+        	// Do Nothing
         }
 }
