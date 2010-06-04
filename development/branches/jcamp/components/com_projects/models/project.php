@@ -17,7 +17,7 @@ jimport('joomla.application.component.modellist');
  * @author eden
  *
  */
-class ProjectsModelProject extends JModel
+class ProjectsModelProject extends JModelForm
 {
 	
 }
