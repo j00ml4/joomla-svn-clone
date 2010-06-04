@@ -10,5 +10,7 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 ?>
+<div>
+<p><?php echo JText::_('COM_PROJECTS_DESC'); ?></p>
 
-<h1><?php echo JText::_('COM_PROJECTS'); ?></h1>
+</div>
