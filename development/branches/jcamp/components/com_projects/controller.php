@@ -6,9 +6,9 @@
  * @copyright   Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
  * @license     GNU/GPL, see LICENSE.php
  */
-
 defined("_JEXEC") or die("Restricted access");
 
+// Imports
 jimport('joomla.application.component.controller');
 
 /**
@@ -17,28 +17,6 @@ jimport('joomla.application.component.controller');
  *
  */
 class ProjectsController extends JController {
-	/**
-	 * To DRY
-	 * @var string
-	 */
-	protected $view;
-	
-	/**
-	 * Constructor.
-	 *
-	 * @param	array An optional associative array of configuration settings.
-	 * @see		JController
-	 * @since	1.6
-	 */
-	public function __construct($config = array())
-	{
-		// Set view
-		$this->view	= JRequest::getWord('view', $this->default_view);
-		JRequest::setVar('view', $this->view);
-		
-		// Constructor
-		parent::__construct($config);
-	}
 	
 	/**
 	 * Method to show a view
@@ -48,15 +26,18 @@ class ProjectsController extends JController {
 	 */
 	function display()
 	{
-		$document = &JFactory::getDocument();
-		$cachable = true;	
-
-		$user = &JFactory::getUser();
+		$cachable = false;	
+		
+		echo "ProjectsController";
+		/*	
 		if ( $user->get('id') || ($_SERVER['REQUEST_METHOD'] == 'POST') ) {
 			$cachable = false;
 		}
-		$safeurlparams = array('id'=>'INT','limit'=>'INT','limitstart'=>'INT','filter_order'=>'CMD','filter_order_Dir'=>'CMD','lang'=>'CMD');
+		*/
+		$safeurlparams = array('id'=>'INT','cid'=>'INT','limit'=>'INT',
+			'limitstart'=>'INT','filter_order'=>'CMD','filter_order_Dir'=>'CMD','lang'=>'CMD');
 
 		parent::display($cachable, $safeurlparams);
 	}
+	
 }

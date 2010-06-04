@@ -15,7 +15,8 @@ jimport('joomla.application.component.controllerform');
  * @subpackage	com_weblinks
  * @since		1.5
  */
-class ProjectsControllerProject extends JController
+echo 'controllerProjectForm';
+class ProjectsControllerProject extends JControllerForm
 {
 	/**
 	 * Overload Context
