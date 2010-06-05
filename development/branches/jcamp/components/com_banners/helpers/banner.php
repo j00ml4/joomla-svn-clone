@@ -1,4 +1,6 @@
 <?php
+//hi
+
 /**
  * @version		$Id$
  * @package		Joomla.Site
