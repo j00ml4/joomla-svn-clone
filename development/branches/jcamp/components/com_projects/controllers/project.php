@@ -15,28 +15,26 @@ jimport('joomla.application.component.controllerform');
  * @subpackage	com_weblinks
  * @since		1.5
  */
-echo 'controllerProjectForm';
 class ProjectsControllerProject extends JControllerForm
 {
-	/**
-	 * Overload Context
-	 */
 	protected $context = 'com_projects.edit.project';
-
-	/**
-	 * @since	1.6
-	 */
+	protected $option = 'com_projects';
 	protected $view_item = 'project';
-
-	/**
-	 * @since	1.6
-	 */
 	protected $view_list = 'projects';
-
+	protected $text_prefix = 'COM_PROJECTS';
+	
 	/**
-	 * @var		string	The prefix to use with controller messages.
-	 * @since	1.6
+	 * Method to get a model object, loading it if required.
+	 *
+	 * @param	string	The model name. Optional.
+	 * @param	string	The class prefix. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 *
+	 * @return	object	The model.
 	 */
-	protected $text_prefix;
+	public function getModel($name = 'Project', $prefix = 'ProjectsModel', $config = null)
+	{
+		return parent::getModel($name, $prefix, $config);
+	}
 	
 }

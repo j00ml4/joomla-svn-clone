@@ -9,17 +9,14 @@
 
 // no direct access
 defined('_JEXEC') or die;
-
-// Create shortcut to parameters.
-$params = $this->state->get('params');
 ?>
 
 <!-- Actions -->
 <div class="formelm_buttons">
-	<button type="button" onclick="submitbutton('article.save')">
+	<button type="button" onclick="submitbutton('project.save')">
 		<?php echo JText::_('JSAVE') ?>
 	</button>
-	<button type="button" onclick="submitbutton('article.cancel')">
+	<button type="button" onclick="submitbutton('project.cancel')">
 		<?php echo JText::_('JCANCEL') ?>
 	</button>
 </div>

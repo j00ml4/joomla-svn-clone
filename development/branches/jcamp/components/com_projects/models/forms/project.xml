@@ -33,23 +33,11 @@
 			name="description" 
 			type="editor"
 			buttons="true"
+			hide="pagebreak,article"
 			description="COM_PROJECTS_FIELD_DESCRIPTION_DESC"
 			filter="safehtml"
 			label="COM_PROJECTS_FIELD_DESCRIPTION_LABEL"/>
-        
-        <field id="state" 
-			name="state" 
-			type="list"
-			default="1"
-			description="JFIELD_PUBLISHED_DESC"
-			label="JGLOBAL_STATE"
-			size="1" >
-         	<option value="3">COM_PROJECTS_STATE_FINISHED</option>
-            <option value="1">JPUBLISHED</option>
-            <option value="0">JUNPUBLISHED</option>
-			<option value="-3">COM_PROJECTS_STATE_PENDING</option>
-        </field>
-		 
+        	 
 		 <field id="start_at"
 			name="start_at"
 			type="calendar"
@@ -67,7 +55,21 @@
 			class="inputbox"
 			format="%Y-%m-%d"
 			size="30" />
-			
+		
+		<!-- CORE -->	
+		 <field id="state" 
+			name="state" 
+			type="list"
+			default="1"
+			description="JFIELD_PUBLISHED_DESC"
+			label="JGLOBAL_STATE"
+			size="1" >
+         	<option value="3">COM_PROJECTS_STATE_FINISHED</option>
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+			<option value="-3">COM_PROJECTS_STATE_PENDING</option>
+        </field>
+		
 		<field id="ordering" 
 			name="ordering" 
 			type="ordering"
@@ -85,5 +87,22 @@
 			class="inputbox">
 			<option value="*">JALL</option>
 		</field>
+		
+		<field id="access"
+			name="access"
+			type="accesslevel"
+			label="JFIELD_ACCESS_LABEL"
+			description="JFIELD_ACCESS_DESC"
+			class="inputbox"
+			size="1" />
+			
+		<!-- Params -->	
+        <field id="params_estimation" 
+			name="params[estimation]" 
+			type="text"
+			description="COM_PROJECTS_FIELD_ESTIMATION_DESC"
+			label="COM_PROJECTS_FIELD_ESTIMATION_LABEL"
+			required="true"
+			size="30" />    
     </fieldset>
 </form>

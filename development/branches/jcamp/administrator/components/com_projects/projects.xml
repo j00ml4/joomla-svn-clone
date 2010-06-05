@@ -37,7 +37,7 @@
 	<administration>
 		    <menu link="index.php?option=com_projects">COM_PROJECTS</menu> 
 		    <submenu>
-		            <menu link="option=com_projects" img="class:article">COM_PROJECTS_PROJECTS</menu>
+		            <menu link="option=com_projects" img="class:article">COM_PROJECTS_CONFIG</menu>
 		            <menu link="option=com_categories&amp;extension=com_projects" view="categories" img="class:category" alt="Portfolios">COM_PROJECTS_PORTFOLIOS</menu>
 		    </submenu>  
 		    <files folder="admin">
@@ -48,6 +48,7 @@
 		            <folder>sql</folder>
 		            <folder>models</folder>
 		            <folder>views</folder>
+					<folder>helpers</folder>
 		            <folder>tables</folder>
 		            <folder>language</folder>
 		    </files>
