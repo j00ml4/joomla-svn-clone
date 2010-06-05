@@ -14,6 +14,5 @@ defined('_JEXEC') or die;
 <div class="item-page">
 	<h1><?php echo $this->params ?></h1>
 
-	<h2></h2>
 	<pre><?php print_r($this); ?></pre>
 </div>

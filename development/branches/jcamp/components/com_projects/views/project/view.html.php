@@ -27,9 +27,15 @@ class ProjectsViewProject extends JView
 	 */
 	public function display($tpl = null) 
 	{
-		//$this->params = $this->state->get('params');
-		$this->params = 'a';
-		
+		$app		= &JFactory::getApplication();
+		$model 		= $this->getModel('project');
+		$state		= $model->getState();
+
+		//Get Model data
+		$this->form 	= $model->getForm();
+		$this->table 	= $model->getTable();
+		$this->params	= &$app->getParams();
+	
 		// Display the view
 		parent::display($tpl);
 	}

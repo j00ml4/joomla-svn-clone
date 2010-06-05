@@ -10,35 +10,36 @@
 // no direct access
 defined('_JEXEC') or die;
 
+$params = $this->params;
+
+// HTML Helpers
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.calendar');
 JHtml::_('behavior.formvalidation');
-
-// Create shortcut to parameters.
-$params = $this->state->get('params');
 ?>
-
+<!-- Script -->
 <script language="javascript" type="text/javascript">
 function submitbutton(task) {
-	if (task == 'article.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
+	if (task == 'project.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
 		<?php //echo $this->form->fields['introtext']->editor->save('jform[introtext]'); ?>
 		submitform(task);
 	}
 }
 </script>
+
+<pre><?php print_r($this->params); ?></pre>
+
 <div class="edit item-page<?php echo $this->escape($params->get('pageclass_sfx')); ?>">
-<?php if ($params->get('show_page_heading', 1)) : ?>
-<h1>
-	<?php echo $this->escape($params->get('page_heading')); ?>
-</h1>
-<?php endif; ?>
+	<?php if ($params->get('show_page_heading', 1)) : ?>
+	<h1><?php echo $this->escape($params->get('page_heading', JText::_('COM_PROJECTS_FORM'))); ?></h1>
+	<?php endif; ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_projects&view=project'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<fieldset>	
 		<?php echo $this->loadTemplate('buttons'); ?>
 	</fieldset>
-	
+
 	<fieldset>
 		<legend><?php echo JText::_('JEDITOR'); ?></legend>
 
@@ -59,7 +60,7 @@ function submitbutton(task) {
 		</div>
 		<?php endif; ?>
 	
-		<?php if ($this->user->authorise('core.edit.state', 'com_projects.project.'.$this->item->id)): ?>
+		<?php if ($params->get('canEditState', 0)): ?>
 		<div class="formelm">
 			<?php echo $this->form->getLabel('state'); ?>
 			<?php echo $this->form->getInput('state'); ?>
@@ -87,7 +88,7 @@ function submitbutton(task) {
 		<?php echo $this->loadTemplate('buttons'); ?>
 	</fieldset>
 
-	<input type="hidden" name="task" value="" />
+	<input type="hidden" name="task" value="project.save" />
 	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 </div>

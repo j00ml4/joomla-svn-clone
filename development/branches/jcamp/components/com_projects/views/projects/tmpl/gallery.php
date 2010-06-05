@@ -11,29 +11,16 @@
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
-
-$pageClass = $this->params->get('pageclass_sfx');
+$params =  $this->params;
 ?>
 
-<div class="portifolio-gallery<?php echo $pageClass;?>">
-<?php if ($this->params->get('show_page_heading')!=0 or $this->params->get('show_category_title')): ?>
-<h1>
-
-<?php if ( $this->params->get('show_page_heading')!=0) : ?>
-	<?php echo $this->escape($this->params->get('page_heading')); ?>
-<?php endif; ?>
-	<?php if ($this->params->get('show_category_title')) :?>
-
-
-	<?php	echo '<span class="subheading-category">'.$this->category->title.'</span>'; ?>
+<div class="portifolio-gallery<?php echo $this->params->get('pageclass_sfx'); ?>">
+	<?php if ($params->get('show_page_heading')): ?>
+	<h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	<?php endif; ?>
-
-</h1>
-<?php endif; ?>
-
-
-
-
+	
+<pre><?php print_r($this); ?></pre>
+<?php /**
 <?php if ($this->params->get('show_description', 1) && $this->category->description): ?>
 	<div class="portifolio-desc">
 		<?php echo JHtml::_('content.prepare', $this->category->description); ?>
@@ -118,5 +105,5 @@ $pageClass = $this->params->get('pageclass_sfx');
 				<?php echo $this->pagination->getPagesLinks(); ?>
 		</div>
 <?php  endif; ?>
-
+*/ ?>
 </div>
