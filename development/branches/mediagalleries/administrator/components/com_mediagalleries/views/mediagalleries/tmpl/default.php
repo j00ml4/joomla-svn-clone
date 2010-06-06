@@ -1,0 +1,148 @@
+<?php 
+// no direct access
+defined('_JEXEC') or die('Restricted access'); 
+
+// Set toolbar items for the page
+JToolBarHelper::title(   JText::_( 'Medias Manager' ), 'generic.png' );
+JToolBarHelper::publishList();
+JToolBarHelper::unpublishList();
+JToolBarHelper::deleteList(JText::_('VALIDDELETEITEMS') );
+JToolBarHelper::editListX();
+JToolBarHelper::addNewX('edit');
+JToolBarHelper::preferences('com_mediagalleries', '360', '550', JText::_('Configuration'));
+JToolBarHelper::custom('media', 'config.png', '', JText::_('Edit Media'), false);
+//JToolBarHelper::media_manager( '', 'Medias Dir' );
+
+JHtml::_('behavior.tooltip');
+JHtml::_('behavior.formvalidation');
+JToolBarHelper::help( 'mediagalleries', true );
+
+?>
+<form action="<?php echo $this->action; ?>" method="post" name="adminForm">
+<table>
+<tr>
+	<td align="left" width="100%">
+		<?php echo JText::_( 'Filter' ); ?>:
+		<input type="text" name="search" id="search" value="<?php echo $this->lists['search'];?>" class="text_area" onchange="document.adminForm.submit();" />
+		<button onclick="this.form.submit();"><?php echo JText::_( 'Go' ); ?></button>
+		<button onclick="document.getElementById('search').value='';this.form.getElementById('filter_catid').value='0';this.form.getElementById('filter_state').value='';this.form.submit();"><?php echo JText::_( 'Reset' ); ?></button>
+	</td>
+	<td nowrap="nowrap">
+		<?php
+			echo $this->lists['catid'];
+			echo $this->lists['state'];
+		?>
+	</td>
+</tr>
+</table>
+<div id="editcell">
+	<table class="adminlist">
+	<thead>
+		<tr>
+			<th width="5">
+				<?php echo JText::_( 'NUM' ); ?>
+			</th>
+			<th width="20">
+				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
+			</th>
+			<th class="title">
+				<?php echo JHTML::_('grid.sort',  'Title', 'a.title', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			</th>
+			<th width="5%" nowrap="nowrap">
+				<?php echo JHTML::_('grid.sort',  'Published', 'a.published', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			</th>
+			<th width="8%" nowrap="nowrap">
+				<?php echo JHTML::_('grid.sort',  'Order', 'a.ordering', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHTML::_('grid.order',  $this->items ); ?>
+			</th>
+			<th width="15%"  class="title">
+				<?php echo JHTML::_('grid.sort',  'Category', 'category', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			</th>
+			<th width="5%">
+				<?php echo JHTML::_('grid.sort',  'Hits', 'a.hits', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			</th>
+			<th width="1%" nowrap="nowrap">
+				<?php echo JHTML::_('grid.sort',  'ID', 'a.id', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+			</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<td colspan="9">
+				<?php
+				//print_r($this->pagination);
+				 echo $this->pagination->getListFooter(); ?>
+			</td>
+		</tr>
+	</tfoot>
+	<tbody>
+	<?php
+	$k = 0;
+	for ($i=0, $n=count( $this->items ); $i < $n; $i++)
+	{
+		$row = &$this->items[$i];
+
+		$link['edit']  = JRoute::_( 'index.php?option=com_jmultimedia&task=edit&view=media&cid[]='. $row->id );
+		$link['cat']  = JRoute::_( 'index.php?option=com_categories&section=com_jmultimedia&task=edit&type=other&cid[]='. $row->catid );
+
+		$checked 	= JHTML::_('grid.checkedout',   $row, $i );
+		$published 	= JHTML::_('grid.published', $row, $i );
+		$ordering = ($this->lists['order'] == 'a.ordering');
+		?>
+		<tr class="<?php echo "row$k"; ?>">
+			<td>
+				<?php echo $this->pagination->getRowOffset( $i ); ?>
+			</td>
+			<td>
+				<?php echo $checked; ?>
+			</td>
+			<td>
+				<?php
+				if (  JTable::isCheckedOut($this->user->get ('id'), $row->checked_out ) ) {
+					echo $row->title;
+				} else {
+				?>
+				<span class="editlinktip hasTip" title="<?php echo JText::_( 'Edit Media' );?>::<?php echo $row->title; ?>">
+					<a href="<?php echo $link['edit']; ?>">
+						<?php echo $row->title; ?></a></span>
+				<?php
+				}
+				?>
+			</td>
+			<td align="center">
+				<?php echo $published;?>
+			</td>
+			<td class="order">
+				<span><?php echo $this->pagination->orderUpIcon( $i, ($row->catid == @$this->items[$i-1]->catid),'orderup', 'Move Up', $ordering ); ?></span>
+				<span><?php echo $this->pagination->orderDownIcon( $i, $n, ($row->catid == @$this->items[$i+1]->catid), 'orderdown', 'Move Down', $ordering ); ?></span>
+				<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
+				<input type="text" name="order[]" size="5" value="<?php echo $row->ordering;?>" <?php echo $disabled ?> class="text_area" style="text-align: center" />
+			</td>
+			<td>
+				<span class="editlinktip hasTip" title="<?php echo JText::_( 'Edit Category' );?>::<?php echo $row->category; ?>">
+					<a href="<?php echo $link['cat']; ?>" ><?php echo $row->category; ?></a>
+				<span>
+			</td>
+			<td align="center">
+				<?php echo $row->hits; ?>
+			</td>
+			<td align="center">
+				<?php echo $row->id; ?>
+			</td>
+		</tr>
+		<?php
+		$k = 1 - $k;
+	}
+	?>
+	</tbody>
+	</table>
+</div>
+
+	<input type="hidden" id="option" name="option" value="com_jmultimedia" />
+	<input type="hidden" id="task" name="task" value="" />
+	<input type="hidden" id="c" name="c" value="media" />
+	<input type="hidden" name="boxchecked" value="0" />
+	<input type="hidden" name="filter_order" value="<?php echo $this->lists['order']; ?>" />
+	<input type="hidden" name="filter_order_Dir" value="<?php echo $this->lists['order_Dir']; ?>" />
+	<?php echo JHTML::_( 'form.token' ); ?>
+</form>
