@@ -1,0 +1,161 @@
+
+/**
+ * JMultimedia Base
+ */
+#jmultimedia{
+	
+}
+
+/**
+ * Player
+ */
+#jmultimedia #player{
+	width: 500px;
+	min-height: 150px;
+	border: #000000 inset 10px;
+	background: #000000;
+	position: relative;
+}
+#jmultimedia #player .denvideo{
+	width: 500px;
+	height: 350px;
+}
+#jmultimedia #player img.denvideo{
+	height:auto;
+	min-height: 150px;
+}
+/* video code */
+#jmultimedia  #embed{
+	
+}
+
+/* rouded corners */
+#jmultimedia #player div{
+	
+}
+#jmultimedia #player div div{
+	
+}
+#jmultimedia #player div div div{
+	
+}
+#jmultimedia #player div div div div{
+	
+}
+
+/**
+ * Media Info
+ */
+#jmultimedia .details{
+	
+}
+
+#jmultimedia ul.mediadetails{
+	list-style:none;
+	list-style-type:none;
+}
+#jmultimedia ul.mediadetails li{
+	list-style:none;
+	list-style-type:none;	
+	display: inline;
+}
+
+#jmultimedia ul.details{
+	list-style:none;
+	list-style-type:none;
+}
+#jmultimedia ul.details li{
+	list-style:none;
+	list-style-type:none;	
+	display: inline;
+}
+
+/**
+ * Thumb
+ */
+ div.mediathumb{
+	background: #FFFFEE;
+	width: 110px;
+	min-height:110px; 
+	padding: 4px;
+	
+	text-align:center;
+	border: 1px solid #000000;
+}
+div.mediathumb a{
+	color: #555555 !important;
+	
+}
+ div.mediathumb a:hover{
+	color: #000000 !important;
+}
+div.mediathumb a img {
+	text-decoration:none;
+	max-width: 100px;
+	max-height:100px; 
+	border: 1px solid #CCCCCC;
+}
+div.mediathumb a:hover img {
+	text-decoration:none;
+	border: 1px solid #000000;	
+}
+
+/**
+ * Lists
+ */
+/** compact */
+div.compact{
+	display: inline;
+}
+
+#jmultimedia .list{
+	
+}
+#jmultimedia .list .related{
+	
+}
+#jmultimedia .mediaslist{
+	float: right;
+	width: 110px;
+	text-align:center;
+	border: 1px;
+}
+#jmultimedia .mediaslist .denvideo{
+	width: 100px;
+	height: 80px;
+	margin: 10px;	
+}
+
+/**
+ *  Form
+ */
+#jmultimedia .adminform label{
+	font-weight: bold;
+	display: block;
+	text-align: right;
+}
+
+
+#jmultimedia .adminform .inputboxfull{
+	width:100%;
+}
+#jmultimedia .buttons{
+	text-align:right;
+}
+#jmultimedia .buttons a{
+	text-decoration:none;
+}
+
+
+/* Fieldset 
+
+
+/* Table */
+#jmultimedia .adminform table{
+		width:90%;
+}
+#jmultimedia .adminform table.input{
+		border: #cccccc 2px dashed;
+		width: 100%;
+		margin: 5px;
+}
