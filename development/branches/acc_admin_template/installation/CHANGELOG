@@ -27,11 +27,111 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+06-June-2010 Christophe Demko
+ # Fixed issue [#18923] JURI::buildQuery does not deal correctly with multidimensional array (Omar Ramos, Antoine BERNIER)
+
+06-June-2010 Jean-Marie Simonet
+# [#20853] Sorting by author in Category list. Thanks Phil.
+# [#20861] plg_user_joomla missing language declaration in manifest. 
+# [#20858] Administrator Editor Media Dialog modal-box height requires scrolling  Thansk Bill.and Ofer.
+# [#20843] wrong constant specified for error message in controllerform.php - missing language key. Thanks Bill and Nikolai. + some
+
+05-June-2010 Jean-Marie Simonet
+# [#20846] Corrected strings for contact creator. Thanks Elin.
+# [#20815] When a contact is created automatically via contact creator plugin. Thanks Radek and Phil.
+#$ Corrected wrong sprintf
+# [#20484] Requested for joomla.json download after uploading image. Thanks John.
+# [#20321] Email functions not working properly. Partly fixed only.
+ 
+04-June-2010 Jean-Marie Simonet
+# [#20768] It is possible to create a single-contact menu entry without selecting a contact. Thanks Artyom and Phil.
+$ Added missing string
+
+03-June-2010 Jean-Marie Simonet
+# [#20744] Logout link in administrator panel isn't logout when editing content. Thanks Andrew.
+$ Missing strings
+# [#20768] It is possible to create a single-contact menu entry without selecting a contact. Thanks Amy.
+# [#20761] Unclear how to select contact for single contact menu item. Thanks Elin.
+# [#20603] Error while trying to use PageBreak from frontend. Thanks Bill.
+
+03-June-2010 Christophe Demko
+ # Fixed issue [#20813] Value Not Found for blank user field (bill richardson, Peter Osipof)
+ # Fixed issue [#20591] Cannot delete all usergroups from an access level (Robert Flodstrom)
+ # Fixed issue [#20825] [patch] Debug plug-in doesn't output well formed code (Rouven Weßling)
+ # Fixed issue [#20697] Uninstalling a component does not remove menu items of that component type
+ # UI enhancement for com_menus
+ # Fixed issue [#20805] Module linked to menu links (Aytug AKAR, Nikolai Plath, bill richardson)
+ # Fixed issue [#20820] menu create - single contact typo error (bill richardson)
+ # Fixed issue [#20789] featured contacts (bill richardson)
+ # Fixed issue [#20819] Incorrect Label on Access Level Filter box on User Manager Access Level Screen (Ian McLennan)
+
+02-June-2010 Jean-Marie Simonet
+# [#20787] some misc html typos. Thanks Phil.
+# [#20677] duplicate key error. Thanks Nicholas.
+# [#20506] Field required: cache_handler - message in Global Config. Thanks Christophe and Klas
+# [#20809] Unable to run installation in IE8. Thanks Ian
+ 
+02-June-2010 Andrew Eddie
+ # Fixed issue [#20771] validate.js causing problems with IE8 (Bill Richardson, Phil Snell).
+ # Fixed issue [#20788] Error when saving template style for administrator template.
+
+02-June-2010 Christophe Demko
+ # Corrected the atomic template since its index.php file is not a correct xml file
+ # Fixed issue [#20758] Property root_user in configuration could be a big security breach. (thanks Henrik Hussfelt, Martin Blodau, Andrew Eddie).
+ # Fixed issue [#20795] user profile plugin typo error (thanks bill richardson)
+ # Fixed issue [#20783] A lot of issues related to searching and language switcher
+ # Fixed issue [#12757] JDate override problem in Backend
+ # Fixed issue [#20784] Some minor errors in the beez* templates
+
+01-June-2010 Jean-Marie Simonet
+# [#20724] HTTP Directory Listing. Thanks Amy.
+# [#20521] usability issue: Item ID not visible during edit. Thanks Tim.
+# [#20741] error in profile plugin manifest. Thanks Nicholai.and Boris.
+# [#20743] Module manager issues with enabled caching. Thanks Dennis.
+# [#20756] Metakeys and metadesc when using langswitcher
+# [#20765] Missing language strings in en-GB.com_newsfeeds.ini (Thanks Stella) + some
+
+31-May-2010 Jean-Marie Simonet
+# [#20537] Edit articles in frontend sometimes gives a blank edit page. Thanks Dennis.
+
+31-May-2010 Mark Dexter
+ # Fixed issue [#20718] Issue with JLanguageTest (Tudor Mazilu).
+
+-------------------- 1.6.0 Beta2 Release [31-May-2010] ------------------
+
+31-May-2010
+# [#20745] Reverting [#20489] because it broke the system test.
+
+31-May-2010 Jean-Marie Simonet
+# [#20721] Select State > trash and content filter Thanks Christophe, Amy.
+# [#20504] plugin working 4 times one the same page. Thanks Christophe.
+# [#20606] "Cache Manager: Clear Cache" doesn't show cache groups if caching is off, no pagination here, same data for Site and Administrator. Thanks Dennis and Klas.
+# [#20305] Configuration.php textarea box breaks layout in installation. Thanks Vicki, Elin.
+# [#20736] [patch] com_content: error on sorting by access level in "articles" view with "modal" layout Thanks Artyom.
+# [#20731] CountModules with multiple positions linked by operator is not working. Thanks Christophe.
+# [#20734] JS Validation missing for Radio Option Selection Required. Thanks Christophe and testers.
+# [#20529] User-Profile Plugin field settings ignored. Thanks Christophe and Amy.
+# [#20489] JTableAsset::store failed Thanks Christophe.
+$ Corrected string typo.
+$ Deleting unused strings from installation ini files
+# [#20593] call to undefined function on tinymce. Thanks Christophe.
+# Corrected path to tinymce templates
+# [#20720] Beez5 template has some minors bugs. Thanks Elin & all.
+$ Added missing string in front-end
+$ Updating xx-XX language front-end/back-end
+
+30-May-2010 Ian MacLennan
+ # Fixed issue  [#20691] Patch to ensure coding standards and correct phpdoc blocks (marius van rijnsoever).
+
 30-May-2010 Ron Severdia
 # Fixed issue [#20632]
 ^ Bluestork image tweaks
+^ Changed user profile radios
+^ Cleaned up pagination buttons
+# Language fixes, CSS fixes for BlueStork
 
 30-May-2010 Christophe Demko
+ # Fixed sample data
  # Fixed some hathor issues relative to [#20632]
  # Fixed issue [#20707] ContentModelArticles::getListQuery does not format ORDER BY clause correctly (thanks Amy Stephen)
  # Fixed issue [#20642] com_banners submits form even when required fields are not filled (thanks bill richardson)
