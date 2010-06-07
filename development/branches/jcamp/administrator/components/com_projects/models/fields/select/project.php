@@ -32,7 +32,7 @@ class JFormFieldSelect_Project extends JFormFieldList
                 $rows = $db->loadObjectList();
                 $options = array();
                 $options[] = JHtml::_('select.option', 0, JText::_('JNONE'));
-                foreach($rows as $row) 
+                foreach($rows as $row)
                 {
                         $options[] = JHtml::_('select.option', $row->value, $row->text);
                 }
