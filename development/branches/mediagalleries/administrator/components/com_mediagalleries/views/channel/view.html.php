@@ -47,7 +47,7 @@ class JMultimediaViewChannel extends JView
 
 		// Is new?
 		if( !$item->id ){
-			$video = JText::_('Select a media to preview' );			
+			$video = JText::_('COM_MEDIAGALLERIES_SELECT_MEDIA' );			
 			$item->published = 1;
 			$item->catid = 0;
 		}else{
