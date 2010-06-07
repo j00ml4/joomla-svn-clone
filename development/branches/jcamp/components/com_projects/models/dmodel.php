@@ -1,7 +1,7 @@
 <?php
 /**
  * @version     $Id$
- * @package     Joomla
+ * @package     Joomla.Site
  * @subpackage	Projects
  * @copyright   Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
  * @license     GNU/GPL, see LICENSE.php
@@ -174,7 +174,7 @@ class DModel extends JModelAdmin
 	protected function prepareTable(&$table)
 	{
 		jimport('joomla.filter.output');
-		empty($table) && $table = $this->getTablee();
+		empty($table) && $table = $this->getTable();
 		$date = JFactory::getDate();
 		$user = JFactory::getUser();
 

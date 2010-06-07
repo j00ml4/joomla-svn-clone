@@ -1,8 +1,8 @@
 <?php
 /**
- * @version		$Id: view.feed.php 15976 2010-04-10 04:44:23Z hackwar $
- * @package		Joomla.Site
- * @subpackage	Weblinks
+ * @version     $Id$
+ * @package     Joomla.Site
+ * @subpackage	com_projects
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -13,12 +13,12 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.view');
 
 /**
- * HTML View class for the WebLinks component
+ * FEED View class for the Projcets component
  *
  * @static
  * @package		Joomla.Site
- * @subpackage	Weblinks
- * @since 1.0
+ * @subpackage	com_projects
+ * @since 1.6
  */
 class ProjectsViewProjects extends JView
 {

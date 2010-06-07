@@ -1,8 +1,8 @@
 <?php
 /**
- * @version		$Id: edit.php 17079 2010-05-15 17:17:59Z infograf768 $
- * @package		Joomla.Site
- * @subpackage	com_content
+ * @version     $Id$
+ * @package     Joomla.Site
+ * @subpackage	com_projects
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */

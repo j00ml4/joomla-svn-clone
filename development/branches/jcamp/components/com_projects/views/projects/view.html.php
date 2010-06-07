@@ -1,8 +1,8 @@
 <?php
 /**
- * version $Id: view.html.php 16878 2010-05-07 05:42:48Z chdemko $
- * @package		Joomla
- * @subpackage	Weblinks
+ * @version     $Id$
+ * @package     Joomla.Site
+ * @subpackage	Projects
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -13,11 +13,11 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.view');
 
 /**
- * HTML View class for the WebLinks component
+ * HTML View class for the Projects component
  *
  * @package		Joomla.Site
- * @subpackage	com_weblinks
- * @since		1.5
+ * @subpackage	Projects
+ * @since		1.6
  */
 class ProjectsViewProjects extends JView
 {
