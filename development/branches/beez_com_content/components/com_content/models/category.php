@@ -228,7 +228,7 @@ class ContentModelCategory extends JModelItem
 			$params = $this->state->params;
 
 			$options = array();
-			$options['countItems'] = $params->get('show_cat_num_articles', 0);
+			$options['countItems'] = 1;
 			$categories = JCategories::getInstance('Content', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 
