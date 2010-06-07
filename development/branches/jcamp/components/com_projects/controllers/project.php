@@ -1,6 +1,8 @@
 <?php
 /**
- * @version		$Id: weblink.php 17248 2010-05-25 01:58:09Z eddieajau $
+ * @version     $Id$
+ * @package     Joomla.Site
+ * @subpackage	Projects
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -12,15 +14,15 @@ jimport('joomla.application.component.controllerform');
 
 /**
  * @package		Joomla.Site
- * @subpackage	com_weblinks
- * @since		1.5
+ * @subpackage	Projects
+ * @since		1.6
  */
 class ProjectsControllerProject extends JControllerForm
 {
 	protected $context = 'com_projects.edit.project';
 	protected $option = 'com_projects';
-	protected $view_item = 'project';
-	protected $view_list = 'projects';
+	protected $view_item = 'edit';
+	protected $view_list = 'project';
 	protected $text_prefix = 'COM_PROJECTS';
 	
 	/**

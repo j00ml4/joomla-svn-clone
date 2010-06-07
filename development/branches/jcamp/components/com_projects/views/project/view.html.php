@@ -1,8 +1,8 @@
 <?php
 /**
  * @version     $Id$
- * @package     Joomla
- * @subpackage	Projects
+ * @package     Joomla.Site
+ * @subpackage	com_projects
  * @copyright   Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
  * @license     GNU/GPL, see LICENSE.php
  */
@@ -27,6 +27,7 @@ class ProjectsViewProject extends JView
 	 */
 	public function display($tpl = null) 
 	{
+		
 		$app		= &JFactory::getApplication();
 		$model 		= $this->getModel('project');
 		$state		= $model->getState();
@@ -37,6 +38,7 @@ class ProjectsViewProject extends JView
 		$this->params	= &$app->getParams();
 	
 		// Display the view
+		$this->setLayout(JRequest::getCMD('task','edit'));
 		parent::display($tpl);
 	}
 }
