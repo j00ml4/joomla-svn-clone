@@ -1,8 +1,8 @@
 <?php
 /**
  * @version     $Id$
- * @package     Joomla
- * @subpackage	Projects
+ * @package     Joomla.Site
+ * @subpackage	com_projects
  * @copyright   Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
  * @license     GNU/GPL, see LICENSE.php
  */

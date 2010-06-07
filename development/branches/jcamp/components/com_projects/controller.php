@@ -1,8 +1,8 @@
 <?php
 /**
  * @version     $Id$
- * @package     Joomla
- * @subpackage	Projects
+ * @package     Joomla.Site
+ * @subpackage	com_projects
  * @copyright   Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
  * @license     GNU/GPL, see LICENSE.php
  */
@@ -22,7 +22,7 @@ class ProjectsController extends JController {
 	 * Method to show a view
 	 *
 	 * @access	public
-	 * @since	1.5
+	 * @since	1.6
 	 */
 	function display()
 	{	
