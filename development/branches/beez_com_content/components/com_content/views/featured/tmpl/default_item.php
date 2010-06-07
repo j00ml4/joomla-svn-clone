@@ -126,7 +126,7 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.frontpage.'.$this->i
 		$menu = JSite::getMenu();
 		$active = $menu->getActive();
 		$itemId = $active->id;
-		$link1 = JRoute::_('index.php?option=com_users&view=login&&Itemid=' . $itemId);
+		$link1 = JRoute::_('index.php?option=com_users&view=login&Itemid=' . $itemId);
 		$returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid));
 		$link = new JURI($link1);
 		$link->setVar('return', base64_encode($returnURL));
@@ -136,7 +136,7 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.frontpage.'.$this->i
 				<a href="<?php echo $link; ?>">
 						<?php if (!$params->get('access-view')) :
 								echo JText::_('COM_CONTENT_REGISTER_TO_READ_MORE');
-						elseif ($readmore = $params->get('alternative_readmore')) :
+						elseif ($readmore = $this->item->alternative_readmore) :
 								echo $readmore;
 						else :
 								echo JText::sprintf('COM_CONTENT_READ_MORE', $this->escape($this->item->title));
