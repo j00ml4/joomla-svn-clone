@@ -16,6 +16,10 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.calendar');
 JHtml::_('behavior.formvalidation');
 
+// Set vars
+$params = &$this->params;
+
+/** this is slower
 $script = "function submitbutton(task) {".
 					"if (task == 'project.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {".
 					"		submitform(task);".
@@ -24,33 +28,77 @@ $script = "function submitbutton(task) {".
 
 $document = &JFactory::getDocument();
 $document->addScriptDeclaration($script);
-
-//print_r($this->form->getFieldset());
+*/
 ?>
-<div class="componentheading"><?php echo JText::_('COM_PROJECTS_PROJECT_EDIT_FORM_TITLE');?></div>
-<form action="<?php echo JRoute::_('index.php?option=com_projects'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
-	<fieldset>
-		<legend><?php echo JText::_('COM_PROJECTS_PROJECT_FORM_LEGEND'); ?></legend>
-		<ul class="adminformlist">
-			<?php 
-			  $fields = $this->form->getFieldset(); 
-				foreach($fields as $name=>$field)	{
-					if($this->form->getFieldAttribute($name,'type') != 'hidden')	{
-						echo '<li>'.$this->form->getLabel($name).$this->form->getInput($name).'</li>';
-					}
-				}
-			?>		
-			</ul>
-	</fieldset>
-	<fieldset>
-		<button type="button" onclick="submitbutton('weblink.save')">
-			<?php echo JText::_('JSAVE') ?>
-		</button>
-		<button type="button" onclick="submitbutton('weblink.cancel')">
-			<?php echo JText::_('JCANCEL') ?>
-		</button>
-	</fieldset>
+<script language="javascript" type="text/javascript">
+function submitbutton(task) {
+	if (task == 'article.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
+		submitform(task);
+	}
+}
+</script>
 
-	<input type="hidden" name="task" value="" />
-	<?php echo JHTML::_( 'form.token' ); ?>
-</form>
+<div class="edit item-page<?php echo $this->escape($params->get('pageclass_sfx')); ?>">
+	<?php if ($params->get('show_page_heading', 1)) : ?>
+	<?php /* this allows the user to set the title he wants */ ?> 
+	<div class="componentheading"><?php echo $this->escape($params->get('page_heading')); ?></div>
+	<?php endif; ?>
+	
+	<?php /** This way we have more controll over the design */ ?>
+	<form action="<?php echo JRoute::_('index.php?option=com_projects'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
+		
+		<!-- This keeps the code more DRY -->	
+		<?php echo $this->loadTemplate('buttons'); ?>
+	
+		
+		<fieldset>
+			<legend><?php echo JText::_('COM_PROJECTS_PROJECT_FORM_LEGEND'); ?></legend>
+	
+			<div class="formelm">
+				<?php echo $this->form->getLabel('catid'); ?>
+				<?php echo $this->form->getInput('catid'); ?>
+			</div>
+			
+			<div class="formelm">
+				<?php echo $this->form->getLabel('title'); ?>
+				<?php echo $this->form->getInput('title'); ?>
+			</div>	
+	
+			<?php if ($params->get('edit_language', 0)): ?>
+			<div class="formelm">
+				<?php echo $this->form->getLabel('language'); ?>
+				<?php echo $this->form->getInput('language'); ?>
+			</div>
+			<?php endif; ?>
+		
+			<?php if ($params->get('canEditState', 1)): ?>
+			<div class="formelm">
+				<?php echo $this->form->getLabel('state'); ?>
+				<?php echo $this->form->getInput('state'); ?>
+			</div>
+			<?php endif; ?>
+	
+			<div class="formelm">
+			<?php echo $this->form->getLabel('start_at'); ?>
+			<?php echo $this->form->getInput('start_at'); ?>
+			</div>
+			<div class="formelm">
+			<?php echo $this->form->getLabel('finish_at'); ?>
+			<?php echo $this->form->getInput('finish_at'); ?>
+			</div>
+	
+			<div class="formelm">
+			<?php echo $this->form->getLabel('ordering'); ?>
+			<?php echo $this->form->getInput('ordering'); ?>
+			</div>
+	
+			<?php echo $this->form->getInput('description'); ?>
+		</fieldset>
+		
+		<!-- SubTemplates are DRY -->	
+		<?php echo $this->loadTemplate('buttons'); ?>
+		
+		<input type="hidden" name="task" value="" />
+		<?php echo JHTML::_( 'form.token' ); ?>
+	</form>
+</div>
