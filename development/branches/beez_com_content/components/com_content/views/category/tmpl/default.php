@@ -43,8 +43,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	</div>
 	<?php endif; ?>
 
-
-        <?php if (is_array($this->children) && count($this->children) > 0 && $this->params->get('maxLevel') !=0)  : ?>
+	<?php if (is_array($this->children[$this->category->id]) && count($this->children[$this->category->id]) > 0 && $this->params->get('maxLevel') !=0) : ?>
                 <div class="cat-children">
 
          <?php if ($this->params->get('show_category_title') OR $this->params->get('page_subheading'))
