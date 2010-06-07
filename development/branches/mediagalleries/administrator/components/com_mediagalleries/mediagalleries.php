@@ -24,11 +24,12 @@ JSubMenuHelper::addEntry(JText::_('Comments'), $link);
 
 $mediapath = JPATH_SITE.DS.'plugins'.DS.'content'.DS.'media'.DS.'media.php';
 if( !is_file($mediapath) )
-{
+{	
+	$mainframe=&JFactory::getApplication();
 	//JApplication::enqueueMessage("Media Plugin Not Installed", 'error');
-	JError::raiseError(1,"Media Plugin Not Installed<br/> Cannot continue","Info");
-	//$msg = JText::_( 'Media pluging is not installed' );
-	//$mainframe->enqueueMessage( $msg, 'error' ); 
+	//JError::raiseError(1,"Media Plugin Not Installed<br/> Cannot continue","Info");
+	$msg = JText::_( 'MEDIA_PLUGIN_NOT_INSTALLED' );
+	$mainframe->enqueueMessage( $msg, 'error' ); 
 	return;
 }
 require_once( $mediapath );

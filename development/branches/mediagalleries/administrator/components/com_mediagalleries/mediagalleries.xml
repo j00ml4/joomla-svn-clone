@@ -49,9 +49,9 @@
 	<administration>
 		    <menu link="index.php?option=com_mediagalleries">Media Galleries</menu> 
 		    <submenu>
-		           	<menu img="" view="mediagalleries">Media</menu>
-					<menu img="" link="option=com_categories&amp;section=com_mediagalleries">Categories</menu>
-					<menu img="" link="option=com_comments&amp;section=com_mediagalleries">Comments</menu>
+		           	<menu img="" view="mediagalleries">COM_MEDIAGALLERIES_MEDIA</menu>
+					<menu img="" link="option=com_categories&amp;section=com_mediagalleries">COM_MEDIAGALLERIES_CATEGORIES</menu>
+					<menu img="" link="option=com_comments&amp;section=com_mediagalleries">COM_MEDIAGALLERIES_COMMENTS</menu>
 		    </submenu>  
 		    
 		    <!-- Admin's Files -->
