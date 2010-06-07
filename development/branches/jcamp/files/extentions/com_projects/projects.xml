@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="1.6.0">
+	<name>COM_PROJECTS</name>
+	<creationDate>June 2010</creationDate>
+	<author>jCamp team</author>
+	<copyright>(C) 2010 jCamp team. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later</license>
+	<version>1.0</version>
+	<description>COM_PROJECTS_DESC</description>
+	<install> <!-- Runs on install -->
+		    <sql>
+		            <file driver="mysql" charset="utf8">sql/install.mysql.sql</file>
+		    </sql>
+	</install>
+	<uninstall> <!-- Runs on uninstall -->
+		    <sql>
+		            <file driver="mysql" charset="utf8">sql/uninstall.mysql.sql</file>
+		    </sql>
+	</uninstall>
+	<update> <!-- Runs on update -->
+		    <sql>
+		            <file driver="mysql" charset="utf8">sql/update.mysql.sql</file>
+		    </sql>
+	</update>
+	<files folder="site">
+		    <filename>controller.php</filename>
+		    <filename>index.html</filename>
+		    <filename>projects.php</filename>
+		    <folder>models</folder>
+		    <folder>views</folder>
+		    <folder>controllers</folder>
+	</files> 
+	<languages folder="site/language">
+		<language tag="en-GB">en-GB.com_projects.ini</language>
+	</languages>
+
+	<administration>
+		    <menu link="index.php?option=com_projects">COM_PROJECTS</menu> 
+		    <submenu>
+		            <menu link="option=com_projects">COM_PROJECTS_CONFIG</menu>
+		            <menu link="option=com_categories&amp;extension=com_projects" view="categories" img="class:category" alt="Portfolios">COM_PROJECTS_PORTFOLIOS</menu>
+		    </submenu>  
+		    <files folder="admin">
+		            <filename>index.html</filename>
+		            <filename>controller.php</filename>
+		            <filename>projects.php</filename>
+		            <filename>config.xml</filename>
+		            <folder>sql</folder>
+		            <folder>models</folder>
+		            <folder>views</folder>
+		            <folder>tables</folder>
+		            <folder>helpers</folder>
+		    </files>
+	    	<languages folder="admin/language">
+				<language tag="en-GB">en-GB.com_projects.ini</language>
+			</languages>
+	</administration>
+</extension>
