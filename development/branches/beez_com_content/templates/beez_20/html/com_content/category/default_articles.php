@@ -26,7 +26,7 @@ JHtml::core();
 $n = count($this->items);
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
-?>rstgr
+?>
 
 <?php if (empty($this->items)) : ?>
 
