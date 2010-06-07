@@ -2,7 +2,7 @@
 /**
  * @version     $Id$
  * @package     Joomla.Administrator
- * @subpackage	Projects
+ * @subpackage	com_projects
  * @copyright   Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
  * @license     GNU/GPL, see LICENSE.php
  */
