@@ -32,7 +32,7 @@ $document->addScriptDeclaration($script);
 ?>
 <script language="javascript" type="text/javascript">
 function submitbutton(task) {
-	if (task == 'article.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
+	if (task == 'project.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
 		submitform(task);
 	}
 }
@@ -63,8 +63,23 @@ function submitbutton(task) {
 				<?php echo $this->form->getLabel('title'); ?>
 				<?php echo $this->form->getInput('title'); ?>
 			</div>	
-	
-			<?php if ($params->get('edit_language', 0)): ?>
+			
+			<div class="formelm">
+				<?php echo $this->form->getLabel('estimation_type', 'params'); ?>
+				<?php echo $this->form->getInput('estimation_type', 'params'); ?>
+			</div>	
+			
+			<div class="formelm">
+			<?php echo $this->form->getLabel('start_at'); ?>
+			<?php echo $this->form->getInput('start_at'); ?>
+			</div>
+			
+			<div class="formelm">
+			<?php echo $this->form->getLabel('finish_at'); ?>
+			<?php echo $this->form->getInput('finish_at'); ?>
+			</div>
+			
+			<?php if ($params->get('edit_language', 1)): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('language'); ?>
 				<?php echo $this->form->getInput('language'); ?>
@@ -76,16 +91,7 @@ function submitbutton(task) {
 				<?php echo $this->form->getLabel('state'); ?>
 				<?php echo $this->form->getInput('state'); ?>
 			</div>
-			<?php endif; ?>
-	
-			<div class="formelm">
-			<?php echo $this->form->getLabel('start_at'); ?>
-			<?php echo $this->form->getInput('start_at'); ?>
-			</div>
-			<div class="formelm">
-			<?php echo $this->form->getLabel('finish_at'); ?>
-			<?php echo $this->form->getInput('finish_at'); ?>
-			</div>
+			<?php endif; ?>	
 	
 			<div class="formelm">
 			<?php echo $this->form->getLabel('ordering'); ?>
@@ -102,3 +108,4 @@ function submitbutton(task) {
 		<?php echo JHTML::_( 'form.token' ); ?>
 	</form>
 </div>
+<?php dump($this->form); ?>

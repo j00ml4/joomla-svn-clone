@@ -10,7 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
+// Vars
 $params =  $this->params;
 ?>
 

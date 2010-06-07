@@ -19,11 +19,9 @@ jimport('joomla.application.component.controllerform');
  */
 class ProjectsControllerProject extends JControllerForm
 {
-	protected $context = 'com_projects.edit.project';
-	protected $option = 'com_projects';
-	protected $view_item = 'edit';
-	protected $view_list = 'project';
-	protected $text_prefix = 'COM_PROJECTS';
+	protected $view_item = 'project';
+	protected $view_list = 'projects';
+	//protected $text_prefix = 'COM_PROJECTS';
 	
 	/**
 	 * Method to get a model object, loading it if required.
@@ -81,6 +79,15 @@ class ProjectsControllerProject extends JControllerForm
 	protected function allowSave($data, $key = 'id')
 	{
 		return true;
+	}
+	
+	
+	/**
+	 * Save overwrite
+	 * 
+	 */
+	public function save(){
+		return parent::save();	
 	}
 	
 }
