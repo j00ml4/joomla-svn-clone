@@ -2,7 +2,7 @@
 /**
  * @version     $Id$
  * @package     Joomla.Administrator
- * @subpackage	Projects
+ * @subpackage	com_projects
  * @copyright   Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
  * @license     GNU/GPL, see LICENSE.php
  */
@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 /**
  * @package		Joomla.Administrator
- * @subpackage	Projects
+ * @subpackage	com_projects
  */
 class jcTable_Project_contents extends JTable
 {
