@@ -39,4 +39,48 @@ class ProjectsControllerProject extends JControllerForm
 		return parent::getModel($name, $prefix, $config);
 	}
 	
+		/**
+	 * Method to check if you can add a new record.
+	 *
+	 * Extended classes can override this if necessary.
+	 *
+	 * @param	array	An array of input data.
+	 *
+	 * @return	boolean
+	 */
+	protected function allowAdd($data = array())
+	{
+		return true;
+	}
+
+	/**
+	 * Method to check if you can add a new record.
+	 *
+	 * Extended classes can override this if necessary.
+	 *
+	 * @param	array	An array of input data.
+	 * @param	string	The name of the key for the primary key.
+	 *
+	 * @return	boolean
+	 */
+	protected function allowEdit($data = array(), $key = 'id')
+	{
+		return true;
+	}
+
+	/**
+	 * Method to check if you can save a new or existing record.
+	 *
+	 * Extended classes can override this if necessary.
+	 *
+	 * @param	array	An array of input data.
+	 * @param	string	The name of the key for the primary key.
+	 *
+	 * @return	boolean
+	 */
+	protected function allowSave($data, $key = 'id')
+	{
+		return true;
+	}
+	
 }
