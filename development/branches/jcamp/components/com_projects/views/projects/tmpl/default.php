@@ -11,4 +11,7 @@
 defined('_JEXEC') or die;
 ?>
 <div class="componenetheading"><?php echo JText::_('COM_PROJECTS_PROJECTS_GREETING');?></div>
-<a href="index.php?option=com_projects&view=project&task=form"><?php echo JText::_('COM_PROJECTS_PROJECT_ADD');?></a>
+
+URL must be passed by JRoute
+<a href="<?php echo JRoute::_('index.php?option=com_projects&view=project&layout=form'); ?>">
+<?php echo JText::_('COM_PROJECTS_PROJECT_ADD');?></a>

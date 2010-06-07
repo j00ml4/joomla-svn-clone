@@ -10,35 +10,32 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 
-require_once dirname(__FILE__).DS.'dmodel.php';
+jimport('joomla.application.component.modeladmin');
 
 /**
  * Project model to display or edit a project
  * @author eden
  *
  */
-class ProjectsModelProject extends DModel
+class ProjectsModelProject extends JModelAdmin
 {
 	protected $text_prefix = 'COM_PROJECTS';
 	protected $context = 'com_projects.edit.project';
-	protected $form_context = 'com_projects.project';
-	protected $table_name = 'Project';
-	protected $table_prefix = 'ProjectsTable';
 
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
 	 * @param	object	A record object.
 	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
-	 * @since	1.6
 	 */
 	protected function canDelete($record, $user=null)
 	{
+		return true;
 		// Can delete? 
-		return $this->canDo($record, array(
+		return ProjectsHelper::canDo(array(
 			'projecs.manage' 	=> 'com_projects.portfolio.'.(int)$record->catid,
 			'projecs.manage'	=> 'com_projects'
-		));
+		), $record, $user);
 	}
 
 	/**
@@ -46,27 +43,142 @@ class ProjectsModelProject extends DModel
 	 *
 	 * @param	object	A record object.
 	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
-	 * @since	1.6
 	 */
 	protected function canEditState($record=null)
 	{
+		return true;
 		// Can delete? 
-		return $this->canDo(array(
+		return ProjectsHelper::canDo(array(
 			'owner',
 			'projecs.manage' 	=> 'com_projects.portfolio.'.(int)$record->catid,
 			'projecs.manage'	=> 'com_projects'
 		), $record);
 	}
 
+	/**
+	 * Method to test whether a record can be edited.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 */
 	protected function canCreate($record=null)
 	{
+		return true;
 		// Can delete? 
-		return $this->canDo(array(
+		return ProjectsHelper::canDo(array(
 			'projecs.manage' 	=> 'com_projects.portfolio.'.(int)$record->catid,
 			'projecs.manage'	=> 'com_projects',
 			'projecs.submit'	=> 'com_projects'
 		), $record);
 	}
 
+	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @return	void
+	 * @since	1.6
+	 */
+	protected function populateState()
+	{
+		$app = JFactory::getApplication();
+
+		// Load the parameters.
+		$params	= $app->getParams();
+		$this->setState('params', $params);
+	}
+
+	/**
+	 * Returns a reference to the a Table object, always creating it
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 *
+	 * @return	JTable	A database object
+	 * @since	1.6
+	*/
+	public function getTable($type = 'Project', $prefix = 'ProjectsTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
+
+	/**
+	 * Method to get a form object.
+	 *
+	 * @access	public
+	 * @param	string		$xml		The form data. Can be XML string if file flag is set to false.
+	 * @param	array		$options	Optional array of parameters.
+	 * @param	boolean		$clear		Optional argument to force load a new form.
+	 *
+	 * @return	mixed		JForm object on success, False on error.
+	 * @since	1.6
+	 */
+	public function getForm($data=array(), $loadData = true)
+	{
+		// Get the form.
+		$form = $this->loadForm('com_projects.project', 'project', array('control' => 'jform', 'load_data' => $loadData));
+		if (empty($form)) {
+			return false;
+		}
+		//dump($data);
+		return $form;
+	}
+
+	/**
+	 * Method to validate the form data.
+	 *
+	 * @param	object		$form		The form to validate against.
+	 * @param	array		$data		The data to validate.
+	 *
+	 * @return	mixed		Array of filtered data if valid, false otherwise.
+	 */
+	public function validate($form, $data)
+	{
+		return parent::validate($form, $data);
+		
+		
+	}
+
+
+	/**
+	 * Prepare and sanitise the table data prior to saving.
+	 *
+	 * @param	JTable	A JTable object.
+	 *		$this->_setAccessFilters($form, $data);
+	 * @return	void
+	 * @since	1.6
+	 */
+	protected function prepareTable(&$table)
+	{
+		jimport('joomla.filter.output');
+		$date = JFactory::getDate();
+		$user = JFactory::getUser();
+
+		$table->title		= htmlspecialchars_decode($table->title, ENT_QUOTES);
+		$table->alias 		= JApplication::stringURLSafe($table->title);
+		//dump($table);
+		//die();
+
+		if (empty($table->id)) {
+			// Set the values
+			$table->created		= $date->toMySQL();
+			$table->created_by	= $user->get('id');
+			
+			// Set ordering to the last item if not set
+			if (empty($table->ordering)) {
+				$db = JFactory::getDbo();
+				$db->setQuery('SELECT MAX(ordering) FROM #__projects WHERE catid = '.(int)$table->catid);
+				$max = $db->loadResult();
+
+				$table->ordering = $max+1;
+			}
+		} else {
+			// Set the values
+			$table->modified	= $date->toMySQL();
+			$table->modified_by	= $user->get('id');
+		}
+	}
 }
 ?>

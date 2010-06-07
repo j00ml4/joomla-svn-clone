@@ -84,7 +84,8 @@
 			type="contentlanguage"
 			label="JFIELD_LANGUAGE_LABEL"
 			description="JFIELD_LANGUAGE_DESC"
-			class="inputbox">
+			class="inputbox"
+			default="*">
 			<option value="*">JALL</option>
 		</field>
 		
@@ -95,14 +96,17 @@
 			description="JFIELD_ACCESS_DESC"
 			class="inputbox"
 			size="1" />
-			
-		<!-- Params -->	
-        <field id="params_estimation" 
-			name="params[estimation]" 
-			type="text"
-			description="COM_PROJECTS_FIELD_ESTIMATION_DESC"
-			label="COM_PROJECTS_FIELD_ESTIMATION_LABEL"
-			required="true"
-			size="30" />    
     </fieldset>
+	<!-- Params -->	
+	<fields name="params">
+		<fieldset name="params">
+	        <field id="estimation_type" 
+				name="estimation_type" 
+				type="text"
+				description="COM_PROJECTS_FIELD_ESTIMATION_TYPE_DESC"
+				label="COM_PROJECTS_FIELD_ESTIMATION_TYPE_LABEL"
+				size="30" 
+				default="Pomodoros" />
+		</fieldset>   
+	</fields>	 
 </form>

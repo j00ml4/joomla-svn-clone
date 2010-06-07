@@ -27,7 +27,7 @@ class ProjectsController extends JController {
 	function display()
 	{	
 		$user =& JFactory::getUser();
-		$cachable = true;
+		$cachable = true;	
 		
 		if ( $user->get('id') || ($_SERVER['REQUEST_METHOD'] == 'POST') ) {
 			$cachable = false;
