@@ -68,7 +68,7 @@
 			default="default.css" 
 			label="COM_MEDIAGALLERIES_FIELD_STYLE_LABEL" 
 			description="COM_MEDIAGALLERIES_FIELD_STYLE_DESC" 
-			directory="components/com_jmultimedia/assets" 
+			directory="components/com_mediagalleries/assets" 
 			filter=".css" 
 			exclude="" 
 			stripext="" 
