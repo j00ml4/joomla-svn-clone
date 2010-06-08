@@ -23,6 +23,7 @@ class ProjectsControllerProject extends JControllerForm
 	protected $view_list = 'projects';
 	//protected $text_prefix = 'COM_PROJECTS';
 	
+	
 	/**
 	 * Method to get a model object, loading it if required.
 	 *
@@ -87,6 +88,8 @@ class ProjectsControllerProject extends JControllerForm
 	 * 
 	 */
 	public function save(){
+		
+		
 		return parent::save();	
 	}
 	
