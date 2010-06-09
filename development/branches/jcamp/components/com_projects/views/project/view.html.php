@@ -33,11 +33,26 @@ class ProjectsViewProject extends JView
 		$state		= $model->getState();
 
 		//Get Model data
-		$this->form 	= $model->getForm();
-		$this->table 	= $model->getTable();
+		$this->item 	= $model->getItem();
 		$this->params	= &$app->getParams();
 	
+		$layout = JRequest::getCMD('layout');
+		switch($layout){
+			case 'edit':
+			case 'form':
+				$this->form	= $model->getForm();
+				$layout 	= 'edit';
+				break;
+			
+			default:
+				$layout		= 'default';
+				if (empty($this->item->id)){
+					JError::raiseWarning(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
+
+				}	
+		}
 		// Display the view
+		$this->setLayout($layout);
 		parent::display($tpl);
 	}
 }
