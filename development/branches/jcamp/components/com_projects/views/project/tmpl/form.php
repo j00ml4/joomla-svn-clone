@@ -19,16 +19,6 @@ JHtml::_('behavior.formvalidation');
 // Set vars
 $params = &$this->params;
 
-/** this is slower
-$script = "function submitbutton(task) {".
-					"if (task == 'project.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {".
-					"		submitform(task);".
-					"	}".
-				  "}";
-
-$document = &JFactory::getDocument();
-$document->addScriptDeclaration($script);
-*/
 ?>
 <script language="javascript" type="text/javascript">
 function submitbutton(task) {
@@ -108,4 +98,3 @@ function submitbutton(task) {
 		<?php echo JHTML::_( 'form.token' ); ?>
 	</form>
 </div>
-<?php dump($this->form); ?>

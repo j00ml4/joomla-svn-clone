@@ -9,9 +9,32 @@
 
 // no direct access
 defined('_JEXEC') or die;
+
 ?>
 <div class="componenetheading"><?php echo JText::_('COM_PROJECTS_PROJECTS_GREETING');?></div>
 
-URL must be passed by JRoute
 <a href="<?php echo JRoute::_('index.php?option=com_projects&view=project&layout=form'); ?>">
-<?php echo JText::_('COM_PROJECTS_PROJECT_ADD');?></a>
+<?php echo JText::_('COM_PROJECTS_PROJECT_ADD');?></a><br />
+<div class="porfolio-list-frame">
+<h2><?php echo JText::_('COM_PROJECTS_PORFOLIO_LIST_HEADER');?></h2>
+<ul class="porfolio-list">
+<?php 
+	$c = count($this->items);
+	for($i = 0; $i<$c;$i++)	{
+		$this->item = &$this->items[$i];
+		echo $this->loadTemplate('item');
+	}
+?>
+</ul>
+	<?php if (($this->params->def('show_pagination', 1) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) { ?>
+		<div class="pagination">
+						<?php  if ($this->params->def('show_pagination_results', 1)) { ?>
+						<p class="counter">
+								<?php echo $this->pagination->getPagesCounter(); ?>
+						</p>
+
+				<?php } ?>
+				<?php echo $this->pagination->getPagesLinks(); ?>
+		</div>
+<?php  } ?>
+</div>
