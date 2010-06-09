@@ -18,7 +18,6 @@ JHtml::_('behavior.formvalidation');
 
 // Set vars
 $params = &$this->params;
-
 ?>
 <script language="javascript" type="text/javascript">
 function submitbutton(task) {
@@ -35,19 +34,19 @@ function submitbutton(task) {
 	<?php endif; ?>
 	
 	<?php /** This way we have more controll over the design */ ?>
-	<form action="<?php echo JRoute::_('index.php?option=com_projects'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
-		
+	<form action="<?php echo JRoute::_('index.php?option=com_projects'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">	
 		<!-- This keeps the code more DRY -->	
 		<?php echo $this->loadTemplate('buttons'); ?>
-	
 		
 		<fieldset>
 			<legend><?php echo JText::_('COM_PROJECTS_PROJECT_FORM_LEGEND'); ?></legend>
-	
+			
+			<?php if ($params->get('canEditPortifolio', 1)): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('catid'); ?>
-				<?php echo $this->form->getInput('catid'); ?>
+				<?php echo $this->form->getInput('catid', null, $this->catid); ?>
 			</div>
+			<?php endif; ?>
 			
 			<div class="formelm">
 				<?php echo $this->form->getLabel('title'); ?>
@@ -59,17 +58,18 @@ function submitbutton(task) {
 				<?php echo $this->form->getInput('estimation_type', 'params'); ?>
 			</div>	
 			
+			<?php if ($params->get('canEditDate', 1)): ?>
 			<div class="formelm">
-			<?php echo $this->form->getLabel('start_at'); ?>
-			<?php echo $this->form->getInput('start_at'); ?>
+				<?php echo $this->form->getLabel('start_at'); ?>
+				<?php echo $this->form->getInput('start_at'); ?>
 			</div>
-			
 			<div class="formelm">
-			<?php echo $this->form->getLabel('finish_at'); ?>
-			<?php echo $this->form->getInput('finish_at'); ?>
+				<?php echo $this->form->getLabel('finish_at'); ?>
+				<?php echo $this->form->getInput('finish_at'); ?>
 			</div>
+			<?php endif; ?>
 			
-			<?php if ($params->get('edit_language', 1)): ?>
+			<?php if ($params->get('canEditLang', 1)): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('language'); ?>
 				<?php echo $this->form->getInput('language'); ?>
@@ -83,10 +83,12 @@ function submitbutton(task) {
 			</div>
 			<?php endif; ?>	
 	
+			<?php if ($params->get('canEditOrder', 1)): ?>
 			<div class="formelm">
-			<?php echo $this->form->getLabel('ordering'); ?>
-			<?php echo $this->form->getInput('ordering'); ?>
+				<?php echo $this->form->getLabel('ordering'); ?>
+				<?php echo $this->form->getInput('ordering'); ?>
 			</div>
+			<?php endif; ?>
 	
 			<?php echo $this->form->getInput('description'); ?>
 		</fieldset>

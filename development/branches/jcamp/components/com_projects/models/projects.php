@@ -46,7 +46,8 @@ class ProjectsModelProjects extends JModelList
 				}
 			case 'gallery' :
 				{
-					$id = JRequest::getInt('id',0);
+					// Is more meanfull to have ther real nama of the field
+					$id = JRequest::getInt('catid',0);
 		
 					// Select the required fields from the table.
 					$q->select('p.`id`, p.`title`, p.`alias`, p.`description`, u.`name`, p.`created`');

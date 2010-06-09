@@ -37,7 +37,7 @@
 	<administration>
 		    <menu link="index.php?option=com_projects">COM_PROJECTS</menu> 
 		    <submenu>
-		            <menu link="option=com_projects" img="class:article">COM_PROJECTS_CONFIG</menu>
+		            <menu link="option=com_projects" img="class:article">COM_PROJECTS</menu>
 		            <menu link="option=com_categories&amp;extension=com_projects" view="categories" img="class:category" alt="Portfolios">COM_PROJECTS_PORTFOLIOS</menu>
 		    </submenu>  
 		    <files folder="admin">
@@ -54,6 +54,7 @@
 		    </files>
 	    	<languages folder="admin/language">
 				<language tag="en-GB">en-GB.com_projects.ini</language>
+				<language tag="en-GB">en-GB.com_projects.sys.ini</language>
 			</languages>
 	</administration>
 </extension>

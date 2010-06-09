@@ -21,6 +21,7 @@ class ProjectsViewProject extends JView
 	protected $item;
 	protected $form;
 	protected $params;
+	protected $catid;
 	
 	/**
 	 * Display project
@@ -35,13 +36,14 @@ class ProjectsViewProject extends JView
 		//Get Model data
 		$this->item 	= $model->getItem();
 		$this->params	= &$app->getParams();
-	
+		$this->catid	= JRequest::getInt('catid');
+		
 		$layout = JRequest::getCMD('layout');
 		switch($layout){
 			case 'edit':
 			case 'form':
 				$this->form	= $model->getForm();
-				$layout 	= 'edit';
+				$layout 	= 'form';
 				break;
 			
 			default:
@@ -51,6 +53,7 @@ class ProjectsViewProject extends JView
 
 				}	
 		}
+		
 		// Display the view
 		$this->setLayout($layout);
 		parent::display($tpl);
