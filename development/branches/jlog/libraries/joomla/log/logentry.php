@@ -43,8 +43,7 @@ class JLogEntry extends JObject {
 		$this->priority = $priority;
 		$this->message = $message;
 		if(empty($entrydate)) {
-			$date = new JDate();
-			$this->entrydate = $date->toMySQL();
+			$this->entrydate = JFactory::getDate()->toMySQL();
 		}
 		$this->logid = $logid;
 	}

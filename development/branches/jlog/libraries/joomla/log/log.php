@@ -28,7 +28,7 @@ defined('_JEXEC') or die();
  * @package Joomla.Framework
  * @subpackage Log
  * @final
- * @since 1.6
+ * @since 1.7
  */
 class JLog extends JAdapter {
 	
@@ -82,17 +82,25 @@ class JLog extends JAdapter {
 		static $instances;
 		$config = & JFactory :: getConfig();
 		if(!$options) {
-			$options = $config->getValue('config.log_options');
+			$options = $config->getValue('log_options');
+		} else {
+			// Check that we're not being called from old code
+			if(is_string($options)) {
+				// 1.5/1.6 Legacy Support warning
+				JError::raiseWarning(100, 'JLog has changed and no longer accepts old style params.');
+				// Wipe both options and formats at this point to system wide defaults
+				// We do this because we can't trust what we've been given
+				$options = $config->getValue('log_options');
+				$formats = $config->getValue('log_formats');
+			}
 		}
 		
 		if(!$formats) { 
-			$formats = $config->getValue('config.log_formats');
+			$formats = $config->getValue('log_formats');
 		}
 		
+		// fun way of creating a unique signature
 		$sig = md5(print_r($options,1).print_r($formats,1));		
-//		jimport('joomla.filesystem.path');
-//		$path = JPath :: clean($path . DS . $file, false);
-//		$sig = md5($path);
 
 		if (!isset ($instances)) {
 			$instances = array ();
@@ -110,7 +118,9 @@ class JLog extends JAdapter {
 	 */
 	function addEntry($entry) {
 		foreach($this->_formats as $format) {
-			$format->addLogEntry($entry);
+			if (is_object($this->_adapters[$format])) {
+				$this->_adapters[$format]->addLogEntry($entry);
+			}
 		}
 		$this->_entries[] = $entry;
 	}
