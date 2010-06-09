@@ -14,7 +14,7 @@ jimport('joomla.application.component.view');
 
 /**
  * Display project view
- * @author eden
+ * @author eden & elf
  */
 class ProjectsViewProject extends JView
 {
@@ -38,7 +38,6 @@ class ProjectsViewProject extends JView
 		$this->params	= &$app->getParams();
 	
 		// Display the view
-		$this->setLayout(JRequest::getCMD('task','edit'));
 		parent::display($tpl);
 	}
 }
