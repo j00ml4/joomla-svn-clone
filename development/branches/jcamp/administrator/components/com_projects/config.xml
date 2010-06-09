@@ -13,13 +13,11 @@
 			filter="rules" component="com_projects"	section="component"/>
 	</fieldset>
 	
-	
 	<fieldset name="manager_tools"
 		label="JCONFIG_ACCESS_LABEL"
 		description="JCONFIG_ACCESS_DESC">
 	</fieldset>
-	
-	
+		
 	<fieldset name="worker_tools"
 		label="JCONFIG_ACCESS_LABEL"
 		description="JCONFIG_ACCESS_DESC">
