@@ -27,7 +27,19 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
-4-June-2010 Mark Dexter
+08-Jun-2010 Mark Dexter
+^ Refactor methods in SeleniumJoomlaTestCase (Matt Thomas)
+# Fix system test errors
+^ Refactor menu0001Test to remove sleep statements
+
+07-Jun-2010 Sam Moffatt
+ # Fixed incorrect metadata in package sample
+
+07-Jun-2010 Mark Dexter
++ New system test for featured blog ordering
+# Clean up doc blocks for system tests 
+
+04-Jun-2010 Mark Dexter
 ^ Improvements to SeleniumJoomlaTestCase. (Matt Thomas)
 
 30-May-2010 Mark Dexter
