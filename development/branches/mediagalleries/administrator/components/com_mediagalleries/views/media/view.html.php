@@ -1,9 +1,9 @@
 <?php
 /**
- * Media View for JMultimedia Component
+ * Media View for mediagalleries Component
  * 
  * @package    		Joomla
- * @subpackage 	JMultimedia Suite
+ * @subpackage 	mediagalleries Suite
  * @link 			http://3den.org/joom/
  * @license	GNU/GPL
  */
@@ -17,9 +17,9 @@ jimport( 'joomla.application.component.view' );
  * Media View
  *
  * @package    		Joomla
- * @subpackage	JMultimedia Suite
+ * @subpackage	mediagalleries Suite
  */
-class JMultimediaViewMedia extends JView
+class mediagalleriesViewMedia extends JView
 {
 	/**
 	 * display method of Media view
@@ -77,11 +77,11 @@ class JMultimediaViewMedia extends JView
 
 		
 		// To folder
-		$folder = GetdenVideoParam('defaultdir');
+		$folder = GetmediaParam('defaultdir');
 				
 		//clean weblink data
 		JFilterOutput::objectHTMLSafe( $item, ENT_QUOTES, 'description' );
-		$action = JRoute::_('index.php?option=com_jmultimedia');
+		$action = JRoute::_('index.php?option=com_mediagalleries');
 		
 		// Assign References
 		$this->assignRef('action', 	$action);		
@@ -106,7 +106,7 @@ class JMultimediaViewMedia extends JView
 		
 		// build the html select list for ordering
 		$query = 'SELECT ordering AS value, title AS text'
-			. ' FROM #__jmultimedia'
+			. ' FROM #__mediagalleries'
 			. ' WHERE catid = ' . (int) $item->catid
 			. ' ORDER BY ordering';
 		$lists['ordering'] 	= JHTML::_('list.specificordering',  $item, $item->id, $query );

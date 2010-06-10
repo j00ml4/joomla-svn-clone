@@ -1,8 +1,8 @@
 <?php
 /**
- * Controller for JMultimedia Component
+ * Controller for mediagalleries Component
  * 
- * @package  			JMultimedia Suite
+ * @package  			mediagalleries Suite
  * @subpackage 	Components
  * @link 				http://3den.org
  * @license		GNU/GPL
@@ -14,13 +14,13 @@ defined('_JEXEC') or die( 'Restricted access' );
 jimport('joomla.application.component.controller');
 
 /** TODO
- * JMultimedia Controller
+ * mediagalleries Controller
  *
  * @package		Joomla
- * @subpackage	JMultimedia
+ * @subpackage	mediagalleries
  * @since 1.5
  */
-class JMultimediaController extends JController{
+class mediagalleriesController extends JController{
 	/** @var Multi - controller Simulator */
 	var $_control = null;
 	
@@ -207,17 +207,17 @@ class JMultimediaController extends JController{
 	}		
 	
 	/**
-	 * Link to denVideo plugin
+	 * Link to media plugin
 	 * 
 	 * @return void
 	 */
-	function denvideo(){
+	function media(){
 		$db =& JFactory::getDBO();
 		$query = 'SELECT id '
 			. ' FROM #__plugins '
 			. ' WHERE '
 				. ' folder= '. $db->Quote('content')
-				. ' AND element = '. $db->Quote('denvideo');
+				. ' AND element = '. $db->Quote('media');
 		$db->setQuery($query);
 		$id = $db->loadResult();		
 		
@@ -238,7 +238,7 @@ class JMultimediaController extends JController{
 		$model = $this->getModel($this->_control);
 		$model->move(-1);
 
-		$this->setRedirect( 'index.php?option=com_jmultimedia');
+		$this->setRedirect( 'index.php?option=com_mediagalleries');
 	}	
 	
 	/**
@@ -254,7 +254,7 @@ class JMultimediaController extends JController{
 		$model = $this->getModel($this->_control);
 		$model->move(1);
 
-		$this->setRedirect( 'index.php?option=com_jmultimedia' );
+		$this->setRedirect( 'index.php?option=com_mediagalleries' );
 	}
 
 	/**
@@ -277,7 +277,7 @@ class JMultimediaController extends JController{
 		$model->saveorder($cid, $order);
 
 		$msg = JText::_('New ordering saved');
-		$this->setRedirect( 'index.php?option=com_jmultimedia', $msg );
+		$this->setRedirect( 'index.php?option=com_mediagalleries', $msg );
 	}
 
 }

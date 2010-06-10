@@ -2,7 +2,7 @@
 /**
  * @version		$Id: controller.php 10094 2008-03-02 04:35:10Z instance $
  * @package		Joomla
- * @subpackage	JMultimedia
+ * @subpackage	mediagalleries
  * @copyright	Copyright (C) 2007 - 2008 3DEN Open Software. All rights reserved.
  * @license		GNU/GPL, see LICENSE.php
  * Joomla! is free software. This version may have been modified pursuant to the
@@ -18,11 +18,11 @@ defined('_JEXEC') or die( 'Restricted access' );
 jimport( 'joomla.application.component.controller' );
 
 /**
- * JMultimedia Component Controller
+ * mediagalleries Component Controller
  *
  * @static
  */
-class JMultimediaController extends JController {
+class mediagalleriesController extends JController {
 	/** @var Multi - controller Simulator */
 	var $_control = null;
 	/** @var Default Redirection target */
@@ -210,17 +210,17 @@ class JMultimediaController extends JController {
 	}		
 	
 	/**
-	 * Link to denVideo plugin
+	 * Link to media plugin
 	 * 
 	 * @return void
 	 */
-	function denvideo(){
+	function media(){
 		$db =& JFactory::getDBO();
 		$query = 'SELECT id '
 			. ' FROM #__plugins '
 			. ' WHERE '
 				. ' folder= '. $db->Quote('content')
-				. ' AND element = '. $db->Quote('denvideo');
+				. ' AND element = '. $db->Quote('media');
 		$db->setQuery($query);
 		$id = $db->loadResult();		
 		

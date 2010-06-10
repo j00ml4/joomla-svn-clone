@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	}
 </script>
 <!-- Content Items -->
-<div id="jmultimedia" class="contentpane<?php echo $this->params->get( 'pageclass_sfx' ); ?>">
+<div id="mediagalleries" class="contentpane<?php echo $this->params->get( 'pageclass_sfx' ); ?>">
 <form action="<?php echo $this->action; ?>" method="post" name="adminForm">	
 	<?php if ($this->params->get('show_page_title')) : ?>
 		<h1 class="componentheading<?php echo $this->params->get( 'pageclass_sfx' ); ?>">

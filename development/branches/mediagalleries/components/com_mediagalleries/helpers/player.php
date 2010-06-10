@@ -1,8 +1,8 @@
 <?php
 /**
- * All Streams Helper of JMultimedia Component
+ * All Streams Helper of mediagalleries Component
  * @package			Joomla
- * @subpackage	JMultimedia
+ * @subpackage	mediagalleries
  * @copyright	Copyright (C) 2005 - 2008 3DEN. All rights reserved.
  * @license		GNU/GPL, see LICENSE.php
  */
@@ -33,7 +33,7 @@ class PlayerHelper{
 	 * @param boolean $autoplay True if yes [optional]
 	 */
 	function play( $url, $width=0, $heigth=0, $autoplay=0 ){
-		$media = showDenVideo($url, $width, $heigth, $autoplay );
+		$media = showmedia($url, $width, $heigth, $autoplay );
 		return $media;
 	}
 	

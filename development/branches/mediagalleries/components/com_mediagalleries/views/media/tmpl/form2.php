@@ -79,7 +79,7 @@ JHTML::_('behavior.formvalidation');
 	}
 </script>
 
-<div id="jmultimedia" class="contentpane">
+<div id="mediagalleries" class="contentpane">
 <form enctype="multipart/form-data" action="<?php echo $this->action; ?>" method="post" name="adminForm" id="adminForm">
 	<!-- Title -->		
 	<?php if ($this->params->get('show_page_title')) : ?>
@@ -277,7 +277,7 @@ JHTML::_('behavior.formvalidation');
 
 	<div class="clr"></div>	
 	<input type="hidden" name="added" value="<?php echo $this->item->added; ?>" />
-	<input type="hidden" id="option" name="option" value="com_jmultimedia" />
+	<input type="hidden" id="option" name="option" value="com_mediagalleries" />
 	<input type="hidden" id="cid" name="cid[]" value="<?php echo $this->item->id; ?>" />
 	<input type="hidden" id="id" name="id" value="<?php echo $this->item->id; ?>" />	
 	<input type="hidden" id="userid" name="userid" value="<?php echo $this->item->userid; ?>" />

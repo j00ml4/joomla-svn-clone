@@ -1,8 +1,8 @@
 <?php
 /**
- * Media Table for JMultimedia Component 
+ * Media Table for mediagalleries Component 
  * @package		Joomla
- * @subpackage	JMultimedia Suite
+ * @subpackage	mediagalleries Suite
  * @license	GNU/GPL, see LICENSE.php
  * @link http://3den.org
  */
@@ -44,7 +44,7 @@ class TableMedia extends JTable
 	 * @since 1.0
 	 */
 	function __construct(& $db) {
-			parent::__construct('#__jmultimedia', 'id', $db);	
+			parent::__construct('#__mediagalleries', 'id', $db);	
 	}
 
 	/**

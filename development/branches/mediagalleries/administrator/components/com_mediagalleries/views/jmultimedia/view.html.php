@@ -1,6 +1,6 @@
 <?php
 /**
- * JMultimedia View for Hello World Component
+ * mediagalleries View for Hello World Component
  * 
  * @package    Joomla.Tutorials
  * @subpackage Components
@@ -14,12 +14,12 @@ defined('_JEXEC') or die();
 jimport( 'joomla.application.component.view' );
 
 /**
- * JMultimedia View
+ * mediagalleries View
  *
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class JMultimediaViewJMultimedia extends JView
+class mediagalleriesViewmediagalleries extends JView
 {
     /**
      * Hellos view display method
@@ -57,7 +57,7 @@ class JMultimediaViewJMultimedia extends JView
 		// search filter
 		$lists['search']= $search;
 
-		$action = JRoute::_('index.php?option=com_jmultimedia');
+		$action = JRoute::_('index.php?option=com_mediagalleries');
 		$this->assignRef('action', 	$action);		
 		
 		// Assign References

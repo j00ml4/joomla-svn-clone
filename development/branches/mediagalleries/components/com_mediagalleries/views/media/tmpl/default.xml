@@ -12,7 +12,7 @@
 		<!-- URL Parameters -->
 		<url>
 			<param type="sql" name="id" label="Item" description="Item to display" 
-				query="SELECT id AS value, title AS id FROM #__jmultimedia WHERE published=1" />
+				query="SELECT id AS value, title AS id FROM #__mediagalleries WHERE published=1" />
 		</url>
 		
 		<!-- Basic Parameters -->

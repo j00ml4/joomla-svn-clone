@@ -3,7 +3,7 @@
 defined('_JEXEC') or die('Restricted access'); 
 
 // Set vars
-$actionlink = JRoute::_('index.php?option=com_jmultimedia');
+$actionlink = JRoute::_('index.php?option=com_mediagalleries');
 
 // Set toolbar items for the page
 JToolBarHelper::title(   JText::_( 'User Chanels Manager' ), 'generic.png' );
@@ -12,10 +12,10 @@ JToolBarHelper::unpublishList();
 JToolBarHelper::deleteList(JText::_('Do u whana delete?') );
 JToolBarHelper::editListX();
 JToolBarHelper::addNewX('edit');
-JToolBarHelper::preferences('com_jmultimedia', '360', '550', JText::_('Configuration'));
-JToolBarHelper::custom('denvideo', 'config.png', '', JText::_('Edit denVideo'));
+JToolBarHelper::preferences('com_mediagalleries', '360', '550', JText::_('Configuration'));
+JToolBarHelper::custom('media', 'config.png', '', JText::_('Edit media'));
 //JToolBarHelper::media_manager( '', 'Medias Dir' );
-JToolBarHelper::help( 'jmultimedia', true );
+JToolBarHelper::help( 'mediagalleries', true );
 ?>
 <?php /**
 <form action="<?php echo $actionlink; ?>" method="post" name="adminForm">
@@ -80,14 +80,14 @@ JToolBarHelper::help( 'jmultimedia', true );
 	{
 		$row = &$this->items[$i];
 
-		$link 	= JRoute::_( 'index.php?option=com_jmultimedia&task=edit&controller=media&cid[]='. $row->id );
+		$link 	= JRoute::_( 'index.php?option=com_mediagalleries&task=edit&controller=media&cid[]='. $row->id );
 
 		$checked 	= JHTML::_('grid.checkedout',   $row, $i );
 		$published 	= JHTML::_('grid.published', $row, $i );
 
 		$ordering = ($this->lists['order'] == 'a.ordering');
 
-		$row->cat_link 	= JRoute::_( 'index.php?option=com_categories&section=com_jmultimedia&task=edit&type=other&cid[]='. $row->catid );
+		$row->cat_link 	= JRoute::_( 'index.php?option=com_categories&section=com_mediagalleries&task=edit&type=other&cid[]='. $row->catid );
 		?>
 		<tr class="<?php echo "row$k"; ?>">
 			<td>
@@ -138,7 +138,7 @@ JToolBarHelper::help( 'jmultimedia', true );
 	</table>
 </div>
 
-	<input type="hidden" name="option" value="com_jmultimedia" />
+	<input type="hidden" name="option" value="com_mediagalleries" />
 	<input type="hidden" name="controller" value="media" />
 	<input type="hidden" name="task" value="" />
 	<input type="hidden" name="boxchecked" value="0" />

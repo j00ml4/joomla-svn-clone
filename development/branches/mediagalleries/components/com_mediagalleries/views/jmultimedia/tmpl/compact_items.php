@@ -5,7 +5,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	foreach ($this->items as $item){
 		$date = JFactory::getDate($item->added);
 		$item->added = $date->toFormat( $this->params->get('date_format') );
-		$link =  JRoute::_('index.php?option=com_jmultimedia&view=media&layout=default&id=' . $item->id);
+		$link =  JRoute::_('index.php?option=com_mediagalleries&view=media&layout=default&id=' . $item->id);
 ?>
 <div class="compact" style="float:left; margin:4px;">
 	<div class="mediathumb">
