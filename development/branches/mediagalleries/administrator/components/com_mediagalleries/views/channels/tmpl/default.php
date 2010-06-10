@@ -6,14 +6,14 @@ defined('_JEXEC') or die('Restricted access');
 $actionlink = JRoute::_('index.php?option=com_mediagalleries');
 
 // Set toolbar items for the page
-JToolBarHelper::title(   JText::_( 'User Chanels Manager' ), 'generic.png' );
+JToolBarHelper::title(   JText::_( 'COM_MEDIAGALLERIES_TITLE' ), 'generic.png' );
 JToolBarHelper::publishList();
 JToolBarHelper::unpublishList();
-JToolBarHelper::deleteList(JText::_('Do u whana delete?') );
+JToolBarHelper::deleteList(JText::_('JACTION_DELETE') );
 JToolBarHelper::editListX();
 JToolBarHelper::addNewX('edit');
-JToolBarHelper::preferences('com_mediagalleries', '360', '550', JText::_('Configuration'));
-JToolBarHelper::custom('media', 'config.png', '', JText::_('Edit media'));
+JToolBarHelper::preferences('com_mediagalleries', '360', '550', JText::_('COM_MEDIAGALLERIES_CONFIG'));
+JToolBarHelper::custom('media', 'config.png', '', JText::_('JGLOBAL_EDIT_ITEM'));
 //JToolBarHelper::media_manager( '', 'Medias Dir' );
 JToolBarHelper::help( 'mediagalleries', true );
 ?>

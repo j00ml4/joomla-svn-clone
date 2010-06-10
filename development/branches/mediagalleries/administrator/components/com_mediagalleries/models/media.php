@@ -84,7 +84,7 @@ class mediagalleriesModelMedia extends JModel
 			
 			// Check to see if the category is published
 			if (!$this->_data->cat_pub) {
-				$this->setError('Resource Not Found');
+				$this->setError('COM_MEDIAGALLERIES_FIELD_RESOURCE_NOT_FOUND');
 				return;
 			}
 

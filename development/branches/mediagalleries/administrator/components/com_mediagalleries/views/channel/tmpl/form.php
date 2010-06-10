@@ -30,19 +30,19 @@ defined('_JEXEC') or die('Restricted access');
 
 		// Title
 		if (form.title.value == ""){
-			alert( "<?php echo JText::_( JText::_('Your Media must contain a title.') ); ?>" );
+			alert( "<?php echo JText::_( JText::_('COM_MEDIAGALLERIES_MUST_CONTAIN_A_TITLE') ); ?>" );
 			return;
 		} 
 		
 		// Category 
 		if (form.catid.value == "0"){
-			alert( "<?php echo JText::_( 'You must select a category', true ); ?>" );
+			alert( "<?php echo JText::_( 'JGLOBAL_FIELD_CATEGORIES_CHOOSE_CATEGORY_LABEL', true ); ?>" );
 			return;
 		} 
 		
 		// URL
 		if ( (form.url.value == "") && (form.upmedia.value == "") ){
-			alert( "<?php echo JText::_('Please provide a valid URL'); ?>" );
+			alert( "<?php echo JText::_('COM_MEDIAGALLERIES_INVALID_ITEM'); ?>" );
 			return;
 		}
 		
@@ -96,13 +96,13 @@ defined('_JEXEC') or die('Restricted access');
 	<!-- Properties -->
 	<div class="col width-50">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_( 'Details' ); ?></legend>
+		<legend><?php echo JText::_( 'JDETAILS' ); ?></legend>
 
 		<table class="admintable">
 		<tr>
 			<td width="100" align="right" class="key">
 				<label for="title">
-					<?php echo JText::_( 'Title' ); ?>:
+					<?php echo JText::_( 'JFIELD_TITLE_DESC' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -112,7 +112,7 @@ defined('_JEXEC') or die('Restricted access');
 		<tr>
 			<td width="100" align="right" class="key">
 				<label for="alias">
-					<?php echo JText::_( 'Alias' ); ?>:
+					<?php echo JText::_( 'JFIELD_ALIAS_LABEL' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -121,7 +121,7 @@ defined('_JEXEC') or die('Restricted access');
 		</tr>
 		<tr>
 			<td valign="top" align="right" class="key">
-				<?php echo JText::_( 'Published' ); ?>:
+				<?php echo JText::_( 'JPUBLISHED' ); ?>:
 			</td>
 			<td>
 				<?php echo $this->lists['published']; ?>
@@ -130,7 +130,7 @@ defined('_JEXEC') or die('Restricted access');
 		<tr>
 			<td valign="top" align="right" class="key">
 				<label for="catid">
-					<?php echo JText::_( 'Category' ); ?>:
+					<?php echo JText::_( 'JCATEGORY' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -140,7 +140,7 @@ defined('_JEXEC') or die('Restricted access');
 		<tr>
 			<td valign="top" align="right" class="key">
 				<label for="ordering">
-					<?php echo JText::_( 'Ordering' ); ?>:
+					<?php echo JText::_( 'JFIELD_ORDERING_LABEL' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -153,7 +153,7 @@ defined('_JEXEC') or die('Restricted access');
 		<tr>
 			<td valign="center" align="right" class="key">
 				<label for="description">
-					<?php echo JText::_( 'Description' ); ?>: 
+					<?php echo JText::_( 'COM_MEDIAGALLERIES_DESCRIPTION' ); ?>: 
 				</label>
 			</td>
 			<td>
@@ -190,7 +190,7 @@ defined('_JEXEC') or die('Restricted access');
 		<!-- Get Media Item -->
 	<div class="col width-50">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_( 'Get Media Item' ); ?></legend>
+		<legend><?php echo JText::_( 'COM_MEDIAGALLERIES_GET_MEDIA_ITEM' ); ?></legend>
 		
 		<?php /*if ($this->ftp) : ?>
 			<?php echo $this->loadTemplate('ftp'); ?>
@@ -199,7 +199,7 @@ defined('_JEXEC') or die('Restricted access');
 		<!-- Install from URL -->
 		<table class="adminform">
 		<tr>
-			<th colspan="2"><?php echo JText::_( 'Load Media from URL' ); ?></th>
+			<th colspan="2"><?php echo JText::_( 'COM_MEDIAGALLERIES_LOAD_MEDIA_FROM_URL' ); ?></th>
 		</tr>
 		<tr>
 			<td>
@@ -213,7 +213,7 @@ defined('_JEXEC') or die('Restricted access');
 		<!-- Upload Media File -->
 		<table class="adminform">
 		<tr>
-			<th colspan="2"><?php echo JText::_( 'Upload Media from File' ); ?>:</th>
+			<th colspan="2"><?php echo JText::_( 'COM_MEDIAGALLERIES_UPLOAD_MEDIA_FROM_FILE' ); ?>:</th>
 		</tr>
 		<tr>
 			<td>

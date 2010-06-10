@@ -44,9 +44,9 @@ class mediagalleriesViewMedia extends JView
 		switch(JRequest::getVar('layout') ){
 			case '_preview':
 				if(!$item->id){
-					JError::raiseError( 1, JText::_('RESOURCE NOT FOUND') );
+					JError::raiseError( 1, JText::_('COM_MEDIAGALLERIES_FIELD_RESOURCE_NOT_FOUND') );
 				}
-				$document->setTitle(JText::_('Preview'));
+				$document->setTitle(JText::_('JGLOBAL_PREVIEW'));
 				$document->addStyleSheet(URI_ASSETS.'preview.css');
 				//$document->setBase(JUri::root());
 				$video = PlayerHelper::play($item->url,  300, 300, 1);
@@ -56,7 +56,7 @@ class mediagalleriesViewMedia extends JView
 			default:
 				// Is new?
 				if( !$item->id ){
-					$video = JText::_('Select a media to preview' );			
+					$video = JText::_('COM_MEDIAGALLERIES_SELECT_MEDIA' );			
 					$item->published = 1;
 					$item->catid = 0;
 				}else{
