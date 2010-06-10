@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+	    <title>Plottable Thumbnail Library Documentation</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css">
+			body{
+				font-family: tahoma;
+				font-size: 14px;
+			}
+			a:link,
+			a:visited{
+				text-decoration: underline;
+				color: #002D59;
+			}
+			a:hover{
+				color: #ff0000;
+			}
+			div.code{
+				border-left: 1px solid black;
+				margin: 5px 0 5px 30px;
+				padding: 0 0 0 5px;
+				background-color: #99CCFF;
+				font-size: 12px;
+			}
+			li{
+				margin: 10px 0 10px 0;
+			}
+			div.indent{
+				margin-left: 30px;
+			}
+		</style>
+    </head>
+	<body>
+	<a name="top"></a><h1>Plottable Thumbnail Library</h1>
+	<a href="http://www.phpclasses.org/pthumb">Website</a> - <a href="http://www.phpclasses.org/browse/file/6732.html">Changelog</a> - Version 1.2.10
+	<hr />
+	<h2>Contents</h2>
+	<ul>
+		<li><a href="#intro">Introduction</a></li>
+		<li><a href="#requirements">Requirements</a></li>
+		<li><a href="#start">Getting Started</a></li>
+		<li><a href="#example">Example Usage Instructions</a></li>
+		<li><a href="#cache">Cache Information</a></li>
+		<li><a href="#config">Configuration Directives</a></li>
+		<li><a href="#method">Methods</a></li>
+	</ul>
+	<hr />
+	<!-- INTRO -->
+	<a name="intro"></a><h3>Introduction</h3>
+	Plottable Thumbnail Library is a class that allows you to generate thumbnails of images on the fly. It supports caching of thumbnails. In addition, the library can write the thumbnails generated to a file for you! The library can automatically calculate the dimensions of your thumbnail based on the following:
+		<ul>	
+			<li>Fixed dimensions such that the dimensions of the thumbnail will be smaller than or equal the set dimensions, preserving width-height ratio.</li>
+			<li>A scale such that the thumbnail will be automatically generated based on the set scale, preserving width-height ratio.</li>
+			<li>A set dimensions of your own.</li>
+		</ul>
+		The image formats currently supported are:
+		<ul>
+			<li>JPEG</li>
+			<li>PNG</li>
+			<li>GIF (PHP version dependent; refer to <a href="http://www.php.net/gd">PHP Manual</a>)</li>
+			<li>WBMP</li>
+			<li>XBM</li>
+		</ul>
+		<small>[<a href="#top">Return to top</a>]</small>
+	<hr />
+	<!-- REQUIREMENTS -->
+	<a name="requirements"></a><h3>Requirements</h3>
+	The library requires the following components:
+	<ul>
+		<li><a href="http://www.php.net">PHP</a> versions greater than 4.3.2</li>
+		<li><a href="http://www.php.net/gd">GD Image Extensions</a></li>
+	</ul>
+	In addition, the following optional components will add more features to the library:
+	<ul>
+		<li>File write access to enable caching</li>
+		<li>To retrieve remote images, you need one of the following:
+			<ul>
+				<li>"<a href="http://www.php.net/manual/en/ref.filesystem.php">allow_url_fopen</a>" to be turned on </li>
+				<li><a href="http://www.phpclasses.org/browse/package/3105.html">HTTP Retriever Class</a></li>
+				<li><a href="http://www.php.net/CURL">CURL Extentions</a></li>
+			</ul>
+		</li>
+	</ul>
+	<small>[<a href="#top">Return to top</a>]</small>
+	<hr />
+	<a name="start"></a><h3>Getting Started</h3>
+	<p>Before you start, I assume you have knowledge of PHP and how to use PHP classes. You can find information on them for <a href="http://au2.php.net/manual/en/language.oop.php">PHP 4</a> or <a href="http://au2.php.net/manual/en/language.oop5.php">PHP 5</a> at the <a href="http://au2.php.net/manual/en/">PHP manual</a>.</p>
+	
+	<p>
+		This section is about the use of your own code (and not the example). If you are interested in seeing the example usage directions, refer to the <a href="#example">example</a> section.
+	</p>
+	
+	<p>
+		First off, you would need to include the class file into your script with something like:</p>
+		<div class="code">
+			require_once("Pthumb.php");
+		</div>
+	
+	
+	<p>
+		Initialise the class and set some variables if needed. You can find out more about the different configuration directives available in <a href="#config">this</a> section.</p>
+		<div class="code">
+			$pthumb = new Pthumb(); //Initialise the class
+			<br />$pthumb -&gt; use_cache = true; //Set to true to use cache
+			<br />$pthumb -&gt; cache_dir = "cache/"; //Cache DIR. Make sure to include trailing slash!
+		</div>
+	
+	
+	<p>Call upon the various <a href="#method">methods</a> to start generating thumbnails!</p>
+		<div class="code">
+			$pthumb -&gt; print_thumbnail("image.png", 200, 200);
+			<br />$pthumb -&gt; scale_thumbnail("image.png", 0.5);
+			<br />$pthumb -&gt; fit_thumbnail("image.png", 200, 200);
+		</div>
+	
+	<small>[<a href="#top">Return to top</a>]</small>
+	<hr />
+	<!-- Example -->
+	<a name="example"></a><h3>Example Usage Instructions</h3>
+	<p>
+		The example is a full implementation of the class that is executed by <a href="http://au2.php.net/manual/en/reserved.variables.php#reserved.variables.get">HTTP GET Parameters</a>. You can even use it directly for your thumbnail generating solutions!
+	</p>
+	<p>
+		Here is a run-down of the various parameters of the example script</p>
+		<ul>
+			<li><em>image</em><br />
+				Use this parameter to define the image to generate thumbnail of.
+			</li>
+			
+			<li>
+				<em>mode</em><br />
+				The mode to generate thumbnails in. The following modes and the respective parameters (self-explanatory) are as follow:
+				<ul>
+					<li>
+						Mode: <em>thumbnail</em><br />
+						Parameters: <em>width</em>, <em>height</em>
+					</li>
+					<li>
+						Mode: <em>fit</em><br />
+						Parameters: <em>width</em>, <em>height</em>
+					</li>
+					<li>
+						Mode: <em>scale</em><br />
+						Parameter: <em>magnitude</em>
+					</li>
+				</ul>
+			</li>
+			
+			<li>
+				<em>to_file</em>
+				<br />If set to a file path, thumbnails will be written to the file path instead of being displayed.
+			</li>
+			
+			<li>
+				<em>overwrite</em>
+				<br />If set in conjunction with the above, exisiting file with the same name will be overwritten.
+			</li>
+		</ul>
+	
+	<p>Examples:</p>
+		<ul>
+			<li>example.php?mode=scale&amp;image=example.jpg&amp;magnitude=0.5&amp;to_file=test.jpg</li>
+			<li>example.php?mode=fit&amp;image=example.jpg&amp;width=500&amp;height=500&amp;to_file=test.jpg&amp;overwrite=true</li>
+		</ul>
+	
+	<small>[<a href="#top">Return to top</a>]</small>
+	<hr />
+	<!-- Cache Information -->
+	<a name="cache"></a><h3>Cache Information</h3>
+	<small>[<a href="#top">Return to top</a>]</small>
+	<hr />
+	<!-- Config -->
+	<a name="config"></a><h3>Configuration Directives</h3>
+	<ul>
+		<li>
+			Variable: <strong>cache_dir</strong>
+			<br />Type: String
+			<br />Possible Values: Directory Paths
+			<br />Description: Set this to the directory path of your cache. It is important that you ensure the directory is write-enabled
+			<br /><strong>IMPORTANT: End the string with a slash! Otherwise, methods will FAIL! (Example: "dir/" NOT "dir")</strong>
+		</li>
+		<li>
+			Variable: <strong>clear_cache</strong>
+			<br />Type: Boolean
+			<br />Possible Values: True/False
+			<br />Description: Set this to clear cache after thumbnail generation. Useful if you want to enable features that require cache to be on and yet do not want to cache thumbnails.
+		</li>
+		<li>
+			Variable: <strong>error_mode</strong>
+			<br />Type: Integer
+			<br />Possible Values: 0, 1, 2
+			<br />Description: Set this to how the class will behave when it encounters errors.
+			<ul>
+				<li>0 - When a fatal error is encountered, the class terminates script execution and displays a text error</li>
+				<li>1 - When a fatal error is encountered, the class terminates script execution and displays an image error</li>
+				<li>2 - When a fatal error is encountered, the class terminates and does nothing but log the error to an internal array</li>
+			</ul>
+		</li>
+		<li>
+			Variable: <strong>log_error</strong>
+			<br />Type: Boolean
+			<br />Possible Values: True/False
+			<br />Description: Set this to log any errors to the file "error_mode" in cache directory. This requires cache to be on.
+		</li>
+		<li>
+			Variable: <strong>remote_check</strong>
+			<br />Type: Boolean
+			<br />Possible Values: True/False
+			<br />Description: Set this to true to retrieve remote files everytime a request for thumbnails is made. Otherwise, remote data is saved to cache and not retrieved again after the initial call.
+		</li>
+		<li>
+			Variable: <strong>use_cache</strong>
+			<br />Type: Boolean
+			<br />Possible Values: True/False
+			<br />Description: Set this to enable cache writing. It is recommended that you turn this on because some features of the class requires this to be turned on. Examples include several remote file retrieving procedures and file writing.
+		</li>
+		</ul>
+	<small>[<a href="#top">Return to top</a>]</small>
+	<hr />
+	<!-- Methods -->
+	<a name="method"></a><h3>Methods</h3>
+	<div class="indent">
+		<h4>Pthumb</h4>
+		void <strong>Pthumb</strong> ( void )
+		<p>
+			Class constructor. Checks to see if GD is enabled and returns an error as appropriate if error is encountered.
+		</p>
+		<hr />
+		
+		<h4>error</h4>
+		
+		array <strong>error</strong> ( [bool is_fatal] )
+		<p>
+			Returns an array of errors. <em>is_fatal defaults</em> to true. If <em>is_fatal</em> is true, fatal errors are returned. Otherwise, warnings are returned.
+		</p>
+		<hr />
+
+		<h4>fit_thumbnail</h4>
+		mixed <strong>fit_thumbnail</strong> ( str image, int max_width, int max_height [, int behaviour [, bool return]] )
+		<p>
+			Calculates the new dimensions of <em>image</em> such that it fits within the maximum width and height <em>max_width</em> and <em>max_height</em> respectively and preserving the width-height ratio of the <em>image</em>. <em>behaviour</em> defaults to 1. If set to 1, the dimensions with the bigger pixel area will be returned in the case of ambiguity. Otherwise, set to 2 to return the dimensions with smaller pixel area.
+			</p>
+			<p><em>return</em> defaults to false. If set to true, an array with the calculated dimensions will be returned. The first element is the width while the second is the height. Otherwise, a callback to <strong>print_thumbnail</strong> with the calculated dimensions is returned.
+		</p>
+		<hr />
+		<h4>image_to_file</h4>
+		bool <strong>image_to_file</strong> ( str data, str filename [, bool overwrite])
+		<p>
+			Writes image <em>data</em> to <em>filename</em> and overwries any existing file if <em>overwrite</em> is set to true. The default value is false.
+		</p>
+		<hr />
+		
+		<h4>isError</h4>
+		bool <strong>isError</strong> ( void )
+		<p>
+			Returns true if an error has occured or false otherwise.
+		</p>
+		<hr />
+		<h4>print_thumbnail</h4>
+		str <strong>print_thumbnail</strong> ( str image, int width, int height [, bool return [, bool display_inline]] )
+		<p>
+			Resizes <em>image</em> according to <em>width</em> and <em>height</em>. <em>return</em> is false by default. If set to true, thumbnail data is returned. Otherwise, thumbnail is directly outputted to the browser. If <em>display_inline</em> is true (by default), headers sent to browser will instruct browser to display the image inline. Otherwise, headers will be sent to the browser to display image as an attachment. For more information, refer to <a href="http://www.ietf.org/rfc/rfc1806.txt">RFC 1806</a>.
+		</p>
+		<hr />
+		
+		<h4>scale_thumbnail</h4>
+		mixed <strong>scale_thumbnail</strong> ( str image, float scale [, bool return] )
+		<p>
+			Calculates the new dimensions of <em>image</em> according to the <em>scale</em> specified. <em>return</em> defaults to false. If set to true, an array with the calculated dimensions will be returned. The first element is the width while the second is the height. Otherwise, a callback to <strong>print_thumbnail</strong> with the calculated dimensions is returned.
+		</p>
+	</div>
+	<small>[<a href="#top">Return to top</a>]</small>
+	<!-- Credits -->
+	<hr />
+	<small>
+	<em>Last Updated: <script type="text/javascript">document.write(document.lastModified)</script></em>
+	<br />&copy; 2004-2007 Chua Yong Wen [<a href="http://chuayw2000.6x.to">http://chuayw2000.6x.to</a>] [lawliet89[at]gmail.com]</small>
+	</body>
+</html>
