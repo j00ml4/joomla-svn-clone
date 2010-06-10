@@ -10,7 +10,7 @@ JToolBarHelper::deleteList(JText::_('VALIDDELETEITEMS') );
 JToolBarHelper::editListX();
 JToolBarHelper::addNewX('edit');
 JToolBarHelper::preferences('com_mediagalleries', '360', '550', JText::_('Configuration'));
-JToolBarHelper::custom('media', 'config.png', '', JText::_('Edit media'), false);
+JToolBarHelper::custom('media', 'config.png', '', JText::_('JGLOBAL_EDIT_ITEM'), false);
 //JToolBarHelper::media_manager( '', 'Medias Dir' );
 JToolBarHelper::help( 'mediagalleries', true );
 ?>
@@ -18,10 +18,10 @@ JToolBarHelper::help( 'mediagalleries', true );
 <table>
 <tr>
 	<td align="left" width="100%">
-		<?php echo JText::_( 'Filter' ); ?>:
+		<?php echo JText::_( 'JSEARCH_FILTER_LABEL' ); ?>:
 		<input type="text" name="search" id="search" value="<?php echo $this->lists['search'];?>" class="text_area" onchange="document.adminForm.submit();" />
-		<button onclick="this.form.submit();"><?php echo JText::_( 'Go' ); ?></button>
-		<button onclick="document.getElementById('search').value='';this.form.getElementById('filter_catid').value='0';this.form.getElementById('filter_state').value='';this.form.submit();"><?php echo JText::_( 'Reset' ); ?></button>
+		<button onclick="this.form.submit();"><?php echo JText::_( 'COM_MEDIAGALLERIES_GO' ); ?></button>
+		<button onclick="document.getElementById('search').value='';this.form.getElementById('filter_catid').value='0';this.form.getElementById('filter_state').value='';this.form.submit();"><?php echo JText::_( 'JSEARCH_RESET' ); ?></button>
 	</td>
 	<td nowrap="nowrap">
 		<?php
@@ -36,7 +36,7 @@ JToolBarHelper::help( 'mediagalleries', true );
 	<thead>
 		<tr>
 			<th width="5">
-				<?php echo JText::_( 'NUM' ); ?>
+				<?php echo JText::_( 'JLIB_HTML_DISPLAY_NUM' ); ?>
 			</th>
 			<th width="20">
 				<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count( $this->items ); ?>);" />
@@ -96,7 +96,7 @@ JToolBarHelper::help( 'mediagalleries', true );
 					echo $row->title;
 				} else {
 				?>
-				<span class="editlinktip hasTip" title="<?php echo JText::_( 'Edit Media' );?>::<?php echo $row->title; ?>">
+				<span class="editlinktip hasTip" title="<?php echo JText::_( 'JTOOLBAR_EDIT' );?>::<?php echo $row->title; ?>">
 					<a href="<?php echo $link['edit']; ?>">
 						<?php echo $row->title; ?></a></span>
 				<?php
@@ -113,7 +113,7 @@ JToolBarHelper::help( 'mediagalleries', true );
 				<input type="text" name="order[]" size="5" value="<?php echo $row->ordering;?>" <?php echo $disabled ?> class="text_area" style="text-align: center" />
 			</td>
 			<td>
-				<span class="editlinktip hasTip" title="<?php echo JText::_( 'Edit Category' );?>::<?php echo $row->category; ?>">
+				<span class="editlinktip hasTip" title="<?php echo JText::_( 'COM_MEDIAGALLERIES_EDIT_CATEGORY' );?>::<?php echo $row->category; ?>">
 					<a href="<?php echo $link['cat']; ?>" ><?php echo $row->category; ?></a>
 				<span>
 			</td>

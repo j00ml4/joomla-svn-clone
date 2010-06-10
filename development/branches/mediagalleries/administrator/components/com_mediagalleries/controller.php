@@ -49,7 +49,7 @@ class mediagalleriesController extends JController{
 		global $option;
 		
 		// Check for request forgeries
-		JRequest::checkToken() or jexit( 'Invalid Token' );
+		JRequest::checkToken() or jexit( 'JINVALID_TOKEN' );
 		
 		// get Model
 		$model = $this->getModel($this->_control);
@@ -59,7 +59,7 @@ class mediagalleriesController extends JController{
 
 		// Save Success or Error
 		if ( $model->store($post) ) {// success
-			$msg = JText::_( 'Successfully saved changes' );
+			$msg = JText::_( 'JLIB_APPLICATION_SAVE_SUCCESS' );
 			$type = 'message';
 		}
 		else{// error			
@@ -97,18 +97,18 @@ class mediagalleriesController extends JController{
 	{
 		global $option;
 		// Check for request forgeries
-		JRequest::checkToken() or jexit( 'Invalid Token' );
+		JRequest::checkToken() or jexit( 'JINVALID_TOKEN' );
 
 		// IDs
 		$cid = JRequest::getVar( 'cid', array(0), 'post', 'array' );
 	
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_('Select an item to delete') );
+			JError::raiseError(500, JText::_('JWARNING_DELETE_MUST_SELECT') );
 		}
 
 		$model = $this->getModel($this->_control);
 		if( $model->delete($cid) ){// success
-			$msg = JText::_( 'Successfully saved changes' );
+			$msg = JText::_( 'JLIB_APPLICATION_SAVE_SUCCESS' );
 			$type = 'message';
 		}
 		else{// error			
@@ -135,12 +135,12 @@ class mediagalleriesController extends JController{
 		$cid = JRequest::getVar( 'cid', array(), 'post', 'array' );
 
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to publish' ) );
+			JError::raiseError(500, JText::_( 'JWARNING_PUBLISH_MUST_SELECT' ) );
 		}
 
 		$model = $this->getModel($this->_control);
 		if( $model->publish($cid, 1) ){// success
-			$msg = JText::_( 'Successfully saved changes' );
+			$msg = JText::_( 'JLIB_APPLICATION_SAVE_SUCCESS' );
 			$type = 'message';
 		}
 		else{// error			
@@ -163,18 +163,18 @@ class mediagalleriesController extends JController{
 		global $option;		
 		
 		// Check for request forgeries
-		JRequest::checkToken() or jexit( 'Invalid Token' );
+		JRequest::checkToken() or jexit( 'JINVALID_TOKEN' );
 		
 		$cid = JRequest::getVar( 'cid', array(), 'post', 'array' );
 		JArrayHelper::toInteger($cid);
 		
 		if (count( $cid ) < 1) {
-			JError::raiseError(500, JText::_( 'Select an item to unpublish' ) );
+			JError::raiseError(500, JText::_( 'JWARNING_UNPUBLISH_MUST_SELECT' ) );
 		}
 		
 		$model = $this->getModel($this->_control);
 		if( $model->publish($cid, 0) ){// success
-			$msg = JText::_( 'Successfully saved changes' );
+			$msg = JText::_( 'JLIB_APPLICATION_SAVE_SUCCESS' );
 			$type = 'message';
 		}
 		else{// error			
@@ -196,7 +196,7 @@ class mediagalleriesController extends JController{
 	{	
 		global $option;
 		
-		JRequest::checkToken() or jexit( 'Invalid Token' );
+		JRequest::checkToken() or jexit( 'JINVALID_TOKEN' );
 
 		// Checkin the weblink
 		$model = $this->getModel($this->_control);
@@ -233,7 +233,7 @@ class mediagalleriesController extends JController{
 	function orderup()
 	{
 		// Check for request forgeries
-		JRequest::checkToken() or jexit( 'Invalid Token' );
+		JRequest::checkToken() or jexit( 'JINVALID_TOKEN' );
 
 		$model = $this->getModel($this->_control);
 		$model->move(-1);
@@ -249,7 +249,7 @@ class mediagalleriesController extends JController{
 	function orderdown()
 	{
 		// Check for request forgeries
-		JRequest::checkToken() or jexit( 'Invalid Token' );
+		JRequest::checkToken() or jexit( 'JINVALID_TOKEN' );
 
 		$model = $this->getModel($this->_control);
 		$model->move(1);
@@ -265,7 +265,7 @@ class mediagalleriesController extends JController{
 	function saveorder()
 	{
 		// Check for request forgeries
-		JRequest::checkToken() or jexit( 'Invalid Token' );
+		JRequest::checkToken() or jexit( 'JINVALID_TOKEN' );
 		
 		// Request Vars
 		$cid 	= JRequest::getVar( 'cid', array(), 'post', 'array' );
@@ -276,7 +276,7 @@ class mediagalleriesController extends JController{
 		$model = $this->getModel($this->_control);
 		$model->saveorder($cid, $order);
 
-		$msg = JText::_('New ordering saved');
+		$msg = JText::_('JLIB_APPLICATION_SUCCESS_ORDERING_SAVED');
 		$this->setRedirect( 'index.php?option=com_mediagalleries', $msg );
 	}
 

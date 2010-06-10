@@ -9,8 +9,8 @@ defined('_JEXEC') or die('Restricted access');
 <?php 
 	// ToolBar
 	$text = ($this->item->id)? 
-		JText::_( 'Edit' ):	
-			JText::_( 'New' ); 		
+		JText::_( 'JACTION_EDIT' ):	
+			JText::_( 'JTOOLBAR_NEW' ); 		
 	
 	JToolBarHelper::title(  'Media: <small><small>['. $text.' ]</small></small>' );
 
@@ -35,13 +35,13 @@ defined('_JEXEC') or die('Restricted access');
 
 		// Title
 		if (form.title.value == ""){
-			alert( "<?php echo JText::_( JText::_('Your Media must contain a title.') ); ?>" );
+			alert( "<?php echo JText::_( JText::_('COM_MEDIAGALLERIES_MUST_CONTAIN_TITLE') ); ?>" );
 			return;
 		} 
 		
 		// Category 
 		if (form.catid.value == "0"){
-			alert( "<?php echo JText::_( 'You must select a category', true ); ?>" );
+			alert( "<?php echo JText::_( 'COM_MEDIAGALLERIES_MUST_SELECT_CATEGORY', true ); ?>" );
 			return;
 		} 
 		
@@ -51,7 +51,7 @@ defined('_JEXEC') or die('Restricted access');
 			&& (form.uplocal.value == "")
 			&& (form.upyoutube.value == "")
 		 ){
-			alert( "<?php echo JText::_('Please provide a valid URL'); ?>" );
+			alert( "<?php echo JText::_('COM_MEDIAGALLERIES_INVALID_ITEM'); ?>" );
 			return;
 		}
 		
@@ -111,13 +111,13 @@ defined('_JEXEC') or die('Restricted access');
 	<!-- Properties -->
 	<div class="col width-50">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_( 'Details' ); ?></legend>
+		<legend><?php echo JText::_( 'JDETAILS' ); ?></legend>
 
 		<table class="admintable">
 		<tr>
 			<td width="100" align="right" class="key">
 				<label for="title">
-					<?php echo JText::_( 'Title' ); ?>:
+					<?php echo JText::_( 'JFIELD_TITLE_DESC' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -126,7 +126,7 @@ defined('_JEXEC') or die('Restricted access');
 		</tr>
 		<tr>
 			<td valign="top" align="right" class="key">
-				<?php echo JText::_( 'Published' ); ?>:
+				<?php echo JText::_( 'JPUBLISHED' ); ?>:
 			</td>
 			<td>
 				<?php echo $this->lists['published']; ?>
@@ -135,7 +135,7 @@ defined('_JEXEC') or die('Restricted access');
 		<tr>
 			<td valign="top" align="right" class="key">
 				<label for="catid">
-					<?php echo JText::_( 'Category' ); ?>:
+					<?php echo JText::_( 'JCATEGORY' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -145,7 +145,7 @@ defined('_JEXEC') or die('Restricted access');
 		<tr>
 			<td valign="top" align="right" class="key">
 				<label for="ordering">
-					<?php echo JText::_( 'Ordering' ); ?>:
+					<?php echo JText::_( 'JFIELD_ORDERING_LABEL' ); ?>:
 				</label>
 			</td>
 			<td>
@@ -199,12 +199,12 @@ defined('_JEXEC') or die('Restricted access');
 		<!-- Get Media Item -->
 	<div class="col width-50">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_( 'Get Media Item' ); ?></legend>
+		<legend><?php echo JText::_( 'COM_MEDIAGALLERIES_GET_MEDIA_ITEM' ); ?></legend>
 		
 		<!-- Install from URL -->
 		<table class="adminform">
 		<tr>
-			<th colspan="2"><?php echo JText::_( 'Load Media from URL' ); ?></th>
+			<th colspan="2"><?php echo JText::_( 'COM_MEDIAGALLERIES_LOAD_MEDIA_FROM_URL' ); ?></th>
 		</tr>
 		<tr>
 			<td>
@@ -222,7 +222,7 @@ defined('_JEXEC') or die('Restricted access');
 		<?php endif;*/ ?>
 		<table class="adminform">
 		<tr>
-			<th colspan="2"><?php echo JText::_( 'Upload Media from File' ); ?>:</th>
+			<th colspan="2"><?php echo JText::_( 'COM_MEDIAGALLERIES_UPLOAD_MEDIA_FROM_FILE' ); ?>:</th>
 		</tr>
 		<tr>
 			<td colspan="2">
@@ -233,7 +233,7 @@ defined('_JEXEC') or die('Restricted access');
 		</tr>
 		<tr>
 			<td align="right" class="key">
-				<label for="toFolder"><?php echo JText::_('To Folder'); ?>:</label>
+				<label for="toFolder"><?php echo JText::_('COM_MEDIAGALLERIES_FIELD_UPLOAD_TO_LABEL'); ?>:</label>
 				<input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="0" />
 			</td>
 			<td>	
@@ -248,7 +248,7 @@ defined('_JEXEC') or die('Restricted access');
 		<!--b><?php echo JText::_( 'or' ); ?></b>		
 		<table class="adminform" style="">
 		<tr>
-			<th><?php echo JText::_( 'Upload to youtube server' ); ?>:</th>
+			<th><?php echo JText::_( 'COM_MEDIAGALLERIES_UPLOAD_TO_YOUTUBE' ); ?>:</th>
 			</tr>
 		<tr>
 			<td>

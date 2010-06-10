@@ -41,13 +41,13 @@ class mediagalleriesViewChannel extends JView
 
 		// fail if checked out not by 'me'
 		if ( $model->isCheckedOut( $user->get('id') ) ) {
-			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'item' ), $item->title );
+			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'COM_MEDIAGALLERIES_MEDIA_ITEM' ), $item->title );
 			$mainframe->redirect( 'index.php?option='. $option, $msg );
 		}
 
 		// Is new?
 		if( !$item->id ){
-			$video = JText::_('Select a media to preview' );			
+			$video = JText::_('COM_MEDIAGALLERIES_SELECT_PREVIEW' );			
 			$item->published = 1;
 			$item->catid = 0;
 		}else{

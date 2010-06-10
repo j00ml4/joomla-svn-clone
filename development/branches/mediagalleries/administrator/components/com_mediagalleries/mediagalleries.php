@@ -20,7 +20,7 @@ JSubMenuHelper::addEntry(JText::_('Comments'), $link);
 $mediapath = JPATH_SITE.DS.'plugins'.DS.'content'.DS.'media.php';
 if( !is_file($mediapath) )
 {
-	$msg = JText::_( 'Media pluging is not installed' );
+	$msg = JText::_( 'MEDIA_PLUGIN_NOT_INSTALLED' );
 	$mainframe->enqueueMessage( $msg, 'error' ); 
 	return;
 }
