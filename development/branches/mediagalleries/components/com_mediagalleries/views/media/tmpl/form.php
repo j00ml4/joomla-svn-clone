@@ -80,18 +80,18 @@ JHTML::_('behavior.formvalidation');
 	}
 </script>
 <style>
-#jmultimedia fieldset.adminform{
+#mediagalleries fieldset.adminform{
 	border: 1px ridge #000000;
 	padding: 5px;
 	margin: 2px;
 }
-#jmultimedia fieldset.adminform legend{
+#mediagalleries fieldset.adminform legend{
 	font-size: large;
 	font-weight: bold;
 }
 </style>
 
-<div id="jmultimedia" class="contentpaneopen">
+<div id="mediagalleries" class="contentpaneopen">
 <form enctype="multipart/form-data" action="<?php echo $this->action; ?>" method="post" name="adminForm" id="adminForm">
 	<!-- Title -->		
 	<?php if ($this->params->get('show_page_title')) : ?>
@@ -339,7 +339,7 @@ JHTML::_('behavior.formvalidation');
 
 	<div class="clr"></div>	
 	<!-- TODO set Date -->
-	<input type="hidden" id="option" name="option" value="com_jmultimedia" />
+	<input type="hidden" id="option" name="option" value="com_mediagalleries" />
 	<input type="hidden" id="cid" name="cid[]" value="<?php echo $this->item->id; ?>" />
 	<input type="hidden" id="id" name="id" value="<?php echo $this->item->id; ?>" />	
 	<input type="hidden" id="userid" name="userid" value="<?php echo $this->item->userid; ?>" />

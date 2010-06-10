@@ -1,9 +1,9 @@
 <?php
 /**
- * Media View for JMultimedia Component
+ * Media View for mediagalleries Component
  * 
  * @package    		Joomla
- * @subpackage 	JMultimedia Suite
+ * @subpackage 	mediagalleries Suite
  * @link 			http://3den.org/joom/
  * @license	GNU/GPL
  */
@@ -17,9 +17,9 @@ jimport( 'joomla.application.component.view' );
  * Media View
  *
  * @package    		Joomla
- * @subpackage	JMultimedia Suite
+ * @subpackage	mediagalleries Suite
  */
-class JMultimediaViewChannel extends JView
+class mediagalleriesViewChannel extends JView
 {
 	/**
 	 * display method of Media view
@@ -56,7 +56,7 @@ class JMultimediaViewChannel extends JView
 
 		// build the html select list for ordering
 		$query = 'SELECT ordering AS value, title AS text'
-			. ' FROM #__jmultimedia'
+			. ' FROM #__mediagalleries'
 			. ' WHERE catid = ' . (int) $item->catid
 			. ' ORDER BY ordering';
 		$lists['ordering'] 	= JHTML::_('list.specificordering',  $item, $item->id, $query );

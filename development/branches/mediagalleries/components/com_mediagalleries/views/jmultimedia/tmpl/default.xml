@@ -9,7 +9,7 @@
 		<name>Standard Table Layout</name>
 		<description>STANDARD CATEGORY LAYOUT DESC</description>
 		<url>
-			<param name="catid" type="category" label="Category" section="com_jmultimedia" description="Choose a category (optional)." />
+			<param name="catid" type="category" label="Category" section="com_mediagalleries" description="Choose a category (optional)." />
 			<param name="ordermode" type="list" default="0" label="Ordering Mode" description="Select items ordering">
 				<option value="popular">Most Popular</option>
 				<option value="random">Random</option>			

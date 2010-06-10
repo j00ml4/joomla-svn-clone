@@ -1,6 +1,6 @@
 <?php
 /**
- * User Channels View for JMultimedia Component
+ * User Channels View for mediagalleries Component
  * 
  * @package    Joomla.Tutorials
  * @subpackage Components
@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.view' );
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class JMultimediaViewChannels extends JView
+class mediagalleriesViewChannels extends JView
 {
     /**
      * Hellos view display method

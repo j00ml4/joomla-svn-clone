@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
 //	JToolBarHelper::apply();// TODO
 	JToolBarHelper::save();
 	JToolBarHelper::cancel();	
-	JToolBarHelper::help( 'jmultimedia', true );
+	JToolBarHelper::help( 'mediagalleries', true );
 ?>
 
 <script language="javascript" type="text/javascript">
@@ -83,7 +83,7 @@ defined('_JEXEC') or die('Restricted access');
 		border: inset 10px #000;
 		color: red;
 	}
-	.denvideo{
+	.media{
 		width: 100%;
 		min-height:330px;
 		display:block;
@@ -240,7 +240,7 @@ defined('_JEXEC') or die('Restricted access');
 	<input type="hidden" name="date" value="<?php echo $this->item->date; ?>" />
 <div class="clr"></div>	
 
-	<input type="hidden" name="option" value="com_jmultimedia" />
+	<input type="hidden" name="option" value="com_mediagalleries" />
 	<input type="hidden" name="cid[]" value="<?php echo $this->item->id; ?>" />
 	<input type="hidden" name="userid" value="<?php echo $this->item->userid; ?>" />
 	<input type="hidden" name="task" value="" />

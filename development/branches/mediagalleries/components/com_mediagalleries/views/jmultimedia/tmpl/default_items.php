@@ -55,7 +55,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		$date = JFactory::getDate($item->added);
 		$item->added = $date->toFormat( $this->params->get('date_format') );
 		if($item->author==''){ $item->author = JText::_('Guest'); }  
-		$link =  JRoute::_('index.php?option=com_jmultimedia&view=media&layout=default&id='.$item->id);
+		$link =  JRoute::_('index.php?option=com_mediagalleries&view=media&layout=default&id='.$item->id);
 		$k = 1 - $k; $count++
 ?>
 	<tr class="sectiontableentry<?php echo ($k +1 ) . $this->params->get( 'pageclass_sfx' ); ?>" >

@@ -1,6 +1,6 @@
 <?php
 /**
- * Madias Model for JMultimedia Component
+ * Madias Model for mediagalleries Component
  * 
  * @package    Joomla.Tutorials
  * @subpackage Components
@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.model' );
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class JMultimediaModelJMultimedia extends JModel
+class mediagalleriesModelmediagalleries extends JModel
 {
  	/**
      * Media data array
@@ -95,7 +95,7 @@ class JMultimediaModelJMultimedia extends JModel
 		if (empty($this->_total))
 		{
 			//$query = $this->_buildQuery();
-			$query = 'SELECT id FROM #__jmultimedia';
+			$query = 'SELECT id FROM #__mediagalleries';
 			$this->_total = $this->_getListCount($query);
 		}
 
@@ -134,7 +134,7 @@ class JMultimediaModelJMultimedia extends JModel
 			. ' ( a.rank / (a.votes+1) ) AS rating, '
 			. ' cc.title AS category, u.name AS author, '
 			. ' 	cc.published AS cat_pub, cc.access AS cat_access'		
-		. ' FROM #__jmultimedia AS a' 
+		. ' FROM #__mediagalleries AS a' 
 		. ' LEFT JOIN #__categories AS cc ON cc.id = a.catid '
 		. ' LEFT JOIN #__users AS u ON u.id = a.userid '
 		. $this->_buildContentWhere()

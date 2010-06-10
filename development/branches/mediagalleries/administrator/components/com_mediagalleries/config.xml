@@ -22,6 +22,6 @@
 		<!-- Display -->
 		<param name="@spacer" type="spacer" default="" label="" description="" />			
 		<param name="style" type="filelist" default="default.css" label="Style" description="Select default CSS file" 
-			directory="components/com_jmultimedia/assets" filter=".css" exclude="" stripext="" hide_default="true" />
+			directory="components/com_mediagalleries/assets" filter=".css" exclude="" stripext="" hide_default="true" />
 	</params>
 </config>

@@ -9,10 +9,10 @@ JToolBarHelper::unpublishList();
 JToolBarHelper::deleteList(JText::_('VALIDDELETEITEMS') );
 JToolBarHelper::editListX();
 JToolBarHelper::addNewX('edit');
-JToolBarHelper::preferences('com_jmultimedia', '360', '550', JText::_('Configuration'));
-JToolBarHelper::custom('denvideo', 'config.png', '', JText::_('Edit denVideo'), false);
+JToolBarHelper::preferences('com_mediagalleries', '360', '550', JText::_('Configuration'));
+JToolBarHelper::custom('media', 'config.png', '', JText::_('Edit media'), false);
 //JToolBarHelper::media_manager( '', 'Medias Dir' );
-JToolBarHelper::help( 'jmultimedia', true );
+JToolBarHelper::help( 'mediagalleries', true );
 ?>
 <form action="<?php echo $this->action; ?>" method="post" name="adminForm">
 <table>
@@ -76,8 +76,8 @@ JToolBarHelper::help( 'jmultimedia', true );
 	{
 		$row = &$this->items[$i];
 
-		$link['edit']  = JRoute::_( 'index.php?option=com_jmultimedia&task=edit&view=media&cid[]='. $row->id );
-		$link['cat']  = JRoute::_( 'index.php?option=com_categories&section=com_jmultimedia&task=edit&type=other&cid[]='. $row->catid );
+		$link['edit']  = JRoute::_( 'index.php?option=com_mediagalleries&task=edit&view=media&cid[]='. $row->id );
+		$link['cat']  = JRoute::_( 'index.php?option=com_categories&section=com_mediagalleries&task=edit&type=other&cid[]='. $row->catid );
 
 		$checked 	= JHTML::_('grid.checkedout',   $row, $i );
 		$published 	= JHTML::_('grid.published', $row, $i );
@@ -132,7 +132,7 @@ JToolBarHelper::help( 'jmultimedia', true );
 	</table>
 </div>
 
-	<input type="hidden" id="option" name="option" value="com_jmultimedia" />
+	<input type="hidden" id="option" name="option" value="com_mediagalleries" />
 	<input type="hidden" id="task" name="task" value="" />
 	<input type="hidden" id="c" name="c" value="media" />
 	<input type="hidden" name="boxchecked" value="0" />

@@ -86,7 +86,7 @@ class YoutubeHelper{
 		$url = FilesHelper::pathToURL($url);
 		
 		// Thumbs folder
-		$localdir = JPATH_SITE.DS.'components/com_jmultimedia/assets/thumbs/';
+		$localdir = JPATH_SITE.DS.'components/com_mediagalleries/assets/thumbs/';
 		$localdir = FilesHelper::pathToUrl($localdir);
 
 		/* ***************************************************

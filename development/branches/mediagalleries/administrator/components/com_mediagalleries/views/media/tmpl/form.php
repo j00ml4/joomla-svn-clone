@@ -15,13 +15,13 @@ defined('_JEXEC') or die('Restricted access');
 	JToolBarHelper::title(  'Media: <small><small>['. $text.' ]</small></small>' );
 
 	if($this->item->id){
-		//JToolBarHelper::preview( 'index.php?option=com_jmultimedia&controller=media&tmpl=component&id='.$this->item->id, true );
+		//JToolBarHelper::preview( 'index.php?option=com_mediagalleries&controller=media&tmpl=component&id='.$this->item->id, true );
 	}
 	
 //	JToolBarHelper::apply();// TODO
 	JToolBarHelper::save();
 	JToolBarHelper::cancel();	
-	JToolBarHelper::help( 'jmultimedia', true );
+	JToolBarHelper::help( 'mediagalleries', true );
 ?>
 
 <script language="javascript" type="text/javascript">
@@ -96,11 +96,11 @@ defined('_JEXEC') or die('Restricted access');
 		border: inset 10px #000;
 		color: red;
 	}
-	#player .denvideo{
+	#player .media{
 		width: 400px;
 		height: 300px;
 	}
-	#player img.denvideo{
+	#player img.media{
 		height:auto;
 		min-height: 150px;
 	}
@@ -273,7 +273,7 @@ defined('_JEXEC') or die('Restricted access');
 	<input type="hidden" id="added" name="added" value="<?php echo $this->item->added; ?>" />
 <div class="clr"></div>	
 
-	<input type="hidden" id="option" name="option" value="com_jmultimedia" />
+	<input type="hidden" id="option" name="option" value="com_mediagalleries" />
 	<input type="hidden" id="cid" name="cid[]" value="<?php echo $this->item->id; ?>" />
 	<input type="hidden" id="id" name="id" value="<?php echo $this->item->id; ?>" />	
 	<input type="hidden" id="userid" name="userid" value="<?php echo $this->item->userid; ?>" />
