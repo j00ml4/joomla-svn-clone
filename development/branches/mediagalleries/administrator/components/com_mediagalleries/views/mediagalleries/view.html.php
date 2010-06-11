@@ -27,7 +27,8 @@ class mediagalleriesViewmediagalleries extends JView
      **/
     function display($tpl = null)
     {
-    	global $mainframe, $option;
+    	global  $option;
+    	$mainframe=&JFactory::getApplication();
 
 		// Define
 		$db		=& JFactory::getDBO();
