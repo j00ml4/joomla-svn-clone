@@ -16,6 +16,7 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_projects')) {
 
 // Include dependancies
 jimport('joomla.application.component.controller'); 
+require_once JPATH_COMPONENT.'/helpers/projects.php';
 
 // Execute the task.
 $controller	= &JController::getInstance('projects');

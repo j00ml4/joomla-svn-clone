@@ -41,7 +41,7 @@ function submitbutton(task) {
 		<fieldset>
 			<legend><?php echo JText::_('COM_PROJECTS_PROJECT_FORM_LEGEND'); ?></legend>
 			
-			<?php if ($params->get('canEditPortifolio', 1)): ?>
+			<?php if ($this->canDo['edit_portfolio']): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('catid'); ?>
 				<?php echo $this->form->getInput('catid', null, $this->catid); ?>
@@ -58,7 +58,7 @@ function submitbutton(task) {
 				<?php echo $this->form->getInput('estimation_type', 'params'); ?>
 			</div>	
 			
-			<?php if ($params->get('canEditDate', 1)): ?>
+			<?php if ($this->canDo['edit_state']): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('start_at'); ?>
 				<?php echo $this->form->getInput('start_at'); ?>
@@ -69,21 +69,21 @@ function submitbutton(task) {
 			</div>
 			<?php endif; ?>
 			
-			<?php if ($params->get('canEditLang', 1)): ?>
+			<?php if ($this->canDo['edit_lang']): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('language'); ?>
 				<?php echo $this->form->getInput('language'); ?>
 			</div>
 			<?php endif; ?>
 		
-			<?php if ($params->get('canEditState', 1)): ?>
+			<?php if ($this->canDo['edit_state']): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('state'); ?>
 				<?php echo $this->form->getInput('state'); ?>
 			</div>
 			<?php endif; ?>	
 	
-			<?php if ($params->get('canEditOrder', 1)): ?>
+			<?php if ($this->canDo['edit_order']): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('ordering'); ?>
 				<?php echo $this->form->getInput('ordering'); ?>

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset name="display" 
-		label="JCONFIG_DISPLAY_LABEL"
-		description="COM_PROJECTS_DISPLAY_DESC">
+	<fieldset name="basic">
 			
 	</fieldset>		
 	
@@ -12,22 +10,7 @@
 		<field name="rules"	type="rules" label="JCONFIG_PERMISSIONS_LABEL"
 			filter="rules" component="com_projects"	section="component"/>
 	</fieldset>
-	
-	<fieldset name="manager_tools"
-		label="JCONFIG_ACCESS_LABEL"
-		description="JCONFIG_ACCESS_DESC">
-	</fieldset>
 		
-	<fieldset name="worker_tools"
-		label="JCONFIG_ACCESS_LABEL"
-		description="JCONFIG_ACCESS_DESC">
-	</fieldset>
-	
-	<fieldset name="tester_tools"
-		label="JCONFIG_ACCESS_LABEL"
-		description="JCONFIG_ACCESS_DESC">
-	</fieldset>
-	
 	<fieldset name="guest_tools"
 		label="JCONFIG_ACCESS_LABEL"
 		description="JCONFIG_ACCESS_DESC">
@@ -76,7 +59,22 @@
 			default="0">
 			<option	value="0">JNO</option>
 			<option	value="1">Featured only</option>
-			<option	value="1">JALL</option>
+			<option	value="2">JALL</option>
 		</field>
+	</fieldset>
+	
+	<fieldset name="manager_tools"
+		label="JCONFIG_ACCESS_LABEL"
+		description="JCONFIG_ACCESS_DESC">
+	</fieldset>
+		
+	<fieldset name="worker_tools"
+		label="JCONFIG_ACCESS_LABEL"
+		description="JCONFIG_ACCESS_DESC">
+	</fieldset>
+	
+	<fieldset name="tester_tools"
+		label="JCONFIG_ACCESS_LABEL"
+		description="JCONFIG_ACCESS_DESC">
 	</fieldset>
 </config>

@@ -13,39 +13,69 @@
  */
 class ProjectsHelper
 {
-	/**
-	 * Method to test whether a user can do an action in the record
-	 *
-	 * @param	object	A record object.
-	 * @param	array	a list of {action => asset}
-	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
-	 * @since	1.6
-	 */
-	public function canDo($accesses=array(), $record=null, $user=null)
-	{
-		empty($user) &&	$user = JFactory::getUser();
+	
+	public function getRoles(){
 		
-		// Nothing set?
-		if (empty($accesses)) return false;
-		// Check if have access
-		foreach($accesses as $role -> $asset){
-			//Is the author?
-			if (
-				($asset=='owner') && 
-				!empty($record->created_by) &&
-				($record->created_by == $user->id)
-			){
-				return true;
-			}
-
-			// Has Permition?
-			if ($user->authorise($role, $asset)){
-				return true;	
-			}
-		}
-		return false;
 	}
 	
+	/**
+	 * Can do some action
+	 * 
+	 * @param $action
+	 * @param $context
+	 * @param $user
+	 * @param $record
+	 */
+	public function can($action, $context=null, $user=null, $record=null)
+	{	
+		// User
+		empty($user) &&	$user = JFactory::getUser();
+		
+		// Can do action?
+		$canDo = false;
+		
+		// What action?
+		switch($action){
+			// Can create project
+			case 'project.create':
+				$canDo = $user->authorise('project.manage', $context);
+				break;
+				
+			// Can edit project
+			case 'project.edit':
+				$canDo = $user->authorise('project.manage', $context);
+				break;
+
+			// Can can cchange the state of project
+			case 'project.edit.state':
+				$canDo = $user->authorise('project.manage', $context);
+				break;	
+
+			// Can edit project portifolio
+			case 'project.edit.portfolio':
+				$canDo = $user->authorise('project.manage', $context);
+				break;
+
+			// Can edit project language
+			case 'project.edit.lang':
+				$canDo = $user->authorise('project.manage', $context);
+				break;
+			
+			// Can edit project ordering
+			case 'project.edit.order':
+				$canDo = $user->authorise('project.manage', $context);
+				break;
+				
+				
+			// Can delete project
+			case 'project.delete':
+				$canDo = $user->authorise('project.manage', $context);
+				break;	 
+		}
+		
+		// Return permition
+		return $canDo;
+	}
 	
 }
 

@@ -29,7 +29,6 @@ class ProjectsController extends JController {
 		$vName = JRequest::getWord('view', $this->default_view);
 		
 		// Submenu
-		require_once JPATH_COMPONENT.'/helpers/projects.php';
 		ProjectsHelper::addSubmenu($vName);
 	}
 
