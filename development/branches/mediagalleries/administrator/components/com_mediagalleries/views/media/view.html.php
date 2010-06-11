@@ -19,77 +19,56 @@ jimport( 'joomla.application.component.view' );
  * @package    		Joomla
  * @subpackage	mediagalleries Suite
  */
-class mediagalleriesViewMedia extends JView
+class MediagalleriesViewMedia extends JView
 {
+	// new way
+	protected $item;
+	protected $action;
+	protected $lists;
+	protected $video;
+	protected $folder;
+	protected $user;
+	protected $form;
+	
 	/**
 	 * display method of Media view
+	 * 
 	 * @return void
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
-		global $mainframe, $option;
-
-		$document		=& JFactory::getDocument();
-		$db		=& JFactory::getDBO();
-		$uri 	=& JFactory::getURI();
-		$user 	=& JFactory::getUser();
-		$model	=& $this->getModel();
+		$document	=& JFactory::getDocument();
+		$db			=& JFactory::getDBO();
+		$uri 		=& JFactory::getURI();
+		$model		=& $this->getModel();
 		
 		//get the data
-		$item			=& $this->get('Data');
+		$this->user 	=& JFactory::getUser();
+		$this->item		=& $this->get('Item');
+		$this->form		=& $this->get('Form');
 		
 		// Import Helpers
 		include_once(PATH_HELPERS.'player.php');
 
-		switch(JRequest::getVar('layout') ){
-			case '_preview':
-				if(!$item->id){
-					JError::raiseError( 1, JText::_('COM_MEDIAGALLERIES_FIELD_RESOURCE_NOT_FOUND') );
-				}
-				$document->setTitle(JText::_('JGLOBAL_PREVIEW'));
-				$document->addStyleSheet(URI_ASSETS.'preview.css');
-				//$document->setBase(JUri::root());
-				$video = PlayerHelper::play($item->url,  300, 300, 1);
-				break;
+		// Is new?
+		if( !$this->item->id ){
+			$video = JText::_('COM_MEDIAGALLERIES_SELECT_MEDIA' );			
+			$item->published = 1;
+			$item->catid = 0;
+		}else{
 			
-			case 'form':
-			default:
-				// Is new?
-				if( !$item->id ){
-					$video = JText::_('COM_MEDIAGALLERIES_SELECT_MEDIA' );			
-					$item->published = 1;
-					$item->catid = 0;
-				}else{
-					
-					$video = PlayerHelper::play($item->url);
-				}
-					
-				// get the lists
-				$lists =& $this->_buildLists($item);
-				
-				// fail if checked out not by 'me'
-				if ( $model->isCheckedOut( $user->get('id') ) ) {
-					$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'item' ), $item->title );
-					$mainframe->redirect( 'index.php?option='. $option, $msg );
-				}				
-				break;				
+			$video = PlayerHelper::play($item->url);
 		}
-
+					
+		// get the lists
+		$this->lists =& $this->_buildLists($item);
 		
 		// To folder
-		$folder = GetmediaParam('defaultdir');
-				
-		//clean weblink data
-		JFilterOutput::objectHTMLSafe( $item, ENT_QUOTES, 'description' );
-		$action = JRoute::_('index.php?option=com_mediagalleries');
+		$this->folder = GetmediaParam('defaultdir');//does it work?
 		
-		// Assign References
-		$this->assignRef('action', 	$action);		
-		$this->assignRef('lists', 	$lists);
-		$this->assignRef('item',	$item);
-		$this->assignRef('video',	$video);
-		$this->assignRef('folder',	$folder);
-
+		// Add the toolbar
+		$this->addToolbar();
+		
 		//Display
 		parent::display($tpl);
 	}
@@ -98,7 +77,7 @@ class mediagalleriesViewMedia extends JView
 	 * 
 	 * @return array Lists 
 	 */
-	function &_buildLists(&$item)
+	protected function &_buildLists(&$item)
 	{
 		global $mainframe, $option;
 		
@@ -120,4 +99,38 @@ class mediagalleriesViewMedia extends JView
 		return $lists;
 	}
 	
+	/**
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
+	 */
+	protected function addToolbar(){
+		JRequest::setVar('hidemainmenu', true);
+
+		$user		= JFactory::getUser();
+		$isNew		= ($this->item->id == 0);
+		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
+		$canDo		= WeblinksHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
+
+		// If not checked out, can save the item.
+		if (!$checkedOut && $canDo->get('core.edit'))
+		{
+
+			JToolBarHelper::apply('media.apply', 'JTOOLBAR_APPLY');
+			JToolBarHelper::save('media.save', 'JTOOLBAR_SAVE');
+			JToolBarHelper::addNew('media.save2new', 'JTOOLBAR_SAVE_AND_NEW');
+		}
+			// If an existing item, can save to a copy.
+		if (!$isNew && $canDo->get('core.create')) {
+			JToolBarHelper::custom('media.save2copy', 'copy.png', 'copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
+		}
+		if (empty($this->item->id))  {
+			JToolBarHelper::cancel('media.cancel', 'JTOOLBAR_CANCEL');
+		}
+		else {
+			JToolBarHelper::cancel('media.cancel', 'JTOOLBAR_CLOSE');
+		}
+
+		JToolBarHelper::divider();
+	}	
 }

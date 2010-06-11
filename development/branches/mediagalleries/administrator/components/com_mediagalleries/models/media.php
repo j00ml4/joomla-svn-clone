@@ -1,418 +1,159 @@
 <?php
 /**
- * Media Model for mediagalleries Component
- * 
- * @package    		mediagalleries Suite
- * @subpackage 	Components
- * @link				http://3den.org
- * @license		GNU/GPL
+ * @version		$Id: weblink.php 17015 2010-05-13 06:37:40Z eddieajau $
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
 
-jimport('joomla.application.component.model');
+// No direct access.
+defined('_JEXEC') or die;
+
+jimport('joomla.application.component.modeladmin');
 
 /**
- * Media Model
+ * Weblinks model.
  *
- * @package    mediagalleries Suite
- * @subpackage Components
+ * @package		Joomla.Administrator
+ * @subpackage	com_weblinks
+ * @since		1.5
  */
-class mediagalleriesModelMedia extends JModel
+class MediagalleriesModelMedia extends JModelAdmin
 {
 	/**
-	 * Media id
-	 *
-	 * @var int
+	 * @var		string	The prefix to use with controller messages.
+	 * @since	1.6
 	 */
-	var $_id = null;
+	protected $text_prefix = 'COM_MEDIAGALLERIES';
 
 	/**
-	 * Media data
+	 * Returns a reference to the a Table object, always creating it.
 	 *
-	 * @var array
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	 * @since	1.6
 	 */
-	var $_data = null;
-	
-	/**
-	 * Constructor
-	 *
-	 * @since 1.5
-	 */
-	function __construct()
+	public function getTable($type = 'Media', $prefix = 'Table', $config = array())
 	{
-		parent::__construct();
-	
-		$cid = JRequest::getVar('cid', 
-			array( JRequest::getInt('id', 0) ), 
-			'', 'array');
-		$this->setId($cid[0]);		
-	}
-	
-	/**
-	 * Method to set the Media identifier
-	 *
-	 * @access	public
-	 * @param	int Weblink identifier
-	 */
-	function setId($id)
-	{
-		// Set id and wipe data
-		$this->_id		= $id;
-		$this->_data	= null;
+		return JTable::getInstance($type, $prefix, $config);
 	}
 
 	/**
-	 * View item
+	 * Method to get the record form.
 	 *
+	 * @param	array	$data		An optional array of data for the form to interogate.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	JForm	A JForm object on success, false on failure
+	 * @since	1.6
 	 */
-	function hit(){
-		$row =& $this->getTable('media');
-		$row->hit($this->_id);
-	}
-	/**
-	 * Method to get a Media
-	 *
-	 */	
-	function &getData()
+	public function getForm($data = array(), $loadData = true)
 	{
-		// Load the media data
-		if ( $this->_loadData() )
-		{
-			// Initialize some variables
-			$user = &JFactory::getUser();
-			
-			// Check to see if the category is published
-			if (!$this->_data->cat_pub) {
-				$this->setError('COM_MEDIAGALLERIES_FIELD_RESOURCE_NOT_FOUND');
-				return;
-			}
-
-			// Check whether category access level allows access
-			if ($this->_data->cat_access > $user->get('aid', 0)) {
-				$this->setError( 'ALERTNOTAUTH' );
-				return;
-			}
-		}
-		else  {
-			$this->_initData();
-		}
-
-		return $this->_data;
-	}
-	
-
-	/**
-	 * Tests if Media is checked out 
-	 *
-	 * @access	public
-	 * @param	int	A user id
-	 * @return	boolean	True if checked out
-	 */
-	function isCheckedOut( $uid=0 )
-	{
-		if ($this->_loadData())
-		{
-			if ($uid) {
-				return ( $this->_data->checked_out && $this->_data->checked_out != $uid );
-			} else {
-				return $this->_data->checked_out;
-			}
-		}
-	}
-
-
-	/**
-	 * Method to checkin/unlock the Media
-	 *
-	 * @access	public
-	 * @return	boolean	True on success
-	 * @since	1.5
-	 */
-	function checkin()
-	{
-		if ($this->_id)
-		{
-			$row =& $this->getTable('media');
-			if(! $row->checkin($this->_id) ) {
-				$this->setError($row->getError());
-				return false;
-			}
-		}
-		return true;
-	}
-
-	/**
-	 * Method to checkout/lock the Media
-	 *
-	 * @access	public
-	 * @param	int $uid User ID of the user checking the article out
-	 * @return	boolean	True on success
-	 * @since	1.5
-	 */
-	function checkout($uid = null)
-	{
-		if ($this->_id)
-		{
-			// Make sure we have a user id to checkout the article with
-			if (is_null($uid)) {
-				$user	=& JFactory::getUser();
-				$uid	= $user->get('id');
-			}
-			// Lets get to it and checkout the thing...
-			$row =& $this->getTable( 'media' );
-			if(! $row->checkout($uid, $this->_id) ) {
-				// TODO cange as chekin 
-				$this->setError($this->_db->getErrorMsg());
-				return false;
-			}
-
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Method to store a record
-	 *
-	 * @access	public
-	 * @return	boolean	True on success
-	 */
-	function store( $data )
-	{
-		$row =& $this->getTable('media');
-		include_once(JPATH_COMPONENT_SITE.DS.'helpers/files.php');
-		
-		// Local Upload
-		$folder = JPATH_SITE.DS.$data['toFolder'];
-		$files = JRequest::get('files');
-		$prefix = 'u'.rand(1, 100).'_';	
-		
-		// Local file
-		if( !empty($files['uplocal']['name']) ){
-			$data['url'] = FilesHelper::sendFile( $files['uplocal'], $folder, $data['MAX_FILE_SIZE'], $prefix );	
-			if(empty($data['url'])){
-				$this->setError('ERROR SAVING FILE');
-				return false;
-			} 
-		}
-		
-		$data['thumb_url'] = FilesHelper::getThumbURL( $data['url'] );	
-		// Bind the form fields to the media table
-		if (!$row->bind($data)) {
-			$this->setError( $row->getError() );
-			return false;
-		}
-		
-		// Make sure the record is valid
-		if (!$row->check()) {
-			$this->setError($row->getError());
-			return false;
-		}
-		
-		// Store to the database
-		if (!$row->store()) {
-			FilesHelper::delete(array($data['url']));
-			$this->setError( $row->getError() );
-			return false;
-		}
-		
-		$row->reorder();
-		return true;
-	}
-
-
-	/**
-	 * Method to delete record(s)
-	 *
-	 * @access	public
-	 * @param array cid
-	 * @return	boolean	True on success
-	 */
-	function delete($cid=array())
-	{
-		JArrayHelper::toInteger($cid);
-		$cids = implode( ',', $cid );
-		
-		// Fisical
-		$query = 'SELECT url FROM #__mediagalleries' 
-			. ' WHERE id IN ( '.$cids.' )';
-		$this->_db->setQuery( $query );
-		$rows = $this->_db->loadResultArray();
-		
-		// Logical delete
-		$query = 'DELETE FROM #__mediagalleries'
-			. ' WHERE id IN ( '.$cids.' )';
-		$this->_db->setQuery( $query );
-		if(!$this->_db->query()) {
-			$this->setError($this->_db->getErrorMsg());
-			return false;
-		}
-		
-		// Import files helper
-		include_once( PATH_HELPERS.'files.php' );
-		FilesHelper::delete($rows);
-		
-		
-		return true;		
-	}
-	
-	
-	/**
-	 * Method to move a mediagalleries
-	 *
-	 * @access	public
-	 * @return	boolean	True on success
-	 * @since	1.5
-	 */
-	function saveorder($cid = array(), $order)
-	{
-		$row =& $this->getTable();
-		$groupings = array();
-
-		// update ordering values
-		for( $i=0; $i < count($cid); $i++ )
-		{
-			$row->load( (int) $cid[$i] );
-			// track categories
-			$groupings[] = $row->catid;
-
-			if ($row->ordering != $order[$i])
-			{
-				$row->ordering = $order[$i];
-				if (!$row->store()) {
-					$this->setError($this->_db->getErrorMsg());
-					return false;
-				}
-			}
-		}
-
-		// execute updateOrder for each parent group
-		$groupings = array_unique( $groupings );
-		foreach ($groupings as $group){
-			$row->reorder('catid = '.(int) $group);
-		}
-
-		return true;
-	}
-
-
-	/**
-	 * Move Ordering
-	 *
-	 * @access	public
-	 * @return	boolean	True on success
-	 * @since	1.5
-	 */
-	function move($direction)
-	{
-		$row =& $this->getTable('media');
-		if (!$row->load($this->_id)) {
-			$this->setError($this->_db->getErrorMsg());
+		// Get the form.
+		$form = $this->loadForm('com_mediagalleries.media', 'media', array('control' => 'jform', 'load_data' => $loadData));
+		if (empty($form)) {
 			return false;
 		}
 
-		if ( !$row->move( $direction, ' catid='.(int) $row->catid )	 ) {
-			$this->setError($this->_db->getErrorMsg());
-			return false;
+		// Determine correct permissions to check.
+		if ($this->getState('media.id')) {
+			// Existing record. Can only edit in selected categories.
+			$form->setFieldAttribute('catid', 'action', 'core.edit');
+		} else {
+			// New record. Can only create in selected categories.
+			$form->setFieldAttribute('catid', 'action', 'core.create');
 		}
 
-		return true;
-	}
-
-
-	/**
-	 * Method to (un)publish a weblink
-	 *
-	 * @access	public
-	 * @return	boolean	True on success
-	 * @since	1.5
-	 */
-	function publish($cid = array(), $publish = 1)
-	{
-		$user 	=& JFactory::getUser();
-
-		$row =& $this->getTable( 'media' );
-		if ( !$row->publish( $cid, $publish, $user->get('id') ) ) {
-			$this->setError( $row->getError() );
-			return false;				
-		}
-		return true;
-	}
-	
-
-
-	/**
-	 * Method to load content mediagalleries data
-	 *
-	 * @access	private
-	 * @return	boolean	True on success
-	 */
-	function _loadData()
-	{
-		// Lets load the content if it doesn't already exist
-		if ( empty($this->_data) )
-		{
-			$query = 'SELECT a.id AS id, a.catid AS catid, a.userid AS userid, '
-				. ' a.published AS published,  a.ordering AS ordering, a.checked_out AS checked_out, '
-				. ' a.title AS title, a.alias AS alias, a.description AS description, '
-				. ' a.url AS url, a.thumb_url AS thumbnail, '
-				. ' a.added AS added, a.hits AS hits, '
-				. ' ( a.rank / (a.votes+1) ) AS rating, '
-				. ' cc.title AS category, u.name AS author, '
-				. ' 	cc.published AS cat_pub, cc.access AS cat_access'		
-			. ' FROM #__mediagalleries AS a' 
-			. ' LEFT JOIN #__categories AS cc ON cc.id = a.catid'
-			. ' LEFT JOIN #__users AS u ON u.id = a.userid'
-			. ' WHERE a.id = '.(int) $this->_id;
-	
-			$this->_db->setQuery($query);
-			$this->_data = $this->_db->loadObject();
-			return (boolean) $this->_data;
-		}
-		return true;
+		return $form;
 	}
 
 	/**
-	 * Method to initialise the mediagalleries data
+	 * Method to get the data that should be injected in the form.
 	 *
-	 * @access	private
-	 * @return	boolean	True on success
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
 	 */
-	function _initData()
+	protected function loadFormData()
 	{
-		// Lets load the content if it doesn't already exist
-		if ( empty($this->_data) )
-		{
-			
-			$item = new stdClass();	
-			// Create the object
-			$item->id = null;
-			$item->catid = null;
-			$item->userid = null;
-			$item->author = null;
-			$item->title = null;
-			$item->alias = null;
-			$item->url = null;
-			$item->thumbnail = null;
-			$item->description = null;
-			$item->hits = null;
-			$item->views = null;			
-			$item->rank = 0;
-			$item->votes = 0;
-			$item->rating = 0;
-			$item->date = null; 
-			$item->added = null; 			
-			$item->checked_out = 0;
-			$item->checked_out_time = null;
-			$item->ordering = null;
-			$item->published = null;
-			
-			// Set data
-			$this->_data	= $item;
-			return (boolean) $this->_data;
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_mediagalleries.edit.media.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
 		}
-		return true;
+
+		return $data;
 	}
 
+	/**
+	 * Method to get a single record.
+	 *
+	 * @param	integer	The id of the primary key.
+	 *
+	 * @return	mixed	Object on success, false on failure.
+	 * @since	1.6
+	 */
+	public function getItem($pk = null)
+	{
+		if ($item = parent::getItem($pk)) {
+			// Convert the params field to an array.
+			$registry = new JRegistry;
+			$registry->loadJSON($item->params);
+			$item->params = $registry->toArray();
+		}
+
+		return $item;
+	}
+
+	/**
+	 * Prepare and sanitise the table prior to saving.
+	 *
+	 * @since	1.6
+	 */
+	protected function prepareTable(&$table)
+	{
+		jimport('joomla.filter.output');
+		$date = JFactory::getDate();
+		$user = JFactory::getUser();
+
+		$table->title		= htmlspecialchars_decode($table->title, ENT_QUOTES);
+		$table->alias		= JApplication::stringURLSafe($table->alias);
+
+		if (empty($table->alias)) {
+			$table->alias = JApplication::stringURLSafe($table->title);
+		}
+
+		if (empty($table->id)) {
+			// Set the values
+			//$table->created	= $date->toMySQL();
+
+			// Set ordering to the last item if not set
+			if (empty($table->ordering)) {
+				$db = $this->getDbo();
+				$db->setQuery('SELECT MAX(ordering) FROM #__mediagalleries');
+				$max = $db->loadResult();
+
+				$table->ordering = $max+1;
+			}
+		}
+		else {
+			// Set the values
+			//$table->modified	= $date->toMySQL();
+			//$table->modified_by	= $user->get('id');
+		}
+	}
+
+	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($table = null)
+	{
+		$condition = array();
+		$condition[] = 'catid = '.(int) $table->catid;
+		return $condition;
+	}
 }

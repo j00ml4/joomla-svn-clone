@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<params>
-		<param 
+	<fieldset name="component">
+		<field 
 			name="width" 
 			type="text" 
 			size="5" 
@@ -9,7 +9,7 @@
 			label="COM_MEDIAGALLERIES_FIELD_WIDTH_LABEL" 
 			description="COM_MEDIAGALLERIES_FIELD_WIDTH_DESC" 
 		/>
-		<param 
+		<field 
 			name="height" 
 			type="text" 
 			size="5" 
@@ -17,7 +17,7 @@
 			label="COM_MEDIAGALLERIES_FIELD_HEIGHT_LABEL" 
 			description="COM_MEDIAGALLERIES_FIELD_HEIGHT_DESC" 
 		/>
-		<param 
+		<field 
 			name="autostart" 
 			type="radio" 
 			default="0" 
@@ -25,8 +25,8 @@
 			description="COM_MEDIAGALLERIES_FIELD_AUTOPLAY_DESC">
 				<option value="0">JNO</option>
 				<option value="1">JYES</option>		
-		</param>	
-		<param 
+		</field>	
+		<field 
 			name="show_embed" 
 			type="radio" 
 			default="0" 
@@ -34,17 +34,17 @@
 			description="COM_MEDIAGALLERIES_FIELD_EMBED_CODE_DESC">
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>		
-		</param>	
+		</field>	
 
 		<!-- Reviews -->	
-		<param 
+		<field 
 			name="@spacer" 
 			type="spacer" 
 			default="" 
 			label="" 
 			description="" 
 		/>	
-		<param 
+		<field 
 			name="allow_comments" 
 			type="radio" 
 			default="1" 
@@ -52,17 +52,16 @@
 			description="COM_MEDIAGALLERIES_FIELD_ALLOW_COMMENTS_DESC">
 				<option value="0">JNO</option>
 				<option value="1">JYES</option>
-		</param>
+		</field>
 		
 		<!-- Display -->
-		<param 
+		<field 
 			name="@spacer" 
 			type="spacer" 
 			default="" 
 			label="" 
-			description="" 
-		/>			
-		<param 
+			description="" />			
+		<field 
 			name="style" 
 			type="filelist" 
 			default="default.css" 
@@ -73,5 +72,15 @@
 			exclude="" 
 			stripext="" 
 			hide_default="true" />
-	</params>
+	</fieldset>
+	
+	<fieldset name="permissions"
+		description="JCONFIG_PERMISSIONS_DESC"
+		label="JCONFIG_PERMISSIONS_LABEL">
+		<field name="rules" type="rules"
+			component="com_mediagalleries"
+			filter="rules"
+			label="JCONFIG_PERMISSIONS_LABEL"
+			section="component" />
+	</fieldset>
 </config>

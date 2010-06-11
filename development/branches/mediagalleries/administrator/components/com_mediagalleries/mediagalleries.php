@@ -10,35 +10,27 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-//new in joomla 1.6
-$mainframe=&JFactory::getApplication();
-// Submenu
-/*TODO add uniComments
-$link = 'index.php?option=com_unicomments&section=com_mediagalleries';
-JSubMenuHelper::addEntry(JText::_('Comments'), $link);
-*/
-
-//  Import Media Plugin or Error
-$mediapath = JPATH_SITE.DS.'plugins'.DS.'content'.DS.'media.php';
-if( !is_file($mediapath) )
-{
-	$msg = JText::_( 'MEDIA_PLUGIN_NOT_INSTALLED' );
-	$mainframe->enqueueMessage( $msg, 'error' ); 
-	return;
+// Access check.
+if (!JFactory::getUser()->authorise('core.manage', 'com_weblinks')) {
+	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
-require_once( $mediapath );
+
+//  Check Media Plugin
+$mediapath = JPATH_SITE.'/plugins/content/media/media.php';
+if (!is_file($mediapath)){
+	return JError::raiseWarning(404, JText::_('MEDIA_PLUGIN_NOT_INSTALLED')); 
+}
+
+// Include dependancies
+jimport('joomla.application.component.controller');
+require_once $mediapath;
+require_once JPATH_COMPONENT.'/helpers/mediagalleries.php';
 
 // Define paths
 define('URI_ASSETS', JURI::base().'../components/com_mediagalleries/assets/' );
 define('PATH_HELPERS', JPATH_COMPONENT_SITE.DS.'helpers'.DS );
-	
-// Imports
-require_once( JPATH_COMPONENT.DS.'controller.php' );
 
-// Create the controller
-$controller    = new mediagalleriesController();
-
-// Perform the Request task
-Jrequest::clean(); //Clean the request from script injection.
-$controller->execute( JRequest::getVar('task') );
+// Load Action Controller
+$controller	= JController::getInstance('Weblinks');
+$controller->execute(JRequest::getCmd('task'));
 $controller->redirect();
