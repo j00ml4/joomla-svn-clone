@@ -13,11 +13,6 @@
  */
 class ProjectsHelper
 {
-	
-	public function getRoles(){
-		
-	}
-	
 	/**
 	 * Can do some action
 	 * 
@@ -41,6 +36,11 @@ class ProjectsHelper
 				$canDo = $user->authorise('project.manage', $context);
 				break;
 				
+			// Can delete project
+			case 'project.delete':
+				$canDo = $user->authorise('project.manage', $context);
+				break;	 
+								
 			// Can edit project
 			case 'project.edit':
 				$canDo = $user->authorise('project.manage', $context);
@@ -66,11 +66,7 @@ class ProjectsHelper
 				$canDo = $user->authorise('project.manage', $context);
 				break;
 				
-				
-			// Can delete project
-			case 'project.delete':
-				$canDo = $user->authorise('project.manage', $context);
-				break;	 
+
 		}
 		
 		// Return permition
