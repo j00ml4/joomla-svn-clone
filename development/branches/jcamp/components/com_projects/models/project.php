@@ -20,7 +20,7 @@ jimport('joomla.application.component.modeladmin');
 class ProjectsModelProject extends JModelAdmin
 {
 	protected $text_prefix = 'COM_PROJECTS';
-	protected $context = 'com_projects.edit.project';
+	//protected $context = 'com_projects.edit.project';
 
 	/**
 	 * Method to test whether a record can be deleted.
@@ -28,14 +28,9 @@ class ProjectsModelProject extends JModelAdmin
 	 * @param	object	A record object.
 	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
 	 */
-	protected function canDelete($record, $user=null)
+	protected function canDelete($record=null, $user=null)
 	{
-		return true;
-		// Can delete? 
-		return ProjectsHelper::canDo(array(
-			'projecs.manage' 	=> 'com_projects.portfolio.'.(int)$record->catid,
-			'projecs.manage'	=> 'com_projects'
-		), $record, $user);
+		return ProjectsHelper::can('project.delete', $this->option, $user, $record);
 	}
 
 	/**
@@ -44,39 +39,16 @@ class ProjectsModelProject extends JModelAdmin
 	 * @param	object	A record object.
 	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
 	 */
-	protected function canEditState($record=null)
+	protected function canEditState($record=null, $user=null)
 	{
-		return true;
-		// Can delete? 
-		return ProjectsHelper::canDo(array(
-			'owner',
-			'projecs.manage' 	=> 'com_projects.portfolio.'.(int)$record->catid,
-			'projecs.manage'	=> 'com_projects'
-		), $record);
-	}
-
-	/**
-	 * Method to test whether a record can be edited.
-	 *
-	 * @param	object	A record object.
-	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
-	 */
-	protected function canCreate($record=null)
-	{
-		return true;
-		// Can delete? 
-		return ProjectsHelper::canDo(array(
-			'projecs.manage' 	=> 'com_projects.portfolio.'.(int)$record->catid,
-			'projecs.manage'	=> 'com_projects',
-			'projecs.submit'	=> 'com_projects'
-		), $record);
+		return ProjectsHelper::can('project.edit.state', $this->option, $user, $record);
 	}
 
 	/**
 	 * Method to auto-populate the model state.
 	 *
 	 * Note. Calling getState in this method will result in recursion.
-	 *
+	 *, $user=null
 	 * @return	void
 	 * @since	1.6
 	 */
@@ -137,10 +109,9 @@ class ProjectsModelProject extends JModelAdmin
 	public function validate($form, $data)
 	{
 		return parent::validate($form, $data);
-		
-		
 	}
 
+	
 
 	/**
 	 * Prepare and sanitise the table data prior to saving.
@@ -168,11 +139,11 @@ class ProjectsModelProject extends JModelAdmin
 			
 			// Set ordering to the last item if not set
 			if (empty($table->ordering)) {
-				$db = JFactory::getDbo();
-				$db->setQuery('SELECT MAX(ordering) FROM #__projects WHERE catid = '.(int)$table->catid);
+				$db = $this->getDbo();
+				$db->setQuery('SELECT MAX(ordering)+1 FROM #__projects WHERE catid = '.(int)$table->catid);
 				$max = $db->loadResult();
 
-				$table->ordering = $max+1;
+				$table->ordering = $max;
 			}
 		} else {
 			// Set the values
