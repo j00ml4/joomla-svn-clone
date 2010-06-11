@@ -4,26 +4,6 @@
  */
 defined('_JEXEC') or die('Restricted access'); 
 ?>
-
-
-<?php 
-	// ToolBar
-	$text = ($this->item->id)? 
-		JText::_( 'JACTION_EDIT' ):	
-			JText::_( 'JTOOLBAR_NEW' ); 		
-	
-	JToolBarHelper::title(  'Media: <small><small>['. $text.' ]</small></small>' );
-
-	if($this->item->id){
-		//JToolBarHelper::preview( 'index.php?option=com_mediagalleries&controller=media&tmpl=component&id='.$this->item->id, true );
-	}
-	
-//	JToolBarHelper::apply();// TODO
-	JToolBarHelper::save();
-	JToolBarHelper::cancel();	
-	JToolBarHelper::help( 'mediagalleries', true );
-?>
-
 <script language="javascript" type="text/javascript">
 	function submitbutton(pressbutton) {
 		var form = document.adminForm;

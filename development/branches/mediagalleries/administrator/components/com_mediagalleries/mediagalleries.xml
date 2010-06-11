@@ -7,8 +7,7 @@
 	<license>GNU General Public License version 2 or later</license>
 	<version>1.0</version>
 	<description>COM_MEDIAGALLERIES_XML_DESC</description>
-	
-	
+
 	<install> <!-- Runs on install -->
 		    <sql>
 		            <file driver="mysql" charset="utf8">sql/install.mysql.sql</file>
@@ -33,7 +32,7 @@
 		<folder>assets</folder>
 		<folder>models</folder>				
 		<folder>views</folder>
-		<folder>sh404plugin</folder> <!-- To be reviewed!!! -->>
+		<!-- <folder>sh404plugin</folder> we dont need this -->>
 	</files>
 	
 	<languages folder="site/language">
@@ -46,7 +45,7 @@
 		    <submenu>
 		           	<menu img="" view="mediagalleries">Media</menu>
 					<menu img="" link="option=com_categories&amp;extension=com_mediagalleries">Categories</menu>
-					<menu img="" link="option=com_comments&amp;extension=com_mediagalleries">Comments</menu>
+					<!--<menu img="" link="option=com_comments&amp;extension=com_mediagalleries">Comments</menu> Not for now -->
 		    </submenu>  
 		    
 		    <!-- Admin's Files -->
@@ -59,15 +58,12 @@
 				<folder>tables</folder>
 				<folder>models</folder>
 				<folder>views</folder>
-				<!-- Install files -->
-				<filename>sql/install.mysql.sql</filename>
-      			<filename>sql/uninstall.mysql.sql</filename>
-      						
+				<!-- Easier -->
+				<folder>sql</folder>
 			</files>
-	    	
 	    	<languages folder="admin/language">
 				<language tag="en-GB">en-GB.com_mediagalleries.ini</language>
+				<language tag="en-GB">en-GB.com_mediagalleries.sys.ini</language><!-- needed -->
 			</languages>
-			
 	</administration>
 </extension>

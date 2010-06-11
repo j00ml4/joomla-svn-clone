@@ -18,25 +18,7 @@ defined('_JEXEC') or die('Restricted access');
 * @since 1.0
 */
 class TableMedia extends JTable
-{
-	var $id = null;
-	var $catid = null;
-	var $userid = null;
-
-	var $title = null;
-	var $alias = null;
-	var $url = null;
-	var $thumb_url = null;
-	var $description = null;
-
-	var $hits = null;
-	var $added = null;
-	var $checked_out = 0;
-	var $checked_out_time = 0;
-	var $ordering = null;
-	var $published = null;
-	
-	
+{	
 	/**
 	 * Constructor
 	 *
@@ -55,7 +37,6 @@ class TableMedia extends JTable
 	 * @since 1.0
 	 */
 	function check(){ 
-
 		// check for valid name 
 		if (trim($this->title) == '') {
 			$this->setError('MUST CONTAIN A TITLE');
@@ -90,23 +71,25 @@ class TableMedia extends JTable
 	 */
 	function bind($data){
 		
-		// try to Bind data
-		if( !parent::bind($data) ){
-			return false;
+		if (isset($array['params']) && is_array($array['params'])) {
+			$registry = new JRegistry();
+			$registry->loadArray($array['params']);
+			$array['params'] = (string)$registry;
 		}
 		
 		//Fix uid
-		if(empty($this->userid)){
-			$user	=& JFactory::getUser();
-			$this->userid=$user->get('id');
+		if(empty($data['userid'])){
+			$user			=& JFactory::getUser();
+			$data['userid']	= $user->get('id');
 		}
 		
 		// Fix alias		
-		$this->alias = JFilterOutput::stringURLSafe($this->title);
+		$data['alias'] = JFilterOutput::stringURLSafe($data['alias']);
 
-		$datenow =& JFactory::getDate($this->added);
-		$this->added = $datenow->toMySQL();
+		$datenow =& JFactory::getDate($data['added']);
+		$data['added'] = $datenow->toMySQL();
 		
-		return true;
+		// bind
+ 		return parent::bind($data);
 	}
 }

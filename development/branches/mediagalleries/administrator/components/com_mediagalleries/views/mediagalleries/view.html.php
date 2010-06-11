@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.view' );
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class mediagalleriesViewmediagalleries extends JView
+class MediagalleriesViewmediagalleries extends JView
 {
     /**
      * Hellos view display method
