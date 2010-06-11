@@ -56,6 +56,14 @@ class ProjectsModelProject extends JModelAdmin
 	{
 		$app = JFactory::getApplication();
 
+		// Load state from the request.
+		$pk = JRequest::getInt('id');
+		$this->setState($this->getName().'.id', $pk);
+		
+		// List limit
+		$offset = JRequest::getInt('limitstart');
+		$this->setState('list.offset', $offset);
+		
 		// Load the parameters.
 		$params	= $app->getParams();
 		$this->setState('params', $params);
@@ -98,6 +106,7 @@ class ProjectsModelProject extends JModelAdmin
 		return $form;
 	}
 
+	
 	/**
 	 * Method to validate the form data.
 	 *
@@ -111,7 +120,17 @@ class ProjectsModelProject extends JModelAdmin
 		return parent::validate($form, $data);
 	}
 
-	
+	/**
+	 * Method to get a single record.
+	 *
+	 * @param	integer	The id of the primary key.
+	 * @return	mixed	Object on success, false on failure.
+	 * @since	1.6
+	 */
+	public function getItem($pk = null)
+	{
+		return parent::getItem(pk);
+	}
 
 	/**
 	 * Prepare and sanitise the table data prior to saving.
