@@ -10,6 +10,8 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
+//new in joomla 1.6
+$mainframe=&JFactory::getApplication();
 // Submenu
 /*TODO add uniComments
 $link = 'index.php?option=com_unicomments&section=com_mediagalleries';

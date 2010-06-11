@@ -50,7 +50,8 @@ class mediagalleriesModelmediagalleries extends JModel
 	function __construct()
 	{
 		parent::__construct();
-		global $mainframe, $option;
+		global  $option;
+		$mainframe=&JFactory::getApplication();
 
 		// Get the pagination request variables
 		$limit = $mainframe->getUserStateFromRequest( 
@@ -145,7 +146,8 @@ class mediagalleriesModelmediagalleries extends JModel
 
 	function _buildContentOrderBy()
 	{
-		global $mainframe, $option;
+		global $option;
+		$mainframe=&JFactory::getApplication();
 
 		$filter_order		= JRequest::getCmd('filter_order');
 		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'filter_order_Dir',	'filter_order_Dir',	'',				'word' );
@@ -170,7 +172,8 @@ class mediagalleriesModelmediagalleries extends JModel
 
 	function _buildContentWhere()
 	{
-		global $mainframe, $option;
+		global $option;
+		$mainframe=&JFactory::getApplication();
 		
 		$db					=& JFactory::getDBO();
 		$filter_state		= $mainframe->getUserStateFromRequest( $option.'filter_state',		'filter_state',		'',				'word' );
