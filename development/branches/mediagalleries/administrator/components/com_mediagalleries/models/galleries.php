@@ -91,16 +91,7 @@ class MediagalleriesModelGalleries extends JModelList
 
 		// Select the required fields from the table.
 		$query->select(
-			$this->getState(
-				'list.select',
-				' a.id AS id, a.catid AS catid, a.userid AS userid, ' 
-				. ' a.published AS published,  a.ordering AS ordering, a.checked_out AS checked_out, '
-				. ' a.title AS title, a.alias AS alias, a.description AS description, '
-				. ' a.url AS url, a.thumb_url AS thumbnail, '
-				. ' a.added AS added, a.hits AS hits, '
-				. ' ( a.rank / (a.votes+1) ) AS rating, '
-				
-			)
+			$this->getState( 'list.select', ' a.*')
 		);
 		$query->from('`#__mediagalleries` AS a');
 
@@ -113,25 +104,20 @@ class MediagalleriesModelGalleries extends JModelList
 		$query->join('LEFT', '#__users AS uc ON uc.id=a.userid');
 	
 		// Join over the asset groups.
-		$query->select('ag.title AS access_level');
-		$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
+		//$query->select('ag.title AS access_level');
+		//$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
 
 		// Join over the categories.
 		$query->select('c.title AS category_title, '
 				. '	c.published AS cat_pub, c.access AS cat_access'	);
 		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 
-		// Filter by access level.
-		if ($access = $this->getState('filter.access')) {
-			$query->where('a.access = '.(int) $access);
-		}
-
 		// Filter by published state
 		$published = $this->getState('filter.state');
 		if (is_numeric($published)) {
-			$query->where('a.state = '.(int) $published);
+			$query->where('a.published = '.(int) $published);
 		} else if ($published === '') {
-			$query->where('(a.state IN (0, 1))');
+			$query->where('(a.published IN (0, 1))');
 		}
 
 		// Filter by category.

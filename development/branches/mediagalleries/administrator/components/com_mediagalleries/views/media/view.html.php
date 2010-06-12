@@ -110,12 +110,11 @@ class MediagalleriesViewMedia extends JView
 		$user		= JFactory::getUser();
 		$isNew		= ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
-		$canDo		= WeblinksHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
+		$canDo		= Mediagalleries::getActions($this->state->get('filter.category_id'), $this->item->id);
 
 		// If not checked out, can save the item.
 		if (!$checkedOut && $canDo->get('core.edit'))
 		{
-
 			JToolBarHelper::apply('media.apply', 'JTOOLBAR_APPLY');
 			JToolBarHelper::save('media.save', 'JTOOLBAR_SAVE');
 			JToolBarHelper::addNew('media.save2new', 'JTOOLBAR_SAVE_AND_NEW');
