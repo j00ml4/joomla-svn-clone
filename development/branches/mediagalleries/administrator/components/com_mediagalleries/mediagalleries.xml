@@ -43,7 +43,8 @@
 	<administration>
 		    <menu link="index.php?option=com_mediagalleries">Media Galleries</menu> 
 		    <submenu>
-		           	<menu img="" view="mediagalleries">Media</menu>
+		    		<!--the view changed to galleries from mediagalleries  -->
+		           	<menu img="" view="galleries">Media</menu>
 					<menu img="" link="option=com_categories&amp;extension=com_mediagalleries">Categories</menu>
 					<!--<menu img="" link="option=com_comments&amp;extension=com_mediagalleries">Comments</menu> Not for now -->
 		    </submenu>  
