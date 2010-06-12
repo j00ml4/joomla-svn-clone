@@ -52,11 +52,11 @@ class mediagalleriesModelChannel extends JModel
 	 * Method to set the Media identifier
 	 *
 	 * @access	public
-	 * @param	int Weblink identifier
+	 * @param	int Mediagalleries identifier
 	 */
 	function setId($id)
 	{
-		// Set weblink id and wipe data
+		// Set mediagelleries id and wipe data
 		$this->_id		= $id;
 		$this->_data	= null;
 	}

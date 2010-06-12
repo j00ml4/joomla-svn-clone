@@ -23,7 +23,7 @@ class MediagalleriesHelper
 	 * @param	string	The name of the active view.
 	 * @since	1.6
 	 */
-	public static function addSubmenu($vName = 'weblinks')
+	public static function addSubmenu($vName = 'mediagalleries')
 	{
 		JSubMenuHelper::addEntry(
 			JText::_('TS_CONFIG'),

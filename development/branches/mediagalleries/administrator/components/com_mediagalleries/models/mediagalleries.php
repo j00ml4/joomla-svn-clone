@@ -68,7 +68,7 @@ class mediagalleriesModelmediagalleries extends JModel
 	
 	
 		/**
-	 * Method to get weblinks item data
+	 * Method to get Mediagalleries item data
 	 *
 	 * @access public
 	 * @return array
@@ -86,7 +86,7 @@ class mediagalleriesModelmediagalleries extends JModel
 	}
 
 	/**
-	 * Method to get the total number of weblink items
+	 * Method to get the total number of Mediagalleries items
 	 * @access public
 	 * @return integer
 	 */
@@ -104,7 +104,7 @@ class mediagalleriesModelmediagalleries extends JModel
 	}
 
 	/**
-	 * Method to get a pagination object for the weblinks
+	 * Method to get a pagination object for the Mediagalleries
 	 *
 	 * @access public
 	 * @return integer

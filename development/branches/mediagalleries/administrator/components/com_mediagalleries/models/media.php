@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: weblink.php 17015 2010-05-13 06:37:40Z eddieajau $
+ * @version		$Id: media.php 17015 2010-05-13 06:37:40Z eddieajau $
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -11,10 +11,10 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modeladmin');
 
 /**
- * Weblinks model.
+ * Mediagalleries model.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_weblinks
+ * @subpackage	com_mediagalleries
  * @since		1.5
  */
 class MediagalleriesModelMedia extends JModelAdmin
