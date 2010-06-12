@@ -41,6 +41,7 @@ $templateparams	= $app->getTemplate(true)->params;
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/print.css" type="text/css" media="Print" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/general.css" type="text/css" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/beez5.css" type="text/css" />
+		<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 		<?php if ($this->direction == 'rtl') : ?>
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/template_rtl.css" type="text/css" />
 		<?php endif; ?>
