@@ -71,5 +71,4 @@ class MediagalleriesViewmediagalleries extends JView
 		// Display
 		parent::display($tpl);
     }
-	
-}
+ }
