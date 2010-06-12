@@ -11,7 +11,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 // Access check.
-if (!JFactory::getUser()->authorise('core.manage', 'com_weblinks')) {
+if (!JFactory::getUser()->authorise('core.manage', 'com_mediagalleries')) {
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
@@ -31,6 +31,6 @@ define('URI_ASSETS', JURI::base().'../components/com_mediagalleries/assets/' );
 define('PATH_HELPERS', JPATH_COMPONENT_SITE.DS.'helpers'.DS );
 
 // Load Action Controller
-$controller	= JController::getInstance('Weblinks');
+$controller	= JController::getInstance('Mediagalleries');
 $controller->execute(JRequest::getCmd('task'));
 $controller->redirect();

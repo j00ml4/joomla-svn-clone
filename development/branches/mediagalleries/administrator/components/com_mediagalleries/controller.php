@@ -34,6 +34,8 @@ class MediagalleriesController extends JController
 		parent::display();
 
 		// Load the submenu.
-		WeblinksHelper::addSubmenu(JRequest::getWord('view', $this->default_view));
+		// But why weblink helper???
+		//WeblinksHelper::addSubmenu(JRequest::getWord('view', $this->default_view));
+		MediagalleriesHelper::addSubmenu(JRequest::getWord('view', $this->default_view));
 	}
 }

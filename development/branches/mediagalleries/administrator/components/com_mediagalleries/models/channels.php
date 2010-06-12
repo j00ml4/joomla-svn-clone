@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.model' );
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class mediagalleriesModelChannels extends JModel
+class MediagalleriesModelChannels extends JModel
 {
  	/**
      * Media data array
@@ -46,7 +46,8 @@ class mediagalleriesModelChannels extends JModel
 	function __construct()
 	{
 		parent::__construct();
-		global $mainframe, $option;
+		global  $option;
+		$mainframe=&JFactory::getApplication();
 
 		// Get the pagination request variables
 		$limit		= $mainframe->getUserStateFromRequest( 'global.list.limit', 'limit', $mainframe->getCfg('list_limit'), 'int' );
@@ -62,7 +63,7 @@ class mediagalleriesModelChannels extends JModel
 	
 	
 	/**
-	 * Method to get weblinks item data
+	 * Method to get mediagalleries item data
 	 *
 	 * @access public
 	 * @return array
@@ -80,7 +81,7 @@ class mediagalleriesModelChannels extends JModel
 	}
 
 	/**
-	 * Method to get the total number of weblink items
+	 * Method to get the total number of Mediagalleries items
 	 * @access public
 	 * @return integer
 	 */
@@ -98,7 +99,7 @@ class mediagalleriesModelChannels extends JModel
 	}
 
 	/**
-	 * Method to get a pagination object for the weblinks
+	 * Method to get a pagination object for the mediagalleries
 	 *
 	 * @access public
 	 * @return integer
@@ -163,7 +164,8 @@ class mediagalleriesModelChannels extends JModel
 
 	function _buildContentWhere()
 	{
-		global $mainframe, $option;
+		global $option;
+		
 		
 		$db						=& JFactory::getDBO();
 		$section				= JRequest::getCmd('section', 'com_content');

@@ -39,13 +39,13 @@ class TableMedia extends JTable
 	function check(){ 
 		// check for valid name 
 		if (trim($this->title) == '') {
-			$this->setError('MUST CONTAIN A TITLE');
+			$this->setError('COM_MEDIAGALLERIES_MUST_CONTAIN_A_TITLE');
 			return false;
 		}
 
 		// check for valid name 
 		if( empty($this->catid) ) {
-			$this->setError('PLEASE SELECT A CATEGORY.');
+			$this->setError('COM_MEDIAGALLERIES_MUST_CONTAIN_A_TITLE');
 			return false;
 		}
 		
