@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.view' );
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class MediagalleriesViewmediagalleries extends JView
+class MediagalleriesViewGalleries extends JView
 {
     /**
      * Hellos view display method
@@ -62,10 +62,10 @@ class MediagalleriesViewmediagalleries extends JView
 		$this->assignRef('action', 	$action);		
 		
 		// Assign References
-		$this->assignRef('user',		JFactory::getUser());
-		$this->assignRef('lists',		$lists);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
+		$this->assignRef('user',JFactory::getUser());
+		$this->assignRef('lists',$lists);
+		$this->assignRef('items',$items);
+		$this->assignRef('pagination',$pagination);
 		
 
 		// Display
