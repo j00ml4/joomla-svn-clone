@@ -61,7 +61,7 @@
 			default="" 
 			label="" 
 			description="" />			
-		<field 
+		<!--<field 
 			name="style" 
 			type="filelist" 
 			default="default.css" 
@@ -71,12 +71,13 @@
 			filter=".css" 
 			exclude="" 
 			stripext="" 
-			hide_default="true" />
+			hide_default="true" />-->
 	</fieldset>
 	
 	<fieldset name="permissions"
 		description="JCONFIG_PERMISSIONS_DESC"
 		label="JCONFIG_PERMISSIONS_LABEL">
+	<!-- Bugging -->		
 		<field name="rules" type="rules"
 			component="com_mediagalleries"
 			filter="rules"

@@ -33,27 +33,9 @@ class MediagalleriesHelper
 		
 		JSubMenuHelper::addEntry(
 			JText::_('COM_MEDIAGALLERIES_CATEGORIES'),
-			'index.php?option=com_categories&extension=com_projects',
+			'index.php?option=com_categories&extension=com_mediagalleries',
 			$vName == 'categories'
-		);
-		
-		// Each Views
-		switch($vName=='categories'){
-			case 'categories':
-				JToolBarHelper::title( JText::_('_categories_'), 'categories' );
-				break;
-			
-			// On medias Vies	
-			case 'media':
-				JToolBarHelper::title( JText::_('COM_MEDIAGALLERIES'), 'media' );ToolBarHelper::title( JText::_('COM_MEDIAGALLERIES_MEDIA'), 'media' );
-				break;
-				
-			default:
-				JToolBarHelper::title( JText::_('COM_MEDIAGALLERIES_MEDIAS'), 'media' );	
-		}
-		
-		// All views
-		JToolBarHelper::preferences('com_mediagalleries');
+		);		
 	}
 
 	/**
