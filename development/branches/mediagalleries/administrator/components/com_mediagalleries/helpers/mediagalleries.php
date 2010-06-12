@@ -25,13 +25,14 @@ class MediagalleriesHelper
 	 */
 	public static function addSubmenu($vName = 'mediagalleries')
 	{
-		JSubMenuHelper::addEntry(
-			JText::_('TS_CONFIG'),
-			'index.php?option=com_projects&view=config',
-			$vName == 'config'
+		JSubMenuHelper::addEntry( 
+			JText::_('COM_MEDIAGALLERIES_MEDIAS'),
+			'index.php?option=com_mediagalleries&view=galleries',
+			$vName == 'galleries'
 		);
+		
 		JSubMenuHelper::addEntry(
-			JText::_('COM_PROJECTS_PORTFOLIOS'),
+			JText::_('COM_MEDIAGALLERIES_CATEGORIES'),
 			'index.php?option=com_categories&extension=com_projects',
 			$vName == 'categories'
 		);
@@ -48,7 +49,7 @@ class MediagalleriesHelper
 				break;
 				
 			default:
-				JToolBarHelper::title( JText::_('COM_MEDIAGALLERIES'), 'media' );	
+				JToolBarHelper::title( JText::_('COM_MEDIAGALLERIES_MEDIAS'), 'media' );	
 		}
 		
 		// All views
