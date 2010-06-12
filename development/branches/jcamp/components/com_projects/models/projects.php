@@ -61,7 +61,7 @@ class ProjectsModelProjects extends JModelList
 	{
 		// Initialise variables.
 		$app	= &JFactory::getApplication();
-		$params	= JComponentHelper::getParams('com_contact');
+		$params	= JComponentHelper::getParams('com_projects');
 
 		// List state information
 		$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
@@ -75,8 +75,9 @@ class ProjectsModelProjects extends JModelList
 
 		$listOrder	=  JRequest::getCmd('filter_order_Dir', 'ASC');
 		$this->setState('list.direction', $listOrder);
-
-		$id = JRequest::getVar('id', 0, '', 'int');
+		
+		
+		$id = JRequest::getInt('id', 0);
 		$this->setState('category.id', $id);
 
 		$this->setState('filter.published',	1);

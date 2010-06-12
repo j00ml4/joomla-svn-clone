@@ -129,7 +129,7 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	public function getItem($pk = null)
 	{
-		return parent::getItem(pk);
+		return parent::getItem($pk);
 	}
 
 	/**

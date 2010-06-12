@@ -41,7 +41,7 @@ function submitbutton(task) {
 		<fieldset>
 			<legend><?php echo JText::_('COM_PROJECTS_PROJECT_FORM_LEGEND'); ?></legend>
 			
-			<?php if ($this->canDo['edit_portfolio']): ?>
+			<?php if ($this->canDo->get('project.edit.portfolio', 1)): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('catid'); ?>
 				<?php echo $this->form->getInput('catid', null, $this->catid); ?>
@@ -58,7 +58,7 @@ function submitbutton(task) {
 				<?php echo $this->form->getInput('estimation_type', 'params'); ?>
 			</div>	
 			
-			<?php if ($this->canDo['edit_state']): ?>
+			<?php if ($this->canDo->get('project.edit.state', 1)): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('start_at'); ?>
 				<?php echo $this->form->getInput('start_at'); ?>
@@ -69,28 +69,33 @@ function submitbutton(task) {
 			</div>
 			<?php endif; ?>
 			
-			<?php if ($this->canDo['edit_lang']): ?>
+			<?php if ($this->canDo->get('project.edit.lang', 1)): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('language'); ?>
 				<?php echo $this->form->getInput('language'); ?>
 			</div>
 			<?php endif; ?>
 		
-			<?php if ($this->canDo['edit_state']): ?>
+			<?php if ($this->canDo->get('project.edit.state', 1)): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('state'); ?>
 				<?php echo $this->form->getInput('state'); ?>
 			</div>
 			<?php endif; ?>	
 	
-			<?php if ($this->canDo['edit_order']): ?>
+			<?php if ($this->canDo->get('project.edit.order', 1)): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('ordering'); ?>
 				<?php echo $this->form->getInput('ordering'); ?>
 			</div>
 			<?php endif; ?>
-	
+		</fieldset>
+		
+		<fieldset>
+			<legend><?php echo JText::_('JFIELD_META_DESCRIPTION_LABEL'); ?></legend>
+			<div class="formelm">
 			<?php echo $this->form->getInput('description'); ?>
+			</div>
 		</fieldset>
 		
 		<!-- SubTemplates are DRY -->	
