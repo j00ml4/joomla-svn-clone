@@ -27,6 +27,33 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+12-Jun-2010 Jean-Marie Simonet
+# [#20980] [patch] Hathor patches to Newsfeed Modal. Thanks Andrea.
+$# Added a bunch of missing strings values, corrected some keys (Thanks Stella), added sticky field in banner parameters.
+# [#20579] Time Change for Server/User does not update. Thanks Christophe.
+# [#20648] mod_wrapper: error on getting params. Thanks Riccardo and Elin.
+# [#20782] Username Reminder Request Incorrect. Thanks Airton.
+# [#20983] Issue with linking articles that have apostrophe in them. Thanks Christophe.
+
+11-Jun-2010 Christophe Demko
+ # Fixed issue [#20867] [Patch] Changes to Hathor to mirror changes in core admin layouts (Andrea Tarr)
+ # Fixed issue [#20968] Fix Category Parameters in Featured Menu Item (Mark Dexter, bill richardson)
+ # Fixed issues in the component installer and in com_alpha component
+
+11-Jun-2010 Jean-Marie Simonet
+# [#20489] JTableAsset::store failed. Thanks Christophe.
+# [#20962] [files and patch] Hathor error page. Thanks Andrea.
+# Corrected code duplication in hathor modal.php
+# [#20965] When in: Article Manager: Articles, Select language select does not work. Thanks Bill.
+
+10-Jun-2010 Christophe Demko
+ # Fixed issue [#20952] Joomla does not load template language file when an error is detected
+
+10-Jun-2010 Jean-Marie Simonet
+# [#20791] settings not saved on first step of installer. Thanks Rune.
+# [#20914] getOptions at category.php. Thanks Andrew.
+$ Added missing string
+$ Changed string in banner/tracks toolbar
 
 09-Jun-2010 Sam Moffatt
  # Fixed bug where updates from deleted update sites were visible after extension uninstall
