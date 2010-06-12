@@ -21,16 +21,24 @@ class ProjectsHelper
 	 * @param $user
 	 * @param $record
 	 */
-	public function can($action, $context=null, $user=null, $record=null)
+	public function can($action, $context=null, $record=null, $user=null )
 	{	
-		// User
+		// Set vars
 		empty($user) &&	$user = JFactory::getUser();
+		$params	= JComponentHelper::getParams('com_projects');
 		
 		// Can do action?
 		$canDo = false;
 		
 		// What action?
 		switch($action){
+			// Can view
+			case 'project.view':
+				$canDo 	= $params->get('view_projects', 1) ||
+					$user->authorise('project.manage', $context) ||
+					$user->authorise('project.work', $context) ||
+					$user->authorise('project.text', $context);
+				break;
 			// Can create project
 			case 'project.create':
 				$canDo = $user->authorise('project.manage', $context);
@@ -66,13 +74,97 @@ class ProjectsHelper
 				$canDo = $user->authorise('project.manage', $context);
 				break;
 				
+			
+			/* Tasks */
+			// Can view project tasks
+			case 'project.view.tasks':
+				$canDo 	= $params->get('view_tasks', 1) ||
+					$user->authorise('project.manage', $context) ||
+					$user->authorise('project.work', $context);
+				break;
+				
+			/* Tickets */
+			// Can view project tickets
+			case 'project.view.tickets':
+				$canDo 	= $params->get('view_tickets', 1) ||
+					$user->authorise('project.manage', $context) ||
+					$user->authorise('project.work', $context);
+				break;	
+		
+			/* Documents */
+			// Can view project documents
+			case 'project.view.documents':
+				$canDo 	= $params->get('view_documents', 1) ||
+					$user->authorise('project.manage', $context) ||
+					$user->authorise('project.work', $context);
+				break;
 
+			/* Activities */
+			// Can view project activities
+			case 'project.view.activities':
+				$canDo 	= $params->get('view_documents', 1) ||
+					$user->authorise('project.manage', $context) ||
+					$user->authorise('project.work', $context);
+				break;					
 		}
 		
 		// Return permition
 		return $canDo;
 	}
 	
+	
+	/**
+	 * Gets a list of the actions that can be performed.
+	 *
+	 * @param	int		The category ID.
+	 * @return	JObject
+	 * @since	1.6
+	 */
+	public static function getActions($record=null, $catid=null)
+	{
+		$user	= JFactory::getUser();
+		$canDo	= new JObject;
+
+		$context = 'com_projects';
+		if (!empty($record->id)) {
+			$context = 'com_projects.'.(int) $record->id;
+		}
+		elseif (!empty($catid)) {
+			$context = 'com_projects.category.'.(int) $catid;
+		}
+		
+		// Action
+		$actions = array(
+			// Project
+			'project.view',
+			'project.create',
+			'project.delete',
+			'project.edit', 
+			'project.edit.state',
+			'project.edit.portfolio', 
+			'project.edit.lang',
+			'project.edit.order',
+		
+			// Tasks
+			'project.view.tasks',
+		
+			// Documents
+			'project.view.documents',
+		
+			// Tickets
+			'project.view.tickets',
+		
+			// Activities
+			'project.view.activities',
+		);
+		
+		// Check Can do list
+		foreach ($actions as $action) {
+			$canDo->set($action, self::can($action, $context, $record, $user));
+		}
+
+		return $canDo;
+	}
 }
 
 /**

@@ -35,10 +35,10 @@ class ProjectsViewProject extends JView
 		$state		= $model->getState();
 
 		//Get Model data
-		$this->item 	= $model->getItem();
+		$this->item 	= &$model->getItem();
 		$this->params	= &$app->getParams();
 		$this->catid	= JRequest::getInt('catid');
-		$this->canDo	= $this->getCanDoList();
+		$this->canDo	= &ProjectsHelper::getActions();
 		
 		// Layout
 		$layout = JRequest::getCMD('layout');
@@ -51,39 +51,18 @@ class ProjectsViewProject extends JView
 			
 			default:
 				$layout		= 'default';
+				if (!$this->canDo->get('project.view')){
+					return JError::raiseError(505, JText::_('JERROR_ALERTNOAUTHOR'));
+				
+				}
 				if (empty($this->item->id)){
-					JError::raiseWarning(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
-
-				}	
+					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
+				}
+					
 		}
 		
 		// Display the view
 		$this->setLayout($layout);
 		parent::display($tpl);
-	}
-	
-	/**
-	 * Get the list of avaliable actions
-	 * 
-	 * @return array CanDoList
-	 */
-	protected function getCanDoList()
-	{
-		$canDo = array();
-		
-		// Project Form
-		$canDo['edit_state'] = ProjectsHelper::can('project.edit.state');
-		$canDo['edit_portfolio'] = ProjectsHelper::can('project.edit.portfolio');
-		$canDo['edit_lang'] = ProjectsHelper::can('project.edit.portfolio');
-		$canDo['edit_order'] = ProjectsHelper::can('project.edit.order');
-		
-		// Project Overview
-		$canDo['view_tasks'] = ProjectsHelper::can('project.edit.state');
-		$canDo['view_documents'] = ProjectsHelper::can('project.edit.portfolio');
-		$canDo['view_tickets'] = ProjectsHelper::can('project.edit.portfolio');
-		$canDo['view_activities'] = ProjectsHelper::can('project.edit.order');
-		
-		// Can Do List
-		return $canDo;
 	}
 }

@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset name="basic">
-			
-	</fieldset>		
-	
 	<fieldset name="permissions"
 		label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC">
@@ -12,8 +8,20 @@
 	</fieldset>
 		
 	<fieldset name="guest_tools"
-		label="JCONFIG_ACCESS_LABEL"
-		description="JCONFIG_ACCESS_DESC">
+		label="COM_PROJECTS_GUEST_TOOLS_LABEL"
+		description="COM_PROJECTS_GUEST_TOOLS_DESC">
+
+		<field name="view_projects"
+			type="radio"
+			label="can_view_tasks"
+			description="What public guests can do"
+			class="inputbox"
+			size="1"
+			default="0">
+			<option	value="0">JNO</option>
+			<option	value="1">Featured only</option>
+			<option	value="2">JALL</option>
+		</field>
 			
 		<field name="view_tickets"
 			type="radio"
@@ -35,7 +43,7 @@
 			default="0">
 			<option	value="0">JNO</option>
 			<option	value="1">Featured only</option>
-			<option	value="1">JALL</option>
+			<option	value="2">JALL</option>
 		</field>
 
 		<field name="view_documents"
@@ -47,7 +55,7 @@
 			default="0">
 			<option	value="0">JNO</option>
 			<option	value="1">Featured only</option>
-			<option	value="1">JALL</option>
+			<option	value="2">JALL</option>
 		</field>
 		
 		<field name="view_activities"
@@ -64,17 +72,17 @@
 	</fieldset>
 	
 	<fieldset name="manager_tools"
-		label="JCONFIG_ACCESS_LABEL"
-		description="JCONFIG_ACCESS_DESC">
+		label="COM_PROJECTS_MANAGER_TOOLS_LABEL"
+		description="COM_PROJECTS_MANAGER_TOOLS_DESC">
 	</fieldset>
 		
 	<fieldset name="worker_tools"
-		label="JCONFIG_ACCESS_LABEL"
-		description="JCONFIG_ACCESS_DESC">
+		label="COM_PROJECTS_WORKER_TOOLS_LABEL"
+		description="COM_PROJECTS_WORKER_TOOLS_DESC">	
 	</fieldset>
 	
 	<fieldset name="tester_tools"
-		label="JCONFIG_ACCESS_LABEL"
-		description="JCONFIG_ACCESS_DESC">
+		label="COM_PROJECTS_TESTER_TOOLS_LABEL"
+		description="COM_PROJECTS_TESTER_TOOLS_DESC">	
 	</fieldset>
 </config>
