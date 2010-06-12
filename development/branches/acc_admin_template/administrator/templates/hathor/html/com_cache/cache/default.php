@@ -11,12 +11,8 @@
 // no direct access
 defined('_JEXEC') or die;
 
-// Get additional language strings prefixed with TPL_HATHOR
-$lang =& JFactory::getLanguage();
-$lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
-|| $lang->load('tpl_hathor', JPATH_ADMINISTRATOR.DS.'templates/hathor');
-
-
+$listOrder	= $this->state->get('list.ordering');
+$listDirn	= $this->state->get('list.direction');
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_cache'); ?>" method="post" name="adminForm" id="adminForm">
@@ -30,13 +26,13 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(<?php echo count($this->data);?>);" />
 			</th>
 			<th class="title nowrap">
-				<?php echo JText::_('COM_CACHE_GROUP'); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_CACHE_GROUP', 'group', $listDirn, $listOrder); ?>
 			</th>
 			<th class="width-5 center nowrap">
-				<?php echo JText::_('COM_CACHE_NUMBER_OF_FILES'); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_CACHE_NUMBER_OF_FILES', 'count', $listDirn, $listOrder); ?>
 			</th>
 			<th class="width-10 center">
-				<?php echo JText::_('COM_CACHE_SIZE'); ?>
+				<?php echo JHtml::_('grid.sort',  'COM_CACHE_SIZE', 'size', $listDirn, $listOrder); ?>
 			</th>
 		</tr>
 	</thead>
@@ -73,5 +69,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 <input type="hidden" name="task" value="" />
 <input type="hidden" name="boxchecked" value="0" />
 <input type="hidden" name="client" value="<?php echo $this->client->id;?>" />
+<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
 <?php echo JHtml::_('form.token'); ?>
 </form>
