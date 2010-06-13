@@ -1,0 +1,45 @@
+div.divProjects{
+	width : 100%;
+	overflow : hidden;
+}
+
+	div.divProjects div.componenetheading{
+		font-size : 24px;
+		margin-bottom : 10px;
+	}
+
+	div.divProjects	a.aNameItem{
+		font-size : 16px;	
+	}
+
+	div.divProjects div.divProjects-content{
+		padding : 10px;
+		overflow : hidden;
+	}
+	
+	div.divProjects div.divProjects-left-column{
+		width : 65%;
+		overflow : hidden;
+		float : left;
+		clear : right;
+		border-right : 1px solid black;
+	}
+	
+		div.divProjects div.divProjects-left-column	div.porfolio-list-frame{
+			overflow : hidden;
+		}
+
+			div.divProjects div.divProjects-left-column	div.porfolio-list-frame div.portfolio-list-item{
+				border : 1px solid #dddddd;
+			  -moz-border-radius: 3px;
+  			-webkit-border-radius: 3px; 
+				border-radius : 3px;
+				margin-bottom : 10px;		
+			}
+		
+	div.divProjects div.divProjects-right-column{
+		width : 35%;
+		overflow : hidden;
+		float : right;	
+		margin-right : -2px;
+	}

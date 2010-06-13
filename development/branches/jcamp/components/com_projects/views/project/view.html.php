@@ -52,13 +52,11 @@ class ProjectsViewProject extends JView
 			default:
 				$layout		= 'default';
 				if (!$this->canDo->get('project.view')){
-					return JError::raiseError(505, JText::_('JERROR_ALERTNOAUTHOR'));
-				
+					return JError::raiseError(505, JText::_('JERROR_ALERTNOAUTHOR'));				
 				}
 				if (empty($this->item->id)){
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
-				}
-					
+				}					
 		}
 		
 		// Display the view

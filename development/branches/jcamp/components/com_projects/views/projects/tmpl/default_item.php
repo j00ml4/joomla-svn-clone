@@ -10,8 +10,11 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<li class="portfolio-list-item">
-	<a href="<?php echo JRoute::_('index.php?option=com_projects&view=projects&layout=project&id='.$this->item->id);?>">
-		<?php echo $this->item->title;?>
-	</a>
-</li>
+<div class="portfolio-list-item">
+	<div class="divProjects-content">
+		<h3><a class="aNameItem" href="<?php echo JRoute::_('index.php?option=com_projects&view=projects&layout=gallery&id='.$this->item->catid);?>">
+			<?php echo $this->item->title;?>
+		</a></h3>
+		<?php echo $this->item->description;?>
+	</div>
+</div	>
