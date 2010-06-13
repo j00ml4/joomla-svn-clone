@@ -26,7 +26,6 @@ function submitbutton(task) {
 	}
 }
 </script>
-
 <div class="edit item-page<?php echo $this->escape($params->get('pageclass_sfx')); ?>">
 	<?php if ($params->get('show_page_heading', 1)) : ?>
 	<?php /* this allows the user to set the title he wants */ ?> 
