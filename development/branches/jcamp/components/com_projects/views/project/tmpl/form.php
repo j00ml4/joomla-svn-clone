@@ -26,7 +26,8 @@ function submitbutton(task) {
 	}
 }
 </script>
-<div class="divProjects">
+<!-- no upercase on css classes -->
+<div class="project">
 <div class="edit item-page<?php echo $this->escape($params->get('pageclass_sfx')); ?>">
 	<?php if ($params->get('show_page_heading', 1)) : ?>
 	<?php /* this allows the user to set the title he wants */ ?> 
@@ -39,7 +40,7 @@ function submitbutton(task) {
 		<?php echo $this->loadTemplate('buttons'); ?>
 		
 		<fieldset>
-			<legend><?php echo JText::_('COM_PROJECTS_PROJECT_FORM_LEGEND'); ?></legend>
+			<legend><?php echo JText::_( 'JDETAILS' ); ?></legend>
 			
 			<?php if ($this->canDo->get('project.edit.portfolio', 1)): ?>
 			<div class="formelm">
