@@ -171,10 +171,10 @@ class ProjectsHelper
 	 *
 	 * @since	1.6
 	 */
-	public static function includeCSS()
+	public static function includeCSS($style='default')
 	{
 		$document = &JFactory::getDocument();
-		$document->addStyleSheet('components/com_projects/assets/css/default.css');
+		$document->addStyleSheet('components/com_projects/assets/css/'.$style.'.css');
 	}
 }
 
