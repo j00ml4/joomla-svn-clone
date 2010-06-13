@@ -10,9 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-// include CSS
-$document = &JFactory::getDocument();
-$document->addStyleSheet('components/com_projects/assets/css/default.css');
+ProjectsHelper::includeCSS();
 ?>
 
 <div class="divProjects">

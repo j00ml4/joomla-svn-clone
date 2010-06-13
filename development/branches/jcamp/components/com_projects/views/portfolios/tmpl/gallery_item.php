@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 ?>
 <div class="portfolio-list-item">
 	<div class="divProjects-content">
-		<h3><a class="aNameItem" href="<?php echo JRoute::_('index.php?option=com_projects&view=projects&layout=gallery&id='.$this->item->catid);?>">
+		<h3><a class="aNameItem" href="<?php echo JRoute::_('index.php?option=com_projects&view=projects&layout=gallery&id='.$this->item->id);?>">
 			<?php echo $this->item->title;?>
 		</a></h3>
 		<?php echo $this->item->description;?>

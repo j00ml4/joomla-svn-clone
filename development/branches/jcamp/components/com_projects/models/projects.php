@@ -110,7 +110,7 @@ class ProjectsModelProjects extends JModelList
 
 		// Filter by category.
 		if ($categoryId = $this->getState('category.id')) {
-			$query->where('a.catid = '.(int) $categoryId);
+			$query->where('p.catid = '.(int) $categoryId);
 			$query->join('LEFT', '#__categories AS c ON c.id = p.catid');
 		}
 
