@@ -26,6 +26,7 @@ function submitbutton(task) {
 	}
 }
 </script>
+<div class="divProjects">
 <div class="edit item-page<?php echo $this->escape($params->get('pageclass_sfx')); ?>">
 	<?php if ($params->get('show_page_heading', 1)) : ?>
 	<?php /* this allows the user to set the title he wants */ ?> 
@@ -103,4 +104,5 @@ function submitbutton(task) {
 		<input type="hidden" name="task" value="" />
 		<?php echo JHTML::_( 'form.token' ); ?>
 	</form>
+</div>
 </div>

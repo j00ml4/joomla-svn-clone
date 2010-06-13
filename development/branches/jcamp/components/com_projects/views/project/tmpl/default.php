@@ -10,10 +10,11 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-
+<div class="divProjects">
 <div class="item-page">
 	<h2><?php echo $this->item->title; ?></h2>
 	
 	<?php dump($this->item); ?>
 	<?php echo $this->loadTemplate('buttons'); ?>
+</div>
 </div>

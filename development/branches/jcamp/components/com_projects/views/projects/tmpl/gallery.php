@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 // Vars
 $params =  $this->params;
 ?>
-
+<div class="divProjects">
 <div class="portifolio-gallery<?php echo $this->params->get('pageclass_sfx'); ?>">
 	<?php if ($params->get('show_page_heading', 1)): ?>
 	<h1 class="componentheading"><?php echo $this->category->title; ?></h1>
@@ -54,4 +54,5 @@ $params =  $this->params;
 		<?php echo $this->pagination->getPagesLinks(); ?>
 	</div>
 	<?php  endif; ?>
+</div>
 </div>
