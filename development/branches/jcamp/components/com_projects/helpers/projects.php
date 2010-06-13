@@ -9,7 +9,7 @@
 
 /**
  * @package		Joomla.Site
- * @subpackage	Media
+ * @subpackage	com_projects
  */
 class ProjectsHelper
 {
@@ -164,6 +164,17 @@ class ProjectsHelper
 		}
 
 		return $canDo;
+	}
+	
+	/**
+	 * Include CSS styles to page
+	 *
+	 * @since	1.6
+	 */
+	public static function includeCSS()
+	{
+		$document = &JFactory::getDocument();
+		$document->addStyleSheet('components/com_projects/assets/css/default.css');
 	}
 }
 
