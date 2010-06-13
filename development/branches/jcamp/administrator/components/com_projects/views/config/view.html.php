@@ -22,10 +22,7 @@ class ProjectsViewConfig extends JView
         {
 			// Set the toolbar
             $this->setToolBar();
-            
-            // Set the document
-            $this->setDocument();
-            
+                   
             // Display the template
             parent::display($tpl);
         }
@@ -36,13 +33,5 @@ class ProjectsViewConfig extends JView
         {
         	// Do Nothing
         }
-        /**
-         * Method to set up the document properties
-         *
-         * @return void
-         */
-        protected function setDocument() 
-        {
-        	// Do Nothing
-        }
+     
 }

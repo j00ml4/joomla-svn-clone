@@ -42,11 +42,10 @@ class ProjectsHelper
 				JToolBarHelper::title( JText::_('COM_PROJECTS_PORTFOLIOS'), 'categories' );
 				break;
 			default:
-				JToolBarHelper::title( JText::_('COM_PROJECTS'), 'article' );	
+				JToolBarHelper::title( JText::_('COM_PROJECTS'), 'article' );
+				JToolBarHelper::preferences('com_projects');	
 		}
 		
-		// All views
-		JToolBarHelper::preferences('com_projects');
 	}
 
 	/**

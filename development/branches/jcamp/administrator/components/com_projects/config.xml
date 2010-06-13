@@ -13,7 +13,7 @@
 
 		<field name="view_projects"
 			type="radio"
-			label="can_view_tasks"
+			label="view_projects"
 			description="What public guests can do"
 			class="inputbox"
 			size="1"

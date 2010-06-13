@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modellist');
+jimport('joomla.application.categories');
 
 /**
  * Portifolio gallery view to display all projects within a portifolio
@@ -76,13 +77,12 @@ class ProjectsModelProjects extends JModelList
 		$listOrder	=  JRequest::getCmd('filter_order_Dir', 'ASC');
 		$this->setState('list.direction', $listOrder);
 		
-		
+		// Category		
 		$id = JRequest::getInt('id', 0);
 		$this->setState('category.id', $id);
 
-		$this->setState('filter.published',	1);
-
-		$this->setState('filter.language',$app->getLanguageFilter());
+		//$this->setState('filter.published',	1);
+		//$this->setState('filter.language',$app->getLanguageFilter());
 
 		// Load the parameters.
 		$this->setState('params', $params);
@@ -98,7 +98,6 @@ class ProjectsModelProjects extends JModelList
 	protected function getListQuery()
 	{
 		$user	= &JFactory::getUser();
-		$groups	= implode(',', $user->authorisedLevels());
 
 		// Create a new query object.
 		$db		= $this->getDbo();
@@ -106,14 +105,12 @@ class ProjectsModelProjects extends JModelList
 
 		// Select required fields from the categories.
 		$query->select($this->getState('list.select', 'a.*'));
-		$query->from('`#__contact_details` AS a');
-		$query->where('a.access IN ('.$groups.')');
+		$query->from('`#__projects` AS a');
 
 		// Filter by category.
 		if ($categoryId = $this->getState('category.id')) {
 			$query->where('a.catid = '.(int) $categoryId);
 			$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
-			$query->where('c.access IN ('.$groups.')');
 		}
 
 		// Filter by state
@@ -125,9 +122,6 @@ class ProjectsModelProjects extends JModelList
 		$nullDate = $db->Quote($db->getNullDate());
 		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
 
-		$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
-		$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
-
 		// Filter by language
 		if ($this->getState('filter.language')) {
 			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
@@ -138,49 +132,6 @@ class ProjectsModelProjects extends JModelList
 
 		return $query;
 	}
-	
-	/**
-	 * @param	boolean	True to join selected foreign information
-	 *
-	 * @return	string
-	 * @since	1.6
-	 */
-	function getListQuery2()
-	{
-		$task = JRequest::getCmd('layout','default');
-		// Create a new query object.
-		$db = $this->getDbo();
-		$q = $db->getQuery(true);
-		
-		switch($task)
-		{
-			case 'default' :
-				{
-					// Select the required fields from the table.
-					$q->select('c.`id`, c.`title`');
-					$q->from('`#__categories` c');
-					$q->where('c.`extension`=\'com_projects\'');
-					$q->order('c.`title`');
-					break;
-				}
-			case 'gallery' :
-				{
-					// Is more meanfull to have ther real nama of the field
-					$id = JRequest::getInt('catid',0);
-		
-					// Select the required fields from the table.
-					$q->select('p.`id`, p.`title`, p.`alias`, p.`description`, u.`name`, p.`created`');
-					$q->from('`#__projects` AS p');
-					$q->leftJoin('`#__users` AS u ON u.`id` = p.`created_by`');
-					$q->where('p.`catid`='.$id);
-					$q->order('p.`ordering`');
-					break;
-				}
-		}
-		
-		return $q;
-	}
-
 	
 	/**
 	 * Method to get category data for the current category
@@ -200,8 +151,8 @@ class ProjectsModelProjects extends JModelList
 			$params = new JRegistry();
 			$params->loadJSON($active->params);
 			$options = array();
-			$options['countItems'] = $params->get('show_contacts', 0);
-			$categories = JCategories::getInstance('Contact', $options);
+			//$options['countItems'] = $params->get('show_ntacts', 0);
+			$categories = JCategories::getInstance('Projects', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 			if(is_object($this->_item))
 			{
