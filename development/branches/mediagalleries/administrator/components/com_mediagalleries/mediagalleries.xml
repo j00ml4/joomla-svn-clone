@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.6.0">
-	<name>COM_MEDIAGALLERIES</name>
+	<name>Mediagalleries</name>
 	<creationDate>June 2010</creationDate>
 	<author>Aman Gautam, Marcelo Eden</author>
 	<copyright>(C) 2010 Joomla. All rights reserved.</copyright>
@@ -42,8 +42,8 @@
 	<administration>
 		    <menu link="index.php?option=com_mediagalleries">COM_MEDIAGALLERIES</menu> 
 		    <submenu>
-		           	<menu link="index.php?option=com_mediagalleries" view="galleries" img="class:media">COM_MEDIAGALLERIES_MEDIAS</menu>
-					<menu link="index.php?option=com_categories&amp;extension=com_mediagalleries" img="class:category">COM_MEDIAGALLERIES_CATEGORIES</menu>
+		           	<menu link="option=com_mediagalleries" view="galleries" img="class:media">COM_MEDIAGALLERIES_MEDIA</menu>
+					<menu link="option=com_categories&amp;extension=com_mediagalleries" img="class:category">COM_MEDIAGALLERIES_CATEGORIES</menu>
 					<!--<menu img="" link="option=com_comments&amp;extension=com_mediagalleries">Comments</menu> Not for now -->
 		    </submenu>  
 		    
