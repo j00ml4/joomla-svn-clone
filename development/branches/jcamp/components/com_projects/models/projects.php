@@ -104,19 +104,20 @@ class ProjectsModelProjects extends JModelList
 		$query	= $db->getQuery(true);
 
 		// Select required fields from the categories.
-		$query->select($this->getState('list.select', 'a.*'));
-		$query->from('`#__projects` AS a');
+		// (using 'a.*' is slower than fetching only columns we need (and this is clearer for us to know what date we fetch from db))
+		$query->select($this->getState('list.select', 'p.id, p.title, p.catid, p.description'));
+		$query->from('`#__projects` AS p');
 
 		// Filter by category.
 		if ($categoryId = $this->getState('category.id')) {
 			$query->where('a.catid = '.(int) $categoryId);
-			$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
+			$query->join('LEFT', '#__categories AS c ON c.id = p.catid');
 		}
 
 		// Filter by state
 		$state = $this->getState('filter.state');
 		if (is_numeric($state)) {
-			$query->where('a.state = '.(int) $state);
+			$query->where('p.state = '.(int) $state);
 		}
 		// Filter by start and end dates.
 		$nullDate = $db->Quote($db->getNullDate());
@@ -124,11 +125,11 @@ class ProjectsModelProjects extends JModelList
 
 		// Filter by language
 		if ($this->getState('filter.language')) {
-			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+			$query->where('p.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
 		}
 
 		// Add the list ordering clause.
-		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		$query->order($db->getEscaped($this->getState('list.ordering', 'p.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
 		return $query;
 	}
