@@ -37,11 +37,11 @@ class ProjectsViewProject extends JView
 		//Get Model data
 		$this->item 	= &$model->getItem();
 		$this->params	= &$app->getParams();
-		$this->catid	= JRequest::getInt('catid');
+		$this->catid	= $app->getUserState('project.category.id', 0);
 		$this->canDo	= &ProjectsHelper::getActions();
 		
 		// Layout
-		$layout = JRequest::getCMD('layout');
+		$layout = $this->getLayout();
 		switch($layout){
 			case 'edit':
 			case 'form':

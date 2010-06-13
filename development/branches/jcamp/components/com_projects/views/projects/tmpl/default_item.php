@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 ?>
 <li class="portfolio-list-item">
-	<a href="<?php echo JRoute::_('index.php?option=com_projects&view=projects&layout=gallery&id='.$this->item->id);?>">
+	<a href="<?php echo JRoute::_('index.php?option=com_projects&view=projects&layout=project&id='.$this->item->id);?>">
 		<?php echo $this->item->title;?>
 	</a>
 </li>

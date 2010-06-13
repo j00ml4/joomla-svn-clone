@@ -17,15 +17,12 @@ defined('_JEXEC') or die;
 <?php echo JText::_('COM_PROJECTS_PROJECT_ADD');?></a><br />
 <div class="porfolio-list-frame">
 <h2><?php echo JText::_('COM_PROJECTS_PORFOLIO_LIST_HEADER');?></h2>
-<ul class="porfolio-list">
-<?php 
-	$c = count($this->items);
-	for($i = 0; $i<$c;$i++)	{
-		$this->item = &$this->items[$i];
-		echo $this->loadTemplate('item');
-	}
-?>
-</ul>
+	<ul class="porfolio-list">
+		<?php foreach ($this->items as $item) :
+			$this->item = $item;
+			echo $this->loadTemplate('item');
+		endforeach; ?>
+	</ul>
 	<?php if (($this->params->def('show_pagination', 1) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) { ?>
 		<div class="pagination">
 						<?php  if ($this->params->def('show_pagination_results', 1)) { ?>

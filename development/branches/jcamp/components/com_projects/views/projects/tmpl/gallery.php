@@ -12,44 +12,46 @@ defined('_JEXEC') or die;
 
 // Vars
 $params =  $this->params;
-//dump($this->items);
 ?>
 
 <div class="portifolio-gallery<?php echo $this->params->get('pageclass_sfx'); ?>">
-	<?php if ($params->get('show_page_heading')){ ?>
-	<h1><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
-	<?php }
-
-	if ($params->get('show_page_heading', 1)){ ?>
-	<?php /* this allows the user to set the title he wants */ ?> 
-	<div class="componentheading"><?php echo $this->escape($params->get('page_heading')); ?></div>
-	<?php }
+	<?php if ($params->get('show_page_heading', 1)): ?>
+	<h1 class="componentheading"><?php echo $this->category->title; ?></h1>
+	<?php endif; ?>
 	
-  if ($this->params->get('show_description', 1) && $this->category->description){ ?>
+  	<?php if ($params->get('show_description', 1) && $this->category->description) : ?>
 	<div class="portifolio-desc">
 		<?php echo JHtml::_('content.prepare', $this->category->description); ?>
 		<div class="clr"></div>
 	</div>
-<?php } ?>
+	<?php endif; ?>
 
-<div class="portfolio-projects">
-	<?php
-			$c = count($this->items);
-			for($i = 0; $i<$c;$i++) {
-				$this->item = &$this->items[$i];
-				echo $this->loadTemplate('item');
-			} ?>
-</div>
+	<div class="portfolio-projects">
+		<?php foreach ($this->items as $item) : 
+			$this->item = $item;
+			echo $this->loadTemplate('item');
+		endforeach; ?>
+	</div>
 
-	<?php if (($this->params->def('show_pagination', 1) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) { ?>
-		<div class="pagination">
-						<?php  if ($this->params->def('show_pagination_results', 1)) { ?>
-						<p class="counter">
-								<?php echo $this->pagination->getPagesCounter(); ?>
-						</p>
+	<?php if($this->canDo->get('project.create', 1)): 
+		echo $this->loadTemplate('buttons');
+	endif; ?>
 
-				<?php } ?>
-				<?php echo $this->pagination->getPagesLinks(); ?>
-		</div>
-<?php  } ?>
+	<?php if ($this->params->get('show_pagination', 1) && ($this->pagination->get('pages.total') > 1)) : ?>
+	<div class="pagination">
+		<?php  if ($this->params->get('show_pagination_results', 1)) : ?>
+		<p class="counter">
+	<div class="pagination">
+		<?php  if ($this->params->get('show_pagination_results', 1)) : ?>
+		<p class="counter">
+			<?php echo $this->pagination->getPagesCounter(); ?>
+		</p>
+		<?php endif; ?>
+		<?php echo $this->pagination->getPagesLinks(); ?>
+			<?php echo $this->pagination->getPagesCounter(); ?>
+		</p>
+		<?php endif; ?>
+		<?php echo $this->pagination->getPagesLinks(); ?>
+	</div>
+	<?php  endif; ?>
 </div>

@@ -29,6 +29,7 @@ class ProjectsViewProjects extends JView
 	protected $state;
 	protected $params;
 	protected $pagination;
+	protected $canDo;
 	
 	/**
 	 * Display View
@@ -40,33 +41,39 @@ class ProjectsViewProjects extends JView
 		$model 		= $this->getModel('Projects');
 			
 		// Get some data from the models
-		$this->state		= &$model->getState();
+		$this->state		= $this->get('State');
 		$this->items		= &$model->getItems();
 		$this->pagination	= &$model->getPagination();
 		$this->params		= &$app->getParams();
+		$this->canDo		= &ProjectsHelper::getActions();
 		
-		// trigger content plugins (in case of 'gallery layout')
-		if($this->getLayout() == 'gallery') {
-			$c = count($this->items);
-			for($i = 0; $i < $c;$i++) {
-					$this->items[$i]->description = JHtml::_('content.prepare', $this->items[$i]->description);
-			}
+		
+		$layout = $this->getLayout();
+		switch($layout){
+			case 'gallery':
+				$c = count($this->items);
+				for($i = 0; $i < $c;$i++) {
+						$this->items[$i]->description = JHtml::_('content.prepare', $this->items[$i]->description);
+				}
+				
+				// Get category
+				$this->category		= $this->get('Category');
+				if(empty($this->category)){
+					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
+				}
+				$app->setUserState('project.category.id', $this->category->id);
+				break;
+
+			default:
+				$app->setUserState('project.category.id', 0);
+				break;
 		}
 		
 		// Check for errors.
-//		if (count($errors = $this->get('Errors'))) {
-			//JError::raiseError(500, implode("\n", $errors));
-			//return false;
-//		}
-
-
-		// Check whether category access level allows access.
-		$this->user	= &JFactory::getUser();
-//		$groups	= $user->authorisedLevels();
-		//if (!in_array($category->access, $groups)) {
-			//return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));
-		//}
-
+		if (count($errors = $this->get('Errors'))) {
+			return JError::raiseError(500, implode("\n", $errors));
+		}
+		
 		parent::display($tpl);
 	}
 }
