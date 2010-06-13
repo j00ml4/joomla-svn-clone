@@ -106,7 +106,20 @@ class ProjectsModelProject extends JModelAdmin
 		return $form;
 	}
 
-	
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{	
+		$data = array();
+		if($this->getState('project.id')){
+			$data = $this->getItem();
+		}
+		return $data;
+	}
 	/**
 	 * Method to validate the form data.
 	 *
