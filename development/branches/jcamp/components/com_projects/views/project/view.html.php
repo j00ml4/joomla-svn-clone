@@ -24,6 +24,7 @@ class ProjectsViewProject extends JView
 	protected $params;
 	protected $catid;
 	protected $canDo;
+	protected $category;
 	
 	/**
 	 * Display project
@@ -37,7 +38,7 @@ class ProjectsViewProject extends JView
 		//Get Model data
 		$this->item 	= &$model->getItem();
 		$this->params	= &$app->getParams();
-		$this->catid	= $app->getUserState('project.category.id', 0);
+		$this->catid	= $app->getUserState('portfolio.id', 0);
 		$this->canDo	= &ProjectsHelper::getActions();
 		
 		// Layout
@@ -58,14 +59,18 @@ class ProjectsViewProject extends JView
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
 				
+				// Get Category
+				$this->category = $this->get('Category');
+				
 				// add 'potfolio' and 'project' of our component breadcrumb
-		  	$bc = $app->getPathway();
-	  		$bc->addItem($model->getState('portfolio.title'),'index.php?option=com_projects&view=projects&layout=gallery&id='.$model->getState('portfolio.id'));
-	  		$bc->addItem($this->item->title);
+			  	$bc = $app->getPathway();
+		  		$bc->addItem($this->category->title, 'index.php?option=com_projects&view=projects&layout=gallery&id='.$model->getState('portfolio.id'));
+		  		$bc->addItem($this->item->title);
 		}
 		
 		// Display the view
 		$this->setLayout($layout);
 		parent::display($tpl);
 	}
+	
 }

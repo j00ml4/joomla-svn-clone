@@ -79,7 +79,7 @@ class ProjectsModelProjects extends JModelList
 		
 		// Category		
 		$id = JRequest::getInt('id', 0);
-		$this->setState('category.id', $id);
+		$this->setState('portfolio.id', $id);
 
 		//$this->setState('filter.published',	1);
 		//$this->setState('filter.language',$app->getLanguageFilter());
@@ -119,7 +119,7 @@ class ProjectsModelProjects extends JModelList
 		$query->from('`#__projects` AS p');
 
 		// Filter by category.
-		if ($categoryId = $this->getState('category.id')) {
+		if ($categoryId = $this->getState('portfolio.id')) {
 			$query->where('p.catid = '.(int) $categoryId);
 			$query->join('LEFT', '`#__categories` AS c ON c.`id` = p.`catid`');
 		}
@@ -164,7 +164,7 @@ class ProjectsModelProjects extends JModelList
 			$options = array();
 			//$options['countItems'] = $params->get('show_ntacts', 0);
 			$categories = JCategories::getInstance('Projects', $options);
-			$this->_item = $categories->get($this->getState('category.id', 'root'));
+			$this->_item = $categories->get($this->getState('portfolio.id', 'root'));
 			if(is_object($this->_item))
 			{
 				$this->_children = $this->_item->getChildren();
@@ -187,7 +187,7 @@ class ProjectsModelProjects extends JModelList
 	/**
 	 * Get the parent categorie.
 	 *
-	 * @param	int		An optional category id. If not supplied, the model state 'category.id' will be used.
+	 * @param	int		An optional category id. If not supplied, the model state 'portfolio.id' will be used.
 	 *
 	 * @return	mixed	An array of categories or false if an error occurs.
 	 */
@@ -226,7 +226,7 @@ class ProjectsModelProjects extends JModelList
 	/**
 	 * Get the child categories.
 	 *
-	 * @param	int		An optional category id. If not supplied, the model state 'category.id' will be used.
+	 * @param	int		An optional category id. If not supplied, the model state 'portfolio.id' will be used.
 	 *
 	 * @return	mixed	An array of categories or false if an error occurs.
 	 */

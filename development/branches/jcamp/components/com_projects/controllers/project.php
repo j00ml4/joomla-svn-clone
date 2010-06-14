@@ -81,16 +81,4 @@ class ProjectsControllerProject extends JControllerForm
 	{
 		return true;
 	}
-	
-	
-	/**
-	 * Save overwrite
-	 * 
-	 */
-	public function save(){
-		
-		
-		return parent::save();	
-	}
-	
 }

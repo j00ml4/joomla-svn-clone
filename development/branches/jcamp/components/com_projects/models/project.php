@@ -56,33 +56,51 @@ class ProjectsModelProject extends JModelAdmin
 	{
 		$app = JFactory::getApplication();
 
-		// Load state from the request.
-		$pk = JRequest::getInt('id');
-		$this->setState($this->getName().'.id', $pk);
+		// ID
+		if (!($pk = JRequest::getInt('id'))) {
+			$pk = $app->getUserState('com_projects.edit.project.id');
+		}
+		$this->setState('project.id', $pk);
 		
 		// List limit
 		$offset = JRequest::getInt('limitstart');
 		$this->setState('list.offset', $offset);
 		
 		// portfolio
-		$db		= $this->getDbo();
-		$query	= $db->getQuery(true);
-		$query->select('c.`title` AS `portfolio`, c.`id`');
-		$query->from('`#__projects` p');
-		$query->join('LEFT',' `#__categories` c ON p.`catid` = c.`id`');
-		$query->where('p.id='.$pk);
-		$db->setQuery($query);
-		$result = $db->loadObject();
-		$this->setState('portfolio.id',$result->id);
-		$this->setState('portfolio.title',$result->portfolio);
-		
-		
+		if($pk){
+			$db		= $this->getDbo();
+			$query	= $db->getQuery(true);
+			$query->select('p.catid');
+			$query->from('#__projects AS p');
+			$query->where('p.id='.$pk);
+			$db->setQuery($query);
+			
+			// load result
+			$result = $db->loadResult();
+			$this->setState('portfolio.id',$result);
+			//$app->getUserState('portfolio.id', $result);
+		}
 		
 		// Load the parameters.
 		$params	= $app->getParams();
 		$this->setState('params', $params);
 	}
-
+	
+	/**
+	 * function to get the portifolo
+	 * @param $pk
+	 */
+	public function getCategory($pk=null){
+		// Get portifolio ID
+		if (empty($pk) && !($pk = $this->getState('portfolio.id', 0))) {
+			return null;
+		}
+		jimport('joomla.application.categories');
+		$categories = JCategories::getInstance('Projects');
+		return $categories->get($pk);
+	} 
+	
+	
 	/**
 	 * Returns a reference to the a Table object, always creating it
 	 *
@@ -128,8 +146,10 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	protected function loadFormData()
 	{	
-		$data = array();
-		if($this->getState('project.id')){
+		$app = JFactory::getApplication();
+		// Check the session for previously entered form data.
+		$data = $app->getUserState('com_projects.edit.project.data', array());
+		if (empty($data)) {
 			$data = $this->getItem();
 		}
 		return $data;
