@@ -25,11 +25,11 @@ div.divProjects{
 		border-right : 1px solid black;
 	}
 	
-		div.divProjects div.divProjects-left-column	div.porfolio-list-frame{
+		div.divProjects div.divProjects-left-column	div.blog{
 			overflow : hidden;
 		}
 
-			div.divProjects div.divProjects-left-column	div.porfolio-list-frame div.portfolio-list-item{
+			div.divProjects div.divProjects-left-column div.item{
 				border : 1px solid #dddddd;
 			  -moz-border-radius: 3px;
   			-webkit-border-radius: 3px; 

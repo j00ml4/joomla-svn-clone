@@ -26,6 +26,11 @@ class ProjectsController extends JController {
 	 */
 	function display()
 	{	
+		$document = &JFactory::getDocument();
+		if($document->getType() == 'html') {
+			ProjectsHelper::includeCSS();
+		}
+		
 		$user =& JFactory::getUser();
 		$cachable = true;	
 		

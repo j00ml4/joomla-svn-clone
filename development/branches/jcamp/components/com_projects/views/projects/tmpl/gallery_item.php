@@ -16,14 +16,15 @@ $item	=& $this->item;
 $link = JRoute::_('index.php?option=com_projects&view=project&layout=detail&id='.$item->id);
 ?>
 
-<div class="portfolio-projects-gallery-item">
-	<h3 class="portfolio-projects-gallery-item-header">
+<div class="items-row item">
+	<h2>
 		<a href="<?php echo $link; ?>"><?php echo $item->title;?></a>
-	</h3>
-	<div class="portfolio-projects-gallery-item-desc">
-		<?php echo $item->description;?>
-	</div>
+	</h2>
+		<div class="cetegory-desc">
+			<?php echo $item->description;?><br />
+			<div class="clr">&nbsp;</div>
+		</div>
 	<a href="<?php echo $link; ?>">
 	<?php echo JText::_('COM_PROJECTS_PROJECT_GALLERY_SEE_PROJECT');?></a>
 </div>
-<div class="portfolio-projects-gallery-item-separator"></div>
+<div class="clr"></div>
