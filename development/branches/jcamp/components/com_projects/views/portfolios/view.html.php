@@ -44,7 +44,7 @@ class ProjectsViewPortfolios extends JView
 		$this->params		= &$app->getParams();
 		$this->canDo		= &ProjectsHelper::getActions();
 		
-		$layout = $this->setLayout('gallery');
+		$this->setLayout('gallery');
 		$c = count($this->items);
 		for($i = 0; $i < $c;$i++) {
 				$this->items[$i]->description = JHtml::_('content.prepare', $this->items[$i]->description);

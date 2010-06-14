@@ -16,8 +16,10 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.calendar');
 JHtml::_('behavior.formvalidation');
 
-// Set vars
-$params = &$this->params;
+// Vars
+$params =  $this->params;
+$pageClass = $this->escape($params->get('pageclass_sfx'));
+
 ?>
 <script language="javascript" type="text/javascript">
 function submitbutton(task) {
@@ -27,11 +29,11 @@ function submitbutton(task) {
 }
 </script>
 <!-- no upercase on css classes -->
-<div class="project">
-<div class="edit item-page<?php echo $this->escape($params->get('pageclass_sfx')); ?>">
+<div class="projects<?php echo $pageClass;?>">
+<div class="edit item-page<?php echo  $pageClass;;?>">
 	<?php if ($params->get('show_page_heading', 1)) : ?>
 	<?php /* this allows the user to set the title he wants */ ?> 
-	<div class="componentheading"><?php echo $this->escape($params->get('page_heading')); ?></div>
+	<h1><?php echo $this->escape($params->get('page_heading')); ?></h1>
 	<?php endif; ?>
 	
 	<?php /** This way we have more controll over the design */ ?>

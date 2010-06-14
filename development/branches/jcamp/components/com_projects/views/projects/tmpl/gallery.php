@@ -12,11 +12,11 @@ defined('_JEXEC') or die;
 
 // Vars
 $params =  $this->params;
-$pageClass = $this->params->get('pageclass_sfx');
+$pageClass = $this->escape($params->get('pageclass_sfx'));
 ?>
-<div class="divProjects<?php echo $pageClass;?> blog<?php echo $pageClass;?>">
-	<div class="divProjects-left-column">
-		<div class="divProjects-content">
+<div class="projects<?php echo $pageClass;?> blog<?php echo $pageClass;?>">
+	<div class="projects-left-column">
+		<div class="projects-content">
 		
 			<?php foreach ($this->items as $item) : 
 				$this->item = $item;
@@ -44,8 +44,8 @@ $pageClass = $this->params->get('pageclass_sfx');
 		</div>
 	</div>	
 	
-	<div class="divProjects-right-column">
-		<div class="divProjects-content">
+	<div class="projects-right-column">
+		<div class="projects-content">
 			<?php if ($params->get('show_page_heading', 1)): ?>
 			<h1><?php echo $this->category->title; ?></h1>
 			<?php endif; ?>
