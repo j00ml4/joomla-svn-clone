@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 $params =  $this->params;
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
-<div class="divProjects blog<?php echo $pageClass;?>">
+<div class="divProjects<?php echo $pageClass;?> blog<?php echo $pageClass;?>">
 	<div class="divProjects-left-column">
 		<div class="divProjects-content">
 		
