@@ -95,11 +95,12 @@ class MediagalleriesModelMedia extends JModelAdmin
 	 */
 	public function getItem($pk = null)
 	{
+			
 		if ($item = parent::getItem($pk)) {
 			// Convert the params field to an array.
-			$registry = new JRegistry;
-			$registry->loadJSON($item->params);
-			$item->params = $registry->toArray();
+			//$registry = new JRegistry;
+			//$registry->loadJSON($item->params);
+			//$item->params= $registry->toArray();
 		}
 
 		return $item;
