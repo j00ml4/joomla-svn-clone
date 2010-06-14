@@ -26,6 +26,7 @@ class ProjectsViewPortfolios extends JView
 	protected $params;
 	protected $pagination;
 	protected $canDo;
+	protected $user;
 	
 	/**
 	 * Display View
@@ -43,7 +44,6 @@ class ProjectsViewPortfolios extends JView
 		$this->params		= &$app->getParams();
 		$this->canDo		= &ProjectsHelper::getActions();
 		
-		
 		$layout = $this->setLayout('gallery');
 		$c = count($this->items);
 		for($i = 0; $i < $c;$i++) {
@@ -54,7 +54,8 @@ class ProjectsViewPortfolios extends JView
 		if (count($errors = $this->get('Errors'))) {
 			return JError::raiseError(500, implode("\n", $errors));
 		}
-		
+
+		$this->user = &JFactory::getUser();
 		parent::display($tpl);
 	}
 }

@@ -10,31 +10,29 @@
 // no direct access
 defined('_JEXEC') or die;
 
-ProjectsHelper::includeCSS();
+// Vars
+$params =  $this->params;
+$pageClass = $this->params->get('pageclass_sfx');
 ?>
 
-<div class="divProjects">
+<div class="divProjects blog<?php echo $pageClass;?>">
 	<div class="divProjects-left-column">
 		<div class="divProjects-content">
-			<div class="porfolio-list-frame">
-				<div class="componenetheading"><?php echo JText::_('COM_PROJECTS_PORFOLIO_LIST_HEADER');?></div>
-				<div class="porfolio-list">
-					<?php foreach ($this->items as $item) :
-						$this->item = $item;
-						echo $this->loadTemplate('item');
-				endforeach; ?>
-				</div>
-				<?php if (($this->params->def('show_pagination', 1) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) { ?>
-				<div class="pagination">
-					<?php  if ($this->params->def('show_pagination_results', 1)) { ?>
-					<p class="counter">
-						<?php echo $this->pagination->getPagesCounter(); ?>
-					</p>
-				<?php } ?>
-				<?php echo $this->pagination->getPagesLinks(); ?>
-				</div>
-				<?php  } ?>
+			<h1><?php echo JText::_('COM_PROJECTS_PORFOLIO_LIST_HEADER');?></h1>
+				<?php foreach ($this->items as $item) :
+					$this->item = $item;
+					echo $this->loadTemplate('item');
+			endforeach; ?>
+			<?php if (($this->params->def('show_pagination', 1) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) { ?>
+			<div class="pagination">
+				<?php  if ($this->params->def('show_pagination_results', 1)) { ?>
+				<p class="counter">
+					<?php echo $this->pagination->getPagesCounter(); ?>
+				</p>
+			<?php } ?>
+			<?php echo $this->pagination->getPagesLinks(); ?>
 			</div>
+			<?php  } ?>
 		</div>
 	</div>
 	
