@@ -29,6 +29,7 @@ class MediagalleriesViewMedia extends JView
 	protected $folder;
 	protected $user;
 	protected $form;
+	protected $state;
 	
 	/**
 	 * display method of Media view
@@ -46,6 +47,7 @@ class MediagalleriesViewMedia extends JView
 		$this->user 	=& JFactory::getUser();
 		$this->item		=& $this->get('Item');
 		$this->form		=& $this->get('Form');
+		$this->state	= $this->get('State');
 		
 		// Import Helpers
 		include_once(PATH_HELPERS.'player.php');
@@ -64,8 +66,11 @@ class MediagalleriesViewMedia extends JView
 		$this->lists =& $this->_buildLists($item);
 		
 		// To folder
-		$this->folder = GetmediaParam('defaultdir');//does it work?
-		
+		// $this->folder= GetmediaParam('defaultdir');//does it work?
+		$plg_media=JPluginHelper::getPlugin('content', 'media');
+		//print_r($plg_media);
+		$this->media_params=$plg_media->params;
+		$this->folder=$this->media_params['defaultdir'];
 		// Add the toolbar
 		$this->addToolbar();
 		
@@ -79,7 +84,9 @@ class MediagalleriesViewMedia extends JView
 	 */
 	protected function &_buildLists(&$item)
 	{
-		global $mainframe, $option;
+		global  $option;
+		
+		$mainframe=&JFactory::getApplication();
 		
 		$lists = array();
 		
@@ -108,9 +115,9 @@ class MediagalleriesViewMedia extends JView
 		JRequest::setVar('hidemainmenu', true);
 
 		$user		= JFactory::getUser();
-		$isNew		= ($this->item->id == 0);
+		$isNew		= ($this->item->id == 0);		
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
-		$canDo		= Mediagalleries::getActions($this->state->get('filter.category_id'), $this->item->id);
+		$canDo		= MediagalleriesHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
 
 		// If not checked out, can save the item.
 		if (!$checkedOut && $canDo->get('core.edit'))

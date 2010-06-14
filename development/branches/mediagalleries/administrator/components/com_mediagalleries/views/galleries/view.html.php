@@ -69,6 +69,7 @@ class MediagalleriesViewGalleries extends JView
 		if ($canDo->get('core.edit')) {
 			JToolBarHelper::editList('media.edit','JTOOLBAR_EDIT');
 		}
+		JToolBarHelper::divider();
 		if ($canDo->get('core.edit.state')) {
 
 			JToolBarHelper::divider();
