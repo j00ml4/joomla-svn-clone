@@ -1,23 +1,24 @@
-div.divProjects{
+div.projects{
 	width : 100%;
 	overflow : hidden;
 }
 
-	div.divProjects div.componenetheading{
+	div.projects h1{
 		font-size : 24px;
 		margin-bottom : 10px;
 	}
 
-	div.divProjects	a.aNameItem{
+	div.projects	a.aNameItem{
 		font-size : 16px;	
 	}
 
-	div.divProjects div.divProjects-content{
+	div.projects div.projects-content{
 		padding : 10px;
 		overflow : hidden;
 	}
 	
-	div.divProjects div.divProjects-left-column{
+	/************************ 2-columns layout ****************************/
+div.projects div.projects-left-column{
 		width : 65%;
 		overflow : hidden;
 		float : left;
@@ -25,11 +26,11 @@ div.divProjects{
 		border-right : 1px solid black;
 	}
 	
-		div.divProjects div.divProjects-left-column	div.blog{
+		div.projects div.projects-left-column	div.blog{
 			overflow : hidden;
 		}
 
-			div.divProjects div.divProjects-left-column div.item{
+			div.projects div.projects-left-column div.item{
 				border : 1px solid #dddddd;
 			  -moz-border-radius: 3px;
   			-webkit-border-radius: 3px; 
@@ -37,9 +38,35 @@ div.divProjects{
 				margin-bottom : 10px;		
 			}
 		
-	div.divProjects div.divProjects-right-column{
+	div.projects div.projects-right-column{
 		width : 35%;
 		overflow : hidden;
 		float : right;	
 		margin-right : -2px;
 	}
+
+	/************************ 3-columns layout ****************************/
+	div.projects div.projects-left-column-3{
+		width : 50%;
+		overflow : hidden;
+		float : left;
+		clear : right;
+		border-right : 1px solid black;
+	}
+
+	div.projects div.projects-middle-column-3{
+		width : 25%;
+		overflow : hidden;
+		float : left;
+		clear : right;	
+		margin-right : -2px;
+		border-right : 1px solid black;
+	}
+	
+	div.projects div.projects-right-column-3{
+		width : 25%;
+		overflow : hidden;
+		float : right;	
+		margin-right : -2px;
+	}
+	
