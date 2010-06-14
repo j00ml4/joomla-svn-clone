@@ -43,6 +43,11 @@ class ProjectsController extends JController {
 								'filter_order'=>'CMD','filter_order_Dir'=>'CMD',
 								'lang'=>'CMD');
 
+		$app = &JFactory::getApplication();
+		// add 'home page' of our component breadcrumb
+	  $bc = $app->getPathway();
+	  $bc->addItem(JText::_('COM_PROJECTS_HOME_PAGE'),'index.php?option=com_projects');
+		
 		parent::display($cachable, $safeurlparams);
 	}
 	

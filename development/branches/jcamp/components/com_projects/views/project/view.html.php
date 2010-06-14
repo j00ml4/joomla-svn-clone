@@ -56,7 +56,12 @@ class ProjectsViewProject extends JView
 				}
 				if (empty($this->item->id)){
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
-				}					
+				}
+				
+				// add 'potfolio' and 'project' of our component breadcrumb
+		  	$bc = $app->getPathway();
+	  		$bc->addItem($model->getState('portfolio.title'),'index.php?option=com_projects&view=projects&layout=gallery&id='.$model->getState('portfolio.id'));
+	  		$bc->addItem($this->item->title);
 		}
 		
 		// Display the view

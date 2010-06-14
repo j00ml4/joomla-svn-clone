@@ -64,6 +64,20 @@ class ProjectsModelProject extends JModelAdmin
 		$offset = JRequest::getInt('limitstart');
 		$this->setState('list.offset', $offset);
 		
+		// portfolio
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+		$query->select('c.`title` AS `portfolio`, c.`id`');
+		$query->from('`#__projects` p');
+		$query->join('LEFT',' `#__categories` c ON p.`catid` = c.`id`');
+		$query->where('p.id='.$pk);
+		$db->setQuery($query);
+		$result = $db->loadObject();
+		$this->setState('portfolio.id',$result->id);
+		$this->setState('portfolio.title',$result->portfolio);
+		
+		
+		
 		// Load the parameters.
 		$params	= $app->getParams();
 		$this->setState('params', $params);

@@ -56,6 +56,7 @@ class ProjectsViewPortfolios extends JView
 		}
 
 		$this->user = &JFactory::getUser();
+		
 		parent::display($tpl);
 	}
 }
