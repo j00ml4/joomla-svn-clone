@@ -46,26 +46,27 @@ class ProjectsViewProjects extends JView
 		$this->pagination	= &$model->getPagination();
 		$this->params		= &$app->getParams();
 		$this->canDo		= &ProjectsHelper::getActions();
-		
-		
+			
 		$layout = $this->getLayout();
 		switch($layout){
 			case 'gallery':
+				$layout = 'gallery'; 
 				$c = count($this->items);
 				for($i = 0; $i < $c;$i++) {
 						$this->items[$i]->description = JHtml::_('content.prepare', $this->items[$i]->description);
 				}
 				
 				// Get category
-				$this->category		= $this->get('Category');
+				$this->category	= $this->get('Category');
 				if(empty($this->category)){
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
-				$app->setUserState('project.category.id', $this->category->id);
+				$app->setUserState('portfolio.id', $this->category->id);
 				break;
 
 			default:
-				$app->setUserState('project.category.id', 0);
+				$layout = 'gallery';
+				$app->setUserState('portfolio.id', 0);
 				break;
 		}
 		
@@ -75,8 +76,10 @@ class ProjectsViewProjects extends JView
 		}
 		
 		// add 'home page' of our component breadcrumb
-	  $bc = $app->getPathway();
-	  $bc->addItem($model->getState('portfolio.title'));
+	  	$bc = $app->getPathway();
+	  	$bc->addItem($model->getState('portfolio.title'));
+	  	
+	  	$this->setLayout($layout);
 		parent::display($tpl);
 	}
 }

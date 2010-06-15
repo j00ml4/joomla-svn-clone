@@ -81,4 +81,19 @@ class ProjectsControllerProject extends JControllerForm
 	{
 		return true;
 	}
+	
+	
+	
+	public function save(){
+		if(!parent::save()){
+			return false;
+		}
+		$model		= $this->getModel();
+		$db 		= $model->getDBO();
+		$id 		= $model->getState('project.id', $db->insertid());
+		$append 	= '&layout=default&id='.$id; 
+		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
+		return true;
+	}
+	 
 }
