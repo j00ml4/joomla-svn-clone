@@ -60,7 +60,7 @@ class ProjectsViewProject extends JView
 				}
 				
 				// Get Category
-				$this->category = $this->get('Category');
+				$this->category = $model->getCategory($this->item->catid);
 				
 				// add 'potfolio' and 'project' of our component breadcrumb
 			  	$bc = $app->getPathway();

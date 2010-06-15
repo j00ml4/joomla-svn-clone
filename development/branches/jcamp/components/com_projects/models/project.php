@@ -61,6 +61,7 @@ class ProjectsModelProject extends JModelAdmin
 			$pk = $app->getUserState('com_projects.edit.project.id');
 		}
 		$this->setState('project.id', $pk);
+		$app->setUserState('com_projects.edit.project.id', null);
 		
 		// List limit
 		$offset = JRequest::getInt('limitstart');
