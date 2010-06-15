@@ -56,11 +56,8 @@ defined('_JEXEC') or die('Restricted access');
 		var form = document.adminForm;	
 		form.upyoutube.value = '';
 		form.url.value = '';
-	}
-	
-	
+	}	
 </script>
-
 
 <style type="text/css">
 	table.paramlist td.paramlist_key {
