@@ -14,13 +14,8 @@ defined('_JEXEC') or die;
  * @package		Joomla.Administrator
  * @subpackage	Projects
  */
-class jcTable_Project_members extends JTable
+class ProjectsTableMember extends JTable
 {
-	var $project_id	= null;
-	var $user_id	= null;
-	var $group_id	= null;
-	var $asset_id	= null;
-	
 	/**
 	 * @param	JDatabase	A database connector object
 	 */
