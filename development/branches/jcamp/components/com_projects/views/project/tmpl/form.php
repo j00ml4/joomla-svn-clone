@@ -19,7 +19,6 @@ JHtml::_('behavior.formvalidation');
 // Vars
 $params =  $this->params;
 $pageClass = $this->escape($params->get('pageclass_sfx'));
-
 ?>
 <script language="javascript" type="text/javascript">
 function submitbutton(task) {
@@ -33,7 +32,7 @@ function submitbutton(task) {
 <div class="edit item-page<?php echo  $pageClass;;?>">
 	<?php if ($params->get('show_page_heading', 1)) : ?>
 	<?php /* this allows the user to set the title he wants */ ?> 
-	<h1><?php echo $this->escape($params->get('page_heading')); ?></h1>
+	<h1 class="componentheading"><?php echo $this->escape($params->get('page_heading', JText::_('COM_PROJECTS_PROJECT_FORM_TITLE'))); ?></h1>
 	<?php endif; ?>
 	
 	<?php /** This way we have more controll over the design */ ?>

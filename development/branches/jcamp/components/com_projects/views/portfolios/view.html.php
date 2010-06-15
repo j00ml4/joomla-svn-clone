@@ -43,6 +43,7 @@ class ProjectsViewPortfolios extends JView
 		$this->pagination	= &$model->getPagination();
 		$this->params		= &$app->getParams();
 		$this->canDo		= &ProjectsHelper::getActions();
+		$this->user 		= &JFactory::getUser();
 		
 		$this->setLayout('gallery');
 		$c = count($this->items);
@@ -54,8 +55,6 @@ class ProjectsViewPortfolios extends JView
 		if (count($errors = $this->get('Errors'))) {
 			return JError::raiseError(500, implode("\n", $errors));
 		}
-
-		$this->user = &JFactory::getUser();
 		
 		parent::display($tpl);
 	}
