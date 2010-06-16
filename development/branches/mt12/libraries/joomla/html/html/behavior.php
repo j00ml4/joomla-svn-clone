@@ -59,7 +59,7 @@ class JHTMLBehavior
 		return;
 	}
 
-		function caption() {
+	function caption() {
 		JHTML::script('caption.js');
 	}
 
