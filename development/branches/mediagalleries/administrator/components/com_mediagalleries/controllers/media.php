@@ -19,6 +19,7 @@ jimport('joomla.application.component.controllerform');
  */
 class MediagalleriesControllerMedia extends JControllerForm
 {
-	// see no code needed ;)
+	 protected $view_list = 'galleries';
+	 protected $view_item = 'media';
 
 }

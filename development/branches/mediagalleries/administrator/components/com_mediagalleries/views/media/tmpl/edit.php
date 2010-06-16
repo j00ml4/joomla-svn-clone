@@ -98,9 +98,7 @@ JHtml::_('behavior.formvalidation');
 
 		<?php echo $this->loadTemplate('params'); ?>
 
-		<?php echo $this->loadTemplate('metadata'); ?>
-
-	</div>
+		</div>
 	<div class="clr"></div>
 
 	<input type="hidden" name="task" value="" />

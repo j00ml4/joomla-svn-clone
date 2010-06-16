@@ -52,9 +52,9 @@ class plgContentMedia extends JPlugin
 		}
 		
 		// Default	
-		$w = (int)$params->get('width', 400);
-		$h = (int)$params->get('height', 0 );
-		$ast = (int)$params->get('autostart', 0 );
+		$w = (int)$this->params->def('width', 400);
+		$h = (int)$this->params->def('height', 0 );
+		$ast = (int)$this->params->def('autostart', 0 );
 		
 		// Loop
 		for( $x=0; $x < $total; $x++ ){
