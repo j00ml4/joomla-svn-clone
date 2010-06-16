@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
  * @package		Joomla.Administrator
  * @subpackage	com_projects
  */
-class ProjectsTableTask extends JTable
+class ProjectsTableTask extends JTableNested
 {	
 	/**
 	 * @param	JDatabase	A database connector object
