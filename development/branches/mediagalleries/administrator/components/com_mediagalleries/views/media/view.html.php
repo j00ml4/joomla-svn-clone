@@ -49,6 +49,7 @@ class MediagalleriesViewMedia extends JView
 		$this->form		=& $this->get('Form');
 		$this->state	= $this->get('State');
 		
+		
 		// Import Helpers
 		include_once(PATH_HELPERS.'player.php');
 
@@ -63,7 +64,7 @@ class MediagalleriesViewMedia extends JView
 		}
 					
 		// get the lists
-		$this->lists =& $this->_buildLists($item);
+		$this->lists =& $this->_buildLists($this->item);
 		
 		// To folder
 		// $this->folder= GetmediaParam('defaultdir');//does it work?
