@@ -9,5 +9,5 @@ ADD  `state` tinyint(1) NOT NULL DEFAULT '1',
 ADD  `language` char(7) COLLATE utf8_unicode_ci NOT NULL,
 ADD  `featured` tinyint(3) unsigned NOT NULL,
 ADD  `xreference` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-ADD  `params` text COLLATE utf8_unicode_ci NOT NULL,
+ADD  `params` text COLLATE utf8_unicode_ci NOT NULL
 ADD  `access` int(10) unsigned NOT NULL;
