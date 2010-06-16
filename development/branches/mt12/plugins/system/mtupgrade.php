@@ -32,7 +32,6 @@ class plgSystemMTUpgrade extends JPlugin
 	 */
 	function plgSystemMTUpgrade(& $subject, $config)
 	{
-		$this->_db = JFactory::getDBO();
 		parent::__construct($subject, $config);
 	}
 
