@@ -51,7 +51,7 @@ class TableMedia extends JTable
 		
 		// check for valid url		
 		if ( !(
-			strposi($this->url,'http://') 
+			stripos($this->url,'http://') 
 			|| eregi( $this->url, 'https://') 
 		) ){
 			$this->setError('Invalid Item');
@@ -71,6 +71,7 @@ class TableMedia extends JTable
 	 */
 	function bind($data){
 		
+		print_r($data);
 		if (isset($array['params']) && is_array($array['params'])) {
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
