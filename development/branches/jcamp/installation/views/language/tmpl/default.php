@@ -14,6 +14,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 // Load the JavaScript behaviors.
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+JHtml::_('script', 'installation/template/js/installation.js', true, false, false, false);
 ?>
 
 <script language="JavaScript" type="text/javascript">
@@ -39,6 +40,14 @@ JHtml::_('behavior.formvalidation');
 			<div class="b"></div>
 		</div>
 	</div>
+</div>
+
+<div id="warning">
+	<noscript>
+		<div id="javascript-warning">
+			<?php echo JText::_('INSTL_WARNJAVASCRIPT'); ?>
+		</div>
+	</noscript>
 </div>
 
 <form action="index.php" method="post" name="adminForm" class="form-validate">

@@ -11,7 +11,6 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modellist');
-jimport('joomla.application.categories');
 
 /**
  * Portifolio gallery view to display all projects within a portifolio
@@ -20,14 +19,12 @@ jimport('joomla.application.categories');
  */
 class ProjectsModelTasks extends JModelList
 {
-		/**
+	/**
 	 * Category items data
 	 *
 	 * @var array
 	 */
 	protected $_item = null;
-
-	protected $_articles = null;
 
 	protected $_siblings = null;
 
@@ -41,7 +38,7 @@ class ProjectsModelTasks extends JModelList
 	 * @access	protected
 	 * @var		object
 	 */
-	protected $_category = null;
+	protected $_project = null;
 
 	
 	/**
@@ -56,39 +53,28 @@ class ProjectsModelTasks extends JModelList
 		// Initialise variables.
 		$app	= &JFactory::getApplication();
 		$params	= JComponentHelper::getParams('com_projects');
-
-		// List state information
-		$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
-		$this->setState('list.limit', $limit);
-
-		$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
-		$this->setState('list.start', $limitstart);
-
-		$orderCol	= JRequest::getCmd('filter_order', 'ordering');
-		$this->setState('list.ordering', $orderCol);
-
-		$listOrder	=  JRequest::getCmd('filter_order_Dir', 'ASC');
-		$this->setState('list.direction', $listOrder);
 		
-		// Category		
+		// Project		
 		$id = JRequest::getInt('id', 0);
-		$this->setState('portfolio.id', $id);
-
-		//$this->setState('filter.published',	1);
+		$this->setState('project.id', $id);
+		$app->setUserState('project.id', $id);
+		
+		// Parent
+		if (!($parent_id = $app->getUserState('task.parent_id'))) {
+			$parent_id = JRequest::getInt('parent_id');
+		}
+		$this->setState('task.parent_id', $parent_id);
+		$app->setUserState('task.parent_id', null);
+		
+		// Filters
+		$this->setState('filter.state',	1);
 		//$this->setState('filter.language',$app->getLanguageFilter());
 
-		// portfolio
-		$db		= $this->getDbo();
-		$query	= $db->getQuery(true);
-		$query->select('title');
-		$query->from('#__categories');
-		$query->where('id='.$id);
-		$db->setQuery($query);
-		$result = $db->loadResult();		
-		$this->setState('portfolio.title',$result);
-		
 		// Load the parameters.
 		$this->setState('params', $params);
+		
+		// List state information.
+		parent::populateState('a.lft', 'asc');
 	}
 	
 	
@@ -108,20 +94,52 @@ class ProjectsModelTasks extends JModelList
 
 		// Select required fields from the categories.
 		// (using 'a.*' is slower than fetching only columns we need (and this is clearer for us to know what date we fetch from db))
-		$query->select($this->getState('list.select', 'p.`id`, p.`title`, p.`catid`, p.`description`'));
-		$query->from('`#__projects` AS p');
+		$query->select($this->getState('list.select', 'a.*'));
+		$query->from('#__project_tasks AS a');
 
-		// Filter by category.
-		if ($categoryId = $this->getState('portfolio.id')) {
-			$query->where('p.catid = '.(int) $categoryId);
-			$query->join('LEFT', '`#__categories` AS c ON c.`id` = p.`catid`');
+		// Filter by project.
+		if ($project_id = $this->getState('project.id')) {
+			$query->where('a.project_id = '.(int) $project_id);
+			$query->join('LEFT', '#__projects AS p ON p.id = a.project_id');
+		}
+		
+		// Filter by parent
+		if ($parent_id = $this->getState('parent.id')) {
+			$query->where('a.parent_id = '.(int) $project_id);
+			$query->join('LEFT', '#__projects AS p ON p.id = a.project_id');
 		}
 
+		// Join over the users for the checked out user.
+		$query->select('uc.name AS editor');
+		$query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
+
+		// Join over the asset groups.
+		$query->select('ag.title AS access_level');
+		$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
+
+		// Join over the users for the author.
+		$query->select('ua.name AS author_name');
+		$query->join('LEFT', '#__users AS ua ON ua.id = a.created_user_id');
+		
 		// Filter by state
-		$state = $this->getState('filter.state');
-		if (is_numeric($state)) {
-			$query->where('p.`state` = '.(int) $state);
+		if ($state = $this->getState('filter.state')) {
+			$query->where('a.state >= '.(int) $state);
 		}
+		
+		// Filter by search in title
+		$search = $this->getState('filter.search');
+		if (!empty($search)) {
+			if (stripos($search, 'id:') === 0) {
+				$query->where('a.id = '.(int) substr($search, 3));
+			} else if (stripos($search, 'author:') === 0) {
+				$search = $db->Quote('%'.$db->getEscaped(substr($search, 7), true).'%');
+				$query->where('(ua.name LIKE '.$search.' OR ua.username LIKE '.$search.')');
+			} else {
+				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
+				$query->where('(a.title LIKE '.$search.' OR a.alias LIKE '.$search.' OR a.note LIKE '.$search.')');
+			}
+		}
+		
 		// Filter by start and end dates.
 		$nullDate = $db->Quote($db->getNullDate());
 		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
@@ -132,8 +150,8 @@ class ProjectsModelTasks extends JModelList
 		}
 
 		// Add the list ordering clause.
-		$query->order($db->getEscaped($this->getState('list.ordering', 'p.`ordering`')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-
+		$query->order($db->getEscaped($this->getState('list.ordering', 'a.title')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+	
 		return $query;
 	}
 	

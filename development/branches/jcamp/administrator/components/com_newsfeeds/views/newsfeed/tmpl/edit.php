@@ -77,7 +77,7 @@ JHtml::_('behavior.keepalive');
 
 				<li><?php echo $this->form->getLabel('cache_time'); ?>
 				<?php echo $this->form->getInput('cache_time'); ?></li>
-
+				
 				<li><?php echo $this->form->getLabel('rtl'); ?>
 				<?php echo $this->form->getInput('rtl'); ?></li>
 

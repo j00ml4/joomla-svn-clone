@@ -64,25 +64,24 @@ function ContentBuildRoute(&$query)
 			$menuCatid = $mId;
 			$categories = JCategories::getInstance('Content');
 			$category = $categories->get($catid);
-			if (!$category)
+			if ($category)
 			{
-				die('The category is not published or does not exist');
 				//TODO Throw error that the category either not exists or is unpublished
-			}
-			$path = array_reverse($category->getPath());
+				$path = array_reverse($category->getPath());
 
-			$array = array();
-			foreach($path as $id) {
-				if ((int) $id == (int)$menuCatid) {
-					break;
+				$array = array();
+				foreach($path as $id) {
+					if ((int) $id == (int)$menuCatid) {
+						break;
+					}
+					if ($advanced) {
+						list($tmp, $id) = explode(':', $id, 2);
+					}
+					$array[] = $id;
 				}
-				if ($advanced) {
-					list($tmp, $id) = explode(':', $id, 2);
-				}
-				$array[] = $id;
-			}
 
-			$segments = array_merge($segments, array_reverse($array));
+				$segments = array_merge($segments, array_reverse($array));
+			}
 			if ($view == 'article') {
 				if ($advanced) {
 					list($tmp, $id) = explode(':', $query['id'], 2);
@@ -142,7 +141,7 @@ function ContentBuildRoute(&$query)
 function ContentParseRoute($segments)
 {
 	$vars = array();
-
+	
 	//Get the active menu item.
 	$menu	= JSite::getMenu();
 	$item	= $menu->getActive();
@@ -224,6 +223,12 @@ function ContentParseRoute($segments)
 				$vars['view'] = 'article';
 			}
 			break;
+		
+		case 'article':
+			if ($count == 1) {
+				$vars['id']		= $segments[0];
+			}
+			break;	
 	}
 
 	return $vars;

@@ -40,6 +40,7 @@ class JFormFieldCategory extends JFormFieldList
 	protected function getOptions()
 	{
 		// Initialize variables.
+		$session = JFactory::getSession();
 		$options = array();
 
 		// Initialize some field attributes.
@@ -51,7 +52,7 @@ class JFormFieldCategory extends JFormFieldList
 
 			// Filter over published state or not depending upon if it is present.
 			if ($published) {
-				$options = JHtml::_('category.options', $extension, array('filter.published' => implode(',', $published)));
+				$options = JHtml::_('category.options', $extension, array('filter.published' => explode(',', $published)));
 			}
 			else {
 				$options = JHtml::_('category.options', $extension);
@@ -80,7 +81,13 @@ class JFormFieldCategory extends JFormFieldList
 		else {
 			JError::raiseWarning(500, JText::_('JLIB_FORM_ERROR_FIELDS_CATEGORY_ERROR_EXTENSION_EMPTY'));
 		}
-
+		
+		// if no value exists, try to load a selected filter category from the list view
+		$context = $this->form->getName();
+		if( !$this->value ) {
+			$this->value = $session->get($context.'.filter.category_id', $this->value);
+		}
+		
 		// Merge any additional options in the XML definition.
 		$options = array_merge(parent::getOptions(), $options);
 

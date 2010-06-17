@@ -54,55 +54,88 @@ class ProjectsModelTask extends JModelAdmin
 	 */
 	protected function populateState()
 	{
-		$app = JFactory::getApplication();
-
-		// ID
-		if (!($pk = JRequest::getInt('id'))) {
-			$pk = $app->getUserState('com_projects.edit.task.id');
-		}
-		$this->setState('project.id', $pk);
+		parent::populateState();
+		$app = JFactory::getApplication();		
 		$app->setUserState('com_projects.edit.task.id', null);
 		
-		// List limit
-		$offset = JRequest::getInt('limitstart');
-		$this->setState('list.offset', $offset);
+		// parent task
+		if (!($parent_id = $app->getUserState('task.parent_id'))) {
+			$parent_id = JRequest::getInt('parent_id');
+		}
+		$this->setState('task.parent_id', $parent_id);
+		$app->setUserState('task.parent_id', null);
 		
-		// portfolio
-		if($pk){
+		// parent task
+		if (!($parent_id = $app->getUserState('project.id'))) {
+			$parent_id = JRequest::getInt('project_id');
+		}
+		$this->setState('task.project_id', $parent_id);
+	}
+	
+	/**
+	 * function to get the project
+	 * @param $pk
+	 */
+	public function getProject($pk=null)
+	{
+		// Get project ID
+		if (empty($pk)) {
+			// portfolio
+			if (!($pk = $this->getState('task.id'))) {
+				return null;	
+			}	
+			
+			// query
 			$db		= $this->getDbo();
 			$query	= $db->getQuery(true);
 			$query->select('a.project_id');
 			$query->from('#__project_tasks AS a');
 			$query->where('a.id='.$pk);
 			$db->setQuery($query);
-			
+						
 			// load result
-			$result = $db->loadResult();
-			$this->setState('project.id',$result);
+			if (!($pk = $db->loadResult())) {
+				return null;
+			}
 		}
 		
-		// Load the parameters.
-		$params	= $app->getParams();
-		$this->setState('params', $params);
-	}
-	
-	/**
-	 * function to get the portifolo
-	 * @param $pk
-	 */
-	public function getProject($pk=null){
-		// Get portifolio ID
-		if (empty($pk) && !($pk = $this->getState('project.id', 0))) {
-			return null;
-		}
-		
-		//$table = $this->getTable('Project', 'ProjectsModel');
-		//$table->load($pk);
-		//return JArrayHelper::toObject($table->getProperties(), 'JObject');
+		//$this->setState('portfolio.id',$pk);
 		$project = JModel::getInstance('Project', 'ProjectsModel');
 		return $project->getItem($pk);
 	} 
 	
+	
+	/**
+	 * function to get the project
+	 * @param $pk
+	 */
+	public function getParent($pk=null)
+	{
+		// Get project ID
+		if (empty($pk)) {
+			// portfolio
+			if (!($pk = $this->getState('task.id'))) {
+				return null;	
+			}	
+			
+			// query
+			$db		= $this->getDbo();
+			$query	= $db->getQuery(true);
+			$query->select('a.parent_id');
+			$query->from('#__project_tasks AS a');
+			$query->where('a.id='.$pk);
+			$db->setQuery($query);
+						
+			// load result
+			if (!($pk = $db->loadResult())) {
+				return null;
+			}
+		}
+		
+		//$this->setState('portfolio.id',$pk);
+		$task = JModel::getInstance('Task', 'ProjectsModel');
+		return $task->getItem($pk);
+	}
 	
 	/**
 	 * Returns a reference to the a Table object, always creating it
@@ -169,7 +202,18 @@ class ProjectsModelTask extends JModelAdmin
 	{
 		return parent::validate($form, $data);
 	}
-
+	
+	/**
+	 * Method to get a single record.
+	 *
+	 * @param	integer	The id of the primary key.
+	 * @return	mixed	Object on success, false on failure.
+	 * @since	1.6
+	 */
+	public function getParent($pk = null)
+	{
+		return parent::getItem($pk);
+	}
 	/**
 	 * Method to get a single record.
 	 *

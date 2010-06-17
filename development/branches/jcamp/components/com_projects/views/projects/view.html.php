@@ -62,6 +62,10 @@ class ProjectsViewProjects extends JView
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
 				$app->setUserState('portfolio.id', $this->category->id);
+				
+				// add ' home page' of our component breadcrumb
+			  	$bc = $app->getPathway();
+			  	$bc->addItem($this->category->title);
 				break;
 
 			default:
@@ -75,10 +79,6 @@ class ProjectsViewProjects extends JView
 			return JError::raiseError(500, implode("\n", $errors));
 		}
 		
-		// add 'home page' of our component breadcrumb
-	  	$bc = $app->getPathway();
-	  	$bc->addItem($model->getState('portfolio.title'));
-	  	
 	  	$this->setLayout($layout);
 		parent::display($tpl);
 	}

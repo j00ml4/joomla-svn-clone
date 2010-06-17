@@ -23,7 +23,6 @@ class ProjectsControllerTask extends JControllerForm
 	protected $view_list = 'tasks';
 	//protected $text_prefix = 'COM_PROJECTS';
 	
-	
 	/**
 	 * Method to get a model object, loading it if required.
 	 *
@@ -83,7 +82,11 @@ class ProjectsControllerTask extends JControllerForm
 	}
 	
 	
-	
+	/**
+	 * Save a record
+	 * 
+	 * @see libraries/joomla/application/component/JControllerForm#save()
+	 */
 	public function save(){
 		if(!parent::save()){
 			return false;
@@ -95,5 +98,5 @@ class ProjectsControllerTask extends JControllerForm
 		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
 		return true;
 	}
-	 
+	
 }

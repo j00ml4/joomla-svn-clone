@@ -155,7 +155,7 @@ class JDocumentHTML extends JDocument
 	 * @param	string  $relation	Relation of link
 	 * @access	public
 	 */
-	function addFavicon($href, $type = 'image/x-icon', $relation = 'shortcut icon')
+	function addFavicon($href, $type = 'image/vnd.microsoft.icon', $relation = 'shortcut icon')
 	{
 		$href = str_replace('\\', '/', $href);
 		$this->_links[] = '<link href="'.$href.'" rel="'.$relation.'" type="'.$type.'"';
@@ -293,7 +293,7 @@ class JDocumentHTML extends JDocument
 	{
 		$result = '';
 
-		$operators = '(\+|\-|\*|\/|==|\!=|\<\>|\<|\>|\<=|\>=|and|or|xor) ';
+		$operators = '(\+|\-|\*|\/|==|\!=|\<\>|\<|\>|\<=|\>=|and|or|xor)';
 		$words = preg_split('# '.$operators.' #', $condition, null, PREG_SPLIT_DELIM_CAPTURE);
 		for ($i = 0, $n = count($words); $i < $n; $i+=2)
 		{
