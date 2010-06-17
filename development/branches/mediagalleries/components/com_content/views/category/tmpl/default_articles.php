@@ -25,7 +25,7 @@ $listDirn	= $this->state->get('list.direction');
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
 	<?php if ($this->params->get('filter_field') != 'hide') :?>
 	<fieldset class="filters">
-		<legend class="element-invisible">
+		<legend class="hidelabeltxt">
 			<?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?>
 		</legend>
 
@@ -37,7 +37,7 @@ $listDirn	= $this->state->get('list.direction');
 
 		<?php if ($this->params->get('show_pagination_limit')) : ?>
 		<div class="display-limit">
-			<?php echo JText::_('COM_CONTENT_DISPLAY_NUM'); ?>&nbsp;
+			<?php echo JText::_('JGLOBAL_DISPLAY_NUM'); ?>&nbsp;
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
 		<?php endif; ?>
@@ -64,7 +64,7 @@ $listDirn	= $this->state->get('list.direction');
 
 				<?php if ($this->params->get('list_show_author',1)) : ?>
 				<th class="list-author" id="tableOrdering3">
-					<?php echo JHTML::_('grid.sort', 'JAUTHOR', 'author_name', $listDirn, $listOrder); ?>
+					<?php echo JHTML::_('grid.sort', 'JAUTHOR', 'author', $listDirn, $listOrder); ?>
 				</th>
 				<?php endif; ?>
 
@@ -99,7 +99,7 @@ $listDirn	= $this->state->get('list.direction');
 
 					<?php if ($this->params->get('list_show_author',1)) : ?>
 					<td class="list-author">
-						<?php echo $this->params->get('link_author', 0) ? JHTML::_('link',JRoute::_('index.php?option=com_users&view=profile&member_id='.$article->created_by),$article->author_name) : $article->author_name; ?>
+						<?php echo $this->params->get('link_author', 0) ? JHTML::_('link',JRoute::_('index.php?option=com_users&view=profile&member_id='.$article->created_by),$article->author) : $article->author; ?>
 					</td>
 					<?php endif; ?>
 

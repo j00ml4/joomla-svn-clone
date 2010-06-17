@@ -272,14 +272,14 @@ abstract class JModuleHelper
 
 		$clientid = (int) $app->getClientId();
 
-		$query->where('m.access IN ('.$groups.')');
+		if (!$user->authorise('core.admin',1)) {
+			$query->where('m.access IN ('.$groups.')');
+		}
 		$query->where('m.client_id = '. $clientid);
 		if (isset($Itemid)) {
 			$query->where('(mm.menuid = '. (int) $Itemid .' OR mm.menuid <= 0)');
 		}
 		$query->order('position, ordering');
-
-		$cacheid = md5(serialize(array($Itemid,$groups,$clientid,JFactory::getLanguage()->getTag())));
 
 		// Filter by language
 		if ($app->isSite() && $app->getLanguageFilter()) {
@@ -289,8 +289,10 @@ abstract class JModuleHelper
 		// Set the query
 		$db->setQuery($query);
 
-		$cache = JFactory::getCache ('com_modules', 'callback' );
-		$modules = $cache->get(array($db,'loadObjectList'),null,$cacheid,false);
+		$cache 		= JFactory::getCache ('com_modules', 'callback');
+		$cacheid 	= md5(serialize(array($Itemid, $groups, $clientid, JFactory::getLanguage()->getTag())));
+		
+		$modules = $cache->get(array($db, 'loadObjectList'), null, $cacheid, false);
 		if (null === $modules)
 		{
 			JError::raiseWarning('SOME_ERROR_CODE', JText::sprintf('JLIB_APPLICATION_ERROR_MODULE_LOAD', $db->getErrorMsg()));

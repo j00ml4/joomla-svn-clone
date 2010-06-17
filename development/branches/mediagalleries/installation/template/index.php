@@ -18,10 +18,6 @@ defined('_JEXEC') or die;
 			<link href="template/css/template_rtl.css" rel="stylesheet" type="text/css" />
 		<?php endif; ?>
 
-		<script type="text/javascript" src="../media/system/js/core.js"></script>
-		<script type="text/javascript" src="../media/system/js/mootools-core.js"></script>
-		<script type="text/javascript" src="template/js/installation.js"></script>
-
 		<script type="text/javascript">
 			window.addEvent('domready', function(){ new Accordion($$('h3.moofx-toggler'), $$('div.moofx-slider'), {onActive: function(toggler, i) { toggler.addClass('moofx-toggler-down'); },onBackground: function(toggler, i) { toggler.removeClass('moofx-toggler-down'); },duration: 300,opacity: false, alwaysHide:true, show: 1}); });
 		</script>
@@ -31,7 +27,7 @@ defined('_JEXEC') or die;
 			<div id="header2">
 				<div id="header3">
 					<span class="logo"><a href="http://www.joomla.org" target="_blank"><img src="template/images/logo.png" alt="Joomla!" /></a></span>
-					<span>Joomla! <?php echo JVERSION; ?> <?php echo JText::_('Installation') ?></span>
+					<span>Joomla! <?php echo JVERSION; ?> <?php echo JText::_('INSTL_INSTALLATION') ?></span>
 				</div>
 			</div>
 		</div>

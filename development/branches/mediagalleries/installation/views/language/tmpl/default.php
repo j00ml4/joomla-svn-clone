@@ -14,6 +14,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 // Load the JavaScript behaviors.
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+JHtml::_('script', 'installation/template/js/installation.js', true, false, false, false);
 ?>
 
 <script language="JavaScript" type="text/javascript">
@@ -41,6 +42,14 @@ JHtml::_('behavior.formvalidation');
 	</div>
 </div>
 
+<div id="warning">
+	<noscript>
+		<div id="javascript-warning">
+			<?php echo JText::_('INSTL_WARNJAVASCRIPT'); ?>
+		</div>
+	</noscript>
+</div>
+
 <form action="index.php" method="post" name="adminForm" class="form-validate">
 	<div id="right">
 		<div id="rightpad">
@@ -58,7 +67,7 @@ JHtml::_('behavior.formvalidation');
 						<div class="button1-right"><div class="prev"><a onclick="validateForm(adminForm, 'setup.setlanguage');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 					<?php endif; ?>
 					</div>
-					<span class="step"><?php echo JText::_('Instl_Language_Title'); ?></span>
+					<span class="step"><?php echo JText::_('INSTL_LANGUAGE_TITLE'); ?></span>
 				</div>
 				<div class="b">
 					<div class="b">
@@ -73,9 +82,9 @@ JHtml::_('behavior.formvalidation');
 					</div>
 				</div>
 				<div class="m">
-					<h2><?php echo JText::_('Instl_Select_Language_Title'); ?></h2>
+					<h2><?php echo JText::_('INSTL_SELECT_LANGUAGE_TITLE'); ?></h2>
 					<div class="install-text">
-						<?php echo JText::_('Instl_Select_Language_Desc'); ?>
+						<?php echo JText::_('INSTL_SELECT_LANGUAGE_DESC'); ?>
 					</div>
 					<div class="install-body">
 						<div class="t">

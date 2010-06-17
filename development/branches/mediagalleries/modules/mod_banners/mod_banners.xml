@@ -18,7 +18,7 @@
 			module="mod_banners">mod_banners.php</filename>
 		<folder>tmpl</folder>
 		<filename>helper.php</filename>
-		<filename>index.php</filename>
+		<filename>index.html</filename>
 		<filename>mod_banners.xml</filename>
 	</files>
 	<languages>
@@ -45,11 +45,13 @@
 
 				<field
 					name="count"
-					type="text"
-					default="1"
+					type="integer"
+					first="1"
+					last="10"
+					step="1"
+					default="5"
 					label="MOD_BANNERS_FIELD_COUNT_LABEL"
 					description="MOD_BANNERS_FIELD_COUNT_DESC" />
-
 				<field
 					name="cid"
 					type="bannerclient"

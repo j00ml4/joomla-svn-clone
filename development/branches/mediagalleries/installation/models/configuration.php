@@ -48,7 +48,7 @@ class JInstallationModelConfiguration extends JModel
 
 		/* Site Settings */
 		$registry->set('offline', 0);
-		$registry->set('offline_message', JText::_('STDOFFLINEMSG'));
+		$registry->set('offline_message', JText::_('INSTL_STD_OFFLINE_MSG'));
 		$registry->set('sitename', $options->site_name);
 		$registry->set('editor', 'tinymce');
 		$registry->set('list_limit', 20);
@@ -82,8 +82,8 @@ class JInstallationModelConfiguration extends JModel
 		$registry->set('ftp_enable', $options->ftp_enable);
 
 		/* Locale Settings */
-		$registry->set('offset', 0);
-		$registry->set('offset_user', 0);
+		$registry->set('offset', 'UTC');
+		$registry->set('offset_user', 'UTC');
 
 		/* Mail Settings */
 		$registry->set('mailer', 'mail');
@@ -100,11 +100,11 @@ class JInstallationModelConfiguration extends JModel
 		/* Cache Settings */
 		$registry->set('caching', 0);
 		$registry->set('cachetime', 15);
-		$registry->set('cache_handler', 'file');
+		$registry->set('cache_handler', '');
 
 		/* Meta Settings */
-		$registry->set('MetaDesc', JText::_('STDMETADESC'));
-		$registry->set('MetaKeys', JText::_('STDMETAKEYS'));
+		$registry->set('MetaDesc', JText::_('INSTL_STD_METADESC'));
+		$registry->set('MetaKeys', JText::_('INSTL_STD_METAKEYS'));
 		$registry->set('MetaTitle', 1);
 		$registry->set('MetaAuthor', 1);
 
@@ -200,13 +200,13 @@ class JInstallationModelConfiguration extends JModel
 
 		// Check for errors.
 		if (JError::isError($db)) {
-			$this->setError(JText::sprintf('WARNNOTCONNECTDB', (string)$db));
+			$this->setError(JText::sprintf('INSTL_ERROR_CONNECT_DB', (string)$db));
 			return false;
 		}
 
 		// Check for database errors.
 		if ($err = $db->getErrorNum()) {
-			$this->setError(JText::sprintf('WARNNOTCONNECTDB', $db->getErrorNum()));
+			$this->setError(JText::sprintf('INSTL_ERROR_CONNECT_DB', $db->getErrorNum()));
 			return false;
 		}
 
@@ -219,7 +219,7 @@ class JInstallationModelConfiguration extends JModel
 		date_default_timezone_set('UTC');
 		$installdate	= date('Y-m-d H:i:s');
 		$nullDate		= $db->getNullDate();
-		$query	= 'INSERT INTO #__users SET'
+		$query	= 'REPLACE INTO #__users SET'
 				. ' id = 42'
 				. ', name = '.$db->quote('Super User')
 				. ', username = '.$db->quote($options->admin_user)
@@ -239,7 +239,7 @@ class JInstallationModelConfiguration extends JModel
 		}
 
 		// Map the super admin to the Super Admin Group
-		$query = 'INSERT INTO #__user_usergroup_map' .
+		$query = 'REPLACE INTO #__user_usergroup_map' .
 				' SET user_id = 42, group_id = 8';
 		$db->setQuery($query);
 		if (!$db->query()) {

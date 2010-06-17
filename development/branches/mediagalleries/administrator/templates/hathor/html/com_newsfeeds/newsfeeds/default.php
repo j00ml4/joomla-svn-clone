@@ -24,7 +24,7 @@ $listDirn	= $this->state->get('list.direction');
 
 <form action="<?php echo JRoute::_('index.php?option=com_newsfeeds&view=newsfeeds'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
-	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABE'); ?></legend>
+	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
 		<div class="filter-search fltlft">
 			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
 			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_NEWSFEEDS_SEARCH_IN_TITLE'); ?>" />
@@ -65,7 +65,7 @@ $listDirn	= $this->state->get('list.direction');
 			</select>
 
 			<button type="button" id="filter-go" onclick="this.form.submit();">
-				<?php echo JText::_('GO'); ?></button>
+				<?php echo JText::_('JSUBMIT'); ?></button>
 
 		</div>
 	</fieldset>
@@ -131,7 +131,7 @@ $listDirn	= $this->state->get('list.direction');
 							<?php echo $this->escape($item->name); ?>
 					<?php endif; ?>
 					<p class="smallsub">
-						(<span><?php echo JText::_('JFIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>)</p>
+						<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias));?></p>
 				</td>
 				<td class="center">
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'newsfeeds.', $canChange); ?>

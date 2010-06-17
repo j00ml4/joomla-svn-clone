@@ -1,4 +1,11 @@
 <?php
+/**
+ * @version		$Id$
+ * @package		Joomla.SystemTest
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * Does a standard Joomla! installation
+ */
 
 require_once 'SeleniumJoomlaTestCase.php';
 
@@ -49,7 +56,7 @@ class DoInstall extends SeleniumJoomlaTestCase
     for ($second = 0; ; $second++) {
         if ($second >= 15) $this->fail("timeout");
         try {
-            if ("Sample Data Loaded Successfully" == $this->getValue("instDefault")) break;
+            if (stripos($this->getValue("instDefault"),'SUCCESS')) break;
         } catch (Exception $e) {}
         sleep(1);
     }

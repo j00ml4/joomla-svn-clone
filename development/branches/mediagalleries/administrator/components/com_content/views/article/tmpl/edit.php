@@ -57,6 +57,10 @@ JHtml::_('behavior.formvalidation');
 
 		<li><?php echo $this->form->getLabel('featured'); ?>
 		<?php echo $this->form->getInput('featured'); ?></li>
+		
+		<li><?php echo $this->form->getLabel('id'); ?>
+		<?php echo $this->form->getInput('id'); ?></li>
+		
 		</ul>
 		<div class="clr"></div>
 		<?php echo $this->form->getLabel('articletext'); ?>
@@ -95,9 +99,6 @@ JHtml::_('behavior.formvalidation');
 
 				<li><?php echo $this->form->getLabel('hits'); ?>
 				<?php echo $this->form->getInput('hits'); ?></li>
-
-				<li><?php echo $this->form->getLabel('id'); ?>
-				<?php echo $this->form->getInput('id'); ?></li>
 			</ul>
 		</fieldset>
 
@@ -125,7 +126,7 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->form->getInput('rules'); ?>
 		</fieldset>
 
-		<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTENT_FIELDSET_METADATA'), 'meta-options'); ?>
+		<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'meta-options'); ?>
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('metadesc'); ?>

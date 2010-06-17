@@ -96,6 +96,11 @@ class UsersModelGroup extends JModelAdmin
 	 */
 	protected function preprocessForm(JForm $form, $data)
 	{
+		$obj = is_array($data) ? JArrayHelper::toObject($data,'JObject') : $data;
+		if (isset($obj->parent_id) && $obj->parent_id == 0 && $obj->id > 0) {
+			$form->setFieldAttribute('parent_id','type','hidden');
+			$form->setFieldAttribute('parent_id','hidden','true');
+		}
 		parent::preprocessForm($form, $data, 'user');
 	}
 
@@ -126,6 +131,7 @@ class UsersModelGroup extends JModelAdmin
 		// Typecast variable.
 		$pks = (array) $pks;
 		$user	= JFactory::getUser();
+		$groups = JAccess::getGroupsByUser($user->get('id'));
 
 		// Get a row instance.
 		$table = $this->getTable();
@@ -134,6 +140,13 @@ class UsersModelGroup extends JModelAdmin
 		JPluginHelper::importPlugin('user');
 		$dispatcher = JDispatcher::getInstance();
 
+		// do not allow to delete groups to which the current user belong
+		foreach ($pks as $i => $pk) {
+			if (in_array($pk, $groups)) {
+				JError::raiseWarning( 403, JText::_('COM_USERS_DELETE_ERROR_INVALID_GROUP'));
+				return false;
+			}
+		}
 		// Iterate the items to delete each one.
 		foreach ($pks as $i => $pk) {
 			if ($table->load($pk)) {

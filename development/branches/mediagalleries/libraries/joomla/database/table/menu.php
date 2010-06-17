@@ -48,7 +48,7 @@ class JTableMenu extends JTableNested
 			return false;
 		}
 
-		if (is_array($array['params']))
+		if (isset($array['params']) && is_array($array['params']))
 		{
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
@@ -72,7 +72,7 @@ class JTableMenu extends JTableNested
 		}
 		$this->alias = JApplication::stringURLSafe($this->alias);
 		if (trim(str_replace('-','',$this->alias)) == '') {
-			$this->alias = JFactory::getDate()->toFormat("%Y-%m-%d-%H-%M-%S");
+			$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
 		}
 
 		return true;

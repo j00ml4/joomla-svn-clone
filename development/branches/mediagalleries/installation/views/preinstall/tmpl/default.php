@@ -14,6 +14,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 // Load the JavaScript behaviors.
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+JHtml::_('script', 'installation/template/js/installation.js', true, false, false, false);
 ?>
 
 <script language="JavaScript" type="text/javascript">
@@ -55,14 +56,18 @@ JHtml::_('behavior.formvalidation');
 <?php if ($this->document->direction == 'ltr') : ?>
 					<div class="button1-left"><div class="refresh"><a href="index.php?view=preinstall" title="<?php echo JText::_('JCheck_Again'); ?>"><?php echo JText::_('JCheck_Again'); ?></a></div></div>
 					<div class="button1-right"><div class="prev"><a href="index.php?view=language" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
+	<?php if ($this->sufficient) : ?>
 					<div class="button1-left"><div class="next"><a href="index.php?view=license" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+	<?php endif; ?>
 <?php elseif ($this->document->direction == 'rtl') : ?>
+	<?php if ($this->sufficient) : ?>
 					<div class="button1-right"><div class="prev"><a href="index.php?view=license" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+	<?php endif; ?>
 					<div class="button1-left"><div class="next"><a href="index.php?view=language" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
 					<div class="button1-left"><div class="refresh"><a href="index.php?view=preinstall" title="<?php echo JText::_('JCheck_Again'); ?>"><?php echo JText::_('JCheck_Again'); ?></a></div></div>
 <?php endif; ?>
 				</div>
-				<span class="step"><?php echo JText::_('Instl_Precheck_Title'); ?></span>
+				<span class="step"><?php echo JText::_('INSTL_PRECHECK_TITLE'); ?></span>
 			</div>
 			<div class="b">
 				<div class="b">
@@ -77,9 +82,9 @@ JHtml::_('behavior.formvalidation');
 				</div>
 			</div>
 			<div class="m">
-				<h2><?php echo JText::sprintf('Instl_Precheck_for_version', $this->version->getLongVersion()); ?></h2>
+				<h2><?php echo JText::sprintf('INSTL_PRECHECK_FOR_VERSION', $this->version->getLongVersion()); ?></h2>
 				<div class="install-text">
-					<?php echo JText::_('Instl_Precheck_Desc'); ?>
+					<?php echo JText::_('INSTL_PRECHECK_DESC'); ?>
 				</div>
 				<div class="install-body">
 					<div class="t">
@@ -98,7 +103,7 @@ JHtml::_('behavior.formvalidation');
 									</td>
 									<td valign="top">
 										<span class="<?php echo ($option->state) ? 'green' : 'red'; ?>">
-											<?php echo JText::_(($option->state) ? 'JYes' : 'JNo'); ?>
+											<?php echo JText::_(($option->state) ? 'JYES' : 'JNO'); ?>
 										</span>
 										<span class="small">
 											<?php echo $option->notice; ?>&nbsp;
@@ -121,9 +126,9 @@ JHtml::_('behavior.formvalidation');
 
 				<div class="newsection"></div>
 
-				<h2><?php echo JText::_('Instl_Precheck_Recommended_settings_Title'); ?></h2>
+				<h2><?php echo JText::_('INSTL_PRECHECK_RECOMMENDED_SETTINGS_TITLE'); ?></h2>
 				<div class="install-text">
-					<?php echo JText::_('Instl_Precheck_Recommended_settings_Desc'); ?>
+					<?php echo JText::_('INSTL_PRECHECK_RECOMMENDED_SETTINGS_DESC'); ?>
 				</div>
 				<div class="install-body">
 					<div class="t">
@@ -137,13 +142,13 @@ JHtml::_('behavior.formvalidation');
 								<thead>
 								<tr>
 									<td class="toggle">
-										<?php echo JText::_('Instl_Precheck_Directive'); ?>
+										<?php echo JText::_('INSTL_PRECHECK_DIRECTIVE'); ?>
 									</td>
 									<td class="toggle">
-										<?php echo JText::_('Instl_Precheck_Recommended'); ?>
+										<?php echo JText::_('INSTL_PRECHECK_RECOMMENDED'); ?>
 									</td>
 									<td class="toggle">
-										<?php echo JText::_('Instl_Precheck_Actual'); ?>
+										<?php echo JText::_('INSTL_PRECHECK_ACTUAL'); ?>
 									</td>
 								</tr>
 								</thead>
@@ -155,12 +160,12 @@ JHtml::_('behavior.formvalidation');
 									</td>
 									<td class="toggle">
 										<span>
-										<?php echo JText::_(($setting->recommended) ? 'JOn' : 'JOff'); ?>
+										<?php echo JText::_(($setting->recommended) ? 'JON' : 'JOFF'); ?>
 										</span>
 									</td>
 									<td>
 										<span class="<?php echo ($setting->state === $setting->recommended) ? 'green' : 'red'; ?>">
-										<?php echo JText::_(($setting->state) ? 'JOn' : 'JOff'); ?>
+										<?php echo JText::_(($setting->state) ? 'JON' : 'JOFF'); ?>
 										</span>
 									</td>
 								</tr>

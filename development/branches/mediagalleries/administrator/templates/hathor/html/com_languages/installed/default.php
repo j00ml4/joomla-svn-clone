@@ -30,7 +30,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 			</select>
 
 			<button type="button" id="filter-go" onclick="this.form.submit();">
-				<?php echo JText::_('GO'); ?></button>
+				<?php echo JText::_('JSUBMIT'); ?></button>
 
 		</div>
 	</fieldset>
@@ -78,7 +78,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 					<?php echo $row->name;?>
 				</td>
 				<td class="center">
-					<?php echo JHtml::_('languages.published',$row->published);?>
+					<?php echo JHtml::_('jgrid.isdefault', $row->published, $i, 'installed.', !$row->published);?>
 				</td>
 				<td class="center">
 					<?php echo $row->version; ?>

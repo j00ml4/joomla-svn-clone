@@ -22,7 +22,14 @@
 			<option value="0">JHIDE</option>
 			<option value="1">JSHOW</option>
 		</field>
-
+			<field name="presentation_style" type="list"
+				description="COM_CONTACT_FIELD_PRESENTATION_DESC"
+				label="COM_CONTACT_FIELD_PRESENTATION_LABEL"
+			>
+				<option value="sliders">COM_CONTACT_FIELD_VALUE_SLIDERS</option>
+				<option value="tabs">COM_CONTACT_FIELD_VALUE_TABS</option>
+				<option value="full">COM_CONTACT_FIELD_VALUE_FULL</option>
+			</field>
 		<field name="show_name" type="radio" default="1"
 			label="COM_CONTACT_FIELD_PARAMS_NAME_LABEL" description="COM_CONTACT_FIELD_PARAMS_NAME_DESC"
 		>
@@ -377,7 +384,7 @@
 
 	</fieldset>
 
-	<fieldset name="Contact_Config_Meta_Data" label="COM_CONTACT_FIELDSET_METADATA">
+	<fieldset name="Contact_Config_Meta_Data" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
 		<field name="metakey" type="textarea"
 			label="JFIELD_META_KEYWORDS_LABEL" description="JFIELD_META_KEYWORDS_DESC"
 			rows="3" cols="30" />

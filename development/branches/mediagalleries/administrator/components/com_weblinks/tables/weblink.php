@@ -129,7 +129,7 @@ class WeblinksTableWeblink extends JTable
 
 		$xid = intval($this->_db->loadResult());
 		if ($xid && $xid != intval($this->id)) {
-			$this->setError(JText::sprintf('WARNNAMETRYAGAIN', JText::_('COM_WEBLINKS_ERR_TABLES_NAME')));
+			$this->setError(JText::_('COM_WEBLINKS_ERR_TABLES_NAME'));
 			return false;
 		}
 
@@ -138,7 +138,7 @@ class WeblinksTableWeblink extends JTable
 		}
 		$this->alias = JApplication::stringURLSafe($this->alias);
 		if (trim(str_replace('-','',$this->alias)) == '') {
-			$this->alias = JFactory::getDate()->toFormat("%Y-%m-%d-%H-%M-%S");
+			$this->alias = JFactory::getDate()->format("Y-m-d-H-i-s");
 		}
 
 		// Check the publish down date is not earlier than publish up.

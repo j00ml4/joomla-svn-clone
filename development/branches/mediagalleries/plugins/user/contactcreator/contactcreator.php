@@ -76,11 +76,11 @@ class plgUserContactCreator extends JPlugin
 			// now replace it in together
 			$contact->webpage = str_replace($search_array, $replace_array, $autowebpage);
 		}
-
-		$result = $contact->store();
-		if(!$result)
-		{
-			JError::raiseError(42, JText::sprintf('Failed to update contact: %s', $contact->getErrorMsg()));
+		if($contact->check()) {
+			$result = $contact->store();
+		}
+		if(!(isset($result)) || !$result) {
+			JError::raiseError(42, JText::sprintf('PLG_CONTACTCREATOR_ERR_FAILED_UPDATE', $contact->getErrorMsg()));
 		}
 	}
 

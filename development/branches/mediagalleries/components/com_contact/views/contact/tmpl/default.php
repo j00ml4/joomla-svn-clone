@@ -21,10 +21,10 @@ $cparams = JComponentHelper::getParams ('com_media');
 		<h2>
 			<span class="contact-name"><?php echo $this->contact->name; ?></span>
 		</h2>
-	<?php endif; ?>
+	<?php endif;  ?>
 	<?php if ($this->params->get('show_contact_category') == 'show_no_link') : ?>
 		<h3>
-			<span class="contact-category"><?php echo $this->contact->category_name; ?></span>
+			<span class="contact-category"><?php echo $this->contact->category_title; ?></span>
 		</h3>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_contact_category') == 'show_with_link') : ?>
@@ -37,15 +37,17 @@ $cparams = JComponentHelper::getParams ('com_media');
 	<?php endif; ?>
 	<?php if ($this->contact->image && $this->params->get('show_image')) : ?>
 		<span class="contact-image">
-			<?php echo JHTML::_('image','images/'.$this->contact->image, JText::_('COM_CONTACT_DETAILS'), array('align' => 'middle')); ?>
+			<?php echo JHTML::_('image',$this->contact->image, JText::_('COM_CONTACT_DETAILS'), array('align' => 'middle')); ?>
 		</span>
-	<?php endif; ?>
-<?php echo  JHtml::_('sliders.start', 'contact-slider'); ?>
-	<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTACT_DETAILS'), 'basic-details'); ?>
-	<?php if ($this->params->get('show_contact_list') && count($this->contacts) > 1) : ?>
+	<?php endif; ?> 
+	<?php if ($this->params->get('presentation_style')!='full'){?>
+		<?php echo  JHtml::_($this->params->get('presentation_style').'.start', 'contact-slider'); ?>	
+	<?php echo JHtml::_($this->params->get('presentation_style').'.panel',JText::_('COM_CONTACT_DETAILS'), 'basic-details'); } ?>
+
+	<?php if ($this->params->get('show_contact_list') && count($this->contact) > 1) : ?>
 		<form action="<?php echo JRoute::_('index.php') ?>" method="post" name="selectForm" id="selectForm">
 			<?php echo JText::_('COM_CONTACT_SELECT_CONTACT'); ?>:
-			<?php echo JHtml::_('select.genericlist',  $this->contacts, 'id', 'class="inputbox" onchange="this.form.submit()"', 'id', 'name', $this->contact->id);?>
+			<?php echo JHtml::_('select.genericlist',  $this->contact, 'id', 'class="inputbox" onchange="this.form.submit()"', 'id', 'name', $this->contact->id);?>
 			<input type="hidden" name="option" value="com_contact" />
 		</form>
 	<?php endif; ?>
@@ -63,23 +65,27 @@ $cparams = JComponentHelper::getParams ('com_media');
 	<?php endif; ?>
 
 	<?php if ($this->params->get('show_email_form') && ($this->contact->email_to )) : ?>
-		<?php echo JHtml::_('sliders.panel', JText::_('COM_CONTACT_EMAIL_FORM'), 'display-form'); ?>
-			<?php echo $this->loadTemplate('form');  ?>
+	<?php if ($this->params->get('presentation_style')!='full'):?>
+		<?php  echo JHtml::_($this->params->get('presentation_style').'.panel', JText::_('COM_CONTACT_EMAIL_FORM'), 'display-form');  ?>
+		<?php endif; ?>		
+		<?php  echo $this->loadTemplate('form');  ?>
 	<?php endif; ?>
-
 	<?php if ($this->params->get('show_links')) : ?>
-	<?php echo $this->loadTemplate('links'); ?>
+		<?php echo $this->loadTemplate('links'); ?>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_articles') &&  $this->contact->user_id) : ?>
-	<?php echo JHtml::_('sliders.panel', JText::_('JGLOBAL_ARTICLES'), 'display-articles'); ?>
-		<?php echo $this->loadTemplate('articles'); ?>
+		<?php if ($this->params->get('presentation_style')!='full'){?>
+			<?php echo JHtml::_($this->params->get('presentation_style').'.panel', JText::_('JGLOBAL_ARTICLES'), 'display-articles');} ?>
+			<?php echo $this->loadTemplate('articles'); ?>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_profile') &&  $this->contact->user_id) : ?>
-	<?php echo JHtml::_('sliders.panel', JText::_('COM_CONTACT_PROFILE'), 'display-profile'); ?>
+		<?php if ($this->params->get(presentation_style)!='full'){?>
+			<?php echo JHtml::_($this->params->get('presentation_style').'.panel', JText::_('COM_CONTACT_PROFILE'), 'display-profile');} ?>
 		<?php echo $this->loadTemplate('profile'); ?>
 	<?php endif; ?>
 	<?php if ($this->contact->misc && $this->params->get('show_misc')) : ?>
-			<?php echo JHtml::_('sliders.panel', JText::_('COM_CONTACT_OTHER_INFORMATION'), 'display-misc'); ?>
+		<?php if ($this->params->get('presentation_style')!='full'){?>
+			<?php echo JHtml::_($this->params->get('presentation_style').'.panel', JText::_('COM_CONTACT_OTHER_INFORMATION'), 'display-misc');} ?>
 				<div class="contact-miscinfo">
 					<span class="<?php echo $this->params->get('marker_class'); ?>">
 						<?php echo $this->params->get('marker_misc'); ?>
@@ -89,6 +95,6 @@ $cparams = JComponentHelper::getParams ('com_media');
 					</span>
 				</div>
 	<?php endif; ?>
-
-			<?php echo JHtml::_('sliders.end'); ?>
+	<?php if ($this->params->get('presentation_style')!='full'){?>
+			<?php echo JHtml::_($this->params->get('presentation_style').'.end');} ?>		
 </div>

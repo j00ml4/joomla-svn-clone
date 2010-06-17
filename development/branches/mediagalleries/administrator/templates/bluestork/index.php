@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 $app = JFactory::getApplication();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo  $this->language; ?>" lang="<?php echo  $this->language; ?>" dir="<?php echo  $this->direction; ?>" id="minwidth" >
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo  $this->language; ?>" lang="<?php echo  $this->language; ?>" dir="<?php echo  $this->direction; ?>" >
 <head>
 <jdoc:include type="head" />
 
@@ -26,10 +26,6 @@ $app = JFactory::getApplication();
 
 <!--[if gte IE 7]>
 <link href="templates/<?php echo  $this->template ?>/css/ie7.css" rel="stylesheet" type="text/css" />
-<![endif]-->
-
-<!--[if lte IE 6]>
-<link href="templates/<?php echo  $this->template ?>/css/ie6.css" rel="stylesheet" type="text/css" />
 <![endif]-->
 
 <?php if ($this->params->get('useRoundedCorners')) : ?>

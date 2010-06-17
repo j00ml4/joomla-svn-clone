@@ -21,18 +21,49 @@ Install.sampleData = function(el) {
 		method: 'get',
 		url: 'index.php?'+document.id(el.form).toQueryString(),
 		data: {'task':'setup.loadSampleData', 'format':'json'},
-		onRequest: function() { el.set('disabled', 'disabled'); },
+		onRequest: function() {
+			el.set('disabled', 'disabled');
+			$('theDefaultError').setStyle('display','none');
+		},
 		onComplete: function(response) {
-			var r = JSON.decode(response);
+			try {
+				var r = JSON.decode(response);
+			} catch(e) {
+				var r = false;
+			}
+			
 			if (r)
 			{
-				Joomla.replaceTokens(r.token)
+				Joomla.replaceTokens(r.token);
 				if (r.error == false) {
 					el.set('value', r.data.text);
 					el.set('onclick','');
+					el.set('disabled', 'disabled');
+					$('jform_sample_installed').set('value','1');
+				}
+				else
+				{
+					$('theDefaultError').setStyle('display','block');
+					$('theDefaultErrorMessage').set('html', r.message);
+					el.set('disabled', '');
 				}
 			}
-			el.set('disabled', '');
+			else
+			{
+				$('theDefaultError').setStyle('display','block');
+				$('theDefaultErrorMessage').set('html', response );
+				el.set('disabled', '');
+			}
+		},
+		onFailure: function(xhr) {
+			var r = JSON.decode(xhr.responseText);
+			if (r)
+			{
+				Joomla.replaceTokens(r.token);
+				$('theDefaultError').setStyle('display','block');
+				$('theDefaultErrorMessage').set('html', r.message);
+			}
+			el.set('disabled', '');			
 		}
 	}).send();
 };
@@ -46,7 +77,7 @@ Install.detectFtpRoot = function(el) {
 	var req = new Request({
 		method: 'get',
 		url: 'index.php?'+document.id(el.form).toQueryString(),
-		data: {'task':'setup.detectFtpRoot', 'protocol':'json'},
+		data: {'task':'setup.detectFtpRoot', 'format':'json'},
 		onRequest: function() { el.set('disabled', 'disabled'); },
 		onComplete: function(response) {
 			var r = JSON.decode(response);
@@ -71,7 +102,7 @@ Install.verifyFtpSettings = function(el) {
 	var req = new Request({
 		method: 'get',
 		url: 'index.php?'+document.id(el.form).toQueryString(),
-		data: {'task':'setup.verifyFtpSettings', 'protocol':'json'},
+		data: {'task':'setup.verifyFtpSettings', 'format':'json'},
 		onRequest: function() { el.set('disabled', 'disabled'); },
 		onComplete: function(response) {
 			var r = JSON.decode(response);

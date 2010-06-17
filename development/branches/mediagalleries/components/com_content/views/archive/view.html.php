@@ -43,11 +43,6 @@ class ContentViewArchive extends JView
 		{
 			$item->catslug = ($item->category_alias) ? ($item->catid . ':' . $item->category_alias) : $item->catid;
 			$item->parent_slug = ($item->parent_alias) ? ($item->parent_id . ':' . $item->parent_alias) : $item->parent_id;
-			$article_params = new JRegistry;
-			$article_params->loadJSON($item->attribs);
-			$temp = clone($params);
-			$temp->merge($article_params);
-			$item->params = $temp;
 		}
 
 		$form = new stdClass();
@@ -79,7 +74,7 @@ class ContentViewArchive extends JView
 		);
 		// Year Field
 		$years = array();
-		$years[] = JHtml::_('select.option', null, JText::_('Year'));
+		$years[] = JHtml::_('select.option', null, JText::_('JYEAR'));
 		for ($i = 2000; $i <= 2020; $i++) {
 			$years[] = JHtml::_('select.option', $i, $i);
 		}

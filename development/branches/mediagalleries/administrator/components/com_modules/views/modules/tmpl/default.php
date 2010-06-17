@@ -81,7 +81,7 @@ $listDirn	= $this->state->get('list.direction');
 				<th width="5%">
 					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'published', $listDirn, $listOrder); ?>
 				</th>
-				<th width="10%" nowrap="nowrap">
+				<th width="10%">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ORDERING', 'ordering', $listDirn, $listOrder); ?>
 					<?php echo JHtml::_('grid.order', $this->items, 'filesave.png', 'modules.saveorder'); ?>
 				</th>
@@ -89,7 +89,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ACCESS', 'access', $listDirn, $listOrder); ?>
 				</th>
 				<th width="5%">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'language', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'language_title', $listDirn, $listOrder); ?>
 				</th>
 				<th width="1%" nowrap="nowrap">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ID', 'id', $listDirn, $listOrder); ?>
@@ -125,26 +125,17 @@ $listDirn	= $this->state->get('list.direction');
 					<?php else : ?>
 							<?php echo $this->escape($item->title); ?>
 					<?php endif; ?>
-					<p class="smallsub">
+
 					<?php if (!empty($item->note)) : ?>
-						(<span><?php echo JText::_('JFIELD_NOTE_LABEL'); ?>:</span> <?php echo $this->escape($item->note); ?>)</p>
+					<p class="smallsub">
+						<?php echo JText::sprintf('JGLOBAL_LIST_NOTE', $this->escape($item->note));?></p>
 					<?php endif; ?>
 				</td>
 				<td class="center">
 					<?php echo $item->position; ?>
 				</td>
 				<td class="center">
-					<?php
-						if (is_null($item->pages)) {
-							echo JText::_('JNONE');
-						} else if ($item->pages < 0) {
-							echo JText::_('COM_MODULES_ASSIGNED_VARIES_EXCEPT');
-						} else if ($item->pages > 0) {
-							echo JText::_('COM_MODULES_ASSIGNED_VARIES_ONLY');
-						} else {
-							echo JText::_('JALL');
-						}
-					?>
+					<?php echo $item->pages; ?>
 				</td>
 				<td class="left">
 					<?php echo $item->name;?>
