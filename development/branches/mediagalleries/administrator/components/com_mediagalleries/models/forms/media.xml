@@ -204,7 +204,7 @@
 			type="hidden" 
 			filter="unset" 
 		/>
-	<!-- to be reviewed/deleted 
+	
 		<field 
 			name="publish_up" 
 			type="calendar"
@@ -214,8 +214,8 @@
 			format="%Y-%m-%d %H:%M:%S" 
 			size="30"
 			filter="server_utc" 
-		/>-->
-	<!-- to be reviewed/deleted 
+		/>
+	
 		<field 
 			name="publish_down" 
 			type="calendar"
@@ -225,8 +225,8 @@
 			format="%Y-%m-%d %H:%M:%S" 
 			size="30"
 			filter="server_utc" 
-		/>-->
-	<!-- to be reviewed/deleted 
+		/>
+	
 		<field 
 			name="metakey" 
 			type="textarea"
@@ -235,7 +235,7 @@
 			class="inputbox" 
 			rows="3" 
 			cols="30"
-		/>-->
+		/>
 	<!-- to be reviewed/deleted 
 		<field 
 			name="metadesc" 
