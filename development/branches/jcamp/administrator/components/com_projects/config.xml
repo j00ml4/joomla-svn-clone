@@ -13,8 +13,8 @@
 
 		<field name="view_projects"
 			type="radio"
-			label="view_projects"
-			description="What public guests can do"
+			label="COM_PROJECTS_VIEW_PROJECTS_LABEL"
+			description="COM_PROJECTS_VIEW_PROJECTS_DESC"
 			class="inputbox"
 			size="1"
 			default="0">
@@ -25,8 +25,8 @@
 			
 		<field name="view_tickets"
 			type="radio"
-			label="can_view_tickets"
-			description="What public guests can do"
+			label="COM_PROJECTS_VIEW_TICKETS_LABEL"
+			description="COM_PROJECTS_VIEW_TICKETS_DESC"
 			class="inputbox"
 			size="1"
 			default="0">
@@ -36,8 +36,8 @@
 		
 		<field name="view_tasks"
 			type="radio"
-			label="can_view_tasks"
-			description="What public guests can do"
+			label="COM_PROJECTS_VIEW_TASKS_LABEL"
+			description="COM_PROJECTS_VIEW_TASKS_DESC"
 			class="inputbox"
 			size="1"
 			default="0">
@@ -48,8 +48,8 @@
 
 		<field name="view_documents"
 			type="radio"
-			label="view_documents"
-			description="What public guests can do"
+			label="COM_PROJECTS_VIEW_DOCUMENTS_LABEL"
+			description="COM_PROJECTS_VIEW_DOCUMENTS_DESC"
 			class="inputbox"
 			size="1"
 			default="0">
@@ -60,8 +60,8 @@
 		
 		<field name="view_activities"
 			type="radio"
-			label="can_view_activities"
-			description="What public guests can do"
+			label="COM_PROJECTS_VIEW_ACTIVITIES_LABEL"
+			description="COM_PROJECTS_VIEW_ACTIVITIES_DESC"
 			class="inputbox"
 			size="1"
 			default="0">
