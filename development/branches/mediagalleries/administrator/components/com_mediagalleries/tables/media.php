@@ -71,8 +71,7 @@ class TableMedia extends JTable
 	 * @return boolean	True on success
 	 */
 	function bind($data){
-		
-		
+	
 		if (isset($array['params']) && is_array($array['params'])) {
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
@@ -80,19 +79,27 @@ class TableMedia extends JTable
 		}
 		
 		//Fix uid
-		if(empty($data['userid'])){
+		
+		//if(empty($data['userid'])){
 			$user			=& JFactory::getUser();
 			$data['userid']	= $user->get('id');
-		}
+		//} Just removed the condition so that the right author is saved
 		
-		// Fix alias		
+		// Fix alias
+		if(!$data['alias'])
+		{
+			$data['alias']=$data[title];	
+		}		
 		$data['alias'] = JFilterOutput::stringURLSafe($data['alias']);
 
 		
 		$datenow =& JFactory::getDate($data['created']);
-		$data['added'] = $datenow->toMySQL();
+		$data['created'] = $datenow->toMySQL();
 		
+		print_r($data);
+		exit;
 		// bind
  		return parent::bind($data);
+ 		
 	}
 }
