@@ -59,7 +59,7 @@ $listDirn	= $this->state->get('list.direction');
 			</select>
 
 			<button type="button" id="filter-go" onclick="this.form.submit();">
-				<?php echo JText::_('Go'); ?></button>
+				<?php echo JText::_('JSUBMIT'); ?></button>
 
 		</div>
 	</fieldset>
@@ -131,10 +131,14 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo $this->escape($item->email); ?>
 				</td>
 				<td class="center">
-					<?php echo JHTML::_('date',$item->lastvisitDate, '%Y-%m-%d %H:%M:%S'); ?>
+					<?php if ($item->lastvisitDate!='0000-00-00 00:00:00'):?>
+						<?php echo JHTML::_('date',$item->lastvisitDate, 'Y-m-d H:i:s'); ?>
+					<?php else:?>
+						<?php echo JText::_('JNEVER'); ?>
+					<?php endif;?>
 				</td>
 				<td class="center">
-					<?php echo JHTML::_('date',$item->registerDate, '%Y-%m-%d %H:%M:%S'); ?>
+					<?php echo JHTML::_('date',$item->registerDate, 'Y-m-d H:i:s'); ?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>

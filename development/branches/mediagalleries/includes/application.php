@@ -32,6 +32,11 @@ final class JSite extends JApplication
 	private $_language_filter = false;
 
 	/**
+	 * Option to detect language by the browser
+	 */
+	private $_detect_browser = false;
+
+	/**
 	 * Class constructor
 	 *
 	 * @param	array An optional associative array of configuration settings.
@@ -56,29 +61,20 @@ final class JSite extends JApplication
 
 		// if a language was specified it has priority
 		// otherwise use user or default language settings
+		jimport('joomla.plugin.helper');
+		JPluginHelper::importPlugin('system');
+
 		if (empty($options['language'])) {
-			$sef = JRequest::getString('lang', null);
-			if (!empty($sef)) {
-				$languages = JLanguageHelper::getLanguages('sef');
-				if (isset($languages[$sef])) {
-					$lang = $languages[$sef]->lang_code;
-					// Make sure that the sef's language exists
-					if ($lang && JLanguage::exists($lang)) {
-						$config = JFactory::getConfig();
-						$cookie_domain 	= $config->get('config.cookie_domain', '');
-						$cookie_path 	= $config->get('config.cookie_path', '/');
-						setcookie(JUtility::getHash('language'), $lang, time() + 365 * 86400, $cookie_path, $cookie_domain);
-						$options['language'] = $lang;
-					}
-				}
+			$lang = JRequest::getString('language', null);
+			if ($lang && JLanguage::exists($lang)) {
+				$options['language'] = $lang;
 			}
 		}
 
-		if (empty($options['language'])) {
+		if ($this->_language_filter && empty($options['language'])) {
 			// Detect cookie language
 			jimport('joomla.utilities.utility');
 			$lang = JRequest::getString(JUtility::getHash('language'), null ,'cookie');
-
 			// Make sure that the user's language exists
 			if ($lang && JLanguage::exists($lang)) {
 				$options['language'] = $lang;
@@ -94,7 +90,7 @@ final class JSite extends JApplication
 			}
 		}
 
-		if (empty($options['language'])) {
+		if ($this->_detect_browser && empty($options['language'])) {
 			// Detect browser language
 			$lang = JLanguageHelper::detectLanguage();
 			// Make sure that the user's language exists
@@ -161,8 +157,13 @@ final class JSite extends JApplication
 				$languages = JLanguageHelper::getLanguages('lang_code');
 
 				// Set metadata
-				$document->setMetaData('keywords', $this->getCfg('MetaKeys') . ($languages[$lang_code]->metakey ? (', ' . $languages[$lang_code]->metakey) : ''));
+				if (isset($languages[$lang_code]) && $languages[$lang_code]->metakey) {
+					$document->setMetaData('keywords', $languages[$lang_code]->metakey);
+				} else {
+					$document->setMetaData('keywords', $this->getCfg('MetaKeys'));
+				}
 				$document->setMetaData('rights', $this->getCfg('MetaRights'));
+				$document->setMetaData('language', $lang_code);
 				if ($router->getMode() == JROUTER_MODE_SEF) {
 					$document->setBase(JURI::current());
 				}
@@ -175,7 +176,6 @@ final class JSite extends JApplication
 
 		$document->setTitle($params->get('page_title'));
 		$document->setDescription($params->get('page_description'));
-
 		$contents = JComponentHelper::renderComponent($component);
 		$document->setBuffer($contents, 'component');
 
@@ -321,9 +321,13 @@ final class JSite extends JApplication
 			$lang_code = JFactory::getLanguage()->getTag();
 			$languages = JLanguageHelper::getLanguages('lang_code');
 
-			$title 			= htmlspecialchars_decode($this->getCfg('sitename'));
-			$description	= $this->getCfg('MetaDesc') . $languages[$lang_code]->metadesc;
-			$rights			= $this->getCfg('MetaRights');
+			$title = htmlspecialchars_decode($this->getCfg('sitename'));
+			if (isset($languages[$lang_code]) && $languages[$lang_code]->metadesc) {
+				$description = $languages[$lang_code]->metadesc;
+			} else {
+				$description = $this->getCfg('MetaDesc');
+			}
+			$rights = $this->getCfg('MetaRights');
 			// Lets cascade the parameters if we have menu item parameters
 			if (is_object($menu)) {
 				$temp = new JRegistry;
@@ -371,6 +375,9 @@ final class JSite extends JApplication
 		// Get the id of the active menu item
 		$menu = $this->getMenu();
 		$item = $menu->getActive();
+		if (!$item) {
+			$item = $menu->getItem(JRequest::getVar('Itemid'));
+		}
 
 		$id = 0;
 		if (is_object($item)) { // valid item retrieved
@@ -502,6 +509,29 @@ final class JSite extends JApplication
 	{
 		$old = $this->_language_filter;
 		$this->_language_filter=$state;
+		return $old;
+	}
+	/**
+	 * Return the current state of the detect browser option.
+	 *
+	 * @return	boolean
+	 * @since	1.6
+	 */
+	public function getDetectBrowser()
+	{
+		return $this->_detect_browser;
+	}
+
+	/**
+	 * Set the current state of the detect browser option.
+	 *
+	 * @return	boolean	The old state
+	 * @since	1.6
+	 */
+	public function setDetectBrowser($state=false)
+	{
+		$old = $this->_detect_browser;
+		$this->_detect_browser=$state;
 		return $old;
 	}
 }

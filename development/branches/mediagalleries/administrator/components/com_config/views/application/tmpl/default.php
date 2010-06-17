@@ -11,24 +11,26 @@
 defined('_JEXEC') or die;
 
 // Load tooltips behavior
-JHtml::_('behavior.tooltip');
+JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.switcher');
+JHtml::_('behavior.tooltip');
 
-// Special treatment to get the submenu to work.
+// Load submenu template, using element id 'submenu' as needed by behavior.switcher
 $this->document->setBuffer($this->loadTemplate('navigation'), 'modules', 'submenu');
-$this->document->addScriptDeclaration("
-	document.switcher = null;
-	window.addEvent('domready', function(){
-		var toggler = document.id('submenu')
-		var element = document.id('config-document')
-		if (element) {
-			document.switcher = new JSwitcher(toggler, element, {cookieName: toggler.getAttribute('class')});
-		}
-	});
-");
 
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_config');?>" method="post" name="adminForm">
+<script type="text/javascript">
+<!--
+	function submitbutton(task)
+	{
+		if (task == 'application.cancel' || document.formvalidator.isValid(document.id('application-form'))) {
+			submitform(task);
+		}
+	}
+-->
+</script>
+
+<form action="<?php echo JRoute::_('index.php?option=com_config');?>" id="application-form" method="post" name="adminForm" class="form-validate">
 	<?php if ($this->ftp) : ?>
 		<?php echo $this->loadTemplate('ftplogin'); ?>
 	<?php endif; ?>

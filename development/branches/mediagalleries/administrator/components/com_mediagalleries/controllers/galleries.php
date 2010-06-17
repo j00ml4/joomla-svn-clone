@@ -18,7 +18,8 @@ jimport('joomla.application.component.controlleradmin');
  * @since		1.6
  */
 class MediagalleriesControllerGalleries extends JControllerAdmin
-{
+{	
+	protected $view_list="galeries";
 	/**
 	 * Proxy for getModel.
 	 * @since	1.6

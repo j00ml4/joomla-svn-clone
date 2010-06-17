@@ -51,15 +51,15 @@ class modMenuHelper
 				$item->shallower = false;
 				$item->level_diff = 0;
 
-				if(isset($items[$lastitem]) && count($items[$lastitem]))
+				if(isset($items[$lastitem]))
 				{
 					$items[$lastitem]->deeper		= ($item->level > $items[$lastitem]->level);
 					$items[$lastitem]->shallower	= ($item->level < $items[$lastitem]->level);
 					$items[$lastitem]->level_diff	= ($items[$lastitem]->level - $item->level);
 				}
+				$lastitem			= $i;
 				$item->active		= false;
 				$item->params		= new JObject(json_decode($item->params));
-				$lastitem			= $i;
 				$item->flink = $item->link;
 				switch ($item->type)
 				{
@@ -70,7 +70,7 @@ class modMenuHelper
 					case 'url':
 						if ((strpos($item->link, 'index.php?') === 0) && (strpos($item->link, 'Itemid=') === false)) {
 							// If this is an internal Joomla link, ensure the Itemid is set.
-							$item->flink = $tmp->link.'&Itemid='.$item->id;
+							$item->flink = $item->link.'&Itemid='.$item->id;
 						}
 						break;
 
@@ -89,6 +89,11 @@ class modMenuHelper
 						break;
 				}
 				$item->flink = JRoute::_($item->flink);
+			}
+			if (isset($items[$lastitem])) {
+				$items[$lastitem]->deeper		= (($start?$start:1) > $items[$lastitem]->level);
+				$items[$lastitem]->shallower	= (($start?$start:1) < $items[$lastitem]->level);
+				$items[$lastitem]->level_diff	= ($items[$lastitem]->level - ($start?$start:1));
 			}
 		}
 

@@ -159,6 +159,13 @@ class JAdministrator extends JApplication
 			$file = 'login';
 		}
 
+		// Safety check for when configuration.php root_user is in use.
+		$config		= JFactory::getConfig();
+		$rootUser	= $config->get('root_user');
+		if (property_exists('JConfig', 'root_user') && JFactory::getUser()->get('username')==$rootUser) {
+			JError::raiseNotice(200, JText::_('JWARNING_REMOVE_ROOT_USER'));
+		}
+
 		$params = array(
 			'template'	=> $template->template,
 			'file'		=> $file.'.php',
@@ -172,6 +179,7 @@ class JAdministrator extends JApplication
 		$data = $document->render(false, $params);
 		JResponse::setBody($data);
 		$this->triggerEvent('onAfterRender');
+
 	}
 
 	/**

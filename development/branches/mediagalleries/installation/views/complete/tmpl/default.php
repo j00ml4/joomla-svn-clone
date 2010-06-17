@@ -14,6 +14,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 // Load the JavaScript behaviors.
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+JHtml::_('script', 'installation/template/js/installation.js', true, false, false, false);
 ?>
 
 <script language="JavaScript" type="text/javascript">
@@ -60,7 +61,7 @@ JHtml::_('behavior.formvalidation');
 					<div class="button1-left"><div class="site"><a href="<?php echo JURI::root(); ?>" title="<?php echo JText::_('JSITE'); ?>"><?php echo JText::_('JSITE'); ?></a></div></div>
 <?php endif; ?>
 				</div>
-				<span class="step"><?php echo JText::_('Finish'); ?></span>
+				<span class="step"><?php echo JText::_('INSTL_COMPLETE'); ?></span>
 			</div>
 			<div class="b">
 				<div class="b">
@@ -75,10 +76,11 @@ JHtml::_('behavior.formvalidation');
 				</div>
 			</div>
 			<div class="m">
-				<h2><?php echo JText::_('CONGRATULATIONS'); ?></h2>
+				<h2><?php echo JText::_('INSTL_COMPLETE_TITLE'); ?></h2>
 				<div class="install-text">
-					<?php echo JText::_('finishButtons'); ?>
-					<?php echo JText::_('languageinfo'); ?>
+					<p><?php echo JText::_('INSTL_COMPLETE_DESC1'); ?></p>
+					<p><?php echo JText::_('INSTL_COMPLETE_DESC2'); ?></p>
+					<p><?php echo JText::_('INSTL_COMPLETE_DESC3'); ?></p>
 				</div>
 				<div class="install-body">
 					<div class="t">
@@ -91,19 +93,19 @@ JHtml::_('behavior.formvalidation');
 							<table class="final-table">
 								<tr>
 									<td class="error" align="center">
-										<?php echo JText::_('removeInstallation'); ?>
+										<?php echo JText::_('INSTL_COMPLETE_REMOVE_INSTALLATION'); ?>
 									</td>
 								</tr>
 								<tr>
 									<td align="center">
 										<h3>
-										<?php echo JText::_('ADMINISTRATION_LOGIN_DETAILS'); ?>
+										<?php echo JText::_('INSTL_COMPLETE_ADMINISTRATION_LOGIN_DETAILS'); ?>
 										</h3>
 									</td>
 								</tr>
 								<tr>
 									<td align="center" class="notice">
-										<?php echo JText::_('Username'); ?>: <?php echo $this->options['admin_user']; ?>
+										<?php echo JText::_('JUSERNAME'); ?>: <?php echo $this->options['admin_user']; ?>
 									</td>
 								</tr>
 								<tr>
@@ -114,13 +116,13 @@ JHtml::_('behavior.formvalidation');
 										<div id="cpanel">
 											<div>
 												<div class="icon">
+													<p>
 													<a href="http://help.joomla.org/content/view/1651/243/" target="_blank">
+													<b><?php echo JText::_('INSTL_COMPLETE_LANGUAGE_1'); ?></b>
 													<br />
-													<b><?php echo JText::_('languagebuttonlineone'); ?></b>
-													<br />
-													<?php echo JText::_('languagebuttonlinetwo'); ?>
-													<br /><br />
+													<?php echo JText::_('INSTL_COMPLETE_LANGUAGE_2'); ?>
 													</a>
+													</p>
 												</div>
 											</div>
 										</div>
@@ -137,7 +139,7 @@ JHtml::_('behavior.formvalidation');
 								</tr>
 								<tr>
 									<td align="center">
-										<textarea rows="5" cols="60" name="configcode" onclick="this.form.configcode.focus();this.form.configcode.select();" ><?php echo $this->config; ?></textarea>
+										<textarea rows="5" cols="49" name="configcode" onclick="this.form.configcode.focus();this.form.configcode.select();" ><?php echo $this->config; ?></textarea>
 									</td>
 								</tr>
 								<?php endif; ?>

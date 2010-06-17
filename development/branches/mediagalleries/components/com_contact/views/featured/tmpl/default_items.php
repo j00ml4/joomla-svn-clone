@@ -9,6 +9,9 @@
 
 // no direct access
 defined('_JEXEC') or die;
+JHtml::core();
+$listOrder	= $this->state->get('list.ordering');
+$listDirn	= $this->state->get('list.direction');
 
 // Create a shortcut for params.
 $params = &$this->item->params;
@@ -20,10 +23,10 @@ $params = &$this->item->params;
 
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
 	<fieldset class="filters">
-	<legend class="element-invisible"><?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?></legend>
+	<legend class="hidelabeltxt"><?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?></legend>
 	<?php if ($this->params->get('show_pagination_limit')) : ?>
 		<div class="display-limit">
-			<?php echo JText::_('COM_CONTACT_DISPLAY_NUM'); ?>&nbsp;
+			<?php echo JText::_('JGLOBAL_DISPLAY_NUM'); ?>&nbsp;
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
 	<?php endif; ?>
@@ -114,8 +117,6 @@ $params = &$this->item->params;
 				</tr>
 			<?php endforeach; ?>
 
-
-
 		</tbody>
 	</table>
 
@@ -136,4 +137,3 @@ $params = &$this->item->params;
 <?php endif; ?>
 
 <div class="item-separator"></div>
-<?php echo $this->item->event->afterDisplayContent; ?>

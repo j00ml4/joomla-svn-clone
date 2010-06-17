@@ -131,7 +131,9 @@ p.error 	{ color: #a20000; font-weight: bold; }
 .nowarning 	{ color: #2c2c2c; font-weight: bold; }
 .success 	{ color: #005800; font-weight: bold;}
 .allow 		{ color: #005800;}
+span.writable 		{ color: #005800;}
 .deny 		{ color: #a20000;}
+span.unwritable		{ color: #a20000;}
 .none 		{ color: #aaaaaa;}
 .pointer	{ cursor: pointer;}
 
@@ -229,7 +231,7 @@ p.error 	{ color: #a20000; font-weight: bold; }
 	display: block;
 	float: left;
 	padding: 4px 20px 0 22px;
-	font-size: 1.3em;
+	font-size: 1.2em;
 }
 
 #module-status {
@@ -299,7 +301,7 @@ div.checkin-tick {
 
 .ol-captionfont {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1.3em;
+	font-size: 1.2em;
 	color: #ffffff;
 	font-weight: bold;
 }
@@ -340,7 +342,7 @@ div.pagetitle {
 }
 
 div.configuration {
-	font-size: 1.3em;
+	font-size: 1.2em;
 	font-weight: bold;
 	color: #2c2c2c;
 	line-height: 2em;
@@ -377,7 +379,9 @@ div.toolbar-list li.spacer {
 }
 
 div.toolbar-list li.divider {
-	width: 5px;
+	width: 10px;
+	border-right:1px dotted #e3e4ca;
+	margin-right: 10px;
 }
 
 div.toolbar-list span {
@@ -426,6 +430,11 @@ textarea#mm_message {
 /**
  * Pane Slider Jpane Toggler styles
  */
+div.pane-sliders {
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
 .pane-sliders .title {
 	margin: 0;
 	padding: 2px;
@@ -444,7 +453,7 @@ textarea#mm_message {
 }
 
 .pane-sliders .content {
-	background: #f9fade;
+	/*background: #f9fade;*/
 }
 
 .pane-sliders .adminlist {
@@ -553,7 +562,7 @@ div.current fieldset.radio label {
 	clear:none;
 	min-width: 45px;
 	float:left;
-	margin: 3px 0 0 5px;
+	margin: 3px 0 0 2px;
 }
 
 div.current input,
@@ -568,6 +577,16 @@ div.current select { margin-bottom: 15px;}
 
 div.current table#acl-config th.acl-groups {
 	text-align: left;
+}
+
+li.acl-editgroups,
+li.acl-resetbtn {
+
+}
+
+li.acl-editgroups:hover,
+li.acl-resetbtn:hover {
+
 }
 
 div#menu-assignment {
@@ -588,7 +607,7 @@ div#menu-assignment h3 {
 div#menu-assignment ul.menu-links li.menu-link label {
 	clear:none;
 	float: left;
-	margin: 3px 0 0 5px;
+	margin: 3px 0 0 2px;
 }
 div#menu-assignment ul.menu-links li.menu-link input {
 	clear: left;
@@ -857,6 +876,7 @@ legend {
 
 fieldset p {
 	margin: 10px 0px;
+	font-size: 1.2em;
 }
 
 fieldset ol, ol#property-values, fieldset ul, ul#property-values {
@@ -1017,11 +1037,33 @@ input.disabled {
 }
 
 input,select, span.faux-input {
-	font-size: 1.4em;
+	font-size: 1.2em;
 	background-color: #ffffff;
 	border: 1px solid #c7c8b2;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
+}
+
+span.readonly {
+	font-size: 1.2em;
+	line-height: 2em;
+}
+
+div.readonly {
+	font-size: 1.2em;
+	line-height: 2em;
+}
+
+div.extdescript {
+	margin-left: 10px;
+}
+
+input[type="button"] {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #f9fade;
+	padding: 1px 6px;
+	font-size: 1.2em;
+	line-height: 1.5em;
 }
 
 textarea {
@@ -1061,30 +1103,6 @@ label.selectlabel {
  * Option or Parameter styles
  */
 
-
-/* .paramlist span.paramlist-key {
-	vertical-align: bottom;
-}
-
-.paramlist span.paramlist-value {
-	vertical-align: bottom;
-}
-
-.paramlist .toplabel label {
-	text-align: left;
-	float: none;
-	margin: 5px 0 0 10px;
-}
-
-.paramlist .toplabel input,.paramlist .toplabel textarea,.paramlist .toplabel select
-	{
-	margin: 0 0 0 10px;
-}
-
-.paramlist {
-	overflow: hidden;
-} */
-
 .paramrules {
 	padding: 10px;
 	background: #f9fade;
@@ -1097,7 +1115,6 @@ span.gi {
 	font-weight: bold;
 	margin-right: 5px;
 }
-
 
 /**
  * Admintable Styles
@@ -1150,6 +1167,20 @@ table.admintable td.key.vtop {
 fieldset.adminform {
 	border: 1px solid #c7c8b2;
 	margin: 0 10px 10px 10px;
+	overflow: hidden;
+}
+
+ul.adminformlist,
+ul.adminformlist li,
+dl.adminformlist,
+dl.adminformlist li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul.adminformlist .button2-left, ul.adminformlist .button2-left {
+	margin-top: 5px;
 }
 
 	/* Table styles are for use with tabular data */
@@ -1327,6 +1358,11 @@ table.adminlist {
 	color: #2c2c2c;
 }
 
+table.adminlist.modal {
+	border-right: 1px solid #c7c8b2;
+	border-left: 1px solid #c7c8b2;
+}
+
 table.adminlist a {
 	color: #054993;
 }
@@ -1477,59 +1513,7 @@ ul#new-modules-list {
 	line-height: 1.5em;
 }
 
-/**
- * Pagination styles
- */
 
-	/* Normal pagination styles */
-div.containerpg {
-	position: relative;
-	left: 50%;
-	float: left;
-	clear: left;
-}
-
-div.pagination {
-	position: relative;
-	left: -50%;
-	margin: 0 auto;
-	padding: .5em;
-}
-
-.pagination div.limit {
-	float: left;
-	height: 3em;
-	line-height: 3em;
-	margin: 0 10px;
-}
-
-	/* The Go submittal button */
-.pagination button {
-	font-size: 1.2em;
-	height: 1.6em;
-	line-height: 1.6em;
-	margin-right: 20px;
-}
-
-	/* Grey out the current page number */
-.pagination .page span {
-	color: #cccccc;
-}
-
-	/* Style if pagination is part of the table (old style) */
-table.adminlist .pagination {
-	display: table;
-	padding: 0;
-	margin: 0 auto;
-	font-size: .8em;
-}
-
-table.adminlist .pagination button {
-	font-size: 1.2em;
-	height: 1.6em;
-	line-height: 1.6em;
-	margin-right: 20px;
-}
 
 /**
  * Utility styles
@@ -1547,6 +1531,12 @@ table.adminlist .pagination button {
 	height: 0;
 	clear:both;
 	visibility: hidden;
+}
+
+.menu-module-list {
+	list-position: inside;
+	padding-left: 10px;
+	margin-left: 5px;
 }
 
 	/* stu nicholls solution for centering divs */
@@ -1587,7 +1577,7 @@ table.noshow fieldset {
 }
 
 button {
-	font-size: 1.6em;
+	font-size: 1.2em;
 	font-family: Arial, Helvetica, sans-serif;
 	background-color: #f9fade;
 	border: 1px solid #c7c8b2;
@@ -1629,7 +1619,7 @@ button:hover,button:focus {
 	height: 2.2em;
 	float: left;
 	line-height: 2.2em;
-	font-size: 1.3em;
+	font-size: 1.2em;
 	font-weight: bold;
 	color: #2c2c2c;
 	cursor: default;
@@ -1647,7 +1637,7 @@ button:hover,button:focus {
 .button2-left,.button2-right {
 	float: left;
 	line-height: 1.5em;
-	font-size: 1.7em;
+	font-size: 1.2em;
 	border: 1px solid #c7c8b2;
 	background-color: #f9fade;
 	-moz-border-radius: 3px;
@@ -1763,6 +1753,156 @@ button:hover,button:focus {
 
 .button2-left .blank {
 
+}
+
+/**
+ * Pagination styles
+ */
+
+	/* Normal pagination styles */
+div.containerpg {
+	position: relative;
+	left: 50%;
+	float: left;
+	clear: left;
+}
+
+div.pagination {
+	position: relative;
+	left: -50%;
+	margin: 0 auto;
+	padding: .5em;
+}
+
+.pagination div.limit {
+	float: left;
+	margin: 0 10px;
+	font-size: 1.2em;
+	height: 1.8em;
+	line-height: 1.8em; 
+}
+
+.pagination div.limit label {
+	font-size: 100%;
+	height: 1.8em;
+	line-height: 1.8em; 
+}
+
+.pagination div.limit select {
+	font-size: 100%;
+	height: 1.8em;
+	line-height: 1.8em; 
+
+}
+
+	/* The Go submittal button */
+.pagination button {
+	font-size: 100%; 
+	height: 1.8em;
+	line-height: 1.8em; 
+	margin-right: 20px;
+}
+
+div.pagination .button2-right, div.pagination .button2-left {
+	font-size: 1.2em;
+	height: 1.6em;
+	line-height: 1.6em;
+}
+
+	/* Grey out the current page number */
+.pagination .page span {
+	color: #cccccc;
+}
+
+	/* Style if pagination is part of the table (old style) */
+table.adminlist .pagination {
+	display: table;
+	padding: 0;
+	margin: 0 auto;
+	font-size: .8em;
+}
+
+table.adminlist .pagination button {
+	font-size: 1.2em;
+	height: 1.6em;
+	line-height: 1.5em;
+	margin-right: 20px;
+}
+
+/**
+ * Pagination styles
+ */
+
+	/* Normal pagination styles */
+div.containerpg {
+	position: relative;
+	left: 50%;
+	float: left;
+	clear: left;
+}
+
+div.pagination {
+	position: relative;
+	left: -50%;
+	margin: 0 auto;
+	padding: .5em;
+}
+
+.pagination div.limit {
+	float: left;
+	margin: 0 10px;
+	font-size: 1.2em;
+	height: 1.6em;
+	line-height: 1.6em; 
+	
+}
+
+.pagination div.limit label {
+	font-size: 100%;
+	height: 1.6em;
+	line-height: 1.6em; 
+}
+
+.pagination div.limit select {
+	font-size: 100%;
+	height: 1.6em;
+	line-height: 1.6em; 
+	padding: 0;
+}
+
+	/* The Go submittal button */
+.pagination button {
+	font-size: 100%; 
+	height: 1.6em;
+	line-height: 1.6em; 
+	margin-right: 20px;
+	padding-bottom: 5px;
+}
+
+div.pagination .button2-right, div.pagination .button2-left {
+	font-size: 1.2em;
+	height: 1.6em;
+	line-height: 1.6em;
+}
+
+	/* Grey out the current page number */
+.pagination .page span {
+	color: #cccccc;
+}
+
+	/* Style if pagination is part of the table (old style) */
+table.adminlist .pagination {
+	display: table;
+	padding: 0;
+	margin: 0 auto;
+	font-size: .8em;
+}
+
+table.adminlist .pagination button {
+	font-size: 1.2em;
+	height: 1.6em;
+	line-height: 1.5em;
+	margin-right: 20px;
 }
 
 /**
@@ -2158,6 +2298,10 @@ a.jgrid:hover {
 	background-image: url(../images/menu/icon-16-links.png);
 }
 
+.icon-16-weblinks-cat {
+	background-image: url(../images/menu/icon-16-links-cat.png);
+}
+
 /**
  * Toolbar icons
  * These icons are used for the toolbar buttons
@@ -2497,6 +2641,9 @@ a.jgrid:hover {
 .icon-48-weblinks {
 	background-image: url(../images/header/icon-48-links.png);
 }
+.icon-48-weblinks-categories {
+	background-image: url(../images/header/icon-48-links-cat.png);
+}
 
 /**
  * General styles
@@ -2614,6 +2761,10 @@ body.contentpane input, body.contentpane select {
 	font-size: 120%;
 }
 
+#filter-bar input, #filter-bar select, #filter-bar button {
+	font-size: 110%;
+}
+
 /**
  * User Accessibility
  */
@@ -2662,6 +2813,8 @@ body.contentpane input, body.contentpane select {
 	display: none;
 }
 
+.hidebtn 		{ border: 0; padding: 0;margin:0;width: 0;height: 0;}
+
 	/* For elements that aren't to be seen by visual users but do need to be read by screenreaders.
 	 * Cannot be used for elements that can get focus such as links and form elements */
 .element-invisible, .hidelabeltxt {
@@ -2685,6 +2838,7 @@ legend.element-invisible {
 
 fieldset.panelform {
 	border: none 0;
+	overflow:hidden;
 }
 
 fieldset.adminform label,
@@ -2696,6 +2850,20 @@ fieldset.panelform span.faux-label {
 	min-width: 12em;
 	float:left;
 	margin-left: 10px;
+}
+
+fieldset.adminform.long label,
+fieldset.panelform.long label,
+fieldset.adminform.long span.faux-label,
+fieldset.panelform.long span.faux-label {
+	min-width: 18em;
+}
+
+fieldset.adminform fieldset.radio label,
+fieldset.panelform fieldset.radio label,
+fieldset.adminform fieldset.radio span.faux-label,
+fieldset.panelform fieldset.radio span.faux-label {
+	margin-left: 0;
 }
 
 
@@ -2727,6 +2895,18 @@ div#jform_ordering {
 	margin-top: 3px;
 }
 
+/* Banner edit */
+#jform_impmade, #jform_clicks {
+	width:30px;
+}
+
+fieldset.adminform input#jform-imp {
+	width:5em;
+}
+
+fieldset.adminform input#jform_clickurl {
+	width: 20em;
+}
 /* Modal accessibility */
 #min-body.body-overlayed a {
 
@@ -2762,7 +2942,7 @@ td.col1 {
 	padding: 4px;
 }
 tr.row1 {
-	background-color: #f0f0ee;
+	background-color: #f9fade;
 }
 table.aclsummary-table caption,
 table.aclmodify-table caption{
@@ -2877,6 +3057,40 @@ ul.acllegend li.acl-resetbtn {
 	padding-right: 0px;
 }
 
+li.acl-editgroups,
+li.acl-resetbtn {
+	display:block;
+	float:left;
+	background-color: #f9fade;
+	border: 1px solid #c7c8b2;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+li.acl-editgroups a,
+li.acl-resetbtn a {
+	padding: 6px;
+	color: #2c2c2c;
+	cursor: default;
+}
+
+li.acl-editgroups a:hover,
+li.acl-resetbtn a:hover,
+li.acl-editgroups a:focus,
+li.acl-resetbtn a:focus {
+	text-decoration:none;
+	cursor: default;
+}
+
+li.acl-editgroups:hover,
+li.acl-resetbtn:hover,
+li.acl-editgroups:focus,
+li.acl-resetbtn:focus {
+	background-color:#e3e4ca;
+	text-decoration:none;
+	cursor: default;
+}
+
 table#acl-config {
 	width: 100%;
 	margin-top: 15px;
@@ -2914,5 +3128,11 @@ table#acl-config td select {
 	font-weight: normal;
 }
 
+label#jform_rules-lbl {
+	float: none;
+	white-space: nowrap;
+}
+
 /* Disabled until verified */
 label#jform_rules-lbl {display:none;}
+*/

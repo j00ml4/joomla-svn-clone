@@ -18,10 +18,10 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 		<?php echo $this->loadTemplate('ftp');?>
 	<?php endif; ?>
 
-	<fieldset class="filter clearfix">
+	<fieldset class="filter">
 		<div class="right">
 			<label for="filter_client_id">
-				<?php echo JText::_('COM_LANGUAGES_FILTER_CLIENT_LABEL'); ?>
+				<?php echo JText::_('COM_LANGUAGES_FILTER_LOCATION_LABEL'); ?>
 			</label>
 			<select id="filter_client_id" name="filter_client_id" class="inputbox" onchange="this.form.submit()">
 				<?php echo JHtml::_('select.options', JHtml::_('languages.clients'), 'value', 'text', $this->state->get('filter.client_id'));?>
@@ -78,7 +78,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 					<?php echo $row->name;?>
 				</td>
 				<td width="5%" align="center">
-					<?php echo JHtml::_('languages.published',$row->published);?>
+					<?php echo JHtml::_('jgrid.isdefault', $row->published, $i, 'installed.', !$row->published);?>
 				</td>
 				<td align="center">
 					<?php echo $row->version; ?>

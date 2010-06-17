@@ -15,16 +15,17 @@
 
 
 #all { width: expression(document . body . clientWidth > 1050 ? "1050" : "auto");  }
-#footer-inner, #footer { width: expression(document . body . clientWidth > 1050 ? "1025" : "auto");  }
+#footer-inner { width: expression(document . body . clientWidth > 1050 ? "1025" : "auto");  }
+#footer { width: expression(document . body . clientWidth > 1050 ? "1020" : "auto");  }
 
 #all
 {
-	border:solid 1px #fff
+        border:solid 1px #fff
 }
 
 .logoheader
 {
-	height:159px
+        height:159px
 }
 
 #line
@@ -115,20 +116,20 @@ h1
 
 ul.tabs
 {
-	text-align:left
+        text-align:left
 }
 
 ul.newsflash-horiz,
 #footer-outer,
 ul.tabs
 {
-	zoom:1
+        zoom:1
 }
 
 .tabcontent
 {
-	overflow:hidden !important;
-	width:90%
+        overflow:hidden !important;
+        width:90%
 }
 
 #main h1

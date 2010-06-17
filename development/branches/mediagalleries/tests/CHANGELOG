@@ -27,6 +27,39 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+12-Jun-2010 Mark Dexter
+# Fix failing featured0001Test
+
+08-Jun-2010 Mark Dexter
+^ Refactor methods in SeleniumJoomlaTestCase (Matt Thomas)
+# Fix system test errors
+^ Refactor menu0001Test to remove sleep statements
+
+07-Jun-2010 Sam Moffatt
+ # Fixed incorrect metadata in package sample
+
+07-Jun-2010 Mark Dexter
++ New system test for featured blog ordering
+# Clean up doc blocks for system tests 
+
+04-Jun-2010 Mark Dexter
+^ Improvements to SeleniumJoomlaTestCase. (Matt Thomas)
+
+30-May-2010 Mark Dexter
+# JLanguageTest fixes and improvements. Thanks Tudor Mazilu!  
+
+28-May-2010 Mark Dexter
+# Fix broken acl0001Test.php system test
+
+27-May-2010 Mark Dexter
+# Fix broken doInstall.php system test
+
+25-May-2010 Mark Dexter
+# Fix broken system tests (Matt Thomas)
+
+19-May-2010 Mark Dexter
+# Fix system test for template change
+
 17-May-2010 Mark Dexter
 # Fix up system tests for core changes
 # Fix sample data test

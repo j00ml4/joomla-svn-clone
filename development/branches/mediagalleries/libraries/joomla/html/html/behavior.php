@@ -56,7 +56,7 @@ abstract class JHtmlBehavior
 			self::framework(false);
 		}
 
-		JHtml::_('script','system/mootools-'.$type.$uncompressed.'.js', false, true);
+		JHtml::_('script','system/mootools-'.$type.$uncompressed.'.js', false, true, false, false);
 		$loaded[$type] = true;
 		return;
 	}
@@ -92,8 +92,8 @@ abstract class JHtmlBehavior
 		$script = "
 			document.switcher = null;
 			window.addEvent('domready', function(){
-				toggler = document.id('submenu')
-				element = document.id('config-document')
+				toggler = document.id('submenu');
+				element = document.id('config-document');
 				if(element) {
 					document.switcher = new JSwitcher(toggler, element, {cookieName: toggler.getAttribute('class')});
 				}
@@ -362,7 +362,7 @@ abstract class JHtmlBehavior
 
 		// Include mootools framework
 		JHtml::_('behavior.framework');
-		JHtml::_('script','system/mootree.js', false, true);
+		JHtml::_('script','system/mootree.js', false, true, false, false);
 		JHtml::_('stylesheet','system/mootree.css', array(), true);
 
 		if (isset($trees[$id]) && ($trees[$id])) {
@@ -408,10 +408,11 @@ abstract class JHtmlBehavior
 
 	public static function calendar()
 	{
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
+		$tag = JFactory::getLanguage()->getTag();
 		JHtml::_('stylesheet','system/calendar-jos.css', array(' title' => JText::_('JLIB_HTML_BEHAVIOR_GREEN') ,' media' => 'all'), true);
-		JHtml::_('script','system/calendar.js', false, true);
-		JHtml::_('script','system/calendar-setup.js', false, true);
+		JHtml::_('script',$tag.'/calendar.js', false, true);
+		JHtml::_('script',$tag.'/calendar-setup.js', false, true);
 
 		$translation = JHtmlBehavior::_calendartranslation();
 		if ($translation) {
