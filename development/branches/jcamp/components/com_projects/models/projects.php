@@ -63,19 +63,6 @@ class ProjectsModelProjects extends JModelList
 		// Initialise variables.
 		$app	= &JFactory::getApplication();
 		$params	= JComponentHelper::getParams('com_projects');
-
-		// List state information
-		$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
-		$this->setState('list.limit', $limit);
-
-		$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
-		$this->setState('list.start', $limitstart);
-
-		$orderCol	= JRequest::getCmd('filter_order', 'ordering');
-		$this->setState('list.ordering', $orderCol);
-
-		$listOrder	=  JRequest::getCmd('filter_order_Dir', 'ASC');
-		$this->setState('list.direction', $listOrder);
 		
 		// Category		
 		$id = JRequest::getInt('id', 0);
@@ -83,19 +70,11 @@ class ProjectsModelProjects extends JModelList
 
 		//$this->setState('filter.published',	1);
 		//$this->setState('filter.language',$app->getLanguageFilter());
-
-		// portfolio
-		$db		= $this->getDbo();
-		$query	= $db->getQuery(true);
-		$query->select('title');
-		$query->from('#__categories');
-		$query->where('id='.$id);
-		$db->setQuery($query);
-		$result = $db->loadResult();		
-		$this->setState('portfolio.title',$result);
 		
 		// Load the parameters.
 		$this->setState('params', $params);
+		
+		parent::populateState();
 	}
 	
 	
@@ -115,19 +94,19 @@ class ProjectsModelProjects extends JModelList
 
 		// Select required fields from the categories.
 		// (using 'a.*' is slower than fetching only columns we need (and this is clearer for us to know what date we fetch from db))
-		$query->select($this->getState('list.select', 'p.`id`, p.`title`, p.`catid`, p.`description`'));
+		$query->select($this->getState('list.select', 'p.*'));
 		$query->from('`#__projects` AS p');
 
 		// Filter by category.
 		if ($categoryId = $this->getState('portfolio.id')) {
 			$query->where('p.catid = '.(int) $categoryId);
-			$query->join('LEFT', '`#__categories` AS c ON c.`id` = p.`catid`');
+			$query->join('LEFT', '#__categories AS c ON c.id = p.catid');
 		}
 
 		// Filter by state
 		$state = $this->getState('filter.state');
 		if (is_numeric($state)) {
-			$query->where('p.`state` = '.(int) $state);
+			$query->where('p.state = '.(int) $state);
 		}
 		// Filter by start and end dates.
 		$nullDate = $db->Quote($db->getNullDate());

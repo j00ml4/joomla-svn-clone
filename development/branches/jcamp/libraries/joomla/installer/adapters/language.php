@@ -187,6 +187,9 @@ class JInstallerLanguage extends JAdapterInstance
 			return false;
 		}
 
+		// Parse optional tags
+		$this->parent->parseMedia($this->manifest->media);
+
 		// Copy all the necessary font files to the common pdf_fonts directory
 		$this->parent->setPath('extension_site', $basePath.DS.'language'.DS.'pdf_fonts');
 		$overwrite = $this->parent->setOverwrite(true);
@@ -318,6 +321,9 @@ class JInstallerLanguage extends JAdapterInstance
 			return false;
 		}
 
+		// Parse optional tags
+		$this->parent->parseMedia($xml->media);
+
 		// Copy all the necessary font files to the common pdf_fonts directory
 		$this->parent->setPath('extension_site', $basePath.DS.'language'.DS.'pdf_fonts');
 		$overwrite = $this->parent->setOverwrite(true);
@@ -426,15 +432,23 @@ class JInstallerLanguage extends JAdapterInstance
 		// construct the path from the client, the language and the extension element name
 		$path = $client->path.DS.'language'.DS.$element;
 
+		// Get the package manifest object and remove media
+		$this->parent->setPath('source', $path);
+		$this->manifest = $this->parent->getManifest();
+		$this->parent->removeFiles($this->manifest->media);
+
 		// check it exists
 		if (!JFolder::exists($path))
 		{
+			// if the folder doesn't exist lets just nuke the row as well and presume the user killed it for us
+			$extension->delete();
 			JError::raiseWarning(100, JText::_('JLIB_INSTALLER_ERROR_LANG_UNINSTALL_PATH_EMPTY'));
 			return false;
 		}
 
 		if (!JFolder::delete($path))
 		{
+			// if deleting failed we'll leave the extension entry in tact just in case
 			JError::raiseWarning(100, JText::_('JLIB_INSTALLER_ERROR_LANG_UNINSTALL_DIRECTORY'));
 			return false;
 		}
@@ -449,7 +463,12 @@ class JInstallerLanguage extends JAdapterInstance
 		$query->select('*');
 		$db->setQuery($query);
 		$users = $db->loadObjectList();
-		$param_name = $client->name=='administrator'?'admin_language':'language';
+		if($client->name == 'administrator') {
+			$param_name = 'admin_language';
+		} else {
+			$param_name = 'language';	
+		}
+		
 		$count = 0;
 		foreach ($users as $user) {
 			$registry = new JRegistry;

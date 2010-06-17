@@ -60,6 +60,10 @@ JHtml::_('behavior.formvalidation');
 
 		<li><?php echo $this->form->getLabel('featured'); ?>
 		<?php echo $this->form->getInput('featured'); ?></li>
+				
+		<li><?php echo $this->form->getLabel('id'); ?>
+		<?php echo $this->form->getInput('id'); ?></li>
+		
 	</ul>
 
 		<div class="clr"></div>
@@ -103,8 +107,6 @@ JHtml::_('behavior.formvalidation');
 				<li><?php echo $this->form->getLabel('hits'); ?>
 				<?php echo $this->form->getInput('hits'); ?></li>
 
-				<li><?php echo $this->form->getLabel('id'); ?>
-				<?php echo $this->form->getInput('id'); ?></li>
 			</ul>
 
 		</fieldset>
@@ -135,9 +137,9 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->form->getInput('rules'); ?>
 		</fieldset>
 
-		<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTENT_FIELDSET_METADATA'), 'meta-options'); ?>
+		<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'meta-options'); ?>
 		<fieldset class="panelform">
-		<legend class="element-invisible"><?php echo JText::_('COM_CONTENT_FIELDSET_METADATA'); ?></legend>
+		<legend class="element-invisible"><?php echo JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'); ?></legend>
 		<ul class="adminformlist">
 			<li><?php echo $this->form->getLabel('metadesc'); ?>
 			<?php echo $this->form->getInput('metadesc'); ?></li>

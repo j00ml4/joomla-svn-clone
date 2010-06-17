@@ -81,14 +81,16 @@ JHtml::_('behavior.formvalidation');
 				</div>
 				</li>
 				
-				<li><?php echo $this->form->getLabel('description'); ?>
-				<?php echo $this->form->getInput('description'); ?></li>
-				
 				<li><div id="url">
 				<?php echo $this->form->getLabel('clickurl'); ?>
 				<?php echo $this->form->getInput('clickurl'); ?>
 				</div>
 				</li>
+				
+				<li><?php echo $this->form->getLabel('description'); ?>
+				<?php echo $this->form->getInput('description'); ?></li>
+				
+			
 
 				<li><?php echo $this->form->getLabel('language'); ?>
 				<?php echo $this->form->getInput('language'); ?></li>
@@ -118,7 +120,7 @@ JHtml::_('behavior.formvalidation');
 			</ul>
 		</fieldset>
 
-	<?php echo JHtml::_('sliders.panel',JText::_('COM_BANNERS_GROUP_LABEL_METADATA_OPTIONS'), 'metadata'); ?>
+	<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'metadata'); ?>
 		<fieldset class="adminform">
 			<ul class="adminformlist">
 				<?php foreach($this->form->getFieldset('metadata') as $field): ?>

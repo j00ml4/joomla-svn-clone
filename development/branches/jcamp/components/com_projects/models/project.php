@@ -19,7 +19,7 @@ jimport('joomla.application.component.modeladmin');
  */
 class ProjectsModelProject extends JModelAdmin
 {
-	protected $text_prefix = 'COM_PROJECTS';
+	//protected $text_prefix = 'COM_PROJECTS';
 	//protected $context = 'com_projects.edit.project';
 
 	/**
@@ -54,37 +54,10 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	protected function populateState()
 	{
+		parent::populateState();
 		$app = JFactory::getApplication();
-
-		// ID
-		if (!($pk = JRequest::getInt('id'))) {
-			$pk = $app->getUserState('com_projects.edit.project.id');
-		}
-		$this->setState('project.id', $pk);
 		$app->setUserState('com_projects.edit.project.id', null);
-		
-		// List limit
-		$offset = JRequest::getInt('limitstart');
-		$this->setState('list.offset', $offset);
-		
-		// portfolio
-		if($pk){
-			$db		= $this->getDbo();
-			$query	= $db->getQuery(true);
-			$query->select('p.catid');
-			$query->from('#__projects AS p');
-			$query->where('p.id='.$pk);
-			$db->setQuery($query);
-			
-			// load result
-			$result = $db->loadResult();
-			$this->setState('portfolio.id',$result);
-			//$app->getUserState('portfolio.id', $result);
-		}
-		
-		// Load the parameters.
-		$params	= $app->getParams();
-		$this->setState('params', $params);
+				
 	}
 	
 	/**
@@ -93,9 +66,25 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	public function getCategory($pk=null){
 		// Get portifolio ID
-		if (empty($pk) && !($pk = $this->getState('portfolio.id', 0))) {
-			return null;
+		if (empty($pk)) {
+			// portfolio
+			if (!($pk = $this->getState('project.id'))) {
+				return null;	
+			}	
+			$db		= $this->getDbo();
+			$query	= $db->getQuery(true);
+			$query->select('a.catid');
+			$query->from('#__projects AS ');
+			$query->where('a.id='.$pk);
+			$db->setQuery($query);
+			
+			// load result
+			if (!($pk = $db->loadResult())) {
+				return null;
+			}
 		}
+		
+		//$this->setState('portfolio.id',$pk);
 		jimport('joomla.application.categories');
 		$categories = JCategories::getInstance('Projects');
 		return $categories->get($pk);

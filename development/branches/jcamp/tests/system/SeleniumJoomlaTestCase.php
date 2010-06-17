@@ -11,9 +11,9 @@ require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 {
 	public $cfg; // configuration so tests can get at the fields
-
+	
 	public function setUp()
-	{
+	{	
 		$cfg = new SeleniumConfig();
 		$this->cfg = $cfg; // save current configuration
 		$this->setBrowser($cfg->browser);
@@ -24,7 +24,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		}
 		echo ".\n" . 'Starting ' . get_class($this) . ".\n";
 	}
-
+	
 	function doAdminLogin()
 	{
 		echo "Logging in to back end.\n";
@@ -97,7 +97,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 	}
 
-	function createUser($name, $userName, $password = 'password', $email = 'testuser@test.com', $group = 'Manager')
+	function createUser($name = 'Test User', $userName = 'TestUser', $password = 'password', $email = 'testuser@test.com', $group = 'Manager')
 	{
 		$this->click("link=User Manager");
 		$this->waitForPageToLoad("30000");
@@ -109,54 +109,19 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->type("jform_password", $password);
 		$this->type("jform_password2", $password);
 		$this->type("jform_email", $email);
-
-		// Set group
-		switch ($group)
-		{
-		case 'Manager':
-			$this->click("1group_6");
-			break;
-
-		case 'Administrator':
-			$this->click("1group_7");
-			break;
-
-		case 'Super Users':
-			$this->click("1group_8");
-			break;
-
-		case 'Park Rangers':
-			$this->click("1group_9");
-			break;
-
-		case 'Registered':
-			$this->click("1group_2");
-			break;
-
-		case 'Author':
-			$this->click("1group_3");
-			break;
-
-		case 'Editor':
-			$this->click("1group_4");
-			break;
-
-		case 'Publisher':
-			$this->click("1group_5");
-			break;
-
-		default:
-			$this->click("1group_6");
-			break;
-		}
-
+        $id = $this->getAttribute('//fieldset[@id=\'user-groups\']/ul/li[contains(label,\''.$group.'\')]/label@for');
+        $this->click($id);
 		$this->click("link=Save & Close");
 		$this->waitForPageToLoad("30000");
 		echo "New user created\n";
-
 	}
+	
+	function toggleAssignedGroupCheckbox($groupName) {
+	        $id = $this->getAttribute('//fieldset[@id=\'user-groups\']/ul/li[contains(label,\''.$groupName.'\')]/label@for');
+	        $this->click($id);
+	}	
 
-	function deleteTestUsers($partialName = 'My Test User')
+	function deleteTestUsers($partialName = 'test')
 	{
 		echo "Browse to User Manager.\n";
 		$this->click("link=User Manager");
@@ -191,49 +156,12 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->click("link=New");
 		$this->waitForPageToLoad("30000");
 		$this->type("jform_title", $groupName);
-		switch ($groupParent)
-		{
-		case 'Public':
-			$this->select("jform_parent_id", "value=1");
-			break;
-
-		case 'Manager':
-			$this->select("jform_parent_id", "value=6");
-			break;
-
-		case 'Administrator':
-			$this->select("jform_parent_id", "value=7");
-			break;
-
-		case 'Super Users':
-			$this->select("jform_parent_id", "value=8");
-			break;
-
-		case 'Registered':
-			$this->select("jform_parent_id", "value=2");
-			break;
-
-		case 'Author':
-			$this->select("jform_parent_id", "value=3");
-			break;
-
-		case 'Editor':
-			$this->select("jform_parent_id", "value=4");
-			break;
-
-		case 'Publisher':
-			$this->select("jform_parent_id", "value=5");
-			break;
-
-		default:
-			$this->select("jform_parent_id", "value=1");
-			break;
-		}
+		$this->select("id=jform_parent_id", "label=regexp:.*".$groupParent);
 		$this->click("link=Save & Close");
 		$this->waitForPageToLoad("30000");
 		try
 		{
-			$this->assertTrue($this->isTextPresent("successfully saved"));
+			$this->assertTrue($this->isTextPresent("Group successfully saved"));
 			echo "Creation of " . $groupName . " succeeded.\n";
 		}
 		catch (PHPUnit_Framework_AssertionFailedError $e)
@@ -241,7 +169,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			array_push($this->verificationErrors, $e->toString());
 		}
 	}
-
+	
 	function deleteGroup($partialName = 'test')
 	{
 		echo "Browse to User Manager: Groups.\n";
@@ -282,6 +210,29 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->jClick('Delete');
 	}
 
+	function changeAccessLevel($levelName = 'Registered', $groupName = 'Public')
+	{
+		echo "Add group " . $groupName . " to " . $levelName . " access level.\n";
+		echo "Navagating to Access Levels.\n";
+		$this->jClick('Access Levels');
+		$this->click("//tr/td[contains(a,'$levelName')]/preceding-sibling::*/input");				
+		$this->jClick('Edit');
+		$this->assertTrue($this->isTextPresent(": Edit", $this->getText("//div[contains(@class,'pagetitle')]/h2")));
+		$id = $this->getAttribute('//fieldset[@class=\'adminform\']/ul/li[contains(label,\''.$groupName.'\')]/label@for');
+        $this->click($id);
+        $this->jClick('Save & Close');
+		try
+		{
+			$this->assertTrue($this->isTextPresent("Access level successfully saved"));
+			echo "Addding group " . $groupName . " to " . $levelName . " access level succeeded.\n";
+		}
+		catch (PHPUnit_Framework_AssertionFailedError $e)
+		{
+			array_push($this->verificationErrors, $e->toString());
+		}		
+			
+	}	
+	
 	/**
 	 * Tests for the presence of a Go button and clicks it if present.
 	 * Used for the hathor accessible template when filtering on lists in back end.
@@ -320,6 +271,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		switch ($item)
 		{
 		case 'Save & Close':
+			echo "Testng Save & Close capability.\n";
 			$this->click("//li[@id='toolbar-save']/a");
 			$this->waitForPageToLoad("30000");
 			try
@@ -334,10 +286,12 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			}
 			break;
 		case 'New':
+			echo "Testng New capability.\n";
 			$this->click("//li[@id='toolbar-new']/a");
 			$this->waitForPageToLoad("30000");
 			break;
 		case 'Delete':
+			echo "Testng Delete capability.\n";
 			$this->click("//li[@id='toolbar-delete']/a");
 			$this->waitForPageToLoad("30000");
 			try
@@ -352,25 +306,87 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			}
 			break;
 		case 'Access Levels':
+			echo "Navagating to Access Levels.\n";
 			$this->click("//a[contains(@class,'icon-16-levels')]");
 			$this->waitForPageToLoad("30000");
 			break;
 		case 'Menu Manager':
+			echo "Navagating to Menu Manager.\n";
 			$this->click("//a[contains(@class,'icon-16-menumgr')]");
 			$this->waitForPageToLoad("30000");
 			break;
 		case 'Redirect Manager':
+			echo "Navagating to Redirect Manager.\n";
 			$this->click("//a[contains(@class, 'icon-16-redirect')]");
 			$this->waitForPageToLoad("30000");
 			$this->assertTrue($this->isTextPresent("Redirect Manager: Links"));
 			break;
+		case 'Weblinks':
+			echo "Navagating to Weblinks.\n";
+			$this->click("//a[contains(@class, 'icon-16-weblinks')]");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Web Links Manager: Web Links"));
+			break;
+		case 'Unpublish':
+			echo "Testng Unpublish capability.\n";
+			$this->click("//li[@id='toolbar-unpublish']/a/span");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("successfully unpublished"));
+			$this->assertFalse($this->isTextPresent("Edit state is not permitted"));
+			break;
+		case 'Trash':
+			echo "Testng Trash capability.\n";
+			$this->click("//li[@id='toolbar-trash']/a/span");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("successfully trashed"));
+			break;
+		case 'Edit':
+			echo "Testng Edit capability.\n";
+			$this->click("//li[@id='toolbar-edit']/a/span");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent(": Edit", $this->getText("//div[contains(@class,'pagetitle')]/h2")));
+			break;
+		case 'Options':
+			echo "Opening options modal.\n";
+			$this->click("//li[@id='toolbar-popup-Popup']/a/span");
+			echo "wait 2 seconds\n";
+			sleep(2);
+			for ($second = 0; ; $second++) {
+				if ($second >= 60) $this->fail("timeout");
+				try {
+					if ($this->isTextPresent("Options")) break;
+				} catch (Exception $e) {}
+				sleep(1);
+			}
+			$this->assertTrue($this->isTextPresent("Options"));
+			break;			
+		case 'Article Manager':
+			echo "Navigating to Article Manager.\n";
+			$this->click("//a[contains(@class,'icon-16-article')]");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Article Manager: Articles"));			
+			break;
+		case 'Global Configuration':
+			echo "Navigating to Global Configuration.\n";
+			$this->click("//a[contains(@class,'icon-16-config')]");
+			$this->waitForPageToLoad("30000");
+			$this->assertTrue($this->isTextPresent("Global Configuration",$this->getText("//div[contains(@class,'pagetitle')]/h2")));
+			break;
+			
+			
 		default:
 			$this->click("//li[@id='toolbar-new']/a");
 			$this->waitForPageToLoad("30000");
 			break;
 		}
 	}
-
+	
+	function clickTab($formTab ='Permissions')
+		{
+			$this->click("//dt[contains(span,'$formTab')]");
+		}
+	
+	
 	function checkNotices()
 	{
 		try

@@ -29,7 +29,8 @@ class ContentModelArticles extends JModelList
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication();
-
+		$session = JFactory::getSession();
+		
 		// Adjust the context to support modal layouts.
 		if ($layout = JRequest::getVar('layout', 'default')) {
 			$this->context .= '.'.$layout;
@@ -47,8 +48,12 @@ class ContentModelArticles extends JModelList
 		$categoryId = $app->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id');
 		$this->setState('filter.category_id', $categoryId);
 
+		// set the value of the category filter for the single record edit view
+		$session->set('com_content.article.filter.category_id',$categoryId);
+		
 		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
 		$this->setState('filter.language', $language);
+
 
 		// List state information.
 		parent::populateState('a.title', 'asc');
@@ -155,13 +160,18 @@ class ContentModelArticles extends JModelList
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else if (stripos($search, 'author:') === 0) {
 				$search = $db->Quote('%'.$db->getEscaped(substr($search, 7), true).'%');
-				$query->where('ua.name LIKE '.$search.' OR ua.username LIKE '.$search);
+				$query->where('(ua.name LIKE '.$search.' OR ua.username LIKE '.$search.')');
 			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-				$query->where('a.title LIKE '.$search.' OR a.alias LIKE '.$search);
+				$query->where('(a.title LIKE '.$search.' OR a.alias LIKE '.$search.')');
 			}
 		}
-
+		
+		// Filter on the language.
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = '.$db->quote($language));
+		}
+		
 		// Add the list ordering clause.
 		$orderCol	= $this->state->get('list.ordering');
 		$orderDirn	= $this->state->get('list.direction');
