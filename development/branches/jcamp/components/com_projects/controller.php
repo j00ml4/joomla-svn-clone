@@ -18,6 +18,8 @@ jimport('joomla.application.component.controller');
  */
 class ProjectsController extends JController {
 	
+	protected $default_view='portfolios';
+	
 	/**
 	 * Method to show a view
 	 *
