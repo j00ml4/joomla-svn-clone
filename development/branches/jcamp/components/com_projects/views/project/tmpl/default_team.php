@@ -11,10 +11,9 @@
 defined('_JEXEC') or die;
 ?>
 <div class="projects-content projects-frame projects-space">
-	<h2><?php echo JText::_('COM_PROJECTS_DOCUMENT_LIST');?></h2>
+	<h2><?php echo JText::_('COM_PROJECTS_TEAM_LIST');?></h2>
 	<ul class="ulList">
 		<li>doc1</li>
 		<li>doc2</li>
 	</ul>
-	<a href="<?php echo JRoute::_('index.php?option=com_projects&view=document&layout=form&project='.$this->item->id);?>"><?php echo JText::_('COM_PROJECTS_DOCUMENT_ADD_LINK');?></a>
 </div>
