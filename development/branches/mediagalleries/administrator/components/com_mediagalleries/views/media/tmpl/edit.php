@@ -67,10 +67,16 @@ JHtml::_('behavior.formvalidation');
 		</fieldset>
 	</div>
 	<div class="width-40 fltrt">
+		<!-- Do we need this? -->
 		<?php echo JHtml::_('sliders.start','newsfeed-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
-
 		<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
-
+		
+		<?php if ($this->media): ?>
+		<fieldset class="panelform">
+			<?php echo $this->media; ?>
+		</fieldset>	
+		<?php endif; ?>
+		
 		<fieldset class="panelform">
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('created_by'); ?>
@@ -97,8 +103,8 @@ JHtml::_('behavior.formvalidation');
 		</fieldset>
 
 		<?php echo $this->loadTemplate('params'); ?>
-
-		</div>
+		
+	</div>
 	<div class="clr"></div>
 
 	<input type="hidden" name="task" value="" />

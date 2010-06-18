@@ -25,7 +25,7 @@ class MediagalleriesViewMedia extends JView
 	protected $item;
 	protected $action;
 	protected $lists;
-	protected $video;
+	protected $media;
 	protected $folder;
 	protected $user;
 	protected $form;
@@ -46,32 +46,25 @@ class MediagalleriesViewMedia extends JView
 		//get the data
 		
 		$this->user 	=& JFactory::getUser();
-		$this->item		=& $this->get('item');
+		$this->item		=& $this->get('Item');
 		$this->form		=& $this->get('Form');
 		$this->state	= $this->get('State');
-		
-		
-		// Import Helpers
-		include_once(PATH_HELPERS.'player.php');
 
+		// PLG
+		$plg_media=JPluginHelper::getPlugin('content', 'media');
+		$this->media_params=$plg_media->params;
+		// To folder
+		// $this->folder= GetmediaParam('defaultdir');//does it work?
+		$this->folder=$this->media_params['defaultdir'];
+		
 		// Is new?
-		if( !$this->item->id ){
-			$video = JText::_('COM_MEDIAGALLERIES_SELECT_MEDIA' );			
-			$item->published = 1;
-			$item->catid = 0;
-		}else{
-			
-			$video = PlayerHelper::play($this->item->url);
+		if( $this->item->id ){
+			$this->media = $plg_media->addMedia($this->item->url);
 		}
 					
 		// get the lists
 		$this->lists =& $this->_buildLists($this->item);
 		
-		// To folder
-		// $this->folder= GetmediaParam('defaultdir');//does it work?
-		$plg_media=JPluginHelper::getPlugin('content', 'media');
-		$this->media_params=$plg_media->params;
-		$this->folder=$this->media_params['defaultdir'];
 		// Add the toolbar
 		$this->addToolbar();
 		
