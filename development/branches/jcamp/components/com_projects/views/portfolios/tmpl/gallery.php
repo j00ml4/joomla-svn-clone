@@ -23,7 +23,7 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
 					$this->item = $item;
 					echo $this->loadTemplate('item');
 			endforeach; ?>
-			<?php if (($this->params->def('show_pagination', 1) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) { ?>
+			<?php if(($params->def('show_pagination', 1) == 1 || ($params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) { ?>
 			<div class="pagination">
 				<?php  if ($this->params->def('show_pagination_results', 1)) { ?>
 				<p class="counter">
