@@ -8,8 +8,11 @@ div.projects{
 		margin-bottom : 10px;
 	}
 
-	div.projects	a.aNameItem{
-		font-size : 16px;	
+	div.projects	.projects-frame{
+		border : 1px solid #dddddd !important;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px; 
+		border-radius : 3px;
 	}
 
 	div.projects div.projects-content{
@@ -17,8 +20,31 @@ div.projects{
 		overflow : hidden;
 	}
 	
+	div.projects div.projects-space{
+		margin-bottom : 10px;
+	}
+
+	div.projects ul.projects-info{
+		margin : 0px 0px 0px 5px !important;
+		padding : 0 !important;
+	}
+
+		div.projects ul.projects-info li{
+			list-style : none;
+		}
+		
+			div.projects ul.projects-info li div.projects-info-key{
+				width : 150px;
+				float : left;
+				clear : right;
+				overflow : hidden;
+			}
+				
+			div.projects ul.projects-info li div.projects-info-data{
+			}
+
 	/************************ 2-columns layout ****************************/
-div.projects div.projects-left-column{
+	div.projects div.projects-left-column{
 		width : 65%;
 		overflow : hidden;
 		float : left;
@@ -39,34 +65,7 @@ div.projects div.projects-left-column{
 			}
 		
 	div.projects div.projects-right-column{
-		width : 35%;
+		width : 34%;
 		overflow : hidden;
-		float : right;	
-		margin-right : -2px;
-	}
-
-	/************************ 3-columns layout ****************************/
-	div.projects div.projects-left-column-3{
-		width : 50%;
-		overflow : hidden;
-		float : left;
-		clear : right;
-		border-right : 1px solid black;
-	}
-
-	div.projects div.projects-middle-column-3{
-		width : 25%;
-		overflow : hidden;
-		float : left;
-		clear : right;	
-		margin-right : -2px;
-		border-right : 1px solid black;
-	}
-	
-	div.projects div.projects-right-column-3{
-		width : 25%;
-		overflow : hidden;
-		float : right;	
-		margin-right : -2px;
-	}
-	
+		float : right;
+	}	
