@@ -27,7 +27,6 @@ function submitbutton(task) {
 	}
 }
 </script>
-<!-- no upercase on css classes -->
 <div class="projects<?php echo $pageClass;?>">
 <div class="edit item-page<?php echo  $pageClass;;?>">
 	<?php if ($params->get('show_page_heading', 1)) : ?>
@@ -99,7 +98,6 @@ function submitbutton(task) {
 			<?php echo $this->form->getInput('description'); ?>
 			</div>
 		</fieldset>
-		
 		<!-- SubTemplates are DRY -->	
 		<?php echo $this->loadTemplate('buttons'); ?>
 		
