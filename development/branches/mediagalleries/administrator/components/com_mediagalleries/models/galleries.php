@@ -70,11 +70,10 @@ class MediagalleriesModelGalleries extends JModelList
 		$query->select($this->getState( 'list.select', ' a.*'));
 		$query->from('#__mediagalleries AS a');
 
-/*		why this dont work?
 		// Join over the language
 		$query->select('l.title AS language_title');
-		$query->join('LEFT', '#__languages AS l ON l.lang_code = a.language');
-*/
+		$query->join('LEFT', '#__languages AS l ON l.lang_code=a.language');
+
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS author');
 		$query->join('LEFT', '#__users AS uc ON uc.id=a.created_by');
