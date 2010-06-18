@@ -106,6 +106,7 @@ class JInstallationModelSetup extends JModel
 		$map = array(
 			'MySQL'  => 'mysql_connect',
 			'MySQLi' => 'mysqli_connect',
+			'SqlSrv' => 'sqlsrv_connect'
 		);
 
 		// Iterate over the options, building an array.

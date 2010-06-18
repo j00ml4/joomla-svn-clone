@@ -782,9 +782,10 @@ abstract class JDatabase extends JObject
 	/**
 	 * List tables in a database
 	 *
+	 * @param 	string 	Tables' prefix
 	 * @return	array	A list of all the tables in the database
 	 */
-	abstract public function getTableList();
+	abstract public function getTableList($prefix);
 
 	/**
 	 * Shows the CREATE TABLE statement that creates the given tables
@@ -804,6 +805,22 @@ abstract class JDatabase extends JObject
 	abstract public function getTableFields($tables, $typeonly = true);
 
 	/**
+	 * Drop a table
+	 *
+	 * @param 	string 	Table name
+	 */
+	abstract public function dropTable($table);
+	
+	/**
+	 * 
+	 * Rename table
+	 * 
+	 * @param 	string	Old Name
+	 * @param 	string	New Name
+	 */
+	abstract public function renameTable($oldName, $newName);
+	
+	/**
 	 * Get a quoted database escaped string
 	 *
 	 * @param	string	A string
@@ -813,5 +830,16 @@ abstract class JDatabase extends JObject
 	public function quote($text, $escaped = true)
 	{
 		return '\''.($escaped ? $this->getEscaped($text) : $text).'\'';
+	}
+	
+	/**
+	 * 
+	 * @param unknown_type $query
+	 */
+	public function setManualAutoIncrementInsert($query, $table)
+	{
+		$this->_sql = $query;
+		
+		return $this;
 	}
 }

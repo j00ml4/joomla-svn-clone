@@ -219,28 +219,31 @@ class JInstallationModelConfiguration extends JModel
 		date_default_timezone_set('UTC');
 		$installdate	= date('Y-m-d H:i:s');
 		$nullDate		= $db->getNullDate();
-		$query	= 'REPLACE INTO #__users SET'
-				. ' id = 42'
-				. ', name = '.$db->quote('Super User')
-				. ', username = '.$db->quote($options->admin_user)
-				. ', email = '.$db->quote($options->admin_email)
-				. ', password = '.$db->quote($cryptpass)
-				. ', usertype = '.$db->quote('deprecated')		// Need to weed out where this is used
-				. ', block = 0'
-				. ', sendEmail = 1'
-				. ', registerDate = '.$db->quote($installdate)
-				. ', lastvisitDate = '.$db->quote($nullDate)
-				. ', activation = '.$db->quote('')
-				. ', params = '.$db->quote('');
+		$query	= 'INSERT INTO #__users (id, name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params) VALUES '
+				. '('
+				. '42'
+				. ','.$db->quote('Super User')
+				. ','.$db->quote($options->admin_user)
+				. ','.$db->quote($options->admin_email)
+				. ','.$db->quote($cryptpass)
+				. ','.$db->quote('deprecated')		// Need to weed out where this is used
+				. ',0'
+				. ',1'
+				. ','.$db->quote($installdate)
+				. ','.$db->quote($nullDate)
+				. ','.$db->quote('')
+				. ','.$db->quote('')
+				. ')';
 		$db->setQuery($query);
+		$db->setManualAutoIncrementInsert($query, '#__users');
 		if (!$db->query()) {
 			$this->setError($db->getErrorMsg());
 			return false;
 		}
 
 		// Map the super admin to the Super Admin Group
-		$query = 'REPLACE INTO #__user_usergroup_map' .
-				' SET user_id = 42, group_id = 8';
+		$query = 'UPDATE #__user_usergroup_map' .
+				' SET group_id = 8 WHERE user_id = 42';
 		$db->setQuery($query);
 		if (!$db->query()) {
 			$this->setError($db->getErrorMsg());

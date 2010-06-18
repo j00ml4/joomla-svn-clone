@@ -36,14 +36,14 @@ class JDatabaseSQLSrv extends JDatabase
 	 *
 	 * @var string
 	 */
-	var $_nullDate		= '0000-00-00 00:00:00';
+	var $_nullDate		= '0001-01-01 00:00:00';
 
 	/**
 	 * Quote for named objects
 	 *
 	 * @var string
 	 */
-	var $_nameQuote		= "'";
+	var $_nameQuote		= "[]";
 
 	/**
 	* Database object constructor
@@ -148,7 +148,7 @@ class JDatabaseSQLSrv extends JDatabase
 			return false;
 		}
 
-		$this->setQuery('USE '. $database);
+		$this->setQuery('USE [' . $database . ']');
 		if ( !$this->Query() ) {
 			$this->_errorNum = 3;
 			$this->_errorMsg = 'Could not connect to database';
@@ -166,7 +166,7 @@ class JDatabaseSQLSrv extends JDatabase
 	 */
 	function hasUTF()
 	{
-		return true;
+		return false;
 	}
 
 	/**
@@ -212,7 +212,7 @@ class JDatabaseSQLSrv extends JDatabase
 		}
 
 		// Take a local copy so that we don't modify the original query and cause issues later
-		$sql = $this->_sql;
+		$sql = $this->replacePrefix((string) $this->_sql);
 		if ($this->_limit > 0 || $this->_offset > 0) {
 			if($this->_limit > 0 && $this->_offset <= 0) {
 				// we have a limit with zero or no offset, we can use top here	
@@ -232,21 +232,40 @@ class JDatabaseSQLSrv extends JDatabase
 		}
 		$this->_errorNum = 0;
 		$this->_errorMsg = '';
-		$this->_cursor = sqlsrv_query( $this->_resource, $sql, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) );
+		//$this->_cursor = sqlsrv_query( $this->_resource, $sql, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) );
+		$this->_cursor = sqlsrv_query( $this->_resource, $sql );
 		
 		
 		if (!$this->_cursor)
 		{
-			$errors = sqlsrv_errors( );
+			if( ($errors = sqlsrv_errors() ) != null)
+			{
+				foreach($errors as $error)
+				{
+					$errorLevel = $error['SQLSTATE'];
+					if ($errorLevel != '01000')
+					{
+						$this->_errorNum = $error['code'];
+						$this->_errorMsg = $error['message']." SQL=$sql";
+					
+						if ($this->_debug) {
+							JError::raiseError(500, 'JDatabaseMSSQL::query: '.$this->_errorNum.' - '.$this->_errorMsg );
+						}
+					}
+				}
+				return false;
+			}
+			
+	/*		$errors = sqlsrv_errors( );
 			print_R($errors);
-			$this->_errorNum = $errors[0]['sqlstate'];
+			$this->_errorNum = $errors[0]['SQLSTATE'];
 			$this->_errorMsg = $errors[0]['message'];
 			// $errors[0]['errorcode']; // Holds the SQL Server Native Error Code
 
 			if ($this->_debug) {
 				JError::raiseError(500, 'JDatabaseSQLSrv::query: '.$this->_errorNum.' - '.$this->_errorMsg );
 			}
-			return false;
+			return false;*/
 		}
 		return $this->_cursor;
 	}
@@ -417,19 +436,20 @@ class JDatabaseSQLSrv extends JDatabase
 	}
 
 	/**
-	* Load a assoc list of database rows
-	*
-	* @access	public
-	* @param string The field name of a primary key
-	* @return array If <var>key</var> is empty as sequential list of returned records.
-	*/
-	function loadAssocList( $key='' )
+	 * Load a assoc list of database rows.
+	 *
+	 * @param	string	The field name of a primary key.
+	 * @param	string	An optional column name. Instead of the whole row, only this column value will be in the return array.
+	 * @return	array	If <var>key</var> is empty as sequential list of returned records.
+	 */
+	public function loadAssocList($key = null, $column = null)
 	{
 		if (!($cur = $this->query())) {
 			return null;
 		}
 		$array = array();
 		while ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_ASSOC )) {
+			$value = ($column) ? (isset($row[$column]) ? $row[$column] : $row) : $row;
 			if ($key) {
 				$array[$row[$key]] = $row;
 			} else {
@@ -439,7 +459,7 @@ class JDatabaseSQLSrv extends JDatabase
 		sqlsrv_free_stmt( $cur );
 		return $array;
 	}
-
+	
 	/**
 	* This global function loads the first row of a query into an object
 	*
@@ -682,19 +702,7 @@ class JDatabaseSQLSrv extends JDatabase
 		// TODO: Not fake this
 		return 'MSSQL UTF-8 (UCS2)';
 	}
-
-	/**
-	 * Description
-	 *
-	 * @access	public
-	 * @return array A list of all the tables in the database
-	 */
-	function getTableList()
-	{
-		$this->setQuery( 'SELECT name from sysobjects WHERE xtype = \'U\';' );
-		return $this->loadResultArray();
-	}
-
+	
 	/**
 	 * Shows the CREATE TABLE statement that creates the given tables
 	 *
@@ -746,5 +754,143 @@ class JDatabaseSQLSrv extends JDatabase
 		}
 
 		return $result;
+	}
+	
+	/**
+	 * 
+	 * @param 	string 	Tables' prefix
+	 * @return	array	An array of tables
+	 */
+	function getTableList($prefix)
+	{
+		// Initialise variables.
+		$result = array();
+
+		// Get the tables in the database.
+		// Better query by Jooml doesn't support very well yet two-part names
+		// $query = 'SELECT table_name = QUOTENAME(s.name) + \'.\' + QUOTENAME(t.name) FROM sys.tables t INNER JOIN sys.schemas s ON t.schema_id = s.schema_id';
+		$query = 'SELECT table_name = t.name FROM sys.tables t';
+		if (!empty($prefix))
+		{			
+			$query = $query . ' where t.name like \'' . $this->getEscaped($prefix) . '%\'';
+		}	
+		$this->setQuery($query);
+		$result = $this->loadResultArray();
+		return $result;
+	}
+	
+	/**
+	 * Drop a table
+	 *
+	 * @param 	string 	Table name
+	 */	
+	function dropTable($table)
+	{
+		$this->setQuery('IF (OBJECT_ID(\'' . $this->nameQuote($table) . '\', \'U\') IS NOT NULL) DROP TABLE ' . $this->nameQuote($table));
+		$this->query();
+	}
+	
+	/**
+	 * 
+	 * Rename table
+	 * 
+	 * @param 	string	Old Name
+	 * @param 	string	New Name
+	 */
+	function renameTable($oldName, $newName)
+	{
+		$this->setQuery('EXEC sp_rename \'' . $this->getEscaped($oldName) . '\', \'' . $this->getEscaped($newName) . '\'');
+		$this->query();
+	}
+	
+
+	/**
+	 * This function replaces a string identifier <var>$prefix</var> with the
+	 * string held is the <var>_table_prefix</var> class variable.
+	 *
+	 * @access public
+	 * @param string The SQL query
+	 * @param string The common table prefix
+	 */
+	function replacePrefix( $sql, $prefix='#__' )
+	{
+		$sql = trim( $sql );
+
+		$escaped = false;
+		$quoteChar = '';
+
+		$n = strlen( $sql );
+
+		$startPos = 0;
+		$literal = '';
+		while ($startPos < $n) {
+			$ip = strpos($sql, $prefix, $startPos);
+			if ($ip === false) {
+				break;
+			}
+
+			$quoteChar	= "'";
+			$j = strpos( $sql, "'", $startPos );
+
+			if ($j === false) {
+				$j = $n;
+			}
+			
+			$thestr = substr( $sql, $startPos, $j - $startPos );
+			$newstr = str_replace( $prefix, $this->_table_prefix, $thestr );
+
+			$literal .= $newstr;
+			$startPos = $j;
+			
+			$j = $startPos + 1;
+
+			if ($j >= $n) {
+				break;
+			}
+
+			// quote comes first, find end of quote
+			while (TRUE) {
+				$k = strpos( $sql, $quoteChar, $j );
+				$escaped = false;
+				if ($k === false) {
+					break;
+				}
+				$l = $k - 1;
+				while ($l >= 0 && $sql{$l} == '\\') {
+					$l--;
+					$escaped = !$escaped;
+				}
+				if ($escaped) {
+					$j	= $k+1;
+					continue;
+				}
+				break;
+			}
+			if ($k === FALSE) {
+				// error in the query - no end quote; ignore it
+				break;
+			}
+			
+			$literal .= substr( $sql, $startPos, $k - $startPos + 1 );			
+			$startPos = $k+1;
+		}
+		if ($startPos < $n) {
+			$literal .= substr( $sql, $startPos, $n - $startPos );
+		}
+		
+		$sqlsrv_literal = str_replace("`", '"', $literal);
+		
+		return $sqlsrv_literal;
+	}
+
+	/**
+	 * 
+	 * @param unknown_type $query
+	 */
+	public function setManualAutoIncrementInsert($query, $table)
+	{
+		$this->_sql = 'SET IDENTITY_INSERT ' . $this->nameQuote($table) . ' ON; ' . $query . ' ;SET IDENTITY_INSERT ' . $this->nameQuote($table) . ' OFF; ';
+		
+		return $this;
 	}
 }

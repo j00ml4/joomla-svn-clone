@@ -90,8 +90,8 @@ class JSessionStorageDatabase extends JSessionStorage
 		// Try to update the session data in the database table.
 		$db->setQuery(
 			'UPDATE `#__session`' .
-			' SET `data` = '.$db->quote($data).',' .
-			'	  `time` = '.(int) time() .
+			' SET `data` = '.$db->quote($db->getEscaped($data)).',' .
+			' `time` = '.(int) time() .
 			' WHERE `session_id` = '.$db->quote($id)
 		);
 		if (!$db->query()) {
@@ -104,7 +104,7 @@ class JSessionStorageDatabase extends JSessionStorage
 			// If the session does not exist, we need to insert the session.
 			$db->setQuery(
 				'INSERT INTO `#__session` (`session_id`, `data`, `time`)' .
-				' VALUES ('.$db->quote($id).', '.$db->quote($data).', '.(int) time().')'
+				' VALUES ('.$db->quote($id).', '.$db->quote($db->getEscaped($data)).', '.(int) time().')'
 			);
 			return (boolean) $db->query();
 		}
