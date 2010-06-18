@@ -55,29 +55,6 @@ class MediagalleriesModelGalleries extends JModelList
 	}
 
 	/**
-	 * Method to get a store id based on model configuration state.
-	 *
-	 * This is necessary because the model is used by the component and
-	 * different modules that might need different sets of data or different
-	 * ordering requirements.
-	 *
-	 * @param	string		$id	A prefix for the store id.
-	 * @return	string		A store id.
-	 * @since	1.6
-	 */
-	protected function getStoreId($id = '')
-	{
-		// Compile the store id.
-		$id.= ':' . $this->getState('filter.search');
-		$id.= ':' . $this->getState('filter.access');
-		$id.= ':' . $this->getState('filter.state');
-		$id.= ':' . $this->getState('filter.category_id');
-		$id.= ':' . $this->getState('filter.language');
-
-		return parent::getStoreId($id);
-	}
-
-	/**
 	 * Build an SQL query to load the list data.
 	 *
 	 * @return	JDatabaseQuery
@@ -90,22 +67,24 @@ class MediagalleriesModelGalleries extends JModelList
 		$query	= $db->getQuery(true);
 
 		// Select the required fields from the table.
-		$query->select(
-			$this->getState( 'list.select', ' a.*')
-		);
-		$query->from('`#__mediagalleries` AS a');
+		$query->select($this->getState( 'list.select', ' a.*'));
+		$query->from('#__mediagalleries AS a');
 
+/*		why this dont work?
 		// Join over the language
-		//$query->select('l.title AS language_title');
-		//$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
-
+		$query->select('l.title AS language_title');
+		$query->join('LEFT', '#__languages AS l ON l.lang_code = a.language');
+*/
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS author');
-		$query->join('LEFT', '#__users AS uc ON uc.id=a.userid');
-	
+		$query->join('LEFT', '#__users AS uc ON uc.id=a.created_by');
+		
+		$query->select('ue.name AS editor');
+		$query->join('LEFT', '#__users AS ue ON ue.id=a.checked_out');
+		
 		// Join over the asset groups.
-		//$query->select('ag.title AS access_level');
-		//$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
+		$query->select('ag.title AS access_level');
+		$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
 
 		// Join over the categories.
 		$query->select('c.title AS category_title, '
@@ -138,9 +117,9 @@ class MediagalleriesModelGalleries extends JModelList
 		}
 
 		// Filter on the language.
-		//if ($language = $this->getState('filter.language')) {
-			//$query->where('a.language = ' . $db->quote($language));
-		//}
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = ' . $db->quote($language));
+		}
 
 		if($this->getState('list.ordering', 'a.ordering') == 'a.ordering') {
 			$query->order('category_title, '.$db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
