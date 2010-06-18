@@ -61,7 +61,7 @@ class MediagalleriesViewMedia extends JView
 			$item->catid = 0;
 		}else{
 			
-			$video = PlayerHelper::play($item->url);
+			$video = PlayerHelper::play($this->item->url);
 		}
 					
 		// get the lists

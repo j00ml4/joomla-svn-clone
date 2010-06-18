@@ -8,6 +8,7 @@ JHTML::_('script','system/multiselect.js',false,true);
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 $user = &$this->user;
+
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_mediagalleries&view=galleries'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
