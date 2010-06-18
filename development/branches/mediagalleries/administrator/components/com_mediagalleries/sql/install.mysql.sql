@@ -15,18 +15,13 @@
 
 CREATE TABLE IF NOT EXISTS `#__mediagalleries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userid` int(11) NOT NULL,
   `catid` int(11) NOT NULL,
   `url` text COLLATE utf8_unicode_ci NOT NULL,
-  `media` text COLLATE utf8_unicode_ci NOT NULL,
   `thumb_url` text COLLATE utf8_unicode_ci NOT NULL,
   `title` text COLLATE utf8_unicode_ci NOT NULL,
   `alias` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   `hits` int(10) unsigned NOT NULL,
-  `rank` int(10) unsigned NOT NULL,
-  `votes` int(11) NOT NULL,
-  `added` datetime NOT NULL,
   `published` tinyint(1) NOT NULL,
   `ordering` int(11) NOT NULL,
   `checked_out` int(11) NOT NULL,
