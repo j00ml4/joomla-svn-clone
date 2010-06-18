@@ -15,16 +15,16 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_mediagalleries')) {
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
-//  Check Media Plugin
-$mediapath = JPATH_SITE.'/plugins/content/media/media.php';
-if (!is_file($mediapath)){
+//  Check Media Plugin, made platform independent
+$mediapath = JPATH_SITE.DS.'plugins'.DS.'content'.DS.'media'.DS.'media.php';
+if (!file_exists($mediapath)){
 	return JError::raiseWarning(404, JText::_('MEDIA_PLUGIN_NOT_INSTALLED')); 
 }
 
 // Include dependancies
 jimport('joomla.application.component.controller');
 require_once $mediapath;
-require_once JPATH_COMPONENT.'/helpers/mediagalleries.php';
+require_once JPATH_COMPONENT.DS.'helpers'.DS.'mediagalleries.php';
 
 // Define paths
 define('URI_ASSETS', JURI::base().'../components/com_mediagalleries/assets/' );
