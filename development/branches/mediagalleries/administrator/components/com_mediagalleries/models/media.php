@@ -60,6 +60,7 @@ class MediagalleriesModelMedia extends JModelAdmin
 	 * @return	JForm	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
+
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
