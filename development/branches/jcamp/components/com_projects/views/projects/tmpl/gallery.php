@@ -27,15 +27,7 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
 			<div class="pagination">
 				<?php  if ($this->params->get('show_pagination_results', 1)) : ?>
 				<p class="counter">
-				<div class="pagination">
-					<?php  if ($this->params->get('show_pagination_results', 1)) : ?>
-					<p class="counter">
 					<?php echo $this->pagination->getPagesCounter(); ?>
-					</p>
-					<?php endif; ?>
-					<?php echo $this->pagination->getPagesLinks(); ?>
-					<?php echo $this->pagination->getPagesCounter(); ?>
-				</div>
 				</p>
 				<?php endif; ?>
 				<?php echo $this->pagination->getPagesLinks(); ?>
