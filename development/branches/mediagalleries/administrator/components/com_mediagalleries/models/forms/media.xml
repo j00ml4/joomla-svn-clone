@@ -10,16 +10,7 @@
 			readonly="true" 
 			class="readonly" 
 		/>
-		<field 
-			name="votes" 
-			type="text" 
-			default="0" 
-			label="votes" 
-			description="Votes"
-			readonly="true" 
-			class="readonly" 
-		/>
-		
+			
 
 		<field 
 			name="title" 
@@ -72,15 +63,7 @@
 		/>
 
 		
-		<field 
-			name="added" 
-			type="Date" 
-			class="inputbox"
-			label="WEBLINKS_DATE_LABEL" 
-			description="WEBLINKS_DATE_DESC"
-			filter="safehtml" 
-		/>
-	
+		
 		<field 
 			name="hits" 
 			type="Text" 
@@ -150,17 +133,6 @@
 				<option value="*">JALL</option>
 		</field>
 
-		<!-- to be reviewed/deleted 
-		<field 
-			id="approved" 
-			name="approved" 
-			type="radio"
-			class="inputbox" 
-			label="WEBLINKS_APPROVED_LABEL"
-			description="WEBLINKS_APPROVED_DESC">
-				<option value="0">JNO</option>
-				<option value="1">JYES</option>
-		</field>-->
 		
 		<field 
 			name="created" 
@@ -236,16 +208,7 @@
 			rows="3" 
 			cols="30"
 		/>
-	<!-- to be reviewed/deleted 
-		<field 
-			name="metadesc" 
-			type="textarea"
-			label="JFIELD_META_DESCRIPTION_LABEL" 
-			description="JFIELD_META_DESCRIPTION_DESC"
-			class="inputbox" 
-			rows="3" 
-			cols="30" 
-		/>-->
+
 
 		<field 
 			name="xreference" 
@@ -268,14 +231,7 @@
 				<option value="3">JGLOBAL_NOINDEX_NOFOLLOW</option>
 				<option value="4">JGLOBAL_NO_ROBOTS_TAG</option>
 		</field>
-	<!-- to be reviewed/deleted -->
-		<field 
-			name="author" 
-			type="text"
-			label="JAUTHOR" 
-			description="JFIELD_METADATA_AUTHOR_DESC"
-			size="20" 
-		/>
+	
 	<!-- to be reviewed/deleted -->
 		<field 
 			name="rights" 
