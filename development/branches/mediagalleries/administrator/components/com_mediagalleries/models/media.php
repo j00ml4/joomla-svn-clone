@@ -39,6 +39,19 @@ class MediagalleriesModelMedia extends JModelAdmin
 		return JTable::getInstance($type, $prefix, $config);
 	}
 
+
+	/**
+	 * Method to auto-populate the model state.
+	 * no needed to overload but is very important  
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
+	 */
+	protected function populateState()
+	{
+		parent::populateState();		
+	}
+		
 	/**
 	 * Method to get the record form.
 	 *
@@ -119,14 +132,14 @@ class MediagalleriesModelMedia extends JModelAdmin
 
 		$table->title		= htmlspecialchars_decode($table->title, ENT_QUOTES);
 		$table->alias		= JApplication::stringURLSafe($table->alias);
-
 		if (empty($table->alias)) {
 			$table->alias = JApplication::stringURLSafe($table->title);
 		}
 
 		if (empty($table->id)) {
 			// Set the values
-			//$table->created	= $date->toMySQL();
+			$table->created	= $date->toMySQL();
+			$table->created_by	= $user->get('id');
 
 			// Set ordering to the last item if not set
 			if (empty($table->ordering)) {
@@ -139,8 +152,8 @@ class MediagalleriesModelMedia extends JModelAdmin
 		}
 		else {
 			// Set the values
-			//$table->modified	= $date->toMySQL();
-			//$table->modified_by	= $user->get('id');
+			$table->modified	= $date->toMySQL();
+			$table->modified_by	= $user->get('id');
 		}
 	}
 
