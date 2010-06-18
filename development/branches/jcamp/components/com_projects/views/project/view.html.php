@@ -32,13 +32,11 @@ class ProjectsViewProject extends JView
 	public function display($tpl = null) 
 	{	
 		$app		= &JFactory::getApplication();
-		$model 		= $this->getModel('project');
-		$state		= $model->getState();
+		$model		= &$this->getModel();
 
 		//Get Model data
 		$this->item 	= &$model->getItem();
 		$this->params	= &$app->getParams();
-		$this->catid	= $app->getUserState('portfolio.id', 0);
 		$this->canDo	= &ProjectsHelper::getActions();
 		
 		// Layout
@@ -46,12 +44,15 @@ class ProjectsViewProject extends JView
 		switch($layout){
 			case 'edit':
 			case 'form':
-				$this->form	= $model->getForm();
-				$layout 	= 'form';
+				$layout = 'form';
+				$this->form	= &$model->getForm();
+				if (empty($this->item)) {
+					$this->catid = $app->getUserState('portfolio.id', 0);
+				}
 				break;
 			
 			default:
-				$layout		= 'default';
+				$layout = 'default';
 				if (!$this->canDo->get('project.view')){
 					return JError::raiseError(505, JText::_('JERROR_ALERTNOAUTHOR'));				
 				}
@@ -60,11 +61,11 @@ class ProjectsViewProject extends JView
 				}
 				
 				// Get Category
-				$this->category = $model->getCategory($this->item->catid);
+				$this->category = &$model->getCategory($this->item->catid);
 				
 				// add 'potfolio' and 'project' of our component breadcrumb
 			  	$bc = $app->getPathway();
-		  		$bc->addItem($this->category->title, 'index.php?option=com_projects&view=projects&layout=gallery&id='.$model->getState('portfolio.id'));
+		  		$bc->addItem($this->category->title, 'index.php?option=com_projects&view=projects&layout=gallery&id='.$this->item->catid);
 		  		$bc->addItem($this->item->title);
 		}
 		
@@ -72,5 +73,4 @@ class ProjectsViewProject extends JView
 		$this->setLayout($layout);
 		parent::display($tpl);
 	}
-	
 }

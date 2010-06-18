@@ -26,7 +26,6 @@ class ProjectsViewProjects extends JView
 	protected $children;
 	protected $parent;
 	protected $maxLevel;
-	protected $state;
 	protected $params;
 	protected $pagination;
 	protected $canDo;
@@ -38,10 +37,9 @@ class ProjectsViewProjects extends JView
 	function display($tpl = null)
 	{
 		$app		= &JFactory::getApplication();
-		$model 		= $this->getModel('Projects');
-			
+		$model		= &$this->getModel();
+		
 		// Get some data from the models
-		$this->state		= $this->get('State');
 		$this->items		= &$model->getItems();
 		$this->pagination	= &$model->getPagination();
 		$this->params		= &$app->getParams();
@@ -57,11 +55,10 @@ class ProjectsViewProjects extends JView
 				}
 				
 				// Get category
-				$this->category	= $this->get('Category');
+				$this->category	= &$model->getCategory();
 				if(empty($this->category)){
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
-				$app->setUserState('portfolio.id', $this->category->id);
 				
 				// add ' home page' of our component breadcrumb
 			  	$bc = $app->getPathway();
@@ -70,7 +67,6 @@ class ProjectsViewProjects extends JView
 
 			default:
 				$layout = 'gallery';
-				$app->setUserState('portfolio.id', 0);
 				break;
 		}
 		

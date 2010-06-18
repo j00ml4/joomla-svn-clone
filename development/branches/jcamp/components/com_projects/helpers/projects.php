@@ -11,7 +11,7 @@
  * @package		Joomla.Site
  * @subpackage	com_projects
  */
-class ProjectsHelper
+abstract class ProjectsHelper
 {
 	/**
 	 * Can do some action
@@ -24,13 +24,14 @@ class ProjectsHelper
 	public function can($action, $context=null, $record=null, $user=null )
 	{	
 		// Set vars
-		empty($user) &&	$user = JFactory::getUser();
+		if (empty($user)) {
+			$user = JFactory::getUser();
+		}
+		// set params
 		$params	= JComponentHelper::getParams('com_projects');
 		
 		// Can do action?
 		$canDo = false;
-		
-		// What action?
 		switch($action){
 			// Can view
 			case 'project.view':
@@ -120,21 +121,12 @@ class ProjectsHelper
 	 * @return	JObject
 	 * @since	1.6
 	 */
-	public static function getActions($record=null, $catid=null)
+	public function getActions($context=null, $record=null)
 	{
-		$user	= JFactory::getUser();
-		$canDo	= new JObject;
-
-		$context = 'com_projects';
-		if (!empty($record->id)) {
-			$context = 'com_projects.'.(int) $record->id;
-		}
-		elseif (!empty($catid)) {
-			$context = 'com_projects.category.'.(int) $catid;
-		}
+		$user		= JFactory::getUser();
 		
 		// Action
-		$actions = array(
+		$actions 	= array(
 			// Project
 			'project.view',
 			'project.create',
@@ -159,23 +151,13 @@ class ProjectsHelper
 		);
 		
 		// Check Can do list
+		$canDo	= new JObject;
 		foreach ($actions as $action) {
 			$canDo->set($action, self::can($action, $context, $record, $user));
 		}
-
 		return $canDo;
 	}
 	
-	/**
-	 * Include CSS styles to page
-	 *
-	 * @since	1.6
-	 */
-	public static function includeCSS($style='default')
-	{
-		$document = &JFactory::getDocument();
-		$document->addStyleSheet('components/com_projects/assets/css/'.$style.'.css');
-	}
 }
 
 /**

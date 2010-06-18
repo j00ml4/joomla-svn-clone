@@ -15,22 +15,12 @@ $params =  $this->params;
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
 <div class="projects<?php echo $pageClass?>">
-	<div class="projects-left-column-3">
-		<div class="projects-content">
-			<h1><?php echo $this->item->title; ?></h1>
-			<?php echo $this->loadTemplate('buttons'); ?>
-		</div>
+<div class="item-page<?php echo $params->get('pageclass_sfx')?>">
+	<h1><?php echo $this->item->title; ?></h1>
+	<div class="project-desc">
+		<?php echo $this->item->description; ?>
 	</div>
-	<div class="projects-middle-column-3">
-		<div class="projects-content">
-			<h1><?php echo $this->item->title; ?></h1>
-			<?php echo $this->loadTemplate('buttons'); ?>
-		</div>
-	</div>
-	<div class="projects-right-column-3">
-		<div class="projects-content">
-			<h1><?php echo $this->item->title; ?></h1>
-			<?php echo $this->loadTemplate('buttons'); ?>
-		</div>
-	</div>
+	<?php dump($this->item); ?>
+	<?php echo $this->loadTemplate('buttons'); ?>
+</div>
 </div>
