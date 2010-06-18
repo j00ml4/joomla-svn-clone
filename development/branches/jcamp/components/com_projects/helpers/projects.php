@@ -35,14 +35,42 @@ abstract class ProjectsHelper
 		switch($action){
 			// Can view
 			case 'project.view':
-				$canDo 	= $params->get('view_projects', 1) ||
-					$user->authorise('project.manage', $context) ||
-					$user->authorise('project.work', $context) ||
-					$user->authorise('project.text', $context);
+				$canDo 	= (
+					// Owner 
+					(
+						!empty($record->created_by) && 
+						$record->created_by == $user->get('id')
+					) ||
+					
+					// Param all can view
+					( 
+						($params->get('view_projects') == 2) ||
+						(
+							($params->get('view_projects') == 1) &&
+							!empty($record->featured) && 
+							$record->featured > 0
+						)
+					) ||
+						
+					// Role permission 
+					(
+						$user->authorise('project.manage', $context) ||
+						$user->authorise('project.work', $context) ||
+						$user->authorise('project.text', $context)
+					)	
+				);	
 				break;
+				
 			// Can create project
 			case 'project.create':
-				$canDo = $user->authorise('project.manage', $context);
+				$canDo 	= (
+					empty($record->id) &&
+					
+					// Permissions
+				 	(
+						$user->authorise('project.manage', $context)
+					)
+				);
 				break;
 				
 			// Can delete project
@@ -52,7 +80,20 @@ abstract class ProjectsHelper
 								
 			// Can edit project
 			case 'project.edit':
-				$canDo = $user->authorise('project.manage', $context);
+				$canDo 	= (
+					!empty($record->id) &&
+					
+					// Owner 
+					(
+						!empty($record->created_by) && 
+						$record->created_by == $user->get('id')
+					) ||
+					
+					// Permissions
+				 	(
+						$user->authorise('project.manage', $context)
+					)
+				);
 				break;
 
 			// Can can cchange the state of project
