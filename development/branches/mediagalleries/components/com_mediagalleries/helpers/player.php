@@ -33,7 +33,7 @@ class PlayerHelper{
 	 * @param boolean $autoplay True if yes [optional]
 	 */
 	function play( $url, $width=0, $heigth=0, $autoplay=0 ){
-		$media = showDenVideo($url, $width, $heigth, $autoplay );
+		$media = plgContentMedia::addMedia($url, $width, $heigth, $autoplay );
 		return $media;
 	}
 	
