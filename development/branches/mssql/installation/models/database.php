@@ -93,12 +93,14 @@ class JInstallationModelDatabase extends JModel
 			if (($position = strpos($db_version, '-')) !== false) {
 				$db_version = substr($db_version, 0, $position);
 			}
-
-			if (!version_compare($db_version, '5.0.4', '>=')) {
+			
+			// @todo 
+			// Make version checking dbtype dependant
+/*			if (!version_compare($db_version, '5.0.4', '>=')) {
 				$this->setError(JText::_('INSTL_DATABASE_INVALID_MYSQL_VERSION'));
 				return false;
 			}
-
+*/
 			// Check utf8 support.
 			$utfSupport = $db->hasUTF();
 
@@ -137,6 +139,7 @@ class JInstallationModelDatabase extends JModel
 				}
 			}
 
+			// @todo: This should be provided by database driver
 			// Set the appropriate schema script based on UTF-8 support.
 			$type = $options->db_type;
 			if ($utfSupport) {
@@ -175,6 +178,7 @@ class JInstallationModelDatabase extends JModel
 				}
 				$params = Json_encode($params);
 
+				// @todo: Use JDatabaseQuery to avoid inline SQL
 				// Update the language settings in the language manager.
 				$db->setQuery(
 					'UPDATE `#__extensions`' .
@@ -283,11 +287,7 @@ class JInstallationModelDatabase extends JModel
 		$backup = 'bak_';
 
 		// Get the tables in the database.
-		$db->setQuery(
-			'SHOW TABLES' .
-			' FROM '.$db->nameQuote($name)
-		);
-		if ($tables = $db->loadResultArray())
+		if ($tables = $db->getTableList())
 		{
 			foreach ($tables as $table)
 			{
@@ -298,22 +298,16 @@ class JInstallationModelDatabase extends JModel
 					$backupTable = str_replace($prefix, $backup, $table);
 
 					// Drop the backup table.
-					$db->setQuery(
-						'DROP TABLE IF EXISTS '.$db->nameQuote($backupTable)
-					);
-					$db->query();
+					$db->dropTable($backupTable);
 
 					// Check for errors.
 					if ($db->getErrorNum()) {
 						$this->setError($db->getErrorMsg());
 						$return = false;
 					}
-
+					
 					// Rename the current table to the backup table.
-					$db->setQuery(
-						'RENAME TABLE '.$db->nameQuote($table).' TO '.$db->nameQuote($backupTable)
-					);
-					$db->query();
+					$db->renameTable($table, $backupTable);					
 
 					// Check for errors.
 					if ($db->getErrorNum()) {
@@ -327,6 +321,7 @@ class JInstallationModelDatabase extends JModel
 		return $return;
 	}
 
+	//@todo - Move method into database driver
 	/**
 	 * Method to create a new database.
 	 *
@@ -339,6 +334,7 @@ class JInstallationModelDatabase extends JModel
 	 */
 	function createDatabase(& $db, $name, $utf)
 	{
+		// @todo: move database creation into database driver
 		// Build the create database query.
 		if ($utf) {
 			$query = 'CREATE DATABASE '.$db->nameQuote($name).' CHARACTER SET `utf8`';
@@ -375,21 +371,15 @@ class JInstallationModelDatabase extends JModel
 		$return = true;
 
 		// Get the tables in the database.
-		$db->setQuery(
-			'SHOW TABLES FROM '.$db->nameQuote($name)
-		);
-		if ($tables = $db->loadResultArray())
+		if ($tables = $db->getTableList($prefix))
 		{
 			foreach ($tables as $table)
 			{
 				// If the table uses the given prefix, drop it.
 				if (strpos($table, $prefix) === 0)
 				{
-					// Drop the table.
-					$db->setQuery(
-						'DROP TABLE IF EXISTS '.$db->nameQuote($table)
-					);
-					$db->query();
+					// Drop the table.				
+					$db->dropTable($table);
 
 					// Check for errors.
 					if ($db->getErrorNum()) {
@@ -462,6 +452,7 @@ class JInstallationModelDatabase extends JModel
 		// Only alter the database if it supports the character set.
 		if ($db->hasUTF())
 		{
+			// @todo: move into database driver
 			// Run the create database query.
 			$db->setQuery(
 				'ALTER DATABASE '.$db->nameQuote($name).' CHARACTER' .

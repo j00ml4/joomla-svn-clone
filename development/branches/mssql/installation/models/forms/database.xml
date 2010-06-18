@@ -10,6 +10,7 @@
 			>
 				<option value="mysql">MySQL</option>
 				<option value="mysqli">MySQLi</option>
+				<option value="sqlsrv">SQL Server 2008</option>
 			</field>
 			<field name="db_host" type="text" id="db_host" class="inputbox"
 				label="INSTL_DATABASE_HOST_LABEL"
