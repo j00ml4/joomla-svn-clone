@@ -128,7 +128,7 @@
 			name="ordering" 
 			type="Ordering" 
 			class="inputbox"
-			label="COM_WEBLINKS_FIELD_ORDERING_LABEL"
+			label="ordering"
 			description="COM_WEBLINKS_FIELD_ORDERING_DESC" 
 		/>
 

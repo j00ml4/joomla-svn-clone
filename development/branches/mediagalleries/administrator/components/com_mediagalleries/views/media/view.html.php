@@ -44,8 +44,9 @@ class MediagalleriesViewMedia extends JView
 		$model		=& $this->getModel();
 		
 		//get the data
+		
 		$this->user 	=& JFactory::getUser();
-		$this->item		=& $this->get('Item');
+		$this->item		=& $this->get('item');
 		$this->form		=& $this->get('Form');
 		$this->state	= $this->get('State');
 		
@@ -69,7 +70,6 @@ class MediagalleriesViewMedia extends JView
 		// To folder
 		// $this->folder= GetmediaParam('defaultdir');//does it work?
 		$plg_media=JPluginHelper::getPlugin('content', 'media');
-		//print_r($plg_media);
 		$this->media_params=$plg_media->params;
 		$this->folder=$this->media_params['defaultdir'];
 		// Add the toolbar
