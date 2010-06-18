@@ -50,8 +50,8 @@ class ProjectsController extends JController {
 								'lang'=>'CMD');
 
 		// add 'home page' of our component breadcrumb
-	  	$bc = $app->getPathway();
-	  	$bc->addItem(JText::_('COM_PROJECTS_HOME_PAGE'),'index.php?option=com_projects');
+	  $bc = $app->getPathway();
+	  $bc->addItem(JText::_('COM_PROJECTS_HOME_PAGE'),'index.php?option=com_projects');
 
 	  	// display
 		return parent::display($cachable, $safeurlparams);
