@@ -99,8 +99,7 @@
                 <option value="">JGLOBAL_USE_GLOBAL</option>
                 <option value="0">JHIDE</option>
                 <option value="1">JSHOW</option>
-            </field>
-        
+            </field>      
         </fieldset>
     </fields>
 </metadata>

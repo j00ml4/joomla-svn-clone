@@ -10,23 +10,30 @@
 // no direct access
 defined('_JEXEC') or die;
 $uri = &JFactory::getURI();
+$id = $this->item->id;
 ?>
 <div class="formelm_buttons">
-	<?php if ($this->canDo->get('project.edit', 1)): ?>
-		<?php 
-			$link = JRoute::_('index.php?task=project.edit&id='.$this->item->id);
-		?>
-		<a href="<?php echo $link; ?>">
-			<button type="button"><?php echo JText::_('JGLOBAL_EDIT'); ?></button>
-		</a>
-	<?php endif; ?>
-	<?php if ($this->canDo->get('project.edit.state', 1)): ?>
-		<?php 
-			$link = JRoute::_('index.php?task=project.publish&id='.$this->item->id);
-		?>
-		<a href="<?php echo $link; ?>">
-			<button type="button"><?php echo JText::_('JGLOBAL_PUBLISH'); ?></button>
-		</a>
-	<?php endif; ?>
+	<ul class="actions">
+		<?php if ($this->canDo->get('project.edit')): ?>
+		<li  class="edit-icon">
+			<?php echo JHTML::_('action.edit', JText::_('JGLOBAL_EDIT'), 'project', $id); ?>
+		</li>
+		<?php endif; ?>
 	
+		<!-- edit state --> 
+		<?php if ($this->canDo->get('project.edit.state')): ?>
+		<li>
+			<?php if ($this->item->state == 0): ?>
+				<?php echo JHTML::_('action.task', JText::_('JGLOBAL_PUBLISH'), 'project.publish', $id); ?>
+			<?php else: ?>
+				<?php echo JHTML::_('action.task', JText::_('JGLOBAL_UNPUBLISH'), 'project.unpublish', $id); ?>
+			<?php endif; ?>
+		</li>	
+		<?php endif; ?>
+		
+		<!--  Delete -->
+		<?php if ($this->canDo->get('project.delete')): ?>
+			<?php echo JHTML::_('action.delete', JText::_('JGLOBAL_DELETE'), 'project', $id); ?>
+		<?php endif; ?>			
+	</ul>
 </div>

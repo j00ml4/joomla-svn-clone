@@ -60,21 +60,18 @@ class ProjectsModelProjects extends JModelList
 	 */
 	protected function populateState()
 	{
+		parent::populateState();
+				
 		// Initialise variables.
 		$app	= &JFactory::getApplication();
-		$params	= JComponentHelper::getParams('com_projects');
 		
 		// Category		
 		$id = JRequest::getInt('id', 0);
 		$this->setState('portfolio.id', $id);
-
+		$app->setUserState('portfolio.id', $id);
+		
 		//$this->setState('filter.published',	1);
 		//$this->setState('filter.language',$app->getLanguageFilter());
-		
-		// Load the parameters.
-		$this->setState('params', $params);
-		
-		parent::populateState();
 	}
 	
 	

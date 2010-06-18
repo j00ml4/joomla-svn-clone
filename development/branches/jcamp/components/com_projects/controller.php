@@ -26,29 +26,35 @@ class ProjectsController extends JController {
 	 */
 	function display()
 	{	
+		$app 	= &JFactory::getApplication();
+		$user 	= &JFactory::getUser();
+		$params = &$app->getParams(); 
+		
+		// HTML
 		$document = &JFactory::getDocument();
-		if($document->getType() == 'html') {
-			ProjectsHelper::includeCSS();
-		}
-		
-		$user =& JFactory::getUser();
+		if($document->getType() == 'html' && ($style = $params->get('style'))) {
+			$document->addStyleSheet('components/com_projects/assets/css/'.$style);
+		}		
+	  	JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
+	  	
+		// Cache
 		$cachable = true;	
-		
 		if ( $user->get('id') || ($_SERVER['REQUEST_METHOD'] == 'POST') ) {
 			$cachable = false;
 		}
 		
+		// Save Params
 		$safeurlparams = array(	'id'=>'INT','cid'=>'INT',
 								'limit'=>'INT',	'limitstart'=>'INT',
 								'filter_order'=>'CMD','filter_order_Dir'=>'CMD',
 								'lang'=>'CMD');
 
-		$app = &JFactory::getApplication();
 		// add 'home page' of our component breadcrumb
-	  $bc = $app->getPathway();
-	  $bc->addItem(JText::_('COM_PROJECTS_HOME_PAGE'),'index.php?option=com_projects');
-		
-		parent::display($cachable, $safeurlparams);
+	  	$bc = $app->getPathway();
+	  	$bc->addItem(JText::_('COM_PROJECTS_HOME_PAGE'),'index.php?option=com_projects');
+
+	  	// display
+		return parent::display($cachable, $safeurlparams);
 	}
 	
 }

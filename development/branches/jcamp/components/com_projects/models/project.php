@@ -30,7 +30,7 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	protected function canDelete($record=null, $user=null)
 	{
-		return ProjectsHelper::can('project.delete', $this->option, $user, $record);
+		return ProjectsHelper::can('project.delete', $this->option, $record);
 	}
 
 	/**
@@ -41,7 +41,7 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	protected function canEditState($record=null, $user=null)
 	{
-		return ProjectsHelper::can('project.edit.state', $this->option, $user, $record);
+		return ProjectsHelper::can('project.edit.state', $this->option, $record);
 	}
 
 	/**
@@ -56,8 +56,7 @@ class ProjectsModelProject extends JModelAdmin
 	{
 		parent::populateState();
 		$app = JFactory::getApplication();
-		$app->setUserState('com_projects.edit.project.id', null);
-				
+		//$app->setUserState('com_projects.edit.project.id', null);			
 	}
 	
 	/**
@@ -74,7 +73,7 @@ class ProjectsModelProject extends JModelAdmin
 			$db		= $this->getDbo();
 			$query	= $db->getQuery(true);
 			$query->select('a.catid');
-			$query->from('#__projects AS ');
+			$query->from('#__projects AS a');
 			$query->where('a.id='.$pk);
 			$db->setQuery($query);
 			
