@@ -8,7 +8,6 @@ JHTML::_('script','system/multiselect.js',false,true);
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 $user = &$this->user;
-
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_mediagalleries&view=galleries'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
@@ -80,10 +79,10 @@ $user = &$this->user;
 		<?php foreach ($this->items as $i => $item) :
 			$ordering	= ($listOrder == 'a.ordering');
 			$item->cat_link	= JRoute::_('index.php?option=com_categories&extension=com_mediagalleries&task=edit&type=other&cid[]='. $item->catid);
-			$canCreate	= $user->authorise('core.create',		'com_mediagalleries.category.'.$item->catid);
-			$canEdit	= $user->authorise('core.edit',			'com_mediagalleries.category.'.$item->catid);
-			$canCheckin	= $user->authorise('core.manage',		'com_checkin') || $item->checked_out==$user->get('id') || $item->checked_out==0;
-			$canChange	= $user->authorise('core.edit.state',	'com_mediagalleries.category.'.$item->catid) && $canCheckin;
+			$canCreate	= $user->authorise('core.create');
+			$canEdit	= $user->authorise('core.edit');
+			$canCheckin	= $user->authorise('core.manage') || $item->checked_out==$user->get('id') || $item->checked_out==0;
+			$canChange	= $user->authorise('core.edit.state') && $canCheckin;
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
@@ -103,7 +102,7 @@ $user = &$this->user;
 						(<span><?php echo JText::_('COM_MEDIAGALLERIES_FIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>)</p>
 				</td>
 				<td class="center">
-					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'galleries.', $canChange);?>
+					<?php echo JHtml::_('jgrid.published', $item->state, $i, 'galleries.', $canChange);?>
 				</td>
 				<td class="center">
 					<?php echo $this->escape($item->category_title); ?>
