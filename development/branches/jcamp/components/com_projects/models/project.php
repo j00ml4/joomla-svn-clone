@@ -54,9 +54,9 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	protected function populateState()
 	{
-		parent::populateState();
 		$app = JFactory::getApplication();
-		//$app->setUserState('com_projects.edit.project.id', null);			
+		$app->setUserState('com_projects.edit.project.id', null);			
+		parent::populateState();
 	}
 	
 	/**
