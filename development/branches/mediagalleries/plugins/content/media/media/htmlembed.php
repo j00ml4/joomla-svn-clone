@@ -58,9 +58,9 @@ function addVideoYoutube( $video, $width='', $height='', $params=array() ){
 	
 	$a = '';
 	$p = '';
+	//Just removed the unnecessary $replace
+	return addMediaSWF( $player, $width, $height, $a, $p );
 	
-	$replace = 	addMediaSWF( $player, $width, $height, $a, $p );
-	return $replace;
 }
 	
 /**
@@ -82,9 +82,9 @@ function addVideoYahoo($video, $width='', $height='',  $autostart='0') {
 	$a = '';
 	$p = '<param name="allowFullScreen" value="true" />'
 		. '<param name="flashvars" value="'. $vars .'" />';
-
-	$replace = 	addMediaSWF( $player, $width, $height, $a, $p );
-	return $replace;
+	
+	return addMediaSWF( $player, $width, $height, $a, $p );
+	
 }
 
 /**
@@ -108,8 +108,8 @@ function addVideoMegavideo($video, $width='', $height='',  $autostart='0' ) {
 		<param name="FlashVars" value="'. $vars .'" />
 		<param name="allowScriptAccess" value="always" />';
 
-	$replace = 	addMediaSWF( $player, $width, $height, $a, $p );
-	return $replace;
+	return addMediaSWF( $player, $width, $height, $a, $p );
+	 
 }
 
 /**
@@ -137,8 +137,8 @@ function addVideoTangle($video, $width='', $height='',  $autostart='0' ) {
 width="330" height="270" name="tangle" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /></embed>
 */
 
-	$replace = 	addMediaSWF( $player, $width, $height, $a, $p );
-	return $replace;
+	return addMediaSWF( $player, $width, $height, $a, $p );
+	 
 }
 
 /**
@@ -157,8 +157,8 @@ function addVideoGameTrailers($video, $width='', $height='',  $autostart='0') {
 	$a = '';
 	$p = '<param name="allowfullscreen" value="true" />';
 
-	$replace = 	addMediaSWF( $player, $width, $height, $a, $p );
-	return $replace;
+	return	addMediaSWF( $player, $width, $height, $a, $p );
+	
 }
 /**
  * Add Google video
@@ -178,8 +178,8 @@ function 	addVideoGoogle( $video, $width='', $height='',  $autostart='0' ){
 	$a= '';
 	$p='<param name="flashvars" value="'. $vars .'" />';
 		
-	$replace = 	addMediaSWF( $player, $width, $height, $a, $p );
-	return $replace;
+	return	addMediaSWF( $player, $width, $height, $a, $p );
+	
 }
 	
 /**
@@ -211,13 +211,12 @@ function addVideoBrightcove( $video, $width='', $height='',  $autostart='0' ){
 	*/
 
 	// opera code
-	$replace = "<embed src='http://www.brightcove.tv/playerswf'  class='denvideo' style='".$width . $height."'
+	return "<embed src='http://www.brightcove.tv/playerswf'  class='denvideo' style='".$width . $height."'
 	flashVars='".$vars."' 
 	base='http://admin.brightcove.com' 
 	allowFullScreen='true' allowScriptAccess='always' seamlesstabbing='false' swLiveConnect='true'
 	type='application/x-shockwave-flash'  pluginspage='http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash'></embed>";
 
-	return $replace;
 }
 
 /**
@@ -240,8 +239,8 @@ function addVideoMetacafe( $video, $width='', $height='',  $autostart='0' ){
 	$a= '';
 	$p = '<param name="flashVars" value="'. $vars .'" />';
 	
-	$replace = addMediaSWF( $video, $width, $height, $a, $p );
-	return $replace;		
+	return addMediaSWF( $video, $width, $height, $a, $p );
+		
 }
 	
 
@@ -258,15 +257,13 @@ function addVideoMetacafe( $video, $width='', $height='',  $autostart='0' ){
 function addVideoVeoh( $video, $width='', $height='',  $autostart='0', $bgcolor='#afafaf' ){
 		$video = substr( stristr( $video, 'videos/' ), 7 ); //' v12316545ACFsJaJY'
 			
-		$replace = '<embed class="denvideo" style="'.$width . $height.'"
+		return '<embed class="denvideo" style="'.$width . $height.'"
 			src="http://www.veoh.com/veohplayer.swf?permalinkId='.  $video  .'&id=anonymous&player=videodetailsembedded&videoAutoPlay='. $autostart .'" 
 			allowFullScreen="true" 
 			bgcolor="'. $bgcolor .'" 
 			type="application/x-shockwave-flash" 
 			pluginspage="http://www.macromedia.com/go/getflashplayer">
 		</embed>';
-		
-		return $replace; 
 }
 	
 	
@@ -281,9 +278,8 @@ function addVideoVeoh( $video, $width='', $height='',  $autostart='0', $bgcolor=
  * @param string $atr [optional]
  */			
 function addPicture( $video, $width='', $height='', $a='' ){ 		
-	$replace= 	'<img '. $a .' class="denvideo" style="'.$width . $height.'" src="'. $video .'" />';
-
-	return $replace;		
+	return	'<img '. $a .' class="denvideo" style="'.$width . $height.'" src="'. $video .'" />';
+	
 }			
 	
 /**
@@ -358,9 +354,9 @@ function addVideo2KPlayer( $video, $width='', $height='',  $params='0' ){
 	$a = '';
 	$p = '';
 
-	$replace = addMediaSWF($video, $width, $height, $a, $p);
+	return addMediaSWF($video, $width, $height, $a, $p);
 		
-	return $replace;
+	
 }					
 	
 /**
@@ -383,8 +379,8 @@ function addVideoJWPlayer	($video, $width='', $height='', $params=array() ){
 			. '<param name="allowfullscreen" value="true" />'
 			. '<param name="allowscriptaccess" value="always" />';
 			
-		$replace = addMediaSWF($player, $width, $height, $a, $p);
-		return $replace;	
+		return addMediaSWF($player, $width, $height, $a, $p);
+		
 }	
 
 /**
@@ -555,7 +551,7 @@ function addAppletJava($video, $width='', $height=''){
  * @param string $video url
  * @param string $msg error message [optional]
  */
-function addVideoError( $video, $msg="Invalid Video" ){		
+function addMediaError( $video, $msg="Invalid Video" ){		
 			$error = '<q class="class="error">Invalid Video: '.$video.'</q>';
 			return $error;
 }

@@ -41,9 +41,11 @@ class plgContentMedia extends JPlugin
 	 */
 	public function onContentPrepare($context, &$row, &$params, $limitstart)
 	{
-		// What is this for?
-		//$app = JFactory::getApplication();
-		
+		// Just to check if plg_media may be called or not, for better performance
+		if (strpos($row->text, 'media') === false) {
+			return true;
+		}
+
 		// Regular Expression
 		$regex = '/\{media(.*?)}/i';
 		$total = preg_match_all( $regex, $row->text, $matches );
@@ -51,7 +53,7 @@ class plgContentMedia extends JPlugin
 			return false;
 		}
 		
-		// Default	
+		// Default	->fixed
 		$w = (int)$this->params->def('width', 400);
 		$h = (int)$this->params->def('height', 0 );
 		$ast = (int)$this->params->def('autostart', 0 );
@@ -107,15 +109,15 @@ class plgContentMedia extends JPlugin
 	/** The most important function! 
 	 * Show Media
 	 * @return str
-	 * @param string $media Media URL // Rename to media
+	 * @param string $media Media URL 
 	 * @param int $width [optional]
 	 * @param int $width [optional]
 	 * @param boolean $autoplay True if yes [optional]
 	 */
 	public function addMedia( $media, $width=0, $height =0, $autostart=0 )
 	{	
-		// The propose of this is to get the defaults set by the admin 
-		$pparams =& self::getParams(); // make it work
+		// The propose of this is to get the defaults set by the admin -> Fixed :D 
+		$pparams=$this->params;// make it work
 		
 		// Fix Video UrL
 		$media = strpos($media,"http://")? 
@@ -363,7 +365,7 @@ class plgContentMedia extends JPlugin
 			/* Error
 			*****************************************************/
 			default: 
-				$replace = addVideoError($media, 'Invalid Video');
+				$replace = addMediaError($media, 'Invalid Media');
 				break;
 			}
 		}
@@ -372,34 +374,4 @@ class plgContentMedia extends JPlugin
 		return $replace;
 	}	
 	
-	/**
-	 * In this needed?
-	 *
-	 * @param $params
-	 */
-	protected function getParams(){
-		static $params;
-		if ($params){
-			return $params;
-		}
-		// PARAMs
-		$plugin =& JPluginHelper::getPlugin( 'content', 'media' );
-		$params = new JParameter( $plugin->params );
-		
-		// Path to plugin folder
-		$params->set('dir_plg', 
-			 JPATH_PLUGINS.DS.'content'.DS.'denvideo' .DS );			
-		$params->set( 'uri_plg', 
-			JURI::base().'plugins/content/denvideo/' );
-	
-		// Path to default videos folder	
-		$defdir = $params->get('defaultdir', 'images/stories');
-		if(!stripos($defdir, 'http://')){
-			$defdir = JURI::base().$defdir;
-			$params->set('defaultdir', $defdir);
-		}	
-		$params->set('uri_img', $defdir);
-	
-		return $params;
-	}
 }
