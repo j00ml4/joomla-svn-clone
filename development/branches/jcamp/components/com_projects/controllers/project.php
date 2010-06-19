@@ -17,9 +17,11 @@ jimport('joomla.application.component.controllerform');
  * @subpackage	Projects
  * @since		1.6
  */
-class ProjectsControllerProject extends JController
+class ProjectsControllerProject extends JControllerForm
 {
 	
+	protected $view_item = 'project';
+	protected $view_list = 'projects';
 /**
 	 * Constructor.
 	 *
@@ -224,7 +226,9 @@ class ProjectsControllerProject extends JController
 			$this->setMessage($model->getError());
 		}
 
-		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
+		$app = &JFactory::getApplication();		
+		$append = '&id='.$app->getUserState('portfolio.id');
+		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list.$append, false));
 		return true;
 	}
 	
