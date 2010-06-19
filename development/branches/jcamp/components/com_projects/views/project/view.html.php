@@ -39,6 +39,7 @@ class ProjectsViewProject extends JView
 		$this->params	= &$app->getParams();
 		$this->canDo	= &ProjectsHelper::getActions();
 		
+		$bc = &ProjectsHelper::resetPathway();
 		// Layout
 		$layout = $this->getLayout();
 		switch($layout){
@@ -57,6 +58,7 @@ class ProjectsViewProject extends JView
 				if (!$this->canDo->get($access)){
 					return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
 				}
+				$bc->addItem(JText::_('COM_PROJECTS_PROJECT_FORM_TITLE'));
 				break;
 			
 			default:
@@ -73,9 +75,8 @@ class ProjectsViewProject extends JView
 				$this->category = &$model->getCategory($this->item->catid);
 				
 				// add 'potfolio' and 'project' of our component breadcrumb
-			  	$bc = $app->getPathway();
-		  		$bc->addItem($this->category->title, 'index.php?option=com_projects&view=projects&layout=gallery&id='.$this->item->catid);
-		  		$bc->addItem($this->item->title);
+		  	$bc->addItem($this->category->title, 'index.php?option=com_projects&view=projects&layout=gallery&id='.$this->item->catid);
+		  	$bc->addItem($this->item->title);
 		}
 		
 		// Display the view

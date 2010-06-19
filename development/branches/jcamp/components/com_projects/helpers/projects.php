@@ -198,7 +198,23 @@ abstract class ProjectsHelper
 		}
 		return $canDo;
 	}
+
+	/**
+	 * Resets breadcrumb and adds "Projects" link as first
+	 *
+	 * @return Reference to breadcrumb object
+	 * @since	1.6
+	 */
 	
+	public function &resetPathway()
+	{
+		$app = &JFactory::getApplication();
+  	$bc = &$app->getPathway();
+  	$bc->setPathway(array());
+ 		$bc->addItem(JText::_('COM_PROJECTS_HOME_PAGE'), 'index.php?option=com_projects');		
+ 		
+ 		return $bc;
+	}
 }
 
 /**

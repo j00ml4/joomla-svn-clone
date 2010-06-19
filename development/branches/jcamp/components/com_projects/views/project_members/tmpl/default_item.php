@@ -11,11 +11,11 @@
 defined('_JEXEC') or die;
 
 // Create a shortcut for params.
-$params	=& $item->params;
-$item	=& $this->item;
-$link = JRoute::_('index.php?option=com_projects&task=project.add');
+$item	=&$this->item;
 ?>
-
-<div class="formelm_buttons">
-	<a href="<?php echo $link; ?>"><?php echo JText::_('COM_PROJECTS_PROJECT_ADD'); ?></a>
-</div>
+<li>
+	<?php if($this->getModel()->getState('type') != 'list') :?>
+		<input type="checkbox" value="<?php echo $item->id;?>" name="usr[]" id="user-<?php echo $item->id;?>"/>
+	<?php endif; ?>
+	<label for="user-<?php echo $item->id;?>"><?php echo $item->name;?></label>
+</li>

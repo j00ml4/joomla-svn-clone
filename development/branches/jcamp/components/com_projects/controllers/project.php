@@ -17,12 +17,8 @@ jimport('joomla.application.component.controllerform');
  * @subpackage	Projects
  * @since		1.6
  */
-class ProjectsControllerProject extends JControllerForm
+class ProjectsControllerProject extends JController
 {
-	protected $view_item = 'project';
-	protected $view_list = 'projects';
-	protected $text_prefix = 'COM_PROJECTS';
-	
 	
 /**
 	 * Constructor.
@@ -35,8 +31,6 @@ class ProjectsControllerProject extends JControllerForm
 	{
 		parent::__construct($config);
 		
-		//die();
-		// Define standard task mappings.
 		$this->registerTask('unpublish',	'publish');	// value = 0 
 		$this->registerTask('archive',		'publish');	// value = 2	// finished
 		$this->registerTask('trash',		'publish');	// value = -2

@@ -56,6 +56,7 @@ class ProjectsViewPortfolios extends JView
 			return JError::raiseError(500, implode("\n", $errors));
 		}
 		
+		ProjectsHelper::resetPathway();
 		parent::display($tpl);
 	}
 }

@@ -76,9 +76,9 @@ class ProjectsViewProjects extends JView
 		}
 		
  	  // add 'portfolio' link to breadcrumb
-	  $bc = $app->getPathway();
-	  $bc->addItem($model->getState('portfolio.title'));
-  	  $this->setLayout($layout);
+	  $bc = ProjectsHelper::resetPathway();	  
+	  $bc->addItem($this->category->title);
+	  $this->setLayout($layout);
 	  parent::display($tpl);
 	}
 }
