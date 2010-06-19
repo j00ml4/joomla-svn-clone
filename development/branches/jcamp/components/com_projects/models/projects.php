@@ -65,7 +65,7 @@ class ProjectsModelProjects extends JModelList
 		// Initialise variables.
 		$app	= &JFactory::getApplication();
 		
-		// Category		
+		// portfolio	
 		$id = JRequest::getInt('id', 0);
 		$this->setState('portfolio.id', $id);
 		$app->setUserState('portfolio.id', $id);

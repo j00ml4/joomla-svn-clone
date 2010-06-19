@@ -12,8 +12,11 @@ defined('_JEXEC') or die;
 ?>
 <div class="projects-content projects-frame projects-space">
 	<h2><?php echo JText::_('COM_PROJECTS_TEAM_LIST');?></h2>
-	<ul class="ulList">
-		<li>doc1</li>
-		<li>doc2</li>
-	</ul>
+	<?php if ($this->canDo->get('project.view')): ?>
+		<a href="<?php echo JRoute::_('index.php?option=com_projects&view=project_members&type=list&id='.$this->item->id);?>"><?php echo JText::_('COM_PROJECTS_TEAM_USER_LIST');?></a><br />
+	<?php endif; ?>
+	<?php if ($this->canDo->get('project.edit')): ?>
+		<a href="<?php echo JRoute::_('index.php?option=com_projects&view=project_members&type=assign&id='.$this->item->id);?>"><?php echo JText::_('COM_PROJECTS_TEAM_USER_ASSIGN');?></a><br />
+		<a href="<?php echo JRoute::_('index.php?option=com_projects&view=project_members&type=delete&id='.$this->item->id);?>"><?php echo JText::_('COM_PROJECTS_TEAM_USER_DELETE');?></a>
+	<?php endif; ?>
 </div>
