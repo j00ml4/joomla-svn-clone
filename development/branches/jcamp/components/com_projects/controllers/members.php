@@ -10,15 +10,14 @@
 // no direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.controllerform');
-
 /**
  * @package		Joomla.Site
  * @subpackage	Projects
  * @since		1.6
  */
-class ProjectsControllerMembers extends JControllerForm
+class ProjectsControllerMembers extends JController
 {			
+	
 	protected $view_item='project';
 	protected $view_list='members';
 	
@@ -112,7 +111,7 @@ class ProjectsControllerMembers extends JControllerForm
 		
 		$append='&layout=default&id='.$id;
 		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false),
-											 JText::_('COM_PROJECT_PROJECT_MEMBER_ASSIGN_SUCCESSFUL'));
+											 JText::_('COM_PROJECT_PROJECT_MEMBER_DELETE_SUCCESSFUL'));
 		return true;
 	}
 }

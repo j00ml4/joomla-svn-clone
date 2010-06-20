@@ -19,8 +19,7 @@ $model = $this->getModel();
 	<div class="projects-content">
 		<h1><?php echo $this->title;?></h1>
 		<?php if($model->getState('type') != 'list') :?>
-		<form action="<?php echo JRoute::_('index.php?option=com_projects'); ?>" method="post" name="adminForm" id="adminForm">
-		<!-- form class="task-button" action="<?php echo JRoute::_('index.php?option=com_projects&id='.$model->getState('project.id').'&task=project_members.'.$model->getState('type'));?>" method="post"-->
+			<form style="display:inline;" class="task-button" action="<?php echo JRoute::_('index.php?option=com_projects&id='.$model->getState('project.id').'&task=members.'.$model->getState('type'));?>" method="post">
 		<?php endif; ?>
 
 		<?php echo $this->loadTemplate('buttons');?>
@@ -37,7 +36,7 @@ $model = $this->getModel();
 		
 		<?php if($model->getState('type') != 'list') :?>
 			<?php echo JHTML::_( 'form.token' ); ?>
-		</form>
+			</form>
 		<?php endif; ?>
 	</div>
 </div>
