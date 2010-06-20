@@ -10,6 +10,8 @@
 JHtml::addIncludePath(JPATH_LIBRARIES.DS.'joomla'.DS.'html'.DS.'html');
 
 jimport('joomla.environment.uri');
+jimport('joomla.environment.browser');
+jimport('joomla.filesystem.file');
 
 /**
  * Utility class for all HTML drawing classes
@@ -219,6 +221,133 @@ abstract class JHtml
 	}
 
 	/**
+	 * compute the files to be include
+	 * @param	string		path to file
+	 * @param	boolean		path to file is relative to /media folder
+	 * @param	boolean		detect browser to include specific browser js files
+	 * @param	folder		folder name to search into (images, css, js, ...)
+	 * @see		JBrowser
+	 * @return	array		files to be included		
+	 * @since	1.6
+	 */
+	private static function _includeRelativeFiles($file, $relative, $detect_browser, $folder)
+	{
+		// if http is present in filename
+		if (strpos($file, 'http') === 0)
+		{
+			$includes = array($file);
+		}
+		else
+		{
+			// Detect browser and compute potential files
+			if ($detect_browser)
+			{
+				$navigator	= JBrowser::getInstance();
+				$browser	= $navigator->getBrowser();
+				$major		= $navigator->getMajor();
+				$minor		= $navigator->getMinor();
+				$ext		= JFile::getExt($file);
+				$strip		= JFile::stripExt($file);
+
+				// try to include files named filename.ext, filename_browser.ext, filename_browser_major.ext, filename_browser_major_minor.ext
+				// where major and minor are the browser version names
+				$potential = array($file, $strip.'_'.$browser.'.'.$ext,  $strip.'_'.$browser.'_'.$major.'.'.$ext, $strip.'_'.$browser.'_'.$major.'_'.$minor.'.'.$ext);
+			}
+			else
+			{
+				$potential = array($file);
+			}
+
+			// if relative search in template directory or media directory
+			if($relative)
+			{
+
+				// Get the template
+				$app = JFactory::getApplication();
+				$template = $app->getTemplate();
+
+				// Prepare array of files
+				$includes = array();
+
+				// for each potential files
+				foreach ($potential as $file)
+				{
+					// if the file is in the template folder
+					if (file_exists(JPATH_THEMES . "/$template/$folder/$file"))
+					{
+						$includes[] = JURI::base(true) . "/templates/$template/$folder/$file";
+					}
+					else
+					{
+						// if the file contains any /: it can be in an media extension subfolder
+						if (strpos($file, '/'))
+						{
+							// divide the file extracting the extension as the first part before /
+							list($extension, $file) = explode('/', $file, 2);
+
+							// if the file yet contains any /: it can be a plugin
+							if (strpos($file, '/'))
+							{
+								// divide the file extracting the element as the first part before /
+								list($element, $file) = explode('/', $file, 2);
+
+								// Try to deal with plugins group in the media folder
+								if (file_exists(JPATH_ROOT . "/media/$extension/$element/$folder/$file")) {
+									$includes[] = JURI::root(true) . "/media/$extension/$element/$folder/$file";
+								}
+								// Try to deal with classical file in a a media subfolder called element
+								elseif (file_exists(JPATH_ROOT . "/media/$extension/$folder/$element/$file")) {
+									$includes[] = JURI::root(true) . "/media/$extension/$folder/$element/$file";
+								}
+								// Try to deal with system files in the template folder
+								elseif (file_exists(JPATH_THEMES . "/$template/$folder/system/$element/$file")) {
+									$includes[] = JURI::root(true) . "/templates/$template/$folder/system/$element/$file";
+								}
+								// Try to deal with system files in the media folder
+								elseif (file_exists(JPATH_ROOT . "/media/system/$folder/$element/$file")) {
+									$includes[] = JURI::root(true) . "/media/system/$folder/$element/$file";
+								}
+							}
+							// Try to deals in the extension media folder
+							elseif (file_exists(JPATH_ROOT . "/media/$extension/$folder/$file"))
+							{
+								$includes[] = JURI::root(true) . "/media/$extension/$folder/$file";
+							}
+							// Try to deal with system files in the template folder 
+							elseif (file_exists(JPATH_THEMES . "/$template/$folder/system/$file"))
+							{
+								$includes[] = JURI::root(true) . "/templates/$template/$folder/system/$file";
+							}
+							// Try to deal with system files in the media folder
+							elseif (file_exists(JPATH_ROOT . "/media/system/$folder/$file"))
+							{
+								$includes[] = JURI::root(true) . "/media/system/$folder/$file";
+							}
+						}
+						// Try to deal with system files in the media folder
+						elseif (file_exists(JPATH_ROOT . "/media/system/$folder/$file"))
+						{
+							$includes[] = JURI::root(true) . "/media/system/$folder/$file";
+						}
+					}
+				}
+			}
+			// if not relative and http is not present in filename
+			else
+			{
+				$includes = array();
+				foreach ($potential as $file)
+				{
+					if (file_exists(JPATH_ROOT . "/$file")) {
+						$includes[] = JURI::root(true) . "/$file";
+					}
+				}
+			}
+		}
+		return $includes;
+	}
+
+	/**
 	 * Write a <img></img> element
 	 *
 	 * @access	public
@@ -228,55 +357,27 @@ abstract class JHtml
 	 * @param	boolean	If set to true, it tries to find an override for the file in the template
 	 * @since	1.5
 	 */
-	public static function image($url, $alt, $attribs = null, $relative = false, $path_only = false)
+	public static function image($file, $alt, $attribs = null, $relative = false, $path_only = false)
 	{
 		if (is_array($attribs)) {
 			$attribs = JArrayHelper::toString($attribs);
 		}
 
-		if($relative) {
-			$app = JFactory::getApplication();
-			$cur_template = $app->getTemplate();
-			if (file_exists(JPATH_THEMES .'/'. $cur_template .'/images/'. $url)) {
-				$url = JURI::base(true).'/templates/'. $cur_template .'/images/'. $url;
+		$includes = self::_includeRelativeFiles($file, $relative, false, 'images');
+
+		// if only path is required
+		if($path_only)
+		{
+			if (count($includes)) {
+				return $includes[0];
 			}
 			else {
-				list($extension, $url) = explode('/', $url, 2);
-				if (strpos($url, '/')) {
-					// Try to deal with plugins group
-					list($element, $url) = explode('/', $url, 2);
-					if (file_exists(JPATH_ROOT .'/media/'.$extension.'/'.$element.'/images/'.$url)) {
-						$url = JURI::root(true).'/media/'.$extension.'/'.$element.'/images/'.$url;
-					}
-					elseif (file_exists(JPATH_ROOT .'/media/'.$extension.'/images/'.$element.'/'.$url)) {
-						$url = JURI::root(true).'/media/'.$extension.'/images/'.$element.'/'.$url;
-					}
-					elseif (file_exists(JPATH_THEMES .'/'. $cur_template .'/images/system/'.$element.'/'.$url)) {
-						$url = JURI::root(true).'/templates/'.$cur_template.'/images/system/'.$element.'/'.$url;
-					}
-					else {
-						$url = JURI::root(true).'/media/system/images/'.$element.'/'.$url;
-					}
-				}
-				elseif (file_exists(JPATH_ROOT .'/media/'.$extension.'/images/'.$url)) {
-					$url = JURI::root(true).'/media/'.$extension.'/images/'.$url;
-				}
-				elseif (file_exists(JPATH_THEMES .'/'. $cur_template .'/images/system/'.$url)) {
-					$url = JURI::root(true).'/templates/'.$cur_template.'/images/system/'.$url;
-				}
-				else {
-					$url = JURI::root(true).'/media/system/images/'.$url;
-				}
-			}
-			if($path_only) {
-				return $url;
+				return null;
 			}
 		}
-		elseif (strpos($url, 'http') !== 0) {
-			$url = JURI::root(true).'/'.$url;
+		else {
+			return '<img src="'.(count($includes) ? $includes[0] : '').'" alt="'.$alt.'" '.$attribs.' />';
 		}
-
-		return '<img src="'.$url.'" alt="'.$alt.'" '.$attribs.' />';
 	}
 
 	/**
@@ -285,60 +386,66 @@ abstract class JHtml
 	 * @param	string		path to file
 	 * @param	array		attributes to be added to the stylesheet
 	 * @param	boolean		path to file is relative to /media folder
-	 * @param	boolean	return the path to the file only
+	 * @param	boolean		return the path to the file only
+	 * @param	boolean		detect browser to include specific browser css files
+	 *						will try to include file, file_*browser*, file_*browser*_*major*, file_*browser*_*major*_*minor*
+	 *						<table>
+	 *							<tr><th>Navigator</th>					<th>browser</th>	<th>major.minor</th></tr>
+	 *
+	 *							<tr><td>Safari 3.0.x</td>				<td>konqueror</td>	<td>522.x</td></tr>
+	 *							<tr><td>Safari 3.1.x and 3.2.x</td>		<td>konqueror</td>	<td>525.x</td></tr>
+	 *							<tr><td>Safari 4.0 to 4.0.2</td>		<td>konqueror</td>	<td>530.x</td></tr>
+	 *							<tr><td>Safari 4.0.3 to 4.0.4</td>		<td>konqueror</td>	<td>531.x</td></tr>
+	 *							<tr><td>iOS 4.0 Safari</td>				<td>konqueror</td>	<td>532.x</td></tr>
+	 *							<tr><td>Safari 5.0</td>					<td>konqueror</td>	<td>533.x</td></tr>
+	 *
+	 *							<tr><td>Google Chrome 1.0</td>			<td>konqueror</td>	<td>528.x</td></tr>
+	 *							<tr><td>Google Chrome 2.0</td>			<td>konqueror</td>	<td>530.x</td></tr>
+	 *							<tr><td>Google Chrome 3.0 and 4.x</td>	<td>konqueror</td>	<td>532.x</td></tr>
+	 *							<tr><td>Google Chrome 5.0</td>			<td>konqueror</td>	<td>533.x</td></tr>
+	 *
+	 *							<tr><td>Internet Explorer 5.5</td>		<td>msie</td>		<td>5.5</td></tr>
+	 *							<tr><td>Internet Explorer 6.x</td>		<td>msie</td>		<td>6.x</td></tr>
+	 *							<tr><td>Internet Explorer 7.x</td>		<td>msie</td>		<td>7.x</td></tr>
+	 *							<tr><td>Internet Explorer 8.x</td>		<td>msie</td>		<td>8.x</td></tr>
+	 *
+	 *							<tr><td>Firefox</td>					<td>mozilla</td>	<td>5.0</td></tr>
+	 *						</table>
+	 *						a lot of others
+	 * @see JBrowser
+	 *
+	 * @return	mixed		nothing if $path_only is false, null, path or array of path if specific css browser files were detected		
 	 * @since	1.6
 	 */
-	public static function stylesheet($file, $attribs = array(), $relative = false, $path_only = false)
+	public static function stylesheet($file, $attribs = array(), $relative = false, $path_only = false, $detect_browser = true)
 	{
 		if (is_array($attribs)) {
 			$attribs = JArrayHelper::toString($attribs);
 		}
 
-		if($relative) {
-			$app = JFactory::getApplication();
-			$cur_template = $app->getTemplate();
-			if (file_exists(JPATH_THEMES .'/'. $cur_template .'/css/'. $file)) {
-				$file = JURI::base(true).'/templates/'. $cur_template .'/css/'. $file;
+		$includes = self::_includeRelativeFiles($file, $relative, $detect_browser, 'css');
+
+		// if only path is required
+		if($path_only)
+		{
+			if (count($includes)==0) {
+				return null;
+			}
+			elseif (count($includes)==1) {
+				return $includes[0];
 			}
 			else {
-				list($extension, $file) = explode('/', $file, 2);
-				if (strpos($file, '/')) {
-					// Try to deal with plugins group
-					list($element, $file) = explode('/', $file, 2);
-					if (file_exists(JPATH_ROOT .'/media/'.$extension.'/'.$element.'/css/'.$file)) {
-						$file = JURI::root(true).'/media/'.$extension.'/'.$element.'/css/'.$file;
-					}
-					elseif (file_exists(JPATH_ROOT .'/media/'.$extension.'/css/'.$element.'/'.$file)) {
-						$file = JURI::root(true).'/media/'.$extension.'/css/'.$element.'/'.$file;
-					}
-					elseif (file_exists(JPATH_THEMES .'/'. $cur_template .'/css/system/'.$element.'/'.$file)) {
-						$file = JURI::root(true).'/templates/'.$cur_template.'/css/system/'.$element.'/'.$file;
-					}
-					else {
-						$file = JURI::root(true).'/media/system/css/'.$element.'/'.$file;
-					}
-				}
-				elseif (file_exists(JPATH_ROOT .'/media/'.$extension.'/css/'.$file)) {
-					$file = JURI::root(true).'/media/'.$extension.'/css/'.$file;
-				}
-				elseif (file_exists(JPATH_THEMES .'/'. $cur_template .'/css/system/'.$file)) {
-					$file = JURI::root(true).'/templates/'.$cur_template.'/css/system/'.$file;
-				}
-				else {
-					$file = JURI::root(true).'/media/system/css/'.$file;
-				}
-			}
-			if($path_only) {
-				return $file;
+				return $includes;
 			}
 		}
-		elseif (strpos($file, 'http') !== 0) {
-			$file = JURI::root(true).'/'.$file;
+		else
+		// if inclusion is required
+		{
+			$document = &JFactory::getDocument();
+			foreach ($includes as $include) {
+				$document->addStylesheet($include, 'text/css', null, $attribs);
+			}
 		}
-
-		$document = &JFactory::getDocument();
-		$document->addStylesheet($file, 'text/css', null, $attribs);
-		return;
 	}
 
 	/**
@@ -346,10 +453,13 @@ abstract class JHtml
 	 * @param	string		path to file
 	 * @param	boolean		load the JS framework
 	 * @param	boolean		path to file is relative to /media folder
-	 * @param	boolean	return the path to the file only
+	 * @param	boolean		return the path to the file only
+	 * @param	boolean		detect browser to include specific browser js files
+	 * @return	mixed		nothing if $path_only is false, null, path or array of path if specific js browser files were detected
+	 * @see 	JHtml::stylesheet
 	 * @since	1.6
 	 */
-	public static function script($file, $framework = false, $relative = false, $path_only = false)
+	public static function script($file, $framework = false, $relative = false, $path_only = false, $detect_browser = true)
 	{
 		JHtml::core();
 
@@ -358,51 +468,29 @@ abstract class JHtml
 			JHtml::_('behavior.framework');
 		}
 
-		if($relative) {
-			$app = JFactory::getApplication();
-			$cur_template = $app->getTemplate();
-			if (file_exists(JPATH_THEMES .'/'. $cur_template .'/js/'. $file)) {
-				$file = JURI::base(true).'/templates/'. $cur_template .'/js/'. $file;
+		$includes = self::_includeRelativeFiles($file, $relative, $detect_browser, 'js');
+
+		// if only path is required
+		if($path_only)
+		{
+			if (count($includes)==0) {
+				return null;
+			}
+			elseif (count($includes)==1) {
+				return $includes[0];
 			}
 			else {
-				list($extension, $file) = explode('/', $file, 2);
-				if (strpos($file, '/')) {
-					// Try to deal with plugins group
-					list($element, $file) = explode('/', $file, 2);
-					if (file_exists(JPATH_ROOT .'/media/'. $extension.'/'.$element.'/js/'.$file)) {
-						$file = JURI::root(true).'/media/'.$extension.'/'.$element.'/js/'.$file;
-					}
-					elseif (file_exists(JPATH_ROOT .'/media/'.$extension.'/js/'.$element.'/'.$file)) {
-						$file = JURI::root(true).'/media/'.$extension.'/js/'.$element.'/'.$file;
-					}
-					elseif (file_exists(JPATH_THEMES .'/'. $cur_template .'/js/system/'.$element.'/'.$file)) {
-						$file = JURI::root(true).'/templates/'.$cur_template.'/js/system/'.$element.'/'.$file;
-					}
-					else {
-						$file = JURI::root(true).'/media/system/js/'.$element.'/'.$file;
-					}
-				}
-				elseif (file_exists(JPATH_ROOT .'/media/'.$extension.'/js/'.$file)) {
-					$file = JURI::root(true).'/media/'.$extension.'/js/'.$file;
-				}
-				elseif (file_exists(JPATH_THEMES .'/'. $cur_template .'/js/system/'.$file)) {
-					$file = JURI::root(true).'/templates/'.$cur_template.'/js/system/'.$file;
-				}
-				else {
-					$file = JURI::root(true).'/media/system/js/'.$file;
-				}
-			}
-			if($path_only) {
-				return $file;
+				return $includes;
 			}
 		}
-		elseif (strpos($file, 'http') !== 0) {
-			$file = JURI::root(true).'/'.$file;
+		else
+		// if inclusion is required
+		{
+			$document = &JFactory::getDocument();
+			foreach ($includes as $include) {
+				$document->addScript($include);
+			}
 		}
-
-		$document = &JFactory::getDocument();
-		$document->addScript($file);
-		return;
 	}
 
 	public static function core($debug = null)

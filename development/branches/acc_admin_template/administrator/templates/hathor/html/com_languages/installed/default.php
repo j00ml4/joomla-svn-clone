@@ -30,7 +30,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 			</select>
 			
 			<button type="button" id="filter-go" onclick="this.form.submit();">
-				<?php echo JText::_('TPL_HATHOR_GO'); ?></button>
+				<?php echo JText::_('JSUBMIT'); ?></button>
 			
 		</div>
 	</fieldset>
@@ -42,7 +42,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 					<?php echo JText::_('COM_LANGUAGES_HEADING_NUM'); ?>
 				</th>
 				<th class="checkmark-col">
-					&nbsp;
+					&#160;
 				</th>
 				<th class="title">
 					<?php echo JText::_('COM_LANGUAGES_HEADING_LANGUAGE'); ?>

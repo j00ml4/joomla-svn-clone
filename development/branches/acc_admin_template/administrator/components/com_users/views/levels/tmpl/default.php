@@ -40,7 +40,7 @@ $listDirn	= $this->state->get('list.direction');
 				<th class="left">
 					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_LEVEL_NAME', 'a.title', $listDirn, $listOrder); ?>
 				</th>
-				<th width="10%" nowrap="nowrap">
+				<th width="10%">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'a.ordering', $listDirn, $listOrder); ?>
 					<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'levels.saveorder'); ?>
 				</th>
@@ -48,7 +48,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo JText::_('JGRID_HEADING_ID'); ?>
 				</th>
 				<th width="40%">
-					&nbsp;
+					&#160;
 				</th>
 			</tr>
 		</thead>
@@ -92,7 +92,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo (int) $item->id; ?>
 				</td>
 				<td>
-					&nbsp;
+					&#160;
 				</td>
 			</tr>
 		<?php endforeach; ?>
