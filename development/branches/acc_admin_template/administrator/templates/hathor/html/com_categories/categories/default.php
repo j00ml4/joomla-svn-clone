@@ -34,7 +34,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 	<fieldset id="filter-bar">
 		<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
 		<div class="filter-search">
-			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?>:</label>
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
 			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_CATEGORIES_ITEMS_SEARCH_FILTER'); ?>" />
 			
 			<button type="submit" class="btn"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
@@ -61,7 +61,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 			</select>
 
 			<button type="button" id="filter-go" onclick="this.form.submit();">
-				<?php echo JText::_('TPL_HATHOR_GO'); ?></button>
+				<?php echo JText::_('JSUBMIT'); ?></button>
 		</div>
 	</fieldset>
 	<div class="clr"> </div>
@@ -113,7 +113,11 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 						<a href="<?php echo JRoute::_('index.php?option=com_categories&task=category.edit&cid[]='.$item->id.'&extension='.$extension);?>">
 							<?php echo $this->escape($item->title); ?></a>
 						<p class="smallsub" title="<?php echo $this->escape($item->path);?>">
-							(<span><?php echo JText::_('JFIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>)</p>
+							<?php if (empty($item->note)) : ?>
+								<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias));?>
+							<?php else : ?>
+								<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS_NOTE', $this->escape($item->alias), $this->escape($item->note));?>
+							<?php endif; ?></p>
 					</td>
 					<td class="center">
 						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'categories.', $canChange);?>

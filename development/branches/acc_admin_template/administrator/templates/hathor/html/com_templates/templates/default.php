@@ -40,7 +40,7 @@ $listDirn	= $this->state->get('list.direction');
 			</select>
 			
 			<button type="button" id="filter-go" onclick="this.form.submit();">
-				<?php echo JText::_('TPL_HATHOR_GO'); ?></button>
+				<?php echo JText::_('JSUBMIT'); ?></button>
 			
 		</div>
 	</fieldset>
@@ -50,7 +50,7 @@ $listDirn	= $this->state->get('list.direction');
 		<thead>
 			<tr>
 				<th class="checkmark-col">
-					&nbsp;
+					&#160;
 				</th>
 				<th>
 					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TEMPLATE', 'a.element', $listDirn, $listOrder); ?>

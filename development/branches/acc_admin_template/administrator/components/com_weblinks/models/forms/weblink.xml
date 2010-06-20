@@ -12,7 +12,7 @@
 			description="COM_WEBLINKS_FIELD_TITLE_DESC" required="true" />
 
 		<field name="alias" type="text" class="inputbox"
-			size="40" label="COM_WEBLINKS_FIELD_ALIAS_LABEL"
+			size="40" label="JFIELD_ALIAS_LABEL"
 			description="COM_WEBLINKS_FIELD_ALIAS_DESC" />
 
 		<field name="catid" type="category" extension="com_weblinks"
@@ -28,7 +28,7 @@
 
 		<field name="description" type="editor" buttons="true" hide="pagebreak,readmore"
 			class="inputbox"
-			label="COM_WEBLINKS_FIELD_DESCRIPTION_LABEL" description="COM_WEBLINKS_FIELD_DESCRIPTION_DESC" />
+			label="JGLOBAL_DESCRIPTION" description="COM_WEBLINKS_FIELD_DESCRIPTION_DESC" />
 
 		<field name="date" type="Date" class="inputbox"
 			label="WEBLINKS_DATE_LABEL" description="WEBLINKS_DATE_DESC"
@@ -147,7 +147,7 @@
 	</fieldset>
 
 	<fields name="params">
-		<fieldset name="jbasic" label="JGLOBAL_FIELDSET_OPTIONS">
+		<fieldset name="jbasic" label="COM_WEBLINKS_FIELDSET_OPTIONS">
 			<field name="target" type="list" default=""
 				label="COM_WEBLINKS_FIELD_TARGET_LABEL" description="COM_WEBLINKS_FIELD_TARGET_DESC"
 			>
@@ -170,7 +170,7 @@
 	</fields>
 
 	<fields name="metadata">
-		<fieldset name="jmetadata" label="JGLOBAL_FIELDSET_METADATA">
+		<fieldset name="jmetadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
 			<field name="robots" type="list"
 				label="JFIELD_METADATA_ROBOTS_LABEL" description="JFIELD_METADATA_ROBOTS_DESC"
 			>

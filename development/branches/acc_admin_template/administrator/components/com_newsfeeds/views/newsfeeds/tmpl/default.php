@@ -68,7 +68,7 @@ $listDirn	= $this->state->get('list.direction');
 				<th width="20%">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_CATEGORY', 'category_title', $listDirn, $listOrder); ?>
 				</th>
-				<th width="10%" nowrap="nowrap">
+				<th width="10%">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'a.ordering', $listDirn, $listOrder); ?>
 					<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'newsfeeds.saveorder'); ?>
 				</th>
@@ -119,7 +119,7 @@ $listDirn	= $this->state->get('list.direction');
 							<?php echo $this->escape($item->name); ?>
 					<?php endif; ?>
 					<p class="smallsub">
-						(<span><?php echo JText::_('JFIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>)</p>
+						<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias));?></p>
 				</td>
 				<td class="center">
 					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'newsfeeds.', $canChange); ?>

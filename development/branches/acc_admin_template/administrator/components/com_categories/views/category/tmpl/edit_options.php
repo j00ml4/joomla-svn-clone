@@ -24,5 +24,7 @@ foreach ($fieldSets as $name => $fieldSet) :
 			<?php echo $field->label; ?>
 			<?php echo $field->input; ?>
 		<?php endforeach; ?>
+		<?php echo $this->form->getLabel('note'); ?>
+		<?php echo $this->form->getInput('note'); ?>
 	</fieldset>
 <?php endforeach; ?>

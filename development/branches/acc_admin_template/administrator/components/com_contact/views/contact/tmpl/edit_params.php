@@ -17,12 +17,12 @@ foreach ($fieldSets as $name => $fieldSet) :
 		echo '<p class="tip">'.$this->escape(JText::_($fieldSet->description)).'</p>';
 	endif;
 	?>
-	<fieldset class="panelform">
-	<ul class="adminformlist">
-		<?php foreach ($this->form->getFieldset($name) as $field) : ?>
-			<li><?php echo $field->label; ?>
-			<?php echo $field->input; ?></li>
-		<?php endforeach; ?>
+	<fieldset class="panelform" >
+		<ul class="adminformlist">
+			<?php foreach ($this->form->getFieldset($name) as $field) : ?>
+				<li><?php echo $field->label; ?>
+				<?php echo $field->input; ?></li>
+			<?php endforeach; ?>
 		</ul>
 	</fieldset>
 <?php endforeach; ?>
