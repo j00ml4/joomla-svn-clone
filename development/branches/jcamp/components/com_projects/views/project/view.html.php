@@ -75,8 +75,8 @@ class ProjectsViewProject extends JView
 				$this->category = &$model->getCategory($this->item->catid);
 				
 				// add 'potfolio' and 'project' of our component breadcrumb
-		  	$bc->addItem($this->category->title, 'index.php?option=com_projects&view=projects&layout=gallery&id='.$this->item->catid);
-		  	$bc->addItem($this->item->title);
+//		  	$bc->addItem($this->category->title, 'index.php?option=com_projects&view=projects&layout=gallery&id='.$this->item->catid);
+//		  	$bc->addItem($this->item->title);
 		}
 		
 		// Display the view
