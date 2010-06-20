@@ -70,17 +70,37 @@ class ProjectsModelMembers extends JModelList
 		$id = JRequest::getInt('id', 0);
 		$this->setState('project.id', $id);
 		
+		// hummmm
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
-		$query->select('pr.title AS `project`, po.title AS `portfolio`');
-		$query->from('#__projects pr');
-		$query->join('LEFT','#__categories po ON po.id=pr.catid');
-		$query->where('pr.id='.$id);
+		$query->select('p.title AS `project_title`, c.title AS `portfolio_title`, c.id AS portfolio_id');
+		$query->from('#__projects AS p');
+		$query->join('LEFT','#__categories c ON c.id=p.catid');
+		$query->where('p.id='.$id);
 		$db->setQuery($query);
 		$res = $db->loadObject();
-		$this->setState('portfolio.title',$res->portfolio);
-		$this->setState('project.title',$res->project);
+		$this->setState('portfolio.id',$res->portfolio_id);
+		$this->setState('portfolio.title',$res->portfolio_title);
+		$this->setState('project.title',$res->project_title);
 	}
+	
+	/**
+	 * function to get the project
+	 * @param $pk
+	 */
+	public function getProject($pk=null)
+	{
+		// Get project ID
+		if (empty($pk)) {
+			// portfolio
+			if (!($pk = $this->getState('project.id'))) {
+				return null;	
+			}	
+		}
+		
+		$project = JModel::getInstance('Project', 'ProjectsModel');
+		return $project->getItem($pk);
+	} 
 	
 	
 	/**
