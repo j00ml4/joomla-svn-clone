@@ -98,6 +98,16 @@ function submitbutton(task) {
 			<?php echo $this->form->getInput('description'); ?>
 			</div>
 		</fieldset>
+
+		<?php if ($this->canDo->get('project.edit.rules') && 0): ?>
+		<fieldset>
+			<legend><?php echo JText::_('JCONFIG_PERMISSIONS_LABEL'); ?></legend>
+			<div class="formelm">
+				<?php echo $this->form->getInput('rules'); ?>
+			</div>
+		</fieldset>
+		<?php endif; ?>
+		
 		<!-- SubTemplates are DRY -->	
 		<?php echo $this->loadTemplate('buttons'); ?>
 		

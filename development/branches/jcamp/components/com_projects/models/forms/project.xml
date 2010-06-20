@@ -95,6 +95,14 @@
 			description="JFIELD_ACCESS_DESC"
 			class="inputbox"
 			size="1" />
+			
+		<field id="rules"
+			name="rules"	
+			type="rules" 
+			label="JCONFIG_PERMISSIONS_LABEL"
+			filter="rules" 
+			component="com_projects"	
+			section="component" />	
     </fieldset>
 	<!-- Params -->	
 	<fields name="params">
