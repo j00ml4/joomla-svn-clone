@@ -19,14 +19,12 @@ jimport('joomla.application.component.view');
  * @subpackage	com_projects
  * @since		1.6
  */
-class ProjectsViewProjects extends JView
+class ProjectsViewTasks extends JView
 {
 	protected $items;
-	protected $category;
-	protected $children;
+	protected $project;
 	protected $parent;
 	protected $maxLevel;
-	protected $state;
 	protected $params;
 	protected $pagination;
 	protected $canDo;
@@ -38,10 +36,9 @@ class ProjectsViewProjects extends JView
 	function display($tpl = null)
 	{
 		$app		= &JFactory::getApplication();
-		$model 		= $this->getModel('Projects');
+		$model 		= $this->getModel();
 			
 		// Get some data from the models
-		$this->state		= $this->get('State');
 		$this->items		= &$model->getItems();
 		$this->pagination	= &$model->getPagination();
 		$this->params		= &$app->getParams();
@@ -49,24 +46,13 @@ class ProjectsViewProjects extends JView
 			
 		$layout = $this->getLayout();
 		switch($layout){
-			case 'gallery':
-				$layout = 'gallery'; 
-				$c = count($this->items);
-				for($i = 0; $i < $c;$i++) {
-						$this->items[$i]->description = JHtml::_('content.prepare', $this->items[$i]->description);
-				}
-				
-				// Get category
-				$this->category	= $this->get('Category');
-				if(empty($this->category)){
+			default:
+				$layout = 'default';
+				// Get project
+				$this->project	= &$model->getProject();
+				if(empty($this->project)){
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
-				$app->setUserState('portfolio.id', $this->category->id);
-				break;
-
-			default:
-				$layout = 'gallery';
-				$app->setUserState('portfolio.id', 0);
 				break;
 		}
 		
@@ -77,9 +63,13 @@ class ProjectsViewProjects extends JView
 		
 		// add 'home page' of our component breadcrumb
 	  	$bc = $app->getPathway();
-	  	$bc->addItem($model->getState('portfolio.title'));
+	  	$bc->addItem($this->project->title, 'index.php?option=com_projects&view=project&id='.$this->project->id);
+	  	$bc->addItem(JText::_('COM_PROJECTS_TASKS'));
 	  	
+	  	// TMLP
 	  	$this->setLayout($layout);
 		parent::display($tpl);
 	}
+	
+	
 }

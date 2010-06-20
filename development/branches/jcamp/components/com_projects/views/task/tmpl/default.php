@@ -42,9 +42,8 @@ $pageClass = $this->params->get('pageclass_sfx');
 	</div>
 
 	<div class="projects-right-column">
-		<?php echo $this->loadTemplate('team');?>
-		<?php echo $this->loadTemplate('tasks');?>
 		<?php echo $this->loadTemplate('documents');?>
+		<?php echo $this->loadTemplate('team');?>
 	</div>
 	<?php echo $this->loadTemplate('buttons'); ?>
 </div>

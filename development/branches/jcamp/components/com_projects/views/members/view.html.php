@@ -33,7 +33,7 @@ class ProjectsViewMembers extends JView
 		$model		= &$this->getModel();
 		$this->canDo	= &ProjectsHelper::getActions();
 		// add 'potfolio' and 'project' of our component breadcrumb
-  	$bc = &ProjectsHelper::resetPathway();
+  		$bc = &ProjectsHelper::resetPathway();
  		$bc->addItem($model->getState('portfolio.title'), 'index.php?option=com_projects&view=portfolios&layout=gallery&id='.$app->getUserState('portfolio.id'));
  		$bc->addItem($model->getState('project.title'),'index.php?option=com_projects&view=project&layout=default&id='.$model->getState('project.id'));
 		

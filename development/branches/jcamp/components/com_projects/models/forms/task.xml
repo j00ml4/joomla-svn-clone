@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id: project.xml 17175 2010-05-18 06:39:50Z infograf768 $ -->
+<form>
+    <fieldset addfieldpath="components/com_projects/models/fields">
+        <field id="id"
+			name="id" 
+			type="hidden"
+			default="0"
+			label="JGLOBAL_ID"
+			readonly="true"
+			required="true"
+			size="10" />
+
+        <field id="project_id"
+			name="project_id" 
+			type="hidden"
+			default="0"
+			readonly="true"
+			required="true"
+			size="10" />
+				
+        <field id="parent_id"
+			name="parent_id" 
+			type="task_parent"
+			description="COM_PROJECTS_FIELD_PARENT_TASK_DESC"
+			label="COM_PROJECTS_FIELD_PARENT_TASK_LABEL"
+			required="true" />		
+			
+		 <field id="catid"
+			name="catid" 
+			type="category"
+			description="JFIELD_CATEGORY_DESC"
+			extension="com_projects.task"
+			label="JCATEGORY"
+			required="true">
+         	<option value="">JOPTION_NO_CATEGORY</option>
+		</field>			
+        
+		<field id="type"
+			name="type" 
+			type="task_type"
+			description="COM_PROJECTS_FIELD_TYPE_DESC"
+			label="COM_PROJECTS_FIELD_TYPE_LABEL" />
+		
+        <field id="title" 
+			name="title" 
+			type="text"
+			description="JFIELD_TITLE_DESC"
+			label="JGLOBAL_TITLE"
+			required="true"
+			size="30" />
+			
+		<field id="estimate" 
+			name="estimate" 
+			type="text"
+			description="COM_PROJECTS_FIELD_ESTIMATE_DESC"
+			label="COM_PROJECTS_FIELD_ESTIMATE_LABEL"
+			required="true"
+			size="3" />	       
+              
+        <field id="description"
+			name="description" 
+			type="editor"
+			buttons="true"
+			hide="pagebreak,article"
+			description="COM_PROJECTS_FIELD_DESCRIPTION_DESC"
+			filter="safehtml"
+			label="JGLOBAL_DESCRIPTION"/>
+        	 
+		 <field id="start_at"
+			name="start_at"
+			type="calendar"
+			label="COM_PROJECTS_FIELD_START_AT_LABEL"
+			description="COM_PROJECTS_FIELD_START_AT_DESC"
+			class="inputbox"
+			format="%Y-%m-%d"
+			size="30" />
+
+		<field id="finish_at"
+			name="finish_at"
+			type="calendar"
+			label="COM_PROJECTS_FIELD_FINISH_AT_LABEL"
+			description="COM_PROJECTS_FIELD_FINISH_AT_DESC"
+			class="inputbox"
+			format="%Y-%m-%d"
+			size="30" />
+		
+		<!-- CORE -->	
+		 <field id="state" 
+			name="state" 
+			type="list"
+			default="1"
+			description="JFIELD_PUBLISHED_DESC"
+			label="JGLOBAL_STATE"
+			size="1" >
+         	<option value="2">JARCHIVED</option>
+            <option value="1">JPUBLISHED</option>
+            <option value="0">JUNPUBLISHED</option>
+        </field>
+		
+		<field id="ordering" 
+			name="ordering" 
+			type="ordering"
+			label="JFIELD_ORDERING_LABEL"
+			description="JFIELD_ORDERING_DESC"
+			class="inputbox"
+			size="6"
+			default="0" />
+		 
+		 <field id="language"
+			name="language"
+			type="contentlanguage"
+			label="JFIELD_LANGUAGE_LABEL"
+			description="JFIELD_LANGUAGE_DESC"
+			class="inputbox"
+			default="*">
+			<option value="*">JALL</option>
+		</field>
+
+		<field id="featured" 
+			name="featured" 
+			type="checkbox"
+			label="JFIELD_FEATURED_LABEL"
+			description="JFIELD_FEATURED_DESC"
+			class="inputbox"
+			value="1"
+			default="0" />
+		
+		<field id="access"
+			name="access"
+			type="accesslevel"
+			label="JFIELD_ACCESS_LABEL"
+			description="JFIELD_ACCESS_DESC"
+			class="inputbox"
+			size="1" />
+			
+    </fieldset>
+	<!-- Params -->	
+	<fields name="params">
+		<fieldset name="params">
+	        <field id="estimation_type" 
+				name="estimation_type" 
+				type="text"
+				description="COM_PROJECTS_FIELD_ESTIMATION_TYPE_DESC"
+				label="COM_PROJECTS_FIELD_ESTIMATION_TYPE_LABEL"
+				size="30" 
+				default="Pomodoros" />
+		</fieldset>   
+	</fields>	 
+</form>
