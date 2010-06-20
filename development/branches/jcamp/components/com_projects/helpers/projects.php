@@ -64,8 +64,7 @@ abstract class ProjectsHelper
 			// Can create project
 			case 'project.create':
 				$canDo 	= (
-					empty($record->id) &&
-					
+					empty($record->id) &&					
 					// Permissions
 				 	(
 						$user->authorise('project.manage', $context)
@@ -82,7 +81,6 @@ abstract class ProjectsHelper
 			case 'project.edit':
 				$canDo 	= (
 					!empty($record->id) &&
-					
 					// Owner 
 					(
 						!empty($record->created_by) && 
@@ -96,11 +94,16 @@ abstract class ProjectsHelper
 				);
 				break;
 
-			// Can can cchange the state of project
+			// Can can change the state of project
 			case 'project.edit.state':
 				$canDo = $user->authorise('project.manage', $context);
 				break;	
 
+			// Can can change the ACL rules of project
+			case 'project.edit.rules':
+				$canDo = $user->authorise('project.manage', $context);
+				break;	
+				
 			// Can edit project portifolio
 			case 'project.edit.portfolio':
 				$canDo = $user->authorise('project.manage', $context);
@@ -163,9 +166,7 @@ abstract class ProjectsHelper
 	 * @since	1.6
 	 */
 	public function getActions($context=null, $record=null)
-	{
-		$user		= JFactory::getUser();
-		
+	{	
 		// Action
 		$actions 	= array(
 			// Project
@@ -177,6 +178,7 @@ abstract class ProjectsHelper
 			'project.edit.portfolio', 
 			'project.edit.lang',
 			'project.edit.order',
+			'project.edit.rules',
 		
 			// Tasks
 			'project.view.tasks',
@@ -194,7 +196,7 @@ abstract class ProjectsHelper
 		// Check Can do list
 		$canDo	= new JObject;
 		foreach ($actions as $action) {
-			$canDo->set($action, self::can($action, $context, $record, $user));
+			$canDo->set($action, self::can($action, $context, $record));
 		}
 		return $canDo;
 	}
