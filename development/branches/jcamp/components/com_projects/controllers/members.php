@@ -17,10 +17,11 @@ jimport('joomla.application.component.controllerform');
  * @subpackage	Projects
  * @since		1.6
  */
-class ProjectsControllerProject_members extends JControllerForm
+class ProjectsControllerMembers extends JControllerForm
 {			
-	
 	protected $view_item='project';
+	protected $view_list='members';
+	
 	/**
 	 * Method to get a model object, loading it if required.
 	 *
@@ -30,7 +31,7 @@ class ProjectsControllerProject_members extends JControllerForm
 	 *
 	 * @return	object	The model.
 	 */
-	public function getModel($name = 'Project_members', $prefix = 'ProjectsModel', $config = null)
+	public function getModel($name = 'Members', $prefix = 'ProjectsModel', $config = null)
 	{
 		return parent::getModel($name, $prefix, $config);
 	}

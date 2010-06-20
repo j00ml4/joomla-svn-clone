@@ -12,9 +12,9 @@
             <field name="id" type="category"
              description="COM_PROJECTS_CHOOSE_PORTFOLIO_DESC"
              extension="com_projects"
-             label="COM_PROJECTS_CHOOSE_PORTFOLIO_LABEL"
-             required="true"
-            />
+             label="COM_PROJECTS_CHOOSE_PORTFOLIO_LABEL">
+             <option value="">JOPTION_NO_CATEGORY</option>	
+			</field> 
         </fieldset>
     </fields>
 
