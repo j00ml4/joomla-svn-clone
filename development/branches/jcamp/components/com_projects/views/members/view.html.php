@@ -63,7 +63,7 @@ class ProjectsViewMembers extends JView
 				return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
 		}
 				
-//		$bc->addItem($this->title);
+		$bc->addItem($this->title);
 		// Display the view
 		parent::display($tpl);
 	}
