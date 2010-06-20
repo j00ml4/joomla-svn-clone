@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 ?>
 <div class="projects-content projects-frame projects-space">
-	<h2><?php echo JText::_('COM_PROJECTS_TEAM_LIST');?></h2>
+	<h3><?php echo JText::_('COM_PROJECTS_TEAM_LIST');?></h3>
 	<?php if ($this->canDo->get('project.view')): ?>
 		<a href="<?php echo JRoute::_('index.php?option=com_projects&view=members&type=list&id='.$this->item->id);?>"><?php echo JText::_('COM_PROJECTS_TEAM_USER_LIST');?></a><br />
 	<?php endif; ?>

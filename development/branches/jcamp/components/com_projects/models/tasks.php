@@ -119,7 +119,7 @@ class ProjectsModelTasks extends JModelList
 
 		// Join over the users for the author.
 		$query->select('ua.name AS author_name');
-		$query->join('LEFT', '#__users AS ua ON ua.id = a.created_user_id');
+		$query->join('LEFT', '#__users AS ua ON ua.id = a.created_by');
 		
 		// Filter by state
 		if ($state = $this->getState('filter.state')) {
@@ -155,45 +155,25 @@ class ProjectsModelTasks extends JModelList
 		return $query;
 	}
 	
+	
 	/**
-	 * Method to get category data for the current category
-	 *
-	 * @param	int		An optional ID
-	 *
-	 * @return	object
-	 * @since	1.5
+	 * function to get the project
+	 * @param $pk
 	 */
-	public function getCategory()
+	public function getProject($pk=null)
 	{
-		if(!is_object($this->_item))
-		{
-			$app = JFactory::getApplication();
-			$menu = $app->getMenu();
-			$active = $menu->getActive();
-			$params = new JRegistry();
-			$params->loadJSON($active->params);
-			$options = array();
-			//$options['countItems'] = $params->get('show_ntacts', 0);
-			$categories = JCategories::getInstance('Projects', $options);
-			$this->_item = $categories->get($this->getState('portfolio.id', 'root'));
-			if(is_object($this->_item))
-			{
-				$this->_children = $this->_item->getChildren();
-				$this->_parent = false;
-				if($this->_item->getParent())
-				{
-					$this->_parent = $this->_item->getParent();
-				}
-				$this->_rightsibling = $this->_item->getSibling();
-				$this->_leftsibling = $this->_item->getSibling(false);
-			} else {
-				$this->_children = false;
-				$this->_parent = false;
-			}
+		// Get project ID
+		if (empty($pk)) {
+			// portfolio
+			if (!($pk = $this->getState('project.id'))) {
+				return null;	
+			}	
 		}
-
-		return $this->_item;
-	}
+		
+		$project = JModel::getInstance('Project', 'ProjectsModel');
+		return $project->getItem($pk);
+	} 
+	
 
 	/**
 	 * Get the parent categorie.

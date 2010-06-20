@@ -211,7 +211,7 @@ abstract class ProjectsHelper
 	public function &resetPathway()
 	{
 		$app = &JFactory::getApplication();
-  	$bc = &$app->getPathway();
+  		$bc = &$app->getPathway();
 //  	$bc->setPathway(array());
 // 		$bc->addItem(JText::_('COM_PROJECTS_HOME_PAGE'), 'index.php?option=com_projects');		
  		
