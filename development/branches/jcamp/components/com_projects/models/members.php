@@ -17,7 +17,7 @@ jimport('joomla.application.component.modellist');
  * @author elf
  *
  */
-class ProjectsModelProject_members extends JModelList
+class ProjectsModelMembers extends JModelList
 {
 		/**
 	 * Category items data

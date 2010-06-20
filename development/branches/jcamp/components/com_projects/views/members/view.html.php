@@ -16,7 +16,7 @@ jimport('joomla.application.component.view');
 /**
  * Display managing users assigned to project view
  */
-class ProjectsViewProject_members extends JView
+class ProjectsViewMembers extends JView
 {
 	protected $item;
 	protected $items;
@@ -63,7 +63,7 @@ class ProjectsViewProject_members extends JView
 				return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
 		}
 				
-		$bc->addItem($this->title);
+//		$bc->addItem($this->title);
 		// Display the view
 		parent::display($tpl);
 	}

@@ -212,8 +212,8 @@ abstract class ProjectsHelper
 	{
 		$app = &JFactory::getApplication();
   	$bc = &$app->getPathway();
-  	$bc->setPathway(array());
- 		$bc->addItem(JText::_('COM_PROJECTS_HOME_PAGE'), 'index.php?option=com_projects');		
+//  	$bc->setPathway(array());
+// 		$bc->addItem(JText::_('COM_PROJECTS_HOME_PAGE'), 'index.php?option=com_projects');		
  		
  		return $bc;
 	}
