@@ -26,30 +26,6 @@ class ProjectsModelMembers extends JModelList
 	 */
 	protected $_item = null;
 
-	protected $_articles = null;
-
-	protected $_siblings = null;
-
-	protected $_children = null;
-
-	protected $_parent = null;
-
-	/**
-	 * The category that applies.
-	 *
-	 * @access	protected
-	 * @var		object
-	 */
-	protected $_category = null;
-
-	/**
-	 * The list of other newfeed categories.
-	 *
-	 * @access	protected
-	 * @var		array
-	 */
-	protected $_categories = null;
-	
 	/**
 	 * Method to auto-populate the model state.
 	 *
@@ -116,5 +92,23 @@ class ProjectsModelMembers extends JModelList
 		$query->order($db->getEscaped($this->getState('list.ordering', 'u.`name`')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 		return $query;
 	}	
+	
+	/**
+	 * function to get the project
+	 * @param $pk
+	 */
+	public function getProject($pk=null)
+	{
+		// Get project ID
+		if (empty($pk)) {
+			// portfolio
+			if (!($pk = $this->getState('project.id'))) {
+				return null;	
+			}	
+		}
+		
+		$project = JModel::getInstance('Project', 'ProjectsModel');
+		return $project->getItem($pk);
+	} 
 }
 ?>
