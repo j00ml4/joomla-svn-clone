@@ -20,7 +20,7 @@ $model = $this->getModel();
 	<div class="item">
 		<h1><?php echo $this->title;?></h1>
 		<?php if($model->getState('type') != 'list') :?>
-			<form style="display:inline;" class="task-button" action="<?php echo JRoute::_('index.php?option=com_projects&id='.$model->getState('project.id').'&task=members.'.$model->getState('type'));?>" method="post">
+			<form action="<?php echo JRoute::_('index.php?option=com_projects&id='.$model->getState('project.id')); ?>" method="post">
 		<?php endif; ?>
 
 		<?php echo $this->loadTemplate('buttons');?>
@@ -36,6 +36,7 @@ $model = $this->getModel();
 		<?php echo $this->loadTemplate('buttons');?>
 		
 		<?php if($model->getState('type') != 'list') :?>
+			<input type="hidden" name="task" value="members.<?php echo $model->getState('type'); ?>" />
 			<?php echo JHTML::_( 'form.token' ); ?>
 			</form>
 		<?php endif; ?>
