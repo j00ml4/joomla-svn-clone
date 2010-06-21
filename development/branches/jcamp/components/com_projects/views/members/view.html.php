@@ -23,6 +23,7 @@ class ProjectsViewMembers extends JView
 	protected $params;
 	protected $canDo;
 	protected $title;
+	protected $project;
 	
 	/**
 	 * Display managing users assigned to project
@@ -32,14 +33,11 @@ class ProjectsViewMembers extends JView
 		$app		= &JFactory::getApplication();
 		$model		= &$this->getModel();
 		$this->canDo	= &ProjectsHelper::getActions();
-		// add 'potfolio' and 'project' of our component breadcrumb
-  		$bc = &ProjectsHelper::resetPathway();
- 		$bc->addItem($model->getState('portfolio.title'), 'index.php?option=com_projects&view=portfolios&layout=gallery&id='.$app->getUserState('portfolio.id'));
- 		$bc->addItem($model->getState('project.title'),'index.php?option=com_projects&view=project&layout=default&id='.$model->getState('project.id'));
 		
 		//Get Model data
 		$this->items 	= &$model->getItems();
 		$this->params	= &$app->getParams();
+		$this->project 	= &$model->getProject();
 		
 		// set up type and layout
 		$this->setLayout('default');
@@ -62,7 +60,10 @@ class ProjectsViewMembers extends JView
 		if (!$this->canDo->get($access)){
 				return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
 		}
-				
+		
+		// Pathway
+		$bc = &$app->getPathway();
+		$bc->addItem($this->project->title,'index.php?option=com_projects&view=project&id='.$this->project->id);
 		$bc->addItem($this->title);
 		// Display the view
 		parent::display($tpl);

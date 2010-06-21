@@ -16,7 +16,8 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
 $model = $this->getModel();
 ?>
 <div class="projects<?php echo $pageClass;?>">
-	<div class="projects-content">
+<div class="item-page">
+	<div class="item">
 		<h1><?php echo $this->title;?></h1>
 		<?php if($model->getState('type') != 'list') :?>
 			<form style="display:inline;" class="task-button" action="<?php echo JRoute::_('index.php?option=com_projects&id='.$model->getState('project.id').'&task=members.'.$model->getState('type'));?>" method="post">
@@ -39,4 +40,5 @@ $model = $this->getModel();
 			</form>
 		<?php endif; ?>
 	</div>
+	</div>	
 </div>

@@ -39,7 +39,6 @@ class ProjectsViewProject extends JView
 		$this->params	= &$app->getParams();
 		$this->canDo	= &ProjectsHelper::getActions();
 		
-		$bc = &ProjectsHelper::resetPathway();
 		// Layout
 		$layout = $this->getLayout();
 		switch($layout){
@@ -70,14 +69,13 @@ class ProjectsViewProject extends JView
 				if (empty($this->item->id)){
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
-				
 				// Get Category
-				$this->category = &$model->getCategory($this->item->catid);
-				
-				// add 'potfolio' and 'project' of our component breadcrumb
-//		  	$bc->addItem($this->category->title, 'index.php?option=com_projects&view=projects&layout=gallery&id='.$this->item->catid);
-//		  	$bc->addItem($this->item->title);
+				$this->category = &$model->getCategory($this->item->catid);				
 		}
+		
+		// Pathway
+		$bc = &$app->getPathway();
+	  	$bc->addItem($this->item->title);
 		
 		// Display the view
 		$this->setLayout($layout);
