@@ -56,7 +56,11 @@ class ProjectsViewPortfolios extends JView
 			return JError::raiseError(500, implode("\n", $errors));
 		}
 		
-		ProjectsHelper::resetPathway();
+		// Get pathway
+		$bc = &$app->getPathway();
+		$bc->addItem(JText::_('COM_PROJECTS_PORTFOLIOS'));
+		
+		
 		parent::display($tpl);
 	}
 }
