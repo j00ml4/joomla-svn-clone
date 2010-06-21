@@ -23,7 +23,7 @@ $cparams =& JComponentHelper::getParams('com_media');
 	<?php echo $this->category->description; ?>
 	</div>
 <?php endif; ?>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 	function tableOrdering( order, dir, task ) {
 	var form = document.adminForm;
 
@@ -38,7 +38,7 @@ $cparams =& JComponentHelper::getParams('com_media');
 		<tr>
 			<td align="right" colspan="6">
 			<?php if ($this->params->get('show_limit')) :
-				echo JText::_('JGLOBAL_DISPLAY_NUM') .'&nbsp;';
+				echo JText::_('JGLOBAL_DISPLAY_NUM') .'&#160;';
 				echo $this->pagination->getLimitBox();
 			endif; ?>
 			</td>

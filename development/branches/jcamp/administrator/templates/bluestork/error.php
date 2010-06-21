@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id$
+ * @version		$Id: error.php 17229 2010-05-24 05:48:04Z infograf768 $
  * @package		Joomla.Administrator
  * @subpackage	templates.bluestork
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
