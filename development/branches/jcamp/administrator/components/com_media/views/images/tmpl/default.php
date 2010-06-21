@@ -60,14 +60,14 @@ echo $params->get('image_path', 'images');?>/';
 			</tr>
 			<?php endif;?>
 		</table>
+		<input type="hidden" id="dirPath" name="dirPath" />
+		<input type="hidden" id="f_file" name="f_file" />
+		<input type="hidden" id="tmpl" name="component" />
 	</fieldset>
-	<input type="hidden" id="dirPath" name="dirPath" />
-	<input type="hidden" id="f_file" name="f_file" />
-	<input type="hidden" id="tmpl" name="component" />
 </form>
 <form action="<?php echo JURI::base(); ?>index.php?option=com_media&amp;task=file.upload&amp;tmpl=component&amp;<?php echo $this->session->getName().'='.$this->session->getId(); ?>&amp;<?php echo JUtility::getToken();?>=1" id="uploadForm" name="uploadForm" method="post" enctype="multipart/form-data">
 	<fieldset id="uploadform">
-		<legend><?php echo JText::_('COM_MEDIA_UPLOAD_FILES'); ?> (<?php echo JText::_('COM_MEDIA_MAXIMUM_SIZE'); ?>:&nbsp;<?php echo ($this->config->get('upload_maxsize') / 1000000); ?>MB)</legend>
+		<legend><?php echo JText::_('COM_MEDIA_UPLOAD_FILES'); ?> (<?php echo JText::_('COM_MEDIA_MAXIMUM_SIZE'); ?>:&#160;<?php echo ($this->config->get('upload_maxsize') / 1000000); ?>MB)</legend>
 		<fieldset id="upload-noflash" class="actions">
 			<label for="upload-file" class="hidelabeltxt"><?php echo JText::_('COM_MEDIA_UPLOAD_FILE'); ?></label>
 			<input type="file" id="upload-file" name="Filedata" />
@@ -91,6 +91,6 @@ echo $params->get('image_path', 'images');?>/';
 		<ul class="upload-queue" id="upload-queue">
 			<li style="display: none" />
 		</ul>
+		<input type="hidden" name="return-url" value="<?php echo base64_encode('index.php?option=com_media&view=images&tmpl=component&e_name='.JRequest::getCmd('e_name')); ?>" />
 	</fieldset>
-	<input type="hidden" name="return-url" value="<?php echo base64_encode('index.php?option=com_media&view=images&tmpl=component&e_name='.JRequest::getCmd('e_name')); ?>" />
 </form>

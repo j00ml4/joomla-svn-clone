@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: group0002Test.php 17552 2010-06-08 18:42:32Z dextercowley $
+ * @version		$Id$
  * @package		Joomla.SystemTest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
