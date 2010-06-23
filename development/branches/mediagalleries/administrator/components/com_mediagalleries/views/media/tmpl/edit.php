@@ -27,7 +27,7 @@ JHtml::_('behavior.formvalidation');
 // -->
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_weblinks'); ?>" method="post" name="adminForm" id="weblink-form" class="form-validate">
+<form action="<?php JRoute::_('index.php?option=com_mediagalleries'); ?>" method="post" name="adminForm" id="mediagalleries-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 			<legend><?php echo empty($this->item->id) ? JText::_('COM_WEBLINKS_NEW_WEBLINK') : JText::sprintf('COM_WEBLINKS_EDIT_WEBLINK', $this->item->id); ?></legend>
@@ -71,7 +71,8 @@ JHtml::_('behavior.formvalidation');
 		<?php echo JHtml::_('sliders.start','newsfeed-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 		<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
 		
-		<?php if ($this->media): ?>
+		<?php 
+		if ($this->media): ?>
 		<fieldset class="panelform">
 			<?php echo $this->media; ?>
 		</fieldset>	
@@ -101,12 +102,14 @@ JHtml::_('behavior.formvalidation');
 				<?php echo $this->form->getInput('version'); ?></li>
 			</ul>
 		</fieldset>
-
+		
 		<?php echo $this->loadTemplate('params'); ?>
 		
+		
+		
 	</div>
+	
 	<div class="clr"></div>
-
 	<input type="hidden" name="task" value="" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
