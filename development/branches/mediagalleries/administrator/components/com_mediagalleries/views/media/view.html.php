@@ -57,11 +57,13 @@ class MediagalleriesViewMedia extends JView
 		// $this->folder= GetmediaParam('defaultdir');//does it work?
 		$this->folder=$this->media_params['defaultdir'];
 		
-		// Is new?
-		if( $this->item->id ){
-			$this->media = $plg_media->addMedia($this->item->url);
+		// Is new? But Now working :C
+	 
+		 if( $this->item->id ){
+			$this->media = $plg_media->addMedia($this->url);
 		}
-					
+	
+				
 		// get the lists
 		$this->lists =& $this->_buildLists($this->item);
 		
@@ -119,6 +121,11 @@ class MediagalleriesViewMedia extends JView
 			JToolBarHelper::apply('media.apply', 'JTOOLBAR_APPLY');
 			JToolBarHelper::save('media.save', 'JTOOLBAR_SAVE');
 			JToolBarHelper::addNew('media.save2new', 'JTOOLBAR_SAVE_AND_NEW');
+		}
+		else
+		{
+			echo "Problem";
+			exit;
 		}
 			// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
