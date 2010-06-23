@@ -105,7 +105,24 @@ class plgContentMedia extends JPlugin
 		return true;
 	}	
 	
-
+	/**
+	 * 
+	 * @param $item
+	 * @param $params
+	 */
+	public function onLoadMedia($item, &$params){
+		// Merge params
+		$this->params->merge($params);
+		$params =& $this->params;
+		
+		// Default	->fixed
+		$w = (int)$params->get('width', 400);
+		$h = (int)$params->get('height', 0 );
+		$ast = (int)$params->get('autostart', 0 );
+		$item->media = self::addMedia( $item->url, $w, $h, $ast );
+		return true;
+	}
+	
 	/** The most important function! 
 	 * Show Media
 	 * @return str
@@ -117,10 +134,10 @@ class plgContentMedia extends JPlugin
 	public function addMedia( $media, $width=0, $height =0, $autostart=0 )
 	{	
 		// The propose of this is to get the defaults set by the admin -> Fixed :D 
-		$pparams=$this->params;// make it work
+		$pparams	= $this->params;// make it work
 		
 		// Fix Video UrL
-		$media = strpos($media,"http://")? 
+		$media		= strpos($media,"http://")? 
 			$media: // Custom PATH
 			$pparams->get('uri_img').$media; // Default PATH
 		

@@ -38,32 +38,29 @@ class MediagalleriesViewMedia extends JView
 	 */
 	public function display($tpl = null)
 	{
+		$app		=& JFactory::getApplication();
 		$document	=& JFactory::getDocument();
 		$db			=& JFactory::getDBO();
 		$uri 		=& JFactory::getURI();
 		$model		=& $this->getModel();
 		
 		//get the data
-		
+		$this->params	=& JComponentHelper::getParams('com_mediagalleries');
 		$this->user 	=& JFactory::getUser();
 		$this->item		=& $this->get('Item');
 		$this->form		=& $this->get('Form');
-		$this->state	= $this->get('State');
-
-		// PLG
-		$plg_media=JPluginHelper::getPlugin('content', 'media');
-		$this->media_params=$plg_media->params;
-		// To folder
-		// $this->folder= GetmediaParam('defaultdir');//does it work?
-		$this->folder=$this->media_params['defaultdir'];
+		$this->state	=& $this->get('State');
 		
-		// Is new? But Now working :C
-	 
-		 if( $this->item->id ){
-			$this->media = $plg_media->addMedia($this->url);
+		// Is new?
+		if( !empty($this->item->id) ){
+			// Load the plugin!!!
+			JPluginHelper::importPlugin('content', 'media');
+			$dispatcher =& JDispatcher::getInstance();
+			$this->params->set('width', 350);
+			$this->params->set('height', 300);
+			$results = $dispatcher->trigger('onLoadMedia', array ( &$this->item, &$this->params));
 		}
-	
-				
+					
 		// get the lists
 		$this->lists =& $this->_buildLists($this->item);
 		
@@ -121,11 +118,6 @@ class MediagalleriesViewMedia extends JView
 			JToolBarHelper::apply('media.apply', 'JTOOLBAR_APPLY');
 			JToolBarHelper::save('media.save', 'JTOOLBAR_SAVE');
 			JToolBarHelper::addNew('media.save2new', 'JTOOLBAR_SAVE_AND_NEW');
-		}
-		else
-		{
-			echo "Problem";
-			exit;
 		}
 			// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
