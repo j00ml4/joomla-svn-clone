@@ -15,7 +15,7 @@ jimport('joomla.plugin.plugin');
 jimport( 'joomla.html.parameter' );
 
 // This lib adds the media 
-include_once dirname(__FILE__) .DS.'media'.DS.'htmlembed.php';
+include_once dirname(__FILE__).DS.'media'.DS.'htmlembed.php';
 
 /**
  * Media Content Plugin

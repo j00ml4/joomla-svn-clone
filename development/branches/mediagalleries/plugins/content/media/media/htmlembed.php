@@ -551,7 +551,7 @@ function addAppletJava($video, $width='', $height=''){
  * @param string $video url
  * @param string $msg error message [optional]
  */
-function addMediaError( $video, $msg="Invalid Video" ){		
-			$error = '<q class="class="error">Invalid Video: '.$video.'</q>';
-			return $error;
+function addMediaError( $video, $msg="Invalid Media: " ){		
+	$error = '<q class="class="error">'.$msg.$video.'</q>';
+	return $error;
 }
