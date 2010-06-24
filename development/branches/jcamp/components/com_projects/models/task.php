@@ -56,20 +56,19 @@ class ProjectsModelTask extends JModelAdmin
 	{
 		parent::populateState();
 		$app = JFactory::getApplication();		
-		$app->setUserState('com_projects.edit.task.id', null);
+		//$app->setUserState('com_projects.edit.task.id', null);
 		
 		// parent task
 		if (!($parent_id = $app->getUserState('task.parent_id'))) {
 			$parent_id = JRequest::getInt('parent_id');
 		}
 		$this->setState('task.parent_id', $parent_id);
-		$app->setUserState('task.parent_id', null);
 		
 		// parent task
 		if (!($parent_id = $app->getUserState('project.id'))) {
 			$parent_id = JRequest::getInt('project_id');
 		}
-		$this->setState('task.project_id', $parent_id);
+		$this->setState('project.id', $parent_id);
 	}
 	
 	/**
@@ -202,18 +201,7 @@ class ProjectsModelTask extends JModelAdmin
 	{
 		return parent::validate($form, $data);
 	}
-	
-	/**
-	 * Method to get a single record.
-	 *
-	 * @param	integer	The id of the primary key.
-	 * @return	mixed	Object on success, false on failure.
-	 * @since	1.6
-	 */
-	public function getParent($pk = null)
-	{
-		return parent::getItem($pk);
-	}
+
 	/**
 	 * Method to get a single record.
 	 *

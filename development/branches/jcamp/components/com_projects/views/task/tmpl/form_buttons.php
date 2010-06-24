@@ -12,10 +12,10 @@ defined('_JEXEC') or die;
 ?>
 <!-- Actions -->
 <div class="formelm_buttons">
-	<button type="button" onclick="submitbutton('project.save')">
-		<?php echo JText::_('JSAVE') ?>
+	<button type="button" onclick="submitbutton('task.save')">
+		<?php echo JText::_('JSAVE'); ?>
 	</button>
-	<button type="button" onclick="submitbutton('project.cancel')">
-		<?php echo JText::_('JCANCEL') ?>
+	<button type="button" onclick="submitbutton('task.cancel')">
+		<?php echo JText::_('JCANCEL'); ?>
 	</button>
 </div>

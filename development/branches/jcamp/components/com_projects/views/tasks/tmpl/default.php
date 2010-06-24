@@ -14,5 +14,8 @@ defined('_JEXEC') or die;
 $params =  $this->params;
 ?>
 <div class="projects<?php echo $params->get('pageclass_sfx'); ?>">
+	<a href="<?php echo JRoute::_('index.php?option=com_projects&view=task&layout=form'); ?>">
+		<?php echo JText::_('COM_PROJECTS_NEW_TASK_LINK'); ?>
+	</a>
 	<?php dump($this)?>
 </div>

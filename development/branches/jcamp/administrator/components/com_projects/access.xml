@@ -7,6 +7,38 @@
 		<action name="project.test" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />
 	</section>
 	
+	<section name="component_new">
+		<!-- Projects -->
+		<action name="project.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
+		<action name="project.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
+		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />
+		
+		<!-- Tasks -->
+		<action name="project.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
+		<action name="project.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
+		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />
+		
+		<!-- Tickets -->
+		<action name="project.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
+		<action name="project.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
+		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />		
+		
+		<!-- Miles -->
+		<action name="project.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
+		<action name="project.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
+		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />
+		
+		<!-- Documents -->
+		<action name="project.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
+		<action name="project.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
+		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />		
+	
+		<!-- Activities -->
+		<action name="project.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
+		<action name="project.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
+		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />	
+	</section>
+	
 	<section name="project">
 		<action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC" />
 		<action name="project.manage" title="JACTION_MANAGE" description="COM_PROJECTS_ACL_MANAGE_DESC" />
@@ -15,7 +47,6 @@
 	</section>
 	
 	<section name="category">
-		<action name="project.manage" title="JACTION_MANAGE" description="COM_PROJECTS_ACL_MANAGE_DESC" />
 		<action name="core.create" title="COM_CATEGORY_ACCESS_CREATE" description="COM_CATEGORY_ACCESS_CREATE_DESC" />
 		<action name="core.delete" title="COM_CATEGORY_ACCESS_DELETE" description="COM_CATEGORY_ACCESS_DELETE_DESC" />
 		<action name="core.edit" title="COM_CATEGORY_ACCESS_EDIT" description="COM_CATEGORY_ACCESS_EDIT_DESC" />
