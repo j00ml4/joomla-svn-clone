@@ -17,14 +17,13 @@ jimport('joomla.application.component.view');
  * Display project view
  * @author eden & elf
  */
-class ProjectsViewProject extends JView
+class ProjectsViewTask extends JView
 {
 	protected $item;
 	protected $form;
 	protected $params;
 	protected $catid;
 	protected $canDo;
-	protected $category;
 	
 	/**
 	 * Display project
@@ -39,16 +38,16 @@ class ProjectsViewProject extends JView
 		$this->params	= &$app->getParams();
 		$this->canDo	= &ProjectsHelper::getActions();
 		
-		$bc = &ProjectsHelper::resetPathway();
 		// Layout
 		$layout = $this->getLayout();
 		switch($layout){
+			case 'new':
 			case 'edit':
 			case 'form':
 				$layout = 'form';
 				$this->form	= &$model->getForm();
 				if (empty($this->item)) {
-					$this->catid = $app->getUserState('portfolio.id', 0);
+					$this->catid = $app->getUserState('task.category.id', 0);
 					$access = 'project.create';
 				}else{
 					$access = 'project.edit';
@@ -58,25 +57,17 @@ class ProjectsViewProject extends JView
 				if (!$this->canDo->get($access)){
 					return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
 				}
-				$bc->addItem(JText::_('COM_PROJECTS_PROJECT_FORM_TITLE'));
 				break;
 			
 			default:
 				$layout = 'default';
 				// Access
-				if (!$this->canDo->get('project.view')){
+				if (!$this->canDo->get('task.view')){
 					return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
 				}
 				if (empty($this->item->id)){
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
-				
-				// Get Category
-				$this->category = &$model->getCategory($this->item->catid);
-				
-				// add 'potfolio' and 'project' of our component breadcrumb
-//		  	$bc->addItem($this->category->title, 'index.php?option=com_projects&view=projects&layout=gallery&id='.$this->item->catid);
-//		  	$bc->addItem($this->item->title);
 		}
 		
 		// Display the view

@@ -22,7 +22,7 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
 ?>
 <script language="javascript" type="text/javascript">
 function submitbutton(task) {
-	if (task == 'project.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
+	if (task == 'task.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
 		submitform(task);
 	}
 }
