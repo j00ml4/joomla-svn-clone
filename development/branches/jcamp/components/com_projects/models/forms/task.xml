@@ -55,7 +55,7 @@
 			hide="pagebreak,article"
 			description="COM_PROJECTS_FIELD_DESCRIPTION_DESC"
 			filter="safehtml"
-			label="JGLOBAL_DESCRIPTION"/>
+			label="JGLOBAL_DESCRIPTION" />
         	 
 		 <field id="start_at"
 			name="start_at"

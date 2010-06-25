@@ -313,13 +313,16 @@ class JDocumentHTML extends JDocument
 	 * @access public
 	 * @return integer Number of child menu items
 	 */
-	function countMenuChildren() {
+	function countMenuChildren()
+	{
 		static $children;
+
 		if (!isset($children)) {
-			$dbo = &JFactory::getDbo();
-			$menu = &JSite::getMenu();
-			$where = Array();
-			$active = $menu->getActive();
+			$dbo	= JFactory::getDbo();
+			$app	= JFactory::getApplication();
+			$menu	= $app->getMenu();
+			$where	= Array();
+			$active	= $menu->getActive();
 			if ($active) {
 				$where[] = 'parent = ' . $active->id;
 				$where[] = 'published = 1';
@@ -395,7 +398,7 @@ class JDocumentHTML extends JDocument
 		}
 
 		// Load the language file for the template
-		$lang = &JFactory::getLanguage();
+		$lang = JFactory::getLanguage();
 		// 1.5 or core then
 		// 1.6
 			$lang->load('tpl_'.$template, JPATH_BASE, null, false, false)
