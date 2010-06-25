@@ -36,6 +36,7 @@
 			hide="pagebreak,article"
 			description="COM_PROJECTS_FIELD_DESCRIPTION_DESC"
 			filter="safehtml"
+			required="true"
 			label="COM_PROJECTS_FIELD_DESCRIPTION_LABEL"/>
         	 
 		 <field id="start_at"
@@ -64,7 +65,7 @@
 			description="JFIELD_PUBLISHED_DESC"
 			label="JGLOBAL_STATE"
 			size="1" >
-         	<option value="2">JARCHIVED</option>
+         	<option value="2">COM_PROJECTS_STATE_FINISHED</option>
             <option value="1">JPUBLISHED</option>
             <option value="0">JUNPUBLISHED</option>
         </field>
@@ -76,7 +77,7 @@
 			description="JFIELD_ORDERING_DESC"
 			class="inputbox"
 			size="6"
-			default="0" />
+			default="1" />
 		 
 		 <field id="language"
 			name="language"
@@ -95,14 +96,6 @@
 			description="JFIELD_ACCESS_DESC"
 			class="inputbox"
 			size="1" />
-			
-		<field id="rules"
-			name="rules"	
-			type="rules" 
-			label="JCONFIG_PERMISSIONS_LABEL"
-			filter="rules" 
-			component="com_projects"	
-			section="component" />	
     </fieldset>
 	<!-- Params -->	
 	<fields name="params">

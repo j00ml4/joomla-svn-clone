@@ -18,7 +18,6 @@ JHtml::_('behavior.formvalidation');
 
 // Vars
 $params =  $this->params;
-$pageClass = $this->escape($params->get('pageclass_sfx'));
 ?>
 <script language="javascript" type="text/javascript">
 function submitbutton(task) {
@@ -27,39 +26,63 @@ function submitbutton(task) {
 	}
 }
 </script>
-<div class="projects<?php echo $pageClass;?>">
-<div class="edit item-page<?php echo  $pageClass;;?>">
-	<?php if ($params->get('show_page_heading', 1)) : ?>
-	<?php /* this allows the user to set the title he wants */ ?> 
-	<h1 class="componentheading"><?php echo $this->escape($params->get('page_heading', JText::_('COM_PROJECTS_PROJECT_FORM_TITLE'))); ?></h1>
+<div class="projects">
+<div class="edit item-page<?php echo $this->escape($params->get('pageclass_sfx')); ?>">
+	<?php if ($params->get('show_page_heading', 1)) : ?> 
+	<h1 class="componentheading">
+		<?php echo $this->escape($params->get('page_heading', 
+			empty($this->item->id)? 
+				JText::_('COM_PROJECTS_TASK_NEW'): 
+				JText::_('COM_PROJECTS_TASK_EDIT')) ); ?>
+	</h1>
 	<?php endif; ?>
-	
-	<?php /** This way we have more controll over the design */ ?>
+		
 	<form action="<?php echo JRoute::_('index.php?option=com_projects'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">	
 		<!-- This keeps the code more DRY -->	
 		<?php echo $this->loadTemplate('buttons'); ?>
 		
 		<fieldset>
-			<legend><?php echo JText::_( 'JDETAILS' ); ?></legend>
+			<legend><?php echo JText::_('JGLOBAL_DESCRIPTION'); ?></legend>
 			
-			<?php if ($this->canDo->get('project.edit.portfolio')): ?>
+			<?php if (empty($this->item->id)): ?>
 			<div class="formelm">
-				<?php echo $this->form->getLabel('catid'); ?>
-				<?php echo $this->form->getInput('catid', null, $this->catid); ?>
+				<?php echo $this->form->getLabel('type'); ?>
+				<?php echo $this->form->getInput('type', null,  $this->params->get('type', 3)); ?>
 			</div>
 			<?php endif; ?>
 			
 			<div class="formelm">
-				<?php echo $this->form->getLabel('title'); ?>
-				<?php echo $this->form->getInput('title'); ?>
-			</div>	
+				<?php echo $this->form->getLabel('parent_id'); ?>
+				<?php echo $this->form->getInput('parent_id', null,  $this->params->get('parent_id')); ?>
+			</div>
 			
 			<div class="formelm">
-				<?php echo $this->form->getLabel('estimation_type', 'params'); ?>
-				<?php echo $this->form->getInput('estimation_type', 'params'); ?>
+				<?php echo $this->form->getLabel('title'); ?>
+				<?php echo $this->form->getInput('title'); ?>
+				
+				<?php echo $this->form->getInput('catid', null, $this->params->get('catid')); ?>
 			</div>	
+					
+			<div class="formelm">
+			<?php echo $this->form->getInput('description'); ?>
+			</div>
+		</fieldset>
+
+
+		<?php if ($this->canDo->get('project.edit.state')): ?>
+		<fieldset>
+			<legend><?php echo JText::_('JDETAILS'); ?></legend>
+
+			<div class="formelm">
+				<?php echo $this->form->getLabel('state'); ?>
+				<?php echo $this->form->getInput('state'); ?>
+			</div>
 			
-			<?php if ($this->canDo->get('project.edit.state')): ?>
+			<div class="formelm">
+				<?php echo $this->form->getLabel('estimate'); ?>
+				<?php echo $this->form->getInput('estimate'); ?>
+			</div>
+				
 			<div class="formelm">
 				<?php echo $this->form->getLabel('start_at'); ?>
 				<?php echo $this->form->getInput('start_at'); ?>
@@ -68,43 +91,21 @@ function submitbutton(task) {
 				<?php echo $this->form->getLabel('finish_at'); ?>
 				<?php echo $this->form->getInput('finish_at'); ?>
 			</div>
-			<?php endif; ?>
 			
-			<?php if ($this->canDo->get('project.edit.lang')): ?>
-			<div class="formelm">
-				<?php echo $this->form->getLabel('language'); ?>
-				<?php echo $this->form->getInput('language'); ?>
-			</div>
-			<?php endif; ?>
-		
-			<?php if ($this->canDo->get('project.edit.state')): ?>
-			<div class="formelm">
-				<?php echo $this->form->getLabel('state'); ?>
-				<?php echo $this->form->getInput('state'); ?>
-			</div>
-			<?php endif; ?>	
-	
-			<?php if ($this->canDo->get('project.edit.order')): ?>
 			<div class="formelm">
 				<?php echo $this->form->getLabel('ordering'); ?>
 				<?php echo $this->form->getInput('ordering'); ?>
 			</div>
-			<?php endif; ?>
-		</fieldset>
-		
-		<fieldset>
-			<legend><?php echo JText::_('JGLOBAL_DESCRIPTION'); ?></legend>
+			
 			<div class="formelm">
-			<?php echo $this->form->getInput('description'); ?>
+				<?php echo $this->form->getLabel('language'); ?>
+				<?php echo $this->form->getInput('language'); ?>
 			</div>
-		</fieldset>
-
-		<?php if ($this->canDo->get('project.edit.rules') && 0): ?>
-		<fieldset>
-			<legend><?php echo JText::_('JCONFIG_PERMISSIONS_LABEL'); ?></legend>
+			
 			<div class="formelm">
-				<?php echo $this->form->getInput('rules'); ?>
-			</div>
+				<?php echo $this->form->getLabel('access'); ?>
+				<?php echo $this->form->getInput('access'); ?>
+			</div>	
 		</fieldset>
 		<?php endif; ?>
 		

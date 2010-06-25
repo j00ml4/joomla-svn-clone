@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 $uri = &JFactory::getURI();
 $id = $this->item->id;
 ?>
-<div class="formelm_buttons projects-content">
+<div class="formelm_buttons projects-content toolbar-list">
 	<ul class="actions">
 		<?php if ($this->canDo->get('project.edit')): ?>
 		<li  class="edit-icon">
@@ -33,7 +33,9 @@ $id = $this->item->id;
 		
 		<!--  Delete -->
 		<?php if ($this->canDo->get('project.delete')): ?>
+		<li>
 			<?php echo JHTML::_('action.delete', JText::_('JGLOBAL_DELETE'), 'project', $id); ?>
+		</li>
 		<?php endif; ?>			
 	</ul>
 </div>

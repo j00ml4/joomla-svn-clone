@@ -15,37 +15,36 @@ $params =  $this->params;
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
 <div class="projects<?php echo $pageClass?>">
-	<div class="projects-left-column">
-		<div class="projects-content">
+	<div class="two3">
+		<div class="project-content">
 			<h1><?php echo $this->item->title; ?></h1>
-			<div class="category-desc">
-				<?php echo JText::_('COM_PROJECTS_FIELD_DESCRIPTION_LABEL')?>:
-				<div class="projects-content projects-frame projects-space">
-					<?php echo $this->item->description; ?>
-				</div>
-				<div class="clr">&nbsp;</div>
+	
+			<?php echo $this->item->description; ?>
+	
+			<div class="progress-bar space">
+				<div class="progress" style="width:<?php echo '50%'; ?>;"></div>
+				<div class="info"><?php echo '50%'; ?></div>
 			</div>
+	
+			<dl class="project-info space frame">
+				<dt><?php echo JText::_('COM_PROJECTS_FIELD_START_AT_LABEL')?></dt>
+				<dd><?php echo JFactory::getDate($this->item->start_at)->toFormat('%d.%m.%Y');?></dd>
+	
+				<dt><?php echo JText::_('COM_PROJECTS_FIELD_FINISH_AT_LABEL')?></dt>
+				<dd><?php echo JFactory::getDate($this->item->finish_at)->toFormat('%d.%m.%Y');?></dd>
+			</dl>
 			
-			<form class="projects-frame" id="adminForm">
-				<div class="projects-content">
-					<div class="formelm"><label><?php echo JText::_('COM_PROJECTS_FIELD_START_AT_LABEL')?>:</label>
-						<?php echo JFactory::getDate($this->item->start_at)->toFormat('%d.%m.%Y');?>					
-					</div>
-					<div class="formelm"><label><?php echo JText::_('COM_PROJECTS_FIELD_FINISH_AT_LABEL')?>:</label>
-						<?php echo JFactory::getDate($this->item->finish_at)->toFormat('%d.%m.%Y');?>
-					</div>
-					<div class="formelm"><label><?php echo JText::_('COM_PROJECTS_FIELD_STATUS_LABEL')?>:</label>50 %</div>
-				</div>
-			</form>
 			<?php echo $this->loadTemplate('buttons'); ?>
 		</div>
+			
 	</div>
 
-	<div class="projects-right-column">
-		<?php echo $this->loadTemplate('team');?>
-		<?php echo $this->loadTemplate('tasks');?>
-		<?php echo $this->loadTemplate('documents');?>
+	<div class="one3">
+		<div class=" project-space">
+			<?php echo $this->loadTemplate('members');?>
+			<?php echo $this->loadTemplate('tasks');?>
+			<?php echo $this->loadTemplate('documents');?>
+		</div>
 	</div>
-	<?php echo $this->loadTemplate('buttons'); ?>
 </div>
 </div>

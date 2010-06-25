@@ -39,6 +39,7 @@ class ProjectsControllerProject extends JControllerForm
 		$this->registerTask('report',		'publish');	// value = -3 	// pending
 		//$this->registerTask('orderup',		'reorder');
 		//$this->registerTask('orderdown',	'reorder');
+		
 	}
 	
 	/**

@@ -1,6 +1,51 @@
+/** COLS */
+.full {
+	width:100%;
+	clear:both;
+	float:none;
+}
+.full, .half, .one3, .two3, .one4, .three4 {
+	margin:0;
+	border:0;
+	float:left;
+}
+.half	{ width:50%; }
+.one3	{ width:33%; }
+.two3	{ width:66%; }
+.one4	{ width:25%; }
+.three4	{ width:75%; }
+
+/** PB */
+.progress-bar{
+	height:30px;
+	overflow:hidden;
+	position:relative;
+	width:90%;
+	marging: 0 auto;
+	text-align:center;
+	border: groove #000 1px;
+	clear:both;
+}
+.progress-bar .progress{
+	height:30px;
+	position:absolute;top:0;left:0;
+	background: #a0a0FF;
+	border: none;
+	z-index:1;
+}
+.progress-bar .info{
+	width: 100%;
+	text-align:center;
+	vertical-align:middle;
+	position:absolute; top:20%;
+	color:#000; font-weight:bold;
+	border: none;
+	z-index:2;
+}
+
+
 div.projects{
 	width : 100%;
-	overflow : hidden;
 }
 
 	div.projects h1{
@@ -8,23 +53,22 @@ div.projects{
 		margin-bottom : 10px;
 	}
 
-	div.projects	.projects-frame{
+	.frame, div.projects .projects-frame{
 		border : 1px solid #dddddd !important;
 		-moz-border-radius: 3px;
 		-webkit-border-radius: 3px; 
 		border-radius : 3px;
 	}
 
-	div.projects div.projects-content{
-		padding : 10px;
-		overflow : hidden;
+	div.projects .project-content{
+		padding: 10px;
 	}
 	
-	div.projects div.projects-space{
-		margin-bottom : 10px;
+	div.projects .project-space, .space{
+		margin: 0px 5px 20px;
 	}
 
-	div.projects ul.projects-info{
+	div.projects .projects-info{
 		margin : 0px 0px 0px 5px !important;
 		padding : 0 !important;
 	}
@@ -49,7 +93,7 @@ div.projects{
 		overflow : hidden;
 		float : left;
 		clear : right;
-		border-right : 1px solid black;
+		/*border-right : 1px solid black;*/
 	}
 	
 		div.projects div.projects-left-column	div.blog{

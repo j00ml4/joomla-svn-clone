@@ -1,44 +1,73 @@
 <?php
 // No direct access to this file
 defined('_JEXEC') or die;
-// import the list field type
-jimport('joomla.html.html.list');
+
+jimport('joomla.html.html');
+jimport('joomla.form.helper');
+JFormHelper::loadFieldClass('radio');
 
 /**
  * Select project form field
  */
-class JFormFieldTask_Parent extends JFormFieldList
+class JFormFieldTask_Type extends JFormFieldRadio
 {
-        /**
-         * The field type.
-         *
-         * @var         string
-         */
-        protected $type = 'task_parent';
-        
-        /**
-         * Method to get a list of options for a list input.
-         *
-         * @return      array           An array of JHtml options.
-         */
-        protected function getOptions($config = array()) 
-        {
-                $db = JFactory::getDBO();
-                $query = new JDatabaseQuery;
-                $query->select('a.id AS value, a.title AS text, a.level');
-                $query->from('#__project_tasks AS a');
-                $query->where(' `type` = 1 AND `state` >= 1 ');
-                $query->order('a.lft ASC, ordering ASC');
+	/**
+	 * The field type.
+	 * @var         string
+	 */
+	protected $type = 'task_type';
 
-                $db->setQuery($query);
-                $rows = $db->loadObjectList();
-                $options = array();
-                $options[] = JHtml::_('select.option', 0, JText::_('JNONE'));
-                foreach($rows as $row)
-                {
-                        $options[] = JHtml::_('select.option', $row->value, $row->text);
-                }
-                $options = array_merge(parent::getOptions() , $options);
-                return $options;
-        }
+	/**
+	 * Method to get the field input markup.
+	 *
+	 * @return	string	The field input markup.
+	 * @since	1.6
+	 */
+	protected function getInput()
+	{
+		// Initialize variables.
+		$html = array();
+
+		// Initialize some field attributes.
+		$class = $this->element['class'] ? ' class="radio '.(string) $this->element['class'].'"' : ' class="radio"';
+
+		// Get the field options.
+		$options = $this->getOptions();
+
+		// Build the radio field output.
+		foreach ($options as $i => $option) {
+
+			// Initialize some option attributes.
+			$checked	= ((string) $option->value == (string) $this->value) ? ' checked="checked"' : '';
+			$class		= !empty($option->class) ? ' class="'.$option->class.'"' : '';
+			$disabled	= !empty($option->disable) ? ' disabled="disabled"' : '';
+
+			// Initialize some JavaScript option attributes.
+			$onclick	= !empty($option->onclick) ? ' onclick="'.$option->onclick.'"' : '';
+
+			$html[] = '<input type="radio" id="'.$this->id.$i.'" name="'.$this->name.'"' .
+					' value="'.htmlspecialchars($option->value, ENT_COMPAT, 'UTF-8').'"'
+					.$checked.$class.$onclick.$disabled.'/>';
+
+					$html[] = '<label for="'.$this->id.$i.'"'.$class.'>'.JText::_($option->text).'</label>';
+		}
+
+		return implode($html);
+	}
+
+	/**
+	 * Method to get a list of options for a list input.
+	 *
+	 * @return      array           An array of JHtml options.
+	 */
+	protected function getOptions($config = array())
+	{
+		$options = array();
+		
+		$options[] = JHtml::_('select.option', 3, JText::_('COM_PROJECTS_TASK_TYPE_TICKET'));
+		$options[] = JHtml::_('select.option', 2, JText::_('COM_PROJECTS_TASK_TYPE_TASK'));
+		$options[] = JHtml::_('select.option', 1, JText::_('COM_PROJECTS_TASK_TYPE_MILESTONE')); 
+		
+		return $options;
+	}
 }

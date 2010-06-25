@@ -54,9 +54,14 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	protected function populateState()
 	{
-		$app = JFactory::getApplication();
-		$app->setUserState('com_projects.edit.project.id', null);			
-		parent::populateState();
+		$app = JFactory::getApplication();	
+
+		// Load the User state.
+		if (!($pk = (int) $app->getUserState($this->option.'.edit.'.$this->getName().'.id'))) {
+			$pk = (int) JRequest::getInt('id');
+		}
+		$this->setState('project.id', $pk);
+		$app->setUserState('project.id', $pk);
 	}
 	
 	/**
@@ -85,7 +90,7 @@ class ProjectsModelProject extends JModelAdmin
 		
 		//$this->setState('portfolio.id',$pk);
 		jimport('joomla.application.categories');
-		$categories = JCategories::getInstance('Projects');
+		$categories = &JCategories::getInstance('Projects');
 		return $categories->get($pk);
 	} 
 	
@@ -179,8 +184,8 @@ class ProjectsModelProject extends JModelAdmin
 	protected function prepareTable(&$table)
 	{
 		jimport('joomla.filter.output');
-		$date = JFactory::getDate();
-		$user = JFactory::getUser();
+		$date = &JFactory::getDate();
+		$user = &JFactory::getUser();
 
 		$table->title		= htmlspecialchars_decode($table->title, ENT_QUOTES);
 		$table->alias 		= JApplication::stringURLSafe($table->title);
@@ -194,7 +199,7 @@ class ProjectsModelProject extends JModelAdmin
 			
 			// Set ordering to the last item if not set
 			if (empty($table->ordering)) {
-				$db = $this->getDbo();
+				$db = &$this->getDbo();
 				$db->setQuery('SELECT MAX(ordering)+1 FROM #__projects WHERE catid = '.(int)$table->catid);
 				$max = $db->loadResult();
 

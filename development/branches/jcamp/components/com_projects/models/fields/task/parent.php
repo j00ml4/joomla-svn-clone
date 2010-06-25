@@ -1,8 +1,11 @@
 <?php
 // No direct access to this file
 defined('_JEXEC') or die;
-// import the list field type
-jimport('joomla.html.html.list');
+
+jimport('joomla.html.html');
+jimport('joomla.form.formfield');
+jimport('joomla.form.helper');
+JFormHelper::loadFieldClass('list');
 
 /**
  * Select project form field
