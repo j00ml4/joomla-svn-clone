@@ -60,15 +60,22 @@ class ProjectsModelTasks extends JModelList
 		$app->setUserState('project.id', $id);
 		
 		// Parent
-		if (!($parent_id = $app->getUserState('task.parent_id'))) {
-			$parent_id = JRequest::getInt('parent_id');
+		if (!($id = $app->getUserState('task.parent.id'))) {
+			$id = JRequest::getInt('parent_id');
 		}
-		$this->setState('task.parent_id', $parent_id);
-		$app->setUserState('task.parent_id', null);
+		$this->setState('task.parent.id', $id);
+		$app->setUserState('task.parent.id', $id);
+		
+		// Category
+		if (!($id = $app->getUserState('task.category.id'))) {
+			$id = JRequest::getInt('catid');
+		}
+		$this->setState('task.category.id', $id);
+		$app->setUserState('task.category.id', $id);
+		
 		
 		// Filters
 		$this->setState('filter.state',	1);
-		//$this->setState('filter.language',$app->getLanguageFilter());
 
 		// Load the parameters.
 		$this->setState('params', $params);

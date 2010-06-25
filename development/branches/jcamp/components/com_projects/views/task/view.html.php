@@ -22,7 +22,6 @@ class ProjectsViewTask extends JView
 	protected $item;
 	protected $form;
 	protected $params;
-	protected $catid;
 	protected $canDo;
 	
 	/**
@@ -44,10 +43,10 @@ class ProjectsViewTask extends JView
 			case 'new':
 			case 'edit':
 			case 'form':
-				$layout = 'form';
+				$layout = 'edit';
 				$this->form	= &$model->getForm();
 				if (empty($this->item)) {
-					$this->catid = $app->getUserState('task.category.id', 0);
+					$this->params->set('catid', $app->getUserState('task.category.id', 0));
 					$access = 'project.create';
 				}else{
 					$access = 'project.edit';
@@ -68,6 +67,7 @@ class ProjectsViewTask extends JView
 				if (empty($this->item->id)){
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
+				break;
 		}
 		
 		// Display the view

@@ -22,7 +22,6 @@ class ProjectsViewProject extends JView
 	protected $item;
 	protected $form;
 	protected $params;
-	protected $catid;
 	protected $canDo;
 	protected $category;
 	
@@ -33,7 +32,8 @@ class ProjectsViewProject extends JView
 	{	
 		$app		= &JFactory::getApplication();
 		$model		= &$this->getModel();
-
+		$bc 		= &$app->getPathway();
+		
 		//Get Model data
 		$this->item 	= &$model->getItem();
 		$this->params	= &$app->getParams();
@@ -57,6 +57,8 @@ class ProjectsViewProject extends JView
 				if (!$this->canDo->get($access)){
 					return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
 				}
+				
+				// Pathway
 				$bc->addItem(JText::_('COM_PROJECTS_PROJECT_FORM_TITLE'));
 				break;
 			
@@ -70,12 +72,12 @@ class ProjectsViewProject extends JView
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
 				// Get Category
-				$this->category = &$model->getCategory($this->item->catid);				
+				//$this->category = &$model->getCategory($this->item->catid);
+
+				// Pathway
+	  			$bc->addItem($this->item->title);
+	  			break;
 		}
-		
-		// Pathway
-		$bc = &$app->getPathway();
-	  	$bc->addItem($this->item->title);
 		
 		// Display the view
 		$this->setLayout($layout);

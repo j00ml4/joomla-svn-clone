@@ -10,37 +10,28 @@
 			readonly="true"
 			required="true"
 			size="10" />
-
-        <field id="project_id"
-			name="project_id" 
-			type="hidden"
-			default="0"
-			readonly="true"
-			required="true"
-			size="10" />
 				
         <field id="parent_id"
 			name="parent_id" 
 			type="task_parent"
-			description="COM_PROJECTS_FIELD_PARENT_TASK_DESC"
-			label="COM_PROJECTS_FIELD_PARENT_TASK_LABEL"
-			required="true" />		
+			description="COM_PROJECTS_FIELD_TASK_PARENT_DESC"
+			label="COM_PROJECTS_FIELD_TASK_PARENT_DESC"
+			required="true" />
+			
+		<field id="type"
+			name="type" 
+			type="task_type"
+			description="COM_PROJECTS_FIELD_TYPE_DESC"
+			label="COM_PROJECTS_FIELD_TYPE_LABEL" />			
 			
 		 <field id="catid"
 			name="catid" 
 			type="category"
 			description="JFIELD_CATEGORY_DESC"
 			extension="com_projects.task"
-			label="JCATEGORY"
-			required="true">
+			label="JCATEGORY" >
          	<option value="">JOPTION_NO_CATEGORY</option>
-		</field>			
-        
-		<field id="type"
-			name="type" 
-			type="task_type"
-			description="COM_PROJECTS_FIELD_TYPE_DESC"
-			label="COM_PROJECTS_FIELD_TYPE_LABEL" />
+		</field>				
 		
         <field id="title" 
 			name="title" 
@@ -55,7 +46,6 @@
 			type="text"
 			description="COM_PROJECTS_FIELD_ESTIMATE_DESC"
 			label="COM_PROJECTS_FIELD_ESTIMATE_LABEL"
-			required="true"
 			size="3" />	       
               
         <field id="description"
@@ -105,7 +95,7 @@
 			description="JFIELD_ORDERING_DESC"
 			class="inputbox"
 			size="6"
-			default="0" />
+			default="1" />
 		 
 		 <field id="language"
 			name="language"
@@ -137,14 +127,6 @@
     </fieldset>
 	<!-- Params -->	
 	<fields name="params">
-		<fieldset name="params">
-	        <field id="estimation_type" 
-				name="estimation_type" 
-				type="text"
-				description="COM_PROJECTS_FIELD_ESTIMATION_TYPE_DESC"
-				label="COM_PROJECTS_FIELD_ESTIMATION_TYPE_LABEL"
-				size="30" 
-				default="Pomodoros" />
-		</fieldset>   
+	
 	</fields>	 
 </form>

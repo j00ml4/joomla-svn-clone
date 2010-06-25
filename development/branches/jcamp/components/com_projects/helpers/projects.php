@@ -119,22 +119,106 @@ abstract class ProjectsHelper
 				$canDo = $user->authorise('project.manage', $context);
 				break;
 				
-			
 			/* Tasks */
 			// Can view project tasks
-			case 'project.view.tasks':
+			case 'task.view':
 				$canDo 	= $params->get('view_tasks', 1) ||
 					$user->authorise('project.manage', $context) ||
 					$user->authorise('project.work', $context);
 				break;
-				
-			/* Tickets */
-			// Can view project tickets
-			case 'project.view.tickets':
-				$canDo 	= $params->get('view_tickets', 1) ||
+
+			// Can view project tasks
+			case 'task.view.milestones':
+				$canDo 	= $params->get('view_milestones', 1) ||
 					$user->authorise('project.manage', $context) ||
 					$user->authorise('project.work', $context);
+				break;
+			
+				
+			// Can view project tickets
+			case 'task.view.tickets':
+				$canDo 	= (
+				 	$params->get('view_tickets', 1) ||
+					$user->authorise('project.manage', $context) ||
+					$user->authorise('project.test', $context) ||
+					$user->authorise('project.work', $context)
+				);
 				break;	
+								
+			// Can create project
+			case 'task.create':
+				$canDo 	= (
+					empty($record->id) &&					
+					// Permissions
+				 	(
+						$user->authorise('project.work', $context)
+					)
+				);
+				break;
+				
+			// Can create project
+			case 'task.create.milestone':
+				$canDo 	= (
+					empty($record->id) &&					
+					// Permissions
+				 	(
+						$user->authorise('project.manage', $context)
+					)
+				);
+				break;	
+
+			// Can create project
+			case 'task.create.ticket':
+				$canDo 	= (
+					empty($record->id) &&					
+					// Permissions
+				 	(
+						$user->authorise('project.test', $context)
+					)
+				);
+				break;
+				
+			// Can delete project
+			case 'task.delete':
+				$canDo = $user->authorise('project.work', $context);
+				break;	 
+
+			// Can edit project
+			case 'task.edit':
+				$canDo 	= (
+					!empty($record->id) &&
+					// Owner 
+					(
+						!empty($record->created_by) && 
+						$record->created_by == $user->get('id')
+					) ||
+					
+					// Permissions
+				 	(
+						$user->authorise('project.work', $context)
+					)
+				);
+				break;
+
+			// Can can change the state of project
+			case 'task.edit.state':
+				$canDo = (
+					!empty($record->id) &&
+					// Owner 
+					(
+						!empty($record->created_by) && 
+						$record->created_by == $user->get('id')
+					) ||
+					
+					// Permissions
+				 	(
+						$user->authorise('project.work', $context) ||
+						$user->authorise('project.manage', $context)
+					)
+				);
+				break;	
+				
+						
 		
 			/* Documents */
 			// Can view project documents
@@ -171,23 +255,24 @@ abstract class ProjectsHelper
 		$actions 	= array(
 			// Project
 			'project.view',
+			'project.view.members',
 			'project.create',
 			'project.delete',
 			'project.edit', 
 			'project.edit.state',
-			'project.edit.portfolio', 
-			'project.edit.lang',
-			'project.edit.order',
-			'project.edit.rules',
 		
 			// Tasks
-			'project.view.tasks',
+			'task.view',
+			'task.view.milestones',
+			'task.view.tickets',
+			'task.create',
+			'task.create.milestones',
+			'task.create.tickets',
+			'task.edit', 
+			'task.edit.state',
 		
 			// Documents
-			'project.view.documents',
-		
-			// Tickets
-			'project.view.tickets',
+			'documents.view',
 		
 			// Activities
 			'project.view.activities',

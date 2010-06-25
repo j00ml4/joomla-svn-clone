@@ -17,5 +17,5 @@ $params =  $this->params;
 	<a href="<?php echo JRoute::_('index.php?option=com_projects&view=task&layout=form'); ?>">
 		<?php echo JText::_('COM_PROJECTS_NEW_TASK_LINK'); ?>
 	</a>
-	<?php dump($this)?>
+	<?php dump($this->items)?>
 </div>

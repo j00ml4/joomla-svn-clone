@@ -58,17 +58,23 @@ class ProjectsModelTask extends JModelAdmin
 		$app = JFactory::getApplication();		
 		//$app->setUserState('com_projects.edit.task.id', null);
 		
-		// parent task
-		if (!($parent_id = $app->getUserState('task.parent_id'))) {
-			$parent_id = JRequest::getInt('parent_id');
+		// parent
+		if (!($id = $app->getUserState('task.parent.id'))) {
+			$id = JRequest::getInt('parent_id');
 		}
-		$this->setState('task.parent_id', $parent_id);
+		$this->setState('task.parent.id', $id);
 		
-		// parent task
-		if (!($parent_id = $app->getUserState('project.id'))) {
-			$parent_id = JRequest::getInt('project_id');
+		// project
+		if (!($id = $app->getUserState('project.id'))) {
+			$id = JRequest::getInt('project_id');
 		}
-		$this->setState('project.id', $parent_id);
+		$this->setState('project.id', $id);
+		
+		// category
+		if (!($id = $app->getUserState('task.category.id'))) {
+			$id = JRequest::getInt('catid');
+		}
+		$this->setState('task.category.id', $id);
 	}
 	
 	/**
@@ -225,13 +231,12 @@ class ProjectsModelTask extends JModelAdmin
 	protected function prepareTable(&$table)
 	{
 		jimport('joomla.filter.output');
-		$date = JFactory::getDate();
-		$user = JFactory::getUser();
+		$date = &JFactory::getDate();
+		$user = &JFactory::getUser();
 
 		$table->title		= htmlspecialchars_decode($table->title, ENT_QUOTES);
 		$table->alias 		= JApplication::stringURLSafe($table->title);
-		//dump($table);
-		//die();
+		$table->project_id 	= $this->getState('project.id');
 
 		if (empty($table->id)) {
 			// Set the values
