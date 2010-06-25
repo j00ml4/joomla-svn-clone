@@ -22,7 +22,8 @@ class ProjectsControllerProject extends JControllerForm
 	
 	protected $view_item = 'project';
 	protected $view_list = 'projects';
-/**
+	
+	/**
 	 * Constructor.
 	 *
 	 * @param	array An optional associative array of configuration settings.
@@ -113,12 +114,12 @@ class ProjectsControllerProject extends JControllerForm
 	 */
 	public function save()
 	{
-		$model		= $this->getModel();
-		$id 		= $model->getState('project.id', 0);
+		$model		= &$this->getModel();
+		$id 		= &$model->getState('project.id', 0);
 		if(!parent::save()){
 			return false;
 		}
-		$db 		= $model->getDBO();
+		$db 		= &$model->getDBO();
 		$id 		= ($id)? $id: $db->insertid();
 		$append 	= '&layout=default&id='.$id; 
 		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));

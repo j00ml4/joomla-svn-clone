@@ -16,8 +16,8 @@ jimport('joomla.application.component.controller');
  * @author eden
  *
  */
-class ProjectsController extends JController {
-	
+class ProjectsController extends JController 
+{	
 	protected $default_view='portfolios';
 	
 	/**

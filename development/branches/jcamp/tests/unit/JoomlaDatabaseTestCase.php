@@ -74,14 +74,11 @@ abstract class JoomlaDatabaseTestCase extends PHPUnit_Extensions_Database_TestCa
 				'prefix' => isset ($config) ? $config->dbprefix : 'jos_'
 			);
 
-			self :: $dbo = & JDatabase :: getInstance($options);
+			self :: $dbo = JDatabase :: getInstance($options);
 
 			if (JError :: isError(self :: $dbo)) {
 				//ignore errors
-			}
-
-			if (self :: $dbo->getErrorNum() > 0) {
-				//ignore errors
+				define('DB_NOT_AVAILABLE', true);
 			}
 		}
 		self :: $database = JFactory :: $database;

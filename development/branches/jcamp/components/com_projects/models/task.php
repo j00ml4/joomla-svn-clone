@@ -54,27 +54,27 @@ class ProjectsModelTask extends JModelAdmin
 	 */
 	protected function populateState()
 	{
-		parent::populateState();
 		$app = JFactory::getApplication();		
-		//$app->setUserState('com_projects.edit.task.id', null);
+		
+		// id
+		$pk = $app->getUserState('com_projects.edit.task.id', JRequest::getInt('id'));
+		$this->setState('task.id', $pk);
 		
 		// parent
-		if (!($id = $app->getUserState('task.parent.id'))) {
-			$id = JRequest::getInt('parent_id');
-		}
+		$id = JRequest::getInt('parent_id', $app->getUserState('task.parent.id'));
 		$this->setState('task.parent.id', $id);
 		
 		// project
-		if (!($id = $app->getUserState('project.id'))) {
-			$id = JRequest::getInt('project_id');
-		}
+		$id = JRequest::getInt('project_id', $app->getUserState('project.id'));
 		$this->setState('project.id', $id);
 		
 		// category
-		if (!($id = $app->getUserState('task.category.id'))) {
-			$id = JRequest::getInt('catid');
-		}
+		$id = JRequest::getInt('catid', $app->getUserState('task.category.id'));
 		$this->setState('task.category.id', $id);
+		
+		// category
+		$id = JRequest::getInt('type', $app->getUserState('task.type'));
+		$this->setState('task.type', $id);
 	}
 	
 	/**
@@ -237,6 +237,7 @@ class ProjectsModelTask extends JModelAdmin
 		$table->title		= htmlspecialchars_decode($table->title, ENT_QUOTES);
 		$table->alias 		= JApplication::stringURLSafe($table->title);
 		$table->project_id 	= $this->getState('project.id');
+		$table->type		= ($table->type)? $table->type: $this->getState('type');
 
 		if (empty($table->id)) {
 			// Set the values
