@@ -68,11 +68,11 @@ JHtml::_('behavior.formvalidation');
 	</div>
 	<div class="width-40 fltrt">
 
-		<?php if ($this->item->media): ?>
+		<?php if (isset($this->item->media)){?>
 		<fieldset>
 				<?php echo $this->item->media; ?>
 		</fieldset>	
-		<?php endif; ?>
+		<?php } ?>
 		
 		<!-- Do we need this? -->
 		<?php echo JHtml::_('sliders.start','newsfeed-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
