@@ -24,6 +24,7 @@ class ProjectsViewMembers extends JView
 	protected $canDo;
 	protected $title;
 	protected $project;
+	protected $pagination;
 	
 	/**
 	 * Display managing users assigned to project
@@ -38,6 +39,7 @@ class ProjectsViewMembers extends JView
 		$this->items 	= &$model->getItems();
 		$this->params	= &$app->getParams();
 		$this->project 	= &$model->getProject();
+		$this->pagination	= &$model->getPagination();
 		
 		// set up type and layout
 		$this->setLayout('default');
