@@ -60,13 +60,13 @@ class JFormFieldTask_Type extends JFormFieldRadio
 	 *
 	 * @return      array           An array of JHtml options.
 	 */
-	protected function getOptions($config = array())
+	protected function getOptions(&$config = array())
 	{
 		$options = array();
 		
-		$options[] = JHtml::_('select.option', 3, JText::_('COM_PROJECTS_TASK_TYPE_TICKET'));
-		$options[] = JHtml::_('select.option', 2, JText::_('COM_PROJECTS_TASK_TYPE_TASK'));
-		$options[] = JHtml::_('select.option', 1, JText::_('COM_PROJECTS_TASK_TYPE_MILESTONE')); 
+		$options[] = JHtml::_('select.option', 3, JText::_('COM_PROJECTS_TYPE_TICKET'));
+		$options[] = JHtml::_('select.option', 2, JText::_('COM_PROJECTS_TYPE_TASK'));
+		$options[] = JHtml::_('select.option', 1, JText::_('COM_PROJECTS_TYPE_MILESTONE')); 
 		
 		return $options;
 	}

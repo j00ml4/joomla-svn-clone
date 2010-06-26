@@ -30,7 +30,7 @@ class ProjectsModelTask extends JModelAdmin
 	 */
 	protected function canDelete($record=null, $user=null)
 	{
-		return ProjectsHelper::can('project.delete', $this->option, $user, $record);
+		return ProjectsHelper::can('task.delete', $this->option, $user, $record);
 	}
 
 	/**
@@ -41,7 +41,7 @@ class ProjectsModelTask extends JModelAdmin
 	 */
 	protected function canEditState($record=null, $user=null)
 	{
-		return ProjectsHelper::can('project.edit.state', $this->option, $user, $record);
+		return ProjectsHelper::can('task.edit.state', $this->option, $user, $record);
 	}
 
 	/**
@@ -73,7 +73,7 @@ class ProjectsModelTask extends JModelAdmin
 		$this->setState('task.category.id', $id);
 		
 		// category
-		$id = JRequest::getInt('type', $app->getUserState('task.type'));
+		$id = $app->getUserState('task.type', JRequest::getInt('type'));
 		$this->setState('task.type', $id);
 	}
 	
@@ -237,7 +237,7 @@ class ProjectsModelTask extends JModelAdmin
 		$table->title		= htmlspecialchars_decode($table->title, ENT_QUOTES);
 		$table->alias 		= JApplication::stringURLSafe($table->title);
 		$table->project_id 	= $this->getState('project.id');
-		$table->type		= ($table->type)? $table->type: $this->getState('type');
+		$table->type		= ($table->type)? $table->type: $this->getState('task.type');
 
 		if (empty($table->id)) {
 			// Set the values
@@ -257,6 +257,7 @@ class ProjectsModelTask extends JModelAdmin
 			$table->modified	= $date->toMySQL();
 			$table->modified_by	= $user->get('id');
 		}
+		
 	}
 }
 ?>

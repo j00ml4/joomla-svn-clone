@@ -9,11 +9,14 @@
 
 // no direct access
 defined('_JEXEC') or die;
-
-// Vars
-$params =  $this->params;
+$uri = &JFactory::getURI();
 ?>
-<div class="projects<?php echo $params->get('pageclass_sfx'); ?>">
-	<?php echo $this->loadTemplate('buttons'); ?>
-	<?php dump($this->items)?>
+<div class="formelm_buttons projects-content toolbar-list">
+	<ul class="actions">
+		<?php if ($this->canDo->get('task.create')): ?>
+		<li  class="">
+			<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_NEW_TASK_LINK'), 'task.add'); ?>
+		</li>
+		<?php endif; ?>
+	</ul>
 </div>

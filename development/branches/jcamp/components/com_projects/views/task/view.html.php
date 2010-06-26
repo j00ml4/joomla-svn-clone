@@ -37,6 +37,9 @@ class ProjectsViewTask extends JView
 		$this->params	= &$app->getParams();
 		$this->canDo	= &ProjectsHelper::getActions();
 		
+		// Type
+		$this->params->set('type', $model->getState('task.type'));
+		
 		// Layout
 		$layout = $this->getLayout();
 		switch($layout){

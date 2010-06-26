@@ -15,7 +15,7 @@
 			name="parent_id" 
 			type="task_parent"
 			description="COM_PROJECTS_FIELD_TASK_PARENT_DESC"
-			label="COM_PROJECTS_FIELD_TASK_PARENT_DESC"
+			label="COM_PROJECTS_FIELD_TASK_PARENT_LABEL"
 			required="true" />
 			
 		<field id="type"

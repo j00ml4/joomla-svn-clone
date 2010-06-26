@@ -21,11 +21,10 @@ $pageClass = $this->params->get('pageclass_sfx');
 	
 			<?php echo $this->item->description; ?>
 	
-			<div class="progress-bar space">
-				<div class="progress" style="width:<?php echo '50%'; ?>;"></div>
-				<div class="info"><?php echo '50%'; ?></div>
+			<div class="project-space">
+				<?php echo JHTML::_('tool.progressBar', 50); ?>
 			</div>
-	
+				
 			<dl class="project-info space frame">
 				<dt><?php echo JText::_('COM_PROJECTS_FIELD_START_AT_LABEL')?></dt>
 				<dd><?php echo JFactory::getDate($this->item->start_at)->toFormat('%d.%m.%Y');?></dd>

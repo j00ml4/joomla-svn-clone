@@ -37,19 +37,22 @@ function submitbutton(task) {
 	</h1>
 	<?php endif; ?>
 		
-	<form action="<?php echo JRoute::_('index.php?option=com_projects'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">	
+	<form action="<?php echo 'index.php?option=com_projects'; ?>" method="post" name="adminForm" id="adminForm" class="form-validate">	
 		<!-- This keeps the code more DRY -->	
 		<?php echo $this->loadTemplate('buttons'); ?>
+		
+		<?php if (empty($this->item->id)): ?>
+		<fieldset>
+			<legend><?php echo JText::_('COM_PROJECTS_FIELD_TYPE_LABEL'); ?></legend>
+			<div class="formelm">
+				<?php echo $this->form->getInput('type', null,  $this->params->get('type', 3)); ?>
+			</div>
+		</fieldset>
+		<?php endif; ?>
 		
 		<fieldset>
 			<legend><?php echo JText::_('JGLOBAL_DESCRIPTION'); ?></legend>
 			
-			<?php if (empty($this->item->id)): ?>
-			<div class="formelm">
-				<?php echo $this->form->getLabel('type'); ?>
-				<?php echo $this->form->getInput('type', null,  $this->params->get('type', 3)); ?>
-			</div>
-			<?php endif; ?>
 			
 			<div class="formelm">
 				<?php echo $this->form->getLabel('parent_id'); ?>
@@ -112,7 +115,7 @@ function submitbutton(task) {
 		<!-- SubTemplates are DRY -->	
 		<?php echo $this->loadTemplate('buttons'); ?>
 		
-		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="task" value="task.save" />
 		<?php echo JHTML::_( 'form.token' ); ?>
 	</form>
 </div>

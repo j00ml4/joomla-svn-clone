@@ -18,18 +18,40 @@ abstract class JHtmlAction
 	 * @param	int $value	The state value
 	 * @param	int $i
 	 */
-	function task($text, $task, $id=null, $action='index.php?option=com_projects'){
+	function button($text, $task, $id=null, $url='index.php?option=com_projects'){
 		
 		if($id){
-			$action .= '&id='.$id;
+			$url .= '&id='.$id;
 		}
 		
-		$html =	'<form style="display:inline;" class="task-button" action="'. $action .'" method="post">'.
+		return	'<form style="display:inline;" class="task-button" action="'. JRoute::_($url) .'" method="post">'.
 					'<button type="submit">'. $text .'</button>'.	
 					'<input type="hidden" name="task" value="'. $task .'" />'.
 					JHTML::_( 'form.token' ).
 				'</form>';
-		return $html; 
+	}
+	
+	function task($text, $task, $id=null, $url='index.php?option=com_projects'){
+		return self::button($text, $task, $id, $url);
+	}
+	
+	/**
+	 * Create a link button to actions
+	 * @param unknown_type $text
+	 * @param unknown_type $task
+	 * @param unknown_type $id
+	 * @param unknown_type $url
+	 * @return string
+	 */
+	public function link($text, $task, $id=null, $url='index.php?option=com_projects'){
+		if($id){
+			$url .= '&id='.$id;
+		}
+		$url .= '&task='.$task;
+		
+		return	'<a class="" href="'. JRoute::_($url) .'">'.
+					'<button type="button">'. $text .'</button>'.
+				'</a>';
 	}
 	
 	/**

@@ -16,7 +16,7 @@ $id = $this->item->id;
 	<ul class="actions">
 		<?php if ($this->canDo->get('project.edit')): ?>
 		<li  class="edit-icon">
-			<?php echo JHTML::_('action.edit', JText::_('JGLOBAL_EDIT'), 'project', $id); ?>
+			<?php echo JHTML::_('action.link', JText::_('JGLOBAL_EDIT'), 'project.edit', $id); ?>
 		</li>
 		<?php endif; ?>
 	
