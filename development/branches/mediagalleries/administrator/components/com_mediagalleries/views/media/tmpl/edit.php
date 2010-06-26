@@ -68,7 +68,7 @@ JHtml::_('behavior.formvalidation');
 	</div>
 	<div class="width-40 fltrt">
 
-		<?php if (isset($this->item->media)){?>
+		<?php if (isset($this->item->media)): ?>
 		<fieldset>
 				<?php echo $this->item->media; ?>
 		</fieldset>	
