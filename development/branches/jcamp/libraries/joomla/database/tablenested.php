@@ -777,7 +777,6 @@ class JTableNested extends JTable
 			echo "\n".get_class($this)."::store\n";
 			$this->_logtable(true, false);
 		}
-
 		/*
 		 * If the primary key is empty, then we assume we are inserting a new node into the
 		 * tree.  From this point we would need to determine where in the tree to insert it.
@@ -789,7 +788,6 @@ class JTableNested extends JTable
 			 * node.  We have to make room for the new node and set the left and right
 			 * values before we insert the row.
 			 */
-
 			if ($this->_location_id >= 0)
 			{
 				// Lock the table for writing.
