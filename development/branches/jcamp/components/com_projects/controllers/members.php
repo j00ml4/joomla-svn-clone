@@ -18,7 +18,6 @@ defined('_JEXEC') or die;
 class ProjectsControllerMembers extends JController
 {			
 	
-	protected $view_item='project';
 	protected $view_list='members';
 	
 	/**
@@ -77,7 +76,7 @@ class ProjectsControllerMembers extends JController
 		}
 		
 		$append='&layout=default&id='.$id;
-		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false),
+		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list.$append.'&type=assign', false),
 											 JText::_('COM_PROJECT_PROJECT_MEMBER_ASSIGN_SUCCESSFUL'));
 		return true;
 	}
@@ -110,7 +109,7 @@ class ProjectsControllerMembers extends JController
 		}
 		
 		$append='&layout=default&id='.$id;
-		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false),
+		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list.$append.'&type=delete', false),
 											 JText::_('COM_PROJECT_PROJECT_MEMBER_DELETE_SUCCESSFUL'));
 		return true;
 	}
