@@ -24,7 +24,7 @@ $model = $this->getModel();
 			<?php endif; ?>
 	
 			<?php echo $this->loadTemplate('buttons');?>
-			<ul>
+			<table>			
 			<?php 
 				$c = count($this->items);
 				for($i = 0; $i<$c;$i++){
@@ -32,7 +32,7 @@ $model = $this->getModel();
 					echo $this->loadTemplate('item');
 				}
 			?>
-			</ul>
+			</table>
 			<?php echo $this->loadTemplate('buttons');?>
 			
 			<?php if($model->getState('type') != 'list') :?>
