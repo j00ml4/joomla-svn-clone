@@ -60,9 +60,6 @@ class MediagalleriesViewMedia extends JView
 			$this->params->set('height', 300);
 			$results = $dispatcher->trigger('onLoadMedia', array ( &$this->item, &$this->params));
 		}
-					
-		// get the lists
-		$this->lists =& $this->_buildLists($this->item);
 		
 		// Add the toolbar
 		$this->addToolbar();
@@ -70,35 +67,7 @@ class MediagalleriesViewMedia extends JView
 		//Display
 		parent::display($tpl);
 	}
-	
-	/**
-	 * 
-	 * @return array Lists 
-	 */
-	protected function &_buildLists(&$item)
-	{
-		global  $option;
 		
-		$mainframe=&JFactory::getApplication();
-		
-		$lists = array();
-		
-		// build the html select list for ordering
-		$query = 'SELECT ordering AS value, title AS text'
-			. ' FROM #__mediagalleries'
-			. ' WHERE catid = ' . (int) $item->catid
-			. ' ORDER BY ordering';
-		$lists['ordering'] 	= JHTML::_('list.specificordering',  $item, $item->id, $query );
-
-		// build list of categories
-		$lists['catid'] 			= JHTML::_('list.category',  'catid', $option, intval( $item->catid ) );
-
-		// build the html select list
-		$lists['published'] 	= JHTML::_('select.booleanlist',  'published', 'class="inputbox"', $item->published );
-
-		return $lists;
-	}
-	
 	/**
 	 * Add the page title and toolbar.
 	 *

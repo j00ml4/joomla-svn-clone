@@ -18,7 +18,7 @@ JHtml::_('behavior.formvalidation');
 <!--
 	function submitbutton(task)
 	{
-		if (task == 'weblink.cancel' || document.formvalidator.isValid(document.id('weblink-form'))) {
+		if (task == 'media.cancel' || document.formvalidator.isValid(document.id('mediagalleries-form'))) {
 			submitform(task);
 		}
 		// @todo Deal with the editor methods
@@ -72,7 +72,7 @@ JHtml::_('behavior.formvalidation');
 		<fieldset>
 				<?php echo $this->item->media; ?>
 		</fieldset>	
-		<?php } ?>
+		<?php endif; ?>
 		
 		<!-- Do we need this? -->
 		<?php echo JHtml::_('sliders.start','newsfeed-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
