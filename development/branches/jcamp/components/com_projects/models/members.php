@@ -34,13 +34,13 @@ class ProjectsModelMembers extends JModelList
 	 * @since	1.6
 	 */
 	protected function populateState()
-	{
-		parent::populateState();
-				
+	{				
 		// Initialise variables.
 		$app	= &JFactory::getApplication();
 
-		$this->setState('type', JRequest::getCmd('type','list'));
+		$type = JRequest::getCmd('type','list');
+		$this->setState('type', $type);
+ 		$this->context .= '.'.$type;
 		
 		// portfolio	
 		$id = JRequest::getInt('id', 0);
@@ -57,6 +57,7 @@ class ProjectsModelMembers extends JModelList
 		$this->setState('portfolio.title',$res->portfolio);
 		$this->setState('project.title',$res->project);
 */
+ 		parent::populateState();
 	}
 	
 	
