@@ -13,9 +13,13 @@ defined('_JEXEC') or die;
 // Create a shortcut for params.
 $item	=&$this->item;
 ?>
-<li>
+<tr>
 	<?php if($this->getModel()->getState('type') != 'list') :?>
+	<td>
 		<input type="checkbox" value="<?php echo $item->id;?>" name="usr[]" id="user-<?php echo $item->id;?>"/>
+	</td>
 	<?php endif; ?>
-	<label for="user-<?php echo $item->id;?>"><?php echo $item->name;?></label>
-</li>
+	<td>
+		<label for="user-<?php echo $item->id;?>"><?php echo $item->name;?></label>
+	</td>
+</tr>
