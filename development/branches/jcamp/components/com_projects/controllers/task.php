@@ -91,8 +91,9 @@ class ProjectsControllerTask extends JControllerForm
 	public function save(){
 	//	$model		= &$this->getModel();
 	//	$id 		= &$model->getState('task.id', 0);
-		die(JRequest::getString('layout'));
+
 		if(!parent::save()){
+			
 			return false;
 		}
 		

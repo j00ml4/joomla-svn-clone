@@ -39,7 +39,41 @@ class ProjectsTableTask extends JTableNested
 			$registry->loadArray($array['params']);
 			$array['params'] = (string)$registry;
 		}
-		
+
 		return parent::bind($array, $ignore);
+	}
+	
+	/**
+	 * Over load the check()
+	 * 
+	 */
+	public function check()
+	{		
+		// Parent id
+		if (!empty($this->parent_id))
+		{
+			$query = $this->_db->getQuery(true);
+			$query->select('COUNT(id)');
+			$query->from($this->_tbl);
+			$query->where('id = '.$this->parent_id);
+			$this->_db->setQuery($query);
+
+			if (!$this->_db->loadResult()) {
+				if ($this->_db->getErrorNum())
+				{
+					$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_CHECK_FAILED', get_class($this), $this->_db->getErrorMsg()));
+					$this->setError($e);
+				}
+				else
+				{
+					$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_INVALID_PARENT_ID', get_class($this)));
+					$this->setError($e);
+				}
+				// No parent
+				return false;
+			}
+		}
+		
+		return true;
 	}
 }
