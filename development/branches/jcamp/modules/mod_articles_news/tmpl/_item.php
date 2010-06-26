@@ -19,7 +19,7 @@ defined('_JEXEC') or die;
 	<?php else : ?>
 		<?php echo $item->title; ?>
 	<?php endif; ?>
-	<?php echo $params->get('item_heading'); ?>
+	</<?php echo $params->get('item_heading'); ?>>
 
 <?php endif; ?>
 
