@@ -3,7 +3,7 @@
  * Media View for mediagalleries Component
  * 
  * @package    		Joomla
- * @subpackage 	mediagalleries Suite
+ * @subpackage 	mediagalleries
  * @link 			http://3den.org/joom/
  * @license	GNU/GPL
  */
@@ -23,9 +23,6 @@ class MediagalleriesViewMedia extends JView
 {
 	// new way
 	protected $item;
-	protected $action;
-	protected $lists;
-	protected $media;
 	protected $folder;
 	protected $user;
 	protected $form;
