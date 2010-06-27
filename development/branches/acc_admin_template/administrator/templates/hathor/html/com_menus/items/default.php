@@ -15,16 +15,10 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 
-$user	= &JFactory::getUser();
+$user	= JFactory::getUser();
 $userId	= $user->get('id');
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
-
-// Get additional language strings prefixed with TPL_HATHOR
-$lang =& JFactory::getLanguage();
-$lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
-|| $lang->load('tpl_hathor', JPATH_ADMINISTRATOR.DS.'templates/hathor');
-
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_menus&view=items');?>" method="post" name="adminForm">
 	<fieldset id="filter-bar">
@@ -43,22 +37,22 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				<option value=""><?php echo JText::_('JOPTION_SELECT_ACCESS');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
 			</select>
-			
+
 			<label class="selectlabel" for="filter_published">
 				<?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?>
-			</label> 
+			</label>
 			<select name="filter_published" id="filter_published" class="inputbox">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions', array('archived' => false)), 'value', 'text', $this->state->get('filter.published'), true);?>
 			</select>
-			
+
 			<label class="selectlabel" for="menutype">
 				<?php echo JText::_('TPL_HATHOR_COM_MENUS_MENU'); ?>
-			</label> 
+			</label>
 			<select name="menutype" id="menutype" class="inputbox">
 				<?php echo JHtml::_('select.options', JHtml::_('menu.menus'), 'value', 'text', $this->state->get('filter.menutype'));?>
 			</select>
-			
+
 			<label class="selectlabel" for="filter_level">
 				<?php echo JText::_('COM_MENUS_OPTION_SELECT_LEVEL'); ?>
 			</label>
@@ -66,7 +60,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				<option value=""><?php echo JText::_('COM_MENUS_OPTION_SELECT_LEVEL');?></option>
 				<?php echo JHtml::_('select.options', $this->f_levels, 'value', 'text', $this->state->get('filter.level'));?>
 			</select>
-			
+
 			<label class="selectlabel" for="filter_language">
 				<?php echo JText::_('JOPTION_SELECT_LANGUAGE'); ?>
 			</label>
@@ -77,7 +71,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 
 			<button type="button" id="filter-go" onclick="this.form.submit();">
 				<?php echo JText::_('JSUBMIT'); ?></button>
-			
+
 		</div>
 	</fieldset>
 	<div class="clr"> </div>
@@ -86,7 +80,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 		<thead>
 			<tr>
 				<th class="checkmark-col">
-					<input type="checkbox" name="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(this)" />
+					<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
@@ -115,11 +109,11 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 				</th>
 			</tr>
 		</thead>
-		
+
 		<tbody>
 		<?php
 		foreach ($this->items as $i => $item) :
-			// $lang = &JFactory::getLanguage();
+			// $lang = JFactory::getLanguage();
 			// $lang->load($item->componentname, JPATH_ADMINISTRATOR);
 			$ordering = ($listOrder == 'a.lft');
 			$orderkey = array_search($item->id, $this->ordering[$item->parent_id]);
@@ -181,7 +175,7 @@ $lang->load('tpl_hathor', JPATH_ADMINISTRATOR)
 			<?php endforeach; ?>
 		</tbody>
 	</table>
-	
+
 	<?php echo $this->pagination->getListFooter(); ?>
 	<div class="clr"> </div>
 

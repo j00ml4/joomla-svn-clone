@@ -28,7 +28,7 @@ body
 #all
 {
         color: #333;
-        border:solid 0px #ddd !important;
+        border:solid 0px ;
         padding-top:7px;
         background:#fff url(../images/personal/grey_bg.png) repeat-x
 }
@@ -61,7 +61,7 @@ input:focus
 
 fieldset
 {
-        border:solid 1px #ccc
+        border:solid 0px #ccc
 }
 
 .article-info
@@ -89,8 +89,9 @@ fieldset
 {
         color:#fff
 }
-#header
-{padding-top:2.8em !important;}
+#all #header
+{padding-top:2.8em ;
+}
 .logoheader
 {
 
@@ -101,7 +102,7 @@ fieldset
 
 }
 
-*html .logoheader
+* html .logoheader
 {
 
  height:168px;
@@ -191,6 +192,12 @@ right:10px}
         color:#fff;
 }
 
+
+#header ul.skiplinks
+{
+width:100%
+}
+
 .skiplinks,
 .skiplinks li
 {
@@ -203,6 +210,8 @@ right:10px}
         background:#990000 !important;
         color:#fff !important;
         border:solid 1px;
+		top:0
+
 
 }
 
@@ -883,16 +892,6 @@ ul.newsflash-horiz li h4
 
 /* ++++++++++++++  login  ++++++++++++++ */
 
-#form-login .inputbox
-{
-        border:solid 1px #ddd;
-        background:url(../images/content_bg.gif) repeat-x;
-        /* CSS 3 works only in FF and Safari */
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 4px;
-        border-radius:4px;
-}
-
 fieldset.input
 {
         border:0 ;
@@ -1100,7 +1099,7 @@ label.invalid
 /* ##########################  tables   ########################### */
 table
 {
-        border:solid 1px #ddd !important
+        border:solid 1px #ddd
 }
 
 tbody
@@ -1133,7 +1132,7 @@ table.newsfeeds th a,
 table.category th a,
 table.jlist-table th a
 {
-        color:#fff !important
+        color:#fff
 }
 
 

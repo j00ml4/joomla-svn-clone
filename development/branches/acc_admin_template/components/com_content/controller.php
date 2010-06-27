@@ -27,14 +27,25 @@ class ContentController extends JController
 		if(JRequest::getWord('view') === 'article' && JRequest::getVar('layout') === 'pagebreak') {
 			$config['base_path'] = JPATH_COMPONENT_ADMINISTRATOR;
 		}
-
+		// Article frontpage Editor article proxying:
+		elseif(JRequest::getWord('view') === 'articles' && JRequest::getVar('layout') === 'modal') {
+			JHTML::_('stylesheet','system/adminlist.css', array(), true);
+			$config['base_path'] = JPATH_COMPONENT_ADMINISTRATOR;
+		}
+	
 		parent::__construct($config);
 	}
 
 	/**
-	 * Display the view
+	 * Method to display a view.
+	 *
+	 * @param	boolean			If true, the view output will be cached
+	 * @param	array			An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return	JController		This object to support chaining.
+	 * @since	1.5
 	 */
-	function display()
+	public function display($cachable = false, $urlparams = false)
 	{
 		$cachable = true;
 
@@ -42,7 +53,7 @@ class ContentController extends JController
 		$vName		= JRequest::getWord('view', 'categories');
 		JRequest::setVar('view', $vName);
 
-		$user = &JFactory::getUser();
+		$user = JFactory::getUser();
 
 		if ($user->get('id') || ($_SERVER['REQUEST_METHOD'] == 'POST' &&
 			(($vName = 'category' && JRequest::getVar('layout') != 'blog') || $vName = 'archive' ))) {
@@ -54,6 +65,7 @@ class ContentController extends JController
 
 		parent::display($cachable,$safeurlparams);
 
+		return $this;
 	}
 
 }

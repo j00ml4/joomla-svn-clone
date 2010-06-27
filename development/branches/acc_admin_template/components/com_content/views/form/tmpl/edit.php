@@ -19,7 +19,7 @@ JHtml::_('behavior.formvalidation');
 $params = $this->state->get('params');
 ?>
 
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 function submitbutton(task) {
 	if (task == 'article.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
 		<?php //echo $this->form->fields['introtext']->editor->save('jform[introtext]'); ?>
@@ -120,7 +120,9 @@ function submitbutton(task) {
 		</div>
 	</fieldset>
 
-	<input type="hidden" name="task" value="" />
-	<?php echo JHTML::_( 'form.token' ); ?>
+	<div>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHTML::_( 'form.token' ); ?>
+	</div>
 </form>
 </div>
