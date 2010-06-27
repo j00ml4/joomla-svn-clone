@@ -29,7 +29,7 @@ h4
 fieldset
 {
         margin:10px 0 ;
-        padding:15px;
+        padding:15px 5px;
 }
 
 p
@@ -528,7 +528,8 @@ ul.menu li.active ul li.active ul li a:link,
 .category-desc
 {
         line-height:1.7em;
-        margin:10px 0
+        margin:10px 0;
+		padding-left:5px
 }
 
 .small
@@ -768,7 +769,8 @@ dd.createdby
 #main .pagination
 {
         margin:10px 0 ;
-        padding:10px 0 10px 5px;
+        padding:10px 0 10px 0px;
+
 }
 
 #main .pagination ul
@@ -782,27 +784,32 @@ dd.createdby
 #main .pagination li
 {
         display:inline;
-        padding:2px 5px 0 !important;
+        padding:2px 5px;
         text-align:left;
-                border:solid 1px #eee;
-                margin:0 2px
+        border:solid 1px #eee;
+        margin:0 2px
 }
 
+.pagenav
+{padding:2px}
 
 #main .pagination li.pagination-start,
 #main .pagination li.pagination-next,
 #main .pagination li.pagination-end,
 #main .pagination li.pagination-prev
 {border:0}
-#main .pagination ul li a
-{
-        padding:2px;
-}
 
+#main .pagination li.pagination-start ,
+#main .pagination li.pagination-start  span
+ {
+padding:0
+
+}
 p.counter
 {
         font-weight:bold;
 }
+
 
 /* ##########################  right  ########################### */
 
@@ -1041,9 +1048,9 @@ dl.search_results dd.result-created
         padding:0 5px
 }
 
-.jcontact-category
+.contact-category
 {
-        padding:0 5px
+        padding:0 10px
 }
 
 address
@@ -1322,14 +1329,6 @@ table.contenttoc tr td
         font-weight:bold;
 }
 
-/* ++++++++++++++  pagination  ++++++++++++++ */
-
-.pagenav
-{
-        padding:0 2px
-}
-
-
 
 /* ++++++++++++++  edit  ++++++++++++++ */
 legend
@@ -1538,7 +1537,7 @@ dl.weblink-count dd
 
 #form-login
 {
-        padding-top:10px
+        padding-top:5px
 }
 
 #form-login fieldset
@@ -1559,9 +1558,16 @@ dl.weblink-count dd
 
 #form-login label
 {
-        margin-right:10px
+        margin-right:10px;
+		width:6em;
+		display:block;
+		float:left
 }
 
+#form-login-remember label
+{float:none;
+width:auto;
+display:inline}
 #form-login ul
 {
         margin-left:5px
@@ -1618,7 +1624,9 @@ button.button
 .login-description,
 .logout-description
 {
-        overflow:hidden
+        overflow:hidden;
+		padding-left:5px;
+		margin:20px 0 10px 0
 }
 
 .logout-description
@@ -1813,6 +1821,9 @@ border-right:solid 1px #ddd
 {list-style-type:none;
 margin:0}
 
+#main .cat-children
+{ padding-left:5px
+}
 #main .cat-children ul dl dt,
 #main .cat-children ul dl dd
 
@@ -1830,3 +1841,81 @@ margin:0}
 
   #main .cat-children ul li
   {margin:10px 0 10px 0}
+
+/* ###########  Modal popups with adminlist grid ############ */
+.contentpane a.pointer { cursor: pointer }
+.contentpane .left  { float: left }
+.contentpane .right { float: right}
+
+.contentpane {
+	margin: 10px;
+	font-size: 0.75em;
+}
+
+.contentpane input,
+.contentpane textarea,
+.contentpane select,
+.contentpane button
+{
+	font-size: 0.9em;
+}
+
+.contentpane table.adminlist a,
+.contentpane table.adminlist a:link,
+.contentpane table.adminlist a:hover,
+.contentpane table.adminlist a:visited,
+.contentpane table.adminlist a:active
+{
+	text-decoration: none;
+	color: #333333;
+	background-color: transparent;
+}
+
+.contentpane table.adminlist a img,
+.contentpane table.adminlist a:link img,
+.contentpane table.adminlist a:hover img,
+.contentpane table.adminlist a:visited img,
+.contentpane table.adminlist a:active img
+{
+	border: none;
+}
+
+/* Pagination */
+.contentpane .list-footer .limit,
+.contentpane .list-footer li,
+.contentpane .list-footer .counter
+{
+	font-size: 1em;
+	line-height: 2em;
+}
+
+.contentpane .list-footer ul {
+	margin: 0; padding: 0;
+}
+
+.contentpane .list-footer li
+{
+	display: inline;
+}
+
+/* pagination look */
+.contentpane .list-footer li a:hover,
+.contentpane .list-footer li a:active,
+.contentpane .list-footer li a:focus
+{
+	text-decoration: underline;
+}
+
+/* Currrent page number should be bold */
+.contentpane .list-footer span.pagenav {
+	font-weight: bold;
+}
+
+/* but other pagenavs shoudn't */
+.contentpane .list-footer .pagination-start span.pagenav,
+.contentpane .list-footer .pagination-prev  span.pagenav,
+.contentpane .list-footer .pagination-next  span.pagenav,
+.contentpane .list-footer .pagination-end   span.pagenav
+{
+	font-weight: normal;
+}

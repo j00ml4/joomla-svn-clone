@@ -27,12 +27,92 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+27-Jun-2010 Mark Dexter
+# [#20372] components options (IE 8 test)
+# [#20793] FTP installation features not working as expected
+# Fix checkall toggle bug in User Manager caused by [#20372] 
+# [#20862] Show Profile in contact not working
+# Sample data fixes for contact (Elin Waring)
+# [#20937] non validated fields when creating banners
+# [#21079] weblink - contacts - newsfeed - new item defaults to last order position
+# [#20602] Frontened article submission - 500 - JLIB_APPLICATION_ERROR_VIEW_NOT_FOUND
+
+25-Jun-2010 Jean-Marie Simonet
+$ Adding missing string, corrected a key
+# Corrected path typos in both beez templates component.php
+
+24-Jun-2010 Jean-Marie Simonet
+[#21185] Weblink edit misses filter="safehtml"
+[#21184] Correcting and normalizing custom html module edit display
+[#21168] [image file] Missing image file in Hathor. Thanks Andrea
+[#21157] Unable to filter template styles with number in it (eg: Beez5, beez_20) Thank CY Lee
+[#21147] No articles in this category when display# changed to "All". Thanks Alain.
+[#21151] com_content manifest in error or file missing. Thanks Boris and Bill.
+
+24-Jun-2010 Jean-Marie Simonet
+$ Completing string value
+[#21173] Default ACL for editors and publishers is incorrect, also weblinks. Thanks Elin.
+$ Correcting Web Link menu Item value (Front-end can't edit).
+
+23-Jun-2010 Andrew Eddie
+ # Fixed issue [#21146] Fix for broken JFormFieldCalendarTest.
+ # Fixed issue [#20907] Making Joomla more compliant to PHP strict standard (Hannes Papenberg, Phil Snell).
+
+23-Jun-2010 Jean-Marie Simonet
+$ Added missing string
+ [#20641] Email Cloaking Plugin doesn't output well formed code. Thanks Nicholas.
+
+23-Jun-2010 Andrew Eddie
+ # Fixed issue [#20617] installer doesn't allow . in database name (Rob Joyce, Troy Hall).
+ # Partial fixes to [#20907] Making Joomla more compliant to PHP strict standard.
+ 
+22-Jun-2010 Ian MacLennan
+ # [#21129] JHtml::_('behavior.keepalive'); Does not work (Phil Snell)
+
+22-Jun-2010 Christophe Demko
+ # Reverting patch #17774.
+
+22-Jun-2010 Andrew Eddie
+ # Fixed issue [#20971] Add getCaching method (Klas Berlič1).
+ # Fixed issue [#20993] Token key word is not user friendly (Troy Hall).
+ # Fixed issue [#20401] [PATCH] JError::handleDie() does not cause application termination in CLI-program (Artyom Bisyarin).
+ 
+21-Jun-2010 Mark Dexter
+# Beez template fixes (Angie Radke)
+
+21-Jun-2010 Jean-Marie Simonet
+[#21020] Ordering of weblinks does not work as expected. Thanks Omar.
+[#21116] [patch] Update Hathor with the new saveorder icon behavior. Thanks Andrea.
+[#21064] Login redirection not functioning. Thanks Omar.
+[#21120] Article Button in Editor missing left side in Milkyway. Thanks Marijke
+[#21057] Mistyped template name in joomla data. Thanks Christophe.
+[#20725] System Path Disclosure
+[#21037] Two similar options in Module Latest News. Thanks Christophe and Stephania. + string
+[#21061] Fatal error when "Show Title" is set to "No". Thanks Omar.
+[#20945] email error when creating a new user. Thanks Elin.
+[#21059] Image selector layout problems. Thanks Omar.
+[#20837] Deleting usergroup that have been assigned to access levels does not remove them from the #__viewlevels table. Thanks Christophe.
+[#21081] [patch] URL not required when submitting weblink. Thanks Michael.
+[#20695] Parameter merge for contacts categories view is not working. Thanks Bill.
+
+21-Jun-2010 Christophe Demko
+ # Fixed issue [#20786] com_users - no frontend_userparams
+ # Fixed issue [#21118] Thumbnails not showing on frontend in Popup
+
+20-Jun-2010 Mark Dexter
+# [#20781] [patch] Remove deprecated attribute language from all occurrences of the tag script
+# [#20989] input elements must be nested in a block level tag
+# [#21119] [patch] Passwords displayed as plain text in Global Config
+# [#20875] Error in css beez template
+
 20-Jun-2010 Christophe Demko
  # Correcting a small issue in JHtmlJGrid
 
 20-Jun-2010 Jean-Marie Simonet
 [#20757] Contacts unpublished visible in frontend. Thanks Christophe.
 [#21042] When enabling/disabling the flash uploader, page refresh needed on 'Options > Save'. Thanks Omar.
+[#21036] Ordering text for new items is floating up and to the right. Thanks Omar
+[#20701] A lot of core extensions have not been marked as "protected. Thanks Nicholas.
 
 19-Jun-2010 Mark Dexter
 # [#21010] &nbsp; must not be used (Thanks Rouven)

@@ -113,7 +113,7 @@ $listDirn	= $this->state->get('list.direction');
 				<td>
 					<?php
 						echo $this->escape($article->title).' : ';
-						$menu		= JSite::getMenu();
+						$menu		= JFactory::getApplication()->getMenu();
 						$active		= $menu->getActive();
 						$itemId		= $active->id;
 						$link = JRoute::_('index.php?option=com_users&view=login&Itemid='.$itemId);
@@ -143,9 +143,11 @@ $listDirn	= $this->state->get('list.direction');
 	</div>
 	<?php endif; ?>
 
-	<!-- @TODO add hidden inputs -->
-	<input type="hidden" name="filter_order" value="" />
-	<input type="hidden" name="filter_order_Dir" value="" />
-	<input type="hidden" name="limitstart" value="" />
+	<div>
+		<!-- @TODO add hidden inputs -->
+		<input type="hidden" name="filter_order" value="" />
+		<input type="hidden" name="filter_order_Dir" value="" />
+		<input type="hidden" name="limitstart" value="" />
+	</div>
 </form>
 <?php endif; ?>

@@ -90,7 +90,30 @@ class BannersTableBanner extends JTable
 		if (isset($array['params']) && is_array($array['params'])) {
 			$registry = new JRegistry();
 			$registry->loadArray($array['params']);
+
+			if((int) $registry->get('width', 0) < 0){
+				$this->setError(JText::sprintf('JLIB_DATABASE_ERROR_NEGATIVE_NOT_PERMITTED', JText::_('COM_BANNERS_FIELD_WIDTH_LABEL')));
+				return false;
+			}
+			
+			if((int) $registry->get('height', 0) < 0){
+				$this->setError(JText::sprintf('JLIB_DATABASE_ERROR_NEGATIVE_NOT_PERMITTED', JText::_('COM_BANNERS_FIELD_HEIGHT_LABEL')));
+				return false;
+			}			
+			
+			// Converts the width and height to an absolute numeric value:
+			$width = abs((int) $registry->get('width', 0));
+			$height = abs((int) $registry->get('height', 0));
+
+			// Sets the width and height to an empty string if = 0
+			$registry->set('width', ($width ? $width : ''));
+			$registry->set('height', ($height ? $height : ''));
+
 			$array['params'] = (string)$registry;
+		}
+
+		if (isset($array['imptotal'])) {
+			$array['imptotal'] = abs((int) $array['imptotal']);
 		}
 
 		return parent::bind($array, $ignore);
@@ -141,7 +164,7 @@ class BannersTableBanner extends JTable
 		else
 		{
 			// Get the old row
-			$oldrow = & JTable::getInstance('Banner', 'BannersTable');
+			$oldrow = JTable::getInstance('Banner', 'BannersTable');
 			if (!$oldrow->load($this->id) && $oldrow->getError())
 			{
 				$this->setError($oldrow->getError());
@@ -196,7 +219,7 @@ class BannersTableBanner extends JTable
 		}
 
 		// Get an instance of the table
-		$table = & JTable::getInstance('Banner','BannersTable');
+		$table = JTable::getInstance('Banner','BannersTable');
 
 		// For all keys
 		foreach ($pks as $pk)
@@ -263,7 +286,7 @@ class BannersTableBanner extends JTable
 		}
 
 		// Get an instance of the table
-		$table = & JTable::getInstance('Banner','BannersTable');
+		$table = JTable::getInstance('Banner','BannersTable');
 
 		// For all keys
 		foreach ($pks as $pk)

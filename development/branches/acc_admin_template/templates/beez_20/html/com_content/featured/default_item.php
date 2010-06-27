@@ -132,10 +132,11 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 	if ($params->get('access-view')) :
 		$link = JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid));
 	else :
-		$menu = JSite::getMenu();
+		$app	= JFactory::getApplication();
+		$menu	= $app->getMenu();
 		$active = $menu->getActive();
 		$itemId = $active->id;
-		$link1 = JRoute::_('index.php?option=com_users&view=login&&Itemid=' . $itemId);
+		$link1 = JRoute::_('index.php?option=com_users&view=login&Itemid=' . $itemId);
 		$returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid));
 		$link = new JURI($link1);
 		$link->setVar('return', base64_encode($returnURL));

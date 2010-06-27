@@ -66,6 +66,8 @@ class Menu0001 extends SeleniumJoomlaTestCase
 			} catch (Exception $e) {}
 			sleep(1);
 		}
+		// test sleep command for hudson error
+		sleep(3);
 		$this->click("link=Australian Parks");
 
 		for ($second = 0; ; $second++) {
@@ -127,14 +129,14 @@ class Menu0001 extends SeleniumJoomlaTestCase
 		$this->click("//button[@type='submit']");
 		$this->waitForPageToLoad("30000");
 		$this->click("cb0");
-		$this->click("toggle");
+		$this->click("checkall-toggle");
 		$this->click("//li[@id='toolbar-trash']/a/span");
 		$this->waitForPageToLoad("30000");
 
 		echo "Navigate to Menu Item Manager and delete new menu item\n";
 		$this->click("link=Functional Test Menu");
 		$this->waitForPageToLoad("30000");
-		$this->click("toggle");
+		$this->click("checkall-toggle");
 		$this->click("//li[@id='toolbar-trash']/a/span");
 		$this->waitForPageToLoad("30000");
 
