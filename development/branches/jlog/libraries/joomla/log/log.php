@@ -14,6 +14,9 @@
 
 defined('_JEXEC') or die();
 
+jimport('joomla.base.adapter');
+jimport('joomla.log.logentry');
+
 /**
  * Joomla! Log Class
  *
@@ -34,11 +37,11 @@ class JLog extends JAdapter {
 	
 	/** @var array formats references to formatting objects
 	 *  @access private */
-	var $_formats = Array();
+	protected $_formats = Array();
 	/** @var array entries a list of logged entries
 	 * @access protected
 	 */
-	var $_entries = Array();
+	protected $_entries = Array();
 	
 	/**
 	 * Constructor
@@ -57,11 +60,13 @@ class JLog extends JAdapter {
 		}
 		
 		if(is_array($formats)) {
+			// Clone this to local storage
+			$this->_formats = $formats;
 			// We should have an array here
 			// Params allow for CSV or Array
 			foreach($formats as $format) {
 				if($format) {
-					$this->loadAdapter($format);
+					$this->getAdapter($format);
 				}
 			}
 		}
@@ -81,7 +86,7 @@ class JLog extends JAdapter {
 	function & getInstance($options = null, $formats = null) {
 		static $instances;
 		$config = & JFactory :: getConfig();
-		if(!$options) {
+		if(empty($options)) {
 			$options = $config->getValue('log_options');
 		} else {
 			// Check that we're not being called from old code
@@ -95,8 +100,8 @@ class JLog extends JAdapter {
 			}
 		}
 		
-		if(!$formats) { 
-			$formats = $config->getValue('log_formats');
+		if(empty($formats)) { 
+			$formats = $config->getValue('log_formats', 'formattedtext');
 		}
 		
 		// fun way of creating a unique signature
@@ -117,6 +122,10 @@ class JLog extends JAdapter {
 	 * Adds a log entry to sub formats and log cache
 	 */
 	function addEntry($entry) {
+		// Convert status+comment int a JLogEntry
+		if(is_array($entry)) {
+			$entry = new JLogEntry('legacy', $entry['status'], 'error', $entry['comment']);
+		}
 		foreach($this->_formats as $format) {
 			if (is_object($this->_adapters[$format])) {
 				$this->_adapters[$format]->addLogEntry($entry);
