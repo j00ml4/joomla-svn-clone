@@ -25,7 +25,7 @@ jimport( 'joomla.application.component.view');
  * @subpackage	Weblinks
  * @since 1.0
  */
-class MediagalleriesViewMediagalleries extends JView
+class MediagalleriesViewGalleries extends JView
 {
 	
     /**
@@ -34,7 +34,8 @@ class MediagalleriesViewMediagalleries extends JView
      **/
     function display($tpl = null)
     {
-		global $mainframe, $option;
+		global  $option;
+		$mainframe=&JFactory::getApplication();
 		
 		// Initialize some variables
 		$user		=& JFactory::getUser();
@@ -47,8 +48,6 @@ class MediagalleriesViewMediagalleries extends JView
 		// Add default Style
 		$document->addStyleSheet( URI_ASSETS. $cparams->get('style', 'default.css') );		
 		
-		// Get lists
-		$lists = $this->_buildSortLists();	
 		
 		// Get the parameters of the active menu item
 		$menus = &JSite::getMenu();
@@ -162,7 +161,7 @@ class MediagalleriesViewMediagalleries extends JView
 	
 				
 		// assign Vars
-		$this->assignRef('lists',		$lists);
+		//$this->assignRef('lists',		$lists);
 		$this->assignRef('category',	$category);
 		$this->assignRef('items',		$items);
 		$this->assignRef('pagination',	$pagination);
@@ -177,32 +176,5 @@ class MediagalleriesViewMediagalleries extends JView
     }
 
 
-	/**
-	 * Build sort list
-	 * 
-	 * @access private
-	 * @return 
-	 */
-	function _buildSortLists()
-	{
-		global $mainframe, $option;
-		
-		$filter_state		= 1;
-		$filter_catid		= JRequest::getInt( 'catid', 0 );
-		$filter_order		= $mainframe->getUserStateFromRequest( $option.'filter_order',		'filter_order',		'a.ordering',	'cmd' );
-		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'filter_order_Dir',	'filter_order_Dir',	'',				'word' );
-		$search				= JRequest::getWord( 'search', '');
-		$search				= JString::strtolower( $search );
-				
-		$lists['task']      = 'category';
-		$lists['filter']    = $search;
-		$lists['order']     = $filter_order;
-		$lists['order_Dir'] = $filter_order_Dir;
-
-		$javascript 	= 'onchange="document.adminForm.submit();"';
-		$lists['catid'] = JHTML::_('list.category',  'catid', $option, intval( $filter_catid ), $javascript );
-	
-		return $lists;
-	}
 
 }
