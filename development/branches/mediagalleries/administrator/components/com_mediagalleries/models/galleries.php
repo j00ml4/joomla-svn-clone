@@ -10,7 +10,7 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modellist');
 
 /**
- * Methods supporting a list of weblink records.
+ * Methods supporting a list of Mediagallery records.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_mediagalleries
