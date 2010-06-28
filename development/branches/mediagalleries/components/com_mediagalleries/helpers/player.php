@@ -1,8 +1,8 @@
 <?php
 /**
- * All Streams Helper of JMultimedia Component
+ * All Streams Helper of mediagalleries Component
  * @package			Joomla
- * @subpackage	JMultimedia
+ * @subpackage	mediagalleries
  * @copyright	Copyright (C) 2005 - 2008 3DEN. All rights reserved.
  * @license		GNU/GPL, see LICENSE.php
  */

@@ -25,7 +25,7 @@ jimport( 'joomla.application.component.view');
  * @subpackage	Weblinks
  * @since 1.0
  */
-class JMultimediaViewJMultimedia extends JView
+class MediagalleriesViewMediagalleries extends JView
 {
 	
     /**
@@ -42,7 +42,7 @@ class JMultimediaViewJMultimedia extends JView
 		$uri 		= &JFactory::getURI();
 		$pathway	= &$mainframe->getPathway();
 		$cparams =& $mainframe->getParams();
-		$model =& $this->getModel('jmultimedia');
+		$model =& $this->getModel('mediagalleries');
 		
 		// Add default Style
 		$document->addStyleSheet( URI_ASSETS. $cparams->get('style', 'default.css') );		

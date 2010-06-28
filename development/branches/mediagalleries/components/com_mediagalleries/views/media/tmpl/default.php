@@ -17,7 +17,7 @@ JHTML::_('behavior.formvalidation');
 ?>
 <?php	 // Custom size
 	echo '<style>';
-		echo '#jmultimedia #player{';
+		echo '#mediagalleries #player{';
 			if($this->params->get('width') ){
 				echo 'width: '.$this->params->get('width').'px;';
 	 		}
@@ -28,7 +28,7 @@ JHTML::_('behavior.formvalidation');
 	echo '</style>'; 
  ?>	
 
-<div id="jmultimedia" class="contentpaneopen">
+<div id="mediagalleries" class="contentpaneopen">
 <div class="watch">	
 	<h1 class="componentheading"><?php echo $this->item->title; ?></h1>
 

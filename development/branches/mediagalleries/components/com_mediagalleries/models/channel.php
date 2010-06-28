@@ -1,8 +1,8 @@
 <?php
 /**
- * Media Model for JMultimedia Component
+ * Media Model for Mediagalleries Component
  * 
- * @package    		JMultimedia Suite
+ * @package    		Mediagalleries Suite
  * @subpackage 	Components
  * @link				http://3den.org
  * @license		GNU/GPL
@@ -15,10 +15,10 @@ jimport('joomla.application.component.model');
 /**
  * Media Model
  *
- * @package    JMultimedia Suite
+ * @package    Mediagalleries Suite
  * @subpackage Components
  */
-class JMultimediaModelChannel extends JModel
+class MediagalleriesModelChannel extends JModel
 {
 	/**
 	 * Media id
@@ -159,7 +159,8 @@ class JMultimediaModelChannel extends JModel
 	 * @access	public
 	 * @return	boolean	True on success
 	 */
-	function store( $data )	{
+	function store( $data )
+	{
 		$row =& $this->getTable('comment');
 		
 		// Bind the form fields to the media table
@@ -195,7 +196,7 @@ class JMultimediaModelChannel extends JModel
 	{
 		JArrayHelper::toInteger($cid);
 		$cids = implode( ',', $cid );
-		$query = 'DELETE FROM #__jmultimedia_comments'
+		$query = 'DELETE FROM #__mediagalleries_comments'
 			. ' WHERE id IN ( '.$cids.' )';
 		$this->_db->setQuery( $query );
 		if(!$this->_db->query()) {
@@ -229,7 +230,7 @@ class JMultimediaModelChannel extends JModel
 
 	
 	/**
-	 * Method to load content JMultimedia data
+	 * Method to load content Mediagalleries data
 	 *
 	 * @access	private
 	 * @return	boolean	True on success
@@ -240,7 +241,7 @@ class JMultimediaModelChannel extends JModel
 		if ( empty($this->_data) )
 		{
 			$query = 'SELECT c.* '
-				. ' FROM #__jmultimedia_comments AS c ' 
+				. ' FROM #__mediagalleries_comments AS c ' 
 				. ' WHERE c.id = '.(int) $this->_id;
 					
 			$this->_db->setQuery($query);
@@ -251,7 +252,7 @@ class JMultimediaModelChannel extends JModel
 	}
 
 	/**
-	 * Method to initialise the JMultimedia data
+	 * Method to initialise the Mediagalleries data
 	 *
 	 * @access	private
 	 * @return	boolean	True on success

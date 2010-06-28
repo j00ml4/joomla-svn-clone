@@ -1,70 +1,70 @@
 
 /**
- * JMultimedia Base
+ * Mediagalleries Base
  */
-#jmultimedia{
+#mediagalleries{
 	
 }
 
 /**
  * Player
  */
-#jmultimedia #player{
+#mediagalleries #player{
 	width: 500px;
 	min-height: 150px;
 	border: #000000 inset 10px;
 	background: #000000;
 	position: relative;
 }
-#jmultimedia #player .denvideo{
+#mediagalleries #player .denvideo{
 	width: 500px;
 	height: 350px;
 }
-#jmultimedia #player img.denvideo{
+#mediagalleries #player img.denvideo{
 	height:auto;
 	min-height: 150px;
 }
 /* video code */
-#jmultimedia  #embed{
+#mediagalleries  #embed{
 	
 }
 
 /* rouded corners */
-#jmultimedia #player div{
+#mediagalleries #player div{
 	
 }
-#jmultimedia #player div div{
+#mediagalleries #player div div{
 	
 }
-#jmultimedia #player div div div{
+#mediagalleries #player div div div{
 	
 }
-#jmultimedia #player div div div div{
+#mediagalleries #player div div div div{
 	
 }
 
 /**
  * Media Info
  */
-#jmultimedia .details{
+#mediagalleries .details{
 	
 }
 
-#jmultimedia ul.mediadetails{
+#mediagalleries ul.mediadetails{
 	list-style:none;
 	list-style-type:none;
 }
-#jmultimedia ul.mediadetails li{
+#mediagalleries ul.mediadetails li{
 	list-style:none;
 	list-style-type:none;	
 	display: inline;
 }
 
-#jmultimedia ul.details{
+#mediagalleries ul.details{
 	list-style:none;
 	list-style-type:none;
 }
-#jmultimedia ul.details li{
+#mediagalleries ul.details li{
 	list-style:none;
 	list-style-type:none;	
 	display: inline;
@@ -108,19 +108,19 @@ div.compact{
 	display: inline;
 }
 
-#jmultimedia .list{
+#mediagalleries .list{
 	
 }
-#jmultimedia .list .related{
+#mediagalleries .list .related{
 	
 }
-#jmultimedia .mediaslist{
+#mediagalleries .mediaslist{
 	float: right;
 	width: 110px;
 	text-align:center;
 	border: 1px;
 }
-#jmultimedia .mediaslist .denvideo{
+#mediagalleries .mediaslist .denvideo{
 	width: 100px;
 	height: 80px;
 	margin: 10px;	
@@ -129,20 +129,20 @@ div.compact{
 /**
  *  Form
  */
-#jmultimedia .adminform label{
+#mediagalleries .adminform label{
 	font-weight: bold;
 	display: block;
 	text-align: right;
 }
 
 
-#jmultimedia .adminform .inputboxfull{
+#mediagalleries .adminform .inputboxfull{
 	width:100%;
 }
-#jmultimedia .buttons{
+#mediagalleries .buttons{
 	text-align:right;
 }
-#jmultimedia .buttons a{
+#mediagalleries .buttons a{
 	text-decoration:none;
 }
 
@@ -151,10 +151,10 @@ div.compact{
 
 
 /* Table */
-#jmultimedia .adminform table{
+#mediagalleries .adminform table{
 		width:90%;
 }
-#jmultimedia .adminform table.input{
+#mediagalleries .adminform table.input{
 		border: #cccccc 2px dashed;
 		width: 100%;
 		margin: 5px;

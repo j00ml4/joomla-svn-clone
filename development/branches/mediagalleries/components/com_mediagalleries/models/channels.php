@@ -1,6 +1,6 @@
 <?php
 /**
- * Comments Model for JMultimedia Component
+ * Comments Model for Mediagalleries Component
  * 
  * @package    Joomla.Tutorials
  * @subpackage Components
@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.model' );
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class JMultimediaModelChannels extends JModel
+class MediagalleriesModelChannels extends JModel
 {
  	/**
      * Media data array
@@ -90,7 +90,7 @@ class JMultimediaModelChannels extends JModel
 		if (empty($this->_total))
 		{
 			//$query = $this->_buildQuery();
-			$query = 'SELECT id FROM #__jmultimedia_comments';
+			$query = 'SELECT id FROM #__mediagalleries_comments';
 			$this->_total = $this->_getListCount($query);
 		}
 
@@ -127,7 +127,7 @@ class JMultimediaModelChannels extends JModel
 		
 		$tbl = str_replace( 'com_', '#__', JRequest::getCmd('section', 'com_content') );
 		$query = ' SELECT a.*, u.name AS author, cc.title AS container '
-			. ' FROM #__jmultimedia_comments AS a '
+			. ' FROM #__mediagalleries_comments AS a '
 			. ' LEFT JOIN #__users AS u ON u.id = a.userid '
 			. ' LEFT JOIN '.$tbl.' AS cc ON cc.id = a.content_id '
 			. $where

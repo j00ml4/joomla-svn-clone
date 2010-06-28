@@ -25,7 +25,7 @@ require_once( $denpath );
 
 // Define paths
 define('URI_ASSETS', 
-	JURI::base().'components/com_jmultimedia/assets/' );
+	JURI::base().'components/com_mediagalleries/assets/' );
 define('PATH_HELPERS', 
 	JPATH_COMPONENT_SITE.DS.'helpers'.DS );
 
@@ -34,7 +34,7 @@ require_once(JPATH_COMPONENT.DS.'controller.php');
 include_once( PATH_HELPERS.'player.php' );
 
 // Create the controller
-$controller   = new JMultimediaController();
+$controller   = new MediagalleriesController();
 
 // Perform the Request task
 $controller->execute( JRequest::getCmd('task') );
