@@ -43,19 +43,5 @@ $pageClass = $this->params->get('pageclass_sfx');
 	</div>
 	<?php endif; ?>
 
-	<?php if (is_array($this->children) && count($this->children) > 0 && $this->params->get('maxLevel') !=0)  : ?>
-	<div class="jcat-children">
-		<h3>
-			<?php echo JTEXT::_('JGLOBAL_SUBCATEGORIES'); ?>
-		</h3>
-
-		<?php echo $this->loadTemplate('children'); ?>
-
-	</div>
-	<?php endif; ?>
-
-	<div class="cat-items">
-		<?php echo $this->loadTemplate('articles'); ?>
-	</div>
-
+	
 </div>
