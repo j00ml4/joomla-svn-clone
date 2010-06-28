@@ -25,7 +25,7 @@ jimport( 'joomla.application.component.view');
  * @subpackage	Weblinks
  * @since 1.0
  */
-class MediagalleriesViewGalleries extends JView
+class MediagalleriesViewGallery extends JView
 {
 	
     /**
@@ -35,14 +35,14 @@ class MediagalleriesViewGalleries extends JView
     function display($tpl = null)
     {
 		global  $option;
-		$mainframe=&JFactory::getApplication();
+		$app=&JFactory::getApplication();
 		
 		// Initialize some variables
 		$user		=& JFactory::getUser();
 		$document	= &JFactory::getDocument();
 		$uri 		= &JFactory::getURI();
-		$pathway	= &$mainframe->getPathway();
-		$cparams =& $mainframe->getParams();
+		$pathway	= &$app->getPathway();
+		$cparams =& $app->getParams();
 		$model =& $this->getModel('mediagalleries');
 		
 		// Add default Style
@@ -55,7 +55,7 @@ class MediagalleriesViewGalleries extends JView
 		
 		// Set Custom Limit
 		if($cparams->get('limit') ){
-			$limit = $mainframe->getUserStateFromRequest(
+			$limit = $app->getUserStateFromRequest(
 				'gallery.list.limit', 'limit', 
 				$cparams->get('limit'), 'int' );
 				
@@ -67,46 +67,9 @@ class MediagalleriesViewGalleries extends JView
 		$total		=& $this->get('total');
 		$pagination	=& $this->get('pagination');
 		$category	=& $this->get('category');
-		$state		=& $this->get('state');
-
-		// Add alternate feed link
-		if($cparams->get('show_feed_link', 1) == 1)
-		{
-			$link	= '&view=category&id=&format=feed&limitstart=';
-			$attribs = array('type' => 'application/rss+xml', 'title' => 'RSS 2.0');
-			$document->addHeadLink(JRoute::_($link.'&type=rss'), 'alternate', 'rel', $attribs);
-			$attribs = array('type' => 'application/atom+xml', 'title' => 'Atom 1.0');
-			$document->addHeadLink(JRoute::_($link.'&type=atom'), 'alternate', 'rel', $attribs);
-		}
+		$state		=& $this->get('state');		
 		
-		
-		// If has Category
-		if(!empty($category)){
-			// Set page title per category
-			$document->setTitle( $category->title. ' - '. $cparams->get( 'page_title'));
-			// Prepare category description
-			$category->description = JHTML::_('content.prepare', $category->description);			
-			// Define image tag attributes
-			if (isset( $category->image ) && $category->image != '')
-			{
-				$attribs['align']  = $category->image_position;
-				$attribs['hspace'] = 6;
 	
-				// Use the static HTML library to build the image tag
-				$category->image = JHTML::_('image', 'images/stories/'.$category->image, JText::_('Web Links'), $attribs);
-			}	
-			//set breadcrumbs
-			if(is_object($menu) && $menu->query['view'] != 'category') {
-				$pathway->addItem($category->title, '');
-			}
-		}		
-
-		// Create a user access object for the user
-		$access = new stdClass();
-		$access->canEdit	= $user->authorize('com_content', 'edit', 'content', 'all');
-		$access->canEditOwn	= $user->authorize('com_content', 'edit', 'content', 'own');
-		$access->canPublish = $user->authorize('com_content', 'publish', 'content', 'all');
-		
 					
 		// switch layout
 		switch( $this->getLayout() ){		
@@ -162,14 +125,14 @@ class MediagalleriesViewGalleries extends JView
 				
 		// assign Vars
 		//$this->assignRef('lists',		$lists);
-		$this->assignRef('category',	$category);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
-		$this->assignRef('user',		$user);
-		$this->assignRef('access',		$access);				
-		$this->assign('total',		$total);
-		$this->assign('action', 	$uri->toString());
-		$this->assignRef('params', $cparams);
+		$this->category=$category;
+		$this->items=$items;
+		$this->pagination=$pagination;
+		$this->user=$user;
+		//$this->access=$access;				
+		$this->total=$total;
+		$this->action=$uri->toString();
+		$this->params=$cparams;
 		
 		//Display
 		parent::display($tpl);
