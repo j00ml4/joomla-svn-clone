@@ -10,6 +10,7 @@
 * other free or open source software licenses.
 * See COPYRIGHT.php for copyright notices and details.
 */
+//TODO : Modify router.php
 function MediagalleriesBuildRoute( &$query )
 {
 	$segments = array();
