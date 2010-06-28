@@ -10,7 +10,7 @@
 * other free or open source software licenses.
 * See COPYRIGHT.php for copyright notices and details.
 */
-function JMultimediaBuildRoute( &$query )
+function MediagalleriesBuildRoute( &$query )
 {
 	$segments = array();
 
@@ -52,7 +52,7 @@ function JMultimediaBuildRoute( &$query )
 		unset( $query['id'] );
 		// Alias
 		$db =& JFactory::getDBO();
-		$db->setQuery('SELECT alias FROM #__jmultimedia WHERE id='.(int)$id);// Alias from your table
+		$db->setQuery('SELECT alias FROM #__mediagalleries WHERE id='.(int)$id);// Alias from your table
 		$alias = $db->loadResult();
 		if(!empty($alias)) $segments[] = $alias;
 	}
@@ -68,7 +68,7 @@ function JMultimediaBuildRoute( &$query )
 	return $segments;
 }
 
-function JMultimediaParseRoute( $segments )
+function MediagalleriesParseRoute( $segments )
 {
 	$vars = array();
 	

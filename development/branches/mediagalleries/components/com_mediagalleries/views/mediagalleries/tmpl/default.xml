@@ -1,36 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="Gallery Layout">
+	<layout title="Standard Table Layout">
 		<message>
 			<![CDATA[STANDARD CATEGORY LAYOUT DESC]]>
 		</message>
 	</layout>
 	<state>
-		<name>Gallery Layout</name>
+		<name>Standard Table Layout</name>
 		<description>STANDARD CATEGORY LAYOUT DESC</description>
 		<url>
-			<param name="catid" type="category" label="Category" section="com_jmultimedia" description="Choose a category (optional)" />
+			<param name="catid" type="category" label="Category" section="com_mediagalleries" description="Choose a category (optional)." />
 			<param name="ordermode" type="list" default="0" label="Ordering Mode" description="Select items ordering">
 				<option value="popular">Most Popular</option>
 				<option value="random">Random</option>			
 				<option value="ordering">Ordering</option>		
 				<option value="newer">Newer</option>
 				<option value="toprated">Top Rated</option>
-			</param>
-			<param name="filter_state" type="list" default="P" label="State" description="Show/Hide the Filter ability">
+			</param>			
+			<param name="filter_state" type="list" default="P" label="State" description="Filter items by state">
 				<option value="P">published</option>
 				<option value="U">unpublished</option>
 				<option value="A">All</option>
-			</param>			
+			</param>
 		</url>
 		<params>
-			<param name="limit" type="text" size="3" default="30" label="Count" description="The number of items to display (default 30)" />						
+			<!-- Show Columns -->
+			<param name="@spacer" type="spacer" label="" default="" /> 		
+			<param name="show_thumbnail" type="radio" default="1" label="Thumbnail" description="Show/Hide the Filter ability">
+				<option value="0">Hide</option>
+				<option value="1">Show</option>
+			</param>
+			<param name="show_date" type="radio" default="1" label="Date" description="Show/Hide the Filter ability">
+				<option value="0">Hide</option>
+				<option value="1">Show</option>
+			</param>
+			<param name="show_author" type="radio" default="1" label="Author" description="Show/Hide the Filter ability">
+				<option value="0">Hide</option>
+				<option value="1">Show</option>
+			</param>
+			<param name="show_views" type="radio" default="1" label="Views" description="Show/Hide the Filter ability">
+				<option value="0">Hide</option>
+				<option value="1">Show</option>
+			</param>		
+			<param name="show_rating" type="radio" default="1" label="Rating" description="Show/Hide the Filter ability">
+				<option value="0">Hide</option>
+				<option value="1">Show</option>
+			</param>		
 		</params>
 		<advanced>
-			<param name="filter_order" type="radio" default="1" label="Order Filter" description="Show/Hide the Order by Filter">
+			<param name="show_headings" type="radio" default="1" label="Headings" description="Show/Hide the Filter ability">
 				<option value="0">Hide</option>
 				<option value="1">Show</option>
 			</param>	
+			<param name="@spacer" type="spacer" label="" default="" /> 				
 			<param name="filter_category" type="radio" default="1" label="Categories Filter" description="Show/Hide the Category List Filter ability">
 				<option value="0">Hide</option>
 				<option value="1">Show</option>
@@ -45,13 +67,12 @@
 				<option value="hits">Hits</option>
 			</param>
 			
-			<!-- Pagination -->
 			<param name="@spacer" type="spacer" label="" default="" /> 		
 			<param name="show_pagination" type="radio" default="1" label="Pagination" description="Show/Hide Pagination support">
 				<option value="0">Hide</option>
 				<option value="1">Show</option>
 			</param>
-			<param name="show_pagination_limit" type="radio" default="0" label="Display Count" description="Show/Hide the Display Select Count dropdown">
+			<param name="show_pagination_limit" type="radio" default="1" label="Display Select" description="Show/Hide the Display Select dropdown">
 				<option value="0">Hide</option>
 				<option value="1">Show</option>
 			</param>

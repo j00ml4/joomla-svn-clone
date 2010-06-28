@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.view' );
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class JMultimediaViewMedia extends JView
+class MediagalleriesViewMedia extends JView
 {
     /**
      * Hellos view display method
@@ -118,7 +118,7 @@ class JMultimediaViewMedia extends JView
 				$item->added = $date->toFormat( JText::_('DATE_FORMAT_LC2') ) ;	
 				
 				// links
-				$links['cat'] = JRoute::_('index.php?option=com_jmultimedia&catid='.$item->catid);
+				$links['cat'] = JRoute::_('index.php?option=com_mediagalleries&catid='.$item->catid);
 				
 				
 				// Set page title
@@ -174,7 +174,7 @@ class JMultimediaViewMedia extends JView
 		$links = array();
 		if(!empty($item->id)){
 			// build list of categories
-			$links['media'] = JRoute::_('index.php?option=com_jmultimedia&view=media&layout=default&id='. $item->id );
+			$links['media'] = JRoute::_('index.php?option=com_mediagalleries&view=media&layout=default&id='. $item->id );
 		}
 		return $links;
 	}	

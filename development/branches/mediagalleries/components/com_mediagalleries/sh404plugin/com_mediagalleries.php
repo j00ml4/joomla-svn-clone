@@ -2,7 +2,7 @@
 /**
  * sh404SEF support for com_Autopecas.
  * Author : OSSchools and 3DEN Open Software
- * contact : http://jmultimedia.3den.org
+ * 
  * 
  * {shSourceVersionTag: Version x - 2007-09-20}
  * 
@@ -13,7 +13,7 @@ defined( '_JEXEC' ) or die( 'Direct Access to this location is not allowed.' );
 // ------------------  standard plugin configurantion var - please change ------------------------
 $com = substr($option, 4);
 $com_table = '#__'.$com;
-$defalt_view = 'jmultimedia';
+$defalt_view = 'mediagalleries';
 
 // ------------------  standard plugin initialize function - don't change ---------------------------
 global $sh_LANG, $sefConfig;  
