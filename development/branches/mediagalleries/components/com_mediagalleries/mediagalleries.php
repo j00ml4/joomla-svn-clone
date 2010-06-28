@@ -16,25 +16,21 @@ defined('_JEXEC') or die('Restricted access');
 
 // Try to Import Media Plugin
 $mediapath = JPATH_SITE.DS.'plugins'.DS.'content'.DS.'media'.DS.'media.php';
-if(!is_file($mediapath)){
-	$msg = JText::_( 'Media is not installed' );
-	$mainframe->enqueueMessage( $msg, 'error' ); 
-	return; 
+if (!file_exists($mediapath)){
+	return JError::raiseWarning(404, JText::_('MEDIA_PLUGIN_NOT_INSTALLED')); 
 }
-require_once( $mediapath );
+require_once $mediapath;
 
 // Define paths
-define('URI_ASSETS', 
-	JURI::base().'components/com_mediagalleries/assets/' );
-define('PATH_HELPERS', 
-	JPATH_COMPONENT_SITE.DS.'helpers'.DS );
+define('URI_ASSETS', JURI::base().'components'.DS.'com_mediagalleries'.DS.'assets.DS' );
+define('PATH_HELPERS', JPATH_COMPONENT_SITE.DS.'helpers'.DS );
 
 // Imports
-require_once(JPATH_COMPONENT.DS.'controller.php');
+jimport('joomla.application.component.controller');
 include_once( PATH_HELPERS.'player.php' );
 
 // Create the controller
-$controller   = new MediagalleriesController();
+$controller	= JController::getInstance('Mediagalleries');
 
 // Perform the Request task
 $controller->execute( JRequest::getCmd('task') );
