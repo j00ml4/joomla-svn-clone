@@ -47,9 +47,6 @@ class JHTMLBehavior
 			return;
 		}
 
-		// Load the JavaScript framework into the document head.
-		JHTMLBehavior::framework();
-
 		// If no debugging value is set, use the setting from  the application configuration.
 		if ($debug === null) {
 			$debug = JFactory::getConfig()->getValue('config.debug');
@@ -63,61 +60,16 @@ class JHTMLBehavior
 
 		// If the debugging flag is set or the browser is Konqueror use the uncompressed file.
 		if ($debug || $kcheck) {
-			JHTML::script('moocompat-uncompressed.js', 'plugins/system/mtupgrade/', false);
+			JHTML::script('mootools-uncompressed.js', 'plugins/system/mtupgrade/', false);
 		}
 		else {
-			JHTML::script('moocompat.js', 'plugins/system/mtupgrade/', false);
+			JHTML::script('mootools.js', 'plugins/system/mtupgrade/', false);
 		}
 
 		// Set the MooTools version string in the application object.
 		JFactory::getApplication()->set('MooToolsVersion', '1.2.4 +Compat');
 
 		// Ensure the files aren't loaded more than once.
-		$loaded = true;
-	}
-
-	/**
-	 * Method to load the mootools framework into the document head.  If the optional debug flag is
-	 * set then a uncompressed version of the file will be loaded.
-	 *
-	 * @param   boolean  $debug  True to enable debugging mode.  If no value is set the value will
-	 *                           be taken from the application configuration settings.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.5.19
-	 * @static
-	 */
-	function framework($debug = null)
-	{
-		// Check to see if it has already been loaded.
-		static $loaded;
-		if (!empty($loaded)) {
-			return;
-		}
-
-		// If no debugging value is set, use the setting from  the application configuration.
-		if ($debug === null) {
-			$debug = JFactory::getConfig()->getValue('config.debug');
-		}
-
-		/*
-		 * Note: Konqueror browser check.
-		 *  - If they fix thier issue with compressed javascript we can remove this.
-		 */
-		$kcheck = isset($_SERVER['HTTP_USER_AGENT']) ? strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "konqueror") : null;
-
-		// If the debugging flag is set or the browser is Konqueror use the uncompressed file.
-		if ($debug || $kcheck) {
-			JHTML::script('mootools12-uncompressed.js', 'plugins/system/mtupgrade/', false);
-		} else {
-			JHTML::script('mootools12.js', 'plugins/system/mtupgrade/', false);
-		}
-
-		// Set the MooTools version string in the application object.
-		JFactory::getApplication()->set('MooToolsVersion', '1.2.4');
-
-		// Ensure the file isn't loaded more than once.
 		$loaded = true;
 	}
 
