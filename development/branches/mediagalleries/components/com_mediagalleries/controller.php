@@ -23,41 +23,18 @@ jimport( 'joomla.application.component.controller' );
  * @static
  */
 class MediagalleriesController extends JController {
-	/** @var Multi - controller Simulator */
-	var $_control = null;
-	/** @var Default Redirection target */
-	var $_target = null;
-	var $default_view= "media";
-	/**
-	 * constructor (registers additional tasks to methods)
-	 * 
-	 * @return void
-	 */
-	function __construct($config = array())
-	{
-		$option="com_mediagalleries";
-		
-		$this->addModelPath(JPATH_COMPONENT_ADMINISTRATOR.DS.'models');		
-		parent::__construct($config);
-		
-		$this->_control = JRequest::getCmd('controller', JRequest::getCmd('c', 'media'));
-		$this->_target = 'index.php?option='.$option;
-		
-		//$this->registerTask( 'apply','save' );
-		//$this->registerTask( 'add','edit' );
-	}
+	
+
+
 	function display()
 	{
 		$cachable = true;
 		// Get the document object.
-		$document = &JFactory::getDocument();
-
 		// Set the default view name and format from the Request.
-		$vName		= JRequest::getWord('view', 'categories');
+		$vName		= JRequest::getWord('view', 'gallery');
 		JRequest::setVar('view', $vName);
 
-		$user = &JFactory::getUser();
-		if ($user->get('id') ||($_SERVER['REQUEST_METHOD'] == 'POST' && $vName = 'categories')) {
+		if (($_SERVER['REQUEST_METHOD'] == 'POST' && $vName = 'categories')) {
 			$cachable = false;
 		}
 		$safeurlparams = array('id'=>'INT','limit'=>'INT','limitstart'=>'INT','filter_order'=>'CMD','filter_order_Dir'=>'CMD','lang'=>'CMD');

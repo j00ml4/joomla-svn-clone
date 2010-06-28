@@ -26,12 +26,10 @@ if (!file_exists($mediapath)){
 
 // Define paths
 define('URI_ASSETS', JPATH_COMPONENT.DS.'assets'.DS );
-define('PATH_HELPERS', JPATH_COMPONENT.DS.'helpers'.DS );
-
-
+define('PATH_HELPERS', JPATH_COMPONENT.DS.'helpers'.DS ); 
 require_once $mediapath;
 require_once PATH_HELPERS.'player.php' ;
 $controller	= JController::getInstance('Mediagalleries');
-$controller->addModelPath(JPATH_COMPONENT_ADMIN.DS.'models');
+$controller->addModelPath(JPATH_COMPONENT_ADMINISTRATOR.DS.'models');
 $controller->execute(JRequest::getCmd('task'));
 $controller->redirect();
