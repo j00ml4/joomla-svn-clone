@@ -214,13 +214,13 @@ class MediagalleriesController extends JController {
 	 * 
 	 * @return void
 	 */
-	function denvideo(){
+	function media(){
 		$db =& JFactory::getDBO();
 		$query = 'SELECT id '
 			. ' FROM #__plugins '
 			. ' WHERE '
 				. ' folder= '. $db->Quote('content')
-				. ' AND element = '. $db->Quote('denvideo');
+				. ' AND element = '. $db->Quote('media');
 		$db->setQuery($query);
 		$id = $db->loadResult();		
 		

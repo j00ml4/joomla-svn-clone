@@ -14,14 +14,14 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-// Try to Import denVideo
-$denpath = JPATH_SITE.DS.'plugins'.DS.'content'.DS.'denvideo.php';
-if(!is_file($denpath)){
-	$msg = JText::_( 'denVideo is not installed' );
+// Try to Import Media Plugin
+$mediapath = JPATH_SITE.DS.'plugins'.DS.'content'.DS.'media'.DS.'media.php';
+if(!is_file($mediapath)){
+	$msg = JText::_( 'Media is not installed' );
 	$mainframe->enqueueMessage( $msg, 'error' ); 
 	return; 
 }
-require_once( $denpath );
+require_once( $mediapath );
 
 // Define paths
 define('URI_ASSETS', 
