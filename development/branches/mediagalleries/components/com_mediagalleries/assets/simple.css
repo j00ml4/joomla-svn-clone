@@ -15,11 +15,11 @@
 	background: #000000;
 	position: relative;
 }
-#mediagalleries #player .denvideo{
+#mediagalleries #player .media{
 	width: 500px;
 	height: 350px;
 }
-#mediagalleries #player img.denvideo{
+#mediagalleries #player img.media{
 	height:auto;
 	min-height: 150px;
 }
@@ -112,7 +112,7 @@ div.compact{
 	text-align:center;
 	border: 1px;
 }
-#mediagalleries .mediaslist .denvideo{
+#mediagalleries .mediaslist .media{
 	width: 100px;
 	height: 80px;
 	margin: 10px;	
