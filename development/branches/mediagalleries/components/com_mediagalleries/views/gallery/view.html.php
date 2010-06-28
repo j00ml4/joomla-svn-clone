@@ -1,33 +1,40 @@
 <?php
 /**
- * Comments View for ... Component
- * 
- * @package    Joomla.Tutorials
- * @subpackage Components
- * @link http://dev.joomla.org/component/option,com_jd-wiki/Itemid,31/id,tutorials:components/
- * @license        GNU/GPL
+ * @version		$Id: view.html.php 10206 2008-04-17 02:52:39Z instance $
+ * @package		Joomla
+ * @subpackage	Weblinks
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+ * @license		GNU/GPL, see LICENSE.php
+ * Joomla! is free software. This version may have been modified pursuant
+ * to the GNU General Public License, and as distributed it includes or
+ * is derivative of works licensed under the GNU General Public License or
+ * other free or open source software licenses.
+ * See COPYRIGHT.php for copyright notices and details.
  */
 
 // Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
-jimport( 'joomla.application.component.view' );
+jimport( 'joomla.application.component.view');
 
 /**
- * Comments View
+ * HTML View class for the WebLinks component
  *
- * @package    Joomla.Tutorials
- * @subpackage Components
+ * @static
+ * @package		Joomla
+ * @subpackage	Weblinks
+ * @since 1.0
  */
-class MediagalleriesViewMedia extends JView
+class MediagalleriesViewGalleries extends JView
 {
+	
     /**
      * Hellos view display method
      * @return void
      **/
     function display($tpl = null)
     {
-		global $option;
+		global  $option;
 		$mainframe=&JFactory::getApplication();
 		
 		// Initialize some variables
@@ -35,175 +42,139 @@ class MediagalleriesViewMedia extends JView
 		$document	= &JFactory::getDocument();
 		$uri 		= &JFactory::getURI();
 		$pathway	= &$mainframe->getPathway();
-		$model	=& $this->getModel();
-		$cparams =& $mainframe->getParams(); 
-
+		$cparams =& $mainframe->getParams();
+		$model =& $this->getModel('mediagalleries');
+		
 		// Add default Style
 		$document->addStyleSheet( URI_ASSETS. $cparams->get('style', 'default.css') );		
 		
+		
+		// Get the parameters of the active menu item
+		$menus = &JSite::getMenu();
+		$menu  = $menus->getActive();
+		
+		// Set Custom Limit
+		if($cparams->get('limit') ){
+			$limit = $mainframe->getUserStateFromRequest(
+				'gallery.list.limit', 'limit', 
+				$cparams->get('limit'), 'int' );
+				
+			$model->setState('limit', $limit);
+		}
+		
 		// Get some data from the model
-		$item	=& $this->get('Data');		
-		// Build lists
-		$lists 	=& $this->_buildLists($item);
-		$links	=& $this->_buildLinks($item);
+		$items		=& $this->get('data' );
+		$total		=& $this->get('total');
+		$pagination	=& $this->get('pagination');
+		$category	=& $this->get('category');
+		$state		=& $this->get('state');
+
+		// Add alternate feed link
+		if($cparams->get('show_feed_link', 1) == 1)
+		{
+			$link	= '&view=category&id=&format=feed&limitstart=';
+			$attribs = array('type' => 'application/rss+xml', 'title' => 'RSS 2.0');
+			$document->addHeadLink(JRoute::_($link.'&type=rss'), 'alternate', 'rel', $attribs);
+			$attribs = array('type' => 'application/atom+xml', 'title' => 'Atom 1.0');
+			$document->addHeadLink(JRoute::_($link.'&type=atom'), 'alternate', 'rel', $attribs);
+		}
 		
-		// switch layout
-		switch( JRequest::getVar('layout') ){
-			/**
-			 * Media Form Layout 
-			 */
-			case 'form2':
-			case 'form':
-				// fail if checked out not by 'me'
-				if ( $model->isCheckedOut( $user->get('id') ) or !JRequest::getInt('Itemid') ) {
-					$msg = JText::_( 'YOU HAVE NO ACCESS TO THIS PAGE' );
-					$mainframe->redirect( 'index.php?option='. $option, $msg, 'error' );
-				}
-			
-				// Is new?
-				if( !$item->id ){
-					$item->published = 1;
-					$item->catid = 0;
-					$title = JText::_('New media');
-					$item->added = '';
-				}else{
-					$title = JText::_('Edit') .': '. $item->title; JText::_('New');
-					$pathway->addItem( $item->category );					
-				}		
-				
-				// Set page title
-				$document->setTitle($title);
-				$pathway->addItem($title, '');
-
-				//clean weblink data
-				JFilterOutput::objectHTMLSafe( $item );//, ENT_QUOTES, 'description' );
-				
-				//Action
-				$action = $uri->toString();
 		
-				// Assign Referencesss
-				$this->assignRef('action', $action);
-				break;
-			
-			/**
-			 * 
-			 * Default Play Media Layout
-			 */	
-			default:
-				// dont exists?
-				if( empty($item->id) ){
-					$msg = JText::_( 'PAGE COULD NOT BE FOUND' );
-					$mainframe->redirect( 'index.php?option='. $option, $msg, 'error' );
-				}
-				
-				//  Increment views count
-				$model->hit();
-				$item->hits++;
+		// If has Category
+		if(!empty($category)){
+			// Set page title per category
+			$document->setTitle( $category->title. ' - '. $cparams->get( 'page_title'));
+			// Prepare category description
+			$category->description = JHTML::_('content.prepare', $category->description);			
+			// Define image tag attributes
+			if (isset( $category->image ) && $category->image != '')
+			{
+				$attribs['align']  = $category->image_position;
+				$attribs['hspace'] = 6;
+	
+				// Use the static HTML library to build the image tag
+				$category->image = JHTML::_('image', 'images/stories/'.$category->image, JText::_('Web Links'), $attribs);
+			}	
+			//set breadcrumbs
+			if(is_object($menu) && $menu->query['view'] != 'category') {
+				$pathway->addItem($category->title, '');
+			}
+		}		
 
-				// get video			
-				$video = PlayerHelper::play($item->url, 
-					$cparams->get('width'), 
-					$cparams->get('height'), 
-					$cparams->get('autostart'));
-				$embed = PlayerHelper::safeStr($video); 					
-			
-				// Comments
-				$comments = $this->_buildCommentList($item);
-				$comments .= $this->_buildCommentForm($item);
-
-				// Author	
-				if($item->author==''){ $item->author = JText::_('Guest'); }  
-				
-				// Date
-				$date =& JFactory::getDate($item->added);
-				$item->added = $date->toFormat( JText::_('DATE_FORMAT_LC2') ) ;	
-				
-				// links
-				$links['cat'] = JRoute::_('index.php?option=com_mediagalleries&catid='.$item->catid);
-				
-				
-				// Set page title
-				$document->setTitle($item->title);
-				$pathway->addItem($item->category, $links['cat']);
-				$pathway->addItem($item->alias, '');
-						
-				//clean data
-				JFilterOutput::objectHTMLSafe( $item );//, ENT_QUOTES, 'description' );
+		// Create a user access object for the user
+		$access = new stdClass();
+		$access->canEdit	= $user->authorize('com_content', 'edit', 'content', 'all');
+		$access->canEditOwn	= $user->authorize('com_content', 'edit', 'content', 'own');
+		$access->canPublish = $user->authorize('com_content', 'publish', 'content', 'all');
+		
 					
-				// Assign References
-				$this->assignRef('embed',	$embed);
-				$this->assignRef('comments',	$comments);				
-				$this->assignRef('video',	$video);
+		// switch layout
+		switch( $this->getLayout() ){		
+			case 'compact':
+				//$cparams->def('limit', 30);
+				break;
+				
+			default:
+
+						
+				// Set some defaults if not set for general params
+				
+				// state
+				$cparams->def('show_thumbnail', 1);
+				$cparams->def('show_title', 1);
+				$cparams->def('show_date', 1);		
+				$cparams->def('show_author', 1);
+				$cparams->def('show_views', 1);
+				$cparams->def('show_rating', 1);
+		
+
 				break;	
 		}
 		
-		// Assign General References 
-		$this->assignRef('params', $cparams);
-		$this->assignRef('lists', 	$lists);
-		$this->assignRef('links', 	$links);
-		$this->assignRef('item',	$item);
 		
-		// Display
+		// Title
+		if(!empty($category)){
+			$title = $category->title;
+		}
+		elseif(is_object($menu)){
+			$title = $menu->name;
+		}
+		else{
+			$title = JText::_('All Medias');
+		}
+		
+		// Set some defaults if not set for general params
+		$cparams->def('page_title', $title );
+		$cparams->def('show_headings', 1);
+		$cparams->def('date_format',	 JText::_('DATE_FORMAT_LC2') );			
+		// filter	
+		$cparams->def('filter_category', 1);
+		$cparams->def('filter', 1);
+		$cparams->def('filter_type', 1);
+		// pagination
+		$cparams->def('show_pagination', 2);
+		$cparams->def('show_pagination_results', 1);
+		$cparams->def('show_pagination_limit', 1);
+		$cparams->def('show_feed_link', 1);
+
+	
+	
+				
+		// assign Vars
+		//$this->assignRef('lists',		$lists);
+		$this->assignRef('category',	$category);
+		$this->assignRef('items',		$items);
+		$this->assignRef('pagination',	$pagination);
+		$this->assignRef('user',		$user);
+		$this->assignRef('access',		$access);				
+		$this->assign('total',		$total);
+		$this->assign('action', 	$uri->toString());
+		$this->assignRef('params', $cparams);
+		
+		//Display
 		parent::display($tpl);
     }
-	
-	/**
-	 * 
-	 * @return array Lists 
-	 */
-	function &_buildLists(&$item){
-		global $option, $mainframe;
-				
-		// Build lists
-		$lists = array();
-		
-			// build list of categories
-			$lists['catid'] = JHTML::_('list.category',  'catid', $option, intval( $item->catid ) );
-			// build the html select list
-			$lists['published'] 	= JHTML::_('select.booleanlist',  'published', 'class="inputbox"', $item->published );
-		return $lists;
-	}
-	
-	/**
-	 * 
-	 * @return array Lists 
-	 */
-	function &_buildLinks(&$item){
-		global $option, $mainframe;
-				
-		// Build lists
-		$links = array();
-		if(!empty($item->id)){
-			// build list of categories
-			$links['media'] = JRoute::_('index.php?option=com_mediagalleries&view=media&layout=default&id='. $item->id );
-		}
-		return $links;
-	}	
-	/**
-	 * 
-	 * @return 
-	 * @param $item Object
-	 */
-	function _buildCommentList(&$item){
-		global $mainframe;
-		
-		$args = array('list', &$item); 
-		$res = $mainframe->triggerEvent('onGetComments', $args );
 
-		return @$res[0];
-	}
-	
-	/**
-	 * 
-	 * @return 
-	 * @param $item Object
-	 */
-	function _buildCommentForm(&$item){
-		global $mainframe;
-		
-		$args = array('form', &$item ) ;
-		$res = $mainframe->triggerEvent('onGetComments', $args);
-		
-		return @$res[0];
-	}
+
+
 }
