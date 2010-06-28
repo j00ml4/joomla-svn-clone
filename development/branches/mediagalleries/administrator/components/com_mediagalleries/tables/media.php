@@ -11,10 +11,10 @@
 defined('_JEXEC') or die('Restricted access');
 
 /**
-* Weblink Table class
+* Media Table class
 *
 * @package		Joomla
-* @subpackage	Weblinks
+* @subpackage	Media
 * @since 1.0
 */
 class TableMedia extends JTable

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: weblink.php 16403 2010-04-24 00:35:09Z eddieajau $
+ * @version		$Id: media.php 16403 2010-04-24 00:35:09Z eddieajau $
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -11,10 +11,10 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.controllerform');
 
 /**
- * Weblink controller class.
+ * Mediagallery controller class.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_weblinks
+ * @subpackage	com_mediagalleries
  * @since		1.6
  */
 class MediagalleriesControllerMedia extends JControllerForm

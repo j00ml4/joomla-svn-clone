@@ -67,7 +67,7 @@ class mediagalleriesViewChannel extends JView
 		// build the html select list
 		$lists['published'] 	= JHTML::_('select.booleanlist',  'published', 'class="inputbox"', $item->published );
 
-		//clean weblink data
+		//clean media data
 		JFilterOutput::objectHTMLSafe( $item, ENT_QUOTES, 'description' );
 		
 		

@@ -2,7 +2,7 @@
 /**
  * @version		$Id: edit_metadata.php 17133 2010-05-17 06:30:14Z severdia $
  * @package		Joomla.Administrator
- * @subpackage	com_weblinks
+ * @subpackage	com_mediagalleries
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */

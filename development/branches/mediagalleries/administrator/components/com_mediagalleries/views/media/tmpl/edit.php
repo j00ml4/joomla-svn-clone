@@ -2,7 +2,7 @@
 /**
  * @version		$Id: edit.php 17133 2010-05-17 06:30:14Z severdia $
  * @package		Joomla.Administrator
- * @subpackage	com_weblinks
+ * @subpackage	com_mediagalleries
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -30,7 +30,7 @@ JHtml::_('behavior.formvalidation');
 <form action="<?php JRoute::_('index.php?option=com_mediagalleries'); ?>" method="post" name="adminForm" id="mediagalleries-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
-			<legend><?php echo empty($this->item->id) ? JText::_('COM_WEBLINKS_NEW_WEBLINK') : JText::sprintf('COM_WEBLINKS_EDIT_WEBLINK', $this->item->id); ?></legend>
+			<legend><?php echo empty($this->item->id) ? JText::_('JTOOLBAR_NEW') : JText::sprintf('JACTION_EDIT', $this->item->id); ?></legend>
 			<ul class="adminformlist">
 			<li><?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?></li>

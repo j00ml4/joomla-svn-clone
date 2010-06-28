@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: weblinks.php 17267 2010-05-25 19:16:30Z chdemko $
+ * @version		$Id: mediagalleries.php 17267 2010-05-25 19:16:30Z chdemko $
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -9,7 +9,7 @@
 defined('_JEXEC') or die;
 
 /**
- * Weblinks helper.
+ * Mediagallery helper.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_projects
@@ -26,7 +26,7 @@ class MediagalleriesHelper
 	public static function addSubmenu($vName = 'mediagalleries')
 	{
 		JSubMenuHelper::addEntry( 
-			JText::_('COM_MEDIAGALLERIES_MEDIAS'),
+			JText::_('COM_MEDIAGALLERIES_GALLERY'),
 			'index.php?option=com_mediagalleries&view=galleries',
 			$vName == 'galleries'
 		);

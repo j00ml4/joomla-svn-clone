@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: weblinks.php 16093 2010-04-15 06:32:42Z eddieajau $
+ * @version		$Id: galleries.php 16093 2010-04-15 06:32:42Z eddieajau $
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -11,10 +11,10 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.controlleradmin');
 
 /**
- * Weblinks list controller class.
+ * mediagalleries list controller class.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_weblinks
+ * @subpackage	com_mediagalleries
  * @since		1.6
  */
 class MediagalleriesControllerGalleries extends JControllerAdmin
