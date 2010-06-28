@@ -24,6 +24,7 @@ jimport( 'joomla.application.component.controller' );
  */
 class MediagalleriesController extends JController {
 	
+	protected $default_view="gallery";
 
 
 	function display()
