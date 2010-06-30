@@ -28,6 +28,29 @@ class ProjectsModelDocument extends ContentModelForm
 	
 	
 	/**
+	 * Method to auto-populate the model state.
+	 *
+	 * Note. Calling getState in this method will result in recursion.
+	 *
+	 * @since	1.6
+	 */
+	protected function populateState()
+	{
+		$app = JFactory::getApplication();
+
+		// Load state from the request.
+		if (!($pk = (int) $app->getUserState($this->_context.'.id'))) {
+			$pk = (int) JRequest::getInt('id');
+			$app->setUserState($this->_context.'.id',$pk);
+		}
+		$this->setState('article.id', $pk);
+
+		// Load the parameters.
+		$params	= $app->getParams();
+		$this->setState('params', $params);
+	}
+	
+	/**
 	 * Returns a Table object, always creating it
 	 *
 	 * @param	type	The table type to instantiate
