@@ -14,18 +14,19 @@ defined('_JEXEC') or die;
 $params	=& $item->params;
 $model	=$this->getModel();
 ?>
-
-<ul class="actions">
-	<?php if ($this->canDo->get('project.edit')): ?>
-	<li>
-		<?php 
-			if($this->getModel()->getState('type') == 'assign') {
-				echo '<button type="submit">'.JText::_('JGLOBAL_ASSIGN').'</button>';
-			}
-			else
-				if($this->getModel()->getState('type') == 'delete') {
-					echo '<button type="submit">'.JText::_('JGLOBAL_DELETE').'</button>';
-				} ?>
-	</li>
-	<?php endif; ?>
-</ul>
+<div class="formelm_buttons projects-content toolbar-list">
+	<ul class="actions">
+		<?php if ($this->canDo->get('project.edit')): ?>
+		<li>
+			<?php 
+				if($this->getModel()->getState('type') == 'assign') {
+					echo '<button type="submit">'.JText::_('JGLOBAL_ASSIGN').'</button>';
+				}
+				else
+					if($this->getModel()->getState('type') == 'delete') {
+						echo '<button type="submit">'.JText::_('JGLOBAL_DELETE').'</button>';
+					} ?>
+		</li>
+		<?php endif; ?>
+	</ul>
+</div>

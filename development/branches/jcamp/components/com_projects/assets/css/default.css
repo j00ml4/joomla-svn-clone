@@ -53,18 +53,18 @@ div.projects{
 		margin-bottom : 10px;
 	}
 
-	.frame, div.projects .projects-frame{
+	div.projects .projects-frame{
 		border : 1px solid #dddddd !important;
 		-moz-border-radius: 3px;
 		-webkit-border-radius: 3px; 
 		border-radius : 3px;
 	}
 
-	div.projects .project-content{
+	div.projects .projects-content{
 		padding: 10px;
 	}
 	
-	div.projects .project-space, .space{
+	div.projects .projects-space{
 		margin: 0px 5px 20px;
 	}
 
