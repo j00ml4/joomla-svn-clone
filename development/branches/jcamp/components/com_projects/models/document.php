@@ -54,7 +54,7 @@ class ProjectsModelDocument extends ContentModelForm
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = $this->loadForm('com_projects.edit.document', 'document', array('control' => 'jform', 'load_data' => $loadData));
+		$form = $this->loadForm($this->_context.'.document', 'document', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
@@ -71,7 +71,7 @@ class ProjectsModelDocument extends ContentModelForm
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_projects.edit.document.data', array());
+		$data = JFactory::getApplication()->getUserState($this->_context.'.data', array());
 
 		if (empty($data)) {
 			$data = $this->getItem();

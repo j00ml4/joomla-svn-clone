@@ -38,6 +38,10 @@ $params = $this->params;
 	<table class="category" border="1">
 		<thead>
 			<tr>
+				<?php if($this->canDo->get('project.edit')) :?>
+				<th>&nbsp;</th>
+				<?php endif; ?>				
+
 				<th class="list-title" id="tableOrdering">
 					<?php  echo JHTML::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder) ; ?>
 				</th>
@@ -58,43 +62,13 @@ $params = $this->params;
 		</thead>
 		<tbody>
 
-			<?php foreach ($this->items as $i => &$article) : ?>
-			<tr class="cat-list-row<?php echo $i % 2; ?>">
+			<?php foreach ($this->items as $i => $this->article) : ?>
+			<tr class="cat-list-row<?php echo $i % 2; ?> <?php echo $this->article->state > 0 ? '' : "artUnpublished";?>">
 
-				<?php if (in_array($article->access, $this->user->authorisedLevels())) : ?>
-					<td class="list-title">
-						<?php if($article->state > 0) :?>
-						<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid)); ?>">
-						<?php echo $this->escape($article->title); ?></a>
-						<?php
-							else :
-								echo $this->escape($article->title);
-							endif;	
-						?>
-						
-					</td>
-
-					<td class="list-date">
-						<?php echo JHTML::_('date',$article->displayDate, $this->escape(
-						$params->get('date_format', JText::_('DATE_FORMAT_LC3')))); ?>
-					</td>
-
-					<td class="list-author">
-						<?php echo $params->get('link_author', 0) ? JHTML::_('link',JRoute::_('index.php?option=com_users&view=profile&member_id='.$article->created_by),$article->author) : $article->author; ?>
-					</td>
-
-					<?php if($this->canDo->get('project.edit')) :?>
-					<td>
-						<a href="<?php echo JRoute::_('index.php?option=com_projects&view=document&layout=edit&id='.$article->id);?>"><?php echo JText::_('JGLOBAL_EDIT'); ?></a>
-					</td>
-					<?php endif; ?>				
-
+				<?php if (in_array($this->article->access, $this->user->authorisedLevels())) : ?>
+					<?php echo $this->loadTemplate('item_access');?>
 				<?php else : ?>
-				<td colspan="<?php echo $this->canDo->get('project.edit') ? 4 : 3; ?>">
-					<?php
-						echo $this->escape($article->title).' : '.JText::_( 'COM_PROJECTS_DOCUMENTS_NO_RIGHT_SEE' );
-					?>
-				</td>				
+					<?php echo $this->loadTemplate('item_noaccess');?>
 				<?php endif; ?>
 			</tr>
 			<?php endforeach; ?>
@@ -111,10 +85,10 @@ $params = $this->params;
 	<?php echo $this->pagination->getPagesLinks(); ?>
 	</div>
 	<?php  } ?>
-
-	<div>
+	<?php echo $this->loadTemplate('buttons');?>
+	
 		<input type="hidden" name="filter_order" value="" />
 		<input type="hidden" name="filter_order_Dir" value="" />
 		<input type="hidden" name="limitstart" value="" />
-	</div>
+		<input type="hidden" name="task" value="" />
 </form>

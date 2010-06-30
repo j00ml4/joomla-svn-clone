@@ -55,6 +55,9 @@ class ProjectsControllerMembers extends JController
 	 */
 	public function assignMembers()
 	{
+		// Check for request forgeries
+		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		
 		if(!ProjectsHelper::can('project.edit', $this->option)) {
 			return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 		}
@@ -88,6 +91,9 @@ class ProjectsControllerMembers extends JController
 	 */
 	public function deleteMembers()
 	{
+		// Check for request forgeries
+		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		
 		if(!ProjectsHelper::can('project.edit', $this->option)) {
 			return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 		}
