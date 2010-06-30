@@ -16,16 +16,16 @@ $pageClass = $this->params->get('pageclass_sfx');
 ?>
 <div class="projects<?php echo $pageClass?>">
 	<div class="two3">
-		<div class="project-content">
+		<div class="projects-content">
 			<h1><?php echo $this->item->title; ?></h1>
 	
 			<?php echo $this->item->description; ?>
 	
-			<div class="project-space">
+			<div class="projects-space">
 				<?php echo JHTML::_('tool.progressBar', 50); ?>
 			</div>
 				
-			<dl class="project-info space frame">
+			<dl class="projects-info projects-space projects-frame">
 				<dt><?php echo JText::_('COM_PROJECTS_FIELD_START_AT_LABEL')?></dt>
 				<dd><?php echo JFactory::getDate($this->item->start_at)->toFormat('%d.%m.%Y');?></dd>
 	
@@ -39,7 +39,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	</div>
 
 	<div class="one3">
-		<div class=" project-space">
+		<div class=" projects-space">
 			<?php echo $this->loadTemplate('members');?>
 			<?php echo $this->loadTemplate('tasks');?>
 			<?php echo $this->loadTemplate('documents');?>

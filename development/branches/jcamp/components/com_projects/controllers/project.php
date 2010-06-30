@@ -127,9 +127,9 @@ class ProjectsControllerProject extends JControllerForm
 	}
 	
 	/**
-	 * Save
+	 * Cancel
 	 * 
-	 * @see libraries/joomla/application/component/JControllerForm#save()
+	 * @see libraries/joomla/application/component/JControllerForm#Cancel()
 	 */
 	public function cancel()
 	{

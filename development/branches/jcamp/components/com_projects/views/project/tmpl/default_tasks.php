@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 $link = JRoute::_('index.php?option=com_projects&view=tasks&id='.$this->item->id);
 ?>
-<div class="project-content frame space">
+<div class="projects-content projects-frame projects-space">
 	<h4><a href="<?php echo $link; ?>"><?php echo JText::_('COM_PROJECTS_TASKS');?></a></h4>
 	<ul class="ulList">
 		<li>task</li>

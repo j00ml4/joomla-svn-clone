@@ -9,8 +9,8 @@
 defined('_JEXEC') or die;
 
 /**
- * @package		Joomla.Administrator
- * @subpackage	com_content
+ * @package		Joomla.Site
+ * @subpackage	com_projects
  */
 abstract class JHtmlTool
 {
@@ -20,7 +20,7 @@ abstract class JHtmlTool
 		
 		return '<div class="progress-bar'. $class_sfx .'">
 			<div class="progress" style="width:'. $percent .'%;"></div>
-			<div class="info">'. (empty($text)? $percent: $text) .'</div>
+			<div class="info">'. (empty($text)? $percent: $text) .'%</div>
 		</div>';
 	}	
 }

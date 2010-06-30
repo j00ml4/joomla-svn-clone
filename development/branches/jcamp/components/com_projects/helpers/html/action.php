@@ -9,8 +9,8 @@
 defined('_JEXEC') or die;
 
 /**
- * @package		Joomla.Administrator
- * @subpackage	com_content
+ * @package		Joomla.Site
+ * @subpackage	com_projects
  */
 abstract class JHtmlAction
 {
