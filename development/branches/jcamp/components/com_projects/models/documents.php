@@ -66,6 +66,9 @@ class ProjectsModelDocuments extends JModelList
 		$id = JRequest::getInt('id', 0);
 		$this->setState('project.id', $id);
 		$app->setUserState('project.id', $id);
+		
+		$app->setUserState('com_projects.edit.document.id',null);
+		$app->setUserState('com_projects.edit.document.data',null);
 	}
 
 	/**
@@ -450,6 +453,19 @@ class ProjectsModelDocuments extends JModelList
 		}
 
 		return $items;
+	}
+	
+	/**
+	 * Returns a Table object, always creating it
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 * @return	JTable	A database object
+	*/
+	public function getTable($type = 'Content', $prefix = 'ProjectsTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
 	}
 }
 ?>

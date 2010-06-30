@@ -32,7 +32,7 @@ $model	=$this->getModel();
 		<?php if (!empty($this->items)) : ?>
 		<li>
 		<?php 
-				echo '<button type="submit">'.JText::_('COM_PROJECTS_DOCUMENTS_DELETE_DOCUMENT_LINK').'</button>';
+				echo '<button onclick="submitform(\'documents.delete\')">'.JText::_('COM_PROJECTS_DOCUMENTS_DELETE_DOCUMENT_LINK').'</button>';
 		?>
 		</li>
 		<?php endif; ?>

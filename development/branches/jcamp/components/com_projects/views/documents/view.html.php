@@ -24,6 +24,7 @@ class ProjectsViewDocuments extends JView
 	protected $items;
 	protected $user;
 	protected $pagination;
+	protected $article;
 	
 	/**
 	 * Display project

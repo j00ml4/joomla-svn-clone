@@ -46,6 +46,8 @@ class ProjectsTableContent extends JTableContent
 			else
 				return true;
 		}
+		else
+			return true;
 	}
 	
 	/**
@@ -65,11 +67,16 @@ class ProjectsTableContent extends JTableContent
 			
 		$app = &JFactory::getApplication();
 		$project_id = $app->getUserState('project.id');
-		$q = 'DELETE FROM `#__project_content` WHERE `project.id`='.$this->_db->quote($project_id).' AND `content_id`='.$this->_db->quote($pk).' LIMIT 1';		
+		$q = 'DELETE FROM `#__project_contents` WHERE `project_id`='.$this->_db->quote($project_id).' AND `content_id`='.$this->_db->quote($pk).' LIMIT 1';		
+		$db->setQuery($q);
 		$db->query($q);
 		if($db->getErrorNum())
+		{
 			return false;
+		}
 		else
+		{
 			return true;			
+		}
 	}
 }

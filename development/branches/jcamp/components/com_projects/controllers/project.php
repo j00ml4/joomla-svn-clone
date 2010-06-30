@@ -114,6 +114,9 @@ class ProjectsControllerProject extends JControllerForm
 	 */
 	public function save()
 	{
+		// Check for request forgeries
+		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		
 		$model		= &$this->getModel();
 		$id 		= &$model->getState('project.id', 0);
 		if(!parent::save()){
@@ -133,6 +136,9 @@ class ProjectsControllerProject extends JControllerForm
 	 */
 	public function cancel()
 	{
+		// Check for request forgeries
+		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		
 		$model		= $this->getModel();
 		$id 		= $model->getState('project.id', 0);
 		if (!parent::cancel()) {
