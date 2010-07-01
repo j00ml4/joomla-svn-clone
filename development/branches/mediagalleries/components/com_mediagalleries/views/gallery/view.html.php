@@ -27,31 +27,40 @@ jimport( 'joomla.application.component.view');
  */
 class MediagalleriesViewGallery extends JView
 {
-	
+	//var $_defaultModel = "gallery";
     /**
      * Hellos view display method
      * @return void
      **/
-    function display($tpl = null)
-    {
-		global  $option;
+    function display($tpl = null)   
+    {		
 		$app=&JFactory::getApplication();
-		
+					
 		// Initialize some variables
 		$user		=& JFactory::getUser();
 		$document	= &JFactory::getDocument();
 		$uri 		= &JFactory::getURI();
 		$pathway	= &$app->getPathway();
 		$cparams =& $app->getParams();
-		$model =& $this->getModel('mediagalleries');
+		$model =& $this->getModel('gallery');
 		
-		// Add default Style
-		$document->addStyleSheet( URI_ASSETS. $cparams->get('style', 'default.css') );		
 		
+    	// Check for errors.
+		if (count($errors = $this->get('Errors'))) {
+			JError::raiseError(500, implode("\n", $errors));
+			return false;
+		}
+    	
+    	
+		//Access Check
+		$user	= &JFactory::getUser();
+		$groups	= $user->authorisedLevels();
 		
 		// Get the parameters of the active menu item
 		$menus = &JSite::getMenu();
 		$menu  = $menus->getActive();
+		
+		
 		
 		// Set Custom Limit
 		if($cparams->get('limit') ){
@@ -68,76 +77,32 @@ class MediagalleriesViewGallery extends JView
 		$pagination	=& $this->get('pagination');
 		$category	=& $this->get('category');
 		$state		=& $this->get('state');		
-		
 	
-					
-		// switch layout
-		switch( $this->getLayout() ){		
-			case 'compact':
-				//$cparams->def('limit', 30);
-				break;
-				
-			default:
-
-						
-				// Set some defaults if not set for general params
-				
-				// state
-				$cparams->def('show_thumbnail', 1);
-				$cparams->def('show_title', 1);
-				$cparams->def('show_date', 1);		
-				$cparams->def('show_author', 1);
-				$cparams->def('show_views', 1);
-				$cparams->def('show_rating', 1);
-		
-
-				break;	
-		}
-		
-		
+	
+	
 		// Title
 		if(!empty($category)){
 			$title = $category->title;
 		}
 		elseif(is_object($menu)){
-			$title = $menu->name;
+			$title = $menu->title;
 		}
 		else{
 			$title = JText::_('All Medias');
 		}
 		
-		// Set some defaults if not set for general params
-		$cparams->def('page_title', $title );
-		$cparams->def('show_headings', 1);
-		$cparams->def('date_format',	 JText::_('DATE_FORMAT_LC2') );			
-		// filter	
-		$cparams->def('filter_category', 1);
-		$cparams->def('filter', 1);
-		$cparams->def('filter_type', 1);
-		// pagination
-		$cparams->def('show_pagination', 2);
-		$cparams->def('show_pagination_results', 1);
-		$cparams->def('show_pagination_limit', 1);
-		$cparams->def('show_feed_link', 1);
-
-	
 	
 				
 		// assign Vars
 		//$this->assignRef('lists',		$lists);
-		$this->category=$category;
-		$this->items=$items;
-		$this->pagination=$pagination;
-		$this->user=$user;
+		
 		//$this->access=$access;				
-		$this->total=$total;
+		
 		$this->action=$uri->toString();
 		$this->params=$cparams;
 		
 		//Display
 		parent::display($tpl);
     }
-
-
 
 }
