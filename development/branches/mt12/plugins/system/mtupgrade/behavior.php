@@ -152,8 +152,8 @@ class JHTMLBehavior
 			return;
 		}
 
-		// Load the tooltips behavior from the plugin.
-		JHTML::script('tips.js', 'plugins/system/mtupgrade/');
+		// Load the Mootools framework.
+		JHTMLBehavior::mootools();
 
 		// Setup the options object.
 		$opt['maxTitleChars']	= (isset($params['maxTitleChars']) && ($params['maxTitleChars'])) ? (int)$params['maxTitleChars'] : 50 ;
@@ -172,14 +172,6 @@ class JHTMLBehavior
 		// Build the script.
 		$script = array(
 			'window.addEvent("domready", function() {',
-			'	$$("'.$selector.'").each(function(el) {',
-			'		var title = el.get("title");',
-			'		if (title) {',
-			'			var parts = title.split("::", 2);',
-			'			el.store("tip:title", parts[0]);',
-			'			el.store("tip:text", parts[1]);',
-			'		}',
-			'	});',
 			'	var JTooltips = new Tips($$("'.$selector.'"), '.JHTMLBehavior::_getJSObject($opt).');',
 			'});'
 		);
