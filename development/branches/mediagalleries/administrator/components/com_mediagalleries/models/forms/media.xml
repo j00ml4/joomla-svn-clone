@@ -51,6 +51,17 @@
 			description="COM_MEDIAGALLERIES_FIELD_URL_DESC" 
 			required="true"
 		/>
+		
+		<field 
+			name="thumb_url" 
+			type="text" 
+			class="inputbox"
+			size="40" 
+			label="COM_MEDIAGALLERIES_FIELD_THUMBURL_LABEL"
+			description="COM_MEDIAGALLERIES_FIELD_THUMBURL_DESC" 
+			
+		/>
+		
 
 		<field 
 			name="description" 
@@ -61,8 +72,22 @@
 			label="JGLOBAL_DESCRIPTION" 
 			description="JGLOBAL_DESCRIPTION" 
 		/>
-
 		
+		<field 
+			name="created_by" 
+			type="user"
+			label="JGLOBAL_FIELD_CREATED_BY_LABEL" 
+			description="JGLOBAL_FIELD_CREATED_BY_Desc" 
+		/>
+		
+		<field 
+			name="created_by_alias" 
+			type="text" 
+			class="inputbox"
+			size="40" 
+			label="JFIELD_ALIAS_LABEL"
+			description="JFIELD_ALIAS_DESC" 
+		/>		
 		
 		<field 
 			name="hits" 
@@ -106,6 +131,19 @@
 				<option value="-3">COM_MEDIAGALLERIES_FIELD_VALUE_REPORTED</option>
 				<option value="-2">JTRASH</option>
 		</field>
+		
+		<field
+			name="featured"
+			type="list"
+			label="COM_MEDIAGALLERIES_FEATURED_LABEL"
+			description="COM_MEDIAGALLERIES_FEATURED_DESC"
+			class="inputbox"
+			size="1"
+			default="0">
+				<option	value="1">JYES</option>
+				<option value="0">JNO</option>
+		</field>
+		
 
 		<field 
 			name="ordering" 
