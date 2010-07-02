@@ -20,6 +20,10 @@ $mediapath = JPATH_SITE.DS.'plugins'.DS.'content'.DS.'media'.DS.'media.php';
 if (!file_exists($mediapath)){
 	return JError::raiseWarning(404, JText::_('MEDIA_PLUGIN_NOT_INSTALLED')); 
 }
+//This is important to give user warning if the Media Plugin Is Not ENABLED
+if(!JPluginHelper::isEnabled('content','media')){
+	return JError::raiseWarning(404,JText::_('MEDIA_PLUGIN_NOT_ENABLED'));
+}
 
 // Include dependancies
 jimport('joomla.application.component.controller');
