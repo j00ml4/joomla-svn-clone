@@ -28,7 +28,7 @@ class MediagalleriesViewGalleries extends JView
 	protected $pagination;
 	protected $state;
     /**
-     * Hellos view display method
+     * display method for the galleries view
      * @return void
      **/
     function display($tpl = null)
@@ -45,7 +45,7 @@ class MediagalleriesViewGalleries extends JView
 		}
 		
 		// Display
-		$this->addToolBar();
+		self::addToolBar();
 		parent::display($tpl);
     }
     
