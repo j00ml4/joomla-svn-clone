@@ -113,3 +113,7 @@ div.projects{
 		overflow : hidden;
 		float : right;
 	}	
+	
+	dd, dt{
+	display:inline;
+	}
