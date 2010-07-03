@@ -15,7 +15,6 @@ $params =  $this->params;
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
 
-<!--
 <div class="projects<?php echo $pageClass?>">
 	<div class="two3">
 		<div class="projects-content">
@@ -28,10 +27,11 @@ $pageClass = $this->params->get('pageclass_sfx');
 			</div>
 
 			<dl class="projects-info projects-space projects-frame">
-				<dt><?php echo JText::_('COM_PROJECTS_FIELD_START_AT_LABEL')?></dt>
+				<dt><?php echo JText::_('COM_PROJECTS_FIELD_START_AT_LABEL')?>:</dt>
 				<dd><?php echo JFactory::getDate($this->item->start_at)->toFormat('%d.%m.%Y');?></dd>
-
-				<dt><?php echo JText::_('COM_PROJECTS_FIELD_FINISH_AT_LABEL')?></dt>
+				<br/>
+				<br/>
+				<dt><?php echo JText::_('COM_PROJECTS_FIELD_FINISH_AT_LABEL')?>:</dt>
 				<dd><?php echo JFactory::getDate($this->item->finish_at)->toFormat('%d.%m.%Y');?></dd>
 			</dl>
 
@@ -49,7 +49,8 @@ $pageClass = $this->params->get('pageclass_sfx');
 	</div>
 </div>
 </div>
--->
+
+<!-- 
 
 <table width="100%" height="100%">
 	<tr>
@@ -97,3 +98,4 @@ $pageClass = $this->params->get('pageclass_sfx');
 		</td>
 	</tr>
 </table>
+ -->
