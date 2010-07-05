@@ -38,3 +38,14 @@ class PlayerHelper{
 	}
 	
 }	
+
+/**
+ * Simple debug function
+ * @param $data
+ */
+function dump($data){
+	echo '<pre>';
+	print_r($data);
+	echo '</pre>';
+	return true;
+}
