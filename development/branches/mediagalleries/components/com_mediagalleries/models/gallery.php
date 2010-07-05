@@ -108,13 +108,13 @@ class MediagalleriesModelGallery extends JModel
 		}
 		
 		// Filter by start and end dates.
-		/*
+		
 		$nullDate = $db->Quote($db->getNullDate());
 		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
 
 		$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
 		$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
-		*/	
+			
 		// Filter by language
 		if ($this->getState('filter.language')) {
 			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
@@ -174,22 +174,27 @@ class MediagalleriesModelGallery extends JModel
 
 	public function getCategory()
 	{
-		if (!is_object($this->_item)) {
-			$params = $this->state->params;
-
+		if(!is_object($this->_item))
+		{
+			$app = JFactory::getApplication();
+			$menu = $app->getMenu();
+			$active = $menu->getActive();
+			$params = new JRegistry();
+			$params->loadJSON($active->params);
 			$options = array();
-			$options['countItems'] = $params->get('show_cat_num_articles', 0);
-			$categories = JCategories::getInstance('Content', $options);
+			$options['countItems'] = 10;
+			$categories = JCategories::getInstance('Mediagalleries', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
-
-			if (is_object($this->_item)) {
+			dump($categories);
+			
+			if(is_object($this->_item))
+			{
 				$this->_children = $this->_item->getChildren();
 				$this->_parent = false;
-
-				if ($this->_item->getParent()) {
+				if($this->_item->getParent())
+				{
 					$this->_parent = $this->_item->getParent();
 				}
-
 				$this->_rightsibling = $this->_item->getSibling();
 				$this->_leftsibling = $this->_item->getSibling(false);
 			} else {
@@ -200,6 +205,7 @@ class MediagalleriesModelGallery extends JModel
 
 		return $this->_item;
 	}
+	
 
 	/**
 	 * Get the parent categorie.
