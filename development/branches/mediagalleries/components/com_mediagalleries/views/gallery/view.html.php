@@ -72,12 +72,12 @@ class MediagalleriesViewGallery extends JView
 		}
 		
 		// Get some data from the model
-		$items		=& $this->get('data' );
+		$items		=& $this->get('_item');
 		$total		=& $this->get('total');
 		$pagination	=& $this->get('pagination');
 		$category	=& $this->get('category');
-		$state		=& $this->get('state');		
-	
+		$state		=& $this->get('state');
+		
 	
 	
 		// Title
