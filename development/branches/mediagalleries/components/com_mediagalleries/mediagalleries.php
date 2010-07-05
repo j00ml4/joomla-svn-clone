@@ -22,14 +22,16 @@ $mediapath = JPATH_SITE.DS.'plugins'.DS.'content'.DS.'media'.DS.'media.php';
 if (!file_exists($mediapath)){
 	return JError::raiseWarning(404, JText::_('MEDIA_PLUGIN_NOT_INSTALLED')); 
 }
-
+if(!JPluginHelper::isEnabled('content','media')){
+	return JError::raiseWarning(404,JText::_('MEDIA_PLUGIN_NOT_ENABLED'));
+}
 
 // Define paths
 define('URI_ASSETS', JPATH_COMPONENT.DS.'assets'.DS );
 define('PATH_HELPERS', JPATH_COMPONENT.DS.'helpers'.DS ); 
 require_once $mediapath;
 require_once PATH_HELPERS.'player.php' ;
-require_once PATH_HELPERS.'category.php';
+//require_once PATH_HELPERS.'category.php';
 $controller	= JController::getInstance('Mediagalleries');
 //$controller->addModelPath(JPATH_COMPONENT_ADMINISTRATOR.DS.'models');
 $controller->execute(JRequest::getCmd('task'));
