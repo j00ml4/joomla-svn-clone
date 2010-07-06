@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Id$ -->
+<extension type="plugin" group="Repair" version="1.6.0" method="upgrade">
+	<name>PLG_REPAIR_CONTENT</name>
+	<author>Andrew Eddie</author>
+	<creationDate>7 July 2010</creationDate>
+	<copyright>Copyright Open Source Matters, Inc. All rights reserved.	</copyright>
+	<license>GNU General Public License version 2 or later.</license>
+	<authorEmail>andrew.eddie@newlifeinit.com</authorEmail>
+	<authorUrl>www.newlifeinit.com</authorUrl>
+	<version>1.0</version>
+	<description>PLG_REPAIR_CONTENT_XML_DESCRIPTION</description>
+	<files>
+		<filename>index.html</filename>
+		<filename plugin="content">Content.php</filename>
+	</files>
+</extension>

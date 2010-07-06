@@ -1,0 +1,11 @@
+Repair Extension Suite
+======================
+
+The purpose of this extension suite is to have a toolset for repairing information in the Joomla schema.
+Whether due to physical tampering, mistakes or bugs in the code, information tends to get out of whack
+from time to time.  This component and set of plugins attempts to address a way to analyse and repair
+information within the Joomla schema.
+
+The methodology is to have an interface that can run test operations and then run repair operations.
+Ideally automatic repair is the goal but sometimes information may be in such a state of disrepair
+that only manual intervention is required.
