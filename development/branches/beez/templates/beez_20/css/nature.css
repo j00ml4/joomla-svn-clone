@@ -81,7 +81,7 @@ fieldset
 #logo span
 {
         color:#fff !important;
-                margin-top:6px
+        margin-top:6px
 }
 
 .logoheader
@@ -89,6 +89,7 @@ fieldset
         border-top:solid 1px transparent;
         color:#fff;
         background:url(../images/nature/bar.jpg) repeat-x top left;
+
 }
 
 h1#logo
@@ -105,9 +106,13 @@ h1#logo
 
 /* ##########################  header  ########################### */
 
+#line {
+}
+
 #header
 {
         background:#185359 url(../images/nature/header.jpg) bottom left repeat-x ;
+        position:relative
 }
 
 /* ++++++++++++++  lists, skiplinks  ++++++++++++++ */
@@ -116,7 +121,9 @@ h1#logo
         background: url(../images/nature/navhoriz.png);
         border:0;
         border-bottom:solid 1px #237D85;
-        list-style-type:none
+        list-style-type:none;
+
+
 }
 
 #header ul.menu li
@@ -124,21 +131,23 @@ h1#logo
         border:0
 }
 
-#header ul li a:link,
-#header ul li a:visited
+#header ul.menu li a:link,
+#header ul.menu li a:visited
 {
         color:#fff;
         border:0;
         border-right:solid 1px #237D85;
-        background:transparent
+        background:transparent;
+        padding:10px ;
 }
 
-#header ul li a:hover,
-#header ul li a:active,
-#header ul li a:focus
+#header ul.menu li a:hover,
+#header ul.menu li a:active,
+#header ul.menu li a:focus
 {
         color:#333;
-        background:#bddfb3
+        background:#bddfb3;
+        padding:10px
 }
 
 #header ul li.active a:link,
@@ -146,7 +155,9 @@ h1#logo
 {
         color:#333;
         border-right:solid 1px #237D85;
-        background:#bddfb3 !important
+        background:#bddfb3 !important;
+        padding: 12px 0px  ;
+        border:solid 10px #000
 }
 
 .skiplinks,
@@ -154,15 +165,31 @@ h1#logo
 {
         border:solid 0px #000;
 }
-
-.skiplinks li a.u2:active,
-.skiplinks li a.u2:focus
+#header ul.skiplinks
 {
-        background:#eee !important;
-        border:solid 1px;
-
+        width:100%;
+        text-align:left;
+        background:none;
+        z-index:20000;
+        top:0;
+        display:inline;
+        padding:0
 }
 
+#header ul.skiplinks li a.u2:active,
+#header ul.skiplinks li a.u2:focus
+
+{
+        background:#333 !important;
+        color:#fff !important;
+        border:solid 1px;
+        top:0px !important;
+        z-index:1000000000000 !important;
+        left:10px !important;
+        display:block;
+                width:14em;
+                display:block
+}
 /* ++++++++++++++  fontsize  ++++++++++++++ */
 
 #fontsize
@@ -825,6 +852,13 @@ ul.newsflash-horiz li h4
 }
 
 /* ++++++++++++++  login  ++++++++++++++ */
+
+#form-login .inputbox
+{
+        border:solid 1px #ddd;
+        background:url(../images/content_bg.gif) repeat-x;
+
+}
 
 fieldset.input
 {
