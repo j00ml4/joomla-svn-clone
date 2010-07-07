@@ -17,7 +17,7 @@ jimport('joomla.application.categories');
  * @package		Joomla.Site
  * @subpackage	Contact
  */
-class MediagalleriesModelGallery extends JModel
+class MediagalleriesModelGallery extends JModelList
 {
 	/**
 	 * Category items data
@@ -59,7 +59,6 @@ class MediagalleriesModelGallery extends JModel
 	{
 		// Invoke the parent getItems method to get the main list
 		$items = &parent::getItems();
-		
 
 		// Convert the params field into an object, saving original in _params
 		for ($i = 0, $n = count($items); $i < $n; $i++) {
@@ -162,7 +161,8 @@ class MediagalleriesModelGallery extends JModel
 		// Load the parameters.
 		$this->setState('params', $params);
 	}
-
+	
+	
 	/**
 	 * Method to get category data for the current category
 	 *
@@ -185,7 +185,7 @@ class MediagalleriesModelGallery extends JModel
 			$options['countItems'] = 10;
 			$categories = JCategories::getInstance('Mediagalleries', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
-			dump($categories);
+			
 			
 			if(is_object($this->_item))
 			{
@@ -202,7 +202,7 @@ class MediagalleriesModelGallery extends JModel
 				$this->_parent = false;
 			}
 		}
-
+		
 		return $this->_item;
 	}
 	
