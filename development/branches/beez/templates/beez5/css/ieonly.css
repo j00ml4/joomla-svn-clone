@@ -147,5 +147,6 @@ ul.tabs
 .box
 {width:26%}
 
-.panel
+.panel,
+div.current
 {zoom:1}
