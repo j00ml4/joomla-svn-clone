@@ -146,5 +146,7 @@ ul.tabs
 #bottom
 {display:inline-block}
 
-.panel
+.panel,
+div.current
 {zoom:1}
+
