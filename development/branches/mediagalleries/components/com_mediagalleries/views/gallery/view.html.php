@@ -27,7 +27,7 @@ jimport( 'joomla.application.component.view');
  */
 class MediagalleriesViewGallery extends JView
 {
-	//var $_defaultModel = "gallery";
+	
     /**
      * Hellos view display method
      * @return void
@@ -58,9 +58,7 @@ class MediagalleriesViewGallery extends JView
 		
 		// Get the parameters of the active menu item
 		$menus = &JSite::getMenu();
-		$menu  = $menus->getActive();
-		
-		
+		$menu  = $menus->getActive();		
 		
 		// Set Custom Limit
 		if($cparams->get('limit') ){
@@ -72,32 +70,33 @@ class MediagalleriesViewGallery extends JView
 		}
 		
 		// Get some data from the model
-		$items		=& $this->get('_item');
-		$total		=& $this->get('total');
-		$pagination	=& $this->get('pagination');
-		$category	=& $this->get('category');
-		$state		=& $this->get('state');
 		
+		//$total		=& $this->get('total');
+		
+		$this->pagination	=& $model->getPagination();
+		$this->category	=& $model->getCategory();
+		$this->items		=& $model->getItems();
+		$this->state		=& $model->getState();
+		
+		$this->children= $model->getChildren();
 	
-	
+		
 		// Title
-		if(!empty($category)){
-			$title = $category->title;
+		if(!empty($this->category)){
+			$title = $this->category->title;
 		}
 		elseif(is_object($menu)){
 			$title = $menu->title;
 		}
 		else{
 			$title = JText::_('All Medias');
-		}
-		
-	
+		}	
 				
 		// assign Vars
 		//$this->assignRef('lists',		$lists);
 		
 		//$this->access=$access;				
-		
+	
 		$this->action=$uri->toString();
 		$this->params=$cparams;
 		

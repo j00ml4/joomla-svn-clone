@@ -190,19 +190,19 @@ class ContentModelCategory extends JModelItem
 		$app	= JFactory::getApplication('site');
 		$params	= $this->state->params;
 		$itemid	= JRequest::getInt('id', 0) . ':' . JRequest::getInt('Itemid', 0);
-		$filter_order = $app->getUserStateFromRequest('com_content.category.list.' . $itemid . '.filter_order', 'filter_order', '', 'string');
-		$filter_order_Dir = $app->getUserStateFromRequest('com_content.category.list.' . $itemid . '.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
+		$filter_order = $app->getUserStateFromRequest('com_mediagalleries.category.list.' . $itemid . '.filter_order', 'filter_order', '', 'string');
+		$filter_order_Dir = $app->getUserStateFromRequest('com_mediagalleries.category.list.' . $itemid . '.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
 		$orderby = ' ';
 
 		if ($filter_order && $filter_order_Dir) {
 			$orderby .= $filter_order . ' ' . $filter_order_Dir . ', ';
 		}
 
-		$articleOrderby		= $params->get('orderby_sec', 'rdate');
-		$articleOrderDate	= $params->get('order_date');
-		$categoryOrderby	= $params->def('orderby_pri', '');
-		$secondary			= ContentHelperQuery::orderbySecondary($articleOrderby, $articleOrderDate) . ', ';
-		$primary			= ContentHelperQuery::orderbyPrimary($categoryOrderby);
+		$MediaOrderby		= $params->get('orderby_sec', 'rdate');
+		$MediaOrderDate	= $params->get('order_date');
+		$GalleryOrderby	= $params->def('orderby_pri', '');
+		$secondary			= MediagalleriesHelperQuery::orderbySecondary($articleOrderby, $articleOrderDate) . ', ';
+		$primary			= MediagalleriesHelperQuery::orderbyPrimary($categoryOrderby);
 
 		$orderby .= $primary . ' ' . $secondary . ' a.created ';
 
