@@ -128,7 +128,8 @@ h1#logo
 
 #header ul.menu li
 {
-        border:0
+        border:0;
+
 }
 
 #header ul.menu li a:link,
@@ -156,8 +157,8 @@ h1#logo
         color:#333;
         border-right:solid 1px #237D85;
         background:#bddfb3 !important;
-        padding: 12px 0px  ;
-        border:solid 10px #000
+        padding: 10px  ;
+
 }
 
 .skiplinks,
@@ -1270,3 +1271,92 @@ table.pagenav td
 
 #main .categories-list ul
 {list-style-type:none}
+
+
+
+
+/* contact  plain */
+#main .contact h3
+{
+    border-bottom:solid 1px #ddd;
+    margin: 20px 0
+}
+
+.jform-required
+{
+    font-weight:bold;
+    margin:10px 0;
+    background:#fff url(../images/req.png) no-repeat;
+    padding:10px 40px
+
+}
+
+.contact .inputbox
+{
+    background:#fff url(../images/content_bg.gif) repeat-x ;
+    border:solid 1px #ccc;
+    padding:3px
+}
+/* contact  slider */
+
+.panel
+{
+    border:solid 1px #ddd;
+    margin-top:-1px
+
+}
+#main .contact .panel h3
+{
+    margin:0px 0 0px 0;
+    padding: 0;
+    background:#eee;
+    border:0
+}
+.panel h3 a
+{
+    display:block;
+    padding:6px;
+    text-decoration:none;
+    color:#444;
+    padding:6px;
+}
+
+
+.panel h3.jpane-toggler a
+{
+    background:#f5f5f5 url(../images/slider_plus.png) right  top no-repeat;
+}
+.panel h3.jpane-toggler-down a
+{
+    background:#f5f5f5  url(../images/slider_minus.png) right  top no-repeat;
+    border-bottom:solid 1px #ddd;
+}
+
+.jpane-slider
+{
+    border:solid 0px;
+    padding:0px 10px !important;
+    margin:0;
+    background: url(../images/nav_level_1.gif) repeat-x ;
+}
+
+.panel .jcontact-form,
+.panel  .contact-miscinfo
+{
+    padding:10px
+}
+
+.contact .panel .jcontact-form form,
+.contact .panel .jcontact-address
+{
+    margin:20px 0 0 0
+}
+
+
+/* tabs */
+
+div.current
+{
+
+    background: url(../images/nav_level_1.gif) repeat-x ;
+}

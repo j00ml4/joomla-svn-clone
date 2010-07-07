@@ -859,7 +859,7 @@ p.counter
 
 #right h3 span.backh3
 {
-        padding:0px 0px 5px 10px;
+        padding:0px 0px 5px 0px;
         display:block;
 }
 
@@ -1126,7 +1126,7 @@ margin:20px 0 10px 0;
 
 dl.tabs {
     float: left;
-    margin: 100px 0 0 0;
+    margin: 50px 0 0 0;
     z-index: 50;
     clear:both;
 
@@ -1156,7 +1156,7 @@ div.current {
     clear: both;
     border: 1px solid #ccc;
     padding: 10px 10px;
-    width: 500px;
+    max-width: 500px;
 }
 
 
@@ -1169,13 +1169,7 @@ dl#content-pane.tabs {
     margin: 1px 0 0 0;
 }
 
-div.current label {
-    display: block;
-    min-width: 150px;
-    float: left;
-    clear: left;
-    margin-top: 8px;
-}
+
 /* ##########################  user profile  ########################### */
 
 #users-profile-core,

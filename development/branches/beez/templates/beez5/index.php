@@ -39,9 +39,9 @@ $templateparams	= $app->getTemplate(true)->params;
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/position.css" type="text/css" media="screen,projection" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/layout.css" type="text/css" media="screen,projection" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/print.css" type="text/css" media="Print" />
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/general.css" type="text/css" />
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/beez5.css" type="text/css" />
 <?php
-	$files = JHtml::_('stylesheet','templates/beez5/css/beez5.css',null,false,true);
+	$files = JHtml::_('stylesheet','templates/beez5/css/general.css',null,false,true);
 	if ($files):
 		if (!is_array($files)):
 			$files = array($files);
