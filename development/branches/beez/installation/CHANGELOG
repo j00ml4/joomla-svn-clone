@@ -27,6 +27,17 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+08-Jul-2010 Jean-Marie Simonet
+ # [#21341] Tinymce has a comma error in JS. Thanks Janich.
+ # [#21290] Extension Manager: Manage Message. Thanks Matt.
+ # [#21330] Com_contact Patch. Thanks Angie.
+ ^ [#21266] Clean up code for removal of Uncategorised content
+ # [#21333] com_languages views with wrong id on filter
+ 
+07-Jul-2010 Jean-Marie Simonet
+ $ [#21313] String in Banner.ini. Thanks Joseph.
+ #$ [#21325] Ordering parameter in frontend edit doesn't make sense
+ 
 06-Jul-2010 Andrew Eddie
  # [#20926] Fields in jos_user_profile not removed when user is deleted (Boris Baddenoff, Omar Ramos).
 
