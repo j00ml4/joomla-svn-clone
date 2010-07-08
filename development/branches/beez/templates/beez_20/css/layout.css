@@ -543,7 +543,7 @@ ul.menu li.active ul li.active ul li a:link,
 {
         line-height:1.7em;
         margin:10px 0;
-                padding-left:5px
+        padding-left:0px
 }
 
 .small
@@ -909,6 +909,10 @@ p.counter
 {
         padding:0 5px
 }
+#member-registration fieldset
+{
+border:solid 1px #ddd
+}
 
 form fieldset dt
 {
@@ -1103,7 +1107,12 @@ margin:20px 0 10px 0;
         float:left;
 
 }
-
+span.contact-image
+{
+    margin-bottom:10px;
+    overflow:hidden;
+    display:block
+}
 #contact_textmsg
 {padding: 2px 0 10px 0}
 
@@ -1605,6 +1614,9 @@ ul.newsfeed
         font-size:1.1em;
         font-weight:bold !important
 }
+
+.feed-item-description img
+{margin: 5px 10px 10px 0}
 
 dl.newsfeed-count dt,
 dl.newsfeed-count dd
