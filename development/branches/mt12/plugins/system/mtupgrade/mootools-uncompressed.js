@@ -6130,21 +6130,23 @@ var Scroller = new Class({
 
 script: Tips.js
 
+name: Tips
+
 description: Class for creating nice tips that follow the mouse cursor when hovering an element.
 
 license: MIT-style license
 
 authors:
-- Valerio Proietti
-- Christoph Pojer
+  - Valerio Proietti
+  - Christoph Pojer
 
 requires:
-- core:1.2.4/Options
-- core:1.2.4/Events
-- core:1.2.4/Element.Event
-- core:1.2.4/Element.Style
-- core:1.2.4/Element.Dimensions
-- /MooTools.More
+  - Core:1.2.4/Options
+  - Core:1.2.4/Events
+  - Core:1.2.4/Element.Event
+  - Core:1.2.4/Element.Style
+  - Core:1.2.4/Element.Dimensions
+  - /MooTools.More
 
 provides: [Tips]
 
@@ -6180,15 +6182,15 @@ this.Tips = new Class({
 		hideDelay: 100,
 		className: 'tip-wrap',
 		offset: {x: 16, y: 16},
+		windowPadding: {x:0, y:0},
 		fixed: false
 	},
 
 	initialize: function(){
 		var params = Array.link(arguments, {options: Object.type, elements: $defined});
 		this.setOptions(params.options);
-		document.id(this);
-		
 		if (params.elements) this.attach(params.elements);
+		this.container = new Element('div', {'class': 'tip'});
 	},
 
 	toElement: function(){
@@ -6258,8 +6260,10 @@ this.Tips = new Class({
 		}, this);
 		
 		$clear(this.timer);
-		this.timer = this.show.delay(this.options.showDelay, this, element);
-		this.position((this.options.fixed) ? {page: element.getPosition()} : event);
+		this.timer = (function(){
+			this.show(element);
+			this.position((this.options.fixed) ? {page: element.getPosition()} : event);
+		}).delay(this.options.showDelay, this);
 	},
 
 	elementLeave: function(event, element){
@@ -6269,11 +6273,10 @@ this.Tips = new Class({
 	},
 
 	fireForParent: function(event, element){
-		if (!element) return;
-		parentNode = element.getParent();
-		if (parentNode == document.body) return;
-		if (parentNode.retrieve('tip:enter')) parentNode.fireEvent('mouseenter', event);
-		else this.fireForParent(parentNode, event);
+		element = element.getParent();
+		if (!element || element == document.body) return;
+		if (element.retrieve('tip:enter')) element.fireEvent('mouseenter', event);
+		else this.fireForParent(event, element);
 	},
 
 	elementMove: function(event, element){
@@ -6281,6 +6284,8 @@ this.Tips = new Class({
 	},
 
 	position: function(event){
+		if (!this.tip) document.id(this);
+
 		var size = window.getSize(), scroll = window.getScroll(),
 			tip = {x: this.tip.offsetWidth, y: this.tip.offsetHeight},
 			props = {x: 'left', y: 'top'},
@@ -6288,7 +6293,7 @@ this.Tips = new Class({
 		
 		for (var z in props){
 			obj[props[z]] = event.page[z] + this.options.offset[z];
-			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z]) obj[props[z]] = event.page[z] - this.options.offset[z] - tip[z];
+			if ((obj[props[z]] + tip[z] - scroll[z]) > size[z] - this.options.windowPadding[z]) obj[props[z]] = event.page[z] - this.options.offset[z] - tip[z];
 		}
 		
 		this.tip.setStyles(obj);
@@ -6300,10 +6305,12 @@ this.Tips = new Class({
 	},
 
 	show: function(element){
+		if (!this.tip) document.id(this);
 		this.fireEvent('show', [this.tip, element]);
 	},
 
 	hide: function(element){
+		if (!this.tip) document.id(this);
 		this.fireEvent('hide', [this.tip, element]);
 	}
 
@@ -6490,9 +6497,9 @@ MooTools.upgradeLog = function() {
 	}
 })();
 
-window.onDomReady = function(fn){
+window.onDomReady = Window.onDomReady = function(fn){
 	MooTools.upgradeLog('1.1 > 1.2: window.onDomReady is no longer supported. Use window.addEvent("domready") instead');
-	return this.addEvent('domready', fn);
+	return window.addEvent('domready', fn);
 };if (Browser.__defineGetter__) {
 	Browser.__defineGetter__('hasGetter',function(){
 		return true;
