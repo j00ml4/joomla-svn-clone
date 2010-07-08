@@ -457,6 +457,12 @@ ul.menu li.active ul li.active ul li a:link,
         margin:10px 0 25px
 }
 
+.blog .cat-children .category-desc
+{
+        padding:0 0px;
+        margin:10px 0 25px
+}
+
 #main .items-row h2
 {
         font-weight:normal;
