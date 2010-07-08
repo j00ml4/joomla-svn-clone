@@ -110,7 +110,7 @@ JCombobox.prototype = {
 }
 
 document.combobox = null
-window.addEvent('domready', function(){
+Window.onDomReady(function(){
   var combobox = new JCombobox()
   document.combobox = combobox
 });
