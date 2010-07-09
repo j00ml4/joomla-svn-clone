@@ -117,3 +117,7 @@ div.projects{
 	dd, dt{
 	display:inline;
 	}
+	
+	th{
+	 background-color:gray;
+	}
