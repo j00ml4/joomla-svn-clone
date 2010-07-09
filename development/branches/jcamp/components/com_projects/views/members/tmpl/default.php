@@ -53,4 +53,23 @@ $model = $this->getModel();
 		</div>
 		<?php  } ?>
 	</div>	
+	
+	<table width="70%">
+		<tr>
+			<th width="50%">Role</th>
+			<th>Name</th>
+		</tr>
+		<tr>
+			<td>Project manager</td>
+			<td>Eden</td>
+		</tr>
+		<tr>
+			<td>Architect</td>
+			<td>Elf</td>
+		</tr>
+		<tr>
+			<td>Coder</td>
+			<td>har</td>
+		</tr>
+	</table>
 </div>
