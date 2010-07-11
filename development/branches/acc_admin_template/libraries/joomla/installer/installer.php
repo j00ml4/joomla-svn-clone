@@ -83,7 +83,7 @@ class JInstaller extends JAdapter
 	 * The redirect URL if this extension (can be null if no redirect)
 	 * @var string
 	 */
-	protected $redirct_url = null;
+	protected $redirect_url = null;
 
 	/**
 	 * Constructor
@@ -165,7 +165,7 @@ class JInstaller extends JAdapter
 	 * @since 1.6
 	 */
 	public function setRedirectURL($newurl) {
-		$this->redirecturl = $newurl;
+		$this->redirect_url = $newurl;
 	}
 
 	/**
@@ -292,6 +292,8 @@ class JInstaller extends JAdapter
 
 				case 'query' :
 					// placeholder in case this is necessary in the future
+					// $stepval is always false because if this step was called it invariably failed
+					$stepval = false;
 					break;
 
 				case 'extension' :
@@ -304,6 +306,7 @@ class JInstaller extends JAdapter
 							' WHERE extension_id = '.(int)$step['id'];
 					$db->setQuery($query);
 					$stepval = $db->Query();
+
 					break;
 
 				default :

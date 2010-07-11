@@ -27,10 +27,99 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+08-Jul-2010 Mark Dexter
+# Fixes to beez and beez5 templates (Angie Radtke)
+
+08-Jul-2010 Jean-Marie Simonet
+ # [#21341] Tinymce has a comma error in JS. Thanks Janich.
+ # [#21290] Extension Manager: Manage Message. Thanks Matt.
+ # [#21330] Com_contact Patch. Thanks Angie.
+ ^ [#21266] Clean up code for removal of Uncategorised content
+ # [#21333] com_languages views with wrong id on filter
+ 
+07-Jul-2010 Jean-Marie Simonet
+ $ [#21313] String in Banner.ini. Thanks Joseph.
+ #$ [#21325] Ordering parameter in frontend edit doesn't make sense
+ 
+06-Jul-2010 Andrew Eddie
+ # [#20926] Fields in jos_user_profile not removed when user is deleted (Boris Baddenoff, Omar Ramos).
+
+05-Jul-2010 Mark Dexter
+ # Sample data - assets table, uncategorised issues (Elin Waring)
+ # [#21117] Save Order button doesn't work in Menu Manager:Menu Items
+
+05-Jul-2010 Jean-Marie Simonet
+ #$ [#21307] Customising date format missing
+ # Wrong class for date fields in redirect xml
+
+05-Jul-2010 Ian MacLennan
+ # [#21299] Typo in page cache controller
+
+04-Jul-2010 Jean-Marie Simonet
+ $ [#21304] More user friendly strings for multilanguage aspects
+ # [#21245] Global parameters for single contact--Showing Contact list makes links not show. Thanks Elin.
+ # [#21273] Incorrect date format being used during INSERTs to Redirect table when 404 occurs. Thanks CY Lee
+
+03-Jul-2010 Jean-Marie Simonet
+ # [#20796] Joomla! caches ALL HTML in 1 file. Thanks Klas.
+ # [#21285] Missing "State" filter for page Extension Manager: Manage
+ $ Correcting some ini/keys
+ 
+02-Jul-2010 Jean-Marie Simonet
+ # [#21284] Language sorting by id broken
+ # [#20836] Missing icon in Messages toolbar (missing from original patch)
+ $ [#21279] COM_USERS_GROUPS_NO_ITEM_SELECTED and others similar message undefined
+ $ Adding missing string.
+ 
+02-Jul-2010 Mark Dexter
+ # [#20634] Typo from earlier patch.
+
+02-Jul-2010 Andrew Eddie
+ # [#21181] Consistent use of authorise vs authorize (Rune Sjøen).
+
+01-Jul-2010 Jean-Marie Simonet
+ $ [#21265] Inserting new weblink in backend describes new newsfeeds ordering
+ # [#21244] Unable to change "Linked User" to "No User" in Contacts. Thanks Bill.
+ # [#21272] Checkall broken for contacts, cache, languages. messages
+
+01-Jul-2010 Andrew Eddie
+ # [#21056] Trashing module leaves an erroneous entry in module position dropdown lists
+
+01-Jul-2010 Christophe Demko
+ # [#21254] Different markup in modal and non-modal menu assignment dialog + Correcting the misplaced <h3> tag
+ # [#21249] Module menu assignments in modal checkmark boxes
+ # [#21269] User modal forces horizontal scrolling. Search field size too big
+ # Error in core-uncompressed.js code for ie7/ie8
+
+30-Jun-2010 Ian MacLennan
+ # [#21126] Token Error on Installation
+ # [#20964] Token error on logon
+ # [#21150] Restore 1.5 ability for multiple categories for banner module
+ # [#21212] Head tags for mod_articles_categories
+ # [#21248] Add keepalive functionality to Hathor that was added to core layout in 21197
+ # [#20750] The HTML meta tag for the http-equiv content-type doesn't reflect the mime type stored in JDocument
+ # [#21237] Typo in JInstaller causes unit tests to fail
+ # [#21238] Error in JInstaller
+ # [#21183] Failing JString unit test
+
+30-Jur-2010 Mark Dexter
+ # Assets table for uncategorised categories in sample data (Elin Waring)
+
+30-Jun-2010 Jean-Marie Simonet
+ # [#21169] "Save & New" toolbar button in "Templates Manager: Edit Style" saves an empty template. Thanks Joseph
+ # [#21170] Changes made in description after toggling the editor are not saved. Thanks CY Lee.
+ $ [#21257] Inaccurate string in contact. Thanks Elin.
+ $ Correcting key typo.
+ # [#21255] Module modal - missing module assignment description. Thanks Bill.
+ # [#21217] Hathor RTL menu issues. Thanks Andrea.
+ $ Deleting a bunch of hardcoded colons
+
 29-Jun-2010 Ian MacLennan
  # [#20959] Single Newsfeed Display Options parameters
  # [#21125] Article manager - view created by - details
  # [#21187] Template styles filter does not display admin templates
+ + [#21028] Add function that returns the current documents MIME type
+ # [#20871] Print view page navigation
 
 29-Jun-2010 Jean-Marie Simonet
  # [#20836] Capitalization of "toolbar-popup-Popup". Thanks Matt. + some
@@ -119,7 +208,7 @@ $ -> Language fix or change
  # Fixed issue [#20401] [PATCH] JError::handleDie() does not cause application termination in CLI-program (Artyom Bisyarin).
  
 21-Jun-2010 Mark Dexter
- # Beez template fixes (Angie Radke)
+ # Beez template fixes (Angie Radtke)
 
 21-Jun-2010 Jean-Marie Simonet
  # [#21020] Ordering of weblinks does not work as expected. Thanks Omar.
