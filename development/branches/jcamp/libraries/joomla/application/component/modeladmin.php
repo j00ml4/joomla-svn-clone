@@ -494,11 +494,10 @@ abstract class JModelAdmin extends JModelForm
 		}
 
 		// Store the data.
-//		if (!$table->store()) {
-//			$this->setError($table->getError());
-//			return false;
-//		}
-return false;
+		if (!$table->store()) {
+			$this->setError($table->getError());
+			return false;
+		}
 
 		// Clean the cache.
 		$cache = JFactory::getCache($this->option);

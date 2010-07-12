@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
 	<layout title="COM_CONTACT_CATEGORIES_VIEW_DEFAULT_TITLE">
+		<help
+			key = "JHELP_MENUS_MENU_ITEM_CONTACT_CATEGORIES"
+		/>
 		<message>
 			<![CDATA[COM_CONTACT_CATEGORIES_VIEW_DEFAULT_DESC]]>
 		</message>
@@ -147,7 +150,7 @@
 				<option value="">JGLOBAL_USE_GLOBAL</option>
 				<option value="sliders">COM_CONTACT_FIELD_VALUE_SLIDERS</option>
 				<option value="tabs">COM_CONTACT_FIELD_VALUE_TABS</option>
-				<option value="full">COM_CONTACT_FIELD_VALUE_FULL</option>
+				<option value="plain">COM_CONTACT_FIELD_VALUE_PLAIN</option>
 			</field>
 			<field name="show_name" type="list"
 				description="COM_CONTACT_FIELD_PARAMS_NAME_DESC"
@@ -294,7 +297,7 @@
 				<option value="1">JSHOW</option>
 			</field>
 
-			<field name="show_links" type="list" default="1"
+			<field name="show_links" type="list" 
 				description="COM_CONTACT_FIELD_SHOW_LINKS_DESC"
 				label="COM_CONTACT_FIELD_SHOW_LINKS_LABEL"
 			>

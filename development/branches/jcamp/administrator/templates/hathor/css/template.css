@@ -2353,7 +2353,7 @@ a.jgrid:hover {
 	background-image: url(../images/toolbar/icon-32-checkin.png);
 }
 
-.icon-32-config {
+.icon-32-options{
 	background-image: url(../images/toolbar/icon-32-config.png);
 }
 
@@ -3161,4 +3161,10 @@ label#jform_rules-lbl {
 
 /* Disabled until verified */
 label#jform_rules-lbl {display:none;}
+
+/**
+* Mod_rewrite Warning
 */
+#jform_sef_rewrite-lbl {
+	background: url(../images/admin/icon-16-notice-note.png) right top no-repeat;
+}
