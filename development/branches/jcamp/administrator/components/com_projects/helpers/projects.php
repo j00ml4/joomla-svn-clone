@@ -46,6 +46,12 @@ class ProjectsHelper
 			$extension == 'com_projects.task'
 		);
 		
+		JSubMenuHelper::addEntry(
+			JText::_('COM_PROJECTS_DOCUMENT_CATEGORIES'),
+			'index.php?option=com_categories&extension=com_projects.document',
+			$extension == 'com_projects.document'
+		);
+		
 		// Each Views
 		switch($extension){
 			case 'com_projects':
