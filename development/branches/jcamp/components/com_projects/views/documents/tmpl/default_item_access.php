@@ -41,7 +41,7 @@ $params = $this->params;
 
 <?php if($this->canDo->get('project.edit')) :?>
 <td>
-	<a href="<?php echo JRoute::_('index.php?option=com_projects&view=document&layout=edit&id='.$this->article->id);?>"><?php echo JText::_('JGLOBAL_EDIT'); ?></a>
+	<a href="<?php echo JRoute::_('index.php?option=com_projects&view=document&task=edit&id='.$this->article->id);?>"><?php echo JText::_('JGLOBAL_EDIT'); ?></a>
 </td>
 <?php endif; ?>				
 

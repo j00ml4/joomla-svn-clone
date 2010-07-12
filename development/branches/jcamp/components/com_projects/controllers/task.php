@@ -92,12 +92,17 @@ class ProjectsControllerTask extends JControllerForm
 	//	$model		= &$this->getModel();
 	//	$id 		= &$model->getState('task.id', 0);
 
-		if(!parent::save()){
-			
-			return false;
-		}
+//		dump(JRequest::getVar('jform', array(), 'post', 'array'));
+//		if(!parent::save()){
+	
+//			return false;
+//		}
+			parent::save();
+//			echo $this->getModel()->getTable()->getError().'###';
+			echo $this->getDbo()->getErrorMsg();
+			dump($this->getModel()->getTable());
 		
-		return true;
+//		return true;
 	}
 	
 }

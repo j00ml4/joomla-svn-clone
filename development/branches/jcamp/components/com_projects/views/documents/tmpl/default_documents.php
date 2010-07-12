@@ -91,4 +91,5 @@ $params = $this->params;
 		<input type="hidden" name="filter_order_Dir" value="" />
 		<input type="hidden" name="limitstart" value="" />
 		<input type="hidden" name="task" value="" />
+		<?php echo JHTML::_( 'form.token' ); ?>
 </form>
