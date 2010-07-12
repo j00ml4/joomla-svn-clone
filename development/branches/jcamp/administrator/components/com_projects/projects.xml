@@ -38,6 +38,8 @@
 		    <submenu>
 		            <menu link="option=com_projects" img="class:article">COM_PROJECTS</menu>
 		            <menu link="option=com_categories&amp;extension=com_projects" view="categories" img="class:category" alt="Portfolios">COM_PROJECTS_PORTFOLIOS</menu>
+					<menu link="option=com_categories&amp;extension=com_projects.task" view="categories" img="class:category" alt="Task Categories">COM_PROJECTS_TASK_CATEGORIES</menu>
+					<menu link="option=com_categories&amp;extension=com_projects.document" view="categories" img="class:category" alt="Document Categories">COM_PROJECTS_DOCUMENT_CATEGORIES</menu>
 		    </submenu>  
 		    <files folder="admin">
 		            <filename>index.html</filename>
