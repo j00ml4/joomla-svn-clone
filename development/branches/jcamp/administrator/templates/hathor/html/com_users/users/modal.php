@@ -18,7 +18,7 @@ $function = 'jSelectUser_'.JRequest::getVar('field');
 	<fieldset id="filter-bar">
 	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER'); ?></legend>
 		<div class="filter-search">
-			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER'); ?>:</label>
+			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER'); ?></label>
 			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_USERS_SEARCH_IN_NAME'); ?>" />
 			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
@@ -46,7 +46,7 @@ $function = 'jSelectUser_'.JRequest::getVar('field');
 					<?php echo JHtml::_('grid.sort', 'JGLOBAL_USERNAME', 'a.username', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 				<th class="nowrap width=25">
-					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_GROUPS', 'a.group_names', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_GROUPS', 'group_names', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 				</th>
 			</tr>
 		</thead>

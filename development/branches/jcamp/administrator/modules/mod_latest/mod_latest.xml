@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<install
+<extension
 	type="module"
 	version="1.6.0"
 	client="administrator">
@@ -18,6 +18,7 @@
 		<filename>index.html</filename>
 		<folder>tmpl</folder>
 	</files>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_ADMIN_LATEST" />
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
@@ -45,11 +46,10 @@
 					extension="com_content"
 					label="JCATEGORY"
 					description="MOD_LATEST_FIELD_CATEGORY_DESC"
+					default=""
 					class="inputbox">
 					<option
 						value="">JOPTION_ANY_CATEGORY</option>
-					<option
-						value="0">JOPTION_NO_CATEGORY</option>
 				</field>
 				<field
 					name="user_id"
@@ -91,4 +91,4 @@
 			</fieldset>
 		</fields>
 	</config>
-</install>
+</extension>

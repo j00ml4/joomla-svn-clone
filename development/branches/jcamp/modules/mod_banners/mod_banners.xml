@@ -25,6 +25,7 @@
 		<language
 			tag="en-GB">en-GB.mod_banners.ini</language>
 	</languages>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_BANNERS" />
 	<config>
 		<fields name="params">
 			<fieldset name="basic"
@@ -63,6 +64,7 @@
 					type="category"
 					extension="com_banners"
 					label="JCATEGORY"
+					multiple="true" size="5"											
 					description="MOD_BANNERS_FIELD_CATEGORY_DESC" />
 
 				<field
