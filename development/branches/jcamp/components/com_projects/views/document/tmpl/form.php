@@ -19,7 +19,6 @@ JHtml::_('behavior.formvalidation');
 $params = $this->state->get('params');
 
 $app = &JFactory::getApplication();
-echo $app->getUserState('project.id');
 ?>
 
 <script type="text/javascript">

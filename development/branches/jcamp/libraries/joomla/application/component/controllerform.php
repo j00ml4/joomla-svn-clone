@@ -425,6 +425,7 @@ class JControllerForm extends JController
 
 		// Attempt to save the data.
 		if (!$model->save($data)) {
+			return;
 			// Save the data in the session.
 			$app->setUserState($context.'.data', $data);
 
