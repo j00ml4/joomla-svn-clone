@@ -52,7 +52,7 @@ class MenusViewItem extends JView
 	{
 		JRequest::setVar('hidemainmenu', true);
 
-		$user		= &JFactory::getUser();
+		$user		= JFactory::getUser();
 		$isNew		= ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 
@@ -74,6 +74,9 @@ class MenusViewItem extends JView
 			JToolBarHelper::cancel('item.cancel', 'JTOOLBAR_CLOSE');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('JHELP_MENUS_MENU_ITEM_MANAGER_EDIT');
+
+		// Get the help information for the menu item.
+		$help = $this->get('Help');
+		JToolBarHelper::help($help->key, $help->local, $help->url);
 	}
 }

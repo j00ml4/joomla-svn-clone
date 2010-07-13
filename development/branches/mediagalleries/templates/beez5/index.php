@@ -36,11 +36,23 @@ $templateparams	= $app->getTemplate(true)->params;
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>" >
 	<head>
 		<jdoc:include type="head" />
-			<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/position.css" type="text/css" media="screen,projection" />
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/position.css" type="text/css" media="screen,projection" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/layout.css" type="text/css" media="screen,projection" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/print.css" type="text/css" media="Print" />
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/general.css" type="text/css" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/beez5.css" type="text/css" />
+<?php
+	$files = JHtml::_('stylesheet','templates/beez5/css/general.css',null,false,true);
+	if ($files):
+		if (!is_array($files)):
+			$files = array($files);
+		endif;
+		foreach($files as $file):
+?>
+		<link rel="stylesheet" href="<?php echo $file;?>" type="text/css" />
+<?php
+	 	endforeach;
+	endif;
+?>
 		<?php if ($this->direction == 'rtl') : ?>
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/template_rtl.css" type="text/css" />
 		<?php endif; ?>
@@ -105,9 +117,9 @@ $templateparams	= $app->getTemplate(true)->params;
 							<script type="text/javascript">
 							//<![CDATA[
 							document.write('<h3><?php echo JText::_('TPL_BEEZ5_FONTSIZE'); ?></h3><p class="fontsize">');
-							document.write('<a href="index.php" title="<?php echo JText::_('TPL_BEEZ5_INCREASE_SIZE'); ?>" onclick="changeFontSize(2); return false;" class="larger"><?php echo JText::_('TPL_BEEZ5_BIGGER'); ?></a><span class="unseen">&nbsp;</span>');
+							document.write('<a href="index.php" title="<?php echo JText::_('TPL_BEEZ5_INCREASE_SIZE'); ?>" onclick="changeFontSize(2); return false;" class="larger"><?php echo JText::_('TPL_BEEZ5_BIGGER'); ?></a><span class="unseen">&#160;</span>');
 							document.write('<a href="index.php" title="<?php echo JText::_('TPL_BEEZ5_REVERT_STYLES_TO_DEFAULT'); ?>" onclick="revertStyles(); return false;" class="reset"><?php echo JText::_('TPL_BEEZ5_RESET'); ?></a> ');
-							document.write('<a href="index.php" title="<?php echo JText::_('TPL_BEEZ5_DECREASE_SIZE'); ?>" onclick="changeFontSize(-2); return false;" class="smaller"><?php echo JText::_('TPL_BEEZ5_SMALLER'); ?></a><span class="unseen">&nbsp;</span></p>');
+							document.write('<a href="index.php" title="<?php echo JText::_('TPL_BEEZ5_DECREASE_SIZE'); ?>" onclick="changeFontSize(-2); return false;" class="smaller"><?php echo JText::_('TPL_BEEZ5_SMALLER'); ?></a><span class="unseen">&#160;</span></p>');
 							//]]>
 							</script>
 					</div>

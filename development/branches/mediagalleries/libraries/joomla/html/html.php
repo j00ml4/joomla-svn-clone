@@ -227,7 +227,7 @@ abstract class JHtml
 	 * @param	boolean		detect browser to include specific browser js files
 	 * @param	folder		folder name to search into (images, css, js, ...)
 	 * @see		JBrowser
-	 * @return	array		files to be included		
+	 * @return	array		files to be included
 	 * @since	1.6
 	 */
 	private static function _includeRelativeFiles($file, $relative, $detect_browser, $folder)
@@ -313,7 +313,7 @@ abstract class JHtml
 							{
 								$includes[] = JURI::root(true) . "/media/$extension/$folder/$file";
 							}
-							// Try to deal with system files in the template folder 
+							// Try to deal with system files in the template folder
 							elseif (file_exists(JPATH_THEMES . "/$template/$folder/system/$file"))
 							{
 								$includes[] = JURI::root(true) . "/templates/$template/$folder/system/$file";
@@ -414,7 +414,7 @@ abstract class JHtml
 	 *						a lot of others
 	 * @see JBrowser
 	 *
-	 * @return	mixed		nothing if $path_only is false, null, path or array of path if specific css browser files were detected		
+	 * @return	mixed		nothing if $path_only is false, null, path or array of path if specific css browser files were detected
 	 * @since	1.6
 	 */
 	public static function stylesheet($file, $attribs = array(), $relative = false, $path_only = false, $detect_browser = true)
@@ -441,7 +441,7 @@ abstract class JHtml
 		else
 		// if inclusion is required
 		{
-			$document = &JFactory::getDocument();
+			$document = JFactory::getDocument();
 			foreach ($includes as $include) {
 				$document->addStylesheet($include, 'text/css', null, $attribs);
 			}
@@ -486,7 +486,7 @@ abstract class JHtml
 		else
 		// if inclusion is required
 		{
-			$document = &JFactory::getDocument();
+			$document = JFactory::getDocument();
 			foreach ($includes as $include) {
 				$document->addScript($include);
 			}
@@ -504,7 +504,7 @@ abstract class JHtml
 		$konkcheck		= strpos(strtolower($_SERVER['HTTP_USER_AGENT']), "konqueror");
 		$uncompressed	= ($debug || $konkcheck) ? '-uncompressed' : '';
 
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 		$document->addScript(JURI::root(true).'/media/system/js/core'.$uncompressed.'.js');
 	}
 
@@ -593,47 +593,60 @@ abstract class JHtml
 	/**
 	 * Creates a tooltip with an image as button
 	 *
-	 * @access	public
-	 * @param	string	$tooltip The tip string
-	 * @param	string	$title The title of the tooltip
-	 * @param	string	$image The image for the tip, if no text is provided
-	 * @param	string	$text The text for the tip
-	 * @param	string	$href An URL that will be used to create the link
-	 * @param	boolean depreciated
-	 * @return	string
+	 * @param	string			$tooltip The tip string
+	 * @param	string|array	$title The title of the tooltip or an associative array with keys contained in {'title','image','text','href','alt'} and values
+	 *							corresponding to parameters of the same name.
+	 * @param	string			$image The image for the tip, if no text is provided
+	 * @param	string			$text The text for the tip
+	 * @param	string			$href An URL that will be used to create the link
+	 * @param	string			$alt The alt attribute for img tag
+ 	 * @return	string
 	 * @since	1.5
 	 */
-	public static function tooltip(
-		$tooltip, $title = '', $image = 'tooltip.png', $text = '', $href = '', $link = 1
-	)
-	{
-		$tooltip	= addslashes(htmlspecialchars($tooltip, ENT_COMPAT, 'UTF-8'));
-		$title		= addslashes(htmlspecialchars($title, ENT_COMPAT, 'UTF-8'));
+ 	public static function tooltip($tooltip, $title = '', $image = 'tooltip.png', $text = '', $href = '', $alt = 'Tooltip', $class='hasTip')
+ 	{
+ 		if (is_array($title))
+ 		{
+ 			if (isset($title['image'])) {
+ 				$image = $title['image'];
+ 			}
+ 			if (isset($title['text'])) {
+ 				$text = $title['text'];
+ 			}
+ 			if (isset($title['href'])) {
+ 				$href = $title['href'];
+ 			}
+ 			if (isset($title['alt'])) {
+ 				$alt = $title['alt'];
+ 			}
+ 			if (isset($title['class'])) {
+ 				$class = $title['class'];
+ 			}
+ 			if (isset($title['title'])) {
+ 				$title = $title['title'];
+ 			}
+ 			else {
+ 				$title = '';
+ 			}
+ 		}
+ 		$tooltip	= addslashes(htmlspecialchars($tooltip,	ENT_COMPAT, 'UTF-8'));
+		$title		= addslashes(htmlspecialchars($title,	ENT_COMPAT, 'UTF-8'));
+		$alt 		= addslashes(htmlspecialchars($alt,		ENT_COMPAT, 'UTF-8'));
 
 		if (!$text) {
-			$image	= JURI::root(true).'/includes/js/ThemeOffice/'. $image;
-			$text	= '<img src="'. $image .'" border="0" alt="'. JText::_('Tooltip') .'"/>';
-		} else {
-			$text	= JText::_($text, true);
+			$text = self::image($image, $alt, null, true);
 		}
 
-		if ($title) {
-			$title .= '::';
-		}
-
-		$style = 'style="text-decoration: none; color: #333;"';
-
-		$tip = '<span class="editlinktip hasTip" title="' . $title . $tooltip . '" '
-			. $style . '>';
 		if ($href) {
-			$href = JRoute::_($href);
-			$style = '';
-			$tip .= '<a href="' . $href . '">' . $text . '</a></span>';
+			$tip = '<a href="' . $href . '">' . $text . '</a>';
 		} else {
-			$tip .= $text . '</span>';
+			$tip = $text;
 		}
-
-		return $tip;
+		
+		if ($title) {
+			$tooltip = $title.'::'.$tooltip;
+		}
+		return '<span class="'.$class.'" title="' . $tooltip . '">'.$tip.'</span>';
 	}
 
 	/**
@@ -665,7 +678,7 @@ abstract class JHtml
 		// Only display the triggers once for each control.
 		if (!in_array($id, $done))
 		{
-			$document = &JFactory::getDocument();
+			$document = JFactory::getDocument();
 			$document->addScriptDeclaration('window.addEvent(\'domready\', function() {Calendar.setup({
 			inputField: "'.$id.'",		// id of the input field
 			ifFormat: "'.$format.'",	// format of the input field

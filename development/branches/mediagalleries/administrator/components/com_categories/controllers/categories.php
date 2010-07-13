@@ -7,7 +7,7 @@
 
 defined('_JEXEC') or die;
 
-jimport( 'joomla.application.component.controlleradmin' );
+jimport('joomla.application.component.controlleradmin');
 
 /**
  * The Menu Item Controller
@@ -41,18 +41,38 @@ class CategoriesControllerCategories extends JControllerAdmin
 		$this->setRedirect('index.php?option=com_categories&view=categories');
 
 		// Initialise variables.
-		$model = &$this->getModel();
+		$model = $this->getModel();
 
 		if ($model->rebuild())
 		{
 			// Reorder succeeded.
 			$this->setMessage(JText::_('COM_CATEGORIES_REBUILD_SUCCESS'));
 			return true;
-		}
-		else {
+		} else {
 			// Rebuild failed.
 			$this->setMessage(JText::_('COM_CATEGORIES_REBUILD_FAILURE'));
 			return false;
+		}
+	}
+
+	public function saveorder()
+	{
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		// Get the arrays from the Request
+		$order	= JRequest::getVar('order',	null,	'post',	'array');
+		$originalOrder = explode(',', JRequest::getString('original_order_values'));
+		
+		// Make sure something has changed
+		if (!($order === $originalOrder))
+		{
+			parent::saveorder();
+		}
+		else
+		{
+			// Nothing to reorder
+			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
+			return true;
 		}
 	}
 }

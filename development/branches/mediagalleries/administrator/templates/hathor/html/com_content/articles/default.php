@@ -17,10 +17,9 @@ JHtml::_('behavior.tooltip');
 $user	= JFactory::getUser();
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
-
+$canOrder	= $user->authorise('core.edit.state', 'com_content.article');
+$saveOrder	= $listOrder == 'a.ordering';
 $n = count($this->items);
-
-
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_content&view=articles');?>" method="post" name="adminForm">
 	<fieldset id="filter-bar">
@@ -67,7 +66,7 @@ $n = count($this->items);
 		<thead>
 			<tr>
 				<th class="checkmark-col">
-					<input type="checkbox" name="toggle" id="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?> " onclick="checkAll(this)" />
+					<input type="checkbox" name="checkall-toggle" id="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?> " onclick="checkAll(this)" />
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
@@ -79,11 +78,13 @@ $n = count($this->items);
 					<?php echo JHtml::_('grid.sort', 'COM_CONTENT_HEADING_FEATURED', 'a.featured', $listDirn, $listOrder); ?>
 				</th>
 				<th class="title category-col">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_CATEGORY', 'a.catid', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_CATEGORY', 'category_title', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap ordering-col">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'a.ordering', $listDirn, $listOrder); ?>
-					<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'articles.saveorder'); ?>
+					<?php if ($canOrder && $saveOrder) :?>
+						<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'articles.saveorder'); ?>
+					<?php endif; ?>
 				</th>
 				<th class="title access-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ACCESS', 'access_level', $listDirn, $listOrder); ?>
@@ -143,9 +144,11 @@ $n = count($this->items);
 				</td>
 				<td class="order">
 					<?php if ($canChange) : ?>
-						<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid), 'articles.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
-						<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, ($item->catid == @$this->items[$i+1]->catid), 'articles.orderdown', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
-						<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
+						<?php if ($saveOrder) :?>
+							<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid), 'articles.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
+							<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, ($item->catid == @$this->items[$i+1]->catid), 'articles.orderdown', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
+						<?php endif; ?>
+						<?php $disabled = $saveOrder ?  '' : 'disabled="disabled"'; ?>
 						<input type="text" name="order[]" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" title="<?php echo $item->title; ?> order" />
 					<?php else : ?>
 						<?php echo $item->ordering; ?>
@@ -158,7 +161,7 @@ $n = count($this->items);
 					<?php echo $this->escape($item->author_name); ?>
 				</td>
 				<td class="center">
-					<?php echo JHTML::_('date',$item->created, 'Y-m-d'); ?>
+					<?php echo JHTML::_('date',$item->created, JText::_('DATE_FORMAT_LC4')); ?>
 				</td>
 				<td class="center">
 					<?php echo (int) $item->hits; ?>

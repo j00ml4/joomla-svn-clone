@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: controller.php 16733 2010-05-04 06:05:58Z eddieajau $
+ * @version		$Id: controller.php 17859 2010-06-23 17:55:52Z eddieajau $
  * @package		Joomla.Installation
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -22,29 +22,31 @@ class JInstallationController extends JController
 	/**
 	 * Method to display a view.
 	 *
-	 * @return	void
-	 * @since	1.0
+	 * @param	boolean			If true, the view output will be cached
+	 * @param	array			An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return	JController		This object to support chaining.
+	 * @since	1.5
 	 */
-	public function display()
+	public function display($cachable = false, $urlparams = false)
 	{
 		// Get the current URI to redirect to.
-		$uri		= &JURI::getInstance();
+		$uri		= JURI::getInstance();
 		$redirect	= base64_encode($uri);
 
 		// Get the document object.
-		$document = &JFactory::getDocument();
+		$document	= JFactory::getDocument();
 
 		// Set the default view name and format from the Request.
 		$vName		= JRequest::getWord('view', 'language');
 		$vFormat	= $document->getType();
 		$lName		= JRequest::getWord('layout', 'default');
 
-		if ($view = &$this->getView($vName, $vFormat))
-		{
-			switch ($vName)
-			{
+		if ($view = $this->getView($vName, $vFormat)) {
+
+			switch ($vName) {
 				default:
-					$model = &$this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
+					$model = $this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
 					break;
 			}
 
@@ -57,5 +59,7 @@ class JInstallationController extends JController
 
 			$view->display();
 		}
+
+		return $this;
 	}
 }

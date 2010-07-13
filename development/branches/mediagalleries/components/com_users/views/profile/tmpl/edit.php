@@ -11,10 +11,11 @@
 defined('_JEXEC') or die;
 
 JHtml::_('behavior.mootools');
+JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 //load user_profile plugin language
-$lang = &JFactory::getLanguage();
+$lang = JFactory::getLanguage();
 $lang->load( 'plg_user_profile', JPATH_ADMINISTRATOR );
 ?>
 <div class="profile-edit<?php echo $this->params->get('pageclass_sfx')?>">
@@ -52,9 +53,11 @@ $lang->load( 'plg_user_profile', JPATH_ADMINISTRATOR );
 	<button type="submit" class="validate"><span><?php echo JText::_('JSUBMIT'); ?></span></button>
 <?php echo JText::_('COM_USERS_OR'); ?>
 	<a href="<?php echo JRoute::_(''); ?>" title="<?php echo JText::_('JCANCEL'); ?>"><?php echo JText::_('JCANCEL'); ?></a>
-	
-	<input type="hidden" name="option" value="com_users" />
-	<input type="hidden" name="task" value="profile.save" />
-<?php echo JHtml::_('form.token'); ?>
+
+		<div>
+			<input type="hidden" name="option" value="com_users" />
+			<input type="hidden" name="task" value="profile.save" />
+			<?php echo JHtml::_('form.token'); ?>
+		</div>
 	</form>
 </div>

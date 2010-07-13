@@ -15,14 +15,15 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 
-$user	= &JFactory::getUser();
+$user	= JFactory::getUser();
 $userId	= $user->get('id');
 $extension	= $this->escape($this->state->get('filter.extension'));
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
+$ordering 	= ($listOrder == 'a.lft');
+$canOrder	= $user->authorise('core.edit.state', 'com_categories');
+$saveOrder 	= ($listOrder == 'a.lft' && $listDirn == 'asc');
 $n = count($this->items);
-
-
 ?>
 <div class="categories">
 <form action="<?php echo JRoute::_('index.php?option=com_categories&view=categories');?>" method="post" name="adminForm">
@@ -66,7 +67,7 @@ $n = count($this->items);
 		<thead>
 			<tr>
 				<th class="checkmark-col">
-					<input type="checkbox" name="toggle" id="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?> " onclick="checkAll(this)" />
+					<input type="checkbox" name="checkall-toggle" id="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?> " onclick="checkAll(this)" />
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
@@ -76,7 +77,9 @@ $n = count($this->items);
 				</th>
 				<th class="nowrap ordering-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ORDERING', 'a.lft', $listDirn, $listOrder); ?>
-					<?php echo JHtml::_('grid.order',  $this->items); ?>
+					<?php if ($canOrder && $saveOrder) :?>
+						<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'categories.saveorder'); ?>
+					<?php endif; ?>
 				</th>
 				<th class="access-col">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ACCESS', 'access_level', $listDirn, $listOrder); ?>
@@ -92,8 +95,8 @@ $n = count($this->items);
 
 		<tbody>
 			<?php
+			$originalOrders = array();
 			foreach ($this->items as $i => $item) :
-				$ordering = ($listOrder == 'a.lft');
 				$orderkey = array_search($item->id, $this->ordering[$item->parent_id]);
 				$canCheckin	= $user->authorise('core.manage',		'com_checkin') || $item->checked_out==$user->get('id')  || $item->checked_out==0;
 				$canChange = $canCheckin;
@@ -119,10 +122,17 @@ $n = count($this->items);
 						<?php echo JHtml::_('jgrid.published', $item->published, $i, 'categories.', $canChange);?>
 					</td>
 					<td class="order">
-						<span><?php echo $this->pagination->orderUpIcon($i, isset($this->ordering[$item->parent_id][$orderkey - 1]), 'categories.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
-						<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, isset($this->ordering[$item->parent_id][$orderkey + 1]), 'categories.orderdown', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
-						<?php $disabled = $ordering ?  '' : 'disabled="disabled"'; ?>
-						<input type="text" name="order[]" value="<?php echo $orderkey + 1;?>" <?php echo $disabled ?> class="text-area-order" title="<?php echo $item->title; ?> order" />
+						<?php if ($canChange) : ?>
+							<?php if ($ordering) : ?>
+								<span><?php echo $this->pagination->orderUpIcon($i, isset($this->ordering[$item->parent_id][$orderkey - 1]), 'categories.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
+								<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, isset($this->ordering[$item->parent_id][$orderkey + 1]), 'categories.orderdown', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
+							<?php endif; ?>
+							<?php $disabled = $saveOrder ?  '' : 'disabled="disabled"'; ?>
+							<input type="text" name="order[]" value="<?php echo $orderkey + 1;?>" <?php echo $disabled ?> class="text-area-order" />
+							<?php $originalOrders[] = $orderkey + 1; ?>
+						<?php else : ?>
+							<?php echo $orderkey + 1;?>
+						<?php endif; ?>
 					</td>
 					<td class="center">
 						<?php echo $this->escape($item->access_level); ?>
@@ -150,6 +160,7 @@ $n = count($this->items);
 	<input type="hidden" name="boxchecked" value="0" />
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
 	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+	<input type="hidden" name="original_order_values" value="<?php echo implode($originalOrders, ','); ?>" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
 </div>

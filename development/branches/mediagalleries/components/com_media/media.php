@@ -10,9 +10,9 @@
 // no direct access
 defined('_JEXEC') or die;
 
-$params = &JComponentHelper::getParams('com_media');
+$params = JComponentHelper::getParams('com_media');
 $ranks = array('publisher', 'editor', 'author', 'registered');
-$acl = & JFactory::getACL();
+$acl = JFactory::getACL();
 
 // TODO: Fix this ACL call
 		//for($i = 0; $i < $params->get('allowed_media_usergroup', 3); $i++)
@@ -21,15 +21,15 @@ $acl = & JFactory::getACL();
 		//}
 
 // Make sure the user is authorized to view this page
-$user = & JFactory::getUser();
-$app	= &JFactory::getApplication();
-if (!$user->authorize('com_media', 'popup')) {
+$user = JFactory::getUser();
+$app	= JFactory::getApplication();
+if (!$user->authorise('com_media', 'popup')) {
 	$app->redirect('index.php', JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
 // Set the path definitions
 define('COM_MEDIA_BASE',	JPATH_ROOT.DS.$params->get('image_path', 'images'));
-define('COM_MEDIA_BASEURL', JURI::root(true).'/'.$params->get('image_path', 'images'));
+define('COM_MEDIA_BASEURL', JURI::root().'/'.$params->get('image_path', 'images'));
 
 // Load the admin HTML view
 require_once JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'media.php';

@@ -52,15 +52,15 @@ class InstallerModelInstall extends JModel
 	protected function populateState()
 	{
 		// Initialise variables.
-		$app = &JFactory::getApplication('administrator');
+		$app = JFactory::getApplication('administrator');
 
 		$this->setState('message',$app->getUserState('com_installer.message'));
 		$this->setState('extension_message',$app->getUserState('com_installer.extension_message'));
 		$app->setUserState('com_installer.message','');
 		$app->setUserState('com_installer.extension_message','');
 
-		// Remember the 'Install from Directory' path.
-		$path = $app->getUserStateFromRequest($this->_context.'.install_directory', 'install_directory', $app->getCfg('config.tmp_path'));
+		// Recall the 'Install from Directory' path.
+		$path = $app->getUserStateFromRequest($this->_context.'.install_directory', 'install_directory', $app->getCfg('tmp_path'));
 		$this->setState('install.directory', $path);
 		parent::populateState();
 	}
@@ -82,6 +82,8 @@ class InstallerModelInstall extends JModel
 
 		switch(JRequest::getWord('installtype')) {
 			case 'folder':
+				// Remember the 'Install from Directory' path.
+				$app->getUserStateFromRequest($this->_context.'.install_directory', 'install_directory');
 				$package = $this->_getPackageFromFolder();
 				break;
 
@@ -120,7 +122,7 @@ class InstallerModelInstall extends JModel
 		}
 
 		// Set some model state values
-		$app	= &JFactory::getApplication();
+		$app	= JFactory::getApplication();
 		$app->enqueueMessage($msg);
 		$this->setState('name', $installer->get('name'));
 		$this->setState('result', $result);
@@ -130,7 +132,7 @@ class InstallerModelInstall extends JModel
 
 		// Cleanup the install files
 		if (!is_file($package['packagefile'])) {
-			$config = &JFactory::getConfig();
+			$config = JFactory::getConfig();
 			$package['packagefile'] = $config->get('tmp_path').DS.$package['packagefile'];
 		}
 
@@ -253,7 +255,7 @@ class InstallerModelInstall extends JModel
 			return false;
 		}
 
-		$config = &JFactory::getConfig();
+		$config		= JFactory::getConfig();
 		$tmp_dest	= $config->get('tmp_path');
 
 		// Unpack the downloaded package file

@@ -11,7 +11,7 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 <!--
 	function submitbutton3(pressbutton) {
 		var form = document.adminForm;
@@ -47,27 +47,26 @@ defined('_JEXEC') or die;
 	<div class="width-70 fltlft">
 		<fieldset class="uploadform">
 			<legend><?php echo JText::_('COM_INSTALLER_UPLOAD_PACKAGE_FILE'); ?></legend>
-			<label for="install_package"><?php echo JText::_('COM_INSTALLER_PACKAGE_FILE'); ?>:</label>
+			<label for="install_package"><?php echo JText::_('COM_INSTALLER_PACKAGE_FILE'); ?></label>
 			<input class="input_box" id="install_package" name="install_package" type="file" size="57" />
 			<input class="button" type="button" value="<?php echo JText::_('COM_INSTALLER_UPLOAD_AND_INSTALL'); ?>" onclick="submitbutton()" />
 		</fieldset>
 		<div class="clr"></div>
 		<fieldset class="uploadform">
 			<legend><?php echo JText::_('COM_INSTALLER_INSTALL_FROM_DIRECTORY'); ?></legend>
-			<label for="install_directory"><?php echo JText::_('COM_INSTALLER_INSTALL_DIRECTORY'); ?>:</label>
-			<input type="text" id="install_directory" name="install_directory" class="input_box" size="70" value="<?php echo $this->state->get('com_installer.install.install_directory'); ?>" />
-			<input type="button" class="button" value="<?php echo JText::_('COM_INSTALLER_INSTALL_BUTTON'); ?>" onclick="submitbutton3()" />
+			<label for="install_directory"><?php echo JText::_('COM_INSTALLER_INSTALL_DIRECTORY'); ?></label>
+			<input type="text" id="install_directory" name="install_directory" class="input_box" size="70" value="<?php echo $this->state->get('install.directory'); ?>" />			<input type="button" class="button" value="<?php echo JText::_('COM_INSTALLER_INSTALL_BUTTON'); ?>" onclick="submitbutton3()" />
 		</fieldset>
 		<div class="clr"></div>
 		<fieldset class="uploadform">
 			<legend><?php echo JText::_('COM_INSTALLER_INSTALL_FROM_URL'); ?></legend>
-			<label for="install_url"><?php echo JText::_('COM_INSTALLER_INSTALL_URL'); ?>:</label>
+			<label for="install_url"><?php echo JText::_('COM_INSTALLER_INSTALL_URL'); ?></label>
 			<input type="text" id="install_url" name="install_url" class="input_box" size="70" value="http://" />
 			<input type="button" class="button" value="<?php echo JText::_('COM_INSTALLER_INSTALL_BUTTON'); ?>" onclick="submitbutton4()" />
 		</fieldset>
+		<input type="hidden" name="type" value="" />
+		<input type="hidden" name="installtype" value="upload" />
+		<input type="hidden" name="task" value="install.install" />
+		<?php echo JHtml::_('form.token'); ?>
 	</div>
-	<input type="hidden" name="type" value="" />
-	<input type="hidden" name="installtype" value="upload" />
-	<input type="hidden" name="task" value="install.install" />
-	<?php echo JHtml::_('form.token'); ?>
 </form>

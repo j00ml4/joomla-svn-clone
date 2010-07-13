@@ -28,7 +28,7 @@ class JInstallationModelDatabase extends JModel
 		$options = JArrayHelper::toObject($options, 'JObject');
 
 		// Load the back-end language files so that the DB error messages work
-		$jlang =& JFactory::getLanguage();
+		$jlang = JFactory::getLanguage();
 		// Pre-load en-GB in case the chosen language files do not exist
 		$jlang->load('joomla', JPATH_ADMINISTRATOR, 'en-GB', true);
 		// Load the selected language
@@ -74,7 +74,7 @@ class JInstallationModelDatabase extends JModel
 		if (empty($options->db_created))
 		{
 			// Get a database object.
-			$db = &$this->getDbo($options->db_type, $options->db_host, $options->db_user, $options->db_pass, null, $options->db_prefix, false);
+			$db = $this->getDbo($options->db_type, $options->db_host, $options->db_user, $options->db_pass, null, $options->db_prefix, false);
 
 			// Check for errors.
 			if (JError::isError($db)) {
@@ -95,7 +95,24 @@ class JInstallationModelDatabase extends JModel
 			}
 
 			if (!version_compare($db_version, '5.0.4', '>=')) {
-				$this->setError(JText::_('INSTL_DATABASE_INVALID_MYSQL_VERSION'));
+				$this->setError(JText::sprintf('INSTL_DATABASE_INVALID_MYSQL_VERSION', $db_version));
+				return false;
+			}
+			// @internal MySQL versions pre 5.1.6 forbid . / or \ or NULL
+			if ((preg_match('#[\\\/\.\0]#',$options->db_name)) && (!version_compare($db_version, '5.1.6', '>='))) {
+				$this->setError(JText::sprintf('INSTL_DATABASE_INVALID_NAME',$db_version));
+				return false;
+			}
+
+			// @internal Check for spaces in beginning or end of name
+			if (strlen(trim($options->db_name)) <> strlen($options->db_name)) {
+				$this->setError(JText::_('INSTL_DATABASE_NAME_INVALID_SPACES'));
+				return false;
+			}
+
+			// @internal Check for asc(00) Null in name
+			if (strpos($options->db_name, chr(00)) !== FALSE ) {
+				$this->setError(JText::_('INSTL_DATABASE_NAME_INVALID_CHAR'));
 				return false;
 			}
 
@@ -161,19 +178,24 @@ class JInstallationModelDatabase extends JModel
 			}
 
 			// Handle default backend language setting. This feature is available for localized versions of Joomla 1.5.
-			$app = & JFactory::getApplication();
+			$app = JFactory::getApplication();
 			$languages = $app->getLocaliseAdmin();
 			if (in_array($options->language, $languages['admin']) || in_array($options->language, $languages['site']))
 			{
 				// Build the language parameters for the language manager.
 				$params = array();
+
+				// Set default administrator/site language to sample data values:
+				$params['administrator'] = 'en-GB';
+				$params['site'] = 'en-GB';
+
 				if (in_array($options->language, $languages['admin'])) {
 					$params['administrator'] = $options->language;
 				}
 				if (in_array($options->language, $languages['site'])) {
 					$params['site'] = $options->language;
 				}
-				$params = Json_encode($params);
+				$params = json_encode($params);
 
 				// Update the language settings in the language manager.
 				$db->setQuery(
@@ -181,6 +203,9 @@ class JInstallationModelDatabase extends JModel
 					' SET `params` = '.$db->Quote($params) .
 					' WHERE `element`="com_languages"'
 				);
+
+				// Execute the query.
+				$db->query();
 
 				// Check for errors.
 				if ($db->getErrorNum()) {
@@ -199,7 +224,7 @@ class JInstallationModelDatabase extends JModel
 		$options = JArrayHelper::toObject($options, 'JObject');
 
 		// Get a database object.
-		$db = & JInstallationHelperDatabase::getDBO($options->db_type, $options->db_host, $options->db_user, $options->db_pass, $options->db_name, $options->db_prefix);
+		$db = JInstallationHelperDatabase::getDBO($options->db_type, $options->db_host, $options->db_user, $options->db_pass, $options->db_name, $options->db_prefix);
 
 		// Check for errors.
 		if (JError::isError($db)) {
@@ -260,7 +285,7 @@ class JInstallationModelDatabase extends JModel
 			);
 
 			// Get a database object.
-			$db = & JDatabase::getInstance($options);
+			$db = JDatabase::getInstance($options);
 		}
 
 		return $db;

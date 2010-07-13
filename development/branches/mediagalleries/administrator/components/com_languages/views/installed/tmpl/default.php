@@ -18,10 +18,10 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 		<?php echo $this->loadTemplate('ftp');?>
 	<?php endif; ?>
 
-	<fieldset class="filter">
-		<div class="right">
+	<fieldset id="filter-bar">
+		<div class="filter-select fltrt">
 			<label for="filter_client_id">
-				<?php echo JText::_('COM_LANGUAGES_FILTER_LOCATION_LABEL'); ?>
+				<?php echo JText::_('COM_LANGUAGES_FILTER_CLIENT_LABEL'); ?>
 			</label>
 			<select id="filter_client_id" name="filter_client_id" class="inputbox" onchange="this.form.submit()">
 				<?php echo JHtml::_('select.options', JHtml::_('languages.clients'), 'value', 'text', $this->state->get('filter.client_id'));?>
@@ -36,7 +36,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 					<?php echo JText::_('COM_LANGUAGES_HEADING_NUM'); ?>
 				</th>
 				<th width="30">
-					&nbsp;
+					&#160;
 				</th>
 				<th width="25%" class="title">
 					<?php echo JText::_('COM_LANGUAGES_HEADING_LANGUAGE'); ?>
@@ -97,7 +97,9 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 		</tbody>
 	</table>
 
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<?php echo JHtml::_('form.token'); ?>
+	<div>
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" />
+		<?php echo JHtml::_('form.token'); ?>
+	</div>
 </form>

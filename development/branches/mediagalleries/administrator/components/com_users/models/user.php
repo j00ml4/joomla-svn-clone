@@ -46,7 +46,7 @@ class UsersModelUser extends JModelAdmin
 		$result = parent::getItem($pk);
 
 		// Get the dispatcher and load the users plugins.
-		$dispatcher	= &JDispatcher::getInstance();
+		$dispatcher	= JDispatcher::getInstance();
 		JPluginHelper::importPlugin('user');
 
 		// Trigger the data preparation event.
@@ -228,7 +228,7 @@ class UsersModelUser extends JModelAdmin
 
 		// Trigger the onUserBeforeSave event.
 		JPluginHelper::importPlugin('user');
-		$dispatcher = &JDispatcher::getInstance();
+		$dispatcher = JDispatcher::getInstance();
 
 		if (in_array($user->id, $pks)) {
 			$this->setError(JText::_('COM_USERS_USERS_ERROR_CANNOT_DELETE_SELF'));
@@ -243,7 +243,7 @@ class UsersModelUser extends JModelAdmin
 
 				if ($allow) {
 					// Get user data for the user to delete.
-					$user = & JFactory::getUser($pk);
+					$user = JFactory::getUser($pk);
 
 					// Fire the onUserBeforeDelete event.
 					$dispatcher->trigger('onUserBeforeDelete', array($table->getProperties()));
@@ -407,7 +407,7 @@ class UsersModelUser extends JModelAdmin
 	{
 		// Ensure there are selected users to operate on.
 		if (empty($user_ids)) {
-			$this->setError(JText::_('COM_USERS_NO_USERS_SELECTED'));
+			$this->setError(JText::_('COM_USERS_USERS_NO_ITEM_SELECTED'));
 			return false;
 		} else if (!empty($config)) {
 			// Only run operations if a config array is present.
@@ -447,14 +447,14 @@ class UsersModelUser extends JModelAdmin
 				// Purge operation, remove the users from all groups.
 				if ($doDelete === 2) {
 					$this->_db->setQuery(
-						'DELETE FROM `#__core_acl_groups_aro_map`' .
-						' WHERE `aro_id` IN ('.implode(',', $user_ids).')'
+						'DELETE FROM `#__user_usergroup_map`' .
+						' WHERE `user_id` IN ('.implode(',', $user_ids).')'
 					);
 				} else {
 					// Remove the users from the group.
 					$this->_db->setQuery(
-						'DELETE FROM `#__core_acl_groups_aro_map`' .
-						' WHERE `aro_id` IN ('.implode(',', $user_ids).')' .
+						'DELETE FROM `#__user_usergroup_map`' .
+						' WHERE `user_id` IN ('.implode(',', $user_ids).')' .
 						' AND `group_id` = '.$group_id
 					);
 				}
@@ -475,7 +475,7 @@ class UsersModelUser extends JModelAdmin
 				}
 
 				$this->_db->setQuery(
-					'INSERT IGNORE INTO `#__core_acl_groups_aro_map` (`aro_id`, `group_id`)' .
+					'INSERT IGNORE INTO `#__user_usergroup_map` (`user_id`, `group_id`)' .
 					' VALUES '.implode(',', $tuples)
 				);
 

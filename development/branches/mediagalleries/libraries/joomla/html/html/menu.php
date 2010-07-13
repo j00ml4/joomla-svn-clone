@@ -40,7 +40,7 @@ abstract class JHtmlMenu
 	{
 		if (empty(self::$menus))
 		{
-			$db = &JFactory::getDbo();
+			$db = JFactory::getDbo();
 			$db->setQuery(
 				'SELECT menutype As value, title As text' .
 				' FROM #__menu_types' .
@@ -154,7 +154,7 @@ abstract class JHtmlMenu
 	 */
 	public static function ordering(&$row, $id)
 	{
-		$db = &JFactory::getDbo();
+		$db = JFactory::getDbo();
 
 		if ($id)
 		{
@@ -184,7 +184,7 @@ abstract class JHtmlMenu
 	 */
 	public static function linkoptions($all=false, $unassigned=false)
 	{
-		$db = &JFactory::getDbo();
+		$db = JFactory::getDbo();
 
 		// get a list of the menu items
 		$query = 'SELECT m.id, m.parent_id, m.title, m.menutype'
@@ -270,11 +270,11 @@ abstract class JHtmlMenu
 				$id = $v->id;
 
 				if ($type) {
-					$pre	= '<sup>|_</sup>&nbsp;';
-					$spacer = '.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+					$pre	= '<sup>|_</sup>&#160;';
+					$spacer = '.&#160;&#160;&#160;&#160;&#160;&#160;';
 				} else {
 					$pre	= '- ';
-					$spacer = '&nbsp;&nbsp;';
+					$spacer = '&#160;&#160;';
 				}
 
 				if ($v->parent_id == 0) {

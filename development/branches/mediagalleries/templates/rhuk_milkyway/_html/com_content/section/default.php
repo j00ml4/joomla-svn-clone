@@ -1,6 +1,6 @@
 <?php // no direct access
 defined('_JEXEC') or die;
-$cparams =& JComponentHelper::getParams('com_media');
+$cparams = JComponentHelper::getParams('com_media');
 ?>
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
 <div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
@@ -28,7 +28,7 @@ $cparams =& JComponentHelper::getParams('com_media');
 			<a href="<?php echo $category->link; ?>" class="category">
 				<?php echo $this->escape($category->title);?></a>
 			<?php if ($this->params->get('show_cat_num_articles')) : ?>
-			&nbsp;
+			&#160;
 			<span class="small">
 				( <?php if ($category->numitems==1) {
 				echo $category->numitems ." ". JText::_( 'item' );}

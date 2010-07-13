@@ -43,19 +43,21 @@ class ContentViewCategories extends JView
 
 		if ($items === false)
 		{
-			//TODO Raise error for missing category here
+			JError::raiseWarning(500, JText::_('COM_CONTENT_ERROR_CATEGORY_NOT_FOUND'));
+			return false;
 		}
 
 		if ($parent == false)
 		{
-			//TODO Raise error for missing parent category here
+			JError::raiseWarning(500, JText::_('COM_CONTENT_ERROR_PARENT_CATEGORY_NOT_FOUND'));
+			return false;
 		}
 
 		$params = &$state->params;
 
 		$items = array($parent->id => $items);
 
-		$this->assignRef('maxLevel',	$params->get('maxLevel', -1));
+		$this->assign('maxLevel',	$params->get('maxLevel', -1));
 		$this->assignRef('params',		$params);
 		$this->assignRef('parent',		$parent);
 		$this->assignRef('items',		$items);
@@ -70,8 +72,8 @@ class ContentViewCategories extends JView
 	 */
 	protected function _prepareDocument()
 	{
-		$app	= &JFactory::getApplication();
-		$menus	= &JSite::getMenu();
+		$app	= JFactory::getApplication();
+		$menus	= $app->getMenu();
 		$title	= null;
 
 		// Because the application sets a default page title,

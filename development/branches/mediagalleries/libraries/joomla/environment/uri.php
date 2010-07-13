@@ -184,11 +184,11 @@ class JURI extends JObject
 		// Get the base request path.
 		if (!isset($base))
 		{
-			$config = &JFactory::getConfig();
+			$config = JFactory::getConfig();
 			$live_site = $config->get('live_site');
 			if (trim($live_site) != '')
 			{
-				$uri = &self::getInstance($live_site);
+				$uri = self::getInstance($live_site);
 				$base['prefix'] = $uri->toString(array('scheme', 'host', 'port'));
 				$base['path'] = rtrim($uri->toString(array('path')), '/\\');
 
@@ -198,19 +198,24 @@ class JURI extends JObject
 			}
 			else
 			{
-				$uri			= &self::getInstance();
+				$uri			= self::getInstance();
 				$base['prefix'] = $uri->toString(array('scheme', 'host', 'port'));
 
-				if (strpos(php_sapi_name(), 'cgi') !== false && !empty($_SERVER['REQUEST_URI']))
+				if (strpos(php_sapi_name(), 'cgi') !== false && !ini_get('cgi.fix_pathinfo') && !empty($_SERVER['REQUEST_URI']))
 				{
-					//Apache CGI
-					$base['path'] =  rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+					// PHP-CGI on Apache with "cgi.fix_pathinfo = 0"
+
+					// We shouldn't have user-supplied PATH_INFO in PHP_SELF in this case
+					// because PHP will not work with PATH_INFO at all.
+					$script_name =  $_SERVER['PHP_SELF'];
 				}
 				else
 				{
 					//Others
-					$base['path'] =  rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+					$script_name =  $_SERVER['SCRIPT_NAME'];
 				}
+
+				$base['path'] =  rtrim(dirname($script_name), '/\\');
 			}
 		}
 
@@ -231,7 +236,7 @@ class JURI extends JObject
 		// Get the scheme
 		if (!isset($root))
 		{
-			$uri			= &self::getInstance(self::base());
+			$uri			= self::getInstance(self::base());
 			$root['prefix'] = $uri->toString(array('scheme', 'host', 'port'));
 			$root['path']	= rtrim($uri->toString(array('path')), '/\\');
 		}
@@ -257,7 +262,7 @@ class JURI extends JObject
 		// Get the current URL.
 		if (!isset($current))
 		{
-			$uri	= &self::getInstance();
+			$uri	= self::getInstance();
 			$current = $uri->toString(array('scheme', 'host', 'port', 'path'));
 		}
 
@@ -664,7 +669,7 @@ class JURI extends JObject
 	 */
 	public static function isInternal($url)
 	{
-		$uri = &self::getInstance($url);
+		$uri = self::getInstance($url);
 		$base = $uri->toString(array('scheme', 'host', 'port', 'path'));
 		$host = $uri->toString(array('scheme', 'host', 'port'));
 		if (stripos($base, self::base()) !== 0 && !empty($host)) {

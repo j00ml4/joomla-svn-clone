@@ -27,6 +27,70 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+13-Jul-2010 Mark Dexter
+# Fix SeleniumJoomlaTestCase to report PHP notices
+# System test for [#21083] Category List menu link to unpublished category gives error
+
+12-Jul-2010 Mark Dexter
+# Fix failing system test for sample data changes
+# Update controlpanel0004Test for [#21196] Save order disk not disabled when not in ordering sort
+
+11-Jul-2010 Mark Dexter
+# Add group0002 test to suite
+# Clean up system tests for sample data changes
+
+05-Jul-2010 Mark Dexter
+# Fix system tests for sample data changes
+# Improvements to test methods (Matt Thomas)
+
+04-Jul-2010 Mark Dexter
+# Fix failing system tests (turn off caching, adjust for language changes)
+
+01-Jul-2010 Mark Dexter
+# Fix problems with system test acl0001Test (Matt Thomas)
+# Fix problems running JElement unit tests stand-alone
+
+30-Jun-2010 Mark Dexter
+# Fix failing system tests
+# Fix system tests for uncategorised category changes
+
+28-Jun-2010 Mark Dexter
+# Fix failing system test
++ Added tests for JInstaller
+
+27-Jun-2010 Mark Dexter
+# Fix failing system tests from [#20372] toggle name change
+
+26-Jun-2010 Ian MacLennan
++ Added JInstaller test
+# Improved JError handling in JoomlaTestCase
+
+25-Jun-2010 Mark Dexter
+# Fix failing JForm test in Windows (hard-coded '/')
+# Fix failing JFilterOutputTest (when running stand-alone)
+
+24-Jun-2010 Ian MacLennan
+# Fixed intermittently failing unit test
+# Added some JInstaller unit tests
+
+23-Jun-2010 Ian MacLennan
++ Added unit tests for JAdapter, JAdapterInstance and one for JObject
+# Fixed unit tests that were breaking because mocks were not getting properly injected
+# Fixed JCache unit tests to supply storage handler to accomodate behaviour change (thanks Klas)
+
+22-Jun-2010 Mark Dexter
+# Added test fixes for failing system tests on Hudson server
+
+22-Jun-2010 Ian MacLennan
+ # Added unit tests for JDocument
+
+20-Jun-2010 Mark Dexter
+# [#20735] JMailHelper unit tests
+
+19-Jun-2010 Mark Dexter
++ New system test featured0002test to test ordering down columns
++ New methods in SeleniumJoomlaTestCase for toggling featured and published in Article Manager
+
 12-Jun-2010 Mark Dexter
 # Fix failing featured0001Test
 

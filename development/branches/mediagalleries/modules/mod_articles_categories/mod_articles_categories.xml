@@ -21,6 +21,7 @@
 	<languages>
 		<language tag="en-GB">en-GB.mod_articles_categories.ini</language>
 	</languages>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_ARTICLES_CATEGORIES" />
 	<config>
 	<fields name="params">
 		<fieldset name="basic">
@@ -73,6 +74,16 @@
 		<fieldset name="advanced">
 			<field name="layout" type="modulelayout"
 				label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+			<field name="item_heading" type="list" default="4"
+				label="MOD_ARTICLES_CATEGORIES_TITLE_HEADING_LABEL"
+				description="MOD_ARTICLES_CATEGORIES_TITLE_HEADING_DESC"
+			>
+				<option value="1">JH1</option>
+				<option value="2">JH2</option>
+				<option value="3">JH3</option>
+				<option value="4">JH4</option>
+				<option value="5">JH5</option>
+			</field>
 
 			<field name="moduleclass_sfx" type="text"
 				label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"

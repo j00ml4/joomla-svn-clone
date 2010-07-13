@@ -21,12 +21,12 @@ class MediaViewMedia extends JView
 {
 	function display($tpl = null)
 	{
-		$app	= &JFactory::getApplication();
-		$config = &JComponentHelper::getParams('com_media');
+		$app	= JFactory::getApplication();
+		$config = JComponentHelper::getParams('com_media');
 
 		$style = $app->getUserStateFromRequest('media.list.layout', 'layout', 'thumbs', 'word');
 
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 		$document->setBuffer($this->loadTemplate('navigation'), 'modules', 'submenu');
 
 		JHtml::_('behavior.framework', true);
@@ -114,7 +114,7 @@ class MediaViewMedia extends JView
 	protected function addToolbar()
 	{
 		// Get the toolbar object instance
-		$bar = &JToolBar::getInstance('toolbar');
+		$bar = JToolBar::getInstance('toolbar');
 
 		// Set the titlebar text
 		JToolBarHelper::title(JText::_('COM_MEDIA'), 'mediamanager.png');
@@ -126,7 +126,7 @@ class MediaViewMedia extends JView
 					$title</a>";
 		$bar->appendButton('Custom', $dhtml, 'delete');
 		JToolBarHelper::divider();
-		JToolBarHelper::preferences('com_media');
+		JToolBarHelper::preferences('com_media', 450, 800, 'JToolbar_Options', '', 'window.location.reload()');
 		JToolBarHelper::divider();
 		JToolBarHelper::help('JHELP_CONTENT_MEDIA_MANAGER');
 	}

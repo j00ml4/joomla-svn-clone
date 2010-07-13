@@ -60,7 +60,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo JText::_('COM_SEARCH_HEADING_RESULTS'); ?>
 				</th>
 				<th width="30%">
-					&nbsp;
+					&#160;
 				</th>
 			</tr>
 		</thead>
@@ -91,7 +91,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php endif; ?>
 					</td>
 					<td>
-						&nbsp;
+						&#160;
 					</td>
 				</tr>
 			<?php endforeach; ?>
@@ -99,9 +99,11 @@ $listDirn	= $this->state->get('list.direction');
 		</table>
 
 
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<div>
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" />
+		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+		<?php echo JHtml::_('form.token'); ?>
+	</div>
 </form>

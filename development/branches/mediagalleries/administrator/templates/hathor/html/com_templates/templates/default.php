@@ -16,7 +16,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.modal');
 
-$user = & JFactory::getUser();
+$user = JFactory::getUser();
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 ?>
@@ -50,7 +50,7 @@ $listDirn	= $this->state->get('list.direction');
 		<thead>
 			<tr>
 				<th class="checkmark-col">
-					&nbsp;
+					&#160;
 				</th>
 				<th>
 					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TEMPLATE', 'a.element', $listDirn, $listOrder); ?>

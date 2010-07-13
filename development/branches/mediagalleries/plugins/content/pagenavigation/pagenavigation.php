@@ -24,7 +24,12 @@ class plgContentPagenavigation extends JPlugin
 	public function onContentBeforeDisplay($context, &$row, &$params, $page=0)
 	{
 		$view = JRequest::getCmd('view');
-
+		$print = JRequest::getBool('print');
+		
+		if ($print) {
+			return false;
+		}
+		
 		if ($params->get('show_item_navigation') && ($context == 'com_content.article')) {
 			$html = '';
 			$db		= JFactory::getDbo();
@@ -37,7 +42,7 @@ class plgContentPagenavigation extends JPlugin
 
 			$uid	= $row->id;
 			$option	= 'com_content';
-			$canPublish = $user->authorize('core.edit.state', $option.'.'.$view.'.'.$row->id);
+			$canPublish = $user->authorise('core.edit.state', $option.'.'.$view.'.'.$row->id);
 
 			// The following is needed as different menu items types utilise a different param to control ordering.
 			// For Blogs the `orderby_sec` param is the order controlling param.
@@ -168,7 +173,7 @@ class plgContentPagenavigation extends JPlugin
 				if ($row->prev && $row->next) {
 					$html .= '
 					<td width="50">
-						&nbsp;
+						&#160;
 					</td>'
 					;
 				}

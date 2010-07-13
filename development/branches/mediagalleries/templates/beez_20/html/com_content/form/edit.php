@@ -19,13 +19,16 @@ JHtml::_('behavior.formvalidation');
 $params = $this->state->get('params');
 ?>
 
-<script language="javascript" type="text/javascript">
-function submitbutton(task) {
-	if (task == 'article.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
-		<?php //echo $this->form->fields['introtext']->editor->save('jform[introtext]'); ?>
+<script type="text/javascript">
+	function submitbutton(task) {
+		if (task == 'article.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
+			<?php echo $this->form->getField('text')->save(); ?>
 		submitform(task);
+		}
+		else {
+			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+		}
 	}
-}
 </script>
 <div class="edit item-page<?php echo $this->escape($params->get('pageclass_sfx')); ?>">
 <?php if ($params->get('show_page_heading', 1)) : ?>
@@ -94,14 +97,15 @@ function submitbutton(task) {
 		<?php echo $this->form->getLabel('access'); ?>
 		<?php echo $this->form->getInput('access'); ?>
 		</div>
-		<div class="formelm">
-		<?php echo $this->form->getLabel('ordering'); ?>
-		<?php echo $this->form->getInput('ordering'); ?>
-		</div>
+		<?php if (is_null($this->item->id)):?>
+			<div class="form-note">
+			<p><?php echo JText::_('COM_CONTENT_ORDERING'); ?></p>
+			</div>
+		<?php endif; ?>
 	</fieldset>
 
 	<fieldset>
-		<legend><?php echo JText::_('COM_CONTENT_LANGUAGE'); ?></legend>
+		<legend><?php echo JText::_('JFIELD_LANGUAGE_LABEL'); ?></legend>
 		<div class="formelm_area">
 		<?php echo $this->form->getLabel('language'); ?>
 		<?php echo $this->form->getInput('language'); ?>
@@ -118,9 +122,8 @@ function submitbutton(task) {
 		<?php echo $this->form->getLabel('metakey'); ?>
 		<?php echo $this->form->getInput('metakey'); ?>
 		</div>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHTML::_( 'form.token' ); ?>
 	</fieldset>
-
-	<input type="hidden" name="task" value="" />
-	<?php echo JHTML::_( 'form.token' ); ?>
 </form>
 </div>

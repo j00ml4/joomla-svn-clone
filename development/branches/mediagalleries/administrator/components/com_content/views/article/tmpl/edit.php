@@ -15,6 +15,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 // Load the tooltip behavior.
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+JHtml::_('behavior.keepalive');
 ?>
 
 <script type="text/javascript">
@@ -160,9 +161,8 @@ JHtml::_('behavior.formvalidation');
 		</fieldset>
 
 		<?php echo JHtml::_('sliders.end'); ?>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHtml::_('form.token'); ?>
 	</div>
-
-	<input type="hidden" name="task" value="" />
-	<?php echo JHtml::_('form.token'); ?>
 </form>
 <div class="clr"></div>

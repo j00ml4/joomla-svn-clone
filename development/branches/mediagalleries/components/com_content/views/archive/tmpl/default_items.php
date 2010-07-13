@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
-$params =& $this->params;
+$params = &$this->params;
 ?>
 
 <ul id="archive-items">
@@ -35,8 +35,7 @@ $params =& $this->params;
 
 <?php if ($params->get('show_category')) : ?>
 		<dd class="category-name">
-			<?php $title = $this->escape($item->category_title);
-					$title = ($title) ? $title : JText::_('JGLOBAL_UNCATEGORISED');
+			<?php	$title = $this->escape($item->category_title);
 					$url = '<a href="' . JRoute::_(ContentHelperRoute::getCategoryRoute($item->catslug)) . '">' . $title . '</a>'; ?>
 			<?php if ($params->get('link_category') && $item->catslug) : ?>
 				<?php echo JText::sprintf('COM_CONTENT_CATEGORY', $url); ?>
@@ -84,7 +83,7 @@ $params =& $this->params;
 	if ($item->params->get('access-view')) :
 		$link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catslug));
 	else :
-		$menu = JSite::getMenu();
+		$menu = JFactory::getApplication()->getMenu();
 		$active = $menu->getActive();
 		$itemId = $active->id;
 		$link1 = JRoute::_('index.php?option=com_users&view=login&Itemid=' . $itemId);

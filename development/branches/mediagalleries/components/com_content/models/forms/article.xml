@@ -91,7 +91,7 @@
 			class="inputbox"
 			required="true">
 			<option
-				value="0">JOPTION_NO_CATEGORY</option>
+				value="0">JOPTION_SELECT_CATEGORY</option>
 		</field>
 
 		<field
@@ -135,16 +135,6 @@
 			format="%Y-%m-%d %H:%M:%S"
 			size="20"
 			filter="user_utc" />
-
-		<field
-			id="ordering"
-			name="ordering"
-			type="ordering"
-			label="JFIELD_ORDERING_LABEL"
-			description="JFIELD_ORDERING_DESC"
-			class="inputbox"
-			size="6"
-			default="0" />
 
 		<field
 			name="language"

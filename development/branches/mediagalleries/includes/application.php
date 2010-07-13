@@ -129,7 +129,7 @@ final class JSite extends JApplication
 		parent::route();
 
 		$Itemid = JRequest::getInt('Itemid');
-		$this->authorize($Itemid);
+		$this->authorise($Itemid);
 	}
 
 	/**
@@ -232,8 +232,13 @@ final class JSite extends JApplication
 		JPluginHelper::importPlugin('system');
 		$this->triggerEvent('onBeforeRender');
 
+		$caching = false;
+		if ($this->getCfg('caching') && $this->getCfg('caching',2) == 2) {
+			$caching = true; 
+		}
+		
 		// Render the document.
-		JResponse::setBody($document->render($this->getCfg('caching'), $params));
+		JResponse::setBody($document->render($caching, $params));
 
 		// Trigger the onAfterRender event.
 		$this->triggerEvent('onAfterRender');
@@ -261,11 +266,19 @@ final class JSite extends JApplication
 	}
 
 	/**
-	 * Check if the user can access the application
+	 * @deprecated 1.6	Use the authorise method instead.
 	 */
 	public function authorize($itemid)
 	{
-		$menus	= JSite::getMenu();
+		return $this->authorise($itemid);
+	}
+
+	/**
+	 * Check if the user can access the application
+	 */
+	public function authorise($itemid)
+	{
+		$menus	= $this->getMenu();
 		$user	= JFactory::getUser();
 
 		if (!$menus->authorise($itemid))
@@ -314,7 +327,7 @@ final class JSite extends JApplication
 			$params[$hash] = clone JComponentHelper::getParams($option);
 
 			// Get menu parameters
-			$menus	= JSite::getMenu();
+			$menus	= $this->getMenu();
 			$menu	= $menus->getActive();
 
 			// Get language
@@ -451,10 +464,13 @@ final class JSite extends JApplication
 	/**
 	 * Return a reference to the JPathway object.
 	 *
-	 * @return object JPathway.
-	 * @since 1.5
+	 * @param	string	$name		The name of the application/client.
+	 * @param	array	$options	An optional associative array of configuration settings.
+	 *
+	 * @return	object	JMenu.
+	 * @since	1.5
 	 */
-	public function getMenu()
+	public function getMenu($name = null, $options = array())
 	{
 		$options	= array();
 		$menu		= parent::getMenu('site', $options);
@@ -464,10 +480,13 @@ final class JSite extends JApplication
 	/**
 	 * Return a reference to the JPathway object.
 	 *
-	 * @return object JPathway.
-	 * @since 1.5
+	 * @param	string	$name		The name of the application.
+	 * @param	array	$options	An optional associative array of configuration settings.
+	 *
+	 * @return	object JPathway.
+	 * @since	1.5
 	 */
-	public function getPathWay()
+	public function getPathway($name = null, $options = array())
 	{
 		$options = array();
 		$pathway = parent::getPathway('site', $options);
@@ -477,10 +496,13 @@ final class JSite extends JApplication
 	/**
 	 * Return a reference to the JRouter object.
 	 *
-	 * @return	JRouter.
+	 * @param	string	$name		The name of the application.
+	 * @param	array	$options	An optional associative array of configuration settings.
+	 *
+	 * @return	JRouter
 	 * @since	1.5
 	 */
-	static public function getRouter()
+	static public function getRouter($name = null, array $options = array())
 	{
 		$config = JFactory::getConfig();
 		$options['mode'] = $config->get('sef');
