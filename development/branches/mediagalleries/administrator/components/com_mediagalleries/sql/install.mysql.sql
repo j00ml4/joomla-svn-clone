@@ -43,6 +43,6 @@ CREATE TABLE IF NOT EXISTS `#__mediagalleries` (
   INDEX `idx_xreference` (`xreference` ASC) ,
   INDEX `idx_language` (`language` ASC) ,
   INDEX `idx_checked_out` (`checked_out` ASC) ,
-  INDEX `idx_alias` (`alias` ASC) )
+  INDEX `idx_alias` (`alias` ASC) 
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
 
