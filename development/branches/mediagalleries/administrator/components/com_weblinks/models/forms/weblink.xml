@@ -19,15 +19,15 @@
 			label="JCATEGORY" description="COM_WEBLINKS_FIELD_CATEGORY_DESC"
 			class="inputbox"
 		>
-			<option>JOPTION_NO_CATEGORY</option>
 		</field>
 
 		<field name="url" type="text" class="inputbox"
 			size="40" label="COM_WEBLINKS_FIELD_URL_LABEL"
-			description="COM_WEBLINKS_FIELD_URL_DESC" />
+			description="COM_WEBLINKS_FIELD_URL_DESC" required="true" />
 
 		<field name="description" type="editor" buttons="true" hide="pagebreak,readmore"
 			class="inputbox"
+			filter="safehtml"
 			label="JGLOBAL_DESCRIPTION" description="COM_WEBLINKS_FIELD_DESCRIPTION_DESC" />
 
 		<field name="date" type="Date" class="inputbox"
@@ -170,7 +170,7 @@
 	</fields>
 
 	<fields name="metadata">
-		<fieldset name="jmetadata" label="COM_WEBLINKS_FIELDSET_METADATA">
+		<fieldset name="jmetadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
 			<field name="robots" type="list"
 				label="JFIELD_METADATA_ROBOTS_LABEL" description="JFIELD_METADATA_ROBOTS_DESC"
 			>

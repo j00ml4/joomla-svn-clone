@@ -22,14 +22,14 @@ class JHTMLIcon
 {
 	static function create($article, $params)
 	{
-		$uri = &JFactory::getURI();
+		$uri = JFactory::getURI();
 
 		$url = 'index.php?option=com_content&task=article.add&return='.base64_encode($uri).'&id=0&sectionid='.$article->sectionid;
 
 		if ($params->get('show_icons')) {
 			$text = JHTML::_('image','system/new.png', JText::_('JNEW'), NULL, true);
 		} else {
-			$text = JText::_('JNEW').'&nbsp;';
+			$text = JText::_('JNEW').'&#160;';
 		}
 
 		$attribs	= array('title' => JText::_('JNEW'));
@@ -38,7 +38,7 @@ class JHTMLIcon
 
 	static function email($article, $params, $attribs = array())
 	{
-		$uri	= &JURI::getInstance();
+		$uri	= JURI::getInstance();
 		$base	= $uri->toString(array('scheme', 'host', 'port'));
 		$link	= $base.JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid) , false);
 		$url	= 'index.php?option=com_mailto&tmpl=component&link='.base64_encode($link);
@@ -48,7 +48,7 @@ class JHTMLIcon
 		if ($params->get('show_icons')) {
 			$text = JHTML::_('image','system/emailButton.png', JText::_('JGLOBAL_EMAIL'), NULL, true);
 		} else {
-			$text = '&nbsp;'.JText::_('JGLOBAL_EMAIL');
+			$text = '&#160;'.JText::_('JGLOBAL_EMAIL');
 		}
 
 		$attribs['title']	= JText::_('JGLOBAL_EMAIL');
@@ -60,8 +60,8 @@ class JHTMLIcon
 
 	static function edit($article, $params, $attribs = array())
 	{
-		$user = &JFactory::getUser();
-		$uri = &JFactory::getURI();
+		$user = JFactory::getUser();
+		$uri = JFactory::getURI();
 
 		if ($params->get('popup')) {
 			return;
@@ -112,7 +112,7 @@ class JHTMLIcon
 		if ($params->get('show_icons')) {
 			$text = JHTML::_('image','system/printButton.png', JText::_('COM_CONTENT_PRINT'), NULL, true);
 		} else {
-			$text = JText::_('COM_CONTENT_ICON_SEP') .'&nbsp;'. JText::_('COM_CONTENT_PRINT') .'&nbsp;'. JText::_('COM_CONTENT_ICON_SEP');
+			$text = JText::_('COM_CONTENT_ICON_SEP') .'&#160;'. JText::_('COM_CONTENT_PRINT') .'&#160;'. JText::_('COM_CONTENT_ICON_SEP');
 		}
 
 		$attribs['title']	= JText::_('COM_CONTENT_PRINT');
@@ -128,7 +128,7 @@ class JHTMLIcon
 		if ($params->get('show_icons')) {
 			$text = JHTML::_('image','system/printButton.png', JText::_('Print'), NULL, true);
 		} else {
-			$text = JText::_('COM_CONTENT_ICON_SEP') .'&nbsp;'. JText::_('COM_CONTENT_PRINT') .'&nbsp;'. JText::_('COM_CONTENT_ICON_SEP');
+			$text = JText::_('COM_CONTENT_ICON_SEP') .'&#160;'. JText::_('COM_CONTENT_PRINT') .'&#160;'. JText::_('COM_CONTENT_ICON_SEP');
 		}
 		return '<a href="#" onclick="window.print();return false;">'.$text.'</a>';
 	}

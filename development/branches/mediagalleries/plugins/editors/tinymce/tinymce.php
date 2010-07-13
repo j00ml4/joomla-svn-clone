@@ -455,7 +455,7 @@ class plgEditorTinymce extends JPlugin
 					remove_script_host : false,
 					// Layout
 					$content_css
-					document_base_url : \"". JURI::root() ."\",
+					document_base_url : \"". JURI::root() ."\"
 				});
 				</script>";
 				break;
@@ -612,7 +612,7 @@ class plgEditorTinymce extends JPlugin
 
 	function onGetInsertMethod($name)
 	{
-		$doc =& JFactory::getDocument();
+		$doc = JFactory::getDocument();
 
 		$js= "
 			function isBrowserIE() {

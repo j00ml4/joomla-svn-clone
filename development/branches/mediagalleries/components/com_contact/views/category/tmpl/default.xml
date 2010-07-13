@@ -2,6 +2,9 @@
 	<!-- $Id$ -->
 <metadata>
 	<layout title="COM_CONTACT_CATEGORY_VIEW_DEFAULT_TITLE">
+		<help
+			key = "JHELP_MENUS_MENU_ITEM_CONTACT_CATEGORY"
+		/>
 		<message>
 			<![CDATA[COM_CONTACT_CATEGORY_VIEW_DEFAULT_DESC]]>
 		</message>
@@ -138,7 +141,7 @@
 				<option value="">JGLOBAL_USE_GLOBAL</option>			
 				<option value="sliders">COM_CONTACT_FIELD_VALUE_SLIDERS</option>
 				<option value="tabs">COM_CONTACT_FIELD_VALUE_TABS</option>
-				<option value="full">COM_CONTACT_FIELD_VALUE_FULL</option>
+				<option value="plain">COM_CONTACT_FIELD_VALUE_PLAIN</option>
 			</field>
 			<field name="show_name" type="list"
 				description="COM_CONTACT_FIELD_PARAMS_NAME_DESC"

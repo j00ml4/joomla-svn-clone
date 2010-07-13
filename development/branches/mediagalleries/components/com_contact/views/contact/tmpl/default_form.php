@@ -8,7 +8,7 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die;
-
+JHtml::_('behavior.keepalive');
 	$script = '<!--
 		function validateForm(frm) {
 			var valid = document.formvalidator.isValid(frm);
@@ -25,20 +25,20 @@ defined('_JEXEC') or die;
 			}
 		}
 		// -->';
-	$document = &JFactory::getDocument();
+	$document = JFactory::getDocument();
 	$document->addScriptDeclaration($script); ?>
 
 <?php if (isset($this->error)) : ?>
-<div class="jcontact-error">
-	<?php echo $this->error; ?>
-</div>
+	<div class="jcontact-error">
+		<?php echo $this->error; ?>
+	</div>
 <?php endif; ?>
 
 <div class="jcontact-form">
 	<form action="<?php echo JRoute::_('index.php');?>" method="post" name="emailForm" id="emailForm" class="form-validate">
-		<div class="jform-required">
+		<p class="jform-required">
 			<?php echo JText::_('COM_CONTACT_CONTACT_REQUIRED');?>
-		</div>
+		</p>
 		<div class="contact_email">
 			<div>
 				<label for="contact_name">
@@ -74,15 +74,14 @@ defined('_JEXEC') or die;
 			</div>
 			<?php endif; ?>
 			<div>
-			<button class="button validate" type="submit"><?php echo JText::_('COM_CONTACT_CONTACT_SEND'); ?></button>
+				<button class="button validate" type="submit"><?php echo JText::_('COM_CONTACT_CONTACT_SEND'); ?></button>
 			</div>
+			<input type="hidden" name="option" value="com_contact" />
+			<input type="hidden" name="view" value="contact" />
+			<input type="hidden" name="id" value="<?php echo $this->contact->id; ?>" />
+			<input type="hidden" name="task" value="submit" />
+			<input type="hidden" name="return" value="<?php echo $this->return; ?>" />
+			<?php echo JHtml::_('form.token'); ?>
 		</div>
-
-	<input type="hidden" name="option" value="com_contact" />
-	<input type="hidden" name="view" value="contact" />
-	<input type="hidden" name="id" value="<?php echo $this->contact->id; ?>" />
-	<input type="hidden" name="task" value="submit" />
-	<input type="hidden" name="return" value="<?php echo $this->return; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
 	</form>
 </div>

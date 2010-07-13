@@ -46,7 +46,7 @@ class WeblinksModelCategories extends JModel
 	 */
 	protected function populateState()
 	{
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
 		$this->setState('filter.extension', $this->_extension);
 
 		// Get the parent id if defined.
@@ -100,7 +100,7 @@ class WeblinksModelCategories extends JModel
 				$params->loadJSON($active->params);
 			}
 			$options = array();
-			$options['countItems'] = $params->get('show_item_count', 0) || !$params->get('show_empty_categories', 0);
+			$options['countItems'] = $params->get('show_numbers', 0) || !$params->get('show_empty_categories', 0);
 			$categories = JCategories::getInstance('Weblinks', $options);
 			$this->_parent = $categories->get($this->getState('filter.parentId', 'root'));
 			if(is_object($this->_parent))

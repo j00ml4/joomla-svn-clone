@@ -46,7 +46,7 @@ abstract class ModMenuHelper
 	 * @return	array	A nest array of component objects and submenus
 	 * @since	1.6
 	 */
-	function getComponents($authCheck = true)
+	public static function getComponents($authCheck = true)
 	{
 		// Initialise variables.
 		$lang	= JFactory::getLanguage();
@@ -80,7 +80,7 @@ abstract class ModMenuHelper
 
 			if ($component->parent_id == 1) {
 				// Only add this top level if it is authorised and enabled.
-				if ($authCheck == false || ($authCheck && $user->authorize('core.manage', $component->element))) {
+				if ($authCheck == false || ($authCheck && $user->authorise('core.manage', $component->element))) {
 					// Root level.
 					$result[$component->id] = $component;
 					if (!isset($result[$component->id]->submenu)) {

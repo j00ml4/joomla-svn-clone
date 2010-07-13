@@ -237,7 +237,7 @@
 	</fieldset>
 
 	<fields name="metadata">
-		<fieldset name="metadata">
+		<fieldset name="metadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
 
 			<field name="robots" type="text"
 				description="JFIELD_METADATA_ROBOTS_DESC"
@@ -410,7 +410,6 @@
 		</field>
 
 		<field name="show_links" type="list"
-			default="0"
 			description="CONTACT_SHOW_LINKS_DESC"
 			label="CONTACT_SHOW_LINKS_LABEL"
 		>

@@ -1,7 +1,7 @@
 <?php // no direct access
 defined('_JEXEC') or die;
 
-$canEdit	= ($this->user->authorize('core.edit', 'com_content.article.'.$this->article->id));
+$canEdit	= ($this->user->authorise('core.edit', 'com_content.article.'.$this->article->id));
 ?>
 <?php if ($this->params->get('show_page_heading', 1) && $this->params->get('page_title') != $this->article->title) : ?>
 	<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
@@ -95,7 +95,7 @@ endif; ?>
 		<span class="small">
 			<?php JText::printf( 'COM_CONTENT_WRITTEN_BY', ($this->escape($this->article->created_by_alias) ? $this->escape($this->article->created_by_alias) : $this->escape($this->article->author)) ); ?>
 		</span>
-		&nbsp;&nbsp;
+		&#160;&#160;
 	</td>
 </tr>
 <?php endif; ?>
@@ -134,5 +134,5 @@ endif; ?>
 </tr>
 <?php endif; ?>
 </table>
-<span class="article_separator">&nbsp;</span>
+<span class="article_separator">&#160;</span>
 <?php echo $this->article->event->afterDisplayContent; ?>

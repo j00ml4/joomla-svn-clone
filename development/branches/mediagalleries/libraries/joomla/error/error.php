@@ -435,7 +435,7 @@ w
 			// output as html
 			echo "<br /><b>J$level_human</b>: ".$error->get('message')."<br />\n";
 			if ($info != null) {
-				echo "&nbsp;&nbsp;&nbsp;".$info."<br />\n";
+				echo "&#160;&#160;&#160;".$info."<br />\n";
 			}
 			echo $error->getBacktrace(true);
 		}
@@ -470,16 +470,17 @@ w
 		if (isset ($_SERVER['HTTP_HOST']))
 		{
 			// output as html
-			jexit("<br /><b>J$level_human</b> ".$error->get('message')."<br />\n");
+			jexit("<br /><b>J$level_human</b>: ".$error->get('message')."<br />\n");
 		}
 		else
 		{
 			// output as simple text
 			if (defined('STDERR')) {
-				fwrite(STDERR, "J$level_human ".$error->get('message')."\n");
+				fwrite(STDERR, "J$level_human: ".$error->get('message')."\n");
+				jexit();
 			}
 			else {
-				jexit("J$level_human ".$error->get('message')."\n");
+				jexit("J$level_human: ".$error->get('message')."\n");
 			}
 		}
 		return $error;
@@ -526,7 +527,7 @@ w
 			jimport('joomla.error.log');
 			$fileName = date('Y-m-d').'.error.log';
 			$options['format'] = "{DATE}\t{TIME}\t{LEVEL}\t{CODE}\t{MESSAGE}";
-			$log = & JLog::getInstance($fileName, $options);
+			$log = JLog::getInstance($fileName, $options);
 		}
 
 		$entry['level'] = $error->get('level');
@@ -566,9 +567,9 @@ w
 	{
 		// Initialise variables.
 		jimport('joomla.document.document');
-		$app		= & JFactory::getApplication();
-		$document	= & JDocument::getInstance('error');
-		$config		= & JFactory::getConfig();
+		$app		= JFactory::getApplication();
+		$document	= JDocument::getInstance('error');
+		$config		= JFactory::getConfig();
 
 		// Get the current template from the application
 		$template = $app->getTemplate();
@@ -623,7 +624,7 @@ w
 				if (isset($backtrace[$i]['file'])) {
 						echo	'				<td class="TD">'.$backtrace[$i]['file'].':'.$backtrace[$i]['line'].'</td>';
 				} else {
-						echo	'				<td class="TD">&nbsp;</td>';
+						echo	'				<td class="TD">&#160;</td>';
 				}
 				echo	'		</tr>';
 				$j++;

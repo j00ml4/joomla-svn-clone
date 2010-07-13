@@ -73,7 +73,7 @@ abstract class JHtmlList
 	 */
 	public static function genericordering($sql, $chop = '30')
 	{
-		$db = &JFactory::getDbo();
+		$db = JFactory::getDbo();
 		$options	= array();
 		$db->setQuery($sql);
 
@@ -158,12 +158,12 @@ abstract class JHtmlList
 		else
 		{
 			if ($neworder > 0) {
-				$text = JText::_('JGLOBAL_NEWITEMSFIRST_DESC');
-			}
-			else if ($neworder <= 0) {
 				$text = JText::_('JGLOBAL_NEWITEMSLAST_DESC');
 			}
-			$html = '<input type="hidden" name="'.$name.'" value="'. (int) $selected .'" />'. $text;
+			else if ($neworder <= 0) {
+				$text = JText::_('JGLOBAL_NEWITEMSFIRST_DESC');
+			}
+			$html = '<input type="hidden" name="'.$name.'" value="'. (int) $selected .'" />'. '<span class="readonly">' . $text . '</span>';
 		}
 		return $html;
 	}
@@ -173,7 +173,7 @@ abstract class JHtmlList
 	 */
 	public static function users($name, $active, $nouser = 0, $javascript = NULL, $order = 'name', $reg = 1)
 	{
-		$db = &JFactory::getDbo();
+		$db = JFactory::getDbo();
 
 		$and = '';
 		if ($reg) {

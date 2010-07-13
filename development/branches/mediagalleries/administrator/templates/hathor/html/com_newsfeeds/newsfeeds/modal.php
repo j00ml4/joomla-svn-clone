@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: modal.php 17660 2010-06-13 16:34:39Z infograf768 $
+ * @version		$Id: modal.php 18098 2010-07-12 11:54:28Z dextercowley $
  * @package		Joomla.Administrator
  * @subpackage	com_newsfeeds
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -68,9 +68,6 @@ $listDirn	= $this->state->get('list.direction');
 				<th class="title access-col">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ACCESS', 'a.access', $listDirn, $listOrder); ?>
 				</th>
-				<th class="width-5">
-					<?php echo JHtml::_('grid.sort',  'JDATE', 'a.created', $listDirn, $listOrder); ?>
-				</th>
 				<th class="nowrap id-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 				</th>
@@ -89,9 +86,6 @@ $listDirn	= $this->state->get('list.direction');
 				</td>
 				<td class="center">
 					<?php echo $this->escape($item->access_level); ?>
-				</td>
-				<td class="center">
-
 				</td>
 				<td class="center">
 					<?php echo (int) $item->id; ?>

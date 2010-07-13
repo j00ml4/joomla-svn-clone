@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: tracks.raw.php 17671 2010-06-14 06:34:55Z eddieajau $
+ * @version		$Id: tracks.raw.php 17858 2010-06-23 17:54:28Z eddieajau $
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -43,11 +43,14 @@ class BannersControllerTracks extends JController
 	/**
 	 * Display method for the raw track data.
 	 *
-	 * @return	void
-	 * @since	1.6
+	 * @param	boolean			If true, the view output will be cached
+	 * @param	array			An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return	JController		This object to support chaining.
+	 * @since	1.5
 	 * @todo	This should be done as a view, not here!
 	 */
-	public function display()
+	public function display($cachable = false, $urlparams = false)
 	{
 		// Get the document object.
 		$document	= JFactory::getDocument();

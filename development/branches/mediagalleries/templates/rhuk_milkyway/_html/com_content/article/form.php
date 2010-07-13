@@ -11,7 +11,7 @@ if (! isset($this->article->publish_down) || $this->article->publish_down == 'Ne
 }
 ?>
 
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 <!--
 function setgood() {
 	// TODO: Put setGood back
@@ -113,7 +113,7 @@ echo $this->editor->display('text', $this->article->text, '100%', '400', '70', '
 		<?php echo $this->lists['catid']; ?>
 	</td>
 </tr>
-<?php if ($this->user->authorize('core.edit.state', 'com_content')) : ?>
+<?php if ($this->user->authorise('core.edit.state', 'com_content')) : ?>
 <tr>
 	<td class="key">
 		<label for="state">

@@ -7,7 +7,7 @@
  */
 
 defined('_JEXEC') or die;
-$app = &JFactory::getApplication();
+$app = JFactory::getApplication();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
@@ -47,11 +47,11 @@ $app = &JFactory::getApplication();
 			<input type="checkbox" name="remember" class="inputbox" value="yes" alt="<?php echo JText::_('JGLOBAL_REMEMBER_ME') ?>" id="remember" />
 		</p>
 		<input type="submit" name="Submit" class="button" value="<?php echo JText::_('JLOGIN') ?>" />
+		<input type="hidden" name="option" value="com_users" />
+		<input type="hidden" name="task" value="user.login" />
+		<input type="hidden" name="return" value="<?php echo base64_encode(JURI::base()) ?>" />
+		<?php echo JHtml::_('form.token'); ?>
 	</fieldset>
-	<input type="hidden" name="option" value="com_users" />
-	<input type="hidden" name="task" value="user.login" />
-	<input type="hidden" name="return" value="<?php echo base64_encode(JURI::base()) ?>" />
-	<?php echo JHtml::_('form.token'); ?>
 	</form>
 	</div>
 </body>

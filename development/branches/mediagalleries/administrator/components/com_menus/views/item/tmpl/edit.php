@@ -19,7 +19,6 @@ JHTML::_('behavior.modal');
 ?>
 
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'item.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
@@ -34,7 +33,6 @@ JHTML::_('behavior.modal');
 			});
 		}
 	}
-// -->
 </script>
 
 <form action="<?php JRoute::_('index.php?option=com_menus'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
@@ -112,10 +110,10 @@ JHTML::_('behavior.modal');
 		<?php endif; ?>
 
 	<?php echo JHtml::_('sliders.end'); ?>
-</div>
 	<input type="hidden" name="task" value="" />
 	<?php echo $this->form->getInput('component_id'); ?>
 	<?php echo JHtml::_('form.token'); ?>
+</div>
 </form>
 
 

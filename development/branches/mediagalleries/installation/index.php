@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: index.php 17564 2010-06-08 23:35:48Z chdemko $
+ * @version		$Id: index.php 17859 2010-06-23 17:55:52Z eddieajau $
  * @package		Joomla.Installation
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -72,7 +72,7 @@ jimport('joomla.language.language');
 jimport('joomla.utilities.string');
 
 // Create the application object.
-$app = &JFactory::getApplication('installation');
+$app = JFactory::getApplication('installation');
 
 // Initialise the application.
 $app->initialise();

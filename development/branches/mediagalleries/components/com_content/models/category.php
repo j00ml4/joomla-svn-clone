@@ -77,8 +77,8 @@ class ContentModelCategory extends JModelItem
 		$params = $app->getParams();
 		$menuParams = new JRegistry;
 
-		if (JSite::getMenu()->getActive()) {
-			$menuParams->loadJSON(JSite::getMenu()->getActive()->params);
+		if ($menu = $app->getMenu()->getActive()) {
+			$menuParams->loadJSON($menu->params);
 		}
 
 		$mergedParams = clone $menuParams;
@@ -147,8 +147,8 @@ class ContentModelCategory extends JModelItem
 			$limit = $this->getState('list.limit');
 		}
 
-		if ($this->_articles === null && $category =& $this->getCategory()) {
-			$model =& JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
+		if ($this->_articles === null && $category = $this->getCategory()) {
+			$model = JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
 			$model->setState('params', JFactory::getApplication()->getParams());
 			$model->setState('filter.category_id', $category->id);
 			$model->setState('filter.published', $this->getState('filter.published'));
@@ -163,7 +163,7 @@ class ContentModelCategory extends JModelItem
 			$model->setState('filter.max_category_levels', $this->setState('filter.max_category_levels'));
 			$model->setState('list.links', $this->getState('list.links'));
 
-			if ($limit > 0) {
+			if ($limit >= 0) {
 				$this->_articles = $model->getItems();
 
 				if ($this->_articles === false) {
@@ -190,19 +190,19 @@ class ContentModelCategory extends JModelItem
 		$app	= JFactory::getApplication('site');
 		$params	= $this->state->params;
 		$itemid	= JRequest::getInt('id', 0) . ':' . JRequest::getInt('Itemid', 0);
-		$filter_order = $app->getUserStateFromRequest('com_mediagalleries.category.list.' . $itemid . '.filter_order', 'filter_order', '', 'string');
-		$filter_order_Dir = $app->getUserStateFromRequest('com_mediagalleries.category.list.' . $itemid . '.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
+		$filter_order = $app->getUserStateFromRequest('com_content.category.list.' . $itemid . '.filter_order', 'filter_order', '', 'string');
+		$filter_order_Dir = $app->getUserStateFromRequest('com_content.category.list.' . $itemid . '.filter_order_Dir', 'filter_order_Dir', '', 'cmd');
 		$orderby = ' ';
 
 		if ($filter_order && $filter_order_Dir) {
 			$orderby .= $filter_order . ' ' . $filter_order_Dir . ', ';
 		}
 
-		$MediaOrderby		= $params->get('orderby_sec', 'rdate');
-		$MediaOrderDate	= $params->get('order_date');
-		$GalleryOrderby	= $params->def('orderby_pri', '');
-		$secondary			= MediagalleriesHelperQuery::orderbySecondary($articleOrderby, $articleOrderDate) . ', ';
-		$primary			= MediagalleriesHelperQuery::orderbyPrimary($categoryOrderby);
+		$articleOrderby		= $params->get('orderby_sec', 'rdate');
+		$articleOrderDate	= $params->get('order_date');
+		$categoryOrderby	= $params->def('orderby_pri', '');
+		$secondary			= ContentHelperQuery::orderbySecondary($articleOrderby, $articleOrderDate) . ', ';
+		$primary			= ContentHelperQuery::orderbyPrimary($categoryOrderby);
 
 		$orderby .= $primary . ' ' . $secondary . ' a.created ';
 
@@ -211,6 +211,9 @@ class ContentModelCategory extends JModelItem
 
 	public function getPagination()
 	{
+		if (empty($this->_pagination)) {
+			return null;
+		}
 		return $this->_pagination;
 	}
 
@@ -225,10 +228,14 @@ class ContentModelCategory extends JModelItem
 	public function getCategory()
 	{
 		if (!is_object($this->_item)) {
-			$params = $this->state->params;
-
-			$options = array();
-			$options['countItems'] = $params->get('show_cat_num_articles', 0);
+			if( isset( $this->state->params ) ) {
+				$params = $this->state->params;
+				$options = array();
+				$options['countItems'] = $params->get('show_cat_num_articles', 0);
+			}
+			else {
+				$options['countItems'] = 0; 
+			}
 			$categories = JCategories::getInstance('Content', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 

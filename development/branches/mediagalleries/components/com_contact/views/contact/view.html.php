@@ -13,39 +13,49 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.view');
 
 /**
+ * HTML Contact View class for the Contact component
+ *
  * @package		Joomla.Site
- * @subpackage	Contacts
+ * @subpackage	com_contact
+ * @since 		1.5
  */
 class ContactViewContact extends JView
 {
-	protected $state = null;
-	protected $contact = null;
+	protected $state;
+	protected $item;
+
 
 	function display($tpl = null)
-	{
-		$app		= &JFactory::getApplication();
-		$user		= &JFactory::getUser();
-		$document	= & JFactory::getDocument();
-		$state		= $this->get('State');
-		$contact	= $this->get('Item');
+	{	
+		// Initialise variables.		
+		$app		= JFactory::getApplication();
+		$user		= JFactory::getUser();
+		$dispatcher =& JDispatcher::getInstance();		
+
+		// Get model data.
+		$state = $this->get('State');
+		$item = $this->get('Item');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
-			JError::raiseError(500, implode("\n", $errors));
+			JError::raiseWarning(500, implode("\n", $errors));
 			return false;
 		}
-
+		
 		// Get the parameters of the active menu item
-		$menus	= &JSite::getMenu();
+		$menus	= $app->getMenu();
 		$menu	= $menus->getActive();
-
-		$params = $state->params;
-
-		// check if access is registered/special
+		$params	= $app->getParams();
+		
+		$item_params = new JRegistry;
+		$item_params->loadJSON($item->params);
+		$params->merge($item_params);
+		
+		// check if access is not public
 		$groups	= $user->authorisedLevels();
 
 		$return ="";
-		if ((!in_array($contact->access, $groups)) || (!in_array($contact->category_access, $groups))) {
+		if ((!in_array($item->access, $groups)) || (!in_array($item->category_access, $groups))) {
 			$uri		= JFactory::getURI();
 			$return		= (string)$uri;
 
@@ -56,27 +66,18 @@ class ContactViewContact extends JView
 
 		}
 
-		$options['category_id']	= $contact->catid;
+		$options['category_id']	= $item->catid;
 		$options['order by']	= 'a.default_con DESC, a.ordering ASC';
 
-		//$contacts = &$this->getModel('Category')->getContacts($options);
-
-
-		// Make contact parameters available to views
-		$contact_params = new JRegistry;
-		$contact_params->loadJSON($contact->params);
-		$temp = clone($params);
-		$temp->merge($contact_params);
-		$contact->params = $temp;
 
 		// Handle email cloaking
-		if ($contact->email_to && $params->get('show_email')) {
-			$contact->email_to = JHtml::_('email.cloak', $contact->email_to);
+		if ($item->email_to && $params->get('show_email')) {
+			$item->email_to = JHtml::_('email.cloak', $item->email_to);
 		}
 
 		if ($params->get('show_street_address') || $params->get('show_suburb') || $params->get('show_state') || $params->get('show_postcode') || $params->get('show_country'))
 		{
-			if (!empty ($contact->address) || !empty ($contact->suburb) || !empty ($contact->state) || !empty ($contact->country) || !empty ($contact->postcode)) {
+			if (!empty ($item->address) || !empty ($item->suburb) || !empty ($item->state) || !empty ($item->country) || !empty ($item->postcode)) {
 				$params->set('address_check', 1);
 			}
 		} else {
@@ -127,26 +128,15 @@ class ContactViewContact extends JView
 				break;
 		}
 
-		// Use link labels from contact if blank in params
-		$loopArray = array('a','b','c','d','e');
-		foreach ($loopArray as $letter) {
-			$thisLable = 'link'.$letter.'_name';
-			$thisLink = 'link'.$letter;
-			if (!$params->get($thisLable)) {
-				if ($contact->params->get($thisLable)) {
-					$params->set($thisLable, $contact->params->get($thisLable));
-				} else {
-					$params->set($thisLable, $contact->params->get($thisLink));
-				}
-			}
-		}
-
 		JHtml::_('behavior.formvalidation');
 
-		$this->assignRef('contact',		$contact);
+		$this->assignRef('contact',		$item);
 		$this->assignRef('params',		$params);
 		$this->assignRef('return',		$return);
-
+		$this->assignRef('state', $state);
+		$this->assignRef('item', $item);
+		$this->assignRef('user', $user);
+	
 		$this->_prepareDocument();
 
 		parent::display($tpl);
@@ -157,9 +147,9 @@ class ContactViewContact extends JView
 	 */
 	protected function _prepareDocument()
 	{
-		$app		= &JFactory::getApplication();
-		$menus		= &JSite::getMenu();
-		$pathway	= &$app->getPathway();
+		$app		= JFactory::getApplication();
+		$menus		= $app->getMenu();
+		$pathway	= $app->getPathway();
 		$title 		= null;
 
 		// Because the application sets a default page title,

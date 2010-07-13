@@ -30,7 +30,7 @@ $listDirn	= $this->state->get('list.direction');
 	<table class="adminlist">
 		<thead>
 			<tr>
-				<th class="checkmark-col""><input type="checkbox" name="toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(this)" /></th>
+				<th class="checkmark-col""><input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(this)" /></th>
 				<th class="title nowrap"><?php echo JHTML::_('grid.sort', 'COM_INSTALLER_HEADING_NAME', 'name', $listDirn, $listOrder); ?></th>
 				<th class="center"><?php echo JHTML::_('grid.sort', 'COM_INSTALLER_HEADING_TYPE', 'type', $listDirn, $listOrder); ?></th>
 				<th class="width-10 center"><?php echo JHTML::_('grid.sort', 'JENABLED', 'enabled', $listDirn, $listOrder); ?></th>
@@ -56,13 +56,13 @@ $listDirn	= $this->state->get('list.direction');
 						<?php echo JHtml::_('jgrid.published', $item->enabled, $i, 'manage.', !$item->protected);?>
 					<?php endif; ?>
 				</td>
-				<td class="center"><?php echo @$item->version != '' ? $item->version : '&nbsp;'; ?></td>
-				<td class="center"><?php echo @$item->creationDate != '' ? $item->creationDate : '&nbsp;'; ?></td>
+				<td class="center"><?php echo @$item->version != '' ? $item->version : '&#160;'; ?></td>
+				<td class="center"><?php echo @$item->creationDate != '' ? $item->creationDate : '&#160;'; ?></td>
 				<td class="center"><?php echo @$item->folder != '' ? $item->folder : JText::_('COM_INSTALLER_TYPE_NONAPPLICABLE'); ?></td>
 				<td class="center"><?php echo $item->client; ?></td>
 				<td class="center">
 					<span class="editlinktip hasTip" title="<?php echo JText::_('COM_INSTALLER_AUTHOR_INFORMATION');?>::<?php echo $item->author_info; ?>">
-						<?php echo @$item->author != '' ? $item->author : '&nbsp;'; ?>
+						<?php echo @$item->author != '' ? $item->author : '&#160;'; ?>
 					</span>
 				</td>
 				<td><?php echo $item->extension_id ?></td>

@@ -83,7 +83,7 @@ class JInstaller extends JAdapter
 	 * The redirect URL if this extension (can be null if no redirect)
 	 * @var string
 	 */
-	protected $redirct_url = null;
+	protected $redirect_url = null;
 
 	/**
 	 * Constructor
@@ -165,7 +165,7 @@ class JInstaller extends JAdapter
 	 * @since 1.6
 	 */
 	public function setRedirectURL($newurl) {
-		$this->redirecturl = $newurl;
+		$this->redirect_url = $newurl;
 	}
 
 	/**
@@ -292,11 +292,13 @@ class JInstaller extends JAdapter
 
 				case 'query' :
 					// placeholder in case this is necessary in the future
+					// $stepval is always false because if this step was called it invariably failed
+					$stepval = false;
 					break;
 
 				case 'extension' :
 					// Get database connector object
-					$db =& $this->getDBO();
+					$db = $this->getDBO();
 
 					// Remove the entry from the #__extensions table
 					$query = 'DELETE' .
@@ -304,6 +306,7 @@ class JInstaller extends JAdapter
 							' WHERE extension_id = '.(int)$step['id'];
 					$db->setQuery($query);
 					$stepval = $db->Query();
+
 					break;
 
 				default :
@@ -333,7 +336,7 @@ class JInstaller extends JAdapter
 		$debug = $conf->get('debug');
 
 		if($debug) {
-			JError::raiseError(500, JText::_('JLIB_INSTALLER_ABORT_DEBUG').':'.$msg);
+			JError::raiseError(500, JText::_('JLIB_INSTALLER_ABORT_DEBUG').$msg);
 		}
 
 		return $retval;
@@ -380,7 +383,7 @@ class JInstaller extends JAdapter
 
 			// Fire the onExtensionBeforeInstall event.
         	JPluginHelper::importPlugin('extension');
-        	$dispatcher =& JDispatcher::getInstance();
+        	$dispatcher = JDispatcher::getInstance();
 			$dispatcher->trigger('onExtensionBeforeInstall', array('method'=>'install', 'type'=>$type, 'manifest'=>$this->manifest, 'extension'=>0));
 
 			// Run the install
@@ -410,7 +413,7 @@ class JInstaller extends JAdapter
 	{
 		if ($eid)
 		{
-			$this->extension =& JTable::getInstance('extension');
+			$this->extension = JTable::getInstance('extension');
 			if (!$this->extension->load($eid))
 			{
 				$this->abort(JText::_('JLIB_INSTALLER_ABORT_LOAD_DETAILS'));
@@ -442,7 +445,7 @@ class JInstaller extends JAdapter
 
 					// Fire the onExtensionBeforeInstall event.
 	                JPluginHelper::importPlugin('extension');
-	                $dispatcher =& JDispatcher::getInstance();
+	                $dispatcher = JDispatcher::getInstance();
 	                $dispatcher->trigger('onExtensionBeforeInstall', array('method'=>'discover_install', 'type'=>$this->extension->get('type'), 'manifest'=>null, 'extension'=>$this->extension->get('extension_id')));
 
 					// Run the install
@@ -526,7 +529,7 @@ class JInstaller extends JAdapter
 			}
 			// Fire the onExtensionBeforeUpdate event.
             JPluginHelper::importPlugin('extension');
-            $dispatcher =& JDispatcher::getInstance();
+            $dispatcher = JDispatcher::getInstance();
 			$dispatcher->trigger('onExtensionBeforeUpdate', array('type'=>$type, 'manifest'=>$this->manifest));
 			// Run the update
 			$result = $this->_adapters[$type]->update();
@@ -565,7 +568,7 @@ class JInstaller extends JAdapter
 			// We don't load languages here, we get the extension adapter to work it out
 			// Fire the onExtensionBeforeUninstall event.
             JPluginHelper::importPlugin('extension');
-            $dispatcher =& JDispatcher::getInstance();
+            $dispatcher = JDispatcher::getInstance();
             $dispatcher->trigger('onExtensionBeforeUninstall', array('eid' => $identifier));
 			// Run the uninstall
 			$result = $this->_adapters[$type]->uninstall($identifier);
@@ -586,7 +589,7 @@ class JInstaller extends JAdapter
 	{
 		if ($eid)
 		{
-			$this->extension =& JTable::getInstance('extension');
+			$this->extension = JTable::getInstance('extension');
 			if (!$this->extension->load($eid))
 			{
 				$this->abort(JText::_('JLIB_INSTALLER_ABORT_LOAD_DETAILS'));
@@ -793,7 +796,7 @@ class JInstaller extends JAdapter
 	 * @param int $eid Extension ID
 	 * @return void
 	 */
-	public function setSchemaVersion($schema, $eid) 
+	public function setSchemaVersion($schema, $eid)
 	{
 		if( ! $eid || ! $schema)
 		{
@@ -803,7 +806,7 @@ class JInstaller extends JAdapter
 				return;
 			}
 
-			if(count($schemapaths)) 
+			if(count($schemapaths))
 			{
 				$dbDriver = strtolower($db->get('name'));
 				if ($dbDriver == 'mysqli') {
@@ -980,7 +983,7 @@ class JInstaller extends JAdapter
 
 		// Get the client info
 		jimport('joomla.application.helper');
-		$client = &JApplicationHelper::getClientInfo($cid);
+		$client = JApplicationHelper::getClientInfo($cid);
 
 		/*
 		 * Here we set the folder we are going to remove the files from.
@@ -1084,7 +1087,7 @@ class JInstaller extends JAdapter
 	public function parseLanguages($element, $cid=0)
 	{
 		// TODO: work out why the below line triggers 'node no longer exists' errors with files
-		if ( ! $element || ! count($element->children())) 
+		if ( ! $element || ! count($element->children()))
 		{
 			// Either the tag does not exist or has no children therefore we return zero files processed.
 			return 0;
@@ -1095,7 +1098,7 @@ class JInstaller extends JAdapter
 
 		// Get the client info
 		jimport('joomla.application.helper');
-		$client = &JApplicationHelper::getClientInfo($cid);
+		$client = JApplicationHelper::getClientInfo($cid);
 
 		/*
 		 * Here we set the folder we are going to copy the files to.
@@ -1140,7 +1143,7 @@ class JInstaller extends JAdapter
 				if ((string)$file->attributes()->client != '')
 				{
 					// override the client
-					$langclient =& JApplicationHelper::getClientInfo((string)$file->attributes()->client, true);
+					$langclient = JApplicationHelper::getClientInfo((string)$file->attributes()->client, true);
 					$path['dest'] = $langclient->path.DS.'language'.DS.$file->attributes()->tag.DS.basename((string)$file);
 				}
 				else
@@ -1206,7 +1209,7 @@ class JInstaller extends JAdapter
 
 		// Get the client info
 		jimport('joomla.application.helper');
-		$client = &JApplicationHelper::getClientInfo($cid);
+		$client = JApplicationHelper::getClientInfo($cid);
 
 		/*
 		 * Here we set the folder we are going to copy the files to.
@@ -1441,7 +1444,7 @@ class JInstaller extends JAdapter
 		// Get the client info if we're using a specific client
 		jimport('joomla.application.helper');
 		if ($cid > -1) {
-			$client = &JApplicationHelper::getClientInfo($cid);
+			$client = JApplicationHelper::getClientInfo($cid);
 		}
 		else {
 			$client = null;
@@ -1476,7 +1479,7 @@ class JInstaller extends JAdapter
 			case 'languages':
 				$lang_client = (string)$element->attributes()->client;
 				if($lang_client) {
-					$client = &JApplicationHelper::getClientInfo($lang_client, true);
+					$client = JApplicationHelper::getClientInfo($lang_client, true);
 					$source = $client->path.DS.'language';
 				} else {
 					if ($client) {
@@ -1570,7 +1573,7 @@ class JInstaller extends JAdapter
 	{
 		// Get the client info
 		jimport('joomla.application.helper');
-		$client = &JApplicationHelper::getClientInfo($cid);
+		$client = JApplicationHelper::getClientInfo($cid);
 
 		$path['src'] = $this->getPath('manifest');
 
@@ -1697,7 +1700,7 @@ class JInstaller extends JAdapter
 	 */
 	public function cleanDiscoveredExtension($type, $element, $folder='', $client=0)
 	{
-		$dbo =& JFactory::getDBO();
+		$dbo = JFactory::getDBO();
 		$dbo->setQuery('DELETE FROM #__extensions WHERE type = '. $dbo->Quote($type).' AND element = '. $dbo->Quote($element) .' AND folder = '. $dbo->Quote($folder). ' AND client_id = '. intval($client).' AND state = -1');
 		return $dbo->Query();
 	}

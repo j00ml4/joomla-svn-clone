@@ -82,7 +82,7 @@ abstract class JHtmlRules
 			$html[] = '		<dt><a href="#">'.$actionTitle.'</a></dt>';
 			$html[] = '		<dd>';
 			$html[] = '			<p>'.$actionDesc.'</p>';
-			$html[] = '			<table class="aclmodify-table" summary="'.$actionDesc.'">';
+			$html[] = '			<table class="aclmodify-table" summary="'.strip_tags($actionDesc).'">';
 			$html[] = '			<caption>'.JText::_('JLIB_HTML_ACCESS_MODIFY_DESC_CAPTION_ACL').' '.$actionTitle.' '.JText::_('JLIB_HTML_ACCESS_MODIFY_DESC_CAPTION_TABLE').'</caption>';
 			$html[] = '			<tr>';
 			$html[] = '				<th class="col1 hidelabeltxt">'.JText::_('JGROUPS').'</th>';
@@ -164,7 +164,7 @@ abstract class JHtmlRules
 		foreach ($options as &$option)
 		{
 			// Pad the option text with spaces using depth level as a multiplier.
-			//$option->text = str_repeat('&nbsp;&nbsp;',$option->level).$option->text;
+			//$option->text = str_repeat('&#160;&#160;',$option->level).$option->text;
 
 			$option->identities = ($option->parents) ? explode(',', $option->parents.','.$option->value) : array($option->value);
 		}

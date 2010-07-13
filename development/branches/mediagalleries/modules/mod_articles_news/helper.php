@@ -17,7 +17,8 @@ abstract class modArticlesNewsHelper
 {
 	public static function getList(&$params)
 	{
-		$app	= &JFactory::getApplication();
+		$app	= JFactory::getApplication();
+		$db		= JFactory::getDbo();
 
 		// Get an instance of the generic articles model
 		$model = JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
@@ -42,19 +43,12 @@ abstract class modArticlesNewsHelper
 		$model->setState('filter.access', $access);
 
 		// Category filter
-		if ($catid = $params->get('catid')) {
-			$model->setState('filter.category_id', $catid);
-		}
+		$model->setState('filter.category_id', $params->get('catid', array()));
 
 		// Set ordering
 		$order_map = array(
 			'm_dsc' => 'a.modified DESC, a.created',
-			/*
-			 * TODO below line does not work because it's running through JDatabase::_getEscaped
-			 * which adds unnecessary quotes before and after the null date.
-			 * This should be uncommented when it's fixed.
-			 */
-			//'mc_dsc' => 'CASE WHEN (a.modified = \'0000-00-00 00:00:00\') THEN a.created ELSE a.modified END',
+			'mc_dsc' => 'CASE WHEN (a.modified = '.$db->quote($db->getNullDate()).') THEN a.created ELSE a.modified END',
 			'c_dsc' => 'a.created'
 		);
 

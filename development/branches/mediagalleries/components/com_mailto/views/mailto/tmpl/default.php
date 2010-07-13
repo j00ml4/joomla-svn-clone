@@ -9,8 +9,9 @@
 
 // no direct access
 defined('_JEXEC') or die;
+JHtml::_('behavior.keepalive');
 ?>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 <!--
 	function submitbutton(pressbutton) {
 		var form = document.mailtoForm;
@@ -72,12 +73,11 @@ $data	= $this->get('data');
 			<?php echo JText::_('COM_MAILTO_CANCEL'); ?>
 		</button>
 	</p>
-</div>
-
 	<input type="hidden" name="layout" value="<?php echo $this->getLayout();?>" />
 	<input type="hidden" name="option" value="com_mailto" />
 	<input type="hidden" name="task" value="send" />
 	<input type="hidden" name="tmpl" value="component" />
 	<input type="hidden" name="link" value="<?php echo $data->link; ?>" />
 	<?php echo JHtml::_('form.token'); ?>
+</div>
 </form>

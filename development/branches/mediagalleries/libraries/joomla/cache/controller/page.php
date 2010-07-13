@@ -65,7 +65,7 @@ class JCacheControllerPage extends JCacheController
 		if (!headers_sent() && isset($_SERVER['HTTP_IF_NONE_MATCH'])){
 			$etag = stripslashes($_SERVER['HTTP_IF_NONE_MATCH']);
 			if ($etag == $id) {
-				$browserCache = isset($this->_options['browsercache']) ? $this->_options['browsercache'] : false;
+				$browserCache = isset($this->options['browsercache']) ? $this->options['browsercache'] : false;
 				if ($browserCache) {
 					$this->_noChange();
 				}
@@ -87,7 +87,7 @@ class JCacheControllerPage extends JCacheController
 		}
 
 		if ($data !== false) {
-
+			$data = unserialize(trim($data));
 			if ($wrkarounds === true) {
 				echo JCache::getWorkarounds($data);
 			}
@@ -130,7 +130,7 @@ class JCacheControllerPage extends JCacheController
 				$this->_locktest = $this->cache->lock($id, $group);
 			}
 
-			$sucess = $this->cache->store($data, $id, $group);
+			$sucess = $this->cache->store(serialize($data), $id, $group);
 
 			if ($this->_locktest->locked == true) {
 				$this->cache->unlock($id, $group);
@@ -163,7 +163,7 @@ class JCacheControllerPage extends JCacheController
 	 */
 	private function _noChange()
 	{
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Send not modified header and exit gracefully
 		header('HTTP/1.x 304 Not Modified', true);

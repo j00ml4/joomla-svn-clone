@@ -1,7 +1,7 @@
 <?php // no direct access
 defined('_JEXEC') or die;
 
-$canEdit	= ($this->user->authorize('core.edit', 'com_content.article.'.$this->item->id));
+$canEdit	= ($this->user->authorise('core.edit', 'com_content.article.'.$this->item->id));
 ?>
 <?php if ($this->item->state == 0) : ?>
 <div class="system-unpublished">
@@ -89,7 +89,7 @@ endif; ?>
 		<span class="small">
 			<?php JText::printf( 'COM_CONTENT_WRITTEN_BY', ($this->escape($this->item->created_by_alias) ? $this->escape($this->item->created_by_alias) : $this->escape($this->item->author)) ); ?>
 		</span>
-		&nbsp;&nbsp;
+		&#160;&#160;
 	</td>
 </tr>
 <?php endif; ?>
@@ -147,5 +147,5 @@ endif; ?>
 <?php if ($this->item->state == 0) : ?>
 </div>
 <?php endif; ?>
-<span class="article_separator">&nbsp;</span>
+<span class="article_separator">&#160;</span>
 <?php echo $this->item->event->afterDisplayContent; ?>

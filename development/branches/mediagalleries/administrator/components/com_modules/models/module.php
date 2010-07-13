@@ -28,7 +28,24 @@ class ModulesModelModule extends JModelAdmin
 	protected $text_prefix = 'COM_MODULES';
 
 	/**
-	 * Method to auto-populate the model state.
+	 * @var		string	The help screen key for the module.
+	 * @since	1.6
+	 */
+	protected $helpKey = 'JHELP_EXTENSIONS_MODULE_MANAGER_EDIT';
+
+	/**
+	 * @var		string	The help screen base URL for the module.
+	 * @since	1.6
+	 */
+	protected $helpURL;
+
+	/**
+	 * @var		boolean	True to use local lookup for the help screen.
+	 * @since	1.6
+	 */
+	protected $helpLocal = false;
+
+	/**	 * Method to auto-populate the model state.
 	 *
 	 * Note. Calling getState in this method will result in recursion.
 	 *
@@ -94,7 +111,7 @@ class ModulesModelModule extends JModelAdmin
 				throw new Exception($table->getError());
 			}
 		}
-		
+
 		return true;
 	}
 
@@ -252,7 +269,7 @@ class ModulesModelModule extends JModelAdmin
 			$false	= false;
 
 			// Get a row instance.
-			$table = &$this->getTable();
+			$table = $this->getTable();
 
 			// Attempt to load the row.
 			$return = $table->load($pk);
@@ -343,6 +360,17 @@ class ModulesModelModule extends JModelAdmin
 	}
 
 	/**
+	 * Get the necessary data to load an item help screen.
+	 *
+	 * @return	object	An object with key, url, and local properties for loading the item help screen.
+	 * @since	1.6
+	 */
+	public function getHelp()
+	{
+		return (object) array('key' => $this->helpKey, 'url' => $this->helpURL, 'local' => $this->helpLocal);
+	}
+	
+	/**
 	 * Returns a reference to the a Table object, always creating it.
 	 *
 	 * @param	type	The table type to instantiate
@@ -413,6 +441,23 @@ class ModulesModelModule extends JModelAdmin
 			if (!$form->loadFile($formFile, false, '//config')) {
 				throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
 			}
+			// Attempt to load the xml file.
+			if (!$xml = simplexml_load_file($formFile)) {
+				throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
+			}
+
+			// Get the help data from the XML file if present.
+			$help = $xml->xpath('/extension/help');
+			if (!empty($help)) {
+				$helpKey = trim((string) $help[0]['key']);
+				$helpURL = trim((string) $help[0]['url']);
+				$helpLoc = trim((string) $help[0]['local']);
+
+				$this->helpKey = $helpKey ? $helpKey : $this->helpKey;
+				$this->helpURL = $helpURL ? $helpURL : $this->helpURL;
+				$this->helpLocal = (($helpLoc == 'true') || ($helpLoc == '1') || ($helpLoc == 'local')) ? true : false;
+			}		
+		
 		}
 
 		// Trigger the default form events.
@@ -545,11 +590,11 @@ class ModulesModelModule extends JModelAdmin
 		$dispatcher->trigger('onExtensionAfterSave', array('com_modules.module', &$table, $isNew));
 
 		$this->setState('module.id', $table->id);
-		
+
 		// Clear module cache
-		$cache = &JFactory::getCache($table->module);
+		$cache = JFactory::getCache($table->module);
 		$cache->clean();
-		
+
 		return true;
 	}
 

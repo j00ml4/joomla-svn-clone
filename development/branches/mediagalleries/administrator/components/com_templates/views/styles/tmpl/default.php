@@ -35,7 +35,7 @@ $listDirn	= $this->state->get('list.direction');
 		<div class="filter-select fltrt">
 			<select name="filter_template" class="inputbox" onchange="this.form.submit()">
 				<option value="0"><?php echo JText::_('COM_TEMPLATES_FILTER_TEMPLATE'); ?></option>
-				<?php echo JHtml::_('select.options', TemplatesHelper::getTemplateOptions($this->state->get('filter.template')), 'value', 'text', $this->state->get('filter.template'));?>
+				<?php echo JHtml::_('select.options', TemplatesHelper::getTemplateOptions($this->state->get('filter.client_id')), 'value', 'text', $this->state->get('filter.template'));?>
 			</select>
 		</div>
 	</fieldset>
@@ -45,7 +45,7 @@ $listDirn	= $this->state->get('list.direction');
 		<thead>
 			<tr>
 				<th width="5">
-					&nbsp;
+					&#160;
 				</th>
 				<th>
 					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_STYLE', 'a.title', $listDirn, $listOrder); ?>
@@ -108,7 +108,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php if ($item->assigned > 0) : ?>
 							<?php echo JHTML::_('image','admin/tick.png', JText::plural('COM_TEMPLATES_ASSIGNED',$item->assigned), array('title'=>JText::plural('COM_TEMPLATES_ASSIGNED',$item->assigned)), true); ?>
 					<?php else : ?>
-							&nbsp;
+							&#160;
 					<?php endif; ?>
 				</td>
 				<td class="center">
@@ -119,9 +119,11 @@ $listDirn	= $this->state->get('list.direction');
 		</tbody>
 	</table>
 
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<div>
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" />
+		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+		<?php echo JHtml::_('form.token'); ?>
+	</div>
 </form>

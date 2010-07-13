@@ -25,7 +25,7 @@ defined('_JEXEC') or die;
 			</thead>
 			<tfoot>
 				<tr>
-					<td colspan="2">&nbsp;</td>
+					<td colspan="2">&#160;</td>
 				</tr>
 			</tfoot>
 			<tbody>
@@ -35,7 +35,7 @@ defined('_JEXEC') or die;
 							<?php echo $key;?>
 						</td>
 						<td>
-							<?php echo $value;?>
+							<?php echo htmlspecialchars($value, ENT_QUOTES);?>
 						</td>
 					</tr>
 				<?php endforeach;?>

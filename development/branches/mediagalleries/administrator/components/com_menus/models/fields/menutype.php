@@ -49,7 +49,7 @@ class JFormFieldMenuType extends JFormFieldList
 		$types = $this->_getTypeList();
 
 		$size	= ($v = $this->element['size']) ? ' size="'.$v.'"' : '';
-		$class	= ($v = $this->element['class']) ? 'class="'.$v.'"' : 'class="text_area"';
+		$class	= ($v = $this->element['class']) ? ' class="'.$v.'"' : 'class="text_area"';
 
 		switch ($this->value)
 		{
@@ -163,11 +163,11 @@ class JFormFieldMenuType extends JFormFieldList
 		jimport('joomla.filesystem.file');
 
 		// Initialise variables.
-		$lang = &JFactory::getLanguage();
+		$lang = JFactory::getLanguage();
 		$list = array();
 
 		// Get the list of components.
-		$db = & JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$db->setQuery(
 			'SELECT `name`, `element` AS "option"' .
 			' FROM `#__extensions`' .

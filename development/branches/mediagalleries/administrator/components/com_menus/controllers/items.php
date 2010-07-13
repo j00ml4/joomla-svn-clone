@@ -47,7 +47,7 @@ class MenusControllerItems extends JControllerAdmin
 		$this->setRedirect('index.php?option=com_menus&view=items');
 
 		// Initialise variables.
-		$model = &$this->getModel();
+		$model = $this->getModel();
 
 		if ($model->rebuild()) {
 			// Reorder succeeded.
@@ -59,6 +59,28 @@ class MenusControllerItems extends JControllerAdmin
 			return false;
 		}
 	}
+	
+	public function saveorder()
+	{
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		// Get the arrays from the Request
+		$order	= JRequest::getVar('order',	null,	'post',	'array');
+		$originalOrder = explode(',', JRequest::getString('original_order_values'));
+		
+		// Make sure something has changed
+		if (!($order === $originalOrder))
+		{
+			parent::saveorder();
+		}
+		else
+		{
+			// Nothing to reorder
+			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
+			return true;
+		}
+	}
+	
 	/**
 	 * Method to set the home property for a list of items
 	 *
