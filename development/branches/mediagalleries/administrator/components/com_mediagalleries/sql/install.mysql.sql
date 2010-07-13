@@ -38,7 +38,11 @@ CREATE TABLE IF NOT EXISTS `#__mediagalleries` (
   `params` text COLLATE utf8_general_ci NOT NULL,
   `access` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `userid` (`userid`),
-  KEY `catid` (`catid`,`published`)
+  INDEX `idx_access` (  `access` ),
+  INDEX `idx_catid` (`catid` ASC) ,
+  INDEX `idx_xreference` (`xreference` ASC) ,
+  INDEX `idx_language` (`language` ASC) ,
+  INDEX `idx_checked_out` (`checked_out` ASC) ,
+  INDEX `idx_alias` (`alias` ASC) )
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci AUTO_INCREMENT=1;
--- --------------------------------------------------------
+
