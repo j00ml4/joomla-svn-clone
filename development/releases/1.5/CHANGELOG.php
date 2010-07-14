@@ -38,6 +38,7 @@ $ -> Language fix or change
 
 14-July-2010 Ian MacLennan
  + [#21404] New installation language bs-BA
+ + [#20984] New installation language ta-IN 
 
 14-July-2010 Louis Landry
  + [#21416] Mootools 1.2.4 Upgrade Plugin
