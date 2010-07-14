@@ -51,11 +51,11 @@ switch (JRequest::getCmd('task'))
 
 					// If unable to store the plugin, raise a notice.
 					if (!$plg->store()) {
-						JError::raiseNotice(500, JText::sprintf('Unable to auto-install the Mootools Upgrade plugin.', $plg->getError()));
+						JError::raiseNotice(500, $plg->getError() /*JText::sprintf('Unable to auto-install the Mootools Upgrade plugin.', $plg->getError())*/);
 					}
 					// Show a message stating that the plugin is now available.
 					else {
-						$app->enqueueMessage(JText::_('Mootools Upgrade plugin available.'));
+						//$app->enqueueMessage(JText::_('Mootools Upgrade plugin available.'));
 					}
 				}
 
