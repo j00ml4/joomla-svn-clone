@@ -36,6 +36,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+14-July-2010 Louis Landry
+ + [#21416] Mootools 1.2.4 Upgrade Plugin
+
 02-June-2010 Sam Moffat
  ! Line ending fix for some XML/HTML files
 
