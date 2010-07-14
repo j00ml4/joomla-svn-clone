@@ -36,6 +36,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+14-July-2010 Ian MacLennan
+ + [#21404] New installation language bs-BA
+
 14-July-2010 Louis Landry
  + [#21416] Mootools 1.2.4 Upgrade Plugin
 
