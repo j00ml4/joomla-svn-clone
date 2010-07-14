@@ -136,6 +136,7 @@ class MediagalleriesModelMedia extends JModelAdmin
 		if (empty($table->alias)) {
 			$table->alias = JApplication::stringURLSafe($table->title);
 		}
+	
 
 		if (empty($table->id)) {
 			// Set the values

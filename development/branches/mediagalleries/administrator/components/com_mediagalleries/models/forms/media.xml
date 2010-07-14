@@ -181,7 +181,7 @@
 			size="16" 
 			format="%Y-%m-%d %H:%M:%S"
 			filter="server_utc" 
-			default="2010-01-01 01:01:01"
+			
 		/>
 
 		<field 
