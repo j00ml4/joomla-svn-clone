@@ -87,12 +87,28 @@ class TableMedia extends JTable
 		// Fix alias
 		if(!$data['alias'])
 		{
-			$data['alias']=$data[title];	
+			$data['alias']=$data['title'];	
 		}		
 		$data['alias'] = JFilterOutput::stringURLSafe($data['alias']);
 		$data['media']=$data['url'];
 		//To be reviewed later
 		$data['thumb_url']="google.com";		
+		if(empty($data['created_by']))
+		{
+			$user=JFactory::getUser();
+			$data['created_by']=$user->id;
+			
+		}
+		if(!$data['created'])
+		{
+			$data['created']=JFactory::getDate();
+		}
+		
+		if(!$data['created_by_alias'])
+		{
+			$user=JFactory::getUser();
+			$data['created_by']=$user->username;
+		}
 
 		$datenow =& JFactory::getDate($data['created']);
 		$data['created'] = $datenow->toMySQL();
@@ -153,7 +169,7 @@ class TableMedia extends JTable
 		// Update the publishing state for rows with the given primary keys.
 		$this->_db->setQuery(
 			'UPDATE `'.$this->_tbl.'`' .
-			' SET `state` = '.(int) $state .
+			' SET `published` = '.(int) $state .
 			' WHERE ('.$where.')' .
 			$checkin
 		);
