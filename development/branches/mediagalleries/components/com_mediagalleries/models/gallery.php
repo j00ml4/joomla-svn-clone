@@ -14,6 +14,8 @@ jimport('joomla.application.component.modellist');
 jimport('joomla.application.categories');
 
 /**
+ * Show Medias list from some category or from all categories
+ * 
  * @package		Joomla.Site
  * @subpackage	Contact
  */
@@ -25,8 +27,6 @@ class MediagalleriesModelGallery extends JModelList
 	 * @var array
 	 */
 	protected $_item = null;
-
-	protected $_articles = null;
 
 	protected $_siblings = null;
 
@@ -63,11 +63,10 @@ class MediagalleriesModelGallery extends JModelList
 		// Convert the params field into an object, saving original in _params
 		for ($i = 0, $n = count($items); $i < $n; $i++) {
 			$item = &$items[$i];
-			if (!isset($this->_params)) {
-				$params = new JRegistry();
-				$params->loadJSON($item->params);
-				$item->params = $params;
-			}
+			
+			$params = new JRegistry();
+			$params->loadJSON($item->params);
+			$item->params = $params;
 		}
 
 		return $items;
@@ -139,7 +138,7 @@ class MediagalleriesModelGallery extends JModelList
 		$params	= JComponentHelper::getParams('com_mediagalleries');
 
 		// List state information
-		$limit = $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
+		$limit 		= $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
 		$this->setState('list.limit', $limit);
 
 		$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
@@ -151,7 +150,7 @@ class MediagalleriesModelGallery extends JModelList
 		$listOrder	=  JRequest::getCmd('filter_order_Dir', 'ASC');
 		$this->setState('list.direction', $listOrder);
 
-		$id = JRequest::getVar('id', 0, '', 'int');
+		$id 		= JRequest::getVar('id', 0, '', 'int');
 		$this->setState('category.id', $id);
 
 		$this->setState('filter.published',	1);

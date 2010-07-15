@@ -10,7 +10,7 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modellist');
 
 /**
- * Methods supporting a list of Mediagallery records.
+ * This View is supose to show Media Categories
  *
  * @package		Joomla.Administrator
  * @subpackage	com_mediagalleries
@@ -28,8 +28,9 @@ class MediagalleriesModelGalleries extends JModelList
 	protected function populateState()
 	{
 		// Initialise variables.
-		$app = JFactory::getApplication('administrator');
-
+		//$app = JFactory::getApplication('administrator');// Wrong		
+		$app = JFactory::getApplication();
+		
 		// Load the filter state.
 		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
@@ -68,7 +69,7 @@ class MediagalleriesModelGalleries extends JModelList
 
 		// Select the required fields from the table.
 		$query->select($this->getState( 'list.select', ' a.*'));
-		$query->from('#__mediagalleries AS a');
+		$query->from('#__mediagalleries AS a'); // From categories!
 
 		// Join over the language
 		$query->select('l.title AS language_title');
