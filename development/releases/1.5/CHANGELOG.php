@@ -39,8 +39,9 @@ $ -> Language fix or change
 
 -------------------- 1.5.19 Stable Release [15-July-2010] ------------------
 
-14-July-2010 Mark Dexter
+15-July-2010 Mark Dexter
 # [#21419] Incorrect Joomla! Community Magazine address
+^ [#21421] *Credits.php update for 1.5.19
 
 14-July-2010 Ian MacLennan
  + [#21404] New installation language bs-BA

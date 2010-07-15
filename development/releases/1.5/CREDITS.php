@@ -72,6 +72,7 @@ Azeri (az-AZ) - Azeri Translation Team - Mahmud and Yusif
 Basque (eu-ES) - Basque Translation Team (Basque Language School of Santurtzi) - Abel Camacho, Pedro Lonbide
 Belarusian (be-BY) - Dennis Hermacki
 Bengali (bn-BD) – Kamal Sikder
+Bosnian (bs-BA) - Bosnian Translation Team - Admir Agic
 Bulgarian (bg-BG) - Bulgarian Translation Team - Bultrans
 Catalan (ca-ES) - Catalan Translation Team - Damià Verger
 Chinese Simplified (zh-CN) - Johnathan Cheung
@@ -121,6 +122,7 @@ Swedish (sv-SE) - Swedish Translation Team (SvenskJoomla!) - Sune Hultman, Chris
 Syriac (sy-IQ) - East Syriac Translation (Syriac Joomla) - Pauls Dinka
 Tagalog (Philippines) (tl-PH) - Tagalog (Philippines) Translation Community - Aristedes Royo
 Tamil (ta-LK) - Sri Lanka -UoM, LK, sarves
+Tamil (ta-IN) - Ilagnayeru 'MIG' Manickam, Elango Samy Manim
 Thai (th-TH) - Joomla LaiThai Team (JoomlaCorner) - Akarawuth Tamrareang , Supachai Teasakul, Pisan Chueachatchai
 Turkish (tr-TR) - Joomla! Turkiye - Ümit Kenan Gönüllü
 Ukrainian (uk-UA) - Ukrainian Translation Team - Denys Nosov
