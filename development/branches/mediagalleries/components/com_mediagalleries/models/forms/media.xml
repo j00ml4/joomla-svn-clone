@@ -11,7 +11,6 @@
 			class="readonly" 
 		/>
 			
-
 		<field 
 			name="title" 
 			type="text" 
@@ -62,8 +61,7 @@
 			description="JGLOBAL_DESCRIPTION" 
 		/>
 
-		
-		
+				
 		<field 
 			name="hits" 
 			type="Text" 
@@ -88,7 +86,7 @@
 				<option	value="1">JPUBLISHED</option>
 				<option value="0">JUNPUBLISHED</option>
 				<option value="2">JARCHIVED</option>
-				<option value="-3">COM_WEBLINKS_FIELD_VALUE_REPORTED</option>
+				<option value="-3">COM_WEBLINKS_FIELD_VALUE_REPORTED</option><!-- no weblinks --> 
 				<option value="-2">JTRASH</option>
 		</field>
 		

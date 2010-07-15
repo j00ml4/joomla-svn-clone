@@ -7,8 +7,13 @@
  * @license		GNU/GPL, see LICENSE.php
  */
 
-
-class PlayerHelper{
+/** 
+ * This helper can be used to play a media
+ * Enter description here ...
+ * @author eden
+ *
+ */
+class PlayerHelper {
 	
 	/**
 	 * 

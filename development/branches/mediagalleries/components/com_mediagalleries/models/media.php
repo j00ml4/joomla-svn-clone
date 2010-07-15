@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modeladmin');
 
 /**
- * Mediagalleries model.
+ * Show a single Media.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_mediagalleries
