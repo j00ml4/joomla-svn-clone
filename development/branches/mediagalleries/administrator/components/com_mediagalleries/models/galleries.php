@@ -37,8 +37,8 @@ class MediagalleriesModelGalleries extends JModelList
 		$accessId = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', null, 'int');
 		$this->setState('filter.access', $accessId);
 
-		$published = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_published', '', 'string');
-		$this->setState('filter.state', $published);
+		$state = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_published', '', 'string');
+		$this->setState('filter.state', $state);
 
 		$categoryId = $app->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id', '');
 		$this->setState('filter.category_id', $categoryId);
@@ -91,11 +91,11 @@ class MediagalleriesModelGalleries extends JModelList
 		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 
 		// Filter by published state
-		$published = $this->getState('filter.state');
-		if (is_numeric($published)) {
-			$query->where('a.published = '.(int) $published);
-		} else if ($published === '') {
-			$query->where('(a.published IN (0, 1))');
+		$state = $this->getState('filter.state');
+		if (is_numeric($state)) {
+			$query->where('a.state = '.(int) $state);
+		} else if ($state=== '') {
+			$query->where('(a.state IN (0, 1))');
 		}
 
 		// Filter by category.
