@@ -18,5 +18,8 @@ $uri = &JFactory::getURI();
 			<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_NEW_TASK_LINK'), 'task.add'); ?>
 		</li>
 		<?php endif; ?>
+		<li>
+			<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_BACK_TO_PROJECT_TASKS_LINK'), 'tasks.back'); ?>
+		</li>
 	</ul>
 </div>

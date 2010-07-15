@@ -58,9 +58,12 @@ class ProjectsModelTasks extends JModelList
 		$id = JRequest::getInt('id', 0);
 		$this->setState('project.id', $id);
 		$app->setUserState('project.id', $id);
-		
+
+		$app->setUserState('com_projects.edit.task.id',null);
+		$app->setUserState('com_projects.edit.task.data',null); 
+
 		// Parent
-		if (!($id = $app->getUserState('task.parent.id'))) {
+/*		if (!($id = $app->getUserState('task.parent.id'))) {
 			$id = JRequest::getInt('parent_id');
 		}
 		$this->setState('task.parent.id', $id);
@@ -71,7 +74,7 @@ class ProjectsModelTasks extends JModelList
 			$id = JRequest::getInt('catid');
 		}
 		$this->setState('task.category.id', $id);
-		$app->setUserState('task.category.id', $id);
+		$app->setUserState('task.category.id', $id); */
 		
 		
 		// Filters
@@ -158,7 +161,7 @@ class ProjectsModelTasks extends JModelList
 
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.title')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-	
+
 		return $query;
 	}
 	

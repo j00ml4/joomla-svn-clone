@@ -26,7 +26,7 @@ $params = $this->params;
 <?php echo $this->loadTemplate('buttons');?>
 <?php if (empty($this->items)) : ?>
 	<p><?php echo JText::_('COM_PROJECTS_DOCUMENTS_NO_DOCUMENT'); ?></p>
-<?php endif ?>
+<?php endif; ?>
 
 		<?php if ($params->get('show_pagination_limit')) : ?>
 		<div class="display-limit">
