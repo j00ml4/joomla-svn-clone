@@ -56,8 +56,10 @@ class ProjectsModelTask extends JModelAdmin
 	{
 		$app = JFactory::getApplication();		
 		
+		if (!($pk = (int) $app->getUserState($this->option.'.edit.'.$this->getName().'.id'))) {
+			$pk = (int) JRequest::getInt('id');
+		}
 		// id
-		$pk = $app->getUserState('com_projects.edit.task.id', JRequest::getInt('id'));
 		$this->setState('task.id', $pk);
 		
 		// parent
@@ -65,8 +67,7 @@ class ProjectsModelTask extends JModelAdmin
 		$this->setState('task.parent.id', $id);
 		
 		// project
-		$id = JRequest::getInt('project_id', $app->getUserState('project.id'));
-		$this->setState('project.id', $id);
+		$this->setState('project.id', $app->getUserState('project.id'));
 		
 		// category
 		$id = JRequest::getInt('catid', $app->getUserState('task.category.id'));
@@ -108,7 +109,6 @@ class ProjectsModelTask extends JModelAdmin
 		$project = JModel::getInstance('Project', 'ProjectsModel');
 		return $project->getItem($pk);
 	} 
-	
 	
 	/**
 	 * function to get the project
@@ -259,5 +259,69 @@ class ProjectsModelTask extends JModelAdmin
 		}
 		
 	}
+	
+	/**
+	 * Method to save the form data.
+	 *
+	 * @param	array	The form data.
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function save($data)
+	{
+		$pk		= (!empty($data['id'])) ? $data['id'] : (int)$this->getState('task.id');
+		$isNew	= true;
+		
+		// Get a row instance.
+		$table = $this->getTable();
+		
+		// Load the row if saving an existing category.
+		if ($pk > 0) {
+			$table->load($pk);
+			$isNew = false;
+		}
+		
+		// Set the new parent id if set.
+		if ($table->parent_id != $data['parent_id']) {
+			$table->setLocation($data['parent_id'], 'last-child');
+		}
+		
+		$table->project_id = $this->getState('project.id');
+		
+		// Bind the data.
+		if (!$table->bind($data)) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Bind the rules.
+		if (isset($data['rules'])) {
+			$rules = new JRules($data['rules']);
+			$table->setRules($rules);
+		}
+
+		// Check the data.
+		if (!$table->check()) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Store the data.
+		if (!$table->store()) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Rebuild the tree path.
+		if (!$table->rebuildPath($table->id)) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		$this->setState('task.id', $table->id);
+
+		return true;
+	}
+	
 }
 ?>
