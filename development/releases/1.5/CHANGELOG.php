@@ -37,6 +37,9 @@ $ -> Language fix or change
 ! -> Note
 
 
+-------------------- 1.5.20 Stable Release [18-July-2010] ------------------
+
+
 -------------------- 1.5.19 Stable Release [15-July-2010] ------------------
 
 15-July-2010 Mark Dexter
