@@ -13,13 +13,25 @@ defined('_JEXEC') or die;
 <div class="projects-content projects-frame projects-space">
 	<h4><?php echo JText::_('COM_PROJECTS_TEAM_LIST');?></h4>
 	<?php if ($this->canDo->get('project.view')): ?>
-		
+		<br/>
 		<form>
 			<input type="button" value="<?php echo JText::_('COM_PROJECTS_TEAM_USER_LIST');?>" onClick="parent.location='<?php echo JRoute::_('index.php?option=com_projects&view=members&type=list&id='.$this->item->id);?>'">
 		</form>
+		<br/>
 	<?php endif; ?>
 	<?php if ($this->canDo->get('project.edit')): ?>
+	
+		<form>
+			<input type="button" value="<?php echo JText::_('COM_PROJECTS_TEAM_USER_ASSIGN');?>" onClick="parent.location='<?php echo JRoute::_('index.php?option=com_projects&view=members&type=assign&id='.$this->item->id);?>'">
+		</form>
+		<br/>
+		<form>
+			<input type="button" value="<?php echo JText::_('COM_PROJECTS_TEAM_USER_DELETE');?>" onClick="parent.location='<?php echo JRoute::_('index.php?option=com_projects&view=members&type=delete&id='.$this->item->id);?>'">
+		</form>
+		
+		<!-- 
 		<a href="<?php echo JRoute::_('index.php?option=com_projects&view=members&type=assign&id='.$this->item->id);?>"><?php echo JText::_('COM_PROJECTS_TEAM_USER_ASSIGN');?></a><br />
 		<a href="<?php echo JRoute::_('index.php?option=com_projects&view=members&type=delete&id='.$this->item->id);?>"><?php echo JText::_('COM_PROJECTS_TEAM_USER_DELETE');?></a>
+		 -->
 	<?php endif; ?>
 </div>
