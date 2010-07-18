@@ -59,20 +59,21 @@ class MediagalleriesModelGallery extends JModelList
 	{
 		// Invoke the parent getItems method to get the main list
 		$items = &parent::getItems();
-
+	
 		// Convert the params field into an object, saving original in _params
 		for ($i = 0, $n = count($items); $i < $n; $i++) {
 			$item = &$items[$i];
-			
-			$params = new JRegistry();
-			$params->loadJSON($item->params);
-			$item->params = $params;
+			if (!isset($this->_params)) {
+				$params = new JRegistry();
+				$params->loadJSON($item->params);
+				$item->params = $params;
+			}
 		}
 
 		return $items;
 	}
 
-	/**
+/**
 	 * Method to build an SQL query to load the list data.
 	 *
 	 * @return	string	An SQL query
@@ -80,7 +81,7 @@ class MediagalleriesModelGallery extends JModelList
 	 */
 	protected function getListQuery()
 	{
-		$user	= &JFactory::getUser();
+		$user	= JFactory::getUser();
 		$groups	= implode(',', $user->authorisedLevels());
 
 		// Create a new query object.
@@ -104,18 +105,16 @@ class MediagalleriesModelGallery extends JModelList
 		if (is_numeric($state)) {
 			$query->where('a.state = '.(int) $state);
 		}
-		
-		// Filter by start and end dates.
-		
+				// Filter by start and end dates.
 		$nullDate = $db->Quote($db->getNullDate());
 		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
 
-		$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
-		$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
-			
+		//$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
+		//$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
+
 		// Filter by language
 		if ($this->getState('filter.language')) {
-			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+			$query->where('a.language in ('.$db->Quote(JFactory::getLanguage()->getTag()).','.$db->Quote('*').')');
 		}
 
 		// Add the list ordering clause.
@@ -123,7 +122,6 @@ class MediagalleriesModelGallery extends JModelList
 
 		return $query;
 	}
-
 	/**
 	 * Method to auto-populate the model state.
 	 *
