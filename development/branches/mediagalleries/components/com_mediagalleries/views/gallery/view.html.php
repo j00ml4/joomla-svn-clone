@@ -60,6 +60,7 @@ class MediagalleriesViewGallery extends JView
 		$menus = &JSite::getMenu();
 		$menu  = $menus->getActive();		
 		
+		
 		// Set Custom Limit
 		if($cparams->get('limit') ){
 			$limit = $app->getUserStateFromRequest(
@@ -73,23 +74,28 @@ class MediagalleriesViewGallery extends JView
 		
 		//$total		=& $this->get('total');
 		
-		$this->pagination	=& $model->getPagination();
-		$this->category	=& $model->getCategory();
-		$this->items		=& $model->getItems();
-		$this->state		=& $model->getState();
+		$this->pagination=& $model->getPagination();
+		$this->category  =& $model->getCategory();
+		$this->items	 =& $model->getItems();
+		$this->state	 =& $model->getState();
 		
 		$this->children= $model->getChildren();
-	
-		
+		foreach($this->children as $children)
+		{
+			echo $children->title;
+			echo "<br>";
+		}
+			
 		// Title
 		if(!empty($this->category)){
-			$title = $this->category->title;
+			$this->title = $this->category->title;
 		}
 		elseif(is_object($menu)){
-			$title = $menu->title;
+			$this->title = $menu->title;
 		}
 		else{
-			$title = JText::_('All Medias');
+			
+			$title = JText::_($this->category->title);
 		}	
 				
 		// assign Vars
