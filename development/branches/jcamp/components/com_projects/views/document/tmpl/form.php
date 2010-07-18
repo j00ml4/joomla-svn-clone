@@ -37,24 +37,15 @@ function submitbutton(task) {
 <?php endif; ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_projects'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
+	<?php  echo $this->loadTemplate('buttons');?>
 	<fieldset>
 		<legend><?php echo JText::_('JEDITOR'); ?></legend>
-
-			<div class="formelm">
+		<div class="formelm">
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
-			</div>
-
-		<?php if (is_null($this->item->id)):?>
-			<div class="formelm">
-			<?php echo $this->form->getLabel('alias'); ?>
-			<?php echo $this->form->getInput('alias'); ?>
-			</div>
-		<?php endif; ?>
-		<?php  echo $this->loadTemplate('buttons');?>
+		</div>
 
 		<?php echo $this->form->getInput('text'); ?>
-
 	</fieldset>
 
 	<fieldset>
