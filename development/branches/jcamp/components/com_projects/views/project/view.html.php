@@ -46,8 +46,8 @@ class ProjectsViewProject extends JView
 			case 'form':
 				$layout = 'form';
 				$this->form	= &$model->getForm();
-				if (empty($this->item)) {
-					$this->catid = $app->getUserState('portfolio.id', 0);
+				if (empty($this->item->id)) {
+					$this->params->set('catid', $app->getUserState('portfolio.id', 0));
 					$access = 'project.create';
 				}else{
 					$access = 'project.edit';

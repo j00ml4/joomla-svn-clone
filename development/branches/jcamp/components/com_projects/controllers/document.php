@@ -14,7 +14,7 @@ jimport('joomla.application.component.controller');
  * @package		Joomla.Site
  * @subpackage	com_project
  */
-class ProjectsControllerDocument extends JController
+class ProjectsControllerDocument extends JControllerForm
 {
 	protected $_context = 'com_projects.edit.document';
 	
