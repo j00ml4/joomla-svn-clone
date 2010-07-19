@@ -22,6 +22,7 @@ jimport('joomla.application.component.view');
 class ProjectsViewTasks extends JView
 {
 	protected $items;
+	protected $item;
 	protected $project;
 	protected $parent;
 	protected $maxLevel;
@@ -65,9 +66,9 @@ class ProjectsViewTasks extends JView
 	  	$bc = $app->getPathway();
 	  	$bc->addItem($this->project->title, 'index.php?option=com_projects&view=project&id='.$this->project->id);
 	  	$bc->addItem(JText::_('COM_PROJECTS_TASKS'));
-	  	
-	  	// TMLP
-	  	$this->setLayout($layout);
+	  			
+  	// TMLP
+  	$this->setLayout($layout);
 		parent::display($tpl);
 	}
 	

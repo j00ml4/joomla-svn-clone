@@ -68,7 +68,7 @@ class ProjectsControllerProject extends JControllerForm
 	 */
 	protected function allowAdd($data = array())
 	{
-		return ProjectsHelper::can('project.create', $this->option, $data);
+		return ProjectsHelper::can('project.create', $this->option, $record);
 	}
 
 	/**
@@ -83,7 +83,7 @@ class ProjectsControllerProject extends JControllerForm
 	 */
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return ProjectsHelper::can('project.edit', $this->option, $data);
+		return ProjectsHelper::can('project.edit', $this->option, $record);
 	}
 
 	/**

@@ -89,14 +89,12 @@ class ProjectsControllerTask extends JControllerForm
 	 * @see libraries/joomla/application/component/JControllerForm#save()
 	 */
 	public function save(){		
-//		$model		= &$this->getModel();
-//		$id 		= &$model->getState('task.id', 0);
-
 		if(!parent::save()){
 			// Redirect back to the edit screen.
 			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=task&layout=edit', false));	
 			return false;
 		}
+		// Redirect to list of tasks
 		$this->setRedirect($this->_getReturnPage());	
 	}
 	
