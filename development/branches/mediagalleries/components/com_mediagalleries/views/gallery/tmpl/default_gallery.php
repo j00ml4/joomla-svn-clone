@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: default_articles.php 18109 2010-07-13 11:21:43Z 3dentech $
+ * @version		$Id: default_gallery.php 18109 2010-07-13 11:21:43Z 3dentech $
  * @package		Joomla.Site
  * @subpackage	com_content
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -20,7 +20,7 @@ $listDirn	= $this->state->get('list.direction');
 ?>
 
 <?php if (empty($this->items)) : ?>
-	<p><?php echo JText::_('COM_CONTENT_NO_ARTICLES'); ?></p>
+	<p><?php echo JText::_('COM_MEDIAGALLERIES_NO_ITEMS'); ?></p>
 <?php else : ?>
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
 	<?php if ($this->params->get('filter_field') != 'hide') :?>
@@ -79,44 +79,45 @@ $listDirn	= $this->state->get('list.direction');
 
 		<tbody>
 
-			<?php foreach ($this->items as $i => &$article) : ?>
+			<?php foreach ($this->items as $i => &$media) : ?>
 			<tr class="cat-list-row<?php echo $i % 2; ?>">
 
-				<?php if (in_array($article->access, $this->user->authorisedLevels())) : ?>
+				<?php if (in_array($media->access, $this->user->authorisedLevels())) : ?>
 				
 					<td class="list-title">
-						<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid)); ?>">
-						<?php echo $this->escape($article->title); ?></a>
+						<a href="<?php // echo JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid)); ?>">
+						<?php echo $this->escape($media->title); ?></a>
 					</td>
 
 					<?php if ($this->params->get('list_show_date')) : ?>
 					<td class="list-date">
-						<?php echo JHTML::_('date',$article->displayDate, $this->escape(
+						<?php echo JHTML::_('date',$media->displayDate, $this->escape(
 						$this->params->get('date_format', JText::_('DATE_FORMAT_LC3')))); ?>
 					</td>
 					<?php endif; ?>
 
 					<?php if ($this->params->get('list_show_author',1)) : ?>
 					<td class="list-author">
-						<?php echo $this->params->get('link_author', 0) ? JHTML::_('link',JRoute::_('index.php?option=com_users&view=profile&member_id='.$article->created_by),$article->author) : $article->author; ?>
+						<?php echo $this->params->get('link_author', 0) ? JHTML::_('link',JRoute::_('index.php?option=com_users&view=profile&member_id='.$media->created_by),$media->created_by) : $media->created_by; ?>
 					</td>
-					<?php endif; ?>
+					<?php endif;
+					?>
 
 					<?php if ($this->params->get('list_show_hits',1)) : ?>
 					<td class="list-hits">
-						<?php echo $article->hits; ?>
+						<?php echo $media->hits; ?>
 					</td>
 					<?php endif; ?>
 
 				<?php else : ?>
 				<td>
 					<?php
-						echo $this->escape($article->title).' : ';
+						echo $this->escape($media->title).' : ';
 						$menu		= JFactory::getApplication()->getMenu();
 						$active		= $menu->getActive();
 						$itemId		= $active->id;
 						$link = JRoute::_('index.php?option=com_users&view=login&Itemid='.$itemId);
-						$returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug));
+						//$returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug));
 						$fullURL = new JURI($link);
 						$fullURL->setVar('return', base64_encode($returnURL));
 					?>
