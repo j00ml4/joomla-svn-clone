@@ -44,7 +44,6 @@ class MediagalleriesViewGallery extends JView
 		$cparams =& $app->getParams();
 		$model =& $this->getModel('gallery');
 		
-		
     	// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
@@ -57,9 +56,10 @@ class MediagalleriesViewGallery extends JView
 		$groups	= $user->authorisedLevels();
 		
 		// Get the parameters of the active menu item
-		$menus = &JSite::getMenu();
+		$menus = &JMenu::getInstance('site');
 		$menu  = $menus->getActive();		
 		
+		$params = $menus->getParams($menu->id);
 		
 		// Set Custom Limit
 		if($cparams->get('limit') ){
@@ -77,15 +77,9 @@ class MediagalleriesViewGallery extends JView
 		$this->pagination=& $model->getPagination();
 		$this->category  =& $model->getCategory();
 		$this->items	 =& $model->getItems();
-		$this->state	 =& $model->getState();
-		
+		$this->state	 =& $model->getState();		
 		$this->children= $model->getChildren();
-		foreach($this->children as $children)
-		{
-			echo $children->title;
-			echo "<br>";
-		}
-			
+					
 		// Title
 		if(!empty($this->category)){
 			$this->title = $this->category->title;
@@ -104,8 +98,8 @@ class MediagalleriesViewGallery extends JView
 		//$this->access=$access;				
 	
 		$this->action=$uri->toString();
-		$this->params=$cparams;
-		
+		$this->params=$params;
+		$this->user=&JFactory::getUser();
 		//Display
 		parent::display($tpl);
     }

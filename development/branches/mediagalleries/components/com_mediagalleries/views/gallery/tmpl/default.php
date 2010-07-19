@@ -14,7 +14,6 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
 $pageClass = $this->params->get('pageclass_sfx');
 
-dump($this->params);
 ?>
 <div class="category-list <?php echo $pageClass;?>">
 
@@ -38,7 +37,11 @@ dump($this->params);
 
 	</div>
 	<?php endif; ?>
+		<div class="cat-items">
+		<?php echo $this->loadTemplate('gallery'); ?>
+	</div>
 
+	</div>
 	
 
 </div>
