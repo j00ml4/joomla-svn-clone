@@ -54,22 +54,35 @@ $model = $this->getModel();
 		<?php  } ?>
 	</div>	
 	
-	<table width="70%">
-		<tr>
-			<th width="50%">Role</th>
-			<th>Name</th>
-		</tr>
-		<tr>
-			<td>Project manager</td>
-			<td>Eden</td>
-		</tr>
-		<tr>
-			<td>Architect</td>
-			<td>Elf</td>
-		</tr>
-		<tr>
-			<td>Coder</td>
-			<td>har</td>
-		</tr>
+	<table class="category" border="1">
+		<thead>
+			<tr>		
+
+				<th id="tableOrdering">
+					<?php  echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBERS_ROLE', 'a.role', $listDirn, $listOrder) ; ?>
+				</th>
+
+				<th id="tableOrdering2">
+					<?php echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBERS_NAME', 'a.name', $listDirn, $listOrder); ?>
+				</th>			
+			</tr>
+		</thead>
+		<tbody>
+					
+					<?php 
+						$c = count($this->items);
+							for($i = 0; $i<$c;$i++){
+								echo '<tr>';
+								echo '<td>';
+								$this->item = &$this->items[$i];
+								echo $this->loadTemplate('item');
+								echo '</td>';
+								echo '</tr>';					
+						}
+					?>
+		</tbody>
 	</table>
+	
+	
+
 </div>
