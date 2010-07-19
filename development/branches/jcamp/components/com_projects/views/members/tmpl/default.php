@@ -24,14 +24,41 @@ $model = $this->getModel();
 			<?php endif; ?>
 	
 			<?php echo $this->loadTemplate('buttons');?>
-			<table>			
-			<?php 
-				$c = count($this->items);
-				for($i = 0; $i<$c;$i++){
-					$this->item = &$this->items[$i];
-					echo $this->loadTemplate('item');
-				}
-			?>
+			
+			<table class="category" border="1">
+			<thead>
+				<tr>		
+					<?php if($model->getState('type') != 'list'): ?>
+					<th>#</th>
+					<?php endif; ?>
+					
+					<th id="tableOrdering2">
+						<?php echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBERS_NAME', 'a.name', $listDirn, $listOrder); ?>
+					</th>	
+					
+					<th id="tableOrdering">
+						<?php  echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBERS_ROLE', 'a.role', $listDirn, $listOrder) ; ?>
+					</th>		
+				</tr>
+			</thead>
+			<tbody>		
+				<?php foreach($this->items as $item): ?>
+					<tr>
+						<?php if($model->getState('type') != 'list'): ?>
+						<td>
+							<input type="checkbox" value="<?php echo $item->id;?>" name="usr[]" id="user-<?php echo $item->id;?>"/>
+						</td>
+						<?php endif; ?>
+						
+						<td>
+							<label for="user-<?php echo $item->id;?>"><?php echo $item->name;?></label>
+						</td>
+						<td>
+							Role
+						</td>
+					</tr>	
+				<?php endforeach; ?>
+			</tbody>
 			</table>
 			<?php echo $this->loadTemplate('buttons');?>
 			
@@ -53,36 +80,5 @@ $model = $this->getModel();
 		</div>
 		<?php  } ?>
 	</div>	
-	
-	<table class="category" border="1">
-		<thead>
-			<tr>		
-
-				<th id="tableOrdering">
-					<?php  echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBERS_ROLE', 'a.role', $listDirn, $listOrder) ; ?>
-				</th>
-
-				<th id="tableOrdering2">
-					<?php echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBERS_NAME', 'a.name', $listDirn, $listOrder); ?>
-				</th>			
-			</tr>
-		</thead>
-		<tbody>
-					
-					<?php 
-						$c = count($this->items);
-							for($i = 0; $i<$c;$i++){
-								echo '<tr>';
-								echo '<td>';
-								$this->item = &$this->items[$i];
-								echo $this->loadTemplate('item');
-								echo '</td>';
-								echo '</tr>';					
-						}
-					?>
-		</tbody>
-	</table>
-	
-	
 
 </div>
