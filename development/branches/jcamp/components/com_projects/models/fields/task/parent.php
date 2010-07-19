@@ -26,11 +26,16 @@ class JFormFieldTask_Parent extends JFormFieldList
          */
         protected function getOptions($config = array()) 
         {
+        				$app = JFactory::getApplication();
+        				$filter = (int)$app->getUserState('project.id');
+
                 $db = JFactory::getDBO();
                 $query = new JDatabaseQuery;
                 $query->select('a.id AS value, a.title AS text, a.level');
                 $query->from('#__project_tasks AS a');
                 $query->where(' `type` = 1 AND `state` >= 1 ');
+//								if($filter)
+//									$query->where(' `project_id` = '.$filter);                
                 $query->order('a.lft ASC, ordering ASC');
 
                 $db->setQuery($query);

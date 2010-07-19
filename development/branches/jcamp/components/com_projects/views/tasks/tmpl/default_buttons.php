@@ -9,7 +9,6 @@
 
 // no direct access
 defined('_JEXEC') or die;
-$uri = &JFactory::getURI();
 ?>
 <div class="formelm_buttons projects-content toolbar-list">
 	<ul class="actions">

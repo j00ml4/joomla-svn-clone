@@ -6,13 +6,14 @@
 		</message>
 	</layout>
 	<!-- Add fields to the parameters object for the layout. -->
-    <!-- fields name="params">
+    <fields name="params">
+        <!-- Basic options. -->
         <fieldset name="basic">
 			<field name="is_new" 
 				type="hidden"
-				default=""
+				default="1"
 				readonly="true"
 				required="true" />
 		</fieldset>
-	</fields -->
+	</fields>
 </metadata>

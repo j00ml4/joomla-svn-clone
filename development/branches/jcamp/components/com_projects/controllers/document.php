@@ -14,7 +14,7 @@ jimport('joomla.application.component.controller');
  * @package		Joomla.Site
  * @subpackage	com_project
  */
-class ProjectsControllerDocument extends JControllerForm
+class ProjectsControllerDocument extends JController
 {
 	protected $_context = 'com_projects.edit.document';
 	
@@ -26,11 +26,6 @@ class ProjectsControllerDocument extends JControllerForm
 	{
 		parent::__construct($config);
 
-		$this->registerTask('unpublish',	'publish');	// value = 0 
-		$this->registerTask('archive',		'publish');	// value = 2	// finished
-		$this->registerTask('trash',		'publish');	// value = -2
-		$this->registerTask('report',		'publish');	// value = -3 	// pending
-		
 		$this->registerTask('apply',		'save');
 		$this->registerTask('save2new',		'save');
 		$this->registerTask('save2copy',	'save');
@@ -45,9 +40,10 @@ class ProjectsControllerDocument extends JControllerForm
 	 * @return	object	The model.
 	 * @since	1.5
 	 */
-	public function &getModel($name = 'Document', $prefix = 'ProjectsModel', $config = array())
+	public function &getModel($name = 'document', $prefix = '', $config = array())
 	{
-		return parent::getModel($name, $prefix, $config);
+		$model = parent::getModel($name, $prefix, $config);
+		return $model;
 	}
 	
 	protected function _getReturnPage()
@@ -55,36 +51,6 @@ class ProjectsControllerDocument extends JControllerForm
 		$app = &JFactory::getApplication();
 		return JRoute::_('index.php?option=com_projects&view=documents&id='.$app->getUserState('project.id'));
 	}	
-	
-	
-	/**
-	 * Method to check if you can add a new record.
-	 *
-	 * Extended classes can override this if necessary.
-	 *
-	 * @param	array	An array of input data.
-	 *
-	 * @return	boolean
-	 */
-	protected function allowAdd($data = array())
-	{
-		return ProjectsHelper::can('project.edit', $this->option, $data);
-	}
-
-	/**
-	 * Method to check if you can add a new record.
-	 *
-	 * Extended classes can override this if necessary.
-	 *
-	 * @param	array	An array of input data.
-	 * @param	string	The name of the key for the primary key.
-	 *
-	 * @return	boolean
-	 */
-	protected function allowEdit($data = array(), $key = 'id')
-	{
-		return ProjectsHelper::can('project.edit', $this->option, $data);
-	}
 	
 	/**
 	 * Method to add a new record.
@@ -109,7 +75,7 @@ class ProjectsControllerDocument extends JControllerForm
 		// Redirect to the edit screen.
 		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document', false));
 	}
-	
+
 	/**
 	 * Method to edit a object
 	 *
