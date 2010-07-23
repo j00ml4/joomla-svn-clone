@@ -93,7 +93,7 @@ class TableMedia extends JTable
 		$data['media']=$data['url'];
 		//To be reviewed later
 		$data['thumb_url']="google.com";		
-		if(empty($data['created_by']))
+		if(!$data['created_by'])
 		{
 			$user=JFactory::getUser();
 			$data['created_by']=$user->id;

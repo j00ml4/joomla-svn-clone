@@ -23,17 +23,7 @@ $listDirn	= $this->state->get('list.direction');
 	<p><?php echo JText::_('COM_MEDIAGALLERIES_NO_ITEMS'); ?></p>
 <?php else : ?>
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
-	<?php if ($this->params->get('filter_field') != 'hide') :?>
-	<fieldset class="filters">
-		<legend class="hidelabeltxt">
-			<?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?>
-		</legend>
-
-		<div class="filter-search">
-			<label class="filter-search-lbl" for="filter-search"><?php echo JText::_('COM_CONTENT_'.$this->params->get('filter_field').'_FILTER_LABEL').'&#160;'; ?></label>
-			<input type="text" name="filter-search" id="filter-search" value="<?php echo $this->escape($this->state->get('list.filter')); ?>" class="inputbox" onchange="document.adminForm.submit();" title="<?php echo JText::_('COM_CONTENT_FILTER_SEARCH_DESC'); ?>" />
-		</div>
-		<?php endif; ?>
+	
 
 		<?php if ($this->params->get('show_pagination_limit')) : ?>
 		<div class="display-limit">
