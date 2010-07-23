@@ -1,174 +1,108 @@
 <?php
 /**
- * @version		$Id: media.php 17015 2010-05-13 06:37:40Z eddieajau $
+ * @version		$Id: weblink.php 18109 2010-07-13 11:21:43Z 3dentech $
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// No direct access.
+// No direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modeladmin');
+jimport('joomla.application.component.modelitem');
 
 /**
- * Show a single Media.
+ * Weblinks Component Model for a Weblink record
  *
- * @package		Joomla.Administrator
- * @subpackage	com_mediagalleries
+ * @package		Joomla.Site
+ * @subpackage	com_weblinks
  * @since		1.5
  */
-class MediagalleriesModelMedia extends JModelAdmin
+class MediagalleriesModelMedia extends JModelItem
 {
 	/**
-	 * @var		string	The prefix to use with controller messages.
-	 * @since	1.6
-	 */
-	protected $text_prefix = 'COM_MEDIAGALLERIES';
-
-	/**
-	 * Returns a reference to the a Table object, always creating it.
+	 * Model context string.
 	 *
-	 * @param	type	The table type to instantiate
-	 * @param	string	A prefix for the table class name. Optional.
-	 * @param	array	Configuration array for model. Optional.
-	 * @return	JTable	A database object
-	 * @since	1.6
+	 * @access	protected
+	 * @var		string
 	 */
-	public function getTable($type = 'Media', $prefix = 'Table', $config = array())
-	{
-		return JTable::getInstance($type, $prefix, $config);
-	}
-
+	protected $_context = 'com_mediagalleries.media';
 
 	/**
 	 * Method to auto-populate the model state.
-	 * no needed to overload but is very important  
+	 *
 	 * Note. Calling getState in this method will result in recursion.
 	 *
 	 * @since	1.6
 	 */
-	protected function populateState()
+	public function populateState()
 	{
-		parent::populateState();		
-	}
-		
-	/**
-	 * Method to get the record form.
-	 *
-	 * @param	array	$data		An optional array of data for the form to interogate.
-	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
-	 * @return	JForm	A JForm object on success, false on failure
-	 * @since	1.6
-	 */
+		$app = JFactory::getApplication();
+		$params	= $app->getParams();
 
-	public function getForm($data = array(), $loadData = true)
-	{
-		// Get the form.
-		$form = $this->loadForm('com_mediagalleries.media', 'media', array('control' => 'jform', 'load_data' => $loadData));
-		if (empty($form)) {
-			return false;
-		}
+		// Load the object state.
+		$id	= JRequest::getInt('id');
+		$this->setState('media.id', $id);
 
-		// Determine correct permissions to check.
-		if ($this->getState('media.id')) {
-			// Existing record. Can only edit in selected categories.
-			$form->setFieldAttribute('catid', 'action', 'core.edit');
-		} else {
-			// New record. Can only create in selected categories.
-			$form->setFieldAttribute('catid', 'action', 'core.create');
-		}
-
-		return $form;
+		// Load the parameters.
+		$this->setState('params', $params);
 	}
 
 	/**
-	 * Method to get the data that should be injected in the form.
+	 * Method to get an ojbect.
 	 *
-	 * @return	mixed	The data for the form.
-	 * @since	1.6
-	 */
-	protected function loadFormData()
-	{
-		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_mediagalleries.edit.media.data', array());
-
-		if (empty($data)) {
-			$data = $this->getItem();
-		}
-
-		return $data;
-	}
-
-	/**
-	 * Method to get a single record.
-	 *
-	 * @param	integer	The id of the primary key.
+	 * @param	integer	The id of the object to get.
 	 *
 	 * @return	mixed	Object on success, false on failure.
-	 * @since	1.6
 	 */
-	public function getItem($pk = null)
+	public function &getItem($id = null)
 	{
-			
-		if ($item = parent::getItem($pk)) {
-			// Convert the params field to an array.
-			//$registry = new JRegistry;
-			//$registry->loadJSON($item->params);
-			//$item->params= $registry->toArray();
-		}
+		if ($this->_item === null)
+		{
+			$this->_item = false;
 
-		return $item;
-	}
+			if (empty($id)) {
+				$id = $this->getState('media.id');
+			}
 
-	/**
-	 * Prepare and sanitise the table prior to saving.
-	 *
-	 * @since	1.6
-	 */
-	protected function prepareTable(&$table)
-	{
-		jimport('joomla.filter.output');
-		$date = JFactory::getDate();
-		$user = JFactory::getUser();
+			// Get a level row instance.
+			$table = JTable::getInstance('Mediagalleries');
 
-		$table->title		= htmlspecialchars_decode($table->title, ENT_QUOTES);
-		$table->alias		= JApplication::stringURLSafe($table->alias);
-		if (empty($table->alias)) {
-			$table->alias = JApplication::stringURLSafe($table->title);
-		}
+			// Attempt to load the row.
+			if ($table->load($id))
+			{
+				// Check published state.
+				if ($published = $this->getState('filter.published'))
+				{
+					if ($table->state != $published) {
+						return $this->_item;
+					}
+				}
 
-		if (empty($table->id)) {
-			// Set the values
-			$table->created	= $date->toMySQL();
-			$table->created_by	= $user->get('id');
-
-			// Set ordering to the last item if not set
-			if (empty($table->ordering)) {
-				$db = $this->getDbo();
-				$db->setQuery('SELECT MAX(ordering) FROM #__mediagalleries');
-				$max = $db->loadResult();
-
-				$table->ordering = $max+1;
+				// Convert the JTable to a clean JObject.
+				$this->_item = JArrayHelper::toObject($table->getProperties(1), 'JObject');
+			}
+			else if ($error = $table->getError()) {
+				$this->setError($error);
 			}
 		}
-		else {
-			// Set the values
-			$table->modified	= $date->toMySQL();
-			$table->modified_by	= $user->get('id');
-		}
+
+		return $this->_item;
 	}
 
 	/**
-	 * A protected method to get a set of ordering conditions.
+	 * Method to increment the hit counter for the media
 	 *
-	 * @param	object	A record object.
-	 * @return	array	An array of conditions to add to add to ordering queries.
-	 * @since	1.6
+	 * @param	int		Optional ID of the weblink.
+	 * @return	boolean	True on success
+	 * @since	1.5
 	 */
-	protected function getReorderConditions($table = null)
+	public function hit($id = null)
 	{
-		$condition = array();
-		$condition[] = 'catid = '.(int) $table->catid;
-		return $condition;
+		if (empty($id)) {
+			$id = $this->getState('media.id');
+		}
+
+		$media = $this->getTable('Mediagalleries');
+		return $media->hit($id);
 	}
 }

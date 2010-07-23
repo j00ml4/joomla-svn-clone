@@ -28,19 +28,19 @@ class MediagalleriesViewMedia extends JView
     function display($tpl = null)
     {
 		global $option;
-		$mainframe=&JFactory::getApplication();
+		$app=&JFactory::getApplication();
 		
 		// Initialize some variables
 		$user		=& JFactory::getUser();
 		$document	= &JFactory::getDocument();
 		$uri 		= &JFactory::getURI();
-		$pathway	= &$mainframe->getPathway();
+		$pathway	= &$app->getPathway();
 		$model	=& $this->getModel();
-		$cparams =& $mainframe->getParams(); 
+		$cparams =& $app->getParams(); 
 
 		// Add default Style
 		$document->addStyleSheet( URI_ASSETS. $cparams->get('style', 'default.css') );		
-		
+		$model= JModel::getInstance("media");
 		// Get some data from the model
 		$item	=& $this->get('Data');		
 		// Build lists
@@ -57,7 +57,7 @@ class MediagalleriesViewMedia extends JView
 				// fail if checked out not by 'me'
 				if ( $model->isCheckedOut( $user->get('id') ) or !JRequest::getInt('Itemid') ) {
 					$msg = JText::_( 'YOU HAVE NO ACCESS TO THIS PAGE' );
-					$mainframe->redirect( 'index.php?option='. $option, $msg, 'error' );
+					$app->redirect( 'index.php?option='. $option, $msg, 'error' );
 				}
 			
 				// Is new?
@@ -93,7 +93,7 @@ class MediagalleriesViewMedia extends JView
 				// dont exists?
 				if( empty($item->id) ){
 					$msg = JText::_( 'PAGE COULD NOT BE FOUND' );
-					$mainframe->redirect( 'index.php?option='. $option, $msg, 'error' );
+					$app->redirect( 'index.php?option='. $option, $msg, 'error' );
 				}
 				
 				//  Increment views count
@@ -152,7 +152,7 @@ class MediagalleriesViewMedia extends JView
 	 * @return array Lists 
 	 */
 	function &_buildLists(&$item){
-		global $option, $mainframe;
+		global $option, $app;
 				
 		// Build lists
 		$lists = array();
@@ -169,7 +169,7 @@ class MediagalleriesViewMedia extends JView
 	 * @return array Lists 
 	 */
 	function &_buildLinks(&$item){
-		global $option, $mainframe;
+		global $option, $app;
 				
 		// Build lists
 		$links = array();
@@ -185,10 +185,10 @@ class MediagalleriesViewMedia extends JView
 	 * @param $item Object
 	 */
 	function _buildCommentList(&$item){
-		global $mainframe;
+		global $app;
 		
 		$args = array('list', &$item); 
-		$res = $mainframe->triggerEvent('onGetComments', $args );
+		$res = $app->triggerEvent('onGetComments', $args );
 
 		return @$res[0];
 	}
@@ -199,10 +199,10 @@ class MediagalleriesViewMedia extends JView
 	 * @param $item Object
 	 */
 	function _buildCommentForm(&$item){
-		global $mainframe;
+		global $app;
 		
 		$args = array('form', &$item ) ;
-		$res = $mainframe->triggerEvent('onGetComments', $args);
+		$res = $app->triggerEvent('onGetComments', $args);
 		
 		return @$res[0];
 	}

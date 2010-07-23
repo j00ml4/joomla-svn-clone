@@ -38,9 +38,9 @@
 			label="JCATEGORY" 
 			description="JFIELD_CATEGORY_DESC"
 			class="inputbox"
-			required="true">
-			<option>JOPTION_NO_CATEGORY</option>
-		</field>
+			required="true"
+		
+		/>
 
 		<field 
 			name="url" 
