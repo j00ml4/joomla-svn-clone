@@ -73,9 +73,12 @@ class ProjectsModelTask extends JModelAdmin
 		$id = JRequest::getInt('catid', $app->getUserState('task.category.id'));
 		$this->setState('task.category.id', $id);
 		
-		// category
+		// task type
 		$id = $app->getUserState('task.type', JRequest::getInt('type'));
 		$this->setState('task.type', $id);
+			
+		// id
+		$this->setState('Itemid', ProjectsHelper::getMenuItemId());
 	}
 	
 	/**

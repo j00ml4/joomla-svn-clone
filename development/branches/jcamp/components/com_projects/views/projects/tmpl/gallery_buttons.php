@@ -12,10 +12,18 @@ defined('_JEXEC') or die;
 
 // Create a shortcut for params.
 $params	=& $item->params;
-$item	=& $this->item;
-$link = JRoute::_('index.php?option=com_projects&task=project.add');
 ?>
 
 <div class="formelm_buttons">
-	<a href="<?php echo $link; ?>"><?php echo JText::_('COM_PROJECTS_PROJECT_ADD'); ?></a>
+	<ul class="actions"> 
+			<?php if($this->canDo->get('project.create', 1)): ?>
+			<li>
+				<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_PROJECT_ADD'), 'projects.add'); ?>
+			</li>
+			<?php endif;?>
+			
+			<li>
+				<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_BACK_TO_PORTFOLIOS_PROJECTS_LINK'), 'projects.back'); ?>
+			</li>
+		</ul>
 </div>

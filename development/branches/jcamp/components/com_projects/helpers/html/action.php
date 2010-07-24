@@ -27,6 +27,7 @@ abstract class JHtmlAction
 		return	'<form style="display:inline;" class="task-button" action="'. JRoute::_($url) .'" method="post">'.
 					'<button type="submit">'. $text .'</button>'.	
 					'<input type="hidden" name="task" value="'. $task .'" />'.
+//					'<input type="hidden" name="Itemid" value="'.JRequest::getInt('Itemid',0).'" />'.
 					JHTML::_( 'form.token' ).
 				'</form>';
 	}
@@ -49,7 +50,7 @@ abstract class JHtmlAction
 		}
 		$url .= '&task='.$task;
 		
-		return	'<a class="" href="'. JRoute::_($url) .'">'.
+		return	'<a class="" href="'. JRoute::_($url, false) .'">'.
 					'<button type="button">'. $text .'</button>'.
 				'</a>';
 	}

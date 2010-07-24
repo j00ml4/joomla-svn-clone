@@ -297,10 +297,24 @@ abstract class ProjectsHelper
 	{
 		$app = &JFactory::getApplication();
   		$bc = &$app->getPathway();
-//  	$bc->setPathway(array());
-// 		$bc->addItem(JText::_('COM_PROJECTS_HOME_PAGE'), 'index.php?option=com_projects');		
- 		
  		return $bc;
+	}
+
+	/**
+	 * Method to get ID of actual menu item
+	 * 
+	 * @return ID of actual menu item
+	 * @since	1.6
+	 */
+	public function getMenuItemId()
+	{
+		$app = JFactory::getApplication();
+		$menu = $app->getMenu();
+		
+		$id = $menu->getActive()->id;
+		if(!((int)$id))
+		  $id = JRequest::getInt('Itemid',0);
+		return $id;
 	}
 }
 

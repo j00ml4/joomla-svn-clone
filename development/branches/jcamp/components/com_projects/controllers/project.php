@@ -38,6 +38,8 @@ class ProjectsControllerProject extends JControllerForm
 		$this->registerTask('archive',		'publish');	// value = 2	// finished
 		$this->registerTask('trash',		'publish');	// value = -2
 		$this->registerTask('report',		'publish');	// value = -3 	// pending
+		$this->registerTask('back',		'back');
+		
 		//$this->registerTask('orderup',		'reorder');
 		//$this->registerTask('orderdown',	'reorder');
 		
@@ -105,7 +107,18 @@ class ProjectsControllerProject extends JControllerForm
 			return ProjectsHelper::can('project.create', $this->option, $record);
 		}
 	}
-	
+
+		
+	/**
+	 * Method to go back to list of projects of a portfolio
+	 * 
+	 */
+	public function back()
+	{
+		$app = JFactory::getApplication();
+		$menu = $app->getMenu();
+		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=projects&layout=gallery&id='.$app->getUserState('portfolio.id').'&Itemid='.$menu->getActive()->id,false));
+	}
 	
 	/**
 	 * Save

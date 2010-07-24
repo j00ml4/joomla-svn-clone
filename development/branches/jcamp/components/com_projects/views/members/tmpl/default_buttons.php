@@ -28,5 +28,8 @@ $model	=$this->getModel();
 					} ?>
 		</li>
 		<?php endif; ?>
+		<li>
+			<?php echo JHTML::_('action.link', JText::_('COM_PROJECT_BACK_TO_PROJECT_MEMBERS_LINK'),'members.back')?>
+		</li>
 	</ul>
 </div>

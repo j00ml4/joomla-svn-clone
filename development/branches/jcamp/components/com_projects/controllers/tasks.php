@@ -28,16 +28,13 @@ class ProjectsControllerTasks extends JController
 	}
 	
 	/**
-	 * Method to cancel an edit
+	 * Method to go back to project overview
 	 *
-	 * Checks the item in, sets item ID in the session to null, and then redirects to the list page.
-	 *
-	 * @access	public
-	 * @return	void
+	 * @since	1.6
 	 */
 	public function back()
 	{
 		$app = JFactory::getApplication();
-		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=project&layout=default&id='.$app->getUserState('project.id')));
+		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=project&layout=default&id='.$app->getUserState('project.id').'&Itemid='.ProjectsHelper::getMenuItemId(),false));
 	}
 }
