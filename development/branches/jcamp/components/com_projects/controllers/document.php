@@ -49,7 +49,7 @@ class ProjectsControllerDocument extends JController
 	protected function _getReturnPage()
 	{
 		$app = &JFactory::getApplication();
-		return JRoute::_('index.php?option=com_projects&view=documents&id='.$app->getUserState('project.id'));
+		return JRoute::_('index.php?option=com_projects&view=documents&id='.$app->getUserState('project.id').'&Itemid='.ProjectsHelper::getMenuItemId(),false);
 	}	
 	
 	/**
@@ -125,7 +125,7 @@ class ProjectsControllerDocument extends JController
 		$app->setUserState($context.'id',	$id);
 		$app->setUserState($context.'data',	null);
 
-		$this->setRedirect('index.php?option=com_projects&view=document');
+		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&Itemid='.ProjectsHelper::getMenuItemId(),false));
 
 		return true;
 	}
@@ -158,7 +158,7 @@ class ProjectsControllerDocument extends JController
 		{
 			// Check-in failed, go back to the menu item and display a notice.
 			$message = JText::sprintf('JError_Checkin_failed', $model->getError());
-			$this->setRedirect('index.php?option=com_projects&view=document', $message, 'error');
+			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&Itemid='.ProjectsHelper::getMenuItemId(),false), $message, 'error');
 			return false;
 		}
 
@@ -212,7 +212,7 @@ class ProjectsControllerDocument extends JController
 			{
 				// Check-in failed, go back to the item and display a notice.
 				$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
-				$this->setRedirect('index.php?option=com_projects&view=document&layout=edit', $message, 'error');
+				$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&layout=edit&Itemid='.ProjectsHelper::getMenuItemId(),false), $message, 'error');
 				return false;
 			}
 
@@ -250,7 +250,7 @@ class ProjectsControllerDocument extends JController
 			$app->setUserState($context.'data', $data);
 
 			// Redirect back to the edit screen.
-			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&layout=edit', false));
+			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&layout=edit&Itemid='.ProjectsHelper::getMenuItemId(), false));
 			return false;
 		}
 
@@ -262,7 +262,7 @@ class ProjectsControllerDocument extends JController
 
 			// Redirect back to the edit screen.
 			$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'notice');
-			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&layout=edit', false));
+			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&layout=edit&Itemid='.ProjectsHelper::getMenuItemId(), false));
 			return false;
 		}
 
@@ -271,7 +271,7 @@ class ProjectsControllerDocument extends JController
 		{
 			// Check-in failed, go back to the row and display a notice.
 			$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
-			$this->setRedirect('index.php?option=com_projects&view=document&layout=edit', $message, 'error');
+			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&layout=edit&Itemid='.ProjectsHelper::getMenuItemId(),false), $message, 'error');
 			return false;
 		}
 
@@ -286,7 +286,7 @@ class ProjectsControllerDocument extends JController
 				$app->setUserState($context.'data',	null);
 
 				// Redirect back to the edit screen.
-				$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&layout=edit', false));
+				$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&layout=edit&Itemid='.ProjectsHelper::getMenuItemId(), false));
 				break;
 
 			case 'save2new':
@@ -295,7 +295,7 @@ class ProjectsControllerDocument extends JController
 				$app->setUserState($context.'data',	null);
 
 				// Redirect back to the edit screen.
-				$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&layout=edit', false));
+				$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&layout=edit&Itemid='.ProjectsHelper::getMenuItemId(), false));
 				break;
 
 			default:

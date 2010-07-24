@@ -45,9 +45,20 @@ class ProjectsControllerMembers extends JController
 		parent::__construct($config);
 		$this->registerTask('assign','assignMembers');
 		$this->registerTask('delete','deleteMembers');
+		$this->registerTask('back','back');
 	}
-	
-	
+
+	/**
+	 * Method to go back to project overview
+	 *
+	 * @since	1.6
+	 */
+	public function back()
+	{
+		$app = JFactory::getApplication();
+		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=project&layout=default&id='.$app->getUserState('project.id').'&Itemid='.ProjectsHelper::getMenuItemId(),false));
+	}
+		
 	/**
 	 * Assigns members to a project
 	 *

@@ -116,6 +116,7 @@ function submitbutton(task) {
 		<?php echo $this->loadTemplate('buttons'); ?>
 		
 		<input type="hidden" name="task" value="task.save" />
+		<input type="hidden" name="Itemid" value="<?php echo $this->getModel()->getState('Itemid');?>" />
 		<?php echo JHTML::_( 'form.token' ); ?>
 	</form>
 </div>

@@ -47,11 +47,9 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
 					<?php echo JHtml::_('content.prepare', $this->category->description); ?>
 				<div class="clr">&nbsp;</div>
 				</div>
-			<?php endif; ?>
-
-			<?php if($this->canDo->get('project.create', 1)): 
-				echo $this->loadTemplate('buttons');
-			endif; ?>
+			<?php endif;
+			
+			echo $this->loadTemplate('buttons'); ?>
 		</div>
 	</div>
 </div>

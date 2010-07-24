@@ -37,5 +37,8 @@ $id = $this->item->id;
 			<?php echo JHTML::_('action.delete', JText::_('JGLOBAL_DELETE'), 'project', $id); ?>
 		</li>
 		<?php endif; ?>			
+		<li>
+			<?php echo JHTML::_('action.task', JText::_('COM_PROJECT_BACK_TO_PROJECTS_PROJECT_LINK'), 'project.back'); ?>
+		</li>
 	</ul>
 </div>

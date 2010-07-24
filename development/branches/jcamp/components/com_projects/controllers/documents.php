@@ -66,7 +66,7 @@ class ProjectsControllerDocuments extends JController
 				return JError::raiseError(500, JText::_('COM_PROJECTS_DOCUMENTS_ERROR_DELETE'));
 			}
 		}
-		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=documents&id='.$app->getUserState('project.id')),
+		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=documents&id='.$app->getUserState('project.id').'&Itemid='.ProjectsHelper::getMenuItemId(), false),
 		JText::_('COM_PROJECTS_DOCUMENTS_SUCCESS_DELETE'));
 	}
 }
