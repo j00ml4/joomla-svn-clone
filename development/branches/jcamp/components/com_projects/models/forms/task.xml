@@ -60,8 +60,8 @@
 		 <field id="start_at"
 			name="start_at"
 			type="calendar"
-			label="COM_PROJECTS_FIELD_START_AT_LABEL"
-			description="COM_PROJECTS_FIELD_START_AT_DESC"
+			label="COM_PROJECTS_FIELD_START_AT_TASK_LABEL"
+			description="COM_PROJECTS_FIELD_START_AT_TASK_DESC"
 			class="inputbox"
 			format="%Y-%m-%d"
 			size="30" />
@@ -69,8 +69,8 @@
 		<field id="finish_at"
 			name="finish_at"
 			type="calendar"
-			label="COM_PROJECTS_FIELD_FINISH_AT_LABEL"
-			description="COM_PROJECTS_FIELD_FINISH_AT_DESC"
+			label="COM_PROJECTS_FIELD_FINISH_AT_TASK_LABEL"
+			description="COM_PROJECTS_FIELD_FINISH_AT_TASK_DESC"
 			class="inputbox"
 			format="%Y-%m-%d"
 			size="30" />

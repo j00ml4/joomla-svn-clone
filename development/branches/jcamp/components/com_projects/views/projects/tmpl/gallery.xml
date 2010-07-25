@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="COM_PROJECTS_PORTFOLIO_GALLERY_TITLE">
+    <layout title="COM_PROJECTS_PROJECTS_GALLERY_TITLE">
         <message>
             <![CDATA[COM_PROJECTS_PORTFOLIO_GALLERY_DESC]]>
         </message>
@@ -10,9 +10,9 @@
     <fields name="request">
         <fieldset name="request">
             <field name="id" type="category"
-             description="COM_PROJECTS_CHOOSE_PORTFOLIO_DESC"
+             description="COM_PROJECTS_PROJECTS_CHOOSE_PORTFOLIO_DESC"
              extension="com_projects"
-             label="COM_PROJECTS_CHOOSE_PORTFOLIO_LABEL">
+             label="COM_PROJECTS_PROJECTS_CHOOSE_PORTFOLIO_LABEL">
              <option value="">JOPTION_NO_CATEGORY</option>	
 			</field> 
         </fieldset>
@@ -35,16 +35,16 @@
             </field>            
 
             <field name="show_description" type="list"
-             description="COM_PROJECTS_SHOW_PORTFOLIO_DESCRIPTION_DESC"
-             label="COM_PROJECTS_SHOW_PORTFOLIO_DESCRIPTION_LABEL">
+             description="COM_PROJECTS_PROJECTS_SHOW_PORTFOLIO_DESCRIPTION_DESC"
+             label="COM_PROJECTS_PROJECTS_SHOW_PORTFOLIO_DESCRIPTION_LABEL">
                 <option value="">JGLOBAL_USE_GLOBAL</option>
                 <option value="0">JHIDE</option>
                 <option value="1">JSHOW</option>
             </field>
          
             <field name="show_title" type="list"
-             label="COM_PROJECTS_SHOW_PORTFOLIO_TITLE_LABEL"
-             description="COM_PROJECTS_SHOW_PORTFOLIO_TITLE_DESC">
+             label="COM_PROJECTS_PROJECTS_SHOW_PORTFOLIO_TITLE_LABEL"
+             description="COM_PROJECTS_PROJECTS_SHOW_PORTFOLIO_TITLE_DESC">
                 <option value="">JGLOBAL_USE_GLOBAL</option>
                 <option value="0">JHIDE</option>
                 <option value="1">JSHOW</option>
