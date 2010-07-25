@@ -55,13 +55,20 @@ class ProjectsModelTasks extends JModelList
 		$params	= JComponentHelper::getParams('com_projects');
 		
 		// Project		
-		$id = JRequest::getInt('id', 0);
+		if (!($id = (int) $app->getUserState('project.id'))) {
+			$id = (int) JRequest::getInt('id');
+		}
 		$this->setState('project.id', $id);
 		$app->setUserState('project.id', $id);
 
 		$app->setUserState('com_projects.edit.task.id',null);
 		$app->setUserState('com_projects.edit.task.data',null); 
 
+		// Type
+		$type = JRequest::getInt('type', 3); // default => tickets
+		$this->setState('task.type', $type);
+		$app->setUserState('task.type', $type);
+		
 		// Parent
 /*		if (!($id = $app->getUserState('task.parent.id'))) {
 			$id = JRequest::getInt('parent_id');
@@ -164,7 +171,21 @@ class ProjectsModelTasks extends JModelList
 
 		return $query;
 	}
-	
+
+	/**
+	 * Returns a reference to the a Table object, always creating it
+	 *
+	 * @param	type	The table type to instantiate
+	 * @param	string	A prefix for the table class name. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 *
+	 * @return	JTable	A database object
+	 * @since	1.6
+	*/
+	public function getTable($type = 'Task', $prefix = 'ProjectsTable', $config = array())
+	{
+		return JTable::getInstance($type, $prefix, $config);
+	}
 	
 	/**
 	 * function to get the project

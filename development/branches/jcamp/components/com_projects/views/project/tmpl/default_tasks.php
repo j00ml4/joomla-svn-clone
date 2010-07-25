@@ -9,13 +9,12 @@
 
 // no direct access
 defined('_JEXEC') or die;
-$link = JRoute::_('index.php?option=com_projects&view=tasks&id='.$this->item->id);
 ?>
 <div class="projects-content projects-frame projects-space">
-	<h4><a href="<?php echo $link; ?>"><?php echo JText::_('COM_PROJECTS_TASKS');?></a></h4>
+	<h4><?php echo JText::_('COM_PROJECTS_PROJECT_TASKS');?></h4>
 	<ul class="ulList">
 		<li>task</li>
 		<li>task</li>
 	</ul>
-	<a href="<?php echo $link; ?>"><?php echo JText::_('COM_PROJECTS_TASK_LIST_LINK');?></a>
+	<?php echo JHTML::_('action.link',JText::_('COM_PROJECTS_PROJECT_TASK_LIST_LINK'), null,$this->item->id,'index.php?option=com_projects&view=tasks&type=2');?>
 </div>

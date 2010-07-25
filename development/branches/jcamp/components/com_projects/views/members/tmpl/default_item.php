@@ -14,12 +14,16 @@ defined('_JEXEC') or die;
 $item	=&$this->item;
 ?>
 <tr>
-	<?php if($this->getModel()->getState('type') != 'list') :?>
+	<?php if($this->getModel()->getState('type') != 'list'): ?>
 	<td>
 		<input type="checkbox" value="<?php echo $item->id;?>" name="usr[]" id="user-<?php echo $item->id;?>"/>
 	</td>
 	<?php endif; ?>
+	
 	<td>
 		<label for="user-<?php echo $item->id;?>"><?php echo $item->name;?></label>
 	</td>
-</tr>
+	<td>
+		Role
+	</td>
+ </tr>

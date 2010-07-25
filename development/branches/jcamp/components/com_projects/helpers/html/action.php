@@ -27,7 +27,7 @@ abstract class JHtmlAction
 		return	'<form style="display:inline;" class="task-button" action="'. JRoute::_($url) .'" method="post">'.
 					'<button type="submit">'. $text .'</button>'.	
 					'<input type="hidden" name="task" value="'. $task .'" />'.
-//					'<input type="hidden" name="Itemid" value="'.JRequest::getInt('Itemid',0).'" />'.
+					'<input type="hidden" name="Itemid" value="'.JRequest::getInt('Itemid',0).'" />'.
 					JHTML::_( 'form.token' ).
 				'</form>';
 	}
@@ -48,9 +48,10 @@ abstract class JHtmlAction
 		if($id){
 			$url .= '&id='.$id;
 		}
-		$url .= '&task='.$task;
+		if($task)
+			$url .= '&task='.$task;
 		
-		return	'<a class="" href="'. JRoute::_($url, false) .'">'.
+		return	'<a class="" href="'. JRoute::_($url) .'">'.
 					'<button type="button">'. $text .'</button>'.
 				'</a>';
 	}
@@ -80,7 +81,7 @@ abstract class JHtmlAction
 	}
 	
 	/**
-	 * Edit button
+	 * Delete button
 	 * 
 	 * @param unknown_type $text
 	 * @param unknown_type $id
@@ -90,5 +91,18 @@ abstract class JHtmlAction
 		$task = $controller.'.delete';		
 		return self::task($text, $task, $id);
 	}
-	
+
+	/**
+	 * Question button
+	 * 
+	 * @param unknown_type $text
+	 * @param unknown_type $id
+	 * @param unknown_type $controller
+	 */
+	function question($text, $msg, $task){	
+		$msg = addslashes($msg);
+		$action = 'javascript:if (document.adminForm.boxchecked.value==0){alert(\''.$msg.'\');}else{ submitbutton(\''.$task.'\')}';
+		
+		return	'<button type="button" onclick="'.$action.'">'. $text .'</button>';
+	}
 }

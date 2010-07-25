@@ -275,7 +275,7 @@ class ProjectsControllerDocument extends JController
 			return false;
 		}
 
-		$this->setMessage(JText::_('COM_PROJECTS_DOCUMENT_SAVE_SUCCESS'));
+		$this->setMessage(JText::_('COM_PROJECTS_DOCUMENTS_SAVE_SUCCESS'));
 
 		// Redirect the user and adjust session state based on the chosen task.
 		switch ($task)

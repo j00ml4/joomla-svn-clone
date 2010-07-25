@@ -12,8 +12,6 @@ defined('_JEXEC') or die;
 
 // HTML Helpers
 JHtml::_('behavior.keepalive');
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.calendar');
 JHtml::_('behavior.formvalidation');
 
 // Vars

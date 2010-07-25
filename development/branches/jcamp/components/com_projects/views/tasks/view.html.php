@@ -29,6 +29,7 @@ class ProjectsViewTasks extends JView
 	protected $params;
 	protected $pagination;
 	protected $canDo;
+	protected $prefix;
 	
 	/**
 	 * Display View
@@ -66,7 +67,22 @@ class ProjectsViewTasks extends JView
 	  	$bc = $app->getPathway();
 	  	$bc->addItem($this->project->title, 'index.php?option=com_projects&view=project&id='.$this->project->id);
 	  	$bc->addItem(JText::_('COM_PROJECTS_TASKS'));
-	  			
+
+	  // set a correct prefix
+	  switch($model->getState('task.type'))
+	  {
+	  	case 1 :
+	  			$this->prefix = 'MILESTONE';
+	  			break;
+	  	case 2 :
+	  			$this->prefix = 'TASK';
+	  			break;
+	  	default:
+	  	case 3 :
+	  			$this->prefix = 'TICKET';
+	  			break;
+	  }
+	  
   	// TMLP
   	$this->setLayout($layout);
 		parent::display($tpl);
