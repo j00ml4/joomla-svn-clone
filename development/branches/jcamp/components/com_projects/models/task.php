@@ -293,6 +293,8 @@ class ProjectsModelTask extends JModelAdmin
 			$this->setError($table->getError());
 			return false;
 		}
+		
+		$this->prepareTable($table);
 
 		// Bind the rules.
 		if (isset($data['rules'])) {
