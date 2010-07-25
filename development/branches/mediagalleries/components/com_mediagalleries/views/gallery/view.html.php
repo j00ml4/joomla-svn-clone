@@ -92,10 +92,6 @@ class MediagalleriesViewGallery extends JView
 			$title = JText::_($this->category->title);
 		}	
 				
-		// assign Vars
-		//$this->assignRef('lists',		$lists);
-		
-		//$this->access=$access;				
 	
 		$this->action=$uri->toString();
 		$this->params=$params;
