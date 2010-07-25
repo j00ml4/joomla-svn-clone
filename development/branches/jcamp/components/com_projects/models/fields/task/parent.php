@@ -41,7 +41,7 @@ class JFormFieldTask_Parent extends JFormFieldList
                 $db->setQuery($query);
                 $rows = $db->loadObjectList();
                 $options = array();
-                $options[] = JHtml::_('select.option', 0, ' - '.JText::_('JNONE').' - ');
+                $options[] = JHtml::_('select.option', 1, ' - '.JText::_('JNONE').' - ');
                 foreach($rows as $item)
                 {	
                 	$repeat = ( $item->level - 1 >= 0 ) ? $item->level - 1 : 0;

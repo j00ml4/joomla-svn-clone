@@ -62,17 +62,9 @@ class ProjectsModelTask extends JModelAdmin
 		// id
 		$this->setState('task.id', $pk);
 		$app->setUserState($this->option.'.edit.'.$this->getName().'.id', $pk);
-		
-		// parent
-//		$id = JRequest::getInt('parent_id', $app->getUserState('task.parent.id'));
-//		$this->setState('task.parent.id', $id);
 
 		// project
-//		$this->setState('project.id', $app->getUserState('project.id'));
-
-		// category
-//		$id = JRequest::getInt('catid', $app->getUserState('task.category.id'));
-//		$this->setState('task.category.id', $id);
+		$this->setState('project.id', $app->getUserState('project.id'));
 
 		// task type
 		$id = $app->getUserStateFromRequest('task.type', JRequest::getInt('type'));
@@ -238,6 +230,7 @@ class ProjectsModelTask extends JModelAdmin
 	protected function prepareTable(&$table)
 	{
 		jimport('joomla.filter.output');
+		$app = JFactory::getApplication();
 		$date = &JFactory::getDate();
 		$user = &JFactory::getUser();
 
@@ -245,7 +238,7 @@ class ProjectsModelTask extends JModelAdmin
 		$table->alias 		= JApplication::stringURLSafe($table->title);
 		$table->project_id 	= $this->getState('project.id');
 		$table->type		= ($table->type)? $table->type: $this->getState('task.type');
-
+		
 		if (empty($table->id)) {
 			// Set the values
 			$table->created		= $date->toMySQL();
