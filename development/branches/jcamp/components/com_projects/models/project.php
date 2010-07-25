@@ -60,6 +60,7 @@ class ProjectsModelProject extends JModelAdmin
 		if (!($pk = (int) $app->getUserState($this->option.'.edit.'.$this->getName().'.id'))) {
 			$pk = (int) JRequest::getInt('id');
 		}
+
 		$this->setState('project.id', $pk);
 		$app->setUserState('project.id', $pk);
 	}

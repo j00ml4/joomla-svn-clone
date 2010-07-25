@@ -46,6 +46,7 @@ class ProjectsControllerDocuments extends JController
 	/*
 	 * Deletes checked documents
 	 * 
+	 * @since 1.6
 	 */
 	
 	public function delete()

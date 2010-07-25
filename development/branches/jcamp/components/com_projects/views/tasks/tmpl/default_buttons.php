@@ -13,12 +13,17 @@ defined('_JEXEC') or die;
 <div class="formelm_buttons projects-content toolbar-list">
 	<ul class="actions">
 		<?php if ($this->canDo->get('task.create')): ?>
-		<li  class="">
-			<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_NEW_TASK_LINK'), 'task.add'); ?>
+		<li>
+			<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_TASKS_NEW_'.$this->prefix.'_LINK'), 'task.add'); ?>
+		</li>
+		<?php endif; ?>
+		<?php if ($this->canDo->get('task.delete')): ?>
+		<li>
+			<?php echo JHTML::_('action.question', JText::_('COM_PROJECTS_TASKS_DELETE_'.$this->prefix.'_LINK'), JText::_('COM_PROJECTS_TASKS_DELETE_'.$this->prefix.'_DELETE_MSG'),'tasks.delete');?>
 		</li>
 		<?php endif; ?>
 		<li>
-			<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_BACK_TO_PROJECT_TASKS_LINK'), 'tasks.back'); ?>
+			<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_TASKS_BACK_TO_PROJECT'), 'tasks.back'); ?>
 		</li>
 	</ul>
 </div>

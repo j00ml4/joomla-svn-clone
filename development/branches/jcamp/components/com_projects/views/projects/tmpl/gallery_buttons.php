@@ -23,7 +23,7 @@ $params	=& $item->params;
 			<?php endif;?>
 			
 			<li>
-				<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_BACK_TO_PORTFOLIOS_PROJECTS_LINK'), 'projects.back'); ?>
+				<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_PROJECTS_BACK_TO_PORTFOLIOS_LINK'), 'projects.back'); ?>
 			</li>
 		</ul>
 </div>

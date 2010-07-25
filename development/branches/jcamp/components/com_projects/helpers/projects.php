@@ -181,7 +181,7 @@ abstract class ProjectsHelper
 			// Can delete project
 			case 'task.delete':
 				$canDo = $user->authorise('project.work', $context);
-				break;	 
+				break;
 
 			// Can edit project
 			case 'task.edit':
@@ -218,8 +218,6 @@ abstract class ProjectsHelper
 				);
 				break;	
 				
-						
-		
 			/* Documents */
 			// Can view project documents
 			case 'project.view.documents':
@@ -260,6 +258,7 @@ abstract class ProjectsHelper
 			'project.delete',
 			'project.edit', 
 			'project.edit.state',
+			'project.work',
 		
 			// Tasks
 			'task.view',
@@ -270,6 +269,7 @@ abstract class ProjectsHelper
 			'task.create.tickets',
 			'task.edit', 
 			'task.edit.state',
+			'task.delete',
 		
 			// Documents
 			'documents.view',

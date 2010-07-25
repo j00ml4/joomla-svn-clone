@@ -29,8 +29,8 @@ $model = $this->getModel();
 			<thead>
 				<tr>		
 					<?php if($model->getState('type') != 'list'): ?>
-					<th>#</th>
-					<?php endif; ?>
+						<th><input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" /></th>
+					<?php endif;?>
 					
 					<th id="tableOrdering2">
 						<?php echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBERS_NAME', 'a.name', $listDirn, $listOrder); ?>
@@ -42,8 +42,13 @@ $model = $this->getModel();
 				</tr>
 			</thead>
 			<tbody>		
-				<?php foreach($this->items as $item): ?>
+				<?php foreach($this->items as $item):
+					$this->item = &$item;
+					echo $this->loadTemplate('item');
+					?>
+<!-- This part should be put into a separate default_item.php file :)
 					<tr>
+
 						<?php if($model->getState('type') != 'list'): ?>
 						<td>
 							<input type="checkbox" value="<?php echo $item->id;?>" name="usr[]" id="user-<?php echo $item->id;?>"/>
@@ -56,15 +61,17 @@ $model = $this->getModel();
 						<td>
 							Role
 						</td>
-					</tr>	
+ 					</tr>	
+ -->
 				<?php endforeach; ?>
 			</tbody>
 			</table>
 			<?php echo $this->loadTemplate('buttons');?>
 			
 			<?php if($model->getState('type') != 'list') :?>
-				<input type="hidden" name="task" value="members.<?php echo $model->getState('type'); ?>" />
+				<input type="hidden" name="task" value="" />
 				<?php echo JHTML::_( 'form.token' ); ?>
+				<input type="hidden" name="boxchecked" value="0" />
 				</form>
 			<?php endif; ?>
 		</div>

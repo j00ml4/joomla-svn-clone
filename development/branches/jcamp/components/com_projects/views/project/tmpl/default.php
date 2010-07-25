@@ -44,6 +44,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 		<div class=" projects-space">
 			<?php echo $this->loadTemplate('members');?>
 			<?php echo $this->loadTemplate('tasks');?>
+			<?php echo $this->loadTemplate('tickets');?>
 			<?php echo $this->loadTemplate('documents');?>
 		</div>
 	</div>

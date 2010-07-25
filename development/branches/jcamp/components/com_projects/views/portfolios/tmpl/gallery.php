@@ -18,7 +18,7 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
 
 <div class="projects-right-column">
 		<div class="projects-content">
-			<h3 align="right"><?php echo JText::_('COM_PROJECTS_PROJECTS_GREETING');?></h3><br /><br />
+			<h3 align="right"><?php echo JText::_('COM_PROJECTS_GREETING');?></h3><br /><br />
 			<h4 align="right"><a href="<?php echo JRoute::_('index.php?option=com_projects&view=project&layout=form'); ?>">
 			<?php echo JText::_('COM_PROJECTS_PROJECT_ADD');?></a></h4><br />
 		</div>
@@ -27,7 +27,7 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
 <div class="projects<?php echo $pageClass;?> blog<?php echo $pageClass;?>">
 	<div class="projects-left-column">
 		<div class="projects-content">
-			<h1><?php echo JText::_('COM_PROJECTS_PORFOLIO_LIST_HEADER');?></h1>
+			<h1><?php echo JText::_('COM_PROJECTS_PORTFOLIO_LIST_HEADER');?></h1>
 				<?php foreach ($this->items as $item) :
 					$this->item = $item;
 					echo $this->loadTemplate('item');

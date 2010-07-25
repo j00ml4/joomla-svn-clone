@@ -61,20 +61,21 @@ class ProjectsModelTask extends JModelAdmin
 		}
 		// id
 		$this->setState('task.id', $pk);
+		$app->setUserState($this->option.'.edit.'.$this->getName().'.id', $pk);
 		
 		// parent
-		$id = JRequest::getInt('parent_id', $app->getUserState('task.parent.id'));
-		$this->setState('task.parent.id', $id);
-		
+//		$id = JRequest::getInt('parent_id', $app->getUserState('task.parent.id'));
+//		$this->setState('task.parent.id', $id);
+
 		// project
-		$this->setState('project.id', $app->getUserState('project.id'));
-		
+//		$this->setState('project.id', $app->getUserState('project.id'));
+
 		// category
-		$id = JRequest::getInt('catid', $app->getUserState('task.category.id'));
-		$this->setState('task.category.id', $id);
-		
+//		$id = JRequest::getInt('catid', $app->getUserState('task.category.id'));
+//		$this->setState('task.category.id', $id);
+
 		// task type
-		$id = $app->getUserState('task.type', JRequest::getInt('type'));
+		$id = $app->getUserStateFromRequest('task.type', JRequest::getInt('type'));
 		$this->setState('task.type', $id);
 			
 		// id
@@ -220,7 +221,10 @@ class ProjectsModelTask extends JModelAdmin
 	 */
 	public function getItem($pk = null)
 	{
-		return parent::getItem($pk);
+		// Initialise variables.
+		$itemId = (int) (!empty($itemId)) ? $itemId : $this->getState('task.id');
+		
+		return parent::getItem($itemId);
 	}
 
 	/**

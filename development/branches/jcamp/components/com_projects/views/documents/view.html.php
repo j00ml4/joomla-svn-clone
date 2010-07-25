@@ -40,7 +40,7 @@ class ProjectsViewDocuments extends JView
 		$this->pagination	= &$model->getPagination();
 		
 		$this->canDo = ProjectsHelper::getActions();
-		// Compute the article slugs and prepare introtext (runs content plugins).
+		// Compute the article slugs (runs content plugins).
 		for ($i = 0, $n = count($this->items); $i < $n; $i++) {
 			$item = &$this->items[$i];
 			$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;

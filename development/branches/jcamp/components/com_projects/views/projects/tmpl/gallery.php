@@ -17,7 +17,7 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
 <div class="projects<?php echo $pageClass;?> blog<?php echo $pageClass;?>">
 	<div class="projects-left-column">
 		<div class="projects-content">
-		
+		<h1><?php echo JText::_('COM_PROJECTS_PROJECTS_LIST_HEADER');?></h1>
 			<?php foreach ($this->items as $item) : 
 				$this->item = $item;
 				echo $this->loadTemplate('item');

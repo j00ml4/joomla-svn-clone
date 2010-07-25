@@ -25,7 +25,7 @@ $link = JRoute::_('index.php?option=com_projects&view=project&id='.$item->id);
 	</div>
 
 	<a href="<?php echo $link; ?>">
-		<?php echo JText::_('COM_PROJECTS_PROJECT_GALLERY_SEE_PROJECT');?>
+		<?php echo JText::_('COM_PROJECTS_PROJECTS_SEE_PROJECT');?>
 	</a>
 </div>
 <div class="clr"></div>

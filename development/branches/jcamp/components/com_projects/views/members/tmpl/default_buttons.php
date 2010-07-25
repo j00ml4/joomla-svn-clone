@@ -24,12 +24,12 @@ $model	=$this->getModel();
 				}
 				else
 					if($this->getModel()->getState('type') == 'delete') {
-						echo '<button type="submit">'.JText::_('JGLOBAL_DELETE').'</button>';
+						echo JHTML::_('action.question',JText::_('JGLOBAL_DELETE'), JText::_('COM_PROJECTS_DELETE'),'members.delete');
 					} ?>
 		</li>
 		<?php endif; ?>
 		<li>
-			<?php echo JHTML::_('action.link', JText::_('COM_PROJECT_BACK_TO_PROJECT_MEMBERS_LINK'),'members.back')?>
+			<?php echo JHTML::_('action.link', JText::_('COM_PROJECT_PROJECT_MEMBERS_BACK_TO_PROJECT_LINK'),'members.back')?>
 		</li>
 	</ul>
 </div>
