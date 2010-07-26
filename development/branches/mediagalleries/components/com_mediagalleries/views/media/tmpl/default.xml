@@ -2,7 +2,7 @@
 <metadata>
 	<layout title="Play Media Layout">
 		<message><![CDATA[
-			Play selected media
+			Single Media Layout
 		]]></message>
 	</layout>
 	<state>
@@ -26,4 +26,318 @@
 		</advanced>
 	
 	</state>
+	
+		<!-- Add fields to the request variables for the layout. -->
+<fields name="request">
+		<fieldset name="request"
+			addfieldpath="/administrator/components/com_content/models/fields">
+
+			<field name="id" type="text"
+				label="COM_CONTENT_FIELD_SELECT_ARTICLE_LABEL"
+				required="true"
+				description="COM_CONTENT_FIELD_SELECT_ARTICLE_DESC"
+			/>
+		</fieldset>
+	</fields>
+	<!-- Add fields to the parameters object for the layout. -->
+<fields name="params">
+<fieldset name="basic">
+			
+				<field name="defaultdir" 
+					type="text" 
+					size="20" 
+					default="images/stories/" 
+					label="PLG_CONTENT_MEDIA_DEFAULT_DIR_LABEL"
+					description="PLG_CONTENT_MEDIA_DEFAULT_DIR_DESC" />
+				
+				<field name="width" 
+					type="text" 
+					size="5" 
+					default="400" 
+					label="PLG_CONTENT_MEDIA_WIDTH_LABEL" 
+					description="PLG_CONTENT_MEDIA_WIDTH_DESC"/>
+				
+				
+				<field name="height" 
+					type="text" 
+					size="5" 
+					default="340" 
+					label="PLG_CONTENT_MEDIA_HEIGHT_LABEL" 
+					description="PLG_CONTENT_MEDIA_HEIGHT_DESC"/>
+				
+				<field name="autostart" 
+					type="radio" 
+					default="0" 
+					label="PLG_CONTENT_MEDIA_AUTOSTART_LABEL" 
+					description="PLG_CONTENT_MEDIA_AUTOSTART_DESC">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+								
+			</fieldset>
+			<!-- In the advanced fieldset make all the default values set to "default" it is put to yes for testing only -->
+			<fieldset name="advanced" label="Advanced">
+			<field name="show_cat" 
+					type="list" 
+					default="yes" 
+					label="Show Category Name" 
+					description="Make it multilingual">
+						
+						<option value="yes">JYES</option>			
+						<option value="no">JNO</option>
+						<option value="defalut">Use Global</option>				
+				</field>
+				<field name="show_title" 
+					type="list" 
+					default="yes" 
+					label="Show Title" 
+					description="Make it multilingual">
+						
+						<option value="yes">JYES</option>			
+						<option value="no">JNO</option>
+						<option value="defalut">Use Global</option>				
+				</field>
+			
+				
+				
+				<field name="show_url" 
+					type="list" 
+					default="yes" 
+					label="Show URL" 
+					description="Make it multilingual">
+						
+						<option value="yes">JYES</option>			
+						<option value="no">JNO</option>
+						<option value="defalut">Use Global</option>				
+				</field>
+				
+				<field name="show_desc" 
+					type="list" 
+					default="yes" 
+					label="Show Description" 
+					description="Make it multilingual">
+						
+						<option value="yes">JYES</option>			
+						<option value="no">JNO</option>
+						<option value="defalut">Use Global</option>				
+				</field>
+				
+				<field name="show_hits" 
+					type="list" 
+					default="yes" 
+					label="Show Hits" 
+					description="Make it multilingual">
+						
+						<option value="yes">JYES</option>			
+						<option value="no">JNO</option>
+						<option value="defalut">Use Global</option>				
+				</field>
+				
+				<field name="show_creation" 
+					type="list" 
+					default="yes" 
+					label="Show Creation time" 
+					description="Make it multilingual">
+						
+						<option value="yes">JYES</option>			
+						<option value="no">JNO</option>
+						<option value="defalut">Use Global</option>				
+				</field>
+				
+				<field name="show_author" 
+					type="list" 
+					default="yes" 
+					label="Show Author" 
+					description="Make it multilingual">
+						
+						<option value="yes">JYES</option>			
+						<option value="no">JNO</option>
+						<option value="defalut">Use Global</option>				
+				</field>
+				
+				<field name="show_modified" 
+					type="list" 
+					default="yes" 
+					label="Show Last Modified" 
+					description="Make it multilingual">
+						
+						<option value="yes">JYES</option>			
+						<option value="no">JNO</option>
+						<option value="defalut">Use Global</option>				
+				</field>
+				
+				<field name="show_modified_by" 
+					type="list" 
+					default="yes" 
+					label="Show Modified By" 
+					description="Make it multilingual">
+						
+						<option value="yes">JYES</option>			
+						<option value="no">JNO</option>
+						<option value="defalut">Use Global</option>				
+				</field>
+				
+							
+			</fieldset>
+
+			<fieldset name="players" label="Players">		
+				<!--Media Players -->
+				<field name="flv_player" 
+					type="list" 
+					default="2kplayer" 
+					label="PLG_CONTENT_MEDIA_FLV_PLAYER_LABEL" 
+					description="PLG_CONTENT_MEDIA_FLV_PLAYER_DESC">
+						
+						<option value="jwplayer">PLG_CONTENT_MEDIA_FLV_PLAYER_JWPPLAYER</option>			
+						<option value="2kplayer">PLG_CONTENT_MEDIA_FLV_PLAYER_3K_FLV_PLAYER</option>
+				
+				</field>
+				
+				<field name="mp3_player" 
+					type="list" 
+					default="1pixelout" 
+					label="PLG_CONTENT_MEDIA_MP3_PLAYER_LABEL" 
+					description="PLG_CONTENT_MEDIA_MP3_PLAYER_DESC" >
+						
+						<option value="jwplayer">PLG_CONTENT_MEDIA_MP3_PLAYER_JWPLAYER</option>			
+						<option value="1pixelout">PLG_CONTENT_MEDIA_MP3_PLAYER_1PIXELOUT</option>
+				
+				</field>
+			</fieldset>
+			<fieldset name="Youtube" label="Youtube">	
+				<!--Youtube API-->
+				<field name="@spacer" 
+					type="spacer" 
+					default="" 
+					label="" 
+					description="" />
+				
+				<field name="youtube_rel" 
+					type="radio" 
+					default="1" 
+					label="PLG_CONTENT_MEDIA_YOUTUBE_RELATED_LABEL" 
+					description="PLG_CONTENT_MEDIA_YOUTUBE_RELATED_DESC" >
+						
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+				
+				</field>
+				
+				<field name="youtube_loop" 
+					type="radio" 
+					default="0" 
+					label="PLG_CONTENT_MEDIA_YOUTUBE_LOOP_LABEL" 
+					description="PLG_CONTENT_MEDIA_YOUTUBE_LOOP_DESC" >
+						
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+				
+				</field>
+				
+				<field name="youtube_disablekb" 
+					type="radio" 
+					default="0" 
+					label="PLG_CONTENT_MEDIA_YOUTUBE_DISABLE_KEYBOARD_LABEL" 
+					description="PLG_CONTENT_MEDIA_YOUTUBE_DISABLE_KEYBOARD_DESC" >
+						
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+				
+				</field>
+				
+				<field name="youtube_egm" 
+					type="radio" 
+					default="0" 
+					label="PLG_CONTENT_MEDIA_YOUTUBE_ENHANCED_GENIE_MENU_LABEL" 
+					description="PLG_CONTENT_MEDIA_YOUTUBE_ENHANCED_GENIE_MENU_DESC">
+						
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+				
+				</field>
+				
+				<field name="youtube_border" 
+				type="radio" 
+				default="0" 
+				label="PLG_CONTENT_MEDIA_YOUTUBE_BORDER_LABEL" 
+				description="PLG_CONTENT_MEDIA_YOUTUBE_BORDER_DESC">
+						
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+				
+				</field>
+				
+				<field name="youtube_color1" 
+					type="text" 
+					size="6" 
+					default="CCCCCC" 
+					label="PLG_CONTENT_MEDIA_YOUTUBE_COLOR1_LABEL" 
+					description="PLG_CONTENT_MEDIA_YOUTUBE_COLOR1_DESC">
+				</field>
+				
+				<field name="youtube_color2" 
+					type="text" 
+					size="6" 
+					default="CCCCCC" 
+					label="PLG_CONTENT_MEDIA_YOUTUBE_COLOR2_LABEL" 
+					description="PLG_CONTENT_MEDIA_YOUTUBE_COLOR2_DESC">
+				</field>
+			</fieldset>
+				<!--JW-->
+			<fieldset name="jwPlayer" label="JW Player">	
+				<field name="@spacer"
+				 	type="spacer" 
+					default="" 
+					label="" 
+					description=""
+				/>
+				
+				<field name="jw_logo" 
+					type="imagelist" 
+					default="" 
+					label="PLG_CONTENT_MEDIA_JW_LOGO_LABEL" 
+					directory="images" 
+					exclude="" 
+					stripext="" 
+					description="PLG_CONTENT_MEDIA_JW_LOGO_DESC" />
+				
+				<field name="jw_backcolor" 
+					type="text" 
+					size="6" 
+					default="FFFFFF" 
+					label="PLG_CONTENT_MEDIA_JW_BACKCOLOR_LABEL" 
+					description="PLG_CONTENT_MEDIA_JW_BACKCOLOR_DESC" />
+				
+				<field name="jw_frontcolor" 
+					type="text" 
+					size="6" 
+					default="000000" 
+					label="PLG_CONTENT_MEDIA_JW_FRONTCOLOR_LABEL" 
+					description="PLG_CONTENT_MEDIA_JW_FRONTCOLOR_DESC"/>
+				
+				<field name="jw_lightcolor" 
+					type="text" 
+					size="6" 
+					default="000000" 
+					label="PLG_CONTENT_MEDIA_JW_LIGHTCOLOR_LABEL" 
+					description="PLG_CONTENT_MEDIA_JW_LIGHTCOLOR_DESC"/>
+				
+				<field name="jw_screencolor" 
+					type="text" 
+					size="6" 
+					default="000000" 
+					label="PLG_CONTENT_MEDIA_JW_SCREENCOLOR_LABEL" 
+					description="PLG_CONTENT_MEDIA_JW_SCREENCOLOR_DESC"/>
+				
+				<field name="jw_quality" 
+					type="radio" 
+					default="1" 
+					label="PLG_CONTENT_MEDIA_JW_QUALITY_LABEL" 
+					description="PLG_CONTENT_MEDIA_JW_QUALITY_DESC">
+					<option value="0">PLG_CONTENT_MEDIA_NORMAL</option>
+					<option value="1">PLG_CONTENT_MEDIA_HIGH</option>
+				</field>
+			</fieldset>
+		</fields>
+	
 </metadata>
