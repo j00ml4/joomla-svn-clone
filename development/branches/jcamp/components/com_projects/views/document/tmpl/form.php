@@ -49,6 +49,10 @@ function submitbutton(task) {
 			<?php echo $this->form->getInput('alias'); ?>
 			</div>
 		<?php endif; ?>
+			<div class="formelm">
+			<?php echo $this->form->getLabel('catid'); ?>
+			<?php echo $this->form->getInput('catid'); ?>
+			</div>
 		<?php  echo $this->loadTemplate('buttons');?>
 
 		<?php echo $this->form->getInput('text'); ?>
