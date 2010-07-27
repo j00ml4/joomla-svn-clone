@@ -65,7 +65,7 @@ class MediagalleriesModelMedia extends JModelItem
 			}
 
 			// Get a level row instance.
-			$table = JTable::getInstance('Mediagalleries');
+			$table = parent::getTable();
 
 			// Attempt to load the row.
 			if ($table->load($id))
@@ -85,7 +85,7 @@ class MediagalleriesModelMedia extends JModelItem
 				$this->setError($error);
 			}
 		}
-
+		
 		return $this->_item;
 	}
 
