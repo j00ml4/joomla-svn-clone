@@ -38,11 +38,13 @@ class MediagalleriesViewGalleries extends JView
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
 		$this->user			= JFactory::getUser();
+		
     	// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
 			return false;
 		}
+
 		
 		// Display
 		self::addToolBar();

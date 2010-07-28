@@ -45,6 +45,7 @@ class MediagalleriesModelMedia extends JModelItem
 
 		// Load the parameters.
 		$this->setState('params', $params);
+		
 	}
 
 	/**
