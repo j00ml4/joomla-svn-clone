@@ -41,7 +41,8 @@ class MediagalleriesViewMedia extends JView
 			return  JError::raiseError(404, "Media Not Found");
 			
 		}
-		
+		$globalParams=JComponentHelper::getParams('plg_media');
+		dump($globalParams);
 		parent::display();
 	}
 }
