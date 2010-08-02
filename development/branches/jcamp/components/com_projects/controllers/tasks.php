@@ -26,6 +26,47 @@ class ProjectsControllerTasks extends JController
 
 		$this->registerTask('back',		'back');
 		$this->registerTask('delete','delete');
+		$this->registerTask('setTasks','setTasks');
+	}
+	
+	/**
+	 * Method to change tickets to tasks
+	 * 
+	 * @since	1.6
+	 */
+	public function setTasks()
+	{
+		// Check for request forgeries
+		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		$app = JFactory::getApplication();
+
+		$id = JRequest::getInt('id',0);
+		if($id)
+		{
+			$id = array($id); // make an array out of it
+		}
+		else
+		{
+			$id = JRequest::getVar('cid',array(),'default','array');
+			JArrayHelper::toInteger($id);
+		}
+		
+		require_once JPATH_COMPONENT.'/helpers/tasks.php';
+		$c = count($id);
+		for($i = 0; $i<$c;$i++)
+		{
+			$result = TasksHelper::setTypeTask($id[$i]); // change a ticket to a task
+			if(!$result)
+			{
+				return JError::raiseError(500, JText::_('COM_PROJECTS_TASKS_ERROR_CHANGE_STATE_TICKET'));
+			}
+		}
+
+		$app = JFactory::getApplication();
+		$text = JText::sprintf('COM_PROJECTS_TASKS_SUCCESS_CHANGE_TICKET',$c);
+		if($c > 1)
+			$text = JText::sprintf('COM_PROJECTS_TASKS_SUCCESS_CHANGE_TICKET_PLURAL',$c);
+		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id='.$app->getUserState('project.id').'&type='.$this->getModel()->getState('task.type').'&Itemid='.ProjectsHelper::getMenuItemId(), false),$text);
 	}
 
 	/**
@@ -36,6 +77,7 @@ class ProjectsControllerTasks extends JController
 	 * @param	array	Configuration array for model. Optional.
 	 *
 	 * @return	object	The model.
+	 * @since	1.6
 	 */
 	public function getModel($name = 'Tasks', $prefix = 'ProjectsModel', $config = null)
 	{
@@ -51,22 +93,28 @@ class ProjectsControllerTasks extends JController
 	{
 		// Check for request forgeries
 		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
+
+		$model = $this->getModel();
+		require_once JPATH_COMPONENT.'/helpers/tasks.php';
+		$prefix = TasksHelper::getPrefix($model->getState('task.type'));
 		
 		$cid = JRequest::getVar('cid',array(),'default','array');
 		JArrayHelper::toInteger($cid);
 		$c = count($cid);
-		$model = $this->getModel();
 		$app = JFactory::getApplication();
 		$tbl = $model->getTable();
 		for($i = 0;$i <$c; $i++)
 		{
 			if(!$tbl->delete($cid[$i]))
 			{
-				return JError::raiseError(500, JText::_('COM_PROJECTS_TASKS_ERROR_DELETE_TASK'));
+				return JError::raiseError(500, JText::_('COM_PROJECTS_TASKS_ERROR_DELETE_'.$prefix));
 			}
 		}
-		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id='.$app->getUserState('project.id').'&Itemid='.ProjectsHelper::getMenuItemId(), false),
-		JText::_('COM_PROJECTS_TASTS_SUCCESS_DELETE_TASK'));
+		
+		$text = JText::sprintf('COM_PROJECTS_TASKS_SUCCESS_DELETE_'.$prefix,$c);
+		if($c > 1)
+			$text = JText::sprintf('COM_PROJECTS_TASKS_SUCCESS_DELETE_'.$prefix.'_PLURAL',$c);
+		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id='.$app->getUserState('project.id').'&type='.$this->getModel()->getState('task.type').'&Itemid='.ProjectsHelper::getMenuItemId(), false),$text);
 	}
 	
 	/**

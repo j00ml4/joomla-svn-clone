@@ -23,6 +23,7 @@ class ProjectsViewTask extends JView
 	protected $form;
 	protected $params;
 	protected $canDo;
+	protected $prefix;
 	
 	/**
 	 * Display project
@@ -60,7 +61,16 @@ class ProjectsViewTask extends JView
 					return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
 				}
 				break;
-			
+			case 'view':
+				$layout = 'view';
+				if (!$this->canDo->get('task.view')){
+					return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
+				}
+				if (empty($this->item->id)){
+					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
+				}
+				break;
+				
 			default:
 				$layout = 'default';
 				// Access
@@ -72,7 +82,11 @@ class ProjectsViewTask extends JView
 				}
 				break;
 		}
-		
+
+	  // set a correct prefix
+		require_once JPATH_COMPONENT.'/helpers/tasks.php';
+		$this->prefix = TasksHelper::getPrefix($app->getUserState('task.type'));
+
 		// Display the view
 		$this->setLayout($layout);
 		parent::display($tpl);

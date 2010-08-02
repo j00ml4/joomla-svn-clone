@@ -91,7 +91,7 @@ class ProjectsControllerTask extends JControllerForm
 	public function save(){		
 		if(!parent::save()){
 			// Redirect back to the edit screen.
-			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=task&layout=edit'.'&Itemid='.ProjectsHelper::getMenuItemId(), false));	
+			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=task&layout=edit&type='.$this->getModel()->getState('task.type').'&Itemid='.ProjectsHelper::getMenuItemId(), false));	
 			return false;
 		}
 		// Redirect to list of tasks
@@ -107,7 +107,7 @@ class ProjectsControllerTask extends JControllerForm
 	protected function _getReturnPage()
 	{
 		$app = &JFactory::getApplication();
-		return JRoute::_('index.php?option=com_projects&view=tasks&id='.$app->getUserState('project.id').'&Itemid='.ProjectsHelper::getMenuItemId(),false);
+		return JRoute::_('index.php?option=com_projects&view=tasks&type='.$this->getModel()->getState('task.type').'id='.$app->getUserState('project.id').'&Itemid='.ProjectsHelper::getMenuItemId(),false);
 	}	
 
 	/**
@@ -137,7 +137,7 @@ class ProjectsControllerTask extends JControllerForm
 		{
 			// Check-in failed, go back to the menu item and display a notice.
 			$message = JText::sprintf('JError_Checkin_failed', $model->getError());
-			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=task'.'&Itemid='.ProjectsHelper::getMenuItemId(),false), $message, 'error');
+			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=task&type='.$this->getModel()->getState('task.type').'&Itemid='.ProjectsHelper::getMenuItemId(),false), $message, 'error');
 			return false;
 		}
 

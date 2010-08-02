@@ -18,18 +18,29 @@ $model	=$this->getModel();
 	<ul class="actions">
 		<?php if ($this->canDo->get('project.edit')): ?>
 		<li>
-			<?php 
-				if($this->getModel()->getState('type') == 'assign') {
-					echo '<button type="submit">'.JText::_('JGLOBAL_ASSIGN').'</button>';
+			<?php
+				switch($model->getState('type'))
+				{
+					case 'assign' :
+						echo JHTML::_('action.question',JText::_('JGLOBAL_'.$this->prefix_text),
+													JText::_('COM_PROJECTS_MEMBERS_'.$this->prefix_text.'_MSG'),
+													null,
+													null,
+													'members.assign');
+						break;
+						
+					case 'delete' :
+						echo JHTML::_('action.question',JText::_('JGLOBAL_'.$this->prefix_text),
+													JText::_('COM_PROJECTS_MEMBERS_'.$this->prefix_text.'_MSG'),
+													JText::_('COM_PROJECTS_MEMBERS_'.$this->prefix_text.'_MSG_CONFIRM'),
+													JText::_('COM_PROJECTS_MEMBERS_'.$this->prefix_text.'_MSG_CONFIRM_PLURAL'),
+													'members.delete');
 				}
-				else
-					if($this->getModel()->getState('type') == 'delete') {
-						echo JHTML::_('action.question',JText::_('JGLOBAL_DELETE'), JText::_('COM_PROJECTS_DELETE'),'members.delete');
-					} ?>
+			?>
 		</li>
 		<?php endif; ?>
 		<li>
-			<?php echo JHTML::_('action.link', JText::_('COM_PROJECT_PROJECT_MEMBERS_BACK_TO_PROJECT_LINK'),'members.back')?>
+			<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_MEMBERS_BACK_TO_PROJECT_LINK'),'members.back')?>
 		</li>
 	</ul>
 </div>

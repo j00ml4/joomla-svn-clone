@@ -96,13 +96,27 @@ abstract class JHtmlAction
 	 * Question button
 	 * 
 	 * @param unknown_type $text
-	 * @param unknown_type $id
-	 * @param unknown_type $controller
+	 * @param unknown_type $msg Message when no record is selected
+	 * @param unknown_type $msg_confirm Message to confim the action
+	 * @param unknown_type $msg_confirm_plural Message to confim the action for more than one item
+	 * @param unknown_type $task Task to submit
 	 */
-	function question($text, $msg, $task){	
-		$msg = addslashes($msg);
-		$action = 'javascript:if (document.adminForm.boxchecked.value==0){alert(\''.$msg.'\');}else{ submitbutton(\''.$task.'\')}';
-		
+	function question($text, $msg, $msg_confirm, $msg_confirm_plural, $task){	
+	
+		if($msg_confirm)
+		{
+			$action = 'javascript:if (document.adminForm.boxchecked.value==0){alert(\''.addslashes($msg).'\');}'.
+														'else{ '.
+														' if(document.adminForm.boxchecked.value==1) var msg=\''.addslashes($msg_confirm).'\';'.
+														' else var msg = \''.addslashes($msg_confirm_plural).'\';'.
+														'if(confirm(msg))submitbutton(\''.$task.'\');}';
+		}
+		else // no confirmation question
+		{
+			$action = 'javascript:if (document.adminForm.boxchecked.value==0){alert(\''.addslashes($msg).'\');}'.
+														'else{ '.
+														' submitbutton(\''.$task.'\');}';
+		}		
 		return	'<button type="button" onclick="'.$action.'">'. $text .'</button>';
 	}
 }

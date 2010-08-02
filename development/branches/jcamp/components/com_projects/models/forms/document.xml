@@ -32,6 +32,18 @@
 			class="inputbox"
 			size="45"
 			filter="unset" />
+			
+		<field
+			id="catid"
+			name="catid"
+			type="category"
+			extension="com_projects.document"
+			label="COM_PROJECT_FIELD_DOCUMENT_CATEGORY_LABEL"
+			description="COM_PROJECT_FIELD_DOCUMENT_CATEGORY_DESC"
+			class="inputbox"
+      default="0">
+  			<option value="0">JNONE</option>
+		</field>
 		<!-- this is for rendering -->
 		<field
 			name="text"

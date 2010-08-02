@@ -18,9 +18,9 @@ $model = $this->getModel();
 <div class="projects<?php echo $pageClass;?>">
 	<div class="item-page">
 		<div class="item">
-			<h1><?php echo $this->title;?></h1>
+			<h1><?php echo JText::_('COM_PROJECTS_MEMBERS_'.$this->prefix_text.'_TITLE');?></h1>
 			<?php if($model->getState('type') != 'list') :?>
-				<form action="<?php echo JRoute::_('index.php?option=com_projects&id='.$model->getState('project.id')); ?>" method="post">
+				<form action="<?php echo JRoute::_('index.php?option=com_projects&id='.$model->getState('project.id')); ?>" method="post" name="adminForm">
 			<?php endif; ?>
 	
 			<?php echo $this->loadTemplate('buttons');?>
@@ -42,9 +42,13 @@ $model = $this->getModel();
 				</tr>
 			</thead>
 			<tbody>		
-				<?php foreach($this->items as $item):
-					$this->item = &$item;
-					echo $this->loadTemplate('item');
+				<?php 
+					$c = count($this->items);
+					for($i = 0; $i <$c; $i++)
+					{
+						$this->item = &$this->items[$i];
+						$this->item->i = $i;
+						echo $this->loadTemplate('item');
 					?>
 <!-- This part should be put into a separate default_item.php file :)
 					<tr>
@@ -63,7 +67,7 @@ $model = $this->getModel();
 						</td>
  					</tr>	
  -->
-				<?php endforeach; ?>
+			<?php } ?>
 			</tbody>
 			</table>
 			<?php echo $this->loadTemplate('buttons');?>

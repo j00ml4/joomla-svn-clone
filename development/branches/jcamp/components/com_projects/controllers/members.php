@@ -73,15 +73,16 @@ class ProjectsControllerMembers extends JController
 			return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 		}
 		
-		$users = JRequest::getVar('usr',array(),'','array');
+		$users = JRequest::getVar('cid',array(),'','array');
 		$c = count($users);
-		$id = JRequest::getInt('id',0);
 		
-		if($id == 0 || !$c) {
+		if(!$c) {
 			return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 		}
 		
 		$model = $this->getModel();
+		$app = JFactory::getApplication();
+		$id = $app->getUserState('project.id');
 		$db = $model->getDBO();
 		for($i = 0; $i<$c;$i++) {
 			$q = 'INSERT INTO `#__project_members` (`project_id`,`user_id`) VALUES ('.$id.','.$users[$i].')';
@@ -91,7 +92,7 @@ class ProjectsControllerMembers extends JController
 		
 		$append='&layout=default&id='.$id;
 		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list.$append.'&type=assign', false),
-											 JText::_('COM_PROJECT_PROJECT_MEMBER_ASSIGN_SUCCESSFUL'));
+											 JText::_('COM_PROJECTS_MEMBERS_ASSIGN_SUCCESSFUL'));
 		return true;
 	}
 	
@@ -109,7 +110,7 @@ class ProjectsControllerMembers extends JController
 			return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 		}
 		
-		$users = JRequest::getVar('usr',array(),'','array');
+		$users = JRequest::getVar('cid',array(),'','array');
 		$c = count($users);
 		$id = JRequest::getInt('id',0);
 		
@@ -127,7 +128,7 @@ class ProjectsControllerMembers extends JController
 		
 		$append='&layout=default&id='.$id;
 		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list.$append.'&type=delete', false),
-											 JText::_('COM_PROJECT_PROJECT_MEMBER_DELETE_SUCCESSFUL'));
+											 JText::_('COM_PROJECTS_MEMBERS_DELETE_SUCCESSFUL'));
 		return true;
 	}
 }

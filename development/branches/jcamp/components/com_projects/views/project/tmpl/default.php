@@ -42,10 +42,13 @@ $pageClass = $this->params->get('pageclass_sfx');
 
 	<div class="one3">
 		<div class=" projects-space">
-			<?php echo $this->loadTemplate('members');?>
-			<?php echo $this->loadTemplate('tasks');?>
-			<?php echo $this->loadTemplate('tickets');?>
-			<?php echo $this->loadTemplate('documents');?>
+			<?php
+				echo $this->loadTemplate('members');			
+				echo $this->loadTemplate('milestones');
+				echo $this->loadTemplate('tasks');
+				echo $this->loadTemplate('tickets');
+				echo $this->loadTemplate('documents');
+			?>
 		</div>
 	</div>
 </div>

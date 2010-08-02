@@ -110,10 +110,17 @@ class ProjectsModelTasks extends JModelList
 		$query	= $db->getQuery(true);
 
 		// Select required fields from the categories.
-		// (using 'a.*' is slower than fetching only columns we need (and this is clearer for us to know what date we fetch from db))
-		$query->select($this->getState('list.select', 'a.*'));
+		$query->select($this->getState('list.select', 'a.id, a.title, a.lft, a.rgt, a.alias, a.language'));
 		$query->from('#__project_tasks AS a');
 
+		// Select category of the task
+		$query->select('c.title AS `category`');
+		$query->join('LEFT','#__categories AS c ON c.id = a.catid');
+
+		// Select name of creator of the task
+		$query->select('CASE WHEN a.created_by_alias = \'\' THEN u.name ELSE a.`created_by_alias` END `created_by`');
+		$query->join('LEFT','#__users AS u ON a.created_by = u.id');
+		
 		// Filter by project.
 		if ($project_id = $this->getState('project.id')) {
 			$query->where('a.project_id = '.(int) $project_id);
@@ -165,6 +172,9 @@ class ProjectsModelTasks extends JModelList
 		if ($this->getState('filter.language')) {
 			$query->where('p.`language` IN (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
 		}
+		
+		// filter by type
+		$query->where('a.type = '.$this->getState('task.type'));
 
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.title')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));

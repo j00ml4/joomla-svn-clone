@@ -19,11 +19,14 @@ $listDir	= $this->getModel()->getState('list.direction');
 	<th>
 		<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDir, $listOrder); ?>
 	</th>
-	<th width="5%">
-		<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'a.published', $listDir, $listOrder); ?>
+	<th width="20%">
+		<?php echo JHtml::_('grid.sort',  'COM_PROJECTS_TASKS_HEADER_CATEGORY', '`category`', $listDir, $listOrder); ?>
 	</th>
 	<th width="10%">
 		<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ACCESS', 'access_level', $listDir, $listOrder); ?>
+	</th>
+	<th width="20%">
+		<?php echo JHtml::_('grid.sort',  'COM_PROJECTS_TASKS_HEADER_CREATED_BY', '`created_by`', $listDir, $listOrder); ?>
 	</th>
 	<th width="5%" class="nowrap">
 		<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_LANGUAGE', 'language', $listDir, $listOrder); ?>

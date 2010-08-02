@@ -16,12 +16,25 @@ defined('_JEXEC') or die;
 		<li>
 			<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_TASKS_NEW_'.$this->prefix.'_LINK'), 'task.add'); ?>
 		</li>
-		<?php endif; ?>
-		<?php if ($this->canDo->get('task.delete')): ?>
+		<?php endif;
+			if ($this->canDo->get('task.delete')): ?>
 		<li>
-			<?php echo JHTML::_('action.question', JText::_('COM_PROJECTS_TASKS_DELETE_'.$this->prefix.'_LINK'), JText::_('COM_PROJECTS_TASKS_DELETE_'.$this->prefix.'_DELETE_MSG'),'tasks.delete');?>
+			<?php echo JHTML::_('action.question', JText::_('COM_PROJECTS_TASKS_DELETE_'.$this->prefix.'_LINK'),
+													JText::_('COM_PROJECTS_TASKS_DELETE_'.$this->prefix.'_DELETE_MSG'),
+													JText::_('COM_PROJECTS_TASKS_DELETE_'.$this->prefix.'_DELETE_MSG_CONFIRM'),
+													JText::_('COM_PROJECTS_TASKS_DELETE_'.$this->prefix.'_DELETE_MSG_CONFIRM_PLURAL'),
+													'tasks.delete');?>
 		</li>
-		<?php endif; ?>
+		<?php endif;
+			if($this->canDo->get('task.edit.state') && ($this->getModel()->getState('task.type') == 3)): ?>
+		<li>
+			<?php echo JHTML::_('action.question', JText::_('COM_PROJECTS_TASKS_CHANGE_TICKET_TASK_LINK'),
+													JText::_('COM_PROJECTS_TASKS_CHANGE_TICKET_TASK_MSG'),
+													JText::_('COM_PROJECTS_TASKS_CHANGE_TICKET_TASK_MSG_CONFIRM'),
+													JText::_('COM_PROJECTS_TASKS_CHANGE_TICKET_TASK_MSG_CONFIRM_PLURAL'),
+													'tasks.setTasks');?>
+		</li>			
+		<?php endif;?>
 		<li>
 			<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_TASKS_BACK_TO_PROJECT'), 'tasks.back'); ?>
 		</li>

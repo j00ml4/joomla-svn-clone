@@ -15,30 +15,31 @@ $canCheckin = $canChange = true;
 	<?php echo JHtml::_('grid.id', $this->item->i, $this->item->id); ?>
 </td>
 <td class="indent-<?php echo intval(($this->item->level-1)*15)+4; ?>">
-	<?php if ($this->item->checked_out) : ?>
-		<?php echo JHtml::_('jgrid.checkedout', $this->item->i, $this->item->editor, $this->item->checked_out_time, 'categories.', $canCheckin); ?>
-	<?php endif; ?>
+	<?php if ($this->item->checked_out) :
+		echo JHtml::_('jgrid.checkedout', $this->item->i, $this->item->editor, $this->item->checked_out_time, 'categories.', $canCheckin);
+	endif; ?>
 	<a href="<?php echo JRoute::_('index.php?option=com_projects&view=task&layout=edit&id='.$this->item->id);?>">
 		<?php echo $this->escape($this->item->title); ?></a>
-	<p class="smallsub" title="<?php echo $this->escape($this->item->path);?>">
-		<?php if (empty($this->item->note)) : ?>
-			<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($this->item->alias));?>
-		<?php else : ?>
-			<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS_NOTE', $this->escape($this->item->alias), $this->escape($this->item->note));?>
-		<?php endif; ?></p>
+  <a href="<?php echo JRoute::_('index.php?option=com_projects&view=task&layout=view&id='.$this->item->id);?>">
+  	<?php echo JText::_('COM_PROJECTS_TASKS_VIEW_'.$this->prefix.'_LINK');?></a>		
+	<p class="smallsub">
+		<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($this->item->alias)); ?></p>
 </td>
 <td class="center">
-	<?php echo JHtml::_('jgrid.published', $this->item->state, $this->item->i);?>
+	<?php echo $this->escape($this->item->category); ?>
 </td>
 <td class="center">
 	<?php echo $this->escape($this->item->access_level); ?>
 </td>
+<td class="center">
+	<?php echo $this->escape($this->item->created_by); ?>
+</td>
 <td class="center nowrap">
-<?php if ($this->item->language=='*'):?>
-	<?php echo JText::_('JALL'); ?>
-<?php else:?>
-	<?php echo $this->item->language_title ? $this->escape($this->item->language_title) : JText::_('JUNDEFINED'); ?>
-<?php endif;?>
+<?php if ($this->item->language=='*'):
+	echo JText::_('JALL');
+	else:
+		echo $this->item->language_title ? $this->escape($this->item->language_title) : JText::_('JUNDEFINED');
+	endif;?>
 </td>
 <td class="center">
 	<span title="<?php echo sprintf('%d-%d', $this->item->lft, $this->item->rgt);?>">

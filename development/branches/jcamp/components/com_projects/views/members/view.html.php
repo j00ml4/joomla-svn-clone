@@ -22,9 +22,9 @@ class ProjectsViewMembers extends JView
 	protected $items;
 	protected $params;
 	protected $canDo;
-	protected $title;
 	protected $project;
 	protected $pagination;
+	protected $prefix_text;
 	
 	/**
 	 * Display managing users assigned to project
@@ -40,29 +40,34 @@ class ProjectsViewMembers extends JView
 		$this->params	= &$app->getParams();
 		$this->project 	= &$model->getProject();
 		$this->pagination	= &$model->getPagination();
+
+	  // set a correct prefix
+	  switch($model->getState('type'))
+	  {
+	  	case 'assign' :
+	  			$this->prefix_text = 'ASSIGN';
+	  			break;
+	  	case 'delete' :
+	  			$this->prefix_text = 'DELETE';
+	  			break;
+	  	case 'list' :
+	  			$this->prefix_text = 'LIST';
+	  			break;
+	  }
 		
 		// set up type and layout
 		$this->setLayout('default');
 		$access = 'project.edit';
-		switch($model->getState('type')){
-			case 'list':
-				$this->title = JText::_('COM_PROJECTS_TEAM_USER_LIST');
-				$access = 'project.view';
-				break;
-			case 'assign':
-				$this->title = JText::_('COM_PROJECTS_TEAM_USER_ASSIGN');
-				break;
-			case 'delete':
-				$this->title = JText::_('COM_PROJECTS_TEAM_USER_DELETE');
-				break;
-			default:
-					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
-		}
+		if($model->getState('type') != 'list' &&
+			 $model->getState('type') != 'assign' &&
+			 $model->getState('type') != 'delete')
+		return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
+
 		// Access
 		if (!$this->canDo->get($access)){
 				return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
 		}
-		
+				
 		// Pathway
 		$bc = &$app->getPathway();
 		$bc->addItem($this->project->title,'index.php?option=com_projects&view=project&id='.$this->project->id);
