@@ -30,8 +30,8 @@ function submitbutton(task) {
 	<h1 class="componentheading">
 		<?php echo $this->escape($params->get('page_heading', 
 			empty($this->item->id)? 
-				JText::_('COM_PROJECTS_TASK_NEW'): 
-				JText::_('COM_PROJECTS_TASK_EDIT')) ); ?>
+				JText::_('COM_PROJECTS_TASK_NEW_'.$this->prefix): 
+				JText::_('COM_PROJECTS_TASK_EDIT_'.$this->prefix)) ); ?>
 	</h1>
 	<?php endif; ?>
 		
@@ -39,7 +39,7 @@ function submitbutton(task) {
 		<!-- This keeps the code more DRY -->	
 		<?php echo $this->loadTemplate('buttons'); ?>
 		
-		<?php if (empty($this->item->id)): ?>
+		<?php if(false): //if (empty($this->item->id)): ?>
 		<fieldset>
 			<legend><?php echo JText::_('COM_PROJECTS_FIELD_TYPE_LABEL'); ?></legend>
 			<div class="formelm">

@@ -69,20 +69,9 @@ class ProjectsViewTasks extends JView
 	  	$bc->addItem(JText::_('COM_PROJECTS_TASKS'));
 
 	  // set a correct prefix
-	  switch($model->getState('task.type'))
-	  {
-	  	case 1 :
-	  			$this->prefix = 'MILESTONE';
-	  			break;
-	  	case 2 :
-	  			$this->prefix = 'TASK';
-	  			break;
-	  	default:
-	  	case 3 :
-	  			$this->prefix = 'TICKET';
-	  			break;
-	  }
-	  
+		require_once JPATH_COMPONENT.'/helpers/tasks.php';
+		$this->prefix = TasksHelper::getPrefix($model->getState('task.type'));
+
   	// TMLP
   	$this->setLayout($layout);
 		parent::display($tpl);

@@ -10,6 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
+JHTML::_('stylesheet','system/adminlist.css', array(), true);
 // Vars
 $params =  $this->params;
 JHtml::_('behavior.tooltip');

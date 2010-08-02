@@ -16,7 +16,7 @@ $item	=&$this->item;
 <tr>
 	<?php if($this->getModel()->getState('type') != 'list'): ?>
 	<td>
-		<input type="checkbox" value="<?php echo $item->id;?>" name="usr[]" id="user-<?php echo $item->id;?>"/>
+		<?php echo JHtml::_('grid.id', $this->item->i, $this->item->id); ?>
 	</td>
 	<?php endif; ?>
 	

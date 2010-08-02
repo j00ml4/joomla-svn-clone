@@ -42,9 +42,8 @@ class ProjectsModelMembers extends JModelList
 		$this->setState('type', $type);
  		$this->context .= '.'.$type;
 		
-		// portfolio	
-		$id = JRequest::getInt('id', 0);
-		$this->setState('project.id', $id);
+		// project id
+		$this->setState('project.id', $app->getUserStateFromRequest('project.id','id'));
 /*		
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
