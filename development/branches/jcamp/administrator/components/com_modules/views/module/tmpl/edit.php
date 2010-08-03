@@ -18,7 +18,6 @@ JHtml::_('behavior.combobox');
 $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $this->item->module == 'mod_custom';
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'module.cancel' || document.formvalidator.isValid(document.id('module-form'))) {
@@ -33,7 +32,6 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			alert('<?php echo $this->escape(JText::_('COM_MODULES_ERROR_TITLE'));?>');
 		}
 	}
-// -->
 </script>
 
 <form action="<?php JRoute::_('index.php?option=com_modules'); ?>" method="post" name="adminForm" id="module-form" class="form-validate">
@@ -91,7 +89,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php echo $this->form->getInput('client_id'); ?>
 			</li>
 			</ul>
-			<div class="clr" /></div>
+			<div class="clr"></div>
 			<?php if ($this->item->xml) : ?>
 				<?php if ($text = trim($this->item->xml->description)) : ?>
 					<label>
@@ -102,7 +100,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			<?php else : ?>
 				<p class="error"><?php echo JText::_('COM_MODULES_ERR_XML'); ?></p>
 			<?php endif; ?>
-			<div class="clr" /></div>
+			<div class="clr"></div>
 		</fieldset>
 	</div>
 
@@ -129,7 +127,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			</ul>
 		</fieldset>
 	</div>
-	
+
 	<div class="clr"></div>
 	<?php endif; ?>
 	<?php if ($this->item->client_id == 0) :?>

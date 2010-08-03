@@ -15,14 +15,12 @@ JHTML::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'plugin.cancel' || document.formvalidator.isValid(document.id('style-form'))) {
 			submitform(task);
 		}
 	}
-// -->
 </script>
 
 <form action="<?php JRoute::_('index.php?option=com_templates'); ?>" method="post" name="adminForm" id="style-form" class="form-validate">
@@ -62,12 +60,12 @@ JHtml::_('behavior.formvalidation');
 						</label>
 						<div class="clr"></div>
 						<span class="readonly plg-desc"><?php echo JText::_($text); ?></span>
-					
+
 				<?php endif; ?>
 			<?php else : ?>
 				<?php echo JText::_('COM_PLUGINS_XML_ERR'); ?>
 			<?php endif; ?>
-			
+
 		</fieldset>
 	</div>
 

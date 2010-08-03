@@ -18,14 +18,6 @@ JHtml::_('behavior.formvalidation');
 JHtml::_('script', 'installation/template/js/installation.js', true, false, false, false);
 ?>
 
-<script type="text/javascript">
-<!--
-	function validateForm(frm, task) {
-		Joomla.submitform(task);
-	}
-// -->
-</script>
-
 <div id="stepbar">
 	<div class="t">
 		<div class="t">
@@ -96,7 +88,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 						<div class="section-smenu">
 							<table class="content2">
 								<tr>
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_enable'); ?>
 									</td>
 									<td>
@@ -104,7 +96,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 									</td>
 								</tr>
 								<tr>
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_user'); ?>
 									</td>
 									<td>
@@ -140,7 +132,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 						<div class="section-smenu moofx-slider">
 							<table class="content2">
 								<tr id="host">
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_host'); ?>
 									</td>
 									<td>
@@ -148,7 +140,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 									</td>
 								</tr>
 								<tr id="port">
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_port'); ?>
 									</td>
 									<td>
@@ -156,7 +148,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 									</td>
 								</tr>
 								<tr>
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_save'); ?>
 									</td>
 									<td>
