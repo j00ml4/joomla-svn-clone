@@ -68,7 +68,12 @@ class JDocumentRendererHead extends JDocumentRenderer
 			}
 		}
 
-		$buffer .= $tab.'<meta name="description" content="'.$document->getDescription().'" />'.$lnEnd;
+		// dont add empty descriptions
+		$documentDescription = $document->getDescription();
+		if ($documentDescription) {
+			$buffer .= $tab.'<meta name="description" content="'.$documentDescription.'" />'.$lnEnd;
+		}
+
 		$buffer .= $tab.'<meta name="generator" content="'.$document->getGenerator().'" />'.$lnEnd;
 		$buffer .= $tab.'<title>'.htmlspecialchars($document->getTitle(), ENT_COMPAT, 'UTF-8').'</title>'.$lnEnd;
 
@@ -96,20 +101,14 @@ class JDocumentRendererHead extends JDocumentRenderer
 			$buffer .= $tab.'<style type="'.$type.'">'.$lnEnd;
 
 			// This is for full XHTML support.
-			if ($document->_mime == 'text/html') {
-				$buffer .= $tab.$tab.'<!--'.$lnEnd;
-			}
-			else {
+			if ($document->_mime != 'text/html') {
 				$buffer .= $tab.$tab.'<![CDATA['.$lnEnd;
 			}
 
 			$buffer .= $content . $lnEnd;
 
 			// See above note
-			if ($document->_mime == 'text/html') {
-				$buffer .= $tab.$tab.'-->'.$lnEnd;
-			}
-			else {
+			if ($document->_mime != 'text/html') {
 				$buffer .= $tab.$tab.']]>'.$lnEnd;
 			}
 			$buffer .= $tab.'</style>'.$lnEnd;
@@ -134,7 +133,7 @@ class JDocumentRendererHead extends JDocumentRenderer
 
 			// See above note
 			if ($document->_mime != 'text/html') {
-				$buffer .= $tab.$tab.'// ]]>'.$lnEnd;
+				$buffer .= $tab.$tab.']]>'.$lnEnd;
 			}
 			$buffer .= $tab.'</script>'.$lnEnd;
 		}

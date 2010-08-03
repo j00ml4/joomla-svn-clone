@@ -32,6 +32,8 @@ body.contentpane {
 		text-align: left;
 }
 
+img { border: 0 none; }
+
 /* TOC */
 table.contenttoc{
         float: right;
@@ -62,3 +64,5 @@ table.contenttoc{
         font-size: 100%;
         margin: 0;
 }
+
+.nowrap { white-space: nowrap; }

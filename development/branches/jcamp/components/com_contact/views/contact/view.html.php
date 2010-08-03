@@ -26,11 +26,11 @@ class ContactViewContact extends JView
 
 
 	function display($tpl = null)
-	{	
-		// Initialise variables.		
+	{
+		// Initialise variables.
 		$app		= JFactory::getApplication();
 		$user		= JFactory::getUser();
-		$dispatcher =& JDispatcher::getInstance();		
+		$dispatcher =& JDispatcher::getInstance();
 
 		// Get model data.
 		$state = $this->get('State');
@@ -41,16 +41,16 @@ class ContactViewContact extends JView
 			JError::raiseWarning(500, implode("\n", $errors));
 			return false;
 		}
-		
+
 		// Get the parameters of the active menu item
 		$menus	= $app->getMenu();
 		$menu	= $menus->getActive();
 		$params	= $app->getParams();
-		
+
 		$item_params = new JRegistry;
 		$item_params->loadJSON($item->params);
 		$params->merge($item_params);
-		
+
 		// check if access is not public
 		$groups	= $user->authorisedLevels();
 
@@ -136,7 +136,7 @@ class ContactViewContact extends JView
 		$this->assignRef('state', $state);
 		$this->assignRef('item', $item);
 		$this->assignRef('user', $user);
-	
+
 		$this->_prepareDocument();
 
 		parent::display($tpl);
@@ -186,6 +186,25 @@ class ContactViewContact extends JView
 			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
 		}
 		$this->document->setTitle($title);
+
+		if ($this->item->metadesc)
+		{
+			$this->document->setDescription($this->item->metadesc);
+		}
+
+		if ($this->item->metakey)
+		{
+			$this->document->setMetadata('keywords', $this->item->metakey);
+		}
+
+		$mdata = $this->item->metadata->toArray();
+		foreach ($mdata as $k => $v)
+		{
+			if ($v)
+			{
+				$this->document->setMetadata($k, $v);
+			}
+		}
 
 	}
 }

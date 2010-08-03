@@ -21,14 +21,12 @@ $fieldsets = $this->form->getFieldsets();
 ?>
 
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'user.cancel' || document.formvalidator.isValid(document.id('user-form'))) {
 			submitform(task);
 		}
 	}
-// -->
 </script>
 
 <form action="<?php JRoute::_('index.php?option=com_users'); ?>" method="post" name="adminForm" id="user-form" class="form-validate">
@@ -75,7 +73,7 @@ $fieldsets = $this->form->getFieldsets();
 		</fieldset>
 		<?php endforeach; ?>
 		<?php echo JHTML::_('sliders.end'); ?>
-		
+
 		<input type="hidden" name="task" value="" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>

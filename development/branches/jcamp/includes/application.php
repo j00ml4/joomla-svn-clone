@@ -234,9 +234,9 @@ final class JSite extends JApplication
 
 		$caching = false;
 		if ($this->getCfg('caching') && $this->getCfg('caching',2) == 2) {
-			$caching = true; 
+			$caching = true;
 		}
-		
+
 		// Render the document.
 		JResponse::setBody($document->render($caching, $params));
 
@@ -436,7 +436,11 @@ final class JSite extends JApplication
 
 		// Fallback template
 		if (!file_exists(JPATH_THEMES.DS.$template->template.DS.'index.php')) {
-			$template->template = 'rhuk_milkyway';
+			JError::raiseWarning(0, JText::_('JERROR_ALERTNOTEMPLATE'));
+		    $template->template = 'beez_20';
+		    if (!file_exists(JPATH_THEMES.DS.'beez_20'.DS.'index.php')) {
+		    	$template->template = '';
+		    }
 		}
 
 		// Cache the result

@@ -19,10 +19,6 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 ?>
 
 <script type="text/javascript">
-<!--
-	function validateForm(frm, task) {
-		Joomla.submitform(task);
-	}
 <?php if ($this->sample_installed) : ?>
 
 	window.addEvent('domready', function() {
@@ -31,7 +27,6 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 		el.setAttribute('value','<?php echo JText::_('INSTL_SITE_SAMPLE_LOADED', true); ?>');
 	});
 <?php endif; ?>
-// -->
 </script>
 
 <div id="stepbar">
@@ -102,7 +97,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 									<td class="item">
 										<?php echo $this->form->getLabel('site_name'); ?>
 									</td>
-									<td align="center">
+									<td>
 										<?php echo $this->form->getInput('site_name'); ?>
 									</td>
 								</tr>
@@ -136,7 +131,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 									<td class="item">
 										<?php echo $this->form->getLabel('admin_email'); ?>
 									</td>
-									<td align="center">
+									<td>
 										<?php echo $this->form->getInput('admin_email'); ?>
 									</td>
 								</tr>
@@ -144,7 +139,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 									<td class="item">
 										<?php echo $this->form->getLabel('admin_user'); ?>
 									</td>
-									<td align="center">
+									<td>
 										<?php echo $this->form->getInput('admin_user'); ?>
 									</td>
 								</tr>
@@ -152,7 +147,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 									<td class="item">
 										<?php echo $this->form->getLabel('admin_password'); ?>
 									</td>
-									<td align="center">
+									<td>
 										<?php echo $this->form->getInput('admin_password'); ?>
 									</td>
 								</tr>
@@ -160,7 +155,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 									<td class="item">
 										<?php echo $this->form->getLabel('admin_password2'); ?>
 									</td>
-									<td align="center">
+									<td>
 										<?php echo $this->form->getInput('admin_password2'); ?>
 									</td>
 								</tr>
@@ -199,8 +194,8 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 					<fieldset>
 						<table class="content2">
 							<tr>
-								<td width="30%"></td>
-								<td width="70%"></td>
+								<td class="item"></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
