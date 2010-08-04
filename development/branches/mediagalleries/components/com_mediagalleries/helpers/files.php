@@ -166,7 +166,7 @@ class FilesHelper{
 	 	* The Show Begins
 	 	*****************************************************/	
 		// Youtube
-		if( eregi( 'youtube.com', $url ) ){
+		if( strpos( $url,'youtube.com' ) ){
 			if( strpos( $url, '/v/' ) ) {// If yes, New way
 				$video = substr( strstr( $url, '/v/' ), 3 );
 				$video = explode( '/', $video);
@@ -182,25 +182,25 @@ class FilesHelper{
 		}
 		
 		// Yahoo Video 
-		elseif( eregi( 'video.yahoo', $url ) ){	
+		elseif( strpos( $url,'video.yahoo' ) ){	
 			//TODO
 			$thumbnail = $localdir. 'sample-video.jpg';
 		}
 	
 		// Google Video 
-		elseif( eregi( 'video.google', $url ) ){
+		elseif( strpos( $url,'video.google' ) ){
 			//TODO
 			$thumbnail = $localdir. 'sample-video.jpg';
 		}
 		
 		// Brightcove Video 
-		elseif( eregi( $url, 'brightcove.tv' ) ){
+		elseif( strpos( $url,'brightcove.tv' ) ){
 			//TODO
 			$thumbnail = $localdir. 'sample-video.jpg';
 		}
 
 		// Metacafe.com
-		elseif( eregi( $url, 'metacafe.com' ) ){
+		elseif( strpos( $url,'metacafe' ) ){
 			//TODO
 			$thumbnail = $localdir. 'sample-video.jpg';
 		}
@@ -227,7 +227,7 @@ class FilesHelper{
 			case '.gif':
 			case '.png': 			
 				$uribase = str_replace('/administrator/', '/', JURI::base());
-				if(eregi( $uribase, $url )){// Local
+				if(strpos($url,$uribase)){// Local
 					$src = self::url2path($url);	// pThumb 
 					$thumbnail = $localdir .'pthumb/thumb.php?mode=fit&width=100&height=100&image='.$src;
 				}else{// Remote

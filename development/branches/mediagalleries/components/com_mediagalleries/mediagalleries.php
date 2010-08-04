@@ -32,6 +32,10 @@ define('PATH_HELPERS', JPATH_COMPONENT.DS.'helpers'.DS );
 require_once $mediapath;
 require_once PATH_HELPERS.'player.php' ;
 require_once PATH_HELPERS.'query.php' ;
+// For generating the thumbnails
+require_once PATH_HELPERS.'files.php' ;
+// For Youtube
+require_once PATH_HELPERS.'youtube.php' ;
 
 $controller	= JController::getInstance('Mediagalleries');
 $controller->execute(JRequest::getCmd('task'));

@@ -33,6 +33,7 @@ class MediagalleriesViewMedia extends JView
 		$state		= $this->get('State');
 		$this->item		= $this->get('Item');
 		$category	= $this->get('Category');
+		$this->thumb= FilesHelper::getThumbURL($this->item->url);
 
 		if ($this->item->url) {					
 			$this->media=plgContentMedia::addMedia($this->item->url,$this->params->get('width',350),$this->params->get('height',350),$this->params->get('autostart',0));
@@ -41,8 +42,7 @@ class MediagalleriesViewMedia extends JView
 			return  JError::raiseError(404, "Media Not Found");
 			
 		}
-		$globalParams=JComponentHelper::getParams('plg_media');
-		dump($globalParams);
+		
 		parent::display();
 	}
 }

@@ -29,6 +29,7 @@ class MediagalleriesController extends JController {
 
 	function display()
 	{
+		
 		$cachable = true;
 		// Get the document object.
 		// Set the default view name and format from the Request.

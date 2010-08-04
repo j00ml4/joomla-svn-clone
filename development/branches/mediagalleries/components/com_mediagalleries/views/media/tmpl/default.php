@@ -4,6 +4,7 @@ JHTML::_( 'behavior.modal' );
 JHtmlBehavior::modal();
 ?>
 <div class="mediagallery" >
+	<?php echo $this->thumb; ?>
 	<div class="media"><?php echo $this->media; ?></div>
 	
 	<?php if($this->params->get('show_cat',1)): ?>
