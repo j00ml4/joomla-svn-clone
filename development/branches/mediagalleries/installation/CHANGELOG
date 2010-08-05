@@ -1,6 +1,6 @@
 0. Metadata
 -----------
-File version:	$Id: CHANGELOG 18106 2010-07-12 21:58:41Z dextercowley $
+File version:	$Id: CHANGELOG 18335 2010-08-05 16:35:25Z infograf768 $
 Copyright:		Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
 License:		GNU General Public License version 2 or later; see LICENSE.txt
 
@@ -20,15 +20,232 @@ code fixes.
 Legend:
 
 * -> Security Fix
-# -> Bug Fix
+# -> Issue Fix
 $ -> Language fix or change
 + -> Addition
 ^ -> Change
 - -> Removed
 ! -> Note
 
+05-Aug-2010 Jean-Marie Simonet
+ # [#21599] Featured articles - article link to parent category - 500 error. Thanks Mathavan
+ # [#21433] Title disappear when you select the menu item type. Thanks Bill
+ #$ [#21358] Breadcrumbs "You are here" text displays regardless of Breadcrumbs settings. Thanks Michael.
+ #$ [#21731] Newsfeeds /menu-items params correction + changes to weblinks. Thanks Bill.
+
+04-Aug-2010 Jean-Marie Simonet
+ [#21662] Single contact view not treating category access issue correctly. Thanks Elin.
+ 
+04-Aug-2010 Andrew Eddie
+ # Fixed issue [#21536] admin/com_users: report view. Is this being used or worked on?
+ # Fixed issue [#20899] Changing 'Home' to a 'External Link' or 'Menu Item Alias' causes '404 Component Not Found' error on homepage (Zach Garner, Tim Plummer, Christophe, Michael Babker).
+ # Fixed issue [#21711] Global Configuration button in Control Panel (Sander Potjer, Michael Babker).
+ # Fixed issue [#21318] Caching causes problems with admin parameters (Elin Waring, Klas Berlič1).
+
+03-Aug-2010 Jean-Marie Simonet
+ $ Adding missing strings, deleting redundant ones for com_contact.
+ $ Adding/normalizing some .sys.ini strings/values com_user, com_weblinks
+ # [#21706] Modifying [#21159] to let cat have the same name/alias when not in same tree when save&copy
+ #$ [#21712] Weblinks /menu-items params correction. Thanks Bill.
+ # [#21694] Beez Templates xml files reference to language folder
+ 
+03-Aug-2010 Andrew Eddie
+ # Fixed issue [#21346] Error in loading order of JS scripts in components (g p).
+ # Fixed issue [#21704] *Re-enabling Published state per default when creating new items (Jean-Marie Simonet).
+
+02-Aug-2010 Andrew Eddie
+ # Fixed issue [#21545] </optgroup> is not generated for menu items admin page (Franklin Tse, Omar Ramos).
+ # Fixed issue [#21670] Implementing the ability to NOT translate label and description (Jean-Marie Simonet, Artyom Bisyarin).
+
+01-Aug-2010 Ron Severdia
+^ [# 21368] Changed alignment of column items
+^ Fixed CSS ordering for BlueStork (table styles out of place)
+^ Separated out IE7 & IE8 CSS files (BlueStork)
+^ Fixed module positions, chrome & overrides for Atomic
+ 
+01-Aug-2010 Jean-Marie Simonet
+ # [#21646] Text fields do not accept html tags
+ $ [#21636] home menu error string. Thanks Bill.
+ # [#21673] Patch committed  (17913) without placing the image in the right folder
+ 
+31-Jul-2010 Ian MacLennan
+ # [#21588] Reverting commit that broke unit tests.
+ 
+ 31-Jul-2010 Jean-Marie Simonet
+ # [#21653] Mod_login redirections
+ # [#21576] Missing code when mod_rewrite is off. Thanks Cherif
+ $ Correcting mod_login string value.
+ 
+30-Jul-2010 Louis Landry
+ # [#21576] Language switcher don't affect document language - sef routing issue
+
+30-Jul-2010 Jean-Marie Simonet
+ # [#21588] Readonly calendar field pops up. Thanks Roland
+ # [#20628] Titles of hidden fields are shown in module edit page, menu edit page, article edit page. Thanks Artyom.
+ $ Correcting some inis. Deleted redundant one.
+ 
+29-Jul-2010 Mark Dexter
+ # Remove trashed category from sample data
+
+29-Jul-2010 Ian MacLennan
+ # [#21605] Change committed without appropriately modifying system tests.
+
+29-Jul-2010 Jean-Marie Simonet
+ # [#21619] Normalizing menu items sliders to be more explicit over the UI
+ # [#21618] Modal CSS various issues, mostly related to bluestork loading media/system/css/adminlist.css. Thanks Matt & Angie.
+
+28-Jul-2010 Ian MacLennan
+ # [#21361] Contact Component (Category Contact List-No Query)
+ # [#21553] "Add Site Name to Page Titles" does not work in Atom and RSS feeds
+ # [#21559] Joomla! Form Field Checkboxes
+ # [#21473] Remove garbage output from system test classes
+ # [#21521] JSessionStorage*::test() should be static
+ # [#21520] JSession::getStores() should be static
+ # [#21518] Only variables should be assigned by reference in JCategories->setParent()
+ # [#21539] Extraneous edit_params.php in banner view
+ # [#21544] The a element in JButtonHelp->fetchButton is not well-formed
+ # [#21555] Fields of type=media do not have an obvious way to clear the data
+ # [#21602] Preventing saving same alias in same category
+ # [#20690] Call to undefined method JRegistry::loadSetupFile()
+ # [#21283] System test article0001 failing
+ # [#21537] Hathor metadata
+
+28-Jul-2010 Jean-Marie Simonet
+ # [#21605] small change in menu manager: new menu item. Thanks Bill.
+ # [#21584] Robots metadata useless Option
+ # [#21569] article categories - not showing no of articles in each category. Thanks Bill.
+ # [#21589] Menu items - link,display and metadata all in one panel slider. Thanks Bill.
+ $ Missing string
+
+27-Jul-2010 Ian MacLennan
+ # [#21578] mod_articles_popular Ordering Correction
+ # [#21547] Make installation work with XHTML parsed as XML
+
+27-Jul-2010 Jean-Marie Simonet
+ # [#21159] Using Save as Copy in Categery - no indication is a copy
+ # [#21596] Small typo in installer adapters. Thanks Viet.
+ # [#21575] Bluestork com_modules module view Clear Float correction. Thanks Omar.
+
+-------------------- 1.6.0 Beta6 Release [26-Jul-2010] ------------------
+
+26-Jul-2010 Jean-Marie Simonet
+ # [#21586] Implementing menu items title and image params
+ # [#21458] css Error - Beez_50. Thanks Bill.
+ # [#21546] plgEditorTinymce->_toogleButton is not well-formed. Thanks Franklin.
+ # [#21585] Trashed menu items still in list
+
+25-Jul-2010 Jean-Marie Simonet
+ # [#20753] Bluestork Template For RTL languge
+ # [#21564] Pagenavigation between articles does not work. Thanks Hannes.
+ # [#21516] 'Disabled' state is not used in Content Languages view. Thanks CY Lee and Michael.
+ $ [#21453] module - archived articles - label. Thanks Bill.
+ # [#21294] Cells of "Date" columns is not in one line in com_content grids in IE. Thanks Artyom.
+ # [#21524] Atom feed renderer reports wrong Joomla! version. Thanks Franklin.
+ $ [#21479] menu alias string error. Thanks Bill.
+ # [#21534] Breadcrumbs: last Seperator apper even if "Show Last" set to "no". Thanks Rune.
+ $ Ini value Typo.
+
+24-Jul-2010 Jean-Marie Simonet
+ # [#21478] Ordering issues when sorted in descending. Thanks Michael
+ # [#21562] Banner Manager: Banners does not display ordering arrow for first item. Thanks Omar.
+ # [#21563] Contact Manager Ordering display issues. Thanks Michael.
+ # [#21530] Milkyway template has two positions 12. Thanks Michael.
+ # [#21566] Reordering Access Levels produces error. Thanks Omar.
+ # [#21528] clear cache check all box doesn't check all. Thanks Andrea
+
+23-Jul-2010 Sam Moffatt
+ # updateNulls being ref: http://groups.google.com/group/joomla-dev-framework/browse_thread/thread/79f6431147a223ba/
+
+22-Jul-2010 Jean-Marie Simonet
+ # [#21199] Profile data show in contacts when profile plugin is disabled
+ # [#21550] Flash Uploader issue
+
+21-Jul-2010 Andrew Eddie
+ # [#20880] fatal error trying to view template positions (Rob Joyce, Rune Sjøen).
+ # [#21394] Problem with submenu translation in 3rd party extensions (Rune Sjøen).
+ # [#21452] Use rel="help" for the help button in the toolbar (Rouven Weßling).
+ # [#21438] Adding categories (Rune Sjøen).
+ # [#21247] HTML comments shouldn't be used to guard JavaScript (Rouven Weßling).
+ # [#21335] Sort by descending causes issues with ordering in Category and Menu Managers (Michael Babker).
+ # [#21250] Token message Error on Install Sample Data (Pete Nurse).
+ # [#21178] Dropdown on Extension manager>Manage to filter results in error - ? due to ftp fields attempting to be populated (Ruth Cheesley, Bill Richardson).
+ # [#20751] Fix some markup errors and bring installer closer to XHTML strict (Rouven Weßling).
+ # [#21339] JFile::Write() returns wrong value (Janich Rasmussen, Artyom Bisyarin).
+ # [#21436] Database Error should return "500 Internal Server Error" so Joomla! can operate properly in CDNs (Klas Berlič1).
+ # [#20381] Readme file (Paulo Izidoro).
+ # [#21517] modSearchHelper's methods should be public static (Franklin Tse).
+ # [#20879] missing functionality Save and New (Rob Joyce, Joseph LeBlanc).
+ # [#21515] ContentHelperQuery's methods should be public static (Franklin Tse).
+ 
+21-Jul-2010 Jean-Marie Simonet
+ $ Changing all occurences of :: to : : in strings' values to avoid breaking tooltips
+ 
+21-Jul-2010 Andrew Eddie
+ # [#21430] User Manager - Blank page if new password and confirmation do not match (Al Kent).
+ # [#21451] Article field "xreference" available in views in 1.5 but missing in 1.6 (Andrea Tarr).
+ # [#21349] Manage view of com_installer does not use the default_item.php sub-template (Rune Sjøen).
+ # [#21464] bitfolge feedcreator is unnecessary (Hannes Papenberg, Amy Stephen).
+
+20-Jul-2010 Jean-Marie Simonet
+ # [#21495] Tooltip max-width insufficient
+ # [#21484] Plugin manger error in Hathor from typo in earlier patch. Thanks Andrea.
+
+20-Jul-2010 Sam Moffatt
+ # Fixed non-updates appear in update list
+
+19-Jul-2010 Jean-Marie Simonet
+ # [#21172] Article pagination display. Thanks Bill.
+ # [#21389] Missing addition of css class "parent" to <li> tag for parent item in menu.
+ # [#21369] New menu item - Metadata options - Show Page Heading. Thanks Bill.
+ # [#21455] XML self closing syntax used on a div. Thanks Rune.
+ $ [#21454] Login module refers to non-existing. Thanks Michael
+ $ Deleting redundant string
+ $ [#21424] Untranslated strings: Default captions for various functions in JToolBarHelper class (Part 1) Tks CY Lee
+ $ [#21425] Untranslated strings: Default captions for various functions in JToolBarHelper class (Part 2) Tks CY Lee
+
+16-Jul-2010 Jean-Marie Simonet
+ # Missing $user in banners and Newsfeed controllers
+ # [#21378] Mootols (and possibly other js/css) not loading with cache on. Thanks Klas.
+ # [#21434] Robots list creates numeric values + metadata missing for articles
+ # [#21357] Newsfeed categories - routing error with sef enabled. Thanks Mathavan.
+ $ Deleting useless JText in grid
+ # [#21437] Rename garbagecron.php to .txt.
+ 
+16-Jul-2010 Andrew Eddie
+ # [#20929] CategoriesControllerCategories Improvements (Omar Ramos).
+ # Partial [#20933] Banner, Contact, Newsfeed, and Weblink Controller Improvements (Omar Ramos).
+ # [#21337] Framework: JControllerForm does not preserve form data on validation error (Anders Knutsson, Bill Richardson).
+
+15-Jul-2010 Jean-Marie Simonet
+ # [#21422] Content Category metadata not displayed 
+ # [#21423] Enabling metadata for newsfeed, contacts, weblinks category
+ # [#21417] Extra < in <script... tag
+ # [#21426] Enabling metadata for single contact
+ 
+14-Jul-2010 Jean-Marie Simonet
+ # [#21398] [Hathor] saveOrder should be $saveOrder. Thanks Viet.
+ # [#21342] JDocumentRendererHead can generate empty meta description. Thanks Janich.
+ # [#21374] Updates to Hathor that were not done when core was updated. Thanks Andrea and Michael.
+ # [#21329] com_modules save-as-new with wrong icon
+ $ [#21412] Untranslated strings: Default captions for JHtmlSelect::booleanlist. Thanks CY Lee
+ # [#21401] Template beez20 Layout.css issue 
+ # [#21415] Restoring deleted title in Hathor. Thanks Michael.
+
+14-Jul-2010 Mark Dexter
+ # Sample data fixes (Elin Waring)
+ # joomla.sql table missing row and lft, rgt values (Seline Feigl)
+ # [#21286] com_banner test code clean up in category.xml
+ # Missing } in /administrator/components/com_users/views/level/view.html.php
+
+13-Jul-2010 Jean-Marie Simonet
+ # [#20760] Contact Manager Options > Contact List parameters
+ # [#21377] Error caused by page break without readmore (see on visiting component menu item in sample data)
+ # [#21382] Fallback template is rhuk_milkyway, not beez_20, and doesn't load properly.
+ # [#21371] Restore 1.5 ability for multiple categories for Latest Articles Module. Thanks Amy
+ # [#21215] Consistency in module layouts. Thanks Bill.
+ 
 13-Jul-2010 Mark Dexter
-# [#21083] Category List menu link to unpublished category gives error
+ # [#21083] Category List menu link to unpublished category gives error
 
 -------------------- 1.6.0 Beta5 Release [12-Jul-2010] ------------------
 

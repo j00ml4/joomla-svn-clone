@@ -20,7 +20,6 @@ JHtml::_('behavior.keepalive');
 ?>
 
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'article.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
@@ -31,7 +30,6 @@ JHtml::_('behavior.keepalive');
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
-// -->
 </script>
 
 <div class="article-edit">
@@ -61,10 +59,10 @@ JHtml::_('behavior.keepalive');
 
 		<li><?php echo $this->form->getLabel('featured'); ?>
 		<?php echo $this->form->getInput('featured'); ?></li>
-				
+
 		<li><?php echo $this->form->getLabel('id'); ?>
 		<?php echo $this->form->getInput('id'); ?></li>
-		
+
 	</ul>
 
 		<div class="clr"></div>
@@ -141,46 +139,14 @@ JHtml::_('behavior.keepalive');
 		<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'meta-options'); ?>
 		<fieldset class="panelform">
 		<legend class="element-invisible"><?php echo JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'); ?></legend>
-		<ul class="adminformlist">
-			<li><?php echo $this->form->getLabel('metadesc'); ?>
-			<?php echo $this->form->getInput('metadesc'); ?></li>
-
-			<li><?php echo $this->form->getLabel('metakey'); ?>
-			<?php echo $this->form->getInput('metakey'); ?></li>
-		</ul>
-
-			<?php
-			$fieldSets = $this->form->getFieldsets('metadata');
-
-			foreach ($fieldSets as $name => $fieldSet) :
-				echo JHtml::_('sliders.panel',JText::_($label), $name.'-options');
-					if (isset($fieldSet->description) && trim($fieldSet->description)) :
-						echo '<p class="tip">'.$this->escape(JText::_($fieldSet->description)).'</p>';
-					endif;
-					?>
-				<fieldset class="panelform">
-				<legend class="element-invisible"><?php echo JText::_($label); ?></legend>
-					<ul class="adminformlist">
-						<?php foreach ($this->form->getFieldset($name) as $field) : ?>
-							<li><?php echo $field->label; ?>
-							<?php echo $field->input; ?></li>
-						<?php endforeach; ?>
-					</ul>
-				</fieldset>
-			<?php endforeach; ?>
-
-		<ul>
-			<li><?php echo $this->form->getLabel('xreference'); ?>
-			<?php echo $this->form->getInput('xreference'); ?></li>
-		</ul>
+			<?php echo $this->loadTemplate('metadata'); ?>
 		</fieldset>
 
 		<?php echo JHtml::_('sliders.end'); ?>
-</div>
 
-
-	<input type="hidden" name="task" value="" />
-	<?php echo JHtml::_('form.token'); ?>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHtml::_('form.token'); ?>
+	</div>
 </form>
 <div class="clr"></div>
 </div>

@@ -17,14 +17,12 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (document.formvalidator.isValid(document.id('component-form'))) {
 			submitform(task);
 		}
 	}
--->
 </script>
 <form action="<?php echo JRoute::_('index.php?option=com_config');?>" id="component-form" method="post" name="adminForm" autocomplete="off" class="form-validate">
 	<fieldset>
@@ -49,17 +47,18 @@ JHtml::_('behavior.formvalidation');
 				echo '<p class="tab-description">'.JText::_($fieldSet->description).'</p>';
 			endif;
 	?>
-		
+
 			<?php
 			foreach ($this->form->getFieldset($name) as $field):
 			?>
-					<?php echo $field->label; ?>
-					<?php echo $field->input; ?>
-
+				<?php if (!$field->hidden) : ?>
+				<?php echo $field->label; ?>
+				<?php endif; ?>
+				<?php echo $field->input; ?>
 			<?php
 			endforeach;
 			?>
-			
+
 
 	<div class="clr"></div>
 	<?php

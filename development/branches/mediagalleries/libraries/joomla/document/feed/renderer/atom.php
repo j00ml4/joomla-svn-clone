@@ -43,19 +43,26 @@ defined('JPATH_BASE') or die;
 	 */
 	function render()
 	{
+		$app	= JFactory::getApplication();
 		$now	= JFactory::getDate();
 		$data	= &$this->_doc;
 
 		$uri = JFactory::getURI();
 		$url = $uri->toString(array('scheme', 'user', 'pass', 'host', 'port'));
 		$syndicationURL = JRoute::_('&format=feed&type=atom');
+		
+		$feed_title = htmlspecialchars(
+			$app->getCfg('sitename_pagetitles',0)?
+			JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $data->title):
+			$data->title
+		, ENT_COMPAT, 'UTF-8');
 
 		$feed = "<feed xmlns=\"http://www.w3.org/2005/Atom\" ";
 		if ($data->language!="") {
 			$feed.= " xml:lang=\"".$data->language."\"";
 		}
 		$feed.= ">\n";
-		$feed.= "	<title type=\"text\">".htmlspecialchars($data->title, ENT_COMPAT, 'UTF-8')."</title>\n";
+		$feed.= "	<title type=\"text\">".$feed_title."</title>\n";
 		$feed.= "	<subtitle type=\"text\">".htmlspecialchars($data->description, ENT_COMPAT, 'UTF-8')."</subtitle>\n";
 		$feed.= "	<link rel=\"alternate\" type=\"text/html\" href=\"".$url."\"/>\n";
 		$feed.= "	<id>".str_replace(' ','%20',$data->getBase())."</id>\n";
@@ -68,7 +75,7 @@ defined('JPATH_BASE') or die;
 			}
 			$feed.= "	</author>\n";
 		}
-		$feed.= "	<generator uri=\"http://joomla.org\" version=\"1.5\">".$data->getGenerator()."</generator>\n";
+		$feed.= "	<generator uri=\"http://joomla.org\" version=\"1.6\">".$data->getGenerator()."</generator>\n";
 		$feed.= '<link rel="self" type="application/atom+xml" href="'.str_replace(' ','%20',$url.$syndicationURL). "\" />\n";
 
 		for ($i=0;$i<count($data->items);$i++)

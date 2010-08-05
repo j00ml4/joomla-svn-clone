@@ -15,16 +15,12 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'language.cancel' || document.formvalidator.isValid(document.id('language-form'))) {
 			submitform(task);
 		}
-		// @todo Deal with the editor methods
-		submitform(task);
 	}
-// -->
 </script>
 
 <form action="<?php JRoute::_('index.php?option=com_languages'); ?>" method="post" name="adminForm" id="language-form" class="form-validate">
@@ -54,7 +50,7 @@ JHtml::_('behavior.formvalidation');
 
 			<?php echo $this->form->getLabel('description'); ?>
 			<?php echo $this->form->getInput('description'); ?>
-			
+
 			<?php echo $this->form->getLabel('lang_id'); ?>
 			<?php echo $this->form->getInput('lang_id'); ?>
 		</fieldset>

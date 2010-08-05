@@ -74,7 +74,7 @@ $saveOrder	= $listOrder=='ordering';
 				<th width="10%">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_CATEGORY', 'category_title', $listDirn, $listOrder); ?>
 				</th>
-				<th width="10%" nowrap="nowrap">
+				<th width="10%" class="nowrap">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'ordering', $listDirn, $listOrder); ?>
 					<?php if ($canOrder && $saveOrder): ?>
 						<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'banners.saveorder'); ?>
@@ -148,8 +148,8 @@ $saveOrder	= $listOrder=='ordering';
 				<td class="order">
 					<?php if ($canChange) : ?>
 						<?php if ($saveOrder) : ?>
-							<span><?php echo $this->pagination->orderUpIcon($i, $listOrder=='asc' ? $item->ordering!=1 : $item->ordering!=$this->categories[$item->catid], $listOrder=='asc' ? 'banners.orderup' : 'banners.orderdown', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
-							<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, $listOrder!='asc' ? $item->ordering!=1 : $item->ordering!=$this->categories[$item->catid], $listOrder=='asc' ? 'banners.orderdown' : 'banners.orderup', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
+							<span><?php echo $this->pagination->orderUpIcon($i, (@$this->items[$i-1]->catid == $item->catid), 'banners.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
+							<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, (@$this->items[$i+1]->catid == $item->catid), 'banners.orderdown', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
 						<?php endif; ?>
 						<?php $disabled = $saveOrder ?  '' : 'disabled="disabled"'; ?>
 						<input type="text" name="order[]" size="5" value="<?php echo $item->ordering;?>" <?php echo $disabled;?> class="text-area-order" />

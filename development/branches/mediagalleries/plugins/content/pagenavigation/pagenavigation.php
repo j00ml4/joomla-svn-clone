@@ -25,11 +25,11 @@ class plgContentPagenavigation extends JPlugin
 	{
 		$view = JRequest::getCmd('view');
 		$print = JRequest::getBool('print');
-		
+
 		if ($print) {
 			return false;
 		}
-		
+
 		if ($params->get('show_item_navigation') && ($context == 'com_content.article')) {
 			$html = '';
 			$db		= JFactory::getDbo();
@@ -107,7 +107,7 @@ class plgContentPagenavigation extends JPlugin
 			$query->from('#__content AS a');
 			$query->leftJoin('#__categories AS cc ON cc.id = a.catid');
 			$query->where('a.catid = '. (int)$row->catid .' AND a.state = '. (int)$row->state
-						. ($canPublish ? '' : ' AND a.access <= ' .(int)$user->get('aid', 0)) . $xwhere);
+						. ($canPublish ? '' : ' AND a.access = ' .(int)$row->access) . $xwhere);
 			$query->order($orderby);
 
 			$db->setQuery($query);
@@ -144,13 +144,13 @@ class plgContentPagenavigation extends JPlugin
 			}
 
 			if ($row->prev) {
-				$row->prev = JRoute::_('index.php?option=com_content&view=article&catid='.$row->prev->catslug.'&id='.$row->prev->slug);
+				$row->prev = JRoute::_(ContentHelperRoute::getArticleRoute($row->prev->slug, $row->prev->catslug));
 			} else {
 				$row->prev = '';
 			}
 
 			if ($row->next) {
-				$row->next = JRoute::_('index.php?option=com_content&view=article&catid='.$row->next->catslug.'&id='.$row->next->slug);
+				$row->next = JRoute::_(ContentHelperRoute::getArticleRoute($row->next->slug, $row->next->catslug));
 			} else {
 				$row->next = '';
 			}
