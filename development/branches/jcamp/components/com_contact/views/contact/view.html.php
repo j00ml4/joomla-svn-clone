@@ -11,7 +11,8 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
-
+require_once JPATH_COMPONENT.'/models/category.php';
+	
 /**
  * HTML Contact View class for the Contact component
  *
@@ -24,7 +25,6 @@ class ContactViewContact extends JView
 	protected $state;
 	protected $item;
 
-
 	function display($tpl = null)
 	{
 		// Initialise variables.
@@ -35,6 +35,13 @@ class ContactViewContact extends JView
 		// Get model data.
 		$state = $this->get('State');
 		$item = $this->get('Item');
+		
+		// Get Category Model data
+		$categoryModel = JModel::getInstance('Category', 'ContactModel', array('ignore_request' => true));
+		$categoryModel->setState('category.id', $item->catid);
+		$categoryModel->setState('list.ordering', 'a.name');
+		$categoryModel->setState('list.direction', 'asc');		
+		$contacts = $categoryModel->getItems();
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -59,11 +66,9 @@ class ContactViewContact extends JView
 			$uri		= JFactory::getURI();
 			$return		= (string)$uri;
 
-			$url  = 'index.php?option=com_users&view=login';
-			$url .= '&return='.base64_encode($return);
-
-			//$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'));
-
+				JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
+				return;
+			
 		}
 
 		$options['category_id']	= $item->catid;
@@ -136,6 +141,7 @@ class ContactViewContact extends JView
 		$this->assignRef('state', $state);
 		$this->assignRef('item', $item);
 		$this->assignRef('user', $user);
+		$this->assignRef('contacts', $contacts);
 
 		$this->_prepareDocument();
 

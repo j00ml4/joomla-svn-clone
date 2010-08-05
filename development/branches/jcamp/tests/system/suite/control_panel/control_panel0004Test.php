@@ -116,7 +116,7 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 		$this->click("link=Ordering");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isElementPresent("//a[contains(@href, 'saveorder')][@class = 'saveorder']"));
-		$this->assertTrue($this->isElementPresent("//span[@class='state downarrow']"));
+		$this->assertFalse($this->isElementPresent("//span[@class='state downarrow']"));
 		$this->assertTrue($this->isElementPresent("//input[@class='text-area-order'][@disabled='disabled']"));
 		echo "Sort by Access and Language to verify all ordering items either hidden or disabled\n";
 		$this->click("link=Access");
@@ -210,7 +210,7 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isElementPresent("//a[contains(@href, 'saveorder')][@class = 'saveorder']"));
 		$this->assertTrue($this->isElementPresent("//input[@class='text-area-order'][@disabled='disabled']"));
-		$this->assertTrue($this->isElementPresent("//span[@class='state downarrow']"));
+		$this->assertFalse($this->isElementPresent("//span[@class='state downarrow']"));
 		echo "Change sort to Access and Language and make sure all three are disabled\n";
 		$this->click("link=Access");
 		$this->waitForPageToLoad("30000");
@@ -238,7 +238,7 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 		$this->assertEquals("Article Categories (Alias: article-categories)", $this->getTable("//table[@class='adminlist'].7.1"));
 		$this->assertEquals("Article Category Blog (Alias: article-category-blog)", $this->getTable("//table[@class='adminlist'].8.1"));
 		$this->assertEquals("Article Category List (Alias: article-category-list)", $this->getTable("//table[@class='adminlist'].9.1"));
-		
+
 		echo "Reverse the order of 4 articles\n";
 		$this->type("//div[@id='element-box']/div[2]/form/table/tbody/tr[6]/td[4]/input", "4");
 		$this->type("//div[@id='element-box']/div[2]/form/table/tbody/tr[7]/td[4]/input", "3");
@@ -252,7 +252,7 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 		$this->assertEquals("Article Categories (Alias: article-categories)", $this->getTable("//table[@class='adminlist'].8.1"));
 		$this->assertEquals("Article Category Blog (Alias: article-category-blog)", $this->getTable("//table[@class='adminlist'].7.1"));
 		$this->assertEquals("Article Category List (Alias: article-category-list)", $this->getTable("//table[@class='adminlist'].6.1"));
-		
+
 		echo "Change the ordering back and click Save Order\n";
 		$this->type("//div[@id='element-box']/div[2]/form/table/tbody/tr[6]/td[4]/input", "4");
 		$this->type("//div[@id='element-box']/div[2]/form/table/tbody/tr[7]/td[4]/input", "3");
@@ -260,14 +260,14 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 		$this->type("//div[@id='element-box']/div[2]/form/table/tbody/tr[9]/td[4]/input", "1");
 		$this->click("//a[contains(@href, 'saveorder')][@class = 'saveorder']");
 		$this->waitForPageToLoad("30000");
-		
+
 		echo "Check the ordering is back to original order\n";
 		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
 		$this->assertEquals("Single Article (Alias: single-article)", $this->getTable("//table[@class='adminlist'].6.1"));
 		$this->assertEquals("Article Categories (Alias: article-categories)", $this->getTable("//table[@class='adminlist'].7.1"));
 		$this->assertEquals("Article Category Blog (Alias: article-category-blog)", $this->getTable("//table[@class='adminlist'].8.1"));
 		$this->assertEquals("Article Category List (Alias: article-category-list)", $this->getTable("//table[@class='adminlist'].9.1"));
-		
+
 		echo "Click Save Order when nothing has been changed and make sure it doesn't to anything\n";
 		$this->click("//a[contains(@href, 'saveorder')][@class = 'saveorder']");
 		$this->waitForPageToLoad("30000");
