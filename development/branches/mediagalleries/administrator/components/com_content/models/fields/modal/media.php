@@ -13,10 +13,10 @@ jimport('joomla.form.formfield');
  * Supports a modal article picker.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_content
+ * @subpackage	com_mediagalleries
  * @since		1.6
  */
-class JFormFieldModal_Article extends JFormField
+class JFormFieldModal_Media extends JFormField
 {
 	/**
 	 * The form field type.
@@ -24,7 +24,7 @@ class JFormFieldModal_Article extends JFormField
 	 * @var		string
 	 * @since	1.6
 	 */
-	protected $type = 'Modal_Article';
+	protected $type = 'Modal_Media';
 
 	/**
 	 * Method to get the field input markup.
@@ -51,12 +51,12 @@ class JFormFieldModal_Article extends JFormField
 
 		// Setup variables for display.
 		$html	= array();
-		$link	= 'index.php?option=com_content&amp;view=articles&amp;layout=modal&amp;tmpl=component&amp;function=jSelectArticle_'.$this->id;
+		$link	= 'index.php?option=com_mediagalleries&amp;view=galleries&amp;layout=modal&amp;tmpl=component&amp;function=jSelectArticle_'.$this->id;
 
 		$db	= JFactory::getDBO();
 		$db->setQuery(
 			'SELECT title' .
-			' FROM #__content' .
+			' FROM #__mediagalleries' .
 			' WHERE id = '.(int) $this->value
 		);
 		$title = $db->loadResult();
@@ -66,7 +66,7 @@ class JFormFieldModal_Article extends JFormField
 		}
 
 		if (empty($title)) {
-			$title = JText::_('COM_CONTENT_SELECT_AN_ARTICLE');
+			$title = JText::_('COM_MEDIAGALLERIES_SELECT_A_MEDIA');
 		}
 		$title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
 
@@ -78,7 +78,7 @@ class JFormFieldModal_Article extends JFormField
 		// The user select button.
 		$html[] = '<div class="button2-left">';
 		$html[] = '  <div class="blank">';
-		$html[] = '	<a class="modal" title="'.JText::_('COM_CONTENT_CHANGE_ARTICLE').'"  href="'.$link.'" rel="{handler: \'iframe\', size: {x: 800, y: 450}}">'.JText::_('COM_CONTENT_CHANGE_ARTICLE_BUTTON').'</a>';
+		$html[] = '	<a class="modal" title="'.JText::_('COM_MEDIA_CHANGE_MEDIA').'"  href="'.$link.'" rel="{handler: \'iframe\', size: {x: 800, y: 450}}">'.JText::_('COM_MEDIAGALLERIES_CHANGE_MEDIA_BUTTON').'</a>';
 		$html[] = '  </div>';
 		$html[] = '</div>';
 
