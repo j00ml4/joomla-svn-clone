@@ -31,6 +31,7 @@
 				<field
 					name="pretext"
 					type="textarea"
+					filter="safehtml"
 					cols="30"
 					rows="5"
 					label="MOD_LOGIN_FIELD_PRE_TEXT_LABEL"
@@ -38,6 +39,7 @@
 				<field
 					name="posttext"
 					type="textarea"
+					filter="safehtml"
 					cols="30"
 					rows="5"
 					label="MOD_LOGIN_FIELD_POST_TEXT_LABEL"
@@ -47,13 +49,19 @@
 					type="menuitem"
 					disable="separator"
 					label="MOD_LOGIN_FIELD_LOGIN_REDIRECTURL_LABEL"
-					description="MOD_LOGIN_FIELD_LOGIN_REDIRECTURL_DESC" />
+					description="MOD_LOGIN_FIELD_LOGIN_REDIRECTURL_DESC" >
+					<option 
+						value="">JDEFAULT</option>
+				</field>
 				<field
 					name="logout"
 					type="menuitem"
 					disable="separator"
 					label="MOD_LOGIN_FIELD_LOGOUT_REDIRECTURL_LABEL"
-					description="MOD_LOGIN_FIELD_LOGOUT_REDIRECTURL_DESC" />
+					description="MOD_LOGIN_FIELD_LOGOUT_REDIRECTURL_DESC" >
+					<option 
+						value="">JDEFAULT</option>
+				</field>
 				<field
 					name="greeting"
 					type="radio"

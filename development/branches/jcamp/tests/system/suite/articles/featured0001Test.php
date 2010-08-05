@@ -24,20 +24,7 @@ class Featured0001Test extends SeleniumJoomlaTestCase
 		echo "Change global param to no category order\n";
 		$this->click("link=Article Manager");
 		$this->waitForPageToLoad("30000");
-		$this->click("//li[@id='toolbar-popup-options']/a/span");
-		for ($second = 0;; $second++)
-		{
-			if ($second >= 15) $this->fail("timeout");
-			try
-			{
-				if ($this->isElementPresent("//dl[@id='config-tabs-com_content_configuration']")) break;
-			}
-			catch (Exception $e)
-			{
-			}
-			sleep(1);
-		}
-
+		$this->jClick('Options');
 		$this->click("//dl[@id='config-tabs-com_content_configuration']/dt[4]/span");
 		$this->select("jform_orderby_pri", "label=No Order");
 		$this->click("//button[contains(@onclick, 'component.save')]");
@@ -107,7 +94,7 @@ class Featured0001Test extends SeleniumJoomlaTestCase
 		$this->select("jform_params_orderby_sec", "label=Title Alphabetical");
 		$this->click("//li[@id='toolbar-save']/a/span");
 		$this->waitForPageToLoad("30000");
-		
+
 		echo "Goto front page and check alpha article order \n";
 		$this->gotoSite();
 		$this->assertEquals("Beginners", $this->getText("//div[@class='leading-0']/h2"), "Beginners should be intro article");
@@ -116,7 +103,7 @@ class Featured0001Test extends SeleniumJoomlaTestCase
 		$this->assertEquals("Upgraders", $this->getText("//div[@class='item column-3']/h2"), "Upgrades should be col 3");
 		$this->assertTrue((bool) preg_match("/^[\s\S]*Joomla![\s\S]*Professionals[\s\S]*Upgraders[\s\S]*$/", $this->getText(
 			"//div[@class='items-row cols-3 row-0']")), "Articles should be Joomla!, Professionals, Upgraders");
-		
+
 		echo "Go back to back end and change parameters back.\n";
 		$this->gotoAdmin();
 		$this->click("link=Main Menu");
@@ -130,20 +117,7 @@ class Featured0001Test extends SeleniumJoomlaTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("link=Article Manager");
 		$this->waitForPageToLoad("30000");
-		$this->click("//li[@id='toolbar-popup-options']/a/span");
-		for ($second = 0;; $second++)
-		{
-			if ($second >= 15) $this->fail("timeout");
-			try
-			{
-				if ($this->isElementPresent("//dl[@id='config-tabs-com_content_configuration']")) break;
-			}
-			catch (Exception $e)
-			{
-			}
-			sleep(1);
-		}
-
+		$this->jClick('Options');
 		$this->click("//dl[@id='config-tabs-com_content_configuration']/dt[4]/span");
 		$this->select("jform_orderby_pri", "label=Category Manager Order");
 		$this->click("//button[contains(@onclick, 'component.save')]");

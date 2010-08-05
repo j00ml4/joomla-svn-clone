@@ -272,11 +272,22 @@ class CategoriesModelCategory extends JModelAdmin
 			$isNew = false;
 		}
 
-		// Set the new parent id if set.
-		if ($table->parent_id != $data['parent_id']) {
+		// Set the new parent id if parent id not matched OR while New/Save as Copy .
+		if ($table->parent_id != $data['parent_id'] || $data['id'] == 0) {
 			$table->setLocation($data['parent_id'], 'last-child');
 		}
-
+		
+		// Alter the title for save as copy
+		if (!$isNew && $data['id'] == 0 && $table->parent_id == $data['parent_id']) {
+			$m = null;
+			$data['alias'] = '';
+			if (preg_match('#\((\d+)\)$#', $table->title, $m)) {
+				$data['title'] = preg_replace('#\(\d+\)$#', '('.($m[1] + 1).')', $table->title);
+			} else {
+				$data['title'] .= ' (2)';
+			}
+		}
+		
 		// Bind the data.
 		if (!$table->bind($data)) {
 			$this->setError($table->getError());
