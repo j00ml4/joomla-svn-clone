@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: group0002Test.php 17552 2010-06-08 18:42:32Z dextercowley $
+ * @version		$Id: group0002Test.php 18280 2010-07-28 18:42:48Z ian $
  * @package		Joomla.SystemTest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -13,55 +13,52 @@ class Group0002Test extends SeleniumJoomlaTestCase
 	function testCreateNewGroups()
 	{
 		$this->setUp();
-        $this->gotoAdmin();
-        $this->doAdminLogin();
-        $saltGroup = mt_rand();
-            
-        $groupParent = 'Public';
-        $groupName = "Test ".$groupParent." Group".$saltGroup;
-        $this->createGroup($groupName, $groupParent);
-                
-        $groupParent = 'Manager';
-        $groupName = "Test ".$groupParent." Group".$saltGroup;
-        $this->createGroup($groupName, $groupParent);
-                
-        $groupParent = 'Administrator';
-        $groupName = "Test ".$groupParent." Group".$saltGroup;
-        $this->createGroup($groupName, $groupParent);
-              
-        $groupParent = 'Super Users';
-        $groupName = "Test ".$groupParent." Group".$saltGroup;
-        $this->createGroup($groupName, $groupParent);
-                
-        $groupParent = 'Registered';
-        $groupName = "Test ".$groupParent." Group".$saltGroup;
-        $this->createGroup($groupName, $groupParent);
-                
-        $groupParent = 'Author';
-        $groupName = "Test ".$groupParent." Group".$saltGroup;
-        $this->createGroup($groupName, $groupParent);
-                
-        $groupParent = 'Editor';
-        $groupName = "Test ".$groupParent." Group".$saltGroup;
-        $this->createGroup($groupName, $groupParent);
-               
-        $groupParent = 'Publisher';
-        $groupName = "Test ".$groupParent." Group".$saltGroup;
-        $this->createGroup($groupName, $groupParent);
-        
-        $groupParent = 'Shop Suppliers';
-        $groupName = "Test ".$groupParent." Group".$saltGroup;
-        $this->createGroup($groupName, $groupParent);
-        
-        $groupParent = 'Customer Group';
-        $groupName = "Test ".$groupParent." Group".$saltGroup;
-        $this->createGroup($groupName, $groupParent);
-                
-        $this->deleteGroup();
-                
-        $this->doAdminLogout();
-        }
-}
-?>
-		
+		$this->gotoAdmin();
+		$this->doAdminLogin();
+		$saltGroup = mt_rand();
+
+		$groupParent = 'Public';
+		$groupName = "Test ".$groupParent." Group".$saltGroup;
+		$this->createGroup($groupName, $groupParent);
+
+		$groupParent = 'Manager';
+		$groupName = "Test ".$groupParent." Group".$saltGroup;
+		$this->createGroup($groupName, $groupParent);
+
+		$groupParent = 'Administrator';
+		$groupName = "Test ".$groupParent." Group".$saltGroup;
+		$this->createGroup($groupName, $groupParent);
+
+		$groupParent = 'Super Users';
+		$groupName = "Test ".$groupParent." Group".$saltGroup;
+		$this->createGroup($groupName, $groupParent);
+
+		$groupParent = 'Registered';
+		$groupName = "Test ".$groupParent." Group".$saltGroup;
+		$this->createGroup($groupName, $groupParent);
+
+		$groupParent = 'Author';
+		$groupName = "Test ".$groupParent." Group".$saltGroup;
+		$this->createGroup($groupName, $groupParent);
+
+		$groupParent = 'Editor';
+		$groupName = "Test ".$groupParent." Group".$saltGroup;
+		$this->createGroup($groupName, $groupParent);
+
+		$groupParent = 'Publisher';
+		$groupName = "Test ".$groupParent." Group".$saltGroup;
+		$this->createGroup($groupName, $groupParent);
+
+		$groupParent = 'Shop Suppliers';
+		$groupName = "Test ".$groupParent." Group".$saltGroup;
+		$this->createGroup($groupName, $groupParent);
+
+		$groupParent = 'Customer Group';
+		$groupName = "Test ".$groupParent." Group".$saltGroup;
+		$this->createGroup($groupName, $groupParent);
+
+		$this->deleteGroup();
+
+		$this->doAdminLogout();
 	}
+}

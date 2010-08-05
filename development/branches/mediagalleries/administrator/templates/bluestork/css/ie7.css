@@ -7,7 +7,7 @@
  */
 
 
-/* IE7 and IE 8 OVERRIDES */
+/* IE7 OVERRIDES */
 
 input {
 	border-width: expression(this.type=="radio"?'0px':this.type=="checkbox"?'0px':'1px');

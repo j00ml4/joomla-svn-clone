@@ -11,7 +11,8 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
-
+require_once JPATH_COMPONENT.'/models/category.php';
+	
 /**
  * HTML Contact View class for the Contact component
  *
@@ -24,33 +25,39 @@ class ContactViewContact extends JView
 	protected $state;
 	protected $item;
 
-
 	function display($tpl = null)
-	{	
-		// Initialise variables.		
+	{
+		// Initialise variables.
 		$app		= JFactory::getApplication();
 		$user		= JFactory::getUser();
-		$dispatcher =& JDispatcher::getInstance();		
+		$dispatcher =& JDispatcher::getInstance();
 
 		// Get model data.
 		$state = $this->get('State');
 		$item = $this->get('Item');
+		
+		// Get Category Model data
+		$categoryModel = JModel::getInstance('Category', 'ContactModel', array('ignore_request' => true));
+		$categoryModel->setState('category.id', $item->catid);
+		$categoryModel->setState('list.ordering', 'a.name');
+		$categoryModel->setState('list.direction', 'asc');		
+		$contacts = $categoryModel->getItems();
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseWarning(500, implode("\n", $errors));
 			return false;
 		}
-		
+
 		// Get the parameters of the active menu item
 		$menus	= $app->getMenu();
 		$menu	= $menus->getActive();
 		$params	= $app->getParams();
-		
+
 		$item_params = new JRegistry;
 		$item_params->loadJSON($item->params);
 		$params->merge($item_params);
-		
+
 		// check if access is not public
 		$groups	= $user->authorisedLevels();
 
@@ -59,11 +66,9 @@ class ContactViewContact extends JView
 			$uri		= JFactory::getURI();
 			$return		= (string)$uri;
 
-			$url  = 'index.php?option=com_users&view=login';
-			$url .= '&return='.base64_encode($return);
-
-			//$app->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'));
-
+				JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
+				return;
+			
 		}
 
 		$options['category_id']	= $item->catid;
@@ -136,7 +141,8 @@ class ContactViewContact extends JView
 		$this->assignRef('state', $state);
 		$this->assignRef('item', $item);
 		$this->assignRef('user', $user);
-	
+		$this->assignRef('contacts', $contacts);
+
 		$this->_prepareDocument();
 
 		parent::display($tpl);
@@ -186,6 +192,25 @@ class ContactViewContact extends JView
 			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
 		}
 		$this->document->setTitle($title);
+
+		if ($this->item->metadesc)
+		{
+			$this->document->setDescription($this->item->metadesc);
+		}
+
+		if ($this->item->metakey)
+		{
+			$this->document->setMetadata('keywords', $this->item->metakey);
+		}
+
+		$mdata = $this->item->metadata->toArray();
+		foreach ($mdata as $k => $v)
+		{
+			if ($v)
+			{
+				$this->document->setMetadata($k, $v);
+			}
+		}
 
 	}
 }

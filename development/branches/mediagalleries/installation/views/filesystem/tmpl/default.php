@@ -18,14 +18,6 @@ JHtml::_('behavior.formvalidation');
 JHtml::_('script', 'installation/template/js/installation.js', true, false, false, false);
 ?>
 
-<script type="text/javascript">
-<!--
-	function validateForm(frm, task) {
-		Joomla.submitform(task);
-	}
-// -->
-</script>
-
 <div id="stepbar">
 	<div class="t">
 		<div class="t">
@@ -43,7 +35,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 	</div>
 </div>
 
-<form action="index.php" method="post" name="adminForm" class="form-validate">
+<form action="index.php" method="post" id="adminForm" class="form-validate">
 <div id="right">
 	<div id="rightpad">
 		<div id="step">
@@ -56,9 +48,9 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 				<div class="far-right">
 <?php if ($this->document->direction == 'ltr') : ?>
 					<div class="button1-right"><div class="prev"><a href="index.php?view=database" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
-					<div class="button1-left"><div class="next"><a onclick="validateForm(adminForm, 'setup.filesystem');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+					<div class="button1-left"><div class="next"><a onclick="validateForm(document.getElementById('adminForm'), 'setup.filesystem');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 <?php elseif ($this->document->direction == 'rtl') : ?>
-					<div class="button1-right"><div class="prev"><a onclick="validateForm(adminForm, 'setup.filesystem');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+					<div class="button1-right"><div class="prev"><a onclick="validateForm(document.getElementById('adminForm'), 'setup.filesystem');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 					<div class="button1-left"><div class="next"><a href="index.php?view=database" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
 <?php endif; ?>
 				</div>
@@ -96,7 +88,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 						<div class="section-smenu">
 							<table class="content2">
 								<tr>
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_enable'); ?>
 									</td>
 									<td>
@@ -104,7 +96,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 									</td>
 								</tr>
 								<tr>
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_user'); ?>
 									</td>
 									<td>
@@ -140,7 +132,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 						<div class="section-smenu moofx-slider">
 							<table class="content2">
 								<tr id="host">
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_host'); ?>
 									</td>
 									<td>
@@ -148,7 +140,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 									</td>
 								</tr>
 								<tr id="port">
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_port'); ?>
 									</td>
 									<td>
@@ -156,7 +148,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 									</td>
 								</tr>
 								<tr>
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_save'); ?>
 									</td>
 									<td>

@@ -113,7 +113,7 @@ class NewsfeedsViewCategory extends JView
 		$id = (int) @$menu->query['id'];
 		if($menu && $menu->query['view'] != 'newsfeed' && $id != $this->category->id)
 		{
-			$this->params->set('page_subheading', $this->category->title);
+		
 			$path = array($this->category->title => '');
 			$category = $this->category->getParent();
 			while($id != $category->id && $category->id > 1)
@@ -137,15 +137,30 @@ class NewsfeedsViewCategory extends JView
 		}
 		$this->document->setTitle($title);
 
-		// Add alternate feed link
-		if ($this->params->get('show_feed_link', 1) == 1)
-		{
-			$link	= '&view=category&id='.$this->category->slug.'&format=feed&limitstart=';
-			$attribs = array('type' => 'application/rss+xml', 'title' => 'RSS 2.0');
-			$this->document->addHeadLink(JRoute::_($link.'&type=rss'), 'alternate', 'rel', $attribs);
-			$attribs = array('type' => 'application/atom+xml', 'title' => 'Atom 1.0');
-			$this->document->addHeadLink(JRoute::_($link.'&type=atom'), 'alternate', 'rel', $attribs);
+		if ($this->category->metadesc) {
+			$this->document->setDescription($this->category->metadesc);
 		}
+
+		if ($this->category->metakey) {
+			$this->document->setMetadata('keywords', $this->category->metakey);
+		}
+
+		if ($app->getCfg('MetaTitle') == '1') {
+			$this->document->setMetaData('title', $this->category->getMetadata()->get('page_title'));
+		}
+
+		if ($app->getCfg('MetaAuthor') == '1') {
+			$this->document->setMetaData('author', $this->category->getMetadata()->get('author'));
+		}
+
+		$mdata = $this->category->getMetadata()->toArray();
+
+		foreach ($mdata as $k => $v) {
+			if ($v) {
+				$this->document->setMetadata($k, $v);
+			}
+		}
+		
 	}
 }
 

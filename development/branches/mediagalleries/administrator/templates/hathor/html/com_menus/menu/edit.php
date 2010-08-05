@@ -19,14 +19,12 @@ JHtml::_('behavior.formvalidation');
 ?>
 
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'menu.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
 			submitform(task);
 		}
 	}
-// -->
 </script>
 
 <div class="menu-edit">
@@ -38,10 +36,10 @@ JHtml::_('behavior.formvalidation');
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('title'); ?>
 				<?php echo $this->form->getInput('title'); ?></li>
-				
+
 				<li><?php echo $this->form->getLabel('menutype'); ?>
 				<?php echo $this->form->getInput('menutype'); ?></li>
-				
+
 				<li><?php echo $this->form->getLabel('description'); ?>
 				<?php echo $this->form->getInput('description'); ?></li>
 			</ul>

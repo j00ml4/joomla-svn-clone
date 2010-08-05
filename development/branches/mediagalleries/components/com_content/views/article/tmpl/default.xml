@@ -210,32 +210,4 @@
 
 		</fieldset>
 	</fields>
-
-	<!-- Add fields to the metadata object for the layout. -->
-	<fields name="params">
-
-		<!-- Metadata options. -->
-		<fieldset name="metadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
-
-			<field name="robots" type="list"
-				description="JFIELD_METADATA_ROBOTS_DESC"
-				label="JFIELD_METADATA_ROBOTS_LABEL"
-			>
-				<option value="">JGLOBAL_USE_GLOBAL</option>
-				<option value="0">JGLOBAL_INDEX_FOLLOW</option>
-				<option value="1">JGLOBAL_NOINDEX_FOLLOW</option>
-				<option value="2">JGLOBAL_INDEX_NOFOLLOW</option>
-				<option value="3">JGLOBAL_NOINDEX_NOFOLLOW</option>
-				<option value="4">JGLOBAL_NO_ROBOTS_TAG</option>
-			</field>
-
-			<field name="rights" type="textarea"
-				cols="30"
-				description="JFIELD_META_RIGHTS_DESC"
-				filter="string"
-				label="JFIELD_META_RIGHTS_LABEL"
-				rows="2"
-			/>
-		</fieldset>
-	</fields>
 </metadata>

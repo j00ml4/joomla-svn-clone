@@ -18,14 +18,6 @@ JHtml::_('behavior.formvalidation');
 JHtml::_('script', 'installation/template/js/installation.js', true, false, false, false);
 ?>
 
-<script type="text/javascript">
-<!--
-	function validateForm(frm, task) {
-		Joomla.submitform(task);
-	}
-// -->
-</script>
-
 <div id="stepbar">
 	<div class="t">
 		<div class="t">
@@ -43,7 +35,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 	</div>
 </div>
 
-<form action="index.php" method="post" name="adminForm" class="form-validate">
+<form action="index.php" method="post" id="adminForm" class="form-validate">
 <div id="right">
 	<div id="rightpad">
 		<div id="step">
@@ -99,10 +91,10 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 								<tbody>
 <?php foreach ($this->options as $option) : ?>
 								<tr>
-									<td class="item" valign="top">
+									<td class="item">
 										<?php echo $option->label; ?>
 									</td>
-									<td valign="top">
+									<td>
 										<span class="<?php echo ($option->state) ? 'green' : 'red'; ?>">
 											<?php echo JText::_(($option->state) ? 'JYES' : 'JNO'); ?>
 										</span>
