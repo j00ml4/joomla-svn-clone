@@ -4,8 +4,9 @@ JHTML::_( 'behavior.modal' );
 JHtmlBehavior::modal();
 ?>
 <div class="mediagallery" >
-	<?php echo $this->thumb; ?>
-	<div class="media"><?php echo $this->media; ?></div>
+	<?php //echo $this->thumb; ?>
+	<div class="media"><img src="<?php	echo plgContentMedia::getThumb($this->item->url);
+	//echo $this->media; ?>" ></div>
 	
 	<?php if($this->params->get('show_cat',1)): ?>
 		<div class ="media_title"><?php  echo $this->item->catid; ?></div>
@@ -16,7 +17,7 @@ JHtmlBehavior::modal();
 	<?php endif; ?>
 	
 	<?php if($this->params->get('show_url',1)): ?>
-	<div class ="media_url"><a href="http://www.theartofjoomla.com/images/articles/2008/02/popups/t_popupdemo.png" class="modal"><?php  echo $this->item->url; ?></a></div>
+	<div class ="media_url"><a href="index.php?option=com_mediagalleries&view=media&layout=modal&tmpl=component&id=<?php echo $this->item->id; ?>" class="modal"><?php  echo $this->item->url; ?></a></div>
 	
 	<?php endif; ?>
 	
