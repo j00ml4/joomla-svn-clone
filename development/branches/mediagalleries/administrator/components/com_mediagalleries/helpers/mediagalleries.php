@@ -26,7 +26,7 @@ class MediagalleriesHelper
 	public static function addSubmenu($vName = 'mediagalleries')
 	{
 		JSubMenuHelper::addEntry( 
-			JText::_('COM_MEDIAGALLERIES_GALLERY'),
+			JText::_('COM_MEDIAGALLERIES_MEDIAS'),
 			'index.php?option=com_mediagalleries&view=galleries',
 			$vName == 'galleries'
 		);
