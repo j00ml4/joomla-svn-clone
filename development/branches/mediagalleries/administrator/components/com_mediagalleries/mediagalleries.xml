@@ -29,7 +29,6 @@
 		<filename>controller.php</filename>
 		<filename>index.html</filename>
 		<folder>helpers</folder>
-		<folder>assets</folder>
 		<folder>models</folder>				
 		<folder>views</folder>
 	</files>
@@ -38,6 +37,13 @@
 		<language tag="en-GB">language/en-GB.com_mediagalleries.ini</language>
 		<language tag="pt-BR">language/pt-BR.com_mediagalleries.ini</language>
 	</languages>
+    
+    <media destination="mediagalleries" folder="media">
+        <filename>index.html</filename>
+        <folder>images</folder>
+        <folder>thumbs</folder>
+        <folder>css</folder>
+    </media>
 
 	<administration>
 		    <menu link="index.php?option=com_mediagalleries">COM_MEDIAGALLERIES</menu> 

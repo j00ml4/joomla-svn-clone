@@ -1,0 +1,131 @@
+Plottable Thumbnail Library Version 1.2.10
+(C) Chua Yong Wen 2004-2007
+lawliet89[at]gmail.com
+http://chuayw2000.6x.to/
+--------------------------------------------------
+CHANGELOG:
+1.2.10
+	29 October 2006
+		- print_thumbnail has a new optional argument: display_inline. Refer to documentation for an explanation.
+		- Corrected filename header print_thumbnail sends to browser. (Used to send filenames without the period between filename and extensions)
+		- Removed redundant transform method and uses realpath() instead.
+		
+	26 November 2006
+		- Added new configuration: remote_check (Refer to Documentation for details)
+		
+	10 October 2007
+		Not really any changes. I'm releasing the changes I made after almost a year. There is currently no plan to continue development except to fix some bugs. Current planned and unimplemented features are:
+			- GIF Transparency Support
+			- GIF Animationn Support
+		These will probably stay unsupported unless there is sufficient demand and I find out how to implement them.
+
+1.2.9
+	26 October 2006
+		- Changed author's email address
+		- Added new method of retrieving remote images
+			==> This method uses the HTTP Retriever class (http://www.phpclasses.org/browse/package/3105.html)
+		- Example.php will now automatically "require" the file "class_HTTPRetriever.php" if it finds it in the same directory.
+		- retrieve_remote_file() now supports an optional parameter to "force" it to use a certain method of image retrival
+		- print_thumbnail() now redirects to an absolute URL instead of a relative URL
+		- Revamped Error Handling
+			- output_error() has been superseded by set_error()
+			- You can now set log_error on to log errors in cache folder
+			- Script will now terminate only on Fatal Errors
+			- error_array has been sub-divided into fatal errors and warnings
+			- Warnings are now logged in error_array. 
+			- Parameter changes to error()
+			- Behavioural changes to isError() and error() - error() now returns ALL errors
+			- Intermediate methods will now generate warnings instead of simply returning a "false" for easier debugging.
+		- Documentation rewritten
+	28 October 2006
+		- Fixed bug in example where parent constructor methods was not run
+		- Added new configuration to clear cache on thumbnail generation complete
+		- Fixed variable mistake in print_thumbnail where $cached was used instead of $outputted
+		- Thumbnail Generator web interface added (generator.php)
+		- PHP Version requirements changed to 4.3.2. Please contact me if the class breaks in any PHP version above 4.3.2.
+		- print_thumbnail now uses imagecopyresampled() instead of imagecopyresized() (Clear your cache if you want clearer thumbnails for cached ones!)
+		- print_thumbnail now correctly saves PNG alpha channels
+1.2.8
+  (1/4/2006) - Not an April Fool's changelog!
+  - print_thumbnail method overhauled to be more efficient
+  - All methods should return a false on error now. The values public methods return are based on the error_mode setting.
+  - Overhauled example. Example should work with E_ALL error reporting and with register_globals off.
+  - Example no longer includes example to output text - this method was intended for internal error output anyway and it seems useless to include in a thumbnail generation class anyway.
+  - Deprecated method validate_connectivity has been removed.
+  - Increased the "randomness" for retrieve_image_data temporary filename generation. (i.e. Uses mt_rand() instead of rand())
+  - retrieve_image_data will no longer overwrite an exisiting file. It will randomly generate filenames until the filename corresponds to a non-existent file.
+  - Pretty phpDoc generated documentation has returned.
+  - print_thumbnail now checks for supported file formats.
+  - A new member, file_ext, was added.
+  - New format XBM is added. This format is experimental as the PHP manual does not have proper documentation for its function.
+  
+1.2.7
+ (11/10/2005)
+ - is_remote no longer test for connectivity.
+ - test_connectivity is now deprecated.
+ - When retrieving remote files via CURL, CURL will now follow redirects.
+ - Fixed a bug where if allow_url_fopen is disabled and PHP 5 is avaliable, remote files and in some cases local files that are valid will be deemed invalid.
+ 
+1.2.6 (30/9/2005)
+ - Changed versioning system
+ - scale_thumbnail now allow floats for magnitude
+ - Changed the behaviour of scale_thumbnail when analysing magnitude values. Negative values are now abs'd. Specify a value smaller than 1 to make the image smaller.
+ - Replaced all instances of file_get_contents($var) with join(file($var)) to ensure compatibility
+ - Changed all hashing functions to use sha1 instead of md5. Please remember to clear your cache for this change!
+ - Cache now supports multiple dimensions for an image file. (i.e. When deciding files to delete, if the file hash is the same, the file will not be deleted)
+ - Methods will not fail if allow_url_fopen is disabled and will use a workaround
+    - Uses CURL for remote files if standard fopen functions don't work
+    - Replaced method's usage of GetImageSize to an internal method that will use a fallback should the standard procedure fail
+        - Temporary files will be created and destroyed if allow_url_fopen is disabled.
+    - New Methods: retrieve_image_data and retrieve_remote_file
+
+1.2.5 (5/9/2005)
+ - Added new error mode to end script execution with a die() statement instead of outputting an image.
+ - New Method: image_to_file() for lazy people, I mean, to save scripters the trouble of coding a write to file function.
+ - Updated the example code to include the use of the new method.
+ - Pretty documentation removed. Please refer to the code's comments from now on. 
+ 
+1.2.4c
+ - Bug fix: A new cache file is created for the same image when the contents of the image is changed.
+ 
+1.2.4b
+ - Fixed a small bug in which the script will not update a remote file cache even when the remote file has changed
+   This is due to an error in variable usage when generating the MD5 Hash
+
+1.2.4a
+ - Fixed a ratio calculation error in fit_thumbnail
+ - fit_thumbnail will no longer enlarge an image
+ - Better Image Type Handling
+  	== For unsupported formats (like GIF), the class will attempt to output them as PNG.
+ - Class is now E_NOTICE Safe. Thanks to Carlos Lorenzetti (kcholoren AT hotmail DOT com)
+ - Added new Method isError to check whether there is an error.
+
+1.2.4
+ - Added support for scaling (New Method for scaling) 
+ - Added Support for fitting (New Method) (Not perfect yet, uses a rather complicated Logical structures)
+ - Added Support for Remote Images
+ - Improved better Error Handling
+ 	== Now you can specify whether to terminaate script execution when an error occurs or to record it to an error
+ 	== The Error Message can be retrieved using the method error()
+ 	== Functions will return false when an error occurs.
+ - Image types are now auto-dectected 
+ - New Internal Method (is_cacheable)
+ 
+1.2.3
+ - Added A New Method (Output Text) 
+ - Script will not display an error instead of returning an image if cache is not enabled
+
+1.2.2 (25/6/04)
+ - Converted it into a class
+ - Removed Plock Support (internal use)
+
+NOTE: Prior to version 1.2.2, this script was only used on my website.
+
+1.2.1
+ - Added Cache Support
+
+1.1.0
+ - Changed the Script Structure
+
+1.0.0
+ - Initial Release
