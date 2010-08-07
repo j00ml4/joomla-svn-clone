@@ -34,15 +34,15 @@
 		<folder>views</folder>
 	</files>
 	
-	<languages folder="site/language">
-		<language tag="en-GB">en-GB.com_mediagalleries.ini</language>
-		<language tag="pt-BR">pt-BR.com_mediagalleries.ini</language>
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB.com_mediagalleries.ini</language>
+		<language tag="pt-BR">language/pt-BR.com_mediagalleries.ini</language>
 	</languages>
 
 	<administration>
 		    <menu link="index.php?option=com_mediagalleries">COM_MEDIAGALLERIES</menu> 
 		    <submenu>
-		           	<menu link="option=com_mediagalleries" view="galleries" img="class:media">COM_MEDIAGALLERIES_MEDIA</menu>
+		           	<menu link="option=com_mediagalleries" view="galleries" img="class:media">COM_MEDIAGALLERIES_MEDIAS</menu>
 					<menu link="option=com_categories&amp;extension=com_mediagalleries" img="class:category">COM_MEDIAGALLERIES_CATEGORIES</menu>
 					<!--<menu img="" link="option=com_comments&amp;extension=com_mediagalleries">Comments</menu> Not for now -->
 		    </submenu>  
@@ -61,9 +61,9 @@
 				<!-- Easier -->
 				<folder>sql</folder>
 			</files>
-	    	<languages folder="admin/language">
-				<language tag="en-GB">en-GB.com_mediagalleries.ini</language>
-				<language tag="en-GB">en-GB.com_mediagalleries.sys.ini</language><!-- needed -->
+	    	<languages folder="admin">
+				<language tag="en-GB">language/en-GB.com_mediagalleries.ini</language>
+				<language tag="en-GB">language/en-GB.com_mediagalleries.sys.ini</language><!-- needed -->
 			</languages>
 	</administration>
 </extension>
