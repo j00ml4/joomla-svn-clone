@@ -23,15 +23,14 @@ class ProjectsHelper
 	 * @param	string	The name of the active view.
 	 * @since	1.6
 	 */
-	public static function addSubmenu()
+	public static function addSubmenu($vName)
 	{
 		$extension = JRequest::getCmd('extension');
-		$vName = JRequest::getCmd('view');
 		
 		JSubMenuHelper::addEntry(
 			JText::_('COM_PROJECTS_CONFIG'),
-			'index.php?option=com_projects&view=config',
-			$vName == 'config'
+			'index.php?option=com_projects&view=projects',
+			$vName == 'projects'
 		);
 		
 		JSubMenuHelper::addEntry(
@@ -61,11 +60,16 @@ class ProjectsHelper
 			case 'com_projects.task':
 				JToolBarHelper::title( JText::_('COM_PROJECTS_TASK_CATEGORIES'), 'categories' );
 				break;
-				
+
+			case 'com_projects.document':
+				JToolBarHelper::title( JText::_('COM_PROJECTS_DOCUMENT_CATEGORIES'), 'categories' );
+				break;
+					
 			default:
-				JToolBarHelper::title( JText::_('COM_PROJECTS'), 'article' );
-				JToolBarHelper::preferences('com_projects');	
+				JToolBarHelper::title( JText::_('COM_PROJECTS'), 'article' );	
 		}
+		// All Views
+		JToolBarHelper::preferences('com_projects');
 		
 	}
 

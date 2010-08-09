@@ -15,7 +15,7 @@ defined("_JEXEC") or die("Restricted access");
  *
  */
 class ProjectsController extends JController {
-	protected $default_view = 'config';
+	protected $default_view = 'projects';
 	 
 	/**
 	 * Display
