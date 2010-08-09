@@ -2,7 +2,7 @@
 <metadata>
     <layout title="COM_PROJECTS_PROJECTS_GALLERY_TITLE">
         <message>
-            <![CDATA[COM_PROJECTS_PORTFOLIO_GALLERY_DESC]]>
+            <![CDATA[COM_PROJECTS_PROJECTS_GALLERY_DESC]]>
         </message>
     </layout>
     
@@ -20,8 +20,7 @@
 
     <!-- Add fields to the parameters object for the layout. -->
     <fields name="params">
-        <fieldset name="basic">
-        	
+        <fieldset name="basic">  	
             <field name="maxLevel" type="list"
              description="JGLOBAL_MAXLEVEL_DESC"
              label="JGLOBAL_MAXLEVEL_LABEL">

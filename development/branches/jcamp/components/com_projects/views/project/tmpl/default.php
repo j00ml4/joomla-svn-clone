@@ -29,27 +29,24 @@ $pageClass = $this->params->get('pageclass_sfx');
 			<dl class="projects-info projects-space projects-frame">
 				<dt><?php echo JText::_('COM_PROJECTS_FIELD_START_AT_LABEL')?>:</dt>
 				<dd><?php echo JFactory::getDate($this->item->start_at)->toFormat('%d.%m.%Y');?></dd>
-				<br/>
-				<br/>
 				<dt><?php echo JText::_('COM_PROJECTS_FIELD_FINISH_AT_LABEL')?>:</dt>
 				<dd><?php echo JFactory::getDate($this->item->finish_at)->toFormat('%d.%m.%Y');?></dd>
 			</dl>
 
 			<?php echo $this->loadTemplate('buttons'); ?>
 		</div>
-
+		
 	</div>
 
 	<div class="one3">
 		<div class=" projects-space">
 			<?php
-				echo $this->loadTemplate('members');			
-				echo $this->loadTemplate('milestones');
-				echo $this->loadTemplate('tasks');
-				echo $this->loadTemplate('tickets');
-				echo $this->loadTemplate('documents');
+				//echo $this->loadTemplate('milestones'); no need milestones are just to group tasks
+				if('can_view_tasks') echo $this->loadTemplate('tasks');
+				if('can_view_tasks') echo $this->loadTemplate('tickets');
+				if('can_view_tasks') echo $this->loadTemplate('documents');
+				if('can_view_..') echo $this->loadTemplate('members');				
 			?>
 		</div>
 	</div>
-</div>
 </div>

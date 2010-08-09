@@ -15,8 +15,9 @@
 			type="filelist"
 			label="COM_PROJECTS_STYLE_LABEL"
 			description="COM_PROJECTS_STYLE_DESC"
-			directory="components/com_projects/assets/css"
+			directory="media/com_projects/css"
 			hide_default="1"
+			filter="css" 
 			default="default.css" />
 
 		<field type="spacer" hr="true" />
