@@ -34,8 +34,8 @@ class ProjectsController extends JController
 		
 		// HTML
 		$document = &JFactory::getDocument();
-		if($document->getType() == 'html' && ($style = $params->get('style'))) {
-			$document->addStyleSheet('components/com_projects/assets/css/'.$style);
+		if($document->getType() == 'html' && ($style = $params->get('style', 'default.css'))) {
+			$document->addStyleSheet('media/com_projects/css/'.$style);		
 		}		
 	  	JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 	  	

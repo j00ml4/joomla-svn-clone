@@ -15,41 +15,24 @@ $params =  $this->params;
 $pageClass = $this->escape($params->get('pageclass_sfx'));
 ?>
 <div class="projects<?php echo $pageClass;?> blog<?php echo $pageClass;?>">
-	<div class="projects-left-column">
-		<div class="projects-content">
+	<div class="projects-content">
 		<h1><?php echo JText::_('COM_PROJECTS_PROJECTS_LIST_HEADER');?></h1>
-			<?php foreach ($this->items as $item) : 
-				$this->item = $item;
-				echo $this->loadTemplate('item');
-			endforeach; ?>
+		<?php foreach ($this->items as $item) : 
+			$this->item = $item;
+			echo $this->loadTemplate('item');
+		endforeach; ?>
 
-			<?php if ($this->params->get('show_pagination', 1) && ($this->pagination->get('pages.total') > 1)) : ?>
-			<div class="pagination">
-				<?php  if ($this->params->get('show_pagination_results', 1)) : ?>
-				<p class="counter">
-					<?php echo $this->pagination->getPagesCounter(); ?>
-				</p>
-				<?php endif; ?>
-				<?php echo $this->pagination->getPagesLinks(); ?>
-			</div>
-			<?php  endif; ?>
-		</div>
-	</div>	
-	
-	<div class="projects-right-column">
-		<div class="projects-content">
-			<?php if ($params->get('show_page_heading', 1)): ?>
-			<h1><?php echo $this->category->title; ?></h1>
+		<?php if ($this->params->get('show_pagination', 1) && ($this->pagination->get('pages.total') > 1)) : ?>
+		<div class="pagination">
+			<?php  if ($this->params->get('show_pagination_results', 1)) : ?>
+			<p class="counter">
+				<?php echo $this->pagination->getPagesCounter(); ?>
+			</p>
 			<?php endif; ?>
-
-	  	<?php if ($params->get('show_description', 1) && $this->category->description) : ?>
-				<div class="category-desc">
-					<?php echo JHtml::_('content.prepare', $this->category->description); ?>
-				<div class="clr">&nbsp;</div>
-				</div>
-			<?php endif;
-			
-			echo $this->loadTemplate('buttons'); ?>
+			<?php echo $this->pagination->getPagesLinks(); ?>
 		</div>
+		<?php  endif; ?>
+	</div>
+
 	</div>
 </div>

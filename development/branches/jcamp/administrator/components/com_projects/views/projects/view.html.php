@@ -12,26 +12,13 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 
-class ProjectsViewConfig extends JView
+/**
+ * Projects View
+ * Enter description here ...
+ * @author eden
+ *
+ */
+class ProjectsViewProjects extends JView
 {
-       /**
-         * HelloWorldList view display method
-         * @return void
-         */
-        function display($tpl = null)
-        {
-			// Set the toolbar
-            $this->setToolBar();
-                   
-            // Display the template
-            parent::display($tpl);
-        }
-        /**
-         * Setting the toolbar
-         */
-        protected function setToolBar()
-        {
-        	// Do Nothing
-        }
-     
+       
 }
