@@ -26,9 +26,16 @@
 		    <filename>controller.php</filename>
 		    <filename>index.html</filename>
 		    <filename>projects.php</filename>
-		    <folder>models</folder>
+		    <folder>controllers</folder>
+		    <folder>helpers</folder>
+			<folder>models</folder>
 		    <folder>views</folder>
 	</files> 
+	<media destination="com_projects" folder="media">
+		<filename>index.html</filename>
+		<folder>css</folder>
+		<folder>images</folder>
+	</media>
 	<languages folder="site/language">
 		<language tag="en-GB">en-GB.com_projects.ini</language>
 	</languages>
@@ -36,7 +43,7 @@
 	<administration>
 		    <menu link="index.php?option=com_projects">COM_PROJECTS</menu> 
 		    <submenu>
-		            <menu link="option=com_projects" img="class:article">COM_PROJECTS</menu>
+		            <!--menu link="option=com_projects" img="class:article">COM_PROJECTS</menu-->
 		            <menu link="option=com_categories&amp;extension=com_projects" view="categories" img="class:category" alt="Portfolios">COM_PROJECTS_PORTFOLIOS</menu>
 					<menu link="option=com_categories&amp;extension=com_projects.task" view="categories" img="class:category" alt="Task Categories">COM_PROJECTS_TASK_CATEGORIES</menu>
 					<menu link="option=com_categories&amp;extension=com_projects.document" view="categories" img="class:category" alt="Document Categories">COM_PROJECTS_DOCUMENT_CATEGORIES</menu>
@@ -47,11 +54,11 @@
 		            <filename>projects.php</filename>
 		            <filename>config.xml</filename>
 					<filename>access.xml</filename>
-		            <folder>sql</folder>
-		            <folder>models</folder>
-		            <folder>views</folder>
 					<folder>helpers</folder>
+					<folder>models</folder>
+		            <folder>sql</folder>		            
 		            <folder>tables</folder>
+					<folder>views</folder>
 		    </files>
 	    	<languages folder="admin/language">
 				<language tag="en-GB">en-GB.com_projects.ini</language>
