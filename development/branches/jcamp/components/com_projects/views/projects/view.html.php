@@ -36,19 +36,19 @@ class ProjectsViewProjects extends JView
 	 */
 	function display($tpl = null)
 	{
-		$app		= &JFactory::getApplication();
-		$model		= &$this->getModel();
-		
+		$app		= JFactory::getApplication();
+		$model		= $this->getModel();
+		$bc 		= $app->getPathway();
+	  
 		// Get some data from the models
-		$this->items		= &$model->getItems();
-		$this->pagination	= &$model->getPagination();
-		$this->params		= &$app->getParams();
-		$this->canDo		= &ProjectsHelper::getActions();
+		$this->items		= $model->getItems();
+		$this->pagination	= $model->getPagination();
+		$this->params		= $app->getParams();
+		$this->canDo		= ProjectsHelper::getActions();
 			
 		$layout = $this->getLayout();
 		switch($layout){
-			case 'gallery':
-				$layout = 'gallery'; 
+			case 'default': 
 				$c = count($this->items);
 				for($i = 0; $i < $c;$i++) {
 						$this->items[$i]->description = JHtml::_('content.prepare', $this->items[$i]->description);
@@ -56,14 +56,13 @@ class ProjectsViewProjects extends JView
 				
 				// Get category
 				$this->category	= &$model->getCategory();
-				if(empty($this->category)){
-					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
+				if(!empty($this->category)){
+					$bc->addItem($this->category->title);
 				}				
 				break;
-
+				
 			default:
-				$layout = 'gallery';
-				break;
+				$layout = 'default';
 		}
 		
 		// Check for errors.
@@ -71,13 +70,7 @@ class ProjectsViewProjects extends JView
 			return JError::raiseError(500, implode("\n", $errors));
 		}
 		
- 	  // add 'portfolio' link to breadcrumb	  
-	  $bc = &$app->getPathway();
-	  $bc->addItem($this->category->title);
-	  // 
-	  
-
-	  $this->setLayout($layout);
-	  parent::display($tpl);
+	  	$this->setLayout($layout);
+	  	parent::display($tpl);
 	}
 }

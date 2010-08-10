@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-    <layout title="COM_PROJECTS_PROJECTS_GALLERY_TITLE">
+    <layout title="COM_PROJECTS_PROJECTS_VIEW_DEFAULT_TITLE">
         <message>
-            <![CDATA[COM_PROJECTS_PROJECTS_GALLERY_DESC]]>
+            <![CDATA[COM_PROJECTS_PROJECTS_VIEW_DEFAULT_TITLE]]>
         </message>
     </layout>
     
@@ -13,7 +13,7 @@
              description="COM_PROJECTS_PROJECTS_CHOOSE_PORTFOLIO_DESC"
              extension="com_projects"
              label="COM_PROJECTS_PROJECTS_CHOOSE_PORTFOLIO_LABEL">
-             <option value="">JOPTION_NO_CATEGORY</option>	
+             <option value="">JOPTION_DO_NOT_USE</option>	
 			</field> 
         </fieldset>
     </fields>
@@ -50,8 +50,8 @@
             </field>
 			
 			 <field name="show_pagination" type="list"
-             description="JGLOBAL_PAGINATION_DESC"
-             label="JGLOBAL_PAGINATION_LABEL">
+             	description="JGLOBAL_PAGINATION_DESC"
+             	label="JGLOBAL_PAGINATION_LABEL">
                 <option value="">JGLOBAL_USE_GLOBAL</option>
                 <option value="0">JHIDE</option>
                 <option value="1">JSHOW</option>
