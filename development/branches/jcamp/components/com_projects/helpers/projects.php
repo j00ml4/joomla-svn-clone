@@ -286,6 +286,24 @@ abstract class ProjectsHelper
 		return $canDo;
 	}
 
+	/**
+	 * Method to determine if a user is member of a project
+	 * 
+	 * @param $user ID of a user
+	 * @param $project ID of a project
+	 *  
+	 * @return False in case the user is not a member of the project or ID of user group
+	 * @since	1.6
+	 */
+	public function isMember($user, $project)
+	{
+		$db = JFactory::getDBO();
+		$q = 'SELECT pm.`group_id` FROM `#__project_members` pm WHERE pm.`user_id` = '.(int)$user.' AND pm.`project_id`='.(int)$project;
+		$db->setQuery($q);
+		$row = $db->loadResult();
+		return (int)$row ? (int)$row : false;
+	}
+
 	/** i don t know if we need this function..
 	 * Resets breadcrumb and adds "Projects" link as first
 	 * 

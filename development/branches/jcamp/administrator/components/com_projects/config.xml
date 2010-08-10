@@ -4,14 +4,14 @@
 		label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC">
 		<field name="rules"	type="rules" label="JCONFIG_PERMISSIONS_LABEL"
-			filter="rules" component="com_projects"	section="component"/>	
+			filter="rules" component="com_projects"	section="component"/>
 	</fieldset>
 	
 	<fieldset name="guest_tools"
 		label="COM_PROJECTS_GUEST_TOOLS_LABEL"
 		description="COM_PROJECTS_GUEST_TOOLS_DESC">
 		<field name="rules"	type="rules" label="JCONFIG_PERMISSIONS_LABEL"
-			filter="rules" component="com_projects"	section="component_old"/>	
+			filter="rules" component="com_projects"	section="component_old"/>			
 		<field name="style"
 			type="filelist"
 			label="COM_PROJECTS_STYLE_LABEL"
