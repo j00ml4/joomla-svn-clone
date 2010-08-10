@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <access component="com_projects">
-	<section name="component">
+	<section name="component_old">
 		<action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC" />
 		<action name="project.manage" title="JACTION_MANAGE" description="COM_PROJECTS_ACL_MANAGE_DESC" />
 		<action name="project.work" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
 		<action name="project.test" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />
 	</section>
 	
-	<section name="component_new">
-		<!-- Projects -->
-		<action name="project.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
-		<action name="project.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
-		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />
+	<section name="component">
+		<!-- Projects Defined by the portfolio permitions
+		<action name="project.create" title="COM_PROJECTS_PROJECT_ACTION_CREATE_LABEL" description="COM_PROJECTS_PROJECT_ACTION_CREATE_DESC" />
+		<action name="project.edit" title="COM_PROJECTS_PROJECT_ACTION_EDIT_LABEL" description="COM_PROJECTS_PROJECT_ACTION_EDIT_LABEL" />
+		<action name="project.delete" title="COM_PROJECTS_PROJECT_ACTION_DELETE_LABEL" description="COM_PROJECTS_PROJECT_ACTION_DELETE_DESC" />
+		-->
 		
 		<!-- Tasks -->
 		<action name="task.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
@@ -19,7 +20,7 @@
 		<action name="task.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />
 		
 		<!-- Tickets -->
-		<action name="project.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
+		<action name=".create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
 		<action name="project.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
 		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />		
 		
@@ -29,14 +30,14 @@
 		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />
 		
 		<!-- Documents -->
-		<action name="project.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
-		<action name="project.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
-		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />		
+		<action name="activity.create" title="COM_PROJECTS_ACTIVITY_ACTION_CREATE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_CREATE_DESC" />
+		<action name="activity.edit" title="COM_PROJECTS_ACTIVITY_ACTION_EDIT_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_EDIT_LABEL" />
+		<action name="activity.delete" title="COM_PROJECTS_ACTIVITY_ACTION_DELETE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_DELETE_DESC" />	
 	
 		<!-- Activities -->
-		<action name="project.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
-		<action name="project.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
-		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />	
+		<action name="activity.create" title="COM_PROJECTS_ACTIVITY_ACTION_CREATE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_CREATE_DESC" />
+		<action name="activity.edit" title="COM_PROJECTS_ACTIVITY_ACTION_EDIT_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_EDIT_LABEL" />
+		<action name="activity.delete" title="COM_PROJECTS_ACTIVITY_ACTION_DELETE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_DELETE_DESC" />	
 	</section>
 	
 	

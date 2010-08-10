@@ -34,18 +34,20 @@ class ProjectsViewPortfolios extends JView
 	 */
 	function display($tpl = null)
 	{
-		$app		= &JFactory::getApplication();
+		$app		= JFactory::getApplication();
 		$model 		= $this->getModel('Portfolios');
+		$bc 		= $app->getPathway();
 			
 		// Get some data from the models
 		$this->state		= $this->get('State');
-		$this->items		= &$model->getItems();
-		$this->pagination	= &$model->getPagination();
-		$this->params		= &$app->getParams();
-		$this->canDo		= &ProjectsHelper::getActions();
-		$this->user 		= &JFactory::getUser();
+		$this->items		= $model->getItems();
+		$this->pagination	= $model->getPagination();
+		$this->parent		= $model->getParent();
+		$this->params		= $app->getParams();
+		$this->canDo		= ProjectsHelper::getActions();
+		$this->user 		= JFactory::getUser();
+		$this->parent		= $model->getParent();
 		
-		$this->setLayout('gallery');
 		$c = count($this->items);
 		for($i = 0; $i < $c;$i++) {
 				$this->items[$i]->description = JHtml::_('content.prepare', $this->items[$i]->description);
@@ -57,9 +59,7 @@ class ProjectsViewPortfolios extends JView
 		}
 		
 		// Get pathway
-		$bc = &$app->getPathway();
 		$bc->addItem(JText::_('COM_PROJECTS_PORTFOLIOS'));
-		
 		
 		parent::display($tpl);
 	}
