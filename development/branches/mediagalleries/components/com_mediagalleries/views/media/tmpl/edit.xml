@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout
+		title="com_mediagalleries_media_view_edit_title">
+		<message>
+			<![CDATA[COM_MEDIAGALLERIES_MEDIA_VIEW_EDIT_TITLE]]>
+		</message>
+	</layout>
+</metadata>

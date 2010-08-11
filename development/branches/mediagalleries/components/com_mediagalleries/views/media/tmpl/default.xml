@@ -1,33 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="Play Media Layout">
+	<layout title="COM_MEDIAGALLERIES_MEDIA_VIEW_DEFAULT_TITLE">
 		<message><![CDATA[
-			Single Media Layout
+			COM_MEDIAGALLERIES_MEDIA_VIEW_DEFAULT_DESC
 		]]></message>
 	</layout>
-	<state>
-		<name>Play Media Item</name>
-		<description>Play selected media</description>
-		
-		<!-- URL Parameters -->
-		<url>
-			<param type="sql" name="id" label="Item" description="Item to display" 
-				query="SELECT id AS value, title AS id FROM #__mediagalleries WHERE published=1" />
-		</url>
-		
-		<!-- Basic Parameters -->
-		<params>
-			
-		</params>	
-		
-		<!-- Advanced Parameters -->
-		<advanced>
-
-		</advanced>
 	
-	</state>
-	
-		<!-- Add fields to the request variables for the layout. -->
+	<!-- Add fields to the request variables for the layout. -->
 	<fields name="request">
 		<fieldset name="request"
 			addfieldpath="/administrator/components/com_mediagalleries/models/fields">
@@ -40,8 +19,8 @@
 		</fieldset>
 	</fields>
 	<!-- Add fields to the parameters object for the layout. -->
-<fields name="params">
-<fieldset name="basic">
+	<fields name="params">
+		<fieldset name="basic">
 
 				
 				<field name="width" 
