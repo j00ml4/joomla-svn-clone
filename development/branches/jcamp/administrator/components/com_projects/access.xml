@@ -4,11 +4,13 @@
 	<!-- All in one component permition just becose we dont support sections yet -->
 	<section name="component">
 		<!-- Tasks -->
+		<!--action name="task.view" title="COM_PROJECTS_TASK_ACTION_VIEW_LABEL" description="COM_PROJECTS_TASK_ACTION_VIEW_DESC" /-->
 		<action name="task.create" title="COM_PROJECTS_TASK_ACTION_CREATE_LABEL" description="COM_PROJECTS_TASK_ACTION_CREATE_DESC" />
 		<action name="task.edit" title="COM_PROJECTS_TASK_ACTION_EDIT_LABEL" description="COM_PROJECTS_TASK_ACTION_EDIT_LABEL" />
 		<action name="task.delete" title="COM_PROJECTS_TASK_ACTION_DELETE_LABEL" description="COM_PROJECTS_TASK_ACTION_DELETE_DESC" />	
 		
 		<!-- Tickets -->	
+		<!-- action name="ticket.view" title="COM_PROJECTS_TICKET_ACTION_VIEW_LABEL" description="COM_PROJECTS_TICKET_ACTION_VIEW_DESC" /-->
 		<action name="ticket.create" title="COM_PROJECTS_TICKET_ACTION_CREATE_LABEL" description="COM_PROJECTS_TICKET_ACTION_CREATE_DESC" />
 		<action name="ticket.edit" title="COM_PROJECTS_TICKET_ACTION_EDIT_LABEL" description="COM_PROJECTS_TICKET_ACTION_EDIT_LABEL" />
 		<action name="ticket.delete" title="COM_PROJECTS_TICKET_ACTION_DELETE_LABEL" description="COM_PROJECTS_TICKET_ACTION_DELETE_DESC" />	
@@ -20,21 +22,20 @@
 		-->
 		
 		<!-- Documents -->
+		<!--action name="document.view" title="COM_PROJECTS_DOCUMENT_ACTION_VIEW_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_VIEW_DESC" /-->
 		<action name="document.create" title="COM_PROJECTS_DOCUMENT_ACTION_CREATE_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_CREATE_DESC" />
 		<action name="document.edit" title="COM_PROJECTS_DOCUMENT_ACTION_EDIT_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_EDIT_LABEL" />
 		<action name="document.delete" title="COM_PROJECTS_DOCUMENT_ACTION_DELETE_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_DELETE_DESC" />	
 	
-		<!-- Activities -->
+		<!-- Activities 
 		<action name="activity.create" title="COM_PROJECTS_ACTIVITY_ACTION_CREATE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_CREATE_DESC" />
-		<!--action name="activity.edit" title="COM_PROJECTS_ACTIVITY_ACTION_EDIT_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_EDIT_LABEL" /-->
-		<action name="activity.delete" title="COM_PROJECTS_ACTIVITY_ACTION_DELETE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_DELETE_DESC" />	
+		<action name="activity.delete" title="COM_PROJECTS_ACTIVITY_ACTION_DELETE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_DELETE_DESC" />
+		-->
 	</section>
 	
 	
 	
 	<section name="category">
-		<action name="core.admin" title="JAction_Admin" description="JAction_Admin_Component_Desc" />
-		<action name="core.manage" title="JAction_Manage" description="JAction_Manage_Component_Desc" />
 		<action name="core.create" title="COM_CATEGORY_ACCESS_CREATE" description="COM_CATEGORY_ACCESS_CREATE_DESC" />
 		<action name="core.delete" title="COM_CATEGORY_ACCESS_DELETE" description="COM_CATEGORY_ACCESS_DELETE_DESC" />
 		<action name="core.edit" title="COM_CATEGORY_ACCESS_EDIT" description="COM_CATEGORY_ACCESS_EDIT_DESC" />
