@@ -13,232 +13,36 @@
  */
 abstract class ProjectsHelper
 {
-	/**
-	 * Can do some action
-	 * 
-	 * @param $action
-	 * @param $context
-	 * @param $user
-	 * @param $record
-	 */
-	public function can($action, $context=null, $record=null, $user=null )
-	{	
-		// Set vars
-		if (empty($user)) {
-			$user = JFactory::getUser();
-		}
-		// set params
-		$params	= JComponentHelper::getParams('com_projects');
-		
-		// Can do action?
-		$canDo = false;
-		switch($action){
-			// Can view
-			case 'project.view':
-				$canDo 	= (
-					// Owner 
-					(
-						!empty($record->created_by) && 
-						$record->created_by == $user->get('id')
-					) ||
-					
-					// Param all can view
-					( 
-						($params->get('view_projects') == 2) ||
-						(
-							($params->get('view_projects') == 1) &&
-							!empty($record->featured) && 
-							$record->featured > 0
-						)
-					) ||
-						
-					// Role permission 
-					(
-						$user->authorise('project.manage', $context) ||
-						$user->authorise('project.work', $context) ||
-						$user->authorise('project.text', $context)
-					)	
-				);	
-				break;
-				
-			// Can create project
-			case 'project.create':
-				$canDo 	= (
-					empty($record->id) &&					
-					// Permissions
-				 	(
-						$user->authorise('project.manage', $context)
-					)
-				);
-				break;
-				
-			// Can delete project
-			case 'project.delete':
-				$canDo = $user->authorise('project.manage', $context);
-				break;	 
-								
-			// Can edit project
-			case 'project.edit':
-				$canDo 	= (
-					!empty($record->id) &&
-					// Owner 
-					(
-						!empty($record->created_by) && 
-						$record->created_by == $user->get('id')
-					) ||
-					
-					// Permissions
-				 	(
-						$user->authorise('project.manage', $context)
-					)
-				);
-				break;
-
-			// Can can change the state of project
-			case 'project.edit.state':
-				$canDo = $user->authorise('project.manage', $context);
-				break;	
-
-			// Can can change the ACL rules of project
-			case 'project.edit.rules':
-				$canDo = $user->authorise('project.manage', $context);
-				break;	
-				
-			// Can edit project portifolio
-			case 'project.edit.portfolio':
-				$canDo = $user->authorise('project.manage', $context);
-				break;
-
-			// Can edit project language
-			case 'project.edit.lang':
-				$canDo = $user->authorise('project.manage', $context);
-				break;
-			
-			// Can edit project ordering
-			case 'project.edit.order':
-				$canDo = $user->authorise('project.manage', $context);
-				break;
-				
-			/* Tasks */
-			// Can view project tasks
-			case 'task.view':
-				$canDo 	= $params->get('view_tasks', 1) ||
-					$user->authorise('project.manage', $context) ||
-					$user->authorise('project.work', $context);
-				break;
-
-			// Can view project tasks
-			case 'task.view.milestones':
-				$canDo 	= $params->get('view_milestones', 1) ||
-					$user->authorise('project.manage', $context) ||
-					$user->authorise('project.work', $context);
-				break;
-			
-				
-			// Can view project tickets
-			case 'task.view.tickets':
-				$canDo 	= (
-				 	$params->get('view_tickets', 1) ||
-					$user->authorise('project.manage', $context) ||
-					$user->authorise('project.test', $context) ||
-					$user->authorise('project.work', $context)
-				);
-				break;	
-								
-			// Can create project
-			case 'task.create':
-				$canDo 	= (
-					empty($record->id) &&					
-					// Permissions
-				 	(
-						$user->authorise('project.work', $context)
-					)
-				);
-				break;
-				
-			// Can create project
-			case 'task.create.milestone':
-				$canDo 	= (
-					empty($record->id) &&					
-					// Permissions
-				 	(
-						$user->authorise('project.manage', $context)
-					)
-				);
-				break;	
-
-			// Can create project
-			case 'task.create.ticket':
-				$canDo 	= (
-					empty($record->id) &&					
-					// Permissions
-				 	(
-						$user->authorise('project.test', $context)
-					)
-				);
-				break;
-				
-			// Can delete project
-			case 'task.delete':
-				$canDo = $user->authorise('project.work', $context);
-				break;
-
-			// Can edit project
-			case 'task.edit':
-				$canDo 	= (
-					!empty($record->id) &&
-					// Owner 
-					(
-						!empty($record->created_by) && 
-						$record->created_by == $user->get('id')
-					) ||
-					
-					// Permissions
-				 	(
-						$user->authorise('project.work', $context)
-					)
-				);
-				break;
-
-			// Can can change the state of project
-			case 'task.edit.state':
-				$canDo = (
-					!empty($record->id) &&
-					// Owner 
-					(
-						!empty($record->created_by) && 
-						$record->created_by == $user->get('id')
-					) ||
-					
-					// Permissions
-				 	(
-						$user->authorise('project.work', $context) ||
-						$user->authorise('project.manage', $context)
-					)
-				);
-				break;	
-				
-			/* Documents */
-			// Can view project documents
-			case 'project.view.documents':
-				$canDo 	= $params->get('view_documents', 1) ||
-					$user->authorise('project.manage', $context) ||
-					$user->authorise('project.work', $context);
-				break;
-
-			/* Activities */
-			// Can view project activities
-			case 'project.view.activities':
-				$canDo 	= $params->get('view_documents', 1) ||
-					$user->authorise('project.manage', $context) ||
-					$user->authorise('project.work', $context);
-				break;					
-		}
-		
-		// Return permition
-		return $canDo;
-	}
 	
+	/**
+	 * Method to determine if a user is member of a project
+	 * 
+	 * @param $project_id ID of a project
+	 * @param $user_id ID of a user
+	 *  
+	 * @return False in case the user is not a member of the project or ID of user group
+	 * @since	1.6
+	 */
+	public function isMember($project_id=0, $user_id=0)
+	{	
+		if(empty($project_id)){
+			return true;
+		}
+		
+		if(empty($user_id)){
+			return false;
+		}
+		
+		// Check if is member
+		$db = JFactory::getDbo();
+		$query = $db->getQuery(true);
+		$query->select('count(project_id)');
+		$query->from('#__project_members AS a');
+		$query->where('a.project_id = '.(int) $project_id .'a.user_id='.(int)$user_id);
+		$db->setQuery($query);
+		
+		return $db->loadResult();
+	}	
 	
 	/**
 	 * Gets a list of the actions that can be performed.
@@ -247,62 +51,70 @@ abstract class ProjectsHelper
 	 * @return	JObject
 	 * @since	1.6
 	 */
-	public function getActions($context=null, $record=null)
+	public function getActions($portfolio_id=0, $project_id=0)
 	{	
+		
+		$user		= JFactory::getUser();
+		$list		= new JObject;
+		$is_member 	= self::isMember($project_id, $user->id);
+		if (empty($portfolio_id)) {
+			$assetName = 'com_projects';
+		} else {
+			$assetName = 'com_projects.category.'.(int)$portfolio_id;
+		}
+		
 		// Action
 		$actions 	= array(
 			// Project
-			'project.view',
-			'project.view.members',
-			'project.create',
-			'project.delete',
-			'project.edit', 
-			'project.edit.state',
-			'project.work',
-		
+			'core.create',
+			'core.delete',
+			'core.edit', 
+			'core.edit.state',
+			
 			// Tasks
-			'task.view',
-			'task.view.milestones',
-			'task.view.tickets',
 			'task.create',
-			'task.create.milestones',
-			'task.create.tickets',
 			'task.edit', 
-			'task.edit.state',
 			'task.delete',
 		
-			// Documents
-			'documents.view',
-		
-			// Activities
-			'project.view.activities',
+			// Tasks
+			'ticket.create',
+			'ticket.edit', 
+			'ticket.delete',
+
+			// Tasks
+			'document.create',
+			'document.edit', 
+			'document.delete',
 		);
 		
-		// Check Can do list
-		$canDo	= new JObject;
-		foreach ($actions as $action) {
-			$canDo->set($action, self::can($action, $context, $record));
+		foreach ($actions as $action){
+			$list->set($action, 
+				($is_member && $user->authorise($action, $assetName))
+			);
 		}
-		return $canDo;
-	}
 
-	/**
-	 * Method to determine if a user is member of a project
-	 * 
-	 * @param $user ID of a user
-	 * @param $project ID of a project
-	 *  
-	 * @return False in case the user is not a member of the project or ID of user group
-	 * @since	1.6
-	 */
-	public function isMember($user, $project)
-	{
-		$db = JFactory::getDBO();
-		$q = 'SELECT pm.`group_id` FROM `#__project_members` pm WHERE pm.`user_id` = '.(int)$user.' AND pm.`project_id`='.(int)$project;
-		$db->setQuery($q);
-		$row = $db->loadResult();
-		return (int)$row ? (int)$row : false;
+		return $list;
 	}
+	
+	
+	public function canDo($action, $portfolio_id=0, $project_id=0){
+		static $assets;
+		static $portfolioId; 
+		static $projectId;
+		
+		if(
+			empty($assets) ||
+			($portfolio_id && $portfolioId != $portfolio_id) ||
+			($project_id && $projectId != $project_id)
+		){
+			$assets = self::getActions($portfolio_id, $project_id);
+			$portfolioId = $portfolio_id;
+			$projectId = $project_id;
+		}
+		
+		return $assets->get($action, false);
+	}
+	
 
 	/** i don t know if we need this function..
 	 * Resets breadcrumb and adds "Projects" link as first
@@ -334,15 +146,5 @@ abstract class ProjectsHelper
 		  $id = JRequest::getInt('Itemid',0);
 		return $id;
 	}
-}
-
-/**
- * Simple debug function
- * @param $data
- */
-function dump($data){
-	echo '<pre>';
-	print_r($data);
-	echo '</pre>';
 }
 ?>
