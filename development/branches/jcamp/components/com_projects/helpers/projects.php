@@ -146,5 +146,6 @@ abstract class ProjectsHelper
 		  $id = JRequest::getInt('Itemid',0);
 		return $id;
 	}
+	
 }
 ?>
