@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 ?>
 <div class="items-row item">
-	<h2><a href="<?php echo JRoute::_('index.php?option=com_projects&view=projects&layout=gallery&id='.$this->item->id);?>">
+	<h2><a href="<?php echo JRoute::_('index.php?option=com_projects&view=portfolios&id='.$this->item->id);?>">
 			<?php echo $this->item->title;?>
 		</a></h2>
 		<div class="cetegory-desc">			

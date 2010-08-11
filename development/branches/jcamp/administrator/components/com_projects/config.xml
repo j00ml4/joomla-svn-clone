@@ -4,18 +4,17 @@
 		label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC">
 		<field name="rules"	type="rules" label="JCONFIG_PERMISSIONS_LABEL"
-			filter="rules" component="com_projects"	section="component"/>
+			filter="rules" component="com_projects"	section="component"/>	
 	</fieldset>
 	
-	<fieldset name="guest_tools"
+	<fieldset name="basic"
 		label="COM_PROJECTS_GUEST_TOOLS_LABEL"
 		description="COM_PROJECTS_GUEST_TOOLS_DESC">
-		<field name="rules"	type="rules" label="JCONFIG_PERMISSIONS_LABEL"
-			filter="rules" component="com_projects"	section="component_old"/>			
+		
 		<field name="style"
 			type="filelist"
-			label="COM_PROJECTS_STYLE_LABEL"
-			description="COM_PROJECTS_STYLE_DESC"
+			label="COM_PROJECTS_SELECT_STYLE_LABEL"
+			description="COM_PROJECTS_SELECT_STYLE_DESC"
 			directory="media/com_projects/css"
 			hide_default="1"
 			filter="css" 
@@ -23,84 +22,55 @@
 
 		<field type="spacer" hr="true" />
 		
-		<field name="view_tickets"
+		<field name="show_tasks"
 			type="radio"
-			label="COM_PROJECTS_CAN_VIEW_TICKETS_LABEL"
-			description="COM_PROJECTS_CAN_VIEW_TICKETS_DESC"
+			label="COM_PROJECTS_SHOW_TASKS_LABEL"
+			description="COM_PROJECTS_SHOW_TASKS_DESC"
+			class="inputbox"
+			size="1"
+			default="0">
+			<option	value="0">JNO</option>
+			<option	value="1">JYES</option>
+		</field>
+
+		<field name="show_tickets"
+			type="radio"
+			label="COM_PROJECTS_SHOW_TICKETS_LABEL"
+			description="COM_PROJECTS_SHOW_TICKETS_DESC"
 			class="inputbox"
 			size="1"
 			default="0">
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 		</field>	
-
-		<field name="view_projects"
+		
+		<field name="show_documents"
 			type="radio"
-			label="COM_PROJECTS_CAN_VIEW_PROJECTS_LABEL"
-			description="COM_PROJECTS_CAN_VIEW_PROJECTS_DESC"
+			label="COM_PROJECTS_SHOW_DOCUMENTS_LABEL"
+			description="COM_PROJECTS_SHOW_DOCUMENTS_DESC"
 			class="inputbox"
 			size="1"
 			default="0">
 			<option	value="0">JNO</option>
-			<option	value="1">JFEATURED</option>
-			<option	value="2">JALL</option>
+			<option	value="1">JYES</option>
 		</field>
 		
-		<field name="view_tasks"
+		<field name="show_activities"
 			type="radio"
-			label="COM_PROJECTS_CAN_VIEW_TASKS_LABEL"
-			description="COM_PROJECTS_CAN_VIEW_TASKS_DESC"
-			class="inputbox"
-			size="1"
-			default="0">
-			<option	value="0">JNO</option>
-			<option	value="1">JFEATURED</option>
-			<option	value="2">JALL</option>
-		</field>
-
-		<field name="view_documents"
-			type="radio"
-			label="COM_PROJECTS_CAN_VIEW_DOCUMENTS_LABEL"
-			description="COM_PROJECTS_CAN_VIEW_DOCUMENTS_DESC"
-			class="inputbox"
-			size="1"
-			default="0">
-			<option	value="0">JNO</option>
-			<option	value="1">JFEATURED</option>
-			<option	value="2">JALL</option>
-		</field>
-		
-		<field name="view_activities"
-			type="radio"
-			label="COM_PROJECTS_CAN_VIEW_ACTIVITIES_LABEL"
-			description="COM_PROJECTS_CAN_VIEW_ACTIVITIES_DESC"
+			label="COM_PROJECTS_SHOW_ACTIVITIES_LABEL"
+			description="COM_PROJECTS_SHOW_ACTIVITIES_DESC"
 			class="inputbox"
 			size="1"
 			default="1">
 			<option	value="0">JNO</option>
-			<option	value="1">JFEATURED</option>
-			<option	value="2">JALL</option>
+			<option	value="1">JYES</option>
 		</field>
 	</fieldset>
 
-	<fields name="manager_tools">
-		<fieldset name="manager_tools"
+	<fields name="features">
+		<fieldset name="features"
 			label="COM_PROJECTS_MANAGER_TOOLS_LABEL"
 			description="COM_PROJECTS_MANAGER_TOOLS_DESC">
 		</fieldset>
 	</fields>	
-		
-	<fields name="worker_tools">	
-		<fieldset name="worker_tools"
-			label="COM_PROJECTS_WORKER_TOOLS_LABEL"
-			description="COM_PROJECTS_WORKER_TOOLS_DESC">	
-		</fieldset>
-	</fields>
-	
-	<fields name="tester_tools">
-		<fieldset name="tester_tools"
-			label="COM_PROJECTS_TESTER_TOOLS_LABEL"
-			description="COM_PROJECTS_TESTER_TOOLS_DESC">	
-		</fieldset>
-	</fields>
 </config>

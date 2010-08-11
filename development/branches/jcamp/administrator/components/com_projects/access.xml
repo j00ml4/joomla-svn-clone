@@ -1,48 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <access component="com_projects">
-	<section name="component_old">
-		<action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC" />
-		<action name="project.manage" title="JACTION_MANAGE" description="COM_PROJECTS_ACL_MANAGE_DESC" />
-		<action name="project.work" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
-		<action name="project.test" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />
-	</section>
 	
+	<!-- All in one component permition just becose we dont support sections yet -->
 	<section name="component">
-		<!-- Projects Defined by the portfolio permitions
-		<action name="project.create" title="COM_PROJECTS_PROJECT_ACTION_CREATE_LABEL" description="COM_PROJECTS_PROJECT_ACTION_CREATE_DESC" />
-		<action name="project.edit" title="COM_PROJECTS_PROJECT_ACTION_EDIT_LABEL" description="COM_PROJECTS_PROJECT_ACTION_EDIT_LABEL" />
-		<action name="project.delete" title="COM_PROJECTS_PROJECT_ACTION_DELETE_LABEL" description="COM_PROJECTS_PROJECT_ACTION_DELETE_DESC" />
+		<!-- Tasks -->
+		<action name="task.create" title="COM_PROJECTS_TASK_ACTION_CREATE_LABEL" description="COM_PROJECTS_TASK_ACTION_CREATE_DESC" />
+		<action name="task.edit" title="COM_PROJECTS_TASK_ACTION_EDIT_LABEL" description="COM_PROJECTS_TASK_ACTION_EDIT_LABEL" />
+		<action name="task.delete" title="COM_PROJECTS_TASK_ACTION_DELETE_LABEL" description="COM_PROJECTS_TASK_ACTION_DELETE_DESC" />	
+		
+		<!-- Tickets -->	
+		<action name="ticket.create" title="COM_PROJECTS_TICKET_ACTION_CREATE_LABEL" description="COM_PROJECTS_TICKET_ACTION_CREATE_DESC" />
+		<action name="ticket.edit" title="COM_PROJECTS_TICKET_ACTION_EDIT_LABEL" description="COM_PROJECTS_TICKET_ACTION_EDIT_LABEL" />
+		<action name="ticket.delete" title="COM_PROJECTS_TICKET_ACTION_DELETE_LABEL" description="COM_PROJECTS_TICKET_ACTION_DELETE_DESC" />	
+		
+		<!-- Miles //Can we use the task permitions for this?
+		<action name="milestone.create" title="COM_PROJECTS_MILESTONE_ACTION_CREATE_LABEL" description="COM_PROJECTS_MILESTONE_ACTION_CREATE_DESC" />
+		<action name="milestone.edit" title="COM_PROJECTS_MILESTONE_ACTION_EDIT_LABEL" description="COM_PROJECTS_MILESTONE_ACTION_EDIT_LABEL" />
+		<action name="milestone.delete" title="COM_PROJECTS_MILESTONE_ACTION_DELETE_LABEL" description="COM_PROJECTS_MILESTONE_ACTION_DELETE_DESC" />	
 		-->
 		
-		<!-- Tasks -->
-		<action name="task.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
-		<action name="task.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
-		<action name="task.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />
-		
-		<!-- Tickets -->
-		<action name=".create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
-		<action name="project.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
-		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />		
-		
-		<!-- Miles -->
-		<action name="project.create" title="COM_PROJECTS_ACL_PROJECET_LABEL" description="COM_PROJECTS_ACL_MANAGE_DESC" />
-		<action name="project.edit" title="COM_PROJECTS_ACL_WORK_LABEL" description="COM_PROJECTS_ACL_WORK_DESC" />
-		<action name="project.delete" title="COM_PROJECTS_ACL_TEST_LABEL" description="COM_PROJECTS_ACL_TEST_DESC" />
-		
 		<!-- Documents -->
-		<action name="activity.create" title="COM_PROJECTS_ACTIVITY_ACTION_CREATE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_CREATE_DESC" />
-		<action name="activity.edit" title="COM_PROJECTS_ACTIVITY_ACTION_EDIT_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_EDIT_LABEL" />
-		<action name="activity.delete" title="COM_PROJECTS_ACTIVITY_ACTION_DELETE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_DELETE_DESC" />	
+		<action name="document.create" title="COM_PROJECTS_DOCUMENT_ACTION_CREATE_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_CREATE_DESC" />
+		<action name="document.edit" title="COM_PROJECTS_DOCUMENT_ACTION_EDIT_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_EDIT_LABEL" />
+		<action name="document.delete" title="COM_PROJECTS_DOCUMENT_ACTION_DELETE_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_DELETE_DESC" />	
 	
 		<!-- Activities -->
 		<action name="activity.create" title="COM_PROJECTS_ACTIVITY_ACTION_CREATE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_CREATE_DESC" />
-		<action name="activity.edit" title="COM_PROJECTS_ACTIVITY_ACTION_EDIT_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_EDIT_LABEL" />
+		<!--action name="activity.edit" title="COM_PROJECTS_ACTIVITY_ACTION_EDIT_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_EDIT_LABEL" /-->
 		<action name="activity.delete" title="COM_PROJECTS_ACTIVITY_ACTION_DELETE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_DELETE_DESC" />	
 	</section>
 	
 	
 	
 	<section name="category">
+		<action name="core.admin" title="JAction_Admin" description="JAction_Admin_Component_Desc" />
+		<action name="core.manage" title="JAction_Manage" description="JAction_Manage_Component_Desc" />
 		<action name="core.create" title="COM_CATEGORY_ACCESS_CREATE" description="COM_CATEGORY_ACCESS_CREATE_DESC" />
 		<action name="core.delete" title="COM_CATEGORY_ACCESS_DELETE" description="COM_CATEGORY_ACCESS_DELETE_DESC" />
 		<action name="core.edit" title="COM_CATEGORY_ACCESS_EDIT" description="COM_CATEGORY_ACCESS_EDIT_DESC" />
