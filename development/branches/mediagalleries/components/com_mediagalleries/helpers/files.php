@@ -1,6 +1,7 @@
 <?php
 
 
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class FilesHelper{
 	
@@ -227,13 +228,8 @@ class FilesHelper{
 			case '.gif':
 			case '.png': 			
 				$uribase = str_replace('/administrator/', '/', JURI::base());
-				if(strpos($url,$uribase)){// Local
-					$src = self::url2path($url);	// pThumb 
-					$thumbnail = $localdir .'pthumb/thumb.php?mode=fit&width=100&height=100&image='.$src;
-				}else{// Remote
-					$src = $url;// phpThumb 
-					$thumbnail = $localdir .'phpthumb/phpThumb.php?w=100&src='.$src;
-				}
+				$thumbnail = $localdir .'thumb.php?w=148&src='.$url;
+				
 				break;
 				
 			// Video .FLV
@@ -286,7 +282,7 @@ class FilesHelper{
 				break;
 			}
 		}		
-					
+		
 		return $thumbnail;
 	}
 	
