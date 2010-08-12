@@ -5,8 +5,8 @@ JHtmlBehavior::modal();
 ?>
 <div class="mediagallery" >
 	<?php //echo $this->thumb; ?>
-	<div class="media"><img src="<?php	echo plgContentMedia::getThumb($this->item->url);
-	//echo $this->media; ?>" ></div>
+	<div class="media"><a href="#"  class="modal" border="0"><img src="<?php	echo plgContentMedia::getThumb($this->item->url);
+	//echo $this->media; ?>"></a></div>
 	
 	<?php if($this->params->get('show_cat',1)): ?>
 		<div class ="media_title"><?php  echo $this->item->catid; ?></div>
