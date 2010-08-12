@@ -1,6 +1,18 @@
 <?php
 function thumbYoutube($media,$width,$height){
-	//TODO
+	if( strpos( $media, '/v/' ) ) {// If yes, New way
+				$video = substr( strstr( $media, '/v/' ), 3 );
+				$video = explode( '/', $video);
+				$video = $video[0];
+			}
+	else{	
+				$video = substr( strstr( $media, 'v=' ), 2 ) ; // Else, Old way	
+				$video = explode( '&', $video);
+				$video = $video[0];
+			}
+			
+	
+	return 'http://i.ytimg.com/vi/'.$video.'/default.jpg';
 }
 
 function thumbVideoYahoo($media, $width, $height){
@@ -54,3 +66,24 @@ function thumbVideoWindows($media, $width, $height){
 function thumbDefault(){
 
 }
+
+function thumbImage($media, $width , $height){
+	$timthumb= 'media/mediagalleries/timthumb/timthumb.php';
+	$w="";
+	$h="";
+	if(isset($width) && $width) // To check if the width is non zero and defined
+	{
+		$w= "&w=".$width;
+	}
+	
+	if(isset($width)) // To check if the height is non zero and defined
+	{
+		if(!$width){
+		$h= "&h=".$height;
+		}
+	}
+	
+	return $timthumb."?src=".$media.$w.$h;
+	
+}
+

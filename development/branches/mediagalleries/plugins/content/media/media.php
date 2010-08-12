@@ -10,13 +10,13 @@
 // No direct access
 defined('_JEXEC') or die;
 
-//THis is some comment!!!! Fingers crossed!!
 jimport('joomla.plugin.plugin');
 jimport( 'joomla.html.parameter' );
 
 // This lib adds the media 
 include_once dirname(__FILE__).DS.'media'.DS.'htmlembed.php';
-include_once dirname(__FILE__).DS.'media'.DS.'htmlembed.php';
+include_once dirname(__FILE__).DS.'media'.DS.'thumbnails.php';
+
 
 /**
  * Media Content Plugin
@@ -46,6 +46,7 @@ class plgContentMedia extends JPlugin
 		if (strpos($row->text, 'media') === false) {
 			return true;
 		}
+		
 
 		// Regular Expression
 		$regex = '/\{media(.*?)}/i';
@@ -282,7 +283,7 @@ class plgContentMedia extends JPlugin
 			case '.jpg':
 			case '.gif':
 			case '.png':
-				$replace = addPicture($media, $width, $height);
+				$replace = thumbImage($media, $width, $height);
 			 	break;
 				
 			/* JPG, GIF, PNG, H264
@@ -403,8 +404,10 @@ class plgContentMedia extends JPlugin
 	 * @param	bool	Save On The Server Or Not
 	 * @since	1.6
 	 */
-	public function getThumb($url , $width=160 , $height = 160)
+	public function getThumb($media , $width=160 , $height = 0)
 	{
+		
+		$pparams= $this->params;		
 		// Fix Video UrL
 		$media		= strpos($media,"http://")? 
 			$media: // Custom PATH
@@ -483,7 +486,7 @@ class plgContentMedia extends JPlugin
 			case '.jpg':
 			case '.gif':
 			case '.png':
-				$replace = thumbPicture($media, $width, $height);
+				$replace=thumbImage($media, $width, $height);
 			 	break;
 				
 			/* JPG, GIF, PNG, H264
@@ -546,5 +549,15 @@ class plgContentMedia extends JPlugin
 		
 		
 	}
+	public function getParams()
+	{
+		return parent::params;
+	}
+		
+	
+	
+	
+
+	
 	
 }
