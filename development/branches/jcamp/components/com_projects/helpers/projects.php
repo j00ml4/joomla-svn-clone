@@ -51,78 +51,92 @@ abstract class ProjectsHelper
 	 * @return	JObject
 	 * @since	1.6
 	 */
-	public function getActions($portfolio_id=0, $project_id=0)
+	public function getActions($portfolio_id=0, $project_id=0, $record=null)
 	{	
-		
 		$user		= JFactory::getUser();
-		$list		= new JObject;
+		$assets		= new JObject;
 		$is_member 	= self::isMember($project_id, $user->id);
-		if (empty($portfolio_id)) {
-			$assetName = 'com_projects';
-		} else {
-			$assetName = 'com_projects.category.'.(int)$portfolio_id;
-		}
+		$assetName 	= empty($portfolio_id)? 
+			'com_projects': 
+			'com_projects.category.'.(int)$portfolio_id;
 		
-		// Action
-		$actions 	= array(
-			// Project
-			'core.create',
-			'core.delete',
-			'core.edit', 
-			'core.edit.state',
-			
-			// Tasks
-			'task.create',
-			'task.edit', 
-			'task.delete',
-		
-			// Tasks
-			'ticket.create',
-			'ticket.edit', 
-			'ticket.delete',
-
-			// Tasks
-			'document.create',
-			'document.edit', 
-			'document.delete',
-		);
-		
-		foreach ($actions as $action){
-			$list->set($action, 
-				($is_member && $user->authorise($action, $assetName))
+		// is owner
+		if($record instanceof JObject){
+			$assets->set('is.owner', 
+				($user->id == $record->get('created_by'))
 			);
 		}
-
-		return $list;
+				
+		// acctions
+		$resources 	= array(
+			'task',
+			'ticket',
+			'document'
+		);
+		$actions	= array(
+			'.create',
+			'.edit',
+			'.delete'
+		);
+		
+		$assets->set('is.member', $is_member);
+		foreach ($resources as $resource){
+			// Actions
+			foreach ($actions as $action){
+				$assets->set($resource.$action, 
+					($is_member && $user->authorise($action, $assetName))
+				);
+			}
+			
+			// View
+			$assets->set($resource.'.view', 
+				(
+					$is_member && 
+					$assets->get($resource.'.create') ||
+					$assets->get($resource.'.edit') ||
+					$assets->get($resource.'.delete')  
+				)	
+			);
+		}
+		
+		// More Actions
+		$actions 	= array(
+			'core.create',
+			'core.edit',
+			'core.edit.state',
+			'core.delete'
+		);
+		foreach ($actions as $action){
+			$assets->set($action, $user->authorise($action, $assetName));
+		}
+		
+		return $assets;
 	}
 	
-	
-	public function canDo($action, $portfolio_id=0, $project_id=0){
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param unknown_type $action
+	 * @param unknown_type $portfolio_id
+	 * @param unknown_type $project_id
+	 */
+	public function canDo($action, $portfolio_id=0, $project_id=0, $record=null){
 		static $assets;
-		static $portfolioId; 
-		static $projectId;
 		
-		if(
-			empty($assets) ||
-			($portfolio_id && $portfolioId != $portfolio_id) ||
-			($project_id && $projectId != $project_id)
-		){
-			$assets = self::getActions($portfolio_id, $project_id);
-			$portfolioId = $portfolio_id;
-			$projectId = $project_id;
+		if(empty($assets)){
+			$assets = self::getActions($portfolio_id, $project_id, $record);
 		}
 		
 		return $assets->get($action, false);
 	}
 	
-
+	
 	/** i don t know if we need this function..
 	 * Resets breadcrumb and adds "Projects" link as first
 	 * 
 	 * @return Reference to breadcrumb object
 	 * @since	1.6
 	 */
-	
 	public function &resetPathway()
 	{
 		$app = &JFactory::getApplication();
@@ -146,6 +160,5 @@ abstract class ProjectsHelper
 		  $id = JRequest::getInt('Itemid',0);
 		return $id;
 	}
-	
 }
 ?>

@@ -23,56 +23,57 @@ class ProjectsViewProject extends JView
 	protected $form;
 	protected $params;
 	protected $canDo;
-	protected $category;
+	protected $portfolio;
 	
 	/**
 	 * Display project
 	 */
 	public function display($tpl = null) 
 	{	
-		$app		= &JFactory::getApplication();
-		$model		= &$this->getModel();
-		$bc 		= &$app->getPathway();
+		$app		= JFactory::getApplication();
+		$model		= $this->getModel();
+		$bc 		= $app->getPathway();
 		
 		//Get Model data
-		$this->item 	= &$model->getItem();
-		$this->params	= &$app->getParams();
-		$this->canDo	= &ProjectsHelper::getActions();
+		$this->item 	= $model->getItem();
+		$this->params	= $app->getParams();
+		$this->canDo	= ProjectsHelper::getActions();
 		
 		// Layout
 		$layout = $this->getLayout();
 		switch($layout){
+			// Form
 			case 'edit':
 			case 'form':
-				$layout = 'form';
+				$layout = 'edit';
 				$this->form	= &$model->getForm();
+				
+				// Pathway
+				$bc->addItem(JText::_('COM_PROJECTS_PROJECT_FORM_TITLE'));
 				if (empty($this->item)) {
 					$this->catid = $app->getUserState('portfolio.id', 0);
-					$access = 'project.create';
+					$access = 'core.create';
 				}else{
-					$access = 'project.edit';
+					$access = 'core.edit';
+					$bc->addItem($this->item->get('title'));					
 				}
-				
+		
 				// Access
 				if (!$this->canDo->get($access)){
 					return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
 				}
-				
-				// Pathway
-				$bc->addItem(JText::_('COM_PROJECTS_PROJECT_FORM_TITLE'));
 				break;
 			
+			// Overview	
 			default:
 				$layout = 'default';
 				// Access
-				if (!$this->canDo->get('project.view')){
-					return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
-				}
 				if (empty($this->item->id)){
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
+				
 				// Get Category
-				//$this->category = &$model->getCategory($this->item->catid);
+				$this->portfolio = &$model->getCategory($this->item->catid);
 
 				// Pathway
 	  			$bc->addItem($this->item->title);

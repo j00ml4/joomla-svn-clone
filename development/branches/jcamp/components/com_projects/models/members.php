@@ -44,18 +44,7 @@ class ProjectsModelMembers extends JModelList
 		
 		// project id
 		$this->setState('project.id', $app->getUserStateFromRequest('project.id','id'));
-/*		
-		$db		= $this->getDbo();
-		$query	= $db->getQuery(true);
-		$query->select('pr.title AS `project`, po.title AS `portfolio`');
-		$query->from('#__projects pr');
-		$query->join('LEFT','#__categories po ON po.id=pr.catid');
-		$query->where('pr.id='.$id);
-		$db->setQuery($query);
-		$res = $db->loadObject();
-		$this->setState('portfolio.title',$res->portfolio);
-		$this->setState('project.title',$res->project);
-*/
+
  		parent::populateState();
 	}
 	
