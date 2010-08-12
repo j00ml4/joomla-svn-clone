@@ -14,14 +14,10 @@ $id = $this->item->id;
 ?>
 <div class="formelm_buttons projects-content toolbar-list">
 	<ul class="actions">
-		<?php if ($this->canDo->get('project.edit')): ?>
+		<?php if ($this->canDo->get('core.edit')): ?>
 		<li  class="edit-icon">
 			<?php echo JHTML::_('action.link', JText::_('JGLOBAL_EDIT'), 'project.edit', $id); ?>
 		</li>
-		<?php endif; ?>
-	
-		<!-- edit state --> 
-		<?php if ($this->canDo->get('project.edit.state')): ?>
 		<li>
 			<?php if ($this->item->state == 0): ?>
 				<?php echo JHTML::_('action.task', JText::_('JGLOBAL_PUBLISH'), 'project.publish', $id); ?>
@@ -32,13 +28,10 @@ $id = $this->item->id;
 		<?php endif; ?>
 		
 		<!--  Delete -->
-		<?php if ($this->canDo->get('project.delete')): ?>
+		<?php if ($this->canDo->get('core.delete')): ?>
 		<li>
 			<?php echo JHTML::_('action.delete', JText::_('JGLOBAL_DELETE'), 'project', $id); ?>
 		</li>
 		<?php endif; ?>			
-		<li>
-			<?php echo JHTML::_('action.task', JText::_('COM_PROJECTS_PROJECT_BACK_TO_PROJECTS_LINK'), 'project.back'); ?>
-		</li>
 	</ul>
 </div>

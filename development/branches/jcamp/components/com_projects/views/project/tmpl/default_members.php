@@ -17,8 +17,7 @@ defined('_JEXEC') or die;
 		<li>eden</li>
 		<li>har</li>
 	</ul>
-	<?php if ($this->canDo->get('project.view')):
-		echo JHTML::_('action.link',JText::_('COM_PROJECTS_PROJECT_TEAM_USER_LIST'),null,$this->item->id,'index.php?option=com_projects&view=members&type=list');
-	endif; ?>
+	<?php
+		echo JHTML::_('action.link',JText::_('COM_PROJECTS_PROJECT_TEAM_USER_LIST'),null,$this->item->id,'index.php?option=com_projects&view=members&type=list'); ?>
 
 </div>

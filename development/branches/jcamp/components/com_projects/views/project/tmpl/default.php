@@ -32,20 +32,38 @@ $pageClass = $this->params->get('pageclass_sfx');
 				<dt><?php echo JText::_('COM_PROJECTS_FIELD_FINISH_AT_LABEL')?>:</dt>
 				<dd><?php echo JFactory::getDate($this->item->finish_at)->toFormat('%d.%m.%Y');?></dd>
 			</dl>
-
 			<?php echo $this->loadTemplate('buttons'); ?>
 		</div>
 		
+		<?php if($params->get('show_activities') || $this->canDo->get('activity.view')): ?>
+		<div class="project-activities projects-space">
+			<?php echo $this->loadTemplate('activities'); ?>
+		</div>
+		<?php endif; ?>
 	</div>
 
 	<div class="one3">
-		<div class=" projects-space">
+		<div class="projects-space">
 			<?php
-				//echo $this->loadTemplate('milestones'); no need milestones are just to group tasks
-				if('can_view_tasks') echo $this->loadTemplate('tasks');
-				if('can_view_tasks') echo $this->loadTemplate('tickets');
-				if('can_view_tasks') echo $this->loadTemplate('documents');
-				if('can_view_..') echo $this->loadTemplate('members');				
+				// Tasks and Milestones
+				if($params->get('show_tasks') || $this->canDo->get('task.view')){
+					echo $this->loadTemplate('tasks');
+				}
+				
+				// Tickets
+				if($params->get('show_tickets') || $this->canDo->get('ticket.view')){
+					echo $this->loadTemplate('tickets');
+				}
+				
+				// Documents
+				if($params->get('show_documents') || $this->canDo->get('document.view')){
+					echo $this->loadTemplate('documents');
+				}
+				
+				// Members
+				if($params->get('show_members') || $this->canDo->get('is.member')){
+					echo $this->loadTemplate('members');
+				}							
 			?>
 		</div>
 	</div>

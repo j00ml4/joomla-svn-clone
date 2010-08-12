@@ -70,7 +70,7 @@ class ProjectsControllerProject extends JControllerForm
 	 */
 	protected function allowAdd($data = array())
 	{
-		return ProjectsHelper::can('project.create', $this->option, $record);
+		return ProjectsHelper::canDo('core.create');
 	}
 
 	/**
@@ -85,7 +85,7 @@ class ProjectsControllerProject extends JControllerForm
 	 */
 	protected function allowEdit($data = array(), $key = 'id')
 	{
-		return ProjectsHelper::can('project.edit', $this->option, $record);
+		return ProjectsHelper::canDo('core.edit');
 	}
 
 	/**
@@ -102,9 +102,9 @@ class ProjectsControllerProject extends JControllerForm
 	{
 		$recordId	= isset($data[$key]) ? $data[$key] : 0;
 		if ($recordId) {
-			return ProjectsHelper::can('project.edit', $this->option, $record);
+			return ProjectsHelper::canDo('core.edit');
 		} else {
-			return ProjectsHelper::can('project.create', $this->option, $record);
+			return ProjectsHelper::canDo('core.create');
 		}
 	}
 

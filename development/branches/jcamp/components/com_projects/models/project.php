@@ -28,9 +28,9 @@ class ProjectsModelProject extends JModelAdmin
 	 * @param	object	A record object.
 	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
 	 */
-	protected function canDelete($record=null, $user=null)
-	{
-		return ProjectsHelper::can('project.delete', $this->option, $record);
+	protected function canDelete($record)
+	{	
+		return ProjectsHelper::canDo('core.delete',  $record->get('catid'), $record->get('id'));
 	}
 
 	/**
@@ -39,9 +39,9 @@ class ProjectsModelProject extends JModelAdmin
 	 * @param	object	A record object.
 	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
 	 */
-	protected function canEditState($record=null, $user=null)
+	protected function canEditState($record)
 	{
-		return ProjectsHelper::can('project.edit.state', $this->option, $record);
+		return ProjectsHelper::canDo('core.edit',  $record->get('catid'), $record->get('id'));
 	}
 
 	/**
@@ -60,7 +60,6 @@ class ProjectsModelProject extends JModelAdmin
 		if (!($pk = (int) $app->getUserState($this->option.'.edit.'.$this->getName().'.id'))) {
 			$pk = (int) JRequest::getInt('id');
 		}
-
 		$this->setState('project.id', $pk);
 		$app->setUserState('project.id', $pk);
 	}
@@ -171,7 +170,13 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	public function getItem($pk = null)
 	{
-		return parent::getItem($pk);
+		$app = JFactory::getApplication();
+		$item = parent::getItem($pk);
+		if(!empty($item)){
+			$app->setUserState('portfolio.id', $item->get('catid'));
+		}
+		
+		return $item;
 	}
 
 	/**
@@ -190,8 +195,6 @@ class ProjectsModelProject extends JModelAdmin
 
 		$table->title		= htmlspecialchars_decode($table->title, ENT_QUOTES);
 		$table->alias 		= JApplication::stringURLSafe($table->title);
-		//dump($table);
-		//die();
 
 		if (empty($table->id)) {
 			// Set the values

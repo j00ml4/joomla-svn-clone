@@ -58,7 +58,7 @@ function submitbutton(task) {
 		</fieldset>
 		
 		
-		<?php if ($this->canDo->get('project.edit.state')): ?>
+		<?php if ($this->canDo->get('core.edit.state')): ?>
 		<fieldset>	
 			<legend><?php echo JText::_( 'JDETAILS' ); ?></legend>
 			<div class="formelm">
@@ -89,11 +89,6 @@ function submitbutton(task) {
 			<div class="formelm">
 				<?php echo $this->form->getLabel('language'); ?>
 				<?php echo $this->form->getInput('language'); ?>
-			</div>
-			
-			<div class="formelm">
-				<?php echo $this->form->getLabel('access'); ?>
-				<?php echo $this->form->getInput('access'); ?>
 			</div>
 		</fieldset>
 		<?php endif; ?>

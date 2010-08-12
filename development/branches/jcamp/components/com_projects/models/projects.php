@@ -61,8 +61,6 @@ class ProjectsModelProjects extends JModelList
 	protected function populateState()
 	{
 		parent::populateState();
-				
-		// Initialise variables.
 		$app	= &JFactory::getApplication();
 		
 		// portfolio	
@@ -70,8 +68,7 @@ class ProjectsModelProjects extends JModelList
 		$this->setState('portfolio.id', $id);
 		$app->setUserState('portfolio.id', $id);
 		
-		//$this->setState('filter.published',	1);
-		//$this->setState('filter.language',$app->getLanguageFilter());
+		$this->setState('filter.language',$app->getLanguageFilter());
 	}
 	
 	
@@ -141,78 +138,9 @@ class ProjectsModelProjects extends JModelList
 			//$options['countItems'] = $params->get('show_ntacts', 0);
 			$categories = JCategories::getInstance('Projects', $options);
 			$this->_item = $categories->get($this->getState('portfolio.id', 'root'));
-			if(is_object($this->_item))
-			{
-				$this->_children = $this->_item->getChildren();
-				$this->_parent = false;
-				if($this->_item->getParent())
-				{
-					$this->_parent = $this->_item->getParent();
-				}
-				$this->_rightsibling = $this->_item->getSibling();
-				$this->_leftsibling = $this->_item->getSibling(false);
-			} else {
-				$this->_children = false;
-				$this->_parent = false;
-			}
 		}
 
 		return $this->_item;
-	}
-
-	/**
-	 * Get the parent categorie.
-	 *
-	 * @param	int		An optional category id. If not supplied, the model state 'portfolio.id' will be used.
-	 *
-	 * @return	mixed	An array of categories or false if an error occurs.
-	 */
-	public function getParent()
-	{
-		if(!is_object($this->_item))
-		{
-			$this->getCategory();
-		}
-		return $this->_parent;
-	}
-
-	/**
-	 * Get the sibling (adjacent) categories.
-	 *
-	 * @return	mixed	An array of categories or false if an error occurs.
-	 */
-	function &getLeftSibling()
-	{
-		if(!is_object($this->_item))
-		{
-			$this->getCategory();
-		}
-		return $this->_leftsibling;
-	}
-
-	function &getRightSibling()
-	{
-		if(!is_object($this->_item))
-		{
-			$this->getCategory();
-		}
-		return $this->_rightsibling;
-	}
-
-	/**
-	 * Get the child categories.
-	 *
-	 * @param	int		An optional category id. If not supplied, the model state 'portfolio.id' will be used.
-	 *
-	 * @return	mixed	An array of categories or false if an error occurs.
-	 */
-	function &getChildren()
-	{
-		if(!is_object($this->_item))
-		{
-			$this->getCategory();
-		}
-		return $this->_children;
 	}
 }
 ?>
