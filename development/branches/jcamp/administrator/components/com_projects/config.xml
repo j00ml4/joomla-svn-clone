@@ -66,12 +66,18 @@
 			<option	value="0">JNO</option>
 			<option	value="1">JYES</option>
 		</field>
+
+		<field name="show_members"
+			type="radio"
+			label="COM_PROJECTS_SHOW_MEMBERS_LABEL"
+			description="COM_PROJECTS_SHOW_MEMBERS_DESC"
+			class="inputbox"
+			size="1"
+			default="1">
+			<option	value="0">JNO</option>
+			<option	value="1">JYES</option>
+		</field>
+
 	</fieldset>
 
-	<fields name="features">
-		<fieldset name="features"
-			label="COM_PROJECTS_MANAGER_TOOLS_LABEL"
-			description="COM_PROJECTS_MANAGER_TOOLS_DESC">
-		</fieldset>
-	</fields>	
 </config>
