@@ -43,6 +43,7 @@ class MediagalleriesViewMedia extends JView
 			
 		}
 		
+		
 		parent::display();
 	}
 }
