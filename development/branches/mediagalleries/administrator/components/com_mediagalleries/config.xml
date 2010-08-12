@@ -61,17 +61,17 @@
 			default="" 
 			label="" 
 			description="" />			
-		<!--<field 
+		<field 
 			name="style" 
 			type="filelist" 
 			default="default.css" 
 			label="COM_MEDIAGALLERIES_FIELD_STYLE_LABEL" 
 			description="COM_MEDIAGALLERIES_FIELD_STYLE_DESC" 
-			directory="components/com_mediagalleries/assets" 
-			filter=".css" 
+			directory="media/mediagalleries/css" 
+			filter="css" 
 			exclude="" 
 			stripext="" 
-			hide_default="true" />-->
+			hide_default="true" />
 	</fieldset>
 	
 	<fieldset name="permissions"
