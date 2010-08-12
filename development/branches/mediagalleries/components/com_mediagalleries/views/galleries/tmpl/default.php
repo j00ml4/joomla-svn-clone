@@ -1,8 +1,8 @@
 <?php
 /**
- * @version		$Id: default.php 17726 2010-06-17 14:39:49Z 3dentech $
+ * @version		$Id: default.php 17130 2010-05-17 05:52:36Z eddieajau $
  * @package		Joomla.Site
- * @subpackage	com_content
+ * @subpackage	com_newsfeeds
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -10,52 +10,32 @@
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 
+// If the page class is defined, wrap the whole output in a div.
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
-<div class="category-list <?php echo $pageClass;?>">
+<div class="categories-list<?php echo $pageClass;?>">
+<?php if ($this->params->get('show_page_heading', 1)) : ?>
+<h1>
+	<?php echo $this->escape($this->params->get('page_heading')); ?>
+</h1>
+<?php endif; ?>
 
-	<?php if ($this->params->get('show_page_heading', 1)) : ?>
-	<h1>
-		<?php echo $this->escape($this->params->get('page_heading')); ?>
-	</h1>
+<?php if ($this->params->get('show_base_description')) : ?>
+	<?php 	//If there is a description in the menu parameters use that; ?>
+		<?php if($this->params->get('categories_description')) : ?>
+			<?php echo  JHtml::_('content.prepare',$this->params->get('categories_description')); ?>
+		<?php  else: ?>
+			<?php //Otherwise get one from the database if it exists. ?>
+			<?php  if ($this->parent->description) : ?>
+				<div class="category-desc">
+					<?php  echo JHtml::_('content.prepare', $this->parent->description); ?>
+				</div>
+			<?php  endif; ?>
+		<?php  endif; ?>
 	<?php endif; ?>
-
-	<?php if ($this->params->get('show_category_title', 1) OR $this->params->get('page_subheading')) : ?>
-	<h2>
-		<?php echo $this->escape($this->params->get('page_subheading')); ?>
-		<?php if ($this->params->get('show_category_title')) : ?>
-			<span class="subheading-category"><?php echo $this->category->title;?></span>
-		<?php endif; ?>
-	</h2>
-	<?php endif; ?>
-
-	<?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
-	<div class="category-desc">
-		<?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
-			<img src="<?php echo $this->category->getParams()->get('image'); ?>"/>
-		<?php endif; ?>
-		<?php if ($this->params->get('show_description') && $this->category->description) : ?>
-			<?php echo JHtml::_('content.prepare', $this->category->description); ?>
-		<?php endif; ?>
-		<div class="clr"></div>
-	</div>
-	<?php endif; ?>
-
-	<?php if (is_array($this->children) && count($this->children) > 0 && $this->params->get('maxLevel') !=0)  : ?>
-	<div class="jcat-children">
-		<h3>
-			<?php echo JTEXT::_('JGLOBAL_SUBCATEGORIES'); ?>
-		</h3>
-
-		<?php echo $this->loadTemplate('children'); ?>
-
-	</div>
-	<?php endif; ?>
-
-	<div class="cat-items">
-		<?php echo $this->loadTemplate('articles'); ?>
-	</div>
-
+<?php
+echo $this->loadTemplate('items');
+?>
 </div>
