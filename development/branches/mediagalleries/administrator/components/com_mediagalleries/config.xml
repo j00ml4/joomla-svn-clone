@@ -5,7 +5,7 @@
 			name="width" 
 			type="text" 
 			size="5" 
-			default="0" 
+			default="350" 
 			label="COM_MEDIAGALLERIES_FIELD_WIDTH_LABEL" 
 			description="COM_MEDIAGALLERIES_FIELD_WIDTH_DESC" 
 		/>
@@ -88,7 +88,7 @@
 	<fieldset name="advanced" label="Advanced">
 			<field name="show_cat" 
 					type="list" 
-					default="yes" 
+					default="1" 
 					label="Show Category Name" 
 					description="Make it multilingual">
 						
@@ -97,7 +97,7 @@
 				</field>
 				<field name="show_title" 
 					type="list" 
-					default="yes" 
+					default="1" 
 					label="Show Title" 
 					description="Make it multilingual">
 						
@@ -109,7 +109,7 @@
 				
 				<field name="show_url" 
 					type="list" 
-					default="yes" 
+					default="1" 
 					label="Show URL" 
 					description="Make it multilingual">
 						
@@ -119,7 +119,7 @@
 				
 				<field name="show_desc" 
 					type="list" 
-					default="yes" 
+					default="1" 
 					label="Show Description" 
 					description="Make it multilingual">
 						
@@ -129,7 +129,7 @@
 				
 				<field name="show_hits" 
 					type="list" 
-					default="yes" 
+					default="1" 
 					label="Show Hits" 
 					description="Make it multilingual">
 						
@@ -139,7 +139,7 @@
 				
 				<field name="show_creation" 
 					type="list" 
-					default="yes" 
+					default="1" 
 					label="Show Creation time" 
 					description="Make it multilingual">
 						
@@ -149,7 +149,7 @@
 				
 				<field name="show_author" 
 					type="list" 
-					default="yes" 
+					default="1" 
 					label="Show Author" 
 					description="Make it multilingual">
 						
@@ -159,7 +159,7 @@
 				
 				<field name="show_modified" 
 					type="list" 
-					default="yes" 
+					default="1" 
 					label="Show Last Modified" 
 					description="Make it multilingual">
 						
@@ -169,7 +169,7 @@
 				
 				<field name="show_modified_by" 
 					type="list" 
-					default="yes" 
+					default="1" 
 					label="Show Modified By" 
 					description="Make it multilingual">
 						
@@ -185,22 +185,22 @@
 				<field name="flv_player" 
 					type="list" 
 					default="2kplayer" 
-					label="PLG_CONTENT_MEDIA_FLV_PLAYER_LABEL" 
-					description="PLG_CONTENT_MEDIA_FLV_PLAYER_DESC">
+					label="COM_MEDIAGALLERIES_FLV_PLAYER_LABEL" 
+					description="COM_MEDIAGALLERIES_FLV_PLAYER_DESC">
 						
-						<option value="jwplayer">PLG_CONTENT_MEDIA_FLV_PLAYER_JWPPLAYER</option>			
-						<option value="2kplayer">PLG_CONTENT_MEDIA_FLV_PLAYER_3K_FLV_PLAYER</option>
+						<option value="jwplayer">COM_MEDIAGALLERIES_FLV_PLAYER_JWPPLAYER</option>			
+						<option value="2kplayer">COM_MEDIAGALLERIES_FLV_PLAYER_3K_FLV_PLAYER</option>
 				
 				</field>
 				
 				<field name="mp3_player" 
 					type="list" 
 					default="1pixelout" 
-					label="PLG_CONTENT_MEDIA_MP3_PLAYER_LABEL" 
-					description="PLG_CONTENT_MEDIA_MP3_PLAYER_DESC" >
+					label="COM_MEDIAGALLERIES_MP3_PLAYER_LABEL" 
+					description="COM_MEDIAGALLERIES_MP3_PLAYER_DESC" >
 						
-						<option value="jwplayer">PLG_CONTENT_MEDIA_MP3_PLAYER_JWPLAYER</option>			
-						<option value="1pixelout">PLG_CONTENT_MEDIA_MP3_PLAYER_1PIXELOUT</option>
+						<option value="jwplayer">COM_MEDIAGALLERIES_MP3_PLAYER_JWPLAYER</option>			
+						<option value="1pixelout">COM_MEDIAGALLERIES_MP3_PLAYER_1PIXELOUT</option>
 				
 				</field>
 			</fieldset>
@@ -215,8 +215,8 @@
 				<field name="youtube_rel" 
 					type="radio" 
 					default="1" 
-					label="PLG_CONTENT_MEDIA_YOUTUBE_RELATED_LABEL" 
-					description="PLG_CONTENT_MEDIA_YOUTUBE_RELATED_DESC" >
+					label="COM_MEDIAGALLERIES_YOUTUBE_RELATED_LABEL" 
+					description="COM_MEDIAGALLERIES_YOUTUBE_RELATED_DESC" >
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -226,8 +226,8 @@
 				<field name="youtube_loop" 
 					type="radio" 
 					default="0" 
-					label="PLG_CONTENT_MEDIA_YOUTUBE_LOOP_LABEL" 
-					description="PLG_CONTENT_MEDIA_YOUTUBE_LOOP_DESC" >
+					label="COM_MEDIAGALLERIES_YOUTUBE_LOOP_LABEL" 
+					description="COM_MEDIAGALLERIES_YOUTUBE_LOOP_DESC" >
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -237,8 +237,8 @@
 				<field name="youtube_disablekb" 
 					type="radio" 
 					default="0" 
-					label="PLG_CONTENT_MEDIA_YOUTUBE_DISABLE_KEYBOARD_LABEL" 
-					description="PLG_CONTENT_MEDIA_YOUTUBE_DISABLE_KEYBOARD_DESC" >
+					label="COM_MEDIAGALLERIES_YOUTUBE_DISABLE_KEYBOARD_LABEL" 
+					description="COM_MEDIAGALLERIES_YOUTUBE_DISABLE_KEYBOARD_DESC" >
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -248,8 +248,8 @@
 				<field name="youtube_egm" 
 					type="radio" 
 					default="0" 
-					label="PLG_CONTENT_MEDIA_YOUTUBE_ENHANCED_GENIE_MENU_LABEL" 
-					description="PLG_CONTENT_MEDIA_YOUTUBE_ENHANCED_GENIE_MENU_DESC">
+					label="COM_MEDIAGALLERIES_YOUTUBE_ENHANCED_GENIE_MENU_LABEL" 
+					description="COM_MEDIAGALLERIES_YOUTUBE_ENHANCED_GENIE_MENU_DESC">
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -259,8 +259,8 @@
 				<field name="youtube_border" 
 				type="radio" 
 				default="0" 
-				label="PLG_CONTENT_MEDIA_YOUTUBE_BORDER_LABEL" 
-				description="PLG_CONTENT_MEDIA_YOUTUBE_BORDER_DESC">
+				label="COM_MEDIAGALLERIES_YOUTUBE_BORDER_LABEL" 
+				description="COM_MEDIAGALLERIES_YOUTUBE_BORDER_DESC">
 						
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
@@ -271,16 +271,16 @@
 					type="text" 
 					size="6" 
 					default="" 
-					label="PLG_CONTENT_MEDIA_YOUTUBE_COLOR1_LABEL" 
-					description="PLG_CONTENT_MEDIA_YOUTUBE_COLOR1_DESC">
+					label="COM_MEDIAGALLERIES_YOUTUBE_COLOR1_LABEL" 
+					description="COM_MEDIAGALLERIES_YOUTUBE_COLOR1_DESC">
 				</field>
 				
 				<field name="youtube_color2" 
 					type="text" 
 					size="6" 
 					default="" 
-					label="PLG_CONTENT_MEDIA_YOUTUBE_COLOR2_LABEL" 
-					description="PLG_CONTENT_MEDIA_YOUTUBE_COLOR2_DESC">
+					label="COM_MEDIAGALLERIES_YOUTUBE_COLOR2_LABEL" 
+					description="COM_MEDIAGALLERIES_YOUTUBE_COLOR2_DESC">
 				</field>
 			</fieldset>
 				<!--JW-->
@@ -295,48 +295,63 @@
 				<field name="jw_logo" 
 					type="imagelist" 
 					default="" 
-					label="PLG_CONTENT_MEDIA_JW_LOGO_LABEL" 
+					label="COM_MEDIAGALLERIES_JW_LOGO_LABEL" 
 					directory="images" 
 					exclude="" 
 					stripext="" 
-					description="PLG_CONTENT_MEDIA_JW_LOGO_DESC" />
+					description="COM_MEDIAGALLERIES_JW_LOGO_DESC" />
 				
 				<field name="jw_backcolor" 
 					type="text" 
 					size="6" 
 					default="" 
-					label="PLG_CONTENT_MEDIA_JW_BACKCOLOR_LABEL" 
-					description="PLG_CONTENT_MEDIA_JW_BACKCOLOR_DESC" />
+					label="COM_MEDIAGALLERIES_JW_BACKCOLOR_LABEL" 
+					description="COM_MEDIAGALLERIES_JW_BACKCOLOR_DESC" />
 				
 				<field name="jw_frontcolor" 
 					type="text" 
 					size="6" 
 					default="" 
-					label="PLG_CONTENT_MEDIA_JW_FRONTCOLOR_LABEL" 
-					description="PLG_CONTENT_MEDIA_JW_FRONTCOLOR_DESC"/>
+					label="COM_MEDIAGALLERIES_JW_FRONTCOLOR_LABEL" 
+					description="COM_MEDIAGALLERIES_JW_FRONTCOLOR_DESC"/>
 				
 				<field name="jw_lightcolor" 
 					type="text" 
 					size="6" 
 					default="" 
-					label="PLG_CONTENT_MEDIA_JW_LIGHTCOLOR_LABEL" 
-					description="PLG_CONTENT_MEDIA_JW_LIGHTCOLOR_DESC"/>
+					label="COM_MEDIAGALLERIES_JW_LIGHTCOLOR_LABEL" 
+					description="COM_MEDIAGALLERIES_JW_LIGHTCOLOR_DESC"/>
 				
 				<field name="jw_screencolor" 
 					type="text" 
 					size="6" 
 					default="" 
-					label="PLG_CONTENT_MEDIA_JW_SCREENCOLOR_LABEL" 
-					description="PLG_CONTENT_MEDIA_JW_SCREENCOLOR_DESC"/>
+					label="COM_MEDIAGALLERIES_JW_SCREENCOLOR_LABEL" 
+					description="COM_MEDIAGALLERIES_JW_SCREENCOLOR_DESC"/>
 				
 				<field name="jw_quality" 
 					type="radio" 
-					label="PLG_CONTENT_MEDIA_JW_QUALITY_LABEL" 
-					description="PLG_CONTENT_MEDIA_JW_QUALITY_DESC">
+					label="COM_MEDIAGALLERIES_JW_QUALITY_LABEL" 
+					description="COM_MEDIAGALLERIES_JW_QUALITY_DESC">
 					
-					<option value="0">PLG_CONTENT_MEDIA_NORMAL</option>
-					<option value="1">PLG_CONTENT_MEDIA_HIGH</option>
+					<option value="0">COM_MEDIAGALLERIES_NORMAL</option>
+					<option value="1">COM_MEDIAGALLERIES_HIGH</option>
 				</field>
+			</fieldset>
+			
+			<fieldset name="thumbnail" label="COM_MEDIAGALLERIES_THUMBNAILS">	
+				<field name="width" 
+					type="text"
+					filter="int" 
+					default="148" 
+					label="COM_MEDIAGALLERIES_WIDTH_LABEL" 
+					description="COM_MEDIAGALLERIES_WIDTH_DESC" />
+				
+				<field name="height" 
+					type="text" 
+					default="148" 
+					label="COM_MEDIAGALLERIES_HEIGHT_LABEL" 
+					description="COM_MEDIAGALLERIES_HEIGHT_LABEL" />
 			</fieldset>
 
 </config>
