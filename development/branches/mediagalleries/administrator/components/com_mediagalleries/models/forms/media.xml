@@ -37,8 +37,7 @@
 			extension="com_mediagalleries"
 			label="JCATEGORY" 
 			description="JFIELD_CATEGORY_DESC"
-			class="inputbox"
-			required="true">
+			class="inputbox">
 			<option value="">JOPTION_NO_CATEGORY</option>	
 		</field>
 
