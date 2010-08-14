@@ -55,13 +55,7 @@ class MediagalleriesViewGallery extends JView
 		$user	= &JFactory::getUser();
 		$groups	= $user->authorisedLevels();
 		
-		// Get the parameters of the active menu item
-		$menus = &JMenu::getInstance('site');
-		$menu  = $menus->getActive();		
-		
-		$params = $menus->getParams($menu->id);
-		
-		// Set Custom Limit
+     	// Set Custom Limit
 		if($cparams->get('limit') ){
 			$limit = $app->getUserStateFromRequest(
 				'gallery.list.limit', 'limit', 
@@ -94,7 +88,7 @@ class MediagalleriesViewGallery extends JView
 				
 	
 		$this->action=$uri->toString();
-		$this->params=$params;
+		$this->params=$cparams;
 		$this->user=&JFactory::getUser();
 		//Display
 		parent::display($tpl);

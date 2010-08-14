@@ -283,7 +283,7 @@ class plgContentMedia extends JPlugin
 			case '.jpg':
 			case '.gif':
 			case '.png':
-				$replace = thumbImage($media, $width, $height);
+				$replace = addPicture($media);
 			 	break;
 				
 			/* JPG, GIF, PNG, H264

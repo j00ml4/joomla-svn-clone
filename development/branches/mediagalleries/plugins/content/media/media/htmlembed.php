@@ -211,7 +211,7 @@ function addVideoBrightcove( $video, $width='', $height='',  $autostart='0' ){
 	*/
 
 	// opera code
-	return "<embed src='http://www.brightcove.tv/playerswf'  class='denvideo' style='".$width . $height."'
+	return "<embed src='http://www.brightcove.tv/playerswf'  class='mediagalleries' style='".$width . $height."'
 	flashVars='".$vars."' 
 	base='http://admin.brightcove.com' 
 	allowFullScreen='true' allowScriptAccess='always' seamlesstabbing='false' swLiveConnect='true'
@@ -257,7 +257,7 @@ function addVideoMetacafe( $video, $width='', $height='',  $autostart='0' ){
 function addVideoVeoh( $video, $width='', $height='',  $autostart='0', $bgcolor='#afafaf' ){
 		$video = substr( stristr( $video, 'videos/' ), 7 ); //' v12316545ACFsJaJY'
 			
-		return '<embed class="denvideo" style="'.$width . $height.'"
+		return '<embed class="mediagalleries" style="'.$width . $height.'"
 			src="http://www.veoh.com/veohplayer.swf?permalinkId='.  $video  .'&id=anonymous&player=videodetailsembedded&videoAutoPlay='. $autostart .'" 
 			allowFullScreen="true" 
 			bgcolor="'. $bgcolor .'" 
@@ -278,7 +278,7 @@ function addVideoVeoh( $video, $width='', $height='',  $autostart='0', $bgcolor=
  * @param string $atr [optional]
  */			
 function addPicture( $video, $width='', $height='', $a='' ){ 		
-	return	'<img '. $a .' class="denvideo" style="'.$width . $height.'" src="'. $video .'" />';
+	return	'<img '. $a .' class="mediagalleries" style="'.$width . $height.'" src="'. $video .'" />';
 	
 }			
 	
@@ -293,12 +293,12 @@ function addPicture( $video, $width='', $height='', $a='' ){
  * @param string $atr [optional]
  */			
 function addMediaSWF( $video, $width='', $height='', $a='',  $p='' ){ 		
-	$replace= 	'<object '. $a .' class="denvideo" style="'.$width . $height.'" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">'
+	$replace= 	'<object '. $a .' class="mediagalleries" style="'.$width . $height.'" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">'
 		. '<param name="movie" value="'. $video .'" />'
 		. '<param name="wmode" value="transparent" />'
 		. $p // Params
 		. '<!--[if !IE]>-->'
-			. '<object '. $a .' class="denvideo" style="'.$width . $height.'" 
+			. '<object '. $a .' class="mediagalleries" style="'.$width . $height.'" 
 				data="' .$video. '" type="application/x-shockwave-flash"> '
 				. '<param name="wmode" value="transparent" />'
 				. $p // Params
@@ -395,7 +395,7 @@ function addVideoJWPlayer	($video, $width='', $height='', $params=array() ){
  */
 function addVideoQuicktime	($video, $width='', $height='',  $autostart='0'){	
 		
-	$replace = '<object class="denvideo" style="'.$width . $height.'" 
+	$replace = '<object class="mediagalleries" style="'.$width . $height.'" 
 		classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" codebase="http://www.apple.com/qtactivex/qtplugin.cab">'
 		. '<param name="src" value="'.$video.'" />'
 		. '<param name="qtsrc" value="'.$video.'" />'				
@@ -403,7 +403,7 @@ function addVideoQuicktime	($video, $width='', $height='',  $autostart='0'){
 		. '<param name="autostart" value="'.( ($autostart)? 'true': 'false' ).'" />'
 		. '<param name="scale" value="tofit" />'
 		
-		. '<embed class="denvideo" style="'.$width . $height.'" src="'.$video.'" qtsrc="'.$video.'"
+		. '<embed class="mediagalleries" style="'.$width . $height.'" src="'.$video.'" qtsrc="'.$video.'"
 				pluginspage="http://www.apple.com/quicktime/download/" type="video/quicktime" 
 				scale="tofit" cache="False" controller="true"
 				autostart="'.( ($autostart)? 'true': 'false' ).'" />'
@@ -423,11 +423,11 @@ function addVideoQuicktime	($video, $width='', $height='',  $autostart='0'){
  * @param array $params [optional]
  */
 function addVideoRealmedia($video, $width='', $height='',  $autostart='0' ){		
-	$replace = '<object class="denvideo" style="'.$width . $height.'" classid="clsid:CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA" >'.
+	$replace = '<object class="mediagalleries" style="'.$width . $height.'" classid="clsid:CFCDAA03-8BE4-11cf-B84B-0020AFBBCCFA" >'.
 		'<param name="controls" value="all" />'.
 		'<param name="autostart" value="'.$autostart.'" />'.
 		'<param name="src" value="'.$video.'" />'.
-		'<embed class="denvideo" style="'.$width . $height.'" type="audio/x-pn-realaudio-plugin"
+		'<embed class="mediagalleries" style="'.$width . $height.'" type="audio/x-pn-realaudio-plugin"
 			src="'.$video.'" controls="all" autostart="'.$autostart.'" />'.
 	'</object>';
 	
@@ -456,7 +456,7 @@ function addVideoDivx($video, $width='', $height='',  $autostart='0' ){
 		. '<param name="bannerEnabled" value="false">'
 		. '<param name="bufferingMode" value="auto">'
 
-		. '<embed class="denvideo" style="'.$width . $height.'" src="'. $video .'" type="video/divx" 
+		. '<embed class="mediagalleries" style="'.$width . $height.'" src="'. $video .'" type="video/divx" 
 			custommode="none" autoPlay="'.( ($autostart)? 'true': 'false' ).'"  mode="mini"
 			allowContextMenu="true" bannerEnabled="false" bufferingMode="auto"
 			pluginspage="http://go.divx.com/plugin/download/" ></embed>'
@@ -478,7 +478,7 @@ function addVideoDivx($video, $width='', $height='',  $autostart='0' ){
  */
 function addVideoWindows($video, $width='', $height='',  $autostart='0' ){		
 /*
- 	$replace = '<object class="denvideo" style="'.$width . $height.'" classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6">'
+ 	$replace = '<object class="mediagalleries" style="'.$width . $height.'" classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6">'
 		. '<param name="url"  value="'. $video .'" />'
 		. '<param name="src"  value="'. $video .'" />'
 		. '<param name="showcontrols" value="true" />'
@@ -489,7 +489,7 @@ function addVideoWindows($video, $width='', $height='',  $autostart='0' ){
 		. '<param name="autostart" value="'..'" />'
 		. '<param name="enableFullScreenControls" value="true" />'
 		.'<!--[if !IE]>-->'
-		  	. '<object class="denvideo" style="'.$width . $height.'" type="application/x-mplayer2" 
+		  	. '<object class="mediagalleries" style="'.$width . $height.'" type="application/x-mplayer2" 
 		    	data=""'. $video .'" >'
 		    	. '<param name="src" value="'. $video .'" />'
 		    	. '<param name="autostart" value="true" />'
@@ -504,7 +504,7 @@ function addVideoWindows($video, $width='', $height='',  $autostart='0' ){
 */
 
 	$replace = '<object classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6"
-		class="denvideo" style="'.$width . $height.'" >'
+		class="mediagalleries" style="'.$width . $height.'" >'
 		. '<param name="url" value="'. $video .'" />'
 		. '<param name="stretchToFit" value="true" />'
 		. '<param name="scale" value="tofit" />'		
@@ -513,7 +513,7 @@ function addVideoWindows($video, $width='', $height='',  $autostart='0' ){
 		. '<param name="animationAtStart" value="true" />'
 		. '<param name="autoStart" value="'. ( ($autostart)? 'true': 'false' ) .'" />'
 		. '<param name="enableFullScreenControls" value="true" />'
-		. '<embed class="denvideo" style="'.$width . $height.'"
+		. '<embed class="mediagalleries" style="'.$width . $height.'"
 				src="'. $video .'" type="application/x-mplayer2"
 				autoStart="'.( ($autostart)? 'true': 'false' ).'" animationAtStart="true" enableFullScreenControls="true" 
 				stretchToFit="true" scale="tofit"
@@ -536,7 +536,7 @@ function addAppletJava($video, $width='', $height=''){
 	$code = substr( $video, 0, $end );
 	$video = substr( $video, $end+1 );			
 	
-	$replace = '<applet class="denvideo" style="'.$width . $height.'"
+	$replace = '<applet class="mediagalleries" style="'.$width . $height.'"
 		codebase="'.$code.'" 
 		code="'.$video.'" >
 	</applet>';

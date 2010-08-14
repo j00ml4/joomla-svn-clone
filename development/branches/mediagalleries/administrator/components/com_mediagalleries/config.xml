@@ -340,16 +340,15 @@
 			</fieldset>
 			
 			<fieldset name="thumbnail" label="COM_MEDIAGALLERIES_THUMBNAILS">	
-				<field name="width" 
+				<field name="thumb_width" 
 					type="text"
-					filter="int" 
-					default="148" 
+					default="160" 
 					label="COM_MEDIAGALLERIES_WIDTH_LABEL" 
 					description="COM_MEDIAGALLERIES_WIDTH_DESC" />
 				
-				<field name="height" 
+				<field name="thumb_height" 
 					type="text" 
-					default="148" 
+					default="" 
 					label="COM_MEDIAGALLERIES_HEIGHT_LABEL" 
 					description="COM_MEDIAGALLERIES_HEIGHT_LABEL" />
 			</fieldset>
