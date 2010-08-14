@@ -24,10 +24,10 @@ if (count($this->items[$this->parent->id]) > 0 && $this->maxLevel != 0) :
 	?>
 	<li<?php echo $class; ?>>
 	<?php $class = ''; ?>
-		<span class="jitem-title"><a href="<?php echo JRoute::_(WeblinksHelperRoute::getCategoryRoute($item->id));?>">
+		<span class="jitem-title"><a href="index.php?option=com_mediagalleries&view=gallery&layout=gallery&id=<?php echo $item->id; ?>">
 			<?php echo $this->escape($item->title); ?></a>
 		</span>
-		<?php if ($this->params->get('show_subcat_desc') == 1) :?>
+		<?php if ($this->params->get('show_subcat_desc',1) == 1) :?>
 		<?php if ($item->description) : ?>
 			<div class="category-desc">
 				<?php echo JHtml::_('content.prepare', $item->description); ?>

@@ -9,6 +9,8 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.model');
+jimport( 'joomla.application.categories' );
+
 
 /**
  * This models supports retrieving lists of article categories.
@@ -17,21 +19,21 @@ jimport('joomla.application.component.model');
  * @subpackage	com_weblinks
  * @since		1.6
  */
-class WeblinksModelCategories extends JModel
+class MediagalleriesModelGalleries extends JModel
 {
 	/**
 	 * Model context string.
 	 *
 	 * @var		string
 	 */
-	public $_context = 'com_weblinks.categories';
+	public $_context = 'com_mediagalleries.categories';
 
 	/**
 	 * The category context (allows other extensions to derived from this model).
 	 *
 	 * @var		string
 	 */
-	protected $_extension = 'com_weblinks';
+	protected $_extension = 'com_mediagalleries';
 
 	private $_parent = null;
 
@@ -101,7 +103,7 @@ class WeblinksModelCategories extends JModel
 			}
 			$options = array();
 			$options['countItems'] = $params->get('show_cat_num_links', 0) || !$params->get('show_empty_categories', 0);
-			$categories = JCategories::getInstance('Weblinks', $options);
+			$categories = JCategories::getInstance('Mediagalleries', $options);
 			$this->_parent = $categories->get($this->getState('filter.parentId', 'root'));
 			if(is_object($this->_parent))
 			{

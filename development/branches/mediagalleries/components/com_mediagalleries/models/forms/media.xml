@@ -11,6 +11,7 @@
 			class="readonly" 
 		/>
 			
+
 		<field 
 			name="title" 
 			type="text" 
@@ -36,9 +37,8 @@
 			extension="com_mediagalleries"
 			label="JCATEGORY" 
 			description="JFIELD_CATEGORY_DESC"
-			class="inputbox"
-			required="true">
-			<option>JOPTION_NO_CATEGORY</option>
+			class="inputbox">
+			<option value="">JOPTION_NO_CATEGORY</option>	
 		</field>
 
 		<field 
@@ -50,6 +50,17 @@
 			description="COM_MEDIAGALLERIES_FIELD_URL_DESC" 
 			required="true"
 		/>
+		
+		<field 
+			name="thumb_url" 
+			type="text" 
+			class="inputbox"
+			size="40" 
+			label="COM_MEDIAGALLERIES_FIELD_THUMBURL_LABEL"
+			description="COM_MEDIAGALLERIES_FIELD_THUMBURL_DESC" 
+			
+		/>
+		
 
 		<field 
 			name="description" 
@@ -60,8 +71,23 @@
 			label="JGLOBAL_DESCRIPTION" 
 			description="JGLOBAL_DESCRIPTION" 
 		/>
-
-				
+		
+		<field 
+			name="created_by" 
+			type="user"
+			label="JGLOBAL_FIELD_CREATED_BY_LABEL" 
+			description="JGLOBAL_FIELD_CREATED_BY_Desc" 
+		/>
+		
+		<field 
+			name="created_by_alias" 
+			type="text" 
+			class="inputbox"
+			size="40" 
+			label="JFIELD_ALIAS_LABEL"
+			description="JFIELD_ALIAS_DESC" 
+		/>		
+		
 		<field 
 			name="hits" 
 			type="Text" 
@@ -86,10 +112,38 @@
 				<option	value="1">JPUBLISHED</option>
 				<option value="0">JUNPUBLISHED</option>
 				<option value="2">JARCHIVED</option>
-				<option value="-3">COM_WEBLINKS_FIELD_VALUE_REPORTED</option><!-- no weblinks --> 
+				<option value="-3">COM_WEBLINKS_FIELD_VALUE_REPORTED</option>
 				<option value="-2">JTRASH</option>
 		</field>
 		
+		<field
+			name="published"
+			type="list"
+			label="JPUBLISHED"
+			description="COM_MEDIAGALLERIES_FIELD_STATE_DESC"
+			class="inputbox"
+			size="1"
+			default="1">
+				<option	value="1">JPUBLISHED</option>
+				<option value="0">JUNPUBLISHED</option>
+				<option value="2">JARCHIVED</option>
+				<option value="-3">COM_MEDIAGALLERIES_FIELD_VALUE_REPORTED</option>
+				<option value="-2">JTRASH</option>
+		</field>
+		
+		<field
+			name="featured"
+			type="list"
+			label="COM_MEDIAGALLERIES_FEATURED_LABEL"
+			description="COM_MEDIAGALLERIES_FEATURED_DESC"
+			class="inputbox"
+			size="1"
+			default="0">
+				<option	value="1">JYES</option>
+				<option value="0">JNO</option>
+		</field>
+		
+
 		<field 
 			name="ordering" 
 			type="Ordering" 
@@ -126,7 +180,7 @@
 			size="16" 
 			format="%Y-%m-%d %H:%M:%S"
 			filter="server_utc" 
-			default="2010-01-01 01:01:01"
+			
 		/>
 
 		<field 

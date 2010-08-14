@@ -136,6 +136,7 @@ class plgContentMedia extends JPlugin
 	public function addMedia( $media, $width=0, $height =0, $autostart=0 )
 	{	
 		// The propose of this is to get the defaults set by the admin -> Fixed :D 
+		
 		$pparams	= $this->params;// make it work
 		
 		// Fix Video UrL
@@ -283,7 +284,7 @@ class plgContentMedia extends JPlugin
 			case '.jpg':
 			case '.gif':
 			case '.png':
-				$replace = addPicture($media);
+				$replace = addPicture($media,$width,$height);
 			 	break;
 				
 			/* JPG, GIF, PNG, H264
@@ -407,7 +408,9 @@ class plgContentMedia extends JPlugin
 	public function getThumb($media , $width=160 , $height = 0)
 	{
 		
-		$pparams= $this->params;		
+		
+		$pparams= &$this->params;	
+		
 		// Fix Video UrL
 		$media		= strpos($media,"http://")? 
 			$media: // Custom PATH
