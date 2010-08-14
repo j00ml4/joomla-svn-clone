@@ -35,7 +35,7 @@ $listDirn	= $this->state->get('list.direction');
 					?>
 					<td class="list-title">
 						<a href="index.php?option=com_mediagalleries&view=media&layout=modal&tmpl=component&id=<?php echo $media->id; ?>" class="modal"  >
-						<img src="<?php echo $media->thumb; ?>" height="<?php echo $this->params->get('thumb_height'); ?>" width="<?php echo $this->params->get('thumb_width'); ?>" /></a>
+						<img src="<?php echo $media->thumb; ?>" height="<?php echo $this->params->get('thumb_height'); ?>" width="<?php echo $this->params->get('thumb_width'); ?>"  rel="{handler: 'iframe', size: {x:<?php echo $this->params->get('width'); ?>   , y: 500 }}" /></a>
 					</td>
 
 					<?php if ($this->params->get('list_show_date')) : ?>

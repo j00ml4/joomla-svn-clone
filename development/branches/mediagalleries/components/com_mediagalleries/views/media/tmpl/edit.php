@@ -1,8 +1,8 @@
 <?php
 /**
- * @version		$Id: edit.php 17966 2010-06-30 04:29:46Z infograf768 $
- * @package		Joomla.Site
- * @subpackage	com_weblinks
+ * @version		$Id: edit.php 17133 2010-05-17 06:30:14Z severdia $
+ * @package		Joomla.Administrator
+ * @subpackage	com_mediagalleries
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -10,72 +10,103 @@
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::_('behavior.keepalive');
+JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
-
-// Create shortcut to parameters.
-$params = $this->params;
 ?>
 <script type="text/javascript">
-	function submitbutton(task) {
-		if (task == 'weblink.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
-			<?php echo $this->form->getField('description')->save(); ?>
+<!--
+	function submitbutton(task)
+	{
+		if (task == 'media.cancel' || document.formvalidator.isValid(document.id('mediagalleries-form'))) {
 			submitform(task);
 		}
-		else {
-			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
-		}
+		// @todo Deal with the editor methods
+		submitform(task);
 	}
+// -->
 </script>
-<div class="<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-<?php if ($this->params->def('show_page_heading', 1)) : ?>
-<h1>
-	<?php echo $this->escape($this->params->get('page_heading')); ?>
-</h1>
 
-<?php endif; ?>
-<form action="<?php echo JRoute::_('index.php?option=com_weblinks'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
-	<fieldset>
-		<legend><?php echo JText::_('COM_MEDIAGALLERIES_MEDIA_VIEW_EDIT_TITLE'); ?></legend>
-			<div class="formelm">
-			<?php echo $this->form->getLabel('catid'); ?>
-			<?php echo $this->form->getInput('catid'); ?>
-			</div>
-			<div class="formelm">
-			<?php echo $this->form->getLabel('title'); ?>
-			<?php echo $this->form->getInput('title'); ?>
-			</div>
-			<div class="formelm">
-			<?php echo $this->form->getLabel('url'); ?>
-			<?php echo $this->form->getInput('url'); ?>
-			</div>
-			<?php if ($this->user->authorise('core.edit.state', 'com_weblinks.weblink')): ?>
-				<div class="formelm">
-				<?php echo $this->form->getLabel('state'); ?>
-				<?php echo $this->form->getInput('state'); ?>
-				</div>
-			<?php endif; ?>
-			<div class="formelm">
-			<?php echo $this->form->getLabel('language'); ?>
-			<?php echo $this->form->getInput('language'); ?>
-			</div>
-			<div class="formelm">
+<form action="<?php JRoute::_('index.php?option=com_mediagalleries'); ?>" method="post" name="adminForm" id="mediagalleries-form" class="form-validate">
+	<div class="width-60 fltlft">
+		<fieldset class="adminform">
+			<legend><?php echo empty($this->item->id) ? JText::_('JTOOLBAR_NEW') : JText::sprintf('JACTION_EDIT', $this->item->id); ?></legend>
+			<ul class="adminformlist">
+			<li><?php echo $this->form->getLabel('title'); ?>
+			<?php echo $this->form->getInput('title'); ?></li>
+
+			<li><?php echo $this->form->getLabel('alias'); ?>
+			<?php echo $this->form->getInput('alias'); ?></li>
+
+			<li><?php echo $this->form->getLabel('url'); ?>
+			<?php echo $this->form->getInput('url'); ?></li>
+
+			<li><?php echo $this->form->getLabel('state'); ?>
+			<?php echo $this->form->getInput('state'); ?></li>
+			
+			<li><?php echo $this->form->getLabel('catid'); ?>
+			<?php echo $this->form->getInput('catid'); ?></li>
+
+			<li><?php echo $this->form->getLabel('ordering'); ?>
+			<?php echo $this->form->getInput('ordering'); ?></li>
+
+			<li><?php echo $this->form->getLabel('access'); ?>
+			<?php echo $this->form->getInput('access'); ?></li>
+
+			<li><?php echo $this->form->getLabel('language'); ?>
+			<?php echo $this->form->getInput('language'); ?></li>
+
+			<li><?php echo $this->form->getLabel('id'); ?>
+			<?php echo $this->form->getInput('id'); ?></li>
+			</ul>
+
 			<?php echo $this->form->getLabel('description'); ?>
+			<div class="clr"></div>
 			<?php echo $this->form->getInput('description'); ?>
-			</div>
-	</fieldset>
-	<fieldset>
-		<div class="formelm_buttons">
-		<button type="button" onclick="submitbutton('media.save')">
-			<?php echo JText::_('JSAVE') ?>
-		</button>
-		<button type="button" onclick="submitbutton('media.cancel')">
-			<?php echo JText::_('JCANCEL') ?>
-		</button>
-		<input type="hidden" name="task" value="" />
-		<?php echo JHTML::_( 'form.token' ); ?>
-		</div>
-	</fieldset>
+
+		</fieldset>
+	</div>
+	<div class="width-40 fltrt">
+
+		<?php if (isset($this->item->media)): ?>
+		<fieldset>
+				<?php echo $this->item->media; ?>
+		</fieldset>	
+		<?php endif; ?>
+		
+		<!-- Do we need this? -->
+		<?php echo JHtml::_('sliders.start','newsfeed-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+		<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_PUBLISHING'), 'publishing-details'); ?>
+		<fieldset class="panelform">
+			<ul class="adminformlist">
+				<li><?php echo $this->form->getLabel('created_by'); ?>
+				<?php echo $this->form->getInput('created_by'); ?></li>
+	
+				<li><?php echo $this->form->getLabel('created_by_alias'); ?>
+				<?php echo $this->form->getInput('created_by_alias'); ?></li>
+	
+				<li><?php echo $this->form->getLabel('created'); ?>
+				<?php echo $this->form->getInput('created'); ?></li>
+	
+				<li><?php echo $this->form->getLabel('publish_up'); ?>
+				<?php echo $this->form->getInput('publish_up'); ?></li>
+	
+				<li><?php echo $this->form->getLabel('publish_down'); ?>
+				<?php echo $this->form->getInput('publish_down'); ?></li>
+	
+				<li><?php echo $this->form->getLabel('modified'); ?>
+				<?php echo $this->form->getInput('modified'); ?></li>
+	
+				<li><?php echo $this->form->getLabel('version'); ?>
+				<?php echo $this->form->getInput('version'); ?></li>
+			</ul>
+		</fieldset>
+
+		<?php echo $this->loadTemplate('params'); ?>
+		
+	</div>
+	<div class="clr"></div>
+
+	<input type="hidden" name="task" value="" />
+	<?php echo JHtml::_('form.token'); ?>
 </form>
-</div>
