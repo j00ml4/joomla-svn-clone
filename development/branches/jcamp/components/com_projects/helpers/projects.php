@@ -38,7 +38,7 @@ abstract class ProjectsHelper
 		$query = $db->getQuery(true);
 		$query->select('count(project_id)');
 		$query->from('#__project_members AS a');
-		$query->where('a.project_id = '.(int) $project_id .'a.user_id='.(int)$user_id);
+		$query->where('a.project_id = '.(int) $project_id .' AND a.user_id='.(int)$user_id);
 		$db->setQuery($query);
 		
 		return $db->loadResult();
@@ -63,7 +63,10 @@ abstract class ProjectsHelper
 		// is owner
 		if($record instanceof JObject){
 			$assets->set('is.owner', 
-				($user->id == $record->get('created_by'))
+				(
+					$user->id == $record->get('created_by') ||
+					$user->id == $record->get('created_user_id')
+				)
 			);
 		}
 				

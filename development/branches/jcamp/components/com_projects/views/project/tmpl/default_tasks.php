@@ -16,5 +16,5 @@ defined('_JEXEC') or die;
 		<li>task</li>
 		<li>task</li>
 	</ul>
-	<?php echo JHTML::_('action.link',JText::_('COM_PROJECTS_PROJECT_TASK_LIST_LINK'), null,$this->item->id,'index.php?option=com_projects&view=tasks&type=2');?>
+	
 </div>

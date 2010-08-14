@@ -20,36 +20,12 @@ jimport('joomla.application.categories');
  */
 class ProjectsModelProjects extends JModelList
 {
-		/**
-	 * Category items data
-	 *
-	 * @var array
-	 */
-	protected $_item = null;
-
-	protected $_articles = null;
-
-	protected $_siblings = null;
-
-	protected $_children = null;
-
-	protected $_parent = null;
-
 	/**
-	 * The category that applies.
+	 * Category item data
 	 *
-	 * @access	protected
-	 * @var		object
+	 * @var JCategory
 	 */
-	protected $_category = null;
-
-	/**
-	 * The list of other newfeed categories.
-	 *
-	 * @access	protected
-	 * @var		array
-	 */
-	protected $_categories = null;
+	protected $_portfolio = null;
 	
 	/**
 	 * Method to auto-populate the model state.
@@ -125,22 +101,21 @@ class ProjectsModelProjects extends JModelList
 	 * @return	object
 	 * @since	1.5
 	 */
-	public function getCategory()
+	public function getPortfolio()
 	{
-		if(!is_object($this->_item))
+		if(!is_object($this->_portfolio))
 		{
 			$app = JFactory::getApplication();
-			$menu = $app->getMenu();
-			$active = $menu->getActive();
-			$params = new JRegistry();
-			$params->loadJSON($active->params);
+			$params = $app->getParams();
 			$options = array();
-			//$options['countItems'] = $params->get('show_ntacts', 0);
+			$options['countItems']	= $params->get('show_ntacts', 0);
+			$options['published']	= 1;
+			$options['access']		= true;
 			$categories = JCategories::getInstance('Projects', $options);
-			$this->_item = $categories->get($this->getState('portfolio.id', 'root'));
+			$this->_portfolio = $categories->get($this->getState('portfolio.id', 'root'));
 		}
 
-		return $this->_item;
+		return $this->_portfolio;
 	}
 }
 ?>

@@ -14,33 +14,17 @@ defined('_JEXEC') or die;
 $params	=& $item->params;
 $model	=$this->getModel();
 ?>
-<div class="formelm_buttons projects-content toolbar-list">
-	<ul class="actions">
-		<?php if ($this->canDo->get('project.edit')): ?>
-		<li>
-			<?php
-				switch($model->getState('type'))
-				{
-					case 'assign' :
-						echo JHTML::_('action.question',JText::_('JGLOBAL_'.$this->prefix_text),
-													JText::_('COM_PROJECTS_MEMBERS_'.$this->prefix_text.'_MSG'),
-													null,
-													null,
-													'members.assign');
-						break;
-						
-					case 'delete' :
-						echo JHTML::_('action.question',JText::_('JGLOBAL_'.$this->prefix_text),
-													JText::_('COM_PROJECTS_MEMBERS_'.$this->prefix_text.'_MSG'),
-													JText::_('COM_PROJECTS_MEMBERS_'.$this->prefix_text.'_MSG_CONFIRM'),
-													JText::_('COM_PROJECTS_MEMBERS_'.$this->prefix_text.'_MSG_CONFIRM_PLURAL'),
-													'members.delete');
-				}
-			?>
-		</li>
-		<?php endif; ?>
-		<li>
-			<?php echo JHTML::_('action.link', JText::_('COM_PROJECTS_MEMBERS_BACK_TO_PROJECT_LINK'),'members.back')?>
-		</li>
-	</ul>
+<div class="tabs">
+<?php switch($this->type){
+	case 'list':
+	case 'delete':	
+		echo '<a class="tab readmore" title="'. JText::_('COM_PROJECTS_MEMBERS_ASSIGN_DESC') .'" href="'.$this->links['assign'].'">'. 
+			JText::_('COM_PROJECTS_MEMBERS_ASSIGN_TITLE') .'</a>';
+		break;		
+		
+	case 'assign':
+		echo '<a class="tab readmore" title="'. JText::_('COM_PROJECTS_MEMBERS_DELETE_DESC') .'" href="'.$this->links['delete'].'">'. 
+			JText::_('COM_PROJECTS_MEMBERS_DELETE_TITLE') .'</a>';
+		break;		
+} ?>
 </div>

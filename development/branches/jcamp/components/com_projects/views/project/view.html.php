@@ -37,7 +37,10 @@ class ProjectsViewProject extends JView
 		//Get Model data
 		$this->item 	= $model->getItem();
 		$this->params	= $app->getParams();
-		$this->canDo	= ProjectsHelper::getActions();
+		$this->canDo	= ProjectsHelper::getActions(
+			$app->getUserState('portfolio.id'), 
+			$app->getUserState('project.id'),
+			$this->item);
 		
 		// Layout
 		$layout = $this->getLayout();
@@ -50,6 +53,8 @@ class ProjectsViewProject extends JView
 				
 				// Pathway
 				$bc->addItem(JText::_('COM_PROJECTS_PROJECT_FORM_TITLE'));
+				
+				// State
 				if (empty($this->item)) {
 					$this->catid = $app->getUserState('portfolio.id', 0);
 					$access = 'core.create';
@@ -73,15 +78,27 @@ class ProjectsViewProject extends JView
 				}
 				
 				// Get Category
-				$this->portfolio = &$model->getCategory($this->item->catid);
+				$this->portfolio = $model->getPortfolio();
 
 				// Pathway
 	  			$bc->addItem($this->item->title);
 	  			break;
 		}
 		
+		// Links
+		$this->links = $this->getLinks();
+		
 		// Display the view
 		$this->setLayout($layout);
 		parent::display($tpl);
+	}
+	
+	
+	protected function getLinks()
+	{
+		return array(
+			'project' => JRoute::_('index.php?option=com_projects&view=project&id='.$this->item->id),
+			'members' => JRoute::_('index.php?option=com_projects&view=members&type=list&id='.$this->item->id)
+		);
 	}
 }

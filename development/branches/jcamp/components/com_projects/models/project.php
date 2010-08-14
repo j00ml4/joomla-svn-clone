@@ -21,7 +21,9 @@ class ProjectsModelProject extends JModelAdmin
 {
 	//protected $text_prefix = 'COM_PROJECTS';
 	//protected $context = 'com_projects.edit.project';
-
+	protected $_item = null;
+	protected $_portfolio = null;
+	
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
@@ -30,7 +32,10 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	protected function canDelete($record)
 	{	
-		return ProjectsHelper::canDo('core.delete',  $record->get('catid'), $record->get('id'));
+		return ProjectsHelper::canDo('core.delete',  
+			$record->get('catid'), 
+			$record->get('id'),
+			$record);
 	}
 
 	/**
@@ -41,7 +46,24 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	protected function canEditState($record)
 	{
-		return ProjectsHelper::canDo('core.edit',  $record->get('catid'), $record->get('id'));
+		return ProjectsHelper::canDo('core.edit', 
+			$record->get('catid'), 
+			$record->get('id'),
+			$record);
+	}
+	
+	/**
+	 * Method to test whether a record can be edited.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 */
+	protected function canEdit($record)
+	{
+		return ProjectsHelper::canDo('core.edit', 
+			$record->get('catid'), 
+			$record->get('id'),
+			$record);
 	}
 
 	/**
@@ -57,9 +79,8 @@ class ProjectsModelProject extends JModelAdmin
 		$app = JFactory::getApplication();	
 
 		// Load the User state.
-		if (!($pk = (int) $app->getUserState($this->option.'.edit.'.$this->getName().'.id'))) {
-			$pk = (int) JRequest::getInt('id');
-		}
+		$pk = JRequest::getInt('id', 
+			$app->getUserState($this->option.'.edit.'.$this->getName().'.id'));
 		$this->setState('project.id', $pk);
 		$app->setUserState('project.id', $pk);
 	}
@@ -68,30 +89,19 @@ class ProjectsModelProject extends JModelAdmin
 	 * function to get the portifolo
 	 * @param $pk
 	 */
-	public function getCategory($pk=null){
+	public function getPortfolio(){
 		// Get portifolio ID
-		if (empty($pk)) {
-			// portfolio
-			if (!($pk = $this->getState('project.id'))) {
-				return null;	
-			}	
-			$db		= $this->getDbo();
-			$query	= $db->getQuery(true);
-			$query->select('a.catid');
-			$query->from('#__projects AS a');
-			$query->where('a.id='.$pk);
-			$db->setQuery($query);
-			
-			// load result
-			if (!($pk = $db->loadResult())) {
-				return null;
+		if(!is_object($this->_portfolio)){
+			if (!is_object($this->_item)) {
+				$this->getItem();
 			}
+			
+			jimport('joomla.application.categories');
+			$categories = &JCategories::getInstance('Projects');
+			$this->_portfolio = $categories->get($this->_item->get('catid'));
 		}
 		
-		//$this->setState('portfolio.id',$pk);
-		jimport('joomla.application.categories');
-		$categories = &JCategories::getInstance('Projects');
-		return $categories->get($pk);
+		return $this->_portfolio;
 	} 
 	
 	
@@ -169,14 +179,16 @@ class ProjectsModelProject extends JModelAdmin
 	 * @since	1.6
 	 */
 	public function getItem($pk = null)
-	{
-		$app = JFactory::getApplication();
-		$item = parent::getItem($pk);
-		if(!empty($item)){
-			$app->setUserState('portfolio.id', $item->get('catid'));
+	{	
+		if(!is_object($this->_item)){
+			$app = JFactory::getApplication();
+			$this->_item = parent::getItem($pk);
+			if(!empty($this->_item)){
+				$this->setState('portfolio.id', $this->_item->get('catid'));
+				$app->setUserState('portfolio.id', $this->_item->get('catid'));
+			}
 		}
-		
-		return $item;
+		return $this->_item;
 	}
 
 	/**
@@ -214,6 +226,93 @@ class ProjectsModelProject extends JModelAdmin
 			$table->modified	= $date->toMySQL();
 			$table->modified_by	= $user->get('id');
 		}
+	}
+	
+	
+		/**
+	 * Assigns members to a project
+	 *
+	 * @since	1.6
+	 */
+	public function addMembers($pk=null, $members=array())
+	{
+		$members = (array) $members;
+		$c = count(members);
+		if(!c){
+			$this->setError(JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
+			return false;
+		}
+		
+		$project = $this->getItem($pk);
+		if(!$this->canEdit($project)) {
+			return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
+		}
+		
+		$app 	= JFactory::getApplication();
+		$db 	= $this->getDBO();
+		$query	= '';
+		for($i = 0; $i<$c;$i++) {
+			$query .= 'INSERT INTO `#__project_members` (`project_id`,`user_id`) VALUES ('.$pk.','.$members[$i].');';	
+		}		
+		$db->setQuery($query);
+		$db->queryBatch();
+		
+		return true;
+	}
+	
+	/**
+	 * deletes members from a project
+	 *
+	 * @since	1.6
+	 */
+	public function removeMembers($pk, $members=array())
+	{
+		$members = (array) $members;
+		$c = count(members);
+		if(!c){
+			$this->setError(JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
+			return false;
+		}
+		
+		$project = $this->getItem($pk);
+		if(!$this->canEdit($project)) {
+			return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
+		}
+		
+		$app 	= JFactory::getApplication();
+		$db 	= $this->getDBO();
+		$query	= '';
+		for($i = 0; $i<$c;$i++) {
+			$query .= 'DELETE FROM `#__project_members` WHERE `project_id` = '.$pk.' AND `user_id`='.$members[$i].';';	
+		}		
+		$db->setQuery($query);
+		$db->queryBatch();
+
+		return true;
+	}
+	
+	/**
+	 * Delete project
+	 * @see libraries/joomla/application/component/JModelAdmin::delete()
+	 */
+	public function delete($pks)
+	{	
+		if(!parent::delete($pks)){
+			return false;
+		}
+		
+		$db 	= $this->getDBO();
+		$where 	= 'WHERE `project_id` IN ('.implode(',', (array)$pks).') ';
+		$query	= '';
+		$query	.= ' DELETE FROM `#__project_members` '.$where.';';
+		$query	.= ' DELETE FROM `#__project_tasks` '.$where.';';
+		$query	.= ' DELETE FROM `#__content` WHERE `id` IN ('.
+			'SELECT content_id FROM `#__project_contents` '.$where.');';
+		$query	.= ' DELETE FROM `#__project_contents`'.$where.';';
+		$db->setQuery($query);
+		$db->queryBatch();
+
+		return true;
 	}
 }
 ?>

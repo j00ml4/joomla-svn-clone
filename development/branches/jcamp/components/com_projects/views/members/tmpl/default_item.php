@@ -14,16 +14,13 @@ defined('_JEXEC') or die;
 $item	=&$this->item;
 ?>
 <tr>
-	<?php if($this->getModel()->getState('type') != 'list'): ?>
+	<?php if($this->canDo->get('core.edit')): ?>	
 	<td>
 		<?php echo JHtml::_('grid.id', $this->item->i, $this->item->id); ?>
 	</td>
 	<?php endif; ?>
 	
 	<td>
-		<label for="user-<?php echo $item->id;?>"><?php echo $item->name;?></label>
-	</td>
-	<td>
-		Role
-	</td>
+		<label for="user-<?php echo $item->id;?>"><?php echo $item->name;?> (<b><?php echo $item->username; ?></b>)</label>
+	</td>	
  </tr>
