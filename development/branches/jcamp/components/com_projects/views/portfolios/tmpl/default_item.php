@@ -17,5 +17,6 @@ defined('_JEXEC') or die;
 		<div class="cetegory-desc">			
 			<?php echo $this->item->description;?>
 			<div class="clr">&nbsp;</div>
+			<div><a href="#">Projects(3)</a> &nbsp;|&nbsp;   <a href="#">Portfolios(2)</a></div>
 		</div>
 </div	>
