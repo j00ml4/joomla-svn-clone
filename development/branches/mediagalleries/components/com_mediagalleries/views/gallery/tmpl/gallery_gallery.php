@@ -23,62 +23,19 @@ $listDirn	= $this->state->get('list.direction');
 	<p><?php echo JText::_('COM_MEDIAGALLERIES_NO_ITEMS'); ?></p>
 <?php else : ?>
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
-	
-
-		<?php if ($this->params->get('show_pagination_limit')) : ?>
-		<div class="display-limit">
-			<?php echo JText::_('JGLOBAL_DISPLAY_NUM'); ?>&#160;
-			<?php echo $this->pagination->getLimitBox(); ?>
-		</div>
-		<?php endif; ?>
-
-	<?php if ($this->params->get('filter_field') != 'hide') :?>
-	
-	<?php endif; ?>
 
 	<table class="category" border="1">
-		<?php if ($this->params->get('show_headings')) :?>
-		<thead>
-			<tr>
-
-				<th class="list-title" id="tableOrdering">
-					<?php  echo JHTML::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder) ; ?>
-				</th>
-
-
-				<?php if ($date = $this->params->get('list_show_date')) : ?>
-				<th class="list-date" id="tableOrdering2">
-					<?php echo JHTML::_('grid.sort', 'COM_CONTENT_'.$date.'_DATE', 'a.created', $listDirn, $listOrder); ?>
-				</th>
-				<?php endif; ?>
-
-				<?php if ($this->params->get('list_show_author',1)) : ?>
-				<th class="list-author" id="tableOrdering3">
-					<?php echo JHTML::_('grid.sort', 'JAUTHOR', 'author', $listDirn, $listOrder); ?>
-				</th>
-				<?php endif; ?>
-
-				<?php if ($this->params->get('list_show_hits',1)) : ?>
-				<th class="list-hits" id="tableOrdering4">
-					<?php echo JHTML::_('grid.sort', 'JGLOBAL_HITS', 'a.hits', $listDirn, $listOrder); ?>
-				</th>
-				<?php endif; ?>
-			</tr>
-		</thead>
-		<?php endif; ?>
-
-		<tbody>
+	<tbody>
 
 			<?php foreach ($this->items as $i => &$media) : ?>
 			<tr class="cat-list-row<?php echo $i % 2; ?>">
 
 				<?php if (in_array($media->access, $this->user->authorisedLevels())) : ?>
-					<?php $media->embed=plgContentMedia::addMedia($media->url);
+					<?php $media->thumb=plgContentMedia::getThumb($media->url);
 					?>
 					<td class="list-title">
-						<a href="<?php // echo JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid)); ?>">
-						<?php //echo $this->escape($media->title);
-								echo $media->embed; ?></a>
+						<a href="index.php?option=com_mediagalleries&view=media&layout=modal&tmpl=component&id=<?php echo $media->id; ?>" class="modal"  >
+						<img src="<?php echo $media->thumb; ?>" height="<?php echo $this->params->get('thumb_height'); ?>" width="<?php echo $this->params->get('thumb_width'); ?>" /></a>
 					</td>
 
 					<?php if ($this->params->get('list_show_date')) : ?>
