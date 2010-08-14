@@ -25,11 +25,11 @@ abstract class ProjectsHelper
 	 */
 	public function isMember($project_id=0, $user_id=0)
 	{	
-		if(empty($project_id)){
+		if(!((int)$project_id)){
 			return true;
 		}
 		
-		if(empty($user_id)){
+		if(!((int)$user_id)){
 			return false;
 		}
 		
