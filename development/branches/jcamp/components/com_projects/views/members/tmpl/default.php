@@ -15,81 +15,101 @@ $params =  $this->params;
 $pageClass = $this->escape($params->get('pageclass_sfx'));
 $model = $this->getModel();
 ?>
-<div class="projects<?php echo $pageClass;?>">
-	<div class="item-page">
-		<div class="item">
-			<h1><?php echo JText::_('COM_PROJECTS_MEMBERS_'.$this->prefix_text.'_TITLE');?></h1>
-			<?php if($model->getState('type') != 'list') :?>
-				<form action="<?php echo JRoute::_('index.php?option=com_projects&id='.$model->getState('project.id')); ?>" method="post" name="adminForm">
-			<?php endif; ?>
-	
-			<?php echo $this->loadTemplate('buttons');?>
-			
-			<table class="category" border="1">
-			<thead>
-				<tr>		
-					<?php if($model->getState('type') != 'list'): ?>
-						<th><input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" /></th>
-					<?php endif;?>
-					
-					<th id="tableOrdering2">
-						<?php echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBERS_NAME', 'a.name', $listDirn, $listOrder); ?>
-					</th>	
-					
-					<th id="tableOrdering">
-						<?php  echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBERS_ROLE', 'a.role', $listDirn, $listOrder) ; ?>
-					</th>		
-				</tr>
-			</thead>
-			<tbody>		
-				<?php 
-					$c = count($this->items);
-					for($i = 0; $i <$c; $i++)
-					{
-						$this->item = &$this->items[$i];
-						$this->item->i = $i;
-						echo $this->loadTemplate('item');
-					?>
-<!-- This part should be put into a separate default_item.php file :)
-					<tr>
+<div class="projects <?php echo $pageClass;?>">
+<div class="category-list">
 
-						<?php if($model->getState('type') != 'list'): ?>
+ 	<div>
+ 	<?php if($this->canDo->get('core.edit')){
+ 		echo $this->loadTemplate('buttons');
+ 	} ?> 
+ 	</div>
+	<div class="cat-items">		
+		<form action="<?php echo JFactory::getURI()->toString(); ?>" method="post" name="adminForm">
+			<?php if ($this->params->get('show_filters')) :?>
+			<fieldset class="filters">
+				<legend class="hidelabeltxt">
+					<?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?>
+				</legend>
+		
+				<div class="filter-search">
+					<label class="filter-search-lbl" for="filter-search"><?php echo JText::_('COM_CONTENT_'.$this->params->get('filter_field').'_FILTER_LABEL').'&#160;'; ?></label>
+					<input type="text" name="filter-search" id="filter-search" value="<?php echo $this->escape($this->state->get('list.filter')); ?>" class="inputbox" onchange="document.adminForm.submit();" title="<?php echo JText::_('COM_CONTENT_FILTER_SEARCH_DESC'); ?>" />
+				</div>
+			<?php endif; ?>
+		
+				<?php if ($this->params->get('show_pagination_limit')) : ?>
+				<div class="display-limit">
+					<?php echo JText::_('JGLOBAL_DISPLAY_NUM'); ?>&#160;
+					<?php echo $this->pagination->getLimitBox(); ?>
+				</div>
+				<?php endif; ?>
+		
+			<?php if ($this->params->get('filter_field') != 'hide') :?>
+			</fieldset>
+		<?php endif; ?>			
+		<?php if(count($this->items)): ?>		
+			<table class="category members" border="1">
+				<thead>
+					<tr>		
+						<?php if($this->canDo->get('core.edit')): ?>	
+						<th>
+							<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
+						</th>
+						<?php endif;?>
+						
+						<th id="tableOrdering2">
+							<?php echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBER_NAME', 'u.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+						</th>	
+						
+						<th id="tableOrdering3">
+							<?php echo JHTML::_('grid.sort', 'JGLOBAL_USERNAME', 'u.username', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+						</th>							
+					</tr>
+				</thead>
+				<tbody>		
+				<?php foreach($this->items as $i => $item): ?>
+					<tr>
+						<?php if($this->canDo->get('core.edit')): ?>	
 						<td>
-							<input type="checkbox" value="<?php echo $item->id;?>" name="usr[]" id="user-<?php echo $item->id;?>"/>
+							<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 						</td>
 						<?php endif; ?>
 						
 						<td>
-							<label for="user-<?php echo $item->id;?>"><?php echo $item->name;?></label>
-						</td>
+							<label for="user-<?php echo $item->id;?>">
+								<?php echo $item->name;?> 
+							</label>
+						</td>	
+						
 						<td>
-							Role
-						</td>
- 					</tr>	
- -->
-			<?php } ?>
-			</tbody>
+							<?php echo $item->username; ?>
+						</td>	
+					 </tr>
+				<?php endforeach; ?>
+				</tbody>
 			</table>
-			<?php echo $this->loadTemplate('buttons');?>
+		<?php else: ?>	
+			<p><?php echo JText::_('COM_PROJECTS_NO_MEMBERS'); ?></p>
+		<?php endif; ?>
 			
-			<?php if($model->getState('type') != 'list') :?>
-				<input type="hidden" name="task" value="" />
-				<?php echo JHTML::_( 'form.token' ); ?>
-				<input type="hidden" name="boxchecked" value="0" />
-				</form>
-			<?php endif; ?>
-		</div>
+			<input type="hidden" name="task" value="" />
+			<?php echo JHTML::_( 'form.token' ); ?>
+			<input type="hidden" name="boxchecked" value="0" />
+			<input type="hidden" name="filter_order" value="" />
+			<input type="hidden" name="filter_order_Dir" value="" />
+			<input type="hidden" name="limitstart" value="" />
+		</form>
+	</div>
 		
-		<?php if(($params->def('show_pagination', 1) == 1 || ($params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) { ?>
-		<div class="pagination">
-			<?php  if ($this->params->def('show_pagination_results', 1)) { ?>
-			<p class="counter">
-				<?php echo $this->pagination->getPagesCounter(); ?>
-			</p>
-		<?php } ?>
+	
+	<div class="pagination">
+		<?php  if ($this->params->def('show_pagination_results', 1)): ?>
+		<p class="counter">
+			<?php echo $this->pagination->getPagesCounter(); ?>
+		</p>
+		<?php endif; ?>
 		<?php echo $this->pagination->getPagesLinks(); ?>
-		</div>
-		<?php  } ?>
-	</div>	
+	</div>
 
+</div>	
 </div>

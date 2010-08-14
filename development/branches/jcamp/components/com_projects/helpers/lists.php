@@ -11,7 +11,7 @@
  * @package		Joomla.Site
  * @subpackage	com_projects
  */
-abstract class ListsHelper
+abstract class ProjectsHelperLists
 {
 
 }

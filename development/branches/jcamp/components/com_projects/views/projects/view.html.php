@@ -22,7 +22,7 @@ jimport('joomla.application.component.view');
 class ProjectsViewProjects extends JView
 {
 	protected $items;
-	protected $category;
+	protected $portfolio;
 	protected $children;
 	protected $parent;
 	protected $maxLevel;
@@ -42,28 +42,32 @@ class ProjectsViewProjects extends JView
 	  
 		// Get some data from the models
 		$this->items		= $model->getItems();
+		$this->portfolio	= $model->getPortfolio();
 		$this->pagination	= $model->getPagination();
 		$this->params		= $app->getParams();
-		$this->canDo		= ProjectsHelper::getActions();
+		$this->canDo		= ProjectsHelper::getActions(
+			$app->getUserState('portfolio.id'),
+			0,
+			$this->portfolio);
 			
 		$layout = $this->getLayout();
 		switch($layout){
-			case 'default': 
+			// Projects default List
+			default:
+				$layout = 'default'; 
 				$c = count($this->items);
 				for($i = 0; $i < $c;$i++) {
 						$this->items[$i]->description = JHtml::_('content.prepare', $this->items[$i]->description);
 				}
 				
 				// Get category
-				$this->category	= &$model->getCategory();
-				if(!empty($this->category)){
-					$bc->addItem($this->category->title);
-				}				
-				break;
-				
-			default:
-				$layout = 'default';
+				if(!empty($this->portfolio)){
+					$bc->addItem($this->portfolio->title);
+				}						
 		}
+		
+		// Show projects
+		//$bc->addItem(JText::_('COM_PROJECTS_PROJECTS_VIEW_TITLE'));
 		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {

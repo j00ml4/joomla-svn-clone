@@ -38,9 +38,12 @@ class ProjectsControllerProject extends JControllerForm
 		$this->registerTask('archive',		'publish');	// value = 2	// finished
 		$this->registerTask('trash',		'publish');	// value = -2
 		$this->registerTask('report',		'publish');	// value = -3 	// pending
-		$this->registerTask('back',		'back');
+		$this->registerTask('back',			'back');
 		
-		//$this->registerTask('orderup',		'reorder');
+		$this->registerTask('assign',		'assignMembers');
+		$this->registerTask('unassign',		'unassignMembers');
+		
+		//$this->registerTask('orderup',	'reorder');
 		//$this->registerTask('orderdown',	'reorder');
 		
 	}
@@ -70,7 +73,11 @@ class ProjectsControllerProject extends JControllerForm
 	 */
 	protected function allowAdd($data = array())
 	{
-		return ProjectsHelper::canDo('core.create');
+		$record = new JObject($data);
+		return ProjectsHelper::canDo('core.create',
+			$record->get('catid'),
+			$record->get('id'),
+			$record);
 	}
 
 	/**
@@ -83,9 +90,13 @@ class ProjectsControllerProject extends JControllerForm
 	 *
 	 * @return	boolean
 	 */
-	protected function allowEdit($data = array(), $key = 'id')
+	protected function allowEdit($data = array())
 	{
-		return ProjectsHelper::canDo('core.edit');
+		$record = new JObject($data);
+		return ProjectsHelper::canDo('core.create',
+			$record->get('catid'),
+			$record->get('id'),
+			$record);
 	}
 
 	/**
@@ -98,14 +109,15 @@ class ProjectsControllerProject extends JControllerForm
 	 *
 	 * @return	boolean
 	 */
-	protected function allowSave($data, $key = 'id')
-	{
-		$recordId	= isset($data[$key]) ? $data[$key] : 0;
-		if ($recordId) {
-			return ProjectsHelper::canDo('core.edit');
-		} else {
-			return ProjectsHelper::canDo('core.create');
-		}
+	protected function allowSave($data)
+	{	
+		$record = new JObject($data);
+		$action = $record->get('id', 0)? 'core.edit': 'core.create';
+		
+		return ProjectsHelper::canDo($action,
+			$record->get('catid'),
+			$record->get('id'),
+			$record);
 	}
 
 		
@@ -128,16 +140,94 @@ class ProjectsControllerProject extends JControllerForm
 	public function save()
 	{
 		// Check for request forgeries
-		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		$app		= JFactory::getApplication();
+		$lang		= JFactory::getLanguage();
+		$model		= $this->getModel();
+		$table		= $model->getTable();
+		$data		= JRequest::getVar('jform', array(), 'post', 'array');
+		$context	= $this->option .'.edit.'. $this->context;
+		$checkin	= property_exists($table, 'checked_out');
+		$id 		= $model->getState('project.id', 0);
+	
+		// Populate the row id from the session.
+		$data['id'] = $id;
+		$isNew = !$id; 
 		
-		$model		= &$this->getModel();
-		$id 		= &$model->getState('project.id', 0);
-		if(!parent::save()){
+		// Access check.
+		if (!$this->allowSave($data)) {
+			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
+			return JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED'));
+		}
+
+		// Validate the posted data.
+		// Sometimes the form needs some posted data, such as for plugins and modules.
+		$form = $model->getForm($data, false);
+
+		if (!$form) {
+			JError::raiseError(500, $model->getError());
 			return false;
 		}
-		$db 		= &$model->getDBO();
-		$id 		= ($id)? $id: $db->insertid();
-		$append 	= '&layout=default&id='.$id; 
+
+		// Test if the data is valid.
+		$validData = $model->validate($form, $data);
+
+		// Check for validation errors.
+		if ($validData === false) {
+			// Get the validation messages.
+			$errors	= $model->getErrors();
+
+			// Push up to three validation messages out to the user.
+			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
+				if (JError::isError($errors[$i])) {
+					$app->enqueueMessage($errors[$i]->getMessage(), 'notice');
+				} else {
+					$app->enqueueMessage($errors[$i], 'notice');
+				}
+			}
+
+			// Save the data in the session.
+			$app->setUserState($context.'.data', $data);
+
+			// Redirect back to the edit screen.
+			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
+			return false;
+		}
+		
+		// Attempt to save the data.
+		if (!$model->save($validData)) {
+			// Save the data in the session.
+			$app->setUserState($context.'.data', $validData);
+
+			// Redirect back to the edit screen.
+			$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'notice');
+			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
+			return false;
+		}
+		
+		// Save succeeded, check-in the record.
+		if ($checkin && !$model->checkin($validData['id'])) {
+			// Save the data in the session.
+			$app->setUserState($context.'.data', $validData);
+
+			// Check-in failed, go back to the record and display a notice.
+			$message = JText::sprintf('JError_Checkin_saved', $model->getError());
+			$this->setRedirect('index.php?option='.$this->option.'&view='.$this->view_item.$append, $message, 'error');
+			return false;
+		}
+		
+		// isNew
+		if ($isNew){
+			$id = $validData['id'] = $model->getDBO()->insertid();
+			$user	= JFactory::getUser();	
+			$model->addMembers($id, $user->id);
+		}
+		
+		$app->setUserState($context.'.id', null);
+		$app->setUserState($context.'.data', null);
+		$this->setMessage(JText::_(($lang->hasKey($this->text_prefix.'_SAVE_SUCCESS') ? $this->text_prefix : 'JLIB_APPLICATION') .  '_SAVE_SUCCESS'));
+		
+		// redirect
+		$append 	= '&layout=default&id='.$id;
 		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
 		return true;
 	}
@@ -234,7 +324,7 @@ class ProjectsControllerProject extends JControllerForm
 		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
 
 		// Get items to publish from the request.
-		$model = $this->getModel();
+		$model	= $this->getModel();
 		$id		= $model->getState('project.id', JRequest::getInt('id', 0));
 		if (empty($id)) {
 			return JError::raiseWarning(500, JText::_($this->text_prefix.'_NO_ITEM_SELECTED'));
@@ -253,4 +343,57 @@ class ProjectsControllerProject extends JControllerForm
 		return true;
 	}
 	
+/**
+	 * Assigns members to a project
+	 *
+	 * @since	1.6
+	 */
+	public function assignMembers()
+	{
+		// Check for request forgeries
+		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		
+		$model		= $this->getModel(); 
+		$members 	= JRequest::getVar('cid',array(),'','array');
+		$id = JRequest::getInt('id',0);
+		
+		if (!$model->addMembers($id, $members)){
+			JError::raiseWarning(500, JText::_('JERROR_AN_ERROR_HAS_OCCURRED'));
+			return false;
+		}	
+			
+		$append='&type=assign&layout=default&id='.$id;
+		$this->setRedirect(
+			JRoute::_('index.php?option='.$this->option.'&view=members'.$append),
+			JText::_('COM_PROJECTS_MEMBERS_ASSIGN_SUCCESSFUL'));
+			
+		return true;
+	}
+	
+	/**
+	 * deletes members from a project
+	 *
+	 * @since	1.6
+	 */
+	public function unassignMembers()
+	{
+		// Check for request forgeries
+		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
+
+		$model		= $this->getModel(); 
+		$members 	= JRequest::getVar('cid',array(),'','array');
+		$id = JRequest::getInt('id',0);
+		
+		if (!$model->removeMembers($id, $members)){
+			JError::raiseWarning(500, JText::_('JERROR_AN_ERROR_HAS_OCCURRED'));
+			return false;
+		}	
+			
+		$append='&type=delete&layout=default&id='.$id;
+		$this->setRedirect(
+			JRoute::_('index.php?option='.$this->option.'&view=members'.$append),
+			JText::_('COM_PROJECTS_MEMBERS_DELETE_SUCCESSFUL'));
+		
+		return true;
+	}
 }

@@ -19,12 +19,7 @@ jimport('joomla.application.component.modellist');
  */
 class ProjectsModelMembers extends JModelList
 {
-		/**
-	 * Category items data
-	 *
-	 * @var array
-	 */
-	protected $_item = null;
+	protected $project = null;
 
 	/**
 	 * Method to auto-populate the model state.
@@ -35,6 +30,8 @@ class ProjectsModelMembers extends JModelList
 	 */
 	protected function populateState()
 	{				
+		parent::populateState();
+		
 		// Initialise variables.
 		$app	= &JFactory::getApplication();
 
@@ -44,8 +41,6 @@ class ProjectsModelMembers extends JModelList
 		
 		// project id
 		$this->setState('project.id', $app->getUserStateFromRequest('project.id','id'));
-
- 		parent::populateState();
 	}
 	
 	
@@ -62,18 +57,19 @@ class ProjectsModelMembers extends JModelList
 		// Create a new query object.
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
-
-		$query->select($this->getState('list.select', 'u.id, u.name'));
+		$id 	= (int) $this->getState('project.id');
+		$query->select($this->getState('list.select', 'u.id, u.name, u.username, u.email'));
 		$query->from('#__users u');
 		switch($this->getState('type')) {
 			case 'delete' :
 			case 'list' :
 				$query->join('LEFT','#__project_members pm ON pm.user_id=u.id');
-				$query->where('pm.project_id ='.$this->getState('project.id'));
+				$query->where('pm.project_id ='.$id);
 				break;
 			case 'assign' :
-				$query->join('LEFT','(SELECT pm.user_id FROM #__project_members pm WHERE pm.project_id='.$this->getState('project.id').') AS tmp ON tmp.user_id = u.id');
-				$query->where('tmp.user_id IS NULL');
+				$query->where('u.id NOT IN (SELECT user_id FROM #__project_members WHERE project_id='.$id.')');
+				//$query->join('LEFT','(SELECT pm.user_id FROM #__project_members pm WHERE pm.project_id='.$this->getState('project.id').') AS tmp ON tmp.user_id = u.id');
+				//$query->where('tmp.user_id IS NULL');
 				break;
 		}
 
@@ -86,18 +82,14 @@ class ProjectsModelMembers extends JModelList
 	 * function to get the project
 	 * @param $pk
 	 */
-	public function getProject($pk=null)
+	public function getProject()
 	{
-		// Get project ID
-		if (empty($pk)) {
-			// portfolio
-			if (!($pk = $this->getState('project.id'))) {
-				return null;	
-			}	
+		if (!is_object($this->project)) {
+			$model = JModel::getInstance('Project', 'ProjectsModel');
+			$this->project = $model->getItem($this->getState('project.id'));
 		}
 		
-		$project = JModel::getInstance('Project', 'ProjectsModel');
-		return $project->getItem($pk);
-	} 
+		return $this->project;
+	} 	
 }
 ?>

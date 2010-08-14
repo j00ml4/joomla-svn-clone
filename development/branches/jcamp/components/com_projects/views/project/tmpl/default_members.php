@@ -17,7 +17,5 @@ defined('_JEXEC') or die;
 		<li>eden</li>
 		<li>har</li>
 	</ul>
-	<?php
-		echo JHTML::_('action.link',JText::_('COM_PROJECTS_PROJECT_TEAM_USER_LIST'),null,$this->item->id,'index.php?option=com_projects&view=members&type=list'); ?>
-
+	<a href="<?php echo $this->links['members']; ?>" class="readmore"><?php echo JText::_('COM_PROJECTS_MEMBERS_LIST_TITLE'); ?></a>
 </div>

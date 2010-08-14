@@ -42,11 +42,13 @@ class ProjectsViewPortfolios extends JView
 		$this->state		= $this->get('State');
 		$this->items		= $model->getItems();
 		$this->pagination	= $model->getPagination();
-		$this->parent		= $model->getParent();
 		$this->params		= $app->getParams();
-		$this->canDo		= ProjectsHelper::getActions();
 		$this->user 		= JFactory::getUser();
 		$this->parent		= $model->getParent();
+		$this->canDo	= ProjectsHelper::getActions(
+			$app->getUserState('portfolio.id'), 
+			$app->getUserState('project.id'),
+			$this->parent);
 		
 		$c = count($this->items);
 		for($i = 0; $i < $c;$i++) {
