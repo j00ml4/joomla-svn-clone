@@ -149,7 +149,7 @@ abstract class ProjectsHelper
 	/**
 	 * Method to get ID of actual menu item
 	 * 
-	 * @return ID of actual menu item
+	 * @return ID of the actual menu item
 	 * @since	1.6
 	 */
 	public function getMenuItemId()
@@ -162,6 +162,39 @@ abstract class ProjectsHelper
 		  $id = JRequest::getInt('Itemid',0);
 		return $id;
 	}
+<<<<<<< .mine
+	
+	/**
+	 * Method to implode multidimensional array (associative)
+	 * 
+	 * @param $arr An array with information to implode
+	 * @param $glue Glue (default is ',')
+	 * 
+	 * @return String with glued values
+	 * @since	1.6
+	 */
+	public function implodeMultiDim($arr, $glue = ',')
+	{
+		$result = '';
+		if(is_array($arr))
+		{
+			$c = count($arr);
+			for($i = 0; $i < $c; $i++)
+			{
+				if(is_array($arr[$i])) // if the actual element is an array => use recursion
+					$result .= ProjectsHelper::implodeMultiDim($arr[$i],$glue).$glue;
+				else // if the actual element isn't an array => write it down
+					$result .= $arr[$i].$glue;
+      }
+		}
+		else // $arr isn't an array
+		{
+			return $arr; // return the variable
+		}
+		
+		return substr($result, 0, strlen($result)-strlen($glue)); // cut off the last glue
+	}
+=======
 	
 	
 	/**
@@ -189,5 +222,6 @@ abstract class ProjectsHelper
 	}
 	
 	
+>>>>>>> .r18444
 }
 ?>
