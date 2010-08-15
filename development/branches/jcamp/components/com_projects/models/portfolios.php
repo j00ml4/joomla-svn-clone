@@ -46,7 +46,29 @@ class ProjectsModelPortfolios extends JModelList
 		$this->setState('filter.published',	1);
 		$this->setState('filter.language',$app->getLanguageFilter());
 	}
-	
+
+	/**
+	 * Method to calculate number of projects in portfolios
+	 * 
+	 * @param $portfolios An array full of portfolio IDs 
+	 *
+	 * @return Array with the same structure as $portfolios with number of projects
+	 *
+	 * @since	1.6
+	 */
+	protected function calculateNumProjects($portfolios)
+	{
+		$db = JFactory::getDbo();
+		$q = $db->getQuery();
+		
+		$result = array();
+		$c = count($portfolios);
+		for($i = 0; $i <$c; $i++)
+		{
+			
+		}
+		return $result;
+	}
 	
 	/**
 	 * Method to build an SQL query to load the list data.
