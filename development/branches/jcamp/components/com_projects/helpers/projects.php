@@ -162,7 +162,6 @@ abstract class ProjectsHelper
 		  $id = JRequest::getInt('Itemid',0);
 		return $id;
 	}
-<<<<<<< .mine
 	
 	/**
 	 * Method to implode multidimensional array (associative)
@@ -194,7 +193,6 @@ abstract class ProjectsHelper
 		
 		return substr($result, 0, strlen($result)-strlen($glue)); // cut off the last glue
 	}
-=======
 	
 	
 	/**
@@ -219,9 +217,6 @@ abstract class ProjectsHelper
 			);
 		}
 		return JRoute::_($links[$key].$append);	
-	}
-	
-	
->>>>>>> .r18444
+	}	
 }
 ?>
