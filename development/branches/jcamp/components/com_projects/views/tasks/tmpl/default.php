@@ -16,15 +16,12 @@ $params =  $this->params;
 JHtml::_('behavior.tooltip');
 ?>
 <div class="projects<?php echo $params->get('pageclass_sfx'); ?>">
-	<?php if ($this->params->get('show_page_heading', 1)) : ?>
-	<h1>
-		<?php 
-			echo JTEXT::_('COM_PROJECTS_TASKS_TITLE_'.$this->prefix);
-			?>
-	</h1>
-	<?php endif; ?>	
+<div class="tasks-list">	
 	<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
-	<?php echo $this->loadTemplate('buttons'); ?>	
+	
+	
+
+	<?php /* 
 	<table class="adminlist">
 		<thead>
 			<?php echo $this->loadTemplate('header');?>
@@ -44,6 +41,8 @@ JHtml::_('behavior.tooltip');
 			<?php } ?>
 		</tbody>
 	</table>
+	*/?>
+	
 	<?php if ($this->params->get('show_pagination', 1) && ($this->pagination->get('pages.total') > 1)) : ?>
 	<div class="pagination">
 		<?php  if ($this->params->get('show_pagination_results', 1)) : ?>
@@ -62,4 +61,5 @@ JHtml::_('behavior.tooltip');
 	<input type="hidden" name="Itemid" value="<?php echo ProjectsHelper::getMenuItemId();?>" />
 	<?php echo JHtml::_('form.token'); ?>
 	</form>
+</div>
 </div>

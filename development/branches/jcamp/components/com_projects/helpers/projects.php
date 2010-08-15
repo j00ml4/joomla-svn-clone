@@ -149,7 +149,7 @@ abstract class ProjectsHelper
 	/**
 	 * Method to get ID of actual menu item
 	 * 
-	 * @return ID of the actual menu item
+	 * @return ID of actual menu item
 	 * @since	1.6
 	 */
 	public function getMenuItemId()
@@ -194,7 +194,6 @@ abstract class ProjectsHelper
 		return substr($result, 0, strlen($result)-strlen($glue)); // cut off the last glue
 	}
 	
-	
 	/**
 	 * Get links
 	 * 
@@ -213,10 +212,13 @@ abstract class ProjectsHelper
 				'project' => 'index.php?option=com_projects&view=project&id=',
 				'members' => 'index.php?option=com_projects&view=members&type=list&id=',
 				'assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
-				'unassign' => 'index.php?option=com_projects&view=members&type=delete&id='
+				'unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
+			 	'tasks' => 'index.php?option=com_projects&view=tasks&type=tasks&id=',
 			);
 		}
 		return JRoute::_($links[$key].$append);	
-	}	
+	}
+	
+	
 }
 ?>

@@ -50,9 +50,8 @@ class ProjectsModelTasks extends JModelList
 	 */
 	protected function populateState()
 	{
-		// Initialise variables.
+		parent::populateState('a.lft', 'asc');
 		$app	= &JFactory::getApplication();
-		$params	= JComponentHelper::getParams('com_projects');
 		
 		// Project		
 		if (!($id = (int) $app->getUserState('project.id'))) {
@@ -60,38 +59,18 @@ class ProjectsModelTasks extends JModelList
 		}
 		$this->setState('project.id', $id);
 		$app->setUserState('project.id', $id);
-
-		$app->setUserState('com_projects.edit.task.id',null);
-		$app->setUserState('com_projects.edit.task.data',null); 
-
+		
+		// Parent task
+		$id = (int) JRequest::getInt('parent_id');
+		$this->setState('parent.id', $id);
+		$app->setUserState('parent.id', $id);
+		
 		// Type
 		$type = JRequest::getInt('type', 3); // default => tickets
-		$this->setState('task.type', $type);
-		$app->setUserState('task.type', $type);
-		
-		// Parent
-/*		if (!($id = $app->getUserState('task.parent.id'))) {
-			$id = JRequest::getInt('parent_id');
-		}
-		$this->setState('task.parent.id', $id);
-		$app->setUserState('task.parent.id', $id);
-		
-		// Category
-		if (!($id = $app->getUserState('task.category.id'))) {
-			$id = JRequest::getInt('catid');
-		}
-		$this->setState('task.category.id', $id);
-		$app->setUserState('task.category.id', $id); */
-		
-		
+		$this->setState('type', $type);
+			
 		// Filters
 		$this->setState('filter.state',	1);
-
-		// Load the parameters.
-		$this->setState('params', $params);
-		
-		// List state information.
-		parent::populateState('a.lft', 'asc');
 	}
 	
 	
