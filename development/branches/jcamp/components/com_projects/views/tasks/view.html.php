@@ -22,9 +22,8 @@ jimport('joomla.application.component.view');
 class ProjectsViewTasks extends JView
 {
 	protected $items;
-	protected $item;
 	protected $project;
-	protected $parent;
+	protected $states;
 	protected $maxLevel;
 	protected $params;
 	protected $pagination;
@@ -37,21 +36,25 @@ class ProjectsViewTasks extends JView
 	 */
 	function display($tpl = null)
 	{
-		$app		= &JFactory::getApplication();
+		$app		= JFactory::getApplication();
 		$model 		= $this->getModel();
 			
 		// Get some data from the models
-		$this->items		= &$model->getItems();
-		$this->pagination	= &$model->getPagination();
-		$this->params		= &$app->getParams();
-		$this->canDo		= &ProjectsHelper::getActions();
+		$this->items		= $model->getItems();
+		$this->states		= $this->get('States');
+		$this->project		= $model->getProject();
+		$this->pagination	= $model->getPagination();
+		$this->params		= $app->getParams();
+		$this->canDo	= ProjectsHelper::getActions(
+			$app->getUserState('portfolio.id'), 
+			$app->getUserState('project.id'),
+			$this->project);
 			
 		$layout = $this->getLayout();
 		switch($layout){
 			default:
 				$layout = 'default';
 				// Get project
-				$this->project	= &$model->getProject();
 				if(empty($this->project)){
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
@@ -68,14 +71,47 @@ class ProjectsViewTasks extends JView
 	  	$bc->addItem($this->project->title, 'index.php?option=com_projects&view=project&id='.$this->project->id);
 	  	$bc->addItem(JText::_('COM_PROJECTS_TASKS'));
 
-	  // set a correct prefix
-		require_once JPATH_COMPONENT.'/helpers/tasks.php';
-		$this->prefix = TasksHelper::getPrefix($model->getState('task.type'));
+	  	// set a correct prefix
+		$this->loadHelper('tasks');
+		$this->type = TasksHelper::getPrefix($model->getState('type'));
 
-  	// TMLP
-  	$this->setLayout($layout);
+	  	// TMLP
+	  	$this->setLayout($layout);
+	  	$this->addToolbar();
 		parent::display($tpl);
 	}
 	
-	
+	protected function addToolbar() 
+	{
+		$this->loadHelper('toolbar');
+		
+		switch ($this->state('type')){
+			case 1:
+				
+				break;
+			case 2:	
+		}
+		$title = JText::_('COM_PROJECTS_TASKS_LIST_');
+		$icon = 'archive';
+		if($this->canDo->get('core.edit')){
+			ToolBar::editList('project.edit');
+		}
+		if($this->item->state && $this->canDo->get('core.edit.state')){
+			ToolBar::unpublish('project.unpublish');
+		}else{
+			if($this->canDo->get('core.edit.state')){
+				ToolBar::publish('project.publish');
+			}
+			if($this->canDo->get('core.delete')){
+				ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_PROJECT_DELETE'), 'project.delete');
+			}
+		}
+		if($this->params->get('show_back_button')){
+			ToolBar::back();
+		}
+		
+		ToolBar::title($title, $icon);
+		
+		echo ToolBar::render();
+	}
 }

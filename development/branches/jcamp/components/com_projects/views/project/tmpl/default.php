@@ -30,7 +30,6 @@ $pageClass = $this->params->get('pageclass_sfx');
 				<dt><?php echo JText::_('COM_PROJECTS_FIELD_FINISH_AT_LABEL')?>:</dt>
 				<dd><?php echo JFactory::getDate($this->item->finish_at)->toFormat('%d.%m.%Y');?></dd>
 			</dl>
-			<?php echo $this->loadTemplate('buttons'); ?>
 		</div>
 		
 		<?php if($params->get('show_activities') || $this->canDo->get('activity.view')): ?>
