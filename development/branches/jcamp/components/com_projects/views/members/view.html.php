@@ -53,11 +53,7 @@ class ProjectsViewMembers extends JView
 		}
 
 		//$this->loadHelper('links');
-		$this->links = $this->getLinks($this->project);
-
-		// params
-		$this->params->set('list.ordering', $model->getState('list.ordering', 'u.name'));
-		$this->params->set('list.direction', $model->getState('list.direction', 'ASC'));
+		$this->links = $this->getLinks();
 
 		// set up type and layout
 		$this->setLayout('default');
@@ -66,11 +62,6 @@ class ProjectsViewMembers extends JView
 		if (!$this->params->get('show_members') && !$this->canDo->get('is.member')){
 			return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 		}
-		
-		// Pathway
-		$bc = &$app->getPathway();
-		$bc->addItem($this->project->title,$this->links['project']);
-		$bc->addItem(JText::_('COM_PROJECTS_MEMBERS'));
 
 		// Display the view
 		$this->addToolbar();
@@ -78,7 +69,7 @@ class ProjectsViewMembers extends JView
 	}
 
 
-	protected function getLinks(&$project)
+	protected function getLinks()
 	{
 		return array(
 			'project' => JRoute::_('index.php?option=com_projects&view=project&id='.$this->project->id),
@@ -114,6 +105,12 @@ class ProjectsViewMembers extends JView
 		}
 		ToolBar::title($title, 'user');
 		ToolBar::back();
+		
+		// Pathway
+		$app = JFactory::getApplication();
+		$bc = $app->getPathway();
+		$bc->addItem($this->project->title,$this->links['project']);
+		$bc->addItem($title);
 		
 		echo ToolBar::render();
 	}

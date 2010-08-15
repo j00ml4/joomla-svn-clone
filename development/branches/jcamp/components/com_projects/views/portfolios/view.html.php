@@ -22,6 +22,7 @@ jimport('joomla.application.component.view');
 class ProjectsViewPortfolios extends JView
 {
 	protected $items;
+	protected $portfolio;
 	protected $state;
 	protected $params;
 	protected $pagination;
@@ -44,12 +45,14 @@ class ProjectsViewPortfolios extends JView
 		$this->pagination	= $model->getPagination();
 		$this->params		= $app->getParams();
 		$this->user 		= JFactory::getUser();
-		$this->parent		= $model->getParent();
-		$this->canDo	= ProjectsHelper::getActions(
+		$this->portfolio	= $model->getParent();
+		$this->canDo		= ProjectsHelper::getActions(
 			$app->getUserState('portfolio.id'), 
 			$app->getUserState('project.id'),
-			$this->parent);
+			$this->portfolio);
 		
+		$this->params->set('is.root', ($this->portfolio->level == 0));	
+			
 		$c = count($this->items);
 		for($i = 0; $i < $c;$i++) {
 				$this->items[$i]->description = JHtml::_('content.prepare', $this->items[$i]->description);
@@ -60,9 +63,47 @@ class ProjectsViewPortfolios extends JView
 			return JError::raiseError(500, implode("\n", $errors));
 		}
 		
-		// Get pathway
-		$bc->addItem(JText::_('COM_PROJECTS_PORTFOLIOS'));
-		
+		// Display
+		$this->loadLinks();
+		$this->addToolbar();
 		parent::display($tpl);
+	}
+	
+
+	protected function loadLinks()
+	{
+		$this->links = array(
+			'project' => 'index.php?option=com_projects&view=project&id=',
+			'projects' => 'index.php?option=com_projects&view=projects&id=',
+			'portfolios' => 'index.php?option=com_projects&view=portfolios&id='
+		);
+	}
+	
+	public function getLink($key, $append=''){
+		return JRoute::_($this->links[$key].$append);
+	}
+	
+	protected function addToolbar() 
+	{
+		$this->loadHelper('toolbar');
+		
+		if($this->canDo->get('core.create')){
+			//ToolBar::addNew('portfolio.add');
+		}
+		
+		if(!$this->params->get('is.root')){
+			$title = $this->portfolio->get('title');
+			
+		}else {
+			$title = JText::_('COM_PROJECTS_PORTFOLIOS_VIEW_DEFAULT_TITLE');
+		}
+		ToolBar::title($title, 'categories');
+		ToolBar::back();
+		
+		$app = JFactory::getApplication();
+		$bc = $app->getPathway();
+		$bc->addItem($title, $this->getLink('portfolios', $this->portfolio->id));
+		
+		echo ToolBar::render();
 	}
 }

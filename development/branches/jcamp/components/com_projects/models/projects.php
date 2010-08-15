@@ -105,10 +105,8 @@ class ProjectsModelProjects extends JModelList
 	{
 		if(!is_object($this->_portfolio))
 		{
-			$app = JFactory::getApplication();
-			$params = $app->getParams();
 			$options = array();
-			$options['countItems']	= $params->get('show_ntacts', 0);
+			$options['countItems']	= true;
 			$options['published']	= 1;
 			$options['access']		= true;
 			$categories = JCategories::getInstance('Projects', $options);
