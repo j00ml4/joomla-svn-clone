@@ -23,7 +23,8 @@ jimport('joomla.application.categories');
  */
 abstract class ProjectsHelperRoute
 {
-	protected static $lookup;
+	protected static $lookup;	
+	
 	/**
 	 * @param	int	The route of the content item
 	 */

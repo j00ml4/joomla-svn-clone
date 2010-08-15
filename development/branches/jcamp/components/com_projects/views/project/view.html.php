@@ -77,28 +77,14 @@ class ProjectsViewProject extends JView
 	  			break;
 		}
 		
-		// Links
-		$this->loadLinks();
-		
 		// Display the view
 		$this->setLayout($layout);
 		$this->addToolbar();
 		parent::display($tpl);
 	}
-	
-	
-	protected function loadLinks()
-	{
-		$this->links = array(
-			'portfolios' => 'index.php?option=com_projects&view=portfolios&id=',
-			'project' => 'index.php?option=com_projects&view=project&id=',
-			'members' => 'index.php?option=com_projects&view=members&type=list&id=',
-			'form' => 'index.php?option=com_projects'
-		);
-	}
-	
+		
 	public function getLink($key, $append=''){
-		return JRoute::_($this->links[$key].$append);
+		return ProjectsHelper::getLink($key, $append);
 	}
 	
 	protected function addToolbar() 

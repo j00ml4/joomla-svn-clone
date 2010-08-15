@@ -64,23 +64,19 @@ class ProjectsViewPortfolios extends JView
 		}
 		
 		// Display
-		$this->loadLinks();
 		$this->addToolbar();
 		parent::display($tpl);
 	}
 	
-
-	protected function loadLinks()
-	{
-		$this->links = array(
-			'project' => 'index.php?option=com_projects&view=project&id=',
-			'projects' => 'index.php?option=com_projects&view=projects&id=',
-			'portfolios' => 'index.php?option=com_projects&view=portfolios&id='
-		);
-	}
-	
+	/**
+	 * 
+	 * Enter description here ...
+	 * @param unknown_type $key
+	 * @param unknown_type $append
+	 * @deprecated
+	 */
 	public function getLink($key, $append=''){
-		return JRoute::_($this->links[$key].$append);
+		return ProjectsHelper::getLink($key, $append);
 	}
 	
 	protected function addToolbar() 
@@ -102,7 +98,7 @@ class ProjectsViewPortfolios extends JView
 		
 		$app = JFactory::getApplication();
 		$bc = $app->getPathway();
-		$bc->addItem($title, $this->getLink('portfolios', $this->portfolio->id));
+		$bc->addItem($title, ProjectsHelper::getLink('portfolios', $this->portfolio->id));
 		
 		echo ToolBar::render();
 	}
