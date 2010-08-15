@@ -9,6 +9,8 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
+jimport( 'joomla.registry.registry' );
+
 
 /**
  * HTML View class for the WebLinks component
@@ -33,10 +35,14 @@ class MediagalleriesViewMedia extends JView
 		$state		= $this->get('State');
 		$this->item		= $this->get('Item');
 		$category	= $this->get('Category');
-		$this->thumb= FilesHelper::getThumbURL($this->item->url);
-
+		
+		$registry = new JRegistry();
+		$registry->loadJSON($this->item->params);
+		$registry->toObject();
+		$this->item->params= $registry;
+		
 		if ($this->item->url) {					
-			$this->media=plgContentMedia::addMedia($this->item->url,$this->params->get('width',350),$this->params->get('height',350),$this->params->get('autostart',0));
+			$this->media=plgContentMedia::addMedia($this->item->url,$this->item->params->get('width'),$this->item->params->get('height'),$this->params->get('autostart',0));
 		} else {
 			//TODO create proper error handling
 			return  JError::raiseError(404, "Media Not Found");
