@@ -27,17 +27,8 @@ function submitbutton(task) {
 }
 </script>
 <div class="projects">
-<div class="edit item-page<?php echo $params->get('pageclass_sfx'); ?>">
-	<?php if ($params->get('show_page_heading', 1)) : ?>
-	<?php /* this allows the user to set the title he wants */ ?> 
-	<h1 class="componentheading"><?php echo $this->escape($params->get('page_heading', 
-			JText::_('COM_PROJECTS_PROJECT_FORM_TITLE'))); ?></h1>
-	<?php endif; ?>
-	
-	<?php /** This way we have more controll over the design */ ?>
-	<form action="<?php echo JRoute::_('index.php?option=com_projects'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">	
-		<!-- This keeps the code more DRY -->	
-		<?php echo $this->loadTemplate('buttons'); ?>
+	<div class="edit item-page<?php echo $params->get('pageclass_sfx'); ?>">	
+	<form action="<?php echo JFactory::getURI()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">	
 		
 		<fieldset>
 			<legend><?php echo JText::_('JGLOBAL_DESCRIPTION'); ?></legend>
@@ -92,9 +83,6 @@ function submitbutton(task) {
 			</div>
 		</fieldset>
 		<?php endif; ?>
-		
-		<!-- SubTemplates are DRY -->	
-		<?php echo $this->loadTemplate('buttons'); ?>
 		
 		<input type="hidden" name="task" value="" />
 		<?php echo JHTML::_( 'form.token' ); ?>

@@ -14,12 +14,10 @@ defined('_JEXEC') or die;
 $params =  $this->params;
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
-
 <div class="projects<?php echo $pageClass?>">
 	<div class="two3">
+	<form action="<?php echo $this->getLink('form') ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 		<div class="projects-content">
-			<h1><?php echo $this->item->title; ?></h1>
-
 			<?php echo $this->item->description; ?>
 
 			<div class="projects-space">
@@ -40,6 +38,12 @@ $pageClass = $this->params->get('pageclass_sfx');
 			<?php echo $this->loadTemplate('activities'); ?>
 		</div>
 		<?php endif; ?>
+		
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="cid[]" value="<?php echo $this->item->id; ?>" />
+		<input type="hidden" name="boxchecked" value="1" />
+		<?php echo JHTML::_( 'form.token' ); ?>
+	</form>
 	</div>
 
 	<div class="one3">

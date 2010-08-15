@@ -23,6 +23,7 @@ class ProjectsControllerProject extends JControllerForm
 	protected $view_item = 'project';
 	protected $view_list = 'projects';
 	
+	
 	/**
 	 * Constructor.
 	 *
@@ -45,7 +46,6 @@ class ProjectsControllerProject extends JControllerForm
 		
 		//$this->registerTask('orderup',	'reorder');
 		//$this->registerTask('orderdown',	'reorder');
-		
 	}
 	
 	/**
@@ -120,7 +120,6 @@ class ProjectsControllerProject extends JControllerForm
 			$record);
 	}
 
-		
 	/**
 	 * Method to go back to list of projects of a portfolio
 	 * 
@@ -266,11 +265,10 @@ class ProjectsControllerProject extends JControllerForm
 	{
 		// Check for request forgeries
 		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
-
-		// Get items to publish from the request.
-		$model = $this->getModel();
-		$id		= $model->getState('project.id', JRequest::getInt('id', 0));
-		if (empty($id)) {
+		
+		$cid	= JRequest::getVar('cid', array(), '', 'array');
+		$id    	= $cid[0];
+		if (empty($cid)) {
 			return JError::raiseWarning(500, JText::_($this->text_prefix.'_NO_ITEM_SELECTED'));
 		} 
 		$data	= array('publish' => 1, 'unpublish' => 0, 'archive'=> 2, 'trash' => -2, 'report'=>-3);
@@ -278,34 +276,35 @@ class ProjectsControllerProject extends JControllerForm
 		$value	= JArrayHelper::getValue($data, $task, 0, 'int');
 		$append = '&layout=default&id='.$id; 
 		
+		$model = $this->getModel();
 		// Publish the items.
-		if (!$model->publish($id, $value)) {
+		if (!$model->publish($cid, $value)) {
 			JError::raiseWarning(500, $model->getError());
 		} 
 		else {
 			switch ($value ) {
 				case 2:
-					$ntext = $this->text_prefix.'_N_ITEMS_ARCHIVED';
+					$ntext = 'COM_PROJECTS_PROJECT_ARCHIVED';
 					break;
 				
 				case 1:
-					$ntext = $this->text_prefix.'_N_ITEMS_PUBLISHED';
+					$ntext = 'COM_PROJECTS_PROJECT_PUBLISHED';
 					break;
 					
 				case 0:
-					$ntext = $this->text_prefix.'_N_ITEMS_UNPUBLISHED';
+					$ntext = 'COM_PROJECTS_PROJECT_UNPUBLISHED';
 					break;
 					
 				case -2:
 					die();
-					$ntext = $this->text_prefix.'_N_ITEMS_TRASHED';
+					$ntext = 'COM_PROJECTS_PROJECT_TRASHED';
 					break;
 					
 				case -3:
-					$ntext = $this->text_prefix.'_N_ITEMS_REPORTED';
+					$ntext = 'COM_PROJECTS_PROJECT_REPORTED';
 					break;	
 			}
-			$this->setMessage(JText::plural($ntext, count($id)));
+			$this->setMessage(JText::_($ntext));
 		}
 		
 		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
@@ -325,7 +324,8 @@ class ProjectsControllerProject extends JControllerForm
 
 		// Get items to publish from the request.
 		$model	= $this->getModel();
-		$id		= $model->getState('project.id', JRequest::getInt('id', 0));
+		$cid	= JRequest::getVar('cid', array(), '', 'array');
+		$id    	= $cid[0];
 		if (empty($id)) {
 			return JError::raiseWarning(500, JText::_($this->text_prefix.'_NO_ITEM_SELECTED'));
 		}
@@ -343,7 +343,7 @@ class ProjectsControllerProject extends JControllerForm
 		return true;
 	}
 	
-/**
+	/**
 	 * Assigns members to a project
 	 *
 	 * @since	1.6
@@ -355,6 +355,7 @@ class ProjectsControllerProject extends JControllerForm
 		
 		$model		= $this->getModel(); 
 		$members 	= JRequest::getVar('cid',array(),'','array');
+		
 		$id = JRequest::getInt('id',0);
 		
 		if (!$model->addMembers($id, $members)){

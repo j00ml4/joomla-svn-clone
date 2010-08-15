@@ -32,7 +32,6 @@ class ProjectsViewProject extends JView
 	{	
 		$app		= JFactory::getApplication();
 		$model		= $this->getModel();
-		$bc 		= $app->getPathway();
 		
 		//Get Model data
 		$this->item 	= $model->getItem();
@@ -51,16 +50,12 @@ class ProjectsViewProject extends JView
 				$layout = 'edit';
 				$this->form	= &$model->getForm();
 				
-				// Pathway
-				$bc->addItem(JText::_('COM_PROJECTS_PROJECT_FORM_TITLE'));
-				
 				// State
 				if (empty($this->item)) {
 					$this->catid = $app->getUserState('portfolio.id', 0);
 					$access = 'core.create';
 				}else{
-					$access = 'core.edit';
-					$bc->addItem($this->item->get('title'));					
+					$access = 'core.edit';					
 				}
 		
 				// Access
@@ -79,26 +74,67 @@ class ProjectsViewProject extends JView
 				
 				// Get Category
 				$this->portfolio = $model->getPortfolio();
-
-				// Pathway
-	  			$bc->addItem($this->item->title);
 	  			break;
 		}
 		
 		// Links
-		$this->links = $this->getLinks();
+		$this->loadLinks();
 		
 		// Display the view
 		$this->setLayout($layout);
+		$this->addToolbar();
 		parent::display($tpl);
 	}
 	
 	
-	protected function getLinks()
+	protected function loadLinks()
 	{
-		return array(
-			'project' => JRoute::_('index.php?option=com_projects&view=project&id='.$this->item->id),
-			'members' => JRoute::_('index.php?option=com_projects&view=members&type=list&id='.$this->item->id)
+		$this->links = array(
+			'portfolios' => 'index.php?option=com_projects&view=portfolios&id=',
+			'project' => 'index.php?option=com_projects&view=project&id=',
+			'members' => 'index.php?option=com_projects&view=members&type=list&id=',
+			'form' => 'index.php?option=com_projects'
 		);
+	}
+	
+	public function getLink($key, $append=''){
+		return JRoute::_($this->links[$key].$append);
+	}
+	
+	protected function addToolbar() 
+	{
+		$this->loadHelper('toolbar');
+		
+		switch($this->getLayout()){
+			case 'edit':
+			case 'form':
+				$title = JText::_('COM_PROJECTS_PROJECT_FORM_TITLE');
+				$icon = 'config';
+				
+				ToolBar::save('project.save');
+				ToolBar::cancel('project.cancel');
+				break;
+				
+			default:
+				$title = $this->item->title;
+				$icon = 'archive';
+				if($this->canDo->get('core.edit')){
+					ToolBar::editList('project.edit');
+				}
+				if($this->item->state && $this->canDo->get('core.edit.state')){
+					ToolBar::unpublish('project.unpublish');
+				}else{
+					if($this->canDo->get('core.edit.state')){
+						ToolBar::publish('project.publish');
+					}
+					if($this->canDo->get('core.delete')){
+						ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_PROJECT_DELETE'), 'project.delete');
+					}
+				}
+				ToolBar::back();
+		}
+		ToolBar::title($title, $icon);
+		
+		echo ToolBar::render();
 	}
 }

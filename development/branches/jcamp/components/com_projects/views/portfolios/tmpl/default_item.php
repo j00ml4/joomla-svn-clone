@@ -18,10 +18,13 @@ defined('_JEXEC') or die;
 		<?php echo $this->item->description;?>
 		<div class="clear"></div>
 		<dl>
-			<dt>projects<dt><dd>xx</dd>
+			<dd><a class="readmore" href="<?php echo $this->getLink('portfolios',$this->item->id);?>">
+				<?php echo JText::sprintf('COM_PROJECTS_PORTFOLIOS_LINK', 'y'); ?>
+			</a></dd>
+			<dd><a class="readmore" href="<?php echo $this->getLink('portfolios',$this->item->id);?>">
+				<?php echo JText::sprintf('COM_PROJECTS_PROJECTS_LINK', 'y'); ?>
+			</a></dd>
 		</dl>
 	</div>
-	<a class="readmore" href="<?php echo $this->getLink('portfolios',$this->item->id);?>">
-		<?php echo JText::_('COM_PROJECTS_PORTFOLIO_LINK'); ?>
-	</a>
+	
 </li>
