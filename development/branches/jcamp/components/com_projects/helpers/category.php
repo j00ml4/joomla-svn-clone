@@ -2,7 +2,7 @@
 /**
  * @version		$Id: category.php 14276 2010-01-18 14:20:28Z louis $
  * @package		Joomla
- * @subpackage	com_projects
+ * @subpackage	Weblinks
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -15,11 +15,11 @@ jimport('joomla.application.component.helper');
 jimport('joomla.application.categories');
 
 /**
- * Projects Component Category Tree
+ * Weblinks Component Category Tree
  *
  * @static
  * @package		Joomla
- * @subpackage	com_projects
+ * @subpackage	Weblinks
  * @since 1.6
  */
 class ProjectsCategories extends JCategories
