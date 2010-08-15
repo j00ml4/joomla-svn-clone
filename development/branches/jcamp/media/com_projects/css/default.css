@@ -423,6 +423,10 @@ div.configuration {
 }
 
 /* -- HEADER ICON STYLES ----------------------------- */
+.icon-48-archive {
+    background-image: url(../images/header/icon-48-archive.png);
+}
+
 .icon-48-generic {
     background-image: url(../images/header/icon-48-generic.png);
 }

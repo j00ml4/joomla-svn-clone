@@ -77,11 +77,12 @@ class ProjectsModelProject extends JModelAdmin
 	protected function populateState()
 	{
 		$app = JFactory::getApplication();	
-
+		
 		// Load the User state.
-		$pk = JRequest::getInt('id', 
-			$app->getUserState($this->option.'.edit.'.$this->getName().'.id'));
-		$this->setState('project.id', $pk);
+		if (!($pk = (int) $app->getUserState($this->option.'.edit.'.$this->getName().'.id'))) {
+			$pk = (int) JRequest::getInt('id');
+		}
+		$this->setState($this->getName().'.id', $pk);
 		$app->setUserState('project.id', $pk);
 	}
 	
@@ -237,8 +238,7 @@ class ProjectsModelProject extends JModelAdmin
 	public function addMembers($pk=null, $members=array())
 	{
 		$members = (array) $members;
-		$c = count(members);
-		if(!c){
+		if(empty($members)){
 			$this->setError(JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 			return false;
 		}
@@ -251,8 +251,8 @@ class ProjectsModelProject extends JModelAdmin
 		$app 	= JFactory::getApplication();
 		$db 	= $this->getDBO();
 		$query	= '';
-		for($i = 0; $i<$c;$i++) {
-			$query .= 'INSERT INTO `#__project_members` (`project_id`,`user_id`) VALUES ('.$pk.','.$members[$i].');';	
+		foreach ($members as $i => $member) {
+			$query .= 'INSERT INTO `#__project_members` (`project_id`,`user_id`) VALUES ('.$pk.','.$member.');';	
 		}		
 		$db->setQuery($query);
 		$db->queryBatch();
@@ -268,8 +268,7 @@ class ProjectsModelProject extends JModelAdmin
 	public function removeMembers($pk, $members=array())
 	{
 		$members = (array) $members;
-		$c = count(members);
-		if(!c){
+		if(empty($members)){
 			$this->setError(JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 			return false;
 		}
@@ -282,8 +281,8 @@ class ProjectsModelProject extends JModelAdmin
 		$app 	= JFactory::getApplication();
 		$db 	= $this->getDBO();
 		$query	= '';
-		for($i = 0; $i<$c;$i++) {
-			$query .= 'DELETE FROM `#__project_members` WHERE `project_id` = '.$pk.' AND `user_id`='.$members[$i].';';	
+		foreach ($members as $i => $member) {
+			$query .= 'DELETE FROM `#__project_members` WHERE `project_id` = '.$pk.' AND `user_id`='.$member.';';	
 		}		
 		$db->setQuery($query);
 		$db->queryBatch();

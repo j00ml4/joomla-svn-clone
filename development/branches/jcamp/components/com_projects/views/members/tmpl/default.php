@@ -17,7 +17,6 @@ $model = $this->getModel();
 ?>
 <div class="projects <?php echo $pageClass;?>">
 <div class="category-list">
-
  	<div>
  	<?php if($this->canDo->get('core.edit')){
  		echo $this->loadTemplate('buttons');
@@ -101,15 +100,16 @@ $model = $this->getModel();
 		</form>
 	</div>
 		
-	
+	<?php if (($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) : ?>
 	<div class="pagination">
-		<?php  if ($this->params->def('show_pagination_results', 1)): ?>
-		<p class="counter">
-			<?php echo $this->pagination->getPagesCounter(); ?>
-		</p>
+
+		<?php if ($this->params->def('show_pagination_results', 1)) : ?>
+		 	<p class="counter">
+				<?php echo $this->pagination->getPagesCounter(); ?>
+			</p>
 		<?php endif; ?>
 		<?php echo $this->pagination->getPagesLinks(); ?>
 	</div>
-
+	<?php endif; ?>
 </div>	
 </div>
