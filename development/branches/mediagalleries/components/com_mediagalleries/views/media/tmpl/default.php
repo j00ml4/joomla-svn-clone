@@ -3,7 +3,7 @@ jimport("joomla.html");
 JHTML::_( 'behavior.modal' ); 
 JHtmlBehavior::modal();
 ?>
-<div class="mediagallery<?php echo $params->get('pageclass_sfx')?>" >
+<div class="mediagallery<?php echo $this->params->get('pageclass_sfx')?>" >
 	<?php //echo $this->thumb; ?>
 	<div class="media"><a href="#"  class="modal" border="0"><img src="<?php	echo plgContentMedia::getThumb($this->item->url);
 	//echo $this->media; ?>"></a></div>
