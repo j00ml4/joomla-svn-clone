@@ -71,10 +71,10 @@ class TableMedia extends JTable
 	 */
 	function bind($data){
 	
-		if (isset($array['params']) && is_array($array['params'])) {
+		if (isset($data['params']) && is_array($data['params'])) {
 			$registry = new JRegistry();
-			$registry->loadArray($array['params']);
-			$array['params'] = (string)$registry;
+			$registry->loadArray($data['params']);
+			$data['params'] = (string)$registry;
 		}
 		
 		//Fix uid
