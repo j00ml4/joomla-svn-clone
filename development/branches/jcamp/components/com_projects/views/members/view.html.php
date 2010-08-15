@@ -18,7 +18,6 @@ jimport('joomla.application.component.view');
  */
 class ProjectsViewMembers extends JView
 {
-	protected $item;
 	protected $items;
 	protected $type;
 	protected $params;
@@ -68,7 +67,12 @@ class ProjectsViewMembers extends JView
 		parent::display($tpl);
 	}
 
-
+	/**
+	 * 
+	 * Enter description here ...
+	 * @return multitype:Ambigous <The, NULL, unknown, mixed>
+	 * @deprecated
+	 */
 	protected function getLinks()
 	{
 		return array(

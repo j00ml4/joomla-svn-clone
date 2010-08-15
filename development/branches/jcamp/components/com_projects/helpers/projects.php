@@ -51,7 +51,7 @@ abstract class ProjectsHelper
 	 * @return	JObject
 	 * @since	1.6
 	 */
-	public function getActions($portfolio_id=0, $project_id=0, $record=null)
+	public static function getActions($portfolio_id=0, $project_id=0, $record=null)
 	{	
 		$user		= JFactory::getUser();
 		$assets		= new JObject;
@@ -123,9 +123,8 @@ abstract class ProjectsHelper
 	 * @param unknown_type $portfolio_id
 	 * @param unknown_type $project_id
 	 */
-	public function canDo($action, $portfolio_id=0, $project_id=0, $record=null){
+	public static function canDo($action, $portfolio_id=0, $project_id=0, $record=null){
 		static $assets;
-		
 		if(empty($assets)){
 			$assets = self::getActions($portfolio_id, $project_id, $record);
 		}
@@ -163,5 +162,32 @@ abstract class ProjectsHelper
 		  $id = JRequest::getInt('Itemid',0);
 		return $id;
 	}
+	
+	
+	/**
+	 * Get links
+	 * 
+	 * Enter description here ...
+	 * @param $key
+	 * @param $append
+	 */
+	public static function getLink($key, $append='')
+	{
+		static $links;
+		if(empty($links)){
+			 $links = array(
+				'form' => 'index.php?option=com_projects',
+				'portfolios' => 'index.php?option=com_projects&view=portfolios&id=',
+				'projects' => 'index.php?option=com_projects&view=projects&id=',
+				'project' => 'index.php?option=com_projects&view=project&id=',
+				'members' => 'index.php?option=com_projects&view=members&type=list&id=',
+				'assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
+				'unassign' => 'index.php?option=com_projects&view=members&type=delete&id='
+			);
+		}
+		return JRoute::_($links[$key].$append);	
+	}
+	
+	
 }
 ?>
