@@ -16,7 +16,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 ?>
 <div class="projects<?php echo $pageClass?>">
 	<div class="two3">
-	<form action="<?php echo $this->getLink('form') ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
+	<form action="<?php echo JFactory::getURI()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 		<div class="projects-content">
 			<?php echo $this->item->description; ?>
 

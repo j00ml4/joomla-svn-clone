@@ -18,15 +18,15 @@ $model	=$this->getModel();
 <ul class="actions">
 		<li>
 			<?php 
-				echo JHTML::_('action.link',JText::_('COM_PROJECTS_DOCUMENTS_BACK_PROJECT_LINK'), 'display', $model->getState('project.id'),
-											'index.php?option=com_projects&view=project&layout=default');
+//				echo JHTML::_('action.link',JText::_('COM_PROJECTS_DOCUMENTS_BACK_PROJECT_LINK'), 'display', $model->getState('project.id'),
+//											'index.php?option=com_projects&view=project&layout=default');
 			?>
 		</li>
 	<?php if($this->canDo->get('project.edit')): ?>
 		<li>
 			<?php 
-				echo JHTML::_('action.link',JText::_('COM_PROJECTS_DOCUMENTS_ADD_DOCUMENT_LINK'), 'display', null,
-											'index.php?option=com_projects&view=document&layout=form');			
+//				echo JHTML::_('action.link',JText::_('COM_PROJECTS_DOCUMENTS_ADD_DOCUMENT_LINK'), 'display', null,
+//											'index.php?option=com_projects&view=document&layout=form');			
 			?>
 		</li>
 		<?php if (!empty($this->items)) : ?>
