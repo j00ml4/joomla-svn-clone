@@ -84,7 +84,7 @@ class ProjectsViewTask extends JView
 		}
 
 	  // set a correct prefix
-		require_once JPATH_COMPONENT.'/helpers/tasks.php';
+	  $this->loadHelper('tasks');
 		$this->prefix = TasksHelper::getPrefix($app->getUserState('task.type'));
 
 		// Display the view
