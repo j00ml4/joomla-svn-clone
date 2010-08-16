@@ -80,6 +80,11 @@ function submitbutton(task) {
 			</div>
 			
 			<div class="formelm">
+				<?php echo $this->form->getLabel('priority'); ?>
+				<?php echo $this->form->getInput('priority'); ?>
+			</div>
+
+			<div class="formelm">
 				<?php echo $this->form->getLabel('estimate'); ?>
 				<?php echo $this->form->getInput('estimate'); ?>
 			</div>

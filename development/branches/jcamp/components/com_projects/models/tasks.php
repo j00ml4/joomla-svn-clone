@@ -67,7 +67,7 @@ class ProjectsModelTasks extends JModelList
 		
 		// Type
 		$type = JRequest::getInt('type', 3); // default => tickets
-		$this->setState('type', $type);
+		$this->setState('task.type', $type);
 			
 		// Filters
 		$this->setState('filter.state',	1);

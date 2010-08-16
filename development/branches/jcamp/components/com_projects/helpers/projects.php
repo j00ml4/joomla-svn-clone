@@ -20,7 +20,7 @@ abstract class ProjectsHelper
 	 * @param $project_id ID of a project
 	 * @param $user_id ID of a user
 	 *  
-	 * @return False in case the user is not a member of the project or ID of user group
+	 * @return NULL in case the user is not a member of the project or ID of user group
 	 * @since	1.6
 	 */
 	public function isMember($project_id=0, $user_id=0)
@@ -132,20 +132,6 @@ abstract class ProjectsHelper
 		return $assets->get($action, false);
 	}
 	
-	
-	/** i don t know if we need this function..
-	 * Resets breadcrumb and adds "Projects" link as first
-	 * 
-	 * @return Reference to breadcrumb object
-	 * @since	1.6
-	 */
-	public function &resetPathway()
-	{
-		$app = &JFactory::getApplication();
-  		$bc = &$app->getPathway();
- 		return $bc;
-	}
-
 	/**
 	 * Method to get ID of actual menu item
 	 * 
@@ -195,7 +181,7 @@ abstract class ProjectsHelper
 	}
 	
 	/**
-	 * Get links
+	 * Method to get links to Get links
 	 * 
 	 * Enter description here ...
 	 * @param $key
@@ -209,12 +195,15 @@ abstract class ProjectsHelper
 				'form' => 'index.php?option=com_projects',
 				'portfolios' => 'index.php?option=com_projects&view=portfolios&id=',
 				'projects' => 'index.php?option=com_projects&view=projects&id=',
-				'project' => 'index.php?option=com_projects&view=project&id=',
-				'members' => 'index.php?option=com_projects&view=members&type=list&id=',
-				'assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
-				'unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
-			 	'tasks' => 'index.php?option=com_projects&view=tasks&type=tasks&id=',
-			);
+				'project.overview' => 'index.php?option=com_projects&view=project&id=',
+				'documents' => 'index.php?option=com_projects&view=documents&id=',
+			 	'members.list' => 'index.php?option=com_projects&view=members&type=list&id=',
+				'members.assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
+				'members.unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
+			 	'tasks.tasks' => 'index.php?option=com_projects&view=tasks&type=2&id=',
+			 	'tasks.tickets' => 'index.php?option=com_projects&view=tasks&type=3&id=',
+			 	'tasks.milestones' => 'index.php?option=com_projects&view=tasks&type=1&id=',
+			 );
 		}
 		return JRoute::_($links[$key].$append);	
 	}

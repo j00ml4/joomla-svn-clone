@@ -11,12 +11,12 @@
 defined('_JEXEC') or die;
 ?>
 <div class="projects-content projects-frame projects-space">
-	<h4><?php echo JText::_('COM_PROJECTS_MEMBERS_LIST');?></h4>
+	<h4><?php echo JText::_('COM_PROJECTS_PROJECT_MEMBERS_LIST');?></h4>
 	<ul class="items-list members-list">
 		<li>elf</li>
 		<li>eden</li>
 		<li>har</li>
 	</ul>
 	<a href="<?php echo ProjectsHelper::getLink('members', $this->item->id); ?>" class="readmore">
-		<?php echo JText::_('COM_PROJECTS_MEMBERS_LIST_LINK'); ?></a>
+		<?php echo JText::_('COM_PROJECTS_PROJECT_MEMBERS_LIST_LINK'); ?></a>
 </div>
