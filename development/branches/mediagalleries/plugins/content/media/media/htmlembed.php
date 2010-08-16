@@ -43,6 +43,7 @@
  */
 function addVideoYoutube( $video, $width='', $height='', $params=array() ){	
 
+	
 	if( strpos( $video, '/v/' ) ) {// If yes, New way
 		$video = substr( strstr( $video, '/v/' ), 3 );
 		$video = explode( '/', $video);
@@ -277,8 +278,8 @@ function addVideoVeoh( $video, $width='', $height='',  $autostart='0', $bgcolor=
  * @param string $p [optional]
  * @param string $atr [optional]
  */			
-function addPicture( $video, $width='', $height='', $a='' ){ 		
-	return	'<img '. $a .' class="mediagalleries" style="'.$width . $height.'" src="'. $video .'" />';
+function addPicture( $img, $width='', $height='', $a='' ){ 		
+	return	'<img '. $a .' class="mediagalleries" style="'.$width . $height.'" src="'. $img .'" />';
 	
 }			
 	
