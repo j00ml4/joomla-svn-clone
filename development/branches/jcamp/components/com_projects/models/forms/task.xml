@@ -50,6 +50,14 @@
 			label="COM_PROJECTS_FIELD_ESTIMATE_LABEL"
 			size="3" />	       
               
+		<field id="priority" 
+			name="priority" 
+			type="category"
+			description="COM_PROJECTS_FIELD_PRIORITY_DESC"
+			label="COM_PROJECTS_FIELD_PRIORITY_LABEL"
+			extension="com_projects.task.priorities"
+		/>
+
         <field id="description"
 			name="description" 
 			type="editor"

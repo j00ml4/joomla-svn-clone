@@ -38,7 +38,6 @@ class ProjectsViewProjects extends JView
 	{
 		$app		= JFactory::getApplication();
 		$model		= $this->getModel();
-		$bc 		= $app->getPathway();
 	  
 		// Get some data from the models
 		$this->items		= $model->getItems();
@@ -59,16 +58,8 @@ class ProjectsViewProjects extends JView
 				for($i = 0; $i < $c;$i++) {
 						$this->items[$i]->description = JHtml::_('content.prepare', $this->items[$i]->description);
 				}
+			}						
 				
-				// Get category
-				if(!empty($this->portfolio)){
-					$bc->addItem($this->portfolio->title);
-				}						
-		}
-		
-		// Show projects
-		//$bc->addItem(JText::_('COM_PROJECTS_PROJECTS_VIEW_TITLE'));
-		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			return JError::raiseError(500, implode("\n", $errors));

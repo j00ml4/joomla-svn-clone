@@ -65,13 +65,8 @@ class ProjectsViewTasks extends JView
 		if (count($errors = $this->get('Errors'))) {
 			return JError::raiseError(500, implode("\n", $errors));
 		}
-		
-		// add 'home page' of our component breadcrumb
-	  	$bc = $app->getPathway();
-	  	$bc->addItem($this->project->title, 'index.php?option=com_projects&view=project&id='.$this->project->id);
-	  	$bc->addItem(JText::_('COM_PROJECTS_TASKS'));
-
-	  	// set a correct prefix
+	
+	 	// set a correct prefix
 		$this->loadHelper('tasks');
 		$this->type = TasksHelper::getPrefix($model->getState('type'));
 
@@ -85,12 +80,12 @@ class ProjectsViewTasks extends JView
 	{
 		$this->loadHelper('toolbar');
 		
-		switch ($this->state('type')){
+/*		switch ($this->state('type')){
 			case 1:
 				
 				break;
 			case 2:	
-		}
+		} */
 		$title = JText::_('COM_PROJECTS_TASKS_LIST_');
 		$icon = 'archive';
 		if($this->canDo->get('core.edit')){

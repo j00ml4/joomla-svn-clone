@@ -16,5 +16,6 @@ defined('_JEXEC') or die;
 		<li>milestone</li>
 		<li>milestone</li>
 	</ul>
-	
+	<a href="<?php echo ProjectsHelper::getLink('tasks.milestones', $this->item->id); ?>" class="readmore">
+		<?php echo JText::_('COM_PROJECTS_TASKS_MILESTONE_LINK'); ?></a>	
 </div>

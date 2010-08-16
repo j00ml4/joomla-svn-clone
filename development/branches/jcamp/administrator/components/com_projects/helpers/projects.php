@@ -38,17 +38,23 @@ class ProjectsHelper
 			'index.php?option=com_categories&extension=com_projects',
 			$extension == 'com_projects'
 		);
+				
+		JSubMenuHelper::addEntry(
+			JText::_('COM_PROJECTS_DOCUMENT_CATEGORIES'),
+			'index.php?option=com_categories&extension=com_projects.document',
+			$extension == 'com_projects.document'
+		);
 		
 		JSubMenuHelper::addEntry(
 			JText::_('COM_PROJECTS_TASK_CATEGORIES'),
 			'index.php?option=com_categories&extension=com_projects.task',
 			$extension == 'com_projects.task'
 		);
-		
+
 		JSubMenuHelper::addEntry(
-			JText::_('COM_PROJECTS_DOCUMENT_CATEGORIES'),
-			'index.php?option=com_categories&extension=com_projects.document',
-			$extension == 'com_projects.document'
+			JText::_('COM_PROJECTS_TASK_PRIORITIES'),
+			'index.php?option=com_categories&extension=com_projects.task.priorities',
+			$extension == 'com_projects.task.priorities'
 		);
 		
 		// Each Views
@@ -65,6 +71,10 @@ class ProjectsHelper
 				JToolBarHelper::title( JText::_('COM_PROJECTS_DOCUMENT_CATEGORIES'), 'categories' );
 				break;
 					
+			case 'com_projects.task.priorities':
+				JToolBarHelper::title( JText::_('COM_PROJECTS_TASK_PRIORITIES'), 'categories' );
+				break;
+				
 			default:
 				JToolBarHelper::title( JText::_('COM_PROJECTS'), 'article' );	
 		}

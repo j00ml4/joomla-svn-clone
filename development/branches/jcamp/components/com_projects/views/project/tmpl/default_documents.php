@@ -16,4 +16,6 @@ defined('_JEXEC') or die;
 		<li>doc1</li>
 		<li>doc2</li>
 	</ul>
+	<a href="<?php echo ProjectsHelper::getLink('documents', $this->item->id); ?>" class="readmore">
+		<?php echo JText::_('COM_PROJECTS_PROJECT_DOCUMENT_LIST_LINK'); ?></a>
 </div>
