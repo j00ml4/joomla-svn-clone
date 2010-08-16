@@ -1,0 +1,1 @@
+ALTER TABLE  `#__project_tasks` ADD  `priroty` INT NOT NULL AFTER  `estimate`
