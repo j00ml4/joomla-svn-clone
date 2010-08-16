@@ -133,7 +133,7 @@ class plgContentMedia extends JPlugin
 	 * @param int $width [optional]
 	 * @param boolean $autoplay True if yes [optional]
 	 */
-	public function addMedia( $media, $width=0, $height =0, $autostart=0 )
+	public function addMedia( $media, $width='', $height ='', $autostart=0 )
 	{	
 		// The propose of this is to get the defaults set by the admin -> Fixed :D 
 		
@@ -182,7 +182,10 @@ class plgContentMedia extends JPlugin
 			$vparams[] = 'border='.$pparams->get('youtube_border');//, 'advanced');
 			$vparams[] = 'color1=0x'.$pparams->get('youtube_color1');//, 'advanced');
 			$vparams[] = 'color2=0x'.$pparams->get('youtube_color2');//, 'advanced');
-	
+			if(!isset($width) or !$width)
+			{
+				$width='425';
+			}
 			$replace = addVideoYoutube($media, $width, $height, $vparams );
 		}
 		
