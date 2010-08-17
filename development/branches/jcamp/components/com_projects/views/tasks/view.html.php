@@ -119,7 +119,6 @@ class ProjectsViewTasks extends JView {
             ToolBar::spacer();
             ToolBar::back();
         }
-
         ToolBar::title($title, $icon);
 
         echo ToolBar::render();
