@@ -10,7 +10,7 @@ defined('JPATH_BASE') or die;
 jimport('joomla.form.formfield');
 
 /**
- * Supports a modal article picker.
+ * Supports a modal media picker.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_mediagalleries
@@ -82,7 +82,7 @@ class JFormFieldModal_Media extends JFormField
 		$html[] = '  </div>';
 		$html[] = '</div>';
 
-		// The active article id field.
+		// The active media id field.
 		if (0 == (int)$this->value) { 
 			$value = '';
 		} else {
