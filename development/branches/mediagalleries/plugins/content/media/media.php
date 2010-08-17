@@ -182,10 +182,7 @@ class plgContentMedia extends JPlugin
 			$vparams[] = 'border='.$pparams->get('youtube_border');//, 'advanced');
 			$vparams[] = 'color1=0x'.$pparams->get('youtube_color1');//, 'advanced');
 			$vparams[] = 'color2=0x'.$pparams->get('youtube_color2');//, 'advanced');
-			if(!isset($width) or !$width)
-			{
-				$width='425';
-			}
+		
 			$replace = addVideoYoutube($media, $width, $height, $vparams );
 		}
 		

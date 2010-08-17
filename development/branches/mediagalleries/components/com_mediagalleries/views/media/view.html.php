@@ -42,7 +42,7 @@ class MediagalleriesViewMedia extends JView
 		$this->item->params= $registry;
 		
 		if ($this->item->url) {					
-			$this->media=plgContentMedia::addMedia($this->item->url,$this->item->params->get('width',425),$this->item->params->get('height'),$this->params->get('autostart',0));
+			$this->media=plgContentMedia::addMedia($this->item->url,$this->item->params->get('width'),$this->item->params->get('height'),$this->params->get('autostart',0));
 		} else {
 			//TODO create proper error handling
 			return  JError::raiseError(404, "Media Not Found");

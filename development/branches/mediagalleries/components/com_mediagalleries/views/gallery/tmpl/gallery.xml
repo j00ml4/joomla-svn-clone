@@ -21,22 +21,6 @@
 
 	<!-- Add fields to the parameters object for the layout. -->
 	<fields name="params">
-		<fieldset name="basic">
-			<field name="preview_width"
-					type="text"
-					label="Preview Width"
-					description =""
-					default=""
-			/>
-			<field name="preview_height"
-					type="text"
-					label="Preview Height"
-					description =""
-					default=""
-			/>
-			
-		</fieldset>
-		
 		<fieldset name="advanced" label="Advanced">
 			<field name="show_title" 
 					type="list" 
