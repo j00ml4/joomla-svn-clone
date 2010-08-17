@@ -21,13 +21,14 @@ class MediagalleriesViewForm extends JView
 {
 	protected $state;
 	protected $item;
+	
 
 	public function display($tpl = null)
 	{
 		// Initialise variables.
 		$app		= JFactory::getApplication();
 		$user		= JFactory::getUser();
-
+		
 		// Get model data.
 		$state	= $this->get('State');
 		$item	= $this->get('Item');
