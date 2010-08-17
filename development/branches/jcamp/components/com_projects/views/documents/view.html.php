@@ -48,6 +48,33 @@ class ProjectsViewDocuments extends JView
 		
 		// Display the view
 		$this->setLayout('default');
+                $this->addToolbar();
 		parent::display($tpl);
+	}
+	
+	
+	protected function addToolbar() 
+	{
+		$this->loadHelper('toolbar');
+		
+		$title = JText::sprintf('COM_PROJECTS_DOCUMENTS_LIST_TITLE', $this->project->title);	
+		$icon = 'article';
+		
+		if($this->canDo->get('document.create')){
+			ToolBar::addNew('document.add');
+		}
+		if($this->canDo->get('document.edit')){
+			ToolBar::editList('document.edit');
+		}
+		if($this->canDo->get('document.delete')){
+			ToolBar::deleteList('documents.edit');
+		}
+		if($this->params->get('show_back_button')){
+			ToolBar::spacer();
+			ToolBar::back();
+		}
+		
+		ToolBar::title($title, $icon);
+		echo ToolBar::render();
 	}
 }
