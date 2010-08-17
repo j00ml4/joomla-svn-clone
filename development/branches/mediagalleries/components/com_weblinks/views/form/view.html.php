@@ -17,7 +17,7 @@ jimport('joomla.application.component.view');
  * @subpackage	com_weblinks
  * @since		1.5
  */
-class WeblinksViewForm extends JView
+class MediagalleriesViewForm extends JView
 {
 	protected $state;
 	protected $item;
@@ -34,10 +34,10 @@ class WeblinksViewForm extends JView
 		$form	= $this->get('Form');
 
 		if (empty($item->id)) {
-			$authorised = $user->authorise('core.create', 'com_weblinks');
+			$authorised = $user->authorise('core.create', 'com_mediagalleries');
 		}
 		else {
-			$authorised = $user->authorise('core.edit', 'com_weblinks.weblink.'.$item->id);
+			$authorised = $user->authorise('core.edit', 'com_mediagalleries.media.'.$item->id);
 		}
 
 		if ($authorised !== true) {
@@ -58,11 +58,11 @@ class WeblinksViewForm extends JView
 		// Create a shortcut to the parameters.
 		$params	= &$state->params;
 
-		$this->assignRef('state',	$state);
-		$this->assignRef('params',	$params);
-		$this->assignRef('item',	$item);
-		$this->assignRef('form',	$form);
-		$this->assignRef('user',	$user);
+		$this->state=$state;
+		$this->params=$params;
+		$this->item=$item;
+		$this->form=$form;
+		$this->user=$user;
 
 		$this->_prepareDocument();
 
@@ -85,9 +85,9 @@ class WeblinksViewForm extends JView
 		{
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		} else {
-			$this->params->def('page_heading', JText::_('COM_WEBLINKS_FORM_EDIT_WEBLINK'));
+			$this->params->def('page_heading', JText::_('COM_MEDIAGALLERIES_FORM_EDIT_MEDIA'));
 		}
-		$title = $this->params->def('page_title', JText::_('COM_WEBLINKS_FORM_EDIT_WEBLINK'));
+		$title = $this->params->def('page_title', JText::_('COM_MEDIAGALLERIES_FORM_EDIT_MEDIA'));
 		if ($app->getCfg('sitename_pagetitles', 0)) {
 			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
 		}
