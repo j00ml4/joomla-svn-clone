@@ -17,8 +17,8 @@ jimport('joomla.application.component.modellist');
  * @author eden & elf
  *
  */
-class ProjectsModelTasks extends JModelList {
-
+class ProjectsModelTasks extends JModelList
+{
     /**
      * Category items data
      *
@@ -191,16 +191,22 @@ class ProjectsModelTasks extends JModelList {
     }
 
     /**
-     * Get the parent categorie.
-     *
-     * @param	int		An optional category id. If not supplied, the model state 'portfolio.id' will be used.
-     *
-     * @return	mixed	An array of categories or false if an error occurs.
+     * function to get the project
+     * @param $pk
      */
     public function getParent() {
-        if (!is_object($this->_item)) {
-            $this->getCategory();
+        // Get project ID
+        if (empty($this->_parent)) {
+            $pk = $this->getState('parent.id');
+            if (empty($pk)) {
+                return null;
+            }
+
+            //$this->setState('portfolio.id',$pk);
+            $model = JModel::getInstance('Task', 'ProjectsModel');
+            $this->_parent = $model->getItem($pk);
         }
+
         return $this->_parent;
     }
 
@@ -238,5 +244,4 @@ class ProjectsModelTasks extends JModelList {
     }
 
 }
-
 ?>
