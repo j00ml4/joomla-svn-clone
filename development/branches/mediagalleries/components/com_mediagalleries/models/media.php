@@ -106,4 +106,41 @@ class MediagalleriesModelMedia extends JModelItem
 		$media = $this->getTable('Mediagalleries');
 		return $media->hit($id);
 	}
+	
+	public function getForm($data = array(), $loadData = true)
+	{
+		// Get the form.
+		$form = $this->loadForm('com_mediagalleries.media', 'media', array('control' => 'jform', 'load_data' => $loadData));
+		if (empty($form)) {
+			return false;
+		}
+
+		// Determine correct permissions to check.
+		if ($this->getState('media.id')) {
+			// Existing record. Can only edit in selected categories.
+			$form->setFieldAttribute('catid', 'action', 'core.edit');
+		} else {
+			// New record. Can only create in selected categories.
+			$form->setFieldAttribute('catid', 'action', 'core.create');
+		}
+
+		return $form;
+		
+	}
+	
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_mediagalleries.edit.media.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
+		}
+
+		return $data;
+	}
+	protected  function loadForm()
+	{
+		
+	}
 }
