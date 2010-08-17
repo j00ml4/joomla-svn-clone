@@ -13,19 +13,19 @@ defined('_JEXEC') or die;
 // Create a shortcut for params.
 $params	=& $item->params;
 $item	=& $this->item;
-$link = JRoute::_('index.php?option=com_projects&view=project&id='.$item->id);
+$link = ProjectsHelper::getLink('project', $item->id);
 ?>
 
 <div class="items-row item">
-	<h2>
-		<a href="<?php echo $link; ?>"><?php echo $item->title;?></a>
-	</h2>
+	<h4>
+            <a href="<?php echo $link; ?>"><?php echo $item->title;?></a>
+	</h4>
 	<div class="category-desc">
-		<?php echo $item->description;?>
+            <?php echo $item->description;?>
 	</div>
 
-	<a href="<?php echo $link; ?>">
-		<?php echo JText::_('COM_PROJECTS_PROJECTS_SEE_PROJECT');?>
+	<a href="<?php echo $link; ?>" class="readmore">
+            <?php echo JText::_('COM_PROJECTS_PROJECTS_SEE_PROJECT');?>
 	</a>
 </div>
 <div class="clr"></div>
