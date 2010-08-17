@@ -12,9 +12,9 @@
 			addfieldpath="/administrator/components/com_mediagalleries/models/fields">
 
 			<field name="id" type="modal_media"
-				label="COM_CONTENT_FIELD_SELECT_ARTICLE_LABEL"
+				label="JSELECT"
 				required="true"
-				description="COM_CONTENT_FIELD_SELECT_ARTICLE_DESC"
+				description="COM_MEDIAGALLERIES_SELECT_MEDIA"
 			/>
 		</fieldset>
 	</fields>

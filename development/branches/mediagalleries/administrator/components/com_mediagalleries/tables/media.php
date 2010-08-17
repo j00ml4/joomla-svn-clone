@@ -53,7 +53,7 @@ class TableMedia extends JTable
 		/*
 		if ( !(	strpos('http://',$this->url)|| strpos( $this->url, 'https://')) )
 		{
-			$this->setError('Invalid Item sorry could not save');
+			$this->setError('COM_MEDIAGALLERIES_INVALID_URL');
 			return false;
 		}
 		*/
