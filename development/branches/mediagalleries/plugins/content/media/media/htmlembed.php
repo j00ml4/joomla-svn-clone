@@ -43,7 +43,11 @@
  */
 function addVideoYoutube( $video, $width='', $height='', $params=array() ){	
 
-	
+	if( !$width ){
+		$width='width: 425px;';
+		$height='height: 344px;';// Auto H		
+		
+		}
 	if( strpos( $video, '/v/' ) ) {// If yes, New way
 		$video = substr( strstr( $video, '/v/' ), 3 );
 		$video = explode( '/', $video);
