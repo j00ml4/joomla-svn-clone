@@ -9,10 +9,17 @@
 
 // no direct access
 defined('_JEXEC') or die;
+jimport('joomla.html.html.behavior');
 
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
 $pageClass = $this->params->get('pageclass_sfx');
+//Loading Mootools
+
+JHtml::script("media/mediagalleries/js/script.js",true);
+//JHtml::stylesheet("media/mediagalleries/css/gallery.css");
+dump($this->params);
+
 
 ?>
 <div class="category-list <?php echo $pageClass;?>">

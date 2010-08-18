@@ -41,8 +41,27 @@ class MediagalleriesViewGallery extends JView
 		$document	= &JFactory::getDocument();
 		$uri 		= &JFactory::getURI();
 		$pathway	= &$app->getPathway();
-		$cparams =& $app->getParams();
+		$this->params=& $app->getParams();
 		$model =& $this->getModel('gallery');
+		$width="";
+		$height="";
+		$thumb_width="";
+		$thumb_height="";
+    	if( $this->params->get('width',500) ){			
+			$width="width: ".$this->params->get('width')."px;";
+		}
+    	if( $this->params->get('height') ){			
+			$width="width: ".$this->params->get('height')."px;";
+		}
+    	if( $this->params->get('thumb_width',100) ){			
+			$width="width: ".$this->params->get('thumb_width')."px;";
+		}
+    	if( $this->params->get('thumb_height') ){			
+			$width="width: ".$this->params->get('thumb_height')."px;";
+		}
+		$css=".thumbnail \n	{ \n ".$thumb_width. " \n".$thumb_height."\n	cursor: pointer; \n } 	#main_image img \n	{ \n". $width. " \n". $height. "\n } \n #main_image \n { \n". $height. " \n }";
+		$document->addStyleDeclaration($css);
+		
 		
     	// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -55,16 +74,7 @@ class MediagalleriesViewGallery extends JView
 		$user	= &JFactory::getUser();
 		$groups	= $user->authorisedLevels();
 		
-     	// Set Custom Limit
-		if($cparams->get('limit') ){
-			$limit = $app->getUserStateFromRequest(
-				'gallery.list.limit', 'limit', 
-				$cparams->get('limit'), 'int' );
-				
-			$model->setState('limit', $limit);
-		}
-		
-		// Get some data from the model
+     	// Get some data from the model
 		
 		//$total		=& $this->get('total');
 		
@@ -88,7 +98,7 @@ class MediagalleriesViewGallery extends JView
 				
 	
 		$this->action=$uri->toString();
-		$this->params=$cparams;
+		
 		$this->user=&JFactory::getUser();
 		//Display
 		parent::display($tpl);
