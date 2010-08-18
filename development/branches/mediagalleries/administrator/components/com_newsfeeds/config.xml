@@ -13,12 +13,9 @@
 			default="1"
 			label="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_DESC">
-			<option
-				value="0">JHIDE</option>
-			<option
-				value="1">JSHOW</option>
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
 		</field>
-
 
 		<field
 			id="show_feed_description"
@@ -27,12 +24,9 @@
 			default="1"
 			label="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_FEED_DESCRIPTION_DESC">
-			<option
-				value="0">JHIDE</option>
-			<option
-				value="1">JSHOW</option>
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
 		</field>
-
 
 		<field
 			id="show_item_description"
@@ -41,10 +35,8 @@
 			default="1"
 			label="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_LABEL"
 			description="COM_NEWSFEEDS_FIELD_SHOW_ITEM_DESCRIPTION_DESC">
-			<option
-				value="0">JHIDE</option>
-			<option
-				value="1">JSHOW</option>
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
 		</field>
 
 		<field
@@ -174,25 +166,55 @@
 			name="show_articles"
 			type="radio"
 			default="1"
-			label="COM_NEWSFEEDS_FIELD_NUM_ARTICLES_COLUMN_LABEL"
-			description="COM_NEWSFEEDS_FIELD_NUM_ARTICLES_COLUMN_DESC">
-			<option
-				value="0">JHIDE</option>
-			<option
-				value="1">JSHOW</option>
+			label="JGLOBAL_SHOW_CATEGORY_IMAGE_LABEL"
+			description="JGLOBAL_SHOW_CATEGORY_IMAGE_DESC"
+		>
+	 		<option value="0">JHIDE</option>
+	 		<option value="1">JSHOW</option>
+	 	</field>
+		
+		<field name="maxLevel" type="list"
+			description="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_DESC"
+			label="JGLOBAL_MAXIMUM_CATEGORY_LEVELS_LABEL"
+			default="-1"
+		>
+			<option value="0">JNONE</option>
+			<option value="-1">JALL</option>
+			<option value="1">J1</option>
+			<option value="2">J2</option>
+			<option value="3">J3</option>
+			<option value="4">J4</option>
+			<option value="5">J5</option>
 		</field>
-
+		
+		<field name="show_empty_categories" type="radio"
+			label="JGLOBAL_SHOW_EMPTY_CATEGORIES_LABEL"
+			description="COM_NEWSFEEDS_SHOW_EMPTY_CATEGORIES_DESC"
+			default="0"
+		>
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+		
+		<field name="show_subcat_desc" type="radio"
+			default="1"
+			label="JGLOBAL_SHOW_SUBCATEGORIES_DESCRIPTION_LABEL"
+			description="JGLOBAL_SHOW_SUBCATEGORIES_DESCRIPTION_DESC"
+		>
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
+		</field>
+			
 		<field
-			id="show_link"
-			name="show_link"
+			id="show_cat_items"
+			name="show_cat_items"
 			type="radio"
 			default="1"
-			label="COM_NEWSFEEDS_FIELD_SHOW_LINKS_LABEL"
-			description="COM_NEWSFEEDS_FIELD_SHOW_LINKS_DESC">
-			<option
-				value="0">JHIDE</option>
-			<option
-				value="1">JSHOW</option>
+			label="COM_NEWSFEEDS_FIELD_SHOW_CAT_ITEMS_LABEL"
+			description="COM_NEWSFEEDS_FIELD_SHOW_CAT_ITEMS_DESC"
+		>
+			<option value="0">JHIDE</option>
+			<option value="1">JSHOW</option>
 		</field>
 	 		
 		<field name="show_pagination"
@@ -204,18 +226,6 @@
 				<option value="1">JSHOW</option>
 				<option value="2">JGLOBAL_AUTO</option>
 		</field>
-
-			<field
-				name="show_pagination_results"
-				type="radio"
-				default="1"
-				label="COM_NEWSFEEDS_FIELD_PAGINATION_RESULTS_LABEL"
-				description="COM_NEWSFEEDS_FIELD_PAGINATION_RESULTS_DESC">
-				<option
-					value="0">JHIDE</option>
-				<option
-					value="1">JSHOW</option>
-			</field>
 
 		
 
@@ -234,6 +244,6 @@
 			label="JCONFIG_PERMISSIONS_LABEL"
 			filter="rules"
 			component="com_newsfeeds"
-			section="component" />
+			section="component"/>
 	</fieldset>
 </config>
