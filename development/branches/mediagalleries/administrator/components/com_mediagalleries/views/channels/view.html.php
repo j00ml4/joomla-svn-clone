@@ -1,6 +1,6 @@
 <?php
 /**
- * User Channels View for mediagalleries Component
+ * mediagalleries View for Hello World Component
  * 
  * @package    Joomla.Tutorials
  * @subpackage Components
@@ -14,57 +14,91 @@ defined('_JEXEC') or die();
 jimport( 'joomla.application.component.view' );
 
 /**
- * User Channels View 
+ * mediagalleries View
  *
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class mediagalleriesViewChannels extends JView
+class MediagalleriesViewGalleries extends JView
 {
+	
+	protected $user;
+	protected $lists;
+	protected $items;
+	protected $pagination;
+	protected $state;
     /**
-     * Hellos view display method
+     * display method for the galleries view
      * @return void
      **/
     function display($tpl = null)
     {
-    	global $mainframe, $option;
-
-		// Define
-		$db		=& JFactory::getDBO();
-		$uri	=& JFactory::getURI();
-
-		$filter_state		= $mainframe->getUserStateFromRequest( $option.'filter_state',		'filter_state',		'',				'word' );
-		$filter_catid		= $mainframe->getUserStateFromRequest( $option.'filter_catid',		'filter_catid',		0,				'int' );
-		$filter_order_Dir	= $mainframe->getUserStateFromRequest( $option.'filter_order_Dir',	'filter_order_Dir',	'',				'word' );
-		$search				= $mainframe->getUserStateFromRequest( $option.'search',			'search',			'',				'string' );
-		$search				= JString::strtolower( $search );
-
-/*		// Get data from the model
-		$items		= & $this->get( 'Data');
-		$total		= & $this->get( 'Total');
-		$pagination = & $this->get( 'Pagination' );
-
-		// build list of categories
-		$javascript 	= 'onchange="document.adminForm.submit();"';
-		$lists['catid'] = JHTML::_('list.category',  'filter_catid', $option, intval( $filter_catid ), $javascript );
-		$lists['state']	= JHTML::_('grid.state',  $filter_state );
+    	// Vars		
+		$this->state		= $this->get('State');
+		$this->items		= $this->get('Items');
+		$this->pagination	= $this->get('Pagination');
+		$this->user			= JFactory::getUser();
 		
-		// table ordering
-		$lists['order_Dir'] = $filter_order_Dir;
-		$lists['order'] = $filter_order;
+    	// Check for errors.
+		if (count($errors = $this->get('Errors'))) {
+			JError::raiseError(500, implode("\n", $errors));
+			return false;
+		}
 
-		// search filter
-		$lists['search']= $search;
 		
-		// Assign References
-		$this->assignRef('user',		JFactory::getUser());
-		$this->assignRef('lists',		$lists);
-		$this->assignRef('items',		$items);
-		$this->assignRef('pagination',	$pagination);
-*/		
-
 		// Display
+		self::addToolBar();
 		parent::display($tpl);
     }
-	
-}
+    
+    
+	/**
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
+	 */
+	protected function addToolbar()
+	{
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'mediagalleries.php';
+
+		$state	= $this->get('State');
+		$canDo	= MediagalleriesHelper::getActions($state->get('filter.category_id'));
+
+		JToolBarHelper::title(JText::_('COM_MEDIAGALLERIES_MANAGER_MEDIAS'), 'media');
+		if ($canDo->get('core.create')) {
+			JToolBarHelper::addNew('media.add','JTOOLBAR_NEW');
+		}
+		if ($canDo->get('core.edit')) {
+			JToolBarHelper::editList('media.edit','JTOOLBAR_EDIT');
+		}
+		JToolBarHelper::divider();
+		if ($canDo->get('core.edit.state')) {
+
+			JToolBarHelper::divider();
+			JToolBarHelper::custom('galleries.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::custom('galleries.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+
+			if ($state->get('filter.state') != -1 ) {
+				JToolBarHelper::divider();
+				if ($state->get('filter.state') != 2) {
+					JToolBarHelper::archiveList('galleries.archive','JTOOLBAR_ARCHIVE');
+				}
+				else if ($state->get('filter.state') == 2) {
+					JToolBarHelper::unarchiveList('galleries.publish', 'JTOOLBAR_UNARCHIVE');
+				}
+			}
+		}
+		if(JFactory::getUser()->authorise('core.manage','com_checkin')) {
+			JToolBarHelper::custom('galleries.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+		}
+		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
+			JToolBarHelper::deleteList('', 'galleries.delete','JTOOLBAR_EMPTY_TRASH');
+		} else if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::trash('galleries.trash','JTOOLBAR_TRASH');
+		}
+		if ($canDo->get('core.admin')) {
+			JToolBarHelper::divider();
+			JToolBarHelper::preferences('com_mediagalleries');
+		}
+	}
+ }
