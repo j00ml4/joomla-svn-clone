@@ -21,8 +21,8 @@
 		<field name="show_contact_list"
 			type="radio"
 			default="0"
-			label="COM_CONTACT_FIELD_CONTACT_SHOW_LIST_LABEL"
-			description="COM_CONTACT_FIELD_CONTACT_SHOW_LIST_LABEL"
+			description="COM_CONTACT_FIELD_CONTACT_SHOW_LIST_DESC"
+				label="COM_CONTACT_FIELD_CONTACT_SHOW_LIST_LABEL"
 		>
 			<option value="0">JHIDE</option>
 			<option value="1">JSHOW</option>
@@ -138,7 +138,8 @@
 		<field name="show_fax"
 			type="radio"
 			default="1"
-			label="COM_CONTACT_FIELD_PARAMS_FAX_LABEL" description="COM_CONTACT_FIELD_PARAMS_FAX_DESC"
+			label="COM_CONTACT_FIELD_PARAMS_FAX_LABEL" 
+			description="COM_CONTACT_FIELD_PARAMS_FAX_DESC"
 		>
 			<option value="0">JHIDE</option>
 			<option value="1">JSHOW</option>
@@ -450,15 +451,25 @@
 		label="COM_CONTACT_FIELD_CONFIG_TABLE_OF_CONTACTS_LABEL"
 		description="COM_CONTACT_FIELD_CONFIG_TABLE_OF_CONTACTS_DESC"
 	>
-		<field name="show_headings"
-			type="radio"
-			default="1"
-			label="COM_CONTACT_FIELD_CONFIG_TABLE_HEADINGS_LABEL"
-			description="COM_CONTACT_FIELD_CONFIG_TABLE_HEADINGS_DESC"
-		>
-			<option value="0">JHIDE</option>
-			<option value="1">JSHOW</option>
-		</field>
+		<field name="show_pagination_limit" type="radio"
+				default="1"
+				description="JGLOBAL_DISPLAY_SELECT_DESC"
+				label="JGLOBAL_DISPLAY_SELECT_LABEL"
+			>
+				
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>		
+			
+			<field name="show_headings" type="radio"
+				default="1"
+				description="JGLOBAL_SHOW_HEADINGS_DESC"
+				label="JGLOBAL_SHOW_HEADINGS_LABEL"
+			>
+				
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
 
 		<field name="show_position_headings" type="radio"
 			default="1"
@@ -482,7 +493,8 @@
 
 		<field name="show_telephone_headings"
 			type="radio"
-			default="1" label="COM_CONTACT_FIELD_CONFIG_PHONE_LABEL"
+			default="1"
+			label="COM_CONTACT_FIELD_CONFIG_PHONE_LABEL"
 			description="COM_CONTACT_FIELD_CONFIG_PHONE_DESC"
 		>
 			
@@ -492,7 +504,8 @@
 
 		<field name="show_mobile_headings"
 			type="radio"
-			default="1" label="COM_CONTACT_FIELD_CONFIG_MOBILE_LABEL"
+			default="0"
+			label="COM_CONTACT_FIELD_CONFIG_MOBILE_LABEL"
 			description="COM_CONTACT_FIELD_CONFIG_MOBILE_DESC"
 		>
 			
@@ -502,7 +515,8 @@
 
 		<field name="show_fax_headings"
 			type="radio"
-			default="1" label="COM_CONTACT_FIELD_CONFIG_FAX_LABEL"
+			default="0"
+			label="COM_CONTACT_FIELD_CONFIG_FAX_LABEL"
 			description="COM_CONTACT_FIELD_CONFIG_FAX_DESC"
 		>
 			
@@ -511,7 +525,8 @@
 		</field>
 
 		<field name="show_suburb_headings" type="radio"
-			default="0" label="COM_CONTACT_FIELD_CONFIG_SUBURB_LABEL"
+			default="0"
+			label="COM_CONTACT_FIELD_CONFIG_SUBURB_LABEL"
 			description="COM_CONTACT_FIELD_CONFIG_SUBURB_DESC"
 		>
 			
@@ -521,7 +536,8 @@
 
 		<field name="show_state_headings"
 			type="radio"
-			default="0" label="JGLOBAL_STATE"
+			default="0"
+			label="JGLOBAL_STATE"
 			description="COM_CONTACT_FIELD_CONFIG_STATE_DESC"
 		>
 			
@@ -531,13 +547,38 @@
 
 		<field name="show_country_headings"
 			type="radio"
-			default="1" label="COM_CONTACT_FIELD_CONFIG_COUNTRY_LABEL"
+			default="0"
+			label="COM_CONTACT_FIELD_CONFIG_COUNTRY_LABEL"
 			description="COM_CONTACT_FIELD_CONFIG_COUNTRY_DESC"
 		>
 			
 			<option value="0">JHIDE</option>
 			<option value="1">JSHOW</option>
 		</field>
+
+			<field name="show_pagination" type="list"
+				default="2"
+				description="JGLOBAL_PAGINATION_DESC"
+				label="JGLOBAL_PAGINATION_LABEL"
+			>
+				
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+				<option value="2">JGLOBAL_AUTO</option>
+			</field>
+			
+			<field
+				name="show_pagination_results"
+				type="radio"
+				default="1"
+				label="JGLOBAL_PAGINATION_RESULTS_LABEL"
+				description="JGLOBAL_PAGINATION_RESULTS_DESC">
+				
+				
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+				
+			</field>
 
 	</fieldset>
 
@@ -622,13 +663,14 @@
 		description="COM_CONTACT_CONFIG_INTEGRATION_SETTINGS_DESC"
 	>
 
-		<field name="show_category_crumb"
+		<field
+			name="show_feed_link"
 			type="radio"
-			default="0" label="COM_CONTACT_FIELD_BREADCRUMBS_LABEL"
-			description="COM_CONTACT_FIELD_BREADCRUMBS_DESC"
-		>
-			<option value="0">JHIDE</option>
-			<option value="1">JSHOW</option>
+			default="1"
+			label="JGLOBAL_SHOW_FEED_LINK_LABEL"
+			description="JGLOBAL_SHOW_FEED_LINK_DESC">
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
 		</field>
 
 		<field
@@ -642,6 +684,8 @@
 			<option
 				value="1">JGLOBAL_FULL_TEXT</option>
 		</field>
+
+	</fieldset>
 
 	<fieldset name="permissions"
 		label="JCONFIG_PERMISSIONS_LABEL"

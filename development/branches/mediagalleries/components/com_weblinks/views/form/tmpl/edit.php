@@ -35,9 +35,9 @@ $params = $this->state->get('params');
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
-<form action="<?php echo JRoute::_('index.php?option=com_mediagalleries'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_weblinks'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<fieldset>
-		<legend><?php echo JText::_('COM_MEDIAGALLERIES_LINKS'); ?></legend>
+		<legend><?php echo JText::_('COM_WEBLINKS_LINK'); ?></legend>
 			<div class="formelm">
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
@@ -67,10 +67,10 @@ $params = $this->state->get('params');
 	</fieldset>
 	<fieldset>
 		<div class="formelm_buttons">
-		<button type="button" onclick="submitbutton('media.save')">
+		<button type="button" onclick="submitbutton('weblink.save')">
 			<?php echo JText::_('JSAVE') ?>
 		</button>
-		<button type="button" onclick="submitbutton('media.cancel')">
+		<button type="button" onclick="submitbutton('weblink.cancel')">
 			<?php echo JText::_('JCANCEL') ?>
 		</button>
 		<input type="hidden" name="task" value="" />
