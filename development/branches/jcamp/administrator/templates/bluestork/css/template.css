@@ -215,6 +215,7 @@ span.unwritable  {
 }
 
 #border-bottom {
+	clear: both;
 	background: url(../images/j_bottom.png) repeat-x;
 }
 
@@ -252,6 +253,8 @@ p.footer-tip {
 #content-box {
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #ccc;
+	float: left;
+	width: 99.85%;
 }
 
 #content-box .padding {
@@ -305,6 +308,10 @@ p.footer-tip {
 
 #module-status .loggedin-users {
 	background: url(../images/menu/icon-16-user.png) 3px 3px no-repeat;
+}
+
+#module-status .backloggedin-users {
+	background: url(../images/menu/icon-16-back-user.png) 3px 3px no-repeat;
 }
 
 #module-status .logout {
@@ -910,6 +917,12 @@ label#jform_title-lbl,
 label#jform_leveltitle-lbl,
 label#jform_grouptitle-lbl {
 	padding-top: 3px;
+}
+
+label#jform_params_subslider-lbl {
+	white-space: nowrap;
+	font-weight: bold;
+	color: #666;
 }
 
 div#content-pane fieldset {
@@ -1973,6 +1986,7 @@ a.jgrid:hover {	text-decoration: none;}
 .icon-16-themes						{	background-image: url(../images/menu/icon-16-themes.png);	}
 .icon-16-trash						{	background-image: url(../images/menu/icon-16-trash.png);	}
 .icon-16-user						{	background-image: url(../images/menu/icon-16-user.png);	}
+.icon-16-back-user					{	background-image: url(../images/menu/icon-16-back-user.png);	}
 .icon-16-writemess					{	background-image: url(../images/menu/icon-16-writemess.png);	}
 .icon-16-newsfeeds					{	background-image: url(../images/menu/icon-16-newsfeeds.png);	}
 .icon-16-newsfeeds-cat				{	background-image: url(../images/menu/icon-16-newsfeeds-cat.png);	}
@@ -2754,7 +2768,13 @@ table#acl-config td {
 
 table#acl-config th.acl-groups {
 	padding-left: 8px;
+	text-align: left;
 }
+
+table#acl-config th.acl-groups span.gi {
+	margin-right: 2px;
+}
+
 table#acl-config td select {
 	float:none;
 }
@@ -2779,4 +2799,19 @@ label#jform_rules-lbl {
 */
 #jform_sef_rewrite-lbl {
 	background: url(../images/admin/icon-16-notice-note.png) right top no-repeat;
+}
+
+/**
+* Options modal- config
+*/
+ul.config-option-list,
+ul.config-option-list li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+ul.config-option-list fieldset {
+	margin: 0;
+	padding-left: 0;
+	padding-right: 0;
 }

@@ -52,7 +52,6 @@ class ContactViewFeatured extends JView
 			return false;
 		}
 
-
 		// Check whether category access level allows access.
 		$user	= JFactory::getUser();
 		$groups	= $user->authorisedLevels();
@@ -77,7 +76,7 @@ class ContactViewFeatured extends JView
 			}
 		}
 
-		$children = array($category->id => $children);
+
 
 		$this->assignRef('maxLevel',	$params->get('maxLevel', -1));
 		$this->assignRef('state',		$state);
@@ -113,21 +112,7 @@ class ContactViewFeatured extends JView
 			$this->params->def('page_heading', JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
 		}
 		$id = (int) @$menu->query['id'];
-		if($menu && $menu->query['view'] != 'contact' && $id != $this->category->id)
-		{
-			$this->params->set('page_subheading', $this->category->title);
-			$path = array($this->category->title => '');
-			while($id != $category->id && $category->id > 1)
-			{
-				$path[$category->title] = ContactHelperRoute::getCategoryRoute($category->id);
-				$category = $category->getParent();
-			}
-			$path = array_reverse($path);
-			foreach($path as $title => $link)
-			{
-				$pathway->addItem($title, $link);
-			}
-		}
+
 
 		$title = $this->params->get('page_title', '');
 		if (empty($title)) {
@@ -138,14 +123,6 @@ class ContactViewFeatured extends JView
 		}
 		$this->document->setTitle($title);
 
-		// Add alternate feed link
-		if ($this->params->get('show_feed_link', 1) == 1)
-		{
-			$link	= '&format=feed&limitstart=';
-			$attribs = array('type' => 'application/rss+xml', 'title' => 'RSS 2.0');
-			$this->document->addHeadLink(JRoute::_($link.'&type=rss'), 'alternate', 'rel', $attribs);
-			$attribs = array('type' => 'application/atom+xml', 'title' => 'Atom 1.0');
-			$this->document->addHeadLink(JRoute::_($link.'&type=atom'), 'alternate', 'rel', $attribs);
-		}
+		
 	}
 }
