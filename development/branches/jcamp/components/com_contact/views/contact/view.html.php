@@ -37,12 +37,14 @@ class ContactViewContact extends JView
 		$item = $this->get('Item');
 		
 		// Get Category Model data
-		$categoryModel = JModel::getInstance('Category', 'ContactModel', array('ignore_request' => true));
-		$categoryModel->setState('category.id', $item->catid);
-		$categoryModel->setState('list.ordering', 'a.name');
-		$categoryModel->setState('list.direction', 'asc');		
-		$contacts = $categoryModel->getItems();
-
+		if ($item)
+		{
+			$categoryModel = JModel::getInstance('Category', 'ContactModel', array('ignore_request' => true));
+			$categoryModel->setState('category.id', $item->catid);
+			$categoryModel->setState('list.ordering', 'a.name');
+			$categoryModel->setState('list.direction', 'asc');		
+			$contacts = $categoryModel->getItems();
+		}
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseWarning(500, implode("\n", $errors));
@@ -132,16 +134,24 @@ class ContactViewContact extends JView
 				$params->set('marker_class',		'jicons-icons');
 				break;
 		}
+		
+		// Add links to contacts
+		if ($params->get('show_contact_list') && count($contacts) > 1) {
+			foreach($contacts as &$contact) {
+				$contact->link = JRoute::_(ContactHelperRoute::getContactRoute($contact->slug, $contact->catid));
+			}
+			$item->link = JRoute::_(ContactHelperRoute::getContactRoute($item->slug, $item->catid));
+		}
 
 		JHtml::_('behavior.formvalidation');
 
 		$this->assignRef('contact',		$item);
 		$this->assignRef('params',		$params);
 		$this->assignRef('return',		$return);
-		$this->assignRef('state', $state);
-		$this->assignRef('item', $item);
-		$this->assignRef('user', $user);
-		$this->assignRef('contacts', $contacts);
+		$this->assignRef('state', 		$state);
+		$this->assignRef('item', 		$item);
+		$this->assignRef('user', 		$user);
+		$this->assignRef('contacts', 	$contacts);
 
 		$this->_prepareDocument();
 
@@ -178,7 +188,7 @@ class ContactViewContact extends JView
 				$category = $category->getParent();
 			}
 			$path = array_reverse($path);
-			foreach($path as $title => $link)
+			foreach($path as $name => $link)
 			{
 				$pathway->addItem($title, $link);
 			}
@@ -193,6 +203,26 @@ class ContactViewContact extends JView
 		}
 		$this->document->setTitle($title);
 
+		if ($menu && $menu->query['view'] != 'contact')
+		{
+			$id = (int) @$menu->query['id'];
+			$path = array($this->item->name  => '');
+			$category = JCategories::getInstance('Contact')->get($this->item->catid);
+			while ($id != $category->id && $category->id > 1)
+			{
+				$path[$category->title] = ContactHelperRoute::getCategoryRoute($category->id);
+				$category = $category->getParent();
+			}
+			$path = array_reverse($path);
+		}
+
+		if (empty($title))
+		{
+			$title = $this->item->title;
+			$this->document->setTitle($title);
+		}
+
+
 		if ($this->item->metadesc)
 		{
 			$this->document->setDescription($this->item->metadesc);
@@ -203,6 +233,12 @@ class ContactViewContact extends JView
 			$this->document->setMetadata('keywords', $this->item->metakey);
 		}
 
+		if ($app->getCfg('MetaTitle') == '1')
+		{
+			$this->document->setMetaData('title', $this->item->name);
+		}
+
+	
 		$mdata = $this->item->metadata->toArray();
 		foreach ($mdata as $k => $v)
 		{

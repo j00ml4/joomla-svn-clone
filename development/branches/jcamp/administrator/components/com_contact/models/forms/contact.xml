@@ -52,8 +52,7 @@
 				JARCHIVED</option>
 			<option value="-2">
 				JTRASHED</option>
-			<option value="-3">
-				JOPTION_REPORTED</option>
+			
 		</field>
 
 		<field name="catid"
@@ -228,7 +227,7 @@
 		</field>
 		<field name="featured"
 			type="radio"
-			label="COM_CONTACT_FIELD_FEATURED_LABEL"
+			label="JFEATURED"
 			description="COM_CONTACT_FIELD_FEATURED_DESC"
 			default="0"
 		>

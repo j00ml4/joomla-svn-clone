@@ -43,18 +43,19 @@ class ContactViewCategories extends JView
 		}
 
 		if ($items === false) {
-			//TODO Raise error for missing category here
+			return JError::raiseWarning(404, JText::_('JGLOBAL_CATEGORY_NOT_FOUND'));
+			
 		}
 
 		if ($parent == false) {
-			//TODO Raise error for missing parent category here
+			return JError::raiseWarning(404, JText::_('JGLOBAL_CATEGORY_NOT_FOUND'));
 		}
 
 		$params = &$state->params;
 
 		$items = array($parent->id => $items);
 
-		$this->assign('maxLevel',	$params->get('maxLevel', -1));
+		$this->assign('maxLevelcat',	$params->get('maxLevelcat', -1));
 		$this->assignRef('params',		$params);
 		$this->assignRef('parent',		$parent);
 		$this->assignRef('items',		$items);

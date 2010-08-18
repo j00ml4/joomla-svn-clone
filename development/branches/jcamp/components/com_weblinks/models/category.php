@@ -158,7 +158,7 @@ class WeblinksModelCategory extends JModelList
 		$id = JRequest::getVar('id', 0, '', 'int');
 		$this->setState('category.id', $id);
 
-		$this->setState('filter.published',	1);
+		$this->setState('filter.state',	1);
 
 		$this->setState('filter.language',$app->getLanguageFilter());
 
@@ -184,7 +184,7 @@ class WeblinksModelCategory extends JModelList
 			$params = new JRegistry();
 			$params->loadJSON($active->params);
 			$options = array();
-			$options['countItems'] = $params->get('show_cat_num_links', 1) || $params->get('show_empty_categories', 0);
+			$options['countItems'] = $params->get('show_cat_num_links_cat', 1) || $params->get('show_empty_categories', 0);
 			$categories = JCategories::getInstance('Weblinks', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 			if(is_object($this->_item))
