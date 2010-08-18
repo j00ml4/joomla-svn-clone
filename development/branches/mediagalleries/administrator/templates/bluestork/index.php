@@ -57,11 +57,32 @@ $app = JFactory::getApplication();
 		</div>
 	</div>
 	<div id="header-box">
-		<div id="module-status">
-			<jdoc:include type="modules" name="status"  />
-		</div>
 		<div id="module-menu">
 			<jdoc:include type="modules" name="menu" />
+		</div>
+		<div id="module-status">
+			<jdoc:include type="modules" name="status" />
+			<?php
+				//Display an harcoded logout
+				$task = JRequest::getCmd('task');
+				if ($task == 'edit' || $task == 'editA' || JRequest::getInt('hidemainmenu')) {
+					$logoutLink = '';
+				} else {
+					$logoutLink = JRoute::_('index.php?option=com_login&task=logout');
+				}
+				$hideLinks	= JRequest::getBool('hidemainmenu');
+				$output = array();
+				// Print the logout link.
+				$output[] = '<span class="logout">' .($hideLinks ? '' : '<a href="'.$logoutLink.'">').JText::_('JLOGOUT').($hideLinks ? '' : '</a>').'</span>';
+				// Reverse rendering order for rtl display.
+				if ($this->direction == "rtl") :
+					$output = array_reverse($output);
+				endif;
+				// Output the items.
+				foreach ($output as $item) :
+				echo $item;
+				endforeach;
+			?>
 		</div>
 		<div class="clr"></div>
 	</div>
@@ -115,8 +136,13 @@ $app = JFactory::getApplication();
 </div>
 </div>
 	<div id="border-bottom"><div><div></div></div></div>
-
-	<jdoc:include type="modules" name="footer" style="none"  />
-
+		<jdoc:include type="modules" name="footer" style="none"  />
+	<div id="footer">
+		<p class="copyright">
+			<?php $joomla= '<a href="http://www.joomla.org">Joomla!</a>';
+				echo JText::sprintf('JGLOBAL_ISFREESOFTWARE', $joomla) ?>
+			<span class="version"><?php echo  JText::_('JVERSION') ?> <?php echo  JVERSION; ?></span>
+		</p>
+	</div>
 </body>
 </html>

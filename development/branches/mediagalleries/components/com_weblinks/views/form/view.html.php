@@ -17,28 +17,27 @@ jimport('joomla.application.component.view');
  * @subpackage	com_weblinks
  * @since		1.5
  */
-class MediagalleriesViewForm extends JView
+class WeblinksViewForm extends JView
 {
 	protected $state;
 	protected $item;
-	
 
 	public function display($tpl = null)
 	{
 		// Initialise variables.
 		$app		= JFactory::getApplication();
 		$user		= JFactory::getUser();
-		
+
 		// Get model data.
 		$state	= $this->get('State');
 		$item	= $this->get('Item');
 		$form	= $this->get('Form');
 
 		if (empty($item->id)) {
-			$authorised = $user->authorise('core.create', 'com_mediagalleries');
+			$authorised = $user->authorise('core.create', 'com_weblinks');
 		}
 		else {
-			$authorised = $user->authorise('core.edit', 'com_mediagalleries.media.'.$item->id);
+			$authorised = $user->authorise('core.edit', 'com_weblinks.weblink.'.$item->id);
 		}
 
 		if ($authorised !== true) {
@@ -59,11 +58,11 @@ class MediagalleriesViewForm extends JView
 		// Create a shortcut to the parameters.
 		$params	= &$state->params;
 
-		$this->state=$state;
-		$this->params=$params;
-		$this->item=$item;
-		$this->form=$form;
-		$this->user=$user;
+		$this->assignRef('state',	$state);
+		$this->assignRef('params',	$params);
+		$this->assignRef('item',	$item);
+		$this->assignRef('form',	$form);
+		$this->assignRef('user',	$user);
 
 		$this->_prepareDocument();
 
@@ -86,9 +85,9 @@ class MediagalleriesViewForm extends JView
 		{
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		} else {
-			$this->params->def('page_heading', JText::_('COM_MEDIAGALLERIES_FORM_EDIT_MEDIA'));
+			$this->params->def('page_heading', JText::_('COM_WEBLINKS_FORM_EDIT_WEBLINK'));
 		}
-		$title = $this->params->def('page_title', JText::_('COM_MEDIAGALLERIES_FORM_EDIT_MEDIA'));
+		$title = $this->params->def('page_title', JText::_('COM_WEBLINKS_FORM_EDIT_WEBLINK'));
 		if ($app->getCfg('sitename_pagetitles', 0)) {
 			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
 		}

@@ -70,7 +70,9 @@ class ContactModelContact extends JModelItem
 				$db = $this->getDbo();
 				$query = $db->getQuery(true);
 
-				$query->select($this->getState('item.select', 'a.*'));
+				$query->select($this->getState('item.select', 'a.*') . ','
+				. ' CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
+				. ' CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(\':\', c.id, c.alias) ELSE c.id END AS catslug ');
 				$query->from('#__contact_details AS a');
 
 				// Join on category table.
@@ -152,11 +154,14 @@ class ContactModelContact extends JModelItem
 			}
 
 		}
+		if ($this->_item[$pk])
+		{
+			$extendedData = $this->getContactQuery($pk);
+ 			$this->_item[$pk]->articles = $extendedData->articles;
+  			$this->_item[$pk]->profile = $extendedData->profile;
+		}
+  		return $this->_item[$pk];
 
-		$extendedData = $this->getContactQuery($pk);
- 		$this->_item[$pk]->articles = $extendedData->articles;
-  		$this->_item[$pk]->profile = $extendedData->profile;
-		return $this->_item[$pk];
 	}
 
 
@@ -194,7 +199,7 @@ class ContactModelContact extends JModelItem
 			}
 
 			if (empty($result)) {
-				throw new Exception(JText::_('Contact_Error_Contact_not_found'), 404);
+					throw new JException(JText::_('COM_CONTACT_ERROR_CONTACT_NOT_FOUND'), 404);
 			}
 
 			// If we are showing a contact list, then the contact parameters take priority

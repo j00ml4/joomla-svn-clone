@@ -221,6 +221,9 @@ class ContactModelContact extends JModelAdmin
 	/**
 	 * Prepare and sanitise the table prior to saving.
 	 *
+	 * @param	JTable	$table
+	 *
+	 * @return	void
 	 * @since	1.6
 	 */
 	protected function prepareTable(&$table)

@@ -1,6 +1,6 @@
 0. Metadata
 -----------
-File version:	$Id: CHANGELOG 18335 2010-08-05 16:35:25Z infograf768 $
+File version:	$Id: CHANGELOG 18486 2010-08-17 17:02:46Z infograf768 $
 Copyright:		Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
 License:		GNU General Public License version 2 or later; see LICENSE.txt
 
@@ -26,6 +26,114 @@ $ -> Language fix or change
 ^ -> Change
 - -> Removed
 ! -> Note
+
+17-Aug-2010 Jean-Marie Simonet
+ [#21812] contact form not sending email. Thanks Joseph.
+ 
+17-Aug-2010 Andrew Eddie
+ # Fixed issue [#21380] session timeout while editing template style in backend, keepalive issue (Elin Waring, Michael Babker).
+
+16-Aug-2010 Jean-Marie Simonet
+ $ Customizing a global string in weblinks, newsfeeds, contacts
+ 
+16-Aug-2010 Mark Dexter
+ # Reverted [#21558] since it breaks JDateTest unit tests
+ # [#21558] Feed datetime formats are invalid (with updated unit test)
+ # [#21768] Sample Data for Atomic Template
+
+16-Aug-2010 Andrew Eddie
+ # Fixed issue [#21822] Add footer to Bluestork template (Michael Babker).
+ # Fixed issue [#21831] JFormFieldCategory relies on a reference to a form (Artyom Bisyarin).
+ # Fixed issue [#20994] [patch] Use DOM instead of document.write for font size controls (Rouven Weßling).
+ # Fixed issue [#21777] No root user notice on admin login screen with userid (Sander Potjer, Mark Dexter).
+ # Fixed issue [#21786] Add uncompressed versions of calendar.js and calendar-setup.js (Rouven Weßling).
+ # Fixed issue [#21771] Consistency of ordering status bar items (Michael Babker).
+ # Fixed issue [#21227] com_menus don't bind the request data into fields that has multiple="true" (Jonnathan S. Lima, Louis Landry).
+ # Fixed issue [#21772] Joomla! doesn't play nicely with other frameworks (Samuel Moffatt).
+ # Fixed issue [#21853] Add featured view to com_contacts (like com_content) or just toggle (Roland Dalmulder, Jean-Marie Simonet).
+ # Fixed issue [#20662] Joomla home page doesn't work from anything except index.php (Jeff Booher, Louis Landry).
+ # Fixed issue [#21854] Replace featured strings with JFEATURED (Roland Dalmulder).
+ # Fixed issue [#21841] Make atomic well formed (Rouven Weßling).
+ # Fixed issue [#21764] calendar.js doesn't work with Firefox and Safari when XHTML is used (Rouven Weßling).
+ # Fixed issue [#21631] user menu module [sample data] (Brian Teeman, Michael Babker).
+ # Fixed issue [#21611] Permissions and groups usability (Brian Teeman, Mathavan Jeyadev, Andrea Tarr, Michael Babker).
+
+15-Aug-2010 Mark Dexter
+ # [#21558] Feed datetime formats are invalid
+ # [#21756] Notices when a contact is unpublished but linked 
+
+15-Aug-2010 Jean-Marie Simonet
+ # [#21832] Submenu renders <a>-tag without link. Thanks Hannes.
+ # [#21834] Featured contact only showing items from the root category and ignoring state. Thanks Elin.
+ $ Correcting a string value.
+ # [#21856] Unpublished items showing in weblinks and news feed category views. Thanks Elin.
+ 
+13-Aug-2010 Mark Dexter
+ # Sample data fixes (spelling errors and rebuild #__menus)
+ # Oops! Fixed syntax error in sample_data.sql.
+
+13-Aug-2010 Jean-Marie Simonet
+ # [#21828] Params and drilldown refactorings in contacts. Thanks Bill and Dennis
+
+12-Aug-2010 Jean-Marie Simonet
+ ^ [#21690] filter order in extension manager:manage. Thanks Bill and Amy
+ # [#21609] Force admin logout button for all user levels
+ # [#21784] Update TinyMCE to current version (3.3.8)
+
+11-Aug-2010 Jean-Marie Simonet
+ # [#21807] newsfeeds - implement drilldown from categories (Bill and JM)
+
+10-Aug-2010 Andrew Eddie
+ # Fixed issue [#21623] 303 redirections cause page subresources to be reloaded on WebKit browsers (Nicholas Dionysopoulos).
+
+10-Aug-2010 Jean-Marie Simonet
+ # [#21787] weblinks - provide specific params for categories (Bill and JM)
+ # [#21783] Single newsfeed layout on drill down is using title not name. Thanks Elin.
+
+10-Aug-2010 Andrew Eddie
+ # Fixed issue [#21648] No e-mail sent to newly created users (via back-end) (Mārcis Kaksis).
+ # Fixed issue [#21601] JDatabaseQuery fails on delete (Harald Leithner, Omar Ramos).
+ # Fixed issue [#21600] single article - sef routing issues (bill richardson, Mathavan Jeyadev).
+ # Fixed issue [#21672] Fix a number of issues in the single newsfeed view (Elin Waring).
+
+-------------------- 1.6.0 Beta7 Release [09-Aug-2010] ------------------
+
+09-Aug-2010 Ian MacLennan
+ # [#20289] FTP Server: Do not save credentials through the Web Interface
+ # [#21476] Not using correct Primary Key while saving
+ # [#21579] E_STRICT error in JCacheCallback due to modRelatedItemsHelper::getList() being non-static
+ # [#21597] New Menu Item - using filter in modal
+ # [#21616] Page scrolls to top when click on Contact Slider
+ # [#21643] Login screen with google chrome 5.0.375 fields misaligned
+ # [#21710] Root user notice only on username
+ # [#21719] Create and delete action in plugins permissions configuration
+ # [#21726] Possible mispelling of "extension" in assorted helper files
+ # [#21751] Missing JErrors in com_contact
+ # [#21754] JOPTION_REPORTED left overs
+
+08-Aug-2010 Jean-Marie Simonet
+ # [#21387] Weird Display Issue Administrator Template In Safari 4 & 5
+
+08-Aug-2010 Ron Severdia
+ # Cleaned up Atomic template (ready to go once sample data is committed).
+ 
+07-Aug-2010 Jean-Marie Simonet
+ # [#21750] Default module position
+ # [#21744] Implementing drill-down options for weblinks and newsfeeds categorieS menu items
+ # [#21749] IE7 patches to the Options modal. Thanks Andrea.
+ # [#21628] unpublish core extensions. Thanks Mark
+ 
+06-Aug-2010 Ian MacLennan
+ # [#21598] Unable to logout ( front end ) if cache enabled
+ # [#21630] Dropdown order in plug in manager
+ # [#21632] Dropdown order in article manager
+ # [#21633] Dropdown order in category manager
+ # [#21634] Dropdown order in menu manager
+ # [#21637] Dropdown order in module manager
+ # [#21667] Menu manager : "Save & New" and "Save as copy" tasks are not implemented
+
+06-Aug-2010 Jean-Marie Simonet
+ # [#21740] Media Manager Submenu not indicating active option. Thanks Andrea.
 
 05-Aug-2010 Jean-Marie Simonet
  # [#21599] Featured articles - article link to parent category - 500 error. Thanks Mathavan
