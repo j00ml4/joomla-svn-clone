@@ -3,7 +3,7 @@
  * Media View for mediagalleries Component
  * 
  * @package    		Joomla
- * @subpackage 	mediagalleries Suite
+ * @subpackage 	mediagalleries
  * @link 			http://3den.org/joom/
  * @license	GNU/GPL
  */
@@ -19,65 +19,83 @@ jimport( 'joomla.application.component.view' );
  * @package    		Joomla
  * @subpackage	mediagalleries Suite
  */
-class mediagalleriesViewChannel extends JView
+class MediagalleriesViewMedia extends JView
 {
+	// new way
+	protected $item;
+	protected $folder;
+	protected $user;
+	protected $form;
+	protected $state;
+	
 	/**
 	 * display method of Media view
+	 * 
 	 * @return void
 	 */
-	function display($tpl = null)
+	public function display($tpl = null)
 	{
-		global $mainframe, $option;
-
-		$db		=& JFactory::getDBO();
-		$uri 	=& JFactory::getURI();
-		$user 	=& JFactory::getUser();
-		$model	=& $this->getModel();
-
-		$lists = array();
-
+		$app		=& JFactory::getApplication();
+		$document	=& JFactory::getDocument();
+		$db			=& JFactory::getDBO();
+		$uri 		=& JFactory::getURI();
+		$model		=& $this->getModel();
+		
 		//get the data
-		$item			=& $this->get('Data');
-
-		// fail if checked out not by 'me'
-		if ( $model->isCheckedOut( $user->get('id') ) ) {
-			$msg = JText::sprintf( 'DESCBEINGEDITTED', JText::_( 'COM_MEDIAGALLERIES_MEDIA_ITEM' ), $item->title );
-			$mainframe->redirect( 'index.php?option='. $option, $msg );
-		}
-
+		$this->params	=& JComponentHelper::getParams('com_mediagalleries');
+		$this->user 	=& JFactory::getUser();
+		$this->item		=& $this->get('Item');
+		$this->form		=& $this->get('Form');
+		$this->state	=& $this->get('State');
+		
 		// Is new?
-		if( !$item->id ){
-			$video = JText::_('COM_MEDIAGALLERIES_SELECT_PREVIEW' );			
-			$item->published = 1;
-			$item->catid = 0;
-		}else{
-			$video = StreamallHelper::showMedia($item->url);
+		if( !empty($this->item->id) ){
+			// Load the plugin!!!
+			JPluginHelper::importPlugin('content', 'media');
+			$dispatcher =& JDispatcher::getInstance();
+			$this->params->set('width', 350);
+			$this->params->set('height', 300);
+			$results = $dispatcher->trigger('onLoadMedia', array ( &$this->item, &$this->params));
 		}
-
-		// build the html select list for ordering
-		$query = 'SELECT ordering AS value, title AS text'
-			. ' FROM #__mediagalleries'
-			. ' WHERE catid = ' . (int) $item->catid
-			. ' ORDER BY ordering';
-		$lists['ordering'] 	= JHTML::_('list.specificordering',  $item, $item->id, $query );
-
-		// build list of categories
-		$lists['catid'] 			= JHTML::_('list.category',  'catid', $option, intval( $item->catid ) );
-
-		// build the html select list
-		$lists['published'] 	= JHTML::_('select.booleanlist',  'published', 'class="inputbox"', $item->published );
-
-		//clean media data
-		JFilterOutput::objectHTMLSafe( $item, ENT_QUOTES, 'description' );
 		
+		// Add the toolbar
+		$this->addToolbar();
 		
-		// Assign References
-		$this->assignRef('lists', 	$lists);
-		$this->assignRef('item',	$item);
-		$this->assignRef('video',	$video);
-
 		//Display
 		parent::display($tpl);
 	}
-	
+		
+	/**
+	 * Add the page title and toolbar.
+	 *
+	 * @since	1.6
+	 */
+	protected function addToolbar(){
+		JRequest::setVar('hidemainmenu', true);
+
+		$user		= JFactory::getUser();
+		$isNew		= ($this->item->id == 0);		
+		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
+		$canDo		= MediagalleriesHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
+
+		// If not checked out, can save the item.
+		if (!$checkedOut && $canDo->get('core.edit'))
+		{
+			JToolBarHelper::apply('media.apply', 'JTOOLBAR_APPLY');
+			JToolBarHelper::save('media.save', 'JTOOLBAR_SAVE');
+			JToolBarHelper::addNew('media.save2new', 'JTOOLBAR_SAVE_AND_NEW');
+		}
+			// If an existing item, can save to a copy.
+		if (!$isNew && $canDo->get('core.create')) {
+			JToolBarHelper::custom('media.save2copy', 'copy.png', 'copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
+		}
+		if (empty($this->item->id))  {
+			JToolBarHelper::cancel('media.cancel', 'JTOOLBAR_CANCEL');
+		}
+		else {
+			JToolBarHelper::cancel('media.cancel', 'JTOOLBAR_CLOSE');
+		}
+
+		JToolBarHelper::divider();
+	}	
 }
