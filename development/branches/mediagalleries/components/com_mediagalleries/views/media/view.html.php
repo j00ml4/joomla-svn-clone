@@ -23,33 +23,44 @@ class MediagalleriesViewMedia extends JView
 {
 	protected $state;
 	protected $item;
-
+	protected $params;
+	protected $category;
+	protected $form;
+	
 	function display($tpl = null)
 	{
-		$app		= JFactory::getApplication();
-		$this->params=$app->getParams(); 
-		
+		$app	= JFactory::getApplication();
 		
 		// Get some data from the models
-		
-		$state		= $this->get('State');
+		$this->state	= $this->get('State');
 		$this->item		= $this->get('Item');
-		$category	= $this->get('Category');
+		$this->category	= $this->get('Category');
+		$this->params	= $app->getParams();
+		
 		
 		$registry = new JRegistry();
 		$registry->loadJSON($this->item->params);
 		$registry->toObject();
 		$this->item->params= $registry;
 		
-		if ($this->item->url) {					
-			$this->media=plgContentMedia::addMedia($this->item->url,$this->item->params->get('width'),$this->item->params->get('height'),$this->params->get('autostart',0));
-		} else {
-			//TODO create proper error handling
-			return  JError::raiseError(404, "Media Not Found");
-			
+		$layout = $this->getLayout();
+		switch ($layout){
+			case 'edit':
+			case 'form':
+				$layout = 'edit';
+				$this->form = $this->get('Form');
+				break;
+
+			default:
+				if ($this->item->url) {					
+					$this->media=plgContentMedia::addMedia($this->item->url,$this->item->params->get('width'),$this->item->params->get('height'),$this->params->get('autostart',0));
+				} else {
+					//TODO create proper error handling
+					return  JError::raiseError(404, "Media Not Found");	
+				}
 		}
-		
-		
+		$this->setLayout($layout);
+	
 		parent::display();
 	}
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="Gallery With Modal Box">
+	<layout title="COM_MEDIAGALLERIES_GALLERY_VIEW_GALLERY_TITLE">
 		<message>
-			<![CDATA[COM_MEDIAGALLERIES_GALLERY_VIEW_DEFAULT_DESC]]>
+			<![CDATA[COM_MEDIAGALLERIES_GALLERY_VIEW_GALLERY_DESC]]>
 		</message>
 	</layout>
 
