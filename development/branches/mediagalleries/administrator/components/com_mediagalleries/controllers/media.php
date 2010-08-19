@@ -17,9 +17,61 @@ jimport('joomla.application.component.controllerform');
  * @subpackage	com_mediagalleries
  * @since		1.6
  */
+
 class MediagalleriesControllerMedia extends JControllerForm
 {
-	 protected $view_list = 'galleries';
+	 protected $view_list = 'gallery';
 	 protected $view_item = 'media';
+	 
+	 
+	 	/**
+	 * Method to get a model object, loading it if required.
+	 *
+	 * @param	string	The model name. Optional.
+	 * @param	string	The class prefix. Optional.
+	 * @param	array	Configuration array for model. Optional.
+	 *
+	 * @return	object	The model.
+	 * @since	1.5
+	 */
+	public function &getModel($name = 'form', $prefix = '', $config = array())
+	{
+		$model = parent::getModel($name, $prefix, $config);
 
+		return $model;
+	}
+	/**
+	 * Save the record
+	 */
+	public function save()
+	{
+		if( parent::save() === true ) {
+			$data = JRequest::getVar( 'jform' );
+			$cid = ( int ) $data[ 'catid' ];
+			$link = JRoute::_('index.php?option=com_mediagalleries&view=gallery&id='.$cid);
+			$this->setRedirect($link);
+		}
+		$this->setMessage(JText::_('COM_WEBLINK_SUBMIT_SAVE_SUCCESS'));
+	}
+	/**
+	 * Method to cancel an edit
+	 *
+	 * Checks the item in, sets item ID in the session to null, and then redirects to the list page.
+	 *
+	 * @access	public
+	 * @return	void
+	 */
+	public function cancel()
+	{
+		// Check for request forgeries.
+		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+
+		parent::cancel();
+
+		// Redirect to the list screen.
+		$link = JRoute::_('index.php?option=com_mediagalleries');
+		$this->setRedirect($link);
+	}
+	 
+	
 }

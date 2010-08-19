@@ -38,7 +38,6 @@
 			label="JCATEGORY" 
 			description="JFIELD_CATEGORY_DESC"
 			class="inputbox">
-			<option value="">JOPTION_NO_CATEGORY</option>	
 		</field>
 
 		<field 

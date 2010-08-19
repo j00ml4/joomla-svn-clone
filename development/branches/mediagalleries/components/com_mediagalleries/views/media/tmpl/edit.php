@@ -15,17 +15,6 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 
 ?>
-<script type="text/javascript">
-function submitbutton(task) {
-	if (task == 'media.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
-		<?php echo $this->form->getField('description')->save(); ?>
-		submitform(task);
-	}
-	else {
-		alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
-	}
-}
-</script>
 
 <div class="<?php echo $this->params->get('pageclass_sfx'); ?>">
 	<?php if ($this->params->def('show_page_heading', 1)) : ?>
@@ -43,8 +32,6 @@ function submitbutton(task) {
 			<button type="button" onclick="submitbutton('media.cancel')">
 				<?php echo JText::_('JCANCEL') ?>
 			</button>
-			<input type="hidden" name="task" value="" />
-			<?php echo JHTML::_( 'form.token' ); ?>
 		</div>
 		
 		
@@ -94,8 +81,6 @@ function submitbutton(task) {
 			<button type="button" onclick="submitbutton('media.cancel')">
 				<?php echo JText::_('JCANCEL') ?>
 			</button>
-			<input type="hidden" name="task" value="" />
-			<?php echo JHTML::_( 'form.token' ); ?>
 		</div>
 					
 		<input type="hidden" name="task" value="" />
