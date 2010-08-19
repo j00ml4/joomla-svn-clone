@@ -8,7 +8,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modelitem');
+jimport('joomla.application.component.modeladmin');
 
 /**
  * Weblinks Component Model for a Weblink record
@@ -17,7 +17,7 @@ jimport('joomla.application.component.modelitem');
  * @subpackage	com_weblinks
  * @since		1.5
  */
-class MediagalleriesModelMedia extends JModelItem
+class MediagalleriesModelMedia extends JModelAdmin
 {
 	/**
 	 * Model context string.
