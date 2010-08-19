@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.view' );
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class MediagalleriesViewGalleries extends JView
+class MediagalleriesViewChannels extends JView
 {
 	
 	protected $user;
@@ -47,7 +47,7 @@ class MediagalleriesViewGalleries extends JView
 
 		
 		// Display
-		self::addToolBar();
+		//self::addToolBar();
 		parent::display($tpl);
     }
     
@@ -62,6 +62,7 @@ class MediagalleriesViewGalleries extends JView
 		require_once JPATH_COMPONENT.DS.'helpers'.DS.'mediagalleries.php';
 
 		$state	= $this->get('State');
+		
 		$canDo	= MediagalleriesHelper::getActions($state->get('filter.category_id'));
 
 		JToolBarHelper::title(JText::_('COM_MEDIAGALLERIES_MANAGER_MEDIAS'), 'media');
