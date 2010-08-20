@@ -136,7 +136,6 @@ class plgContentMedia extends JPlugin
 	public function addMedia( $media, $width='', $height ='', $autostart=0 )
 	{	
 		// The propose of this is to get the defaults set by the admin -> Fixed :D 
-		
 		$pparams	= $this->params;// make it work
 		
 		// Fix Video UrL
@@ -554,7 +553,10 @@ class plgContentMedia extends JPlugin
 	}
 	public function getParams()
 	{
-		return parent::params;
+		$temp=JPluginHelper::getPlugin("content","media");
+		$params=$temp->params;
+		//JRegistry::
+		
 	}
 		
 	
