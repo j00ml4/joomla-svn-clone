@@ -67,21 +67,6 @@ class ProjectsViewMembers extends JView
 		parent::display($tpl);
 	}
 
-	/**
-	 * 
-	 * Enter description here ...
-	 * @return multitype:Ambigous <The, NULL, unknown, mixed>
-	 * @deprecated
-	 */
-	protected function getLinks()
-	{
-		return array(
-			'project' => JRoute::_('index.php?option=com_projects&view=project&id='.$this->project->id),
-			'assign' => JRoute::_('index.php?option=com_projects&view=members&type=assign&id='.$this->project->id),
-			'delete' => JRoute::_('index.php?option=com_projects&view=members&type=list&id='.$this->project->id),
-		);
-	}
-
 	protected function addToolbar() 
 	{
 		$this->loadHelper('toolbar');
@@ -108,7 +93,10 @@ class ProjectsViewMembers extends JView
 			$title = JText::_('COM_PROJECTS_MEMBERS_LIST_TITLE');
 		}
 		ToolBar::title($title, 'user');
-		ToolBar::back();
+		if ($this->params->get('show_back_button')) {
+            ToolBar::spacer();
+            ToolBar::back();
+		}
 		
 		// Pathway
 		$app = JFactory::getApplication();

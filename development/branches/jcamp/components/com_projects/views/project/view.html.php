@@ -83,9 +83,6 @@ class ProjectsViewProject extends JView
 		parent::display($tpl);
 	}
 	
-	public function getLink($key, $append=''){
-		return ProjectsHelper::getLink($key, $append);
-	}
 	
 	protected function addToolbar() 
 	{
@@ -117,9 +114,10 @@ class ProjectsViewProject extends JView
 						ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_PROJECT_DELETE'), 'project.delete');
 					}
 				}
-				if($this->params->get('show_back_button')){
-					ToolBar::back();
-				}
+		        if ($this->params->get('show_back_button')) {
+		            ToolBar::spacer();
+		            ToolBar::back();
+		        }
 		}
 		ToolBar::title($title, $icon);
 		

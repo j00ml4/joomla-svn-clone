@@ -167,19 +167,54 @@ abstract class ProjectsHelper {
         static $links;
         if (empty($links)) {
             $links = array(
-                'form' => 'index.php?option=com_projects',
+                'form' => JFilterOutput::ampReplace(JFactory::getURI()->toString()),
                 'portfolios' => 'index.php?option=com_projects&view=portfolios&id=',
                 'projects' => 'index.php?option=com_projects&view=projects&id=',
                 'project' => 'index.php?option=com_projects&view=project&id=',
                 'members' => 'index.php?option=com_projects&view=members&type=list&id=',
                 'assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
                 'unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
-                'tasks' => 'index.php?option=com_projects&view=tasks&type=2&id=',
+            	'task' => 'index.php?option=com_projects&view=task&id=',
+                'tasks' => 'index.php?option=com_projects&view=tasks&id=',
+            	'tasks.tasks' => 'index.php?option=com_projects&view=tasks&type=2&id=',
+            	'tasks.tickets' => 'index.php?option=com_projects&view=tasks&type=3&id=',
+            	'tasks.milestones' => 'index.php?option=com_projects&view=tasks&type=1&id=',
                 'documents' => 'index.php?option=com_projects&view=documents&id=',
             );
         }
-        return JRoute::_($links[$key] . $append);
+        return JRoute::_($links[$key] . $append, true, 0);
     }
+    
+        
+    /**
+     * function to get a single the project
+     * @param $pk
+     */
+    public function getProject($pk=null) {
+        // Get project ID
+        if (empty($pk)) {
+           return null;
+        }
+
+        //$this->setState('portfolio.id',$pk);
+        $model = JModel::getInstance('Project', 'ProjectsModel');
+        return $model->getItem($pk);
+    }
+    
+    /**
+	 * function to get the portifolo
+	 * @param $pk
+	 */
+	public function getPortfolio($pk){
+		// Get portifolio ID
+		if (empty($pk)) {
+           return null;
+        }
+		
+		jimport('joomla.application.categories');
+		$categories = &JCategories::getInstance('Projects');
+		return $categories->get($pk);
+	} 
 }
 
 ?>

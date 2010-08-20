@@ -29,7 +29,7 @@ class ProjectsModelTask extends JModelAdmin
      * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
      */
     protected function canDelete($record=null, $user=null) {
-        return ProjectsHelper::can('task.delete', $this->option, $user, $record);
+        return ProjectsHelper::canDo('task.delete', $this->option, $user, $record);
     }
 
     /**
@@ -39,7 +39,7 @@ class ProjectsModelTask extends JModelAdmin
      * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
      */
     protected function canEditState($record=null, $user=null) {
-        return ProjectsHelper::can('task.edit.state', $this->option, $user, $record);
+        return ProjectsHelper::canDo('task.edit', $this->option, $user, $record);
     }
 
     /**
@@ -77,6 +77,7 @@ class ProjectsModelTask extends JModelAdmin
      */
     public function getProject($pk=null) {
         // Get project ID
+        $pk = $this->getState('project.id');
         if (empty($pk)) {
             // portfolio
             if (!($pk = $this->getState('task.id'))) {
@@ -97,9 +98,8 @@ class ProjectsModelTask extends JModelAdmin
             }
         }
 
-        //$this->setState('portfolio.id',$pk);
-        $project = JModel::getInstance('Project', 'ProjectsModel');
-        return $project->getItem($pk);
+        $model = JModel::getInstance('Project', 'ProjectsModel');
+        return $model->getItem($pk);
     }
 
     /**

@@ -14,6 +14,6 @@ jimport('joomla.application.component.controller');
 require_once JPATH_COMPONENT.'/helpers/projects.php';
 
 // Execute the task.
-$controller	= &JController::getInstance('projects');
-$controller->execute(JRequest::getVar('task'));
+$controller	= &JController::getInstance('Projects');
+$controller->execute(JRequest::getCmd('task'));
 $controller->redirect(); 
