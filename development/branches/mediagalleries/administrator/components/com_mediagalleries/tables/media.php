@@ -26,7 +26,7 @@ class TableMedia extends JTable
 	 * @since 1.0
 	 */
 	function __construct(& $db) {
-			parent::__construct('#__mediagalleries', 'id', $db);	
+			parent::__construct('#__medias', 'id', $db);	
 	}
 
 	/**
