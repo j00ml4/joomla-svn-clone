@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 jimport('joomla.html.html.behavior');
 
+
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
 $pageClass = $this->params->get('pageclass_sfx');
@@ -18,7 +19,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 
 JHtml::script("media/mediagalleries/js/script.js",true);
 //JHtml::stylesheet("media/mediagalleries/css/gallery.css");
-dump($this->params);
+
 
 
 ?>
