@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_MEDIAGALLERIES_GALLERY_VIEW_DEFAULT_TITLE">
+	<layout title="Default Gallery">
 		<message>
 			<![CDATA[COM_MEDIAGALLERIES_GALLERY_VIEW_DEFAULT_DESC]]>
 		</message>
@@ -11,9 +11,8 @@
 		<fieldset name="request"
 		>
 
-			<field name="id" type="category"
+			<field name="id" type="user"
 				description="JGLOBAL_CHOOSE_CATEGORY_DESC"
-				extension="com_mediagalleries"
 				label="JGLOBAL_CHOOSE_CATEGORY_LABEL"
 				required="true"	/>
 		</fieldset>
