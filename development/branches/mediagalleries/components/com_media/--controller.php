@@ -1,31 +1,26 @@
 <?php
 /**
  * @version		$Id$
- * @package		Joomla
- * @subpackage	JMultimedia
- * @copyright	Copyright (C) 2007 - 2008 3DEN Open Software. All rights reserved.
- * @license		GNU/GPL, see LICENSE.php
- * Joomla! is free software. This version may have been modified pursuant to the
- * GNU General Public License, and as distributed it includes or is derivative
- * of works licensed under the GNU General Public License or other free or open
- * source software licenses. See COPYRIGHT.php for copyright notices and
- * details.
+ * @package		Joomla.Site
+ * @subpackage	Massmail
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die( 'Restricted access' );
+// no direct access
+defined('_JEXEC') or die;
 
-jimport( 'joomla.application.component.controller' );
+jimport('joomla.application.component.controller');
 
 /**
- * JMultimedia Component Controller
+ * Media Manager Component Controller
  *
- * @static
+ * @package		Joomla.Site
+ * @subpackage	Media
+ * @version 1.5
  */
-class MediaController extends JController 
-{	
-	protected $default_view="gallery";
-
+class MediaController extends JController
+{
 	/**
 	 * Method to display a view.
 	 *
@@ -43,6 +38,7 @@ class MediaController extends JController
 			case 'imagesList':
 				$mName = 'list';
 				$vLayout = JRequest::getCmd('layout', 'default');
+
 				break;
 
 			case 'images':
@@ -50,6 +46,7 @@ class MediaController extends JController
 				$vLayout = JRequest::getCmd('layout', 'default');
 				$mName = 'manager';
 				$vName = 'images';
+
 				break;
 		}
 
@@ -68,15 +65,10 @@ class MediaController extends JController
 
 		// Set the layout
 		$view->setLayout($vLayout);
-		
-		$cachable = true;
-		if (($_SERVER['REQUEST_METHOD'] == 'POST' && $vName = 'categories')) {
-			$cachable = false;
-		}
-		$safeurlparams = array('id'=>'INT','limit'=>'INT','limitstart'=>'INT','filter_order'=>'CMD','filter_order_Dir'=>'CMD','lang'=>'CMD');
-				
+
 		// Display the view
-		$view->display($cachable, $safeurlparams);
+		$view->display();
+
 		return $this;
 	}
 
