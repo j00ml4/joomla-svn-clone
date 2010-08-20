@@ -23,7 +23,7 @@ class MediagalleriesViewMedia extends JView
 {
 	protected $state;
 	protected $item;
-	protected $params;
+	public $params;
 	protected $category;
 	protected $form;
 	
@@ -39,7 +39,7 @@ class MediagalleriesViewMedia extends JView
 		
 		
 		$registry = new JRegistry();
-		$registry->loadJSON($this->item->params);
+		$registry->loadArray($this->item->params);
 		$registry->toObject();
 		$this->item->params= $registry;
 		
@@ -52,8 +52,11 @@ class MediagalleriesViewMedia extends JView
 				break;
 
 			default:
-				if ($this->item->url) {					
-					$this->media=plgContentMedia::addMedia($this->item->url,$this->item->params->get('width'),$this->item->params->get('height'),$this->params->get('autostart',0));
+				if ($this->item->url) {	
+					$plug=JPluginHelper::getPlugin("content","media");
+					$dispatcher=JDispatcher::getInstance();
+					$dispatcher->trigger("addMedia");			
+					$this->media=plgContentMedia::addMedia($this->item->url,$this->item->params->get('width'),$this->item->params->get('height'),$this->item->params->get('autostart',0));
 				} else {
 					//TODO create proper error handling
 					return  JError::raiseError(404, "Media Not Found");	

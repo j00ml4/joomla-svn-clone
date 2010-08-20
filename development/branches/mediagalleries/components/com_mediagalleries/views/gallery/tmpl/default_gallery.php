@@ -9,7 +9,7 @@
 
 // no direct access
 defined('_JEXEC') or die;
-
+JHtml::_('behavior.modal');
 JHtml::core();
 
 $n = count($this->items);
@@ -23,12 +23,13 @@ $thumbHeight= $this->params->get('thumb_height',75);
 <?php if (empty($this->items)) : ?>
 	<p><?php echo JText::_('COM_MEDIAGALLERIES_NO_ITEMS'); ?></p>
 <?php else : ?>
-<table>
 
-	<?php for($i=0, $j=0; $i<$thumbs , $j<$n; $i++, $j++) : ?>
-		<tr>
-			<td ><img src="<?php echo plgContentMedia::getThumb($media->url); ?>" width="<?php echo $thumbWidth; ?>" height="<?php echo $thumbHeight?>"></td>
-		</tr>
-	<?php endfor; ?>
-</table>
-<?php endif; ?>
+	<?php foreach ($this->items as $i => &$media) : ?>
+			
+				<?php if (in_array($media->access, $this->user->authorisedLevels())) : ?>
+					<a href="index.php?option=com_mediagalleries&view=media&layout=modal&tmpl=component&id=<?php echo $media->id; ?>" class="modal"><img src="<?php echo plgContentMedia::getThumb($media->url); ?>" width="<?php echo $this->params->get('thumb_width',100);?>" height="<?php echo $this->params->get('thumb_height',75); ?>" /></a>
+				<?php endif; ?>
+	
+	<?php endforeach; ?>
+
+	<?php endif;?>

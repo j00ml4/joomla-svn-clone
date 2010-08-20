@@ -25,13 +25,31 @@
 					type="text"
 					label="Preview Width"
 					description =""
-					default=""
+					default="512"
 			/>
 			<field name="preview_height"
 					type="text"
 					label="Preview Height"
 					description =""
-					default=""
+					default="384"
+			/>
+			<field name="thumb_width"
+					type="text"
+					label="Thumb Width"
+					description =""
+					default="100"
+			/>
+			<field name="thumb_height"
+					type="text"
+					label="Preview Height"
+					description =""
+					default="75"
+			/>
+			<field name="thumbs_per_row"
+					type="text"
+					label="Thumbs Per Row"
+					description =""
+					default="3"
 			/>
 			
 		</fieldset>
