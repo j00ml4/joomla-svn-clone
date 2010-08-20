@@ -90,7 +90,7 @@ class MediagalleriesModelGallery extends JModelList
 
 		// Select required fields from the categories.
 		$query->select($this->getState('list.select', 'a.*'));
-		$query->from('`#__mediagalleries` AS a');
+		$query->from('`#__medias` AS a');
 		$query->where('a.access IN ('.$groups.')');
 
 		// Filter by category.

@@ -68,7 +68,7 @@ class MediagalleriesModelGalleries extends JModelList
 
 		// Select the required fields from the table.
 		$query->select($this->getState( 'list.select', ' a.*'));
-		$query->from('#__mediagalleries AS a');
+		$query->from('#__medias AS a');
 
 		// Join over the language
 		$query->select('l.title AS language_title');

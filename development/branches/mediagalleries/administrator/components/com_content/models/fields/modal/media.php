@@ -56,7 +56,7 @@ class JFormFieldModal_Media extends JFormField
 		$db	= JFactory::getDBO();
 		$db->setQuery(
 			'SELECT title' .
-			' FROM #__mediagalleries' .
+			' FROM #__medias' .
 			' WHERE id = '.(int) $this->value
 		);
 		$title = $db->loadResult();
