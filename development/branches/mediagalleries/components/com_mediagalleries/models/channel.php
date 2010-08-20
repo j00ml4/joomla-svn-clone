@@ -94,9 +94,9 @@ class MediagalleriesModelChannel extends JModelList
 		$query->where('a.access IN ('.$groups.')');
 
 		// Filter by category.
-		if ($categoryId = $this->getState('category.id')) {
-			$query->where('a.catid = '.(int) $categoryId);
-			$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
+		if ($channelId = $this->getState('user.id')) {
+			$query->where('a.created_by = '.(int) $channelId);
+			//$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 			$query->where('c.access IN ('.$groups.')');
 		}
 

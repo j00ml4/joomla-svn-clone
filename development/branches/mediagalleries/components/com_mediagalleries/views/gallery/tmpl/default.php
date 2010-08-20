@@ -11,7 +11,6 @@
 defined('_JEXEC') or die;
 jimport('joomla.html.html.behavior');
 
-
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
 $pageClass = $this->params->get('pageclass_sfx');
