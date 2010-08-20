@@ -21,7 +21,7 @@ class ProjectsControllerTask extends JControllerForm
 {
 	protected $view_item = 'task';
 	protected $view_list = 'tasks';
-	//protected $text_prefix = 'COM_PROJECTS';
+	protected $text_prefix = 'COM_PROJECTS_TASK';
 	
 	
 	/**
@@ -87,7 +87,7 @@ class ProjectsControllerTask extends JControllerForm
 	 * Save a record
 	 * 
 	 * @see libraries/joomla/application/component/JControllerForm#save()
-	 */
+	 *
 	public function save(){		
 		if(!parent::save()){
 			// Redirect back to the edit screen.
@@ -95,7 +95,8 @@ class ProjectsControllerTask extends JControllerForm
 			return false;
 		}
 		// Redirect to list of tasks
-		$this->setRedirect($this->_getReturnPage());	
+		//die();
+		//$this->setRedirect($this->_getReturnPage());	
 	}
 	
 	/**

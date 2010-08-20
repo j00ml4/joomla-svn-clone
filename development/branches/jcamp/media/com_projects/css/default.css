@@ -316,6 +316,10 @@ div.configuration {
 }
 
 /* -- TOOLBAR ICON STYLES ----------------------------- */
+.icon-32-notice {
+    background-image: url(../images/toolbar/icon-32-notice.png);
+}
+
 .icon-32-send {
     background-image: url(../images/toolbar/icon-32-send.png);
 }

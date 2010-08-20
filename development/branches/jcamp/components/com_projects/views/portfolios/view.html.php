@@ -68,16 +68,6 @@ class ProjectsViewPortfolios extends JView
 		parent::display($tpl);
 	}
 	
-	/**
-	 * 
-	 * Enter description here ...
-	 * @param unknown_type $key
-	 * @param unknown_type $append
-	 * @deprecated
-	 */
-	public function getLink($key, $append=''){
-		return ProjectsHelper::getLink($key, $append);
-	}
 	
 	protected function addToolbar() 
 	{
@@ -94,7 +84,10 @@ class ProjectsViewPortfolios extends JView
 			$title = JText::_('COM_PROJECTS_PORTFOLIOS_VIEW_DEFAULT_TITLE');
 		}
 		ToolBar::title($title, 'categories');
-		ToolBar::back();
+		if ($this->params->get('show_back_button')) {
+            ToolBar::spacer();
+            ToolBar::back();
+		}
 		
 		$app = JFactory::getApplication();
 		$bc = $app->getPathway();

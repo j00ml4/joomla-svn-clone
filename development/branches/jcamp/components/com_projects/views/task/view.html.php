@@ -17,13 +17,17 @@ jimport('joomla.application.component.view');
  * Display project view
  * @author eden & elf
  */
-class ProjectsViewTask extends JView {
-
+class ProjectsViewTask extends JView 
+{
+	protected $state;
     protected $item;
+    protected $project;
     protected $form;
     protected $params;
     protected $canDo;
     protected $prefix;
+	protected $type; 
+	
 
     /**
      * Display project
@@ -33,12 +37,12 @@ class ProjectsViewTask extends JView {
         $model = &$this->getModel();
 
         //Get Model data
+        $this->state = $this->get('State');
         $this->item = &$model->getItem();
+        $this->project = $model->getProject();
         $this->params = &$app->getParams();
         $this->canDo = &ProjectsHelper::getActions();
 
-        // Type
-        $this->params->set('type', $model->getState('task.type'));
 
         // Layout
         $layout = $this->getLayout();
@@ -50,9 +54,9 @@ class ProjectsViewTask extends JView {
                 $this->form = &$model->getForm();
                 if (empty($this->item)) {
                     $this->params->set('catid', $app->getUserState('task.category.id', 0));
-                    $access = 'project.create';
+                    $access = 'task.create';
                 } else {
-                    $access = 'project.edit';
+                    $access = 'task.edit';
                 }
 
                 // Access
@@ -60,6 +64,7 @@ class ProjectsViewTask extends JView {
                     return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
                 }
                 break;
+                
             case 'view':
                 $layout = 'view';
                 if (!$this->canDo->get('task.view')) {
@@ -81,6 +86,21 @@ class ProjectsViewTask extends JView {
                 }
                 break;
         }
+        
+    	$this->type = 'task';
+		switch($this->state->get('type')){
+			case 3:
+				$this->type = 'ticket';	
+				break;
+				
+			case 2:
+				$this->type = 'task';
+				break;
+				
+			case 1:
+				$this->type = 'milestone';
+				break;
+		}
 
         // set a correct prefix
         require_once JPATH_COMPONENT . '/helpers/tasks.php';
@@ -88,7 +108,47 @@ class ProjectsViewTask extends JView {
 
         // Display the view
         $this->setLayout($layout);
+        $this->addToolbar();
         parent::display($tpl);
     }
 
+	protected function addToolbar() 
+	{
+		$this->loadHelper('toolbar');
+				
+		switch($this->getLayout()){
+			case 'edit':
+			case 'form':
+				$title = JText::sprintf('COM_PROJECTS_TASK_FORM_'.$this->type.'_TITLE', $this->project->title);
+				$icon = 'config';
+				
+				ToolBar::save('task.save');
+				ToolBar::cancel('task.cancel');
+				break;
+				
+			default:
+				$title = JText::sprintf('COM_PROJECTS_TASK_VIEW_'.$this->type.'_TITLE', $this->project->title, $this->item->title);
+				$icon = 'archive';
+				if($this->canDo->get('core.edit')){
+					ToolBar::editList('project.edit');
+				}
+				if($this->item->state && $this->canDo->get('core.edit.state')){
+					ToolBar::unpublish('project.unpublish');
+				}else{
+					if($this->canDo->get('core.edit.state')){
+						ToolBar::publish('project.publish');
+					}
+					if($this->canDo->get('core.delete')){
+						ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_PROJECT_DELETE'), 'project.delete');
+					}
+				}
+		        if ($this->params->get('show_back_button')) {
+		            ToolBar::spacer();
+		            ToolBar::back();
+		        }
+		}
+		ToolBar::title($title, $icon);
+		
+		echo ToolBar::render();
+	}
 }

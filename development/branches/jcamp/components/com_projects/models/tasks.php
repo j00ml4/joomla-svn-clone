@@ -51,10 +51,12 @@ class ProjectsModelTasks extends JModelList
         // Parent task
         $id = (int) JRequest::getInt('parent_id');
         $this->setState('parent.id', $id);
-
+		$app->setUserState('task.parent.id', $id);
+        
         // Type
-        $type = JRequest::getInt('type', 3); // default => tickets
-        $this->setState('type', $type);
+        $id = JRequest::getInt('type', 2); // default => tickets
+        $this->setState('type', $id);
+        $app->setUserState('task.type', $id);
 
         // Filters
         $this->setState('filter.state', 1);
@@ -74,11 +76,11 @@ class ProjectsModelTasks extends JModelList
         $query = $db->getQuery(true);
 
         // Select required fields from the categories.
-        $query->select($this->getState('list.select', 'a.id, a.title, a.lft, a.rgt, a.alias, a.language'));
+        $query->select($this->getState('list.select', 'a.*'));
         $query->from('#__project_tasks AS a');
 
         // Select category of the task
-        $query->select('c.title AS `category`');
+        $query->select('c.title AS `category_title`');
         $query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 
         // Select name of creator of the task
@@ -93,8 +95,7 @@ class ProjectsModelTasks extends JModelList
 
         // Filter by parent
         if ($parent_id = $this->getState('parent.id')) {
-            $query->where('a.parent_id = ' . (int) $project_id);
-            $query->join('LEFT', '#__projects AS p ON p.id = a.project_id');
+            $query->where('a.parent_id = ' . (int) $parent_id);
         }
 
         // Join over the users for the checked out user.
@@ -111,7 +112,7 @@ class ProjectsModelTasks extends JModelList
 
         // Filter by state
         if ($state = $this->getState('filter.state')) {
-            $query->where('a.state >= ' . (int) $state);
+           // $query->where('a.state >= ' . (int) $state);
         }
 
         // Filter by search in title
