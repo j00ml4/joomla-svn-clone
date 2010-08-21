@@ -8,13 +8,13 @@
 // no direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.controller');
+jimport('joomla.application.component.controlleradmin');
 
 /**
  * @package		Joomla.Site
  * @subpackage	com_project
  */
-class ProjectsControllerDocuments extends JController
+class ProjectsControllerDocuments extends JControllerAdmin
 {
 	protected $_context = 'com_projects.edit.document';
 	
@@ -38,7 +38,7 @@ class ProjectsControllerDocuments extends JController
 	 *
 	 * @return	object	The model.
 	 */
-	public function getModel($name = 'Documents', $prefix = 'ProjectsModel', $config = null)
+	public function getModel($name = 'Document', $prefix = 'ProjectsModel', $config = null)
 	{
 		return parent::getModel($name, $prefix, $config);
 	}
@@ -56,16 +56,10 @@ class ProjectsControllerDocuments extends JController
 		
 		$cid = JRequest::getVar('cid',array(),'default','array');
 		JArrayHelper::toInteger($cid);
-		$c = count($cid);
 		$model = $this->getModel();
 		$app = JFactory::getApplication();
-		$tbl = $model->getTable();
-		for($i = 0;$i <$c; $i++)
-		{
-			if(!$tbl->delete($cid[$i]))
-			{
-				return JError::raiseError(500, JText::_('COM_PROJECTS_DOCUMENTS_ERROR_DELETE'));
-			}
+		if (!$model->delete($cid)){			
+			return JError::raiseError(500, JText::_('COM_PROJECTS_DOCUMENTS_ERROR_DELETE'));
 		}
 		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=documents&id='.$app->getUserState('project.id').'&Itemid='.ProjectsHelper::getMenuItemId(), false),
 		JText::_('COM_PROJECTS_DOCUMENTS_SUCCESS_DELETE'));

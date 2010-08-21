@@ -20,10 +20,8 @@ $listDirn = $this->state->get('list.direction');
 
 $params = $this->params;
 ?>
-
-<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
 <?php if (empty($this->items)) : ?>
-    <p><?php echo JText::_('COM_PROJECTS_DOCUMENTS_NO_DOCUMENT'); ?></p>
+    <p><?php echo JText::_('COM_PROJECTS_NO_DOCUMENTS'); ?></p>
 <?php else: ?>
     <?php if ($params->get('show_pagination_limit')) : ?>
         <div class="display-limit">
@@ -56,15 +54,15 @@ $params = $this->params;
         </tr>
         </thead>
         <tbody>
-<?php foreach ($this->items as $i => $this->article) : ?>
-         <tr class="cat-list-row<?php echo $i % 2; ?> <?php echo $this->article->state > 0 ? '' : "artUnpublished"; ?>">
-            <?php if (in_array($this->article->access, $this->user->authorisedLevels())) : ?>
-            <?php echo $this->loadTemplate('item_access'); ?>
-            <?php else : ?>
-            <?php echo $this->loadTemplate('item_noaccess'); ?>
-            <?php endif; ?>
-         </tr>
-<?php endforeach; ?>
+		<?php foreach ($this->items as $i => $this->article) : ?>
+	         <tr class="cat-list-row<?php echo $i % 2; ?> <?php echo $this->article->state > 0 ? '' : "artUnpublished"; ?>">
+	            <?php if (in_array($this->article->access, $this->user->authorisedLevels())) : ?>
+	            <?php echo $this->loadTemplate('item_access'); ?>
+	            <?php else : ?>
+	            <?php echo $this->loadTemplate('item_noaccess'); ?>
+	            <?php endif; ?>
+	         </tr>
+		<?php endforeach; ?>
         </tbody>
     </table>
 
@@ -77,10 +75,3 @@ $params = $this->params;
     </div>
     <?php endif; ?>
 <?php endif; ?>
-
-    <input type="hidden" name="filter_order" value="" />
-    <input type="hidden" name="filter_order_Dir" value="" />
-    <input type="hidden" name="limitstart" value="" />
-    <input type="hidden" name="task" value="" />
-    <?php echo JHTML::_('form.token'); ?>
-</form>

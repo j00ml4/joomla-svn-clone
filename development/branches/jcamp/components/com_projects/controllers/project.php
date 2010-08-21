@@ -145,7 +145,7 @@ class ProjectsControllerProject extends JControllerForm {
 
         // Access check.
         if (!$this->allowSave($data)) {
-            $this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list, false));
+            $this->setRedirect(ProjectsHelper::getLink('projects', $data['catid']));
             return JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED'));
         }
 
@@ -159,10 +159,10 @@ class ProjectsControllerProject extends JControllerForm {
         }
 
         // Test if the data is valid.
-        $validData = $model->validate($form, $data);
+        $data = $model->validate($form, $data);
 
         // Check for validation errors.
-        if ($validData === false) {
+        if ($data === false) {
             // Get the validation messages.
             $errors = $model->getErrors();
 
@@ -179,14 +179,14 @@ class ProjectsControllerProject extends JControllerForm {
             $app->setUserState($context . '.data', $data);
 
             // Redirect back to the edit screen.
-            $this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_item . $append));
+            $this->setRedirect(ProjectsHelper::getLink('projects', $data['catid']));
             return false;
         }
 
         // Attempt to save the data.
-        if (!$model->save($validData)) {
+        if (!$model->save($data)) {
             // Save the data in the session.
-            $app->setUserState($context . '.data', $validData);
+            $app->setUserState($context . '.data', $data);
 
             // Redirect back to the edit screen.
             $this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'notice');
@@ -195,19 +195,19 @@ class ProjectsControllerProject extends JControllerForm {
         }
 
         // Save succeeded, check-in the record.
-        if ($checkin && !$model->checkin($validData['id'])) {
+        if ($checkin && !$model->checkin($data['id'])) {
             // Save the data in the session.
-            $app->setUserState($context . '.data', $validData);
+            $app->setUserState($context . '.data', $data);
 
             // Check-in failed, go back to the record and display a notice.
             $message = JText::sprintf('JError_Checkin_saved', $model->getError());
-            $this->setRedirect('index.php?option=' . $this->option . '&view=' . $this->view_item . $append, $message, 'error');
+            $this->setRedirect(ProjectsHelper::getLink('project', $data['id']), $message, 'error');
             return false;
         }
 
         // isNew
         if ($isNew) {
-            $id = $validData['id'] = $model->getDBO()->insertid();
+            $id = $data['id'] = $model->getDBO()->insertid();
             $user = JFactory::getUser();
             $model->addMembers($id, $user->id);
         }
@@ -217,8 +217,7 @@ class ProjectsControllerProject extends JControllerForm {
         $this->setMessage(JText::_(($lang->hasKey($this->text_prefix . '_SAVE_SUCCESS') ? $this->text_prefix : 'JLIB_APPLICATION') . '_SAVE_SUCCESS'));
 
         // redirect
-        $append = '&layout=default&id=' . $id;
-        $this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_item . $append));
+        $this->setRedirect(ProjectsHelper::getLink('project', (int)$data['id']));
         return true;
     }
 
@@ -284,7 +283,6 @@ class ProjectsControllerProject extends JControllerForm {
                     break;
 
                 case -2:
-                    die();
                     $ntext = 'COM_PROJECTS_PROJECT_TRASHED';
                     break;
 

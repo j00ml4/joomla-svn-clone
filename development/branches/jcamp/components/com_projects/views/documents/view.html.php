@@ -24,27 +24,29 @@ class ProjectsViewDocuments extends JView {
     protected $items;
     protected $user;
     protected $pagination;
-    protected $article;
+    protected $project;
 
     /**
      * Display project
      */
     public function display($tpl = null) {
-        $app = JFactory::getApplication();
-        $model = $this->getModel();
-        $this->params = $app->getParams();
-        $this->items = $model->getItems();
-        $this->state = $model->get('state');
-        $this->user = JFactory::getUser();
-        $this->pagination = &$model->getPagination();
-
-        $this->canDo = ProjectsHelper::getActions();
-        // Compute the article slugs (runs content plugins).
-        for ($i = 0, $n = count($this->items); $i < $n; $i++) {
-            $item = &$this->items[$i];
-            $item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
-        }
-
+        $app 	= JFactory::getApplication();
+        $model 	= $this->getModel('Documents');
+        
+        $this->params 		= $app->getParams();
+        $this->items 		= $model->getItems();
+        $this->project 		= $model->getProject();
+        $this->state 		= $this->get('State');  
+        $this->pagination 	= $model->getPagination();
+        $this->canDo		= ProjectsHelper::getActions(
+			$app->getUserState('portfolio.id'), 
+			$app->getUserState('project.id'),
+			$this->project);
+	
+    	if (empty($this->project)){
+			return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
+		}	
+			
         // Display the view
         $this->setLayout('default');
         $this->addToolbar();
@@ -60,12 +62,16 @@ class ProjectsViewDocuments extends JView {
         if ($this->canDo->get('document.create')) {
             ToolBar::addNew('document.add');
         }
-        if ($this->canDo->get('document.edit')) {
-            ToolBar::editList('document.edit');
+        
+        if(count($this->items)){
+	        if ($this->canDo->get('document.edit')) {
+	            ToolBar::editList('document.edit');
+	        }
+	        if ($this->canDo->get('document.delete')) {
+	            ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_DOCUMENT_DELETE'), 'documents.delete');
+	        }
         }
-        if ($this->canDo->get('document.delete')) {
-            ToolBar::deleteList('documents.edit');
-        }
+        
         if ($this->params->get('show_back_button')) {
             ToolBar::spacer();
             ToolBar::back();

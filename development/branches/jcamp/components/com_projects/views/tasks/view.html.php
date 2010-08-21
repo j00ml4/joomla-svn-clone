@@ -59,7 +59,8 @@ class ProjectsViewTasks extends JView {
                 }
                 break;
         }
-
+		$this->setLayout($layout);
+		
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {
             return JError::raiseError(500, implode("\n", $errors));
@@ -75,7 +76,6 @@ class ProjectsViewTasks extends JView {
         $this->type = TasksHelper::getPrefix($model->getState('type'));
 
         // TMLP
-        $this->setLayout($layout);
         $this->addToolbar();
         parent::display($tpl);
     }

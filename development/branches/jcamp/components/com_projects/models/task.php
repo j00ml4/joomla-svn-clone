@@ -19,8 +19,8 @@ jimport('joomla.application.component.modeladmin');
  */
 class ProjectsModelTask extends JModelAdmin
 {
-    protected $text_prefix = 'COM_PROJECTS';
-    //protected $context = 'com_projects.edit.project';
+    protected $text_prefix = 'COM_PROJECTS_TASK';
+    protected $context = 'com_projects.edit.task';
 
     /**
      * Method to test whether a record can be deleted.
@@ -54,7 +54,7 @@ class ProjectsModelTask extends JModelAdmin
         $app = JFactory::getApplication();
 
         // curent task
-        if (!($pk = (int) $app->getUserState($this->option . '.edit.' . $this->getName() . '.id'))) {
+        if (!($pk = (int) $app->getUserState($this->context.'.id'))) {
             $pk = (int) JRequest::getInt('id');
         }
         $this->setState('task.id', $pk);
@@ -64,11 +64,8 @@ class ProjectsModelTask extends JModelAdmin
         $this->setState('project.id', $app->getUserState('project.id'));
 
         // task type
-        $id = $app->getUserStateFromRequest('task.type', JRequest::getInt('type'));
-        $this->setState('task.type', $id);
-
-        // id
-        //$this->setState('Itemid', ProjectsHelper::getMenuItemId());
+        $this->setState('task.type', 
+        	$app->getUserStateFromRequest('task.type', 'type'));
     }
 
     /**
@@ -177,7 +174,7 @@ class ProjectsModelTask extends JModelAdmin
     protected function loadFormData() {
         $app = JFactory::getApplication();
         // Check the session for previously entered form data.
-        $data = $app->getUserState('com_projects.edit.task.data', array());
+        $data = $app->getUserState($this->context.'.data', array());
         if (empty($data)) {
             $data = $this->getItem();
         }
@@ -312,6 +309,22 @@ class ProjectsModelTask extends JModelAdmin
 
         return true;
     }
-
+    
+	/**
+	 * function to get the project
+	 * @param $pk
+	 */
+	public function getProject()
+	{	
+		$id = $this->getState('project.id');
+		if (empty($this->project) && $id) {
+			$app = JFactory::getApplication();
+			$model = JModel::getInstance('Project', 'ProjectsModel');
+			$this->project = $model->getItem($id);
+			$this->setState('portfolio.id', $this->project->catid);
+		}
+		
+		return $this->project;
+	} 	
 }
 ?>

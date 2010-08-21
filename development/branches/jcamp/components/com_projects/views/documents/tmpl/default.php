@@ -8,12 +8,21 @@
  */
 // no direct access
 defined('_JEXEC') or die;
-
-$pageClass = $this->params->get('pageclass_sfx');
 ?>
 
-<div class="projects<?php echo $pageClass; ?> category-list<?php echo $pageClass; ?>">
-    <div class="cat-items">
-        <?php echo $this->loadTemplate('documents'); ?>
+<div class="project-items <?php echo $this->params->get('pageclass_sfx'); ?>">
+<form action="<?php echo ProjectsHelper::getLink('form'); ?>" method="post" id="adminForm" name="adminForm">
+	<div class="category-list">	
+	    <div class="cat-items">
+	        <?php echo $this->loadTemplate('articles'); ?>
+	    </div>
     </div>
+    
+    <input type="hidden" id="task" name="task" value="" />
+    <input type="hidden" name="boxchecked" value="0" />
+	<input type="hidden" name="filter_order" value="" />
+	<input type="hidden" name="filter_order_Dir" value="" />
+	<input type="hidden" name="limitstart" value="" />
+	<?php echo JHTML::_('form.token'); ?>
+</form>    
 </div>

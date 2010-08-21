@@ -83,10 +83,11 @@ class ProjectsModelMembers extends JModelList
 	 * @param $pk
 	 */
 	public function getProject()
-	{
-		if (!is_object($this->project)) {
+	{	
+		$id = $this->getState('project.id');
+		if (empty($this->project) && $id) {
 			$model = JModel::getInstance('Project', 'ProjectsModel');
-			$this->project = $model->getItem($this->getState('project.id'));
+			$this->project = $model->getItem($id);
 		}
 		
 		return $this->project;
