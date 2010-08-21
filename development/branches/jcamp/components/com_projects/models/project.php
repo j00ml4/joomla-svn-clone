@@ -19,10 +19,10 @@ jimport('joomla.application.component.modeladmin');
  */
 class ProjectsModelProject extends JModelAdmin
 {
-	//protected $text_prefix = 'COM_PROJECTS';
-	//protected $context = 'com_projects.edit.project';
-	protected $_item = null;
-	protected $_portfolio = null;
+	protected $text_prefix = 'COM_PROJECTS_PROJECT';
+	protected $context = 'com_projects.edit.project';
+	protected $item = null;
+	protected $portfolio = null;
 	
 	/**
 	 * Method to test whether a record can be deleted.
@@ -79,7 +79,7 @@ class ProjectsModelProject extends JModelAdmin
 		$app = JFactory::getApplication();	
 		
 		// Load the User state.
-		if (!($pk = (int) $app->getUserState($this->option.'.edit.'.$this->getName().'.id'))) {
+		if (!($pk = (int) $app->getUserState($this->context.'.id'))) {
 			$pk = (int) JRequest::getInt('id');
 		}
 		$this->setState($this->getName().'.id', $pk);
@@ -92,17 +92,15 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	public function getPortfolio(){
 		// Get portifolio ID
-		if(!is_object($this->_portfolio)){
-			if (!is_object($this->_item)) {
+		if(!is_object($this->portfolio)){
+			if (!is_object($this->item)) {
 				$this->getItem();
 			}
-			
 			jimport('joomla.application.categories');
 			$categories = &JCategories::getInstance('Projects');
-			$this->_portfolio = $categories->get($this->_item->get('catid'));
 		}
 		
-		return $this->_portfolio;
+		return $this->portfolio;
 	} 
 	
 	
@@ -153,7 +151,7 @@ class ProjectsModelProject extends JModelAdmin
 	{	
 		$app = JFactory::getApplication();
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_projects.edit.project.data', array());
+		$data = $app->getUserState($this->context.'.data', array());
 		if (empty($data)) {
 			$data = $this->getItem();
 		}
@@ -181,15 +179,15 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	public function getItem($pk = null)
 	{	
-		if(!is_object($this->_item)){
+		if(!is_object($this->item)){
 			$app = JFactory::getApplication();
-			$this->_item = parent::getItem($pk);
-			if(!empty($this->_item)){
-				$this->setState('portfolio.id', $this->_item->get('catid'));
-				$app->setUserState('portfolio.id', $this->_item->get('catid'));
+			$this->item = parent::getItem($pk);
+			if(!empty($this->item)){
+				$this->setState('portfolio.id', $this->item->get('catid'));
+				$app->setUserState('portfolio.id', $this->item->get('catid'));
 			}
 		}
-		return $this->_item;
+		return $this->item;
 	}
 
 	/**
@@ -230,7 +228,7 @@ class ProjectsModelProject extends JModelAdmin
 	}
 	
 	
-		/**
+	/**
 	 * Assigns members to a project
 	 *
 	 * @since	1.6

@@ -40,11 +40,8 @@ class ProjectsModelProjects extends JModelList
 		$app	= &JFactory::getApplication();
 		
 		// portfolio	
-		$id = JRequest::getInt('id', 0);
-		$this->setState('portfolio.id', $id);
-		$app->setUserState('portfolio.id', $id);
-		
-		$this->setState('filter.language',$app->getLanguageFilter());
+		$this->setState('portfolio.id', 
+			$app->getUserStateFromRequest('portfolio.id', 'id'));
 	}
 	
 	

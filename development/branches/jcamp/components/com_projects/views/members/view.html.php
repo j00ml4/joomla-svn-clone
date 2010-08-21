@@ -25,7 +25,6 @@ class ProjectsViewMembers extends JView
 	protected $project;
 	protected $pagination;
 	protected $state;
-	protected $prefix_text;
 
 	/**
 	 * Display managing users assigned to project
@@ -39,9 +38,9 @@ class ProjectsViewMembers extends JView
 		$this->items 		= $model->getItems();
 		$this->params		= $app->getParams();
 		$this->project 		= $model->getProject();
-		$this->type			= $model->getState('type');
 		$this->pagination	= $model->getPagination();
 		$this->state		= $this->get('State');
+		$this->type			= $this->state->get('type');
 		$this->canDo		= ProjectsHelper::getActions(
 			$app->getUserState('portfolio.id'),
 			$app->getUserState('project.id'),
@@ -50,9 +49,6 @@ class ProjectsViewMembers extends JView
 		if(empty($this->project)){
 			return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 		}
-
-		//$this->loadHelper('links');
-		$this->links = $this->getLinks();
 
 		// set up type and layout
 		$this->setLayout('default');
@@ -101,7 +97,7 @@ class ProjectsViewMembers extends JView
 		// Pathway
 		$app = JFactory::getApplication();
 		$bc = $app->getPathway();
-		$bc->addItem($this->project->title,$this->links['project']);
+		$bc->addItem($this->project->title, ProjectsHelper::getLink('project', $this->project->id));
 		$bc->addItem($title);
 		
 		echo ToolBar::render();

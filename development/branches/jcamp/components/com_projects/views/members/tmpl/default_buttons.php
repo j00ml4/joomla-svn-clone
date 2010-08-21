@@ -14,16 +14,16 @@ defined('_JEXEC') or die;
 $params	=& $item->params;
 $model	=$this->getModel();
 ?>
-<div class="tabs">
+<div class="formelm_buttons">
 <?php switch($this->type){
 	case 'list':
 	case 'delete':	
-		echo '<a class="tab readmore" title="'. JText::_('COM_PROJECTS_MEMBERS_ASSIGN_DESC') .'" href="'.$this->links['assign'].'">'. 
+		echo '<a class="tab readmore" title="'. JText::_('COM_PROJECTS_MEMBERS_ASSIGN_DESC') .'" href="'.ProjectsHelper::getLink('members.assign', $this->project->id).'">'. 
 			JText::_('COM_PROJECTS_MEMBERS_ASSIGN_TITLE') .'</a>';
 		break;		
 		
 	case 'assign':
-		echo '<a class="tab readmore" title="'. JText::_('COM_PROJECTS_MEMBERS_DELETE_DESC') .'" href="'.$this->links['delete'].'">'. 
+		echo '<a class="tab readmore" title="'. JText::_('COM_PROJECTS_MEMBERS_DELETE_DESC') .'" href="'.ProjectsHelper::getLink('members.unassign', $this->project->id).'">'. 
 			JText::_('COM_PROJECTS_MEMBERS_DELETE_TITLE') .'</a>';
 		break;		
 } ?>

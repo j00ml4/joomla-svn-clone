@@ -32,7 +32,7 @@
 			description="JFIELD_CATEGORY_DESC"
 			extension="com_projects.task"
 			label="JCATEGORY" >
-         	<option value="">JOPTION_NO_CATEGORY</option>
+         	<option value="">JNONE</option>
 		</field>
 		
         <field id="title" 

@@ -172,14 +172,19 @@ abstract class ProjectsHelper {
                 'projects' => 'index.php?option=com_projects&view=projects&id=',
                 'project' => 'index.php?option=com_projects&view=project&id=',
                 'members' => 'index.php?option=com_projects&view=members&type=list&id=',
-                'assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
-                'unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
-            	'task' => 'index.php?option=com_projects&view=task&id=',
+                'members.assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
+                'members.unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
                 'tasks' => 'index.php?option=com_projects&view=tasks&id=',
             	'tasks.tasks' => 'index.php?option=com_projects&view=tasks&type=2&id=',
             	'tasks.tickets' => 'index.php?option=com_projects&view=tasks&type=3&id=',
             	'tasks.milestones' => 'index.php?option=com_projects&view=tasks&type=1&id=',
-                'documents' => 'index.php?option=com_projects&view=documents&id=',
+            	'task' => 'index.php?option=com_projects&view=task&id=',
+                'task.task' => 'index.php?option=com_projects&view=task&type=2&id=',
+            	'task.ticket' => 'index.php?option=com_projects&view=task&type=3&id=',
+            	'task.milestone' => 'index.php?option=com_projects&view=task&type=1&id=',
+            	'documents' => 'index.php?option=com_projects&view=documents&id=',
+             	'document' => 'index.php?option=com_projects&view=document&id=',
+            
             );
         }
         return JRoute::_($links[$key] . $append, true, 0);

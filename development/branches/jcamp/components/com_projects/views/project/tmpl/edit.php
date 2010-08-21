@@ -19,7 +19,7 @@ JHtml::_('behavior.formvalidation');
 // Vars
 $params =  $this->params;
 ?>
-<div class="projects">
+<div class="project-item">
     <div class="edit item-page<?php echo $params->get('pageclass_sfx'); ?>">
 		<form action="<?php echo ProjectsHelper::getLink('project'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">	
             <fieldset>
@@ -31,7 +31,7 @@ $params =  $this->params;
                 </div>
 
                 <div class="formelm">
-                        <?php echo $this->form->getLabel('title'); ?>
+                       	<?php echo $this->form->getLabel('title'); ?>
                         <?php echo $this->form->getInput('title'); ?>
                 </div>
 

@@ -15,7 +15,7 @@ $params =  $this->params;
 ?>
 <div class="projects<?php echo $params->get('pageclass_sfx'); ?>">
     <div class="tasks-list">
-	<form action="<?php echo ProjectsHelper::getLink('form') ?>" method="post" id="adminForm" name="adminForm">	
+	<form action="<?php echo ProjectsHelper::getLink('form'); ?>" method="post" id="adminForm" name="adminForm">	
         <?php if(empty($this->items)): ?>
             <p><?php echo JText::_('COM_PROJECTS_NO_TASKS'); ?></p>
         <?php else: ?>

@@ -174,22 +174,22 @@ class ProjectsModelTasks extends JModelList
         return JTable::getInstance($type, $prefix, $config);
     }
 
-    /**
-     * function to get the project
-     * @param $pk
-     */
-    public function getProject($pk=null) {
-        // Get project ID
-        if (empty($pk)) {
-            // portfolio
-            if (!($pk = $this->getState('project.id'))) {
-                return null;
-            }
-        }
-
-        $project = JModel::getInstance('Project', 'ProjectsModel');
-        return $project->getItem($pk);
-    }
+	/**
+	 * function to get the project
+	 * @param $pk
+	 */
+	public function getProject()
+	{	
+		$id = $this->getState('project.id');
+		if (empty($this->project) && $id) {
+			$app = JFactory::getApplication();
+			$model = JModel::getInstance('Project', 'ProjectsModel');
+			$this->project = $model->getItem($id);
+			$this->setState('portfolio.id', $this->project->catid);
+		}
+		
+		return $this->project;
+	} 	
 
     /**
      * function to get the project
