@@ -63,10 +63,8 @@ class ProjectsControllerTasks extends JControllerAdmin
         }
 
         $app = JFactory::getApplication();
-        $text = JText::sprintf('COM_PROJECTS_TASKS_SUCCESS_CHANGE_TICKET', $c);
-        if ($c > 1)
-            $text = JText::sprintf('COM_PROJECTS_TASKS_SUCCESS_CHANGE_TICKET_PLURAL', $c);
-        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id=' . $app->getUserState('project.id') . '&type=' . $this->getModel()->getState('task.type') . '&Itemid=' . ProjectsHelper::getMenuItemId(), false), $text);
+        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id=' . $app->getUserState('project.id') . '&type=' . $this->getModel()->getState('task.type') . '&Itemid=' . ProjectsHelper::getMenuItemId(), false),
+                           JText::sprintf(ProjectsHelper::textPlural('COM_PROJECTS_TASKS_SUCCESS_CHANGE_TICKET', $c), $c));
     }
 
     /**
@@ -108,10 +106,8 @@ class ProjectsControllerTasks extends JControllerAdmin
             }
         }
 
-        $text = JText::sprintf('COM_PROJECTS_TASKS_SUCCESS_DELETE_' . $prefix, $c);
-        if ($c > 1)
-            $text = JText::sprintf('COM_PROJECTS_TASKS_SUCCESS_DELETE_' . $prefix . '_PLURAL', $c);
-        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id=' . $app->getUserState('project.id') . '&type=' . $this->getModel()->getState('task.type') . '&Itemid=' . ProjectsHelper::getMenuItemId(), false), $text);
+        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id=' . $app->getUserState('project.id') . '&type=' . $this->getModel()->getState('task.type') . '&Itemid=' . ProjectsHelper::getMenuItemId(), false),
+                           JText::sprintf(ProjectsHelper::textPlural('COM_PROJECTS_TASKS_SUCCESS_DELETE_'.$prefix, $c), $c));
     }
 
     /**
