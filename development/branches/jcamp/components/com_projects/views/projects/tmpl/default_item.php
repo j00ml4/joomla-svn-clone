@@ -10,22 +10,21 @@
 // no direct access
 defined('_JEXEC') or die;
 
-// Create a shortcut for params.
-$params	=& $item->params;
-$item	=& $this->item;
-$link = ProjectsHelper::getLink('project', $item->id);
 ?>
-
-<div class="items-row item">
-	<h4>
-            <a href="<?php echo $link; ?>"><?php echo $item->title;?></a>
-	</h4>
-	<div class="category-desc">
-            <?php echo $item->description;?>
+<li class="items-row item">
+	<h3><a href="<?php echo ProjectsHelper::getLink('project',$this->item->id); ?>">
+		<?php echo $this->item->title;?>
+	</a></h3>
+	<div class="cetegory-desc">			
+		<?php echo $this->item->description;?>
+		<div class="clear"></div>
+		<dl>
+			<dd><a class="readmore" href="<?php echo ProjectsHelper::getLink('portfolios',$this->item->id);?>">
+				<?php echo JText::sprintf('COM_PROJECTS_PORTFOLIOS_LINK', 'y'); ?>
+			</a></dd>
+			<dd><a class="readmore" href="<?php echo ProjectsHelper::getLink('portfolios',$this->item->id);?>">
+				<?php echo JText::sprintf('COM_PROJECTS_PROJECTS_LINK', 'y'); ?>
+			</a></dd>
+		</dl>
 	</div>
-
-	<a href="<?php echo $link; ?>" class="readmore">
-            <?php echo JText::_('COM_PROJECTS_PROJECTS_SEE_PROJECT');?>
-	</a>
-</div>
-<div class="clr"></div>
+</li>

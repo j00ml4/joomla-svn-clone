@@ -91,7 +91,7 @@ class ProjectsModelProjects extends JModelList
 	}
 	
 	/**
-	 * Method to get category data for the current category
+	 * Method to get portfolio data for the current projects
 	 *
 	 * @param	int		An optional ID
 	 *
@@ -108,6 +108,7 @@ class ProjectsModelProjects extends JModelList
 			$options['access']		= true;
 			$categories = JCategories::getInstance('Projects', $options);
 			$this->_portfolio = $categories->get($this->getState('portfolio.id', 'root'));
+			$this->_portfolio->numprojects = $this->getTotal();
 		}
 
 		return $this->_portfolio;

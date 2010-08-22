@@ -109,6 +109,9 @@ border-bottom: none;
 cursor : pointer;
 }
 
+ul.tabnav li.active a { /* settings for active tab links */
+	background : #dddddd;
+}
  
 /* end css tabs */
 
