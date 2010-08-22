@@ -26,7 +26,7 @@ class TableMedia extends JTable
 	 * @since 1.0
 	 */
 	function __construct(& $db) {
-			parent::__construct('#__mediagalleries', 'id', $db);	
+			parent::__construct('#__medias', 'id', $db);	
 	}
 
 	/**
@@ -39,13 +39,13 @@ class TableMedia extends JTable
 	function check(){ 
 		// check for valid name 
 		if (trim($this->title) == '') {
-			$this->setError('COM_MEDIAGALLERIES_MUST_CONTAIN_A_TITLE');
+			$this->setError('com_media_MUST_CONTAIN_A_TITLE');
 			return false;
 		}
 
 		// check for valid name 
 		if( empty($this->catid) ) {
-			$this->setError('COM_MEDIAGALLERIES_MUST_CONTAIN_A_TITLE');
+			$this->setError('com_media_MUST_CONTAIN_A_TITLE');
 			return false;
 		}
 		
@@ -53,7 +53,7 @@ class TableMedia extends JTable
 		/*
 		if ( !(	strpos('http://',$this->url)|| strpos( $this->url, 'https://')) )
 		{
-			$this->setError('COM_MEDIAGALLERIES_INVALID_URL');
+			$this->setError('com_media_INVALID_URL');
 			return false;
 		}
 		*/

@@ -17,7 +17,7 @@ $function = JRequest::getVar('function', 'jSelectArticle');
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_mediagalleries&view=galleries&layout=modal&tmpl=component');?>" method="post" name="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_media&view=galleries&layout=modal&tmpl=component');?>" method="post" name="adminForm">
 	<fieldset class="filter clearfix">
 		<div class="left">
 			<label for="filter_search">
@@ -44,7 +44,7 @@ $listDirn	= $this->state->get('list.direction');
 
 			<select name="filter_category_id" class="inputbox" onchange="this.form.submit()">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_CATEGORY');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_mediagalleries'), 'value', 'text', $this->state->get('filter.category_id'));?>
+				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_media'), 'value', 'text', $this->state->get('filter.category_id'));?>
 			</select>
 		</div>
 	</fieldset>

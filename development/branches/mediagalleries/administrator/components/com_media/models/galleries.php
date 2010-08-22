@@ -13,10 +13,10 @@ jimport('joomla.application.component.modellist');
  * Methods supporting a list of Mediagallery records.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_mediagalleries
+ * @subpackage	com_media
  * @since		1.6
  */
-class MediagalleriesModelGalleries extends JModelList
+class MediaModelGalleries extends JModelList
 {
 	/**
 	 * Method to auto-populate the model state.
@@ -47,7 +47,7 @@ class MediagalleriesModelGalleries extends JModelList
 		$this->setState('filter.language', $language);
 
 		// Load the parameters.
-		$params = JComponentHelper::getParams('com_mediagalleries');
+		$params = JComponentHelper::getParams('com_media');
 		$this->setState('params', $params);
 
 		// List state information.
@@ -68,7 +68,7 @@ class MediagalleriesModelGalleries extends JModelList
 
 		// Select the required fields from the table.
 		$query->select($this->getState( 'list.select', ' a.*'));
-		$query->from('#__mediagalleries AS a');
+		$query->from('#__medias AS a');
 
 		// Join over the language
 		$query->select('l.title AS language_title');

@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.view' );
  * @package    Joomla.Tutorials
  * @subpackage Components
  */
-class MediagalleriesViewGalleries extends JView
+class MediaViewGalleries extends JView
 {
 	
 	protected $user;
@@ -64,7 +64,7 @@ class MediagalleriesViewGalleries extends JView
 		$state	= $this->get('State');
 		$canDo	= MediagalleriesHelper::getActions($state->get('filter.category_id'));
 
-		JToolBarHelper::title(JText::_('COM_MEDIAGALLERIES_MANAGER_MEDIAS'), 'media');
+		JToolBarHelper::title(JText::_('com_media_MANAGER_MEDIAS'), 'media');
 		if ($canDo->get('core.create')) {
 			JToolBarHelper::addNew('media.add','JTOOLBAR_NEW');
 		}
@@ -98,7 +98,7 @@ class MediagalleriesViewGalleries extends JView
 		}
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::divider();
-			JToolBarHelper::preferences('com_mediagalleries');
+			JToolBarHelper::preferences('com_media');
 		}
 	}
  }

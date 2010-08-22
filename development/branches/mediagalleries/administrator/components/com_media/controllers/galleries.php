@@ -14,7 +14,7 @@ jimport('joomla.application.component.controlleradmin');
  * mediagalleries list controller class.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_mediagalleries
+ * @subpackage	com_media
  * @since		1.6
  */
 class MediagalleriesControllerGalleries extends JControllerAdmin

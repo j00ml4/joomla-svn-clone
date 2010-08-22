@@ -14,13 +14,13 @@ defined('_JEXEC') or die( 'Restricted access' );
 jimport('joomla.application.component.controller');
 
 /** TODO
- * mediagalleries Controller
+ * media Controller
  *
  * @package		Joomla
- * @subpackage	mediagalleries
+ * @subpackage	media
  * @since 1.5
  */
-class MediagalleriesController extends JController
+class MediaController extends JController
 {
 	protected $default_view = 'galleries';
 	
@@ -34,6 +34,6 @@ class MediagalleriesController extends JController
 		parent::display();
 
 		// Load the submenu.
-		MediagalleriesHelper::addSubmenu(JRequest::getWord('view', $this->default_view));
+		mediaHelper::addSubmenu(JRequest::getWord('view', $this->default_view));
 	}
 }

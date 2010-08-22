@@ -17,7 +17,7 @@ jimport('joomla.application.component.controllerform');
  * @subpackage	com_mediagalleries
  * @since		1.6
  */
-class MediagalleriesControllerMedia extends JControllerForm
+class MediaControllerMedia extends JControllerForm
 {
 	 protected $view_list = 'gallery';
 	 protected $view_item = 'media';

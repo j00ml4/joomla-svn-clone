@@ -42,7 +42,7 @@ class MediagalleriesViewMedia extends JView
 		$model		=& $this->getModel();
 		
 		//get the data
-		$this->params	=& JComponentHelper::getParams('com_mediagalleries');
+		$this->params	=& JComponentHelper::getParams('com_media');
 		$this->user 	=& JFactory::getUser();
 		$this->item		=& $this->get('Item');
 		$this->form		=& $this->get('Form');

@@ -2,7 +2,7 @@
 /**
  * @version		$Id: edit.php 17133 2010-05-17 06:30:14Z severdia $
  * @package		Joomla.Administrator
- * @subpackage	com_mediagalleries
+ * @subpackage	com_media
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -28,7 +28,7 @@ JHtml::_('behavior.formvalidation');
 // -->
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_mediagalleries'); ?>" method="post" name="adminForm" id="mediagalleries-form" class="form-validate">
+<form action="<?php JRoute::_('index.php?option=com_media'); ?>" method="post" name="adminForm" id="mediagalleries-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 			<legend><?php echo empty($this->item->id) ? JText::_('JTOOLBAR_NEW') : JText::sprintf('JACTION_EDIT', $this->item->id); ?></legend>
