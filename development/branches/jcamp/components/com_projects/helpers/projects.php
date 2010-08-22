@@ -155,6 +155,19 @@ abstract class ProjectsHelper {
             $id = JRequest::getInt('Itemid', 0);
         return $id;
     }
+    
+    /**
+     * Method to get singular or plural version of text based on number of items
+     *
+     * @param $text Base of translation text
+     * @param $num  Number of items
+     * 
+     * @return Translation string for JText::_() method
+     */
+    public static function textPlural($text, $num) {
+    	return $num > 1 ? $text.'_PLURAL' : $text;
+    }
+    
 
     /**
      * Get links
@@ -184,42 +197,10 @@ abstract class ProjectsHelper {
             	'task.milestone' => 'index.php?option=com_projects&view=task&type=1&id=',
             	'documents' => 'index.php?option=com_projects&view=documents&id=',
              	'document' => 'index.php?option=com_projects&view=document&id=',
-            
-            );
+                        );
         }
-        return JRoute::_($links[$key] . $append, true, 0);
+        return JRoute::_($links[$key] . $append);
     }
-    
-        
-    /**
-     * function to get a single the project
-     * @param $pk
-     */
-    public function getProject($pk=null) {
-        // Get project ID
-        if (empty($pk)) {
-           return null;
-        }
-
-        //$this->setState('portfolio.id',$pk);
-        $model = JModel::getInstance('Project', 'ProjectsModel');
-        return $model->getItem($pk);
-    }
-    
-    /**
-	 * function to get the portifolo
-	 * @param $pk
-	 */
-	public function getPortfolio($pk){
-		// Get portifolio ID
-		if (empty($pk)) {
-           return null;
-        }
-		
-		jimport('joomla.application.categories');
-		$categories = &JCategories::getInstance('Projects');
-		return $categories->get($pk);
-	} 
 }
 
 ?>
