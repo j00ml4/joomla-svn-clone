@@ -30,4 +30,45 @@ class ProjectsCategories extends JCategories
 		$options['extension'] = 'com_projects';
 		parent::__construct($options);
 	}
+	
+	/*
+	 * Method to get number of portfolios linked to a certain portfolio
+	 * 
+	 * @param $id ID of a portfolio
+	 * @param $params Parameters
+	 * @return Number of portfolios linked to the portfolio
+	 */
+	public function calcNumCategories($id, $params) {
+		$user	= JFactory::getUser();
+		$db		= JFactory::getDbo();
+		$q		= $db->getQuery(true);
+		
+		
+		// Select required fields from the categories.
+		$q->select('a.*');
+		$q->from('`#__categories` AS a');
+		$q->where('a.extension = '.$db->Quote('com_projects'));
+		
+		$q->where('a.parent_id = '.(int) $id);
+			
+		// Filter by state
+		$state = $params['filter.state'];
+		if (is_numeric($state)) {
+			$q->where('a.state = '.(int)$state);
+		}
+		
+		// Filter by start and end dates.
+		$nullDate = $db->Quote($db->getNullDate());
+		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+
+		// Filter by language
+		if ($params['filter.language']) {
+			$q->where('a.`language` IN (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+		}
+		
+		$db->setQuery($q);
+		$db->query();
+		
+		return $db->getNumRows();
+	}
 }

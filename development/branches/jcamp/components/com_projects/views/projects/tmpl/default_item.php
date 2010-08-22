@@ -22,7 +22,7 @@ defined('_JEXEC') or die;
 			<dd><a class="readmore" href="<?php echo ProjectsHelper::getLink('portfolios',$this->item->id);?>">
 				<?php echo JText::sprintf('COM_PROJECTS_PORTFOLIOS_LINK', 'y'); ?>
 			</a></dd>
-			<dd><a class="readmore" href="<?php echo ProjectsHelper::getLink('portfolios',$this->item->id);?>">
+			<dd><a class="readmore" href="<?php echo ProjectsHelper::getLink('projects',$this->item->id);?>">
 				<?php echo JText::sprintf('COM_PROJECTS_PROJECTS_LINK', 'y'); ?>
 			</a></dd>
 		</dl>
