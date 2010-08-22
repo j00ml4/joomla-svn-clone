@@ -26,14 +26,14 @@ class MediagalleriesHelper
 	public static function addSubmenu($vName = 'mediagalleries')
 	{
 		JSubMenuHelper::addEntry( 
-			JText::_('COM_MEDIAGALLERIES_MEDIAS'),
-			'index.php?option=com_mediagalleries&view=galleries',
+			JText::_('com_media_MEDIAS'),
+			'index.php?option=com_media&view=galleries',
 			$vName == 'galleries'
 		);
 		
 		JSubMenuHelper::addEntry(
-			JText::_('COM_MEDIAGALLERIES_CATEGORIES'),
-			'index.php?option=com_categories&extension=com_mediagalleries',
+			JText::_('com_media_CATEGORIES'),
+			'index.php?option=com_categories&extension=com_media',
 			$vName == 'categories'
 		);		
 	}
@@ -51,9 +51,9 @@ class MediagalleriesHelper
 		$result	= new JObject;
 
 		if (empty($categoryId)) {
-			$assetName = 'com_mediagalleries';
+			$assetName = 'com_media';
 		} else {
-			$assetName = 'com_mediagalleries.category.'.(int) $categoryId;
+			$assetName = 'com_media.category.'.(int) $categoryId;
 		}
 
 		$actions = array(

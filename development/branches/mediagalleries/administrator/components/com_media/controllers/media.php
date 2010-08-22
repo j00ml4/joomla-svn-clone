@@ -14,7 +14,7 @@ jimport('joomla.application.component.controllerform');
  * Mediagallery controller class.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_mediagalleries
+ * @subpackage	com_media
  * @since		1.6
  */
 
@@ -48,7 +48,7 @@ class MediagalleriesControllerMedia extends JControllerForm
 		if( parent::save() === true ) {
 			$data = JRequest::getVar( 'jform' );
 			$cid = ( int ) $data[ 'catid' ];
-			$link = JRoute::_('index.php?option=com_mediagalleries&view=gallery&id='.$cid);
+			$link = JRoute::_('index.php?option=com_media&view=gallery&id='.$cid);
 			$this->setRedirect($link);
 		}
 		$this->setMessage(JText::_('COM_WEBLINK_SUBMIT_SAVE_SUCCESS'));
@@ -69,7 +69,7 @@ class MediagalleriesControllerMedia extends JControllerForm
 		parent::cancel();
 
 		// Redirect to the list screen.
-		$link = JRoute::_('index.php?option=com_mediagalleries');
+		$link = JRoute::_('index.php?option=com_media');
 		$this->setRedirect($link);
 	}
 	 

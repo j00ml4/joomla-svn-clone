@@ -11,7 +11,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 // Access check.
-if (!JFactory::getUser()->authorise('core.manage', 'com_mediagalleries')) {
+if (!JFactory::getUser()->authorise('core.manage', 'com_media')) {
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
@@ -31,7 +31,7 @@ require_once $mediapath;
 require_once JPATH_COMPONENT.DS.'helpers'.DS.'mediagalleries.php';
 
 // Define paths
-define('URI_ASSETS', JURI::base().'../components/com_mediagalleries/assets/' );
+define('URI_ASSETS', JURI::base().'../components/com_media/assets/' );
 define('PATH_HELPERS', JPATH_COMPONENT_SITE.DS.'helpers'.DS );
 
 // Load Action Controller

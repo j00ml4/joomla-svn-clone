@@ -9,11 +9,11 @@ $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 $user = &$this->user;
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_mediagalleries&view=galleries'); ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_media&view=galleries'); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
 		<div class="filter-search fltlft">
 			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?>:</label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_MEDIAGALLERIES_SEARCH_IN_TITLE'); ?>" />
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('com_media_SEARCH_IN_TITLE'); ?>" />
 			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
@@ -30,7 +30,7 @@ $user = &$this->user;
 
 			<select name="filter_category_id" class="inputbox" onchange="this.form.submit()">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_CATEGORY');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_mediagalleries'), 'value', 'text', $this->state->get('filter.category_id'));?>
+				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_media'), 'value', 'text', $this->state->get('filter.category_id'));?>
 			</select>
 
 			<select name="filter_language" class="inputbox" onchange="this.form.submit()">
@@ -78,7 +78,7 @@ $user = &$this->user;
 		<tbody>
 		<?php foreach ($this->items as $i => $item) :
 			$ordering	= ($listOrder == 'a.ordering');
-			$item->cat_link	= JRoute::_('index.php?option=com_categories&extension=com_mediagalleries&task=edit&type=other&cid[]='. $item->catid);
+			$item->cat_link	= JRoute::_('index.php?option=com_categories&extension=com_media&task=edit&type=other&cid[]='. $item->catid);
 			$canCreate	= $user->authorise('core.create');
 			$canEdit	= $user->authorise('core.edit');
 			$canCheckin	= $user->authorise('core.manage') || $item->checked_out==$user->get('id') || $item->checked_out==0;
@@ -93,13 +93,13 @@ $user = &$this->user;
 						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'galleries.', $canCheckin); ?>
 					<?php endif; ?>
 					<?php if ($canCreate || $canEdit) : ?>
-						<a href="<?php echo JRoute::_('index.php?option=com_mediagalleries&task=media.edit&id='.(int) $item->id); ?>">
+						<a href="<?php echo JRoute::_('index.php?option=com_media&task=media.edit&id='.(int) $item->id); ?>">
 							<?php echo $this->escape($item->title); ?></a>
 					<?php else : ?>
 							<?php echo $this->escape($item->title); ?>
 					<?php endif; ?>
 					<p class="smallsub">
-						(<span><?php echo JText::_('COM_MEDIAGALLERIES_FIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>)</p>
+						(<span><?php echo JText::_('com_media_FIELD_ALIAS_LABEL'); ?>:</span> <?php echo $this->escape($item->alias);?>)</p>
 				</td>
 				<td class="center">
 					<?php echo JHtml::_('jgrid.published', $item->state, $i, 'galleries.', $canChange);?>

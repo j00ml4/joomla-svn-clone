@@ -6,7 +6,7 @@
 	<copyright>(C) 2010 Joomla. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later</license>
 	<version>1.0</version>
-	<description>COM_MEDIAGALLERIES_XML_DESC</description>
+	<description>com_media_XML_DESC</description>
 
 	<install> <!-- Runs on install -->
 	    <sql>
@@ -34,8 +34,8 @@
 	</files>
 	
 	<languages folder="site">
-		<language tag="en-GB">language/en-GB.com_mediagalleries.ini</language>
-		<language tag="pt-BR">language/pt-BR.com_mediagalleries.ini</language>
+		<language tag="en-GB">language/en-GB.com_media.ini</language>
+		<language tag="pt-BR">language/pt-BR.com_media.ini</language>
 	</languages>
     
     <media destination="mediagalleries" folder="media">
@@ -46,11 +46,11 @@
     </media>
 
 	<administration>
-		    <menu link="index.php?option=com_mediagalleries">COM_MEDIAGALLERIES</menu> 
+		    <menu link="index.php?option=com_media">com_media</menu> 
 		    <submenu>
-		           	<menu link="option=com_mediagalleries" view="galleries" img="class:media">COM_MEDIAGALLERIES_MEDIAS</menu>
-					<menu link="option=com_categories&amp;extension=com_mediagalleries" img="class:category">COM_MEDIAGALLERIES_CATEGORIES</menu>
-					<!--<menu img="" link="option=com_comments&amp;extension=com_mediagalleries">Comments</menu> Not for now -->
+		           	<menu link="option=com_media" view="galleries" img="class:media">com_media_MEDIAS</menu>
+					<menu link="option=com_categories&amp;extension=com_media" img="class:category">com_media_CATEGORIES</menu>
+					<!--<menu img="" link="option=com_comments&amp;extension=com_media">Comments</menu> Not for now -->
 		    </submenu>  
 		    
 		    <!-- Admin's Files -->
@@ -68,8 +68,8 @@
 				<folder>sql</folder>
 			</files>
 	    	<languages folder="admin">
-				<language tag="en-GB">language/en-GB.com_mediagalleries.ini</language>
-				<language tag="en-GB">language/en-GB.com_mediagalleries.sys.ini</language><!-- needed -->
+				<language tag="en-GB">language/en-GB.com_media.ini</language>
+				<language tag="en-GB">language/en-GB.com_media.sys.ini</language><!-- needed -->
 			</languages>
 	</administration>
 </extension>
