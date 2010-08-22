@@ -108,7 +108,11 @@ class ProjectsModelProjects extends JModelList
 			$options['access']		= true;
 			$categories = JCategories::getInstance('Projects', $options);
 			$this->_portfolio = $categories->get($this->getState('portfolio.id', 'root'));
-			$this->_portfolio->numprojects = $this->getTotal();
+
+			$params = array();
+			$params['filter.state'] = $this->getState('filter.state');
+			$params['filter.language'] = $this->getState('filter.language');
+			$this->_portfolio->numcategories = $categories->calcNumCategories($this->getState('portfolio.id'),$params);
 		}
 
 		return $this->_portfolio;
