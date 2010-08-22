@@ -66,6 +66,34 @@ class ProjectsViewProjects extends JView
 		}
 		
 	  	$this->setLayout($layout);
+	  	$this->addToolbar();
 	  	parent::display($tpl);
+	}
+	
+	protected function addToolbar() 
+	{
+		$this->loadHelper('toolbar');
+		
+		if($this->canDo->get('core.create')){
+			ToolBar::addNew('project.add');
+		}
+		
+		if(!$this->params->get('is.root')){
+			$title = $this->portfolio->get('title');
+			
+		}else {
+			$title = JText::_('COM_PROJECTS_PROJECTS_LIST_HEADER');
+		}
+		ToolBar::title($title, 'categories');
+		if ($this->params->get('show_back_button')) {
+            ToolBar::spacer();
+            ToolBar::back();
+		}
+		
+		$app = JFactory::getApplication();
+		$bc = $app->getPathway();
+		$bc->addItem($title, ProjectsHelper::getLink('portfolios', $this->portfolio->id));
+		
+		echo ToolBar::render();
 	}
 }

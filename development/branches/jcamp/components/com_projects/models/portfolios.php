@@ -44,9 +44,7 @@ class ProjectsModelPortfolios extends JModelList
 		$this->setState('params',$menuParams);
 
 		// portfolio
-		$id = $menuParams->def('portfolio','0');
-		if(!$id)
-			$id = JRequest::getInt('id', 0);
+		$id = JRequest::getInt('id', 0);
 		$this->setState('portfolio.id', $id);
 		$app->setUserState('portfolio.id', $id);
 		

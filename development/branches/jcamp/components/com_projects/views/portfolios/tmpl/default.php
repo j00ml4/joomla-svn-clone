@@ -31,7 +31,7 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
 
         <div class="TabView" id="TabView">
             <ul class="tabnav">
-                <li class=active"><a title="<?php echo JText::_('COM_PROJECTS_PORTFOLIOS_LINK_DESC'); ?>">
+                <li class="active"><a title="<?php echo JText::_('COM_PROJECTS_PORTFOLIOS_LINK_DESC'); ?>">
                     <?php echo JText::sprintf('COM_PROJECTS_PORTFOLIOS_LINK', $this->portfolio->numcategories); ?>
                 </a></li>
                 <?php if (!$params->get('is.root')): ?>
