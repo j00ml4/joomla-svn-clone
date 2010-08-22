@@ -37,8 +37,16 @@ class ProjectsModelPortfolios extends JModelList
 		// Initialise variables.
 		$app	= &JFactory::getApplication();
 		
-		// portfolio	
-		$id = JRequest::getInt('id', 0);
+		$menuParams = new JRegistry();
+		if ($menu = $app->getMenu()->getActive()) {
+			$menuParams->loadJSON($menu->params);
+		}
+		$this->setState('params',$menuParams);
+
+		// portfolio
+		$id = $menuParams->def('portfolio','0');
+		if(!$id)
+			$id = JRequest::getInt('id', 0);
 		$this->setState('portfolio.id', $id);
 		$app->setUserState('portfolio.id', $id);
 		

@@ -13,7 +13,7 @@
              description="COM_PROJECTS_PROJECTS_CHOOSE_PORTFOLIO_DESC"
              extension="com_projects"
              label="COM_PROJECTS_PROJECTS_CHOOSE_PORTFOLIO_LABEL">
-             <option value="">JOPTION_DO_NOT_USE</option>	
+             <option value="0">JOPTION_DO_NOT_USE</option>	
 			</field> 
         </fieldset>
     </fields>
