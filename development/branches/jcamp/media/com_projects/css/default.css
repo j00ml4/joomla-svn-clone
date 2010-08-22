@@ -94,11 +94,19 @@ padding-top: 4px; /* must change with respect to padding (X) above and below */
 ul.tabnav li a { /* settings for all tab links */
 padding: 3px 4px; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
 border: 1px solid #269; /* set border COLOR as desired; usually matches border color specified in #tabnav */
+-moz-border-radius-topright : 5px;
+-moz-border-radius-topleft : 5px;
+-webkit-border-top-right-radius : 5px;
+-webkit-border-top-left-radius : 5px;
+border-top-right-radius : 5px;
+border-top-left-radius : 5px;
+
 background-color: #cfc; /* set unselected tab background color as desired */
 color: #666; /* set unselected tab link color as desired */
-margin-right: 0px; /* set additional spacing between tabs as desired */
+margin-right: 5px; /* set additional spacing between tabs as desired */
 text-decoration: none;
 border-bottom: none;
+cursor : pointer;
 }
 
  
@@ -264,6 +272,35 @@ div.configuration {
     background: url(../images/menu/icon-16-config.png) 0 6px no-repeat;
 }
 
+/* Main page */
+div.page div.pad > ul{
+	padding : 0 !important;
+	margin : 0 !important;
+}
+
+div.page div.pad > ul li{
+	border-radius : 5px;
+	-moz-border-radius : 5px;
+	-webkit-border-radius : 5px;
+	padding : 0px 10px !important;
+}
+
+div.page div.pad > ul > li:nth-child(even){
+	background : #ececec;
+}
+
+div.page div.pad > ul > li:nth-child(odd){
+	background : #dedede;
+}
+div.projects-content div.category-desc{
+	border : 1px #dfdfdf solid;
+	border-radius : 5px;
+	-webkit-border-radius : 5px;
+	-moz-border-radius : 5px;
+	padding : 0px 5px;
+	margin : 0px !important;
+}
+
 /* Main toolbars */
 #toolbar-box div.toolbar-list {
     float: right;
@@ -294,7 +331,7 @@ div.configuration {
     width: 2px;
 }
 
-#toolbar-box div.toolbar-list span {
+#toolbar-box div.toolbar-list span{
     float: none;
     width: 32px;
     height: 32px;
@@ -309,17 +346,16 @@ div.configuration {
     border: none;
     padding: 0 5px;
     cursor: pointer;
+    text-decoration : none;
+    color : #555555;
 }
 
 #toolbar-box div.toolbar-list a:hover {
-    
+	text-decoration : underline;
+	background : none !important;
 }
 
 /* -- TOOLBAR ICON STYLES ----------------------------- */
-.icon-32-notice {
-    background-image: url(../images/toolbar/icon-32-notice.png);
-}
-
 .icon-32-send {
     background-image: url(../images/toolbar/icon-32-send.png);
 }
