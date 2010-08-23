@@ -16,6 +16,7 @@ jimport('joomla.application.component.controlleradmin');
  */
 class ProjectsControllerTasks extends JControllerAdmin
 {
+	protected $text_prefix;
     /**
      * Constructor
      */
@@ -23,14 +24,13 @@ class ProjectsControllerTasks extends JControllerAdmin
         parent::__construct($config);
 
         // States
-        $this->registerTask('publish', 'publish'); // value = 0 	UNFINISHED TASK
-        $this->registerTask('unpublish', 'publish'); // value = 0	NOT APROVED
+        $this->registerTask('publish', 'publish'); // value = 0 	APPROVED TASK
+        //$this->registerTask('unpublish', 'publish'); // value = 0	NOT APROVED
         $this->registerTask('archive', 'publish'); // value = 2 	FINISHED TASK
-        $this->registerTask('trash', 'publish'); // value = -2
-        $this->registerTask('report', 'publish'); // value = -3 	Open ticket
+        //$this->registerTask('trash', 'publish'); // value = -2
+        $this->registerTask('report', 'publish'); // value = -3 	REPORTED ticket
         $this->registerTask('orderup', 'reorder');
         $this->registerTask('orderdown', 'reorder');
-
 
         $this->registerTask('setTasks', 'aprove');
     }
@@ -63,9 +63,10 @@ class ProjectsControllerTasks extends JControllerAdmin
         }
 
         $app = JFactory::getApplication();
-        $menu = $app->getMenu();
-        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id=' . $app->getUserState('project.id').'&type='.$this->getModel()->getState('task.type').'&Itemid='.$menu->getActive()->id, false),
-                           JText::sprintf(ProjectsHelper::textPlural('COM_PROJECTS_TASKS_SUCCESS_CHANGE_TICKET', $c), $c));
+        $text = JText::sprintf('COM_PROJECTS_TASKS_SUCCESS_CHANGE_TICKET', $c);
+        if ($c > 1)
+            $text = JText::sprintf('COM_PROJECTS_TASKS_SUCCESS_CHANGE_TICKET_PLURAL', $c);
+        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id=' . $app->getUserState('project.id') . '&type=' . $this->getModel()->getState('task.type') . '&Itemid=' . ProjectsHelper::getMenuItemId(), false), $text);
     }
 
     /**
@@ -83,44 +84,13 @@ class ProjectsControllerTasks extends JControllerAdmin
     }
 
     /**
-     * Method to delete selected tasks
-     *
-     * @since	1.6
-     * @deprecated
-     */
-    public function _delete() {
-        // Check for request forgeries
-        JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
-
-        $model = $this->getModel();
-        require_once JPATH_COMPONENT . '/helpers/tasks.php';
-        $prefix = TasksHelper::getPrefix($model->getState('task.type'));
-
-        $cid = JRequest::getVar('cid', array(), 'default', 'array');
-        JArrayHelper::toInteger($cid);
-        $c = count($cid);
-        $app = JFactory::getApplication();
-        $tbl = $model->getTable();
-        for ($i = 0; $i < $c; $i++) {
-            if (!$tbl->delete($cid[$i])) {
-                return JError::raiseError(500, JText::_('COM_PROJECTS_TASKS_ERROR_DELETE_' . $prefix));
-            }
-        }
-
-		$menu= $app->getMenu();
-        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id='.$app->getUserState('project.id').'&type='.$this->getModel()->getState('task.type').'&Itemid='.$menu->getActive()->id, false),
-                           JText::sprintf(ProjectsHelper::textPlural('COM_PROJECTS_TASKS_SUCCESS_DELETE_'.$prefix, $c), $c));
-    }
-
-    /**
      * Method to go back to project overview
      *
      * @since	1.6
      */
     public function back() {
         $app = JFactory::getApplication();
-        $menu = $app->getMenu();
-        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=project&layout=default&id='.$app->getUserState('project.id').'&Itemid='.$menu->getActive()->id, false));
+        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=project&layout=default&id=' . $app->getUserState('project.id') . '&Itemid=' . ProjectsHelper::getMenuItemId(), false));
     }
 
 }
