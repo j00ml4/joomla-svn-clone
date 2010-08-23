@@ -15,6 +15,6 @@ defined('_JEXEC') or die;
         <li>task</li>
         <li>task</li>
     </ul>
-    <a href="<?php echo ProjectsHelper::getLink('tasks.tasks', $this->item->id); ?>" class="readmore">
+    <a href="<?php echo ProjectsHelper::getLink('tasks.task', $this->item->id); ?>" class="readmore">
         <?php echo JText::_('COM_PROJECTS_TASKS_LIST_TASKS_LINK'); ?></a>
 </div>

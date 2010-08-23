@@ -30,8 +30,6 @@ class ProjectsModelMembers extends JModelList
 	 */
 	protected function populateState()
 	{				
-		parent::populateState();
-		
 		// Initialise variables.
 		$app	= &JFactory::getApplication();
 
@@ -41,6 +39,9 @@ class ProjectsModelMembers extends JModelList
 		
 		// project id
 		$this->setState('project.id', $app->getUserStateFromRequest('project.id','id'));
+		
+		// Parent Populate
+		parent::populateState();
 	}
 	
 	

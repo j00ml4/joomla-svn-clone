@@ -15,10 +15,9 @@
 			name="parent_id" 
 			type="task_parent"
 			description="COM_PROJECTS_FIELD_TASK_PARENT_DESC"
-			label="COM_PROJECTS_FIELD_TASK_PARENT_LABEL"
-			required="true">
+			label="COM_PROJECTS_FIELD_TASK_PARENT_LABEL">
          	<option value="1">JNONE</option>			
-			 </field>
+		</field>
 			
 		<field id="type"
 			name="type" 
@@ -52,11 +51,14 @@
               
 		<field id="priority" 
 			name="priority" 
-			type="category"
+			type="list"
 			description="COM_PROJECTS_FIELD_PRIORITY_DESC"
 			label="COM_PROJECTS_FIELD_PRIORITY_LABEL"
-			extension="com_projects.task.priorities"
-		/>
+			default="2">
+			<option value="1">COM_PROJECTS_PRIORITY_HIGH</option>
+            <option value="2">COM_PROJECTS_PRIORITY_NORMAL</option>
+            <option value="3">COM_PROJECTS_PRIORITY_LOW</option>
+		</field>
 
         <field id="description"
 			name="description" 
@@ -93,9 +95,10 @@
 			description="JFIELD_PUBLISHED_DESC"
 			label="JGLOBAL_STATE"
 			size="1" >
-         	<option value="2">JARCHIVED</option>
-            <option value="1">JPUBLISHED</option>
-            <option value="0">JUNPUBLISHED</option>
+         	<option value="2">COM_PROJECTS_STATE_FINISHED</option>
+            <option value="1">COM_PROJECTS_STATE_APPROVED</option>
+            <option value="-3">COM_PROJECTS_STATE_PENDING</option>
+            <option value="0">COM_PROJECTS_STATE_DENIED</option>
         </field>
 		
 		<field id="ordering" 
@@ -132,8 +135,7 @@
 			label="JFIELD_ACCESS_LABEL"
 			description="JFIELD_ACCESS_DESC"
 			class="inputbox"
-			size="1" />
-			
+			size="1" />		
     </fieldset>
 	<!-- Params -->	
 	<fields name="params">

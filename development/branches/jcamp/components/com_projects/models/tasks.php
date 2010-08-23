@@ -19,17 +19,18 @@ jimport('joomla.application.component.modellist');
  */
 class ProjectsModelTasks extends JModelList
 {
-    /**
-     * Category items data
-     *
-     * @var array
-     */
-    protected $_item = null;
-    protected $_siblings = null;
-    protected $_children = null;
-    protected $_parent = null;
-    protected $_project = null;
-
+	protected $text_prefix = 'COM_PROJECTS_TASKS';
+    protected $project;
+    protected $parent;
+	
+    
+    
+    public function getType(){
+    	return ($this->getState('type') == 3)? 
+    		'ticket': 
+    		'task';				
+    }
+        
     /**
      * Method to auto-populate the model state.
      *
@@ -38,9 +39,16 @@ class ProjectsModelTasks extends JModelList
      * @since	1.6
      */
     protected function populateState() {
-        parent::populateState('a.lft', 'asc');
-        $app = &JFactory::getApplication();
-
+    	$app = &JFactory::getApplication();
+    	        
+        $value = $app->getUserStateFromRequest('task.type', 'type', 2);
+        $this->setState('type', $value); 
+    	$this->context .= $value;
+        
+    	$value = JRequest::getString('parent_id');
+        $this->setState('parent.id', $value);  
+    	$this->context .= '.'.$value;
+    	
         // Project
         if (!($id = (int) $app->getUserState('project.id'))) {
             $id = (int) JRequest::getInt('id');
@@ -48,18 +56,17 @@ class ProjectsModelTasks extends JModelList
         $this->setState('project.id', $id);
         $app->setUserState('project.id', $id);
 
-        // Parent task
-        $id = (int) JRequest::getInt('parent_id');
-        $this->setState('parent.id', $id);
-		$app->setUserState('task.parent.id', $id);
-        
-        // Type
-        $id = JRequest::getInt('type', 2); // default => tickets
-        $this->setState('type', $id);
-        $app->setUserState('task.type', $id);
-
         // Filters
-        $this->setState('filter.state', 1);
+        $value = $app->getUserStateFromRequest($this->context.'.state', 'filter_state');
+        $this->setState('filter.state', $value);
+       
+        $value = $app->getUserStateFromRequest($this->context.'.catid', 'filter_catid');
+        $this->setState('filter.catid', $value);
+   
+        $value = JRequest::getString('filter_search');
+        $this->setState('filter.search', $value);  
+        
+        parent::populateState('a.lft', 'asc');
     }
 
     /**
@@ -87,17 +94,6 @@ class ProjectsModelTasks extends JModelList
         $query->select('CASE WHEN a.created_by_alias = \'\' THEN u.name ELSE a.`created_by_alias` END `created_by`');
         $query->join('LEFT', '#__users AS u ON a.created_by = u.id');
 
-        // Filter by project.
-        if ($project_id = $this->getState('project.id')) {
-            $query->where('a.project_id = ' . (int) $project_id);
-            $query->join('LEFT', '#__projects AS p ON p.id = a.project_id');
-        }
-
-        // Filter by parent
-        if ($parent_id = $this->getState('parent.id')) {
-            $query->where('a.parent_id = ' . (int) $parent_id);
-        }
-
         // Join over the users for the checked out user.
         $query->select('uc.name AS editor');
         $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
@@ -110,22 +106,39 @@ class ProjectsModelTasks extends JModelList
         $query->select('ua.name AS author_name');
         $query->join('LEFT', '#__users AS ua ON ua.id = a.created_by');
 
+    	// Filter by project
+        if ($value = $this->getState('project.id')) {
+            $query->where('a.project_id = ' . (int) $value);
+            $query->join('LEFT', '#__projects AS p ON p.id = a.project_id');
+        }
+        
+    	// Filter by parent
+        if ($value = $this->getState('parent.id')) {
+            $query->where('a.parent_id = ' . (int) $value);
+        }
+        
         // Filter by state
-        if ($state = $this->getState('filter.state')) {
-           // $query->where('a.state >= ' . (int) $state);
+        if ($value = $this->getState('filter.state')) {
+        	//var_dump($value);
+        	$query->where('a.state = ' . (int) $value);
         }
 
+    	// Filter by state
+        if ($value = $this->getState('filter.catid')) {
+        	$query->where('a.catid = ' . (int) $value);
+        }
+        
         // Filter by search in title
-        $search = $this->getState('filter.search');
-        if (!empty($search)) {
-            if (stripos($search, 'id:') === 0) {
-                $query->where('a.id = ' . (int) substr($search, 3));
-            } else if (stripos($search, 'author:') === 0) {
-                $search = $db->Quote('%' . $db->getEscaped(substr($search, 7), true) . '%');
-                $query->where('(ua.name LIKE ' . $search . ' OR ua.username LIKE ' . $search . ')');
+        $value = $this->getState('filter.search');
+        if (!empty($value)) {
+            if (stripos($value, 'id:') === 0) {
+                $query->where('a.id = ' . (int) substr($value, 3));
+            } else if (stripos($value, 'author:') === 0) {
+                $value = $db->Quote('%' . $db->getEscaped(substr($value, 7), true) . '%');
+                $query->where('(ua.name LIKE ' . $value . ' OR ua.username LIKE ' . $value . ')');
             } else {
-                $search = $db->Quote('%' . $db->getEscaped($search, true) . '%');
-                $query->where('(a.title LIKE ' . $search . ' OR a.alias LIKE ' . $search . ' OR a.note LIKE ' . $search . ')');
+                $value = $db->Quote('%' . $db->getEscaped($value, true) . '%');
+                $query->where('(a.title LIKE ' . $value . ')');
             }
         }
 
@@ -145,7 +158,8 @@ class ProjectsModelTasks extends JModelList
             case 3:
                 $query->where('a.type = 3');
                 break;
-
+			
+            // tasks
             case 1:
             case 2:
             default:
@@ -155,8 +169,11 @@ class ProjectsModelTasks extends JModelList
 
 
         // Add the list ordering clause.
-        $query->order($db->getEscaped($this->getState('list.ordering', 'a.title')) . ' ' . $db->getEscaped($this->getState('list.direction', 'ASC')));
-
+        $query->order( 
+        	$db->getEscaped(
+        		$this->getState('list.ordering', 'a.title')) . ' ' . 
+        		$db->getEscaped($this->getState('list.direction', 'ASC')));
+				
         return $query;
     }
 
@@ -174,6 +191,22 @@ class ProjectsModelTasks extends JModelList
         return JTable::getInstance($type, $prefix, $config);
     }
 
+    
+    /**
+     * function to get the project
+     * @param $pk
+     */
+    public function getParent() 
+    {
+    	$pk = $this->getState('parent.id');
+        if (empty($this->parent) && $pk) {
+	        $model = JModel::getInstance('Task', 'ProjectsModel');
+	        $this->parent = $model->getItem($pk);
+        }
+        
+        return $this->parent;
+    }
+    
 	/**
 	 * function to get the project
 	 * @param $pk
@@ -190,59 +223,6 @@ class ProjectsModelTasks extends JModelList
 		
 		return $this->project;
 	} 	
-
-    /**
-     * function to get the project
-     * @param $pk
-     */
-    public function getParent() {
-        // Get project ID
-        if (empty($this->_parent)) {
-            $pk = $this->getState('parent.id');
-            if (empty($pk)) {
-                return null;
-            }
-
-            //$this->setState('portfolio.id',$pk);
-            $model = JModel::getInstance('Task', 'ProjectsModel');
-            $this->_parent = $model->getItem($pk);
-        }
-
-        return $this->_parent;
-    }
-
-    /**
-     * Get the sibling (adjacent) categories.
-     *
-     * @return	mixed	An array of categories or false if an error occurs.
-     */
-    function &getLeftSibling() {
-        if (!is_object($this->_item)) {
-            $this->getCategory();
-        }
-        return $this->_leftsibling;
-    }
-
-    function &getRightSibling() {
-        if (!is_object($this->_item)) {
-            $this->getCategory();
-        }
-        return $this->_rightsibling;
-    }
-
-    /**
-     * Get the child categories.
-     *
-     * @param	int		An optional category id. If not supplied, the model state 'portfolio.id' will be used.
-     *
-     * @return	mixed	An array of categories or false if an error occurs.
-     */
-    function &getChildren() {
-        if (!is_object($this->_item)) {
-            $this->getCategory();
-        }
-        return $this->_children;
-    }
 
 }
 ?>

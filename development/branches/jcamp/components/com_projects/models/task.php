@@ -21,26 +21,53 @@ class ProjectsModelTask extends JModelAdmin
 {
     protected $text_prefix = 'COM_PROJECTS_TASK';
     protected $context = 'com_projects.edit.task';
+	protected $project;
+	protected $parent;
+	protected $item;
+	
+	protected $children;
+	protected $children_model;
+	
+	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
+	 */
+	protected function canDelete($record)
+	{	
+		$app = JFactory::getApplication();
+		return ProjectsHelper::canDo($this->getType().'.delete',  
+			$app->getUserState('portfolio.id'), 
+			$app->getUserState('project.id'),
+			$record);
+	}
 
-    /**
-     * Method to test whether a record can be deleted.
-     *
-     * @param	object	A record object.
-     * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
-     */
-    protected function canDelete($record=null, $user=null) {
-        return ProjectsHelper::canDo('task.delete', $this->option, $user, $record);
-    }
-
-    /**
-     * Method to test whether a record can be edited.
-     *
-     * @param	object	A record object.
-     * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
-     */
-    protected function canEditState($record=null, $user=null) {
-        return ProjectsHelper::canDo('task.edit', $this->option, $user, $record);
-    }
+	/**
+	 * Method to test whether a record can be edited.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 */
+	protected function canEditState($record)
+	{
+		return $this->canEdit($record);
+	}
+	
+	/**
+	 * Method to test whether a record can be edited.
+	 *
+	 * @param	object	A record object.
+	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 */
+	protected function canEdit($record)
+	{
+		$app = JFactory::getApplication();
+		return ProjectsHelper::canDo($this->getType().'.edit', 
+			$app->getUserState('portfolio.id'), 
+			$app->getUserState('project.id'),
+			$record);
+	}
 
     /**
      * Method to auto-populate the model state.
@@ -64,70 +91,66 @@ class ProjectsModelTask extends JModelAdmin
         $this->setState('project.id', $app->getUserState('project.id'));
 
         // task type
-        $this->setState('task.type', 
+        $this->setState('type', 
         	$app->getUserStateFromRequest('task.type', 'type'));
     }
-
-    /**
-     * function to get the project
-     * @param $pk
-     */
-    public function getProject($pk=null) {
-        // Get project ID
-        $pk = $this->getState('project.id');
-        if (empty($pk)) {
-            // portfolio
-            if (!($pk = $this->getState('task.id'))) {
-                return null;
-            }
-
-            // query
-            $db = $this->getDbo();
-            $query = $db->getQuery(true);
-            $query->select('a.project_id');
-            $query->from('#__project_tasks AS a');
-            $query->where('a.id=' . $pk);
-            $db->setQuery($query);
-
-            // load result
-            if (!($pk = $db->loadResult())) {
-                return null;
-            }
-        }
-
-        $model = JModel::getInstance('Project', 'ProjectsModel');
-        return $model->getItem($pk);
+	
+    public function getType(){
+    	return ($this->getState('type') == 3)? 
+    		'ticket': 
+    		'task';				
     }
+	/**
+	 * Method to get a single record.
+	 *
+	 * @param	integer	The id of the primary key.
+	 * @return	mixed	Object on success, false on failure.
+	 * @since	1.6
+	 */
+	public function getItem($pk = null)
+	{	
+		if(!is_object($this->item)){
+			$app = JFactory::getApplication();
+			$this->item = parent::getItem($pk);
+			if(!empty($this->item->id)){
+				$this->setState('project.id', $this->item->project_id);
+				$app->setUserState('project.id', $this->item->project_id);
+				$this->setState('type', $this->item->type);
+				$app->setUserState('task.type', $this->item->type);
+			}
+		}
+		return $this->item;
+	}
+	
+	/**
+	 * function to get the project
+	 * @param $pk
+	 */
+	public function getProject()
+	{	
+		$id = $this->getState('project.id');
+		if (empty($this->project) && $id) {
+			$app = JFactory::getApplication();
+			$model = JModel::getInstance('Project', 'ProjectsModel');
+			$this->project = $model->getItem($id);
+			$this->setState('portfolio.id', $this->project->catid);
+			$app->setUserState('portfolio.id', $this->project->catid);
+		}
+		
+		return $this->project;
+	} 	
 
     /**
      * function to get the project
      * @param $pk
      */
-    public function getParent($pk=null) {
+    public function getParent() {
         // Get project ID
-        if (empty($pk)) {
-            // portfolio
-            if (!($pk = $this->getState('task.id'))) {
-                return null;
-            }
-
-            // query
-            $db = $this->getDbo();
-            $query = $db->getQuery(true);
-            $query->select('a.parent_id');
-            $query->from('#__project_tasks AS a');
-            $query->where('a.id=' . $pk);
-            $db->setQuery($query);
-
-            // load result
-            if (!($pk = $db->loadResult())) {
-                return null;
-            }
+        if (empty($this->parent)) {
+           $this->parent = $this->getItem()->parent_id;
         }
 
-        //$this->setState('portfolio.id',$pk);
-        $task = JModel::getInstance('Task', 'ProjectsModel');
-        return $task->getItem($pk);
+        return $this->parent;
     }
 
     /**
@@ -194,20 +217,6 @@ class ProjectsModelTask extends JModelAdmin
     }
 
     /**
-     * Method to get a single record.
-     *
-     * @param	integer	The id of the primary key.
-     * @return	mixed	Object on success, false on failure.
-     * @since	1.6
-     */
-    public function getItem($pk = null) {
-        // Initialise variables.
-        $itemId = (int) (!empty($itemId)) ? $itemId : $this->getState('task.id');
-
-        return parent::getItem($itemId);
-    }
-
-    /**
      * Prepare and sanitise the table data prior to saving.
      *
      * @param	JTable	A JTable object.
@@ -224,13 +233,15 @@ class ProjectsModelTask extends JModelAdmin
         $table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
         $table->alias = JApplication::stringURLSafe($table->title);
         $table->project_id = $this->getState('project.id');
-        $table->type = ($table->type) ? $table->type : $this->getState('task.type');
+        $table->type = ($table->type) ? $table->type : $this->getState('type');
 
+ 
+        
         if (empty($table->id)) {
             // Set the values
             $table->created = $date->toMySQL();
             $table->created_by = $user->get('id');
-
+            
             // Set ordering to the last item if not set
             if (empty($table->ordering)) {
                 $db = $this->getDbo();
@@ -246,85 +257,105 @@ class ProjectsModelTask extends JModelAdmin
         }
     }
 
-    /**
-     * Method to save the form data.
-     *
-     * @param	array	The form data.
-     * @return	boolean	True on success.
-     * @since	1.6
-     */
-    public function save($data) {
-        $pk = (!empty($data['id'])) ? $data['id'] : (int) $this->getState('task.id');
-        $isNew = true;
-
-        // Get a row instance.
-        $table = $this->getTable();
-
-        // Load the row if saving an existing category.
-        if ($pk > 0) {
-            $table->load($pk);
-            $isNew = false;
-        }
-
-        // Set the new parent id if set.
-        if ($table->parent_id != $data['parent_id']) {
-            $table->setLocation($data['parent_id'], 'last-child');
-        }
-
-        $table->project_id = $this->getState('project.id');
-
-        // Bind the data.
-        if (!$table->bind($data)) {
-            $this->setError($table->getError());
-            return false;
-        }
-
-        $this->prepareTable($table);
-
-        // Bind the rules.
-        if (isset($data['rules'])) {
-            $rules = new JRules($data['rules']);
-            $table->setRules($rules);
-        }
-
-        // Check the data.
-        if (!$table->check()) {
-            $this->setError($table->getError());
-            return false;
-        }
-
-        // Store the data.
-        if (!$table->store()) {
-            $this->setError($table->getError());
-            return false;
-        }
-
-        // Rebuild the tree path.
-        if (!$table->rebuildPath($table->id)) {
-            $this->setError($table->getError());
-            return false;
-        }
-
-        $this->setState('task.id', $table->id);
-
-        return true;
-    }
-    
 	/**
-	 * function to get the project
-	 * @param $pk
+	 * Method to save the form data.
+	 *
+	 * @param	array	The form data.
+	 * @return	boolean	True on success.
+	 * @since	1.6
 	 */
-	public function getProject()
-	{	
-		$id = $this->getState('project.id');
-		if (empty($this->project) && $id) {
-			$app = JFactory::getApplication();
-			$model = JModel::getInstance('Project', 'ProjectsModel');
-			$this->project = $model->getItem($id);
-			$this->setState('portfolio.id', $this->project->catid);
+	public function save($data)
+	{
+		$pk		= (!empty($data['id'])) ? $data['id'] : (int)$this->getState('task.id');
+		$isNew	= true;
+		
+		// Get a row instance.
+		$table = $this->getTable();
+
+		// Load the row if saving an existing category.
+		if ($pk > 0) {
+			$table->load($pk);
+			$isNew = false;
+		}
+
+		// Set the new parent id if parent id not matched OR while New/Save as Copy .
+		if ($table->parent_id != $data['parent_id'] || $data['id'] == 0) {
+			$table->setLocation($data['parent_id'], 'last-child');
 		}
 		
-		return $this->project;
-	} 	
+		// Prepare
+		$this->prepareTable($table);
+		
+		// Bind the data.
+		if (!$table->bind($data)) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Bind the rules.
+		if (isset($data['rules'])) {
+			$rules = new JRules($data['rules']);
+			$table->setRules($rules);
+		}
+
+		// Check the data.
+		if (!$table->check()) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Store the data.
+		if (!$table->store()) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		// Rebuild the tree path.
+		if (!$table->rebuildPath($table->id)) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		$this->setState('task.id', $table->id);
+		return true;
+	}
+	
+	/**
+	 * Get the chidren model
+	 * Enter description here ...
+	 */
+	public function getChildren(){
+		if(empty($this->children)){
+			$item = $this->getItem();
+			if(empty($item)){
+				return null;
+			}
+		
+			JRequest::setVar('parent_id', $item->id);
+			$model = JModel::getInstance('tasks', 'ProjectsModel');
+			$this->children = $model;	
+		}
+		
+		return $this->children;
+	}
+	
+	public function getItems()
+	{
+		$model = $this->getChildren();
+		if(empty($model)){
+			return null;
+		}
+		
+		return $model->getItems();
+	}
+	
+	public function getPagination(){
+		$model = $this->getChildren();
+		if(empty($model)){
+			return null;
+		}
+		
+		return $model->getPagination();
+	}
 }
 ?>

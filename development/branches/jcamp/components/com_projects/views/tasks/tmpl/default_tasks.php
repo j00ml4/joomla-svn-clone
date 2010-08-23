@@ -11,17 +11,16 @@
 defined('_JEXEC') or die;
 $canCheckin = $canChange = true;
 ?>
-<ol>
+<ol class="todo-list">
 <?php foreach ($this->items as $i => $item): ?>
 	<?php if(!empty($parent) && $item->parent_id != $parent->id){
 		$parent = null;
-		echo '</ul>';
+		echo '</ol>';
 	}?>	 
 	<?php if($i && empty($parent) && $this->items[$i-1]->id == $item->parent_id){
 		$parent = $this->items[$i-1];
-		echo '<ul><li>';
+		echo '<ol><li>';
 		/* Create tjhe parrent */
-		
 	}else{
 		echo '<li>';
 	}?> 

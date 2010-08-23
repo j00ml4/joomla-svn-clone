@@ -87,7 +87,7 @@ class ProjectsViewTasks extends JView {
         switch ($this->state->get('type')) {
             case 3:
                 $icon = 'archive';
-                $this->type = 'tickets';
+                $this->type = 'ticket';
         		if ($this->canDo->get('ticket.edit')) {
                     ToolBar::custom('tasks.publish', 'publish', 'apply', JText::_('COM_PROJECTS_STATE_APPROVED'));
                     ToolBar::custom('tasks.unpublish', 'unpublish', 'unpublish', JText::_('COM_PROJECTS_STATE_DENIED'));
@@ -96,14 +96,11 @@ class ProjectsViewTasks extends JView {
                 break;
 
             	
-            case 1:
-                $icon = 'archive';
-                $this->type = 'milestones';
-                break;
-            	
+            case 1:    	
             case 2:
+            default:	
                 $icon = 'archive';
-                $this->type = 'tasks';
+                $this->type = 'task';
                 if ($this->canDo->get('task.edit')) {
                     ToolBar::custom('tasks.archive', 'checkin', 'checkin', JText::_('COM_PROJECTS_STATE_FINISHED'));
                     ToolBar::custom('tasks.publish', 'notice', 'notice', JText::_('COM_PROJECTS_STATE_PENDING'));
@@ -119,10 +116,10 @@ class ProjectsViewTasks extends JView {
             ToolBar::editList('task.edit');
         }
         if ($this->canDo->get('task.delete')) {
-            ToolBar::deleteList('COM_PROJECTS_CONFIRM_'.$this->type.'_DELETE', 'tasks.delete');
+            ToolBar::deleteList('COM_PROJECTS_CONFIRM_'.$this->type.'S_DELETE', 'tasks.delete');
         }
         
-        $title = JText::sprintf('COM_PROJECTS_TASKS_LIST_'.$this->type.'_TITLE', $this->project->title);
+        $title = JText::sprintf('COM_PROJECTS_TASKS_LIST_'.$this->type.'S_TITLE', $this->project->title);
         ToolBar::title($title, $icon);
         if ($this->params->get('show_back_button')) {
             ToolBar::spacer();
