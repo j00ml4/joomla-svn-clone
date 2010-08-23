@@ -108,7 +108,8 @@ class ProjectsControllerTask extends JControllerForm
 	protected function _getReturnPage()
 	{
 		$app = &JFactory::getApplication();
-		return JRoute::_('index.php?option=com_projects&view=tasks&type='.$this->getModel()->getState('task.type').'id='.$app->getUserState('project.id').'&Itemid='.ProjectsHelper::getMenuItemId(),false);
+		$menu = $app->getMenu();
+		return JRoute::_('index.php?option=com_projects&view=tasks&type='.$this->getModel()->getState('task.type').'id='.$app->getUserState('project.id').'&Itemid='.$menu->getActive()->id,false);
 	}	
 
 	/**
@@ -132,13 +133,16 @@ class ProjectsControllerTask extends JControllerForm
 
 		// Get the menu item model.
 		$model = $this->getModel();
+		
+		
+		$menu = $app->getMenu();
 
 		// If rows ids do not match, checkin previous row.
 		if (!$model->checkin($previousId))
 		{
 			// Check-in failed, go back to the menu item and display a notice.
 			$message = JText::sprintf('JError_Checkin_failed', $model->getError());
-			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=task&type='.$this->getModel()->getState('task.type').'&Itemid='.ProjectsHelper::getMenuItemId(),false), $message, 'error');
+			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=task&type='.$this->getModel()->getState('task.type').'&Itemid='.$menu->getActive()->id,false), $message, 'error');
 			return false;
 		}
 

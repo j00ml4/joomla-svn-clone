@@ -58,10 +58,11 @@ class ProjectsControllerDocuments extends JControllerAdmin
 		JArrayHelper::toInteger($cid);
 		$model = $this->getModel();
 		$app = JFactory::getApplication();
+	    $menu = $app->getMenu();
 		if (!$model->delete($cid)){			
 			return JError::raiseError(500, JText::_('COM_PROJECTS_DOCUMENTS_ERROR_DELETE'));
 		}
-		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=documents&id='.$app->getUserState('project.id').'&Itemid='.ProjectsHelper::getMenuItemId(), false),
+		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=documents&id='.$app->getUserState('project.id').'&Itemid='.$menu->getActive()->id, false),
 		JText::_('COM_PROJECTS_DOCUMENTS_SUCCESS_DELETE'));
 	}
 }
