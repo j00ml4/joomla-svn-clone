@@ -84,35 +84,6 @@ class ProjectsControllerTask extends JControllerForm
 	
 	
 	/**
-	 * Save a record
-	 * 
-	 * @see libraries/joomla/application/component/JControllerForm#save()
-	 *
-	public function save(){		
-		if(!parent::save()){
-			// Redirect back to the edit screen.
-			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=task&layout=edit&type='.$this->getModel()->getState('task.type').'&Itemid='.ProjectsHelper::getMenuItemId(), false));	
-			return false;
-		}
-		// Redirect to list of tasks
-		//die();
-		//$this->setRedirect($this->_getReturnPage());	
-	}
-	
-	/**
-	 * Method to generate link to list of tasks
-	 *
-	 * @return	URI to list of tasks of this project
-	 * @since	1.6
-	 */
-	protected function _getReturnPage()
-	{
-		$app = &JFactory::getApplication();
-		$menu = $app->getMenu();
-		return JRoute::_('index.php?option=com_projects&view=tasks&type='.$this->getModel()->getState('task.type').'id='.$app->getUserState('project.id').'&Itemid='.$menu->getActive()->id,false);
-	}	
-
-	/**
 	 * Method to cancel an edit
 	 *
 	 * Checks the item in, sets item ID in the session to null, and then redirects to the list page.
@@ -133,16 +104,13 @@ class ProjectsControllerTask extends JControllerForm
 
 		// Get the menu item model.
 		$model = $this->getModel();
-		
-		
-		$menu = $app->getMenu();
 
 		// If rows ids do not match, checkin previous row.
 		if (!$model->checkin($previousId))
 		{
 			// Check-in failed, go back to the menu item and display a notice.
 			$message = JText::sprintf('JError_Checkin_failed', $model->getError());
-			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=task&type='.$this->getModel()->getState('task.type').'&Itemid='.$menu->getActive()->id,false), $message, 'error');
+			$this->setRedirect(ProjectsHelper::getLink('task',$previousId), $message, 'error');
 			return false;
 		}
 
@@ -151,6 +119,6 @@ class ProjectsControllerTask extends JControllerForm
 		$app->setUserState('task.data',	null);
 
 		// Redirect to the list screen.
-		$this->setRedirect($this->_getReturnPage());
+		$this->setRedirect(ProjectsHelper::getLink('tasks'));
 	}
 }
