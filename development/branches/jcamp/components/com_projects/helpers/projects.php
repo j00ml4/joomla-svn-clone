@@ -172,51 +172,15 @@ abstract class ProjectsHelper {
                 'members.assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
                 'members.unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
                 'tasks' => 'index.php?option=com_projects&view=tasks&id=',
-            	'tasks.task' => 'index.php?option=com_projects&view=tasks&type=2&id=',
-            	'tasks.ticket' => 'index.php?option=com_projects&view=tasks&type=3&id=',
-            	'tasks.milestone' => 'index.php?option=com_projects&view=tasks&type=1&id=',
-            	'task' => 'index.php?option=com_projects&view=task&id=',
-                'task.task' => 'index.php?option=com_projects&view=task&type=2&id=',
-            	'task.ticket' => 'index.php?option=com_projects&view=task&type=3&id=',
-            	'task.milestone' => 'index.php?option=com_projects&view=task&type=1&id=',
+            	'tasks.tasks' => 'index.php?option=com_projects&view=tasks&type=2&id=',
+            	'tasks.tickets' => 'index.php?option=com_projects&view=tasks&type=3&id=',
+            	'tasks.milestones' => 'index.php?option=com_projects&view=tasks&type=1&id=',
             	'documents' => 'index.php?option=com_projects&view=documents&id=',
              	'document' => 'index.php?option=com_projects&view=document&id=',
-            
-            );
+                        );
         }
-        return JRoute::_($links[$key] . $append, true, 0);
+        return JRoute::_($links[$key].$append);
     }
-    
-        
-    /**
-     * function to get a single the project
-     * @param $pk
-     */
-    public function getProject($pk=null) {
-        // Get project ID
-        if (empty($pk)) {
-           return null;
-        }
-
-        //$this->setState('portfolio.id',$pk);
-        $model = JModel::getInstance('Project', 'ProjectsModel');
-        return $model->getItem($pk);
-    }
-    
-    /**
-	 * function to get the portifolo
-	 * @param $pk
-	 */
-	public function getPortfolio($pk){
-		// Get portifolio ID
-		if (empty($pk)) {
-           return null;
-        }
-		
-		jimport('joomla.application.categories');
-		$categories = &JCategories::getInstance('Projects');
-		return $categories->get($pk);
-	} 
 }
 
 ?>
