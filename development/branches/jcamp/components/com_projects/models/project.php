@@ -137,7 +137,6 @@ class ProjectsModelProject extends JModelAdmin
 		if (empty($form)) {
 			return false;
 		}
-		//dump($data);
 		return $form;
 	}
 
@@ -183,8 +182,14 @@ class ProjectsModelProject extends JModelAdmin
 			$app = JFactory::getApplication();
 			$this->item = parent::getItem($pk);
 			if(!empty($this->item)){
-				$this->setState('portfolio.id', $this->item->get('catid'));
-				$app->setUserState('portfolio.id', $this->item->get('catid'));
+				if(!$this->item->get('catid')){ // when creating a new project, try to set current portfolio as default
+					$this->setState('portfolio.id',$app->getUserState('portfolio.id'));
+					$this->item->set('catid',$this->setState('portfolio.id'));
+				}
+				else {
+					$this->setState('portfolio.id', $this->item->get('catid'));
+					$app->setUserState('portfolio.id', $this->item->get('catid'));
+				}
 			}
 		}
 		return $this->item;
@@ -259,7 +264,7 @@ class ProjectsModelProject extends JModelAdmin
 	}
 	
 	/**
-	 * deletes members from a project
+	 * Deletes members from a project
 	 *
 	 * @since	1.6
 	 */

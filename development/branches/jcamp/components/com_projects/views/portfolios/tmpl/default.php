@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 // Vars
 $params = $this->params;
 $pageClass = $this->escape($params->get('pageclass_sfx'));
+
 ?>
 
 
