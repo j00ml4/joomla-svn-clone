@@ -156,7 +156,7 @@ abstract class ProjectsHelper {
     /**
      * Get links
      *
-     * Enter description here ...
+     * Method to get pre-defined links
      * @param $key
      * @param $append
      */
@@ -165,16 +165,22 @@ abstract class ProjectsHelper {
         if (empty($links)) {
             $links = array(
                 'form' => JFilterOutput::ampReplace(JFactory::getURI()->toString()),
-                'portfolios' => 'index.php?option=com_projects&view=portfolios&id=',
+
+            	'portfolios' => 'index.php?option=com_projects&view=portfolios&id=',
                 'projects' => 'index.php?option=com_projects&view=projects&id=',
                 'project' => 'index.php?option=com_projects&view=project&id=',
-                'members' => 'index.php?option=com_projects&view=members&type=list&id=',
+
+            	'members' => 'index.php?option=com_projects&view=members&type=list&id=',
                 'members.assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
                 'members.unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
-                'tasks' => 'index.php?option=com_projects&view=tasks&id=',
-            	'tasks.tasks' => 'index.php?option=com_projects&view=tasks&type=2&id=',
-            	'tasks.tickets' => 'index.php?option=com_projects&view=tasks&type=3&id=',
-            	'tasks.milestones' => 'index.php?option=com_projects&view=tasks&type=1&id=',
+
+            	'task.view' => 'index.php?option=com_projects&view=task&layout=view&id=',
+                'task.edit' => 'index.php?option=com_projects&view=task&layout=edit&id=',
+
+            	'tasks' => 'index.php?option=com_projects&view=tasks&id=',
+            	'tasks.task' => 'index.php?option=com_projects&view=tasks&type=2&id=',
+            	'tasks.ticket' => 'index.php?option=com_projects&view=tasks&type=3&id=',
+
             	'documents' => 'index.php?option=com_projects&view=documents&id=',
              	'document' => 'index.php?option=com_projects&view=document&id=',
                         );

@@ -66,7 +66,7 @@ class ProjectsControllerTasks extends JControllerAdmin
         $text = JText::sprintf('COM_PROJECTS_TASKS_SUCCESS_CHANGE_TICKET', $c);
         if ($c > 1)
             $text = JText::sprintf('COM_PROJECTS_TASKS_SUCCESS_CHANGE_TICKET_PLURAL', $c);
-        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id=' . $app->getUserState('project.id') . '&type=' . $this->getModel()->getState('task.type') . '&Itemid=' . ProjectsHelper::getMenuItemId(), false), $text);
+        $this->setRedirect(ProjectsHelper::getLink('tasks',$app->getUserState('project.id').'&type='.$this->getModel()->getState('task.type')), $text);
     }
 
     /**
@@ -90,7 +90,7 @@ class ProjectsControllerTasks extends JControllerAdmin
      */
     public function back() {
         $app = JFactory::getApplication();
-        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=project&layout=default&id=' . $app->getUserState('project.id') . '&Itemid=' . ProjectsHelper::getMenuItemId(), false));
+        $this->setRedirect(ProjectsHelpers::getLink('project',$app->getUserState('project.id')));
     }
 
 }

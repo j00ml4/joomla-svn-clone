@@ -118,9 +118,8 @@ class ProjectsControllerProject extends JControllerForm {
      *
      */
     public function back() {
-        $app = JFactory::getApplication();
-        $menu = $app->getMenu();
-        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=projects&layout=gallery&id=' . $app->getUserState('portfolio.id') . '&Itemid=' . $menu->getActive()->id, false));
+    	$app = JFactory::getApplication();
+        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=projects&layout=gallery&id='.$app->getUserState('portfolio.id'), false));
     }
 
     /**
@@ -138,8 +137,6 @@ class ProjectsControllerProject extends JControllerForm {
         $context = $this->option.'.edit.'.$this->context;
         $checkin = property_exists($table, 'checked_out');
         $id = $model->getState('project.id', 0);
-	    $menu = $app->getMenu();
-	    $append = '&Itemid='.$menu->getActive()->id;
         
         // Populate the row id from the session.
         $data['id'] = $id;
@@ -159,6 +156,7 @@ class ProjectsControllerProject extends JControllerForm {
             JError::raiseError(500, $model->getError());
             return false;
         }
+        
 
         // Test if the data is valid.
         $data = $model->validate($form, $data);
@@ -178,7 +176,7 @@ class ProjectsControllerProject extends JControllerForm {
             }
 
             // Save the data in the session.
-            $app->setUserState($context . '.data', $data);
+            $app->setUserState($context.'.data', $data);
 
             // Redirect back to the edit screen.
             $this->setRedirect(ProjectsHelper::getLink('projects', $data['catid']));
@@ -188,14 +186,15 @@ class ProjectsControllerProject extends JControllerForm {
         // Attempt to save the data.
         if (!$model->save($data)) {
             // Save the data in the session.
-            $app->setUserState($context . '.data', $data);
+            $app->setUserState($context.'.data', $data);
 
             // Redirect back to the edit screen.
             $this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'notice');
-            $this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
+            $this->setRedirect(ProjectsHelper::getLink('projects', $data['catid']));
             return false;
         }
-
+        print_r($data);
+        
         // Save succeeded, check-in the record.
         if ($checkin && !$model->checkin($data['id'])) {
             // Save the data in the session.
@@ -233,7 +232,6 @@ class ProjectsControllerProject extends JControllerForm {
         JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
 
         $app = JFactory::getApplication();
-        $menu = $app->getMenu();
         $model = $this->getModel();
         $id = $model->getState('project.id', 0);
         if (!parent::cancel()) {
@@ -242,7 +240,7 @@ class ProjectsControllerProject extends JControllerForm {
 
         // if has id
         if ($id) {
-            $append = '&layout=default&id='.$id.'&Itemid='.$menu->getActive()->id;
+            $append = '&layout=default&id='.$id;
             $this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
         }
 
@@ -259,7 +257,6 @@ class ProjectsControllerProject extends JControllerForm {
         JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
 
         $app = JFactory::getApplication();
-        $menu = $app->getMenu();
         $cid = JRequest::getVar('cid', array(), '', 'array');
         $id = $cid[0];
         if (empty($cid)) {
@@ -268,7 +265,7 @@ class ProjectsControllerProject extends JControllerForm {
         $data = array('publish' => 1, 'unpublish' => 0, 'archive' => 2, 'trash' => -2, 'report' => -3);
         $task = $this->getTask();
         $value = JArrayHelper::getValue($data, $task, 0, 'int');
-        $append = '&layout=default&id='.$id.'&Itemid='.$menu->getActive()->id;
+        $append = '&layout=default&id='.$id;
 
         $model = $this->getModel();
         // Publish the items.
@@ -327,9 +324,7 @@ class ProjectsControllerProject extends JControllerForm {
             $this->setMessage($model->getError());
         }
 
-        $app = &JFactory::getApplication();
-        $menu = $app->getMenu();
-        $append = '&id='.$app->getUserState('portfolio.id').'&Itemid='.$menu->getActive()->id;
+        $append = '&id='.$app->getUserState('portfolio.id');
         $this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list.$append, false));
         return true;
     }
@@ -343,8 +338,6 @@ class ProjectsControllerProject extends JControllerForm {
         // Check for request forgeries
         JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
 
-        $app = JFactory::getApplication();
-        $menu = $app->getMenu();
         $model = $this->getModel();
         $members = JRequest::getVar('cid', array(), '', 'array');
 
@@ -355,7 +348,7 @@ class ProjectsControllerProject extends JControllerForm {
             return false;
         }
 
-        $append = '&type=assign&layout=default&id='.$id.'&Itemid='.$menu->getActive()->id;
+        $append = '&type=assign&layout=default&id='.$id;
         $this->setRedirect(
                 JRoute::_('index.php?option='.$this->option.'&view=members'.$append),
                 JText::_('COM_PROJECTS_MEMBERS_ASSIGN_SUCCESSFUL'));
@@ -372,8 +365,6 @@ class ProjectsControllerProject extends JControllerForm {
         // Check for request forgeries
         JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
 
-        $app = JFactory::getApplication();
-        $menu = $app->getMenu();
         $model = $this->getModel();
         $members = JRequest::getVar('cid', array(), '', 'array');
         $id = JRequest::getInt('id', 0);
@@ -383,7 +374,7 @@ class ProjectsControllerProject extends JControllerForm {
             return false;
         }
 
-        $append = '&type=delete&layout=default&id='.$id.'&Itemid='.$menu->getActive()->id;
+        $append = '&type=delete&layout=default&id='.$id;
         $this->setRedirect(
                 JRoute::_('index.php?option='.$this->option.'&view=members'.$append),
                 JText::_('COM_PROJECTS_MEMBERS_DELETE_SUCCESSFUL'));

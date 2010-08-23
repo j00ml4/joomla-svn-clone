@@ -18,6 +18,7 @@ JHtml::_('behavior.formvalidation');
 
 // Vars
 $params =  $this->params;
+print_r($this->portfolio);
 ?>
 <div class="project-item">
     <div class="edit item-page<?php echo $params->get('pageclass_sfx'); ?>">

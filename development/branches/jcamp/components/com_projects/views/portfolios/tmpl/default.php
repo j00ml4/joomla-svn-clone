@@ -35,11 +35,11 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
                 <li class="active"><a title="<?php echo JText::_('COM_PROJECTS_PORTFOLIOS_LINK_DESC'); ?>">
                     <?php echo JText::sprintf('COM_PROJECTS_PORTFOLIOS_LINK', $this->portfolio->numcategories); ?>
                 </a></li>
-                <?php if (!$params->get('is.root')): ?>
+                <?php //if (!$params->get('is.root')): ?>
                 <li><a title="<?php echo JText::_('COM_PROJECTS_PROJECTS_LINK_DESC'); ?>" href="<?php echo ProjectsHelper::getLink('projects', $this->portfolio->id); ?>" >
                     <?php echo JText::sprintf('COM_PROJECTS_PROJECTS_LINK', $this->portfolio->numitems); ?>
                 </a></li>
-                <?php endif; ?>
+                <?php //endif; ?>
             </ul>
             <!-- *** Pages ************************************************************* -->
 
