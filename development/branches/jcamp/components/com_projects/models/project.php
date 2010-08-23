@@ -87,17 +87,15 @@ class ProjectsModelProject extends JModelAdmin
 	}
 	
 	/**
-	 * function to get the portifolo
+	 * Function to get the portifolo
 	 * @param $pk
 	 */
-	public function getPortfolio(){
-		// Get portifolio ID
+	public function getPortfolio($pk = 'root'){
+		// Get portifolio
 		if(!is_object($this->portfolio)){
-			if (!is_object($this->item)) {
-				$this->getItem();
-			}
 			jimport('joomla.application.categories');
-			$categories = &JCategories::getInstance('Projects');
+			$categories = JCategories::getInstance('Projects', $options);
+			$this->portfolio = $categories->get($pk);
 		}
 		
 		return $this->portfolio;
@@ -182,8 +180,14 @@ class ProjectsModelProject extends JModelAdmin
 			$app = JFactory::getApplication();
 			$this->item = parent::getItem($pk);
 			if(!empty($this->item)){
-				$this->setState('portfolio.id', $this->item->get('catid'));
-				$app->setUserState('portfolio.id', $this->item->get('catid'));
+				if(!$this->item->get('catid')){ // when creating a new project, try to set current portfolio as default
+					$this->setState('portfolio.id',$app->getUserState('portfolio.id'));
+					$this->item->set('catid',$this->setState('portfolio.id'));
+				}
+				else {
+					$this->setState('portfolio.id', $this->item->get('catid'));
+					$app->setUserState('portfolio.id', $this->item->get('catid'));
+				}
 			}
 		}
 		return $this->item;
