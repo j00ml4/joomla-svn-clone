@@ -163,27 +163,60 @@ abstract class ProjectsHelper {
     public static function getLink($key, $append='') {
         static $links;
         if (empty($links)) {
-        	$app = JFactory::getApplication();
-        	$menu = $app->getMenu();
-        	$append_link = '&Itemid'.$menu->getActive()->id;
             $links = array(
                 'form' => JFilterOutput::ampReplace(JFactory::getURI()->toString()),
-                'portfolios' => 'index.php?option=com_projects&view=portfolios'.$append_link.'&id=',
-                'projects' => 'index.php?option=com_projects&view=projects'.$append_link.'&id=',
-                'project' => 'index.php?option=com_projects&view=project'.$append_link.'&id=',
-                'members' => 'index.php?option=com_projects&view=members&type=list'.$append_link.'&id=',
-                'members.assign' => 'index.php?option=com_projects&view=members&type=assign'.$append_link.'&id=',
-                'members.unassign' => 'index.php?option=com_projects&view=members&type=delete'.$append_link.'&id=',
-                'tasks' => 'index.php?option=com_projects&view=tasks'.$append_link.'&id=',
-            	'tasks.tasks' => 'index.php?option=com_projects&view=tasks&type=2'.$append_link.'&id=',
-            	'tasks.tickets' => 'index.php?option=com_projects&view=tasks&type=3'.$append_link.'&id=',
-            	'tasks.milestones' => 'index.php?option=com_projects&view=tasks&type=1'.$append_link.'&id=',
-            	'documents' => 'index.php?option=com_projects&view=documents'.$append_link.'&id=',
-             	'document' => 'index.php?option=com_projects&view=document'.$append_link.'&id=',
-                        );
+                'portfolios' => 'index.php?option=com_projects&view=portfolios&id=',
+                'projects' => 'index.php?option=com_projects&view=projects&id=',
+                'project' => 'index.php?option=com_projects&view=project&id=',
+                'members' => 'index.php?option=com_projects&view=members&type=list&id=',
+                'members.assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
+                'members.unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
+                'tasks' => 'index.php?option=com_projects&view=tasks&id=',
+            	'tasks.task' => 'index.php?option=com_projects&view=tasks&type=2&id=',
+            	'tasks.ticket' => 'index.php?option=com_projects&view=tasks&type=3&id=',
+            	'tasks.milestone' => 'index.php?option=com_projects&view=tasks&type=1&id=',
+            	'task' => 'index.php?option=com_projects&view=task&id=',
+                'task.task' => 'index.php?option=com_projects&view=task&type=2&id=',
+            	'task.ticket' => 'index.php?option=com_projects&view=task&type=3&id=',
+            	'task.milestone' => 'index.php?option=com_projects&view=task&type=1&id=',
+            	'documents' => 'index.php?option=com_projects&view=documents&id=',
+             	'document' => 'index.php?option=com_projects&view=document&id=',
+            
+            );
         }
-        return JRoute::_($links[$key] . $append);
+        return JRoute::_($links[$key] . $append, true, 0);
     }
+    
+        
+    /**
+     * function to get a single the project
+     * @param $pk
+     */
+    public function getProject($pk=null) {
+        // Get project ID
+        if (empty($pk)) {
+           return null;
+        }
+
+        //$this->setState('portfolio.id',$pk);
+        $model = JModel::getInstance('Project', 'ProjectsModel');
+        return $model->getItem($pk);
+    }
+    
+    /**
+	 * function to get the portifolo
+	 * @param $pk
+	 */
+	public function getPortfolio($pk){
+		// Get portifolio ID
+		if (empty($pk)) {
+           return null;
+        }
+		
+		jimport('joomla.application.categories');
+		$categories = &JCategories::getInstance('Projects');
+		return $categories->get($pk);
+	} 
 }
 
 ?>
