@@ -182,14 +182,8 @@ class ProjectsModelProject extends JModelAdmin
 			$app = JFactory::getApplication();
 			$this->item = parent::getItem($pk);
 			if(!empty($this->item)){
-				if(!$this->item->get('catid')){ // when creating a new project, try to set current portfolio as default
-					$this->setState('portfolio.id',$app->getUserState('portfolio.id'));
-					$this->item->set('catid',$this->setState('portfolio.id'));
-				}
-				else {
-					$this->setState('portfolio.id', $this->item->get('catid'));
-					$app->setUserState('portfolio.id', $this->item->get('catid'));
-				}
+				$this->setState('portfolio.id', $this->item->get('catid'));
+				$app->setUserState('portfolio.id', $this->item->get('catid'));
 			}
 		}
 		return $this->item;
