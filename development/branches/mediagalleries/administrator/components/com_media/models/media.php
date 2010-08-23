@@ -17,7 +17,7 @@ jimport('joomla.application.component.modeladmin');
  * @subpackage	com_media
  * @since		1.5
  */
-class MediagalleriesModelMedia extends JModelAdmin
+class MediaModelMedia extends JModelAdmin
 {
 	/**
 	 * @var		string	The prefix to use with controller messages.
@@ -34,7 +34,7 @@ class MediagalleriesModelMedia extends JModelAdmin
 	 * @return	JTable	A database object
 	 * @since	1.6
 	 */
-	public function getTable($type = 'Media', $prefix = 'Table', $config = array())
+	public function getTable($type = 'media', $prefix = 'Table', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}

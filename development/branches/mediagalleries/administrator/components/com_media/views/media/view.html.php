@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.view' );
  * @package    		Joomla
  * @subpackage	mediagalleries Suite
  */
-class MediagalleriesViewMedia extends JView
+class MediaViewMedia extends JView
 {
 	// new way
 	protected $item;
