@@ -66,8 +66,8 @@ $model = $this->getModel();
 					</tr>
 				</thead>
 				<tbody>		
-				<?php foreach($this->items as $i => $item): ?>
-					<tr>
+					<?php foreach($this->items as $i => $item): ?>
+					<tr class="cat-list-row<?php echo $i % 2; ?>">
 						<?php if($this->canDo->get('core.edit')): ?>	
 						<td>
 							<?php echo JHtml::_('grid.id', $i, $item->id); ?>
@@ -84,7 +84,7 @@ $model = $this->getModel();
 							<?php echo $item->username; ?>
 						</td>	
 					 </tr>
-				<?php endforeach; ?>
+					<?php endforeach; ?>
 				</tbody>
 			</table>
 		<?php else: ?>	

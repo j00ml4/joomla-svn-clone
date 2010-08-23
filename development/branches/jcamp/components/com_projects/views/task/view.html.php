@@ -27,23 +27,30 @@ class ProjectsViewTask extends JView
     protected $canDo;
     protected $prefix;
 	protected $type; 
+	protected $pagination;
+	protected $items;
 	
 
     /**
      * Display project
      */
-    public function display($tpl = null) {
-        $app = &JFactory::getApplication();
-        $model = &$this->getModel();
+    public function display($tpl = null) 
+    {
+        $app = JFactory::getApplication();
+        $model = $this->getModel();
 
         //Get Model data
         $this->state = $this->get('State');
-        $this->item = &$model->getItem();
+        $this->item = $model->getItem();
         $this->project = $model->getProject();
-        $this->params = &$app->getParams();
-        $this->canDo = &ProjectsHelper::getActions();
-
-
+        $this->params = $app->getParams();
+        $this->type = $model->getType();
+		$this->items = $model->getItems();
+		$this->pagination = $model->getPagination();
+		$this->canDo	= ProjectsHelper::getActions(
+			$app->getUserState('portfolio.id'), 
+			$app->getUserState('project.id'),
+			$this->item);
         // Layout
         $layout = $this->getLayout();
         switch ($layout) {
@@ -86,21 +93,6 @@ class ProjectsViewTask extends JView
                 }
                 break;
         }
-        
-    	$this->type = 'task';
-		switch($this->state->get('type')){
-			case 3:
-				$this->type = 'ticket';	
-				break;
-				
-			case 2:
-				$this->type = 'task';
-				break;
-				
-			case 1:
-				$this->type = 'milestone';
-				break;
-		}
 
         // set a correct prefix
         require_once JPATH_COMPONENT . '/helpers/tasks.php';
@@ -128,20 +120,21 @@ class ProjectsViewTask extends JView
 				
 			default:
 				$title = JText::sprintf('COM_PROJECTS_TASK_VIEW_'.$this->type.'_TITLE', $this->project->title, $this->item->title);
-				$icon = 'archive';
-				if($this->canDo->get('core.edit')){
-					ToolBar::editList('project.edit');
+				$icon = 'archive';			
+				if($this->canDo->get($this->type.'.edit')){
+					if($this->item->state == 1){
+						ToolBar::custom('tasks.archive', 'checkin', 'checkin', JText::_('COM_PROJECTS_STATE_FINISHED'));
+					}else{
+						ToolBar::custom('tasks.publish', 'notice', 'notice', JText::_('COM_PROJECTS_STATE_PENDING'));
+                    }
+                    ToolBar::spacer();					
+					ToolBar::editList('task.edit');
 				}
-				if($this->item->state && $this->canDo->get('core.edit.state')){
-					ToolBar::unpublish('project.unpublish');
-				}else{
-					if($this->canDo->get('core.edit.state')){
-						ToolBar::publish('project.publish');
-					}
-					if($this->canDo->get('core.delete')){
-						ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_PROJECT_DELETE'), 'project.delete');
-					}
+
+				if($this->canDo->get('core.delete')){
+					ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_'.$this->type.'_DELETE'), 'task.delete');
 				}
+				
 		        if ($this->params->get('show_back_button')) {
 		            ToolBar::spacer();
 		            ToolBar::back();

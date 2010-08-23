@@ -14,24 +14,27 @@ defined('_JEXEC') or die;
 $params =  $this->params;
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
-<div class="projects<?php echo $pageClass?>">
+<div class="project-item <?php echo $pageClass?>">
+<form action="<?php echo ProjectsHelper::getLink('task', $this->item->id); ?>" method="post" id="adminForm" name="adminForm">
 	<div class="item-page">
 		<div class="item">
-			<h1><?php echo $this->item->title; ?></h1>
 			<div class="category-desc">
 				<?php echo $this->item->description; ?>
 			</div>
-			
-			<?php echo $this->loadTemplate('buttons'); ?>
 		</div>
 	</div>
-
-	<div class="projects-right-column">
-		<ul>
-		<li>what here?</li>
-		<li>what here?</li>
-		<li>what here?</li>
-		<li>what here?</li>
-		</ul>
-	</div>
+	
+	<?php if(count($this->items)): ?>
+	<fieldset>
+		<legend><?php JText::_(''); ?></legend>
+		<?php echo $this->loadTemplate('table'); ?>
+	</fieldset>
+	<?php endif; ?>
+		
+	
+    <input type="hidden" name="task" value="" />
+    <input type="hidden" name="cid[]" value="<?php echo $this->item->id; ?>" />
+    <input type="hidden" name="boxchecked" value="1" />     
+    <?php echo JHTML::_('form.token'); ?>
+</form>		
 </div>

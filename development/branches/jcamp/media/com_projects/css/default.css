@@ -64,7 +64,6 @@
 
 	
 /* begin css tabs */
- 
 ul.tabnav { 
 text-align: left;
 margin: 1em 0 1em 0;
@@ -114,6 +113,12 @@ ul.tabnav li.active a { /* settings for active tab links */
 }
  
 /* end css tabs */
+ol.todo-list{
+	list-style: none;
+}	
+ol.todo-list li{
+	list-style: none;
+}
 
 /** PB */
 .progress-bar {
@@ -190,6 +195,16 @@ div.projects ul.projects-info li div.projects-info-key {
 }
 
 div.projects ul.projects-info li div.projects-info-data {
+}
+
+/** Tasks **/
+.state-1{
+	font-weight: bold;
+	text-decoration: none;	
+}
+.state-2{
+	color: #AAA;
+	text-decoration: line-through;	
 }
 
 /************************ 2-columns layout ****************************/
@@ -359,6 +374,10 @@ div.projects-content div.category-desc{
 }
 
 /* -- TOOLBAR ICON STYLES ----------------------------- */
+.icon-32-notice {
+    background-image: url(../images/toolbar/icon-32-notice.png);
+}
+
 .icon-32-send {
     background-image: url(../images/toolbar/icon-32-send.png);
 }
