@@ -21,7 +21,7 @@ $params =  $this->params;
 ?>
 <div class="project-item">
     <div class="edit item-page<?php echo $params->get('pageclass_sfx'); ?>">
-		<form action="<?php echo ProjectsHelper::getLink('project'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">	
+		<form action="<?php echo JFactory::getURI()->toString(); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">	
             <fieldset>
                 <legend><?php echo JText::_('JGLOBAL_DESCRIPTION'); ?></legend>
 

@@ -52,7 +52,7 @@ class ProjectsViewProject extends JView
 				
 				// State
 				if (empty($this->item)) {
-					$this->catid = $app->getUserState('portfolio.id', 0);
+//					$this->catid = $app->getUserState('portfolio.id', 0);
 					$access = 'core.create';
 				}else{
 					$access = 'core.edit';					
