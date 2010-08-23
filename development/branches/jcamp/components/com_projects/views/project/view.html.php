@@ -51,13 +51,11 @@ class ProjectsViewProject extends JView
 				$this->form	= &$model->getForm();
 				
 				// State
-				if (empty($this->item)) {
-//					$this->catid = $app->getUserState('portfolio.id', 0);
+				if (!$this->item->id) {
 					$access = 'core.create';
 				}else{
 					$access = 'core.edit';					
 				}
-		
 				// Access
 				if (!$this->canDo->get($access)){
 					return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));				
@@ -72,8 +70,8 @@ class ProjectsViewProject extends JView
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
 				
-				// Get Category
-				$this->portfolio = $model->getPortfolio();
+				// Get Portfolio
+				$this->portfolio = $model->getPortfolio($this->item->catid);
 	  			break;
 		}
 		

@@ -83,11 +83,9 @@ class ProjectsViewTasks extends JView {
     protected function addToolbar() {
         $this->loadHelper('toolbar');
         
-        $this->type ='tasks';
         switch ($this->state->get('type')) {
             case 3:
                 $icon = 'archive';
-                $this->type = 'ticket';
         		if ($this->canDo->get('ticket.edit')) {
                     ToolBar::custom('tasks.publish', 'publish', 'apply', JText::_('COM_PROJECTS_STATE_APPROVED'));
                     ToolBar::custom('tasks.unpublish', 'unpublish', 'unpublish', JText::_('COM_PROJECTS_STATE_DENIED'));
@@ -100,7 +98,6 @@ class ProjectsViewTasks extends JView {
             case 2:
             default:	
                 $icon = 'archive';
-                $this->type = 'task';
                 if ($this->canDo->get('task.edit')) {
                     ToolBar::custom('tasks.archive', 'checkin', 'checkin', JText::_('COM_PROJECTS_STATE_FINISHED'));
                     ToolBar::custom('tasks.publish', 'notice', 'notice', JText::_('COM_PROJECTS_STATE_PENDING'));

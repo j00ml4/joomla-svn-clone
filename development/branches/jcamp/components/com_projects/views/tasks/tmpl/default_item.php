@@ -18,9 +18,9 @@ $canCheckin = $canChange = true;
 	<?php if ($this->item->checked_out) :
 		echo JHtml::_('jgrid.checkedout', $this->item->i, $this->item->editor, $this->item->checked_out_time, 'categories.', $canCheckin);
 	endif; ?>
-	<a href="<?php echo JRoute::_('index.php?option=com_projects&view=task&layout=edit&id='.$this->item->id);?>">
+	<a href="<?php echo ProjectsHelper::getLink('task.edit', $this->item->id);?>">
 		<?php echo $this->escape($this->item->title); ?></a>
-  <a href="<?php echo JRoute::_('index.php?option=com_projects&view=task&layout=view&id='.$this->item->id);?>">
+  <a href="<?php echo ProjectsHelper::getLink('task.view', $this->item->id);?>">
   	<?php echo JText::_('COM_PROJECTS_TASKS_VIEW_'.$this->prefix.'_LINK');?></a>		
 	<p class="smallsub">
 		<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($this->item->alias)); ?></p>

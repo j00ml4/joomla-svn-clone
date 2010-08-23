@@ -46,8 +46,6 @@ abstract class TasksHelper
 		switch($type)
 		{
 			case 1:
-				return 'MILESTONE';
-
 			case 2:
 				return 'TASK';
 					
