@@ -34,7 +34,7 @@ class MediaControllerMedia extends JControllerForm
 	 * @return	object	The model.
 	 * @since	1.5
 	 */
-	public function &getModel($name = 'form', $prefix = '', $config = array())
+	public function &getModel($name = 'media', $prefix = '', $config = array())
 	{
 		$model = parent::getModel($name, $prefix, $config);
 

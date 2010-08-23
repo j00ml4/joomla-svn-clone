@@ -22,7 +22,7 @@ jimport('joomla.application.categories');
  * @subpackage	Weblinks
  * @since 1.5
  */
-abstract class MediagalleriesHelperRoute
+abstract class MediaHelperRoute
 {
 	protected static $lookup;
 	/**

@@ -22,7 +22,7 @@ jimport('joomla.application.categories');
  * @subpackage	Weblinks
  * @since 1.6
  */
-class MediagalleriesCategories extends JCategories
+class MediaCategories extends JCategories
 {
 	public function __construct($options = array())
 	{

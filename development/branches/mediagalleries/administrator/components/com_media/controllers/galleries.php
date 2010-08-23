@@ -17,7 +17,7 @@ jimport('joomla.application.component.controlleradmin');
  * @subpackage	com_media
  * @since		1.6
  */
-class MediagalleriesControllerGalleries extends JControllerAdmin
+class MediaControllerGalleries extends JControllerAdmin
 {	
 	protected $view_list="galleries" ;
 	
@@ -25,7 +25,7 @@ class MediagalleriesControllerGalleries extends JControllerAdmin
 	 * Proxy for getModel.
 	 * @since	1.6
 	 */
-	public function &getModel($name = 'Media', $prefix = 'MediagalleriesModel')
+	public function &getModel($name = 'Media', $prefix = 'MediaModel')
 	{
 		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
 		return $model;

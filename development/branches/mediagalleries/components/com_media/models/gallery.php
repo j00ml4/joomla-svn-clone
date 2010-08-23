@@ -19,7 +19,7 @@ jimport('joomla.application.categories');
  * @package		Joomla.Site
  * @subpackage	Contact
  */
-class MediagalleriesModelGallery extends JModelList
+class MediaModelGallery extends JModelList
 {
 	/**
 	 * Category items data

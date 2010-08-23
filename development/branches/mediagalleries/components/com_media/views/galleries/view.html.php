@@ -17,7 +17,7 @@ jimport('joomla.application.component.view');
  * @subpackage	com_weblinks
  * @since 1.5
  */
-class MediagalleriesViewGalleries extends JView
+class MediaViewGalleries extends JView
 {
 	protected $state = null;
 	protected $item = null;

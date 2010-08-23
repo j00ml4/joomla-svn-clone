@@ -39,7 +39,7 @@ class MediaViewMedia extends JView
 		$document	=& JFactory::getDocument();
 		$db			=& JFactory::getDBO();
 		$uri 		=& JFactory::getURI();
-		$model		=& $this->getModel();
+		$model		=& $this->getModel("media");
 		
 		//get the data
 		$this->params	=& JComponentHelper::getParams('com_media');
