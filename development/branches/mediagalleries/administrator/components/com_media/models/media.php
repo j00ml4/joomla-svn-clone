@@ -93,6 +93,7 @@ class MediaModelMedia extends JModelAdmin
 		$data = JFactory::getApplication()->getUserState('com_media.edit.media.data', array());
 
 		if (empty($data)) {
+			
 			$data = $this->getItem();
 		}
 

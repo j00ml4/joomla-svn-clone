@@ -76,7 +76,7 @@ class MediaViewMedia extends JView
 		$user		= JFactory::getUser();
 		$isNew		= ($this->item->id == 0);		
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
-		$canDo		= MediagalleriesHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
+		$canDo		= MediaHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
 
 		// If not checked out, can save the item.
 		if (!$checkedOut && $canDo->get('core.edit'))

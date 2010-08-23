@@ -59,10 +59,10 @@ class MediaViewGalleries extends JView
 	 */
 	protected function addToolbar()
 	{
-		require_once JPATH_COMPONENT.DS.'helpers'.DS.'mediagalleries.php';
+		require_once JPATH_COMPONENT.DS.'helpers'.DS.'media.php';
 
 		$state	= $this->get('State');
-		$canDo	= MediagalleriesHelper::getActions($state->get('filter.category_id'));
+		$canDo	= MediaHelper::getActions($state->get('filter.category_id'));
 
 		JToolBarHelper::title(JText::_('com_media_MANAGER_MEDIAS'), 'media');
 		if ($canDo->get('core.create')) {
