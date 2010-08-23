@@ -62,6 +62,7 @@ class ProjectsControllerDocument extends JControllerForm
 		$model		= $this->getModel();
 		$task		= $this->getTask();
 		$id 		= (int)$model->getState('document.id', 0);
+	    $menu = $app->getMenu();
 		
 		// Get posted form variables.
 		$data		= JRequest::getVar('jform', array(), 'post', 'array');
@@ -116,14 +117,15 @@ class ProjectsControllerDocument extends JControllerForm
 		}
 
 		// Attempt to save the data.
+		$append= '&Itemid='.$menu->getActive()->id;
 		if (!$model->save($data))
 		{
 			// Save the data in the session.
 			$app->setUserState($context.'data', $data);
-
+			
 			// Redirect back to the edit screen.
 			$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'notice');
-			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&layout=edit'));
+			$this->setRedirect(JRoute::_('index.php?option=com_projects&view=document&layout=edit'.$append));
 			return false;
 		}
 		
@@ -132,7 +134,7 @@ class ProjectsControllerDocument extends JControllerForm
 		{
 			// Check-in failed, go back to the row and display a notice.
 			$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
-			$this->setRedirect('index.php?option=com_projects&view=document&layout=edit', $message, 'error');
+			$this->setRedirect('index.php?option=com_projects&view=document&layout=edit'.$append, $message, 'error');
 			return false;
 		}
 	

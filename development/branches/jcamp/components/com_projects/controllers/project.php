@@ -135,10 +135,12 @@ class ProjectsControllerProject extends JControllerForm {
         $model = $this->getModel();
         $table = $model->getTable();
         $data = JRequest::getVar('jform', array(), 'post', 'array');
-        $context = $this->option . '.edit.' . $this->context;
+        $context = $this->option.'.edit.'.$this->context;
         $checkin = property_exists($table, 'checked_out');
         $id = $model->getState('project.id', 0);
-
+	    $menu = $app->getMenu();
+	    $append = '&Itemid='.$menu->getActive()->id;
+        
         // Populate the row id from the session.
         $data['id'] = $id;
         $isNew = !$id;
@@ -190,14 +192,14 @@ class ProjectsControllerProject extends JControllerForm {
 
             // Redirect back to the edit screen.
             $this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'notice');
-            $this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_item . $append, false));
+            $this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
             return false;
         }
 
         // Save succeeded, check-in the record.
         if ($checkin && !$model->checkin($data['id'])) {
             // Save the data in the session.
-            $app->setUserState($context . '.data', $data);
+            $app->setUserState($context.'.data', $data);
 
             // Check-in failed, go back to the record and display a notice.
             $message = JText::sprintf('JError_Checkin_saved', $model->getError());
@@ -212,9 +214,9 @@ class ProjectsControllerProject extends JControllerForm {
             $model->addMembers($id, $user->id);
         }
 
-        $app->setUserState($context . '.id', null);
-        $app->setUserState($context . '.data', null);
-        $this->setMessage(JText::_(($lang->hasKey($this->text_prefix . '_SAVE_SUCCESS') ? $this->text_prefix : 'JLIB_APPLICATION') . '_SAVE_SUCCESS'));
+        $app->setUserState($context.'.id', null);
+        $app->setUserState($context.'.data', null);
+        $this->setMessage(JText::_(($lang->hasKey($this->text_prefix.'_SAVE_SUCCESS') ? $this->text_prefix : 'JLIB_APPLICATION').'_SAVE_SUCCESS'));
 
         // redirect
         $this->setRedirect(ProjectsHelper::getLink('project', (int)$data['id']));
@@ -230,6 +232,8 @@ class ProjectsControllerProject extends JControllerForm {
         // Check for request forgeries
         JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
 
+        $app = JFactory::getApplication();
+        $menu = $app->getMenu();
         $model = $this->getModel();
         $id = $model->getState('project.id', 0);
         if (!parent::cancel()) {
@@ -238,8 +242,8 @@ class ProjectsControllerProject extends JControllerForm {
 
         // if has id
         if ($id) {
-            $append = '&layout=default&id=' . $id;
-            $this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_item . $append, false));
+            $append = '&layout=default&id='.$id.'&Itemid='.$menu->getActive()->id;
+            $this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
         }
 
         return true;
@@ -254,15 +258,17 @@ class ProjectsControllerProject extends JControllerForm {
         // Check for request forgeries
         JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
 
+        $app = JFactory::getApplication();
+        $menu = $app->getMenu();
         $cid = JRequest::getVar('cid', array(), '', 'array');
         $id = $cid[0];
         if (empty($cid)) {
-            return JError::raiseWarning(500, JText::_($this->text_prefix . '_NO_ITEM_SELECTED'));
+            return JError::raiseWarning(500, JText::_($this->text_prefix.'_NO_ITEM_SELECTED'));
         }
         $data = array('publish' => 1, 'unpublish' => 0, 'archive' => 2, 'trash' => -2, 'report' => -3);
         $task = $this->getTask();
         $value = JArrayHelper::getValue($data, $task, 0, 'int');
-        $append = '&layout=default&id=' . $id;
+        $append = '&layout=default&id='.$id.'&Itemid='.$menu->getActive()->id;
 
         $model = $this->getModel();
         // Publish the items.
@@ -293,7 +299,7 @@ class ProjectsControllerProject extends JControllerForm {
             $this->setMessage(JText::_($ntext));
         }
 
-        $this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_item . $append, false));
+        $this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
         return true;
     }
 
@@ -316,14 +322,15 @@ class ProjectsControllerProject extends JControllerForm {
 
         // Remove the items.
         if ($model->delete($id)) {
-            $this->setMessage(JText::_($this->text_prefix . '_ITEM_DELETED', count($id)));
+            $this->setMessage(JText::_($this->text_prefix.'_ITEM_DELETED', count($id)));
         } else {
             $this->setMessage($model->getError());
         }
 
         $app = &JFactory::getApplication();
-        $append = '&id=' . $app->getUserState('portfolio.id');
-        $this->setRedirect(JRoute::_('index.php?option=' . $this->option . '&view=' . $this->view_list . $append, false));
+        $menu = $app->getMenu();
+        $append = '&id='.$app->getUserState('portfolio.id').'&Itemid='.$menu->getActive()->id;
+        $this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list.$append, false));
         return true;
     }
 
@@ -336,6 +343,8 @@ class ProjectsControllerProject extends JControllerForm {
         // Check for request forgeries
         JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
 
+        $app = JFactory::getApplication();
+        $menu = $app->getMenu();
         $model = $this->getModel();
         $members = JRequest::getVar('cid', array(), '', 'array');
 
@@ -346,9 +355,9 @@ class ProjectsControllerProject extends JControllerForm {
             return false;
         }
 
-        $append = '&type=assign&layout=default&id=' . $id;
+        $append = '&type=assign&layout=default&id='.$id.'&Itemid='.$menu->getActive()->id;
         $this->setRedirect(
-                JRoute::_('index.php?option=' . $this->option . '&view=members' . $append),
+                JRoute::_('index.php?option='.$this->option.'&view=members'.$append),
                 JText::_('COM_PROJECTS_MEMBERS_ASSIGN_SUCCESSFUL'));
 
         return true;
@@ -363,6 +372,8 @@ class ProjectsControllerProject extends JControllerForm {
         // Check for request forgeries
         JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
 
+        $app = JFactory::getApplication();
+        $menu = $app->getMenu();
         $model = $this->getModel();
         $members = JRequest::getVar('cid', array(), '', 'array');
         $id = JRequest::getInt('id', 0);
@@ -372,9 +383,9 @@ class ProjectsControllerProject extends JControllerForm {
             return false;
         }
 
-        $append = '&type=delete&layout=default&id=' . $id;
+        $append = '&type=delete&layout=default&id='.$id.'&Itemid='.$menu->getActive()->id;
         $this->setRedirect(
-                JRoute::_('index.php?option=' . $this->option . '&view=members' . $append),
+                JRoute::_('index.php?option='.$this->option.'&view=members'.$append),
                 JText::_('COM_PROJECTS_MEMBERS_DELETE_SUCCESSFUL'));
 
         return true;

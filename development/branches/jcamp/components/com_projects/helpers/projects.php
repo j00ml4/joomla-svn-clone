@@ -139,22 +139,6 @@ abstract class ProjectsHelper {
         $bc = &$app->getPathway();
         return $bc;
     }
-
-    /**
-     * Method to get ID of actual menu item
-     *
-     * @return ID of actual menu item
-     * @since	1.6
-     */
-    public function getMenuItemId() {
-        $app = JFactory::getApplication();
-        $menu = $app->getMenu();
-
-        $id = $menu->getActive()->id;
-        if (!((int) $id))
-            $id = JRequest::getInt('Itemid', 0);
-        return $id;
-    }
     
     /**
      * Method to get singular or plural version of text based on number of items
@@ -179,24 +163,23 @@ abstract class ProjectsHelper {
     public static function getLink($key, $append='') {
         static $links;
         if (empty($links)) {
+        	$app = JFactory::getApplication();
+        	$menu = $app->getMenu();
+        	$append_link = '&Itemid'.$menu->getActive()->id;
             $links = array(
                 'form' => JFilterOutput::ampReplace(JFactory::getURI()->toString()),
-                'portfolios' => 'index.php?option=com_projects&view=portfolios&id=',
-                'projects' => 'index.php?option=com_projects&view=projects&id=',
-                'project' => 'index.php?option=com_projects&view=project&id=',
-                'members' => 'index.php?option=com_projects&view=members&type=list&id=',
-                'members.assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
-                'members.unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
-                'tasks' => 'index.php?option=com_projects&view=tasks&id=',
-            	'tasks.tasks' => 'index.php?option=com_projects&view=tasks&type=2&id=',
-            	'tasks.tickets' => 'index.php?option=com_projects&view=tasks&type=3&id=',
-            	'tasks.milestones' => 'index.php?option=com_projects&view=tasks&type=1&id=',
-            	'task' => 'index.php?option=com_projects&view=task&id=',
-                'task.task' => 'index.php?option=com_projects&view=task&type=2&id=',
-            	'task.ticket' => 'index.php?option=com_projects&view=task&type=3&id=',
-            	'task.milestone' => 'index.php?option=com_projects&view=task&type=1&id=',
-            	'documents' => 'index.php?option=com_projects&view=documents&id=',
-             	'document' => 'index.php?option=com_projects&view=document&id=',
+                'portfolios' => 'index.php?option=com_projects&view=portfolios'.$append_link.'&id=',
+                'projects' => 'index.php?option=com_projects&view=projects'.$append_link.'&id=',
+                'project' => 'index.php?option=com_projects&view=project'.$append_link.'&id=',
+                'members' => 'index.php?option=com_projects&view=members&type=list'.$append_link.'&id=',
+                'members.assign' => 'index.php?option=com_projects&view=members&type=assign'.$append_link.'&id=',
+                'members.unassign' => 'index.php?option=com_projects&view=members&type=delete'.$append_link.'&id=',
+                'tasks' => 'index.php?option=com_projects&view=tasks'.$append_link.'&id=',
+            	'tasks.tasks' => 'index.php?option=com_projects&view=tasks&type=2'.$append_link.'&id=',
+            	'tasks.tickets' => 'index.php?option=com_projects&view=tasks&type=3'.$append_link.'&id=',
+            	'tasks.milestones' => 'index.php?option=com_projects&view=tasks&type=1'.$append_link.'&id=',
+            	'documents' => 'index.php?option=com_projects&view=documents'.$append_link.'&id=',
+             	'document' => 'index.php?option=com_projects&view=document'.$append_link.'&id=',
                         );
         }
         return JRoute::_($links[$key] . $append);

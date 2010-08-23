@@ -63,7 +63,8 @@ class ProjectsControllerTasks extends JControllerAdmin
         }
 
         $app = JFactory::getApplication();
-        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id=' . $app->getUserState('project.id') . '&type=' . $this->getModel()->getState('task.type') . '&Itemid=' . ProjectsHelper::getMenuItemId(), false),
+        $menu = $app->getMenu();
+        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id=' . $app->getUserState('project.id').'&type='.$this->getModel()->getState('task.type').'&Itemid='.$menu->getActive()->id, false),
                            JText::sprintf(ProjectsHelper::textPlural('COM_PROJECTS_TASKS_SUCCESS_CHANGE_TICKET', $c), $c));
     }
 
@@ -106,7 +107,8 @@ class ProjectsControllerTasks extends JControllerAdmin
             }
         }
 
-        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id=' . $app->getUserState('project.id') . '&type=' . $this->getModel()->getState('task.type') . '&Itemid=' . ProjectsHelper::getMenuItemId(), false),
+		$menu= $app->getMenu();
+        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=tasks&id='.$app->getUserState('project.id').'&type='.$this->getModel()->getState('task.type').'&Itemid='.$menu->getActive()->id, false),
                            JText::sprintf(ProjectsHelper::textPlural('COM_PROJECTS_TASKS_SUCCESS_DELETE_'.$prefix, $c), $c));
     }
 
@@ -117,7 +119,8 @@ class ProjectsControllerTasks extends JControllerAdmin
      */
     public function back() {
         $app = JFactory::getApplication();
-        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=project&layout=default&id=' . $app->getUserState('project.id') . '&Itemid=' . ProjectsHelper::getMenuItemId(), false));
+        $menu = $app->getMenu();
+        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=project&layout=default&id='.$app->getUserState('project.id').'&Itemid='.$menu->getActive()->id, false));
     }
 
 }
