@@ -29,7 +29,13 @@ abstract class MediaHelper
 			JText::_('com_media_CATEGORIES'),
 			'index.php?option=com_categories&extension=com_media',
 			$vName == 'categories'
-		);		
+		);
+
+		JSubMenuHelper::addEntry(
+			JText::_('com_media_CATEGORIES'),
+			'index.php?option=com_categories&extension=com_media',
+			$vName == 'categories'
+		);
 	}
 
 	/**
