@@ -17,13 +17,13 @@ jimport('joomla.application.component.modeladmin');
  * @subpackage	com_mediagalleries
  * @since		1.5
  */
-class MediagalleriesModelMedia extends JModelAdmin
+class MediaModelMedia extends JModelAdmin
 {
 	/**
 	 * @var		string	The prefix to use with controller messages.
 	 * @since	1.6
 	 */
-	protected $text_prefix = 'COM_MEDIAGALLERIES';
+	protected $text_prefix = 'COM_MEDIA';
 
 	/**
 	 * Returns a reference to the a Table object, always creating it.

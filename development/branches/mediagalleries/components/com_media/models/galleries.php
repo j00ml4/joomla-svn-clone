@@ -19,7 +19,7 @@ jimport( 'joomla.application.categories' );
  * @subpackage	com_weblinks
  * @since		1.6
  */
-class MediagalleriesModelGalleries extends JModel
+class MediaModelGalleries extends JModel
 {
 	/**
 	 * Model context string.

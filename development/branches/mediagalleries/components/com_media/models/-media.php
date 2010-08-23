@@ -17,7 +17,7 @@ jimport('joomla.application.component.modeladmin');
  * @subpackage	com_weblinks
  * @since		1.5
  */
-class MediagalleriesModelMedia extends JModelAdmin
+class MediaModelMedia extends JModelAdmin
 {
 	/**
 	 * Model context string.

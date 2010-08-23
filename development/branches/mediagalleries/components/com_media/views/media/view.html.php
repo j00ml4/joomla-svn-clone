@@ -19,7 +19,7 @@ jimport( 'joomla.registry.registry' );
  * @subpackage	com_weblinks
  * @since		1.5
  */
-class MediagalleriesViewMedia extends JView
+class MediaViewMedia extends JView
 {
 	protected $state;
 	protected $item;

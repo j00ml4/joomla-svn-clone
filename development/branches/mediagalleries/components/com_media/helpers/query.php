@@ -18,7 +18,7 @@ defined('_JEXEC') or die;
  * @subpackage	com_content
  * @since 1.5
  */
-class MediagalleriesHelperQuery
+class MediaHelperQuery
 {
 	function orderbyPrimary($orderby)
 	{
