@@ -78,11 +78,11 @@ class ProjectsViewProjects extends JView
 			ToolBar::addNew('project.add');
 		}
 		
-		if(!$this->params->get('is.root')){
+//		if(!$this->params->get('is.root')){
+		if((int)$this->item->id) {
 			$title = $this->portfolio->get('title');
-			
 		}else {
-			$title = JText::_('COM_PROJECTS_PROJECTS_LIST_HEADER');
+			$title = JText::_('COM_PROJECTS_PROJECTS_VIEW_DEFAULT_TITLE');
 		}
 		ToolBar::title($title, 'categories');
 		if ($this->params->get('show_back_button')) {

@@ -77,9 +77,9 @@ class ProjectsViewPortfolios extends JView
 			//ToolBar::addNew('portfolio.add');
 		}
 		
-		if(!$this->params->get('is.root')){
-			$title = $this->portfolio->get('title');
-			
+//		if(!$this->params->get('is.root')){
+		if((int)$this->item->id) {
+			$title = $this->portfolio->get('title');			
 		}else {
 			$title = JText::_('COM_PROJECTS_PORTFOLIOS_VIEW_DEFAULT_TITLE');
 		}
