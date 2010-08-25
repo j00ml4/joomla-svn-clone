@@ -42,7 +42,9 @@ class MediaControllerFile extends JController
 		$file	= JRequest::getVar('Filedata', '', 'files', 'array');
 		$folder	= JRequest::getVar('folder', '', '', 'path');
 		$format	= JRequest::getVar('format', 'html', '', 'cmd');
+		
 		$return	= JRequest::getVar('return-url', null, 'post', 'base64');
+		echo  $return;
 		$err	= null;
 
 		// Set FTP credentials, if given
