@@ -45,13 +45,7 @@ class MediaControllerMedia extends JControllerForm
 	 */
 	public function save()
 	{
-		if( parent::save() === true ) {
-			$data = JRequest::getVar( 'jform' );
-			$cid = ( int ) $data[ 'catid' ];
-			$link = JRoute::_('index.php?option=com_media&view=galleries&id='.$cid);
-			$this->setRedirect($link);
-		}
-		$this->setMessage(JText::_('COM_MEDIA_SUBMIT_SAVE_SUCCESS'));
+		parent::save();
 	}
 	/**
 	 * Method to cancel an edit
@@ -63,14 +57,7 @@ class MediaControllerMedia extends JControllerForm
 	 */
 	public function cancel()
 	{
-		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
-
 		parent::cancel();
-
-		// Redirect to the list screen.
-		$link = JRoute::_('index.php?option=com_media');
-		$this->setRedirect($link);
 	}
 	 
 	
