@@ -19,6 +19,13 @@ abstract class MediaHelper
 	 */
 	public static function addSubmenu($vName = 'mediagalleries')
 	{
+		JSubMenuHelper::addEntry(
+			JText::_('Images'),
+			'index.php?option=com_media&view=images',
+			$vName == 'images',
+			$mName = 'manager'
+			
+		);
 		JSubMenuHelper::addEntry( 
 			JText::_('com_media_MEDIAS'),
 			'index.php?option=com_media&view=galleries',
@@ -31,13 +38,7 @@ abstract class MediaHelper
 			$vName == 'categories'
 		);
 
-		JSubMenuHelper::addEntry(
-			JText::_('com_media_CATEGORIES'),
-			'index.php?option=com_media&view=images',
-			$vName == 'images',
-			$mName = 'manager'
-			
-		);
+		
 	}
 
 	/**

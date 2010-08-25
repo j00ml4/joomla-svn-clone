@@ -51,7 +51,7 @@ class MediaControllerMedia extends JControllerForm
 			$link = JRoute::_('index.php?option=com_media&view=galleries&id='.$cid);
 			$this->setRedirect($link);
 		}
-		$this->setMessage(JText::_('COM_WEBLINK_SUBMIT_SAVE_SUCCESS'));
+		$this->setMessage(JText::_('COM_MEDIA_SUBMIT_SAVE_SUCCESS'));
 	}
 	/**
 	 * Method to cancel an edit
