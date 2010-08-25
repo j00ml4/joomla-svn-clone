@@ -22,7 +22,7 @@ jimport('joomla.application.component.controller');
  */
 class MediaController extends JController
 {
-	protected $default_view = 'galleries';
+	protected $default_view = 'images';
 	
 	/**
 	 * Method to display a view.
@@ -31,7 +31,7 @@ class MediaController extends JController
 	 */
 	function display()
 	{
-		$vName = JRequest::getCmd('view', 'galleries');
+		$vName = JRequest::getCmd('view', 'images');
 		switch ($vName)
 		{
 			case 'images':
