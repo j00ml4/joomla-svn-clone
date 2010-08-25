@@ -90,7 +90,7 @@ class MediaModelGallery extends JModelList
 
 		// Select required fields from the categories.
 		$query->select($this->getState('list.select', 'a.*'));
-		$query->from('`#__mediagalleries` AS a');
+		$query->from('`#__medias` AS a');
 		$query->where('a.access IN ('.$groups.')');
 
 		// Filter by category.
@@ -133,7 +133,7 @@ class MediaModelGallery extends JModelList
 	{
 		// Initialise variables.
 		$app	= &JFactory::getApplication();
-		$params	= JComponentHelper::getParams('com_mediagalleries');
+		$params	= JComponentHelper::getParams('com_medias');
 
 		// List state information
 		$limit 		= $app->getUserStateFromRequest('global.list.limit', 'limit', $app->getCfg('list_limit'));
@@ -179,8 +179,8 @@ class MediaModelGallery extends JModelList
 			$params = new JRegistry();
 			$params->loadJSON($active->params);
 			$options = array();
-			$options['countItems'] = 10;
-			$categories = JCategories::getInstance('Mediagalleries', $options);
+			//$options['countItems'] = 10;
+			$categories = JCategories::getInstance('media', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 			
 			
