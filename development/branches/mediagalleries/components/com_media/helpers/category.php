@@ -26,8 +26,8 @@ class MediaCategories extends JCategories
 {
 	public function __construct($options = array())
 	{
-		$options['table'] = '#__mediagalleries';
-		$options['extension'] = 'com_mediagalleries';
+		$options['table'] = '#__medias';
+		$options['extension'] = 'com_media';
 		parent::__construct($options);
 	}
 }

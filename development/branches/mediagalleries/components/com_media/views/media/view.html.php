@@ -36,7 +36,7 @@ class MediaViewMedia extends JView
 		$this->item		= $this->get('Item');
 		$this->category	= $this->get('Category');
 		$this->params	= $app->getParams();
-		
+	
 		
 		$registry = new JRegistry();
 		$registry->loadArray($this->item->params);

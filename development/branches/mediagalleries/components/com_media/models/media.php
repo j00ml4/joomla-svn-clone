@@ -64,7 +64,7 @@ class MediaModelMedia extends JModelAdmin
 	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = $this->loadForm('com_mediagalleries.media', 'media', array('control' => 'jform', 'load_data' => $loadData));
+		$form = $this->loadForm('com_media.media', 'media', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
@@ -90,7 +90,7 @@ class MediaModelMedia extends JModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState('com_mediagalleries.edit.media.data', array());
+		$data = JFactory::getApplication()->getUserState('com_media.edit.media.data', array());
 
 		if (empty($data)) {
 			$data = $this->getItem();
@@ -146,7 +146,7 @@ class MediaModelMedia extends JModelAdmin
 			// Set ordering to the last item if not set
 			if (empty($table->ordering)) {
 				$db = $this->getDbo();
-				$db->setQuery('SELECT MAX(ordering) FROM #__mediagalleries');
+				$db->setQuery('SELECT MAX(ordering) FROM #__medias');
 				$max = $db->loadResult();
 
 				$table->ordering = $max+1;

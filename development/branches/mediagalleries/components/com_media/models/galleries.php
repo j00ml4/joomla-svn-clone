@@ -26,14 +26,14 @@ class MediaModelGalleries extends JModel
 	 *
 	 * @var		string
 	 */
-	public $_context = 'com_mediagalleries.categories';
+	public $_context = 'com_media.categories';
 
 	/**
 	 * The category context (allows other extensions to derived from this model).
 	 *
 	 * @var		string
 	 */
-	protected $_extension = 'com_mediagalleries';
+	protected $_extension = 'com_media';
 
 	private $_parent = null;
 
@@ -103,7 +103,8 @@ class MediaModelGalleries extends JModel
 			}
 			$options = array();
 			$options['countItems'] = $params->get('show_cat_num_links', 0) || !$params->get('show_empty_categories', 0);
-			$categories = JCategories::getInstance('Mediagalleries', $options);
+			$categories = JCategories::getInstance('Media', $options);
+			
 			$this->_parent = $categories->get($this->getState('filter.parentId', 'root'));
 			if(is_object($this->_parent))
 			{

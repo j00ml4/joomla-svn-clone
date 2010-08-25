@@ -34,10 +34,10 @@ abstract class MediaHelperRoute
 			'media'  => array((int) $id)
 		);
 		//Create the link
-		$link = 'index.php?option=com_mediagalleries&view=media&id='. $id;
+		$link = 'index.php?option=com_media&view=media&id='. $id;
 		if ($catid > 1)
 		{
-			$categories = JCategories::getInstance('Mediagalleries');
+			$categories = JCategories::getInstance('Media');
 			$category = $categories->get($catid);
 			if($category)
 			{
@@ -56,7 +56,7 @@ abstract class MediaHelperRoute
 
 	public static function getCategoryRoute($catid)
 	{
-		$categories = JCategories::getInstance('Mediagalleries');
+		$categories = JCategories::getInstance('Media');
 		$category = $categories->get((int)$catid);
 		$catids = array_reverse($category->getPath());
 		$needles = array(
@@ -64,7 +64,7 @@ abstract class MediaHelperRoute
 			'categories' => $catids
 		);
 		//Create the link
-		$link = 'index.php?option=com_mediagalleries&view=gallery&id='.(int)$catid;
+		$link = 'index.php?option=com_media&view=gallery&id='.(int)$catid;
 
 		if ($item = MediagalleriesHelperRoute::_findItem($needles)) {
 			$link .= '&Itemid='.$item;
@@ -80,7 +80,7 @@ abstract class MediaHelperRoute
 		{
 			self::$lookup = array();
 
-			$component	= JComponentHelper::getComponent('com_mediagalleries');
+			$component	= JComponentHelper::getComponent('com_media');
 			$menus		= JApplication::getMenu('site');
 			$items		= $menus->getItems('component_id', $component->id);
 			foreach ($items as $item)

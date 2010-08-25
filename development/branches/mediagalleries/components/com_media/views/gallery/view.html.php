@@ -64,19 +64,15 @@ class MediaViewGallery extends JView
 		$this->items	 =& $model->getItems();
 		$this->state	 =& $model->getState();		
 		$this->children= $model->getChildren();
-					
-		// Title
+		
+		// Title BUGGED
 		if(!empty($this->category)){
 			$this->title = $this->category->title;
 		}
-		elseif(is_object($menu)){
-			$this->title = $menu->title;
-		}
 		else{
-			
-			$title = JText::_($this->category->title);
+			$this->title = "Gallery";
 		}	
-				
+			
 	
 		$this->action=$uri->toString();
 		

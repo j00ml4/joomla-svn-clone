@@ -37,47 +37,19 @@ class MediaController extends JController
 	 */
 	public function display($cachable = false, $urlparams = false)
 	{
-		$vName = JRequest::getCmd('view', 'images');
-		switch ($vName)
-		{
-			case 'imagesList':
-				$mName = 'list';
-				$vLayout = JRequest::getCmd('layout', 'default');
-				break;
-
-			case 'images':
-			default:
-				$vLayout = JRequest::getCmd('layout', 'default');
-				$mName = 'manager';
-				$vName = 'images';
-				break;
-		}
-
-		$document = JFactory::getDocument();
-		$vType		= $document->getType();
-
-		// Get/Create the view
-		$view = $this->getView($vName, $vType);
-		$view->addTemplatePath(JPATH_COMPONENT_ADMINISTRATOR.DS.'views'.DS.strtolower($vName).DS.'tmpl');
-
-		// Get/Create the model
-		if ($model = $this->getModel($mName)) {
-			// Push the model into the view (as default)
-			$view->setModel($model, true);
-		}
-
-		// Set the layout
-		$view->setLayout($vLayout);
 		
 		$cachable = true;
+		// Get the document object.
+		// Set the default view name and format from the Request.
+		$vName		= JRequest::getWord('view', 'gallery');
+		JRequest::setVar('view', $vName);
+
 		if (($_SERVER['REQUEST_METHOD'] == 'POST' && $vName = 'categories')) {
 			$cachable = false;
 		}
 		$safeurlparams = array('id'=>'INT','limit'=>'INT','limitstart'=>'INT','filter_order'=>'CMD','filter_order_Dir'=>'CMD','lang'=>'CMD');
-				
-		// Display the view
-		$view->display($cachable, $safeurlparams);
-		return $this;
+
+		parent::display($cachable,$safeurlparams);
 	}
 
 	function ftpValidate()

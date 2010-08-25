@@ -34,7 +34,7 @@
 		<field 
 			name="catid" 
 			type="category" 
-			extension="com_mediagalleries"
+			extension="com_media"
 			label="JCATEGORY" 
 			description="JFIELD_CATEGORY_DESC"
 			class="inputbox">
@@ -45,8 +45,8 @@
 			type="text" 
 			class="inputbox"
 			size="40" 
-			label="COM_MEDIAGALLERIES_FIELD_URL_LABEL"
-			description="COM_MEDIAGALLERIES_FIELD_URL_DESC" 
+			label="COM_MEDIA_FIELD_URL_LABEL"
+			description="COM_MEDIA_FIELD_URL_DESC" 
 			required="true"
 		/>
 		
@@ -55,8 +55,8 @@
 			type="text" 
 			class="inputbox"
 			size="40" 
-			label="COM_MEDIAGALLERIES_FIELD_THUMBURL_LABEL"
-			description="COM_MEDIAGALLERIES_FIELD_THUMBURL_DESC" 
+			label="COM_MEDIA_FIELD_THUMBURL_LABEL"
+			description="COM_MEDIA_FIELD_THUMBURL_DESC" 
 			
 		/>
 		
@@ -92,8 +92,8 @@
 			type="Text" 
 			class="inputbox"
 			size="6" 
-			label="MEDIAGALLERIES_HITS_LABEL"
-			description="MEDIAGALLERIES_HITS_DESC" 
+			label="MEDIA_HITS_LABEL"
+			description="MEDIA_HITS_DESC" 
 			readonly="true" 
 			filter="unset" 
 			default="0"
@@ -116,22 +116,22 @@
 			name="published"
 			type="list"
 			label="JPUBLISHED"
-			description="COM_MEDIAGALLERIES_FIELD_STATE_DESC"
+			description="COM_MEDIA_FIELD_STATE_DESC"
 			class="inputbox"
 			size="1"
 			default="1">
 				<option	value="1">JPUBLISHED</option>
 				<option value="0">JUNPUBLISHED</option>
 				<option value="2">JARCHIVED</option>
-				<option value="-3">COM_MEDIAGALLERIES_FIELD_VALUE_REPORTED</option>
+				<option value="-3">COM_MEDIA_FIELD_VALUE_REPORTED</option>
 				<option value="-2">JTRASH</option>
 		</field>
 		
 		<field
 			name="featured"
 			type="list"
-			label="COM_MEDIAGALLERIES_FEATURED_LABEL"
-			description="COM_MEDIAGALLERIES_FEATURED_DESC"
+			label="COM_MEDIA_FEATURED_LABEL"
+			description="COM_MEDIA_FEATURED_DESC"
 			class="inputbox"
 			size="1"
 			default="0">
@@ -161,7 +161,7 @@
 			name="language"
 			type="contentlanguage"
 			label="JFIELD_LANGUAGE_LABEL"
-			description="COM_MEDIAGALLERIES_FIELD_LANGUAGE_DESC"
+			description="COM_MEDIA_FIELD_LANGUAGE_DESC"
 			class="inputbox">
 				<option value="*">JALL</option>
 		</field>
@@ -285,21 +285,21 @@
 				<field name="width" 
 			type="text" 
 			size="5" 
-			label="COM_MEDIAGALLERIES_WIDTH_LABEL" 
-			description="COM_MEDIAGALLERIES_WIDTH_DESC"/>
+			label="COM_MEDIA_WIDTH_LABEL" 
+			description="COM_MEDIA_WIDTH_DESC"/>
 				
 				
 		<field name="height" 
 			type="text" 
 			size="5" 
-			label="COM_MEDIAGALLERIES_HEIGHT_LABEL" 
-			description="COM_MEDIAGALLERIES_HEIGHT_DESC"/>
+			label="COM_MEDIA_HEIGHT_LABEL" 
+			description="COM_MEDIA_HEIGHT_DESC"/>
 				
 		<field name="autostart" 
 					type="radio" 
 					default="0" 
-					label="COM_MEDIAGALLERIES_AUTOSTART_LABEL" 
-					description="COM_MEDIAGALLERIES_AUTOSTART_DESC">
+					label="COM_MEDIA_AUTOSTART_LABEL" 
+					description="COM_MEDIA_AUTOSTART_DESC">
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>

@@ -31,6 +31,7 @@ class MediaViewGalleries extends JView
 	function display($tpl = null)
 	{
 		// Initialise variables
+		
 		$state		= $this->get('State');
 		$items		= $this->get('Items');
 		$parent		= $this->get('Parent');
@@ -43,7 +44,8 @@ class MediaViewGalleries extends JView
 
 		if($items === false)
 		{
-			//TODO Raise error for missing category here
+			JError::raiseWarning(500, "No Gallery");
+			return false;
 		}
 
 		if($parent == false)
