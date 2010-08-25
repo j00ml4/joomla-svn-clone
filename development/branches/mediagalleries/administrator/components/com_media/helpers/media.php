@@ -33,8 +33,10 @@ abstract class MediaHelper
 
 		JSubMenuHelper::addEntry(
 			JText::_('com_media_CATEGORIES'),
-			'index.php?option=com_categories&extension=com_media',
-			$vName == 'categories'
+			'index.php?option=com_media&view=images',
+			$vName == 'images',
+			$mName = 'manager'
+			
 		);
 	}
 
