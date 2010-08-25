@@ -31,7 +31,7 @@ class MediaController extends JController
 	 */
 	function display()
 	{
-		$vName = JRequest::getCmd('view', 'media');
+		$vName = JRequest::getCmd('view', 'galleries');
 		switch ($vName)
 		{
 			case 'images':
@@ -59,12 +59,6 @@ class MediaController extends JController
 				$vLayout = JRequest::getCmd('layout', 'default');
 				$mName = 'media';
 				break;
-				
-			case 'galleries':
-				$mName = 'galleries';
-				$vLayout = JRequest::getCmd('layout', 'default');
-
-				break;
 		}
 
 		$document = JFactory::getDocument();
@@ -81,9 +75,17 @@ class MediaController extends JController
 
 		// Set the layout
 		$view->setLayout($vLayout);
+
 		parent::display();
 
 		// Load the submenu.
 		mediaHelper::addSubmenu(JRequest::getWord('view', $this->default_view));
+	}
+	
+	function ftpValidate()
+	{
+		// Set FTP credentials, if given
+		jimport('joomla.client.helper');
+		JClientHelper::setCredentialsFromRequest('ftp');
 	}
 }
