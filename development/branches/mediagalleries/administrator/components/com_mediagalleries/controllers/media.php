@@ -34,44 +34,13 @@ class MediagalleriesControllerMedia extends JControllerForm
 	 * @return	object	The model.
 	 * @since	1.5
 	 */
-	public function &getModel($name = 'form', $prefix = '', $config = array())
+	public function &getModel($name = 'media', $prefix = '', $config = array())
 	{
 		$model = parent::getModel($name, $prefix, $config);
 
 		return $model;
 	}
-	/**
-	 * Save the record
-	 */
-	public function save()
-	{
-		if( parent::save() === true ) {
-			$data = JRequest::getVar( 'jform' );
-			$cid = ( int ) $data[ 'catid' ];
-			$link = JRoute::_('index.php?option=com_mediagalleries&view=galleries&id='.$cid);
-			$this->setRedirect($link);
-		}
-		$this->setMessage(JText::_('COM_WEBLINK_SUBMIT_SAVE_SUCCESS'));
-	}
-	/**
-	 * Method to cancel an edit
-	 *
-	 * Checks the item in, sets item ID in the session to null, and then redirects to the list page.
-	 *
-	 * @access	public
-	 * @return	void
-	 */
-	public function cancel()
-	{
-		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
-
-		parent::cancel();
-
-		// Redirect to the list screen.
-		$link = JRoute::_('index.php?option=com_mediagalleries');
-		$this->setRedirect($link);
-	}
+	
 	 
 	
 }
