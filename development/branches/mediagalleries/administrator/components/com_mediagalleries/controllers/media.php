@@ -20,7 +20,7 @@ jimport('joomla.application.component.controllerform');
 
 class MediagalleriesControllerMedia extends JControllerForm
 {
-	 protected $view_list = 'gallery';
+	 protected $view_list = 'galleries';
 	 protected $view_item = 'media';
 	 
 	 
@@ -48,7 +48,7 @@ class MediagalleriesControllerMedia extends JControllerForm
 		if( parent::save() === true ) {
 			$data = JRequest::getVar( 'jform' );
 			$cid = ( int ) $data[ 'catid' ];
-			$link = JRoute::_('index.php?option=com_mediagalleries&view=gallery&id='.$cid);
+			$link = JRoute::_('index.php?option=com_mediagalleries&view=galleries&id='.$cid);
 			$this->setRedirect($link);
 		}
 		$this->setMessage(JText::_('COM_WEBLINK_SUBMIT_SAVE_SUCCESS'));

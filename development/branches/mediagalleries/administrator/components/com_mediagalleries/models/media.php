@@ -34,7 +34,7 @@ class MediagalleriesModelMedia extends JModelAdmin
 	 * @return	JTable	A database object
 	 * @since	1.6
 	 */
-	public function getTable($type = 'Media', $prefix = 'Table', $config = array())
+	public function getTable($type = 'media', $prefix = 'Table', $config = array())
 	{
 		return JTable::getInstance($type, $prefix, $config);
 	}
