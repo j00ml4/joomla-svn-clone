@@ -73,6 +73,13 @@ class ProjectsModelPortfolios extends JModelList
 			$query->where('a.level = 1');
 		} 
 		$query->where('a.parent_id = '.(int) $parent_id);
+		
+		// Count
+		$query->select('COUNT(nc.id) AS numcategories');
+		$query->join('LEFT', '#__categories AS nc ON nc.parent_id = a.id');
+		$query->select('COUNT(ni.id) AS numitems');
+		$query->join('LEFT', '#__projects AS ni ON ni.catid = a.id');
+		$query->group('a.id');
 			
 		// Filter by state
 		$state = $this->getState('filter.state');
@@ -105,7 +112,6 @@ class ProjectsModelPortfolios extends JModelList
 		if(!is_object($this->_portfolio))
 		{
 			$options = array();
-			$options['countItems']	= true;
 			$options['published']	= 1;
 			$options['access']		= true;
 			$categories = JCategories::getInstance('Projects', $options);
