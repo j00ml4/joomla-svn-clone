@@ -19,7 +19,7 @@ jimport('joomla.application.categories');
  * @package		Joomla.Site
  * @subpackage	Contact
  */
-class MediagalleriesModelGallery extends JModelList
+class MediaModelGallery extends JModelList
 {
 	/**
 	 * Category items data
@@ -180,7 +180,7 @@ class MediagalleriesModelGallery extends JModelList
 			$params->loadJSON($active->params);
 			$options = array();
 			$options['countItems'] = 10;
-			$categories = JCategories::getInstance('Mediagalleries', $options);
+			$categories = JCategories::getInstance('Media', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 			
 			

@@ -25,7 +25,7 @@ jimport( 'joomla.application.component.view');
  * @subpackage	Weblinks
  * @since 1.0
  */
-class MediagalleriesViewGallery extends JView
+class MediaViewGallery extends JView
 {
 	
     /**

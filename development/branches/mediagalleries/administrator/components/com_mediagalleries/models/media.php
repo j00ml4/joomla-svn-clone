@@ -146,7 +146,7 @@ class MediagalleriesModelMedia extends JModelAdmin
 			// Set ordering to the last item if not set
 			if (empty($table->ordering)) {
 				$db = $this->getDbo();
-				$db->setQuery('SELECT MAX(ordering) FROM #__medias');
+				$db->setQuery('SELECT MAX(ordering) FROM #__mediagalleries');
 				$max = $db->loadResult();
 
 				$table->ordering = $max+1;
