@@ -29,6 +29,7 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
         <?php endif; ?>
 		<form action="<?php echo ProjectsHelper::getLink('projects'); ?>" method="post" id="adminForm" name="adminForm">
         <div class="TabView" id="TabView">
+            <?php if ($this->portfolio->numcategories && $this->portfolio->numitems) : ?>
             <ul class="tabnav">
                 <li><a title="<?php echo JText::_('COM_PROJECTS_PORTFOLIOS_LINK_DESC'); ?>" href="<?php echo ProjectsHelper::getLink('portfolios', $this->portfolio->id); ?>" >
                     <?php echo JText::sprintf('COM_PROJECTS_PORTFOLIOS_LINK', $this->portfolio->numcategories); ?>
@@ -37,6 +38,7 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
                     <?php echo JText::sprintf('COM_PROJECTS_PROJECTS_LINK', $this->portfolio->numitems); ?>
                 </a></li>
             </ul>
+            <?php endif; ?>
             <!-- *** Pages ************************************************************* -->
 
             <div class="page" >

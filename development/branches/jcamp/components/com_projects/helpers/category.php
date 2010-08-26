@@ -39,7 +39,8 @@ class ProjectsCategories extends JCategories
 			return false;
 		}
 		
-		$item->numcategories = $this->getNumCategories($id); 
+		$item->numcategories = $this->getNumCategories($id);
+		return $item; 
 	}
 	/*
 	 * Method to get number of portfolios linked to a certain portfolio
