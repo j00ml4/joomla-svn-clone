@@ -25,7 +25,7 @@ class ProjectsModelProjects extends JModelList
 	 *
 	 * @var JCategory
 	 */
-	protected $_portfolio = null;
+	protected $portfolio = null;
 	
 	/**
 	 * Method to auto-populate the model state.
@@ -100,17 +100,17 @@ class ProjectsModelProjects extends JModelList
 	 */
 	public function getPortfolio()
 	{
-		if(!is_object($this->_portfolio))
+		if(!is_object($this->portfolio))
 		{
 			$options = array();
 			$options['countItems']	= true;
 			$options['published']	= 1;
 			$options['access']		= true;
 			$categories = JCategories::getInstance('Projects', $options);
-			$this->_portfolio = $categories->get($this->getState('portfolio.id', 'root'));
+			$this->portfolio = $categories->get($this->getState('portfolio.id', 'root'));
 		}
 
-		return $this->_portfolio;
+		return $this->portfolio;
 	}
 }
 ?>

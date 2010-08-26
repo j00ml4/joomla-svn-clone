@@ -94,7 +94,7 @@ class ProjectsModelProject extends JModelAdmin
 		// Get portifolio
 		if(!is_object($this->portfolio)){
 			jimport('joomla.application.categories');
-			$categories = JCategories::getInstance('Projects', $options);
+			$categories = JCategories::getInstance('Projects');
 			$this->portfolio = $categories->get($pk);
 		}
 		

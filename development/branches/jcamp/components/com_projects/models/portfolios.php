@@ -20,7 +20,7 @@ jimport('joomla.application.categories');
  */
 class ProjectsModelPortfolios extends JModelList
 {
-	protected $_portfolio = null;
+	protected $portfolio = null;
 	protected $_items = null;
 	
 	/**
@@ -109,19 +109,16 @@ class ProjectsModelPortfolios extends JModelList
 	 */
 	public function getParent()
 	{	
-		if(!is_object($this->_portfolio))
+		if(!is_object($this->portfolio))
 		{
 			$options = array();
 			$options['published']	= 1;
 			$options['access']		= true;
 			$categories = JCategories::getInstance('Projects', $options);
-			$this->_portfolio = $categories->get($this->getState('portfolio.id', 'root'));
-		
-			// Count
-			$this->_portfolio->numcategories = $this->getTotal(); 			
+			$this->portfolio = $categories->get($this->getState('portfolio.id', 'root'));	
 		}
 		
 		
-		return $this->_portfolio;
+		return $this->portfolio;
 	}
 }
