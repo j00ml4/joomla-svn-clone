@@ -27,10 +27,20 @@ class ProjectsCategories extends JCategories
 	public function __construct($options = array())
 	{
 		$options['table'] = '#__projects';
+		$options['countItems']	= true;
 		$options['extension'] = 'com_projects';
 		parent::__construct($options);
 	}
 	
+	public function get($id = 'root', $forceload = false)
+	{
+		$item =& parent::get($id, $forceload);
+		if(empty($item)){
+			return false;
+		}
+		
+		$item->numcategories = $this->getNumCategories($id); 
+	}
 	/*
 	 * Method to get number of portfolios linked to a certain portfolio
 	 * 
@@ -38,37 +48,27 @@ class ProjectsCategories extends JCategories
 	 * @param $params Parameters
 	 * @return Number of portfolios linked to the portfolio
 	 */
-	public function calcNumCategories($id, $params) {
-		$user	= JFactory::getUser();
+	protected function getNumCategories($id) {
 		$db		= JFactory::getDbo();
-		$q		= $db->getQuery(true);
-		
+		$query	= $db->getQuery(true);
 		
 		// Select required fields from the categories.
-		$q->select('a.*');
-		$q->from('`#__categories` AS a');
-		$q->where('a.extension = '.$db->Quote('com_projects'));
-		
-		$q->where('a.parent_id = '.(int) $id);
+		$query->select('COUNT(nc.id)');
+		$query->from('`#__categories` AS nc');
+		$query->where('a.parent_id = '.(int) $id);
 			
 		// Filter by state
-		$state = $params['filter.state'];
-		if (is_numeric($state)) {
-			$q->where('a.state = '.(int)$state);
+		if($this->_options['access'])
+		{
+			$user	= JFactory::getUser();
+			$query->where('c.access IN ('.implode(',', $user->authorisedLevels()).')');
+		}
+		if($this->_options['published'] == 1)
+		{
+			$query->where('c.published = 1');
 		}
 		
-		// Filter by start and end dates.
-		$nullDate = $db->Quote($db->getNullDate());
-		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
-
-		// Filter by language
-		if ($params['filter.language']) {
-			$q->where('a.`language` IN (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
-		}
-		
-		$db->setQuery($q);
-		$db->query();
-		
-		return $db->getNumRows();
+		$db->setQuery($query);	
+		return $db->loadResult();
 	}
 }
