@@ -43,7 +43,6 @@ class MediaController extends JController
 			case 'imagesList':
 				$mName = 'list';
 				$vLayout = JRequest::getCmd('layout', 'default');
-
 				break;
 
 			case 'mediaList':
