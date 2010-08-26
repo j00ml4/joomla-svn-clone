@@ -46,11 +46,11 @@ define('GESHI_VERSION', '1.0.8.4');
 // Define the root directory for the GeSHi code tree
 if (!defined('GESHI_ROOT')) {
     /** The root directory for GeSHi */
-    define('GESHI_ROOT', dirname(__FILE__) . DS);
+    define('GESHI_ROOT', JPATH::dirname(__FILE__) . '/' );
 }
 /** The language file directory for GeSHi
     @access private */
-define('GESHI_LANG_ROOT', GESHI_ROOT . 'geshi' . DS);
+define('GESHI_LANG_ROOT', GESHI_ROOT . 'geshi' . '/' );
 
 // Define if GeSHi should be paranoid about security
 if (!defined('GESHI_SECURITY_PARANOID')) {

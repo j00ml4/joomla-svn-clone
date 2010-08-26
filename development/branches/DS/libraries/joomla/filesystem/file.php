@@ -107,9 +107,9 @@ class JFile
 				$ftp = JFTP::getInstance($FTPOptions['host'], $FTPOptions['port'], null, $FTPOptions['user'], $FTPOptions['pass']);
 
 				// If the parent folder doesn't exist we must create it
-				if (!file_exists(dirname($dest))) {
+				if (!file_exists(JPATH::dirname($dest))) {
 					jimport('joomla.filesystem.folder');
-					JFolder::create(dirname($dest));
+					JFolder::create(JPATH::dirname($dest));
 				}
 
 				//Translate the destination path for the FTP account
@@ -311,9 +311,9 @@ class JFile
 	{
 
 		// If the destination directory doesn't exist we need to create it
-		if (!file_exists(dirname($file))) {
+		if (!file_exists(JPATH::dirname($file))) {
 			jimport('joomla.filesystem.folder');
-			JFolder::create(dirname($file));
+			JFolder::create(JPATH::dirname($file));
 		}
 
 		if ($use_streams) {
@@ -363,7 +363,7 @@ class JFile
 		$dest = JPath::clean($dest);
 
 		// Create the destination directory if it does not exist
-		$baseDir = dirname($dest);
+		$baseDir = JPATH::dirname($dest);
 
 		if (!file_exists($baseDir)) {
 			jimport('joomla.filesystem.folder');

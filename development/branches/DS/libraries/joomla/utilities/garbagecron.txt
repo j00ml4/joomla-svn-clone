@@ -11,8 +11,8 @@
 
 // Initialize Joomla framework
 define('_JEXEC', 1);
-define('DS', DIRECTORY_SEPARATOR);
-define('JPATH_BASE', dirname(__FILE__).'/../../..');
+define('DS', '/');
+define('JPATH_BASE', str_replace('\\','/',(dirname(__FILE__).'/../../..'));
 
 /* Required Files */
 require_once JPATH_BASE.'/includes/defines.php';

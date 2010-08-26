@@ -151,9 +151,9 @@ abstract class JModuleHelper
 			// 1.5 or Core then
 			// 1.6 3PD
 				$lang->load($module->module, JPATH_BASE, null, false, false)
-			||	$lang->load($module->module, dirname($path), null, false, false)
+			||	$lang->load($module->module, JPATH::dirname($path), null, false, false)
 			||	$lang->load($module->module, JPATH_BASE, $lang->getDefault(), false, false)
-			||	$lang->load($module->module, dirname($path), $lang->getDefault(), false, false);
+			||	$lang->load($module->module, JPATH::dirname($path), $lang->getDefault(), false, false);
 
 
 

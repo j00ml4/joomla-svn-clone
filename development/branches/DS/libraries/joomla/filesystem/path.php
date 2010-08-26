@@ -18,12 +18,12 @@ define('JPATH_ISMAC', (strtoupper(substr(PHP_OS, 0, 3)) === 'MAC'));
 
 if (!defined('DS')) {
 	/** string Shortcut for the DS define */
-	define('DS', DIRECTORY_SEPARATOR);
+	define('DS', '/');
 }
 
 if (!defined('JPATH_ROOT')) {
 	/** string The root directory of the file system in native format */
-	define('JPATH_ROOT', JPath::clean(JPATH_SITE));
+	define('JPATH_ROOT', JPATH_SITE);
 }
 
 /**
@@ -175,6 +175,18 @@ class JPath
 		return $path;
 	}
 
+	/**
+	 * Function to ensure uniform dirname DS in a path name
+	 *
+	 * @param	string	The path to clean
+	 * @param	string	Number of dirname simulations (optional)
+	 * @return	string	The cleaned path
+	 * @since	1.6
+	 */
+	public static function dirname($path, $trim = 0)
+	{
+		return implode('/', explode('/', strtr($path, '\\', '/'), -($trim + 1)));
+	}
 	/**
 	 * Method to determine if script owns the path
 	 *

@@ -104,7 +104,7 @@ class AdminModelHelp extends JModel
 			$this->toc = array();
 			foreach($files as $file)
 			{
-				$buffer = file_get_contents(JPATH_BASE . '/help/' . $lang_tag . DS . $file);
+				$buffer = file_get_contents(JPATH_BASE . '/help/' . $lang_tag . '/' . $file);
 				if (preg_match('#<title>(.*?)</title>#', $buffer, $m))
 				{
 					$title = trim($m[1]);

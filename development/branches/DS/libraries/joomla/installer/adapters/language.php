@@ -543,7 +543,7 @@ class JInstallerLanguage extends JAdapterInstance
 		// Need to find to find where the XML file is since we don't store this normally
 		$client = JApplicationHelper::getClientInfo($this->parent->extension->client_id);
 		$short_element = $this->parent->extension->element;
-		$manifestPath = $client->path . '/language/' . $short_element . DS . $short_element . '.xml';
+		$manifestPath = $client->path . '/language/' . $short_element . '/' . $short_element . '.xml';
 		$this->parent->manifest = $this->parent->isManifest($manifestPath);
 		$this->parent->setPath('manifest', $manifestPath);
 		$this->parent->setPath('source', $client->path . '/language/' . $short_element);

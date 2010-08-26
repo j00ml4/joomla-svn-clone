@@ -63,7 +63,7 @@ class JControllerTest extends PHPUnit_Framework_TestCase
 		// Include JModel as this method is a proxy for JModel::addIncludePath
 		require_once JPATH_BASE.'/libraries/joomla/application/component/model.php';
 
-		$path = dirname(__FILE__).'/addmodelpath';
+		$path = JPATH::dirname(__FILE__).'/addmodelpath';
 		JController::addModelPath($path);
 
 		// The default path is the class file folder/forms
@@ -88,7 +88,7 @@ class JControllerTest extends PHPUnit_Framework_TestCase
 	{
 		$controller = new JControllerInspector;
 
-		$path = dirname(__FILE__).'//foobar';
+		$path = JPATH::dirname(__FILE__).'//foobar';
 		$controller->addPath('test', $path);
 		$paths = $controller->getPaths();
 
@@ -106,7 +106,7 @@ class JControllerTest extends PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			$paths['test'][0],
-			$this->equalTo(dirname(__FILE__).'/foobar/'),
+			$this->equalTo(JPATH::dirname(__FILE__).'/foobar/'),
 			'Line:'.__LINE__.' The path type should be present, clean and with a trailing slash.'
 		);
 	}
@@ -118,7 +118,7 @@ class JControllerTest extends PHPUnit_Framework_TestCase
 	{
 		$controller = new JControllerInspector;
 
-		$path = dirname(__FILE__).'/views';
+		$path = JPATH::dirname(__FILE__).'/views';
 		$controller->addViewPath($path);
 		$paths = $controller->getPaths();
 
@@ -136,7 +136,7 @@ class JControllerTest extends PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			$paths['view'][0],
-			$this->equalTo(dirname(__FILE__).'/views/'),
+			$this->equalTo(JPATH::dirname(__FILE__).'/views/'),
 			'Line:'.__LINE__.' The path type should be present, clean and with a trailing slash.'
 		);
 	}

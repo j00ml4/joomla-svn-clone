@@ -196,7 +196,7 @@ class JArchiveZip extends JObject
 				$buffer = $this->_getFileData($i);
 				$path = JPath::clean($destination.'/'.$this->_metadata[$i]['name']);
 				// Make sure the destination folder exists
-				if (!JFolder::create(dirname($path))) {
+				if (!JFolder::create(JPATH::dirname($path))) {
 					$this->set('error.message', JText::_('JLIB_FILESYSTEM_ZIP_UNABLE_TO_CREATE_DESTINATION'));
 					return false;
 				}

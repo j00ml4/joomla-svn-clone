@@ -116,7 +116,7 @@ class JInstallerHelper
 		$tmpdir = uniqid('install_');
 
 		// Clean the paths to use for archive extraction
-		$extractdir = JPath::clean(dirname($p_filename).'/'.$tmpdir);
+		$extractdir = JPath::dirname(dirname($p_filename).'/'.$tmpdir);
 		$archivename = JPath::clean($archivename);
 
 		// do the unpacking of the archive

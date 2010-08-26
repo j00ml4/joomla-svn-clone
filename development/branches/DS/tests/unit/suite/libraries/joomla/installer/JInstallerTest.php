@@ -162,10 +162,10 @@ class JInstallerTest extends JoomlaTestCase
 	 */
 	public function testAbortFile()
 	{
-		copy(JPATH_BASE.'/tests/_data/installer_packages/com_alpha/com_alpha.jpg', dirname(__FILE__).'/tmp/com_alpha.jpg');
+		copy(JPATH_BASE.'/tests/_data/installer_packages/com_alpha/com_alpha.jpg', JPATH::dirname(__FILE__).'/tmp/com_alpha.jpg');
 
 		$this->object = JInstaller::getInstance();
-		$this->object->pushStep(array('type' => 'file', 'path' => dirname(__FILE__).'/tmp/com_alpha.jpg'));
+		$this->object->pushStep(array('type' => 'file', 'path' => JPATH::dirname(__FILE__).'/tmp/com_alpha.jpg'));
 
 
 		$this->assertThat(
@@ -174,7 +174,7 @@ class JInstallerTest extends JoomlaTestCase
 		);
 
 		$this->assertThat(
-			file_exists(dirname(__FILE__).'/tmp/com_alpha.jpg'),
+			file_exists(JPATH::dirname(__FILE__).'/tmp/com_alpha.jpg'),
 			$this->isFalse()
 		);
 
@@ -185,10 +185,10 @@ class JInstallerTest extends JoomlaTestCase
 	 */
 	public function testAbortFolder()
 	{
-		JFolder::copy(JPATH_BASE.'/tests/_data/installer_packages/com_alpha/language/en-GB', dirname(__FILE__).'/tmp/en-GB');
+		JFolder::copy(JPATH_BASE.'/tests/_data/installer_packages/com_alpha/language/en-GB', JPATH::dirname(__FILE__).'/tmp/en-GB');
 
 		$this->object = JInstaller::getInstance();
-		$this->object->pushStep(array('type' => 'folder', 'path' => dirname(__FILE__).'/tmp/en-GB'));
+		$this->object->pushStep(array('type' => 'folder', 'path' => JPATH::dirname(__FILE__).'/tmp/en-GB'));
 
 
 		$this->assertThat(
@@ -197,7 +197,7 @@ class JInstallerTest extends JoomlaTestCase
 		);
 
 		$this->assertThat(
-			file_exists(dirname(__FILE__).'/tmp/en-GB'),
+			file_exists(JPATH::dirname(__FILE__).'/tmp/en-GB'),
 			$this->isFalse()
 		);
 
