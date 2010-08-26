@@ -215,7 +215,7 @@ class JURI extends JObject
 					$script_name =  $_SERVER['SCRIPT_NAME'];
 				}
 
-				$base['path'] =  rtrim(dirname($script_name), '/\\');
+				$base['path'] =  rtrim(str_replace('\\','/',(dirname($script_name))), '/\\');
 			}
 		}
 

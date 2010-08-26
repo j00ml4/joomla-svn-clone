@@ -682,11 +682,11 @@ class JInstallerPlugin extends JAdapterInstance
 		// Similar to modules and templates, rather easy
 		// If its not in the extensions table we just add it
 		$client = JApplicationHelper::getClientInfo($this->parent->extension->client_id);
-		if (is_dir($client->path . '/plugins/' . $this->parent->extension->folder . DS . $this->parent->extension->element)) {
-			$manifestPath = $client->path . '/plugins/' . $this->parent->extension->folder . DS . $this->parent->extension->element . DS . $this->parent->extension->element . '.xml';
+		if (is_dir($client->path . '/plugins/' . $this->parent->extension->folder . '/' . $this->parent->extension->element)) {
+			$manifestPath = $client->path . '/plugins/' . $this->parent->extension->folder . '/' . $this->parent->extension->element . '/' . $this->parent->extension->element . '.xml';
 		}
 		else {
-			$manifestPath = $client->path . '/plugins/' . $this->parent->extension->folder . DS . $this->parent->extension->element . '.xml';
+			$manifestPath = $client->path . '/plugins/' . $this->parent->extension->folder . '/' . $this->parent->extension->element . '.xml';
 		}
 		$this->parent->manifest = $this->parent->isManifest($manifestPath);
 		$description = (string)$this->parent->manifest->description;

@@ -19,12 +19,12 @@ define('_JEXEC', 1);
 /**
  * Constant that defines the base path of the installed Joomla site.
  */
-define('JPATH_BASE', dirname(__FILE__));
+define('JPATH_BASE', str_replace('\\','/',dirname(__FILE__)));
 
 /**
  * Shortcut for the directory separator character.
  */
-define('DS', DIRECTORY_SEPARATOR);
+define('DS', '/');
 
 // Set path constants.
 $parts = explode(DS, JPATH_BASE);

@@ -142,7 +142,7 @@ class JArchiveTar extends JObject
 				{
 					$path = JPath::clean($destination.'/'.$file['name']);
 					// Make sure the destination folder exists
-					if (!JFolder::create(dirname($path)))
+					if (!JFolder::create(JPATH::dirname(dirname($path))))
 					{
 						$this->set('error.message', JText::_('JLIB_FILESYSTEM_TAR_UNABLE_TO_CREATE_DESTINATION'));
 						return JError::raiseWarning(100, $this->get('error.message'));

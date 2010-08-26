@@ -495,7 +495,7 @@ class JInstallerModule extends JAdapterInstance
 		// Modules are like templates, and are one of the easiest
 		// If its not in the extensions table we just add it
 		$client = JApplicationHelper::getClientInfo($this->parent->extension->client_id);
-		$manifestPath = $client->path . '/modules/' . $this->parent->extension->element . DS . $this->parent->extension->element . '.xml';
+		$manifestPath = $client->path . '/modules/' . $this->parent->extension->element . '/' . $this->parent->extension->element . '.xml';
 		$this->parent->manifest = $this->parent->isManifest($manifestPath);
 		$description = (string)$this->parent->manifest->description;
 		if ($description) {
@@ -525,7 +525,7 @@ class JInstallerModule extends JAdapterInstance
 	function refreshManifestCache()
 	{
 		$client = JApplicationHelper::getClientInfo($this->parent->extension->client_id);
-		$manifestPath = $client->path . '/modules/' . $this->parent->extension->element . DS . $this->parent->extension->element . '.xml';
+		$manifestPath = $client->path . '/modules/' . $this->parent->extension->element . '/' . $this->parent->extension->element . '.xml';
 		$this->parent->manifest = $this->parent->isManifest($manifestPath);
 		$this->parent->setPath('manifest', $manifestPath);
 		$manifest_details = JApplicationHelper::parseXMLInstallFile($this->parent->getPath('manifest'));

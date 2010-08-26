@@ -57,14 +57,14 @@ class Auth_OpenID_FileStore extends Auth_OpenID_OpenIDStore {
         $this->directory = $directory;
         $this->active = true;
 
-        $this->nonce_dir = $directory . DS . 'nonces';
+        $this->nonce_dir = $directory . '/' . 'nonces';
 
-        $this->association_dir = $directory . DS .
+        $this->association_dir = $directory . '/' .
             'associations';
 
         // Temp dir must be on the same filesystem as the assciations
         // $directory.
-        $this->temp_dir = $directory . DS . 'temp';
+        $this->temp_dir = $directory . '/' . 'temp';
 
         $this->max_nonce_age = 6 * 60 * 60; // Six hours, in seconds
 
@@ -173,7 +173,7 @@ class Auth_OpenID_FileStore extends Auth_OpenID_OpenIDStore {
         $filename = sprintf('%s-%s-%s-%s', $proto, $domain, $url_hash,
                             $handle_hash);
 
-        return $this->association_dir. DS . $filename;
+        return $this->association_dir. '/' . $filename;
     }
 
     /**
@@ -384,7 +384,7 @@ class Auth_OpenID_FileStore extends Auth_OpenID_OpenIDStore {
 
         $filename = sprintf('%08x-%s-%s-%s-%s', $timestamp, $proto,
                             $domain, $url_hash, $salt_hash);
-        $filename = $this->nonce_dir . DS . $filename;
+        $filename = $this->nonce_dir . '/' . $filename;
 
         $result = @fopen($filename, 'x');
 
@@ -450,7 +450,7 @@ class Auth_OpenID_FileStore extends Auth_OpenID_OpenIDStore {
         // Check all nonces for expiry
         foreach ($nonces as $nonce) {
             if (!Auth_OpenID_checkTimestamp($nonce, $now)) {
-                $filename = $this->nonce_dir . DS . $nonce;
+                $filename = $this->nonce_dir . '/' . $nonce;
                 Auth_OpenID_FileStore::_removeIfPresent($filename);
             }
         }
@@ -542,7 +542,7 @@ class Auth_OpenID_FileStore extends Auth_OpenID_OpenIDStore {
         $files = array();
         while (false !== ($filename = readdir($handle))) {
             if (!in_array($filename, array('.', '..'))) {
-                $files[] = $dir . DS . $filename;
+                $files[] = $dir . '/' . $filename;
             }
         }
         return $files;

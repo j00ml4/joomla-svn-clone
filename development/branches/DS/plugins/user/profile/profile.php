@@ -86,7 +86,7 @@ class plgUserProfile extends JPlugin
 
 		if ($form->getName()=='com_users.profile') {
 			// Add the profile fields to the form.
-			JForm::addFormPath(dirname(__FILE__).'/profiles');
+			JForm::addFormPath(JPATH::dirname(__FILE__).'/profiles');
 			$form->loadFile('profile', false);
 
 			// Toggle whether the address1 field is required.
@@ -180,7 +180,7 @@ class plgUserProfile extends JPlugin
 			// In this example, we treat the frontend registration and the back end user create or edit as the same.
 
 			// Add the registration fields to the form.
-			JForm::addFormPath(dirname(__FILE__).'/profiles');
+			JForm::addFormPath(JPATH::dirname(__FILE__).'/profiles');
 			$form->loadFile('profile', false);
 
 			// Toggle whether the address1 field is required.

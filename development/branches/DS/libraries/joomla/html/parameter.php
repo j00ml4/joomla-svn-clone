@@ -11,7 +11,7 @@ defined('JPATH_BASE') or die;
 jimport('joomla.registry.registry');
 
 // Register the element class with the loader.
-JLoader::register('JElement', dirname(__FILE__).'/parameter/element.php');
+JLoader::register('JElement', JPATH::dirname(__FILE__).'/parameter/element.php');
 
 /**
  * Parameter handler
@@ -66,7 +66,7 @@ class JParameter extends JRegistry
 		parent::__construct('_default');
 
 		// Set base path.
-		$this->_elementPath[] = dirname(__FILE__).'/parameter/element';
+		$this->_elementPath[] = JPATH::dirname(__FILE__).'/parameter/element';
 
 		if ($data = trim($data)) {
 			if (strpos($data, '{') === 0) {

@@ -10,7 +10,7 @@
 // No direct access
 defined('JPATH_BASE') or die;
 
-require_once dirname(__FILE__).'/list.php';
+require_once JPATH::dirname(__FILE__).'/list.php';
 
 /**
  * Renders a select list of Asset Groups

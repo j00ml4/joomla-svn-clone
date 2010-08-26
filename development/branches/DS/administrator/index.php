@@ -8,8 +8,8 @@
 
 // Set flag that this is a parent file
 define('_JEXEC', 1);
-define('JPATH_BASE', dirname(__FILE__));
-define('DS', DIRECTORY_SEPARATOR);
+define('JPATH_BASE', str_replace('\\','/',dirname(__FILE__)));
+define('DS', '/');
 
 require_once JPATH_BASE.'/includes/defines.php';
 require_once JPATH_BASE.'/includes/framework.php';

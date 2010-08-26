@@ -18,7 +18,7 @@ if (file_exists('config.php')) {
 
 // Define expected Joomla constants.
 
-define('DS',DIRECTORY_SEPARATOR);
+define('DS','/');
 define('_JEXEC',		1);
 
 if (!defined('JPATH_BASE'))
@@ -26,12 +26,12 @@ if (!defined('JPATH_BASE'))
 	// JPATH_BASE can be defined in init.php
 	// This gets around problems with soft linking the unittest folder into a Joomla tree,
 	// or using the unittest framework from a central location.
-	define('JPATH_BASE', dirname(dirname(dirname(__FILE__))));
+	define('JPATH_BASE', JPATH::dirname(__FILE__ , 2));
 }
 
 if (!defined('JPATH_TESTS'))
 {
-	define('JPATH_TESTS', dirname(__FILE__));
+	define('JPATH_TESTS', JPATH::dirname(__FILE__));
 }
 
 // Fix magic quotes.
@@ -56,7 +56,7 @@ require_once JPATH_LIBRARIES.'/joomla/import.php';
 require_once JPATH_BASE.'/libraries/joomla/session/session.php';
 
 // Exclude all of the tests from code coverage reports
-PHPUnit_Util_Filter::addDirectoryToFilter(JPATH_BASE . '/tests');
+PHPUnit_Util_Filter::addDirectoryToFilter (JPATH_BASE . '/tests');
 
 // Set error handling.
 JError::setErrorHandling(E_NOTICE, 'ignore');

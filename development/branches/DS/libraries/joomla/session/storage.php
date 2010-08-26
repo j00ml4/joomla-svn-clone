@@ -54,7 +54,7 @@ class JSessionStorage extends JObject
 			$class = 'JSessionStorage'.ucfirst($name);
 
 			if (!class_exists($class)) {
-				$path = dirname(__FILE__).'/storage/'.$name.'.php';
+				$path = str_replace('\\','/',(dirname(__FILE__))).'/storage/'.$name.'.php';
 
 				if (file_exists($path)) {
 					require_once $path;

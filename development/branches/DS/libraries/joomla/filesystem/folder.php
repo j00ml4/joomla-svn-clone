@@ -39,8 +39,8 @@ class JFolder
 		$FTPOptions = JClientHelper::getCredentials('ftp');
 
 		if ($path) {
-			$src = JPath::clean($path . DS . $src);
-			$dest = JPath::clean($path . DS . $dest);
+			$src = JPath::clean($path . '/' . $src);
+			$dest = JPath::clean($path . '/' . $dest);
 		}
 
 		// Eliminate trailing directory separators, if any
@@ -74,8 +74,8 @@ class JFolder
 			}
 			// Walk through the directory copying files and recursing into folders.
 			while (($file = readdir($dh)) !== false) {
-				$sfid = $src . DS . $file;
-				$dfid = $dest . DS . $file;
+				$sfid = $src . '/' . $file;
+				$dfid = $dest . '/' . $file;
 				switch (filetype($sfid)) {
 					case 'dir':
 						if ($file != '.' && $file != '..') {
@@ -101,8 +101,8 @@ class JFolder
 			}
 			// Walk through the directory copying files and recursing into folders.
 			while (($file = readdir($dh)) !== false) {
-				$sfid = $src . DS . $file;
-				$dfid = $dest . DS . $file;
+				$sfid = $src . '/' . $file;
+				$dfid = $dest . '/' . $file;
 				switch (filetype($sfid)) {
 					case 'dir':
 						if ($file != '.' && $file != '..') {
@@ -150,7 +150,7 @@ class JFolder
 		$path = JPath::clean($path);
 
 		// Check if parent dir exists
-		$parent = dirname($path);
+		$parent = JPATH::dirname($path);
 		if (!JFolder::exists($parent)) {
 			// Prevent infinite loops!
 			$nested++;
@@ -342,8 +342,8 @@ class JFolder
 		$FTPOptions = JClientHelper::getCredentials('ftp');
 
 		if ($path) {
-			$src = JPath::clean($path . DS . $src);
-			$dest = JPath::clean($path . DS . $dest);
+			$src = JPath::clean($path . '/' . $src);
+			$dest = JPath::clean($path . '/' . $dest);
 		}
 
 		if (!JFolder::exists($src)) {
@@ -435,7 +435,7 @@ class JFolder
 		while (($file = readdir($handle)) !== false)
 		{
 			if (($file != '.') && ($file != '..') && (!in_array($file, $exclude)) && (!$excludefilter || !preg_match($excludefilter, $file))) {
-				$dir = $path . DS . $file;
+				$dir = $path . '/' . $file;
 				$isDir = is_dir($dir);
 				if ($isDir) {
 					if ($recurse) {
@@ -450,7 +450,7 @@ class JFolder
 				} else {
 					if (preg_match("/$filter/", $file)) {
 						if ($fullpath) {
-							$arr[] = $path . DS . $file;
+							$arr[] = $path . '/' . $file;
 						} else {
 							$arr[] = $file;
 						}
@@ -503,7 +503,7 @@ class JFolder
 		while (($file = readdir($handle)) !== false)
 		{
 			if (($file != '.') && ($file != '..') && (!in_array($file, $exclude)) && (empty($excludefilter_string) || !preg_match($excludefilter_string, $file))) {
-				$dir = $path . DS . $file;
+				$dir = $path . '/' . $file;
 				$isDir = is_dir($dir);
 				if ($isDir) {
 					// Removes filtered directories
@@ -556,7 +556,7 @@ class JFolder
 			// first path, index foldernames
 			foreach ($folders as $name) {
 				$id = ++$GLOBALS['_JFolder_folder_tree_index'];
-				$fullName = JPath::clean($path . DS . $name);
+				$fullName = JPath::clean($path . '/' . $name);
 				$dirs[] = array(
 					'id' => $id,
 					'parent' => $parent,

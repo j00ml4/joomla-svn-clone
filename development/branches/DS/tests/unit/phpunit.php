@@ -40,7 +40,7 @@ if (extension_loaded('xdebug')) {
 }
 
 if (strpos('C:\xampp\php\.\php.exe', '@php_bin') === 0) {
-    set_include_path(dirname(__FILE__) . PATH_SEPARATOR . get_include_path());
+    set_include_path(JPATH::dirname(__FILE__) . PATH_SEPARATOR . get_include_path());
 }
 
 require_once 'PHPUnit/Util/Filter.php';
