@@ -482,7 +482,7 @@ class JCacheStorageFile extends JCacheStorage
 		while (($file = readdir($handle)) !== false)
 		{
 			if (($file != '.') && ($file != '..') && (!in_array($file, $exclude)) && (!$excludefilter || !preg_match($excludefilter, $file))) {
-				$dir = $path . DS . $file;
+				$dir = $path . '/' . $file;
 				$isDir = is_dir($dir);
 				if ($isDir) {
 					if ($recurse) {
@@ -497,7 +497,7 @@ class JCacheStorageFile extends JCacheStorage
 				} else {
 					if (preg_match("/$filter/", $file)) {
 						if ($fullpath) {
-							$arr[] = $path . DS . $file;
+							$arr[] = $path . '/' . $file;
 						} else {
 							$arr[] = $file;
 						}
@@ -550,7 +550,7 @@ class JCacheStorageFile extends JCacheStorage
 		while (($file = readdir($handle)) !== false)
 		{
 			if (($file != '.') && ($file != '..') && (!in_array($file, $exclude)) && (empty($excludefilter_string) || !preg_match($excludefilter_string, $file))) {
-				$dir = $path . DS . $file;
+				$dir = $path . '/' . $file;
 				$isDir = is_dir($dir);
 				if ($isDir) {
 					// Removes filtered directories

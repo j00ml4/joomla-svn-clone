@@ -142,7 +142,7 @@ class JInstallationModelConfiguration extends JModel
 		 * is not writable we need to use FTP
 		 */
 		$useFTP = false;
-		if ((file_exists($path) && !is_writable($path)) || (!file_exists($path) && !is_writable(dirname($path).'/'))) {
+		if ((file_exists($path) && !is_writable($path)) || (!file_exists($path) && !is_writable(JPATH::dirname($path).'/'))) {
 			$useFTP = true;
 		}
 

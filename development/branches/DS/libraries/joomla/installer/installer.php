@@ -92,7 +92,7 @@ class JInstaller extends JAdapter
 	 */
 	public function __construct()
 	{
-		parent::__construct(dirname(__FILE__),'JInstaller');
+		parent::__construct(str_replace('\\','/',dirname(__FILE__)),'JInstaller');
 	}
 
 	/**
@@ -1058,7 +1058,7 @@ class JInstaller extends JAdapter
 			 */
 			if (basename($path['dest']) != $path['dest'])
 			{
-				$newdir = dirname($path['dest']);
+				$newdir = str_replace('\\','/',dirname($path['dest']));
 
 				if (!JFolder::create($newdir))
 				{
@@ -1153,7 +1153,7 @@ class JInstaller extends JAdapter
 				}
 
 				// If the language folder is not present, then the core pack hasn't been installed... ignore
-				if (!JFolder::exists(dirname($path['dest']))) {
+				if (!JFolder::exists(str_replace('\\','/',dirname($path['dest'])))) {
 					continue;
 				}
 			}
@@ -1170,7 +1170,7 @@ class JInstaller extends JAdapter
 			 */
 			if (basename($path['dest']) != $path['dest'])
 			{
-				$newdir = dirname($path['dest']);
+				$newdir = str_replace('\\','/',dirname($path['dest']));
 
 				if (!JFolder::create($newdir))
 				{
@@ -1251,7 +1251,7 @@ class JInstaller extends JAdapter
 			 */
 			if (basename($path['dest']) != $path['dest'])
 			{
-				$newdir = dirname($path['dest']);
+				$newdir = str_replace('\\','/',dirname($path['dest']));
 
 				if (!JFolder::create($newdir))
 				{
@@ -1528,7 +1528,7 @@ class JInstaller extends JAdapter
 				}
 
 				// If the language folder is not present, then the core pack hasn't been installed... ignore
-				if (!JFolder::exists(dirname($path)))
+				if (!JFolder::exists(str_replace('\\','/',dirname($path))))
 				{
 					continue;
 				}
@@ -1627,7 +1627,7 @@ class JInstaller extends JAdapter
 					$this->setPath('manifest', $file);
 
 					// Set the installation source path to that of the manifest file
-					$this->setPath('source', dirname($file));
+					$this->setPath('source', str_replace('\\','/',dirname($file)));
 					return true;
 				}
 			}
@@ -1732,7 +1732,7 @@ class JInstaller extends JAdapter
 				default:
 					$files[] = (string)$file; // add any files to the list
 					// now handle the folder part of the file to ensure we get any containers
-					$container_parts = explode('/',dirname((string)$file)); // break up the parts of the directory
+					$container_parts = explode('/',str_replace('\\','/',dirname((string)$file))); // break up the parts of the directory
 					$container = ''; // make sure this is clean and empty
 					foreach ($container_parts as $part)
 					{
@@ -1764,7 +1764,7 @@ class JInstaller extends JAdapter
 					if (!in_array((string)$file, $files))
 					{
 						// look if the file exists in the new list
-						if (!in_array(dirname((string)$file), $folders)) {
+						if (!in_array(str_replace('\\','/',dirname((string)$file)), $folders)) {
 							// look if the file is now potentially in a folder
 							$files_deleted[] = (string)$file; // not in a folder, doesn't exist, wipe it out!
 						}
