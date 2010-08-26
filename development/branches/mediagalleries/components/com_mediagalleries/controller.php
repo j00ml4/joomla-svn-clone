@@ -24,7 +24,7 @@ jimport( 'joomla.application.component.controller' );
  */
 class MediagalleriesController extends JController {
 	
-	protected $default_view="gallery";
+	protected $default_view="galleries";
 
 
 	function display()
@@ -33,7 +33,7 @@ class MediagalleriesController extends JController {
 		$cachable = true;
 		// Get the document object.
 		// Set the default view name and format from the Request.
-		$vName		= JRequest::getWord('view', 'gallery');
+		$vName		= JRequest::getWord('view', 'galleries');
 		JRequest::setVar('view', $vName);
 
 		if (($_SERVER['REQUEST_METHOD'] == 'POST' && $vName = 'categories')) {
