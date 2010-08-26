@@ -7,7 +7,7 @@
  */
 
 if (!defined('DS')) {
-	define('DS', DIRECTORY_SEPARATOR);
+	define('DS', '/');
 }
 
 spl_autoload_register(array('JLoader','load'));
@@ -36,7 +36,7 @@ abstract class JLoader
 		if (!isset(JLoader::$paths[$keyPath]))
 		{
 			if (!$base) {
-				$base = dirname(__FILE__);
+				$base = str_replace('\\','/',(dirname(__FILE__)));
 			}
 
 			$parts = explode('.', $filePath);

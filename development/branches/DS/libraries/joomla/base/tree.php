@@ -7,7 +7,7 @@
 
 // No direct access
 defined('JPATH_BASE') or die;
-require_once dirname(__FILE__).'/node.php';
+require_once JPATH::dirname(__FILE__).'/node.php';
 
 /**
  * Tree Class.

@@ -24,7 +24,7 @@
 * Put the current directory in this constant
 */
 if ( !defined('UTF8') ) {
-    define('UTF8',dirname(__FILE__));
+    define('UTF8',JPATH::dirname(__FILE__));
 }
 
 /**

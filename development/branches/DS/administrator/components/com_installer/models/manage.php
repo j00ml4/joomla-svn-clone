@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 // Import library dependencies
-require_once dirname(__FILE__) . '/extension.php';
+require_once JPATH::dirname(__FILE__) . '/extension.php';
 
 /**
  * Installer Manage Model

@@ -6,7 +6,7 @@
  */
 
 require_once JPATH_BASE.'/libraries/joomla/event/event.php';
-require_once dirname(__FILE__).'/JEventStub.php';
+require_once JPATH::dirname(__FILE__).'/JEventStub.php';
 
 /**
  * Test class for JEvent.
