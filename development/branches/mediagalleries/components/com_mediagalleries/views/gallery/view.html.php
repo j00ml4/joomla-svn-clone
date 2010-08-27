@@ -64,8 +64,9 @@ class MediagalleriesViewGallery extends JView
 		$this->items	 =& $model->getItems();
 		$this->state	 =& $model->getState();		
 		$this->children= $model->getChildren();
-					
-		// Title
+				
+		// Title TODO
+		/*
 		if(!empty($this->category)){
 			$this->title = $this->category->title;
 		}
@@ -76,7 +77,7 @@ class MediagalleriesViewGallery extends JView
 			
 			$title = JText::_($this->category->title);
 		}	
-				
+		*/	
 	
 		$this->action=$uri->toString();
 		

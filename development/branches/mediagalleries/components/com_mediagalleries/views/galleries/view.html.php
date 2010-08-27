@@ -34,7 +34,7 @@ class MediagalleriesViewGalleries extends JView
 		$state		= $this->get('State');
 		$items		= $this->get('Items');
 		$parent		= $this->get('Parent');
-
+		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseWarning(500, implode("\n", $errors));
@@ -43,7 +43,7 @@ class MediagalleriesViewGalleries extends JView
 
 		if($items === false)
 		{
-			//TODO Raise error for missing category here
+			JError::raiseNotice(404, "COM_MEDIAGALLERIES_EMPTY");
 		}
 
 		if($parent == false)
@@ -59,7 +59,7 @@ class MediagalleriesViewGalleries extends JView
 		$this->params=$params;
 		$this->parent=$parent;
 		$this->items=$items;
-
+		dump($this->items);
 		parent::display($tpl);
 	}
 
