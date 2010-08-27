@@ -81,6 +81,7 @@ class MediagalleriesModelChannel extends JModelList
 	 */
 	protected function getListQuery()
 	{
+		
 		$user	= JFactory::getUser();
 		$groups	= implode(',', $user->authorisedLevels());
 
@@ -90,7 +91,7 @@ class MediagalleriesModelChannel extends JModelList
 
 		// Select required fields from the categories.
 		$query->select($this->getState('list.select', 'a.*'));
-		$query->from('`#__medias` AS a');
+		$query->from('`#__mediagalleries` AS a');
 		$query->where('a.access IN ('.$groups.')');
 
 		// Filter by category.
@@ -98,6 +99,9 @@ class MediagalleriesModelChannel extends JModelList
 			$query->where('a.created_by = '.(int) $channelId);
 			//$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 			$query->where('c.access IN ('.$groups.')');
+		}
+		else {
+			return false;
 		}
 
 		// Filter by state
@@ -149,7 +153,7 @@ class MediagalleriesModelChannel extends JModelList
 		$this->setState('list.direction', $listOrder);
 
 		$id 		= JRequest::getVar('id', 0, '', 'int');
-		$this->setState('category.id', $id);
+		$this->setState('user.id', $id);
 
 		$this->setState('filter.published',	1);
 
@@ -159,103 +163,5 @@ class MediagalleriesModelChannel extends JModelList
 		$this->setState('params', $params);
 	}
 	
-	
-	/**
-	 * Method to get category data for the current category
-	 *
-	 * @param	int		An optional ID
-	 *
-	 * @return	object
-	 * @since	1.5
-	 */
 
-	public function getCategory()
-	{
-		if(!is_object($this->_item))
-		{
-			$app = JFactory::getApplication();
-			$menu = $app->getMenu();
-			$active = $menu->getActive();
-			$params = new JRegistry();
-			$params->loadJSON($active->params);
-			$options = array();
-			$options['countItems'] = 10;
-			$categories = JCategories::getInstance('Mediagalleries', $options);
-			$this->_item = $categories->get($this->getState('category.id', 'root'));
-			
-			
-			if(is_object($this->_item))
-			{
-				$this->_children = $this->_item->getChildren();
-				$this->_parent = false;
-				if($this->_item->getParent())
-				{
-					$this->_parent = $this->_item->getParent();
-				}
-				$this->_rightsibling = $this->_item->getSibling();
-				$this->_leftsibling = $this->_item->getSibling(false);
-			} else {
-				$this->_children = false;
-				$this->_parent = false;
-			}
-		}
-		
-		return $this->_item;
-	}
-	
-
-	/**
-	 * Get the parent categorie.
-	 *
-	 * @param	int		An optional category id. If not supplied, the model state 'category.id' will be used.
-	 *
-	 * @return	mixed	An array of categories or false if an error occurs.
-	 */
-	public function getParent()
-	{
-		if(!is_object($this->_item))
-		{
-			$this->getCategory();
-		}
-		return $this->_parent;
-	}
-
-	/**
-	 * Get the sibling (adjacent) categories.
-	 *
-	 * @return	mixed	An array of categories or false if an error occurs.
-	 */
-	function &getLeftSibling()
-	{
-		if(!is_object($this->_item))
-		{
-			$this->getCategory();
-		}
-		return $this->_leftsibling;
-	}
-
-	function &getRightSibling()
-	{
-		if(!is_object($this->_item))
-		{
-			$this->getCategory();
-		}
-		return $this->_rightsibling;
-	}
-
-	/**
-	 * Get the child categories.
-	 *
-	 * @param	int		An optional category id. If not supplied, the model state 'category.id' will be used.
-	 *
-	 * @return	mixed	An array of categories or false if an error occurs.
-	 */
-	function &getChildren()
-	{
-		if(!is_object($this->_item))
-		{
-			$this->getCategory();
-		}
-		return $this->_children;
-	}
 }

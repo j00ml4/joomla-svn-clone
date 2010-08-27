@@ -39,7 +39,7 @@
 			description="JFIELD_CATEGORY_DESC"
 			class="inputbox">
 		</field>
-
+		
 		<field 
 			name="url" 
 			type="text" 
