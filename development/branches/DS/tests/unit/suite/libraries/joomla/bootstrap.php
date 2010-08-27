@@ -22,7 +22,7 @@ define('DS', '/');
 define('_JEXEC',		1);
 
 //@FIXME this should not be here
-define('JPATH_BASE', '/home/estaffor/src/php/Workspace/trunk');
+define('JPATH_BASE', '/wamp/www/j16');
 
 if (!defined('JPATH_BASE'))
 {
