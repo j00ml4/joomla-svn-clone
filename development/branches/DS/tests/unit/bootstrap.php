@@ -26,12 +26,12 @@ if (!defined('JPATH_BASE'))
 	// JPATH_BASE can be defined in init.php
 	// This gets around problems with soft linking the unittest folder into a Joomla tree,
 	// or using the unittest framework from a central location.
-	define('JPATH_BASE', JPATH::dirname(__FILE__ , 2));
+	define('JPATH_BASE', str_replace('\\','/',dirname(dirname(dirname(__FILE__)))));
 }
 
 if (!defined('JPATH_TESTS'))
 {
-	define('JPATH_TESTS', JPATH::dirname(__FILE__));
+	define('JPATH_TESTS', str_replace('\\','/',dirname(__FILE__)));
 }
 
 // Fix magic quotes.
