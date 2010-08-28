@@ -19,9 +19,7 @@ $params =  $this->params;
 		<h1 class="componentheading">
 			<?php echo JText::sprintf('COM_PROJECTS_TASK_VIEW_'.$this->prefix.'_TITLE',$this->item->title); ?>
 		</h1>
-		<?php endif;
-			echo $this->loadTemplate('buttons');
-		?>
+		<?php endif; ?>
 		<table style="width : 100%;">
 			<tr>
 				<td><?php echo JText::_('COM_PROJECTS_TYPE_'.$this->prefix);?>:</td>
@@ -74,6 +72,5 @@ $params =  $this->params;
 				<td colspan="4"><?php echo $this->item->description;?></td>
 			</tr>
 		</table>	
-<?php	echo $this->loadTemplate('buttons');?>
 	</div>
 </div>

@@ -127,18 +127,6 @@ abstract class ProjectsHelper {
 
         return $assets->get($action, false);
     }
-
-    /** i don t know if we need this function..
-     * Resets breadcrumb and adds "Projects" link as first
-     *
-     * @return Reference to breadcrumb object
-     * @since	1.6
-     */
-    public function &resetPathway() {
-        $app = &JFactory::getApplication();
-        $bc = &$app->getPathway();
-        return $bc;
-    }
     
     /**
      * Method to get singular or plural version of text based on number of items
@@ -151,14 +139,99 @@ abstract class ProjectsHelper {
     public static function textPlural($text, $num) {
     	return $num > 1 ? $text.'_PLURAL' : $text;
     }
+
+     /**
+     * Method to get list of tasks
+     * @param $params JRegistry object with parameters for the output
+     * @return List of tasks as an array of objects
+     */
+    public static function getTasks($params) {
+    	$db = JFactory::getDbo();
+    	$q = $db->getQuery(true);
+    	
+    	$q->select('t.title, t.id');
+    	$q->from('`#__project_tasks` AS t');
+    	
+    	// filter by project id
+    	$project_id = (int)$params->get('project.id',0);
+    	if($project_id)
+	    	$q->where('t.`project_id` = '.$project_id);
+	    	
+	    // filter by type
+	    $type = (int)$params->get('task.type',3);
+	    $q->where('t.`type` = '.$type);
+	    
+	    // filter by state
+	    $state = $params->get('state',false);
+	    if($state !== false)
+	    {
+	    	if(is_int($state))
+				$q->where('t.`state` = '.$state);
+			else
+				$q->where('t.`state` '.$state);
+	    }
+	    
+	    // order and limit
+	    $ord = $params->get('order.list','t.`ordering`');
+	    $start = (int)$params->get('limit.start',0);
+	    $limit = (int)$params->get('limit.limit',5);
+	    if($ord)
+	    	$q->order($ord.' '.$params->get('order.dir','ASC').' LIMIT '.$start.','.$limit);
+	    else
+	    	$q->order('LIMIT '.$start.','.$limit);
+	    
+	    $db->setQuery($q);
+	    return $db->loadObjectList();
+    }
     
+     /**
+     * Method to get list of documents
+     * @param $params JRegistry object with parameters for the output
+     * @return List of tasks as an array of objects
+     */
+    public static function getDocuments($params) {
+    	$db = JFactory::getDbo();
+    	$q = $db->getQuery(true);
+    	
+    	$q->select('c.title, c.id');
+    	$q->from('`#__project_contents` AS ct');
+    	$q->join('left','`#__content` AS c ON c.`id`= ct.`content_id`');
+    	
+    	// filter by project id
+    	$project_id = (int)$params->get('project.id',0);
+    	if($project_id)
+	    	$q->where('ct.`project_id` = '.$project_id);
+	    		    
+	    // filter by state
+	    $state = $params->get('state',false);
+	    if($state !== false)
+	    {
+	    	if(is_int($state))
+				$q->where('c.`state` = '.$state);
+			else
+				$q->where('c.`state` '.$state);
+	    }
+	    
+	    // order and limit
+	    $ord = $params->get('order.list','c.`modified`, c.`created`');
+	    $start = (int)$params->get('limit.start',0);
+	    $limit = (int)$params->get('limit.limit',5);
+	    if($ord)
+	    	$q->order($ord.' '.$params->get('order.dir','ASC').' LIMIT '.$start.','.$limit);
+	    else
+	    	$q->order('LIMIT '.$start.','.$limit);
+	    
+	    $db->setQuery($q);
+	    
+	    return $db->loadObjectList();
+    }
 
     /**
-     * Get links
-     *
      * Method to get pre-defined links
      * @param $key
      * @param $append
+     * 
+     * return Routed link
      */
     public static function getLink($key, $append='') {
         static $links;
@@ -175,7 +248,9 @@ abstract class ProjectsHelper {
                 'members.unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
 
             	'task.view' => 'index.php?option=com_projects&view=task&layout=view&id=',
-                'task.edit' => 'index.php?option=com_projects&view=task&layout=edit&id=',
+            	'task.view.task' => 'index.php?option=com_projects&view=task&layout=view&type=2&id=',
+            	'task.view.ticket' => 'index.php?option=com_projects&view=task&layout=view&type=3&id=',
+            	'task.edit' => 'index.php?option=com_projects&view=task&layout=edit&id=',
 
             	'tasks' => 'index.php?option=com_projects&view=tasks&id=',
             	'tasks.task' => 'index.php?option=com_projects&view=tasks&type=2&id=',

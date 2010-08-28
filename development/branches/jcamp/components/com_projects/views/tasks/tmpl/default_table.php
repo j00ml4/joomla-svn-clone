@@ -40,7 +40,7 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 			</td>
 			<td class="state-<?php echo $item->state; ?>">
 				<span class="padding"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $item->level-1); ?></span>
-				<a href="<?php echo ProjectsHelper::getLink('task.'.$this->type, $item->id); ?>">
+				<a href="<?php echo ProjectsHelper::getLink('task.view', $item->id); ?>">
 					<?php echo $item->title; ?></a>	
 			</td>
 

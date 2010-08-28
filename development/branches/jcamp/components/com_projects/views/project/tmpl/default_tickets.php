@@ -12,10 +12,22 @@ defined('_JEXEC') or die;
 ?>
 <div class="projects-content projects-frame projects-space">
 	<h4><?php echo JText::_('COM_PROJECTS_PROJECT_TICKETS');?></h4>
-	<ul class="ulList">
-		<li>ticket</li>
-		<li>ticket</li>
-	</ul>
+	<?php
+		$c = count($this->tickets); 
+		if($c) : // list tickets ?>
+		<ul class="ulList">
+		<?php
+			for($i = 0; $i < $c; $i++) {
+				?>
+				<li><a href="<?php echo ProjectsHelper::getLink('task.view.ticket',$this->tickets[$i]->id)?>"><?php echo $this->tickets[$i]->title?></a></li>
+				<?php
+			} ?>
+		</ul>
+		<?php
+		else:
+			echo JText::_('COM_PROJECTS_PROJECT_NO_TICKET').'<br /><br />';
+		endif
+	?>
 	<a href="<?php echo ProjectsHelper::getLink('tasks.ticket', $this->item->id); ?>" class="readmore">
 		<?php echo JText::_('COM_PROJECTS_PROJECT_TICKET_LIST_LINK'); ?></a>	
 </div>
