@@ -15,18 +15,28 @@ $params =  $this->params;
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
 <div class="project-item <?php echo $pageClass?>">
-<form action="<?php echo ProjectsHelper::getLink('task', $this->item->id); ?>" method="post" id="adminForm" name="adminForm">
+<form action="<?php echo ProjectsHelper::getLink('form'); ?>" method="post" id="adminForm" name="adminForm">
+	<dl class="">
+	<?php if(!empty($this->item->estimate)): ?>
+		<dt><?php echo JText::_('COM_PROJECTS_TASK_CELL_ESTIMATE'); ?></dt>
+		<dd><?php echo $this->item->estimate; ?></dd>
+	<?php endif; ?>
+	
+	<?php if(!empty($this->item->category_title)): ?>
+		<dt><?php echo JText::_('JCATEGORY'); ?></dt>
+		<dd><?php echo $this->item->category_title; ?></dd>
+	<?php endif; ?>		
+	</dl>
+	
 	<div class="item-page">
 		<div class="item">
-			<div class="category-desc">
-				<?php echo $this->item->description; ?>
-			</div>
+			<?php echo $this->item->description; ?>
 		</div>
 	</div>
 	
 	<?php if(count($this->items)): ?>
 	<fieldset>
-		<legend><?php JText::_(''); ?></legend>
+		<legend><?php echo JText::sprintf('COM_PROJECTS_TASKS_LIST_TASKS_TITLE', $this->item->title); ?></legend>
 		<?php echo $this->loadTemplate('table'); ?>
 	</fieldset>
 	<?php endif; ?>

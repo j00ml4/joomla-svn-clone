@@ -123,20 +123,40 @@ abstract class JHtmlTool
 	 *
 	 * @since	1.6
 	 */
-	public static function taskstate($value, $i, $prefix = '', $enabled = true, $checkbox='cb')
+	public static function published($value, $i, $type = '', $enabled = true, $checkbox='cb')
 	{
-		if (is_array($prefix)) {
-			$options	= $prefix;
-			$enabled	= array_key_exists('enabled',	$options) ? $options['enabled']		: $enabled;
-			$checkbox	= array_key_exists('checkbox',	$options) ? $options['checkbox']	: $checkbox;
-			$prefix		= array_key_exists('prefix',	$options) ? $options['prefix']		: '';
+		
+		switch ($type){
+			case 'task':
+				$prefix = 'tasks.';
+				$states	= array(
+					2	=> array('publish',		'COM_PROJECTS_STATE_FINISHED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JARCHIVED',	false,	'archive',		'archive'),	
+					1	=> array('archive',		'COM_PROJECTS_STATE_PENDING',	'JLIB_HTML_UNPUBLISH_ITEM',	'JPUBLISHED',	false,	'publish',		'publish'),
+					0	=> array('report',		'COM_PROJECTS_STATE_DENIED',	'JLIB_HTML_PUBLISH_ITEM',	'JUNPUBLISHED',	false,	'unpublish',	'unpublish'),
+				);
+				break;
+				
+			case 'ticket':
+				$prefix = 'tasks.';
+				$states	= array(	
+					2	=> array('archive',		'COM_PROJECTS_STATE_FINISHED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JARCHIVED',	false,	'archive',		'archive'),
+					1	=> array('unpublish',	'COM_PROJECTS_STATE_APPROVED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JPUBLISHED',	false,	'publish',		'publish'),
+					-3	=> array('publish',		'COM_PROJECTS_STATE_REPORTED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JREPORTED',	false,	'report',		'report'),
+					0	=> array('publish',		'COM_PROJECTS_STATE_DENIED',	'JLIB_HTML_PUBLISH_ITEM',	'JUNPUBLISHED',	false,	'unpublish',	'unpublish'),
+				);
+				break;
+				
+			default:
+				$prefix = '';	
+				$states	= array(	
+					2	=> array('archive',		'JARCHIVED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JARCHIVED',	false,	'archive',		'archive'),
+					1	=> array('unpublish',	'JPUBLISHED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JPUBLISHED',	false,	'publish',		'publish'),
+					-3	=> array('publish',		'JREPORTED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JREPORTED',	false,	'report',		'report'),
+					0	=> array('publish',		'JUNPUBLISHED',	'JLIB_HTML_PUBLISH_ITEM',	'JUNPUBLISHED',	false,	'unpublish',	'unpublish'),
+				);
+			
 		}
-		$states	= array(
-			2	=> array('publish',		'COM_PROJECTS_STATE_FINISHED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JARCHIVED',	false,	'archive',		'archive'),	
-			1	=> array('archive',		'COM_PROJECTS_STATE_APPROVED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JPUBLISHED',	false,	'publish',		'publish'),
-			-3	=> array('publish',		'COM_PROJECTS_STATE_REPORTED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JREPORTED',	false,	'report',		'report'),
-			0	=> array('report',	'COM_PROJECTS_STATE_DENIED',	'JLIB_HTML_PUBLISH_ITEM',		'JUNPUBLISHED',	false,	'unpublish',	'unpublish'),
-		);
+		
 /*		
 		case 2:
 						echo JText::_('COM_PROJECTS_STATE_FINISHED');
@@ -154,6 +174,13 @@ abstract class JHtmlTool
 						echo JText::_('');
 						break;	
 	*/	
+		if (is_array($prefix)) {
+			$options	= $prefix;
+			$enabled	= array_key_exists('enabled',	$options) ? $options['enabled']		: $enabled;
+			$checkbox	= array_key_exists('checkbox',	$options) ? $options['checkbox']	: $checkbox;
+			$prefix		= array_key_exists('prefix',	$options) ? $options['prefix']		: '';
+		}
+		
 		return self::state($states, $value, $i, $prefix, $enabled, true, $checkbox);
 	}
 

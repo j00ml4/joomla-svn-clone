@@ -34,21 +34,26 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 	
 	<tbody>
 		<?php foreach ($this->items as $i => $item): ?>
-		<tr class="cat-list-row<?php echo $i % 2; ?> state-<?php echo $item->state; ?>">
+		<tr class="cat-list-row<?php echo $i % 2; ?>">
 			<td> 
 				<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 			</td>
 			<td class="state-<?php echo $item->state; ?>">
 				<span class="padding"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $item->level-1); ?></span>
-				<a href="<?php echo ProjectsHelper::getLink('task.view', $item->id); ?>">
+				<a class="state-<?php echo $item->state; ?>" href="<?php echo ProjectsHelper::getLink($this->type, $item->id); ?>">
 					<?php echo $item->title; ?></a>	
+				<?php if(!empty($item->category_title)): ?>
+				<span class="category">
+					(<?php echo $item->category_title; ?>)
+				</span>
+				<?php endif; ?>	
 			</td>
 
-			<td class="center">
-				<?php echo JHtml::_('tool.taskstate', $item->state, $i, 'tasks.') ?>
+			<td>
+				<?php echo JHtml::_('tool.published', $item->state, $i, $this->type); ?>
 			</td>
 			
-			<td class="center">
+			<td>
 				<?php if ($item->checked_out) :
 					echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canCheckin);
 				else:

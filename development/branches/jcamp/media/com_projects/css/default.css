@@ -61,7 +61,9 @@
 .clear {
     clear: both;
 }
-
+.center{
+	text-align: center;
+}
 	
 /* begin css tabs */
 ul.tabnav { 
@@ -198,14 +200,28 @@ div.projects ul.projects-info li div.projects-info-data {
 }
 
 /** Tasks **/
-.state-1{
-	font-weight: bold;
-	text-decoration: none;	
+.publish, .state-1, .state-1 a{
+	font-weight: bold !important;
+	text-decoration: none !important;	
 }
-.state-2{
-	color: #AAA;
-	text-decoration: line-through;	
+.archive, .state-2, .state-2 a {
+	color:green !important;	
+	font-weight: normal !important;
+	text-decoration: line-through !important;	
 }
+.unpublish, .state-0, .state-0 a {
+	color:red !important;	
+	font-weight: normal !important;
+	text-decoration: none !important;	
+}
+
+.state{
+	
+}
+a.jgrid {
+	text-decoration: none;
+}
+
 
 /************************ 2-columns layout ****************************/
 div.projects div.projects-left-column {

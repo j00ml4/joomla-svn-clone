@@ -28,7 +28,7 @@ class ProjectsViewTasks extends JView {
     protected $params;
     protected $pagination;
     protected $canDo;
-    protected $prefix;
+    protected $type;
 
     /**
      * Display View
@@ -42,6 +42,7 @@ class ProjectsViewTasks extends JView {
         $this->items = $model->getItems();
         $this->state = $this->get('State');
         $this->project = $model->getProject();
+        $this->type = $model->getType();
         $this->pagination = $model->getPagination();
         $this->params = $app->getParams();
         $this->canDo = ProjectsHelper::getActions(
@@ -70,10 +71,7 @@ class ProjectsViewTasks extends JView {
         $bc = $app->getPathway();
         $bc->addItem($this->project->title, 'index.php?option=com_projects&view=project&id=' . $this->project->id);
         $bc->addItem(JText::_('COM_PROJECTS_TASKS'));
-
-        // set a correct prefix
-        $this->loadHelper('tasks');
-        $this->type = TasksHelper::getPrefix($model->getState('type'));
+ 
 
         // TMLP
         $this->addToolbar();
