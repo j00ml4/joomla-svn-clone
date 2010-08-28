@@ -18,15 +18,7 @@ $params = $this->params;
 ?>
 <div class="project-item <?php echo $params->get('pageclass_sfx'); ?>">
     <div class="edit item-page">
-        <form action="<?php echo ProjectsHelper::getLink('task'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
-            <?php if (false): ?>
-             <fieldset>
-                    <legend><?php echo JText::_('COM_PROJECTS_FIELD_TYPE_LABEL'); ?></legend>
-                    <div class="formelm">
-                    <?php echo $this->form->getInput('type', null, $this->params->get('type', 3)); ?>
-                </div>
-            </fieldset>
-            <?php endif; ?>
+        <form action="<?php echo ProjectsHelper::getLink('form'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 
 			<fieldset>
             	<legend><?php echo JText::_('JGLOBAL_DESCRIPTION'); ?></legend>

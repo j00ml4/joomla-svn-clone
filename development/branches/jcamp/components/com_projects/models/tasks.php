@@ -40,12 +40,12 @@ class ProjectsModelTasks extends JModelList
      */
     protected function populateState() {
     	$app = &JFactory::getApplication();
-    	        
+    	 
         $value = $app->getUserStateFromRequest('task.type', 'type', 2);
         $this->setState('type', $value); 
     	$this->context .= $value;
-        
-    	$value = JRequest::getString('parent_id');
+               
+    	$value = JRequest::getInt('parent_id', 0);
         $this->setState('parent.id', $value);  
     	$this->context .= '.'.$value;
     	

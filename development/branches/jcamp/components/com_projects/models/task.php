@@ -333,6 +333,7 @@ class ProjectsModelTask extends JModelAdmin
 		
 			JRequest::setVar('parent_id', $item->id);
 			$model = JModel::getInstance('tasks', 'ProjectsModel');
+			$model->setState('parent.id', $item->id);
 			$this->children = $model;	
 		}
 		

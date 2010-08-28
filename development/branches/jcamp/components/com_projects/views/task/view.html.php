@@ -94,10 +94,6 @@ class ProjectsViewTask extends JView
                 break;
         }
 
-        // set a correct prefix
-        require_once JPATH_COMPONENT . '/helpers/tasks.php';
-        $this->prefix = TasksHelper::getPrefix($app->getUserState('task.type'));
-
         // Display the view
         $this->setLayout($layout);
         $this->addToolbar();
@@ -119,7 +115,7 @@ class ProjectsViewTask extends JView
 				break;
 				
 			default:
-				$title = JText::sprintf('COM_PROJECTS_TASK_VIEW_'.$this->type.'_TITLE', $this->project->title, $this->item->title);
+				$title = JText::sprintf('COM_PROJECTS_TASK_VIEW_'.$this->type.'_TITLE', $this->item->title);
 				$icon = 'archive';			
 				if($this->canDo->get($this->type.'.edit')){
 					if($this->item->state == 1){
