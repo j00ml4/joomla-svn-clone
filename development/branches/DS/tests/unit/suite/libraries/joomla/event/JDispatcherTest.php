@@ -7,8 +7,8 @@
 
 require_once JPATH_BASE.'/libraries/joomla/event/dispatcher.php';
 require_once JPATH_BASE.'/tests/unit/JoomlaTestCase.php';
-require_once JPATH::dirname(__FILE__).'/dispatcherSamples.php';
-require_once JPATH::dirname(__FILE__).'/JDispatcherStub.php';
+require_once dirname(__FILE__).'/dispatcherSamples.php';
+require_once dirname(__FILE__).'/JDispatcherStub.php';
 
 /**
  * Test class for JDispatcher.

@@ -40,7 +40,7 @@ class JAdapterTest extends JoomlaDatabaseTestCase {
 	 * @todo Implement testGetDBO().
 	 */
 	public function testGetDBO() {
-		$this->object = new JAdapter(JPATH::dirname(__FILE__));
+		$this->object = new JAdapter(dirname(__FILE__));
 		$db = JFactory::getDbo();
 		$this->assertThat(
 			$this->object->getDbo(),
@@ -53,7 +53,7 @@ class JAdapterTest extends JoomlaDatabaseTestCase {
 	 */
 	public function testSetAdapter() {
 		require_once(JPATH_BASE.'/libraries/joomla/base/adapterinstance.php');
-		$this->object = new JAdapter(JPATH::dirname(__FILE__), 'Test', 'adapters');
+		$this->object = new JAdapter(dirname(__FILE__), 'Test', 'adapters');
 		$this->object->setAdapter('Testadapter');
 
 		$this->assertThat(
@@ -78,7 +78,7 @@ class JAdapterTest extends JoomlaDatabaseTestCase {
 	 */
 	public function testGetAdapter() {
 		require_once(JPATH_BASE.'/libraries/joomla/base/adapterinstance.php');
-		$this->object = new JAdapter(JPATH::dirname(__FILE__), 'Test', 'adapters');
+		$this->object = new JAdapter(dirname(__FILE__), 'Test', 'adapters');
 
 		$this->assertThat(
 			$this->object->getAdapter('Testadapter3'),
@@ -97,7 +97,7 @@ class JAdapterTest extends JoomlaDatabaseTestCase {
 	 */
 	public function testLoadAllAdapters() {
 		require_once(JPATH_BASE.'/libraries/joomla/base/adapterinstance.php');
-		$this->object = new JAdapter(JPATH::dirname(__FILE__), 'Test', 'adapters');
+		$this->object = new JAdapter(dirname(__FILE__), 'Test', 'adapters');
 		$this->object->loadAllAdapters();
 
 		$this->assertThat(

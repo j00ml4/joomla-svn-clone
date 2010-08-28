@@ -1,4 +1,4 @@
-@!C:\wamp\bin\php\php5.3.3\php.exe
+#!C:\xampp\php\.\php.exe
 <?php
 /* PHPUnit
  *
@@ -39,7 +39,7 @@ if (extension_loaded('xdebug')) {
     ini_set('xdebug.show_exception_trace', 0);
 }
 
-if (strpos('C:\wamp\bin\php\php5.3.php.exe', '@php_bin') === 0) {
+if (strpos('C:\xampp\php\.\php.exe', '@php_bin') === 0) {
     set_include_path(dirname(__FILE__) . PATH_SEPARATOR . get_include_path());
 }
 

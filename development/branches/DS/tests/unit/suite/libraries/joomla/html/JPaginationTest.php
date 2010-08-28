@@ -5,7 +5,7 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-require_once JPATH::dirname(__FILE__).'/JPaginationTestHelper.php';
+require_once dirname(__FILE__).'/JPaginationTestHelper.php';
 
 class JPaginationTest extends PHPUnit_Framework_TestCase
 {

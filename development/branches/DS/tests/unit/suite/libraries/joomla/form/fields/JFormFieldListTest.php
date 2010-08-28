@@ -22,7 +22,7 @@ class JFormFieldListTest extends JoomlaTestCase
 		jimport('joomla.form.form');
 		jimport('joomla.form.formfield');
 		require_once JPATH_BASE.'/libraries/joomla/form/fields/list.php';
-		include_once JPATH::dirname(__FILE__ , 1 ).'/inspectors.php';
+		include_once dirname(dirname(__FILE__)).'/inspectors.php';
 	}
 
 	/**
