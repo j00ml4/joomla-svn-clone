@@ -61,7 +61,7 @@ $model = $this->getModel();
 						</th>	
 						
 						<th id="tableOrdering3">
-							<?php echo JHTML::_('grid.sort', 'JGLOBAL_USERNAME', 'u.username', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+							<?php echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBER_ROLES', 'roles', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 						</th>							
 					</tr>
 				</thead>
@@ -81,8 +81,9 @@ $model = $this->getModel();
 						</td>	
 						
 						<td>
-							<?php echo $item->username; ?>
+							<?php echo $item->roles; ?>
 						</td>	
+						
 					 </tr>
 					<?php endforeach; ?>
 				</tbody>

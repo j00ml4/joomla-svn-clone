@@ -9,8 +9,8 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<div class="projects-content projects-frame projects-space">
-    <h4><?php echo JText::_('COM_PROJECTS_TASKS_LIST_TASKS'); ?></h4>
+<fieldset>
+	<legend><?php echo JText::_('COM_PROJECTS_TASKS_LIST_TASKS');?></legend>
 	<?php
 		$c = count($this->tasks); 
 		if($c) : // list tasks ?>
@@ -28,4 +28,4 @@ defined('_JEXEC') or die;
 	?>
     <a href="<?php echo ProjectsHelper::getLink('tasks.task', $this->item->id); ?>" class="readmore">
         <?php echo JText::_('COM_PROJECTS_TASKS_LIST_TASKS_LINK'); ?></a>
-</div>
+</fieldset>

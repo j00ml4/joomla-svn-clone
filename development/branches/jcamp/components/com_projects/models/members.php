@@ -61,6 +61,12 @@ class ProjectsModelMembers extends JModelList
 		$id 	= (int) $this->getState('project.id');
 		$query->select($this->getState('list.select', 'u.id, u.name, u.username, u.email'));
 		$query->from('#__users u');
+		
+		$query->select('GROUP_CONCAT(DISTINCT ug.`title` SEPARATOR ", ") AS `roles`');
+    	$query->join('left','`#__user_usergroup_map` AS ugm ON ugm.`user_id`= u.`id`');
+   		$query->join('left','`#__usergroups` AS ug ON ug.`id`= ugm.`group_id`');
+    	$query->group('u.id');  
+		
 		switch($this->getState('type')) {
 			case 'delete' :
 			case 'list' :

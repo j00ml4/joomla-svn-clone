@@ -235,30 +235,32 @@ abstract class ProjectsHelper {
     	$db = JFactory::getDbo();
     	$q = $db->getQuery(true);
     	
-    	$q->select('u.`name`, u.`id`, ug.`title` AS `role`');
+    	$q->select('u.`name`, u.`id`'); 
     	$q->from('`#__project_members` AS m');
     	$q->join('left','`#__users` AS u ON u.`id`= m.`user_id`');
-    	$q->join('left','`#__usergroups` AS ug ON ug.`id`= m.`group_id`');
+    	
+    	/*
+    	$q->select('GROUP_CONCAT(DISTINCT ug.`title` SEPARATOR ", ") AS `role`');
+    	$q->join('left','`#__user_usergroup_map` AS ugm ON ugm.`user_id`= u.`id`');
+   		$q->join('left','`#__usergroups` AS ug ON ug.`id`= ugm.`group_id`');
+    	$q->group('u.id');  	
+    	*/
     	
     	// filter by project id
     	$project_id = (int)$params->get('project.id',0);
-    	if($project_id)
+    	if($project_id){
 	    	$q->where('m.`project_id` = '.$project_id);
-	    
-    	// filter by usergroup
-    	$ug_id = (int)$params->get('usergroup.id',0);
-    	if($usergroup)
-	    	$q->where('m.`group_id` = '.$ug_id);
+    	}
 
     	// order and limit
 	    $ord = $params->get('order.list','u.`name`');
 	    $start = (int)$params->get('limit.start',0);
 	    $limit = (int)$params->get('limit.limit',5);
-	    if($ord)
+	    if($ord){
 	    	$q->order($ord.' '.$params->get('order.dir','ASC').' LIMIT '.$start.','.$limit);
-	    else
+	    }else{
 	    	$q->order('LIMIT '.$start.','.$limit);
-	    
+	    }
 	    $db->setQuery($q);
 	    return $db->loadObjectList();
     }
