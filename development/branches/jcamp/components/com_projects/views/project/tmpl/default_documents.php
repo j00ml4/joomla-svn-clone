@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
     <h4><?php echo JText::_('COM_PROJECTS_DOCUMENTS_LIST'); ?></h4>
 	<?php
 		$c = count($this->docs); 
-		if($c) : // list tickets ?>
+		if($c) : // list documents ?>
 		<ul class="ulList">
 		<?php
 			for($i = 0; $i < $c; $i++) {

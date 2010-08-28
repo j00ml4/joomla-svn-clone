@@ -73,30 +73,7 @@ class ProjectsViewProject extends JView
 				// Get Portfolio
 				$this->portfolio = $model->getPortfolio($this->item->catid);
 				
-				// get tickets and tasks
-				$params_tasks = new JRegistry();
-				$params_tasks->set('project.id', $model->getState('project.id'));
-				$params_tasks->set('order.list', 't.`ordering`');
-				$params_tasks->set('order.dir', 'ASC');
-				$params_tasks->set('state',' >= 1');
-				$params_tasks->set('task.type', 2); // get tasks
-				// limit for lister
-				$params_tasks->set('limit.limit', 5);
-				$params_tasks->set('limit.start', 0);
-				$this->assignRef('tasks',ProjectsHelper::getTasks($params_tasks));
-				$params_tasks->set('task.type', 3); // get tickets
-				$this->assignRef('tickets',ProjectsHelper::getTasks($params_tasks));
-				
-				// get documents
-				$params_docs = new JRegistry();
-				$params_docs->set('project.id', $model->getState('project.id'));
-				$params_docs->set('order.list', 'c.`modified`, c.`created`');
-				$params_docs->set('order.dir', 'ASC');
-				$params_docs->set('state',' >= 1');
-				// limit for lister
-				$params_docs->set('limit.limit', 5);
-				$params_docs->set('limit.start', 0);
-				$this->assignRef('docs',ProjectsHelper::getDocuments($params_docs));
+				$this->initListers(); // initialize listers
 				break;
 		}
 		
@@ -106,6 +83,48 @@ class ProjectsViewProject extends JView
 		parent::display($tpl);
 	}
 	
+	/*
+	 * Method to initialize all listers for project overview layout
+	 */
+	protected function initListers()
+	{
+		$model = $this->getModel();
+		// get tickets and tasks
+		$params_tasks = new JRegistry();
+		$params_tasks->set('project.id', $model->getState('project.id'));
+		$params_tasks->set('order.list', 't.`ordering`');
+		$params_tasks->set('order.dir', 'ASC');
+		$params_tasks->set('state',' >= 1');
+		$params_tasks->set('task.type', 2); // get tasks
+		// limit for lister
+		$params_tasks->set('limit.limit', 5);
+		$params_tasks->set('limit.start', 0);
+		$this->assignRef('tasks',ProjectsHelper::getTasks($params_tasks));
+		$params_tasks->set('task.type', 3); // get tickets
+		$this->assignRef('tickets',ProjectsHelper::getTasks($params_tasks));
+		
+		// get documents
+		$params_docs = new JRegistry();
+		$params_docs->set('project.id', $model->getState('project.id'));
+		$params_docs->set('order.list', 'c.`modified`, c.`created`');
+		$params_docs->set('order.dir', 'ASC');
+		$params_docs->set('state',' >= 1');
+		// limit for lister
+		$params_docs->set('limit.limit', 5);
+		$params_docs->set('limit.start', 0);
+		$this->assignRef('docs',ProjectsHelper::getDocuments($params_docs));
+		
+		// get members
+		$params_mems = new JRegistry();
+		$params_mems->set('project.id', $model->getState('project.id'));
+		$params_mems->set('order.list', 'u.`name`');
+		$params_mems->set('order.dir', 'ASC');
+		$params_mems->set('state',' >= 1');
+		// limit for lister
+		$params_mems->set('limit.limit', 5);
+		$params_mems->set('limit.start', 0);
+		$this->assignRef('members',ProjectsHelper::getMembers($params_mems));
+	}
 	
 	protected function addToolbar() 
 	{
