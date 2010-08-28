@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
     <h4><?php echo JText::_('COM_PROJECTS_TASKS_LIST_TASKS'); ?></h4>
 	<?php
 		$c = count($this->tasks); 
-		if($c) : // list tickets ?>
+		if($c) : // list tasks ?>
 		<ul class="ulList">
 		<?php
 			for($i = 0; $i < $c; $i++) {
