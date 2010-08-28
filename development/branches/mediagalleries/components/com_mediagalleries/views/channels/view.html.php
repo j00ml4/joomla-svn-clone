@@ -30,27 +30,28 @@ class MediagalleriesViewChannels extends JView
 	 */
 	function display($tpl = null)
 	{
+		$app=&JFactory::getApplication();
 		// Initialise variables
-		$state		= $this->get('State');
-		$items		= $this->get('Items');
-		$parent		= $this->get('Parent');
-
+		$this->state		= $this->get('State');
+		$this->items		= $this->get('Items');
+		$user		=& JFactory::getUser();
+		$document	= &JFactory::getDocument();
+		$uri 		= &JFactory::getURI();
+		$pathway	= &$app->getPathway();	
+		$this->params=& $app->getParams();
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseWarning(500, implode("\n", $errors));
 			return false;
 		}
 
-		if($items === false)
+		if($this->items === false)
 		{
-			//TODO Raise error for missing category here
+			JError::raiseWarning(404, JText::_("COM_MEDIAGALLERIES_NO_CHANNEL"));
+			return false;
 		}
 
-		if($parent == false)
-		{
-			//TODO Raise error for missing parent category here
-		}
-
+		/*
 		$params = &$state->params;
 
         $items = array($parent->id => $items);
@@ -59,7 +60,7 @@ class MediagalleriesViewChannels extends JView
 		$this->params=$params;
 		$this->parent=$parent;
 		$this->items=$items;
-
+		`*/
 		parent::display($tpl);
 	}
 

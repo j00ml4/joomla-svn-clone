@@ -59,7 +59,7 @@ class MediagalleriesModelChannel extends JModelList
 	{
 		// Invoke the parent getItems method to get the main list
 		$items = &parent::getItems();
-	
+		
 		// Convert the params field into an object, saving original in _params
 		for ($i = 0, $n = count($items); $i < $n; $i++) {
 			$item = &$items[$i];
@@ -95,27 +95,15 @@ class MediagalleriesModelChannel extends JModelList
 		$query->where('a.access IN ('.$groups.')');
 
 		// Filter by category.
-		if ($channelId = $this->getState('user.id')) {
-			$query->where('a.created_by = '.(int) $channelId);
-			//$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
-			$query->where('c.access IN ('.$groups.')');
-		}
-		else {
-			return false;
-		}
-
+		;
+		$query->where('a.created_by = '.$this->getState("user.id",42));
+		
 		// Filter by state
 		$state = $this->getState('filter.state');
 		if (is_numeric($state)) {
 			$query->where('a.state = '.(int) $state);
 		}
-				// Filter by start and end dates.
-		$nullDate = $db->Quote($db->getNullDate());
-		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
-
-		//$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
-		//$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
-
+	
 		// Filter by language
 		if ($this->getState('filter.language')) {
 			$query->where('a.language in ('.$db->Quote(JFactory::getLanguage()->getTag()).','.$db->Quote('*').')');
