@@ -72,7 +72,32 @@ class ProjectsViewProject extends JView
 				
 				// Get Portfolio
 				$this->portfolio = $model->getPortfolio($this->item->catid);
-	  			break;
+				
+				// get tickets and tasks
+				$params_tasks = new JRegistry();
+				$params_tasks->set('project.id', $model->getState('project.id'));
+				$params_tasks->set('order.list', 't.`ordering`');
+				$params_tasks->set('order.dir', 'ASC');
+				$params_tasks->set('state',' >= 1');
+				$params_tasks->set('task.type', 2); // get tasks
+				// limit for lister
+				$params_tasks->set('limit.limit', 5);
+				$params_tasks->set('limit.start', 0);
+				$this->assignRef('tasks',ProjectsHelper::getTasks($params_tasks));
+				$params_tasks->set('task.type', 3); // get tickets
+				$this->assignRef('tickets',ProjectsHelper::getTasks($params_tasks));
+				
+				// get documents
+				$params_docs = new JRegistry();
+				$params_docs->set('project.id', $model->getState('project.id'));
+				$params_docs->set('order.list', 'c.`modified`, c.`created`');
+				$params_docs->set('order.dir', 'ASC');
+				$params_docs->set('state',' >= 1');
+				// limit for lister
+				$params_docs->set('limit.limit', 5);
+				$params_docs->set('limit.start', 0);
+				$this->assignRef('docs',ProjectsHelper::getDocuments($params_docs));
+				break;
 		}
 		
 		// Display the view
