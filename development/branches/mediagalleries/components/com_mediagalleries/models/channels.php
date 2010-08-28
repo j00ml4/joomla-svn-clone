@@ -8,8 +8,8 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.model');
-jimport( 'joomla.application.categories' );
+jimport('joomla.application.component.modellist');
+
 
 
 /**
@@ -19,7 +19,7 @@ jimport( 'joomla.application.categories' );
  * @subpackage	com_weblinks
  * @since		1.6
  */
-class MediagalleriesModelChannels extends JModel
+class MediagalleriesModelChannels extends JModelList
 {
 	/**
 	 * Model context string.
@@ -50,11 +50,7 @@ class MediagalleriesModelChannels extends JModel
 	{
 		$app = JFactory::getApplication();
 		$this->setState('filter.extension', $this->_extension);
-
-		// Get the parent id if defined.
-		$parentId = JRequest::getInt('id');
-		$this->setState('filter.parentId', $parentId);
-
+		
 		$params = $app->getParams();
 		$this->setState('params', $params);
 
@@ -79,7 +75,7 @@ class MediagalleriesModelChannels extends JModel
 		$id	.= ':'.$this->getState('filter.extension');
 		$id	.= ':'.$this->getState('filter.published');
 		$id	.= ':'.$this->getState('filter.access');
-		$id	.= ':'.$this->getState('filter.parentId');
+		//$id	.= ':'.$this->getState('filter.parentId');
 
 		return parent::getStoreId($id);
 	}
@@ -91,37 +87,47 @@ class MediagalleriesModelChannels extends JModel
 	 */
 	public function getItems()
 	{
-		if(!count($this->_items))
-		{
-			$app = JFactory::getApplication();
-			$menu = $app->getMenu();
-			$active = $menu->getActive();
-			$params = new JRegistry();
-			if($active)
-			{
-				$params->loadJSON($active->params);
-			}
-			$options = array();
-			$options['countItems'] = $params->get('show_cat_num_links', 0) || !$params->get('show_empty_categories', 0);
-			$categories = JCategories::getInstance('Mediagalleries', $options);
-			$this->_parent = $categories->get($this->getState('filter.parentId', 'root'));
-			if(is_object($this->_parent))
-			{
-				$this->_items = $this->_parent->getChildren();
-			} else {
-				$this->_items = false;
-			}
-		}
-
-		return $this->_items;
+		// Invoke the parent getItems method to get the main list
+		$items = &parent::getItems();
+		return $items;
 	}
 
-	public function getParent()
+	/**
+	 * Method to build an SQL query to load the list data.
+	 *
+	 * @return	string	An SQL query
+	 * @since	1.6
+	 */
+	protected function getListQuery()
 	{
-		if(!is_object($this->_parent))
-		{
-			$this->getItems();
+		
+		$user	= JFactory::getUser();
+		$groups	= implode(',', $user->authorisedLevels());
+
+		// Create a new query object.
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+
+		// Select required fields from the categories.
+		$query->select('DISTINCT created_by');
+		$query->from('`#__mediagalleries` AS a');
+		$query->where('a.access IN ('.$groups.')');
+
+		
+		// Filter by state
+		$state = $this->getState('filter.state');
+		if (is_numeric($state)) {
+			$query->where('a.state = '.(int) $state);
 		}
-		return $this->_parent;
+	
+		// Filter by language
+		if ($this->getState('filter.language')) {
+			$query->where('a.language in ('.$db->Quote(JFactory::getLanguage()->getTag()).','.$db->Quote('*').')');
+		}
+
+		// Add the list ordering clause.
+		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+
+		return $query;
 	}
 }
