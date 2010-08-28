@@ -20,12 +20,12 @@ class JCacheControllerCallbackTest_Callback extends PHPUnit_Extensions_OutputTes
 {
 
 	public function setUp() {
-		//require_once JPATH::dirname(__FILE__ , 5).'/bootstrap.php';
+		//require_once dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/bootstrap.php';
 		jimport('joomla.cache.cache');
 
-		require_once JPATH::dirname(__FILE__,1).'/storage/JCacheStorageMock.php';
+		require_once dirname(dirname(__FILE__)).'/storage/JCacheStorageMock.php';
 
-		require_once JPATH::dirname(__FILE__).'/JCacheControllerCallback.helper.php';
+		require_once dirname(__FILE__).'/JCacheControllerCallback.helper.php';
 
 	}
 

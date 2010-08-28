@@ -18,18 +18,16 @@ if (file_exists('config.php')) {
 
 // Define expected Joomla constants.
 
-define('DS', '/');
+define('DS',			DIRECTORY_SEPARATOR);
 define('_JEXEC',		1);
-
-//@FIXME this should not be here
-define('JPATH_BASE', '/wamp/www/j16');
+define('JPATH_BASE', '/home/estaffor/src/php/Workspace/trunk');
 
 if (!defined('JPATH_BASE'))
 {
 	// JPATH_BASE can be defined in init.php
 	// This gets around problems with soft linking the unittest folder into a Joomla tree,
 	// or using the unittest framework from a central location.
-//	define('JPATH_BASE',	JPATH::dirname(__FILE__ ,1 );
+//	define('JPATH_BASE',	dirname(dirname(__FILE__)));
 }
 
 // Fix magic quotes.

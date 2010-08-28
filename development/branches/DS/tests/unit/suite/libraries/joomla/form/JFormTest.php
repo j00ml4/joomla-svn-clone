@@ -60,7 +60,7 @@ class JFormTest extends JoomlaTestCase
 		$paths = JForm::addFieldPath();
 
 		// The default path is the class file folder/forms
-		$valid = JPATH_LIBRARIES.'/joomla/form/fields';
+		$valid = JPATH_LIBRARIES.DS.'joomla'.DS.'form'.DS.'fields';
 
 		$this->assertThat(
 			in_array($valid, $paths),
@@ -69,11 +69,11 @@ class JFormTest extends JoomlaTestCase
 		);
 
 		// Test adding a custom folder.
-		JForm::addFieldPath(JPATH::dirname(__FILE__));
+		JForm::addFieldPath(dirname(__FILE__));
 		$paths = JForm::addFieldPath();
 
 		$this->assertThat(
-			in_array(JPATH::dirname(__FILE__), $paths),
+			in_array(dirname(__FILE__), $paths),
 			$this->isTrue(),
 			'Line:'.__LINE__.' An added path should be in the returned array.'
 		);
@@ -90,7 +90,7 @@ class JFormTest extends JoomlaTestCase
 		$paths = JForm::addFormPath();
 
 		// The default path is the class file folder/forms
-		$valid = JPATH_LIBRARIES.'/joomla/form/forms';
+		$valid = JPATH_LIBRARIES.DS.'joomla'.DS.'form'.DS.'forms';
 
 		$this->assertThat(
 			in_array($valid, $paths),
@@ -99,11 +99,11 @@ class JFormTest extends JoomlaTestCase
 		);
 
 		// Test adding a custom folder.
-		JForm::addFormPath(JPATH::dirname(__FILE__));
+		JForm::addFormPath(dirname(__FILE__));
 		$paths = JForm::addFormPath();
 
 		$this->assertThat(
-			in_array(JPATH::dirname(__FILE__), $paths),
+			in_array(dirname(__FILE__), $paths),
 			$this->isTrue(),
 			'Line:'.__LINE__.' An added path should be in the returned array.'
 		);
@@ -120,7 +120,7 @@ class JFormTest extends JoomlaTestCase
 		$paths = JForm::addRulePath();
 
 		// The default path is the class file folder/rules
-		$valid = JPATH_LIBRARIES.'/joomla/form/rules';
+		$valid = JPATH_LIBRARIES.DS.'joomla'.DS.'form'.DS.'rules';
 
 		$this->assertThat(
 			in_array($valid, $paths),
@@ -129,11 +129,11 @@ class JFormTest extends JoomlaTestCase
 		);
 
 		// Test adding a custom folder.
-		JForm::addRulePath(JPATH::dirname(__FILE__));
+		JForm::addRulePath(dirname(__FILE__));
 		$paths = JForm::addRulePath();
 
 		$this->assertThat(
-			in_array(JPATH::dirname(__FILE__), $paths),
+			in_array(dirname(__FILE__), $paths),
 			$this->isTrue(),
 			'Line:'.__LINE__.' An added path should be in the returned array.'
 		);
@@ -1321,7 +1321,7 @@ class JFormTest extends JoomlaTestCase
 		);
 
 		// Add custom path.
-		JForm::addFieldPath(JPATH::dirname(__FILE__).'/_testfields');
+		JForm::addFieldPath(dirname(__FILE__).'/_testfields');
 
 		$this->assertThat(
 			(JFormInspector::loadFieldType('test') instanceof JFormFieldTest),
@@ -1356,7 +1356,7 @@ class JFormTest extends JoomlaTestCase
 		// Testing loading a file by full path.
 
 		$this->assertThat(
-			$form->loadFile(JPATH::dirname(__FILE__).'/example.xml'),
+			$form->loadFile(dirname(__FILE__).'/example.xml'),
 			$this->isTrue(),
 			'Line:'.__LINE__.' XML file by full path should load successfully.'
 		);
@@ -1370,7 +1370,7 @@ class JFormTest extends JoomlaTestCase
 		// Testing loading a file by file name.
 
 		$form = new JFormInspector('form1');
-		JForm::addFormPath(JPATH::dirname(__FILE__));
+		JForm::addFormPath(dirname(__FILE__));
 
 		$this->assertThat(
 			$form->loadFile('example'),
@@ -1402,7 +1402,7 @@ class JFormTest extends JoomlaTestCase
 
 		// Test loading a custom rule.
 
-		JForm::addRulePath(JPATH::dirname(__FILE__).'/_testrules');
+		JForm::addRulePath(dirname(__FILE__).'/_testrules');
 
 		$this->assertThat(
 			($form->loadRuleType('custom') instanceof JFormRule),
