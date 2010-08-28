@@ -41,7 +41,7 @@ class ProjectsModelTasks extends JModelList
     protected function populateState() {
     	$app = &JFactory::getApplication();
     	 
-        $value = $app->getUserStateFromRequest('task.type', 'type', 2);
+        $value = $app->getUserStateFromRequest('task.type', 'type');
         $this->setState('type', $value); 
     	$this->context .= $value;
                
@@ -118,8 +118,9 @@ class ProjectsModelTasks extends JModelList
         }
         
         // Filter by state
-        if ($value = $this->getState('filter.state')) {
-        	//var_dump($value);
+        $value = $this->getState('filter.state');
+        if (!empty($value)) {
+        	$value = ($value != -2)? $value: 0;
         	$query->where('a.state = ' . (int) $value);
         }
 

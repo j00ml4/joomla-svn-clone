@@ -117,6 +117,15 @@ class ProjectsModelTask extends JModelAdmin
 				$app->setUserState('project.id', $this->item->project_id);
 				$this->setState('type', $this->item->type);
 				$app->setUserState('task.type', $this->item->type);
+				
+				if(!empty($this->item->catid)){
+					$db = $this->getDbo();
+					$q = 'SELECT title FROM #__categories WHERE id='.$this->item->catid;
+					$db->setQuery($q);
+					$this->item->category_title = $db->loadResult();
+				}else{
+					$this->item->category_title = '';
+				}
 			}
 		}
 		return $this->item;
@@ -241,7 +250,11 @@ class ProjectsModelTask extends JModelAdmin
             // Set the values
             $table->created = $date->toMySQL();
             $table->created_by = $user->get('id');
-            
+            if($table->type == 3){
+            	$table->state = -3;
+            }else{
+            	$table->state = 1;
+            }
             // Set ordering to the last item if not set
             if (empty($table->ordering)) {
                 $db = $this->getDbo();

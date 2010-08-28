@@ -25,11 +25,13 @@ abstract class JHtmlFilter
         	$options[] = JHtml::_('select.option', '', JText::_('JOPTION_SELECT_PUBLISHED'));
         	switch ($type){
         		case 'task':
+        			$options[] = JHtml::_('select.option', '-2', JText::_('COM_PROJECTS_STATE_DENIED'));
+        			$options[] = JHtml::_('select.option', '-3', JText::_('COM_PROJECTS_STATE_REPORTED'));
         	     	$options[] = JHtml::_('select.option', '1', JText::_('COM_PROJECTS_STATE_PENDING'));
         			$options[] = JHtml::_('select.option', '2', JText::_('COM_PROJECTS_STATE_FINISHED'));
         			break;
         		case 'ticket':
-        			$options[] = JHtml::_('select.option', '0', JText::_('COM_PROJECTS_STATE_DENIED'));
+        			$options[] = JHtml::_('select.option', '-2', JText::_('COM_PROJECTS_STATE_DENIED'));
         			$options[] = JHtml::_('select.option', '-3', JText::_('COM_PROJECTS_STATE_REPORTED'));
         			$options[] = JHtml::_('select.option', '1', JText::_('COM_PROJECTS_STATE_APPROVED'));
         			$options[] = JHtml::_('select.option', '2', JText::_('COM_PROJECTS_STATE_FINISHED'));
@@ -61,7 +63,6 @@ abstract class JHtmlFilter
         }
         
         public function type($selected=null){
-	        	JRegistry::	
 			$options = array(
 				JHtml::_('select.option', 2, JText::_('COM_PROJECTS_TYPE_TASK')),
 				JHtml::_('select.option', 3, JText::_('COM_PROJECTS_TYPE_TICKET'))

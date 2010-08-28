@@ -10,8 +10,8 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<div class="projects-content projects-frame projects-space">
-	<h4><?php echo JText::_('COM_PROJECTS_PROJECT_TICKETS');?></h4>
+<fieldset>
+	<legend><?php echo JText::_('COM_PROJECTS_PROJECT_TICKETS');?></legend>
 	<?php
 		$c = count($this->tickets); 
 		if($c) : // list tickets ?>
@@ -30,4 +30,4 @@ defined('_JEXEC') or die;
 	?>
 	<a href="<?php echo ProjectsHelper::getLink('tasks.ticket', $this->item->id); ?>" class="readmore">
 		<?php echo JText::_('COM_PROJECTS_PROJECT_TICKET_LIST_LINK'); ?></a>	
-</div>
+</fieldset>

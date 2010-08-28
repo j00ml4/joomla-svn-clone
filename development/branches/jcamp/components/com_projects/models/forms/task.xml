@@ -97,7 +97,7 @@
 			size="1" >
          	<option value="2">COM_PROJECTS_STATE_FINISHED</option>
             <option value="1">COM_PROJECTS_STATE_APPROVED</option>
-            <option value="-3">COM_PROJECTS_STATE_PENDING</option>
+            <option value="-3">COM_PROJECTS_STATE_REPORTED</option>
             <option value="0">COM_PROJECTS_STATE_DENIED</option>
         </field>
 		

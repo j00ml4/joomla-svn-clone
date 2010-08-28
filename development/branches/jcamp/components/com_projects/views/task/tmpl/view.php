@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 // Vars
 $params =  $this->params;
 ?>
-<div class="projects">
+<div class="project-item">
 	<div class="projects-content">
 		<?php if ($params->get('show_page_heading', 1)) : ?> 
 		<h1 class="componentheading">
@@ -43,7 +43,7 @@ $params =  $this->params;
 			<?php endif;?>
 			<tr>
 				<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_CATEGORY_'.$this->prefix);?>:</td>
-				<td><?php echo $this->item->category;?></td>
+				<td><?php echo $this->item->category_title;?></td>
 				<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_ESTIMATE');?>:</td>
 				<td><?php echo $this->item->estimate;?></td>			
 			</tr>
