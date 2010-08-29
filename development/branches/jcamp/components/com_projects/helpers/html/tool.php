@@ -17,7 +17,7 @@ abstract class JHtmlTool
 	
 	public function progressBar($percent, $text=null, $class_sfx='')
 	{
-		
+		$percent = (int)$percent;
 		return '<div class="progress-bar'. $class_sfx .'">
 			<div class="progress" style="width:'. $percent .'%;"></div>
 			<div class="info">'. (empty($text)? $percent: $text) .'%</div>

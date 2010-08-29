@@ -63,6 +63,12 @@ class ProjectsModelProjects extends JModelList
 		// (using 'a.*' is slower than fetching only columns we need (and this is clearer for us to know what date we fetch from db))
 		$query->select($this->getState('list.select', 'p.*'));
 		$query->from('`#__projects` AS p');
+		
+		// Progress
+		$query->select(' FLOOR((COUNT(DISTINCT ntf.id) / COUNT(DISTINCT nt.id)) * 100) AS progress');
+		$query->join('LEFT', '#__project_tasks AS nt ON nt.project_id=p.id');
+		$query->join('LEFT', '#__project_tasks AS ntf ON ntf.project_id=p.id AND ntf.state=2');
+		$query->group('p.id');
 
 		// Filter by category.
 		if ($categoryId = $this->getState('portfolio.id')) {
