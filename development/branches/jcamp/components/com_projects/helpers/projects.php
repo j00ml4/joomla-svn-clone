@@ -286,10 +286,8 @@ abstract class ProjectsHelper {
                 'members.assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
                 'members.unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
 				
-            	'task' => 'index.php?option=com_projects&view=task&type=2&id=',
-            	'ticket' => 'index.php?option=com_projects&view=task&type=3&id=',
-            	'task.view.task' => 'index.php?option=com_projects&view=task&layout=view&type=2&id=',
-            	'task.view.ticket' => 'index.php?option=com_projects&view=task&layout=view&type=3&id=',
+            	'task.view.task' => 'index.php?option=com_projects&view=task&type=2&id=',
+            	'task.view.ticket' => 'index.php?option=com_projects&view=task&type=3&id=',
             	'task.edit' => 'index.php?option=com_projects&view=task&layout=edit&id=',
 
             	'tasks' => 'index.php?option=com_projects&view=tasks&id=',
