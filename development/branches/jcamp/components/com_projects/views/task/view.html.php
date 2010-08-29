@@ -91,6 +91,27 @@ class ProjectsViewTask extends JView
                 if (empty($this->item->id)) {
                     return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
                 }
+                
+                if($this->params->get('use_content_plugins',0)){
+                	$this->item->text = $this->item->description;
+                	$dispatcher = JDispatcher::getInstance();
+					//
+					// Process the content plugins.
+					//
+					JPluginHelper::importPlugin('content');
+					$dispatcher->trigger('onContentPrepare', array ('com_content.article', &$this->item, &$this->params, 0));
+			
+					$results = $dispatcher->trigger('onContentAfterTitle', array('com_content.article', &$this->item, &$this->params, 0));
+					$this->item->text = trim(implode("\n", $results)).$this->item->text;
+								
+					$results = $dispatcher->trigger('onContentBeforeDisplay', array('com_content.article', &$$this->item, &$this->params, 0));
+					$this->item->text = trim(implode("\n", $results)).$this->item->text;
+			
+					$results = $dispatcher->trigger('onContentAfterDisplay', array('com_content.article', &$this->item, &$this->params, 0));
+					$this->item->text.= trim(implode("\n", $results));
+					$this->item->description = $this->item->text;
+					unset($this->item->text);
+                }
                 break;
         }
 
