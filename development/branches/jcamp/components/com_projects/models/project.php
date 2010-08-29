@@ -180,14 +180,28 @@ class ProjectsModelProject extends JModelAdmin
 			$app = JFactory::getApplication();
 			$this->item = parent::getItem($pk);
 			if(!empty($this->item)){
-				if(!$this->item->get('catid')){ // when creating a new project, try to set current portfolio as default
+				if(empty($this->item->id)){ // when creating a new project, try to set current portfolio as default
 					$this->setState('portfolio.id',$app->getUserState('portfolio.id'));
 					$this->item->set('catid',$this->setState('portfolio.id'));
+					$this->item->progress = 0;
 				}
 				else {
 					$this->setState('portfolio.id', $this->item->get('catid'));
 					$app->setUserState('portfolio.id', $this->item->get('catid'));
+					
+					// Progress
+					$db = $this->getDbo();
+					$query = $db->getQuery(true);
+					$query->from('`#__projects` AS p');
+					$query->select(' FLOOR((COUNT(DISTINCT ntf.id) / COUNT(DISTINCT nt.id)) * 100) AS progress');
+					$query->join('LEFT', '#__project_tasks AS nt ON nt.project_id=p.id');
+					$query->join('LEFT', '#__project_tasks AS ntf ON ntf.project_id=p.id AND ntf.state=2');
+					$query->where('p.id='.$this->item->id);
+					$db->setQuery($query);
+	
+					$this->item->progress = $db->loadResult();
 				}
+
 			}
 		}
 		return $this->item;

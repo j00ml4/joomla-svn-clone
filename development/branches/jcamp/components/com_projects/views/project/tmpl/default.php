@@ -17,17 +17,16 @@ $pageClass = $this->params->get('pageclass_sfx');
     <div class="two3">
         <form action="<?php echo ProjectsHelper::getLink('project', $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
             <div class="projects-content">
-                <?php echo $this->item->description; ?>
-                <div class="projects-space">
-                    <?php echo JHTML::_('tool.progressBar', 10); ?>
-                </div>
-
                 <dl class="projects-info projects-space projects-frame">
                     <dt><?php echo JText::_('COM_PROJECTS_FIELD_START_AT_LABEL') ?>:</dt>
                     <dd><?php echo JFactory::getDate($this->item->start_at)->toFormat('%d.%m.%Y'); ?></dd>
                     <dt><?php echo JText::_('COM_PROJECTS_FIELD_FINISH_AT_LABEL') ?>:</dt>
                     <dd><?php echo JFactory::getDate($this->item->finish_at)->toFormat('%d.%m.%Y'); ?></dd>
                 </dl>
+                <div class="projects-space">
+                    <?php echo JHTML::_('tool.progressBar', $this->item->progress); ?>
+                </div>
+				<?php echo $this->item->description; ?>
             </div>
 
         <?php if ($params->get('show_activities') || $this->canDo->get('activity.view')): ?>

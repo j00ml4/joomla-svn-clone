@@ -119,8 +119,7 @@ class ProjectsModelTasks extends JModelList
         
         // Filter by state
         $value = $this->getState('filter.state');
-        if (!empty($value)) {
-        	$value = ($value != -2)? $value: 0;
+        if (is_numeric($value)) {
         	$query->where('a.state = ' . (int) $value);
         }
 
@@ -164,7 +163,7 @@ class ProjectsModelTasks extends JModelList
             case 1:
             case 2:
             default:
-                $query->where('a.type != 3');
+                $query->where('(a.type != 3 OR (a.type = 3 AND a.state = 1))');
                 break;
         }
 

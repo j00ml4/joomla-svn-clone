@@ -39,7 +39,9 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 				<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 			</td>
 			<td class="state-<?php echo $item->state; ?>">
-				<span class="padding"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $item->level-1); ?></span>
+				<?php if($this->type == 'task'): ?>
+				<span class="padding"><?php echo str_repeat('|- ', $item->level-1); ?></span>
+				<?php endif; ?>
 				<a class="state-<?php echo $item->state; ?>" href="<?php echo ProjectsHelper::getLink($this->type, $item->id); ?>">
 					<?php echo $item->title; ?></a>	
 				<?php if(!empty($item->category_title)): ?>
@@ -49,13 +51,13 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 				<?php endif; ?>	
 			</td>
 
-			<td class="center">
+			<td>
 				<?php echo JHtml::_('tool.published', $item->state, $i, $this->type); ?>
 			</td>
 			
-			<td class="center">
+			<td>
 				<?php if ($item->checked_out) :
-					echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canCheckin);
+					echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canChange);
 				else:
 					echo $item->author_name;
 				endif; ?>

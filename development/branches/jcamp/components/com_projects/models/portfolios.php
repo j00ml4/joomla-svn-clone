@@ -75,11 +75,12 @@ class ProjectsModelPortfolios extends JModelList
 		$query->where('a.parent_id = '.(int) $parent_id);
 		
 		// Count
-		$query->select('COUNT(nc.id) AS numcategories');
-		$query->join('LEFT', '#__categories AS nc ON nc.parent_id = a.id');
-		$query->select('COUNT(ni.id) AS numitems');
+		$query->select('COUNT(DISTINCT nc.id) AS numcategories');
+		$query->join('LEFT', '#__categories AS nc ON nc.parent_id = a.id AND nc.published=1');		
+		$query->select('COUNT(DISTINCT ni.id) AS numitems');
 		$query->join('LEFT', '#__projects AS ni ON ni.catid = a.id');
 		$query->group('a.id');
+		
 			
 		// Filter by state
 		$state = $this->getState('filter.state');
@@ -99,7 +100,7 @@ class ProjectsModelPortfolios extends JModelList
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.`lft`')).
 			' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-
+			
 		return $query;
 	}
 	
