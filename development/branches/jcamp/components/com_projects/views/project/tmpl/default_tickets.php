@@ -10,24 +10,26 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<fieldset>
-	<legend><?php echo JText::_('COM_PROJECTS_PROJECT_TICKETS');?></legend>
-	<?php
-		$c = count($this->tickets); 
-		if($c) : // list tickets ?>
-		<ul class="ulList">
+<div class="projects-module">
+	<h4><?php echo JText::_('COM_PROJECTS_PROJECT_TICKETS');?></h4>
+	<div class="projects-content">
 		<?php
-			for($i = 0; $i < $c; $i++) {
-				?>
-				<li><a href="<?php echo ProjectsHelper::getLink('task.view.ticket',$this->tickets[$i]->id)?>"><?php echo $this->tickets[$i]->title?></a></li>
-				<?php
-			} ?>
-		</ul>
-		<?php
-		else:
-			echo JText::_('COM_PROJECTS_PROJECT_NO_TICKET').'<br /><br />';
-		endif
-	?>
-	<a href="<?php echo ProjectsHelper::getLink('tasks.ticket', $this->item->id); ?>" class="readmore">
-		<?php echo JText::_('COM_PROJECTS_PROJECT_TICKET_LIST_LINK'); ?></a>	
-</fieldset>
+			$c = count($this->tickets); 
+			if($c) : // list tickets ?>
+			<ul class="ulList">
+			<?php
+				for($i = 0; $i < $c; $i++) {
+					?>
+					<li><a href="<?php echo ProjectsHelper::getLink('task.view.ticket',$this->tickets[$i]->id)?>"><?php echo $this->tickets[$i]->title?></a></li>
+					<?php
+				} ?>
+			</ul>
+			<?php
+			else:
+				echo JText::_('COM_PROJECTS_PROJECT_NO_TICKET').'<br /><br />';
+			endif
+		?>
+		<a href="<?php echo ProjectsHelper::getLink('tasks.ticket', $this->item->id); ?>" class="readmore">
+			<?php echo JText::_('COM_PROJECTS_PROJECT_TICKET_LIST_LINK'); ?></a>	
+	</div>
+</div>
