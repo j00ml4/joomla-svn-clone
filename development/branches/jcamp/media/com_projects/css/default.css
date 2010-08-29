@@ -34,7 +34,7 @@
     width: 75%;
 }
 
-/* new sintax */
+/* new syntax */
 .half, .one3th, .two3th, .one4th, .three4th {
     margin: 0;
     padding: 0;
@@ -122,6 +122,21 @@ ol.todo-list li{
 	list-style: none;
 }
 
+/* project modules */
+div.projects-module{
+	border-radius : 5px;
+	-moz-border-radius : 5px;
+	-webkit-border-radius : 5px;
+	
+	border :1px #222222 solid;
+	margin-bottom : 10px;
+}
+	div.projects-module > h4{
+		background : #222222;
+		padding : 5px 10px;
+		color : white !important;
+		
+	}
 /** PB */
 .progress-bar {
     height: 30px;
