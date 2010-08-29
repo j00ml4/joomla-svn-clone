@@ -37,7 +37,7 @@ $params = $this->params;
 	<legend><?php echo JText::_('JDETAILS'); ?></legend>
 	
 	<div class="formelm">
-		<?php echo $this->form->getLabel('priority'); ?> <?php echo $this->form->getInput('priority'); ?>
+		<?php echo $this->form->getLabel('ordering'); ?> <?php echo $this->form->getInput('ordering'); ?>
 	</div>
 	
 	<div class="formelm">
