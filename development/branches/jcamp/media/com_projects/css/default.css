@@ -140,6 +140,78 @@ div.projects-module{
 	div.projects-module ul.ulList{
 		margin-top : 0px !important;
 	}
+
+/*  Project tasks/tickets  */
+div.projects-task{
+}
+
+	div.projects-task div.divCreatedBy{
+		background : #dfdfdf;
+		-moz-border-radius-bottomright : 5px;
+		-moz-border-radius-bottomleft : 5px;
+		-webkit-border-bottom-right-radius : 5px;
+		-webkit-border-bottom-left-radius : 5px;
+		border-bottom-right-radius : 5px;
+		border-bottom-left-radius : 5px;
+		padding : 3px 0px;
+		font-size : 0.8em;
+		text-align : right;
+		overflow : auto;
+	}
+
+		div.projects-task div.divCreatedBy > span:first-child{
+			padding-left : 72px;
+			float : left;
+		}
+
+		div.projects-task div.divCreatedBy > span{
+			text-align : right;
+			clear : both;
+			padding-right : 5px;
+		}
+		
+	div.projects-task div.divBox1{
+		width : 100%;
+		margin : 10px 0px;
+		float : left;
+		clear : none;
+	}
+
+		div.projects-task div.divBox1 table{
+			width : 49%;
+			border-collapse : separate !important;
+			border: 1px solid #dfdfdf !important;
+			border-radius : 5px;
+			-moz-border-radius : 5px;
+			-webkit-border-radius : 5px;
+			float : left;
+			clear : right;
+		}
+
+			div.projects-task div.divBox1 table td{
+				padding : 5px;
+				text-align : right;
+			}
+			
+				div.projects-task div.divBox1 table td:first-child{
+					text-align : left;
+				}
+
+			div.projects-task div.divBox1 table td,
+				div.projects-task div.divBox1 table tr{
+				border :0px !important;
+			}
+					
+		div.projects-task div.divBox1 table:first-child{
+			margin-right : 2%;
+		}
+
+	div.projects-task div.projects-module{
+		width : 100%;
+		float : left;
+		clear : none;
+	}
+
 /** PB */
 .progress-bar {
     height: 30px;

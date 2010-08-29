@@ -83,7 +83,7 @@ class ProjectsViewTask extends JView
                 break;
 
             default:
-                $layout = 'default';
+//                $layout = 'default2';
                 // Access
                 if (!$this->canDo->get('task.view')) {
                     return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
@@ -95,7 +95,7 @@ class ProjectsViewTask extends JView
         }
 
         // Display the view
-        $this->setLayout($layout);
+//        $this->setLayout($layout);
         $this->addToolbar();
         parent::display($tpl);
     }
