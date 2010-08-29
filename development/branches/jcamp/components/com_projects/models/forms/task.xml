@@ -49,8 +49,8 @@
 			label="COM_PROJECTS_FIELD_ESTIMATE_LABEL"
 			size="3" />	       
               
-		<field id="priority" 
-			name="priority" 
+		<field id="ordering" 
+			name="ordering" 
 			type="list"
 			description="COM_PROJECTS_FIELD_PRIORITY_DESC"
 			label="COM_PROJECTS_FIELD_PRIORITY_LABEL"

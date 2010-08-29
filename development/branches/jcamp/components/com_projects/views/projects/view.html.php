@@ -49,6 +49,7 @@ class ProjectsViewProjects extends JView
 			0,
 			$this->portfolio);
 			
+		$this->params->set('is.root', ($this->portfolio->level == 0));	
 		$layout = $this->getLayout();
 		switch($layout){
 			// Projects default List
