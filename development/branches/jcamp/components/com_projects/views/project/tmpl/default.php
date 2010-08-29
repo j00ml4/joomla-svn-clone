@@ -29,7 +29,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 				<?php echo $this->item->description; ?>
             </div>
 
-        <?php if ($params->get('show_activities') || $this->canDo->get('activity.view')): ?>
+        <?php if ($params->get('show_activities') || $this->canDo->get('activity.view') || false): ?>
             <div class="project-activities projects-space">
                 <?php echo $this->loadTemplate('activities'); ?>
             </div>
