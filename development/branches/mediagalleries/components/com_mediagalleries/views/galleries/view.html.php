@@ -59,7 +59,7 @@ class MediagalleriesViewGalleries extends JView
 		$this->params=$params;
 		$this->parent=$parent;
 		$this->items=$items;
-		dump($this->items);
+		
 		parent::display($tpl);
 	}
 

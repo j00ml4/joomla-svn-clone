@@ -14,9 +14,7 @@ JHtmlBehavior::modal();
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
-
 $pageClass = $this->params->get('pageclass_sfx');
-
 ?>
 <div class="category-list <?php echo $pageClass;?>">
 
@@ -45,6 +43,3 @@ $pageClass = $this->params->get('pageclass_sfx');
 	</div>
 
 	</div>
-	
-
-</div>

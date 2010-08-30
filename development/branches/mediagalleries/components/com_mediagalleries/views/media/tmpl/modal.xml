@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-	<layout title="COM_MEDIAGALLERIES_MEDIA_VIEW_MODAL_TITLE">
+	<layout title="COM_MEDIAGALLERIES_MEDIA_VIEW_MODAL_TITLE Non Customizable">
 		<message><![CDATA[
 			COM_MEDIAGALLERIES_MEDIA_VIEW_MODAL_DESC		
 		]]></message>
