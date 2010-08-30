@@ -11,8 +11,9 @@
 		<fieldset name="request"
 		>
 
-			<field name="id" type="user"
+			<field name="id" type="category"
 				description="JGLOBAL_CHOOSE_CATEGORY_DESC"
+				extension="com_mediagalleries"
 				label="JGLOBAL_CHOOSE_CATEGORY_LABEL"
 				required="true"	/>
 		</fieldset>

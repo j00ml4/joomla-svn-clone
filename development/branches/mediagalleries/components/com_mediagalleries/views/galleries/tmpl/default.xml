@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_MEDIAGALLERIES_GALLERIES_VIEW_DEFAULT_TITLE">
+	<layout title="Galleries">
 		<message>
 			<![CDATA[COM_MEDIAGALLERIES_GALLERIES_VIEW_DEFAULT_DESC]]>
 		</message>
