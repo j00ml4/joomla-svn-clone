@@ -248,19 +248,25 @@ class UsersModelUser extends JModelAdmin
 			if ($value == 1 && $pk == $user->get('id')) {
 				// Cannot block yourself.
 				unset($pks[$i]);
-				JError::raiseWarning(403, JText::_('COM_USERS_USERS_ERROR_CANNOT_DELETE_SELF'));
+				JError::raiseWarning(403, JText::_('COM_USERS_USERS_ERROR_CANNOT_BLOCK_SELF'));
 
 			}
 			else if ($table->load($pk)) {
 				$old	= $table->getProperties();
 				$allow	= $user->authorise('core.edit.state', 'com_users');
-
+				
 				// Prepare the logout options.
 				$options = array(
 					'clientid' => array(0, 1)
 				);
 
 				if ($allow) {
+					// Skip changing of same state
+					if ($table->block == $value) {
+						unset($pks[$i]);
+						continue;
+					}
+					
 					$table->block = (int) $value;
 
 					if (!$table->check()) {

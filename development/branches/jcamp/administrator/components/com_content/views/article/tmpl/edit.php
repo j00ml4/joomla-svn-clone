@@ -31,7 +31,7 @@ JHtml::_('behavior.keepalive');
 	}
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_content'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_content'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 		<legend><?php echo empty($this->item->id) ? JText::_('COM_CONTENT_NEW_ARTICLE') : JText::sprintf('COM_CONTENT_EDIT_ARTICLE', $this->item->id); ?></legend>
@@ -132,6 +132,7 @@ JHtml::_('behavior.keepalive');
 
 		<?php echo JHtml::_('sliders.end'); ?>
 		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="return" value="<?php echo JRequest::getCmd('return');?>" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
 </form>

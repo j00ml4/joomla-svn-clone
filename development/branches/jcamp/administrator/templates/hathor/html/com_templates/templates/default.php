@@ -32,10 +32,10 @@ $listDirn	= $this->state->get('list.direction');
 		</div>
 		<div class="filter-select">
 			<label class="selectlabel" for="filter_client_id">
-				<?php echo JText::_('COM_TEMPLATES_TEMPLATES_FILTER_CLIENT'); ?>
+				<?php echo JText::_('JGLOBAL_FILTER_CLIENT'); ?>
 			</label>
 			<select name="filter_client_id" id="filter_client_id" class="inputbox">
-				<option value="*"><?php echo JText::_('COM_TEMPLATES_TEMPLATES_FILTER_CLIENT'); ?></option>
+				<option value="*"><?php echo JText::_('JGLOBAL_FILTER_CLIENT'); ?></option>
 				<?php echo JHtml::_('select.options', TemplatesHelper::getClientOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
 			</select>
 
@@ -56,7 +56,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TEMPLATE', 'a.element', $listDirn, $listOrder); ?>
 				</th>
 				<th class="width-10">
-					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TYPE', 'a.client_id', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'JCLIENT', 'a.client_id', $listDirn, $listOrder); ?>
 				</th>
 				<th class="center width-10">
 					<?php echo JText::_('JVERSION'); ?>

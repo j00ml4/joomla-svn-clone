@@ -46,6 +46,36 @@ class MenusModelItem extends JModelAdmin
 	protected $helpLocal = false;
 
 	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 *
+	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
+	 * @since	1.6
+	 */
+	protected function canDelete($record)
+	{
+		$user = JFactory::getUser();
+
+		return $user->authorise('core.delete', 'com_menus.item.'.(int) $record->id);
+	}
+
+	/**
+	 * Method to test whether a record can be deleted.
+	 *
+	 * @param	object	A record object.
+	 *
+	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
+	 * @since	1.6
+	 */
+	protected function canEditState($record)
+	{
+		$user = JFactory::getUser();
+
+		return $user->authorise('core.edit.state', 'com_menus.item.'.(int) $record->id);
+	}
+
+	/**
 	 * Method to perform batch operations on an item or a set of items.
 	 *
 	 * @param	array	$commands	An array of commands to perform.
@@ -627,6 +657,20 @@ class MenusModelItem extends JModelAdmin
 	}
 
 	/**
+	 * A protected method to get the where clause for the reorder
+	 * This ensures that the row will be moved relative to a row with the same menutype
+	 *
+	 * @param	JTableMenu $table instance
+	 *
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($table)
+	{
+		return 'menutype = ' . $this->_db->Quote($table->menutype);
+	}	
+	
+	/**
 	 * Returns a Table object, always creating it
 	 *
 	 * @param	type	$type	The table type to instantiate
@@ -926,7 +970,14 @@ class MenusModelItem extends JModelAdmin
 		$cache = JFactory::getCache('com_modules');
 		$cache->clean();
 		$cache->clean('mod_menu');
-
+		
+		if (isset($data['link'])) {
+			$base = JURI::base();
+			$juri = JURI::getInstance($base.$data['link']);
+			$com = $juri->getVar('option');
+			$cache->clean($com);
+		}
+		
 		return true;
 	}
 
