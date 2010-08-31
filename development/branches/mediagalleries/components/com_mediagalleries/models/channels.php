@@ -13,10 +13,10 @@ jimport('joomla.application.component.modellist');
 
 
 /**
- * This models supports retrieving lists of article categories.
+ * This models supports retrieving lists of user channels.
  *
  * @package		Joomla.Administrator
- * @subpackage	com_weblinks
+ * @subpackage	com_mediagalleries
  * @since		1.6
  */
 class MediagalleriesModelChannels extends JModelList

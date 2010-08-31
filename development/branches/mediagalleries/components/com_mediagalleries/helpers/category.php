@@ -15,7 +15,7 @@ jimport('joomla.application.component.helper');
 jimport('joomla.application.categories');
 
 /**
- * Weblinks Component Category Tree
+ * Mediagalleries Component Category Tree
  *
  * @static
  * @package		Joomla
@@ -26,7 +26,7 @@ class MediagalleriesCategories extends JCategories
 {
 	public function __construct($options = array())
 	{
-		$options['table'] = '#__medias';
+		$options['table'] = '#__mediagalleries';
 		$options['extension'] = 'com_mediagalleries';
 		parent::__construct($options);
 	}

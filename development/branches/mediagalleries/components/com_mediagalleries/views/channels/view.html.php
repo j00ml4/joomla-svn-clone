@@ -11,10 +11,10 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.view');
 
 /**
- * Content categories view.
+ * Mediagalleries Channels View
  *
  * @package		Joomla.Site
- * @subpackage	com_weblinks
+ * @subpackage	com_medigalleries
  * @since 1.5
  */
 class MediagalleriesViewChannels extends JView

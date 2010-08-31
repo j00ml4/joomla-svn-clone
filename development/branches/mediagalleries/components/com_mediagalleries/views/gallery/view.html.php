@@ -18,11 +18,11 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport( 'joomla.application.component.view');
 
 /**
- * HTML View class for the WebLinks component
+ * View for Gallery
  *
  * @static
  * @package		Joomla
- * @subpackage	Weblinks
+ * @subpackage	Mediagalleries
  * @since 1.0
  */
 class MediagalleriesViewGallery extends JView
