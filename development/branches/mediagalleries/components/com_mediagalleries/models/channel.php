@@ -14,7 +14,7 @@ jimport('joomla.application.component.modellist');
 jimport('joomla.application.categories');
 
 /**
- * Show Medias list from some category or from all categories
+ * Show Medias list from some channel
  * 
  * @package		Joomla.Site
  * @subpackage	Contact
@@ -93,9 +93,8 @@ class MediagalleriesModelChannel extends JModelList
 		$query->select($this->getState('list.select', 'a.*'));
 		$query->from('`#__mediagalleries` AS a');
 		$query->where('a.access IN ('.$groups.')');
-
-		// Filter by category.
-		;
+		
+		// Fiter By User or Channel
 		$query->where('a.created_by = '.$this->getState("user.id",42));
 		
 		// Filter by state

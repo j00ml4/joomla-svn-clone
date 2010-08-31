@@ -15,7 +15,7 @@ jimport('joomla.application.component.helper');
 jimport('joomla.application.categories');
 
 /**
- * Weblinks Component Route Helper
+ * Mediagalleries Component Route Helper
  *
  * @static
  * @package		Joomla

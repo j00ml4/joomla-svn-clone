@@ -18,7 +18,7 @@ defined('_JEXEC') or die( 'Restricted access' );
 jimport( 'joomla.application.component.controller' );
 
 /**
- * JMultimedia Component Controller
+ * Mediagalleries front end component controller
  *
  * @static
  */

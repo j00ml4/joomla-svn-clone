@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.view');
 
 /**
- * Content categories view.
+ * Mediagalleries Galleries View
  *
  * @package		Joomla.Site
  * @subpackage	com_weblinks

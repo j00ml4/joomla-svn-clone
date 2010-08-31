@@ -13,10 +13,10 @@ jimport( 'joomla.registry.registry' );
 
 
 /**
- * HTML View class for the WebLinks component
+ * View Class for displaying a media
  *
  * @package		Joomla.Site
- * @subpackage	com_weblinks
+ * @subpackage	com_mediagalleries
  * @since		1.5
  */
 class MediagalleriesViewMedia extends JView
@@ -59,7 +59,7 @@ class MediagalleriesViewMedia extends JView
 					$this->media=plgContentMedia::addMedia($this->item->url,$this->item->params->get('width'),$this->item->params->get('height'),$this->item->params->get('autostart',0));
 				} else {
 					//TODO create proper error handling
-					return  JError::raiseError(404, "Media Not Found");	
+					return  JError::raiseError(404, "COM_MEDIAGALLERIES_MEDIA_NOT_FOUND");	
 				}
 		}
 		$this->setLayout($layout);
