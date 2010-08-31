@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit.php 18290 2010-07-29 02:27:05Z ian $
+ * @version		$Id: edit.php 18650 2010-08-26 13:28:49Z ian $
  * @package		Joomla.Administrator
  * @subpackage	com_languages
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.

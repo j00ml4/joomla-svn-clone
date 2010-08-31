@@ -19,9 +19,12 @@ JHTML::_('behavior.modal');
 ?>
 
 <script type="text/javascript">
-	function submitbutton(task)
+	function submitbutton(task, type)
 	{
-		if (task == 'item.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
+		if (task == 'item.setType') {
+			document.id('item-form').elements['jform[type]'].value = type;
+			submitform(task);
+		} else if (task == 'item.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
 			submitform(task);
 		} else {
 			// special case for modal popups validation response
@@ -35,7 +38,7 @@ JHTML::_('behavior.modal');
 	}
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_menus'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_menus'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 
 <div class="width-60 fltlft">
 	<fieldset class="adminform">

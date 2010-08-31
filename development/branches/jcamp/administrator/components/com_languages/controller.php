@@ -8,6 +8,8 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 
+jimport('joomla.application.component.controller');
+
 /**
  * Languages Controller
  *
@@ -36,10 +38,10 @@ class LanguagesController extends JController
 	{
 		require_once JPATH_COMPONENT.'/helpers/languages.php';
 
-		parent::display();
-
 		// Load the submenu.
 		LanguagesHelper::addSubmenu(JRequest::getWord('view', 'installed'));
+
+		parent::display();
 
 		return $this;
 	}
