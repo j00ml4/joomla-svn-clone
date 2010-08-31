@@ -78,7 +78,6 @@ class JConfig {
 	/* Debug Settings */
 	public $debug = '0';
 	public $debug_lang = '0';
-	public $debug_modules = '1';
 
 	/* Meta Settings */
 	public $MetaDesc = 'Joomla! - the dynamic portal engine and content management system';
@@ -87,9 +86,9 @@ class JConfig {
 	public $MetaAuthor = '1';
 
 	/* SEO Settings */
-	public $sef = '0';
+	public $sef = '1';
 	public $sef_rewrite = '0';
-	public $sef_suffix = '';
+	public $sef_suffix = '0';
 	public $unicodeslugs = '0';
 
 	/* Feed Settings */

@@ -10,7 +10,7 @@ require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 
 class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 {
-	public $cfg; // configuration so tests can get at the fields
+	public $cfg; // configuration so tests can get at the fields	
 
 	public function setUp()
 	{
@@ -23,6 +23,16 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 			$this->setHost($cfg->selhost);
 		}
 		echo ".\n" . 'Starting ' . get_class($this) . ".\n";
+	}
+	
+	function checkMessage($message)
+	{
+		try {
+			$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., '$message')]"), 'Message not displayed or message changed, SeleniumJoomlaTestCase line 31');			
+	    }
+	    catch (PHPUnit_Framework_AssertionFailedError $e){
+			array_push($this->verificationErrors, $this->getTraceFiles($e));
+	    }		
 	}
 
 	function doAdminLogin()
@@ -63,29 +73,31 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->open($cfg->path);
 		$this->waitForPageToLoad("30000");
 	}
-
-	function doFrontEndLogin()
+	
+	function doFrontEndLogin($username = null,$password = null)
 	{
 		$cfg = new SeleniumConfig();
+		if(!isset($username))$username=$cfg->username;
+		if(!isset($password))$password=$cfg->password;		
 		// check to see if we are already logged in
 		if ($this->getValue("Submit") == "Log out")
 		{
-			echo "Logging out before loggin in. \n";
+			echo "Logging out before logging in. \n";
 			$this->click("Submit");
 			$this->waitForPageToLoad("30000");
 			$this->click("link=Home");
 			$this->waitForPageToLoad("30000");
 		}
 		echo "Logging in to front end.\n";
-		$this->type("modlgn_username", $cfg->username);
-		$this->type("modlgn_passwd", $cfg->password);
+		$this->type("modlgn_username", $username);
+		$this->type("modlgn_passwd", $password);
 		$this->click("Submit");
 		$this->waitForPageToLoad("30000");
-	}
+	}		
 
 	function setTinyText($text)
 	{
-		$this->selectFrame("text_ifr");
+		$this->selectFrame("jform_text_ifr");
 		$this->type("tinymce", $text);
 		$this->selectFrame("relative=top");
 	}
@@ -590,7 +602,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
 	function togglePublished($articleTitle)
 	{
-		echo "Toggling Featured on/off for article " . $articleTitle . "\n";
+		echo "Toggling publishing of article " . $articleTitle . "\n";
 		$this->click("//table[@class='adminlist']/tbody//tr//td/a[contains(text(), '" .
 			$articleTitle . "')]/../../td[3]/a");
 		$this->waitForPageToLoad("30000");
