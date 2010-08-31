@@ -100,12 +100,18 @@ class UsersControllerRegistration extends UsersController
 		// Check for request forgeries.
 		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
+		// If registration is disabled - Redirect to login page.
+		if(JComponentHelper::getParams('com_users')->get('allowUserRegistration') == 0) {
+			$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false));
+			return false;
+		}
+
 		// Initialise variables.
 		$app	= JFactory::getApplication();
 		$model	= $this->getModel('Registration', 'UsersModel');
 
 		// Get the user data.
-		$data = JRequest::getVar('jform', array(), 'post', 'array');
+		$requestData = JRequest::getVar('jform', array(), 'post', 'array');
 
 		// Validate the posted data.
 		$form	= $model->getForm();
@@ -113,7 +119,7 @@ class UsersControllerRegistration extends UsersController
 			JError::raiseError(500, $model->getError());
 			return false;
 		}
-		$data	= $model->validate($form, $data);
+		$data	= $model->validate($form, $requestData);
 
 		// Check for validation errors.
 		if ($data === false) {
@@ -130,7 +136,7 @@ class UsersControllerRegistration extends UsersController
 			}
 
 			// Save the data in the session.
-			$app->setUserState('com_users.registration.data', $data);
+			$app->setUserState('com_users.registration.data', $requestData);
 
 			// Redirect back to the registration screen.
 			$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration', false));

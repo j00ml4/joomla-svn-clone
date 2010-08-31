@@ -36,10 +36,11 @@ $params = $this->params;
 <fieldset>
 	<legend><?php echo JText::_('JDETAILS'); ?></legend>
 	
+	<?php /* ?>
 	<div class="formelm">
 		<?php echo $this->form->getLabel('ordering'); ?> <?php echo $this->form->getInput('ordering'); ?>
 	</div>
-	
+	<?php */ ?>
 	<div class="formelm">
 		<?php echo $this->form->getLabel('state'); ?> <?php echo $this->form->getInput('state'); ?>
 	</div>

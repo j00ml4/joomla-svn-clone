@@ -20,14 +20,20 @@ $pageClass = $this->params->get('pageclass_sfx');
 						$this->item->created_by);?></span>
 	<?php if($this->item->modified_by): ?>
 	<span>
-<?php echo JText::sprintf('COM_PROJECTS_MODIFIED_ON_BY',
+		<?php echo JText::sprintf('COM_PROJECTS_MODIFIED_ON_BY',
 						JHTML::_('date', $this->item->modified, JText::_('COM_PROJECTS_DATE_FORMAT2')),
 						$this->item->modified_by);?>		
 	</span>
-<?php endif;?>
+	<?php endif;?>
+	<?php if($this->item->category_title): ?>
+	<span>
+		<?php echo JText::_('JCATEGORY') .': '. $this->item->category_title; ?>
+	</span>
+	<?php endif; ?>
 </div>
 <div class="divBox1">
 	<table>
+		<?php  /* ?>
 		<tr>
 			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_START_AT');?>:</td>
 			<td>
@@ -38,45 +44,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 			?>
 			</td>
 		</tr>
-		<tr>
-			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_FINISHED_WHEN');?>:</td>
-			<td>
-			<?php
-				echo strtotime($this->item->finished) == 0 ?
-					 JText::_('COM_PROJECTS_TASK_NOT_YET') :
-				     JHTML::_('date', $this->item->finished, JText::_('DATE_FORMAT_LC3'));
-			?>
-			</td>
-		</tr>
-		<tr>
-			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_ESTIMATE');?>:</td>
-			<td><?php echo $this->item->estimate;?></td>
-		</tr>
-		<tr>
-			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_ASSIGNED_TO');?>:</td>
-			<td>
-			<?php
-//				echo $this->item-> == 0 ?
-					echo JText::_('COM_PROJECTS_TASK_NOT_YET');
-//				     JHTML::_('date', $this->item->finish_at, JText::_('DATE_FORMAT_LC3'));
-			?>
-			</td>
-		</tr>
-	</table>
-	
-	<table>
-		<tr>
-			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_CATEGORY_TASK');?>:</td>
-			<td><?php echo $this->item->category_title;?></td>
-		</tr>
-		<tr>
-			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_STATUS_TASK');?>:</td>
-			<td><?php echo ProjectsHelper::getStateTask($this->item->state);?></td>
-		</tr>
-		<tr>
-			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_IMPORTANCE');?>:</td>
-			<td><?php echo ProjectsHelper::getImportanceTask($this->item->ordering);?></td>
-		</tr>
+		<?php */ ?>
 		<tr>
 			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_FINISH_AT');?>:</td>
 			<td>
@@ -87,15 +55,39 @@ $pageClass = $this->params->get('pageclass_sfx');
 			?>
 			</td>
 		</tr>
+		<?php /* ?>
+		<tr>
+			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_ESTIMATE');?>:</td>
+			<td><?php echo $this->item->estimate;?></td>
+		</tr>
+		<tr>
+			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_ASSIGNED_TO');?>:</td>
+			<td>
+			<?php
+				echo $this->item->editor;
+			?>
+			</td>
+		</tr>
+		<?php */ ?>
+	</table>
+	
+	<table>
+		
+		<tr>
+			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_STATUS_TASK');?>:</td>
+			<td><?php echo JHtml::_('tool.published', $this->item->state,  $this->item->id, $this->type, false); ?></td>
+		</tr>
 	</table>
 </div>
 
+<?php if($this->item->description): ?>
 <div class="projects-module">
 	<h4><?php echo JText::_('COM_PROJECTS_TASK_CELL_DESCRIPTION');?></h4>
 	<div class="projects-content">
 		<?php echo $this->item->description;?>
 	</div>
 </div>
+<?php endif; ?>
 
 <?php if(count($this->items)): ?>
 <div class="projects-module">

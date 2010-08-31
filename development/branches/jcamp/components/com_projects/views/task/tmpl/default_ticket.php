@@ -20,11 +20,16 @@ $pageClass = $this->params->get('pageclass_sfx');
 						$this->item->created_by);?></span>
 	<?php if($this->item->modified_by): ?>
 	<span>
-<?php echo JText::sprintf('COM_PROJECTS_MODIFIED_ON_BY',
+		<?php echo JText::sprintf('COM_PROJECTS_MODIFIED_ON_BY',
 						JHTML::_('date', $this->item->modified, JText::_('COM_PROJECTS_DATE_FORMAT2')),
 						$this->item->modified_by);?>		
 	</span>
-<?php endif;?>
+	<?php endif;?>
+	<?php if($this->item->category_title): ?>
+	<span>
+		<?php echo JText::_('JCATEGORY') .': '. $this->item->category_title; ?>
+	</span>
+	<?php endif; ?>
 </div>
 <div class="divBox1">
 	<table>
@@ -53,7 +58,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<table>
 		<tr>
 			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_STATUS_TICKET');?>:</td>
-			<td><?php echo ProjectsHelper::getStateTicket($this->item->state);?></td>
+			<td><?php echo JHtml::_('tool.published', $this->item->state,  $this->item->id, $this->type, false); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_FINISHED_WHEN');?>:</td>
@@ -68,9 +73,11 @@ $pageClass = $this->params->get('pageclass_sfx');
 	</table>
 </div>
 
+<?php if($this->item->description): ?>
 <div class="projects-module">
 	<h4><?php echo JText::_('COM_PROJECTS_TASK_CELL_DESCRIPTION');?></h4>
 	<div class="projects-content">
 		<?php echo $this->item->description;?>
 	</div>
 </div>
+<?php endif; ?>

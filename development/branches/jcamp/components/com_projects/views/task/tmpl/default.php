@@ -16,9 +16,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 <form action="<?php echo ProjectsHelper::getLink('form'); ?>" method="post" id="adminForm" name="adminForm">
 	<div class="projects<?php echo $pageClass;?> projects-task<?php echo $pageClass;?>">
 	<?php 
-		echo $this->getModel()->getState('type') == 2 ?
-			$this->loadTemplate('task') :
-			$this->loadTemplate('ticket');
+		echo $this->loadTemplate($this->type);
 	?>
 	</div>
 	<input type="hidden" name="task" value="" />
