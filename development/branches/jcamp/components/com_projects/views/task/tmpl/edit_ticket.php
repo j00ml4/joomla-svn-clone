@@ -19,12 +19,14 @@ $params = $this->params;
 
 <fieldset>
 	<legend><?php echo JText::_('JGLOBAL_DESCRIPTION'); ?></legend>
+	<?php /* ?>
 	<div class="formelm">
 		<?php echo $this->form->getLabel('priority'); ?> <?php echo $this->form->getInput('priority'); ?>
 	</div>
-
+	<?php */ ?>
 	<div class="formelm">
 		<?php echo $this->form->getLabel('title'); ?> <?php echo $this->form->getInput('title'); ?>
+		<?php echo $this->form->getInput('catid', null, $this->params->get('catid')); ?>
 	</div>
 
 	<div class="formelm">

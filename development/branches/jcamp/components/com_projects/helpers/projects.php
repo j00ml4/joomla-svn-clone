@@ -307,41 +307,6 @@ abstract class ProjectsHelper {
     }
     
     /**
-     * Method to get a translated text of a state of a task
-     * @param $state
-     * return Translated text of a state of a task
-     */
-    public static function getStateTask($state) {
-        static $states;
-        if (empty($states)) {
-            $states = array(
-    			2 => COM_PROJECTS_STATE_FINISHED,
-				1 => COM_PROJECTS_STATE_PENDING,
-				-3 => COM_PROJECTS_STATE_REPORTED,
-				0 => COM_PROJECTS_STATE_DENIED
-			);
-        }
-        return JText::_($states[$state]);
-	}
-	
-    /**
-     * Method to get a translated text of a state of a ticket
-     * @param $state
-     * return Translated text of a state of a task
-     */
-    public static function getStateTicket($state) {
-        static $states;
-        if (empty($states)) {
-            $states = array(
-    			-3 => COM_PROJECTS_STATE_REPORTED,
-				0 => COM_PROJECTS_STATE_DENIED,
-    			1 => COM_PROJECTS_STATE_APPROVED,
-    			2 => COM_PROJECTS_STATE_FINISHED);
-        }
-        return JText::_($states[$state]);
-	}
-	
-    /**
      * Method to get a translated text of a importance of a task
      * @param $importance
      * return Translated text of a importance of a task
@@ -350,9 +315,9 @@ abstract class ProjectsHelper {
         static $importances;
         if (empty($importances)) {
             $importances = array(
-    			1 => COM_PROJECTS_PRIORITY_HIGH,
-				2 => COM_PROJECTS_PRIORITY_NORMAL,
-				3 => COM_PROJECTS_PRIORITY_LOW,
+    			1 => 'COM_PROJECTS_PRIORITY_HIGH',
+				2 => 'COM_PROJECTS_PRIORITY_NORMAL',
+				3 => 'COM_PROJECTS_PRIORITY_LOW',
 			);
         }
         return JText::_($importances[$importance]);

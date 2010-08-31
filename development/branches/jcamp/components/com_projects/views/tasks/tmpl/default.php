@@ -16,6 +16,9 @@ $params =  $this->params;
 <div class="projects<?php echo $params->get('pageclass_sfx'); ?>">
     <div class="tasks-list">
 		<form action="<?php echo ProjectsHelper::getLink('form'); ?>" method="post" id="adminForm" name="adminForm">	
+	        <?php if($this->canDo->get('task.view') && $this->canDo->get('ticket.view')): ?>
+				<?php echo $this->loadTemplate('buttons'); ?>
+			<?php endif; ?>
 	        <fieldset class="filters">
 				<legend><?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?></legend>
 		
@@ -29,9 +32,6 @@ $params =  $this->params;
 						<?php echo JHtml::_('filter.state', $this->type, $this->state->get('filter.state')); ?>
 						
 						<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
-					</p>
-					<p>
-						<?php echo JHtml::_('filter.type', $this->state->get('type')); ?>
 					</p>
 				</div>
 			</fieldset>

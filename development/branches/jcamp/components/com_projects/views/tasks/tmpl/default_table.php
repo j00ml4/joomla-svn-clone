@@ -21,14 +21,16 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 				<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
 			</th>
 			<th>
-				<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDir, $listOrder); ?>
-			</th>
-			<th width="5%">
-				<?php echo JHtml::_('grid.sort',  'JGLOBAL_STATE', 'a.`state`', $listDir, $listOrder); ?>
+				<?php echo JText::_('JGLOBAL_TITLE'); ?>
 			</th>
 			<th width="20%">
-				<?php echo JHtml::_('grid.sort',  'JGLOBAL_FIELD_CREATED_BY_ALIAS_LABEL', '`created_by_alias`', $listDir, $listOrder); ?>
+				<?php echo JText::_('JGLOBAL_FIELD_CREATED_BY_ALIAS_LABEL'); ?>
+				<?php //echo JHtml::_('grid.sort',  'JGLOBAL_FIELD_CREATED_BY_ALIAS_LABEL', '`created_by_alias`', $listDir, $listOrder); ?>
 			</th>
+			<th width="5%">
+				<?php echo JText::_('JGLOBAL_STATE'); ?>
+				<?php //echo JHtml::_('grid.sort',  'JGLOBAL_STATE', 'a.`state`', $listDir, $listOrder); ?>
+			</th>	
 		</tr>
 	</thead>
 	
@@ -52,10 +54,6 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 			</td>
 
 			<td>
-				<?php echo JHtml::_('tool.published', $item->state, $i, $this->type); ?>
-			</td>
-			
-			<td>
 				<?php if ($item->checked_out) :
 					echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canChange);
 				else:
@@ -63,6 +61,10 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 				endif; ?>
 			</td>
 			
+			<td>
+				<?php echo JHtml::_('tool.published', $item->state, $i, $this->type); ?>
+			</td>
+						
 		</tr>
 		<?php endforeach; ?>
 	</tbody>
