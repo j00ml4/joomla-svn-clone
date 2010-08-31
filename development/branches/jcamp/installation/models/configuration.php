@@ -57,7 +57,6 @@ class JInstallationModelConfiguration extends JModel
 		/* Debug Settings */
 		$registry->set('debug', 0);
 		$registry->set('debug_lang', 0);
-		$registry->set('debug_modules', 0);
 
 		/* Database Settings */
 		$registry->set('dbtype', $options->db_type);
@@ -111,7 +110,7 @@ class JInstallationModelConfiguration extends JModel
 		/* SEO Settings */
 		$registry->set('sef', 1);
 		$registry->set('sef_rewrite', 0);
-		$registry->set('sef_suffix', 1);
+		$registry->set('sef_suffix', 0);
 		$registry->set('unicodeslugs', 0);
 
 		/* Feed Settings */

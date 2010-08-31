@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: language0001Test.php 18212 2010-07-22 06:02:54Z eddieajau $
+ * @version		$Id: language0001Test.php 18675 2010-08-27 04:53:20Z eddieajau $
  * @package		Joomla.SystemTest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -1306,7 +1306,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
     $this->click("link=Mass Mail Users");
 	$screen='Mass Mail';
     $this->waitForPageToLoad("30000");
-	$this->click("link=Send e-mail");
+	$this->click("link=Send email");
 	try
 	{
 	    $this->assertEquals("Please enter a subject", $this->getAlert());
@@ -1316,7 +1316,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	    array_push($this->verificationErrors, $this->getTraceFiles($e));
 	}
 	$this->type("jform_subject", "test");
-	$this->click("link=Send e-mail");
+	$this->click("link=Send email");
     try
 	{
 	     $this->assertEquals("Please enter a message", $this->getAlert());

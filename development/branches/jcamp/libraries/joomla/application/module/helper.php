@@ -90,7 +90,7 @@ abstract class JModuleHelper
 		}
 		if (count($result) == 0)
 		{
-			if ($app->getCfg('debug_modules') && JRequest::getBool('tp'))
+			if (JRequest::getBool('tp') && JComponentHelper::getParams('com_templates')->get('template_positions_display'))
 			{
 				$result[0] = JModuleHelper::getModule('mod_'.$position);
 				$result[0]->title = $position;
@@ -186,7 +186,7 @@ abstract class JModuleHelper
 		}
 
 		//dynamically add outline style
-		if ($app->getCfg('debug_modules') && JRequest::getBool('tp')) {
+		if (JRequest::getBool('tp') && JComponentHelper::getParams('com_templates')->get('template_positions_display')) {
 			$attribs['style'] .= ' outline';
 		}
 
@@ -383,8 +383,8 @@ abstract class JModuleHelper
 		$conf = JFactory::getConfig();
 
 		// turn cache off for internal callers if parameters are set to off and for all loged in users
-		if($moduleparams->get('owncache', null) == 0  || $conf->get('caching') == 0 || $user->get('id')) {
-			$cache->setCaching = false;
+		if($moduleparams->get('owncache', null) === 0  || $conf->get('caching') == 0 || $user->get('id')) {
+			$cache->setCaching(false);
 		}
 
 		$cache->setLifeTime($moduleparams->get('cache_time', $conf->get('cachetime') * 60));

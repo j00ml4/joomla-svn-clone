@@ -27,6 +27,22 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+30-Aug-2010 Mark Dexter
+^ Improve documentation for JUserHelper unit tests (Thanks Niels Braczek!)
+
+29-Aug-2010 Mark Dexter
++ [#20726] Unit tests for JUserHelper
++ [#22021] ACL System Tests
+
+28-Aug-2010 Ian MacLennan
+ # Fixed errors in tests and added mocks to deal with some failures properly
+
+26-Aug-2010 Ian MacLennan
+ + Added unit test for JFormRuleEmail
+
+20-Aug-2010 Mark Dexter
+# Fix control_panel0004Test for category formatting changes
+
 06-Aug-2010 Mark Dexter
 ^ Added new var to configdef.php to allow doInstall to set caching to different values
 
