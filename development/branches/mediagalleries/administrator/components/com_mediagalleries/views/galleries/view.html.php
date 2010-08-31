@@ -16,7 +16,7 @@ jimport( 'joomla.application.component.view' );
 /**
  * mediagalleries View
  *
- * @package    Joomla.Tutorials
+ * @package    Joomla.Administrator
  * @subpackage Components
  */
 class MediagalleriesViewGalleries extends JView
