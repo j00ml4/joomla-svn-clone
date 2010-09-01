@@ -18,7 +18,7 @@
 			extension="com_projects"
 			label="COM_PROJECTS_FIELD_PORTFOLIO_LABEL"
 			required="true">
-         	<option value="">JOPTION_NO_CATEGORY</option>
+         	<option value="">COM_PROJECTS_SELECT_PORTFOLIO</option>
 		</field>	
         
         <field id="title" 

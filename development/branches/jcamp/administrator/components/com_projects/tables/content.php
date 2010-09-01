@@ -18,6 +18,5 @@ require_once 'libraries'.DS.'joomla'.DS.'database'.DS.'table'.DS.'content.php';
  */
 class ProjectsTableContent extends JTableContent
 {
-	
-	
+
 }
