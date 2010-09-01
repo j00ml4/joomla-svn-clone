@@ -50,10 +50,6 @@ $listDirn	= $this->state->get('list.direction');
 				<th class="list-title" id="tableOrdering">
 					<?php  echo JHTML::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder) ; ?>
 				</th>
-
-				<th class="list-category" id="tableOrdering">
-					<?php  echo JHTML::_('grid.sort', 'JCATEGORY', 'category_title', $listDirn, $listOrder) ; ?>
-				</th>
 				
 				<th class="list-author" id="tableOrdering3">
 					<?php echo JHTML::_('grid.sort', 'JAUTHOR', 'author', $listDirn, $listOrder); ?>
@@ -77,12 +73,15 @@ $listDirn	= $this->state->get('list.direction');
 					
 				<td class="list-title">
 					<a href="<?php echo ProjectsHelper::getLink('document', $item->id); ?>">
-					<?php echo $item->title; ?></a>
+						<?php echo $item->title; ?></a>
+						
+					<?php if(!empty($item->category_title)): ?>
+					<span class="category">
+						(<?php echo $item->category_title; ?>)
+					</span>
+					<?php endif; ?>	
 				</td>
 				
-				<td class="list-category"> 
-					<?php echo $item->category_title; ?>
-				</td>
 
 				<td class="list-author">
 					<?php echo $this->params->get('link_author', 0) ? 

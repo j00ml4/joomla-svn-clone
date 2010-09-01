@@ -66,7 +66,7 @@ class ProjectsModelProjects extends JModelList
 		
 		// Progress
 		$query->select(' FLOOR((COUNT(DISTINCT ntf.id) / COUNT(DISTINCT nt.id)) * 100) AS progress');
-		$query->join('LEFT', '#__project_tasks AS nt ON nt.project_id=p.id');
+		$query->join('LEFT', '#__project_tasks AS nt ON nt.project_id=p.id AND nt.state != 0');
 		$query->join('LEFT', '#__project_tasks AS ntf ON ntf.project_id=p.id AND ntf.state=2');
 		$query->group('p.id');
 
