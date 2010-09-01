@@ -31,7 +31,7 @@
 			description="JFIELD_CATEGORY_DESC"
 			extension="com_projects.task"
 			label="JCATEGORY" >
-         	<option value="">JNONE</option>
+         	<option value="">JOPTION_SELECT_CATEGORY</option>
 		</field>
 		
         <field id="title" 

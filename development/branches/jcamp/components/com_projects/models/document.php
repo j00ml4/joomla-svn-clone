@@ -10,25 +10,31 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modeladmin');
-//require_once 'components'.DS.'com_content'.DS	.'models'.DS.'form.php';
+//jimport('joomla.application.component.modeladmin');
+require_once 'components'.DS.'com_content'.DS.'models'.DS.'form.php';
 
 /**
  * Model to display editing form for a document
  * @author elf
  *
  */
-class ProjectsModelDocument extends JModelAdmin
+class ProjectsModelDocument extends ContentModelForm
 {
 	/**
 	 * Model context string.
 	 *
 	 * @var		string
 	 */
-	protected $context = 'com_projects.edit.document';
+	protected $_context = 'com_projects.edit.document';
 	protected $project;
 	protected $item;
 	
+	
+	public function __construct($config){
+		parent::__construct($config);
+		
+		$this->addTablePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_content'.DS.'tables');
+	}
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
@@ -85,9 +91,10 @@ class ProjectsModelDocument extends JModelAdmin
 		// project
         $this->setState('project.id', 
         	$app->getUserState('project.id'));
-        	
-        $app->setUserState($this->context.'id', null);
-		$app->setUserState($this->context.'data',	null);	
+
+        //$this->setState('article.id', 	
+       // $app->setUserState($this->_context.'id', null);
+		//$app->setUserState($this->_context.'data',	null);	
 	}
 
 	
@@ -136,7 +143,7 @@ class ProjectsModelDocument extends JModelAdmin
 	protected function loadFormData()
 	{
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState($this->context.'.data', array());
+		$data = JFactory::getApplication()->getUserState($this->_context.'.data', array());
 
 		if (empty($data)) {
 			$data = $this->getItem();
@@ -156,6 +163,7 @@ class ProjectsModelDocument extends JModelAdmin
 	{	
 		if(!is_object($this->item)){
 			$this->item = parent::getItem($pk);
+			
 			if(!empty($this->item)){
 				$app = JFactory::getApplication();				
 				if($this->item->id){
@@ -170,11 +178,6 @@ class ProjectsModelDocument extends JModelAdmin
 					$app->setUserState('project.id', $this->item->project_id);
 				}
 				
-				$this->item->text = $this->item->introtext;
-				if (!empty($this->item->fulltext)) {
-					$this->item->text .= '<hr id="system-readmore" />'.$this->item->fulltext;
-				}
-				
 				// Convert parameter fields to objects.
 				$registry = new JRegistry;
 				$registry->loadJSON($this->item->attribs);
@@ -182,6 +185,7 @@ class ProjectsModelDocument extends JModelAdmin
 				$this->item->params->merge($registry);
 			}
 		}
+		
 		return $this->item;
 	}	
 	
@@ -204,13 +208,14 @@ class ProjectsModelDocument extends JModelAdmin
 	} 	
 	
 	public function save($data){
+		$isNew = !$data['id'];
 		if(!parent::save($data)){
 			return false;
 		}
-				
-		if($this->getState('document.new')){
+		
+		if($isNew){
 			$db = $this->getDbo();
-			$id = $this->getState('document.id', $db->insertid());
+			$id = $this->getState('article.id', $db->insertid());
 			$app= JFactory::getApplication();		
 			$q = 'INSERT INTO `#__project_contents`'. 
 				'(`project_id`,`content_id`)'. 

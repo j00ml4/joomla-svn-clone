@@ -301,6 +301,7 @@ abstract class ProjectsHelper {
 
             	'documents' => 'index.php?option=com_projects&view=documents&id=',
              	'document' => 'index.php?option=com_projects&view=document&id=',
+            	'document.form' => 'index.php?option=com_projects&view=document&layout=edit&id=',
               );
         }
         return JRoute::_($links[strtolower($key)].$append);

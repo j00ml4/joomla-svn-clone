@@ -27,12 +27,13 @@ $app = &JFactory::getApplication();
 		<legend><?php echo JText::_('JEDITOR'); ?></legend>
 
 		<div class="formelm">
+			<?php echo $this->form->getLabel('featured'); ?>
+			<?php echo $this->form->getInput('featured'); ?>
+		</div>
+		
+		<div class="formelm">
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
-		</div>
-
-		<div class="formelm">
-			<?php echo $this->form->getLabel('catid'); ?>
 			<?php echo $this->form->getInput('catid'); ?>
 		</div>
 		

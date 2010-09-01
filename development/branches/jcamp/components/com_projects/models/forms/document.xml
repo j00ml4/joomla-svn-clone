@@ -42,7 +42,7 @@
 			description="COM_PROJECT_FIELD_DOCUMENT_CATEGORY_DESC"
 			class="inputbox"
       		default="0">
-  			<option value="0">JNONE</option>
+  			<option value="0">JOPTION_SELECT_CATEGORY</option>
 		</field>
 		<!-- this is for rendering -->
 		<field
@@ -154,6 +154,19 @@
 			<option value="*">JALL</option>
 		</field>
 
+		<field 
+			id="featured"
+			name="featured" 
+			type="list"
+			label="JGLOBAL_FIELD_FEATURED_LABEL"
+			description="JGLOBAL_FIELD_FEATURED_DESC"
+			class="inputbox"
+			default="0"
+		>
+			<option value="0">JNO</option>
+			<option value="1">JYES</option>
+		</field>
+		
 		<field
 			id="access"
 			name="access"
@@ -161,6 +174,8 @@
 			label="JFIELD_ACCESS_LABEL"
 			description="JFIELD_ACCESS_DESC"
 			class="inputbox"
-			size="1" />
+			size="1">
+			<option value="">JOPTION_SELECT_ACCESS</option>
+		</field>
 	</fieldset>
 </form>
