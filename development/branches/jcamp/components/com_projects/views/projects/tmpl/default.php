@@ -16,7 +16,8 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
 ?>
 <div class="projects<?php echo $pageClass;?> blog<?php echo $pageClass;?>">
     <div class="projects-content">
-        <?php if ($params->get('show_description', 1) || $params->def('show_description_image', 1)) : ?>
+        <?php if (($params->get('show_description', 1) || $params->def('show_description_image', 1)) &&
+        			strlen($this->portfolio->description)) : ?>
         <div class="category-desc">
             <?php if ($params->get('show_description_image') && $this->portfolio->getParams()->get('image')) : ?>
                 <img src="<?php echo $this->portfolio->getParams()->get('image'); ?>"/>
