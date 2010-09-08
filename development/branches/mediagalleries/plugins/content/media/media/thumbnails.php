@@ -37,21 +37,22 @@ function thumbVideoMegavideo($media, $width, $height, $autostart ){
 }
 
 function thumbMediaSWF($media, $width, $height){
+	return 'media/mediagalleries/thumbs/sample-swf.jpg';
 }
 
 function thumbAudioMp3($media, $width, $height){
-}
-
-function thumbPicture($media, $width, $height){
+	return 'media/mediagalleries/thumbs/sample-audio.jpg';
 }
 
 function thumbFlv($media, $width, $height){
+	return 'media/mediagalleries/thumbs/sample-flv.jpg';
 }
 
 function thumbH264($media, $width, $height){
 }
 
 function thumbVideoQuicktime($media, $width, $height){
+	return 'media/mediagalleries/thumbs/sample-quicktime.jpg';
 }
 
 function thumbVideoRealmedia($media, $width, $height){
@@ -64,7 +65,7 @@ function thumbVideoWindows($media, $width, $height){
 }
 
 function thumbDefault(){
-
+	return 'media/mediagalleries/thumbs/sample-none.jpg';
 }
 
 function thumbImage($media, $width , $height){
