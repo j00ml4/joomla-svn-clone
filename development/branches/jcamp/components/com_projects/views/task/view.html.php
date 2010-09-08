@@ -128,7 +128,8 @@ class ProjectsViewTask extends JView
 		switch($this->getLayout()){
 			case 'edit':
 			case 'form':
-				$title = JText::sprintf('COM_PROJECTS_TASK_FORM_'.$this->type.'_TITLE', $this->project->title);
+				$type = empty($this->item->id) ? 'NEW' : 'EDIT';
+				$title = JText::sprintf('COM_PROJECTS_TASK_'.$type.'_'.$this->type.'_TITLE', $this->project->title);
 				$icon = 'config';
 				
 				ToolBar::save('task.save');

@@ -51,17 +51,17 @@ $model = $this->getModel();
 				<thead>
 					<tr>		
 						<?php if($this->canDo->get('core.edit')): ?>	
-						<th>
+						<th style="width : 15px;">
 							<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
 						</th>
 						<?php endif;?>
 						
 						<th id="tableOrdering2">
-							<?php echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBER_NAME', 'u.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+							<?php echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBERS_NAME', 'u.name', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 						</th>	
 						
 						<th id="tableOrdering3">
-							<?php echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBER_ROLES', 'roles', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
+							<?php echo JHTML::_('grid.sort', 'COM_PROJECTS_MEMBERS_ROLES', 'roles', $this->state->get('list.direction'), $this->state->get('list.ordering')); ?>
 						</th>							
 					</tr>
 				</thead>
@@ -89,7 +89,7 @@ $model = $this->getModel();
 				</tbody>
 			</table>
 		<?php else: ?>	
-			<p><?php echo JText::_('COM_PROJECTS_NO_MEMBERS'); ?></p>
+			<p><?php echo $this->type == 'assign' ? JText::_('COM_PROJECTS_MEMBERS_NO_MEMBERS_ASSIGN') : JText::_('COM_PROJECTS_MEMBERS_NO_MEMBERS_UNASSIGN'); ?></p>
 		<?php endif; ?>
 			
 			<input type="hidden" name="task" value="" />

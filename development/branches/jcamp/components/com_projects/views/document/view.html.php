@@ -113,7 +113,7 @@ class ProjectsViewDocument extends JView
 		switch($this->getLayout()){
 			case 'edit':
 			case 'form':	
-				$type = empty($this->item)? 'NEW' : 'EDIT';			
+				$type = empty($this->item->id)? 'NEW' : 'EDIT';			
 				$title = JText::sprintf('COM_PROJECTS_DOCUMENT_'.$type.'_TITLE', $this->project->title);
 				$icon = 'config';
 				

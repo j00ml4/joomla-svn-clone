@@ -133,7 +133,8 @@ class ProjectsViewProject extends JView
 		switch($this->getLayout()){
 			case 'edit':
 			case 'form':
-				$title = JText::_('COM_PROJECTS_PROJECT_FORM_TITLE');
+				$type = empty($this->item->id)? 'NEW' : 'EDIT';		
+				$title = JText::_('COM_PROJECTS_PROJECT_'.$type.'_TITLE');
 				$icon = 'config';
 				
 				ToolBar::save('project.save');

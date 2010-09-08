@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 ?>
 <div class="projects-module">
-	<h4><?php echo JText::_('COM_PROJECTS_DOCUMENTS_LIST');?></h4>
+	<h4><?php echo JText::_('COM_PROJECTS_PROJECT_DOCUMENTS_LIST');?></h4>
 	<div class="projects-content">
 		<?php
 			$c = count($this->docs); 
@@ -30,6 +30,6 @@ defined('_JEXEC') or die;
 		?>
 	
 	    <a href="<?php echo ProjectsHelper::getLink('documents', $this->item->id); ?>" class="readmore">
-		<?php echo JText::_('COM_PROJECTS_DOCUMENTS_LIST_LINK'); ?></a>
+		<?php echo JText::_('COM_PROJECTS_PROJECT_DOCUMENTS_LIST_LINK'); ?></a>
 	</div>
 </div>
