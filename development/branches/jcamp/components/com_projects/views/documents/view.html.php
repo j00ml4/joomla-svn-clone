@@ -68,7 +68,7 @@ class ProjectsViewDocuments extends JView {
 	            ToolBar::editList('document.edit');
 	        }
 	        if ($this->canDo->get('document.delete')) {
-	            ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_DOCUMENT_DELETE'), 'documents.delete');
+	            ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_DOCUMENTS_DELETE'), 'documents.delete');
 	        }
         }
         

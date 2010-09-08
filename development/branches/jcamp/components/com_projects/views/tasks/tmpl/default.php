@@ -36,7 +36,7 @@ $params =  $this->params;
 				</div>
 			</fieldset>
 			<?php if(empty($this->items)): ?>
-	            <p><?php echo JText::_('COM_PROJECTS_NO_TASKS'); ?></p>
+	            <p><?php echo JText::_('COM_PROJECTS_TASKS_NO_'.$this->type.'S'); ?></p>
 	       	 <?php else: ?>
 	            <?php echo $this->loadTemplate('table'); ?>  	
 	            

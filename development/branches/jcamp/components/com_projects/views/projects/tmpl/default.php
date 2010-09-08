@@ -30,6 +30,7 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
         <?php endif; ?>
 		<form action="<?php echo ProjectsHelper::getLink('projects'); ?>" method="post" id="adminForm" name="adminForm">
         <div class="TabView" id="TabView">
+        <?php // when is this triggerred?! elf ?>
             <?php if ($this->portfolio->numcategories && $this->portfolio->numitems) : ?>
             <ul class="tabnav">
                 <li><a title="<?php echo JText::_('COM_PROJECTS_PORTFOLIOS_LINK_DESC'); ?>" href="<?php echo ProjectsHelper::getLink('portfolios', $this->portfolio->id); ?>" >

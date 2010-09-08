@@ -78,8 +78,8 @@ class ProjectsViewMembers extends JView
 					 
 				case 'delete':
 				case 'list' :
-					$title = JText::_('COM_PROJECTS_MEMBERS_DELETE_TITLE');
-					ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_MEMBERS_DELETE'), 'project.unassign');
+					$title = JText::_('COM_PROJECTS_MEMBERS_UNASSIGN_TITLE');
+					ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_MEMBERS_UNASSIGN'), 'project.unassign');
 					break;
 	
 				default:

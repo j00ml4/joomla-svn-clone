@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 ?>
 <div class="projects-module">
-	<h4><?php echo JText::_('COM_PROJECTS_TASKS_LIST_TASKS');?></h4>
+	<h4><?php echo JText::_('COM_PROJECTS_PROJECT_TASKS_LIST');?></h4>
 	<div class="projects-content">
 		<?php
 			$c = count($this->tasks); 
@@ -28,6 +28,6 @@ defined('_JEXEC') or die;
 			endif
 		?>
 	    <a href="<?php echo ProjectsHelper::getLink('tasks.task', $this->item->id); ?>" class="readmore">
-	        <?php echo JText::_('COM_PROJECTS_TASKS_LIST_TASKS_LINK'); ?></a>
+	        <?php echo JText::_('COM_PROJECTS_PROJECT_TASKS_LIST_LINK'); ?></a>
     </div>
 </div>

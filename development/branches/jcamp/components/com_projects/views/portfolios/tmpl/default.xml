@@ -10,9 +10,9 @@
     <fields name="request">
         <fieldset name="request">
             <field name="id" type="category"
-             description="COM_PROJECTS_PROJECTS_CHOOSE_PORTFOLIO_DESC"
+             description="COM_PROJECTS_FIELD_CHOOSE_PORTFOLIO_DESC"
              extension="com_projects"
-             label="COM_PROJECTS_PROJECTS_CHOOSE_PORTFOLIO_LABEL">
+             label="COM_PROJECTS_FIELD_CHOOSE_PORTFOLIO_LABEL">
              <option value="0">JOPTION_DO_NOT_USE</option>	
 			</field> 
         </fieldset>

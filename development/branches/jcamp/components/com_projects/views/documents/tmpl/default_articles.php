@@ -19,7 +19,7 @@ $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 ?>
 <?php if (empty($this->items)) : ?>
-	<p><?php echo JText::_('COM_PROJECTS_NO_DOCUMENTS'); ?></p>
+	<p><?php echo JText::_('COM_PROJECTS_DOCUMENTS_NO_DOCUMENT'); ?></p>
 <?php else : ?>
 	<?php if ($this->params->get('filter_field') != 'hide') :?>
 	<fieldset class="filters">
