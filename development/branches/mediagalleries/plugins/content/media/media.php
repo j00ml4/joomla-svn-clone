@@ -187,6 +187,7 @@ class plgContentMedia extends JPlugin
 		
 		/* Yahoo Video 
 		*****************************************************/
+		//TODO
 		elseif( stripos($media,'video.yahoo') ){	
 			
 			$replace = addVideoYahoo($media, $width, $height, $autostart );
@@ -194,6 +195,7 @@ class plgContentMedia extends JPlugin
 		
 		/* Google Video 
 		*****************************************************/
+		//To be Reviewed
 		elseif( stripos($media,'video.google') ){
 			
 			$replace = addVideoGoogle($media, $width, $height, $autostart);
@@ -202,6 +204,7 @@ class plgContentMedia extends JPlugin
 		
 		/* Brightcove Video 
 		*****************************************************/
+		//Need not to be there...
 		elseif( stripos( $media,'brightcove.tv') ){
 	
 			$replace = addVideoBrightcove( $media, $width, $height, $autostart );
@@ -245,7 +248,7 @@ class plgContentMedia extends JPlugin
 			*****************************************************/
 			case '.mp3': 	
 				$vparams = array();
-				$vparams['path_player'] = $pparams->get('uri_plg');
+				$vparams['path_player'] = "plugins/content/media/media/";
 				switch( $pparams->get('mp3_player') ){
 					case 'jwplayer':// Play with JWPLAYER
 						$vparams['flashvars'][] = 'autostart='. ( ($autostart)? 'true': 'false' );
@@ -290,7 +293,7 @@ class plgContentMedia extends JPlugin
 			*****************************************************/
 			case '.h264':
 				$vparams = array();
-				$vparams['path_player'] = $pparams->get('uri_plg');
+				$vparams['path_player'] = "plugins/content/media/media/";
 				// JW PLAYER
 				$vparams['flashvars'][] = 'autostart='. ( ($autostart)? 'true': 'false' );
 				$vparams['flashvars'][] = 'showstop=true';
@@ -312,7 +315,7 @@ class plgContentMedia extends JPlugin
 			*****************************************************/
 			case '.flv': 	
 				$vparams = array();
-				$vparams['path_player'] = $pparams->get('uri_plg');
+				$vparams['path_player'] = "plugins/content/media/media/";
 				switch( $pparams->get('flv_player') ){
 					case 'jwplayer':// Play with JWPLAYER
 						$vparams['flashvars'][] = 'autostart='. ( ($autostart)? 'true': 'false' );
@@ -551,14 +554,7 @@ class plgContentMedia extends JPlugin
 		
 		
 	}
-	public function getParams()
-	{
-		$temp=JPluginHelper::getPlugin("content","media");
-		$params=$temp->params;
-		//JRegistry::
-		
-	}
-		
+	
 	
 	
 	
