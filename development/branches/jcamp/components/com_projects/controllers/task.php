@@ -33,7 +33,7 @@ class ProjectsControllerTask extends JControllerForm
 	 *
 	 * @return	object	The model.
 	 */
-	public function getModel($name = 'Task', $prefix = 'ProjectsModel', $config = null)
+	public function getModel($name = 'Task', $prefix = 'ProjectsModel', $config = array())
 	{
 		return parent::getModel($name, $prefix, $config);
 	}
@@ -93,32 +93,28 @@ class ProjectsControllerTask extends JControllerForm
 	 */
 	public function cancel()
 	{
-		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
-
-		// Initialise variables.
-		$app		= JFactory::getApplication();
-
-		// Get the previous menu item id (if any) and the current menu item id.
-		$previousId	= (int) $app->getUserState('task.id');
-
-		// Get the menu item model.
-		$model = $this->getModel();
-
-		// If rows ids do not match, checkin previous row.
-		if (!$model->checkin($previousId))
-		{
-			// Check-in failed, go back to the menu item and display a notice.
-			$message = JText::sprintf('JError_Checkin_failed', $model->getError());
-			$this->setRedirect(ProjectsHelper::getLink('task',$previousId), $message, 'error');
-			return false;
+		parent::cancel();
+		
+		$model	= $this->getModel();
+		$id = $model->getState('task.id');
+		
+		if($id){
+			$this->setRedirect(ProjectsHelper::getLink('task', $id));
+		}else{
+			$this->setRedirect(ProjectsHelper::getLink('tasks', $model->getState('project.id')));
 		}
-
-		// Clear the menu item edit information from the session.
-		$app->setUserState('task.id',	null);
-		$app->setUserState('task.data',	null);
-
-		// Redirect to the list screen.
-		$this->setRedirect(ProjectsHelper::getLink('tasks'));
+	}
+	
+	public function save(){
+		parent::save();
+		
+		$model	= $this->getModel();
+		$id = $model->getState('task.id');
+		
+		if($id){
+			$this->setRedirect(ProjectsHelper::getLink('task', $id));
+		}else{
+			$this->setRedirect(ProjectsHelper::getLink('tasks', $model->getState('project.id')));
+		}	
 	}
 }

@@ -60,5 +60,21 @@ abstract class ToolBar extends JToolBarHelper
 		$html .= '</div>';
 		return $html;
 	}
+	
+	
+	/**
+	 * Writes a cancel button that will go back to the previous page without doing
+	 * any other operation.
+	 *
+	 * @param	string	$alt	Alternative text.
+	 * @param	string	$href	URL of the href attribute.
+	 * @since	1.0
+	 */
+	public static function back($task='back', $alt = 'JTOOLBAR_BACK')
+	{
+		$bar = JToolBar::getInstance('toolbar');
+		// Add a back button.
+		$bar->appendButton('Link', 'back', $alt, $task, false);
+	}
 }
 ?>

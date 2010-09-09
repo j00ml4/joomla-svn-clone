@@ -139,7 +139,7 @@ abstract class JHtmlTool
 			case 'ticket':
 				$prefix = 'tasks.';
 				$states	= array(	
-					2	=> array('archive',		'COM_PROJECTS_STATE_FINISHED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JARCHIVED',	false,	'archive',		'archive'),
+					2	=> array('publish',		'COM_PROJECTS_STATE_FINISHED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JARCHIVED',	false,	'archive',		'archive'),
 					1	=> array('unpublish',	'COM_PROJECTS_STATE_APPROVED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JPUBLISHED',	false,	'publish',		'publish'),
 					-3	=> array('publish',		'COM_PROJECTS_STATE_REPORTED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JREPORTED',	false,	'report',		'report'),
 					0	=> array('publish',		'COM_PROJECTS_STATE_DENIED',	'JLIB_HTML_PUBLISH_ITEM',	'JUNPUBLISHED',	false,	'unpublish',	'unpublish'),

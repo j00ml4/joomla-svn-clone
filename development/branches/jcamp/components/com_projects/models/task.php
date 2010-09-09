@@ -280,7 +280,6 @@ class ProjectsModelTask extends JModelAdmin
 	public function save($data)
 	{
 		$pk		= (!empty($data['id'])) ? $data['id'] : (int)$this->getState('task.id');
-		$isNew	= true;
 		
 		// Get a row instance.
 		$table = $this->getTable();
@@ -291,13 +290,16 @@ class ProjectsModelTask extends JModelAdmin
 			$isNew = false;
 		}
 
+		// Prepare
+		$this->prepareTable($table);
+		if(empty($data['parent_id'])){
+			$data['parent_id'] = 1;
+		}
 		// Set the new parent id if parent id not matched OR while New/Save as Copy .
 		if ($table->parent_id != $data['parent_id'] || $data['id'] == 0) {
 			$table->setLocation($data['parent_id'], 'last-child');
 		}
 		
-		// Prepare
-		$this->prepareTable($table);
 		
 		// Bind the data.
 		if (!$table->bind($data)) {
@@ -305,11 +307,6 @@ class ProjectsModelTask extends JModelAdmin
 			return false;
 		}
 
-		// Bind the rules.
-		if (isset($data['rules'])) {
-			$rules = new JRules($data['rules']);
-			$table->setRules($rules);
-		}
 
 		// Check the data.
 		if (!$table->check()) {

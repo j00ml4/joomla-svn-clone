@@ -25,10 +25,11 @@ class ProjectsHelper
 	 */
 	public static function addSubmenu($vName)
 	{
-		$extension = JRequest::getCmd('extension');
+		$extension	= JRequest::getCmd('extension');
+		$option		= JRequest::getCmd('option');
 		
 		JSubMenuHelper::addEntry(
-			JText::_('COM_PROJECTS_CONFIG'),
+			JText::_('COM_PROJECTS_PROJECTS'),
 			'index.php?option=com_projects&view=projects',
 			$vName == 'projects'
 		);
@@ -50,11 +51,11 @@ class ProjectsHelper
 			'index.php?option=com_categories&extension=com_projects.task',
 			$extension == 'com_projects.task'
 		);
-		
+
 		// Each Views
 		switch($extension){
 			case 'com_projects':
-				JToolBarHelper::title( JText::_('COM_PROJECTS_PORTFOLIOS'), 'categories' );
+				JToolBarHelper::title(JText::_('COM_PROJECTS_PORTFOLIOS'), 'categories' );
 				break;
 				
 			case 'com_projects.task':
@@ -62,43 +63,31 @@ class ProjectsHelper
 				break;
 
 			case 'com_projects.document':
+				echo 'document';
 				JToolBarHelper::title( JText::_('COM_PROJECTS_DOCUMENT_CATEGORIES'), 'categories' );
 				break;
 					
 			default:
-				JToolBarHelper::title( JText::_('COM_PROJECTS'), 'article' );	
+				JToolBarHelper::title( JText::_('COM_PROJECTS_PROJECTS'), 'article' );	
 		}
-		// All Views
-		JToolBarHelper::preferences('com_projects');
 		
-	}
-
-	/**
-	 * Gets a list of the actions that can be performed.
-	 *
-	 * @param	int		The category ID.
-	 * @return	JObject
-	 * @since	1.6
-	 */
-	public static function getActions($categoryId = 0)
-	{
-		$user	= JFactory::getUser();
-		$result	= new JObject;
-
-		if (empty($categoryId)) {
-			$assetName = 'com_projects';
-		} else {
-			$assetName = 'com_projects.category.'.(int) $categoryId;
+		
+		switch ($option){
+			case 'com_categories':
+				// All Views
+				JToolBarHelper::preferences('com_projects');
+				JToolBarHelper::divider();
+				break;
+			
+			case 'com_projects':
+			default:
+				JToolBarHelper::divider();
+				JToolBarHelper::preferences('com_projects');
+				JToolBarHelper::divider();
+				JToolBarHelper::help('COM_PROJECTS_HELP_PATH', false, 'http://jcamp.3den.org/');	
 		}
+		
 
-		$actions = array(
-			'core.admin', 'core.manage', 'core.create', 'core.edit', 'core.edit.state', 'core.delete'
-		);
-
-		foreach ($actions as $action) {
-			$result->set($action,	$user->authorise($action, $assetName));
-		}
-
-		return $result;
+		
 	}
 }

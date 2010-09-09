@@ -9,7 +9,7 @@
 defined('_JEXEC') or die;
 
 //jimport('joomla.application.component.controllerform');
-require_once 'components'.DS.'com_content'.DS.'controllers'.DS.'article.php';
+require_once JPATH_SITE.DS.'components'.DS.'com_content'.DS.'controllers'.DS.'article.php';
 
 /**
  * @package		Joomla.Site
@@ -62,28 +62,15 @@ class ProjectsControllerDocument extends ContentControllerArticle
 	 * Save the record
 	 */
 	public function save()
-	{
-		
+	{	
 		parent::save();
-		
+
 		// Set the row data in the session.
 		$app = JFactory::getApplication();		
 		$model = $this->getModel();
-		$id = $model->getState('article.id');
-		// Redirect back to the edit screen.
-		if(!$id){
-			$app->setUserState($this->_context.'.id', null);
-			$app->setUserState($this->_context.'.data',	null);
-			$msg = JText::_('COM_PROJECTS_DOCUMENT_SAVE_ERROR');
-			//$this->setMessage($msg, 'error');
-			$this->setRedirect(ProjectsHelper::getLink('documents', $model->getState('project.id')));
-			return false;
-		}
 		
-		$app->setUserState($this->_context.'.id', $id);
-		$app->setUserState($this->_context.'.data',	null);
 		$this->setMessage(JText::_('COM_PROJECTS_DOCUMENT_SAVE_SUCCESS'));
-		$this->setRedirect(ProjectsHelper::getLink('document', $id));
+		$this->setRedirect(ProjectsHelper::getLink('documents', $model->getState('project.id')));
 		return true;
 	}
 }

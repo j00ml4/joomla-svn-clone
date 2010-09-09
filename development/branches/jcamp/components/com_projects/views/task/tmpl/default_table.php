@@ -15,22 +15,6 @@ $listDir	= $this->state->get('list.direction');
 $canChange  = $this->canDo->get($this->type.'.edit');
 ?>
 <table class="todo-table category">
-	<thead>
-		<tr>
-			<th width="1%">
-				<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
-			</th>
-			<th>
-				<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDir, $listOrder); ?>
-			</th>
-			<th width="5%">
-				<?php echo JHtml::_('grid.sort',  'JGLOBAL_STATE', 'a.`state`', $listDir, $listOrder); ?>
-			</th>
-			<th width="20%">
-				<?php echo JHtml::_('grid.sort',  'JGLOBAL_FIELD_CREATED_BY_ALIAS_LABEL', '`created_by_alias`', $listDir, $listOrder); ?>
-			</th>
-		</tr>
-	</thead>
 	
 	<tbody>
 		<?php foreach ($this->items as $i => $item): ?>
@@ -38,8 +22,10 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 			<td> 
 				<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 			</td>
-			<td class="state-<?php echo $item->state; ?>">
-				<span class="padding"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $item->level-1); ?></span>
+			<td>
+				<?php if($this->type == 'task'): ?>
+				<span class="padding"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ', $item->level-1); ?></span>
+				<?php endif; ?>
 				<a class="state-<?php echo $item->state; ?>" href="<?php echo ProjectsHelper::getLink($this->type, $item->id); ?>">
 					<?php echo $item->title; ?></a>	
 				<?php if(!empty($item->category_title)): ?>
@@ -49,18 +35,18 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 				<?php endif; ?>	
 			</td>
 
-			<td class="center">
-				<?php echo JHtml::_('tool.published', $item->state, $i, $this->type); ?>
-			</td>
-			
-			<td class="center">
+			<td>
 				<?php if ($item->checked_out) :
-					echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canCheckin);
+					echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canChange);
 				else:
 					echo $item->author_name;
 				endif; ?>
 			</td>
 			
+			<td>
+				<?php echo JHtml::_('tool.published', $item->state, $i, $this->type); ?>
+			</td>
+						
 		</tr>
 		<?php endforeach; ?>
 	</tbody>
