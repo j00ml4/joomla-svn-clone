@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit.php 18650 2010-08-26 13:28:49Z ian $
+ * @version		$Id: edit.php 18760 2010-09-02 15:39:53Z infograf768 $
  * @package		Joomla.Administrator
  * @subpackage	com_languages
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+$canDo = LanguagesHelper::getActions();
 ?>
 <script type="text/javascript">
 <!--
@@ -48,9 +49,11 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->form->getLabel('lang_code'); ?>
 			<?php echo $this->form->getInput('lang_code'); ?>
 
-			<?php echo $this->form->getLabel('published'); ?>
-			<?php echo $this->form->getInput('published'); ?>
-
+			<?php if ($canDo->get('core.edit.state')) : ?>
+				<?php echo $this->form->getLabel('published'); ?>
+				<?php echo $this->form->getInput('published'); ?>
+			<?php endif ?>
+			
 			<?php echo $this->form->getLabel('description'); ?>
 			<?php echo $this->form->getInput('description'); ?>
 

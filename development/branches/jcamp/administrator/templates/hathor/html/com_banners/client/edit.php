@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit.php 18290 2010-07-29 02:27:05Z ian $
+ * @version		$Id: edit.php 18760 2010-09-02 15:39:53Z infograf768 $
  * @package		Joomla.Administrator
  * @subpackage	templates.hathor
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -40,9 +40,11 @@ JHtml::_('behavior.formvalidation');
 				<li><?php echo $this->form->getLabel('email'); ?>
 				<?php echo $this->form->getInput('email'); ?></li>
 
-				<li><?php echo $this->form->getLabel('state'); ?>
-				<?php echo $this->form->getInput('state'); ?></li>
-
+				<?php if ($canDo->get('core.edit.state')) { ?>
+					<li><?php echo $this->form->getLabel('state'); ?>
+					<?php echo $this->form->getInput('state'); ?></li>
+				<?php }?>	
+				
 				<li><?php echo $this->form->getLabel('purchase_type'); ?>
 				<?php echo $this->form->getInput('purchase_type'); ?></li>
 

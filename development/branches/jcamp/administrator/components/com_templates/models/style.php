@@ -10,7 +10,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.modelform');
+jimport('joomla.application.component.modeladmin');
 
 /**
  * Template style model.
@@ -19,7 +19,7 @@ jimport('joomla.application.component.modelform');
  * @subpackage	com_templates
  * @since		1.6
  */
-class TemplatesModelStyle extends JModelForm
+class TemplatesModelStyle extends JModelAdmin
 {
 	/**
 	 * Item cache.
@@ -82,6 +82,10 @@ class TemplatesModelStyle extends JModelForm
 			}
 		}
 
+		$cache = JFactory::getCache();
+		$cache->clean('com_templates');
+		$cache->clean('_system');
+
 		return true;
 	}
 
@@ -133,6 +137,9 @@ class TemplatesModelStyle extends JModelForm
 			}
 		}
 
+		$cache = JFactory::getCache();
+		$cache->clean('com_templates');
+		$cache->clean('_system');
 
 		return true;
 	}
@@ -169,6 +176,16 @@ class TemplatesModelStyle extends JModelForm
 		$form = $this->loadForm('com_templates.style', 'style', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
+		}
+
+		// Modify the form based on access controls.
+		if (!$this->canEditState((object) $data)) {
+			// Disable fields for display.
+			$form->setFieldAttribute('home', 'disabled', 'true');
+
+			// Disable fields while saving.
+			// The controller has already verified this is a record you can edit.
+			$form->setFieldAttribute('home', 'filter', 'unset');
 		}
 
 		return $form;
@@ -385,7 +402,7 @@ class TemplatesModelStyle extends JModelForm
 		}
 
 		// Clean the cache.
-		$cache = JFactory::getCache('com_templates');
+		$cache = JFactory::getCache();
 		$cache->clean();
 
 		// Trigger the onExtensionAfterSave event.
@@ -451,6 +468,11 @@ class TemplatesModelStyle extends JModelForm
 		if (!$db->query()) {
 			throw new Exception($db->getErrorMsg());
 		}
+
+		// Clean the cache.
+		$cache = JFactory::getCache();
+		$cache->clean('com_templates');
+		$cache->clean('_system');
 
 		return true;
 	}

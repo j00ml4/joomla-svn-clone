@@ -44,7 +44,7 @@ JHTML::_('behavior.modal');
 	<fieldset class="adminform">
 		<legend><?php echo JText::_('COM_MENUS_ITEM_DETAILS');?></legend>
 			<ul class="adminformlist">
-				
+
 
 				<li><?php echo $this->form->getLabel('type'); ?>
 				<?php echo $this->form->getInput('type'); ?></li>

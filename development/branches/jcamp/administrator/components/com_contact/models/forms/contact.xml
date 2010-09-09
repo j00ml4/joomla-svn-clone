@@ -7,7 +7,6 @@
 			description="JGLOBAL_FIELD_ID_DESC"
 			size="10"
 			default="0"
-			required="true"
 			readonly="true"
 			class="readonly"
 		/>
@@ -226,7 +225,7 @@
 			<option value="*">JALL</option>
 		</field>
 		<field name="featured"
-			type="radio"
+			type="list"
 			label="JFEATURED"
 			description="COM_CONTACT_FIELD_FEATURED_DESC"
 			default="0"
