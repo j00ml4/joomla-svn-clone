@@ -38,7 +38,7 @@ class ProjectsControllerDocuments extends JControllerAdmin
 	 *
 	 * @return	object	The model.
 	 */
-	public function getModel($name = 'Document', $prefix = 'ProjectsModel', $config = null)
+	public function getModel($name = 'Document', $prefix = 'ProjectsModel', $config = array())
 	{
 		return parent::getModel($name, $prefix, $config);
 	}
@@ -51,18 +51,9 @@ class ProjectsControllerDocuments extends JControllerAdmin
 	
 	public function delete()
 	{		
-		// Check for request forgeries
-		JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
+		parent::delete();
 		
-		$cid = JRequest::getVar('cid',array(),'default','array');
-		JArrayHelper::toInteger($cid);
-		$model = $this->getModel();
 		$app = JFactory::getApplication();
-	    $menu = $app->getMenu();
-		if (!$model->delete($cid)){			
-			return JError::raiseError(500, JText::_('COM_PROJECTS_DOCUMENTS_ERROR_DELETE'));
-		}
-		$this->setRedirect(JRoute::_('index.php?option=com_projects&view=documents&id='.$app->getUserState('project.id').'&Itemid='.$menu->getActive()->id, false),
-		JText::_('COM_PROJECTS_DOCUMENTS_SUCCESS_DELETE'));
+		$this->setRedirect(ProjectsHelper::getLink('documents', $app->getUserState('project.id')));	
 	}
 }

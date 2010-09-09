@@ -26,9 +26,9 @@ $params =  $this->params;
 					<p>
 						<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
 						<input type="text" class="" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_CATEGORIES_ITEMS_SEARCH_FILTER'); ?>" />
-						<?php if($this->type == 'task'): ?>
+						
 						<?php echo JHtml::_('filter.catid', '.task', $this->state->get('filter.catid')); ?>
-						<?php endif; ?>
+						
 						<?php echo JHtml::_('filter.state', $this->type, $this->state->get('filter.state')); ?>
 						
 						<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>

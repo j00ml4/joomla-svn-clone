@@ -11,7 +11,8 @@
 defined('_JEXEC') or die;
 
 //jimport('joomla.application.component.modeladmin');
-require_once 'components'.DS.'com_content'.DS.'models'.DS.'form.php';
+//require_once JPATH_ADMINISTRATOR.DS.'components'.DS.'com_content'.DS.'models'.DS.'article.php';
+require_once JPATH_SITE.DS.'components'.DS.'com_content'.DS.'models'.DS.'form.php';
 
 /**
  * Model to display editing form for a document
@@ -33,6 +34,7 @@ class ProjectsModelDocument extends ContentModelForm
 	public function __construct($config){
 		parent::__construct($config);
 		
+		// Add content tables
 		$this->addTablePath(JPATH_ADMINISTRATOR.DS.'components'.DS.'com_content'.DS.'tables');
 	}
 	/**
@@ -91,10 +93,6 @@ class ProjectsModelDocument extends ContentModelForm
 		// project
         $this->setState('project.id', 
         	$app->getUserState('project.id'));
-
-        //$this->setState('article.id', 	
-       // $app->setUserState($this->_context.'id', null);
-		//$app->setUserState($this->_context.'data',	null);	
 	}
 
 	
@@ -179,8 +177,8 @@ class ProjectsModelDocument extends ContentModelForm
 				}
 				
 				// Convert parameter fields to objects.
-				$registry = new JRegistry;
-				$registry->loadJSON($this->item->attribs);
+				$registry = new JRegistry();
+				$registry->loadJSON(json_encode($this->item->attribs));
 				$this->item->params = clone $this->getState('params');
 				$this->item->params->merge($registry);
 			}
@@ -215,7 +213,7 @@ class ProjectsModelDocument extends ContentModelForm
 		
 		if($isNew){
 			$db = $this->getDbo();
-			$id = $this->getState('article.id', $db->insertid());
+			$id = $this->getState('article.id');
 			$app= JFactory::getApplication();		
 			$q = 'INSERT INTO `#__project_contents`'. 
 				'(`project_id`,`content_id`)'. 
@@ -229,11 +227,57 @@ class ProjectsModelDocument extends ContentModelForm
 		return true;
 	}
 	
-	public function delete($pks){
-		if(!parent::delete($pks)){
-			return false;
+	
+	/**
+	 * Method to delete one or more records.
+	 *
+	 * @param	array	$pks	An array of record primary keys.
+	 *
+	 * @return	boolean	True if successful, false if an error occurs.
+	 * @since	1.6
+	 */
+	public function delete(&$pks)
+	{
+		// Initialise variables.
+		$dispatcher	= JDispatcher::getInstance();
+		$user		= JFactory::getUser();
+		$pks		= (array) $pks;
+		$table		= $this->getTable();
+
+
+		// Iterate the items to delete each one.
+		foreach ($pks as $i => $pk) {
+
+			if ($table->load($pk)) {
+
+				if ($this->canDelete($table)) {
+
+					$context = $this->option.'.'.$this->name;
+			
+
+					if (!$table->delete($pk)) {
+						$this->setError($table->getError());
+						return false;
+					}
+
+
+				} else {
+					// Prune items that you can't change.
+					unset($pks[$i]);
+					JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_EDIT_STATE_NOT_PERMITTED'));
+				}
+
+			} else {
+				$this->setError($table->getError());
+				return false;
+			}
 		}
-					
+		
+		// Clear the component's cache
+		$cache = JFactory::getCache($this->option);
+		$cache->clean();
+	
+		// Delete Relation
 		$app = JFactory::getApplication();
 		$db = $this->getDbo();
 		$q = 'DELETE FROM `#__project_contents` WHERE `content_id` IN ('.implode(',', $pks).')';		

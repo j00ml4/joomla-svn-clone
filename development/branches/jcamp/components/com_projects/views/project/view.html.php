@@ -148,18 +148,18 @@ class ProjectsViewProject extends JView
 					ToolBar::editList('project.edit');
 				}
 				if($this->item->state && $this->canDo->get('core.edit.state')){
-					ToolBar::unpublish('project.unpublish');
+					ToolBar::unpublish('projects.unpublish');
 				}else{
 					if($this->canDo->get('core.edit.state')){
-						ToolBar::publish('project.publish');
+						ToolBar::publish('projects.publish');
 					}
 					if($this->canDo->get('core.delete')){
-						ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_PROJECT_DELETE'), 'project.delete');
+						ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_PROJECT_DELETE'), 'projects.delete');
 					}
 				}
 		        if ($this->params->get('show_back_button')) {
 		            ToolBar::spacer();
-		            ToolBar::back();
+		            ToolBar::back('project.back');
 		        }
 		}
 		ToolBar::title($title, $icon);

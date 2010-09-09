@@ -21,21 +21,6 @@ $listDirn	= $this->state->get('list.direction');
 <?php if (empty($this->items)) : ?>
 	<p><?php echo JText::_('COM_PROJECTS_DOCUMENTS_NO_DOCUMENT'); ?></p>
 <?php else : ?>
-	<?php if ($this->params->get('filter_field') != 'hide') :?>
-	<fieldset class="filters">
-		<div class="filter-search">
-			<label class="filter-search-lbl" for="filter-search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
-			<input type="text" name="filter-search" id="filter-search" value="<?php echo $this->escape($this->state->get('list.filter')); ?>" class="inputbox" onchange="document.adminForm.submit();" title="<?php echo JText::_('JSEARCH_FILTER_DESC'); ?>" />
-		</div>
-
-		<?php if ($this->params->get('show_pagination_limit', 1)) : ?>
-		<div class="display-limit">
-			<?php echo JText::_('JGLOBAL_DISPLAY_NUM'); ?>&#160;
-			<?php echo $this->pagination->getLimitBox(); ?>
-		</div>
-		<?php endif; ?>
-	</fieldset>
-	<?php endif; ?>
 
 	<table class="category" border="1">
 		<?php if ($this->params->get('show_headings', 1)) :?>

@@ -40,9 +40,9 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 			<td> 
 				<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 			</td>
-			<td class="state-<?php echo $item->state; ?>">
+			<td>
 				<?php if($this->type == 'task'): ?>
-				<span class="padding"><?php echo str_repeat('|- ', $item->level-1); ?></span>
+				<span class="padding"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ', $item->level-1); ?></span>
 				<?php endif; ?>
 				<a class="state-<?php echo $item->state; ?>" href="<?php echo ProjectsHelper::getLink($this->type, $item->id); ?>">
 					<?php echo $item->title; ?></a>	

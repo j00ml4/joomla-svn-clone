@@ -14,11 +14,11 @@ jimport('joomla.application.component.controlleradmin');
  * @package		Joomla.Site
  * @subpackage	com_project
  */
-class ProjectsControllerTasks extends JControllerAdmin
+class ProjectsControllerProjects extends JControllerAdmin
 {
-	protected $view_item = 'task';
-	protected $view_list = 'tasks';
-	protected $text_prefix = 'COM_PROJECTS_TASKS';
+	protected $view_item = 'project';
+	protected $view_list = 'projects';
+	protected $text_prefix = 'COM_PROJECTS_PROJECTS';
     /**
      * Constructor
      */
@@ -47,24 +47,8 @@ class ProjectsControllerTasks extends JControllerAdmin
      * @return	object	The model.
      * @since	1.6
      */
-    public function getModel($name = 'Task', $prefix = 'ProjectsModel', $config = array()) {
+    public function getModel($name = 'Project', $prefix = 'ProjectsModel', $config = array()) {
         return parent::getModel($name, $prefix, $config);
     }
-
-    /**
-     * Method to go back to project overview
-     *
-     * @since	1.6
-     */
-    public function back() {
-        $app = JFactory::getApplication();
-        $this->setRedirect(ProjectsHelper::getLink('project',$app->getUserState('project.id')));
-    }
 	
-    public function publish(){
-    	parent::publish();
-    	
-    	$app = JFactory::getApplication();
-        $this->setRedirect(ProjectsHelper::getLink('tasks', $app->getUserState('project.id')));
-    }
 }

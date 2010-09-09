@@ -18,10 +18,11 @@ jimport('joomla.application.component.controllerform');
  * @since		1.6
  */
 class ProjectsControllerProject extends JControllerForm {
-
+	protected $text_prefix = 'COM_PROJECTS_PROJECT';
     protected $view_item = 'project';
     protected $view_list = 'projects';
-
+	protected $_context = 'com_projects.edit.project';
+	
     /**
      * Constructor.
      *
@@ -54,7 +55,7 @@ class ProjectsControllerProject extends JControllerForm {
      *
      * @return	object	The model.
      */
-    public function getModel($name = 'Project', $prefix = 'ProjectsModel', $config = null) {
+    public function getModel($name = 'Project', $prefix = 'ProjectsModel', $config = array()) {
         return parent::getModel($name, $prefix, $config);
     }
 
@@ -122,6 +123,7 @@ class ProjectsControllerProject extends JControllerForm {
         $this->setRedirect(JRoute::_('index.php?option=com_projects&view=projects&layout=gallery&id='.$app->getUserState('portfolio.id'), false));
     }
 
+    
     /**
      * Save
      *
@@ -134,7 +136,7 @@ class ProjectsControllerProject extends JControllerForm {
         $model = $this->getModel();
         $table = $model->getTable();
         $data = JRequest::getVar('jform', array(), 'post', 'array');
-        $context = $this->option.'.edit.'.$this->context;
+        $context = $this->_context;
         $checkin = property_exists($table, 'checked_out');
         $id = $model->getState('project.id', 0);
         
@@ -179,7 +181,7 @@ class ProjectsControllerProject extends JControllerForm {
             $app->setUserState($context.'.data', $data);
 
             // Redirect back to the edit screen.
-            $this->setRedirect(ProjectsHelper::getLink('projects', $data['catid']));
+            $this->setRedirect(ProjectsHelper::getLink('project', '&layout=edit'));
             return false;
         }
 
@@ -190,10 +192,9 @@ class ProjectsControllerProject extends JControllerForm {
 
             // Redirect back to the edit screen.
             $this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'notice');
-            $this->setRedirect(ProjectsHelper::getLink('projects', $data['catid']));
+            $this->setRedirect(ProjectsHelper::getLink('project', '&layout=edit'));
             return false;
         }
-        print_r($data);
         
         // Save succeeded, check-in the record.
         if ($checkin && !$model->checkin($data['id'])) {
@@ -213,8 +214,6 @@ class ProjectsControllerProject extends JControllerForm {
             $model->addMembers($id, $user->id);
         }
 
-        $app->setUserState($context.'.id', null);
-        $app->setUserState($context.'.data', null);
         $this->setMessage(JText::_(($lang->hasKey($this->text_prefix.'_SAVE_SUCCESS') ? $this->text_prefix : 'JLIB_APPLICATION').'_SAVE_SUCCESS'));
 
         // redirect
@@ -234,101 +233,20 @@ class ProjectsControllerProject extends JControllerForm {
         $app = JFactory::getApplication();
         $model = $this->getModel();
         $id = $model->getState('project.id', 0);
-        if (!parent::cancel()) {
-            //return false;
-        }
+        parent::cancel();
+         
 
         // if has id
         if ($id) {
-            $append = '&layout=default&id='.$id;
-            $this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
+            $this->setRedirect(ProjectsHelper::getLink('project', (int)$id));
+        }else{
+        	 $this->setRedirect(ProjectsHelper::getLink('projects', $model->getState('portfolio.id')));
         }
 
         return true;
     }
 
-    /**
-     * Method to publish a list
-     *
-     * @since	1.6
-     */
-    function publish() {
-        // Check for request forgeries
-        JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
-
-        $app = JFactory::getApplication();
-        $cid = JRequest::getVar('cid', array(), '', 'array');
-        $id = $cid[0];
-        if (empty($cid)) {
-            return JError::raiseWarning(500, JText::_($this->text_prefix.'_NO_ITEM_SELECTED'));
-        }
-        $data = array('publish' => 1, 'unpublish' => 0, 'archive' => 2, 'trash' => -2, 'report' => -3);
-        $task = $this->getTask();
-        $value = JArrayHelper::getValue($data, $task, 0, 'int');
-        $append = '&layout=default&id='.$id;
-
-        $model = $this->getModel();
-        // Publish the items.
-        if (!$model->publish($cid, $value)) {
-            JError::raiseWarning(500, $model->getError());
-        } else {
-            switch ($value) {
-                case 2:
-                    $ntext = 'COM_PROJECTS_PROJECT_ARCHIVED';
-                    break;
-
-                case 1:
-                    $ntext = 'COM_PROJECTS_PROJECT_PUBLISHED';
-                    break;
-
-                case 0:
-                    $ntext = 'COM_PROJECTS_PROJECT_UNPUBLISHED';
-                    break;
-
-                case -2:
-                    $ntext = 'COM_PROJECTS_PROJECT_TRASHED';
-                    break;
-
-                case -3:
-                    $ntext = 'COM_PROJECTS_PROJECT_REPORTED';
-                    break;
-            }
-            $this->setMessage(JText::_($ntext));
-        }
-
-        $this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
-        return true;
-    }
-
-    /**
-     * Removes an item.
-     *
-     * @since	1.6
-     */
-    function delete() {
-        // Check for request forgeries
-        JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
-
-        // Get items to publish from the request.
-        $model = $this->getModel();
-        $cid = JRequest::getVar('cid', array(), '', 'array');
-        $id = $cid[0];
-        if (empty($id)) {
-            return JError::raiseWarning(500, JText::_($this->text_prefix . '_NO_ITEM_SELECTED'));
-        }
-
-        // Remove the items.
-        if ($model->delete($id)) {
-            $this->setMessage(JText::_($this->text_prefix.'_ITEM_DELETED', count($id)));
-        } else {
-            $this->setMessage($model->getError());
-        }
-
-        $append = '&id='.$app->getUserState('portfolio.id');
-        $this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list.$append, false));
-        return true;
-    }
-
+ 
     /**
      * Assigns members to a project
      *
@@ -348,9 +266,8 @@ class ProjectsControllerProject extends JControllerForm {
             return false;
         }
 
-        $append = '&type=assign&layout=default&id='.$id;
-        $this->setRedirect(
-                JRoute::_('index.php?option='.$this->option.'&view=members'.$append),
+        $this->setRedirect(        		
+        		ProjectsHelper::getLink('members.assign', $id),
                 JText::_('COM_PROJECTS_MEMBERS_ASSIGN_SUCCESSFUL'));
 
         return true;
@@ -374,11 +291,9 @@ class ProjectsControllerProject extends JControllerForm {
             return false;
         }
 
-        $append = '&type=delete&layout=default&id='.$id;
-        $this->setRedirect(
-                JRoute::_('index.php?option='.$this->option.'&view=members'.$append),
+        $this->setRedirect(        		
+        		ProjectsHelper::getLink('members.unassign', $id),
                 JText::_('COM_PROJECTS_MEMBERS_DELETE_SUCCESSFUL'));
-
         return true;
     }
 

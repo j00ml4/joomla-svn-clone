@@ -278,7 +278,6 @@ class ContentModelForm extends JModelForm
 		$dispatcher->trigger('onContentAfterSave', array('com_content.article', &$table, $isNew));
 
 		$this->setState('article.id', $table->id);
-
 		return true;
 	}
 
