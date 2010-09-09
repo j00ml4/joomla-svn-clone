@@ -71,6 +71,7 @@ class JUserTest extends JoomlaDatabaseTestCase
 	protected function tearDown()
 	{
 		$this->setErrorhandlers($this->savedErrorState);
+		$this->restoreFactoryState();
 	}
 
 	/**
@@ -406,6 +407,110 @@ class JUserTest extends JoomlaDatabaseTestCase
 		$this->markTestIncomplete(
 			'This test has not been implemented yet.'
 		);
+	}
+
+	/**
+	 *	Testing save() for the case where check() returns false
+	 *
+	 * @return void
+	 */
+	public function testSaveCheckIsFalse()
+	{
+		// This is the error message that check is going to return.
+		$myErrorMessage = 'This is the error that bind returns';
+
+		// we need two mock objects - one to mock the other methods of JUser, and one to serve as a JTable mock
+		// the false in the $tableMock means that our constructor doesn't get called
+		$testObject = $this->getMock('JUser', array('getTable', 'getProperties', 'setError'));
+		$tableMock = $this->getMock('JTableUser', array('bind', 'check', 'getError'), array(), '', false);
+
+		// we expect getTable to be called once.  We are going to return our mock table object.
+		$testObject->expects($this->once())
+					->method('getTable')
+					->will($this->returnValue($tableMock));
+
+		// we expect getProperties to be called once.  We are going to return some random user data
+		// this data should get passed to the bind method.
+		$testObject->expects($this->once())
+					->method('getProperties')
+					->will($this->returnValue(array('id' => 5, 'username' => 'jimbo')));
+
+		// We expect setError to be called with the error message that check returned.
+		$testObject->expects($this->once())
+					->method('setError')
+					->with($this->equalTo($myErrorMessage));
+
+		// We expect bind to be called with the data that was returned from getProperties
+		$tableMock->expects($this->once())
+					->method('bind')
+					->with($this->equalTo(array('id' => 5, 'username' => 'jimbo')));
+
+		// We expect check to be called.  We will return false.
+		$tableMock->expects($this->once())
+					->method('check')
+					->will($this->returnValue(false));
+
+		// If check behaves properly, it will have set the error message in the table object.  So we expect getError to be called on
+		// the table object and it should return the error message.
+		$tableMock->expects($this->once())
+					->method('getError')
+					->will($this->returnValue($myErrorMessage));
+
+		// Now when we call our actual save() method, it will return false
+		$this->assertThat(
+			$testObject->save(),
+			$this->equalTo(false),
+			'JUser::save() did not return false when JTable::check returned failed'
+		);
+	}
+
+	/**
+	 *	Testing save() for the case where updateOnly is true and it is a new user
+	 *
+	 * @return void
+	 */		
+	public function testSaveNoCreateNewUser()
+	{
+		// here we inject a mock user object into a mock session object so that when JFactory::getUser gets called
+		// we already have an object in place and we don't get complaints about not being able to send cookies
+		$sessionMock = $this->getMock('JSession', array('get'), array(), '', false);
+		$userMock = $this->getMock('JUser', array(), array(), '', false);
+
+		$sessionMock->expects($this->any())
+					->method('get')
+					->with($this->equalTo('user'))
+					->will($this->returnValue($userMock));
+
+		JFactory::$session = $sessionMock;
+
+		// we need two mock objects - one to mock the other methods of JUser, and one to serve as a JTable mock
+		// the false in the $tableMock means that our constructor doesn't get called
+		// We don't care too much about these methods, because all we're primarily concerned about is that
+		// it doesn't try to create a new user
+		$testObject = $this->getMock('JUser', array('getTable', 'getProperties'));
+		$tableMock = $this->getMock('JTableUser', array('bind', 'check', 'store'), array(), '', false);
+		
+		// we expect getTable to be called once.  We are going to return our mock table object.
+		$testObject->expects($this->any())
+					->method('getTable')
+					->will($this->returnValue($tableMock));
+
+		$testObject->id = null;
+
+		$tableMock->expects($this->never())
+				->method('store');
+
+		$tableMock->expects($this->any())
+				->method('check')
+				->will($this->returnValue(true));
+
+		// Now when we call our actual save() method, it will return false
+		$this->assertThat(
+			$testObject->save(true),
+			$this->equalTo(true),
+			'JUser::save() did not get stopped when trying to save a new user when it was not supposed to'
+		);
+
 	}
 
 	/**

@@ -27,6 +27,103 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+09-Sep-2010 Jean-Marie Simonet
+ # [#22319] American english spelling in en-GB language files. Thanks Bill.
+ # [#22320] <br> <br/> <br />. Thanks Amy and Bill.
+ # [#22328] Database prefix error when other than jos_. Thanks Michael.
+
+08-Sep-2010 Andrew Eddie
+ # Fixed issue [#22274] Mark items as required that prevent save (Michael Babker).
+ # Fixed issue [#21902] Cannot assign template style to components [cache] (Jen Kramer McKibben, Klas Berlič1).
+ # Fixed issue [#21447] Updated: Add ACL Create, Edit, & Edit State checks to Category Manager (Michael Babker, Elin Waring).
+ # Changed default caching level to disabled on installation.
+ # Fixed issue [#22171] Cannot edit a group to change parent once it is created (Jennifer Marriott, Amy Stephen).
+ # Fixed issue [#20932] com_categories CategoryParent Field Permissions Check Additions (Omar Ramos).
+ # Fixed issue [#22222] Newsflash inopérant (C. Tapuscrine, Omar Ramos, Bill Richardson, Michael Babker).
+ # Fixed issue [#22322] Inappropriate language in code (Amy Stephen).
+ # Fixed issue [#22095] Userfield shows button even when "readonly" (Thomas Hunziker, Michael Babker).
+ # Fixed issue [#22185] beez2 missing level 4 image (Klas Berlič1, Angie Radtke).
+ # Fixed issue [#21315] *ACL in edit screens issue (Jean-Marie Simonet).
+
+07-Sep-2010 Jean-Marie Simonet
+ # [#21666] New menu : form is empty when using the "Save" button. Thanks Michael.
+ # [#22287] Save & New button in Menu Edit views. Thanks Michael.
+ # [#22245] Default site metadata. Thanks Ole.
+
+-------------------- 1.6.0 Beta9 Release [07-Sep-2010] ------------------
+
+07-Sep-2010 Ian MacLennan
+ # Updating sample data
+
+06-Sep-2010 Ron Severdia
+ # [#20942] Fixed extra whitespace in fieldsets (Thanks Viet Hoang Vu)
+ ^ Updated Blueprint cheatsheet
+ ^ Updated backend users icon
+ # [#21746] Bluestork display issue with Permissions views in IE7
+ 
+06-Sep-2010 Ian MacLennan
+ # [#21573] Error in flash uploader
+ # [#22018] The alert of "failed" creating a menu item doesn't look like a Failed (admin default template)
+ # [#22076] Update Site manager tries to create duplicate entries on second install if extension adapter behaves pathologically
+ # [#22198] Weblinks module follow/no follow description
+ # [#22204] surplus image in bluestork
+ # [#22205] unpublished menu items visible
+ # [#22220] Admin Menu Flyouts not respecting ACL
+ # [#22241] Everyone with Manage can checkin
+ # [#22256] Language string definition missing on front end.
+
+06-Sep-2010 Jean-Marie Simonet
+ # [#22053] sample data article capitalisation. Thanks Tim.
+ $ [#22272] Database Error. Thanks Bill.
+
+06-Sep-2010 Andrew Eddie
+ # Fixed issue [#22246] Remove potty mouth language from htaccess (Brian Teeman, Bill Richardson).
+ # Fixed issue [#22273] This is a demo. Delete for beta (Michael Babker).
+ # Fixed issue [#21658] Marking items as required (Michael Babker, Bill Richardson).
+
+05-Sep-2010 Jean-Marie Simonet
+ # [#22219] Remove overrides from Beez2.
+ # [#22203] toolbar icon consistency. Thanks Michael and Bill.
+ # [#22257] User with Delete permission unable to delete a user. Thanks Michael.
+ # [#22191] Search image. Thanks Christophe and Bill.
+ $ [#22192] Code Mirror tab mode description missing.Thanks Bill.
+ # [#22275] Two check-in buttons in Newsfeeds. Thanks Michael.
+ # [#22207] toolbar icon divider in administrator template. Thanks Bill.
+ 
+03-Sep-2010 Mark Dexter
+ # Fix syntax errors in diff_15_to_16.sql (Elin Waring)
+
+03-Sep-2010 Jean-Marie Simonet
+ # [#22186] beez2 - Park links right module displacement.
+ 
+03-Sep-2010 Andrew Eddie
+ # Fixed issue [#22248] Fix inappropriate code comment (Brian Teeman, Bill Richardson).
+ # Fixing issue [#21447] - Added user.debug task to user controller to assist with access control testing.
+
+02-Sep-2010 Ian MacLennan
+ # Fixed typo in 15 to 16 diff sql file
+ # Added missing semicolon in diff sql file.
+
+02-Sep-2010 Jean-Marie Simonet
+ # [#22149] Tool bar clean up focused on users with delete only. Thanks Elin.
+ # [#22002] Edit state ACL in edit views. Thanks Elin.
+
+02-Sep-2010 Andrew Eddie
+ # Fixed issue [#22210] module latest users (Bill Richardson).
+ # Fixed issue [#22211] module - latest news - typo error (Bill Richardson).
+ # Fixed issue [#22169] After selecting cannot set -use default- (Klas Berlič1, Ian MacLennan).
+ # Fixed issue [#22052] sample data menu capitalisation (Brian Teeman, Tim Plummer).
+ # Fixed issue [#22170] Unable to Save Weblinks on Edit (Jennifer Marriott, Elin Waring).
+
+01-Sep-2010 Andrew Eddie (and Happy 5th Birthday Joomla!)
+ # Fixed issue [#22118] The setRedirect method() overwrites an already set messageType (Roland Dalmulder, Artyom Bisyarin).
+ # Fixed issue [#21604] The "Memory Usage" debug info has no measurement unit (Javier Gómez, Nikolai Plath, Omar Ramos).
+ # Fixed issue [#21862] Backend menu components are not ordered alphabetically (Hannes Papenberg).
+ # Fixed issue [#21879] Speed improvement for Beez tempalte's use of html5.js (Rouven Weßling).
+ # Fixed issue [#22037] Module manager - varies only (Brian Teeman, Bill Richardson).
+ # Fixed issue [#21880] Relocate Database Prefix Portion of Database Configuration Installer Screen (Matt Thomas).
+ # Fixed issue [#20427] Media Manager: impossible to upload image in the specific folder chosen (Jean-Marie Simonet, Hannes Papenberg).
+
 31-Aug-2010 Jean-Marie Simonet
  # [#22150] hathor menu type - unable to select type. Thanks Bill.
  # [#22161] edit article - show icons and + param missing 

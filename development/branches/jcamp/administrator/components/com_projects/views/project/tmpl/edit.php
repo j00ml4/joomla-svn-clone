@@ -15,7 +15,7 @@ JHtml::_('behavior.formvalidation');
 <script type="text/javascript">
 	function submitbutton(task)
 	{
-		if (task == 'project.cancel' || document.formvalidator.isValid(document.id('project-form'))) {
+		if (task == 'project.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
 			<?php echo $this->form->getField('description')->save(); ?>
 			submitform(task);
 		}

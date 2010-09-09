@@ -5,7 +5,7 @@
 <form>
 	<fieldset>
 		<field name="id"  type="text" class="readonly" label="JGLOBAL_FIELD_ID_LABEL"
-			description ="JGLOBAL_FIELD_ID_DESC" size="10" default="0" required="true"
+			description ="JGLOBAL_FIELD_ID_DESC" size="10" default="0" 
 			readonly="true"  />
 
 		<field name="asset_id" type="hidden" filter="unset" />
@@ -105,7 +105,7 @@
 			<option value="*">JALL</option>
 		</field>
 
-		<field name="featured" type="radio"
+		<field name="featured" type="list"
 			label="JFEATURED"
 			description="COM_CONTENT_FIELD_FEATURED_DESC"
 			default="0"

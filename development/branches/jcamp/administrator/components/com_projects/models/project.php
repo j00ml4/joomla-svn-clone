@@ -206,8 +206,11 @@ class ProjectsModelProject extends JModelAdmin
 					$query->join('LEFT', '#__project_tasks AS ntf ON ntf.project_id=p.id AND ntf.state=2');
 					$query->where('p.id='.$this->item->id);
 					$db->setQuery($query);
-	
 					$this->item->progress = $db->loadResult();
+					
+					// Start today
+					$date = &JFactory::getDate();
+					$this->item->start_at = $date->toMySQL();
 				}
 
 			}
@@ -349,8 +352,11 @@ class ProjectsModelProject extends JModelAdmin
 		
 		// if is a new project
 		if($this->getState('project.new')){
+			
 			$table = $this->getTable();
-            $model->addMembers($table->id, $table->created_by);
+			var_dump($table);
+			die();
+            $this->addMembers($table->id, $table->created_by);
 		}
 		
 		return true;

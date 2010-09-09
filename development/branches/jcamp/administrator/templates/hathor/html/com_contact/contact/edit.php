@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit.php 18290 2010-07-29 02:27:05Z ian $
+ * @version		$Id: edit.php 18760 2010-09-02 15:39:53Z infograf768 $
  * @package		Joomla.Administrator
  * @subpackage	templates.hathor
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -14,6 +14,7 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+$canDo		= ContactHelper::getActions();
 ?>
 <script type="text/javascript">
 <!--
@@ -47,20 +48,23 @@ JHtml::_('behavior.formvalidation');
 			<li><?php echo $this->form->getLabel('access'); ?>
 			<?php echo $this->form->getInput('access'); ?></li>
 
-			<li><?php echo $this->form->getLabel('published'); ?>
-			<?php echo $this->form->getInput('published'); ?></li>
-
-			<li><?php echo $this->form->getLabel('catid'); ?>
-			<?php echo $this->form->getInput('catid'); ?></li>
-
+			<?php if ($canDo->get('core.edit.state')) { ?>
+				<li><?php echo $this->form->getLabel('published'); ?>
+				<?php echo $this->form->getInput('published'); ?></li>
+			<?php }?>
+			<?php if ($canDo->get('core.edit.state')) { ?>
+				<li><?php echo $this->form->getLabel('catid'); ?>
+				<?php echo $this->form->getInput('catid'); ?></li>
+			<?php }?>
 			<li><?php echo $this->form->getLabel('ordering'); ?>
 			<?php echo $this->form->getInput('ordering'); ?></li>
 
 			<li><?php echo $this->form->getLabel('language'); ?>
 			<?php echo $this->form->getInput('language'); ?></li>
-
-			<li><?php echo $this->form->getLabel('featured'); ?>
-			<?php echo $this->form->getInput('featured'); ?></li>
+			<?php if ($canDo->get('core.edit.state')) { ?>
+				<li><?php echo $this->form->getLabel('featured'); ?>
+				<?php echo $this->form->getInput('featured'); ?></li>
+			<?php }?>
 
 			<li><?php echo $this->form->getLabel('id'); ?>
 			<?php echo $this->form->getInput('id'); ?></li>
