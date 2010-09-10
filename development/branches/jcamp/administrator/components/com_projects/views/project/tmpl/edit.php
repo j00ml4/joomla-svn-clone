@@ -66,9 +66,6 @@ JHtml::_('behavior.formvalidation');
 				<li><?php echo $this->form->getLabel('language'); ?>
 				<?php echo $this->form->getInput('language'); ?></li>
 				
-				<li><?php echo $this->form->getLabel('ordering'); ?>
-				<?php echo $this->form->getInput('ordering'); ?></li>
-				
 				<li><?php echo $this->form->getLabel('created_by'); ?>
 				<?php echo $this->form->getInput('created_by'); ?></li>
 

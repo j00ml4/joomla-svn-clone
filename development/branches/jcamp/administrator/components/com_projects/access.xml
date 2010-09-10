@@ -4,25 +4,16 @@
 	<!-- All in one component permition just becose we dont support sections yet -->
 	<section name="component">
 		<!-- Tasks -->
-		<!--action name="task.view" title="COM_PROJECTS_TASK_ACTION_VIEW_LABEL" description="COM_PROJECTS_TASK_ACTION_VIEW_DESC" /-->
 		<action name="task.create" title="COM_PROJECTS_TASK_ACTION_CREATE_LABEL" description="COM_PROJECTS_TASK_ACTION_CREATE_DESC" />
 		<action name="task.edit" title="COM_PROJECTS_TASK_ACTION_EDIT_LABEL" description="COM_PROJECTS_TASK_ACTION_EDIT_LABEL" />
 		<action name="task.delete" title="COM_PROJECTS_TASK_ACTION_DELETE_LABEL" description="COM_PROJECTS_TASK_ACTION_DELETE_DESC" />	
 		
 		<!-- Tickets -->	
-		<!-- action name="ticket.view" title="COM_PROJECTS_TICKET_ACTION_VIEW_LABEL" description="COM_PROJECTS_TICKET_ACTION_VIEW_DESC" /-->
 		<action name="ticket.create" title="COM_PROJECTS_TICKET_ACTION_CREATE_LABEL" description="COM_PROJECTS_TICKET_ACTION_CREATE_DESC" />
 		<action name="ticket.edit" title="COM_PROJECTS_TICKET_ACTION_EDIT_LABEL" description="COM_PROJECTS_TICKET_ACTION_EDIT_LABEL" />
 		<action name="ticket.delete" title="COM_PROJECTS_TICKET_ACTION_DELETE_LABEL" description="COM_PROJECTS_TICKET_ACTION_DELETE_DESC" />	
 		
-		<!-- Miles //Can we use the task permitions for this?
-		<action name="milestone.create" title="COM_PROJECTS_MILESTONE_ACTION_CREATE_LABEL" description="COM_PROJECTS_MILESTONE_ACTION_CREATE_DESC" />
-		<action name="milestone.edit" title="COM_PROJECTS_MILESTONE_ACTION_EDIT_LABEL" description="COM_PROJECTS_MILESTONE_ACTION_EDIT_LABEL" />
-		<action name="milestone.delete" title="COM_PROJECTS_MILESTONE_ACTION_DELETE_LABEL" description="COM_PROJECTS_MILESTONE_ACTION_DELETE_DESC" />	
-		-->
-		
 		<!-- Documents -->
-		<!--action name="document.view" title="COM_PROJECTS_DOCUMENT_ACTION_VIEW_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_VIEW_DESC" /-->
 		<action name="document.create" title="COM_PROJECTS_DOCUMENT_ACTION_CREATE_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_CREATE_DESC" />
 		<action name="document.edit" title="COM_PROJECTS_DOCUMENT_ACTION_EDIT_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_EDIT_LABEL" />
 		<action name="document.delete" title="COM_PROJECTS_DOCUMENT_ACTION_DELETE_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_DELETE_DESC" />	

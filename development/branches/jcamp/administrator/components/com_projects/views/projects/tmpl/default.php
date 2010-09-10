@@ -36,9 +36,9 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.state'), true);?>
 			</select>
 
-			<select name="filter_category_id" class="inputbox" onchange="this.form.submit()">
-				<option value=""><?php echo JText::_('JOPTION_SELECT_CATEGORY');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_projects'), 'value', 'text', $this->state->get('filter.category_id'));?>
+			<select name="id" class="inputbox" onchange="this.form.submit()">
+				<option value=""><?php echo JText::_('COM_PROJECTS_SELECT_PORTFOLIO');?></option>
+				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_projects'), 'value', 'text', $this->state->get('portfolio.id'));?>
 			</select>
             
             <select name="filter_access" class="inputbox" onchange="this.form.submit()">

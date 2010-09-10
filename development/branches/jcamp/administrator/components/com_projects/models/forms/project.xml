@@ -68,15 +68,14 @@
             <option value="1">JPUBLISHED</option>
             <option value="0">JUNPUBLISHED</option>
         </field>
-		
+
 		<field id="ordering" 
 			name="ordering" 
 			type="ordering"
 			label="JFIELD_ORDERING_LABEL"
 			description="JFIELD_ORDERING_DESC"
 			class="inputbox"
-			size="6"
-			default="1" />
+			 />
 		 
 		 <field id="language"
 			name="language"

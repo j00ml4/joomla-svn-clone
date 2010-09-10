@@ -68,9 +68,7 @@ COMMENT = 'Activities message board is the twitter of the project';
 CREATE  TABLE IF NOT EXISTS `#__project_members` (
   `project_id` INT NOT NULL ,
   `user_id` INT NOT NULL ,
-  `group_id` INT NULL ,
-  PRIMARY KEY (`project_id`, `user_id`) ,
-  INDEX `idx_group_id` (`group_id` ASC) )
+  PRIMARY KEY (`project_id`, `user_id`) )
 ENGINE = MyISAM
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci

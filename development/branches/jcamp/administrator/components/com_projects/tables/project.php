@@ -123,4 +123,20 @@ class ProjectsTableProject extends JTable
 		$this->setError('');
 		return true;
 	}
+	
+	
+	public function check(){
+		if(!parent::check()){
+			return false;
+		}
+		
+		// Check the publish down date is not earlier than publish up.
+		if (!empty($this->finish_at) && $this->start_at > $this->finish_at) {
+			// Swap the dates.
+			$this->setError(JText::_('COM_PROJECTS_PROJECT_WARNING_PROVIDE_VALID_DATE'));
+			return false;
+		}
+		
+		return true;
+	}
 }
