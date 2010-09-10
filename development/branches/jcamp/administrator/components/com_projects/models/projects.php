@@ -36,12 +36,30 @@ class ProjectsModelProjects extends JModelList
 	 */
 	protected function populateState()
 	{
-		parent::populateState();
 		$app	= &JFactory::getApplication();
+		
+		// Load the filter state.
+		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
+		$this->setState('filter.search', $search);
+
+		$accessId = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', null, 'int');
+		$this->setState('filter.access', $accessId);
+
+		$published = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_published', '', 'string');
+		$this->setState('filter.state', $published);
+
+		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
+		$this->setState('filter.language', $language);
+
+		// Load the parameters.
+		$params = JComponentHelper::getParams('com_weblinks');
+		$this->setState('params', $params);
 		
 		// portfolio	
 		$this->setState('portfolio.id', 
 			$app->getUserStateFromRequest('portfolio.id', 'id'));
+	
+		parent::populateState('a.ordering');
 	}
 	
 	
@@ -60,7 +78,6 @@ class ProjectsModelProjects extends JModelList
 		$query	= $db->getQuery(true);
 
 		// Select required fields from the categories.
-		// (using 'a.*' is slower than fetching only columns we need (and this is clearer for us to know what date we fetch from db))
 		$query->select($this->getState('list.select', 'a.*'));
 		$query->from('`#__projects` AS a');
 		
@@ -74,7 +91,6 @@ class ProjectsModelProjects extends JModelList
 		$value = $this->getState('portfolio.id');
 		if ($value) {
 			$query->where('a.catid = '.(int) $value);
-			$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 		}
 
 		// Join over the users for the checked out user.
@@ -111,7 +127,9 @@ class ProjectsModelProjects extends JModelList
 		}
 
 		// Add the list ordering clause.
-		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).
+			' '.
+			$db->getEscaped($this->getState('list.direction', 'ASC')));
 		//die($query->__toString());
 		return $query;
 	}

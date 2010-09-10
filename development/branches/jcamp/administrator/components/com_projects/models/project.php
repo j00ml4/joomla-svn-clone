@@ -192,6 +192,10 @@ class ProjectsModelProject extends JModelAdmin
 					$this->setState('portfolio.id',$app->getUserState('portfolio.id'));
 					$this->item->set('catid',$this->setState('portfolio.id'));
 					$this->item->progress = 0;
+					
+					// Start today
+					$date = &JFactory::getDate();
+					$this->item->start_at = $date->toMySQL();
 				}
 				else {
 					$this->setState('portfolio.id', $this->item->get('catid'));
@@ -207,10 +211,6 @@ class ProjectsModelProject extends JModelAdmin
 					$query->where('p.id='.$this->item->id);
 					$db->setQuery($query);
 					$this->item->progress = $db->loadResult();
-					
-					// Start today
-					$date = &JFactory::getDate();
-					$this->item->start_at = $date->toMySQL();
 				}
 
 			}
@@ -241,13 +241,10 @@ class ProjectsModelProject extends JModelAdmin
 			$table->created_by	= $user->get('id');
 			
 			// Set ordering to the last item if not set
-			if (empty($table->ordering)) {
-				$db = &$this->getDbo();
-				$db->setQuery('SELECT MAX(ordering)+1 FROM #__projects WHERE catid = '.(int)$table->catid);
-				$max = $db->loadResult();
-
-				$table->ordering = $max;
-			}
+			$db = &$this->getDbo();
+			$db->setQuery('SELECT MAX(ordering)+1 FROM #__projects WHERE catid='.$table->catid);
+			$table->ordering = $db->loadResult();
+			
 		} else {
 			// Set the values
 			$table->modified	= $date->toMySQL();
@@ -352,14 +349,28 @@ class ProjectsModelProject extends JModelAdmin
 		
 		// if is a new project
 		if($this->getState('project.new')){
-			
-			$table = $this->getTable();
-			var_dump($table);
-			die();
-            $this->addMembers($table->id, $table->created_by);
+			$id = $this->getState('project.id', $this->getDbo()->insertID());
+			$user_id = !empty($data['created_by'])? $data['created_by']: JFactory::getUser()->id;
+
+            $this->addMembers($id, $user_id);
 		}
 		
 		return true;
+	}
+	
+	
+	/**
+	 * A protected method to get a set of ordering conditions.
+	 *
+	 * @param	object	A record object.
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($table = null)
+	{
+		$condition = array();
+		$condition[] = 'catid = '.(int) $table->catid;
+		return $condition;
 	}
 }
 ?>
