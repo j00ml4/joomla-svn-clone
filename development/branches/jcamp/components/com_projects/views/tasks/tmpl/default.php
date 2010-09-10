@@ -38,7 +38,7 @@ $params =  $this->params;
 			<?php if(empty($this->items)): ?>
 	            <p><?php echo JText::_('COM_PROJECTS_TASKS_NO_'.$this->type.'S'); ?></p>
 	       	 <?php else: ?>
-	            <?php echo $this->loadTemplate('table'); ?>  	
+	            <?php echo $this->loadTemplate($this->type); ?>  	
 	            
 	            <?php if ($this->params->get('show_pagination', 1) && ($this->pagination->get('pages.total') > 1)) : ?>
 	            <div class="pagination">

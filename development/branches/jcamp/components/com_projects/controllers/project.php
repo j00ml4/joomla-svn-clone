@@ -130,94 +130,15 @@ class ProjectsControllerProject extends JControllerForm {
      * @see libraries/joomla/application/component/JControllerForm#save()
      */
     public function save() {
-        // Check for request forgeries
-        $app = JFactory::getApplication();
-        $lang = JFactory::getLanguage();
-        $model = $this->getModel();
-        $table = $model->getTable();
-        $data = JRequest::getVar('jform', array(), 'post', 'array');
-        $context = $this->_context;
-        $checkin = property_exists($table, 'checked_out');
-        $id = $model->getState('project.id', 0);
-        
-        // Populate the row id from the session.
-        $data['id'] = $id;
-        $isNew = !$id;
-
-        // Access check.
-        if (!$this->allowSave($data)) {
-            $this->setRedirect(ProjectsHelper::getLink('projects', $data['catid']));
-            return JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED'));
-        }
-
-        // Validate the posted data.
-        // Sometimes the form needs some posted data, such as for plugins and modules.
-        $form = $model->getForm($data, false);
-
-        if (!$form) {
-            JError::raiseError(500, $model->getError());
-            return false;
-        }
-        
-
-        // Test if the data is valid.
-        $data = $model->validate($form, $data);
-
-        // Check for validation errors.
-        if ($data === false) {
-            // Get the validation messages.
-            $errors = $model->getErrors();
-
-            // Push up to three validation messages out to the user.
-            for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
-                if (JError::isError($errors[$i])) {
-                    $app->enqueueMessage($errors[$i]->getMessage(), 'notice');
-                } else {
-                    $app->enqueueMessage($errors[$i], 'notice');
-                }
-            }
-
-            // Save the data in the session.
-            $app->setUserState($context.'.data', $data);
-
-            // Redirect back to the edit screen.
-            $this->setRedirect(ProjectsHelper::getLink('project', '&layout=edit'));
-            return false;
-        }
-
-        // Attempt to save the data.
-        if (!$model->save($data)) {
-            // Save the data in the session.
-            $app->setUserState($context.'.data', $data);
-
-            // Redirect back to the edit screen.
-            $this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'notice');
-            $this->setRedirect(ProjectsHelper::getLink('project', '&layout=edit'));
-            return false;
-        }
-        
-        // Save succeeded, check-in the record.
-        if ($checkin && !$model->checkin($data['id'])) {
-            // Save the data in the session.
-            $app->setUserState($context.'.data', $data);
-
-            // Check-in failed, go back to the record and display a notice.
-            $message = JText::sprintf('JError_Checkin_saved', $model->getError());
-            $this->setRedirect(ProjectsHelper::getLink('project', $data['id']), $message, 'error');
-            return false;
-        }
-
-        // isNew
-        if ($isNew) {
-            $id = $data['id'] = $model->getDBO()->insertid();
-            $user = JFactory::getUser();
-            $model->addMembers($id, $user->id);
-        }
-
-        $this->setMessage(JText::_(($lang->hasKey($this->text_prefix.'_SAVE_SUCCESS') ? $this->text_prefix : 'JLIB_APPLICATION').'_SAVE_SUCCESS'));
-
+		if(!parent::save()){
+			return false;
+		}
+    	
+    	$model = $this->getModel();
+    	$id = $model->getState('project.id');
+    	
         // redirect
-        $this->setRedirect(ProjectsHelper::getLink('project', (int)$data['id']));
+    	$this->setRedirect(ProjectsHelper::getLink('project', $id));
         return true;
     }
 

@@ -67,4 +67,34 @@ class ProjectsControllerTasks extends JControllerAdmin
     	$app = JFactory::getApplication();
         $this->setRedirect(ProjectsHelper::getLink('tasks', $app->getUserState('project.id')));
     }
+    
+    
+    /**
+	 * Check in of one or more records.
+	 *
+	 * @since	1.6
+	 */
+	public function checkout()
+	{
+		// Check for request forgeries.
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		// Initialise variables.
+		$user	= JFactory::getUser();
+		$id	= JRequest::getInt('id', null);
+		
+		$model = $this->getModel();
+		if (!$model->checkout($id)) {
+			// Checkin failed.
+			$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
+			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false), $message, 'error');
+			return false;
+		}
+		
+		// Checkin succeeded.
+		$message =  JText::plural($this->text_prefix.'_N_ITEMS_CHECKED_IN', count($ids));
+		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false), $message);
+		return true;
+	}
+    
 }

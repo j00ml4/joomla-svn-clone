@@ -56,17 +56,17 @@ class ProjectsCategories extends JCategories
 		// Select required fields from the categories.
 		$query->select('COUNT(nc.id)');
 		$query->from('`#__categories` AS nc');
-		$query->where('a.parent_id = '.(int) $id);
+		$query->where('nc.parent_id = '.(int) $id);
 			
 		// Filter by state
 		if($this->_options['access'])
 		{
 			$user	= JFactory::getUser();
-			$query->where('c.access IN ('.implode(',', $user->authorisedLevels()).')');
+			$query->where('nc.access IN ('.implode(',', $user->authorisedLevels()).')');
 		}
 		if($this->_options['published'] == 1)
 		{
-			$query->where('c.published = 1');
+			$query->where('nc.published = 1');
 		}
 		
 		$db->setQuery($query);	
