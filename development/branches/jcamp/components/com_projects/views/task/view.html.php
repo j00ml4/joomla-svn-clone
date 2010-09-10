@@ -92,7 +92,7 @@ class ProjectsViewTask extends JView
                     return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
                 }
                 
-                if($this->params->get('use_content_plugins',0)){
+                if($this->params->get('use_content_plugins_tasks',0)){
                 	$this->item->text = $this->item->description;
                 	$dispatcher = JDispatcher::getInstance();
 					//

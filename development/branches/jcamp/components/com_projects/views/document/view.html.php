@@ -82,20 +82,22 @@ class ProjectsViewDocument extends JView
 				//
 				// Process the content plugins.
 				//
-				$offset 	= $this->state->get('list.offset');
-				$dispatcher	= JDispatcher::getInstance();
-				JPluginHelper::importPlugin('content');
-				$results = $dispatcher->trigger('onContentPrepare', array ('com_content.article', &$this->item, &$this->params, $offset));
-		
-				$this->item->event = new stdClass();
-				$results = $dispatcher->trigger('onContentAfterTitle', array('com_content.article', &$this->item, &$this->params, $offset));
-				$this->item->event->afterDisplayTitle = trim(implode("\n", $results));
-		
-				$results = $dispatcher->trigger('onContentBeforeDisplay', array('com_content.article', &$this->item, &$this->params, $offset));
-				$this->item->event->beforeDisplayContent = trim(implode("\n", $results));
-		
-				$results = $dispatcher->trigger('onContentAfterDisplay', array('com_content.article', &$this->item, &$this->params, $offset));
-				$this->item->event->afterDisplayContent = trim(implode("\n", $results));	
+                if($this->params->get('use_content_plugins_documents',0)){
+					$offset 	= $this->state->get('list.offset');
+					$dispatcher	= JDispatcher::getInstance();
+					JPluginHelper::importPlugin('content');
+					$results = $dispatcher->trigger('onContentPrepare', array ('com_content.article', &$this->item, &$this->params, $offset));
+			
+					$this->item->event = new stdClass();
+					$results = $dispatcher->trigger('onContentAfterTitle', array('com_content.article', &$this->item, &$this->params, $offset));
+					$this->item->event->afterDisplayTitle = trim(implode("\n", $results));
+			
+					$results = $dispatcher->trigger('onContentBeforeDisplay', array('com_content.article', &$this->item, &$this->params, $offset));
+					$this->item->event->beforeDisplayContent = trim(implode("\n", $results));
+			
+					$results = $dispatcher->trigger('onContentAfterDisplay', array('com_content.article', &$this->item, &$this->params, $offset));
+					$this->item->event->afterDisplayContent = trim(implode("\n", $results));	
+                }
 	  			break;
 		}	
 		$this->setLayout($layout);
