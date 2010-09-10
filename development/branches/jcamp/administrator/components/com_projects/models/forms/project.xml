@@ -124,22 +124,5 @@
     
 	<!-- Params -->	
 	<fields name="params">
-		<fieldset name="params">
-	        <field id="estimate_type" 
-				name="estimate_type" 
-				type="text"
-				description="COM_PROJECTS_FIELD_ESTIMATION_TYPE_DESC"
-				label="COM_PROJECTS_FIELD_ESTIMATION_TYPE_LABEL"
-				size="30" 
-				default="Pomodoros" />
-				
-	        <field id="estimation_type" 
-				name="estimation_type" 
-				type="text"
-				description="COM_PROJECTS_FIELD_ESTIMATION_TYPE_DESC"
-				label="COM_PROJECTS_FIELD_ESTIMATION_TYPE_LABEL"
-				size="30" 
-				default="Pomodoros" />
-		</fieldset>   
 	</fields>	 
 </form>
