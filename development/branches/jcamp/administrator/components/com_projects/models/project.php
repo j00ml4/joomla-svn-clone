@@ -86,10 +86,7 @@ class ProjectsModelProject extends JModelAdmin
 	{
 		$app = JFactory::getApplication();	
 		
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState($this->context.'.id'))) {
-			$pk = (int) JRequest::getInt('id');
-		}
+		$pk = (int) $app->getUserStateFromRequest($this->context.'.id', 'id');
 		$this->setState($this->getName().'.id', $pk);
 		$app->setUserState('project.id', $pk);
 	}
@@ -138,6 +135,10 @@ class ProjectsModelProject extends JModelAdmin
 	 */
 	public function getForm($data=array(), $loadData = true)
 	{
+		// Get the form.
+		JForm::addFormPath(JPATH_COMPONENT_ADMINISTRATOR.'/models/forms');
+		JForm::addFieldPath(JPATH_COMPONENT_ADMINISTRATOR.'/models/fields');
+		
 		// Get the form.
 		$form = $this->loadForm('com_projects.project', 'project', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
@@ -353,6 +354,7 @@ class ProjectsModelProject extends JModelAdmin
 			$user_id = !empty($data['created_by'])? $data['created_by']: JFactory::getUser()->id;
 
             $this->addMembers($id, $user_id);
+            $this->setState('project.id', $id);
 		}
 		
 		return true;

@@ -368,5 +368,22 @@ class ProjectsModelTask extends JModelAdmin
 		
 		return $model->getPagination();
 	}
+	
+	
+	public function publish($pks, $value){
+		if($value == 2){
+			$db = $this->getDbo();
+			$db->setQuery('SELECT COUNT(id) FROM #__project_tasks ' .
+				' WHERE parent_id IN ('. implode(',', $pks) .') AND state != 2 AND state != 0'.
+					' AND id NOT IN ('. implode(',', $pks) .')');
+			
+			if($db->loadResult() > 0){
+				$this->setError(JText::_($this->text_prefix.'_ERROR_FINISH_PARENT_TASK'));
+				return false;
+			}
+		}
+		
+		return parent::publish($pks, $value);
+	}
 }
 ?>

@@ -10,6 +10,13 @@
 // no direct access
 defined('_JEXEC') or die;
 
+JHtml::_('behavior.tooltip');
+JHTML::_('script','system/multiselect.js',false,true);
+
+$ordering	= true;
+$listOrder	= $this->state->get('list.ordering');
+$listDirn	= $this->state->get('list.direction');
+$canOrder	= $this->canDo->get('core.edit.state');
 $listOrder	= $this->state->get('list.ordering');
 $listDir	= $this->state->get('list.direction');
 $canChange  = $this->canDo->get($this->type.'.edit');
@@ -21,12 +28,9 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 				<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
 			</th>
 			<th>
-				<?php echo JText::_('JGLOBAL_TITLE'); ?>
+				<?php echo JText::_('COM_PROJECTS_TASK'); ?>
 			</th>
-			<th width="20%">
-				<?php echo JText::_('JGLOBAL_FIELD_CREATED_BY_ALIAS_LABEL'); ?>
-				<?php //echo JHtml::_('grid.sort',  'JGLOBAL_FIELD_CREATED_BY_ALIAS_LABEL', '`created_by_alias`', $listDir, $listOrder); ?>
-			</th>
+
 			<th width="5%">
 				<?php echo JText::_('JGLOBAL_STATE'); ?>
 				<?php //echo JHtml::_('grid.sort',  'JGLOBAL_STATE', 'a.`state`', $listDir, $listOrder); ?>
@@ -41,30 +45,32 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 				<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 			</td>
 			<td>
-				<?php if($this->type == 'task'): ?>
-				<span class="padding"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ', $item->level-1); ?></span>
-				<?php endif; ?>
-				<a class="state-<?php echo $item->state; ?>" href="<?php echo ProjectsHelper::getLink($this->type, $item->id); ?>">
-					<?php echo $item->title; ?></a>	
-				<?php if(!empty($item->category_title)): ?>
-				<span class="category">
-					(<?php echo $item->category_title; ?>)
-				</span>
-				<?php endif; ?>	
+				<div style="padding-left:<?php echo (($item->level - 1) * 3); ?>em;">
+					<a class="state-<?php echo $item->state; ?>" href="<?php echo ProjectsHelper::getLink($this->type, $item->id); ?>">
+						<?php echo $item->title; ?></a>	
+					<?php if(!empty($item->category_title)): ?>
+					<span class="category">
+						(<?php echo $item->category_title; ?>)
+					</span>
+					<?php endif; ?>
+					<!-- p class="smallsub" title="<?php echo $this->escape($item->title);?>">
+						<?php echo str_repeat('<span class="gtr">|&mdash;</span>', $item->level-1) ?>
+						<dl></dl>
+						
+					</p-->
+				</div>	
 			</td>
 
-			<td>
-				<?php if ($item->checked_out) :
+				<?php /*if ($item->checked_out) :
 					echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canChange);
 				else:
 					echo $item->author_name;
-				endif; ?>
-			</td>
+				endif; */ ?>
 			
 			<td>
 				<?php echo JHtml::_('tool.published', $item->state, $i, $this->type); ?>
 			</td>
-						
+				
 		</tr>
 		<?php endforeach; ?>
 	</tbody>

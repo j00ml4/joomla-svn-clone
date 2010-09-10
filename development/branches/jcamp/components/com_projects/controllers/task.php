@@ -117,4 +117,5 @@ class ProjectsControllerTask extends JControllerForm
 			$this->setRedirect(ProjectsHelper::getLink('tasks', $model->getState('project.id')));
 		}	
 	}
+	
 }
