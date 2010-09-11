@@ -23,7 +23,7 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
                 <img src="<?php echo $this->portfolio->getParams()->get('image'); ?>"/>
             <?php endif; ?>
             <?php if ($this->portfolio->description) : ?>
-                <?php echo JHtml::_('content.prepare', $this->portfolio->description); ?>
+                <?php echo $this->portfolio->description; ?>
             <?php endif; ?>
             <div class="clr"></div>
         </div>
