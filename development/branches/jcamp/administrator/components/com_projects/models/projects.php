@@ -38,22 +38,29 @@ class ProjectsModelProjects extends JModelList
 	{
 		$app	= &JFactory::getApplication();
 		
+		if($app->getName() == 'administrator'){
+			// Load the parameters.
+			$params = JComponentHelper::getParams('com_projects');
+			$this->setState('params', $params);
+			
+			$accessId = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', null, 'int');
+			$this->setState('filter.access', $accessId);	
+		}else{
+			$params = $app->getParams();
+        	$this->setState('params', $params);
+        
+			$this->setState('filter.access', !$params->get('show_noauth'));
+		}
+		
 		// Load the filter state.
 		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
-
-		$accessId = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', null, 'int');
-		$this->setState('filter.access', $accessId);
 
 		$published = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_published', '', 'string');
 		$this->setState('filter.state', $published);
 
 		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
 		$this->setState('filter.language', $language);
-
-		// Load the parameters.
-		$params = JComponentHelper::getParams('com_weblinks');
-		$this->setState('params', $params);
 		
 		// portfolio	
 		$this->setState('portfolio.id', 

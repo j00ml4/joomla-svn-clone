@@ -37,7 +37,7 @@ class ProjectsModelTask extends JModelAdmin
 	protected function canDelete($record)
 	{	
 		$app = JFactory::getApplication();
-		return ProjectsHelper::canDo($this->getType().'.delete',  
+		return ProjectsHelperACL::canDo($this->getType().'.delete',  
 			$app->getUserState('portfolio.id'), 
 			$app->getUserState('project.id'),
 			$record);
@@ -63,7 +63,7 @@ class ProjectsModelTask extends JModelAdmin
 	protected function canEdit($record)
 	{
 		$app = JFactory::getApplication();
-		return ProjectsHelper::canDo($this->getType().'.edit', 
+		return ProjectsHelperACL::canDo($this->getType().'.edit', 
 			$app->getUserState('portfolio.id'), 
 			$app->getUserState('project.id'),
 			$record);

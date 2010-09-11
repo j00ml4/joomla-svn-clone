@@ -36,7 +36,7 @@ class ProjectsViewProject extends JView
 		//Get Model data
 		$this->item 	= $model->getItem();
 		$this->params	= $app->getParams();
-		$this->canDo	= ProjectsHelper::getActions(
+		$this->canDo	= ProjectsHelperACL::getActions(
 			$app->getUserState('portfolio.id'), 
 			$app->getUserState('project.id'),
 			$this->item);

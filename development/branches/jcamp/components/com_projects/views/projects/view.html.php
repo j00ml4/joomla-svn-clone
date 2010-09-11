@@ -44,7 +44,7 @@ class ProjectsViewProjects extends JView
 		$this->portfolio	= $model->getPortfolio();
 		$this->pagination	= $model->getPagination();
 		$this->params		= $app->getParams();
-		$this->canDo		= ProjectsHelper::getActions(
+		$this->canDo		= ProjectsHelperACL::getActions(
 			$app->getUserState('portfolio.id'),
 			0,
 			$this->portfolio);

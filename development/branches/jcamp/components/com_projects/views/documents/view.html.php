@@ -38,7 +38,7 @@ class ProjectsViewDocuments extends JView {
         $this->project 		= $model->getProject();
         $this->state 		= $this->get('State');  
         $this->pagination 	= $model->getPagination();
-        $this->canDo		= ProjectsHelper::getActions(
+        $this->canDo		= ProjectsHelperACL::getActions(
 			$app->getUserState('portfolio.id'), 
 			$app->getUserState('project.id'),
 			$this->project);

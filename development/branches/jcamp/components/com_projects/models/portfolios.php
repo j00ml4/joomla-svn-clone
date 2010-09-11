@@ -42,7 +42,10 @@ class ProjectsModelPortfolios extends JModelList
 		$this->setState('portfolio.id', $id);
 		$app->setUserState('portfolio.id', $id);
 		
-		$this->setState('filter.access',	1);
+		$params = $app->getParams();
+        $this->setState('params', $params);
+        
+		$this->setState('filter.access', !$params->get('show_noauth'));
 		$this->setState('filter.published',	1);
 		$this->setState('filter.language',$app->getLanguageFilter());
 	}
@@ -81,7 +84,18 @@ class ProjectsModelPortfolios extends JModelList
 		$query->join('LEFT', '#__projects AS ni ON ni.catid = a.id');
 		$query->group('a.id');
 		
-			
+				
+		// Join over the asset groups.
+		$query->select('ag.title AS access_level');
+		$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
+		
+		// Filter by access level.
+		$value = $this->getState('filter.access');
+		if ($value) {
+			$value = $user->authorisedLevels();
+			$query->where('a.access IN ('. implode(',', $value) .')');
+		}	
+		
 		// Filter by state
 		$state = $this->getState('filter.state');
 		if (is_numeric($state)) {

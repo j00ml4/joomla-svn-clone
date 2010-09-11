@@ -41,7 +41,7 @@ class ProjectsViewMembers extends JView
 		$this->pagination	= $model->getPagination();
 		$this->state		= $this->get('State');
 		$this->type			= $this->state->get('type');
-		$this->canDo		= ProjectsHelper::getActions(
+		$this->canDo		= ProjectsHelperACL::getActions(
 			$app->getUserState('portfolio.id'),
 			$app->getUserState('project.id'),
 			$this->project);

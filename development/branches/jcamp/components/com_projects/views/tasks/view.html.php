@@ -45,7 +45,7 @@ class ProjectsViewTasks extends JView {
         $this->type = $model->getType();
         $this->pagination = $model->getPagination();
         $this->params = $app->getParams();
-        $this->canDo = ProjectsHelper::getActions(
+        $this->canDo = ProjectsHelperACL::getActions(
                         $app->getUserState('portfolio.id'),
                         $app->getUserState('project.id'),
                         $this->project);

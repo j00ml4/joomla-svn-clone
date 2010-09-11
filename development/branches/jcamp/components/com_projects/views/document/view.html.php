@@ -40,7 +40,7 @@ class ProjectsViewDocument extends JView
 		$this->project 	= $model->getProject();
 		$this->state	= $this->get('State');
 		$this->params	= $this->state->params;
-		$this->canDo	= ProjectsHelper::getActions(
+		$this->canDo	= ProjectsHelperACL::getActions(
 			$app->getUserState('portfolio.id'), 
 			$app->getUserState('project.id'),
 			$this->item);
