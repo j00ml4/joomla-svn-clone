@@ -49,6 +49,9 @@ class ProjectsModelTasks extends JModelList
         $this->setState('parent.id', $value);  
     	$this->context .= '.'.$value;
     	
+        $params = $app->getParams();
+        $this->setState('params', $params);
+        
         // Project
         if (!($id = (int) $app->getUserState('project.id'))) {
             $id = (int) JRequest::getInt('id');
@@ -64,7 +67,9 @@ class ProjectsModelTasks extends JModelList
         $this->setState('filter.catid', $value);
    
         $value = JRequest::getString('filter_search');
-        $this->setState('filter.search', $value);  
+        $this->setState('filter.search', $value); 
+        
+		$this->setState('filter.access', !$params->get('show_noauth'));
         
         parent::populateState('a.lft', 'asc');
     }
@@ -89,7 +94,7 @@ class ProjectsModelTasks extends JModelList
         // Select category of the task
         $query->select('c.title AS `category_title`');
         $query->join('LEFT', '#__categories AS c ON c.id = a.catid');
-
+		
         // Select name of creator of the task
         $query->select('CASE WHEN a.created_by_alias = \'\' THEN u.name ELSE a.`created_by_alias` END `created_by`');
         $query->join('LEFT', '#__users AS u ON a.created_by = u.id');
@@ -98,14 +103,21 @@ class ProjectsModelTasks extends JModelList
         $query->select('uc.name AS editor');
         $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
 
-        // Join over the asset groups.
-        $query->select('ag.title AS access_level');
-        $query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
-
         // Join over the users for the author.
         $query->select('ua.name AS author_name');
         $query->join('LEFT', '#__users AS ua ON ua.id = a.created_by');
-
+    		
+		// Join over the asset groups.
+		$query->select('ag.title AS access_level');
+		$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
+		
+		// Filter by access level.
+		$value = $this->getState('filter.access');
+		if ($value) {
+			$value = $user->authorisedLevels();
+			$query->where('a.access IN ('. implode(',', $value) .')');
+		}	
+		
     	// Filter by project
         if ($value = $this->getState('project.id')) {
             $query->where('a.project_id = ' . (int) $value);

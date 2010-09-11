@@ -58,7 +58,7 @@ class ProjectsViewProject extends JView
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 		$canDo		= $this->canDo;
 
-		JToolBarHelper::title(JText::_('COM_PROJECTS_MANAGER_PROJECT'), 'projects.png');
+		JToolBarHelper::title(JText::_('COM_PROJECTS_MANAGER_PROJECT'), 'article');
 
 		// If not checked out, can save the item.
 		if (!$checkedOut && ($canDo->get('core.edit')||($canDo->get('core.create'))))

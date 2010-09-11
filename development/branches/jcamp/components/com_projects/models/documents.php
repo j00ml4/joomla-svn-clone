@@ -91,13 +91,17 @@ class ProjectsModelDocuments extends JModelList
         // Join over the categories to get parent category titles
         $query->select('parent.title as parent_title, parent.id as parent_id, parent.path as parent_route, parent.alias as parent_alias');
         $query->join('LEFT', '#__categories as parent ON parent.id = c.parent_id');
-
-        // Filter by access level.
-        if ($access = $this->getState('filter.access')) {
-            $user = JFactory::getUser();
-            $groups = implode(',', $user->authorisedLevels());
-            $query->where('a.access IN (' . $groups . ')');
-        }
+     		
+		// Join over the asset groups.
+		$query->select('ag.title AS access_level');
+		$query->join('LEFT', '#__viewlevels AS ag ON ag.id = a.access');
+		
+		// Filter by access level.
+		$value = $this->getState('filter.access');
+		if ($value) {
+			$value = $user->authorisedLevels();
+			$query->where('a.access IN ('. implode(',', $value) .')');
+		}	
 		
         $query->select('p.project_id AS project_id');
         $query->join('left', '#__project_contents AS p ON p.content_id=a.id');

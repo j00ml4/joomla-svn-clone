@@ -54,7 +54,7 @@ class ProjectsViewProjects extends JView
 		$state	= $this->state;
 		$canDo	= $this->canDo;
 
-		JToolBarHelper::title(JText::_('COM_PROJECTS_MANAGER_PROJECTS'), 'projects.png');
+		JToolBarHelper::title(JText::_('COM_PROJECTS_MANAGER_PROJECTS'), 'article');
 		if ($canDo->get('core.create')) {
 			JToolBarHelper::addNew('project.add','JTOOLBAR_NEW');
 		}

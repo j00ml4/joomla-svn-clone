@@ -70,7 +70,7 @@ class ProjectsControllerProject extends JControllerForm {
      */
     protected function allowAdd($data = array()) {
         $record = new JObject($data);
-        return ProjectsHelper::canDo('core.create',
+        return ProjectsHelperACL::canDo('core.create',
                 $record->get('catid'),
                 $record->get('id'),
                 $record);
@@ -88,7 +88,7 @@ class ProjectsControllerProject extends JControllerForm {
      */
     protected function allowEdit($data = array()) {
         $record = new JObject($data);
-        return ProjectsHelper::canDo('core.create',
+        return ProjectsHelperACL::canDo('core.create',
                 $record->get('catid'),
                 $record->get('id'),
                 $record);
@@ -108,7 +108,7 @@ class ProjectsControllerProject extends JControllerForm {
         $record = new JObject($data);
         $action = $record->get('id', 0) ? 'core.edit' : 'core.create';
 
-        return ProjectsHelper::canDo($action,
+        return ProjectsHelperACL::canDo($action,
                 $record->get('catid'),
                 $record->get('id'),
                 $record);

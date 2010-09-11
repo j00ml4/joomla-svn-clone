@@ -46,7 +46,7 @@ class ProjectsModelDocument extends ContentModelForm
 	protected function canDelete($record)
 	{	
 		$app = JFactory::getApplication();
-		return ProjectsHelper::canDo('document.delete',  
+		return ProjectsHelperACL::canDo('document.delete',  
 			$app->getUserState('portfolio.id'), 
 			$app->getUserState('project.id'),
 			$record);
@@ -72,7 +72,7 @@ class ProjectsModelDocument extends ContentModelForm
 	protected function canEdit($record)
 	{
 		$app = JFactory::getApplication();
-		return ProjectsHelper::canDo('document.edit', 
+		return ProjectsHelperACL::canDo('document.edit', 
 			$app->getUserState('portfolio.id'), 
 			$app->getUserState('project.id'),
 			$record);

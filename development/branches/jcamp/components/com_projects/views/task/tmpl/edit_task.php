@@ -46,6 +46,10 @@ $params = $this->params;
 	</div>
 	
 	<div class="formelm">
+		<?php echo $this->form->getLabel('access'); ?> <?php echo $this->form->getInput('access'); ?>
+	</div>
+	
+	<div class="formelm">
 		<?php echo $this->form->getLabel('estimate'); ?> <?php echo $this->form->getInput('estimate'); ?>
 	</div>
 	

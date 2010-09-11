@@ -49,22 +49,10 @@ $app = &JFactory::getApplication();
 			<?php echo $this->form->getLabel('state'); ?>
 			<?php echo $this->form->getInput('state'); ?>
 		</div>
-		<div class="formelm">
-			<?php echo $this->form->getLabel('publish_up'); ?>
-			<?php echo $this->form->getInput('publish_up'); ?>
-		</div>
-		<div class="formelm">
-			<?php echo $this->form->getLabel('publish_down'); ?>
-			<?php echo $this->form->getInput('publish_down'); ?>
-		</div>
 
 		<div class="formelm">
 			<?php echo $this->form->getLabel('access'); ?>
 			<?php echo $this->form->getInput('access'); ?>
-		</div>
-		<div class="formelm">
-			<?php echo $this->form->getLabel('ordering'); ?>
-			<?php echo $this->form->getInput('ordering'); ?>
 		</div>
 
 		<div class="formelm_area">

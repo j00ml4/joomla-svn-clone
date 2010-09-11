@@ -51,25 +51,6 @@ class ProjectsHelper
 			'index.php?option=com_categories&extension=com_projects.task',
 			$extension == 'com_projects.task'
 		);
-
-		// Each Views
-		switch($extension){
-			case 'com_projects':
-				JToolBarHelper::title(JText::_('COM_PROJECTS_PORTFOLIOS'), 'categories' );
-				break;
-				
-			case 'com_projects.task':
-				JToolBarHelper::title( JText::_('COM_PROJECTS_TASK_CATEGORIES'), 'categories' );
-				break;
-
-			case 'com_projects.document':
-				echo 'document';
-				JToolBarHelper::title( JText::_('COM_PROJECTS_DOCUMENT_CATEGORIES'), 'categories' );
-				break;
-					
-			default:
-				JToolBarHelper::title( JText::_('COM_PROJECTS_PROJECTS'), 'article' );	
-		}
 		
 		
 		switch ($option){
@@ -86,8 +67,6 @@ class ProjectsHelper
 				JToolBarHelper::divider();
 				JToolBarHelper::help('COM_PROJECTS_HELP_PATH', false, 'http://jcamp.3den.org/');	
 		}
-		
-
-		
+				
 	}
 }

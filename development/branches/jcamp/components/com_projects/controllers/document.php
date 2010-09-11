@@ -73,4 +73,59 @@ class ProjectsControllerDocument extends ContentControllerArticle
 		$this->setRedirect(ProjectsHelper::getLink('documents', $model->getState('project.id')));
 		return true;
 	}
+	
+    /**
+     * Method to check if you can add a new record.
+     *
+     * Extended classes can override this if necessary.
+     *
+     * @param	array	An array of input data.
+     *
+     * @return	boolean
+     */
+    protected function allowAdd($data = array()) {
+        $record = new JObject($data);
+        return ProjectsHelperACL::canDo('core.create',
+                $record->get('catid'),
+                $record->get('id'),
+                $record);
+    }
+
+    /**
+     * Method to check if you can add a new record.
+     *
+     * Extended classes can override this if necessary.
+     *
+     * @param	array	An array of input data.
+     * @param	string	The name of the key for the primary key.
+     *
+     * @return	boolean
+     */
+    protected function allowEdit($data = array()) {
+        $record = new JObject($data);
+        return ProjectsHelperACL::canDo('core.create',
+                $record->get('catid'),
+                $record->get('id'),
+                $record);
+    }
+
+    /**
+     * Method to check if you can save a new or existing record.
+     *
+     * Extended classes can override this if necessary.
+     *
+     * @param	array	An array of input data.
+     * @param	string	The name of the key for the primary key.
+     *
+     * @return	boolean
+     */
+    protected function allowSave($data) {
+        $record = new JObject($data);
+        $action = $record->get('id', 0) ? 'core.edit' : 'core.create';
+
+        return ProjectsHelperACL::canDo($action,
+                $record->get('catid'),
+                $record->get('id'),
+                $record);
+    }
 }

@@ -34,10 +34,10 @@ $pageClass = $this->escape($params->get('pageclass_sfx'));
         <div class="TabView" id="TabView">
             <?php if ($this->portfolio->numcategories && $this->portfolio->numitems) : ?>
             <ul class="tabnav">
-                <li><a title="<?php echo JText::_('COM_PROJECTS_PORTFOLIOS_LINK_DESC'); ?>" href="<?php echo ProjectsHelper::getLink('portfolios', $this->portfolio->id); ?>" >
+                <li class="active"><a title="<?php echo JText::_('COM_PROJECTS_PORTFOLIOS_LINK_DESC'); ?>" >
                     <?php echo JText::sprintf('COM_PROJECTS_PORTFOLIOS_LINK', $this->portfolio->numcategories); ?>
                 </a></li>
-                <li class="active"><a title="<?php echo JText::_('COM_PROJECTS_PROJECTS_LINK_DESC'); ?>">
+                <li><a title="<?php echo JText::_('COM_PROJECTS_PROJECTS_LINK_DESC'); ?>"  href="<?php echo ProjectsHelper::getLink('projects', $this->portfolio->id); ?>">
                     <?php echo JText::sprintf('COM_PROJECTS_PROJECTS_LINK', $this->portfolio->numitems); ?>
                 </a></li>
             </ul>
