@@ -4,23 +4,23 @@
 	<!-- All in one component permition just becose we dont support sections yet -->
 	<section name="component">
 		<!-- Tasks -->
-		<action name="task.create" title="COM_PROJECTS_TASK_ACTION_CREATE_LABEL" description="COM_PROJECTS_TASK_ACTION_CREATE_DESC" />
-		<action name="task.edit" title="COM_PROJECTS_TASK_ACTION_EDIT_LABEL" description="COM_PROJECTS_TASK_ACTION_EDIT_LABEL" />
-		<action name="task.delete" title="COM_PROJECTS_TASK_ACTION_DELETE_LABEL" description="COM_PROJECTS_TASK_ACTION_DELETE_DESC" />	
+		<action name="task.create" title="COM_PROJECTS_ACTION_TASK_CREATE_LABEL" description="COM_PROJECTS_ACTION_TASK_CREATE_DESC" />
+		<action name="task.edit" title="COM_PROJECTS_ACTION_TASK_EDIT_LABEL" description="COM_PROJECTS_ACTION_TASK_EDIT_LABEL" />
+		<action name="task.delete" title="COM_PROJECTS_ACTION_TASK_DELETE_LABEL" description="COM_PROJECTS_ACTION_TASK_DELETE_DESC" />	
 		
 		<!-- Tickets -->	
-		<action name="ticket.create" title="COM_PROJECTS_TICKET_ACTION_CREATE_LABEL" description="COM_PROJECTS_TICKET_ACTION_CREATE_DESC" />
-		<action name="ticket.edit" title="COM_PROJECTS_TICKET_ACTION_EDIT_LABEL" description="COM_PROJECTS_TICKET_ACTION_EDIT_LABEL" />
-		<action name="ticket.delete" title="COM_PROJECTS_TICKET_ACTION_DELETE_LABEL" description="COM_PROJECTS_TICKET_ACTION_DELETE_DESC" />	
+		<action name="ticket.create" title="COM_PROJECTS_ACTION_TICKET_CREATE_LABEL" description="COM_PROJECTS_ACTION_TICKET_CREATE_DESC" />
+		<action name="ticket.edit" title="COM_PROJECTS_ACTION_TICKET_EDIT_LABEL" description="COM_PROJECTS_ACTION_TICKET_EDIT_LABEL" />
+		<action name="ticket.delete" title="COM_PROJECTS_ACTION_TICKET_DELETE_LABEL" description="COM_PROJECTS_ACTION_TICKET_DELETE_DESC" />	
 		
 		<!-- Documents -->
-		<action name="document.create" title="COM_PROJECTS_DOCUMENT_ACTION_CREATE_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_CREATE_DESC" />
-		<action name="document.edit" title="COM_PROJECTS_DOCUMENT_ACTION_EDIT_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_EDIT_LABEL" />
-		<action name="document.delete" title="COM_PROJECTS_DOCUMENT_ACTION_DELETE_LABEL" description="COM_PROJECTS_DOCUMENT_ACTION_DELETE_DESC" />	
+		<action name="document.create" title="COM_PROJECTS_ACTION_DOCUMENT_CREATE_LABEL" description="COM_PROJECTS_ACTION_DOCUMENT_CREATE_DESC" />
+		<action name="document.edit" title="COM_PROJECTS_ACTION_DOCUMENT_EDIT_LABEL" description="COM_PROJECTS_ACTION_DOCUMENT_EDIT_LABEL" />
+		<action name="document.delete" title="COM_PROJECTS_ACTION_DOCUMENT_DELETE_LABEL" description="COM_PROJECTS_ACTION_DOCUMENT_DELETE_DESC" />	
 	
 		<!-- Activities 
-		<action name="activity.create" title="COM_PROJECTS_ACTIVITY_ACTION_CREATE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_CREATE_DESC" />
-		<action name="activity.delete" title="COM_PROJECTS_ACTIVITY_ACTION_DELETE_LABEL" description="COM_PROJECTS_ACTIVITY_ACTION_DELETE_DESC" />
+		<action name="activity.create" title="COM_PROJECTS_ACTION_ACTIVITY_CREATE_LABEL" description="COM_PROJECTS_ACTION_ACTIVITY_CREATE_DESC" />
+		<action name="activity.delete" title="COM_PROJECTS_ACTION_ACTIVITY_DELETE_LABEL" description="COM_PROJECTS_ACTION_ACTIVITY_DELETE_DESC" />
 		-->
 	</section>
 	

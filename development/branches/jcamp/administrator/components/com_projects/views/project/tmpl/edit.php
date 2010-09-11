@@ -28,7 +28,7 @@ JHtml::_('behavior.formvalidation');
 <form action="<?php echo JRoute::_('index.php?option=com_projects'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
-			<legend><?php echo empty($this->item->id) ? JText::_('COM_PROJECTS_NEW_PROJECT') : JText::sprintf('COM_PROJECTS_EDIT_PROJECT', $this->item->id); ?></legend>
+			<legend><?php echo empty($this->item->id) ? JText::_('COM_PROJECTS_PROJECT_NEW_PROJECT') : JText::sprintf('COM_PROJECTS_PROJECT_EDIT_PROJECT', $this->item->id); ?></legend>
 			<ul class="adminformlist">
 			<li><?php echo $this->form->getLabel('catid'); ?>
 			<?php echo $this->form->getInput('catid'); ?></li>
