@@ -118,7 +118,8 @@ class plgContentExample extends JPlugin
 	{
 		$app = JFactory::getApplication();
 
-		return 'BeforeDisplay';
+		$article->text .="BeforeDisplay";
+		return '';
 	}
 
 	/**

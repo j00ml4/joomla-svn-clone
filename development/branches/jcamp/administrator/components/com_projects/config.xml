@@ -29,6 +29,17 @@
 			hr="true"
 			/>
 
+		<field name="use_content_plugins_portfolios"
+			type="radio"
+			label="COM_PROJECTS_CONFIGURATION_USE_CONTENT_PLUGINS_PORTFOLIOS_LABEL"
+			description="COM_PROJECTS_CONFIGURATION_USE_CONTENT_PLUGINS_PORTFOLIOS_DESC"
+			class="inputbox"
+			size="1"
+			default="1">
+			<option	value="0">JNO</option>
+			<option	value="1">JYES</option>
+		</field>
+
 		<field name="use_content_plugins_projects"
 			type="radio"
 			label="COM_PROJECTS_CONFIGURATION_USE_CONTENT_PLUGINS_PROJECTS_LABEL"
