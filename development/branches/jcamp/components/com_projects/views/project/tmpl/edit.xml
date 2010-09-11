@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_PROJECTS_PROJECT_FORM_TITLE">
+	<layout title="COM_PROJECTS_MENU_PROJECT_FORM_TITLE">
 		<message>
-			<![CDATA[COM_PROJECTS_PROJECT_FORM_DESC]]>
+			<![CDATA[COM_PROJECTS_MENU_PROJECT_FORM_DESC]]>
 		</message>
 	</layout>
 	<!-- Add fields to the parameters object for the layout. -->
