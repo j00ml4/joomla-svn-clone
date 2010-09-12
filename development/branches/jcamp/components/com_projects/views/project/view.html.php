@@ -91,6 +91,7 @@ class ProjectsViewProject extends JView
 	 */
 	protected function initListers()
 	{
+		$count = $this->params->get('number_listers_items',5);
 		$model = $this->getModel();
 		// get tickets and tasks
 		$params_tasks = new JRegistry();
@@ -100,7 +101,7 @@ class ProjectsViewProject extends JView
 		$params_tasks->set('state',' >= 1');
 		$params_tasks->set('task.type', 2); // get tasks
 		// limit for lister
-		$params_tasks->set('limit.limit', 5);
+		$params_tasks->set('limit.limit', $count);
 		$params_tasks->set('limit.start', 0);
 		$this->assignRef('tasks',ProjectsHelper::getTasks($params_tasks));
 		$params_tasks->set('task.type', 3); // get tickets
@@ -113,7 +114,7 @@ class ProjectsViewProject extends JView
 		$params_docs->set('order.dir', 'ASC');
 		$params_docs->set('state',' >= 1');
 		// limit for lister
-		$params_docs->set('limit.limit', 5);
+		$params_docs->set('limit.limit', $count);
 		$params_docs->set('limit.start', 0);
 		$this->assignRef('docs',ProjectsHelper::getDocuments($params_docs));
 		
@@ -124,7 +125,7 @@ class ProjectsViewProject extends JView
 		$params_mems->set('order.dir', 'ASC');
 		$params_mems->set('state',' >= 1');
 		// limit for lister
-		$params_mems->set('limit.limit', 5);
+		$params_mems->set('limit.limit', $count);
 		$params_mems->set('limit.start', 0);
 		$this->assignRef('members',ProjectsHelper::getMembers($params_mems));
 	}
