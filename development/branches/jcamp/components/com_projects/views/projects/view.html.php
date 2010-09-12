@@ -56,25 +56,8 @@ class ProjectsViewProjects extends JView
 			default:
 				$layout = 'default';
                 if($this->params->get('use_content_plugins_portfolios',0)){
-                	$this->portfolio->text = $this->portfolio->description;
-                	$dispatcher = JDispatcher::getInstance();
-					//
-					// Process the content plugins.
-					//
-					JPluginHelper::importPlugin('content');
-					$dispatcher->trigger('onContentPrepare', array ('com_content.article', &$this->portfolio, &$this->params, 0));
-			
-					$results = $dispatcher->trigger('onContentAfterTitle', array('com_content.article', &$this->portfolio, &$this->params, 0));
-					$this->portfolio->text = trim(implode("\n", $results)).$this->portfolio->text;
-								
-					$results = $dispatcher->trigger('onContentBeforeDisplay', array('com_content.article', &$$this->portfolio, &$this->params, 0));
-					$this->portfolio->text = trim(implode("\n", $results)).$this->portfolio->text;
-			
-					$results = $dispatcher->trigger('onContentAfterDisplay', array('com_content.article', &$this->portfolio, &$this->params, 0));
-					$this->portfolio->text.= trim(implode("\n", $results));
-					$this->portfolio->description = $this->portfolio->text;
-					unset($this->portfolio->text);
-                }
+					$this->portfolio->description = ProjectsHelper::triggerContentEvents($this->portfolio->description);
+				}
 				
 	            break;
 			}						
