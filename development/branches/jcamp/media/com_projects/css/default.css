@@ -145,7 +145,7 @@ div.projects-module{
 div.projects-task{
 }
 
-	div.projects-task div.divCreatedBy{
+	div.projects-task div.projects-both-sides{
 		background : #dfdfdf;
 		-moz-border-radius-bottomright : 5px;
 		-moz-border-radius-bottomleft : 5px;
@@ -155,18 +155,13 @@ div.projects-task{
 		border-bottom-left-radius : 5px;
 		padding : 3px 0px;
 		font-size : 0.8em;
-		text-align : right;
-		overflow : auto;
 	}
 
-		div.projects-task div.divCreatedBy > span:first-child{
+		div.projects-task div.projects-both-sides > span:first-child{
 			padding-left : 72px;
-			float : left;
 		}
 
-		div.projects-task div.divCreatedBy > span{
-			text-align : right;
-			clear : both;
+		div.projects-task div.projects-both-sides > span{
 			padding-right : 5px;
 		}
 		
@@ -246,6 +241,7 @@ div.projects-task{
     z-index: 2;
 }
 
+/* ****************** Project general CSS **************** */
 div.projects {
     width: 100%;
 }
@@ -254,6 +250,11 @@ div.projects h1 {
     font-size: 24px;
     margin-bottom: 10px;
 }
+
+div.projects .projects-overview {
+    padding: 0px 10px 10px 10px;
+}
+
 
 div.projects .projects-frame {
     border: 1px solid #dddddd !important;
@@ -267,27 +268,29 @@ div.projects .projects-content {
 }
 
 div.projects .projects-space {
-    margin: 0px 5px 20px;
+    margin: 0px 0px 10px 0px;
 }
 
 div.projects .projects-info {
-    margin: 0px 0px 0px 5px !important;
+    margin: 0px 0px 10px 0px !important;
     padding: 0 !important;
+    text-align : right;
 }
 
-div.projects ul.projects-info li {
-    list-style: none;
+div.projects div.projects-both-sides{
+	text-align : right;
+	overflow : auto;
 }
 
-div.projects ul.projects-info li div.projects-info-key {
-    width: 150px;
-    float: left;
-    clear: right;
-    overflow: hidden;
-}
+	div.projects div.projects-both-sides > span:first-child{
+		float : left;
+	}
 
-div.projects ul.projects-info li div.projects-info-data {
-}
+	div.projects div.projects-both-sides > span{
+		text-align : right;
+		clear : both;
+	}
+
 
 /** Tasks **/
 .publish, .state-1, .state-1 a{
@@ -422,7 +425,7 @@ div.projects-content div.category-desc{
 	-webkit-border-radius : 5px;
 	-moz-border-radius : 5px;
 	padding : 0px 5px;
-	margin : 0px !important;
+	margin : 0px 0px 10px 0px !important;
 }
 
 /* Main toolbars */
