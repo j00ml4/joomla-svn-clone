@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 $params =  $this->params;
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
-<div class="divCreatedBy">
+<div class="projects-both-sides">
 	<span><?php echo JText::sprintf('COM_PROJECTS_CREATED_ON_BY',
 						JHTML::_('date', $this->item->created, JText::_('COM_PROJECTS_DATE_FORMAT2')),
 						$this->item->created_by);?></span>
