@@ -11,7 +11,7 @@
  * @package		Joomla.Site
  * @subpackage	com_projects
  */
-abstract class ProjectsHelper {
+abstract class ProjectsHelper {  
     /**
      * Method to get singular or plural version of text based on number of items
      *
@@ -206,6 +206,16 @@ abstract class ProjectsHelper {
 			);
         }
         return JText::_($importances[$importance]);
+	}
+	
+	/**
+	 * Method to trigger all necessary events on content (assumes that real text is in variabla $item->description)
+	 * 
+	 * @param $item  Item to trigger event on
+	 * @return Item with changed "description" property after triggering all events
+	 */
+	public static function triggerContentEvents($item) {
+		return JHtml::_('content.prepare',$item->description);
 	}
 }
 
