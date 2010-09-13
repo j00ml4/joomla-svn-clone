@@ -86,14 +86,14 @@ class ProjectsControllerTasks extends JControllerAdmin
 		$model = $this->getModel();
 		if (!$model->checkout($id)) {
 			// Checkin failed.
-			$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
+			$message = $model->getError();
 			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false), $message, 'error');
 			return false;
 		}
 		
 		// Checkin succeeded.
-		$message =  JText::plural($this->text_prefix.'_N_ITEMS_CHECKED_IN', count($ids));
-		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false), $message);
+		$message =  JText::_($this->text_prefix.'_N_ITEMS_CHECKED_OUT');
+		$this->setRedirect(ProjectsHelper::getLink($key));
 		return true;
 	}
     

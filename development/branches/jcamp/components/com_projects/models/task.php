@@ -156,7 +156,8 @@ class ProjectsModelTask extends JModelAdmin
     public function getParent() {
         // Get project ID
         if (empty($this->parent)) {
-           $this->parent = $this->getItem()->parent_id;
+        	$pk  = $this->getItem()->parent_id;
+           	$this->parent = parent::getItem($pk);
         }
 
         return $this->parent;
@@ -242,9 +243,7 @@ class ProjectsModelTask extends JModelAdmin
         $table->title = htmlspecialchars_decode($table->title, ENT_QUOTES);
         $table->alias = JApplication::stringURLSafe($table->title);
         $table->project_id = $this->getState('project.id');
-        $table->type = ($table->type) ? $table->type : $this->getState('type');
-
- 
+        $table->type = ($table->type) ? $table->type : $this->getState('type'); 
         
         if (empty($table->id)) {
             // Set the values
@@ -255,6 +254,7 @@ class ProjectsModelTask extends JModelAdmin
             }else{
             	$table->state = 1;
             }
+            
             // Set ordering to the last item if not set
             if (empty($table->ordering)) {
                 $db = $this->getDbo();
@@ -385,5 +385,15 @@ class ProjectsModelTask extends JModelAdmin
 		
 		return parent::publish($pks, $value);
 	}
+	
+	
+	public function delete($pks){
+		if(!parent::delete($pks)){
+			return false;
+		}
+		
+		return true;
+	}
+	
 }
 ?>

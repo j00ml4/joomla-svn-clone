@@ -134,11 +134,23 @@ class ProjectsTableTask extends JTableNested
 		else {
 			$checkin = ' AND (checked_out = 0 OR checked_out = '.(int) $userId.')';
 		}
-
+		
+		// Consistency
+		$update = ' SET `state` = '.(int) $state;
+		switch ($state){
+			case 2:
+				$date = JFactory::getDate();
+				$update .= ', `finished`="'. $date->toMySQL() .'", `finished_by`='. (int) $userId;
+				break;
+				
+			default:
+				$update .= ', `finished`=NULL, `finished_by`=NULL';
+		}
+		
 		// Update the publishing state for rows with the given primary keys.
 		$this->_db->setQuery(
-			'UPDATE `'.$this->_tbl.'`' .
-			' SET `state` = '.(int) $state .
+			'UPDATE `'.$this->_tbl.'`' . 
+			$update . 
 			' WHERE ('.$where.')' .
 			$checkin
 		);
@@ -167,5 +179,61 @@ class ProjectsTableTask extends JTableNested
 
 		$this->setError('');
 		return true;
+	}
+	
+	
+	public function store($updateNulls = false){
+		// Parents
+		$parents = $this->getPath();
+		if(!empty($parents)){	
+			$pks = array();
+			foreach($parents as $i => $item){
+				if($item->start_at > $this->start_at || $item->finish_at < $this->finish_at){
+					$pks[] = $item->id;
+				}
+			}
+			
+			if(!empty($pks)){
+				$pks = implode(',', $pks);	
+				$db = $this->getDbo();
+				
+				$query = 'UPDATE #__project_tasks SET start_at = "'. $this->start_at .'"' .
+					' WHERE id IN ('. $pks .') AND start_at > "'. $this->start_at .'";';
+						
+				$query .= 'UPDATE #__project_tasks SET finish_at = "'. $this->finish_at .'"' .
+						' WHERE id IN ('. $pks .') AND finish_at < "'. $this->finish_at .'";';
+							
+				$db->setQuery($query);
+				$db->queryBatch();
+			}
+		}
+		
+		// Children
+		$children = $this->getTree();
+		if(!empty($children)){	
+			$pks = array();
+			foreach($children as $i => $item){
+				if($item->start_at < $this->start_at || $item->finish_at > $this->finish_at){
+					$pks[] = $item->id;
+				}
+			}
+			
+			if(!empty($pks)){
+				$pks = implode(',', $pks);	
+				$db = $this->getDbo();
+				
+				$query = 'UPDATE #__project_tasks SET start_at = "'. $this->start_at .'"' .
+					' WHERE id IN ('. $pks .') AND start_at < "'. $this->start_at .'";';
+						
+				$query .= 'UPDATE #__project_tasks SET finish_at = "'. $this->finish_at .'"' .
+						' WHERE id IN ('. $pks .') AND finish_at > "'. $this->finish_at .'";';
+							
+				$db->setQuery($query);
+				$db->queryBatch();
+			}
+		}
+		
+		// Store
+		return parent::store($updateNulls);
 	}
 }
