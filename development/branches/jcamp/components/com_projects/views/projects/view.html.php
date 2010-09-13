@@ -88,7 +88,7 @@ class ProjectsViewProjects extends JView
 		ToolBar::title($title, 'categories');
 		if ($this->params->get('show_back_button')) {
             ToolBar::spacer();
-            ToolBar::back();
+            ToolBar::back(ProjectsHelper::getLink('portfolios', $this->portfolio->get('id')));
 		}
 		
 		$app = JFactory::getApplication();

@@ -74,7 +74,7 @@ class ProjectsViewDocuments extends JView {
         
         if ($this->params->get('show_back_button')) {
             ToolBar::spacer();
-            ToolBar::back();
+            ToolBar::back(ProjectsHelper::getLink('project', $this->project->id));
         }
 
         ToolBar::title($title, $icon);
