@@ -118,7 +118,7 @@ class ProjectsViewTasks extends JView {
         ToolBar::title($title, $icon);
         if ($this->params->get('show_back_button')) {
             ToolBar::spacer();
-            ToolBar::back();
+            ToolBar::back(ProjectsHelper::getLink('project', $this->project->id));
         }
         
         echo ToolBar::render();

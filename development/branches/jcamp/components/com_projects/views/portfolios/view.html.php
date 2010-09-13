@@ -46,7 +46,7 @@ class ProjectsViewPortfolios extends JView
 		$this->params		= $app->getParams();
 		$this->user 		= JFactory::getUser();
 		$this->portfolio	= $model->getParent();
-		$this->canDo		= ProjectsHelper::getActions(
+		$this->canDo		= ProjectsHelperACL::getActions(
 			$app->getUserState('portfolio.id'), 
 			$app->getUserState('project.id'),
 			$this->portfolio);
@@ -89,7 +89,7 @@ class ProjectsViewPortfolios extends JView
 		ToolBar::title($title, 'categories');
 		if ($this->params->get('show_back_button')) {
             ToolBar::spacer();
-            ToolBar::back();
+            ToolBar::back(ProjectsHelper::getLink('portfolios', $this->portfolio->get('id')));;
 		}
 		
 		$app = JFactory::getApplication();

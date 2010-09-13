@@ -163,7 +163,7 @@ class ProjectsViewProject extends JView
 				}
 		        if ($this->params->get('show_back_button')) {
 		            ToolBar::spacer();
-		            ToolBar::back('project.back');
+		            ToolBar::back(ProjectsHelper::getLink('projects', $this->portfolio->id));
 		        }
 		}
 		ToolBar::title($title, $icon);

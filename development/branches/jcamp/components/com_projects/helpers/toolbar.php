@@ -70,11 +70,9 @@ abstract class ToolBar extends JToolBarHelper
 	 * @param	string	$href	URL of the href attribute.
 	 * @since	1.0
 	 */
-	public static function back($task='back', $alt = 'JTOOLBAR_BACK')
+	public static function back($href, $alt = 'JTOOLBAR_BACK')
 	{
-		$bar = JToolBar::getInstance('toolbar');
-		// Add a back button.
-		$bar->appendButton('Link', 'back', $alt, $task, false);
+		parent::back($alt, $href);
 	}
 }
 ?>
