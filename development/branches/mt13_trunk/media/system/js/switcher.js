@@ -38,7 +38,7 @@ var JSwitcher = new Class({
 		this.hideAll();
 
 		this.togglers.each(function(el) {
-			el.addEvent('click', this.display.bind(this, el.id));
+			el.addEvent('click', this.display.pass(el.id, this));
 		}.bind(this));
 
 		var first = $pick(Cookie.read(this.options.cookieName), this.togglers[0].id);
