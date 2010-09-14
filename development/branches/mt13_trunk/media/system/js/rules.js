@@ -44,7 +44,7 @@ var JTabs = new Class({
 			var title = this.titles[i];
 			var description = this.descriptions[i];
 			title.setStyle('cursor', 'pointer');
-			title.addEvent('click', this.display.bind(this, i));
+			title.addEvent('click', this.display.pass(i, this));
 			description.inject(this.content);
 		}
 

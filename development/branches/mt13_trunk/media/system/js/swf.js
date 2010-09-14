@@ -97,7 +97,7 @@ Swiff.Uploader = new Class({
 			.addEvent('complete', this.update, true)
 			.addEvent('fileRemove', function(file) {
 				this.fileList.erase(file);
-			}.bind(this), true);
+			}.pass(true, this));
 
 		this.setOptions(options);
 
@@ -141,18 +141,18 @@ Swiff.Uploader = new Class({
 				width: '100%'
 			});
 
-			this.target.addEvent('mouseenter', this.reposition.bind(this, []));
+			this.target.addEvent('mouseenter', this.reposition.pass([], this));
 
 			// button interactions, relayed to to the target
 			this.addEvents({
-				buttonEnter: this.targetRelay.bind(this, ['mouseenter']),
-				buttonLeave: this.targetRelay.bind(this, ['mouseleave']),
-				buttonDown: this.targetRelay.bind(this, ['mousedown']),
-				buttonDisable: this.targetRelay.bind(this, ['disable'])
+				buttonEnter: this.targetRelay.pass(['mouseenter'], this),
+				buttonLeave: this.targetRelay.pass(['mouseleave'], this),
+				buttonDown: this.targetRelay.pass(['mousedown'], this),
+				buttonDisable: this.targetRelay.pass(['disable'], this)
 			});
 
 			this.reposition();
-			window.addEvent('resize', this.reposition.bind(this, []));
+			window.addEvent('resize', this.reposition.pass([], this));
 		} else {
 			this.parent(path);
 		}

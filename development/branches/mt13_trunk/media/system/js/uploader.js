@@ -207,7 +207,7 @@ FancyUpload2.File = new Class({
 
 	onRemove: function() {
 		this.element.getElements('a').setStyle('visibility', 'hidden');
-		this.element.fade('out').retrieve('tween').chain(Element.destroy.bind(Element, this.element));
+		this.element.fade('out').retrieve('tween').chain(Element.destroy.pass(this.element, Element));
 	}
 
 });
