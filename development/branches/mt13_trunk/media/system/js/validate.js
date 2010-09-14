@@ -63,7 +63,7 @@ var JFormValidator = new Class({
 	attachToForm: function(form)
 	{
 		// Iterate through the form object and attach the validate method to all input fields.
-		form.getElements('fieldset').concat($A(form.elements)).each(function(el){
+		form.getElements('fieldset').concat($A(form.elements)).flatten().each(function(el){
 			if (($(el).get('tag') == 'input' || $(el).get('tag') == 'button') && $(el).get('type') == 'submit') {
 				if (el.hasClass('validate')) {
 					el.onclick = function(){return document.formvalidator.isValid(this.form);};
@@ -124,7 +124,7 @@ var JFormValidator = new Class({
 		var valid = true;
 
 		// Validate form fields
-		var elements = form.getElements('fieldset').concat($A(form.elements));
+		var elements = form.getElements('fieldset').concat($A(form.elements)).flatten();
 		for (var i=0;i < elements.length; i++) {
 			if (this.validate(elements[i]) == false) {
 				valid = false;
