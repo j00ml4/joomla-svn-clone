@@ -93,7 +93,7 @@ class ProjectsViewTask extends JView
                 }
                 
                 if($this->params->get('use_content_plugins_tasks',0)){
-					$this->item->description = ProjectsHelper::triggerContentEvents($this->item);
+					$this->item->description = ProjectsHelper::triggerContentEvents(&$this->item);
                 }
                 break;
         }
