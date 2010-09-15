@@ -126,9 +126,9 @@ class ProjectsModelTask extends JModelAdmin
 				$q->from('#__project_tasks AS a');
 				$q->where('id = '.(int)$this->item->id);
 				
-				$q->join('left','#__categories AS `c` ON `c`.id = a.catid';
-				$q->join('left','#__users AS `ua` ON `ua`.id = a.created_by';
-				$q->join('left','#__users AS `ue` ON `ue`.id = a.finished_by';
+				$q->join('left','#__categories AS `c` ON `c`.id = a.catid');
+				$q->join('left','#__users AS `ua` ON `ua`.id = a.created_by');
+				$q->join('left','#__users AS `ue` ON `ue`.id = a.finished_by');
 				
 				$db->setQuery($q);
 				$result = $db->loadObject();
@@ -405,7 +405,7 @@ class ProjectsModelTask extends JModelAdmin
 		if(!parent::delete($pks)){
 			return false;
 		}
-		parent::checkout()
+
 		return true;
 	}
 	
