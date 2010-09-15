@@ -115,29 +115,31 @@ class ProjectsModelTask extends JModelAdmin
 			if(!empty($this->item->id)){
 				$this->setState('project.id', $this->item->project_id);
 				$app->setUserState('project.id', $this->item->project_id);
-				$this->setState('type', $this->item->type);
-				$app->setUserState('task.type', $this->item->type);
-				$db = $this->getDbo();
-				
-				if(!empty($this->item->catid)){
-					$q = 'SELECT title FROM #__categories WHERE id='.$this->item->catid;
-					$db->setQuery($q);
-					$this->item->category_title = $db->loadResult();
-				}else{
-					$this->item->category_title = '';
-				}
+				//$this->setState('type', $this->item->type);
+				//$app->setUserState('task.type', $this->item->type);
+								
 				
 				$q = $db->getQuery(true);
-				$q->select('u1.name as `created`');
-				$q->select('u2.name as `modified`');
-				$q->from('#__users AS `u1`');
-				$q->where('`u1`.id = '.(int)$this->item->created_by);
-				$q->join('left','#__users AS `u2` ON `u2`.id='.(int)$this->item->modified_by);
-				$db->setQuery($q);
-				$res = $db->loadObject();
+				$q->select('c.title as `category_title`');
+				$q->select('ua.name as `created_by`');
+				$q->select('ue.name as `finished_by`');
+				$q->from('#__project_tasks AS a');
+				$q->where('id = '.(int)$this->item->id);
 				
-				$this->item->created_by = $res->created;
-				$this->item->modified_by = $res->modified;
+				$q->join('left','#__categories AS `c` ON `c`.id = a.catid';
+				$q->join('left','#__users AS `ua` ON `ua`.id = a.created_by';
+				$q->join('left','#__users AS `ue` ON `ue`.id = a.finished_by';
+				
+				$db->setQuery($q);
+				$result = $db->loadObject();
+				
+				$this->item->author = $result->created_by;
+				$this->item->editor = $result->modified_by;
+				$this->item->category_title = $result->category_title;
+				
+			}else{						
+				$date = &JFactory::getDate();
+				$this->item->start_at = $date->toMySQL();
 			}
 		}
 		return $this->item;
@@ -403,7 +405,7 @@ class ProjectsModelTask extends JModelAdmin
 		if(!parent::delete($pks)){
 			return false;
 		}
-		
+		parent::checkout()
 		return true;
 	}
 	

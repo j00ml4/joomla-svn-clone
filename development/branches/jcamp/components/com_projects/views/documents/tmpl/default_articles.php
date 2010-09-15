@@ -77,7 +77,7 @@ $listDirn	= $this->state->get('list.direction');
 				<td class="list-date">
 					<?php echo JHTML::_('date',
 					$item->modified, 
-					$this->escape($this->params->get('date_format', JText::_('DATE_FORMAT_LC3')))); ?>
+					$this->escape($this->params->get('date_format', JText::_('DATE_FORMAT_LC1')))); ?>
 				</td>
 			</tr>
 			<?php endforeach; ?>

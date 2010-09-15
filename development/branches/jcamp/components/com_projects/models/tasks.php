@@ -94,17 +94,13 @@ class ProjectsModelTasks extends JModelList
         // Select category of the task
         $query->select('c.title AS `category_title`');
         $query->join('LEFT', '#__categories AS c ON c.id = a.catid');
-		
-        // Select name of creator of the task
-        $query->select('CASE WHEN a.created_by_alias = \'\' THEN u.name ELSE a.`created_by_alias` END `created_by`');
-        $query->join('LEFT', '#__users AS u ON a.created_by = u.id');
 
         // Join over the users for the checked out user.
-        $query->select('uc.name AS editor');
-        $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
+        $query->select('ue.name AS editor');
+        $query->join('LEFT', '#__users AS ue ON ue.id=a.finished_by');
 
         // Join over the users for the author.
-        $query->select('ua.name AS author_name');
+        $query->select('ua.name AS author');
         $query->join('LEFT', '#__users AS ua ON ua.id = a.created_by');
     		
 		// Join over the asset groups.

@@ -157,23 +157,6 @@ abstract class JHtmlTool
 			
 		}
 		
-/*		
-		case 2:
-						echo JText::_('COM_PROJECTS_STATE_FINISHED');
-						break;
-						
-					case 1:
-						echo JText::_('COM_PROJECTS_STATE_APPROVED');
-						break;
-							
-					case -3:
-						echo JText::_('COM_PROJECTS_STATE_PENDING');
-						break;
-						
-					case 0:
-						echo JText::_('');
-						break;	
-	*/	
 		if (is_array($prefix)) {
 			$options	= $prefix;
 			$enabled	= array_key_exists('enabled',	$options) ? $options['enabled']		: $enabled;
@@ -184,6 +167,26 @@ abstract class JHtmlTool
 		return self::state($states, $value, $i, $prefix, $enabled, true, $checkbox);
 	}
 
+	/**
+	 * Pickup Task
+	 * Enter description here ...
+	 * @param $value
+	 * @param $i
+	 * @param $enabled
+	 */
+	public static function checkout($i, $prefix, $enabled = true, $translate = true, $checkbox='cb')
+	{	
+		$text = JText::_('COM_PROJECTS_'. $prefix .'_CHECKOUT');
+		$active_title = 'Active Title';
+		$inactive_title = 'inactive title';
+		$tip = 'tip'; 
+		$active_class = 'checkout';
+		$inactive_class = 'editor';
+		
+		return self::action($i, '.checkout', $prefix, $text, $active_title, $inactive_title, $tip, $active_class, $inactive_class, $enabled, $translate, $checkbox);
+	} 	
+	
+	
 	/**
 	 * Returns a isDefault state on a grid
 	 *
@@ -213,7 +216,7 @@ abstract class JHtmlTool
 		);
 		return self::state($states, $value, $i, $prefix, $enabled, true, $checkbox);
 	}
-
+	
 	/**
 	 * Returns an array of standard published state filter options.
 	 *

@@ -50,11 +50,7 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 			</td>
 
 			<td>
-				<?php if ($item->checked_out) :
-					echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canChange);
-				else:
-					echo $item->author_name;
-				endif; ?>
+				<?php echo $item->author; ?>
 			</td>
 			
 			<td>
