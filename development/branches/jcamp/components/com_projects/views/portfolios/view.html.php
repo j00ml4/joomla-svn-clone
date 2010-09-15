@@ -56,10 +56,10 @@ class ProjectsViewPortfolios extends JView
 		if($this->params->get('use_content_plugins_portfolios',0)){
 			$c = count($this->items);
 			for($i = 0; $i < $c;$i++) {
-               	$this->items[$i]->description = ProjectsHelper::triggerContentEvents($this->items[$i]);
+               	ProjectsHelper::triggerContentEvents($this->items[$i]);
 			}
 			
-            $this->portfolio->description = ProjectsHelper::triggerContentEvents($this->portfolio);
+            ProjectsHelper::triggerContentEvents($this->portfolio);
 		}
 
 		// Check for errors.
