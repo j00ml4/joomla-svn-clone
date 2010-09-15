@@ -12,18 +12,6 @@
  * @subpackage	com_projects
  */
 abstract class ProjectsHelper {  
-    /**
-     * Method to get singular or plural version of text based on number of items
-     *
-     * @param $text Base of translation text
-     * @param $num  Number of items
-     * 
-     * @return Translation string for JText::_() method
-     */
-    public static function textPlural($text, $num) {
-    	return $num > 1 ? $text.'_PLURAL' : $text;
-    }
-
      /**
      * Method to get list of tasks
      * @param $params JRegistry object with parameters for the output
