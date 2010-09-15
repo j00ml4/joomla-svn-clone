@@ -18,7 +18,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<span><?php echo JText::sprintf('COM_PROJECTS_CREATED_ON_BY',
 						JHTML::_('date', $this->item->created, JText::_('COM_PROJECTS_DATE_FORMAT2')),
 						$this->item->created_by);?></span>
-	<?php if($this->item->modified_by): ?>
+	<?php if(!empty($this->item->modified_by)): ?>
 	<span>
 		<?php echo JText::sprintf('COM_PROJECTS_MODIFIED_ON_BY',
 						JHTML::_('date', $this->item->modified, JText::_('COM_PROJECTS_DATE_FORMAT2')),
