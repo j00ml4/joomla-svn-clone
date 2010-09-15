@@ -17,6 +17,7 @@ jimport('joomla.application.component.controlleradmin');
 class ProjectsControllerDocuments extends JControllerAdmin
 {
 	protected $_context = 'com_projects.edit.document';
+	protected $text_prefix = 'COM_PROJECTS_DOCUMENTS';
 	
 
 	/**

@@ -17,7 +17,7 @@ require_once JPATH_SITE.DS.'components'.DS.'com_content'.DS.'controllers'.DS.'ar
  */
 class ProjectsControllerDocument extends ContentControllerArticle
 {
-
+	protected $text_prefix = 'COM_PROJECTS_DOCUMENT';
 	protected $_context = 'com_projects.edit.document';
 	protected $view_item = 'document';
 	protected $view_list = 'documents';
