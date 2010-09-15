@@ -71,7 +71,7 @@ class ProjectsViewProject extends JView
 				}
 				
                 if($this->params->get('use_content_plugins_projects',0)){
-                	$this->item->description = ProjectsHelper::triggerContentEvents($this->item);
+                	ProjectsHelper::triggerContentEvents($this->item);
                 }
 				// Get Portfolio
 				$this->portfolio = $model->getPortfolio($this->item->catid);

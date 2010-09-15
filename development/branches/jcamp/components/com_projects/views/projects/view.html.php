@@ -56,7 +56,7 @@ class ProjectsViewProjects extends JView
 			default:
 				$layout = 'default';
                 if($this->params->get('use_content_plugins_portfolios',0)){
-					$this->portfolio->description = ProjectsHelper::triggerContentEvents($this->portfolio);
+					ProjectsHelper::triggerContentEvents($this->portfolio);
 				}
 				
 	            break;

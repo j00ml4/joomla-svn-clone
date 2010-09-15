@@ -214,11 +214,12 @@ abstract class ProjectsHelper {
 	 * @param $item  Item to trigger event on
 	 * @return Item with changed "description" property after triggering all events
 	 */
-	public static function triggerContentEvents(&$item, &$params, $offset=0) {
+	public static function triggerContentEvents(&$item, &$params = null, $offset=0) {
 		$dispatcher	= JDispatcher::getInstance();
 		JPluginHelper::importPlugin('content');
+		$item->text = $item->description;
 		$results = $dispatcher->trigger('onContentPrepare', array ('com_content.article', &$item, &$params, $offset));
-
+/*
 		$item->event = new stdClass();
 		$results = $dispatcher->trigger('onContentAfterTitle', array('com_content.article', &$item, &$params, $offset));
 		$item->event->afterDisplayTitle = trim(implode("\n", $results));
@@ -228,6 +229,9 @@ abstract class ProjectsHelper {
 
 		$results = $dispatcher->trigger('onContentAfterDisplay', array('com_content.article', &$item, &$params, $offset));
 		$item->event->afterDisplayContent = trim(implode("\n", $results));	
+*/
+		$item->description = $item->text;
+		unset($item->text);
 	}
 }
 
