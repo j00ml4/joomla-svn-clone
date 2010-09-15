@@ -136,11 +136,12 @@ class ProjectsTableTask extends JTableNested
 		}
 		
 		// Consistency
+		$date = JFactory::getDate()->toMySQL();
 		$update = ' SET `state` = '.(int) $state;
+		$update .= ', `modified` = "'. $date .'", `modified_by` = '. (int) $userId;
 		switch ($state){
 			case 2:
-				$date = JFactory::getDate();
-				$update .= ', `finished`="'. $date->toMySQL() .'", `finished_by`='. (int) $userId;
+				$update .= ', `finished`="'. $date .'", `finished_by`='. (int) $userId;
 				break;
 				
 			default:

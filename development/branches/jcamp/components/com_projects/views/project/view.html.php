@@ -19,6 +19,7 @@ jimport('joomla.application.component.view');
  */
 class ProjectsViewProject extends JView
 {
+	protected $state;
 	protected $item;
 	protected $form;
 	protected $params;
@@ -34,6 +35,7 @@ class ProjectsViewProject extends JView
 		$model		= $this->getModel();
 		
 		//Get Model data
+		$this->state	= $this->get('State');
 		$this->item 	= $model->getItem();
 		$this->params	= $app->getParams();
 		$this->canDo	= ProjectsHelperACL::getActions(
@@ -70,9 +72,11 @@ class ProjectsViewProject extends JView
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
 				
-                if($this->params->get('use_content_plugins_projects',0)){
-                	ProjectsHelper::triggerContentEvents($this->item);
-                }
+				if($this->params->get('use_content_plugins_portfolios',0)){			
+					$this->item->text = &$this->item->description;
+		            ProjectsHelper::triggerContentEvents($this->item, $this->params, $this->state->get('list.offset'));
+				}
+				
 				// Get Portfolio
 				$this->portfolio = $model->getPortfolio($this->item->catid);
 				
