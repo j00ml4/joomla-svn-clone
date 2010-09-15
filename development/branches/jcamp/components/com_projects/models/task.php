@@ -117,15 +117,27 @@ class ProjectsModelTask extends JModelAdmin
 				$app->setUserState('project.id', $this->item->project_id);
 				$this->setState('type', $this->item->type);
 				$app->setUserState('task.type', $this->item->type);
+				$db = $this->getDbo();
 				
 				if(!empty($this->item->catid)){
-					$db = $this->getDbo();
 					$q = 'SELECT title FROM #__categories WHERE id='.$this->item->catid;
 					$db->setQuery($q);
 					$this->item->category_title = $db->loadResult();
 				}else{
 					$this->item->category_title = '';
 				}
+				
+				$q = $db->getQuery(true);
+				$q->select('u1.name as `created`');
+				$q->select('u2.name as `modified`');
+				$q->from('#__users AS `u1`');
+				$q->where('`u1`.id = '.(int)$this->item->created_by);
+				$q->join('left','#__users AS `u2` ON `u2`.id='.(int)$this->item->modified_by);
+				$db->setQuery($q);
+				$res = $db->loadObject();
+				
+				$this->item->created_by = $res->created;
+				$this->item->modified_by = $res->modified;
 			}
 		}
 		return $this->item;
