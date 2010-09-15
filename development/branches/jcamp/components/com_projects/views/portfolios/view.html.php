@@ -56,10 +56,12 @@ class ProjectsViewPortfolios extends JView
 		if($this->params->get('use_content_plugins_portfolios',0)){
 			$c = count($this->items);
 			for($i = 0; $i < $c;$i++) {
-               	ProjectsHelper::triggerContentEvents($this->items[$i]);
+               	$this->items[$i]->text = & $this->items[$i]->description;
+				ProjectsHelper::triggerContentEvents($this->items[$i], $this->params, $this->state->get('list.offset'));
 			}
 			
-            ProjectsHelper::triggerContentEvents($this->portfolio);
+			$this->portfolio->text = &$this->portfolio->description;
+            ProjectsHelper::triggerContentEvents($this->portfolio, $this->params, $this->state->get('list.offset'));
 		}
 
 		// Check for errors.
@@ -89,7 +91,7 @@ class ProjectsViewPortfolios extends JView
 		ToolBar::title($title, 'categories');
 		if ($this->params->get('show_back_button')) {
             ToolBar::spacer();
-            ToolBar::back(ProjectsHelper::getLink('portfolios', $this->portfolio->get('id')));;
+            ToolBar::back(ProjectsHelper::getLink('portfolios', $this->portfolio->get('parent_id')));;
 		}
 		
 		$app = JFactory::getApplication();

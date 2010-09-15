@@ -72,16 +72,6 @@ class ProjectsViewTask extends JView
                 }
                 break;
                 
-            case 'view':
-                $layout = 'view';
-                if (!$this->canDo->get('task.view')) {
-                    return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
-                }
-                if (empty($this->item->id)) {
-                    return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
-                }
-                break;
-
             default:
                 $layout = 'default';
                 // Access
@@ -92,9 +82,11 @@ class ProjectsViewTask extends JView
                     return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
                 }
                 
-                if($this->params->get('use_content_plugins_tasks',0)){
-					ProjectsHelper::triggerContentEvents(&$this->item);
-                }
+        
+				if($this->params->get('use_content_plugins_portfolios',0)){			
+					$this->item->text = &$this->item->description;
+		            ProjectsHelper::triggerContentEvents($this->item, $this->params, $this->state->get('list.offset'));
+				}
                 break;
         }
 

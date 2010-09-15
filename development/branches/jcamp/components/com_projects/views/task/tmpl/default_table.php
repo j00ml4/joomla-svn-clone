@@ -23,25 +23,34 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 				<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 			</td>
 			<td>
-				<?php if($this->type == 'task'): ?>
-				<span class="padding"><?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ', $item->level-1); ?></span>
-				<?php endif; ?>
-				<a class="state-<?php echo $item->state; ?>" href="<?php echo ProjectsHelper::getLink($this->type, $item->id); ?>">
-					<?php echo $item->title; ?></a>	
-				<?php if(!empty($item->category_title)): ?>
-				<span class="category">
-					(<?php echo $item->category_title; ?>)
-				</span>
-				<?php endif; ?>	
+				<div style="padding-left:<?php echo (($item->level - $this->item->level - 1) * 3); ?>em;">
+					<a class="state-<?php echo $item->state; ?>" href="<?php echo ProjectsHelper::getLink($this->type, $item->id); ?>">
+						<?php echo $item->title; ?></a>	
+					<?php if(!empty($item->category_title)): ?>
+					<span class="category">
+						(<?php echo $item->category_title; ?>)
+					</span>
+					<?php endif; ?>
+					<p class="smallsub" title="<?php echo $this->escape($item->title);?>">
+					<?php 
+						switch ($item->state){
+							case 2:
+								echo JText::sprintf('COM_PROJECTS_FINISHED_ON_BY', 
+									JHTML::_('date', $item->finished, JText::_('DATE_FORMAT_LC1')),
+									$item->editor);
+									break;
+
+							default:
+								echo JText::sprintf('COM_PROJECTS_CREATED_ON_BY', 
+									JHTML::_('date', $item->created, JText::_('DATE_FORMAT_LC1')),
+									$item->author);
+									break;
+						}		
+					?>			
+					</p>
+				</div>	
 			</td>
 
-			<td>
-				<?php if ($item->checked_out) :
-					echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canChange);
-				else:
-					echo $item->author_name;
-				endif; ?>
-			</td>
 			
 			<td>
 				<?php echo JHtml::_('tool.published', $item->state, $i, $this->type); ?>
