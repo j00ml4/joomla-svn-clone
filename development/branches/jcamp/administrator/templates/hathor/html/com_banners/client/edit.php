@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit.php 18760 2010-09-02 15:39:53Z infograf768 $
+ * @version		$Id: edit.php 18871 2010-09-13 14:27:48Z chdemko $
  * @package		Joomla.Administrator
  * @subpackage	templates.hathor
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -15,14 +15,12 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'client.cancel' || document.formvalidator.isValid(document.id('client-form'))) {
-			submitform(task);
+			Joomla.submitform(task, document.getElementByID('client-form'));
 		}
 	}
-// -->
 </script>
 
 <form action="<?php JRoute::_('index.php?option=com_banners'); ?>" method="post" name="adminForm" id="client-form" class="form-validate">

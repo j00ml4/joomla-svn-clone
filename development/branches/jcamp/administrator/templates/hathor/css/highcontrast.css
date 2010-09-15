@@ -13,8 +13,8 @@
 
 /**
  * #163365	Text background/border
- * #1c4181  Alternate text background 1/border
- * #1b3f7c	Alternate text background 2/border
+ * #1c4181  Alternative text background 1/border
+ * #1b3f7c	Alternative text background 2/border
  * #fcff20	Text
  * #ffffff	Highlighted Text
  * #10254a	Main hover color/border
@@ -1002,14 +1002,6 @@ button:hover,button:focus {
 /**
  * System Standard Messages
  */
-	/* OpenID icon style */
-input.system-openid,input.com-system-openid {
-	background: url(http://openid.net/login-bg.gif) no-repeat;
-	background-color: #10254a;
-	background-position: 0 50%;
-	color: #fcff20;
-	padding-left: 18px;
-}
 
 /* System Messages */
 #system-message {

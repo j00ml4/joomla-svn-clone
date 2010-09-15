@@ -50,7 +50,7 @@ class plgContentExample extends JPlugin
 	{
 		$app = JFactory::getApplication();
 
-		return 'aftgerDisplay';
+		return '';
 	}
 
 	/**
@@ -86,7 +86,7 @@ class plgContentExample extends JPlugin
 	{
 		$app = JFactory::getApplication();
 
-		return 'AfterTitle';
+		return '';
 	}
 
 	/**
@@ -118,7 +118,6 @@ class plgContentExample extends JPlugin
 	{
 		$app = JFactory::getApplication();
 
-		$article->text .="BeforeDisplay";
 		return '';
 	}
 
@@ -171,7 +170,5 @@ class plgContentExample extends JPlugin
 	public function onContentPrepare($context, &$article, &$params, $limitstart)
 	{
 		$app = JFactory::getApplication();
-		
-		$article->text.= 'contentPrepare';
 	}
 }

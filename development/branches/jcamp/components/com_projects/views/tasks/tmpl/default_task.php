@@ -31,6 +31,7 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 				<?php echo JText::_('COM_PROJECTS_TASK'); ?>
 			</th>
 
+			
 			<th width="5%">
 				<?php echo JText::_('JGLOBAL_STATE'); ?>
 				<?php //echo JHtml::_('grid.sort',  'JGLOBAL_STATE', 'a.`state`', $listDir, $listOrder); ?>
@@ -53,22 +54,28 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 						(<?php echo $item->category_title; ?>)
 					</span>
 					<?php endif; ?>
-					<!-- p class="smallsub" title="<?php echo $this->escape($item->title);?>">
-						<?php echo str_repeat('<span class="gtr">|&mdash;</span>', $item->level-1) ?>
-						<dl></dl>
-						
-					</p-->
+					<p class="smallsub" title="<?php echo $this->escape($item->title);?>">
+					<?php 
+						switch ($item->state){
+							case 2:
+								echo JText::sprintf('COM_PROJECTS_FINISHED_ON_BY', 
+									JHTML::_('date', $item->finished, JText::_('DATE_FORMAT_LC1')),
+									$item->editor);
+									break;
+
+							default:
+								echo JText::sprintf('COM_PROJECTS_CREATED_ON_BY', 
+									JHTML::_('date', $item->created, JText::_('DATE_FORMAT_LC1')),
+									$item->author);
+									break;
+						}		
+					?>			
+					</p>
 				</div>	
 			</td>
-
-				<?php /*if ($item->checked_out) :
-					echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canChange);
-				else:
-					echo $item->author_name;
-				endif; */ ?>
 			
 			<td>
-				<?php echo JHtml::_('tool.published', $item->state, $i, $this->type); ?>
+				<?php echo JHtml::_('tool.published', $item->state, $i, $this->type, $canChange); ?>
 			</td>
 				
 		</tr>

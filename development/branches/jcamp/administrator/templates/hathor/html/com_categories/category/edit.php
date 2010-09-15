@@ -11,14 +11,13 @@
 // no direct access
 defined('_JEXEC') or die;
 
-defined('_JEXEC') or die;
-
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
 // Load the tooltip behavior.
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+JHtml::_('behavior.keepalive');
 ?>
 
 <script type="text/javascript">
@@ -26,7 +25,7 @@ JHtml::_('behavior.formvalidation');
 	{
 		if (task == 'category.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
 			<?php echo $this->form->getField('description')->save(); ?>
-			submitform(task);
+			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
@@ -75,7 +74,7 @@ JHtml::_('behavior.formvalidation');
 
 	<div class="col options-section">
 
-		<?php echo JHtml::_('sliders.start','plugin-sliders-'.$this->item->id); ?>
+		<?php echo JHtml::_('sliders.start','plugin-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 			<?php echo $this->loadTemplate('options'); ?>
 			<div class="clr"></div>
 

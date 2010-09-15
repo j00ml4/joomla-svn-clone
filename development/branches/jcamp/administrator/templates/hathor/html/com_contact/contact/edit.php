@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit.php 18760 2010-09-02 15:39:53Z infograf768 $
+ * @version		$Id: edit.php 18871 2010-09-13 14:27:48Z chdemko $
  * @package		Joomla.Administrator
  * @subpackage	templates.hathor
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -17,18 +17,16 @@ JHtml::_('behavior.formvalidation');
 $canDo		= ContactHelper::getActions();
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'contact.cancel' || document.formvalidator.isValid(document.id('contact-form'))) {
 			<?php echo $this->form->getField('misc')->save(); ?>
-			submitform(task);
+			Joomla.submitform(task, document.getElementByID('contact-form'));
 		}
 		else {
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
-// -->
 </script>
 
 <form action="<?php JRoute::_('index.php?option=com_contact'); ?>" method="post" name="adminForm" id="contact-form" class="form-validate">

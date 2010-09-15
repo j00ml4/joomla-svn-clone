@@ -63,7 +63,7 @@ class ProjectsModelDocuments extends JModelList
         // Create a new query object.
         $db = $this->getDbo();
         $query = $db->getQuery(true);        
-
+		
         // Select the required fields from the table.
         $query->select(
                 $this->getState('list.select',

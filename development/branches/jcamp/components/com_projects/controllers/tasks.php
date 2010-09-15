@@ -81,8 +81,12 @@ class ProjectsControllerTasks extends JControllerAdmin
 
 		// Initialise variables.
 		$user	= JFactory::getUser();
-		$id	= JRequest::getInt('id', null);
+			
+		// Get items to remove from the request.
+		$cid	= JRequest::getVar('cid', array(), '', 'array');
+		$id		= $cid[0];
 		
+		// Model Checkout
 		$model = $this->getModel();
 		if (!$model->checkout($id)) {
 			// Checkin failed.
@@ -90,11 +94,12 @@ class ProjectsControllerTasks extends JControllerAdmin
 			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false), $message, 'error');
 			return false;
 		}
-		
+		//die();
 		// Checkin succeeded.
-		$message =  JText::_($this->text_prefix.'_N_ITEMS_CHECKED_OUT');
-		$this->setRedirect(ProjectsHelper::getLink($key));
+		$this->setMessage(JText::_($this->text_prefix.'_N_ITEMS_CHECKED_OUT'), 'notice');
+		$this->setRedirect(ProjectsHelper::getLink('tasks', $model->getState('project.id')));
 		return true;
 	}
+	
     
 }
