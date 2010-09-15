@@ -99,6 +99,7 @@ class ProjectsModelDocuments extends JModelList
 		// Filter by access level.
 		$value = $this->getState('filter.access');
 		if ($value) {
+			$user = JFactory::getUser();
 			$value = $user->authorisedLevels();
 			$query->where('a.access IN ('. implode(',', $value) .')');
 		}	
