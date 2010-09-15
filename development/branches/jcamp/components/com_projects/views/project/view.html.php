@@ -96,8 +96,8 @@ class ProjectsViewProject extends JView
 		// get tickets and tasks
 		$params_tasks = new JRegistry();
 		$params_tasks->set('project.id', $model->getState('project.id'));
-		$params_tasks->set('order.list', 't.`ordering`');
-		$params_tasks->set('order.dir', 'ASC');
+		$params_tasks->set('order.list', 't.`modified`, t.`created`');
+		$params_tasks->set('order.dir', 'DESC');
 		$params_tasks->set('state',' >= 1');
 		$params_tasks->set('task.type', 2); // get tasks
 		// limit for lister
@@ -111,7 +111,7 @@ class ProjectsViewProject extends JView
 		$params_docs = new JRegistry();
 		$params_docs->set('project.id', $model->getState('project.id'));
 		$params_docs->set('order.list', 'c.`modified`, c.`created`');
-		$params_docs->set('order.dir', 'ASC');
+		$params_docs->set('order.dir', 'DESC');
 		$params_docs->set('state',' >= 1');
 		// limit for lister
 		$params_docs->set('limit.limit', $count);
