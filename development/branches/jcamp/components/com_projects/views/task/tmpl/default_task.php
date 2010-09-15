@@ -17,12 +17,12 @@ $pageClass = $this->params->get('pageclass_sfx');
 <div class="projects-both-sides">
 	<span><?php echo JText::sprintf('COM_PROJECTS_CREATED_ON_BY',
 						JHTML::_('date', $this->item->created, JText::_('DATE_FORMAT_LC1')),
-						$this->item->created_by);?></span>
+						$this->item->author);?></span>
 	<?php if(!empty($this->item->modified_by)): ?>
 	<span>
 		<?php echo JText::sprintf('COM_PROJECTS_MODIFIED_ON_BY',
 						JHTML::_('date', $this->item->modified, JText::_('DATE_FORMAT_LC1')),
-						$this->item->modified_by);?>		
+						$this->item->modified_last);?>		
 	</span>
 	<?php endif;?>
 	<?php if($this->item->category_title): ?>

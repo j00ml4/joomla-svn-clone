@@ -118,23 +118,25 @@ class ProjectsModelTask extends JModelAdmin
 				//$this->setState('type', $this->item->type);
 				//$app->setUserState('task.type', $this->item->type);
 								
-				
+				$db = JFactory::getDbo();
 				$q = $db->getQuery(true);
 				$q->select('c.title as `category_title`');
 				$q->select('ua.name as `created_by`');
+				$q->select('um.name as `modified_by`');
 				$q->select('ue.name as `finished_by`');
 				$q->from('#__project_tasks AS a');
-				$q->where('id = '.(int)$this->item->id);
+				$q->where('a.id = '.(int)$this->item->id);
 				
 				$q->join('left','#__categories AS `c` ON `c`.id = a.catid');
 				$q->join('left','#__users AS `ua` ON `ua`.id = a.created_by');
+				$q->join('left','#__users AS `um` ON `um`.id = a.modified_by');
 				$q->join('left','#__users AS `ue` ON `ue`.id = a.finished_by');
 				
 				$db->setQuery($q);
 				$result = $db->loadObject();
-				
 				$this->item->author = $result->created_by;
-				$this->item->editor = $result->modified_by;
+				$this->item->modified_last = $result->modified_by;
+				$this->item->editor = $result->finished_by;
 				$this->item->category_title = $result->category_title;
 				
 			}else{						
