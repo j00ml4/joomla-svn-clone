@@ -43,6 +43,9 @@ class ProjectsModelProjects extends JModelList
 			$params = JComponentHelper::getParams('com_projects');
 			$this->setState('params', $params);
 			
+			$published = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_published', '', 'string');
+			$this->setState('filter.state', $published);
+			
 			$accessId = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', null, 'int');
 			$this->setState('filter.access', $accessId);	
 		}else{
@@ -50,14 +53,12 @@ class ProjectsModelProjects extends JModelList
         	$this->setState('params', $params);
         
 			$this->setState('filter.access', !$params->get('show_noauth'));
+			$this->setState('filter.state', 1);
 		}
 		
 		// Load the filter state.
 		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
-
-		$published = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_published', '', 'string');
-		$this->setState('filter.state', $published);
 
 		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
 		$this->setState('filter.language', $language);
