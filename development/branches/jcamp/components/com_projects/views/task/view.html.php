@@ -75,7 +75,7 @@ class ProjectsViewTask extends JView
             default:
                 $layout = 'default';
                 // Access
-                if (!$this->canDo->get('task.view')) {
+                if (!$this->canDo->get('is.authorised')) {
                     return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
                 }
                 if (empty($this->item->id)) {
@@ -116,7 +116,9 @@ class ProjectsViewTask extends JView
 				$icon = 'archive';			
 				if($this->canDo->get($this->type.'.edit')){
 					if($this->item->state == 1){
-						ToolBar::custom('tasks.archive', 'checkin', 'checkin', JText::_('COM_PROJECTS_STATE_FINISHED'));
+						if(empty($this->items) || $this->item->progress == 100){
+							ToolBar::custom('tasks.archive', 'checkin', 'checkin', JText::_('COM_PROJECTS_STATE_FINISHED'));
+						}
 					}else{
 						ToolBar::custom('tasks.publish', 'notice', 'notice', JText::_('COM_PROJECTS_STATE_PENDING'));
                     }

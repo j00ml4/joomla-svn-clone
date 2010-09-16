@@ -79,6 +79,11 @@ class ProjectsViewDocument extends JView
 					return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));
 				}
 				
+				// Access
+                if (!$this->canDo->get('is.authorised')) {
+                    return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
+                }
+                
 				//
 				// Process the content plugins.
 				//
