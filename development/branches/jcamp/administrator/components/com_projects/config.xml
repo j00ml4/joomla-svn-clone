@@ -37,6 +37,55 @@
 			hr="true"
 			/>
 
+		<field name="show_tasks"
+			type="radio"
+			label="COM_PROJECTS_CONFIGURATION_SHOW_TASKS_LABEL"
+			description="COM_PROJECTS_CONFIGURATION_SHOW_TASKS_DESC"
+			class="inputbox"
+			size="1"
+			default="0">
+			<option	value="0">JNO</option>
+			<option	value="1">JYES</option>
+		</field>
+
+		<field name="show_tickets"
+			type="radio"
+			label="COM_PROJECTS_CONFIGURATION_SHOW_TICKETS_LABEL"
+			description="COM_PROJECTS_CONFIGURATION_SHOW_TICKETS_DESC"
+			class="inputbox"
+			size="1"
+			default="0">
+			<option	value="0">JNO</option>
+			<option	value="1">JYES</option>
+		</field>
+
+		<field name="show_documents"
+			type="radio"
+			label="COM_PROJECTS_CONFIGURATION_SHOW_DOCUMENTS_LABEL"
+			description="COM_PROJECTS_CONFIGURATION_SHOW_DOCUMENTS_DESC"
+			class="inputbox"
+			size="1"
+			default="0">
+			<option	value="0">JNO</option>
+			<option	value="1">JYES</option>
+		</field>
+		
+		<field name="show_members"
+			type="radio"
+			label="COM_PROJECTS_CONFIGURATION_SHOW_MEMBERS_LABEL"
+			description="COM_PROJECTS_CONFIGURATION_SHOW_MEMBERS_DESC"
+			class="inputbox"
+			size="1"
+			default="0">
+			<option	value="0">JNO</option>
+			<option	value="1">JYES</option>
+		</field>
+
+		<field name="spacer2"
+			type="spacer"
+			hr="true"
+			/>
+
 		<field name="use_content_plugins_portfolios"
 			type="radio"
 			label="COM_PROJECTS_CONFIGURATION_USE_CONTENT_PLUGINS_PORTFOLIOS_LABEL"
