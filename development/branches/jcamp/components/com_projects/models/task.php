@@ -120,18 +120,26 @@ class ProjectsModelTask extends JModelAdmin
 								
 				$db = $this->getDbo();
 				$q = $db->getQuery(true);
+				$q->from('#__project_tasks AS a');
+				$q->where('a.id ='.(int)$this->item->id);
+				$q->group('a.id');
+				
+				// Progress
+				$q->select(' FLOOR((COUNT(DISTINCT ntf.id) / COUNT(DISTINCT nt.id)) * 100) AS progress');
+				$q->join('LEFT', '#__project_tasks AS nt ON nt.parent_id=a.id AND nt.state != 0');
+				$q->join('LEFT', '#__project_tasks AS ntf ON ntf.parent_id=a.id AND ntf.state=2');
+				
+				// vars
 				$q->select('c.title as `category_title`');
 				$q->select('ua.name as `created_by`');
 				$q->select('um.name as `modified_by`');
-				$q->select('ue.name as `finished_by`');
-				$q->from('#__project_tasks AS a');
-				$q->where('a.id ='.(int)$this->item->id);
-				
+				$q->select('ue.name as `finished_by`');	
 				$q->join('left','#__categories AS `c` ON `c`.id = a.catid');
 				$q->join('left','#__users AS `ua` ON `ua`.id = a.created_by');
 				$q->join('left','#__users AS `um` ON `um`.id = a.modified_by');
 				$q->join('left','#__users AS `ue` ON `ue`.id = a.finished_by');
 				
+				// Results
 				$db->setQuery($q);
 				$result = $db->loadObject();
 				
@@ -139,6 +147,7 @@ class ProjectsModelTask extends JModelAdmin
 				$this->item->editor = $result->finished_by;
 				$this->item->modified_last = $result->modified_by;
 				$this->item->category_title = $result->category_title;
+				$this->item->progress = $result->progress;
 				
 			}else{						
 				$date = &JFactory::getDate();

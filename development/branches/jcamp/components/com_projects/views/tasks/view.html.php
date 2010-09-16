@@ -54,10 +54,12 @@ class ProjectsViewTasks extends JView {
         switch ($layout) {
             default:
                 $layout = 'default';
+                
                 // Access
-                if (!$this->canDo->get('task.view')) {
+                if (!$this->canDo->get($this->type.'.view') && !$this->params->get('show_'.$this->type.'s')) {
                     return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
                 }
+                
                 // Get project
                 if (empty($this->project)) {
                     return JError::raiseError(404, JText::_('JERROR_LAYOUT_REQUESTED_RESOURCE_WAS_NOT_FOUND'));

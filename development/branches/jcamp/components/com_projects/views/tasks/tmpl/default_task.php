@@ -24,9 +24,12 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 <table class="todo-table category">
 	<thead>
 		<tr>
+			<?php if($canChange): ?>
 			<th width="1%">
 				<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
 			</th>
+			<?php endif; ?>
+			
 			<th>
 				<?php echo JText::_('COM_PROJECTS_TASK'); ?>
 			</th>
@@ -42,9 +45,12 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 	<tbody>
 		<?php foreach ($this->items as $i => $item): ?>
 		<tr class="cat-list-row<?php echo $i % 2; ?>">
+			<?php if($canChange): ?>
 			<td> 
 				<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 			</td>
+			<?php endif; ?>
+			
 			<td>
 				<div style="padding-left:<?php echo (($item->level - 1) * 3); ?>em;">
 					<a class="state-<?php echo $item->state; ?>" href="<?php echo ProjectsHelper::getLink($this->type, $item->id); ?>">

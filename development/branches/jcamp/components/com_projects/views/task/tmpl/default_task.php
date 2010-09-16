@@ -33,18 +33,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 </div>
 <div class="divBox1">
 	<table>
-		<?php  /* ?>
-		<tr>
-			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_START_AT');?>:</td>
-			<td>
-			<?php
-				echo strtotime($this->item->start_at) == 0 ?
-					 JText::_('COM_PROJECTS_TASK_NOT_YET') :
-				     JHTML::_('date', $this->item->start_at, JText::_('DATE_FORMAT_LC3'));
-			?>
-			</td>
-		</tr>
-		<?php */ ?>
+
 		<tr>
 			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_FINISH_AT');?>:</td>
 			<td>
@@ -55,20 +44,6 @@ $pageClass = $this->params->get('pageclass_sfx');
 			?>
 			</td>
 		</tr>
-		<?php /* ?>
-		<tr>
-			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_ESTIMATE');?>:</td>
-			<td><?php echo $this->item->estimate;?></td>
-		</tr>
-		<tr>
-			<td><?php echo JText::_('COM_PROJECTS_TASK_CELL_ASSIGNED_TO');?>:</td>
-			<td>
-			<?php
-				echo $this->item->editor;
-			?>
-			</td>
-		</tr>
-		<?php */ ?>
 	</table>
 	
 	<table>
@@ -93,6 +68,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 <div class="projects-module">
 	<h4><?php echo JText::sprintf('COM_PROJECTS_TASKS_LIST_TASKS_TITLE', $this->item->title); ?></h4>
 	<div class="projects-content">
+		<?php echo JHTML::_('tool.progressBar', $this->item->progress); ?>
 		<?php echo $this->loadTemplate('table'); ?>
 	</div>
 </div>

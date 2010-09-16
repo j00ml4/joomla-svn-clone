@@ -66,6 +66,12 @@ abstract class ProjectsHelperACL {
             );
         }
 
+        // is.authorized
+        $is_authorised = (is_object($record) && !empty($record->access))? 
+        	in_array($record->access, $user->authorisedLevels()): 
+        	true; 
+        $assets->set('is.authorised', $is_authorised);        
+        
         // acctions
         $resources = array(
             'task',
@@ -83,7 +89,10 @@ abstract class ProjectsHelperACL {
             // Actions
             foreach ($actions as $action) {
                 $assets->set($resource . $action,
-                        ($user->authorise($action, $assetName))
+                	(
+                		$is_member &&
+                        $user->authorise($action, $assetName)
+                	)
                 );
             }
 
@@ -97,7 +106,7 @@ abstract class ProjectsHelperACL {
                     )
             );
         }
-
+        
         // More Actions
         $actions = array(
             'core.create',

@@ -16,9 +16,14 @@ $params =  $this->params;
 <div class="projects<?php echo $params->get('pageclass_sfx'); ?>">
     <div class="tasks-list">
 		<form action="<?php echo ProjectsHelper::getLink('form'); ?>" method="post" id="adminForm" name="adminForm">	
-	        <?php if($this->canDo->get('task.view') && $this->canDo->get('ticket.view')): ?>
-				<?php echo $this->loadTemplate('buttons'); ?>
-			<?php endif; ?>
+	        <?php 
+	        if( 
+	        	($this->canDo->get('task.view') || $params->get('show_tasks')) && 
+	        	($this->canDo->get('ticket.view') || $params->get('show_tickets')) 
+	        ){
+				echo $this->loadTemplate('buttons');
+	        }
+			?>
 	        <fieldset class="filters">
 				<legend><?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?></legend>
 		
