@@ -27,10 +27,41 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+17-Sep-2010 Jean-Marie Simonet
+ # [#22466] Registration failed message when mail function doesn't work. Thanks Roland.
+ # [#22100] Unable to view unpublished article in frontend. Thanks Elin.
+ # [#22481] Patch: Templates Date column blank. Thanks Ole.
+ $ [#22471] Module banners - description. Thanks Bill.
+
+16-Sep-2010 Jean-Marie Simonet
+ $ [#22461] Module articles - newsflash - description. Thanks Bill
+ # Took off forgotten echo from 22418
+ # [#22448] Weblink search year gives -0001 for new weblinks. Thanks Ole.
+ 
+15-Sep-2010 Mark Dexter
+# Sample data fixes (Thanks Elin Waring) 
+
+15-Sep-2010 Christophe Demko
+ # [#22418] Category Manager page title no longer includes component name
+ 
+15-Sep-2010 Jean-Marie Simonet
+ # [#22450] Add level filter to admin categories view. Thanks Andrew and Christophe.
+ $ Changed figures to strings in Menu items manager maxlevels filter
+ # [#22427] Module Manager: Modules - Module Filter Only Lists "Administrator Menu" at times. Thanks Michael.
+ # [#22440] default module positions. Thanks Christophe.
+ 
 15-Sep-2010 Andrew Eddie
  # Fixed issue [#22125] We don't have CSS for system "warning" messages (Artyom Bisyarin, Elin Waring).
  # Fixed issue [#22385] Make meta data not required (Elin Waring).
  # Fixed issue [#22245] Default site metadata (Brian Teeman, Matt Thomas, Ole Bang Ottosen, Michael Babker).
+ # Fixed issue [#22030] Full Path Disclosure 2 (Brian Teeman, Hannes Papenberg, Roland Dalmulder, Michael Babker).
+ # Fixed issue [#22434] poor choice of language (Brian Teeman, Bill Richardson).
+ # Fixed issue [#20794] ftp host and port fields, not validated (Rob Joyce, Roland Dalmulder, Troy Hall, Christophe Demko).
+ # Fixed issue [#21839] Incorrect display in Menu manager - showing 8 pages (Bill Richardson, Ian MacLennan).
+ # Fixed issue [#22212] Create New Module (Brian Teeman, Michael Babker).
+ # Fixed issue [#22244] control_panel0004Test.php system test failing (Matt Thomas).
+ # Fixed issue [#22021] ACL System Tests (Matt Thomas).
+ # Fixed issue [#21791] Menu Item Alias (Stian Totland, Christophe Demko).
 
 14-Sep-2010 Jean-Marie Simonet
  # [#22288] Content category - displaying title twice. Thanks Bill.
