@@ -33,12 +33,6 @@ class ProjectsControllerProject extends JControllerForm {
     public function __construct($config = array()) {
         parent::__construct($config);
 
-        $this->registerTask('unpublish', 'publish'); // value = 0
-        $this->registerTask('archive', 'publish'); // value = 2	// finished
-        $this->registerTask('trash', 'publish'); // value = -2
-        $this->registerTask('report', 'publish'); // value = -3 	// pending
-        $this->registerTask('back', 'back');
-
         $this->registerTask('assign', 'assignMembers');
         $this->registerTask('unassign', 'unassignMembers');
 
@@ -114,15 +108,6 @@ class ProjectsControllerProject extends JControllerForm {
                 $record);
     }
 
-    /**
-     * Method to go back to list of projects of a portfolio
-     *
-     */
-    public function back() {
-    	$app = JFactory::getApplication();
-        $this->setRedirect(JRoute::_('index.php?option=com_projects&view=projects&layout=gallery&id='.$app->getUserState('portfolio.id'), false));
-    }
-
     
     /**
      * Save
@@ -130,12 +115,12 @@ class ProjectsControllerProject extends JControllerForm {
      * @see libraries/joomla/application/component/JControllerForm#save()
      */
     public function save() {
-		if(!parent::save()){
+    	if(!parent::save()){
 			return false;
 		}
     	
-    	$model = $this->getModel();
-    	$id = $model->getState('project.id');
+		$app = JFactory::getApplication();
+    	$id = $app->getUserState('project.id');
     	
         // redirect
     	$this->setRedirect(ProjectsHelper::getLink('project', $id));
@@ -151,7 +136,6 @@ class ProjectsControllerProject extends JControllerForm {
         // Check for request forgeries
         JRequest::checkToken() or die(JText::_('JINVALID_TOKEN'));
 
-        $app = JFactory::getApplication();
         $model = $this->getModel();
         $id = $model->getState('project.id', 0);
         parent::cancel();

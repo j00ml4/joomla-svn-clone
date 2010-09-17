@@ -51,15 +51,6 @@ class ProjectsControllerTasks extends JControllerAdmin
         return parent::getModel($name, $prefix, $config);
     }
 
-    /**
-     * Method to go back to project overview
-     *
-     * @since	1.6
-     */
-    public function back() {
-        $app = JFactory::getApplication();
-        $this->setRedirect(ProjectsHelper::getLink('project',$app->getUserState('project.id')));
-    }
 	
     public function publish(){
     	parent::publish();
