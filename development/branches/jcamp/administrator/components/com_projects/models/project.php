@@ -350,11 +350,16 @@ class ProjectsModelProject extends JModelAdmin
 		
 		// if is a new project
 		if($this->getState('project.new')){
-			$id = $this->getState('project.id', $this->getDbo()->insertID());
+			$id = $this->getState('project.id')? 
+				$this->getState('project.id'): 
+				$this->getDbo()->insertID();
+			
 			$user_id = !empty($data['created_by'])? $data['created_by']: JFactory::getUser()->id;
-
+						
             $this->addMembers($id, $user_id);
-            $this->setState('project.id', $id);
+           	
+            $app = JFactory::getApplication();	
+			$app->setUserState('project.id', $id);
 		}
 		
 		return true;

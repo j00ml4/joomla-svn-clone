@@ -91,9 +91,11 @@ class ProjectsTableProject extends JTable
 		}
 
 		// Update the publishing state for rows with the given primary keys.
+		$date = JFactory::getDate()->toMySQL();
 		$this->_db->setQuery(
 			'UPDATE `'.$this->_tbl.'`' .
 			' SET `state` = '.(int) $state .
+			', `modified` = "'. $date .'", `modified_by` = '. (int) $userId.
 			' WHERE ('.$where.')' .
 			$checkin
 		);

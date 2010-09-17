@@ -33,7 +33,7 @@ abstract class ProjectsHelperACL {
         // Check if is member
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
-        $query->select('count(project_id)');
+        $query->select('COUNT(project_id)');
         $query->from('#__project_members AS a');
         $query->where('a.project_id = ' . (int) $project_id . ' AND a.user_id=' . (int) $user_id);
         $db->setQuery($query);
@@ -99,7 +99,7 @@ abstract class ProjectsHelperACL {
             // View
             $assets->set($resource . '.view',
                     (
-                    //$is_member &&
+                    $is_member &&
                     $assets->get($resource . '.create') ||
                     $assets->get($resource . '.edit') ||
                     $assets->get($resource . '.delete')
@@ -115,7 +115,9 @@ abstract class ProjectsHelperACL {
             'core.delete'
         );
         foreach ($actions as $action) {
-            $assets->set($action, $user->authorise($action, $assetName));
+            $assets->set($action, 
+            	$is_member &&
+            	$user->authorise($action, $assetName));
         }
 
         return $assets;
