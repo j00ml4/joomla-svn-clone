@@ -43,6 +43,21 @@ class CategoriesViewCategories extends JView
 			$this->ordering[$item->parent_id][] = $item->id;
 		}
 
+		// Levels filter.
+		$options	= array();
+		$options[]	= JHtml::_('select.option', '1', JText::_('J1'));
+		$options[]	= JHtml::_('select.option', '2', JText::_('J2'));
+		$options[]	= JHtml::_('select.option', '3', JText::_('J3'));
+		$options[]	= JHtml::_('select.option', '4', JText::_('J4'));
+		$options[]	= JHtml::_('select.option', '5', JText::_('J5'));
+		$options[]	= JHtml::_('select.option', '6', JText::_('J6'));
+		$options[]	= JHtml::_('select.option', '7', JText::_('J7'));
+		$options[]	= JHtml::_('select.option', '8', JText::_('J8'));
+		$options[]	= JHtml::_('select.option', '9', JText::_('J9'));
+		$options[]	= JHtml::_('select.option', '10', JText::_('J10'));
+
+		$this->assign('f_levels', $options);
+
 		$this->addToolbar();
 		parent::display($tpl);
 	}
@@ -86,8 +101,8 @@ class CategoriesViewCategories extends JView
 		// Get the results for each action.
 		$canDo = CategoriesHelper::getActions($component, $categoryId);
 
-		// If the section is defined, component supports multiple category groups.
-		if ($section) {
+		// If the string is present, let's use it.
+		if ($this->escape(JText::_($component.($section?"_$section":''))) !=NULL) {
 			$title = JText::sprintf(
 				'COM_CATEGORIES_CATEGORIES_TITLE',
 				$this->escape(JText::_($component.($section?"_$section":'')))
@@ -109,7 +124,6 @@ class CategoriesViewCategories extends JView
 		}
 
 		if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::divider();
 			JToolBarHelper::custom('categories.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
 			JToolBarHelper::custom('categories.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
 			JToolBarHelper::divider();
