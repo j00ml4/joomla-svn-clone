@@ -123,6 +123,7 @@ class ProjectsViewProject extends JView
 		$params_docs->set('order.list', 'c.`modified`, c.`created`');
 		$params_docs->set('order.dir', 'DESC');
 		$params_docs->set('state',' >= 1');
+		$params_docs->set('filter.access',true);
 		// limit for lister
 		$params_docs->set('limit.limit', $count);
 		$params_docs->set('limit.start', 0);

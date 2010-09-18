@@ -83,7 +83,14 @@ abstract class ProjectsHelper {
 			else
 				$q->where('c.`state` '.$state);
 	    }
-	    
+
+		// Filter by access level.
+		if ($params->get('filter.access',false)) {
+			$user = JFactory::getUser();
+			$value = $user->authorisedLevels();
+			$q->where('c.access IN ('. implode(',', $value) .')');
+		}	
+
 	    // order and limit
 	    $ord = $params->get('order.list','c.`modified`, c.`created`');
 	    $start = (int)$params->get('limit.start',0);
