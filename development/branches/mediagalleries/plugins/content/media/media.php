@@ -162,7 +162,7 @@ class plgContentMedia extends JPlugin
 				// Put Video inside the content
 				$thumbnail = self::getThumb( $url, $width, $height );
 				$replace = '<span id="thumb_'. $x .'" class="thumb" style="position:relative">'
-					.'<img src="'.$thumbnail.'">'
+					.'<img src="'.$thumbnail.'" width="'.$width.'" height="'.$height.'">'
 				. '</span>';
 				$row->text = str_replace( $matches[0][$x], $replace, $row->text );
 			}
@@ -171,6 +171,7 @@ class plgContentMedia extends JPlugin
 		}	
 	}
 	
+	//this is the patch
 	/**
 	 * 
 	 * @param $item
