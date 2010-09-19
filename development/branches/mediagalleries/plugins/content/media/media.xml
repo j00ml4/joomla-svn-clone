@@ -65,15 +65,15 @@
 					type="text"
 					default="160" 
 					size="20" 
-					label="PLG_CONTENT_MEDIA_WIDTH_LABEL"
-					description="PLG_CONTENT_MEDIA_WIDTH_DESC" />
+					label="PLG_CONTENT_MEDIA_THUMB_WIDTH_LABEL"
+					description="PLG_CONTENT_MEDIA_THUMB_WIDTH_DESC" />
 				
 				<field name="thumbheight" 
 					type="text" 
 					size="5" 
 					default="" 
-					label="PLG_CONTENT_MEDIA_HEIGHT_LABEL" 
-					description="PLG_CONTENT_MEDIA_HEIGHT_DESC"/>
+					label="PLG_CONTENT_MEDIA_THUMB_HEIGHT_LABEL" 
+					description="PLG_CONTENT_MEDIA_THUMB_HEIGHT_DESC"/>
 				
 				
 			</fieldset>
