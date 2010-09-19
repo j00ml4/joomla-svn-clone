@@ -43,69 +43,133 @@ class plgContentMedia extends JPlugin
 	public function onContentPrepare($context, &$row, &$params, $limitstart)
 	{
 		// Just to check if plg_media may be called or not, for better performance
-		if (strpos($row->text, 'media') === false) {
+		$makeMedia=strpos($row->text, 'media');
+		$makeThumb=strpos($row->text, 'thumb');
+		if ( $makeMedia=== false &&  $makeThumb=== false) {
 			return true;
 		}
 		
-
-		// Regular Expression
-		$regex = '/\{media(.*?)}/i';
-		$total = preg_match_all( $regex, $row->text, $matches );
-		if ( !$total ){
-			return false;
-		}
+		if($makeMedia)
+		{
+			// Regular Expression
+			$regex = '/\{media(.*?)}/i';
+			$total = preg_match_all( $regex, $row->text, $matches );
+			if ( !$total ){
+				return false;
+			}
 		
-		// Default	->fixed
-		$w = (int)$this->params->def('width', 400);
-		$h = (int)$this->params->def('height', 0 );
-		$ast = (int)$this->params->def('autostart', 0 );
+			// 	Default	->fixed
+			$w = (int)$this->params->def('width', 400);
+			$h = (int)$this->params->def('height', 0 );
+			$ast = (int)$this->params->def('autostart', 0 );
 		
-		// Loop
-		for( $x=0; $x < $total; $x++ ){
-			// General Params		
-			$parts = preg_replace('/\<.*?\>/', '', trim($matches[1][$x])); // Dumies Prof
-			$parts = explode( ' ', $parts); // Split	
+			// Loop
+			for( $x=0; $x < $total; $x++ ){
+				// General Params		
+				$parts = preg_replace('/\<.*?\>/', '', trim($matches[1][$x])); // Dumies Prof
+				$parts = explode( ' ', $parts); // Split	
 	
-			// Default Vaues
-			$width = $w;
-			$height = ($h > 0)? $h : ($width * 0.7);
-			$autostart = $ast;
+				// Default Vaues
+				$width = $w;
+				$height = ($h > 0)? $h : ($width * 0.7);
+				$autostart = $ast;
 			
-			// Params
-			$pcount = count($parts);
+				// Params
+				$pcount = count($parts);
 			
-			/**Width*/
+				/**Width*/
 			if($pcount > 1){
-				($parts[1] > 0) // if true 
-					&& $width = (int)$parts[1];
-				$height = $width * 0.7;
+					($parts[1] > 0) // if true 
+						&& $width = (int)$parts[1];
+					$height = $width * 0.7;
 				
-				/**Height*/			
-				if($pcount > 2){
-					($parts[2] > 0) // if true 
-						&& ($height = (int)$parts[2]);
-					($parts[1] > 0) // if false
+					/**Height*/			
+					if($pcount > 2){
+						($parts[2] > 0) // if true 
+							&& ($height = (int)$parts[2]);
+						($parts[1] > 0) // if false
 						|| $width = $height * 1.3;
 									
-					/**autoStart*/				
-					if($pcount > 3){
-						$autostart = (boolean)$parts[3];						
+						/**autoStart*/				
+						if($pcount > 3){
+							$autostart = (boolean)$parts[3];						
+						}
+					}
+				
+			
+				// Video Display
+				$media = $parts[0];
+	
+				// Put Video inside the content
+				$replace = self::addMedia( $media, $width, $height, $autostart );
+				$replace = '<span id="media_'. $x .'" class="media" style="position:relative">'
+					. $replace
+				. '</span>';
+				$row->text = str_replace( $matches[0][$x], $replace, $row->text );
+			}
+		}
+	
+		}
+		
+	if($makeThumb)
+		{
+			// Regular Expression
+			$regex = '/\{thumb(.*?)}/i';
+			$total = preg_match_all( $regex, $row->text, $matches );
+			if ( !$total ){
+				return false;
+			}
+		
+			// 	Default	->fixed
+			$w = (int)$this->params->def('thumbwidth', 160);
+			$h = (int)$this->params->def('thumbheight');
+					
+			// Loop
+			for( $x=0; $x < $total; $x++ ){
+				// General Params		
+				$parts = preg_replace('/\<.*?\>/', '', trim($matches[1][$x])); // Dumies Prof
+				$parts = explode( ' ', $parts); // Split	
+	
+				// Default Vaues
+				$width = $w;
+							
+				// Params
+				$pcount = count($parts);
+			
+				/**Width*/
+				if($pcount > 1){
+					($parts[1] > 0) // if true 
+						&& $width = (int)$parts[1];
+					$height = $width * 0.7;
+				
+					/**Height*/			
+					if($pcount > 2){
+						($parts[2] > 0) // if true 
+							&& ($height = (int)$parts[2]);
+						($parts[1] > 0) // if false
+						|| $width = $height * 1.3;
+									
+						/**autoStart*/				
+						if($pcount > 3){
+							$autostart = (boolean)$parts[3];						
+						}
 					}
 				}
-			}
 			
-			// Video Display
-			$media = $parts[0];
+				// Video Display
+				$url = $parts[0];
 	
-			// Put Video inside the content
-			$replace = self::addMedia( $media, $width, $height, $autostart );
-			$replace = '<span id="media_'. $x .'" class="media" style="position:relative">'
-				. $replace
-			. '</span>';
-			$row->text = str_replace( $matches[0][$x], $replace, $row->text );
-		}
-		return true;
-	}	
+				// Put Video inside the content
+				$thumbnail = self::getThumb( $url, $width, $height );
+				$replace = '<span id="thumb_'. $x .'" class="thumb" style="position:relative">'
+					.'<img src="'.$thumbnail.'">'
+				. '</span>';
+				$row->text = str_replace( $matches[0][$x], $replace, $row->text );
+			}
+		
+			return true;
+		}	
+	}
 	
 	/**
 	 * 
