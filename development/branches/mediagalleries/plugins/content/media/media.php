@@ -45,7 +45,7 @@ class plgContentMedia extends JPlugin
 		// Just to check if plg_media may be called or not, for better performance
 		$makeMedia=strpos($row->text, 'media');
 		$makeThumb=strpos($row->text, 'thumb');
-		if ( $makeMedia=== false &&  $makeThumb=== false) {
+		if ($makeMedia === false &&  $makeThumb === false) {
 			return true;
 		}
 		
@@ -53,16 +53,13 @@ class plgContentMedia extends JPlugin
 		{
 			// Regular Expression
 			$regex = '/\{media(.*?)}/i';
-			$total = preg_match_all( $regex, $row->text, $matches );
-			if ( !$total ){
-				return false;
-			}
+			$total = preg_match_all( $regex, $row->text, $matches );			
 		
 			// 	Default	->fixed
 			$w = (int)$this->params->def('width', 400);
 			$h = (int)$this->params->def('height', 0 );
 			$ast = (int)$this->params->def('autostart', 0 );
-		
+			
 			// Loop
 			for( $x=0; $x < $total; $x++ ){
 				// General Params		
@@ -78,24 +75,21 @@ class plgContentMedia extends JPlugin
 				$pcount = count($parts);
 			
 				/**Width*/
-			if($pcount > 1){
-					($parts[1] > 0) // if true 
-						&& $width = (int)$parts[1];
+				if($pcount > 1){	
+					$width 	= (is_numeric($parts[1]) && $parts[1] > 0) ? $parts[1] : $w;
 					$height = $width * 0.7;
+				}
 				
-					/**Height*/			
-					if($pcount > 2){
-						($parts[2] > 0) // if true 
-							&& ($height = (int)$parts[2]);
-						($parts[1] > 0) // if false
-						|| $width = $height * 1.3;
-									
-						/**autoStart*/				
-						if($pcount > 3){
-							$autostart = (boolean)$parts[3];						
-						}
-					}
+				/**Height*/			
+				if($pcount > 2){
+					$height = (is_numeric($parts[2]) && $parts[2] > 0) ? $parts[2]: $h;
+					$width = ($parts[1]) ? $parts[1] : $height * 1.3;
+				}
 				
+				/**autoStart*/				
+				if($pcount > 3){
+					$autostart = (boolean)$parts[3];						
+				}
 			
 				// Video Display
 				$media = $parts[0];
@@ -108,17 +102,13 @@ class plgContentMedia extends JPlugin
 				$row->text = str_replace( $matches[0][$x], $replace, $row->text );
 			}
 		}
-	
-		}
-		
-	if($makeThumb)
+			
+		// Thumb
+		if($makeThumb)
 		{
 			// Regular Expression
 			$regex = '/\{thumb(.*?)}/i';
 			$total = preg_match_all( $regex, $row->text, $matches );
-			if ( !$total ){
-				return false;
-			}
 		
 			// 	Default	->fixed
 			$w = (int)$this->params->def('thumbwidth', 160);
@@ -132,28 +122,21 @@ class plgContentMedia extends JPlugin
 	
 				// Default Vaues
 				$width = $w;
+				$height = ($h > 0)? $h : ($width * 0.7);
 							
 				// Params
 				$pcount = count($parts);
 			
 				/**Width*/
-				if($pcount > 1){
-					($parts[1] > 0) // if true 
-						&& $width = (int)$parts[1];
+				if($pcount > 1){	
+					$width 	= (is_numeric($parts[1]) && $parts[1] > 0) ? $parts[1] : $w;
 					$height = $width * 0.7;
+				}
 				
-					/**Height*/			
-					if($pcount > 2){
-						($parts[2] > 0) // if true 
-							&& ($height = (int)$parts[2]);
-						($parts[1] > 0) // if false
-						|| $width = $height * 1.3;
-									
-						/**autoStart*/				
-						if($pcount > 3){
-							$autostart = (boolean)$parts[3];						
-						}
-					}
+				/**Height*/			
+				if($pcount > 2){
+					$height = (is_numeric($parts[2]) && $parts[2] > 0) ? $parts[2]: $h;
+					$width = ($parts[1]) ? $parts[1] : $height * 1.3;
 				}
 			
 				// Video Display
@@ -166,9 +149,9 @@ class plgContentMedia extends JPlugin
 				. '</span>';
 				$row->text = str_replace( $matches[0][$x], $replace, $row->text );
 			}
-		
-			return true;
 		}	
+		
+		return true;
 	}
 	
 	//this is the patch
@@ -619,11 +602,6 @@ class plgContentMedia extends JPlugin
 		
 		
 	}
-	
-	
-	
-	
-
 	
 	
 }
