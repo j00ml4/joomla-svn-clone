@@ -21,8 +21,8 @@
 		<language tag="en-GB">language/en-GB.plg_content_media.sys.ini</language>
 	</languages>
 
-    <media destination="mediagalleries">
-        <folder>timthumbs</folder>
+    <media destination="mediagalleries" folder="mediagalleries">
+        <folder>thumbs</folder>
     </media>
 	
 	<config>
@@ -60,7 +60,7 @@
 					<option value="1">JYES</option>
 				</field>
 			</fieldset>
-				<fieldset name="thumbnails">
+				<fieldset name="thumbnails" label="Thumbnails">
 				<field name="thumbwidth" 
 					type="text"
 					default="160" 

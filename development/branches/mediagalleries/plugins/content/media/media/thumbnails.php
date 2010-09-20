@@ -69,7 +69,7 @@ function thumbDefault(){
 }
 
 function thumbImage($media, $width , $height){
-	$timthumb= 'media/mediagalleries/timthumb/timthumb.php';
+	$timthumb= 'media/mediagalleries/thumbs/timthumb/timthumb.php';
 	$w="";
 	$h="";
 	if(isset($width) && $width) // To check if the width is non zero and defined
