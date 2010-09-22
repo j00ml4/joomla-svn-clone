@@ -59,7 +59,7 @@ class ProjectsViewDocument extends JView
 				$this->form	= $model->getForm();
 				
 				// State
-				if (empty($this->item)) {
+				if (empty($this->item->id)) {
 					$access = 'document.create';
 				}else{
 					$access = 'document.edit';					

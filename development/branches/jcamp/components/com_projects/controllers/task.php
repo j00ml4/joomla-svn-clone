@@ -48,10 +48,12 @@ class ProjectsControllerTask extends JControllerForm
      * @return	boolean
      */
     protected function allowAdd($data = array()) {
+    	$app = JFactory::getApplication();
         $record = new JObject($data);
-        return ProjectsHelperACL::canDo('core.create',
-                $record->get('catid'),
-                $record->get('id'),
+        
+        return ProjectsHelperACL::canDo($this->getModel()->getType().'.create',
+                $app->getUserState('portfolio.id'), 
+				$app->getUserState('project.id'),
                 $record);
     }
 
@@ -66,12 +68,15 @@ class ProjectsControllerTask extends JControllerForm
      * @return	boolean
      */
     protected function allowEdit($data = array()) {
-        $record = new JObject($data);
-        return ProjectsHelperACL::canDo('core.create',
-                $record->get('catid'),
-                $record->get('id'),
+        $app = JFactory::getApplication();
+    	$record = new JObject($data);
+
+        return ProjectsHelperACL::canDo($this->getModel()->getType().'.edit',
+                $app->getUserState('portfolio.id'), 
+				$app->getUserState('project.id'),
                 $record);
     }
+  
 
     /**
      * Method to check if you can save a new or existing record.
@@ -84,12 +89,13 @@ class ProjectsControllerTask extends JControllerForm
      * @return	boolean
      */
     protected function allowSave($data) {
+    	$app = JFactory::getApplication();
         $record = new JObject($data);
-        $action = $record->get('id', 0) ? 'core.edit' : 'core.create';
+        $action = $record->get('id', 0) ? '.edit' : '.create';
 
-        return ProjectsHelperACL::canDo($action,
-                $record->get('catid'),
-                $record->get('id'),
+        return ProjectsHelperACL::canDo($this->getModel()->getType() . $action,
+                $app->getUserState('portfolio.id'), 
+				$app->getUserState('project.id'),
                 $record);
     }
 	

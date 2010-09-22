@@ -17,6 +17,7 @@ JHtml::core();
 $n = count($this->items);
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
+$canChange = $this->canDo->get('document.edit') || $this->canDo->get('document.delete');
 ?>
 <?php if (empty($this->items)) : ?>
 	<p><?php echo JText::_('COM_PROJECTS_DOCUMENTS_NO_DOCUMENT'); ?></p>
@@ -26,7 +27,7 @@ $listDirn	= $this->state->get('list.direction');
 		<?php if ($this->params->get('show_headings', 1)) :?>
 		<thead>
 			<tr>
-				<?php if($this->canDo->get('document.edit') || $this->canDo->get('document.delete')): ?>	
+				<?php if($canChange): ?>	
 				<th>
 					<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
 				</th>
@@ -50,7 +51,7 @@ $listDirn	= $this->state->get('list.direction');
 		<tbody>
 			<?php foreach ($this->items as $i => &$item) : ?>
 			<tr class="cat-list-row<?php echo $i % 2; ?>">
-				<?php if($this->canDo->get('core.edit')): ?>	
+				<?php if($canChange): ?>	
 				<td>
 					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 				</td>
