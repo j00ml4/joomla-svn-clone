@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.6.0">
 	<name>COM_PROJECTS</name>
-	<creationDate>June 2010</creationDate>
+	<creationDate>sep 2010</creationDate>
 	<author>jCamp team</author>
+	<authorEmail>team.jcamp@gmail.com</authorEmail>
+	<authorUrl>jcamp.3den.org</authorUrl>
 	<copyright>(C) 2010 jCamp team. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later</license>
 	<version>1.0</version>
@@ -19,7 +21,7 @@
 	</uninstall>
 	<update> <!-- Runs on update -->
 		    <sql>
-		            <file driver="mysql" charset="utf8">sql/update.mysql.sql</file>
+		            <file driver="mysql" charset="utf8">sql/install.mysql.sql</file>
 		    </sql>
 	</update>
 	<files folder="site">
@@ -45,8 +47,8 @@
 		    <submenu>
 		            <menu link="option=com_projects" img="class:article">COM_PROJECTS_PROJECTS</menu>
 		            <menu link="option=com_categories&amp;extension=com_projects" view="categories" img="class:category" alt="Portfolios">COM_PROJECTS_PORTFOLIOS</menu>
+		            <menu link="option=com_categories&amp;extension=com_projects.document" view="categories" img="class:category" alt="Document Categories">COM_PROJECTS_DOCUMENT_CATEGORIES</menu>
 					<menu link="option=com_categories&amp;extension=com_projects.task" view="categories" img="class:category" alt="Task Categories">COM_PROJECTS_TASK_CATEGORIES</menu>
-					<menu link="option=com_categories&amp;extension=com_projects.document" view="categories" img="class:category" alt="Document Categories">COM_PROJECTS_DOCUMENT_CATEGORIES</menu>
 		    </submenu>  
 		    <files folder="admin">
 		            <filename>index.html</filename>

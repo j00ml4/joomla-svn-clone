@@ -58,7 +58,7 @@ class ProjectsViewProjects extends JView
 			default:
 				$layout = 'default';
 		
-				if($this->params->get('use_content_plugins_portfolios',0)){
+				if($this->params->get('use_content_plugins_projects',0)){
 					$c = count($this->items);
 					for($i = 0; $i < $c;$i++) {
 		               	$this->items[$i]->text = & $this->items[$i]->description;

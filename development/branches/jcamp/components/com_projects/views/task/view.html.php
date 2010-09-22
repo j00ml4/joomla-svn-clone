@@ -83,7 +83,7 @@ class ProjectsViewTask extends JView
                 }
                 
         
-				if($this->params->get('use_content_plugins_portfolios',0)){			
+				if($this->params->get('use_content_plugins_tasks',0)){			
 					$this->item->text = &$this->item->description;
 		            ProjectsHelper::triggerContentEvents($this->item, $this->params, $this->state->get('list.offset'));
 				}
