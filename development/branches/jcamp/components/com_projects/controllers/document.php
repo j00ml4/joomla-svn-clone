@@ -84,10 +84,12 @@ class ProjectsControllerDocument extends ContentControllerArticle
      * @return	boolean
      */
     protected function allowAdd($data = array()) {
-        $record = new JObject($data);
-        return ProjectsHelperACL::canDo('core.create',
-                $record->get('catid'),
-                $record->get('id'),
+        $app = JFactory::getApplication();
+    	$record = new JObject($data);
+
+        return ProjectsHelperACL::canDo('document.create',
+                $app->getUserState('portfolio.id'), 
+				$app->getUserState('project.id'),
                 $record);
     }
 
@@ -102,10 +104,12 @@ class ProjectsControllerDocument extends ContentControllerArticle
      * @return	boolean
      */
     protected function allowEdit($data = array()) {
-        $record = new JObject($data);
-        return ProjectsHelperACL::canDo('core.create',
-                $record->get('catid'),
-                $record->get('id'),
+        $app = JFactory::getApplication();
+    	$record = new JObject($data);
+
+        return ProjectsHelperACL::canDo('document.edit',
+                $app->getUserState('portfolio.id'), 
+				$app->getUserState('project.id'),
                 $record);
     }
 
@@ -120,12 +124,13 @@ class ProjectsControllerDocument extends ContentControllerArticle
      * @return	boolean
      */
     protected function allowSave($data) {
+    	$app = JFactory::getApplication();
         $record = new JObject($data);
-        $action = $record->get('id', 0) ? 'core.edit' : 'core.create';
+        $action = $record->get('id', 0) ? 'document.edit' : 'document.create';
 
         return ProjectsHelperACL::canDo($action,
-                $record->get('catid'),
-                $record->get('id'),
+                $app->getUserState('portfolio.id'), 
+				$app->getUserState('project.id'),
                 $record);
     }
 }

@@ -61,13 +61,13 @@ class ProjectsViewTask extends JView
                 $this->form = &$model->getForm();
                 if (empty($this->item)) {
                     $this->params->set('catid', $app->getUserState('task.category.id', 0));
-                    $access = 'task.create';
+                    $access = '.create';
                 } else {
-                    $access = 'task.edit';
+                    $access = '.edit';
                 }
 
                 // Access
-                if (!$this->canDo->get($access)) {
+                if (!$this->canDo->get($this->type . $access)) {
                     return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
                 }
                 break;
@@ -114,7 +114,7 @@ class ProjectsViewTask extends JView
 			default:
 				$title = JText::sprintf('COM_PROJECTS_TASK_VIEW_'.$this->type.'_TITLE', $this->item->title);
 				$icon = 'archive';			
-				if($this->canDo->get($this->type.'.edit')){
+				if($this->canDo->get($this->type . '.edit')){
 					if($this->item->state == 1){
 						if(empty($this->items) || $this->item->progress == 100){
 							ToolBar::custom('tasks.archive', 'checkin', 'checkin', JText::_('COM_PROJECTS_STATE_FINISHED'));
@@ -126,7 +126,7 @@ class ProjectsViewTask extends JView
 					ToolBar::editList('task.edit');
 				}
 
-				if($this->canDo->get('core.delete')){
+				if($this->canDo->get($this->type . '.delete')){
 					ToolBar::deleteList(JText::_('COM_PROJECTS_CONFIRM_'.$this->type.'_DELETE'), 'task.delete');
 				}
 				

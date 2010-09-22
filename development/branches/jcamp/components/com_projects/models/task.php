@@ -37,6 +37,7 @@ class ProjectsModelTask extends JModelAdmin
 	protected function canDelete($record)
 	{	
 		$app = JFactory::getApplication();
+		
 		return ProjectsHelperACL::canDo($this->getType().'.delete',  
 			$app->getUserState('portfolio.id'), 
 			$app->getUserState('project.id'),

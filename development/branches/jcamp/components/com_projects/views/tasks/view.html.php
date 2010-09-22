@@ -110,13 +110,13 @@ class ProjectsViewTasks extends JView {
                 break;
         }
 
-        if ($this->canDo->get('task.create')) {
+        if ($this->canDo->get($this->type . '.create')) {
             ToolBar::addNew('task.add');
         }
-        if ($this->canDo->get('task.edit')) {
+        if ($this->canDo->get($this->type . '.edit')) {
             ToolBar::editList('task.edit');
         }
-        if ($this->canDo->get('task.delete')) {
+        if ($this->canDo->get($this->type . '.delete')) {
             ToolBar::deleteList('COM_PROJECTS_CONFIRM_'.$this->type.'S_DELETE', 'tasks.delete');
         }
         

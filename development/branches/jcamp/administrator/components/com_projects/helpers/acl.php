@@ -55,7 +55,7 @@ abstract class ProjectsHelperACL {
         $assetName = empty($portfolio_id) ?
                 'com_projects' :
                 'com_projects.category.' . (int) $portfolio_id;
-
+        
         // is owner
         if ($record instanceof JObject) {
             $assets->set('is.owner',
@@ -76,22 +76,24 @@ abstract class ProjectsHelperACL {
         $resources = array(
             'task',
             'ticket',
-            'document'
+            'document',
+            'core'
         );
         $actions = array(
             '.create',
             '.edit',
-            '.delete'
+            '.delete',
+            '.edit.state'
         );
 
         $assets->set('is.member', $is_member);
-        foreach ($resources as $resource) {
+        foreach ($resources as &$resource) {
             // Actions
-            foreach ($actions as $action) {
+            foreach ($actions as &$action) {
                 $assets->set($resource . $action,
                 	(
                 		$is_member &&
-                        $user->authorise($action, $assetName)
+                        $user->authorise($resource . $action, $assetName)
                 	)
                 );
             }
@@ -106,20 +108,8 @@ abstract class ProjectsHelperACL {
                     )
             );
         }
+         
         
-        // More Actions
-        $actions = array(
-            'core.create',
-            'core.edit',
-            'core.edit.state',
-            'core.delete'
-        );
-        foreach ($actions as $action) {
-            $assets->set($action, 
-            	$is_member &&
-            	$user->authorise($action, $assetName));
-        }
-
         return $assets;
     }
 
