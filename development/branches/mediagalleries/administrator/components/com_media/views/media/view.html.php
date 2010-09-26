@@ -1,101 +1,146 @@
 <?php
 /**
- * Media View for mediagalleries Component
- * 
- * @package    		Joomla
- * @subpackage 	mediagalleries
- * @link 			http://3den.org/joom/
- * @license	GNU/GPL
+ * @version		$Id$
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die();
+// No direct access
+defined('_JEXEC') or die;
 
-jimport( 'joomla.application.component.view' );
+jimport('joomla.application.component.view');
 
 /**
- * Media View
+ * HTML View class for the Media component
  *
- * @package    		Joomla
- * @subpackage	mediagalleries Suite
+ * @package		Joomla.Administrator
+ * @subpackage	com_media
+ * @since 1.0
  */
 class MediaViewMedia extends JView
 {
-	// new way
-	protected $item;
-	protected $folder;
-	protected $user;
-	protected $form;
-	protected $state;
-	
-	/**
-	 * display method of Media view
-	 * 
-	 * @return void
-	 */
-	public function display($tpl = null)
+	function display($tpl = null)
 	{
-		$app		=& JFactory::getApplication();
-		$document	=& JFactory::getDocument();
-		$db			=& JFactory::getDBO();
-		$uri 		=& JFactory::getURI();
-		$model		=& $this->getModel("media");
-		
-		//get the data
-		$this->params	=& JComponentHelper::getParams('com_media');
-		$this->user 	=& JFactory::getUser();
-		$this->item		=& $this->get('Item');
-		$this->form		=& $this->get('Form');
-		$this->state	=& $this->get('State');
-		
-		// Is new?
-		if( !empty($this->item->id) ){
-			// Load the plugin!!!
-			JPluginHelper::importPlugin('content', 'media');
-			$dispatcher =& JDispatcher::getInstance();
-			$this->params->set('width', 350);
-			$this->params->set('height', 300);
-			$results = $dispatcher->trigger('onLoadMedia', array ( &$this->item, &$this->params));
+		$app	= &JFactory::getApplication();
+		$config = &JComponentHelper::getParams('com_media');
+
+		$style = $app->getUserStateFromRequest('media.list.layout', 'layout', 'thumbs', 'word');
+
+		$document = &JFactory::getDocument();
+		$document->setBuffer($this->loadTemplate('navigation'), 'modules', 'submenu');
+
+		JHtml::_('behavior.framework', true);
+
+		JHTML::_('script','media/mediamanager.js', true, true);
+		JHTML::_('stylesheet','media/mediamanager.css', array(), true);
+
+		JHtml::_('behavior.modal');
+		$document->addScriptDeclaration("
+		window.addEvent('domready', function() {
+			document.preview = SqueezeBox;
+		});");
+
+		JHTML::_('script','system/mootree.js', true, true);
+		JHTML::_('stylesheet','system/mootree.css', array(), true);
+
+		if ($config->get('enable_flash', 1)) {
+			$fileTypes = $config->get('image_extensions', 'bmp,gif,jpg,png,jpeg');
+			$types = explode(',', $fileTypes);
+			$displayTypes = '';		// this is what the user sees
+			$filterTypes = '';		// this is what controls the logic
+			$firstType = true;
+			foreach($types AS $type) {
+				if(!$firstType) {
+					$displayTypes .= ', ';
+					$filterTypes .= '; ';
+				} else {
+					$firstType = false;
+				}
+				$displayTypes .= '*.'.$type;
+				$filterTypes .= '*.'.$type;
+			}
+			$typeString = '{ \'Images ('.$displayTypes.')\': \''.$filterTypes.'\' }';
+
+			JHtml::_('behavior.uploader', 'upload-flash',
+				array(
+					'onBeforeStart' => 'function(){ Uploader.setOptions({url: $(\'uploadForm\').action + \'&folder=\' + $(\'mediamanager-form\').folder.value}); }',
+					'onComplete' 	=> 'function(){ MediaManager.refreshFrame(); }',
+					'targetURL' 	=> '\\$(\'uploadForm\').action',
+					'typeFilter' 	=> $typeString,
+					'fileSizeMax'	=> $config->get('upload_maxsize'),
+				)
+			);
 		}
-		
-		// Add the toolbar
+
+		if (DS == '\\')
+		{
+			$base = str_replace(DS,"\\\\",COM_MEDIA_BASE);
+		} else {
+			$base = COM_MEDIA_BASE;
+		}
+
+		$js = "
+			var basepath = '".$base."';
+			var viewstyle = '".$style."';
+		" ;
+		$document->addScriptDeclaration($js);
+
+		/*
+		 * Display form for FTP credentials?
+		 * Don't set them here, as there are other functions called before this one if there is any file write operation
+		 */
+		jimport('joomla.client.helper');
+		$ftp = !JClientHelper::hasCredentials('ftp');
+
+		$this->assignRef('session', JFactory::getSession());
+		$this->assignRef('config', $config);
+		$this->assignRef('state', $this->get('state'));
+		$this->assign('require_ftp', $ftp);
+		$this->assign('folders_id', ' id="media-tree"');
+		$this->assign('folders', $this->get('folderTree'));
+
+		// Set the toolbar
 		$this->addToolbar();
-		
-		//Display
+
 		parent::display($tpl);
+		echo JHtml::_('behavior.keepalive');
 	}
-		
+
 	/**
 	 * Add the page title and toolbar.
 	 *
 	 * @since	1.6
 	 */
-	protected function addToolbar(){
-		JRequest::setVar('hidemainmenu', true);
+	protected function addToolbar()
+	{
+		// Get the toolbar object instance
+		$bar = &JToolBar::getInstance('toolbar');
 
-		$user		= JFactory::getUser();
-		$isNew		= ($this->item->id == 0);		
-		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
-		$canDo		= MediaHelper::getActions($this->state->get('filter.category_id'), $this->item->id);
+		// Set the titlebar text
+		JToolBarHelper::title(JText::_('COM_MEDIA'), 'mediamanager.png');
 
-		// If not checked out, can save the item.
-		if (!$checkedOut && $canDo->get('core.edit'))
-		{
-			JToolBarHelper::apply('media.apply', 'JTOOLBAR_APPLY');
-			JToolBarHelper::save('media.save', 'JTOOLBAR_SAVE');
-			JToolBarHelper::addNew('media.save2new', 'JTOOLBAR_SAVE_AND_NEW');
-		}
-			// If an existing item, can save to a copy.
-		if (!$isNew && $canDo->get('core.create')) {
-			JToolBarHelper::custom('media.save2copy', 'copy.png', 'copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
-		}
-		if (empty($this->item->id))  {
-			JToolBarHelper::cancel('media.cancel', 'JTOOLBAR_CANCEL');
-		}
-		else {
-			JToolBarHelper::cancel('media.cancel', 'JTOOLBAR_CLOSE');
-		}
-
+		// Add a delete button
+		$title = JText::_('JTOOLBAR_DELETE');
+		$dhtml = "<a href=\"#\" onclick=\"MediaManager.submit('folder.delete')\" class=\"toolbar\">
+					<span class=\"icon-32-delete\" title=\"$title\"></span>
+					$title</a>";
+		$bar->appendButton('Custom', $dhtml, 'delete');
 		JToolBarHelper::divider();
-	}	
+		JToolBarHelper::preferences('com_media');
+		JToolBarHelper::divider();
+		JToolBarHelper::help('JHELP_CONTENT_MEDIA_MANAGER');
+	}
+
+	function getFolderLevel($folder)
+	{
+		$this->folders_id = null;
+		$txt = null;
+		if (isset($folder['children']) && count($folder['children'])) {
+			$tmp = $this->folders;
+			$this->folders = $folder;
+			$txt = $this->loadTemplate('folders');
+			$this->folders = $tmp;
+		}
+		return $txt;
+	}
 }

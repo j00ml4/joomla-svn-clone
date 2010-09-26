@@ -1,37 +1,30 @@
 <?php
 /**
- * Controller for mediagalleries Component
- * 
- * @package  			mediagalleries Suite
- * @subpackage 	Components
- * @link 				http://3den.org
- * @license		GNU/GPL
+ * @version		$Id$
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
+ * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die( 'Restricted access' );
+// no direct access
+defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controller');
 
-/** TODO
- * media Controller
+/**
+ * Media Manager Component Controller
  *
- * @package		Joomla
- * @subpackage	media
- * @since 1.5
+ * @package		Joomla.Administrator
+ * @subpackage	com_media
+ * @version 1.5
  */
 class MediaController extends JController
 {
-	protected $default_view = 'images';
-	
 	/**
-	 * Method to display a view.
-	 *
-	 * @since	1.6
+	 * Display the view
 	 */
 	function display()
 	{
-		$vName = JRequest::getCmd('view', 'images');
+		$vName = JRequest::getCmd('view', 'media');
 		switch ($vName)
 		{
 			case 'images':
@@ -43,10 +36,11 @@ class MediaController extends JController
 			case 'imagesList':
 				$mName = 'list';
 				$vLayout = JRequest::getCmd('layout', 'default');
+
 				break;
 
 			case 'mediaList':
-				$app	= JFactory::getApplication();
+				$app	= &JFactory::getApplication();
 				$mName = 'list';
 				$vLayout = $app->getUserStateFromRequest('media.list.layout', 'layout', 'thumbs', 'word');
 
@@ -56,18 +50,18 @@ class MediaController extends JController
 			default:
 				$vName = 'media';
 				$vLayout = JRequest::getCmd('layout', 'default');
-				$mName = 'media';
+				$mName = 'manager';
 				break;
 		}
 
-		$document = JFactory::getDocument();
+		$document = &JFactory::getDocument();
 		$vType		= $document->getType();
 
 		// Get/Create the view
-		$view = $this->getView($vName, $vType);
+		$view = &$this->getView($vName, $vType);
 
 		// Get/Create the model
-		if ($model = $this->getModel($mName)) {
+		if ($model = &$this->getModel($mName)) {
 			// Push the model into the view (as default)
 			$view->setModel($model, true);
 		}
@@ -75,12 +69,11 @@ class MediaController extends JController
 		// Set the layout
 		$view->setLayout($vLayout);
 
-		parent::display();
+		// Display the view
+		$view->display();
 
-		// Load the submenu.
-		mediaHelper::addSubmenu(JRequest::getWord('view', $this->default_view));
 	}
-	
+
 	function ftpValidate()
 	{
 		// Set FTP credentials, if given

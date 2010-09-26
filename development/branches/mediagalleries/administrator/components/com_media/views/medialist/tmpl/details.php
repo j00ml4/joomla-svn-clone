@@ -15,11 +15,11 @@ defined('_JEXEC') or die;
 	<table width="100%" cellspacing="0">
 	<thead>
 		<tr>
-			<th width="1%"><?php echo JText::_('JGLOBAL_PREVIEW'); ?></th>
+			<th><?php echo JText::_('JGLOBAL_PREVIEW'); ?></th>
 			<th><?php echo JText::_('COM_MEDIA_NAME'); ?></th>
-			<th width="8%"><?php echo JText::_('COM_MEDIA_PIXEL_DIMENSIONS'); ?></th>
-			<th width="8%"><?php echo JText::_('COM_MEDIA_FILESIZE'); ?></th>
-			<th width="8%"><?php echo JText::_('JACTION_DELETE'); ?></th>
+			<th><?php echo JText::_('COM_MEDIA_PIXEL_DIMENSIONS'); ?></th>
+			<th><?php echo JText::_('COM_MEDIA_FILESIZE'); ?></th>
+			<th><?php echo JText::_('JACTION_DELETE'); ?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -42,9 +42,9 @@ defined('_JEXEC') or die;
 
 	</tbody>
 	</table>
+	</div>
 	<input type="hidden" name="task" value="list" />
 	<input type="hidden" name="username" value="" />
 	<input type="hidden" name="password" value="" />
 	<?php echo JHtml::_('form.token'); ?>
-	</div>
 </form>

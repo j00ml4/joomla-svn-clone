@@ -99,357 +99,45 @@
 			<option
 				value="1">JYES</option>
 		</field>
-		
-		<field 
-			name="width" 
-			type="text" 
-			size="5" 
-			default="350" 
-			label="com_media_FIELD_WIDTH_LABEL" 
-			description="com_media_FIELD_WIDTH_DESC" 
-		/>
-		<field 
-			name="height" 
-			type="text" 
-			size="5" 
-			default="0" 
-			label="com_media_FIELD_HEIGHT_LABEL" 
-			description="com_media_FIELD_HEIGHT_DESC" 
-		/>
-		<field 
-			name="autostart" 
-			type="radio" 
-			default="0" 
-			label="com_media_FIELD_AUTOPLAY_LABEL" 
-			description="com_media_FIELD_AUTOPLAY_DESC">
-				<option value="0">JNO</option>
-				<option value="1">JYES</option>		
-		</field>	
-		<field 
-			name="show_embed" 
-			type="radio" 
-			default="0" 
-			label="com_media_FIELD_EMBED_CODE_LABEL" 
-			description="com_media_FIELD_EMBED_CODE_DESC">
-				<option value="0">JHIDE</option>
-				<option value="1">JSHOW</option>		
-		</field>	
-
-		<!-- Reviews -->	
-		<field 
-			name="@spacer" 
-			type="spacer" 
-			default="" 
-			label="" 
-			description="" 
-		/>	
-		<field 
-			name="allow_comments" 
-			type="radio" 
-			default="1" 
-			label="com_media_FIELD_ALLOW_COMMENTS_LABEL" 
-			description="com_media_FIELD_ALLOW_COMMENTS_DESC">
-				<option value="0">JNO</option>
-				<option value="1">JYES</option>
-		</field>
-		
-		<!-- Display -->
-		<field 
-			name="@spacer" 
-			type="spacer" 
-			default="" 
-			label="" 
-			description="" />			
-		<field 
-			name="style" 
-			type="filelist" 
-			default="default.css" 
-			label="com_media_FIELD_STYLE_LABEL" 
-			description="com_media_FIELD_STYLE_DESC" 
-			directory="media/mediagalleries/css" 
-			filter="css" 
-			exclude="" 
-			stripext="" 
-			hide_default="true" />
 	</fieldset>
-	
-	<fieldset name="permissions"
+
+	<fieldset
+		name="permissions"
+		label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC"
-		label="JCONFIG_PERMISSIONS_LABEL">
-	<!-- Bugging -->		
-		<field name="rules" type="rules"
-			component="com_media"
-			filter="rules"
+		>
+
+		<field
+			name="rules"
+			type="rules"
 			label="JCONFIG_PERMISSIONS_LABEL"
-			section="component" />
+			filter="rules"
+			component="com_media"
+			section="component">
+			<action
+				name="core.admin"
+				title="JACTION_ADMIN"
+				description="JACTION_MANAGE_COMPONENT_DESC" />
+			<action
+				name="core.manage"
+				title="JACTION_MANAGE"
+				description="JACTION_MANAGE_COMPONENT_DESC" />
+			<action
+				name="core.create"
+				title="JACTION_CREATE"
+				description="JACTION_CREATE_COMPONENT_DESC" />
+			<action
+				name="core.delete"
+				title="JACTION_DELETE"
+				description="JACTION_DELETE_COMPONENT_DESC" />
+			<action
+				name="core.edit"
+				title="JACTION_EDIT"
+				description="JACTION_EDIT_COMPONENT_DESC" />
+			<action
+				name="core.edit.state"
+				title="JACTION_EDIT_STATE"
+				description="JACTION_EDIT_STATE_COMPONENT_DESC" />
+		</field>
 	</fieldset>
-	
-	<fieldset name="advanced" label="Advanced">
-			<field name="show_cat" 
-					type="list" 
-					default="1" 
-					label="com_media_SHOW_CATEGORY_LABEL" 
-					description="com_media_SHOW_CATEGORY_DESC">
-						
-						<option value="1">JYES</option>			
-						<option value="0">JNO</option>										
-				</field>
-				<field name="show_title" 
-					type="list" 
-					default="1" 
-					label="com_media_SHOW_TITLE_LABEL" 
-					description="com_media_SHOW_TITLE_DESC">
-						
-						<option value="1">JYES</option>			
-						<option value="0">JNO</option>						
-				</field>
-			
-				
-				
-				<field name="show_url" 
-					type="list" 
-					default="1" 
-					label="com_media_SHOW_URL_LABEL" 
-					description="com_media_SHOW_URL_DESC">
-						
-						<option value="1">JYES</option>			
-						<option value="0">JNO</option>						
-				</field>
-				
-				<field name="show_desc" 
-					type="list" 
-					default="1" 
-					label="com_media_SHOW_DESCRIPTION_LABEL" 
-					description="com_media_SHOW_DESCRIPTION_DESC">
-						
-						<option value="1">JYES</option>			
-						<option value="0">JNO</option>						
-				</field>
-				
-				<field name="show_hits" 
-					type="list" 
-					default="1" 
-					label="com_media_SHOW_HITS_LABEL" 
-					description="com_media_SHOW_HITS_DESC">
-						
-						<option value="1">JYES</option>			
-						<option value="0">JNO</option>						
-				</field>
-				
-				<field name="show_creation" 
-					type="list" 
-					default="1" 
-					label="com_media_SHOW_CREATION_TIME_LABEL" 
-					description="com_media_SHOW_CREATION_TIME_DESC">
-						
-						<option value="1">JYES</option>			
-						<option value="0">JNO</option>						
-				</field>
-				
-				<field name="show_author" 
-					type="list" 
-					default="1" 
-					label="com_media_SHOW_AUTHOR_LABEL" 
-					description="com_media_SHOW_AUTHOR_DESC">
-						
-						<option value="1">JYES</option>			
-						<option value="0">JNO</option>						
-				</field>
-				
-				<field name="show_modified" 
-					type="list" 
-					default="1" 
-					label="com_media_SHOW_LAST_MODIFIED_LABEL" 
-					description="com_media_SHOW_LAST_MODIFIED_DESC">
-						
-						<option value="1">JYES</option>			
-						<option value="0">JNO</option>						
-				</field>
-				
-				<field name="show_modified_by" 
-					type="list" 
-					default="1" 
-					label="com_media_SHOW_MODIFIED_BY_LABEL" 
-					description="com_media_SHOW_MODIFIED_BY_DESC">
-						
-						<option value="1">JYES</option>			
-						<option value="0">JNO</option>					
-				</field>
-				
-							
-			</fieldset>
-
-			<fieldset name="players" label="Players">		
-				<!--Media Players -->
-				<field name="flv_player" 
-					type="list" 
-					default="2kplayer" 
-					label="com_media_FLV_PLAYER_LABEL" 
-					description="com_media_FLV_PLAYER_DESC">
-						
-						<option value="jwplayer">com_media_FLV_PLAYER_JWPPLAYER</option>			
-						<option value="2kplayer">com_media_FLV_PLAYER_3K_FLV_PLAYER</option>
-				
-				</field>
-				
-				<field name="mp3_player" 
-					type="list" 
-					default="1pixelout" 
-					label="com_media_MP3_PLAYER_LABEL" 
-					description="com_media_MP3_PLAYER_DESC" >
-						
-						<option value="jwplayer">com_media_MP3_PLAYER_JWPLAYER</option>			
-						<option value="1pixelout">com_media_MP3_PLAYER_1PIXELOUT</option>
-				
-				</field>
-			</fieldset>
-			<fieldset name="Youtube" label="Youtube">	
-				<!--Youtube API-->
-				<field name="@spacer" 
-					type="spacer" 
-					default="" 
-					label="" 
-					description="" />
-				
-				<field name="youtube_rel" 
-					type="radio" 
-					default="1" 
-					label="com_media_YOUTUBE_RELATED_LABEL" 
-					description="com_media_YOUTUBE_RELATED_DESC" >
-						
-						<option value="0">JNO</option>
-						<option value="1">JYES</option>
-				
-				</field>
-				
-				<field name="youtube_loop" 
-					type="radio" 
-					default="0" 
-					label="com_media_YOUTUBE_LOOP_LABEL" 
-					description="com_media_YOUTUBE_LOOP_DESC" >
-						
-						<option value="0">JNO</option>
-						<option value="1">JYES</option>
-				
-				</field>
-				
-				<field name="youtube_disablekb" 
-					type="radio" 
-					default="0" 
-					label="com_media_YOUTUBE_DISABLE_KEYBOARD_LABEL" 
-					description="com_media_YOUTUBE_DISABLE_KEYBOARD_DESC" >
-						
-						<option value="0">JNO</option>
-						<option value="1">JYES</option>
-				
-				</field>
-				
-				<field name="youtube_egm" 
-					type="radio" 
-					default="0" 
-					label="com_media_YOUTUBE_ENHANCED_GENIE_MENU_LABEL" 
-					description="com_media_YOUTUBE_ENHANCED_GENIE_MENU_DESC">
-						
-						<option value="0">JNO</option>
-						<option value="1">JYES</option>
-				
-				</field>
-				
-				<field name="youtube_border" 
-				type="radio" 
-				default="0" 
-				label="com_media_YOUTUBE_BORDER_LABEL" 
-				description="com_media_YOUTUBE_BORDER_DESC">
-						
-						<option value="0">JNO</option>
-						<option value="1">JYES</option>
-				
-				</field>
-				
-				<field name="youtube_color1" 
-					type="text" 
-					size="6" 
-					default="" 
-					label="com_media_YOUTUBE_COLOR1_LABEL" 
-					description="com_media_YOUTUBE_COLOR1_DESC">
-				</field>
-				
-				<field name="youtube_color2" 
-					type="text" 
-					size="6" 
-					default="" 
-					label="com_media_YOUTUBE_COLOR2_LABEL" 
-					description="com_media_YOUTUBE_COLOR2_DESC">
-				</field>
-			</fieldset>
-				<!--JW-->
-			<fieldset name="jwPlayer" label="JW Player">	
-				<field name="@spacer"
-				 	type="spacer" 
-					default="" 
-					label="" 
-					description=""
-				/>
-				
-				<field name="jw_logo" 
-					type="imagelist" 
-					default="" 
-					label="com_media_JW_LOGO_LABEL" 
-					directory="images" 
-					exclude="" 
-					stripext="" 
-					description="com_media_JW_LOGO_DESC" />
-				
-				<field name="jw_backcolor" 
-					type="text" 
-					size="6" 
-					default="" 
-					label="com_media_JW_BACKCOLOR_LABEL" 
-					description="com_media_JW_BACKCOLOR_DESC" />
-				
-				<field name="jw_frontcolor" 
-					type="text" 
-					size="6" 
-					default="" 
-					label="com_media_JW_FRONTCOLOR_LABEL" 
-					description="com_media_JW_FRONTCOLOR_DESC"/>
-				
-				<field name="jw_lightcolor" 
-					type="text" 
-					size="6" 
-					default="" 
-					label="com_media_JW_LIGHTCOLOR_LABEL" 
-					description="com_media_JW_LIGHTCOLOR_DESC"/>
-				
-				<field name="jw_screencolor" 
-					type="text" 
-					size="6" 
-					default="" 
-					label="com_media_JW_SCREENCOLOR_LABEL" 
-					description="com_media_JW_SCREENCOLOR_DESC"/>
-				
-				<field name="jw_quality" 
-					type="radio" 
-					label="com_media_JW_QUALITY_LABEL" 
-					description="com_media_JW_QUALITY_DESC">
-					
-					<option value="0">com_media_NORMAL</option>
-					<option value="1">com_media_HIGH</option>
-				</field>
-			</fieldset>
-			
-			<fieldset name="thumbnail" label="com_media_THUMBNAILS">	
-				<field name="thumb_width" 
-					type="text"
-					default="160" 
-					label="com_media_THUMB_WIDTH_LABEL" 
-					description="com_media_THUMB_WIDTH_DESC" />
-				
-				<field name="thumb_height" 
-					type="text" 
-					default="" 
-					label="com_media_THUMB_HEIGHT_LABEL" 
-					description="com_media_THUMB_HEIGHT_DESC" />
-			</fieldset>
-
 </config>
