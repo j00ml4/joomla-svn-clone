@@ -15,17 +15,8 @@ if (!JFactory::getUser()->authorise('core.manage', 'com_media')) {
 	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
-$params = JComponentHelper::getParams('com_media');
+$params = &JComponentHelper::getParams('com_media');
 
-//  Check Media Plugin, made platform independent
-$mediapath = JPATH_SITE.DS.'plugins'.DS.'content'.DS.'media'.DS.'media.php';
-if (!file_exists($mediapath)){
-	return JError::raiseWarning(404, JText::_('MEDIA_PLUGIN_NOT_INSTALLED')); 
-}
-//This is important to give user warning if the Media Plugin Is Not ENABLED
-if(!JPluginHelper::isEnabled('content','media')){
-	return JError::raiseWarning(404,JText::_('MEDIA_PLUGIN_NOT_ENABLED'));
-}
 // Load the admin HTML view
 require_once JPATH_COMPONENT.DS.'helpers'.DS.'media.php';
 

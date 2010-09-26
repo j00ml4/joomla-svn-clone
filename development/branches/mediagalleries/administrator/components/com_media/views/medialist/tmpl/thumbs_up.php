@@ -18,7 +18,7 @@ defined('_JEXEC') or die;
 				</div>
 			</div>
 			<div class="controls">
-				<span>&#160;</span>
+				<span>&nbsp;</span>
 			</div>
 			<div class="imginfoBorder">
 				<a href="index.php?option=com_media&amp;view=mediaList&amp;tmpl=component&amp;folder=<?php echo $this->state->parent; ?>" target="folderframe">..</a>

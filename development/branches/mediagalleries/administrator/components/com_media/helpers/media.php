@@ -12,71 +12,6 @@
 abstract class MediaHelper
 {
 	/**
-	 * Configure the Linkbar.
-	 *
-	 * @param	string	The name of the active view.
-	 * @since	1.6
-	 */
-	public static function addSubmenu($vName = 'mediagalleries')
-	{
-		JSubMenuHelper::addEntry(
-			JText::_('Images'),
-			'index.php?option=com_media&view=images',
-			$vName == 'images',
-			$mName = 'manager'
-			
-		);
-		JSubMenuHelper::addEntry( 
-			JText::_('com_media_MEDIAS'),
-			'index.php?option=com_media&view=galleries',
-			$vName == 'galleries'
-		);
-		
-		JSubMenuHelper::addEntry(
-			JText::_('com_media_CATEGORIES'),
-			'index.php?option=com_categories&extension=com_media',
-			$vName == 'categories'
-		);
-
-		
-	}
-
-	/**
-	 * Gets a list of the actions that can be performed.
-	 *
-	 * @param	int		The category ID.
-	 * @return	JObject
-	 * @since	1.6
-	 */
-	public static function getActions($categoryId = 0)
-	{
-		$user	= JFactory::getUser();
-		$result	= new JObject;
-
-		if (empty($categoryId)) {
-			$assetName = 'com_media';
-		} else {
-			$assetName = 'com_media.category.'.(int) $categoryId;
-		}
-
-		$actions = array(
-			'core.admin', 
-			'core.manage', 
-			'core.create', 
-			'core.edit', 
-			'core.edit.state', 
-			'core.delete'
-		);
-
-		foreach ($actions as $action) {
-			$result->set($action,	$user->authorise($action, $assetName));
-		}
-
-		return $result;
-	}
-	
-	
-	/**
 	 * Checks if the file is an image
 	 * @param string The filename
 	 * @return boolean
@@ -107,7 +42,7 @@ abstract class MediaHelper
 	 */
 	public static function canUpload($file, &$err)
 	{
-		$params = JComponentHelper::getParams('com_media');
+		$params = &JComponentHelper::getParams('com_media');
 
 		if (empty($file['name'])) {
 			$err = 'COM_MEDIA_ERROR_UPLOAD_INPUT';
@@ -172,7 +107,7 @@ abstract class MediaHelper
 						$err = 'COM_MEDIA_ERROR_WARNINVALID_MIME';
 						return false;
 					}
-				} else if (!$user->authorise('core.manage')) {
+				} else if (!$user->authorize('core.manage')) {
 					$err = 'COM_MEDIA_ERROR_WARNNOTADMIN';
 					return false;
 				}
