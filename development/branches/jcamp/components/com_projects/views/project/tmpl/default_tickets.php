@@ -16,11 +16,11 @@ defined('_JEXEC') or die;
 		<?php
 			$c = count($this->tickets); 
 			if($c) : // list tickets ?>
-			<ul class="ulList">
+			<ul class="ulList category">
 			<?php
 				for($i = 0; $i < $c; $i++) {
 					?>
-					<li><a href="<?php echo ProjectsHelper::getLink('task.view.ticket',$this->tickets[$i]->id)?>"><?php echo $this->tickets[$i]->title?></a></li>
+					<li><a href="<?php echo ProjectsHelper::getLink('ticket',$this->tickets[$i]->id)?>" class="state-<?php echo $this->tickets[$i]->state; ?>"><?php echo $this->tickets[$i]->title?></a></li>
 					<?php
 				} ?>
 			</ul>

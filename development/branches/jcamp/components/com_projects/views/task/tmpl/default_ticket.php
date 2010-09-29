@@ -13,24 +13,9 @@ defined('_JEXEC') or die;
 // Vars
 $params =  $this->params;
 $pageClass = $this->params->get('pageclass_sfx');
+
+echo $this->loadTemplate('header');
 ?>
-<div class="projects-both-sides">
-	<span><?php echo JText::sprintf('COM_PROJECTS_CREATED_ON_BY',
-						JHTML::_('date', $this->item->created, JText::_('DATE_FORMAT_LC1')),
-						$this->item->author);?></span>
-	<?php if(!empty($this->item->modified_by)): ?>
-	<span>
-		<?php echo JText::sprintf('COM_PROJECTS_MODIFIED_ON_BY',
-						JHTML::_('date', $this->item->modified, JText::_('DATE_FORMAT_LC1')),
-						$this->item->modified_last);?>		
-	</span>
-	<?php endif;?>
-	<?php if($this->item->category_title): ?>
-	<span>
-		<?php echo JText::_('JCATEGORY') .': '. $this->item->category_title; ?>
-	</span>
-	<?php endif; ?>
-</div>
 <div class="divBox1">
 	<table>
 		<tr>

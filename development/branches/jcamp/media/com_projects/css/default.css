@@ -128,11 +128,11 @@ div.projects-module{
 	-moz-border-radius : 5px;
 	-webkit-border-radius : 5px;
 	
-	border :1px #222222 solid;
+	border :1px #444444 solid;
 	margin-bottom : 10px;
 }
 	div.projects-module > h4{
-		background : #222222;
+		background : #444444;
 		padding : 5px 10px;
 		color : white !important;		
 	}
@@ -157,14 +157,21 @@ div.projects-task{
 		font-size : 0.8em;
 	}
 
-		div.projects-task div.projects-both-sides > span:first-child{
+		div.projects-task div.projects-both-sides div.projects-left-side{
+			float : left;
+			clear : both;
 			padding-left : 72px;
+			text-align : left;
 		}
-
+				
 		div.projects-task div.projects-both-sides > span{
 			padding-right : 5px;
 		}
-		
+
+			div.projects-task div.projects-both-sides span > span{
+				font-weight : bold;
+			}
+
 	div.projects-task div.divBox1{
 		width : 100%;
 		margin : 10px 0px;
