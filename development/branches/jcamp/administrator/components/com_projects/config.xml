@@ -24,6 +24,11 @@
 			<option	value="1">JYES</option>
 		</field>
 		
+		<field name="spacer1"
+			type="spacer"
+			hr="true"
+			/>
+		
 		<field name="number_listers_items"
 			type="text"
 			label="COM_PROJECTS_CONFIGURATION_NUMBER_LISTERS_ITEMS_LABEL"
@@ -32,7 +37,30 @@
 			size="5"
 			default="5" />
 
-		<field name="spacer1"
+		<field name="listing_tasks"
+			type="radio"
+			label="COM_PROJECTS_CONFIGURATION_LISTING_TASKS_LABEL"
+			description="COM_PROJECTS_CONFIGURATION_LISTING_TASKS_DESC"
+			class="inputbox"
+			size="1"
+			default="1">
+			<option	value="0">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_ALL</option>
+			<option	value="1">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_PENDING</option>
+		</field>
+
+		<field name="listing_tickets"
+			type="radio"
+			label="COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_LABEL"
+			description="COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_DESC"
+			class="inputbox"
+			size="1"
+			default="1">
+			<option	value="0">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_ALL</option>
+			<option	value="1">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_REPORTED</option>
+		</field>
+
+
+		<field name="spacer2"
 			type="spacer"
 			hr="true"
 			/>
@@ -81,7 +109,7 @@
 			<option	value="1">JYES</option>
 		</field>
 
-		<field name="spacer2"
+		<field name="spacer3"
 			type="spacer"
 			hr="true"
 			/>

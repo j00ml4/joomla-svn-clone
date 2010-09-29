@@ -21,7 +21,7 @@ abstract class ProjectsHelper {
     	$db = JFactory::getDbo();
     	$q = $db->getQuery(true);
     	
-    	$q->select('t.title, t.id');
+    	$q->select('t.title, t.id, t.state');
     	$q->from('`#__project_tasks` AS t');
     	
     	// filter by project id
@@ -30,17 +30,20 @@ abstract class ProjectsHelper {
 	    	$q->where('t.`project_id` = '.$project_id);
 	    	
 	    // filter by type
-	    $type = (int)$params->get('task.type',3);
-	    $q->where('t.`type` = '.$type);
+	    $type = $params->get('task.type',3);
+	   	if(is_int($type))
+				$q->where('(t.`type` = '.$type.')');
+			else
+				$q->where('((t.`type` '.$type.')');
 	    
 	    // filter by state
 	    $state = $params->get('state',false);
 	    if($state !== false)
 	    {
 	    	if(is_int($state))
-				$q->where('t.`state` = '.$state);
-			else
-				$q->where('t.`state` '.$state);
+					$q->where('t.`state` = '.$state);
+				else
+					$q->where('t.`state` '.$state);
 	    }
 	    
 	    // order and limit
@@ -155,23 +158,20 @@ abstract class ProjectsHelper {
         static $links;
         if (empty($links)) {
             $links = array(
-                'form' => JFilterOutput::ampReplace(JFactory::getURI()->toString()),
+              'form' => JFilterOutput::ampReplace(JFactory::getURI()->toString()),
 
             	'portfolios' => 'index.php?option=com_projects&view=portfolios&id=',
-                'projects' => 'index.php?option=com_projects&view=projects&id=',
-                'project' => 'index.php?option=com_projects&view=project&id=',
+              'projects' => 'index.php?option=com_projects&view=projects&id=',
+              'project' => 'index.php?option=com_projects&view=project&id=',
 
             	'members' => 'index.php?option=com_projects&view=members&type=list&id=',
-                'members.assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
-                'members.unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
+              'members.assign' => 'index.php?option=com_projects&view=members&type=assign&id=',
+              'members.unassign' => 'index.php?option=com_projects&view=members&type=delete&id=',
 				
             	// we need this coz is more standard
-            	'task' => 'index.php?option=com_projects&view=task&id=',
+            	'task' => 'index.php?option=com_projects&view=task&type=2&id=',
             	'ticket' => 'index.php?option=com_projects&view=task&type=3&id=',
-            	// 
-            	'task.view.task' => 'index.php?option=com_projects&view=task&type=2&id=',
-            	'task.view.ticket' => 'index.php?option=com_projects&view=task&type=3&id=',
-            	
+            	'task.view' => 'index.php?option=com_projects&view=task&id=',
             	'task.edit' => 'index.php?option=com_projects&view=task&layout=edit&id=',
 
             	'tasks' => 'index.php?option=com_projects&view=tasks&id=',

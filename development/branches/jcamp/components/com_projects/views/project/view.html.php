@@ -102,19 +102,39 @@ class ProjectsViewProject extends JView
 	protected function initListers()
 	{
 		$count = $this->params->get('number_listers_items',5);
+		$type_task = $this->params->get('listing_tasks',1);
+		$type_ticket = $this->params->get('listing_tickets',1);
 		$model = $this->getModel();
 		// get tickets and tasks
 		$params_tasks = new JRegistry();
 		$params_tasks->set('project.id', $model->getState('project.id'));
 		$params_tasks->set('order.list', 't.`modified`, t.`created`');
 		$params_tasks->set('order.dir', 'DESC');
-		$params_tasks->set('state',' >= 1');
-		$params_tasks->set('task.type', 2); // get tasks
+		
+		if($type_task) // only pending
+		{
+			$params_tasks->set('state',1);
+			$params_tasks->set('task.type', 'IN (2,3)'); // get tasks
+		}
+		else // all tasks (pending tasks+finished tasks+approved tickets)
+		{
+			$params_tasks->set('task.type', '=2 AND `state` IN (1,2)) OR (`type`=3 AND `state`=1)'); // get tasks
+		}
 		// limit for lister
 		$params_tasks->set('limit.limit', $count);
 		$params_tasks->set('limit.start', 0);
 		$this->assignRef('tasks',ProjectsHelper::getTasks($params_tasks));
-		$params_tasks->set('task.type', 3); // get tickets
+		
+		if($type_ticket) // only reported
+		{
+			$params_tasks->set('task.type', 3); // get tickets
+			$params_tasks->set('state',-3);
+		}
+		else // all tickets (reported+approved+finished)
+		{
+			$params_tasks->set('state',' IN (1,2,-3)');
+			$params_tasks->set('task.type', 3); // get tasks
+		}
 		$this->assignRef('tickets',ProjectsHelper::getTasks($params_tasks));
 		
 		// get documents
