@@ -32,7 +32,15 @@ $saveOrder	= $listOrder=='ordering';
 		</div>
 		<div class="filter-select">
 
-			<label class="selectlabel" for="filter_state">
+			<label class="selectlabel" for="filter_client_id">
+				<?php echo JText::_('COM_BANNERS_SELECT_CLIENT'); ?>
+			</label>
+			<select name="filter_client_id" id="filter_client_id" class="inputbox">
+				<option value=""><?php echo JText::_('COM_BANNERS_SELECT_CLIENT');?></option>
+				<?php echo JHtml::_('select.options', JFormFieldBannerClient::getOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
+			</select>
+            
+            <label class="selectlabel" for="filter_state">
 				<?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?>
 			</label>
 			<select name="filter_state" id="filter_state" class="inputbox">
@@ -48,13 +56,7 @@ $saveOrder	= $listOrder=='ordering';
 				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_banners'), 'value', 'text', $this->state->get('filter.category_id'));?>
 			</select>
 
-			<label class="selectlabel" for="filter_client_id">
-				<?php echo JText::_('COM_BANNERS_SELECT_CLIENT'); ?>
-			</label>
-			<select name="filter_client_id" id="filter_client_id" class="inputbox">
-				<option value=""><?php echo JText::_('COM_BANNERS_SELECT_CLIENT');?></option>
-				<?php echo JHtml::_('select.options', JFormFieldBannerClient::getOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
-			</select>
+			
 
 			<label class="selectlabel" for="filter_language">
 				<?php echo JText::_('JOPTION_SELECT_LANGUAGE'); ?>
@@ -87,7 +89,7 @@ $saveOrder	= $listOrder=='ordering';
 					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'state', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap title category-col">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_CATEGORY', 'category_title', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'JCATEGORY', 'category_title', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap ordering-col">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'ordering', $listDirn, $listOrder); ?>
@@ -136,7 +138,7 @@ $saveOrder	= $listOrder=='ordering';
 					<?php if ($item->checked_out) : ?>
 						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'banners.', $canCheckin); ?>
 					<?php endif; ?>
-					<?php if ($canCreate || $canEdit) : ?>
+					<?php if ($canEdit) : ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_banners&task=banner.edit&id='.(int) $item->id); ?>">
 							<?php echo $this->escape($item->name); ?></a>
 					<?php else : ?>
@@ -157,8 +159,13 @@ $saveOrder	= $listOrder=='ordering';
 				<td class="order">
 					<?php if ($canChange) : ?>
 						<?php if ($saveOrder) :?>
-							<span><?php echo $this->pagination->orderUpIcon($i, (@$this->items[$i-1]->catid == $item->catid), 'banners.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
-							<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, (@$this->items[$i+1]->catid == $item->catid), 'banners.orderdown', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
+							<?php if ($listDirn == 'asc') : ?>
+								<span><?php echo $this->pagination->orderUpIcon($i, (@$this->items[$i-1]->catid == $item->catid), 'banners.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
+								<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, (@$this->items[$i+1]->catid == $item->catid), 'banners.orderdown', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
+							<?php elseif ($listDirn == 'desc') : ?>
+								<span><?php echo $this->pagination->orderUpIcon($i, (@$this->items[$i-1]->catid == $item->catid), 'banners.orderdown', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
+								<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, (@$this->items[$i+1]->catid == $item->catid), 'banners.orderup', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
+							<?php endif; ?>
 						<?php endif; ?>
 						<?php $disabled = $saveOrder ?  '' : 'disabled="disabled"'; ?>
 						<input type="text" name="order[]" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" title="<?php echo $item->name; ?> order" />

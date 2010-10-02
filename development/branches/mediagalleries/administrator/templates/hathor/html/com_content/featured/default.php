@@ -22,7 +22,7 @@ $canOrder	= $user->authorise('core.edit.state', 'com_content.article');
 $saveOrder	= $listOrder == 'fp.ordering';
 $n = count($this->items);
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_content&view=featured');?>" method="post" name="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_content&view=featured');?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
 	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
 		<div class="filter-search">
@@ -33,16 +33,17 @@ $n = count($this->items);
 		</div>
 
 		<div class="filter-select">
-			<label class="selectlabel" for="filter_access"><?php echo JText::_('JOPTION_SELECT_ACCESS'); ?></label>
-			<select name="filter_access" class="inputbox" id="filter_access">
-				<option value=""><?php echo JText::_('JOPTION_SELECT_ACCESS');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
-			</select>
 
 			<label class="selectlabel" for="filter_published"><?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?></label>
 			<select name="filter_published" class="inputbox" id="filter_published">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
+			</select>
+
+            <label class="selectlabel" for="filter_access"><?php echo JText::_('JOPTION_SELECT_ACCESS'); ?></label>
+			<select name="filter_access" class="inputbox" id="filter_access">
+				<option value=""><?php echo JText::_('JOPTION_SELECT_ACCESS');?></option>
+				<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
 			</select>
 
 			<label class="selectlabel" for="filter_language"><?php echo JText::_('JOPTION_SELECT_LANGUAGE'); ?></label>
@@ -70,7 +71,7 @@ $n = count($this->items);
 					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'a.state', $listDirn, $listOrder); ?>
 				</th>
 				<th class="title category-col">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_CATEGORY', 'a.catid', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'JCATEGORY', 'a.catid', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap ordering-col">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ORDERING', 'fp.ordering', $listDirn, $listOrder); ?>
@@ -117,8 +118,8 @@ $n = count($this->items);
 					<?php if ($item->checked_out) : ?>
 						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'featured.', $canCheckin); ?>
 					<?php endif; ?>
-					<?php if ($canCreate || $canEdit) : ?>
-					<a href="<?php echo JRoute::_('index.php?option=com_content&task=article.edit&id='.$item->id);?>">
+					<?php if ($canEdit) : ?>
+					<a href="<?php echo JRoute::_('index.php?option=com_content&task=article.edit&return=featured&id='.$item->id);?>">
 						<?php echo $this->escape($item->title); ?></a>
 					<?php else : ?>
 						<?php echo $this->escape($item->title); ?>
@@ -135,8 +136,13 @@ $n = count($this->items);
 				<td class="order">
 					<?php if ($canChange) : ?>
 						<?php if ($saveOrder) :?>
-							<span><?php echo $this->pagination->orderUpIcon($i, true, 'featured.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
-							<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, true, 'featured.orderdown', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
+							<?php if ($listDirn == 'asc') : ?>
+								<span><?php echo $this->pagination->orderUpIcon($i, true, 'featured.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
+								<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, true, 'featured.orderdown', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
+							<?php elseif ($listDirn == 'desc') : ?>
+								<span><?php echo $this->pagination->orderUpIcon($i, true, 'featured.orderdown', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
+								<span><?php echo $this->pagination->orderDownIcon($i, $this->pagination->total, true, 'featured.orderup', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
+							<?php endif; ?>
 						<?php endif; ?>
 						<?php $disabled = $saveOrder ?  '' : 'disabled="disabled"'; ?>
 						<input type="text" name="order[]" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" title="<?php echo $item->title; ?> order" />

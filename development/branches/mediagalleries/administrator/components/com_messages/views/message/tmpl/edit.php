@@ -19,7 +19,7 @@ JHtml::_('behavior.keepalive');
 <script type="text/javascript">
 	function submitbutton(task) {
 		if (task == 'message.cancel' || document.formvalidator.isValid(document.id('message-form'))) {
-			submitform(task);
+			Joomla.submitform(task, document.getElementById('message-form'));
 		}
 	}
 </script>
@@ -37,7 +37,7 @@ JHtml::_('behavior.keepalive');
 			<?php echo $this->form->getInput('message'); ?></li>
 		</ul>
 		</fieldset>
-		<input type="hidden" name="task" value="">
+		<input type="hidden" name="task" value="" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
 </form>

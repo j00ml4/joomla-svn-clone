@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: configuration.php-dist 17387 2010-05-30 16:28:20Z infograf768 $
+ * @version		$Id: configuration.php-dist 18680 2010-08-27 05:44:28Z infograf768 $
  * @package		Joomla
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -78,7 +78,6 @@ class JConfig {
 	/* Debug Settings */
 	public $debug = '0';
 	public $debug_lang = '0';
-	public $debug_modules = '1';
 
 	/* Meta Settings */
 	public $MetaDesc = 'Joomla! - the dynamic portal engine and content management system';
@@ -87,9 +86,9 @@ class JConfig {
 	public $MetaAuthor = '1';
 
 	/* SEO Settings */
-	public $sef = '0';
+	public $sef = '1';
 	public $sef_rewrite = '0';
-	public $sef_suffix = '';
+	public $sef_suffix = '0';
 	public $unicodeslugs = '0';
 
 	/* Feed Settings */

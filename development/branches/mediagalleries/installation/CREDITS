@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: CREDITS 14328 2010-01-19 22:18:59Z ian $
+ * @version		$Id: CREDITS 18868 2010-09-13 09:54:11Z infograf768 $
  * @package		Joomla.Installation
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -243,12 +243,6 @@ Mootools
 Author:		Valerio Proietti
 Copyright:	Copyright (C) 2007 Valerio Proietti
 License:	MIT license
-
-PHP OpenID
-----------
-Author:		Janrain, Inc.
-Copyright:	Copyright (C) 2005 - 2009 Janrain, Inc.
-License:	Apache License 2.0
 
 patError
 ------

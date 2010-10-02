@@ -91,7 +91,10 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 						</div>
 					</div>
 					<div class="m">
-						<fieldset>
+						<h3 class="title-smenu" title="<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>">
+							<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>
+						</h3>
+						<div class="section-smenu">
 							<table class="content2">
 								<tr>
 									<td class="item">
@@ -100,9 +103,32 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 									<td>
 										<?php echo $this->form->getInput('site_name'); ?>
 									</td>
+								</tr></table>
+								</div>
+
+						<h3 class="title-smenu moofx-toggler" title="<?php echo JText::_('INSTL_SITE_META_ADVANCED_SETTINGS'); ?>">
+							<?php echo JText::_('INSTL_SITE_META_ADVANCED_SETTINGS'); ?>
+						</h3>
+						<div class="section-smenu moofx-slider">
+								<table class="content2">
+								<tr>
+									<td title="<?php echo JText::_('INSTL_SITE_METADESC_TITLE_LABEL'); ?>">
+										<?php echo $this->form->getLabel('site_metadesc'); ?>
+									</td>
+									<td>
+										<?php echo $this->form->getInput('site_metadesc'); ?>
+									</td>
+								</tr>
+								<tr>
+									<td title="<?php echo JText::_('INSTL_SITE_METAKEYS_TITLE_LABEL'); ?>">
+										<?php echo $this->form->getLabel('site_metakeys'); ?>
+									</td>
+									<td>
+										<?php echo $this->form->getInput('site_metakeys'); ?>
+									</td>
 								</tr>
 							</table>
-						</fieldset>
+							</div>
 					</div>
 					<div class="b">
 						<div class="b">

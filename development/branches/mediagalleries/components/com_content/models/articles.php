@@ -50,9 +50,11 @@ class ContentModelArticles extends JModelList
 
 		$params = $app->getParams();
 		$this->setState('params', $params);
-
-		$this->setState('filter.published', 1);
-
+		$user		= JFactory::getUser();		
+		if ((!$user->authorise('core.edit.state', 'com_content')) &&  (!$user->authorise('core.edit', 'com_content'))){
+			// filter on published for those who do not have edit or edit.state rights.
+			$this->setState('filter.published', 1);
+		}
 		$this->setState('filter.language',$app->getLanguageFilter());
 
 		// process show_noauth parameter
@@ -144,6 +146,10 @@ class ContentModelArticles extends JModelList
 		$query->select('parent.title as parent_title, parent.id as parent_id, parent.path as parent_route, parent.alias as parent_alias');
 		$query->join('LEFT', '#__categories as parent ON parent.id = c.parent_id');
 
+		// Join on voting table
+		$query->select('ROUND( v.rating_sum / v.rating_count ) AS rating, v.rating_count as rating_count');
+		$query->join('LEFT', '#__content_rating AS v ON a.id = v.content_id');
+
 		// Filter by access level.
 		if ($access = $this->getState('filter.access')) {
 			$user	= JFactory::getUser();
@@ -218,7 +224,7 @@ class ContentModelArticles extends JModelList
 			} else {
 				$query->where($categoryEquals);
 			}
-		} else if (is_array($categoryId)) {
+		} else if (is_array($categoryId) && (count($categoryId) > 0)) {
 			JArrayHelper::toInteger($categoryId);
 			$categoryId = implode(',', $categoryId);
 			$type = $this->getState('filter.category_id.include', true) ? 'IN' : 'NOT IN';

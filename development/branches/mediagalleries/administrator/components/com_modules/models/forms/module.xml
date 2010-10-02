@@ -7,7 +7,6 @@
 			description="JGLOBAL_FIELD_ID_DESC"
 			default="0"
 			readonly="true"
-			required="true"
 		/>
 
 		<field name="title" type="text"
@@ -73,9 +72,7 @@
 			label="COM_MODULES_FIELD_CLIENT_ID_LABEL"
 			readonly="true"
 			size="1"
-		>
-
-		</field>
+		/>
 
 		<field name="position" type="moduleposition"
 			default=""

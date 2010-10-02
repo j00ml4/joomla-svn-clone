@@ -21,12 +21,12 @@ $extension	= $this->escape($this->state->get('filter.extension'));
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 $ordering 	= ($listOrder == 'a.lft');
-$canOrder	= $user->authorise('core.edit.state', 'com_categories');
+$canOrder	= $user->authorise('core.edit.state');
 $saveOrder 	= ($listOrder == 'a.lft' && $listDirn == 'asc');
 $n = count($this->items);
 ?>
 <div class="categories">
-<form action="<?php echo JRoute::_('index.php?option=com_categories&view=categories');?>" method="post" name="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_categories&view=categories');?>" method="post" name="adminForm" id="adminForm">
 
 	<fieldset id="filter-bar">
 		<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
@@ -40,6 +40,13 @@ $n = count($this->items);
 
 		<div class="filter-select">
 			
+
+			<label class="selectlabel" for="filter_level"><?php echo JText::_('COM_CATEGORIES_OPTION_SELECT_LEVEL'); ?></label>
+			<select name="filter_level" class="inputbox" id="filter_level">
+				<option value=""><?php echo JText::_('COM_CATEGORIES_OPTION_SELECT_LEVEL');?></option>
+				<?php echo JHtml::_('select.options', $this->f_levels, 'value', 'text', $this->state->get('filter.level'));?>
+			</select>
+
 
 			<label class="selectlabel" for="filter_published"><?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?></label>
 			<select name="filter_published" class="inputbox" id="filter_published">
@@ -100,20 +107,22 @@ $n = count($this->items);
 			$originalOrders = array();
 			foreach ($this->items as $i => $item) :
 				$orderkey = array_search($item->id, $this->ordering[$item->parent_id]);
-				$canCheckin	= $user->authorise('core.manage',		'com_checkin') || $item->checked_out==$user->get('id')  || $item->checked_out==0;
+				$canCheckin	= $user->authorise('core.manage',	'com_checkin') || $item->checked_out==$user->get('id');
 				$canChange = $canCheckin;
-				?>
+			?>
 				<tr class="row<?php echo $i % 2; ?>">
 					<th class="center">
 						<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 					</th>
-					<td class="indent-<?php echo intval(($item->level-1)*15)+4; ?>">
+					<td>
+						<?php echo str_repeat('<span class="gi">|&mdash;</span>', $item->level-1) ?>
 						<?php if ($item->checked_out) : ?>
 							<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canCheckin); ?>
 						<?php endif; ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_categories&task=category.edit&cid[]='.$item->id.'&extension='.$extension);?>">
 							<?php echo $this->escape($item->title); ?></a>
 						<p class="smallsub" title="<?php echo $this->escape($item->path);?>">
+							<?php echo str_repeat('<span class="gtr">|&mdash;</span>', $item->level-1) ?>
 							<?php if (empty($item->note)) : ?>
 								<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias));?>
 							<?php else : ?>

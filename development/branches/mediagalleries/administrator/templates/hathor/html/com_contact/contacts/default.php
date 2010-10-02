@@ -32,13 +32,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
 		<div class="filter-select">
-			<label class="selectlabel" for="filter_access">
-				<?php echo JText::_('JOPTION_SELECT_ACCESS'); ?>
-			</label>
-			<select name="filter_access" id="filter_access" class="inputbox">
-				<option value=""><?php echo JText::_('JOPTION_SELECT_ACCESS');?></option>
-				<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
-			</select>
+			
 			<label class="selectlabel" for="filter_published">
 				<?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?>
 			</label>
@@ -53,9 +47,16 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<option value=""><?php echo JText::_('JOPTION_SELECT_CATEGORY');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('category.options', 'com_contact'), 'value', 'text', $this->state->get('filter.category_id'));?>
 			</select>
+            <label class="selectlabel" for="filter_access">
+				<?php echo JText::_('JOPTION_SELECT_ACCESS'); ?>
+			</label>
+			<select name="filter_access" id="filter_access" class="inputbox">
+				<option value=""><?php echo JText::_('JOPTION_SELECT_ACCESS');?></option>
+				<?php echo JHtml::_('select.options', JHtml::_('access.assetgroups'), 'value', 'text', $this->state->get('filter.access'));?>
+			</select>
 			<label class="selectlabel" for="filter_language">
 				<?php echo JText::_('JOPTION_SELECT_LANGUAGE'); ?>
-			</label>
+			</label>            
 			<select name="filter_language" id="filter_language" class="inputbox">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_LANGUAGE');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('contentlanguage.existing', true, true), 'value', 'text', $this->state->get('filter.language'));?>
@@ -72,7 +73,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 		<thead>
 			<tr>
 				<th class="checkmark-col">
-					<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(<?php echo count($this->items); ?>);" />
+					<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort',  'JGLOBAL_TITLE', 'a.name', $listDirn, $listOrder); ?>
@@ -87,7 +88,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 					<?php endif; ?>
 				</th>
 				<th class="title category-col">
-					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_CATEGORY', 'category_title', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'JCATEGORY', 'category_title', $listDirn, $listOrder); ?>
 				</th>
 				<th class="title access-col">
 					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_ACCESS', 'access_level', $listDirn, $listOrder); ?>
@@ -121,7 +122,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 					<?php if ($item->checked_out) : ?>
 						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'contacts.', $canCheckin); ?>
 					<?php endif; ?>
-					<?php if ($canCreate || $canEdit) : ?>
+					<?php if ($canEdit) : ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_contact&task=contact.edit&id='.(int) $item->id); ?>">
 							<?php echo $this->escape($item->name); ?></a>
 					<?php else : ?>
@@ -136,8 +137,13 @@ $saveOrder	= $listOrder == 'a.ordering';
 				<td class="order">
 					<?php if ($canChange) : ?>
 						<?php if ($saveOrder) :?>
-							<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid),'contacts.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
-							<span><?php echo $this->pagination->orderDownIcon($i, $n, ($item->catid == @$this->items[$i+1]->catid), 'contacts.orderdown', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
+							<?php if ($listDirn == 'asc') : ?>
+								<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid),'contacts.orderup', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
+								<span><?php echo $this->pagination->orderDownIcon($i, $n, ($item->catid == @$this->items[$i+1]->catid), 'contacts.orderdown', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
+							<?php elseif ($listDirn == 'desc') : ?>
+								<span><?php echo $this->pagination->orderUpIcon($i, ($item->catid == @$this->items[$i-1]->catid),'contacts.orderdown', 'JLIB_HTML_MOVE_UP', $ordering); ?></span>
+								<span><?php echo $this->pagination->orderDownIcon($i, $n, ($item->catid == @$this->items[$i+1]->catid), 'contacts.orderup', 'JLIB_HTML_MOVE_DOWN', $ordering); ?></span>
+							<?php endif; ?>
 						<?php endif; ?>
 						<?php $disabled = $saveOrder ?  '' : 'disabled="disabled"'; ?>
 						<input type="text" name="order[]" value="<?php echo $item->ordering;?>" <?php echo $disabled ?> class="text-area-order" title="<?php echo $item->name; ?> order" />

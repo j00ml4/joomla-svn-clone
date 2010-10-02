@@ -33,12 +33,18 @@ $saveOrder	= $listOrder == 'ordering';
 		</div>
 		<div class="filter-select">
 			<label class="selectlabel" for="filter_client_id">
-				<?php echo JText::_('COM_MODULES_OPTION_SELECT_CLIENT'); ?>
+				<?php echo JText::_('JGLOBAL_FILTER_CLIENT'); ?>
 			</label>
 			<select name="filter_client_id" id="filter_client_id" class="inputbox">
 				<?php echo JHtml::_('select.options', ModulesHelper::getClientOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
 			</select>
-            
+            <label class="selectlabel" for="filter_state">
+				<?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?>
+			</label>
+			<select name="filter_state" id="filter_state" class="inputbox">
+				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
+				<?php echo JHtml::_('select.options', ModulesHelper::getStateOptions(), 'value', 'text', $this->state->get('filter.state'));?>
+			</select>
             <label class="selectlabel" for="filter_position">
 				<?php echo JText::_('COM_MODULES_OPTION_SELECT_POSITION'); ?>
 			</label>
@@ -54,13 +60,7 @@ $saveOrder	= $listOrder == 'ordering';
 				<option value=""><?php echo JText::_('COM_MODULES_OPTION_SELECT_MODULE');?></option>
 				<?php echo JHtml::_('select.options', ModulesHelper::getModules($this->state->get('filter.client_id')), 'value', 'text', $this->state->get('filter.module'));?>
 			</select>
-			<label class="selectlabel" for="filter_state">
-				<?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?>
-			</label>
-			<select name="filter_state" id="filter_state" class="inputbox">
-				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
-				<?php echo JHtml::_('select.options', ModulesHelper::getStateOptions(), 'value', 'text', $this->state->get('filter.state'));?>
-			</select>
+			
 
 			<label class="selectlabel" for="filter_access">
 				<?php echo JText::_('JOPTION_SELECT_ACCESS'); ?>
@@ -93,25 +93,25 @@ $saveOrder	= $listOrder == 'ordering';
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort', 'JGLOBAL_TITLE', 'title', $listDirn, $listOrder); ?>
+				</th>                
+                <th class="width-5">
+					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'published', $listDirn, $listOrder); ?>
 				</th>
 				<th class="width-20">
 					<?php echo JHtml::_('grid.sort',  'COM_MODULES_HEADING_POSITION', 'position', $listDirn, $listOrder); ?>
 				</th>
-				<th class="width-10">
-					<?php echo JHtml::_('grid.sort',  'COM_MODULES_HEADING_PAGES', 'pages', $listDirn, $listOrder); ?>
-				</th>
-				<th class="width-10">
-					<?php echo JHtml::_('grid.sort', 'COM_MODULES_HEADING_MODULE', 'name', $listDirn, $listOrder); ?>
-				</th>
-				<th class="width-5">
-					<?php echo JHtml::_('grid.sort', 'JPUBLISHED', 'published', $listDirn, $listOrder); ?>
-				</th>
-				<th class="nowrap ordering-col">
+                <th class="nowrap ordering-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ORDERING', 'ordering', $listDirn, $listOrder); ?>
 					<?php if ($canOrder && $saveOrder) :?>
 						<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'modules.saveorder'); ?>
 					<?php endif; ?>
+				</th>				
+				<th class="width-10">
+					<?php echo JHtml::_('grid.sort', 'COM_MODULES_HEADING_MODULE', 'name', $listDirn, $listOrder); ?>
 				</th>
+                	<th class="width-10">
+					<?php echo JHtml::_('grid.sort',  'COM_MODULES_HEADING_PAGES', 'pages', $listDirn, $listOrder); ?>
+				</th>		
 				<th class="title access-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ACCESS', 'access', $listDirn, $listOrder); ?>
 				</th>
@@ -140,7 +140,7 @@ $saveOrder	= $listOrder == 'ordering';
 					<?php if ($item->checked_out) : ?>
 						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'modules.', $canCheckin); ?>
 					<?php endif; ?>
-					<?php if ($canCreate || $canEdit) : ?>
+					<?php if ($canEdit) : ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_modules&task=module.edit&id='.(int) $item->id); ?>">
 							<?php echo $this->escape($item->title); ?></a>
 					<?php else : ?>
@@ -151,19 +151,13 @@ $saveOrder	= $listOrder == 'ordering';
 						<?php echo JText::sprintf('JGLOBAL_LIST_NOTE', $this->escape($item->note));?></p>
 					<?php endif; ?>
 				</td>
+                <td class="center">
+					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'modules.', $canChange);?>
+				</td>
 				<td class="center">
 					<?php echo $item->position; ?>
 				</td>
-				<td class="center">
-					<?php echo $item->pages; ?>
-				</td>
-				<td class="left">
-					<?php echo $item->name;?>
-				</td>
-				<td class="center">
-					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'modules.', $canChange);?>
-				</td>
-				<td class="order">
+                <td class="order">
 					<?php if ($canChange) : ?>
 						<?php if ($saveOrder) :?>
 							<?php if ($listDirn == 'asc') : ?>
@@ -180,6 +174,13 @@ $saveOrder	= $listOrder == 'ordering';
 						<?php echo $item->ordering; ?>
 					<?php endif; ?>
 				</td>
+                <td class="left">
+					<?php echo $item->name;?>
+				</td>
+				<td class="center">
+					<?php echo $item->pages; ?>
+				</td>			
+							
 				<td class="center">
 					<?php echo $this->escape($item->access_level); ?>
 				</td>

@@ -50,7 +50,18 @@ class CategoriesModelCategory extends JModelAdmin
 	{
 		$user = JFactory::getUser();
 
-		return $user->authorise('core.edit.state', $record->extension.'.category.'.(int) $record->id);
+		// Check for existing category.
+		if (!empty($record->id)) {
+			return $user->authorise('core.edit.state', $record->extension.'.category.'.(int) $record->id);
+		}
+		// New category, so check against the parent.
+		else if (!empty($record->parent_id)) {
+			return $user->authorise('core.edit.state', $record->extension.'.category.'.(int) $record->parent_id);
+		}
+		// Default to component settings if neither category nor parent known.
+		else {
+			return $user->authorise('core.edit.state', $record->extension);
+		}
 	}
 
 	/**
@@ -169,7 +180,37 @@ class CategoriesModelCategory extends JModelAdmin
 			return false;
 		}
 
+		// Modify the form based on Edit State access controls.
+		if (empty($data['extension'])) {
+			$data['extension'] = $extension;
+		}
+
+		if (!$this->canEditState((object) $data)) {
+			// Disable fields for display.
+			$form->setFieldAttribute('ordering', 'disabled', 'true');
+			$form->setFieldAttribute('published', 'disabled', 'true');
+
+			// Disable fields while saving.
+			// The controller has already verified this is a record you can edit.
+			$form->setFieldAttribute('ordering', 'filter', 'unset');
+			$form->setFieldAttribute('published', 'filter', 'unset');
+		}
+
 		return $form;
+	}
+
+	/**
+	 * A protected method to get the where clause for the reorder
+	 * This ensures that the row will be moved relative to a row with the same extension
+	 *
+	 * @param	JCategoryTable	current table instance
+	 *
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($table)
+	{
+		return 'extension = ' . $this->_db->Quote($table->extension);
 	}
 
 	/**
@@ -276,7 +317,7 @@ class CategoriesModelCategory extends JModelAdmin
 		if ($table->parent_id != $data['parent_id'] || $data['id'] == 0) {
 			$table->setLocation($data['parent_id'], 'last-child');
 		}
-		
+
 		// Alter the title for save as copy
 		if (!$isNew && $data['id'] == 0 && $table->parent_id == $data['parent_id']) {
 			$m = null;
@@ -287,7 +328,7 @@ class CategoriesModelCategory extends JModelAdmin
 				$data['title'] .= ' (2)';
 			}
 		}
-		
+
 		// Bind the data.
 		if (!$table->bind($data)) {
 			$this->setError($table->getError());

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit.php 18290 2010-07-29 02:27:05Z ian $
+ * @version		$Id: edit.php 18871 2010-09-13 14:27:48Z chdemko $
  * @package		Joomla.Administrator
  * @subpackage	templates.hathor
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -13,13 +13,13 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+$canDo		= BannersHelper::getActions();
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'banner.cancel' || document.formvalidator.isValid(document.id('banner-form'))) {
-			submitform(task);
+			Joomla.submitform(task, document.getElementById('banner-form'));
 		}
 	}
 	window.addEvent('domready', function() {
@@ -39,7 +39,6 @@ JHtml::_('behavior.formvalidation');
 			document.id('jform_type1').fireEvent('click');
 		}
 	});
-// -->
 </script>
 
 <form action="<?php JRoute::_('index.php?option=com_banners'); ?>" method="post" name="adminForm" id="banner-form" class="form-validate">
@@ -55,10 +54,11 @@ JHtml::_('behavior.formvalidation');
 
 				<li><?php echo $this->form->getLabel('access'); ?>
 				<?php echo $this->form->getInput('access'); ?></li>
-
-				<li><?php echo $this->form->getLabel('catid'); ?>
-				<?php echo $this->form->getInput('catid'); ?></li>
-
+				<?php if ($canDo->get('core.create')) { ?>	
+					<li><?php echo $this->form->getLabel('catid'); ?>
+					<?php echo $this->form->getInput('catid'); ?></li>
+				<?php }?>
+					
 				<li><?php echo $this->form->getLabel('type'); ?>
 				<?php echo $this->form->getInput('type'); ?></li>
 
@@ -88,7 +88,10 @@ JHtml::_('behavior.formvalidation');
 				<li><?php echo $this->form->getLabel('description'); ?>
 				<?php echo $this->form->getInput('description'); ?></li>
 
-
+				<?php if ($canDo->get('core.edit.state')) { ?>
+						<li><?php echo $this->form->getLabel('state'); ?>
+				<?php echo $this->form->getInput('state'); ?></li>
+				<?php }?>
 
 				<li><?php echo $this->form->getLabel('language'); ?>
 				<?php echo $this->form->getInput('language'); ?></li>

@@ -9,7 +9,7 @@
 
 // no direct access
 defined('_JEXEC') or die;
-
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
 <div class="weblink-category<?php echo $pageClass;?>">
@@ -24,7 +24,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 </h2>
 <?php endif; ?>
 <?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
-	<div class="category_desc">
+	<div class="category-desc">
 	<?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
 		<img src="<?php echo $this->category->getParams()->get('image'); ?>"/>
 	<?php endif; ?>
@@ -34,13 +34,11 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<div class="clr"></div>
 	</div>
 <?php endif; ?>
-
 <?php echo $this->loadTemplate('items'); ?>
-<div class="cat-children">
 <?php if (!empty($this->children[$this->category->id])&& $this->maxLevel != 0) : ?>
-
+	<div class="cat-children">
 	<h3><?php echo JText::_('JGLOBAL_SUBCATEGORIES') ; ?></h3>
 	<?php echo $this->loadTemplate('children'); ?>
-</div>
+	</div>
 <?php endif; ?>
 </div>

@@ -21,7 +21,7 @@ $user = JFactory::getUser();
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_users&view=groups');?>" method="post" name="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_users&view=groups');?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
 	<legend class="element-invisible"><?php echo JText::_('COM_USERS_SEARCH_GROUPS_LABEL'); ?></legend>
 		<div class="filter-search">
@@ -63,7 +63,7 @@ $listDirn	= $this->state->get('list.direction');
 				</td>
 				<td>
 					<?php echo str_repeat('<span class="gi">|&mdash;</span>', $item->level) ?>
-					<?php if ($canCreate || $canEdit) : ?>
+					<?php if ($canEdit) : ?>
 					<a href="<?php echo JRoute::_('index.php?option=com_users&task=group.edit&id='.$item->id);?>">
 						<?php echo $this->escape($item->title); ?></a>
 					<?php else : ?>

@@ -176,15 +176,22 @@ class InstallerModelManage extends InstallerModel
 					$failed[] = $id;
 				}
 			}
+			
+			$langstring = 'COM_INSTALLER_TYPE_'. strtoupper($row->type);
+			$rowtype = JText::_($langstring);
+			if(strpos($rowtype, $langstring) !== false) {
+				$rowtype = $row->type;
+			}
+			
 			if (count($failed)) {
 
 				// There was an error in uninstalling the package
-				$msg = JText::sprintf('COM_INSTALLER_UNINSTALL_ERROR', $row->type);
+				$msg = JText::sprintf('COM_INSTALLER_UNINSTALL_ERROR', $rowtype);
 				$result = false;
 			} else {
 
 				// Package uninstalled sucessfully
-				$msg = JText::sprintf('COM_INSTALLER_UNINSTALL_SUCCESS', $row->type);
+				$msg = JText::sprintf('COM_INSTALLER_UNINSTALL_SUCCESS', $rowtype);
 				$result = true;
 			}
 			$app = JFactory::getApplication();

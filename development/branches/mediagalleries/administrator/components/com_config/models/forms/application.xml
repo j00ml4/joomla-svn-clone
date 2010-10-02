@@ -165,19 +165,6 @@
 			<option
 				value="0">JNO</option>
 		</field>
-
-		<field
-			name="debug_modules"
-			type="radio"
-			default="0"
-			label="COM_CONFIG_FIELD_DEBUG_MODULES_LABEL"
-			description="COM_CONFIG_FIELD_DEBUG_MODULES_DESC"
-			filter="integer">
-			<option
-				value="1">JYES</option>
-			<option
-				value="0">JNO</option>
-		</field>
 	</fieldset>
 
 	<fieldset
@@ -369,7 +356,6 @@
 			type="textarea"
 			label="COM_CONFIG_FIELD_METADESC_LABEL"
 			description="COM_CONFIG_FIELD_METADESC_DESC"
-			required="true"
 			filter="string"
 			cols="60"
 			rows="3" />
@@ -379,7 +365,6 @@
 			type="textarea"
 			label="COM_CONFIG_FIELD_METAKEYS_LABEL"
 			description="COM_CONFIG_FIELD_METAKEYS_DESC"
-			required="true"
 			filter="string"
 			cols="60"
 			rows="3" />
@@ -425,7 +410,7 @@
 		<field
 			name="sef"
 			type="radio"
-			default="0"
+			default="1"
 			label="COM_CONFIG_FIELD_SEF_URL_LABEL"
 			description="COM_CONFIG_FIELD_SEF_URL_DESC"
 			filter="integer">

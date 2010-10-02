@@ -19,7 +19,7 @@ JHtml::_('behavior.formvalidation');
 	{
 		if (task == 'weblink.cancel' || document.formvalidator.isValid(document.id('weblink-form'))) {
 			<?php echo $this->form->getField('description')->save(); ?>
-			submitform(task);
+			Joomla.submitform(task, document.getElementById('weblink-form'));
 		}
 		else {
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
@@ -27,7 +27,7 @@ JHtml::_('behavior.formvalidation');
 	}
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_weblinks'); ?>" method="post" name="adminForm" id="weblink-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_weblinks'); ?>" method="post" name="adminForm" id="weblink-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 			<legend><?php echo empty($this->item->id) ? JText::_('COM_WEBLINKS_NEW_WEBLINK') : JText::sprintf('COM_WEBLINKS_EDIT_WEBLINK', $this->item->id); ?></legend>
@@ -98,6 +98,8 @@ JHtml::_('behavior.formvalidation');
 		<?php echo $this->loadTemplate('params'); ?>
 
 		<?php echo $this->loadTemplate('metadata'); ?>
+		
+		<?php echo JHtml::_('sliders.end'); ?>
 
 		<input type="hidden" name="task" value="" />
 		<?php echo JHtml::_('form.token'); ?>

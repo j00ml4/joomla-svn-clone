@@ -15,13 +15,12 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
-
 ?>
 <script type="text/javascript">
 	function submitbutton(task)
 	{
 		if (task == 'link.cancel' || document.formvalidator.isValid(document.id('link-form'))) {
-			submitform(task);
+			Joomla.submitform(task, document.getElementById('link-form'));
 		}
 	}
 </script>
@@ -52,7 +51,8 @@ JHtml::_('behavior.keepalive');
 			<ul class="adminformlist">
 				<li><?php echo $this->form->getLabel('published'); ?>
 				<?php echo $this->form->getInput('published'); ?></li>
-				</ul>
+			</ul>
+
 		</fieldset>
 		<fieldset class="adminform">
 			<legend><?php echo JText::_('COM_REDIRECT_DETAILS'); ?></legend>

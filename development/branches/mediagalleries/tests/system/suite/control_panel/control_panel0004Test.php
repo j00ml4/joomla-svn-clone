@@ -79,18 +79,41 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 		$this->select("filter_published", "label=- Select State -");
 		$this->clickGo();
 		$this->waitForPageToLoad("30000");
-
 		print("Check that new category is not shown." . "\n");
 		$this->assertFalse($this->isTextPresent("Functional Test Category"));
 		print("Check that reordering still works." . "\n");
-		print("Move Modules category up one." . "\n");
-		$this->click("//table[@class='adminlist']/tbody//tr//td/a[contains(text(), 'Modules')]/../../td//a[@title='Move Up']");
-		$this->waitForPageToLoad("30000");
-		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
 		print("Move Modules category down one." . "\n");
 		$this->click("//table[@class='adminlist']/tbody//tr//td/a[contains(text(), 'Modules')]/../../td//a[@title='Move Down']");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
+		print("Check that Templates and Modules categories are in new order." . "\n");
+		$this->assertContains("Templates", $this->getTable("//table[@class='adminlist'].5.1"));
+		$this->assertContains("Beez 20", $this->getTable("//table[@class='adminlist'].6.1"));
+		$this->assertContains("Beez5", $this->getTable("//table[@class='adminlist'].7.1"));
+		$this->assertContains("Atomic", $this->getTable("//table[@class='adminlist'].8.1"));
+		$this->assertContains("Milky Way", $this->getTable("//table[@class='adminlist'].9.1"));
+		$this->assertContains("Modules", $this->getTable("//table[@class='adminlist'].10.1"));
+		$this->assertContains("Content Modules", $this->getTable("//table[@class='adminlist'].11.1"));
+		$this->assertContains("User Modules", $this->getTable("//table[@class='adminlist'].12.1"));
+		$this->assertContains("Display Modules", $this->getTable("//table[@class='adminlist'].13.1"));
+		$this->assertContains("Utility Modules", $this->getTable("//table[@class='adminlist'].14.1"));
+		$this->assertContains("Menu Module", $this->getTable("//table[@class='adminlist'].15.1"));
+		print("Move Modules category up one." . "\n");
+		$this->click("//table[@class='adminlist']/tbody//tr//td/a[contains(text(), 'Modules')]/../../td//a[@title='Move Up']");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
+		print("Check that Templates and Modules categories are in original order." . "\n");
+		$this->assertContains("Templates", $this->getTable("//table[@class='adminlist'].11.1"));
+		$this->assertContains("Beez 20", $this->getTable("//table[@class='adminlist'].12.1"));
+		$this->assertContains("Beez5", $this->getTable("//table[@class='adminlist'].13.1"));
+		$this->assertContains("Atomic", $this->getTable("//table[@class='adminlist'].14.1"));
+		$this->assertContains("Milky Way", $this->getTable("//table[@class='adminlist'].15.1"));
+		$this->assertContains("Modules", $this->getTable("//table[@class='adminlist'].5.1"));
+		$this->assertContains("Content Modules", $this->getTable("//table[@class='adminlist'].6.1"));
+		$this->assertContains("User Modules", $this->getTable("//table[@class='adminlist'].7.1"));
+		$this->assertContains("Display Modules", $this->getTable("//table[@class='adminlist'].8.1"));
+		$this->assertContains("Utility Modules", $this->getTable("//table[@class='adminlist'].9.1"));
+		$this->assertContains("Menu Module", $this->getTable("//table[@class='adminlist'].10.1"));
 		$this->doAdminLogout();
 		print("Finished control_panel0004Test.php/testCreateRemoveCategory." . "\n");
 
@@ -135,11 +158,11 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 		$this->assertFalse($this->isElementPresent("//input[@class='text-area-order'][@disabled='disabled']"));
 
 		echo "Check initial ordering of categories\n";
-		$this->assertEquals("Components (Alias: components)", $this->getTable("//table[@class=\"adminlist\"].4.1"));
-		$this->assertEquals("Modules (Alias: modules)", $this->getTable("//table[@class=\"adminlist\"].5.1"));
-		$this->assertEquals("Templates (Alias: templates)", $this->getTable("//table[@class=\"adminlist\"].11.1"));
-		$this->assertEquals("Languages (Alias: languages)", $this->getTable("//table[@class=\"adminlist\"].16.1"));
-		$this->assertEquals("Plugins (Alias: plugins)", $this->getTable("//table[@class=\"adminlist\"].17.1"));
+		$this->assertContains("Components", $this->getTable("//table[@class=\"adminlist\"].4.1"));
+		$this->assertContains("Modules", $this->getTable("//table[@class=\"adminlist\"].5.1"));
+		$this->assertContains("Templates", $this->getTable("//table[@class=\"adminlist\"].11.1"));
+		$this->assertContains("Languages", $this->getTable("//table[@class=\"adminlist\"].16.1"));
+		$this->assertContains("Plugins", $this->getTable("//table[@class=\"adminlist\"].17.1"));
 
 		echo "change the order of categories and click Save Order\n";
 		$this->type("//div[@id='element-box']/div[2]/form/table/tbody/tr[4]/td[4]/input", "5");
@@ -151,11 +174,11 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 		$this->waitForPageToLoad("30000");
 
 		echo "check that orders have changed\n";
-		$this->assertEquals("Plugins (Alias: plugins)", $this->getTable("//table[@class=\"adminlist\"].4.1"));
-		$this->assertEquals("Languages (Alias: languages)", $this->getTable("//table[@class=\"adminlist\"].5.1"));
-		$this->assertEquals("Templates (Alias: templates)", $this->getTable("//table[@class=\"adminlist\"].6.1"));
-		$this->assertEquals("Modules (Alias: modules)", $this->getTable("//table[@class=\"adminlist\"].11.1"));
-		$this->assertEquals("Components (Alias: components)", $this->getTable("//table[@class=\"adminlist\"].17.1"));
+		$this->assertContains("Plugins ", $this->getTable("//table[@class=\"adminlist\"].4.1"));
+		$this->assertContains("Languages", $this->getTable("//table[@class=\"adminlist\"].5.1"));
+		$this->assertContains("Templates", $this->getTable("//table[@class=\"adminlist\"].6.1"));
+		$this->assertContains("Modules", $this->getTable("//table[@class=\"adminlist\"].11.1"));
+		$this->assertContains("Components", $this->getTable("//table[@class=\"adminlist\"].17.1"));
 		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
 
 		echo "put the categories back in the original order and click Save Order\n";
@@ -169,22 +192,22 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 
 		echo "Check for success message and that order has been put back to original\n";
 		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
-		$this->assertEquals("Components (Alias: components)", $this->getTable("//table[@class=\"adminlist\"].4.1"));
-		$this->assertEquals("Modules (Alias: modules)", $this->getTable("//table[@class=\"adminlist\"].5.1"));
-		$this->assertEquals("Templates (Alias: templates)", $this->getTable("//table[@class=\"adminlist\"].11.1"));
-		$this->assertEquals("Languages (Alias: languages)", $this->getTable("//table[@class=\"adminlist\"].16.1"));
-		$this->assertEquals("Plugins (Alias: plugins)", $this->getTable("//table[@class=\"adminlist\"].17.1"));
+		$this->assertContains("Components", $this->getTable("//table[@class=\"adminlist\"].4.1"));
+		$this->assertContains("Modules", $this->getTable("//table[@class=\"adminlist\"].5.1"));
+		$this->assertContains("Templates", $this->getTable("//table[@class=\"adminlist\"].11.1"));
+		$this->assertContains("Languages", $this->getTable("//table[@class=\"adminlist\"].16.1"));
+		$this->assertContains("Plugins", $this->getTable("//table[@class=\"adminlist\"].17.1"));
 
 		echo "Try pressing save order with no form changes\n";
 		$this->click("//a[contains(@href, 'saveorder')][@class = 'saveorder']");
 		$this->waitForPageToLoad("30000");
 		echo "Check that there is no success message and that orders haven't changed\n";
 		$this->assertFalse($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
-		$this->assertEquals("Components (Alias: components)", $this->getTable("//table[@class=\"adminlist\"].4.1"));
-		$this->assertEquals("Modules (Alias: modules)", $this->getTable("//table[@class=\"adminlist\"].5.1"));
-		$this->assertEquals("Templates (Alias: templates)", $this->getTable("//table[@class=\"adminlist\"].11.1"));
-		$this->assertEquals("Languages (Alias: languages)", $this->getTable("//table[@class=\"adminlist\"].16.1"));
-		$this->assertEquals("Plugins (Alias: plugins)", $this->getTable("//table[@class=\"adminlist\"].17.1"));
+		$this->assertContains("Components", $this->getTable("//table[@class=\"adminlist\"].4.1"));
+		$this->assertContains("Modules", $this->getTable("//table[@class=\"adminlist\"].5.1"));
+		$this->assertContains("Templates", $this->getTable("//table[@class=\"adminlist\"].11.1"));
+		$this->assertContains("Languages", $this->getTable("//table[@class=\"adminlist\"].16.1"));
+		$this->assertContains("Plugins", $this->getTable("//table[@class=\"adminlist\"].17.1"));
 		$this->doAdminLogout();
 		print("Finished control_panel0004Test.php/testCategorySaveOrder." . "\n");
 	}
@@ -234,10 +257,10 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 		$this->assertTrue($this->isElementPresent("//input[@class='text-area-order']"));
 		$this->assertTrue($this->isElementPresent("//span[@class='state downarrow']"));
 		echo "Check the starting order of the menu items\n";
-		$this->assertEquals("Single Article (Alias: single-article)", $this->getTable("//table[@class='adminlist'].6.1"));
-		$this->assertEquals("Article Categories (Alias: article-categories)", $this->getTable("//table[@class='adminlist'].7.1"));
-		$this->assertEquals("Article Category Blog (Alias: article-category-blog)", $this->getTable("//table[@class='adminlist'].8.1"));
-		$this->assertEquals("Article Category List (Alias: article-category-list)", $this->getTable("//table[@class='adminlist'].9.1"));
+		$this->assertContains("Single Article", $this->getTable("//table[@class='adminlist'].6.1"));
+		$this->assertContains("Article Categories", $this->getTable("//table[@class='adminlist'].7.1"));
+		$this->assertContains("Article Category Blog", $this->getTable("//table[@class='adminlist'].8.1"));
+		$this->assertContains("Article Category List", $this->getTable("//table[@class='adminlist'].9.1"));
 
 		echo "Reverse the order of 4 articles\n";
 		$this->type("//div[@id='element-box']/div[2]/form/table/tbody/tr[6]/td[4]/input", "4");
@@ -248,10 +271,10 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 		$this->click("//a[contains(@href, 'saveorder')][@class = 'saveorder']");
 		$this->waitForPageToLoad("30000");
 		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
-		$this->assertEquals("Single Article (Alias: single-article)", $this->getTable("//table[@class='adminlist'].9.1"));
-		$this->assertEquals("Article Categories (Alias: article-categories)", $this->getTable("//table[@class='adminlist'].8.1"));
-		$this->assertEquals("Article Category Blog (Alias: article-category-blog)", $this->getTable("//table[@class='adminlist'].7.1"));
-		$this->assertEquals("Article Category List (Alias: article-category-list)", $this->getTable("//table[@class='adminlist'].6.1"));
+		$this->assertContains("Single Article", $this->getTable("//table[@class='adminlist'].9.1"));
+		$this->assertContains("Article Categories", $this->getTable("//table[@class='adminlist'].8.1"));
+		$this->assertContains("Article Category Blog", $this->getTable("//table[@class='adminlist'].7.1"));
+		$this->assertContains("Article Category List", $this->getTable("//table[@class='adminlist'].6.1"));
 
 		echo "Change the ordering back and click Save Order\n";
 		$this->type("//div[@id='element-box']/div[2]/form/table/tbody/tr[6]/td[4]/input", "4");
@@ -263,20 +286,112 @@ class ControlPanel0004 extends SeleniumJoomlaTestCase
 
 		echo "Check the ordering is back to original order\n";
 		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
-		$this->assertEquals("Single Article (Alias: single-article)", $this->getTable("//table[@class='adminlist'].6.1"));
-		$this->assertEquals("Article Categories (Alias: article-categories)", $this->getTable("//table[@class='adminlist'].7.1"));
-		$this->assertEquals("Article Category Blog (Alias: article-category-blog)", $this->getTable("//table[@class='adminlist'].8.1"));
-		$this->assertEquals("Article Category List (Alias: article-category-list)", $this->getTable("//table[@class='adminlist'].9.1"));
+		$this->assertContains("Single Article", $this->getTable("//table[@class='adminlist'].6.1"));
+		$this->assertContains("Article Categories", $this->getTable("//table[@class='adminlist'].7.1"));
+		$this->assertContains("Article Category Blog", $this->getTable("//table[@class='adminlist'].8.1"));
+		$this->assertContains("Article Category List", $this->getTable("//table[@class='adminlist'].9.1"));
 
 		echo "Click Save Order when nothing has been changed and make sure it doesn't to anything\n";
 		$this->click("//a[contains(@href, 'saveorder')][@class = 'saveorder']");
 		$this->waitForPageToLoad("30000");
 		$this->assertFalse($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
-		$this->assertEquals("Single Article (Alias: single-article)", $this->getTable("//table[@class='adminlist'].6.1"));
-		$this->assertEquals("Article Categories (Alias: article-categories)", $this->getTable("//table[@class='adminlist'].7.1"));
-		$this->assertEquals("Article Category Blog (Alias: article-category-blog)", $this->getTable("//table[@class='adminlist'].8.1"));
-		$this->assertEquals("Article Category List (Alias: article-category-list)", $this->getTable("//table[@class='adminlist'].9.1"));
+		$this->assertContains("Single Article", $this->getTable("//table[@class='adminlist'].6.1"));
+		$this->assertContains("Article Categories", $this->getTable("//table[@class='adminlist'].7.1"));
+		$this->assertContains("Article Category Blog", $this->getTable("//table[@class='adminlist'].8.1"));
+		$this->assertContains("Article Category List", $this->getTable("//table[@class='adminlist'].9.1"));
 		echo "Done with control_panel0004Test/testMenuItemSaveOrder\n";
+		$this->doAdminLogout();
+	}
+
+	function testMenuItemOrderUpDown()
+	{
+		echo "Starting testMenuItemOrderUpDown\n";
+		$this->setUp();
+		$this->gotoAdmin();
+		$this->doAdminLogin();
+		echo "Navigate to Menu Items -> About Joomla menu\n";
+		$this->click("link=About Joomla");
+		$this->waitForPageToLoad("30000");
+
+		echo "Check that Contact Component and Content Component Menu Items are in original order\n";
+		$this->assertContains("Contact Component", $this->getTable("//table[@class='adminlist'].13.1"));
+		$this->assertContains("Contact Categories", $this->getTable("//table[@class='adminlist'].14.1"));
+		$this->assertContains("Contact Single Category", $this->getTable("//table[@class='adminlist'].15.1"));
+		$this->assertContains("Single Contact", $this->getTable("//table[@class='adminlist'].16.1"));
+		$this->assertContains("Featured Contacts", $this->getTable("//table[@class='adminlist'].17.1"));
+		$this->assertContains("Content Component", $this->getTable("//table[@class='adminlist'].5.1"));
+		$this->assertContains("Single Article", $this->getTable("//table[@class='adminlist'].6.1"));
+		$this->assertContains("Article Categories", $this->getTable("//table[@class='adminlist'].7.1"));
+		$this->assertContains("Article Category Blog", $this->getTable("//table[@class='adminlist'].8.1"));
+		$this->assertContains("Article Category List", $this->getTable("//table[@class='adminlist'].9.1"));
+		$this->assertContains("Featured Articles", $this->getTable("//table[@class='adminlist'].10.1"));
+
+		echo "Move Content Component Menu Item Down One\n";
+		$this->click("//table[@class='adminlist']/tbody//tr//td/a[contains(text(), 'Content Component')]/../../td//a[@title='Move Down']");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
+		echo "Check that Contact Component and Content Component Menu Items are in new order\n";
+		$this->assertContains("Contact Component", $this->getTable("//table[@class='adminlist'].5.1"));
+		$this->assertContains("Contact Categories", $this->getTable("//table[@class='adminlist'].6.1"));
+		$this->assertContains("Contact Single Category", $this->getTable("//table[@class='adminlist'].7.1"));
+		$this->assertContains("Single Contact", $this->getTable("//table[@class='adminlist'].8.1"));
+		$this->assertContains("Featured Contacts", $this->getTable("//table[@class='adminlist'].9.1"));
+		$this->assertContains("Content Component", $this->getTable("//table[@class='adminlist'].10.1"));
+		$this->assertContains("Single Article", $this->getTable("//table[@class='adminlist'].11.1"));
+		$this->assertContains("Article Categories", $this->getTable("//table[@class='adminlist'].12.1"));
+		$this->assertContains("Article Category Blog", $this->getTable("//table[@class='adminlist'].13.1"));
+		$this->assertContains("Article Category List", $this->getTable("//table[@class='adminlist'].14.1"));
+		$this->assertContains("Featured Articles", $this->getTable("//table[@class='adminlist'].15.1"));
+
+		echo "Move Content Component Menu Item Up One\n";
+		$this->click("//table[@class='adminlist']/tbody//tr//td/a[contains(text(), 'Content Component')]/../../td//a[@title='Move Up']");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
+		echo "Check that Contact Component and Content Component Menu Items are in original order\n";
+		$this->assertContains("Contact Component", $this->getTable("//table[@class='adminlist'].13.1"));
+		$this->assertContains("Contact Categories", $this->getTable("//table[@class='adminlist'].14.1"));
+		$this->assertContains("Contact Single Category", $this->getTable("//table[@class='adminlist'].15.1"));
+		$this->assertContains("Single Contact", $this->getTable("//table[@class='adminlist'].16.1"));
+		$this->assertContains("Featured Contacts", $this->getTable("//table[@class='adminlist'].17.1"));
+		$this->assertContains("Content Component", $this->getTable("//table[@class='adminlist'].5.1"));
+		$this->assertContains("Single Article", $this->getTable("//table[@class='adminlist'].6.1"));
+		$this->assertContains("Article Categories", $this->getTable("//table[@class='adminlist'].7.1"));
+		$this->assertContains("Article Category Blog", $this->getTable("//table[@class='adminlist'].8.1"));
+		$this->assertContains("Article Category List", $this->getTable("//table[@class='adminlist'].9.1"));
+		$this->assertContains("Featured Articles", $this->getTable("//table[@class='adminlist'].10.1"));
+
+		echo "Move Getting Started menu item down one\n";
+		$this->click("//table[@class='adminlist']/tbody//tr//td/a[contains(text(), 'Getting Started')]/../../td//a[@title='Move Down']");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
+		echo "Check that Using Joomla! is now in first row\n";
+		$this->assertContains("Using Joomla!", $this->getTable("//table[@class='adminlist'].1.1"));
+		echo "Move Getting Started back up one\n";
+		$this->select("limit", "label=All");
+		$this->waitForPageToLoad("30000");
+		$this->click("//table[@class='adminlist']/tbody//tr//td/a[contains(text(), 'Getting Started')]/../../td//a[@title='Move Up']");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
+		echo "Check that Getting Started is now in first row\n";
+		$this->assertContains("Getting Started", $this->getTable("//table[@class='adminlist'].1.1"));
+		$this->select("limit", "label=20");
+		$this->waitForPageToLoad("30000");
+
+		echo "Test moving Weblinks categories\n";
+		$this->click("//ul[@id='menu-weblinks']/li[2]/a");
+		$this->waitForPageToLoad("30000");
+		echo "Move weblinks Uncatgorised up\n";
+		$this->click("//table[@class='adminlist']/tbody//tr//td/a[contains(text(), 'Uncategorised')]/../../td//a[@title='Move Up']");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
+		$this->assertContains("Uncategorised", $this->getTable("//table[@class='adminlist'].1.1"));
+		echo "Move weblinks Uncatgorised back down\n";
+		$this->click("//table[@class='adminlist']/tbody//tr//td/a[contains(text(), 'Uncategorised')]/../../td//a[@title='Move Down']");
+		$this->waitForPageToLoad("30000");
+		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
+		$this->assertContains("Sample Data-Weblinks", $this->getTable("//table[@class='adminlist'].1.1"));
+
+		echo "Done with control_panel0004Test/testMenuItemOrderUpDown\n";
 		$this->doAdminLogout();
 	}
 }

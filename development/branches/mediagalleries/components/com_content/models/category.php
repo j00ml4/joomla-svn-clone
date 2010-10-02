@@ -85,10 +85,22 @@ class ContentModelCategory extends JModelItem
 		$mergedParams->merge($params);
 
 		$this->setState('params', $mergedParams);
-
-		// limit to published
-		$this->setState('filter.published', 1);
-
+		$user		= JFactory::getUser();		
+				// Create a new query object.
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+		$groups	= implode(',', $user->authorisedLevels());
+				
+		if ((!$user->authorise('core.edit.state', 'com_content')) &&  (!$user->authorise('core.edit', 'com_content'))){
+			// limit to published for people who can't edit or edit.state.
+			$this->setState('filter.published', 1);
+			// Filter by start and end dates.
+			$nullDate = $db->Quote($db->getNullDate());
+			$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+	
+			$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
+			$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
+		}
 		// process show_noauth parameter
 		if (!$params->get('show_noauth')) {
 			$this->setState('filter.access', true);
@@ -231,7 +243,7 @@ class ContentModelCategory extends JModelItem
 			if( isset( $this->state->params ) ) {
 				$params = $this->state->params;
 				$options = array();
-				$options['countItems'] = $params->get('show_cat_num_articles', 0);
+				$options['countItems'] = $params->get('show_cat_num_articles', 1);
 			}
 			else {
 				$options['countItems'] = 0;

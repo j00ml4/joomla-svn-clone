@@ -24,12 +24,13 @@ class NewsfeedsViewCategory extends JView
 	protected $state;
 	protected $items;
 	protected $category;
-	protected $children;
+	protected $categories;
 	protected $pagination;
 
 	function display($tpl = null)
 	{
 		$app		= JFactory::getApplication();
+		$user		= JFactory::getUser();
 		$params		= $app->getParams();
 
 		// Get some data from the models
@@ -46,18 +47,15 @@ class NewsfeedsViewCategory extends JView
 			return false;
 		}
 
-		if($category == false)
-		{
+		if ($category == false) {
 			return JError::raiseWarning(404, JText::_('JGLOBAL_CATEGORY_NOT_FOUND'));
 		}
 
-		if($parent == false)
-		{
-			//TODO Raise error for missing parent category here
+		if ($parent == false) {
+			return JError::raiseWarning(404, JText::_('JGLOBAL_CATEGORY_NOT_FOUND'));
 		}
 
 		// Check whether category access level allows access.
-		$user	= JFactory::getUser();
 		$groups	= $user->authorisedLevels();
 		if (!in_array($category->access, $groups)) {
 			return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));
@@ -111,20 +109,20 @@ class NewsfeedsViewCategory extends JView
 			$this->params->def('page_heading', JText::_('COM_NEWSFEEDS_DEFAULT_PAGE_TITLE'));
 		}
 		$id = (int) @$menu->query['id'];
-		if($menu && $menu->query['view'] != 'newsfeed' && $id != $this->category->id)
+		if ($menu && ($menu->query['option'] != 'com_newsfeeds' || $menu->query['view'] == 'newsfeed' || $id != $this->category->id))
 		{
 		
-			$path = array($this->category->title => '');
+			$path = array(array('title' => $this->category->title, 'link' => ''));
 			$category = $this->category->getParent();
-			while($id != $category->id && $category->id > 1)
+			while (($menu->query['option'] != 'com_newsfeeds' || $menu->query['view'] == 'newsfeed' || $id != $category->id) && $category->id > 1)
 			{
-				$path[$category->title] = NewsfeedsHelperRoute::getCategoryRoute($category->id);
+				$path[] = array('title' => $category->title, 'link' => NewsfeedsHelperRoute::getCategoryRoute($category->id));
 				$category = $category->getParent();
 			}
 			$path = array_reverse($path);
-			foreach($path as $title => $link)
+			foreach($path as $item)
 			{
-				$pathway->addItem($title, $link);
+				$pathway->addItem($item['title'], $item['link']);
 			}
 		}
 

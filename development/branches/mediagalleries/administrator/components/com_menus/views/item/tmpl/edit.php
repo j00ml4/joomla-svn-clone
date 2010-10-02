@@ -19,10 +19,13 @@ JHTML::_('behavior.modal');
 ?>
 
 <script type="text/javascript">
-	function submitbutton(task)
+	function submitbutton(task, type)
 	{
-		if (task == 'item.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
-			submitform(task);
+		if (task == 'item.setType') {
+			document.id('item-form').elements['jform[type]'].value = type;
+			Joomla.submitform(task, document.getElementById('item-form'));
+		} else if (task == 'item.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
+			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {
 			// special case for modal popups validation response
 			$$('#item-form .modal-value.invalid').each(function(field){
@@ -35,13 +38,13 @@ JHTML::_('behavior.modal');
 	}
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_menus'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_menus'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 
 <div class="width-60 fltlft">
 	<fieldset class="adminform">
 		<legend><?php echo JText::_('COM_MENUS_ITEM_DETAILS');?></legend>
 			<ul class="adminformlist">
-				
+
 
 				<li><?php echo $this->form->getLabel('type'); ?>
 				<?php echo $this->form->getInput('type'); ?></li>

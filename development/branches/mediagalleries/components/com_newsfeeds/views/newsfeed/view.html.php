@@ -58,6 +58,15 @@ class NewsfeedsViewNewsfeed extends JView
 		$state = $this->get('State');
 		$item = $this->get('Item');
 
+		if ($item) {
+		// Get Category Model data
+		$categoryModel = JModel::getInstance('Category', 'NewsfeedsModel', array('ignore_request' => true));
+		$categoryModel->setState('category.id', $item->catid);
+		$categoryModel->setState('list.ordering', 'a.name');
+		$categoryModel->setState('list.direction', 'asc');		
+		$items = $categoryModel->getItems();
+		}
+		
 		// Check for errors.
 		// @TODO Maybe this could go into JComponentHelper::raiseErrors($this->get('Errors'))
 		if (count($errors = $this->get('Errors'))) {
@@ -105,10 +114,11 @@ class NewsfeedsViewNewsfeed extends JView
 		}
 
 		$offset = $state->get('list.offset');
+
 		// Check the access to the newsfeed
 		$levels = $user->authorisedLevels();
 
-		if (!in_array($item->access, $levels) OR (in_array($item->access,$levels) AND (!in_array($item->category_access, $levels)))) {
+		if (!in_array($item->access, $levels) OR ((in_array($item->access,$levels) AND (!in_array($item->category_access, $levels))))) {
 			JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
 
 			return;
@@ -208,17 +218,23 @@ class NewsfeedsViewNewsfeed extends JView
 		}
 		$this->document->setTitle($title);
 
-		if ($menu && $menu->query['view'] != 'newsfeed') {
-			$id = (int) @$menu->query['id'];
-			$path = array($this->item->name  => '');
-			$category = JCategories::getInstance('Newsfeeds')->get($this->item->catid);
+		$id = (int) @$menu->query['id'];
 
-			while ($id != $category->id && $category->id > 1)
+		// if the menu item does not concern this newsfeed
+		if ($menu && ($menu->query['option'] != 'com_newsfeeds' || $menu->query['view'] != 'newsfeed' || $id != $this->item->id))
+		{
+			$path = array(array('title' => $this->item->name, 'link' => ''));
+			$category = JCategories::getInstance('Newsfeeds')->get($this->item->catid);
+			while (($menu->query['option'] != 'com_newsfeeds' || $menu->query['view'] == 'newsfeed' || $id != $category->id) && $category->id > 1)
 			{
-				$path[$category->title] = NewsfeedsHelperRoute::getCategoryRoute($category->id);
+				$path[] = array('title' => $category->title, 'link' => NewsfeedHelperRoute::getCategoryRoute($category->id));
 				$category = $category->getParent();
 			}
-			$path = array_reverse($path);
+ 			$path = array_reverse($path);
+			foreach($path as $item)
+			{
+				$pathway->addItem($item['title'], $item['link']);
+			}
 		}
 
 		if (empty($title)) {

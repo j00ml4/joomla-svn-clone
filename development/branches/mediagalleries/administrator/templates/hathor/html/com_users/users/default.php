@@ -69,7 +69,7 @@ $listDirn	= $this->state->get('list.direction');
 		<thead>
 			<tr>
 				<th class="checkmark-col">
-					<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(<?php echo count($this->items);?>)" />
+					<input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('TPL_HATHOR_CHECKMARK_ALL'); ?>" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_NAME', 'a.name', $listDirn, $listOrder); ?>
@@ -87,7 +87,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_GROUPS', 'group_names', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap width-15">
-					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_EMAIL', 'a.email', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'JGLOBAL_EMAIL', 'a.email', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap width-15">
 					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_LAST_VISIT_DATE', 'a.lastvisitDate', $listDirn, $listOrder); ?>

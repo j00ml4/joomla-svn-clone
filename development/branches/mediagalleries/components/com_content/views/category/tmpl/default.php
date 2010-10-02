@@ -10,7 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
@@ -42,9 +42,15 @@ $pageClass = $this->params->get('pageclass_sfx');
 		<div class="clr"></div>
 	</div>
 	<?php endif; ?>
-
-	<?php if (is_array($this->children) && count($this->children) > 0 && $this->params->get('maxLevel') !=0)  : ?>
-	<div class="jcat-children">
+<?php // var_dump($this->items );die; ?>
+	<div class="cat-items">			
+		<?php echo $this->loadTemplate('articles'); ?>
+	
+	</div>
+	
+	
+	<?php if (!empty($this->children[$this->category->id])&& $this->maxLevel != 0) : ?>
+	<div class="cat-children">
 		<h3>
 			<?php echo JTEXT::_('JGLOBAL_SUBCATEGORIES'); ?>
 		</h3>
@@ -54,8 +60,6 @@ $pageClass = $this->params->get('pageclass_sfx');
 	</div>
 	<?php endif; ?>
 
-	<div class="cat-items">
-		<?php echo $this->loadTemplate('articles'); ?>
-	</div>
+	
 
 </div>

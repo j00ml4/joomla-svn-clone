@@ -7,6 +7,9 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
+// no direct access
+defined('_JEXEC') or die;
+
 /**
  * Note: this view is intended only to be opened in a popup
  * @package		Joomla.Administrator
@@ -67,9 +70,9 @@ class ConfigControllerComponent extends JController
 			// Push up to three validation messages out to the user.
 			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
 				if (JError::isError($errors[$i])) {
-					$app->enqueueMessage($errors[$i]->getMessage(), 'notice');
+					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				} else {
-					$app->enqueueMessage($errors[$i], 'notice');
+					$app->enqueueMessage($errors[$i], 'warning');
 				}
 			}
 

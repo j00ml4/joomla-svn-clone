@@ -120,20 +120,19 @@ class ContactViewCategory extends JView
 			$this->params->def('page_heading', JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
 		}
 		$id = (int) @$menu->query['id'];
-		if($menu && $menu->query['view'] != 'contact' && $id != $this->category->id)
+		if ($menu && ($menu->query['option'] != 'com_contact' || $menu->query['view'] == 'contact' || $id != $this->category->id))
 		{
-			
-			$path = array($this->category->title => '');
+			$path = array(array('title' => $this->category->title, 'link' => ''));
 			$category = $this->category->getParent();
-			while($id != $category->id && $category->id > 1)
+			while (($menu->query['option'] != 'com_contact' || $menu->query['view'] == 'contact' || $id != $category->id) && $category->id > 1)
 			{
-				$path[$category->title] = ContactHelperRoute::getCategoryRoute($category->id);
+				$path[] = array('title' => $category->title, 'link' => ContactHelperRoute::getCategoryRoute($category->id));
 				$category = $category->getParent();
 			}
 			$path = array_reverse($path);
-			foreach($path as $title => $link)
+			foreach($path as $item)
 			{
-				$pathway->addItem($title, $link);
+				$pathway->addItem($item['title'], $item['link']);
 			}
 		}
 
@@ -171,7 +170,7 @@ class ContactViewCategory extends JView
 			}
 		}
 
-		// Add alternate feed link
+		// Add alternative feed link
 		if ($this->params->get('show_feed_link', 1) == 1)
 		{
 			$link	= '&format=feed&limitstart=';

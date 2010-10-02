@@ -9,8 +9,18 @@
 
 // no direct access
 defined('_JEXEC') or die;
-
+// Code to support edit links for weblinks
+// Create a shortcut for params.
+$params = &$this->item->params;
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
+JHtml::_('behavior.tooltip');
 JHtml::core();
+// Get the user object.
+$user = JFactory::getUser();
+// Check if user is allowed to add/edit based on weblinks permissinos.
+$canEdit = $user->authorise('core.edit', 'com_weblinks');
+$canCreate = $user->authorise('core.create', 'com_weblinks');
+$canEditState = $user->authorise('core.edit.state', 'com_weblinks');
 
 $n = count($this->items);
 $listOrder	= $this->state->get('list.ordering');
@@ -21,16 +31,16 @@ $listDirn	= $this->state->get('list.direction');
 	<p> <?php echo JText::_('COM_WEBLINKS_NO_WEBLINKS'); ?></p>
 <?php else : ?>
 
-<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
-	<fieldset class="filters">
-	<legend class="hidelabeltxt"><?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?></legend>
+<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">
 	<?php if ($this->params->get('show_pagination_limit')) : ?>
+		<fieldset class="filters">
+		<legend class="hidelabeltxt"><?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?></legend>
 		<div class="display-limit">
 			<?php echo JText::_('JGLOBAL_DISPLAY_NUM'); ?>&#160;
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
+		</fieldset>
 	<?php endif; ?>
-	</fieldset>
 
 	<table class="category">
 		<?php if ($this->params->get('show_headings')==1) : ?>
@@ -88,6 +98,15 @@ $listDirn	= $this->state->get('list.direction');
 							break;
 					}
 				?>
+				<?php // Code to add the edit link for the weblink. ?>
+	
+						<?php if ($canEdit) : ?>
+							<ul class="actions">
+								<li class="edit-icon">
+									<?php echo JHtml::_('icon.edit',$item, $params); ?>
+								</li>
+							</ul>
+						<?php endif; ?>		
 			</p>
 
 			<?php if (($this->params->get('show_link_description')) AND ($item->description !='')): ?>
@@ -105,19 +124,25 @@ $listDirn	= $this->state->get('list.direction');
 	<?php endforeach; ?>
 </tbody>
 </table>
-	<?php if ($this->params->get('show_pagination')) : ?>
-	 <div class="pagination">
-	<?php if ($this->params->def('show_pagination_results', 1)) : ?>
-						<p class="counter">
-							<?php echo $this->pagination->getPagesCounter(); ?>
-						</p>
-   <?php endif; ?>
-			<?php echo $this->pagination->getPagesLinks(); ?>
+
+	<?php // Code to add a link to submit a weblink. ?>
+	<?php if ($canCreate) : ?>
+		<span class="hasTip" title="<?php echo JText::_('COM_WEBLINKS_FORM_EDIT_WEBLINK'); ?>"><a href="<?php echo JRoute::_(WeblinksHelperRoute::getFormRoute(0));?>">
+		<img src="media/system/images/edit.png" alt="Edit"></img></a></span>
+	<?php  endif; ?>
+		<?php if ($this->params->get('show_pagination')) : ?>
+		 <div class="pagination">
+			<?php if ($this->params->def('show_pagination_results', 1)) : ?>
+				<p class="counter">
+					<?php echo $this->pagination->getPagesCounter(); ?>
+				</p>
+			<?php endif; ?>
+				<?php echo $this->pagination->getPagesLinks(); ?>
+			</div>
+		<?php endif; ?>
+		<div>
+			<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+			<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
 		</div>
-	<?php endif; ?>
-	<div>
-		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	</div>
-</form>
+	</form>
 <?php endif; ?>
