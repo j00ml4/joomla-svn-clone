@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: horizontal.php 18810 2010-09-08 09:26:35Z eddieajau $
+ * @version		$Id: horizontal.php 19022 2010-10-02 14:51:33Z infograf768 $
  * @package		Joomla.Site
  * @subpackage	mod_articles_news
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -19,7 +19,7 @@ defined('_JEXEC') or die;
 
 	if ($n > 1 && (($i < $n - 1) || $params->get('showLastSeparator'))) : ?>
 
-	<span class="article_separator">&#160;</span>
+	<span class="article-separator">&#160;</span>
 
 	<?php endif; ?>
 	</li>
