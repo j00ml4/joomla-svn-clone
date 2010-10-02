@@ -151,13 +151,13 @@ p.error {
 	font-weight: bold;
 }
 
-.warning {
+p.warning {
 	color: red;
 	font-weight: bold;
 	font-size: 1.091em;
 }
 
-.nowarning {
+p.nowarning {
 	color: #333;
 	font-weight: bold;
 	font-size: 1.091em;
@@ -520,6 +520,9 @@ textarea#mm_message {
 }
 
 /* -- PANE SLIDER STYLES ----------------------------- */
+.pane-sliders {
+	margin: 18px 0 0 0;
+}
 .pane-sliders .title {
 	margin: 0;
 	padding: 2px 2px 2px 5px;
@@ -810,6 +813,10 @@ ul.adminformlist li {
 	list-style: none;
 }
 
+ul.adminformlist pre {
+	font-size:1.3em;
+}
+
 fieldset label {
 	float: left;
 	clear: left;
@@ -860,7 +867,7 @@ fieldset.adminform ul.checklist li label {
 
 input.readonly {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1.091em;;
+	font-size: 1.091em;
 	padding-top: 1px;
 	border: 0;
 	font-weight: bold;
@@ -870,7 +877,7 @@ input.readonly {
 #jform_id,
 span.readonly {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 1.091em;;
+	font-size: 1.091em;
 	margin:5px 5px 5px 0;
 	font-weight: bold;
 	float: left;
@@ -1131,7 +1138,7 @@ fieldset.adminform-legacy fieldset.radio {
 	float: left;
 	padding: 0;
 	margin: 0 0 5px 5px;
-	clear: right;
+	/* clear: right; */
 }
 
 fieldset.adminform fieldset.radio label,
@@ -1140,6 +1147,7 @@ fieldset.panelform fieldset.radio label {
 	float: left;
 	clear: none;
 	width: 40px;
+	display:inline;
 }
 
 fieldset.panelform-legacy label,
@@ -1319,6 +1327,11 @@ fieldset.uploadform label {
 span.gi {
 	color: #d7d7d7;
 	font-weight: bold;
+	margin-right: 5px;
+}
+
+span.gtr {
+	visibility:hidden;
 	margin-right: 5px;
 }
 
@@ -1734,78 +1747,23 @@ a img.calendar {
 /* -- SYSTEM MESSAGE STYLES ----------------------------- */
 
 #system-message dd.message ul {
-	background: #C3D2E5 url(../images/notice-info.png) 4px center no-repeat;
+	background-image: url(../images/notice-info.png);
+	background-position: 5px 50%;
 }
 
 #system-message dd.error ul {
-	color: #c00;
-	background: #E6C0C0 url(../images/notice-alert.png) 4px top no-repeat;
-	border-top: 3px solid #DE7A7B;
-	border-bottom: 3px solid #DE7A7B;
+	background-image: url(../images/notice-alert.png);
+	background-position: 5px 50%;
+}
+
+#system-message dd.warning ul {
+	background-image: url(../images/notice-note.png);
+	background-position: 5px 50%;
 }
 
 #system-message dd.notice ul {
-	color: #c00;
-	background: #EFE7B8 url(../images/notice-note.png) 4px top no-repeat;
-	border-top: 3px solid #F0DC7E;
-	border-bottom: 3px solid #F0DC7E;
-}
-
-/* -- SYSTEM MESSAGES ---- */
-
-/* Relocated from system.css */
-#system-message {
-	margin-bottom: 10px;
-	padding: 0;
-}
-
-#system-message dt {
-	font-weight: bold;
-}
-
-#system-message dd {
-	margin: 0;
-	font-weight: bold;
-	text-indent: 30px;
-}
-
-#system-message dd ul {
-	color: #0055BB;
-	margin-bottom: 10px;
-	list-style: none;
-	padding: 10px;
-	border-top: 3px solid #84A7DB;
-	border-bottom: 3px solid #84A7DB;
-}
-
-#system-message dt.message {
-	display: none;
-}
-
-#system-message dd.message {
-
-}
-
-#system-message dt.error {
-	display: none;
-}
-
-#system-message dd.error ul {
-	color: #c00;
-	background-color: #E6C0C0;
-	border-top: 3px solid #DE7A7B;
-	border-bottom: 3px solid #DE7A7B;
-}
-
-#system-message dt.notice {
-	display: none;
-}
-
-#system-message dd.notice ul {
-	color: #c00;
-	background-color: #EFE7B8;
-	border-top: 3px solid #F0DC7E;
-	border-bottom: 3px solid #F0DC7E;
+	background-image: url(../images/notice-note.png);
+	background-position: 5px 50%;
 }
 
 /* -- LOGIN STYLES ----------------------------- */
@@ -1832,8 +1790,7 @@ p {
 
 #section-box {
 	float: right;
-	width: auto;
-	max-width: 300px;
+	width: 300px;
 	margin-left: 10px;
 	margin-right: 10px;
 	background-color: #fff;
@@ -1892,15 +1849,6 @@ select#lang {
 
 p#login-error-message {
 
-}
-
-/* OpenID icon style */
-input.system-openid,input.com-system-openid {
-	background: url(http://openid.net/login-bg.gif) no-repeat;
-	background-color: #fff;
-	background-position: 0 50%;
-	color: #000;
-	padding-left: 18px;
 }
 
 /* -- JGRID STYLES ----------------------------- */
@@ -2015,6 +1963,7 @@ a.jgrid:hover {	text-decoration: none;}
 .icon-32-css						{	background-image: url(../images/toolbar/icon-32-css.png);	}
 .icon-32-menus						{	background-image: url(../images/toolbar/icon-32-menu.png);	}
 .icon-32-publish					{	background-image: url(../images/toolbar/icon-32-publish.png);	}
+.icon-32-unblock					{	background-image: url(../images/toolbar/icon-32-unblock.png);	}
 .icon-32-unpublish					{	background-image: url(../images/toolbar/icon-32-unpublish.png);	}
 .icon-32-restore					{	background-image: url(../images/toolbar/icon-32-revert.png);	}
 .icon-32-trash						{	background-image: url(../images/toolbar/icon-32-trash.png);	}
@@ -2036,12 +1985,16 @@ a.jgrid:hover {	text-decoration: none;}
 .icon-48-generic					{	background-image: url(../images/header/icon-48-generic.png);	}
 .icon-48-banners					{	background-image: url(../images/header/icon-48-banner.png);	}
 .icon-48-banners-categories			{	background-image: url(../images/header/icon-48-banner-categories.png);	}
+.icon-48-banners-category-edit		{	background-image: url(../images/header/icon-48-banner-categories.png);	}
+.icon-48-banners-category-add		{	background-image: url(../images/header/icon-48-category-add.png);	}
 .icon-48-banners-clients			{	background-image: url(../images/header/icon-48-banner-client.png);	}
 .icon-48-banners-tracks				{	background-image: url(../images/header/icon-48-banner-tracks.png);	}
 .icon-48-checkin					{	background-image: url(../images/header/icon-48-checkin.png);	}
 .icon-48-clear						{	background-image: url(../images/header/icon-48-clear.png);	}
 .icon-48-contact					{	background-image: url(../images/header/icon-48-contacts.png);	}
 .icon-48-contact-categories			{	background-image: url(../images/header/icon-48-contacts-categories.png);	}
+.icon-48-contact-category-edit		{	background-image: url(../images/header/icon-48-contacts-categories.png);	}
+.icon-48-contact-category-add		{	background-image: url(../images/header/icon-48-category-add.png);	}
 .icon-48-purge						{	background-image: url(../images/header/icon-48-purge.png);	}
 .icon-48-cpanel						{	background-image: url(../images/header/icon-48-cpanel.png);	}
 .icon-48-config						{	background-image: url(../images/header/icon-48-config.png);	}
@@ -2054,6 +2007,8 @@ a.jgrid:hover {	text-decoration: none;}
 .icon-48-menu-add					{	background-image: url(../images/header/icon-48-menu-add.png);	}
 .icon-48-menumgr					{	background-image: url(../images/header/icon-48-menumgr.png);	}
 .icon-48-newsfeeds-categories		{	background-image: url(../images/header/icon-48-newsfeeds-cat.png);	}
+.icon-48-newsfeeds-category-edit	{	background-image: url(../images/header/icon-48-newsfeeds-cat.png);	}
+.icon-48-newsfeeds-category-add		{	background-image: url(../images/header/icon-48-category-add.png);	}
 .icon-48-trash						{	background-image: url(../images/header/icon-48-trash.png);	}
 .icon-48-user						{	background-image: url(../images/header/icon-48-user.png);	}
 .icon-48-user-add					{	background-image: url(../images/header/icon-48-user-add.png);	}
@@ -2074,6 +2029,9 @@ a.jgrid:hover {	text-decoration: none;}
 .icon-48-article-add				{	background-image: url(../images/header/icon-48-article-add.png);	}
 .icon-48-article-edit				{	background-image: url(../images/header/icon-48-article-edit.png);	}
 .icon-48-article					{	background-image: url(../images/header/icon-48-article.png);	}
+.icon-48-content-categories			{	background-image: url(../images/header/icon-48-category.png);	}
+.icon-48-content-category-edit		{	background-image: url(../images/header/icon-48-category.png);	}
+.icon-48-content-category-add		{	background-image: url(../images/header/icon-48-category-add.png);	}
 .icon-48-categories					{	background-image: url(../images/header/icon-48-category.png);	}
 .icon-48-category-add				{	background-image: url(../images/header/icon-48-category-add.png);	}
 .icon-48-install					{	background-image: url(../images/header/icon-48-extension.png);	}
@@ -2088,6 +2046,8 @@ a.jgrid:hover {	text-decoration: none;}
 .icon-48-newsfeeds-cat				{	background-image: url(../images/header/icon-48-newsfeeds-cat.png);	}
 .icon-48-weblinks					{	background-image: url(../images/header/icon-48-links.png);	}
 .icon-48-weblinks-categories		{	background-image: url(../images/header/icon-48-links-cat.png);	}
+.icon-48-weblinks-category-edit		{	background-image: url(../images/header/icon-48-links-cat.png);	}
+.icon-48-weblinks-category-add		{	background-image: url(../images/header/icon-48-category-add.png);	}
 
 /* -- BASIC MENU STYLES ----------------------------- */
 
@@ -2760,7 +2720,6 @@ table#acl-config th {
 
 table#acl-config thead th,
 table#acl-config td {
-	width: 10px;
 	text-align:center;
 	vertical-align:middle;
 	height: 30px;
@@ -2783,7 +2742,6 @@ table#acl-config td select {
 	font-size: 1.091em;
 	margin: auto 0;
 }
-
 .acl-groups {
 	font-size: 1.091em;
 	font-weight: normal;

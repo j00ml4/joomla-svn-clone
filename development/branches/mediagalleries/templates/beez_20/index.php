@@ -33,6 +33,7 @@ $templateparams     = $app->getTemplate(true)->params;
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>" >
         <head>
                 <jdoc:include type="head" />
+                <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/system.css" type="text/css" />
                 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/template.css" type="text/css" />
                 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/position.css" type="text/css" media="screen,projection" />
                 <link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/layout.css" type="text/css" media="screen,projection" />
@@ -82,7 +83,6 @@ $templateparams     = $app->getTemplate(true)->params;
                 <![endif]-->
                 <script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/beez_20/javascript/md_stylechanger.js"></script>
                 <script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/beez_20/javascript/hide.js"></script>
-                <script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/beez_20/javascript/html5.js"></script>
 
                 <script type="text/javascript">
                         var big ='<?php echo $this->params->get('wrapperLarge');?>%';
@@ -142,9 +142,9 @@ $templateparams     = $app->getTemplate(true)->params;
                         </div><!-- end header -->
                         <div id="<?php echo $showRightColumn ? 'contentarea2' : 'contentarea'; ?>">
                                         <div id="breadcrumbs">
-                                                <p>
+                                            
                                                         <jdoc:include type="modules" name="position-2" />
-                                                </p>
+                                            
                                         </div>
 
                                         <?php if ($navposition=='left' AND $showleft) : ?>

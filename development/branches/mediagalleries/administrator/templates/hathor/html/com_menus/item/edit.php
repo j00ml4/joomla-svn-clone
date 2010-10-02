@@ -17,13 +17,17 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHTML::_('behavior.modal');
+$canDo		= MenusHelper::getActions();
 ?>
 
 <script type="text/javascript">
-	function submitbutton(task)
+	function submitbutton(task, type)
 	{
-		if (task == 'item.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
-			submitform(task);
+		if (task == 'item.setType') {
+			document.id('item-form').elements['jform[type]'].value = type;
+			Joomla.submitform(task, document.getElementById('item-form'));
+		} else if (task == 'item.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
+			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {
 			// special case for modal popups validation response
 			$$('#item-form .modal-value.invalid').each(function(field){
@@ -43,12 +47,12 @@ JHTML::_('behavior.modal');
 <div class="col main-section">
 	<fieldset class="adminform">
 		<legend><?php echo JText::_('COM_MENUS_ITEM_DETAILS');?></legend>
-			<ul class="adminformlist">
-				<li><?php echo $this->form->getLabel('title'); ?>
-				<?php echo $this->form->getInput('title'); ?></li>
+			<ul class="adminformlist">				
 
 				<li><?php echo $this->form->getLabel('type'); ?>
 				<?php echo $this->form->getInput('type'); ?></li>
+                <li><?php echo $this->form->getLabel('title'); ?>
+				<?php echo $this->form->getInput('title'); ?></li>
 
 				<?php if ($this->item->type =='url'): ?>
 					<?php $this->form->setFieldAttribute('link','readonly','false');?>
@@ -66,10 +70,12 @@ JHTML::_('behavior.modal');
 					<li><?php echo $this->form->getLabel('link'); ?>
 					<?php echo $this->form->getInput('link'); ?></li>
 				<?php endif ?>
-
-				<li><?php echo $this->form->getLabel('published'); ?>
-				<?php echo $this->form->getInput('published'); ?></li>
-
+				
+				<?php if ($canDo->get('core.edit.state')) : ?>	
+					<li><?php echo $this->form->getLabel('published'); ?>
+					<?php echo $this->form->getInput('published'); ?></li>
+				<?php endif ?>
+				
 				<li><?php echo $this->form->getLabel('access'); ?>
 				<?php echo $this->form->getInput('access'); ?></li>
 
@@ -81,10 +87,10 @@ JHTML::_('behavior.modal');
 
 				<li><?php echo $this->form->getLabel('browserNav'); ?>
 				<?php echo $this->form->getInput('browserNav'); ?></li>
-
-				<li><?php echo $this->form->getLabel('home'); ?>
-				<?php echo $this->form->getInput('home'); ?></li>
-
+				<?php if ($canDo->get('core.edit.state')) : ?>	
+					<li><?php echo $this->form->getLabel('home'); ?>
+					<?php echo $this->form->getInput('home'); ?></li>
+				<?php endif ?>
 				<li><?php echo $this->form->getLabel('language'); ?>
 				<?php echo $this->form->getInput('language'); ?></li>
 

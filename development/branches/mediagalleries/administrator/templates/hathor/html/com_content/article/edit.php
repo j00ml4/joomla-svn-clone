@@ -17,6 +17,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
+$canDo		= ContentHelper::getActions();
 ?>
 
 <script type="text/javascript">
@@ -24,7 +25,7 @@ JHtml::_('behavior.keepalive');
 	{
 		if (task == 'article.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
 			<?php echo $this->form->getField('articletext')->save(); ?>
-			submitform(task);
+			Joomla.submitform(task, document.getElementById('item-form'));
 		}
 		else {
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
@@ -45,20 +46,26 @@ JHtml::_('behavior.keepalive');
 		<li><?php echo $this->form->getLabel('alias'); ?>
 		<?php echo $this->form->getInput('alias'); ?></li>
 
-		<li><?php echo $this->form->getLabel('catid'); ?>
-		<?php echo $this->form->getInput('catid'); ?></li>
+		<?php if ($canDo->get('core.create')) { ?>
+			<li><?php echo $this->form->getLabel('catid'); ?>
+			<?php echo $this->form->getInput('catid'); ?></li>
+		<?php }?>
 
-		<li><?php echo $this->form->getLabel('state'); ?>
-		<?php echo $this->form->getInput('state'); ?></li>
-
+		<?php if ($canDo->get('core.edit.state')) { ?>		
+			<li><?php echo $this->form->getLabel('state'); ?>
+			<?php echo $this->form->getInput('state'); ?></li>
+		<?php }?>
+		
 		<li><?php echo $this->form->getLabel('access'); ?>
 		<?php echo $this->form->getInput('access'); ?></li>
 
 		<li><?php echo $this->form->getLabel('language'); ?>
 		<?php echo $this->form->getInput('language'); ?></li>
 
-		<li><?php echo $this->form->getLabel('featured'); ?>
-		<?php echo $this->form->getInput('featured'); ?></li>
+		<?php if ($canDo->get('core.edit.state')) { ?>	
+			<li><?php echo $this->form->getLabel('featured'); ?>
+			<?php echo $this->form->getInput('featured'); ?></li>
+		<?php }?>
 
 		<li><?php echo $this->form->getLabel('id'); ?>
 		<?php echo $this->form->getInput('id'); ?></li>
@@ -145,6 +152,7 @@ JHtml::_('behavior.keepalive');
 		<?php echo JHtml::_('sliders.end'); ?>
 
 		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="return" value="<?php echo JRequest::getCmd('return');?>" />
 		<?php echo JHtml::_('form.token'); ?>
 	</div>
 </form>

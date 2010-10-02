@@ -42,7 +42,7 @@ abstract class MediaHelper
 	 */
 	public static function canUpload($file, &$err)
 	{
-		$params = &JComponentHelper::getParams('com_media');
+		$params = JComponentHelper::getParams('com_media');
 
 		if (empty($file['name'])) {
 			$err = 'COM_MEDIA_ERROR_UPLOAD_INPUT';
@@ -107,7 +107,7 @@ abstract class MediaHelper
 						$err = 'COM_MEDIA_ERROR_WARNINVALID_MIME';
 						return false;
 					}
-				} else if (!$user->authorize('core.manage')) {
+				} else if (!$user->authorise('core.manage')) {
 					$err = 'COM_MEDIA_ERROR_WARNNOTADMIN';
 					return false;
 				}

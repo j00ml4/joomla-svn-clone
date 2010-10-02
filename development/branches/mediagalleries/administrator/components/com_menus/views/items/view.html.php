@@ -123,10 +123,17 @@ class MenusViewItems extends JView
 
 		// Levels filter.
 		$options	= array();
-		$options[]	= JHtml::_('select.option', '1');
-		$options[]	= JHtml::_('select.option', '2');
-		$options[]	= JHtml::_('select.option', '3');
-		$options[]	= JHtml::_('select.option', '4');
+		$options[]	= JHtml::_('select.option', '1', JText::_('J1'));
+		$options[]	= JHtml::_('select.option', '2', JText::_('J2'));
+		$options[]	= JHtml::_('select.option', '3', JText::_('J3'));
+		$options[]	= JHtml::_('select.option', '4', JText::_('J4'));
+		$options[]	= JHtml::_('select.option', '5', JText::_('J5'));
+		$options[]	= JHtml::_('select.option', '6', JText::_('J6'));
+		$options[]	= JHtml::_('select.option', '7', JText::_('J7'));
+		$options[]	= JHtml::_('select.option', '8', JText::_('J8'));
+		$options[]	= JHtml::_('select.option', '9', JText::_('J9'));
+		$options[]	= JHtml::_('select.option', '10', JText::_('J10'));
+
 		$this->assign('f_levels', $options);
 
 		parent::display($tpl);
@@ -140,32 +147,43 @@ class MenusViewItems extends JView
 	 */
 	protected function addToolbar()
 	{
+		require_once JPATH_COMPONENT.'/helpers/menus.php';
+
+		$canDo	= MenusHelper::getActions($this->state->get('filter.parent_id'));
+
 		JToolBarHelper::title(JText::_('COM_MENUS_VIEW_ITEMS_TITLE'), 'menumgr.png');
 
-
-		JToolBarHelper::custom('item.add', 'new.png', 'new_f2.png','JTOOLBAR_NEW', false);
-		JToolBarHelper::custom('item.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
-
-		JToolBarHelper::divider();
-
-		JToolBarHelper::custom('items.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
-		JToolBarHelper::custom('items.unpublish', 'unpublish.png', 'unpublish_f2.png','JTOOLBAR_UNPUBLISH', true);
-		if ($this->state->get('filter.published') == -2) {
-			JToolBarHelper::divider();
-			JToolBarHelper::deleteList('', 'items.delete','JTOOLBAR_EMPTY_TRASH');
-		} else {
-			JToolBarHelper::divider();
-			JToolBarHelper::trash('items.trash','JTOOLBAR_TRASH');
+		if ($canDo->get('core.create')) {
+			JToolBarHelper::custom('item.add', 'new.png', 'new_f2.png','JTOOLBAR_NEW', false);
 		}
-		if(JFactory::getUser()->authorise('core.manage','com_checkin')) {
+		if ($canDo->get('core.edit')) {
+			JToolBarHelper::custom('item.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
+		}
+		if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::divider();
+			JToolBarHelper::custom('items.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::custom('items.unpublish', 'unpublish.png', 'unpublish_f2.png','JTOOLBAR_UNPUBLISH', true);
+		}
+		if (JFactory::getUser()->authorise('core.admin')) {
+			JToolBarHelper::divider();
 			JToolBarHelper::custom('items.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
 		}
-		JToolBarHelper::makeDefault('items.setDefault', 'COM_MENUS_TOOLBAR_SET_HOME');
-
-		JToolBarHelper::divider();
-		JToolBarHelper::custom('items.rebuild', 'refresh.png', 'refresh_f2.png', 'JToolbar_Rebuild', false);
-
-		JToolBarHelper::divider();
+		
+		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete')) {
+			JToolBarHelper::deleteList('', 'items.delete','JTOOLBAR_EMPTY_TRASH');
+		}
+		else if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::trash('items.trash','JTOOLBAR_TRASH');
+		}
+		
+		if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::makeDefault('items.setDefault', 'COM_MENUS_TOOLBAR_SET_HOME');
+			JToolBarHelper::divider();
+		}
+		if (JFactory::getUser()->authorise('core.admin')) {
+			JToolBarHelper::custom('items.rebuild', 'refresh.png', 'refresh_f2.png', 'JToolbar_Rebuild', false);
+			JToolBarHelper::divider();
+		}
 		JToolBarHelper::help('JHELP_MENUS_MENU_ITEM_MANAGER');
 	}
 }

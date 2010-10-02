@@ -22,14 +22,14 @@ $params = $this->state->get('params');
 	function submitbutton(task) {
 		if (task == 'weblink.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
 			<?php echo $this->form->getField('description')->save(); ?>
-			submitform(task);
+			Joomla.submitform(task);
 		}
 		else {
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
 </script>
-<div class="<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
+<div class="edit<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 <?php if ($this->params->def('show_page_heading', 1)) : ?>
 <h1>
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
@@ -38,10 +38,12 @@ $params = $this->state->get('params');
 <form action="<?php echo JRoute::_('index.php?option=com_weblinks'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<fieldset>
 		<legend><?php echo JText::_('COM_WEBLINKS_LINK'); ?></legend>
+
 			<div class="formelm">
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
 			</div>
+
 			<div class="formelm">
 			<?php echo $this->form->getLabel('catid'); ?>
 			<?php echo $this->form->getInput('catid'); ?>
@@ -60,22 +62,23 @@ $params = $this->state->get('params');
 			<?php echo $this->form->getLabel('language'); ?>
 			<?php echo $this->form->getInput('language'); ?>
 			</div>
-			<div class="formelm">
+			<div class="formelm-buttons">
+			<button type="button" onclick="submitbutton('weblink.save')">
+				<?php echo JText::_('JSAVE') ?>
+			</button>
+			<button type="button" onclick="submitbutton('weblink.cancel')">
+				<?php echo JText::_('JCANCEL') ?>
+			</button>		
+			</div>			
+			<div>
 			<?php echo $this->form->getLabel('description'); ?>
 			<?php echo $this->form->getInput('description'); ?>
 			</div>
 	</fieldset>
-	<fieldset>
-		<div class="formelm_buttons">
-		<button type="button" onclick="submitbutton('weblink.save')">
-			<?php echo JText::_('JSAVE') ?>
-		</button>
-		<button type="button" onclick="submitbutton('weblink.cancel')">
-			<?php echo JText::_('JCANCEL') ?>
-		</button>
+
 		<input type="hidden" name="task" value="" />
 		<?php echo JHTML::_( 'form.token' ); ?>
 		</div>
-	</fieldset>
+
 </form>
 </div>

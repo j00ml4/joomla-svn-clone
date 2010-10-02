@@ -53,7 +53,7 @@ class WeblinksViewCategory extends JView
 
 		if($parent == false)
 		{
-			//TODO Raise error for missing parent category here
+			return JError::raiseWarning(404, JText::_('JGLOBAL_CATEGORY_NOT_FOUND'));
 		}
 
 		// Check whether category access level allows access.
@@ -116,20 +116,20 @@ class WeblinksViewCategory extends JView
 			$this->params->def('page_heading', JText::_('COM_WEBLINKS_DEFAULT_PAGE_TITLE'));
 		}
 		$id = (int) @$menu->query['id'];
-		if($menu && $menu->query['view'] != 'weblink' && $id != $this->category->id)
+		if ($menu && ($menu->query['option'] != 'com_weblinks' || $id != $this->category->id))
 		{
 			$this->params->set('page_subheading', $this->category->title);
-			$path = array($this->category->title => '');
+			$path = array(array('title' => $this->category->title, 'link' => ''));
 			$category = $this->category->getParent();
-			while($id != $category->id && $category->id > 1)
+			while (($menu->query['option'] != 'com_weblinks' || $id != $category->id) && $category->id > 1)
 			{
-				$path[$category->title] = WeblinksHelperRoute::getCategoryRoute($category->id);
+				$path[] = array('title' => $category->title, 'link' => WeblinksHelperRoute::getCategoryRoute($category->id));
 				$category = $category->getParent();
 			}
 			$path = array_reverse($path);
-			foreach($path as $title => $link)
+			foreach($path as $item)
 			{
-				$pathway->addItem($title, $link);
+				$pathway->addItem($item['title'], $item['link']);
 			}
 		}
 
@@ -167,7 +167,7 @@ class WeblinksViewCategory extends JView
 		}
 
 
-		// Add alternate feed link
+		// Add alternative feed link
 		if ($this->params->get('show_feed_link', 1) == 1)
 		{
 			$link	= '&format=feed&limitstart=';

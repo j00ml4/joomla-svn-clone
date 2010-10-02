@@ -23,7 +23,7 @@ $params = $this->state->get('params');
 	function submitbutton(task) {
 		if (task == 'article.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
 			<?php echo $this->form->getField('text')->save(); ?>
-			submitform(task);
+			Joomla.submitform(task);
 		}
 		else {
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
@@ -53,7 +53,7 @@ $params = $this->state->get('params');
 			</div>
 		<?php endif; ?>
 
-			<div class="formelm_buttons">
+			<div class="formelm-buttons">
 			<button type="button" onclick="submitbutton('article.save')">
 				<?php echo JText::_('JSAVE') ?>
 			</button>
@@ -83,6 +83,12 @@ $params = $this->state->get('params');
 		<?php echo $this->form->getLabel('state'); ?>
 		<?php echo $this->form->getInput('state'); ?>
 		</div>
+		
+		<div class="formelm">
+		<?php echo $this->form->getLabel('featured'); ?>
+		<?php echo $this->form->getInput('featured'); ?>
+		</div>
+		
 		<div class="formelm">
 		<?php echo $this->form->getLabel('publish_up'); ?>
 		<?php echo $this->form->getInput('publish_up'); ?>
@@ -106,7 +112,7 @@ $params = $this->state->get('params');
 
 	<fieldset>
 		<legend><?php echo JText::_('JFIELD_LANGUAGE_LABEL'); ?></legend>
-		<div class="formelm_area">
+		<div class="formelm-area">
 		<?php echo $this->form->getLabel('language'); ?>
 		<?php echo $this->form->getInput('language'); ?>
 		</div>
@@ -114,19 +120,16 @@ $params = $this->state->get('params');
 
 	<fieldset>
 		<legend><?php echo JText::_('COM_CONTENT_METADATA'); ?></legend>
-		<div class="formelm_area">
+		<div class="formelm-area">
 		<?php echo $this->form->getLabel('metadesc'); ?>
 		<?php echo $this->form->getInput('metadesc'); ?>
 		</div>
-		<div class="formelm_area">
+		<div class="formelm-area">
 		<?php echo $this->form->getLabel('metakey'); ?>
 		<?php echo $this->form->getInput('metakey'); ?>
 		</div>
-	</fieldset>
-
-	<div>
 		<input type="hidden" name="task" value="" />
 		<?php echo JHTML::_( 'form.token' ); ?>
-	</div>
+	</fieldset>	
 </form>
 </div>

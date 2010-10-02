@@ -25,10 +25,10 @@ defined('_JEXEC') or die;
 					<fieldset title="<?php echo JText::_('COM_MEDIA_DESCFTPTITLE'); ?>">
 						<legend><?php echo JText::_('COM_MEDIA_DESCFTPTITLE'); ?></legend>
 						<?php echo JText::_('COM_MEDIA_DESCFTP'); ?>
-						<label for="username"><?php echo JText::_('JGLOBAL_USERNAME'); ?>:</label>
+						<label for="username"><?php echo JText::_('JGLOBAL_USERNAME'); ?></label>
 						<input type="text" id="username" name="username" class="inputbox" size="70" value="" />
 
-						<label for="password"><?php echo JText::_('JGLOBAL_PASSWORD'); ?>:</label>
+						<label for="password"><?php echo JText::_('JGLOBAL_PASSWORD'); ?></label>
 						<input type="password" id="password" name="password" class="inputbox" size="70" value="" />
 					</fieldset>
 				</form>
@@ -52,15 +52,14 @@ defined('_JEXEC') or die;
 						<input class="update-folder" type="hidden" name="folderbase" id="folderbase" value="<?php echo $this->state->folder; ?>" />
 						<button type="submit"><?php echo JText::_('COM_MEDIA_CREATE_FOLDER'); ?></button>
 					</div>
-
+					<?php echo JHtml::_('form.token'); ?>
 				</fieldset>
-				<?php echo JHtml::_('form.token'); ?>
 			</form>
 
 			<!-- File Upload Form -->
 			<form action="<?php echo JURI::base(); ?>index.php?option=com_media&amp;task=file.upload&amp;tmpl=component&amp;<?php echo $this->session->getName().'='.$this->session->getId(); ?>&amp;<?php echo JUtility::getToken();?>=1&amp;format=json" id="uploadForm" name="uploadForm" method="post" enctype="multipart/form-data">
 				<fieldset id="uploadform">
-										<legend><?php echo JText::_('COM_MEDIA_UPLOAD_FILES'); ?> (<?php echo JText::_('COM_MEDIA_MAXIMUM_SIZE'); ?>:&nbsp;<?php echo round($this->config->get('upload_maxsize') / (1024 * 1024) , 2 ); ?> MB)</legend>
+										<legend><?php echo JText::_('COM_MEDIA_UPLOAD_FILES'); ?> (<?php echo JText::_('COM_MEDIA_MAXIMUM_SIZE'); ?>:&#160;<?php echo round($this->config->get('upload_maxsize') / (1024 * 1024) , 2 ); ?> MB)</legend>
 					<fieldset id="upload-noflash" class="actions">
 						<label for="upload-file" class="hidelabeltxt"><?php echo JText::_('COM_MEDIA_UPLOAD_FILE'); ?></label>
 						<input type="file" id="upload-file" name="Filedata" />
@@ -84,9 +83,9 @@ defined('_JEXEC') or die;
 					<ul class="upload-queue" id="upload-queue">
 						<li style="display:none;" />
 					</ul>
+					<input type="hidden" name="return-url" value="<?php echo base64_encode('index.php?option=com_media'); ?>" />
+					<input type="hidden" name="format" value="html" />
 				</fieldset>
-				<input type="hidden" name="return-url" value="<?php echo base64_encode('index.php?option=com_media'); ?>" />
-				<input type="hidden" name="format" value="html" />
 			</form>
 		</td>
 	</tr>

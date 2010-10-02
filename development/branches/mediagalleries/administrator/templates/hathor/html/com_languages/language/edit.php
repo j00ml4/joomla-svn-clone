@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit.php 18290 2010-07-29 02:27:05Z ian $
+ * @version		$Id: edit.php 18871 2010-09-13 14:27:48Z chdemko $
  * @package		Joomla.Administrator
  * @subpackage	com_languages
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -13,16 +13,15 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+$canDo = LanguagesHelper::getActions();
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'language.cancel' || document.formvalidator.isValid(document.id('language-form'))) {
-			submitform(task);
+			Joomla.submitform(task, document.getElementByID('language-form'));
 		}
 	}
-// -->
 </script>
 
 <form action="<?php JRoute::_('index.php?option=com_languages'); ?>" method="post" name="adminForm" id="language-form" class="form-validate">
@@ -48,9 +47,11 @@ JHtml::_('behavior.formvalidation');
 			<?php echo $this->form->getLabel('lang_code'); ?>
 			<?php echo $this->form->getInput('lang_code'); ?>
 
-			<?php echo $this->form->getLabel('published'); ?>
-			<?php echo $this->form->getInput('published'); ?>
-
+			<?php if ($canDo->get('core.edit.state')) : ?>
+				<?php echo $this->form->getLabel('published'); ?>
+				<?php echo $this->form->getInput('published'); ?>
+			<?php endif ?>
+			
 			<?php echo $this->form->getLabel('description'); ?>
 			<?php echo $this->form->getInput('description'); ?>
 

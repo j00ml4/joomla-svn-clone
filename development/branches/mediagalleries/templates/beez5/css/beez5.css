@@ -628,17 +628,24 @@ min-height:300px
 	border:solid 0;
 }
 
-ul#archive-items li
+ul#archive-items li.row0,
+ul#archive-items li.row1
 {
-	border-bottom:solid 1px #ddd
+	border-bottom:solid 1px #ddd 
+}
+
+.archive #adminForm fieldset
+{
+	border:0;
+	padding:0;
+	margin:20px 0
 }
 
 /* ++++++++++++++  images  ++++++++++++++ */
 
 .image-left
 {
-	border:solid 1px #ddd;
-		padding:2px
+		padding:2px;
 }
 
 .image-right
@@ -685,8 +692,8 @@ ul#archive-items li
 .items-row h2 a:visited,
 .items-leading h2 a:link,
 .items-leading h2 a:visited
-{color:#7BA428 !important;
-text-decoration:underline !important
+{
+	color:#7BA428 !important;
 }
 
 
@@ -719,7 +726,7 @@ text-decoration:none !important
 
 #main h2 a
 {
-	color:#333
+	color:#333;
 }
 
 
@@ -944,7 +951,7 @@ ul.newsflash-horiz li h4
 
 /* ++++++++++++++  login  ++++++++++++++ */
 
-#form-login .inputbox
+#login-form .inputbox
 {
 	border:solid 1px #ddd;
 	background:url(../images/content_bg.gif) repeat-x;
@@ -1098,12 +1105,12 @@ dl.search-results
 	background:#f5f5f5;
 }
 
-dl.search_results dt.result-title
+dl.search-results dt.result-title
 {
 	border-top:dotted 1px #ddd
 }
 
-dl.search_results dd.result-created
+dl.search-results dd.result-created
 {
 	border-bottom:solid 5px #fff;
 }
@@ -1321,7 +1328,7 @@ form#adminForm
 	border:solid 0px #000
 }
 
-form#adminForm fieldset
+.edit form#adminForm fieldset
 {
 	border:solid 1px #ddd
 }
@@ -1349,7 +1356,7 @@ table.pagenav td
 	margin: 20px 0
 }
 
-.jform-required
+.form-required
 {
 	font-weight:bold;
 	margin:10px 0;
@@ -1407,19 +1414,21 @@ table.pagenav td
 	background: url(../images/nav_level_1.gif) repeat-x ;
 }
 
-.panel .jcontact-form,
+.panel .contact-form,
 .panel  .contact-miscinfo
 {
 	padding:10px
 }
 
-.contact .panel .jcontact-form form,
-.contact .panel .jcontact-address
+.contact .panel .contact-form form,
+.contact .panel .contact-address
 {
 	margin:20px 0 0 0
 }
 
-
+.categories-list .category-desc ul li
+{list-style-type:square
+}
 /* tabs */
 
 div.current
@@ -1427,3 +1436,6 @@ div.current
 
 	background: url(../images/nav_level_1.gif) repeat-x ;
 }
+
+#close a
+{text-decoration:none}

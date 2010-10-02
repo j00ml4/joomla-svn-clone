@@ -164,29 +164,6 @@ class UsersModelRegistration extends JModelForm
 			return false;
 		}
 
-		/*
-		// TODO: Should we send a confirming email for activation? We don't in 1.5.
-		// Compile the notification mail values.
-		$data = $user->getProperties();
-		$data['fromname'] = $config->get('fromname');
-		$data['mailfrom'] = $config->get('mailfrom');
-		$data['sitename'] = $config->get('sitename');
-
-		// Load the message template and bind the data.
-		jimport('joomla.utilities.simpletemplate');
-		$template = JxSimpleTemplate::getInstance('com_users.registration.confirm');
-		$template->bind($data);
-
-		// Send the registration e-mail.
-		$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $data['email'], $template->getTitle(), $template->getBody());
-
-		// Check for an error.
-		if ($return !== true) {
-			$this->setError(JText::_('USERS ACTIVATION SEND MAIL FAILED'));
-			return false;
-		}
-		*/
-
 		return $user;
 	}
 
@@ -363,7 +340,7 @@ class UsersModelRegistration extends JModelForm
 		$data['sitename']	= $config->get('sitename');
 		$data['siteurl']	= JUri::base();
 
-		// Handle account activation/confirmation e-mails.
+		// Handle account activation/confirmation emails.
 		if ($useractivation == 2)
 		{
 			// Set the link to confirm the user email.
@@ -425,12 +402,34 @@ class UsersModelRegistration extends JModelForm
 			);
 		}
 
-		// Send the registration e-mail.
+		// Send the registration email.
 		$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $data['email'], $emailSubject, $emailBody);
 
 		// Check for an error.
 		if ($return !== true) {
 			$this->setError(JText::_('COM_USERS_REGISTRATION_SEND_MAIL_FAILED'));
+			
+			// Send a system message to administrators receiving system mails
+			$db = JFactory::getDBO();
+			$q = "SELECT id
+				FROM #__users
+				WHERE block = 0
+				AND sendEmail = 1";
+			$db->setQuery($q);
+			$sendEmail = $db->loadResultArray();
+			if (count($sendEmail) > 0) {
+				$jdate = new JDate();
+				// Build the query to add the messages
+				$q = "INSERT INTO `#__messages` (`user_id_from`, `user_id_to`, `date_time`, `subject`, `message`)
+					VALUES ";
+				$messages = array();
+				foreach ($sendEmail as $userid) {
+					$messages[] = "(".$userid.", ".$userid.", '".$jdate->toMySQL()."', '".JText::_('COM_USERS_MAIL_SEND_FAILURE_SUBJECT')."', '".JText::sprintf('COM_USERS_MAIL_SEND_FAILURE_BODY', $return, $data['username'])."')";
+				}
+				$q .= implode(',', $messages);
+				$db->setQuery($q);
+				$db->query();
+			}
 			return false;
 		}
 

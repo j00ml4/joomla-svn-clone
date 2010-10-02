@@ -27,6 +27,33 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+15-Sep-2010 Mark Dexter
+# [#22419] Fixes for Language0001 System Test (Thanks Matt Thomas)
+# Fixed restoreDefaultGlobalPermissions method in SeleniumJoomlaTestCase
+# Fixed problem in controlpanel0005 from sample data change
+
+01-Sep-2010 Mark Dexter
+ + Added JDatabaseQueryElementTest
+
+01-Sep-2010 Ian MacLennan
+ + Added JUser::save test
+
+30-Aug-2010 Mark Dexter
+^ Improved documentation for JUserHelper unit tests (Thanks Niels Braczek!)
+
+29-Aug-2010 Mark Dexter
++ [#20726] Unit tests for JUserHelper
++ [#22021] ACL System Tests
+
+28-Aug-2010 Ian MacLennan
+ # Fixed errors in tests and added mocks to deal with some failures properly
+
+26-Aug-2010 Ian MacLennan
+ + Added unit test for JFormRuleEmail
+
+20-Aug-2010 Mark Dexter
+# Fix control_panel0004Test for category formatting changes
+
 06-Aug-2010 Mark Dexter
 ^ Added new var to configdef.php to allow doInstall to set caching to different values
 

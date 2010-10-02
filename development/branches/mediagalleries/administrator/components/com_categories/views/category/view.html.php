@@ -50,30 +50,81 @@ class CategoriesViewCategory extends JView
 	 */
 	protected function addToolbar()
 	{
+		// Initialise variables.
+		$extension	= JRequest::getCmd('extension');
 		$user		= JFactory::getUser();
+
 		$isNew		= ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
-		$component	= JRequest::getCmd('extension');
 
-		JToolBarHelper::title(JText::_($isNew ? 'COM_CATEGORIES_CATEGORY_ADD_TITLE' : 'COM_CATEGORIES_CATEGORY_EDIT_TITLE'), 'category-add');
+		// Avoid nonsense situation.
+		if ($extension == 'com_categories') {
+			return;
+		}
+
+ 		// The extension can be in the form com_foo.section
+		$parts = explode('.',$extension);
+		$component = $parts[0];
+		$section = (count($parts) > 1) ? $parts[1] : null;
+
+		// Need to load the menu language file as mod_menu hasn't been loaded yet.
+		$lang = JFactory::getLanguage();
+			$lang->load($component.'.sys', JPATH_BASE, null, false, false)
+		||	$lang->load($component.'.sys', JPATH_ADMINISTRATOR.'/components/'.$component, null, false, false)
+		||	$lang->load($component.'.sys', JPATH_BASE, $lang->getDefault(), false, false)
+		||	$lang->load($component.'.sys', JPATH_ADMINISTRATOR.'/components/'.$component, $lang->getDefault(), false, false);
+
+		// Load the category helper.
+		require_once JPATH_COMPONENT.'/helpers/categories.php';
+
+		// Get the results for each action.
+		$canDo = CategoriesHelper::getActions($component, $this->item->id);
+
+		// If a component categories title string is present, let's use it.
+		if ($lang->hasKey($component_title_key = $component.($section?"_$section":'').'_CATEGORY'.($isNew?'_ADD':'_EDIT').'_TITLE')) {
+			$title = JText::_($component_title_key);
+		}
+		// Else if the component section string exits, let's use it
+		elseif ($lang->hasKey($component_section_key = $component.($section?"_$section":''))) {
+			$title = JText::sprintf( 'COM_CATEGORIES_CATEGORY'.($isNew?'_ADD':'_EDIT').'_TITLE', $this->escape(JText::_($component_section_key)));
+		}
+		// Else use the base title
+		else {
+			$title = JText::_('COM_CATEGORIES_CATEGORY_BASE'.($isNew?'_ADD':'_EDIT').'_TITLE');
+		}
+
+		// Load specific css component 
+		JHtml::_('stylesheet',$component.'/administrator/categories.css', array(), true);
+		
+		// Prepare the toolbar.
+		JToolBarHelper::title($title, substr($component,4).($section?"-$section":'').'-category'.($isNew?'-add':'-edit').'.png');
+
+		// If a new item, can save the item.
+		if ($isNew && $canDo->get('core.create') && !$canDo->get('core.edit')) {
+			JToolBarHelper::save('category.save', 'JTOOLBAR_SAVE');
+		}
 
 		// If not checked out, can save the item.
-		if ($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id')) {
+		if (!$checkedOut && $canDo->get('core.edit')) {
 			JToolBarHelper::apply('category.apply', 'JTOOLBAR_APPLY');
 			JToolBarHelper::save('category.save', 'JTOOLBAR_SAVE');
-			JToolBarHelper::custom('category.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+			if ($canDo->get('core.create')){
+				JToolBarHelper::custom('category.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+			}
 		}
 
 		// If an existing item, can save to a copy.
-		if (!$isNew) {
+		if (!$isNew && $canDo->get('core.create')) {
 			JToolBarHelper::custom('category.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
 		}
 
 		if (empty($this->item->id))  {
 			JToolBarHelper::cancel('category.cancel','JTOOLBAR_CANCEL');
-		} else {
+		}
+		else {
 			JToolBarHelper::cancel('category.cancel', 'JTOOLBAR_CLOSE');
 		}
+
 		JToolBarHelper::divider();
 		JToolBarHelper::help('JHELP_COMPONENTS_'.strtoupper(substr($component,4)).'_CATEGORIES_EDIT');
 	}

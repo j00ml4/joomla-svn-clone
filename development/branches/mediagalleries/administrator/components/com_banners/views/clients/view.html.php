@@ -62,35 +62,26 @@ class BannersViewClients extends JView
 			JToolBarHelper::editList('client.edit','JTOOLBAR_EDIT');
 		}
 		if ($canDo->get('core.edit.state')) {
-			if ($this->state->get('filter.published') != 2){
-				JToolBarHelper::divider();
-				JToolBarHelper::custom('clients.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
-				JToolBarHelper::custom('clients.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
-			}
-			if ($this->state->get('filter.published') != -1 ) {
-				JToolBarHelper::divider();
-				if ($this->state->get('filter.published') != 2) {
-					JToolBarHelper::archiveList('clients.archive','JTOOLBAR_ARCHIVE');
-				}
-				else if ($this->state->get('filter.published') == 2) {
-					JToolBarHelper::unarchiveList('clients.publish', 'JTOOLBAR_UNARCHIVE');
-				}
-			}
-		}
-		if(JFactory::getUser()->authorise('core.manage','com_checkin')) {
+			JToolBarHelper::divider();
+			JToolBarHelper::custom('clients.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::custom('clients.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+			JToolBarHelper::divider();
+			JToolBarHelper::archiveList('clients.archive','JTOOLBAR_ARCHIVE');
 			JToolBarHelper::custom('clients.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
 		}
 		if ($this->state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'clients.delete','JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::divider();
 		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('clients.trash','JTOOLBAR_TRASH');
+			JToolBarHelper::divider();
 		}
 
 		if ($canDo->get('core.admin')) {
-			JToolBarHelper::divider();
 			JToolBarHelper::preferences('com_banners');
+			JToolBarHelper::divider();
 		}
-		JToolBarHelper::divider();
+
 		JToolBarHelper::help('JHELP_COMPONENTS_BANNERS_CLIENTS');
 	}
 }

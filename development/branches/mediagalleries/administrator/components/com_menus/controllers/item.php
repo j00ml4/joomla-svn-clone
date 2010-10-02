@@ -54,7 +54,7 @@ class MenusControllerItem extends JControllerForm
 
 		// Initialise variables.
 		$app	= JFactory::getApplication();
-		$model	= $this->getModel('Item');
+		$model	= $this->getModel('Item', '', array());
 		$vars	= JRequest::getVar('batch', array(), 'post', 'array');
 		$cid	= JRequest::getVar('cid', array(), 'post', 'array');
 
@@ -166,7 +166,7 @@ class MenusControllerItem extends JControllerForm
 
 		// Initialise variables.
 		$app	= JFactory::getApplication();
-		$model	= $this->getModel('Item');
+		$model	= $this->getModel('Item', '', array());
 		$task	= $this->getTask();
 
 		// Get the posted values from the request.
@@ -218,9 +218,9 @@ class MenusControllerItem extends JControllerForm
 			// Push up to three validation messages out to the user.
 			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
 				if (JError::isError($errors[$i])) {
-					$app->enqueueMessage($errors[$i]->getMessage(), 'notice');
+					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				} else {
-					$app->enqueueMessage($errors[$i], 'notice');
+					$app->enqueueMessage($errors[$i], 'warning');
 				}
 			}
 
@@ -272,6 +272,7 @@ class MenusControllerItem extends JControllerForm
 				$app->setUserState('com_menus.edit.item.data',	null);
 				$app->setUserState('com_menus.edit.item.type',	null);
 				$app->setUserState('com_menus.edit.item.link',	null);
+				$app->setUserState('com_menus.edit.item.menutype',	$model->getState('item.menutype'));
 
 				// Redirect back to the edit screen.
 				$this->setRedirect(JRoute::_('index.php?option=com_menus&view=item&layout=edit', false));
@@ -301,8 +302,12 @@ class MenusControllerItem extends JControllerForm
 		// Initialise variables.
 		$app = JFactory::getApplication();
 
+		// Get the posted values from the request.
+		$data	= JRequest::getVar('jform', array(), 'post', 'array');
+
 		// Get the type.
-		$type = JRequest::getVar('type');
+		$type = $data['type'];
+
 		$type = json_decode(base64_decode($type));
 		$title = isset($type->title) ? $type->title : null;
 		if ($title != 'alias' && $title != 'separator' && $title != 'url') {
@@ -312,6 +317,8 @@ class MenusControllerItem extends JControllerForm
 		$app->setUserState('com_menus.edit.item.type',	$title);
 		if ($title == 'component') {
 			if (isset($type->request)) {
+				$component = JComponentHelper::getComponent($type->request->option);
+				$data['component_id'] = $component->id;
 				if (isset($type->request->layout)) {
 					$app->setUserState(
 						'com_menus.edit.item.link',
@@ -328,6 +335,13 @@ class MenusControllerItem extends JControllerForm
 		else if ($title == 'alias') {
 			$app->setUserState('com_menus.edit.item.link', 'index.php?Itemid=');
 		}
+
+		unset($data['request']);
+		$data['type'] = $title;
+		$data['link'] = $app->getUserState('com_menus.edit.item.link');
+
+		//Save the data in the session.
+		$app->setUserState('com_menus.edit.item.data', $data);
 
 		$this->type = $type;
 		$this->setRedirect('index.php?option=com_menus&view=item&layout=edit');

@@ -7,7 +7,6 @@
 			description="JGLOBAL_FIELD_ID_DESC"
 			size="10"
 			default="0"
-			required="true"
 			readonly="true"
 			class="readonly"
 		/>
@@ -99,9 +98,9 @@
 		/>
 
 		<field name="email_to" type="text"
-			label="COM_CONTACT_FIELD_INFORMATION_EMAIL_LABEL"
+			label="JGLOBAL_EMAIL"
 			description="COM_CONTACT_FIELD_INFORMATION_EMAIL_DESC"
-			class="inputbox"
+			class="inputbox validate-email"
 			size="30"
 		/>
 
@@ -226,7 +225,7 @@
 			<option value="*">JALL</option>
 		</field>
 		<field name="featured"
-			type="radio"
+			type="list"
 			label="JFEATURED"
 			description="COM_CONTACT_FIELD_FEATURED_DESC"
 			default="0"
@@ -352,7 +351,7 @@
 			</field>
 
 			<field name="show_email" type="list"
-				label="COM_CONTACT_FIELD_PARAMS_CONTACT_E_MAIL_LABEL"
+				label="JGLOBAL_EMAIL"
 				description="COM_CONTACT_FIELD_PARAMS_CONTACT_E_MAIL_DESC"
 			>
 				<option value="">JGLOBAL_USE_GLOBAL</option>
@@ -577,8 +576,7 @@
 		</fieldset>
 
 		<fieldset name="email"
-			label="COM_CONTACT_FIELDSET_CONTACT_FORM"
-			description="COM_CONTACT_EMAIL_FORM_DETAILS"
+			label="COM_CONTACT_FIELDSET_CONTACT_FORM"			
 		>
 
 			<field name="show_email_form" type="list"
@@ -640,8 +638,8 @@
 			<field name="redirect"
 				type="text"
 				size="30"
-				label="COM_CONTACT_FIELD_EMAIL_REDIRECT_LABEL"
-				description="COM_CONTACT_FIELD_EMAIL_REDIRECT_DESC" />
+				label="COM_CONTACT_FIELD_CONFIG_REDIRECT_LABEL"
+			description="COM_CONTACT_FIELD_CONFIG_REDIRECT_DESC" />
 		</fieldset>
 	</fields>
 	<fields name="metadata">

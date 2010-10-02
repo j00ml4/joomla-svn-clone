@@ -57,7 +57,6 @@ class JInstallationModelConfiguration extends JModel
 		/* Debug Settings */
 		$registry->set('debug', 0);
 		$registry->set('debug_lang', 0);
-		$registry->set('debug_modules', 0);
 
 		/* Database Settings */
 		$registry->set('dbtype', $options->db_type);
@@ -98,20 +97,20 @@ class JInstallationModelConfiguration extends JModel
 		$registry->set('smtpport', '25');
 
 		/* Cache Settings */
-		$registry->set('caching', 2);
+		$registry->set('caching', 0);
 		$registry->set('cache_handler', 'file');
 		$registry->set('cachetime', 15);
 
 		/* Meta Settings */
-		$registry->set('MetaDesc', JText::_('INSTL_STD_METADESC'));
-		$registry->set('MetaKeys', JText::_('INSTL_STD_METAKEYS'));
+		$registry->set('MetaDesc', $options->site_metadesc);
+		$registry->set('MetaKeys', $options->site_metakeys);
 		$registry->set('MetaTitle', 1);
 		$registry->set('MetaAuthor', 1);
 
 		/* SEO Settings */
 		$registry->set('sef', 1);
 		$registry->set('sef_rewrite', 0);
-		$registry->set('sef_suffix', 1);
+		$registry->set('sef_suffix', 0);
 		$registry->set('unicodeslugs', 0);
 
 		/* Feed Settings */

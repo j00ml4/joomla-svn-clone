@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: language0001Test.php 18212 2010-07-22 06:02:54Z eddieajau $
+ * @version		$Id: language0001Test.php 18925 2010-09-16 01:16:29Z dextercowley $
  * @package		Joomla.SystemTest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -440,7 +440,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
-    $this->click("//ul[@id='submenu']/li[2]/a");
+    $this->click("//ul[@id='submenu']/li/a[contains(., 'Clients')]");
 	$screen='Banner Manager: Clients';
     $this->waitForPageToLoad("30000");
 	$this->filterView($filterOn);
@@ -509,7 +509,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
-    $this->click("//ul[@id='submenu']/li[3]/a");
+    $this->click("//ul[@id='submenu']/li/a[contains(., 'Categories')]");
 	$screen='Category Manager: Banners';
     $this->waitForPageToLoad("30000");
 	$this->filterView($filterOn);
@@ -647,7 +647,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
-    $this->click("//ul[@id='submenu']/li[2]/a");
+    $this->click("//ul[@id='submenu']/li/a[contains(., 'Categories')]");
 	$screen='Category Manager: Contacts';
     $this->waitForPageToLoad("30000");
 	$this->filterView($filterOn);
@@ -785,7 +785,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
-    $this->click("//ul[@id='submenu']/li[2]/a");
+    $this->click("//ul[@id='submenu']/li/a[contains(., 'Categories')]");
 	$screen='Category Manager: Newsfeeds';
 	$this->waitForPageToLoad("30000");
 	$this->filterView($filterOn);
@@ -923,7 +923,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
-    $this->click("//ul[@id='submenu']/li[2]/a");
+    $this->click("//ul[@id='submenu']/li/a[contains(., 'Categories')]");
 	$screen='Category Manager: Weblinks';
     $this->waitForPageToLoad("30000");
 	$this->filterView($filterOn);
@@ -1260,7 +1260,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
     }
 	$this->click("link=Language Manager");
     $this->waitForPageToLoad("30000");
-    $this->click("//ul[@id='submenu']/li[2]/a");
+    $this->click("//ul[@id='submenu']/li/a[contains(., 'Content')]");
 	$screen='Language Manager: Content Languages';
     $this->waitForPageToLoad("30000");
 	$this->filterView($filterOn);
@@ -1306,7 +1306,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
     $this->click("link=Mass Mail Users");
 	$screen='Mass Mail';
     $this->waitForPageToLoad("30000");
-	$this->click("link=Send e-mail");
+	$this->click("link=Send email");
 	try
 	{
 	    $this->assertEquals("Please enter a subject", $this->getAlert());
@@ -1316,7 +1316,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	    array_push($this->verificationErrors, $this->getTraceFiles($e));
 	}
 	$this->type("jform_subject", "test");
-	$this->click("link=Send e-mail");
+	$this->click("link=Send email");
     try
 	{
 	     $this->assertEquals("Please enter a message", $this->getAlert());

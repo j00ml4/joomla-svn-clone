@@ -36,6 +36,7 @@ $templateparams	= $app->getTemplate(true)->params;
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>" >
 	<head>
 		<jdoc:include type="head" />
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/system/css/system.css" type="text/css" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/position.css" type="text/css" media="screen,projection" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/layout.css" type="text/css" media="screen,projection" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez5/css/print.css" type="text/css" media="Print" />
@@ -62,9 +63,13 @@ $templateparams	= $app->getTemplate(true)->params;
 		<!--[if IE 7]>
 			<link href="<?php echo $this->baseurl ?>/templates/beez5/css/ie7only.css" rel="stylesheet" type="text/css" />
 		<![endif]-->
+<?php if($templateparams->get('html5', 0)) { ?>
+		<!--[if lt IE 9]>
+			<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/beez5/javascript/html5.js"></script>
+		<![endif]-->
+<?php } ?>
 		<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/beez5/javascript/md_stylechanger.js"></script>
 		<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/beez5/javascript/hide.js"></script>
-		<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/beez5/javascript/html5.js"></script>
 
 		<script type="text/javascript">
 			var big ='<?php echo $this->params->get('wrapperLarge');?>%';
@@ -137,9 +142,9 @@ $templateparams	= $app->getTemplate(true)->params;
 		<?php endif; ?>
 		<div id="<?php echo $showRightColumn ? 'contentarea2' : 'contentarea'; ?>">
 					<div id="breadcrumbs">
-						<p>
+						
 							<jdoc:include type="modules" name="position-2" />
-						</p>
+					
 					</div>
 
 					<?php if ($navposition=='left' AND $showleft) : ?>
