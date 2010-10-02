@@ -27,12 +27,83 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+
+2-Oct-2010 Jean-Marie Simonet
+ # [#22306] Module CSS class and id changes  Thanks Angie.
+ # [#22487] Separating weblink from content on 22100. Thanks Elin.
+
+30-Sep-2010 Jean-Marie Simonet
+ # [#22582] Menu location lost after pressing "Save & New". Thanks Mathavan
+ 
+29-Sep-2010 Jean-Marie Simonet
+ # [#22512] Category didn't load component translations. Thanks Christophe and Marcelo.
+ # [#22591] Trashing an item in Featured Articles view redirects to non-Featured Articles view. Thanks Mathavan.
+
+28-Sep-2010 Ron Severdia
+ # Fixed misplaced DIV in Atomic
+ ^ Updated Atomic preview & thumbnail
+ ^ Updated Blueprint plug-ins
+ # Fix validation issue in Atomic login override
+ 
+28-Sep-2010 Christophe Demko
+ # [#22603] XML well formedness errors in com_messages and com_weblinks (thanks Rouven Weßling)
+ # [#22125] We don't have CSS for system "warning" messages - deleting and moving icons
+
+28-Sep-2010 Mark Dexter
+ # [#21766] If an unpublished article is linked there are errors instead of a message/model change
+
+28-Sep-2010 Jean-Marie Simonet
+ $ Adding missing strings in installation.
+
+27-Sep-2010 Jean-Marie Simonet
+ # [#21825] Pagebreak and Article Buttons don't work when using CodeMirror. Thanks Mathavan.
+ $ Adding missing strings in front-end
+ #  [#22432] Administrator login form not consistent in Chrome. Thanks Bill and Viet.
+ 
+26-Sep-2010 Jean-Marie Simonet
+ # [#22596] Implementing language filtering in modals + normalizing filters/columns + fixing Newsfeeds language filtering
+
+25-Sep-2010 Jean-Marie Simonet
+ # [#22493] Can not register user fatal error message
+
+24-Sep-2010 Jean-Marie Simonet
+ # [#22016] Breadcrumbs missing from single items. Thanks Christophe.
+ #$ [#22576] Component Manager Options - needless use of name options in tab headings + Normalizing some strings.
+ # [#22549] No from user shown on Private Messages. Thanks Tim.
+
+22-Sep-2010 Jean-Marie Simonet
+ ^ [#22514] Upgrade TinyMCE to 3.3.9. Thanks Michael.
+ #$ [#21970] Some_message_here language string needs proper message.
+ $ Missing string in front-end
+
+-------------------- 1.6.0 Beta10 Release [20-Sep-2010] ------------------
+
+21-Sep-2010 Christophe Demko
+ # [#22451] Categories save for categories at root is not accounting for extensions (thanks Elin)
+
+20-Sep-2010 Mark Dexter
+# [#21816] JFeedItem->category should now be an array
+
+19-Sep-2010 Jean-Marie Simonet
+ # [#22498] Translating Manager Extensions Types for install/uninstall messages. Thanks Sam.
+ # [#22433] Editor-xtd plugins not working when no editor is selected. Thanks Mathavan.
+ # [#22364] configuration.php shows writeable when it is not. Thanks Troy and Artyom.
+
+18-Sep-2010 Jean-Marie Simonet
+ #$ [#22462] Module articles Categories - update options. Thanks Bill.
+ # [#22496] Commit 22440 prevents custom position from being entered. Thanks Roland
+ # Correcting some components xml (extraneous files)
+ # [#22497] Adding Written by in Article Edit icon overlib in front-end
+ # [#22498] Translating Manager Extensions Types for install/uninstall messages.
+ $ Added missing string.
+  
 17-Sep-2010 Jean-Marie Simonet
  # [#22466] Registration failed message when mail function doesn't work. Thanks Roland.
  # [#22100] Unable to view unpublished article in frontend. Thanks Elin.
  # [#22481] Patch: Templates Date column blank. Thanks Ole.
  $ [#22471] Module banners - description. Thanks Bill.
-
+ # [#22470] Incorrect vertical align of system message icon in Bluestork. Thanks Viet.
+ 
 16-Sep-2010 Jean-Marie Simonet
  $ [#22461] Module articles - newsflash - description. Thanks Bill
  # Took off forgotten echo from 22418
