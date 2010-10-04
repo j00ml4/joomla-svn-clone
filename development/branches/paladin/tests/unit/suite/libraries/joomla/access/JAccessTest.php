@@ -24,13 +24,23 @@ class JAccessTest extends JoomlaDatabaseTestCase {
         var $have_db = false;
 
 	/**
+	 * Gets the data set to be loaded into the database during setup
+	 *
+	 * @return xml dataset
+	 */
+	protected function getDataSet()
+	{
+		return $this->createXMLDataSet(JPATH_BASE . '/tests/unit/stubs/jos_assets.xml');
+	}
+	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 *
 	 * @access protected
 	 */
 	protected function setUp() {
-	  $this->object = new JAccess;
+            parent::setUp();
+            $this->object = new JAccess;
         }
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
@@ -39,6 +49,7 @@ class JAccessTest extends JoomlaDatabaseTestCase {
 	 * @access protected
 	 */
 	protected function tearDown() {
+            parent::tearDown();
 	}
 
 	/**
@@ -69,24 +80,32 @@ class JAccessTest extends JoomlaDatabaseTestCase {
             //$this->assertTrue($access2->check('78',4,234));
             $this->assertThat(
 				Null,
-				$this->equalTo($access->check('58','core.login.site',3))
+				$this->equalTo($access->check('58','core.login.site')),
+                                'login site 58 to default asset'
 				);
             $this->assertThat(
 				Null,
-				$this->equalTo($access->check('42','complusoft',3))
+				$this->equalTo($access->check('58','core.login.site',3)),
+                                'login site 58'
+				);
+            $this->assertThat(
+				Null,
+				$this->equalTo($access->check('42','complusoft',3)),
+                                'complusoft 42'
 				);
             $this->assertThat(
 				true,
-				$this->equalTo($access->check('42','core.login.site',345))
+				$this->equalTo($access->check('42','core.login.site',345)),
+                                'login site 42'
 			);
-            $this->assertTrue($access->check('42','core.login.site',3));
-            $this->assertTrue($access->check('42','core.login.admin',3));
-            $this->assertTrue($access->check('42','core.admin',3));
-            $this->assertTrue($access->check('42','core.manage',3));
-            $this->assertTrue($access->check('42','core.create',3));
-            $this->assertTrue($access->check('42','core.delete',3));
-            $this->assertTrue($access->check('42','core.edit',3));
-            $this->assertTrue($access->check('42','core.edit.state',3));
+            $this->assertTrue($access->check('42','core.login.site',3), 'core.login.site 42,3 is not true');
+            $this->assertTrue($access->check('42','core.login.admin',3), 'core.login.admin 42,3 is not true');
+            $this->assertTrue($access->check('42','core.admin',3), 'core.admin 42,3 is not true');
+            $this->assertTrue($access->check('42','core.manage',3), 'core.manage 42,3 is not true');
+            $this->assertTrue($access->check('42','core.create',3), 'core.create 42,3 is not true');
+            $this->assertTrue($access->check('42','core.delete',3), 'core.delete 42,3 is not true');
+            $this->assertTrue($access->check('42','core.edit',3), 'core.edit 42,3 is not true');
+            $this->assertTrue($access->check('42','core.edit.state',3), 'core.edit.state 42,3 is not true');
         }
 
 
@@ -118,6 +137,14 @@ class JAccessTest extends JoomlaDatabaseTestCase {
                 $this->assertThat(
 			$string1,
 			$this->equalTo((string)$ObjArrayJrules)
+		);
+
+                $ObjArrayJrules = $access->getAssetRules('Unknown Asset', False);
+                $string1 = '[]';
+                $this->assertThat(
+			$string1,
+			$this->equalTo((string)$ObjArrayJrules),
+                        'Testing access rules for unknwon asset'
 		);
 
 	}
@@ -191,21 +218,30 @@ class JAccessTest extends JoomlaDatabaseTestCase {
 		);
 
 
-                $this->assertThat(
-			$array1,
-			$this->equalTo($access->getAuthorisedViewLevels(42))
+        $this->assertThat(
+		$array1,
+		$this->equalTo($access->getAuthorisedViewLevels(42)),
+                        'Testing Viewlevels of User 42'
 		);
 
-                $array2 = array(
-                    0       => 1
-                );
-                $this->assertThat(
+        $array2 = array(
+            0   => 1
+        );
+        $this->assertThat(
 			$array2,
-			$this->equalTo($access->getAuthorisedViewLevels(50))
+			$this->equalTo($access->getAuthorisedViewLevels(50)),
+                        'Testing Viewlevels of User 50'
 		);
 
-
-
+        $array3 = array(
+            0   =>  1,
+            1   =>  4
+        );
+        $this->assertThat(
+			$array3,
+			$this->equalTo($access->getAuthorisedViewLevels(43)),
+                        "Testing Viewlevels of User 43"
+		);
 	}
 
 	/**

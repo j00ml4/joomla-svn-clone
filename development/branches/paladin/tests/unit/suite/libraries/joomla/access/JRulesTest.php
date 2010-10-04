@@ -50,9 +50,16 @@ class JRulesTest extends PHPUnit_Framework_TestCase
 			$this->equalTo($string)
 		);
 
+		// Test input as object.
+		$rules	= new JRules((object)$array);
+		$this->assertThat(
+			(string) $rules,
+			$this->equalTo($string)
+		);
+
 	}
 
-	public function testMergeRule()
+	public function testMergeAction()
 	{
 		$identities = array(
 			-42	=> 1,
@@ -170,6 +177,119 @@ class JRulesTest extends PHPUnit_Framework_TestCase
 		$this->assertThat(
 			(string) $rules1,
 			$this->equalTo(json_encode($result2))
+		);
+
+		$rules2 = new JRules();
+		$rules2->merge($string1);
+		$this->assertThat(
+			(string) $rules2,
+			$this->equalTo($string1)
+		);
+
+	}
+
+	/**
+	 * This method can merge an array of JRules Objects,
+	 * a single JRules object,
+	 * or a JSON rules string.
+	 */
+	public function testMergeCollection()
+	{
+                $inputArray = array(
+                    array(
+                        'core.login.site' => array(
+                                            '6' => 1,
+                                            '2' => 1
+                        ),
+                        'core.login.admin' => array(
+                                            '6' => 1
+                        ),
+                        'core.admin' => array(
+                                            '8' => 1
+                        ),
+                        'core.manage' => array(
+                                            '7' => 1
+                        ),
+                        'core.create' => array(
+                                            '6' => 1,
+                                            '3' => 1
+                        ),
+                        'core.delete' => array(
+                                            '6' => 1
+                        ),
+                        'core.edit' => array(
+                                            '6' => 1,
+                                            '4' => 1
+                        ),
+                        'core.edit.state' => array(
+                                            '6' => 1,
+                                            '5' => 1
+                        )
+                    ),
+                    array(
+                        'core.admin' => array(
+                                            '7' => 1),
+                        'core.manage' => array(
+                                            '6' => 1),
+                        'core.create' => array(),
+                        'core.delete' => array(),
+                        'core.edit' => array(),
+                        'core.edit.state' => array()
+                    )
+                );
+
+                $resultArray = array(
+                        'core.login.site' => array(
+                                            '6' => 1,
+                                            '2' => 1
+                        ),
+                        'core.login.admin' => array(
+                                            '6' => 1
+                        ),
+                        'core.admin' => array(
+                                            '8' => 1,
+                                            '7' => 1
+                        ),
+                        'core.manage' => array(
+                                            '7' => 1,
+                                            '6' => 1
+                        ),
+                        'core.create' => array(
+                                            '6' => 1,
+                                            '3' => 1
+                        ),
+                        'core.delete' => array(
+                                            '6' => 1
+                        ),
+                        'core.edit' => array(
+                                            '6' => 1,
+                                            '4' => 1
+                        ),
+                        'core.edit.state' => array(
+                                            '6' => 1,
+                                            '5' => 1
+                        )
+                );
+
+                $rules = new JRules();
+		$rules->mergeCollection($inputArray);
+		$this->assertThat(
+			(string) $rules,
+			$this->equalTo(json_encode($resultArray)),
+                        "Multi-dimensional array input"
+		);
+
+                $inputStrings = array(
+                  '{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}',
+                  '{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
+                );
+
+                $rules1 = new JRules();
+		$rules1->mergeCollection($inputStrings);
+		$this->assertThat(
+			(string) $rules1,
+			$this->equalTo(json_encode($resultArray)),
+                        "String array input"
 		);
 
 	}

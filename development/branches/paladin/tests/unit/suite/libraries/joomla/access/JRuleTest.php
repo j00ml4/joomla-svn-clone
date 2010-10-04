@@ -41,7 +41,8 @@ class JRuleTest extends PHPUnit_Framework_TestCase
 		// Check that import equals export.
 		$this->assertEquals(
 			$string,
-			(string) $rule1
+			(string) $rule1,
+                        'Build Rule from array'
 		);
 
 		// Test constructor with string.
@@ -61,7 +62,8 @@ class JRuleTest extends PHPUnit_Framework_TestCase
                 $rule_A	= new JRule($string_A);
 		$this->assertNotEquals(
 			$string,
-			(string) $rule_A
+			(string) $rule_A,
+                        'Build Rule from json string'
 		);
 	}
 
@@ -74,21 +76,24 @@ class JRuleTest extends PHPUnit_Framework_TestCase
 		$rule->mergeIdentity(-42, true);
 		$this->assertEquals(
 			'{"-42":1}',
-			(string) $rule
+			(string) $rule,
+                        'Merge an allow'
 		);
 
 		// Readd the identity, but deny.
 		$rule->mergeIdentity(-42, false);
 		$this->assertEquals(
 			'{"-42":0}',
-			(string) $rule
+			(string) $rule,
+                        'Merge a deny'
 		);
 
 		// Readd the identity with allow (checking deny wins).
 		$rule->mergeIdentity(-42, true);
 		$this->assertEquals(
 			'{"-42":0}',
-			(string) $rule
+			(string) $rule,
+                        'Merge another add, deny should win'
 		);
 	}
 
@@ -106,7 +111,8 @@ class JRuleTest extends PHPUnit_Framework_TestCase
 		$rule->mergeIdentities($array);
 		$this->assertEquals(
 			json_encode($array),
-			(string) $rule
+			(string) $rule,
+                        'Merge multiple identities from array'
 		);
 
                 // Check that import equals export.
@@ -118,12 +124,14 @@ class JRuleTest extends PHPUnit_Framework_TestCase
                 $rule->mergeIdentities($rule_A);
                 $this->assertEquals(
 			json_encode($array),
-			(string) $rule
+			(string) $rule,
+                        'Merge multiple identities from object'
 		);
 
                 $this->assertEquals(
 			(string) $rule_A,
-			(string) $rule
+			(string) $rule,
+                        'Check string encoding of object'
 		);
 
 
@@ -146,7 +154,8 @@ class JRuleTest extends PHPUnit_Framework_TestCase
 		$rule->mergeIdentities($array);
 		$this->assertEquals(
 			json_encode($result),
-			(string) $rule
+			(string) $rule,
+                        'Deny should win for 3, and add 4'
 		);
 	}
 
