@@ -282,10 +282,9 @@
 	</fieldset>
 
 	<fields name="params">
-		<fieldset 
-			name="jbasic" 
-			label="JGLOBAL_FIELDSET_OPTIONS">
-				<field name="width" 
+	<fieldset 	name="jbasic" 
+					label="JGLOBAL_FIELDSET_OPTIONS">
+		<field name="width" 
 			type="text" 
 			size="5" 
 			label="COM_MEDIAGALLERIES_WIDTH_LABEL" 
@@ -300,7 +299,6 @@
 				
 		<field name="autostart" 
 					type="radio" 
-					default="0" 
 					label="COM_MEDIAGALLERIES_AUTOSTART_LABEL" 
 					description="COM_MEDIAGALLERIES_AUTOSTART_DESC">
 					<option value="0">JNO</option>
@@ -312,10 +310,9 @@
 				<!--Media Players -->
 				<field name="flv_player" 
 					type="list" 
-					default="2kplayer" 
 					label="COM_MEDIAGALLERIES_FLV_PLAYER_LABEL" 
 					description="COM_MEDIAGALLERIES_FLV_PLAYER_DESC">
-						<option value="">Use Global</option>
+						<option value="">JGLOBAL_USE_GLOBAL</option>
 						<option value="jwplayer">COM_MEDIAGALLERIES_FLV_PLAYER_JWPPLAYER</option>			
 						<option value="2kplayer">COM_MEDIAGALLERIES_FLV_PLAYER_3K_FLV_PLAYER</option>
 				
@@ -323,10 +320,9 @@
 				
 				<field name="mp3_player" 
 					type="list" 
-					default="1pixelout" 
 					label="COM_MEDIAGALLERIES_MP3_PLAYER_LABEL" 
 					description="COM_MEDIAGALLERIES_MP3_PLAYER_DESC" >
-						<option value="">Use Global</option>
+						<option value="">JGLOBAL_USE_GLOBAL</option>
 						<option value="jwplayer">COM_MEDIAGALLERIES_MP3_PLAYER_JWPLAYER</option>			
 						<option value="1pixelout">COM_MEDIAGALLERIES_MP3_PLAYER_1PIXELOUT</option>
 				
@@ -342,10 +338,9 @@
 				
 				<field name="youtube_rel" 
 					type="radio" 
-					default="1" 
 					label="COM_MEDIAGALLERIES_YOUTUBE_RELATED_LABEL" 
 					description="COM_MEDIAGALLERIES_YOUTUBE_RELATED_DESC" >
-						<option value="">Use Global</option>
+						<option value="">JGLOBAL_USE_GLOBAL</option>
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
 				
@@ -353,10 +348,9 @@
 				
 				<field name="youtube_loop" 
 					type="radio" 
-					default="0" 
 					label="COM_MEDIAGALLERIES_YOUTUBE_LOOP_LABEL" 
 					description="COM_MEDIAGALLERIES_YOUTUBE_LOOP_DESC" >
-						<option value="">Use Global</option>
+						<option value="">JGLOBAL_USE_GLOBAL</option>
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
 				
@@ -367,7 +361,7 @@
 					default="0" 
 					label="COM_MEDIAGALLERIES_YOUTUBE_DISABLE_KEYBOARD_LABEL" 
 					description="COM_MEDIAGALLERIES_YOUTUBE_DISABLE_KEYBOARD_DESC" >
-						<option value="">Use Global</option>
+						<option value="">JGLOBAL_USE_GLOBAL</option>
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
 				
@@ -378,7 +372,7 @@
 					default="0" 
 					label="COM_MEDIAGALLERIES_YOUTUBE_ENHANCED_GENIE_MENU_LABEL" 
 					description="COM_MEDIAGALLERIES_YOUTUBE_ENHANCED_GENIE_MENU_DESC">
-						<option value="">Use Global</option>
+						<option value="">JGLOBAL_USE_GLOBAL</option>
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
 				
@@ -386,10 +380,9 @@
 				
 				<field name="youtube_border" 
 				type="radio" 
-				default="0" 
 				label="COM_MEDIAGALLERIES_YOUTUBE_BORDER_LABEL" 
 				description="COM_MEDIAGALLERIES_YOUTUBE_BORDER_DESC">
-						<option value="">Use Global</option>
+						<option value="">JGLOBAL_USE_GLOBAL</option>
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
 				
@@ -461,7 +454,7 @@
 					type="radio" 
 					label="COM_MEDIAGALLERIES_JW_QUALITY_LABEL" 
 					description="COM_MEDIAGALLERIES_JW_QUALITY_DESC">
-					<option value="">Use Global</option>
+					<option value="">JGLOBAL_USE_GLOBAL</option>
 					<option value="0">COM_MEDIAGALLERIES_NORMAL</option>
 					<option value="1">COM_MEDIAGALLERIES_HIGH</option>
 				</field>
