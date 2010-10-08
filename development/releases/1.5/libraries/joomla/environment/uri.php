@@ -175,7 +175,24 @@ class JURI extends JObject
 				}
 
 				// Now we need to clean what we got since we can't trust the server var
-				$theURI = urldecode($theURI);
+				// Need to check that the URI is fully decoded in case of multiple-encoded attack vectors.
+				$halt	= 0;
+				while (true)
+				{
+					$last	= $theURI;
+					$theURI = urldecode($theURI);
+
+					// Check whether the last decode is equal to the first.
+					if ($theURI == $last) {
+						// Break out of the while if the URI is stable.
+						break;
+					}
+					else if (++$halt > 10) {
+						// Runaway check. URI has been seriously compromised.
+						jexit();
+					}
+				}
+
 				$theURI = str_replace('"', '&quot;',$theURI);
 				$theURI = str_replace('<', '&lt;',$theURI);
 				$theURI = str_replace('>', '&gt;',$theURI);

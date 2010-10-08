@@ -36,6 +36,8 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+-------------------- 1.5.21 Stable Release [08-October-2010] ------------------
+
 
 -------------------- 1.5.20 Stable Release [18-July-2010] ------------------
 
