@@ -16,7 +16,7 @@ jimport('joomla.form.formfield');
  * @subpackage	Form
  * @since		1.6
  */
-class JFormFieldTest extends JFormField
+class JFormFieldTest2 extends JFormField
 {
 	/**
 	 * The field type.
