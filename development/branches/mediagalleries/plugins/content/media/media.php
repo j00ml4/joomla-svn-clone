@@ -181,6 +181,39 @@ class plgContentMedia extends JPlugin
 	 * @param int $width [optional]
 	 * @param boolean $autoplay True if yes [optional]
 	 */
+	public function addMedia1( $media, $width='', $height ='', $autostart=0 )
+	{
+		// The propose of this is to get the defaults set by the admin -> Fixed :D 
+		$pparams	= $this->params;// make it work
+		
+		// Fix Video UrL
+		$media		= strpos($media,"http://")? 
+			$media: // Custom PATH
+			$pparams->get('uri_img').$media; // Default PATH
+		
+		// Size Style
+		if( $width ){			
+			$height = ($height)?
+				'height:'. $height .'px;': // Manual H
+					'height:'. $width .'px;';// Auto H		
+							
+			$width = 'width:'. $width .'px;';
+		}elseif( $height ){		
+			$height = 'height:'. $height .'px;';
+			$width = 'width:'. $height .'px;';
+		}else{ 
+			$height=''; 
+			$width ='';
+		}
+		
+		// AutoStart
+		$autostart = (boolean)$autostart;
+		
+		$host=parse_url($url, PHP_URL_HOST);
+		// Embedding based on extension
+		
+	}
+
 	public function addMedia( $media, $width='', $height ='', $autostart=0 )
 	{	
 		// The propose of this is to get the defaults set by the admin -> Fixed :D 
