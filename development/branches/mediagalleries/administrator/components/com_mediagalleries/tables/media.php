@@ -107,7 +107,7 @@ class TableMedia extends JTable
 		if(!$data['created_by_alias'])
 		{
 			$user=JFactory::getUser();
-			$data['created_by']=$user->username;
+			$data['created_by']=$user->id;
 		}
 
 		$datenow =& JFactory::getDate($data['created']);
