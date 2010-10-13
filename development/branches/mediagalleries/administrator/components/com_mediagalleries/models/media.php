@@ -95,31 +95,10 @@ class MediagalleriesModelMedia extends JModelAdmin
 		if (empty($data)) {
 			$data = $this->getItem();
 		}
-
 		return $data;
 	}
 
-	/**
-	 * Method to get a single record.
-	 *
-	 * @param	integer	The id of the primary key.
-	 *
-	 * @return	mixed	Object on success, false on failure.
-	 * @since	1.6
-	 */
-	public function getItem($pk = null)
-	{
-			
-		if ($item = parent::getItem($pk)) {
-			// Convert the params field to an array.
-			//$registry = new JRegistry;
-			//$registry->loadJSON($item->params);
-			//$item->params= $registry->toArray();
-		}
-
-		return $item;
-	}
-
+	
 	/**
 	 * Prepare and sanitise the table prior to saving.
 	 *
@@ -152,11 +131,13 @@ class MediagalleriesModelMedia extends JModelAdmin
 
 				$table->ordering = $max+1;
 			}
+		
 		}
 		else {
 			// Set the values
+		
 			$table->modified	= $date->toMySQL();
-			$table->modified_by	= $user->get('id');
+			$table->modified_by	=$user->get('id');
 		}
 	}
 
