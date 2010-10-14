@@ -7,8 +7,8 @@
  */
 
 // PHP 5 check
-if (version_compare(PHP_VERSION, '5.2.0', '<')) {
-	die('Your host needs to use PHP 5.2.0 or higher to run Joomla 1.6.');
+if (version_compare(PHP_VERSION, '5.2.4', '<')) {
+	die('Your host needs to use PHP 5.2.4 or higher to run Joomla 1.6.');
 }
 
 /**
@@ -72,7 +72,7 @@ jimport('joomla.language.language');
 jimport('joomla.utilities.string');
 
 // Create the application object.
-$app = &JFactory::getApplication('installation');
+$app = JFactory::getApplication('installation');
 
 // Initialise the application.
 $app->initialise();

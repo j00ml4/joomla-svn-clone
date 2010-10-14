@@ -27,39 +27,46 @@ class JInstallationModelDatabase extends JModel
 		// Get the options as a JObject for easier handling.
 		$options = JArrayHelper::toObject($options, 'JObject');
 
+		// Load the back-end language files so that the DB error messages work
+		$jlang = JFactory::getLanguage();
+		// Pre-load en-GB in case the chosen language files do not exist
+		$jlang->load('joomla', JPATH_ADMINISTRATOR, 'en-GB', true);
+		// Load the selected language
+		$jlang->load('joomla', JPATH_ADMINISTRATOR, $options->language, true);
+
 		// Ensure a database type was selected.
 		if (empty($options->db_type)) {
-			$this->setError(JText::_('validType'));
+			$this->setError(JText::_('INSTL_DATABASE_INVALID_TYPE'));
 			return false;
 		}
 
 		// Ensure that a valid hostname and user name were input.
 		if (empty($options->db_host) || empty($options->db_user)) {
-			$this->setError(JText::_('validDBDetails'));
+			$this->setError(JText::_('INSTL_DATABASE_INVALID_DB_DETAILS'));
 			return false;
 		}
 
 		// Ensure that a database name was input.
 		if (empty($options->db_name)) {
-			$this->setError(JText::_('emptyDBName'));
+			$this->setError(JText::_('INSTL_DATABASE_EMPTY_NAME'));
 			return false;
 		}
 
 		// Validate database table prefix.
 		if (!preg_match('#^[a-zA-Z]+[a-zA-Z0-9_]*$#', $options->db_prefix)) {
-			$this->setError(JText::_('MYSQLPREFIXINVALIDCHARS'));
+			$this->setError(JText::_('INSTL_DATABASE_PREFIX_INVALID_CHARS'));
 			return false;
 		}
 
 		// Validate length of database table prefix.
 		if (strlen($options->db_prefix) > 15) {
-			$this->setError(JText::_('MYSQLPREFIXTOOLONG'));
+			$this->setError(JText::_('INSTL_DATABASE_FIX_TOO_LONG'));
 			return false;
 		}
 
 		// Validate length of database name.
 		if (strlen($options->db_name) > 64) {
-			$this->setError(JText::_('MYSQLDBNAMETOOLONG'));
+			$this->setError(JText::_('INSTL_DATABASE_NAME_TOO_LONG'));
 			return false;
 		}
 
@@ -67,17 +74,17 @@ class JInstallationModelDatabase extends JModel
 		if (empty($options->db_created))
 		{
 			// Get a database object.
-			$db = &$this->getDbo($options->db_type, $options->db_host, $options->db_user, $options->db_pass, null, $options->db_prefix, false);
+			$db = $this->getDbo($options->db_type, $options->db_host, $options->db_user, $options->db_pass, null, $options->db_prefix, false);
 
 			// Check for errors.
 			if (JError::isError($db)) {
-				$this->setError(JText::sprintf('WARNNOTCONNECTDB', (string)$db));
+				$this->setError(JText::sprintf('INSTL_DATABASE_COULD_NOT_CONNECT', (string)$db));
 				return false;
 			}
 
 			// Check for database errors.
 			if ($err = $db->getErrorNum()) {
-				$this->setError(JText::sprintf('WARNNOTCONNECTDB', $db->getErrorNum()));
+				$this->setError(JText::sprintf('INSTL_DATABASE_COULD_NOT_CONNECT', $db->getErrorNum()));
 				return false;
 			}
 
@@ -88,7 +95,24 @@ class JInstallationModelDatabase extends JModel
 			}
 
 			if (!version_compare($db_version, '5.0.4', '>=')) {
-				$this->setError(JText::_('You need MySQL 5.0.4 or higher to continue the installation.'));
+				$this->setError(JText::sprintf('INSTL_DATABASE_INVALID_MYSQL_VERSION', $db_version));
+				return false;
+			}
+			// @internal MySQL versions pre 5.1.6 forbid . / or \ or NULL
+			if ((preg_match('#[\\\/\.\0]#',$options->db_name)) && (!version_compare($db_version, '5.1.6', '>='))) {
+				$this->setError(JText::sprintf('INSTL_DATABASE_INVALID_NAME',$db_version));
+				return false;
+			}
+
+			// @internal Check for spaces in beginning or end of name
+			if (strlen(trim($options->db_name)) <> strlen($options->db_name)) {
+				$this->setError(JText::_('INSTL_DATABASE_NAME_INVALID_SPACES'));
+				return false;
+			}
+
+			// @internal Check for asc(00) Null in name
+			if (strpos($options->db_name, chr(00)) !== FALSE ) {
+				$this->setError(JText::_('INSTL_DATABASE_NAME_INVALID_CHAR'));
 				return false;
 			}
 
@@ -103,7 +127,7 @@ class JInstallationModelDatabase extends JModel
 					$db->select($options->db_name);
 				}
 				else {
-					$this->setError(JText::sprintf('WARNCREATEDB', $options->db_name));
+					$this->setError(JText::sprintf('INSTL_DATABASE_ERROR_CREATE', $options->db_name));
 					return false;
 				}
 			}
@@ -117,7 +141,7 @@ class JInstallationModelDatabase extends JModel
 			{
 				// Attempt to delete the old database tables.
 				if (!$this->deleteDatabase($db, $options->db_name, $options->db_prefix)) {
-					$this->setError(JText::_('WARNDELETEDB'));
+					$this->setError(JText::_('INSTL_DATABASE_ERROR_DELETE'));
 					return false;
 				}
 			}
@@ -125,7 +149,7 @@ class JInstallationModelDatabase extends JModel
 			{
 				// If the database isn't being deleted, back it up.
 				if (!$this->backupDatabase($db, $options->db_name, $options->db_prefix)) {
-					$this->setError(JText::_('WARNBACKINGUPDB'));
+					$this->setError(JText::_('INSTL_DATABASE_ERROR_BACKINGUP'));
 					return false;
 				}
 			}
@@ -140,7 +164,7 @@ class JInstallationModelDatabase extends JModel
 
 			// Attempt to import the database schema.
 			if (!$this->populateDatabase($db, $schema)) {
-				$this->setError(JText::sprintf('Instl_Error_DB', $this->getError()));
+				$this->setError(JText::sprintf('INSTL_ERROR_DB', $this->getError()));
 				return false;
 			}
 
@@ -148,25 +172,30 @@ class JInstallationModelDatabase extends JModel
 			$dblocalise = 'sql/'.(($type == 'mysqli') ? 'mysql' : $type).'/localise.sql';
 			if (JFile::exists($dblocalise)) {
 				if (!$this->populateDatabase($db, $dblocalise)) {
-					$this->setError(JText::sprintf('Instl_Error_DB', $this->getError()));
+					$this->setError(JText::sprintf('INSTL_ERROR_DB', $this->getError()));
 					return false;
 				}
 			}
 
 			// Handle default backend language setting. This feature is available for localized versions of Joomla 1.5.
-			$app = & JFactory::getApplication();
+			$app = JFactory::getApplication();
 			$languages = $app->getLocaliseAdmin();
 			if (in_array($options->language, $languages['admin']) || in_array($options->language, $languages['site']))
 			{
 				// Build the language parameters for the language manager.
 				$params = array();
+
+				// Set default administrator/site language to sample data values:
+				$params['administrator'] = 'en-GB';
+				$params['site'] = 'en-GB';
+
 				if (in_array($options->language, $languages['admin'])) {
 					$params['administrator'] = $options->language;
 				}
 				if (in_array($options->language, $languages['site'])) {
 					$params['site'] = $options->language;
 				}
-				$params = Json_encode($params);
+				$params = json_encode($params);
 
 				// Update the language settings in the language manager.
 				$db->setQuery(
@@ -174,6 +203,9 @@ class JInstallationModelDatabase extends JModel
 					' SET `params` = '.$db->Quote($params) .
 					' WHERE `element`="com_languages"'
 				);
+
+				// Execute the query.
+				$db->query();
 
 				// Check for errors.
 				if ($db->getErrorNum()) {
@@ -192,17 +224,17 @@ class JInstallationModelDatabase extends JModel
 		$options = JArrayHelper::toObject($options, 'JObject');
 
 		// Get a database object.
-		$db = & JInstallationHelperDatabase::getDBO($options->db_type, $options->db_host, $options->db_user, $options->db_pass, $options->db_name, $options->db_prefix);
+		$db = JInstallationHelperDatabase::getDBO($options->db_type, $options->db_host, $options->db_user, $options->db_pass, $options->db_name, $options->db_prefix);
 
 		// Check for errors.
 		if (JError::isError($db)) {
-			$this->setError(JText::sprintf('WARNNOTCONNECTDB', (string)$db));
+			$this->setError(JText::sprintf('INSTL_DATABASE_COULD_NOT_CONNECT', (string)$db));
 			return false;
 		}
 
 		// Check for database errors.
 		if ($err = $db->getErrorNum()) {
-			$this->setError(JText::sprintf('WARNNOTCONNECTDB', $db->getErrorNum()));
+			$this->setError(JText::sprintf('INSTL_DATABASE_COULD_NOT_CONNECT', $db->getErrorNum()));
 			return false;
 		}
 
@@ -215,7 +247,7 @@ class JInstallationModelDatabase extends JModel
 
 		// Attempt to import the database schema.
 		if (!$this->populateDatabase($db, $data)) {
-			$this->setError(JText::sprintf('Instl_Error_DB', $this->getError()));
+			$this->setError(JText::sprintf('INSTL_ERROR_DB', $this->getError()));
 			return false;
 		}
 
@@ -253,7 +285,7 @@ class JInstallationModelDatabase extends JModel
 			);
 
 			// Get a database object.
-			$db = & JDatabase::getInstance($options);
+			$db = JDatabase::getInstance($options);
 		}
 
 		return $db;
@@ -276,10 +308,19 @@ class JInstallationModelDatabase extends JModel
 		$backup = 'bak_';
 
 		// Get the tables in the database.
-		$db->setQuery(
-			'SHOW TABLES' .
-			' FROM '.$db->nameQuote($name)
-		);
+		if($db->name == 'mysql')
+    {
+		  $db->setQuery(
+		  	'SHOW TABLES' .
+		  	' FROM '.$db->nameQuote($name)
+		  );
+    }elseif($db->name == 'mssql'){
+      $db->setQuery(
+      'SELECT NAME' .
+      ' FROM '.$db->nameQuote($name).'..sysobjects WHERE xtype = \'U\''
+    );
+    }
+		
 		if ($tables = $db->loadResultArray())
 		{
 			foreach ($tables as $table)
@@ -368,9 +409,18 @@ class JInstallationModelDatabase extends JModel
 		$return = true;
 
 		// Get the tables in the database.
+		if($db->name == 'mysql')
+    {
 		$db->setQuery(
 			'SHOW TABLES FROM '.$db->nameQuote($name)
 		);
+    }elseif($db->name == 'mssql')
+    {
+		$db->setQuery(
+			'SELECT NAME' .
+			' FROM '.$db->nameQuote($name).'..sysobjects WHERE xtype = \'U\''
+		);
+  }
 		if ($tables = $db->loadResultArray())
 		{
 			foreach ($tables as $table)
@@ -453,7 +503,7 @@ class JInstallationModelDatabase extends JModel
 	function setDatabaseCharset(& $db, $name)
 	{
 		// Only alter the database if it supports the character set.
-		if ($db->hasUTF())
+		/*if ($db->hasUTF())
 		{
 			// Run the create database query.
 			$db->setQuery(
@@ -466,7 +516,7 @@ class JInstallationModelDatabase extends JModel
 			if ($db->getErrorNum()) {
 				return false;
 			}
-		}
+		}*/
 
 		return true;
 	}

@@ -12,17 +12,11 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
 // Load the JavaScript behaviors.
+JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+JHtml::_('script', 'installation/template/js/installation.js', true, false, false, false);
 ?>
-
-<script language="JavaScript" type="text/javascript">
-<!--
-	function validateForm(frm, task) {
-		Joomla.submitform(task);
-	}
-// -->
-</script>
 
 <div id="stepbar">
 	<div class="t">
@@ -41,7 +35,7 @@ JHtml::_('behavior.formvalidation');
 	</div>
 </div>
 
-<form action="index.php" method="post" name="adminForm" class="form-validate">
+<form action="index.php" method="post" id="adminForm" class="form-validate">
 <div id="right">
 	<div id="rightpad">
 		<div id="step">
@@ -54,13 +48,13 @@ JHtml::_('behavior.formvalidation');
 				<div class="far-right">
 <?php if ($this->document->direction == 'ltr') : ?>
 					<div class="button1-right"><div class="prev"><a href="index.php?view=license" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
-					<div class="button1-left"><div class="next"><a onclick="validateForm(adminForm, 'setup.database');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+					<div class="button1-left"><div class="next"><a onclick="validateForm(document.getElementById('adminForm'), 'setup.database');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 <?php elseif ($this->document->direction == 'rtl') : ?>
-					<div class="button1-right"><div class="prev"><a onclick="validateForm(adminForm, 'setup.database');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+					<div class="button1-right"><div class="prev"><a onclick="validateForm(document.getElementById('adminForm'), 'setup.database');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 					<div class="button1-left"><div class="next"><a href="index.php?view=license" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
 <?php endif; ?>
 				</div>
-				<span class="step"><?php echo JText::_('DATABASE_CONFIGURATION'); ?></span>
+				<span class="step"><?php echo JText::_('INSTL_DATABASE'); ?></span>
 			</div>
 			<div class="b">
 				<div class="b">
@@ -75,15 +69,9 @@ JHtml::_('behavior.formvalidation');
 				</div>
 			</div>
 			<div class="m">
-				<h2><?php echo JText::_('CONNECTION_SETTINGS'); ?>:</h2>
+				<h2><?php echo JText::_('INSTL_DATABASE_TITLE'); ?>:</h2>
 				<div class="install-text">
-						<?php echo JText::_('
-							<p>Setting up Joomla! to run on your server involves 4 simple steps...</p>
-							<p>Please enter the hostname of the server Joomla! is to be installed on.</p>
-							<p>Enter the DB (Mysql, PSQl, Oracle...) username, password and database name you wish to use with Joomla.</p>
-							<p>Enter a prefix to be used by tables for this Joomla! installation. Select how to handle exisitng tables from a previous installation.</p>
-							<p>Install the samples unless you are experienced want to start with a virtually empty site.</p>
-						'); ?>
+						<?php echo JText::_('INSTL_DATABASE_DESC'); ?>
 				</div>
 				<div class="install-body">
 					<div class="t">
@@ -93,7 +81,7 @@ JHtml::_('behavior.formvalidation');
 					</div>
 					<div class="m">
 						<h3 class="title-smenu" title="<?php echo JText::_('Basic'); ?>">
-							<?php echo JText::_('BASIC_SETTINGS'); ?>
+							<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>
 						</h3>
 						<div class="section-smenu">
 							<table class="content2">
@@ -110,7 +98,7 @@ JHtml::_('behavior.formvalidation');
 									</td>
 									<td>
 										<em>
-										<?php echo JText::_('Supported databases "mysql, oracle"'); ?>
+										<?php echo JText::_('INSTL_DATABASE_TYPE_DESC'); ?>
 										</em>
 									</td>
 								</tr>
@@ -122,7 +110,7 @@ JHtml::_('behavior.formvalidation');
 									</td>
 									<td>
 										<em>
-										<?php echo JText::_('This is usually "localhost"'); ?>
+										<?php echo JText::_('INSTL_DATABASE_HOST_DESC'); ?>
 										</em>
 									</td>
 								</tr>
@@ -134,7 +122,7 @@ JHtml::_('behavior.formvalidation');
 									</td>
 									<td>
 										<em>
-										<?php echo JText::_('Either something as "root" or a username given by the hoster'); ?>
+										<?php echo JText::_('INSTL_DATABASE_USER_DESC'); ?>
 										</em>
 									</td>
 								</tr>
@@ -146,7 +134,7 @@ JHtml::_('behavior.formvalidation');
 									</td>
 									<td>
 										<em>
-										<?php echo JText::_('For site security using a password for the mysql account is mandatory'); ?>
+										<?php echo JText::_('INSTL_DATABASE_PASSWORD_DESC'); ?>
 										</em>
 									</td>
 								</tr>
@@ -158,85 +146,7 @@ JHtml::_('behavior.formvalidation');
 									</td>
 									<td>
 										<em>
-										<?php echo JText::_('Some hosts allow only a certain DB name per site. Use table prefix in this case for distinct Joomla! sites.'); ?>
-										</em>
-									</td>
-								</tr>
-							</table>
-							<br /><br />
-						</div>
-
-						<h3 class="title-smenu" title="<?php echo JText::_('Advanced DB'); ?>">
-							<?php echo JText::_('ADVANCED_DB_SETTINGS'); ?>
-						</h3>
-						<div class="section-smenu">
-							<table class="content2">
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								
-								<tr>
-									<td colspan="2">
-										<?php echo $this->form->getLabel('db_slave_host'); ?>
-										<br />
-										<?php echo $this->form->getInput('db_slave_host'); ?>
-									</td>
-									<td>
-										<em>
-										<?php echo JText::_('This could be slave - a master replicated db or a read only database host'); ?>
-										</em>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<?php echo $this->form->getLabel('db_slave_user'); ?>
-										<br />
-										<?php echo $this->form->getInput('db_slave_user'); ?>
-									</td>
-									<td>
-										<em>
-										<?php echo JText::_('Either something as "root" or a username given by the hoster'); ?>
-										</em>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<?php echo $this->form->getLabel('db_slave_pass'); ?>
-										<br />
-										<?php echo $this->form->getInput('db_slave_pass'); ?>
-									</td>
-									<td>
-										<em>
-										<?php echo JText::_('For site security using a password for the database account is mandatory'); ?>
-										</em>
-									</td>
-								</tr>
-								
-							</table>
-							<br /><br />
-						</div>
-
-						<h3 class="title-smenu moofx-toggler" title="<?php echo JText::_('Advanced'); ?>">
-							<?php echo JText::_('ADVANCED_SETTINGS'); ?>
-						</h3>
-						<div class="section-smenu moofx-slider">
-							<table class="content2">
-								<tr>
-									<td></td>
-									<td></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<?php echo $this->form->getLabel('db_old'); ?>
-										<br />
-										<?php echo $this->form->getInput('db_old'); ?>
-									</td>
-									<td>
-										<em>
-										<?php echo JText::_('Any existing backup tables from former Joomla! installations will be replaced'); ?>
+										<?php echo JText::_('INSTL_DATABASE_NAME_DESC'); ?>
 										</em>
 									</td>
 								</tr>
@@ -248,10 +158,71 @@ JHtml::_('behavior.formvalidation');
 									</td>
 									<td>
 										<em>
-										<?php echo JText::_('Dont use "old_" since this is used for backup tables'); ?>
+										<?php echo JText::_('INSTL_DATABASE_PREFIX_DESC'); ?>
 										</em>
 									</td>
 								</tr>
+								<tr>
+									<td colspan="2">
+										<?php echo $this->form->getLabel('db_old'); ?>
+										<br />
+										<?php echo $this->form->getInput('db_old'); ?>
+									</td>
+									<td>
+										<em>
+										<?php echo JText::_('INSTL_DATABASE_OLD_PROCESS_DESC'); ?>
+										</em>
+									</td>
+								</tr>																
+							</table>
+						</div>
+						<div class="clr"></div>
+					</div>
+					
+					<div class="m">
+						<h3 class="title-smenu" title="<?php echo JText::_('Slave DB Settings'); ?>">
+							<?php echo JText::_('INSTL_SLAVE_DB_SETTINGS'); ?>
+						</h3>
+						<div class="section-smenu">
+							<table class="content2">
+								
+								<tr>
+									<td colspan="2">
+										<?php echo $this->form->getLabel('slave_db_host'); ?>
+										<br />
+										<?php echo $this->form->getInput('slave_db_host'); ?>
+									</td>
+									<td>
+										<em>
+										<?php echo JText::_('INSTL_SLAVE_DATABASE_HOST_DESC'); ?>
+										</em>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<?php echo $this->form->getLabel('slave_db_user'); ?>
+										<br />
+										<?php echo $this->form->getInput('slave_db_user'); ?>
+									</td>
+									<td>
+										<em>
+										<?php echo JText::_('INSTL_DATABASE_USER_DESC'); ?>
+										</em>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<?php echo $this->form->getLabel('slave_db_pass'); ?>
+										<br />
+										<?php echo $this->form->getInput('slave_db_pass'); ?>
+									</td>
+									<td>
+										<em>
+										<?php echo JText::_('INSTL_DATABASE_PASSWORD_DESC'); ?>
+										</em>
+									</td>
+								</tr>
+																			
 							</table>
 						</div>
 						<div class="clr"></div>
@@ -272,10 +243,8 @@ JHtml::_('behavior.formvalidation');
 			</div>
 		</div>
 	</div>
-</div>
-
-<div class="clr"></div>
-
 	<input type="hidden" name="task" value="" />
 	<?php echo JHtml::_('form.token'); ?>
+</div>
+<div class="clr"></div>
 </form>

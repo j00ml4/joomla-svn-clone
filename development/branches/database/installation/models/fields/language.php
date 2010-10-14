@@ -39,15 +39,24 @@ class JFormFieldLanguage extends JFormFieldList
 	protected function getOptions()
 	{
 		// Initialise variables.
-		$app = & JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Detect the native language.
 		$native = JLanguageHelper::detectLanguage();
+		if (empty($native)) {
+			$native = 'en-GB';
+		}
 
 		// Get a forced language if it exists.
 		$forced = $app->getLocalise();
 		if (!empty($forced['lang'])) {
 			$native = $forced['lang'];
+		}
+
+		// If a language is already set in the session, use this instead
+		$session = JFactory::getSession()->get('setup.options', array());
+		if(!empty($session['language'])){
+			$native = $session['language'];
 		}
 
 		// Get the list of available languages.

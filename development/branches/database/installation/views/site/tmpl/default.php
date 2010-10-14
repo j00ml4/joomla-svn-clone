@@ -6,22 +6,27 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-defined('_JEXEC') or die('Invalid Request.');
+defined('_JEXEC') or die;
 
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
 // Load the JavaScript behaviors.
+JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+JHtml::_('script', 'installation/template/js/installation.js', true, false, false, false);
 ?>
 
-<script language="JavaScript" type="text/javascript">
-<!--
-	function validateForm(frm, task) {
-		Joomla.submitform(task);
-	}
-// -->
+<script type="text/javascript">
+<?php if ($this->sample_installed) : ?>
+
+	window.addEvent('domready', function() {
+		var el = document.getElementById('theDefault').children[0];
+		el.setAttribute('disabled','disabled');
+		el.setAttribute('value','<?php echo JText::_('INSTL_SITE_SAMPLE_LOADED', true); ?>');
+	});
+<?php endif; ?>
 </script>
 
 <div id="stepbar">
@@ -53,13 +58,13 @@ JHtml::_('behavior.formvalidation');
 				<div class="far-right">
 <?php if ($this->document->direction == 'ltr') : ?>
 					<div class="button1-right"><div class="prev"><a href="index.php?view=filesystem" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
-					<div class="button1-left"><div class="next"><a onclick="validateForm(adminForm, 'setup.saveconfig');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+					<div class="button1-left"><div class="next"><a onclick="validateForm(document.getElementById('adminForm'), 'setup.saveconfig');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 <?php elseif ($this->document->direction == 'rtl') : ?>
-					<div class="button1-right"><div class="prev"><a onclick="validateForm(adminForm, 'setup.saveconfig');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+					<div class="button1-right"><div class="prev"><a onclick="validateForm(document.getElementById('adminForm'), 'setup.saveconfig');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 					<div class="button1-left"><div class="next"><a href="index.php?view=filesystem" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
 <?php endif; ?>
 				</div>
-				<span class="step"><?php echo JText::_('MAIN_CONFIGURATION'); ?></span>
+				<span class="step"><?php echo JText::_('INSTL_SITE'); ?></span>
 			</div>
 			<div class="b">
 				<div class="b">
@@ -74,10 +79,10 @@ JHtml::_('behavior.formvalidation');
 				</div>
 			</div>
 			<div class="m">
-				<form action="index.php" method="post" name="adminForm" class="form-validate">
-				<h2><?php echo JText::_('SITE_NAME'); ?></h2>
+				<form action="index.php" method="post" id="adminForm" class="form-validate">
+				<h2><?php echo JText::_('INSTL_SITE_NAME_TITLE'); ?></h2>
 				<div class="install-text">
-					<?php echo JText::_('ENTERSITENAME'); ?>
+					<?php echo JText::_('INSTL_SITE_NAME_DESC'); ?>
 				</div>
 				<div class="install-body">
 					<div class="t">
@@ -86,18 +91,44 @@ JHtml::_('behavior.formvalidation');
 						</div>
 					</div>
 					<div class="m">
-						<fieldset>
+						<h3 class="title-smenu" title="<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>">
+							<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>
+						</h3>
+						<div class="section-smenu">
 							<table class="content2">
 								<tr>
 									<td class="item">
 										<?php echo $this->form->getLabel('site_name'); ?>
 									</td>
-									<td align="center">
+									<td>
 										<?php echo $this->form->getInput('site_name'); ?>
+									</td>
+								</tr></table>
+								</div>
+
+						<h3 class="title-smenu moofx-toggler" title="<?php echo JText::_('INSTL_SITE_META_ADVANCED_SETTINGS'); ?>">
+							<?php echo JText::_('INSTL_SITE_META_ADVANCED_SETTINGS'); ?>
+						</h3>
+						<div class="section-smenu moofx-slider">
+								<table class="content2">
+								<tr>
+									<td title="<?php echo JText::_('INSTL_SITE_METADESC_TITLE_LABEL'); ?>">
+										<?php echo $this->form->getLabel('site_metadesc'); ?>
+									</td>
+									<td>
+										<?php echo $this->form->getInput('site_metadesc'); ?>
+									</td>
+								</tr>
+								<tr>
+									<td title="<?php echo JText::_('INSTL_SITE_METAKEYS_TITLE_LABEL'); ?>">
+										<?php echo $this->form->getLabel('site_metakeys'); ?>
+									</td>
+									<td>
+										<?php echo $this->form->getInput('site_metakeys'); ?>
 									</td>
 								</tr>
 							</table>
-						</fieldset>
+							</div>
 					</div>
 					<div class="b">
 						<div class="b">
@@ -109,9 +140,9 @@ JHtml::_('behavior.formvalidation');
 
 				<div class="newsection"></div>
 
-				<h2><?php echo JText::_('confTitle'); ?></h2>
+				<h2><?php echo JText::_('INSTL_SITE_CONF_TITLE'); ?></h2>
 				<div class="install-text">
-					<?php echo JText::_('tipConfSteps'); ?>
+					<?php echo JText::_('INSTL_SITE_CONF_DESC'); ?>
 				</div>
 				<div class="install-body">
 					<div class="t">
@@ -126,7 +157,7 @@ JHtml::_('behavior.formvalidation');
 									<td class="item">
 										<?php echo $this->form->getLabel('admin_email'); ?>
 									</td>
-									<td align="center">
+									<td>
 										<?php echo $this->form->getInput('admin_email'); ?>
 									</td>
 								</tr>
@@ -134,7 +165,7 @@ JHtml::_('behavior.formvalidation');
 									<td class="item">
 										<?php echo $this->form->getLabel('admin_user'); ?>
 									</td>
-									<td align="center">
+									<td>
 										<?php echo $this->form->getInput('admin_user'); ?>
 									</td>
 								</tr>
@@ -142,7 +173,7 @@ JHtml::_('behavior.formvalidation');
 									<td class="item">
 										<?php echo $this->form->getLabel('admin_password'); ?>
 									</td>
-									<td align="center">
+									<td>
 										<?php echo $this->form->getInput('admin_password'); ?>
 									</td>
 								</tr>
@@ -150,7 +181,7 @@ JHtml::_('behavior.formvalidation');
 									<td class="item">
 										<?php echo $this->form->getLabel('admin_password2'); ?>
 									</td>
-									<td align="center">
+									<td>
 										<?php echo $this->form->getInput('admin_password2'); ?>
 									</td>
 								</tr>
@@ -163,21 +194,21 @@ JHtml::_('behavior.formvalidation');
 						</div>
 					</div>
 					<div class="clr"></div>
+					<input type="hidden" name="task" value="" />
+					<?php echo JHtml::_('form.token'); ?>
+					<?php echo $this->form->getInput('sample_installed'); ?>
 				</div>
-
-				<input type="hidden" name="task" value="" />
-				<?php echo JHtml::_('form.token'); ?>
 			</form>
 
 			<div class="clr"></div>
 
-			<form enctype="multipart/form-data" action="index.php" method="post" name="filename" id="filename">
-				<h2><?php echo JText::_('loadSampleOrMigrate'); ?></h2>
+			<form enctype="multipart/form-data" action="index.php" method="post" id="filename">
+				<h2><?php echo JText::_('INSTL_SITE_LOAD_SAMPLE_TITLE'); ?></h2>
 				<div class="install-text">
-					<p><?php echo JText::_('LOADSQLINSTRUCTIONS1'); ?></p>
-					<p><?php echo JText::_('LOADSQLINSTRUCTIONS2'); ?></p>
-					<p><?php echo JText::_('LOADSQLINSTRUCTIONS3'); ?></p>
-					<p><?php echo JText::_('LOADSQLINSTRUCTIONS7'); ?></p>
+					<p><?php echo JText::_('INSTL_SITE_LOAD_SAMPLE_DESC1'); ?></p>
+					<p><?php echo JText::_('INSTL_SITE_LOAD_SAMPLE_DESC2'); ?></p>
+					<p><?php echo JText::_('INSTL_SITE_LOAD_SAMPLE_DESC3'); ?></p>
+					<p><?php echo JText::_('INSTL_SITE_LOAD_SAMPLE_DESC7'); ?></p>
 				</div>
 				<div class="install-body">
 				<div class="t">
@@ -189,27 +220,33 @@ JHtml::_('behavior.formvalidation');
 					<fieldset>
 						<table class="content2">
 							<tr>
-								<td width="30%"></td>
-								<td width="70%"></td>
+								<td class="item"></td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
-									<span id="theDefault"><input class="button" type="button" name="instDefault" value="<?php echo JText::_('clickToInstallDefault'); ?>" onclick="Install.sampleData(this);"/></span>
+									<span id="theDefault"><input class="button" type="button" name="instDefault" value="<?php echo JText::_('INSTL_SITE_INSTALL_SAMPLE_LABEL'); ?>" onclick="Install.sampleData(this);"/></span>
 								</td>
 								<td>
-									<em><?php echo JText::_('tipInstallDefault'); ?></em>
+									<em><?php echo JText::_('INSTL_SITE_INSTALL_SAMPLE_DESC'); ?></em>
 								</td>
 							</tr>
 						</table>
 					</fieldset>
+					<div class="message inlineError" id="theDefaultError" style="display: none">
+						<dl>
+							<dt class="error"><?php echo JText::_('JERROR'); ?></dt>
+							<dd id="theDefaultErrorMessage"></dd>
+						</dl>
+					</div>
 				</div>
 				<div class="b">
 					<div class="b">
 						<div class="b"></div>
 					</div>
 				</div>
+				<?php echo JHtml::_('form.token'); ?>
 			</div>
-			<?php echo JHtml::_('form.token'); ?>
 		</form>
 
 		<div class="clr"></div>

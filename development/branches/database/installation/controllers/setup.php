@@ -19,38 +19,47 @@ class JInstallationControllerSetup extends JController
 	/**
 	 * Method to set the setup language for the application.
 	 *
-	 * @access	public
 	 * @return	void
-	 * @since	1.0
+	 * @since	1.6
 	 */
-	function setlanguage()
+	public function setlanguage()
 	{
-		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
-
 		// Get the application object.
-		$app = & JFactory::getApplication();
+		$app = JFactory::getApplication();
+
+		// Check for potentially unwritable session
+		$session = JFactory::getSession();
+
+		if ($session->isNew()) {
+			JError::setErrorHandling(E_ERROR, 'message');
+			JError::raise(E_ERROR, 500, JText::_('INSTL_COOKIES_NOT_ENABLED'));
+
+			return false;
+		}
+
+		// Check for request forgeries.
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get the setup model.
-		$model = &$this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
+		$model = $this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
 
 		// Get the posted values from the request and validate them.
 		$data = JRequest::getVar('jform', array(), 'post', 'array');
 		$return	= $model->validate($data, 'language');
 
 		// Check for validation errors.
-		if ($return === false)
-		{
+		if ($return === false) {
+
 			// Get the validation messages.
 			$errors	= $model->getErrors();
 
 			// Push up to three validation messages out to the user.
-			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
-			{
+			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
+
 				if (JError::isError($errors[$i])) {
-					$app->enqueueMessage($errors[$i]->getMessage(), 'notice');
+					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				} else {
-					$app->enqueueMessage($errors[$i], 'notice');
+					$app->enqueueMessage($errors[$i], 'warning');
 				}
 			}
 
@@ -66,39 +75,42 @@ class JInstallationControllerSetup extends JController
 		$this->setRedirect('index.php?view=preinstall');
 	}
 
+	/**
+	 * @since	1.6
+	 */
 	function database()
 	{
 		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get the application object.
-		$app = & JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Get the setup model.
-		$model = &$this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
+		$model = $this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
 
 		// Get the posted values from the request and validate them.
 		$data = JRequest::getVar('jform', array(), 'post', 'array');
 		$return	= $model->validate($data, 'database');
 
 		// Check for validation errors.
-		if ($return === false)
-		{
+		if ($return === false) {
 			// Get the validation messages.
 			$errors	= $model->getErrors();
 
 			// Push up to three validation messages out to the user.
-			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
-			{
+			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
+
 				if (JError::isError($errors[$i])) {
-					$app->enqueueMessage($errors[$i]->getMessage(), 'notice');
+					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				} else {
-					$app->enqueueMessage($errors[$i], 'notice');
+					$app->enqueueMessage($errors[$i], 'warning');
 				}
 			}
 
 			// Redirect back to the database selection screen.
 			$this->setRedirect('index.php?view=database');
+
 			return false;
 		}
 
@@ -106,7 +118,7 @@ class JInstallationControllerSetup extends JController
 		$vars = $model->storeOptions($return);
 
 		// Get the database model.
-		$database = & $this->getModel('Database', 'JInstallationModel', array('dbo' => null));
+		$database = $this->getModel('Database', 'JInstallationModel', array('dbo' => null));
 
 		// Attempt to initialise the database.
 		$return = $database->initialise($vars);
@@ -115,45 +127,53 @@ class JInstallationControllerSetup extends JController
 		if (!$return) {
 			$this->setMessage($database->getError(), 'notice');
 			$this->setRedirect('index.php?view=database');
-		}
-		else {
+		} else {
+			// Mark sample content as not installed yet
+			$data = array(
+				'sample_installed' => '0'
+			);
+			$dummy = $model->storeOptions($data);
+
 			$this->setRedirect('index.php?view=filesystem');
 		}
 	}
 
+	/**
+	 * @since	1.6
+	 */
 	function filesystem()
 	{
 		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get the application object.
-		$app = & JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Get the setup model.
-		$model = &$this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
+		$model = $this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
 
 		// Get the posted values from the request and validate them.
 		$data = JRequest::getVar('jform', array(), 'post', 'array');
 		$return	= $model->validate($data, 'filesystem');
 
 		// Check for validation errors.
-		if ($return === false)
-		{
+		if ($return === false) {
 			// Get the validation messages.
 			$errors	= $model->getErrors();
 
 			// Push up to three validation messages out to the user.
-			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
-			{
+			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
+
 				if (JError::isError($errors[$i])) {
-					$app->enqueueMessage($errors[$i]->getMessage(), 'notice');
+					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				} else {
-					$app->enqueueMessage($errors[$i], 'notice');
+					$app->enqueueMessage($errors[$i], 'warning');
 				}
 			}
 
 			// Redirect back to the database selection screen.
 			$this->setRedirect('index.php?view=filesystem');
+
 			return false;
 		}
 
@@ -163,39 +183,48 @@ class JInstallationControllerSetup extends JController
 		$this->setRedirect('index.php?view=site');
 	}
 
+	/**
+	 * @since	1.6
+	 */
 	function saveconfig()
 	{
 		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
 		// Get the application object.
-		$app = & JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Get the setup model.
-		$model = &$this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
+		$model = $this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
 
 		// Get the posted values from the request and validate them.
 		$data = JRequest::getVar('jform', array(), 'post', 'array');
 		$return	= $model->validate($data, 'site');
 
+		// Attempt to save the data before validation
+		$form = $model->getForm();
+		$data = $form->filter($data);
+		unset($data['admin_password2']);
+		$model->storeOptions($data);
+
 		// Check for validation errors.
-		if ($return === false)
-		{
+		if ($return === false) {
 			// Get the validation messages.
 			$errors	= $model->getErrors();
 
 			// Push up to three validation messages out to the user.
-			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
-			{
+			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
+
 				if (JError::isError($errors[$i])) {
-					$app->enqueueMessage($errors[$i]->getMessage(), 'notice');
+					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				} else {
-					$app->enqueueMessage($errors[$i], 'notice');
+					$app->enqueueMessage($errors[$i], 'warning');
 				}
 			}
 
 			// Redirect back to the database selection screen.
 			$this->setRedirect('index.php?view=site');
+
 			return false;
 		}
 
@@ -204,7 +233,7 @@ class JInstallationControllerSetup extends JController
 		$vars = $model->storeOptions($return);
 
 		// Get the configuration model.
-		$configuration = & $this->getModel('Configuration', 'JInstallationModel', array('dbo' => null));
+		$configuration = $this->getModel('Configuration', 'JInstallationModel', array('dbo' => null));
 
 		// Attempt to setup the configuration.
 		$return = $configuration->setup($vars);
@@ -213,8 +242,7 @@ class JInstallationControllerSetup extends JController
 		if (!$return) {
 			$this->setMessage($configuration->getError(), 'notice');
 			$this->setRedirect('index.php?view=site');
-		}
-		else {
+		} else {
 			$this->setRedirect('index.php?view=complete');
 		}
 	}
