@@ -66,15 +66,15 @@ defined('_JEXEC') or die;
 function pagination_list_footer($list)
 {
 	// Initialise variables.
-	$lang = &JFactory::getLanguage();
-	$html = "<del class=\"container\"><div class=\"pagination\">\n";
+	$lang = JFactory::getLanguage();
+	$html = "<div class=\"container\"><div class=\"pagination\">\n";
 
-	$html .= "\n<div class=\"limit\">".JText::_('JLIB_HTML_DISPLAY_NUM').$list['limitfield']."</div>";
+	$html .= "\n<div class=\"limit\">".JText::_('JGLOBAL_DISPLAY_NUM').$list['limitfield']."</div>";
 	$html .= $list['pageslinks'];
 	$html .= "\n<div class=\"limit\">".$list['pagescounter']."</div>";
 
 	$html .= "\n<input type=\"hidden\" name=\"" . $list['prefix'] . "limitstart\" value=\"".$list['limitstart']."\" />";
-	$html .= "\n</div></del>";
+	$html .= "\n</div></div>";
 
 	return $html;
 }
@@ -82,7 +82,7 @@ function pagination_list_footer($list)
 function pagination_list_render($list)
 {
 	// Initialise variables.
-	$lang = &JFactory::getLanguage();
+	$lang = JFactory::getLanguage();
 	$html = null;
 
 	if ($list['start']['active']) {
@@ -119,9 +119,9 @@ function pagination_list_render($list)
 function pagination_item_active(&$item)
 {
 	if ($item->base>0)
-		return "<a href=\"#\" title=\"".$item->text."\" onclick=\"javascript: document.adminForm." . $item->prefix . "limitstart.value=".$item->base."; submitform();return false;\">".$item->text."</a>";
+		return "<a href=\"#\" title=\"".$item->text."\" onclick=\"javascript: document.adminForm." . $item->prefix . "limitstart.value=".$item->base."; Joomla.submitform();return false;\">".$item->text."</a>";
 	else
-		return "<a href=\"#\" title=\"".$item->text."\" onclick=\"javascript: document.adminForm." . $item->prefix . "limitstart.value=0; submitform();return false;\">".$item->text."</a>";
+		return "<a href=\"#\" title=\"".$item->text."\" onclick=\"javascript: document.adminForm." . $item->prefix . "limitstart.value=0; Joomla.submitform();return false;\">".$item->text."</a>";
 }
 
 function pagination_item_inactive(&$item)

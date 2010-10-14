@@ -57,25 +57,28 @@ class RedirectViewLink extends JView
 		$isNew		= ($this->item->id == 0);
 		$canDo		= RedirectHelper::getActions();
 
-		JToolBarHelper::title(JText::_('COM_REDIRECT_MANAGER_LINK'));
+		JToolBarHelper::title(JText::_('COM_REDIRECT_MANAGER_LINK'), 'redirect');
 
 		// If not checked out, can save the item.
 		if ($canDo->get('core.edit')) {
 			JToolBarHelper::apply('link.apply', 'JTOOLBAR_APPLY');
 			JToolBarHelper::save('link.save', 'JTOOLBAR_SAVE');
 		}
-		// If an existing item, can save to a copy.
-		if (!$isNew && $canDo->get('core.create')) {
-			JToolBarHelper::custom('link.save2copy', 'copy.png', 'copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
-		}
+
+		// This component does not support Save as Copy due to uniqueness checks.
+		// While it can be done, it causes too much confusion if the user does
+		// not change the Old URL.
+
 		if ($canDo->get('core.edit') && $canDo->get('core.create')) {
-			JToolBarHelper::addNew('link.save2new', 'JTOOLBAR_SAVE_AND_NEW');
+			JToolBarHelper::custom('link.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
 		}
+
 		if (empty($this->item->id)) {
 			JToolBarHelper::cancel('link.cancel', 'JTOOLBAR_CANCEL');
 		} else {
 			JToolBarHelper::cancel('link.cancel', 'JTOOLBAR_CLOSE');
 		}
-		JToolBarHelper::help('screen.redirect.link','JTOOLBAR_HELP');
+
+		JToolBarHelper::help('JHELP_COMPONENTS_REDIRECT_MANAGER_EDIT');
 	}
 }

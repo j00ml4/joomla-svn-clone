@@ -20,6 +20,24 @@ jimport('joomla.application.component.controllerform');
 class ModulesControllerModule extends JControllerForm
 {
 	/**
+	 * Override the execute method to clear the modules cache for non-display tasks.
+	 *
+	 * @param	string		The task to perform.
+	 * @return	mixed|false	The value returned by the called method, false in error case.
+	 * @since	1.6
+	 */
+	public function execute($task)
+	{
+		parent::execute($task);
+
+		// Clear the component's cache
+		if ($task != 'edit' && $task != 'cancel' && $task != 'add') {
+			$cache = JFactory::getCache('com_modules');
+			$cache->clean();
+		}
+	}
+
+	/**
 	 * Override parent add method.
 	 */
 	public function add()
@@ -57,9 +75,9 @@ class ModulesControllerModule extends JControllerForm
 	}
 
 	/**
-	 * Override parent _allowSave method.
+	 * Override parent allowSave method.
 	 */
-	protected function _allowSave(&$data, $key = 'id')
+	protected function allowSave(&$data, $key = 'id')
 	{
 		// use custom position if selected
 		if (empty($data['position'])) {
@@ -68,18 +86,32 @@ class ModulesControllerModule extends JControllerForm
 
 		unset($data['custom_position']);
 
-		return parent::_allowSave($data, $key);
+		return parent::allowSave($data, $key);
 	}
 
 	/**
-	 * Override parent save method.
+	 * Function that allows child controller access to model data after the data has been saved.
+	 *
+	 * @param	JModel	$model	The data model object.
+	 *
+	 * @return	void
+	 * @since	1.6
 	 */
-	public function save()
+	protected function postSaveHook(JModel &$model)
 	{
-		if ($result = parent::save()) {
-			$app = JFactory::getApplication();
-			$app->setUserState('com_modules.add.module.extension_id', null);
+		// Initialise variables.
+		$app = JFactory::getApplication();
+		$task = $this->getTask();
+
+		switch ($task)
+		{
+			case 'save2new':
+				$app->setUserState('com_modules.add.module.extension_id', $model->getState('module.extension_id'));
+				break;
+
+			default:
+				$app->setUserState('com_modules.add.module.extension_id', null);
+				break;
 		}
-		return $result;
 	}
 }

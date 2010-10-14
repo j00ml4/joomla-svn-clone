@@ -15,40 +15,33 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 // Load the tooltip behavior.
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
-
+$canDo = UsersHelper::getActions();
 ?>
 
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'group.cancel' || document.formvalidator.isValid(document.id('group-form'))) {
-			submitform(task);
+			Joomla.submitform(task, document.getElementById('group-form'));
 		}
 	}
-// -->
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_users'); ?>" method="post" name="adminForm" id="group-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_users'); ?>" method="post" name="adminForm" id="group-form" class="form-validate">
 	<div class="width-100">
 		<fieldset class="adminform">
 			<legend><?php echo JText::_('COM_USERS_USERGROUP_DETAILS');?></legend>
-			<?php echo $this->form->getLabel('title'); ?>
-			<?php echo $this->form->getInput('title'); ?>
+			<ul class="adminformlist">
+				<li><?php echo $this->form->getLabel('title'); ?>
+				<?php echo $this->form->getInput('title'); ?></li>
 
-			<?php echo $this->form->getLabel('parent_id'); ?>
-			<?php echo $this->form->getInput('parent_id'); ?>
+				<?php $parent_id = $this->form->getField('parent_id');?>
+				<li><?php if (!$parent_id->hidden) echo $parent_id->label; ?>
+				<?php echo $parent_id->input; ?></li>
+			</ul>
 		</fieldset>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHtml::_('form.token'); ?>
 	</div>
-
-	<div class="width-50">
-		<fieldset id="user-groups">
-			<legend><?php echo JText::_('COM_USERS_ACTIONS_AVAILABLE');?></legend>
-			<?php //echo JHtml::_('access.actions', 'jform[actions]', $this->item->actions); ?>
-		</fieldset>
-	</div>
-
-	<input type="hidden" name="task" value="" />
-	<?php echo JHtml::_('form.token'); ?>
 </form>
 <div class="clr"></div>

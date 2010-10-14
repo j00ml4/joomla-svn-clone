@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<install
+<extension
 	type="module"
 	version="1.6.0"
 	client="administrator">
@@ -19,6 +19,7 @@
 		<filename>index.html</filename>
 		<folder>tmpl</folder>
 	</files>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_ADMIN_MENU" />
 	<config>
 		<fields name="params">
 			<fieldset name="advanced">
@@ -30,10 +31,29 @@
 				<field
 					name="moduleclass_sfx"
 					type="text"
-					default=""
 					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
 					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
-
+				
+				<field
+					name="shownew"
+					type="list"
+					default="1"
+					label="MOD_MENU_FIELD_SHOWNEW"
+					description="MOD_MENU_FIELD_SHOWNEW_DESC">
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+				
+				<field
+					name="showhelp"
+					type="list"
+					default="1"
+					label="MOD_MENU_FIELD_SHOWHELP"
+					description="MOD_MENU_FIELD_SHOWHELP_DESC">
+					<option value="0">JHIDE</option>
+					<option value="1">JSHOW</option>
+				</field>
+				
 				<field
 					name="cache"
 					type="list"
@@ -46,4 +66,4 @@
 			</fieldset>
 		</fields>
 	</config>
-</install>
+</extension>

@@ -4,10 +4,12 @@
 	<fieldset>
 		<field
 			name="id"
-			type="hidden"
+			type="text"
+			class="readonly"
+			label="JGLOBAL_FIELD_ID_LABEL"
+			description ="JGLOBAL_FIELD_ID_DESC"
 			default="0"
 			filter="int"
-			required="true"
 			readonly="true"/>
 
 		<field
@@ -24,7 +26,6 @@
 			type="alias"
 			label="JFIELD_ALIAS_LABEL"
 			description="COM_MENUS_ITEM_FIELD_ALIAS_DESC"
-			default=""
 			class="inputbox"
 			size="40"/>
 
@@ -33,7 +34,6 @@
 			type="text"
 			label="JFIELD_NOTE_LABEL"
 			description="COM_MENUS_ITEM_FIELD_NOTE_DESC"
-			default=""
 			class="inputbox"
 			size="40"/>
 
@@ -42,7 +42,7 @@
 			type="link"
 			label="COM_MENUS_ITEM_FIELD_LINK_LABEL"
 			description="COM_MENUS_ITEM_FIELD_LINK_DESC"
-			default=""
+			readonly="true"
 			class="inputbox"
 			size="50"/>
 
@@ -52,7 +52,6 @@
 			label="COM_MENUS_ITEM_FIELD_ASSIGNED_LABEL"
 			description="COM_MENUS_ITEM_FIELD_ASSIGNED_DESC"
 			class="inputbox"
-			default=""
 			required="true"
 			size="1" />
 
@@ -61,7 +60,6 @@
 			type="menutype"
 			label="COM_MENUS_ITEM_FIELD_TYPE_LABEL"
 			description="COM_MENUS_ITEM_FIELD_TYPE_DESC"
-			default=""
 			class="inputbox"
 			required="true"
 			size="40" />
@@ -71,7 +69,7 @@
 			type="list"
 			id="published"
 			class="inputbox"
-			label="JFIELD_PUBLISHED_LABEL"
+			label="JGLOBAL_STATE"
 			description="JFIELD_PUBLISHED_DESC"
 			size="1"
 			default="1"
@@ -108,7 +106,6 @@
 			type="ordering"
 			label="JFIELD_ORDERING_LABEL"
 			description="JFIELD_ORDERING_DESC"
-			default=""
 			filter="int"
 			class="inputbox"/>
 
@@ -141,7 +138,6 @@
 			type="templatestyle"
 			label="COM_MENUS_ITEM_FIELD_TEMPLATE_LABEL"
 			description="COM_MENUS_ITEM_FIELD_TEMPLATE_DESC"
-			default=""
 			filter="int"
 			class="inputbox">
 			<option value="0">JOPTION_USE_DEFAULT</option>
@@ -159,6 +155,15 @@
 				value="0">JNO</option>
 			<option
 				value="1">JYES</option>
+		</field>
+
+		<field
+			name="language"
+			type="contentlanguage"
+			label="JFIELD_LANGUAGE_LABEL"
+			description="JFIELD_MODULE_LANGUAGE_DESC"
+			class="inputbox">
+			<option value="*">JALL</option>
 		</field>
 
 		<field

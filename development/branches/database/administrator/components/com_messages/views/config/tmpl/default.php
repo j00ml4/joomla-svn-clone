@@ -17,14 +17,12 @@ JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'config.cancel' || document.formvalidator.isValid(document.id('config-form'))) {
-			submitform(task);
+			Joomla.submitform(task, document.getElementById('config-form'));
 		}
 	}
-// -->
 </script>
 <form action="<?php echo JRoute::_('index.php?option=com_messages'); ?>" method="post" name="adminForm" id="message-form" class="form-validate">
 	<fieldset>
@@ -50,8 +48,7 @@ JHtml::_('behavior.keepalive');
 		<?php echo $this->form->getLabel('auto_purge'); ?>
 		<?php echo $this->form->getInput('auto_purge'); ?>
 
+		<input type="hidden" name="task" value="" />
+		<?php echo JHtml::_('form.token'); ?>
 	</fieldset>
-
-	<input type="hidden" name="task" value="" />
-	<?php echo JHtml::_('form.token'); ?>
 </form>

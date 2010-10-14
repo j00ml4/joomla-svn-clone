@@ -87,31 +87,33 @@ class BannersTableBanner extends JTable
 	 */
 	public function bind($array, $ignore = array())
 	{
-		if (!isset($array['params']))
-		{
-			$parameter = new JParameter;
-			$params=array();
-			// custom group
-			if (isset($array['custom']) && is_array($array['custom']))
-			{
-				$params['custom']=$array['custom'];
-			}
-			if (isset($array['alt']) && is_array($array['alt']))
-			{
-				$params['alt']=$array['alt'];
-			}
-			if (isset($array['flash']) && is_array($array['flash']))
-			{
-				$params['flash']=$array['flash'];
-			}
-			if (isset($array['image']) && is_array($array['image']))
-			{
-				$params['image']=$array['image'];
+		if (isset($array['params']) && is_array($array['params'])) {
+			$registry = new JRegistry();
+			$registry->loadArray($array['params']);
+
+			if((int) $registry->get('width', 0) < 0){
+				$this->setError(JText::sprintf('JLIB_DATABASE_ERROR_NEGATIVE_NOT_PERMITTED', JText::_('COM_BANNERS_FIELD_WIDTH_LABEL')));
+				return false;
 			}
 
-			// encode params to JSON
-			$parameter->loadArray($params);
-			$array['params'] = (string)$parameter;
+			if((int) $registry->get('height', 0) < 0){
+				$this->setError(JText::sprintf('JLIB_DATABASE_ERROR_NEGATIVE_NOT_PERMITTED', JText::_('COM_BANNERS_FIELD_HEIGHT_LABEL')));
+				return false;
+			}
+
+			// Converts the width and height to an absolute numeric value:
+			$width = abs((int) $registry->get('width', 0));
+			$height = abs((int) $registry->get('height', 0));
+
+			// Sets the width and height to an empty string if = 0
+			$registry->set('width', ($width ? $width : ''));
+			$registry->set('height', ($height ? $height : ''));
+
+			$array['params'] = (string)$registry;
+		}
+
+		if (isset($array['imptotal'])) {
+			$array['imptotal'] = abs((int) $array['imptotal']);
 		}
 
 		return parent::bind($array, $ignore);
@@ -162,7 +164,7 @@ class BannersTableBanner extends JTable
 		else
 		{
 			// Get the old row
-			$oldrow = & JTable::getInstance('Banner', 'BannersTable');
+			$oldrow = JTable::getInstance('Banner', 'BannersTable');
 			if (!$oldrow->load($this->id) && $oldrow->getError())
 			{
 				$this->setError($oldrow->getError());
@@ -180,31 +182,7 @@ class BannersTableBanner extends JTable
 		}
 		return count($this->getErrors())==0;
 	}
-	/**
-	 * Overloaded load function
-	 *
-	 * @param	int $pk primary key
-	 * @param	boolean $reset reset data
-	 * @return	boolean
-	 * @see JTable:load
-	 */
-	public function load($pk = null, $reset = true)
-	{
-		if (parent::load($pk, $reset))
-		{
-			// Convert the params field to a parameter.
-			$registry = new JRegistry;
-			$registry->loadJSON($this->params);
-			$this->params = $registry;
-			// Set customcode
-			$this->params->set('custom.bannercode', JFilterOutput::objectHTMLSafe( $this->params->get('custom.bannercode',''), ENT_QUOTES));
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+
 	/**
 	 * Method to set the publishing state for a row or list of rows in the database
 	 * table.  The method respects checked out rows by other users and will attempt
@@ -241,7 +219,7 @@ class BannersTableBanner extends JTable
 		}
 
 		// Get an instance of the table
-		$table = & JTable::getInstance('Banner','BannersTable');
+		$table = JTable::getInstance('Banner','BannersTable');
 
 		// For all keys
 		foreach ($pks as $pk)
@@ -257,6 +235,8 @@ class BannersTableBanner extends JTable
 			{
 				// Change the state
 				$table->state = $state;
+				$table->checked_out=0;
+				$table->checked_out_time=0;
 
 				// Check the row
 				$table->check();
@@ -306,7 +286,7 @@ class BannersTableBanner extends JTable
 		}
 
 		// Get an instance of the table
-		$table = & JTable::getInstance('Banner','BannersTable');
+		$table = JTable::getInstance('Banner','BannersTable');
 
 		// For all keys
 		foreach ($pks as $pk)
@@ -322,6 +302,8 @@ class BannersTableBanner extends JTable
 			{
 				// Change the state
 				$table->sticky = $state;
+				$table->checked_out=0;
+				$table->checked_out_time=0;
 
 				// Check the row
 				$table->check();

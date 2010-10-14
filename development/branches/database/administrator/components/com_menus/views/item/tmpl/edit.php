@@ -19,70 +19,85 @@ JHTML::_('behavior.modal');
 ?>
 
 <script type="text/javascript">
-<!--
-	function submitbutton(task)
+	function submitbutton(task, type)
 	{
-		if (task == 'item.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
-			submitform(task);
+		if (task == 'item.setType') {
+			document.id('item-form').elements['jform[type]'].value = type;
+			Joomla.submitform(task, document.getElementById('item-form'));
+		} else if (task == 'item.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
+			Joomla.submitform(task, document.getElementById('item-form'));
+		} else {
+			// special case for modal popups validation response
+			$$('#item-form .modal-value.invalid').each(function(field){
+				var idReversed = field.id.split("").reverse().join("");
+				var separatorLocation = idReversed.indexOf('_');
+				var name = idReversed.substr(separatorLocation).split("").reverse().join("")+'name';
+				$(name).addClass('invalid');
+			});
 		}
 	}
-// -->
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_menus'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_menus'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 
 <div class="width-60 fltlft">
 	<fieldset class="adminform">
-		<legend><?php echo JText::_('COM_MENUS_ITEM_REQUIRED');?></legend>
-
-			<?php echo $this->form->getLabel('title'); ?>
-			<?php echo $this->form->getInput('title'); ?>
-			<?php echo $this->form->getLabel('type'); ?>
-			<?php echo $this->form->getInput('type'); ?>
-
-			<?php if ($this->item->type =='url'){ ?>
-				<?php echo $this->form->getLabel('link'); ?>
-				<?php echo $this->form->getInput('link'); ?>
-			<?php } ?>
-
-	</fieldset>
-	<fieldset class="adminform">
 		<legend><?php echo JText::_('COM_MENUS_ITEM_DETAILS');?></legend>
-
-			<?php echo $this->form->getLabel('alias'); ?>
-			<?php echo $this->form->getInput('alias'); ?>
-
-			<?php echo $this->form->getLabel('note'); ?>
-			<?php echo $this->form->getInput('note'); ?>
+			<ul class="adminformlist">
 
 
+				<li><?php echo $this->form->getLabel('type'); ?>
+				<?php echo $this->form->getInput('type'); ?></li>
 
-			<?php if ($this->item->type !=='url'){ ?>
-				<?php echo $this->form->getLabel('link'); ?>
-				<?php echo $this->form->getInput('link'); ?>
-			<?php } ?>
+				<li><?php echo $this->form->getLabel('title'); ?>
+				<?php echo $this->form->getInput('title'); ?></li>
 
-			<?php echo $this->form->getLabel('published'); ?>
-			<?php echo $this->form->getInput('published'); ?>
+				<?php if ($this->item->type =='url'): ?>
+					<?php $this->form->setFieldAttribute('link','readonly','false');?>
+					<li><?php echo $this->form->getLabel('link'); ?>
+					<?php echo $this->form->getInput('link'); ?></li>
+				<?php endif ?>
 
-			<?php echo $this->form->getLabel('access'); ?>
-			<?php echo $this->form->getInput('access'); ?>
+				<li><?php echo $this->form->getLabel('alias'); ?>
+				<?php echo $this->form->getInput('alias'); ?></li>
 
-			<?php echo $this->form->getLabel('menutype'); ?>
-			<?php echo $this->form->getInput('menutype'); ?>
+				<li><?php echo $this->form->getLabel('note'); ?>
+				<?php echo $this->form->getInput('note'); ?></li>
 
-			<?php echo $this->form->getLabel('parent_id'); ?>
-			<?php echo $this->form->getInput('parent_id'); ?>
+				<?php if ($this->item->type !=='url'): ?>
+					<li><?php echo $this->form->getLabel('link'); ?>
+					<?php echo $this->form->getInput('link'); ?></li>
+				<?php endif ?>
 
-			<?php echo $this->form->getLabel('browserNav'); ?>
-			<?php echo $this->form->getInput('browserNav'); ?>
+				<li><?php echo $this->form->getLabel('published'); ?>
+				<?php echo $this->form->getInput('published'); ?></li>
 
-			<?php echo $this->form->getLabel('home'); ?>
-			<?php echo $this->form->getInput('home'); ?>
+				<li><?php echo $this->form->getLabel('access'); ?>
+				<?php echo $this->form->getInput('access'); ?></li>
 
-			<?php echo $this->form->getLabel('template_style_id'); ?>
-			<?php echo $this->form->getInput('template_style_id'); ?>
+				<li><?php echo $this->form->getLabel('menutype'); ?>
+				<?php echo $this->form->getInput('menutype'); ?></li>
 
+				<li><?php echo $this->form->getLabel('parent_id'); ?>
+				<?php echo $this->form->getInput('parent_id'); ?></li>
+
+				<li><?php echo $this->form->getLabel('browserNav'); ?>
+				<?php echo $this->form->getInput('browserNav'); ?></li>
+
+				<?php if ($this->item->type == 'component') : ?>
+					<li><?php echo $this->form->getLabel('home'); ?>
+					<?php echo $this->form->getInput('home'); ?></li>
+				<?php endif; ?>
+
+				<li><?php echo $this->form->getLabel('language'); ?>
+				<?php echo $this->form->getInput('language'); ?></li>
+
+				<li><?php echo $this->form->getLabel('template_style_id'); ?>
+				<?php echo $this->form->getInput('template_style_id'); ?></li>
+
+				<li><?php echo $this->form->getLabel('id'); ?>
+				<?php echo $this->form->getInput('id'); ?></li>
+		</ul>
 
 	</fieldset>
 </div>
@@ -90,7 +105,7 @@ JHTML::_('behavior.modal');
 <div class="width-40 fltrt">
 	<?php echo JHtml::_('sliders.start','menu-sliders-'.$this->item->id); ?>
 	<?php //Load  parameters.
-			echo $this->loadTemplate('options'); ?>
+		echo $this->loadTemplate('options'); ?>
 
 		<div class="clr"></div>
 
@@ -102,10 +117,10 @@ JHTML::_('behavior.modal');
 		<?php endif; ?>
 
 	<?php echo JHtml::_('sliders.end'); ?>
-</div>
 	<input type="hidden" name="task" value="" />
 	<?php echo $this->form->getInput('component_id'); ?>
 	<?php echo JHtml::_('form.token'); ?>
+</div>
 </form>
 
 

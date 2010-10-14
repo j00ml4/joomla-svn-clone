@@ -42,6 +42,36 @@ class MenusHelper
 	}
 
 	/**
+	 * Gets a list of the actions that can be performed.
+	 *
+	 * @param	int		The menu ID.
+	 *
+	 * @return	JObject
+	 * @since	1.6
+	 */
+	public static function getActions($parentId = 0)
+	{
+		$user	= JFactory::getUser();
+		$result	= new JObject;
+
+		if (empty($parentId)) {
+			$assetName = 'com_menus';
+		} else {
+			$assetName = 'com_menus.item.'.(int) $parentId;
+		}
+
+		$actions = array(
+			'core.admin', 'core.manage', 'core.create', 'core.edit', 'core.edit.state', 'core.delete'
+		);
+
+		foreach ($actions as $action) {
+			$result->set($action,	$user->authorise($action, $assetName));
+		}
+
+		return $result;
+	}
+	
+	/**
 	 * Gets a standard form of a link for lookups.
 	 *
 	 * @param	mixed	A link string or array of request variables.
@@ -108,7 +138,7 @@ class MenusHelper
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true);
 
-		$query->select('a.id AS value, a.title AS text, a.level, a.menutype, a.type');
+		$query->select('a.id AS value, a.title AS text, a.level, a.menutype, a.type, a.template_style_id, a.checked_out');
 		$query->from('#__menu AS a');
 		$query->join('LEFT', '`#__menu` AS b ON a.lft > b.lft AND a.rgt < b.rgt');
 
@@ -129,7 +159,8 @@ class MenusHelper
 			if (is_array($published)) $published = '(' . implode(',',$published) .')';
 			$query->where('a.published IN ' . $published);
 		}
-
+		
+		$query->where('a.published != -2');
 		$query->group('a.id');
 		$query->order('a.lft ASC');
 

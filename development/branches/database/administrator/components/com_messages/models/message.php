@@ -28,6 +28,8 @@ class MessagesModelMessage extends JModelAdmin
 	 */
 	protected function populateState()
 	{
+		parent::populateState();
+
 		$user = JFactory::getUser();
 		$this->setState('user.id', $user->get('id'));
 
@@ -36,10 +38,6 @@ class MessagesModelMessage extends JModelAdmin
 
 		$replyId = (int) JRequest::getInt('reply_id');
 		$this->setState('reply.id', $replyId);
-
-		// Load the parameters.
-		$params	= JComponentHelper::getParams('com_messages');
-		$this->setState('params', $params);
 	}
 
 	/**
@@ -90,13 +88,13 @@ class MessagesModelMessage extends JModelAdmin
 						$item->set('subject', $re.$message->subject);
 					}
 				}
-			} else {
-				// Get the user name for an existing messasge.
-				if ($item->user_id_from && $fromUser = new JUser($item->user_id_from)) {
-					$item->set('from_user_name', $fromUser->name);
-				}
 			}
 		}
+		
+		// Get the user name for an existing messasge.
+		if ($item->user_id_from && $fromUser = new JUser($item->user_id_from)) {
+			$item->set('from_user_name', $fromUser->name);
+		}		
 
 		return $item;
 	}
@@ -104,30 +102,38 @@ class MessagesModelMessage extends JModelAdmin
 	/**
 	 * Method to get the record form.
 	 *
-	 * @return	mixed	JForm object on success, false on failure.
+	 * @param	array	$data		Data for the form.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	JForm	A JForm object on success, false on failure
+	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
-		// Initialise variables.
-		$app	= JFactory::getApplication();
-
 		// Get the form.
-		$form = parent::getForm('com_messages.message', 'message', array('control' => 'jform'));
+		$form = $this->loadForm('com_messages.message', 'message', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
 
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_messages.edit.message.data', array());
+		return $form;
+	}
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_messages.edit.message.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
 		}
 
-		return $form;
+		return $data;
 	}
 
 	/**

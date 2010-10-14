@@ -15,34 +15,38 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 // Load the tooltip behavior.
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+$canDo = UsersHelper::getActions();
 
 // Get the form fieldsets.
 $fieldsets = $this->form->getFieldsets();
-
-//load user_profile plugin language
-$lang = &JFactory::getLanguage();
-$lang->load( 'plg_user_profile', JPATH_ADMINISTRATOR );
 ?>
 
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'user.cancel' || document.formvalidator.isValid(document.id('user-form'))) {
-			submitform(task);
+			Joomla.submitform(task, document.getElementById('user-form'));
 		}
 	}
-// -->
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_users'); ?>" method="post" name="adminForm" id="user-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_users'); ?>" method="post" name="adminForm" id="user-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 			<legend><?php echo JText::_('COM_USERS_USER_ACCOUNT_DETAILS'); ?></legend>
+			<ul class="adminformlist">
 			<?php foreach($this->form->getFieldset('user_details') as $field) :?>
-				<?php echo $field->label; ?>
-				<?php echo $field->input; ?>
+				<li><?php echo $field->label; ?>
+				<?php echo $field->input; ?></li>
 			<?php endforeach; ?>
+			</ul>
+		</fieldset>
+
+		<fieldset id="user-groups" class="adminform">
+			<legend><?php echo JText::_('COM_USERS_ASSIGNED_GROUPS'); ?></legend>
+				<?php if ($this->grouplist) :
+					echo $this->loadTemplate('groups');
+				endif; ?>
 		</fieldset>
 
 	</div>
@@ -57,26 +61,21 @@ $lang->load( 'plg_user_profile', JPATH_ADMINISTRATOR );
 			echo JHTML::_('sliders.panel', JText::_($fieldset->label), $fieldset->name);
 		?>
 		<fieldset class="panelform">
+		<ul class="adminformlist">
 		<?php foreach($this->form->getFieldset($fieldset->name) as $field): ?>
 			<?php if ($field->hidden): ?>
 				<?php echo $field->input; ?>
 			<?php else: ?>
-				<?php echo $field->label; ?>
-				<?php echo $field->input; ?>
+				<li><?php echo $field->label; ?>
+				<?php echo $field->input; ?></li>
 			<?php endif; ?>
 		<?php endforeach; ?>
+		</ul>
 		</fieldset>
 		<?php endforeach; ?>
 		<?php echo JHTML::_('sliders.end'); ?>
 
-		<fieldset id="user-groups">
-			<legend><?php echo JText::_('COM_USERS_ASSIGNED_GROUPS'); ?></legend>
-				<?php if ($this->grouplist) :
-					echo $this->loadTemplate('groups');
-				endif; ?>
-		</fieldset>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHtml::_('form.token'); ?>
 	</div>
-
-	<input type="hidden" name="task" value="" />
-	<?php echo JHtml::_('form.token'); ?>
 </form>

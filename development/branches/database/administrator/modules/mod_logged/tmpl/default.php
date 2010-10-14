@@ -18,7 +18,7 @@ defined('_JEXEC') or die;
 				if($params->get('name', 1)) {
 					echo JText::_('MOD_LOGGED_NAME');
 				} else {
-					echo JText::_('MOD_LOGGED_USERNAME');
+					echo JText::_('JGLOBAL_USERNAME');
 				}; ?>
 			</th>
 			<th>
@@ -58,7 +58,7 @@ defined('_JEXEC') or die;
 				<?php echo $user->id; ?>
 			</td>
 			<td class="center">
-				<?php echo JHtml::_('date', $user->time, '%Y-%m-%d %H:%M:%S'); ?>
+				<?php echo JHtml::_('date', $user->time, 'Y-m-d H:i:s'); ?>
 			</td>
 			<td class="center">
 				<?php if ($user->client_id == 0) :?>

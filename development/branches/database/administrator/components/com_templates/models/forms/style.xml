@@ -3,13 +3,14 @@
 <form>
 	<fieldset>
 		<field
+			id="id"
 			name="id"
-			label="JGLOBAL_FIELD_ID_LABEL"
-			description ="JGLOBAL_FIELD_ID_DESC"
-			type="hidden"
+			type="text"
 			default="0"
-			required="true"
-			readonly="true" />
+			readonly="true"
+			class="readonly"
+			label="JGLOBAL_FIELD_ID_LABEL"
+			description ="JGLOBAL_FIELD_ID_DESC" />
 
 		<field
 			name="template"
@@ -18,12 +19,11 @@
 			description="COM_TEMPLATES_FIELD_TEMPLATE_DESC"
 			class="readonly"
 			size="30"
-			readonly="true"
-			filter="unset" />
+			readonly="true" />
 
 		<field
 			name="client_id"
-			type="client"
+			type="hidden"
 			label="COM_TEMPLATES_FIELD_CLIENT_LABEL"
 			description="COM_TEMPLATES_FIELD_CLIENT_DESC"
 			class="readonly"
@@ -36,8 +36,7 @@
 			label="COM_TEMPLATES_FIELD_HOME_LABEL"
 			description="COM_TEMPLATES_FIELD_HOME_DESC"
 			class="inputbox"
-			default="0"
-			readonly="true">
+			default="0">
 			<option
 				value="1">
 				JYes</option>
@@ -50,7 +49,6 @@
 			name="title"
 			type="text"
 			class="inputbox"
-			default=""
 			size="50"
 			label="COM_TEMPLATES_FIELD_TITLE_LABEL"
 			description="COM_TEMPLATES_FIELD_TITLE_DESC"
@@ -59,5 +57,7 @@
 		<field
 			name="params"
 			type="hidden" />
+		<field name="assigned" type="hidden" />
+
 	</fieldset>
 </form>

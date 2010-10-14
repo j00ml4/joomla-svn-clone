@@ -16,11 +16,10 @@ jimport('joomla.filesystem.folder');
  *
  * @package		Joomla.Administrator
  * @subpackage	com_media
- * @since 1.5
+ * @since		1.5
  */
-class MediaControllerFile extends MediaController
+class MediaControllerFile extends JController
 {
-
 	/**
 	 * Upload a file
 	 *
@@ -28,14 +27,12 @@ class MediaControllerFile extends MediaController
 	 */
 	function upload()
 	{
-
 		// Check for request forgeries
 		JRequest::checkToken('request') or jexit(JText::_('JINVALID_TOKEN'));
 
-		$app	= &JFactory::getApplication();
+		$app	= JFactory::getApplication();
 		$file	= JRequest::getVar('Filedata', '', 'files', 'array');
 		$folder	= JRequest::getVar('folder', '', '', 'path');
-		$format	= JRequest::getVar('format', 'html', '', 'cmd');
 		$return	= JRequest::getVar('return-url', null, 'post', 'base64');
 		$err	= null;
 
@@ -51,71 +48,42 @@ class MediaControllerFile extends MediaController
 			$filepath = JPath::clean(COM_MEDIA_BASE.DS.$folder.DS.strtolower($file['name']));
 
 			if (!MediaHelper::canUpload($file, $err)) {
-				if ($format == 'json') {
-					jimport('joomla.error.log');
-					$log = &JLog::getInstance('upload.error.php');
-					$log->addEntry(array('comment' => 'Invalid: '.$filepath.': '.$err));
-					header('HTTP/1.0 415 Unsupported Media Type');
-					jexit('Error. Unsupported Media Type!');
-				} else {
-					JError::raiseNotice(100, JText::_($err));
-					// REDIRECT
-					if ($return) {
-						$app->redirect(base64_decode($return).'&folder='.$folder);
-					}
-					return;
+
+				JError::raiseNotice(100, JText::_($err));
+				// REDIRECT
+				if ($return) {
+					$this->setRedirect(base64_decode($return).'&folder='.$folder);
 				}
+				return;
+
 			}
 
 			if (JFile::exists($filepath)) {
-				if ($format == 'json') {
-					jimport('joomla.error.log');
-					$log = &JLog::getInstance('upload.error.php');
-					$log->addEntry(array('comment' => 'File already exists: '.$filepath));
-					header('HTTP/1.0 409 Conflict');
-					jexit('Error. File already exists');
-				} else {
-					JError::raiseNotice(100, JText::_('COM_MEDIA_ERROR_FILE_EXISTS'));
-					// REDIRECT
-					if ($return) {
-						$app->redirect(base64_decode($return).'&folder='.$folder);
-					}
-					return;
+				JError::raiseNotice(100, JText::_('COM_MEDIA_ERROR_FILE_EXISTS'));
+				// REDIRECT
+				if ($return) {
+					$this->setRedirect(base64_decode($return).'&folder='.$folder);
 				}
+				return;
 			}
 
 			if (!JFile::upload($file['tmp_name'], $filepath)) {
-				if ($format == 'json') {
-					jimport('joomla.error.log');
-					$log = &JLog::getInstance('upload.error.php');
-					$log->addEntry(array('comment' => 'Cannot upload: '.$filepath));
-					header('HTTP/1.0 400 Bad Request');
-					jexit('Error Unable to upload file');
-				} else {
-					JError::raiseWarning(100, JText::_('COM_MEDIA_ERROR_UNABLE_TO_UPLOAD_FILE'));
-					// REDIRECT
-					if ($return) {
-						$app->redirect(base64_decode($return).'&folder='.$folder);
-					}
-					return;
+				JError::raiseWarning(100, JText::_('COM_MEDIA_ERROR_UNABLE_TO_UPLOAD_FILE'));
+				// REDIRECT
+				if ($return) {
+					$this->setRedirect(base64_decode($return).'&folder='.$folder);
 				}
+				return;
 			} else {
-				if ($format == 'json') {
-					jimport('joomla.error.log');
-					$log = &JLog::getInstance();
-					$log->addEntry(array('comment' => $folder));
-					jexit('Upload complete');
-				} else {
-					$app->enqueueMessage(JText::_('COM_MEDIA_UPLOAD_COMPLETE'));
-					// REDIRECT
-					if ($return) {
-						$app->redirect(base64_decode($return).'&folder='.$folder);
-					}
-					return;
+				$app->enqueueMessage(JText::_('COM_MEDIA_UPLOAD_COMPLETE'));
+				// REDIRECT
+				if ($return) {
+					$this->setRedirect(base64_decode($return).'&folder='.$folder);
 				}
+				return;
 			}
 		} else {
-			$app->redirect('index.php', 'Invalid Request', 'error');
+			$this->setRedirect('index.php', 'Invalid Request', 'error');
 		}
 	}
 
@@ -134,7 +102,6 @@ class MediaControllerFile extends MediaController
 		JClientHelper::setCredentialsFromRequest('ftp');
 
 		// Get some data from the request
-		$app	= &JFactory::getApplication();
 		$tmpl	= JRequest::getCmd('tmpl');
 		$paths	= JRequest::getVar('rm', array(), '', 'array');
 		$folder = JRequest::getVar('folder', '', '', 'path');
@@ -144,9 +111,8 @@ class MediaControllerFile extends MediaController
 		$ret = true;
 
 		if (count($paths)) {
-			foreach ($paths as $path)
-			{
-			if ($path !== JFile::makeSafe($path)) {
+			foreach ($paths as $path) {
+				if ($path !== JFile::makeSafe($path)) {
 					$filename = htmlspecialchars($path, ENT_COMPAT, 'UTF-8');
 					JError::raiseWarning(100, JText::sprintf('COM_MEDIA_ERROR_UNABLE_TO_DELETE_FILE_WARNFILENAME', $filename));
 					continue;
@@ -172,11 +138,12 @@ class MediaControllerFile extends MediaController
 				}
 			}
 		}
+
 		if ($tmpl == 'component') {
 			// We are inside the iframe
-			$app->redirect('index.php?option=com_media&view=mediaList&folder='.$folder.'&tmpl=component');
+			$this->setRedirect('index.php?option=com_media&view=mediaList&folder='.$folder.'&tmpl=component');
 		} else {
-			$app->redirect('index.php?option=com_media&folder='.$folder);
+			$this->setRedirect('index.php?option=com_media&folder='.$folder);
 		}
 	}
 }

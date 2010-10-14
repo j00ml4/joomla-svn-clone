@@ -48,10 +48,10 @@ class UsersViewMail extends JView
 
 		JToolBarHelper::title(JText::_('COM_USERS_MASS_MAIL'), 'massmail.png');
 		JToolBarHelper::custom('mail.send', 'send.png', 'send_f2.png', 'COM_USERS_TOOLBAR_MAIL_SEND_MAIL', false);
-		JToolBarHelper::cancel('mail.cancel');
+		JToolBarHelper::cancel('mail.cancel','JTOOLBAR_CANCEL');
 		JToolBarHelper::divider();
 		JToolBarHelper::preferences('com_users');
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.users','JTOOLBAR_HELP');
+		JToolBarHelper::help('JHELP_USERS_MASS_MAIL_USERS');
 	}
 }

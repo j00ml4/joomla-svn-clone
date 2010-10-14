@@ -47,8 +47,7 @@ class JFormFieldModuleOrder extends JFormField
 		// Initialize JavaScript field attributes.
 		$attr .= $this->element['onchange'] ? ' onchange="'.(string) $this->element['onchange'].'"' : '';
 
-		$html[] = '<script language="javascript" type="text/javascript">';
-		$html[] = '<!-- ';
+		$html[] = '<script type="text/javascript">';
 
 		$ordering = $this->form->getValue('ordering');
 		$position = $this->form->getValue('position');
@@ -63,6 +62,7 @@ class JFormFieldModuleOrder extends JFormField
 		$query->select('position, ordering, title');
 		$query->from('#__modules');
 		$query->where('client_id = '.(int) $clientId);
+		$query->where('published > -1');
 		$query->order('ordering');
 
 		$db->setQuery($query);
@@ -85,7 +85,6 @@ class JFormFieldModuleOrder extends JFormField
 		}
 
 		$html[] = 'writeDynaList(\'name="'.$this->name.'" id="'.$this->id.'"'.$attr.'\', orders, originalPos, originalPos, originalOrder);';
-		$html[] = ' //-->';
 		$html[] = '</script>';
 
 		return implode("\n", $html);

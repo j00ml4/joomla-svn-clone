@@ -81,9 +81,13 @@ class TemplatesControllerSource extends JController
 	/**
 	 * This controller does not have a display method. Redirect back to the list view of the component.
 	 *
-	 * @return	void
+	 * @param	boolean			If true, the view output will be cached
+	 * @param	array			An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return	JController		This object to support chaining.
+	 * @since	1.5
 	 */
-	public function display()
+	public function display($cachable = false, $urlparams = false)
 	{
 		$this->setRedirect(JRoute::_('index.php?option=com_templates&view=templates', false));
 	}
@@ -167,7 +171,7 @@ class TemplatesControllerSource extends JController
 		}
 
 		// Validate the posted data.
-		$form	= &$model->getForm();
+		$form	= $model->getForm();
 		if (!$form)
 		{
 			JError::raiseError(500, $model->getError());
@@ -185,10 +189,10 @@ class TemplatesControllerSource extends JController
 			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
 			{
 				if (JError::isError($errors[$i])) {
-					$app->enqueueMessage($errors[$i]->getMessage(), 'notice');
+					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				}
 				else {
-					$app->enqueueMessage($errors[$i], 'notice');
+					$app->enqueueMessage($errors[$i], 'warning');
 				}
 			}
 
@@ -207,7 +211,7 @@ class TemplatesControllerSource extends JController
 			$app->setUserState($context.'.data', $data);
 
 			// Redirect back to the edit screen.
-			$this->setMessage(JText::sprintf('JERROR_SAVE_FAILED', $model->getError()), 'notice');
+			$this->setMessage(JText::sprintf('JERROR_SAVE_FAILED', $model->getError()), 'warning');
 			$this->setRedirect(JRoute::_('index.php?option=com_templates&view=source&layout=edit', false));
 			return false;
 		}

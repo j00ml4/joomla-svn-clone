@@ -58,17 +58,17 @@ class UsersViewGroups extends JView
 		}
 		if ($canDo->get('core.edit')) {
 			JToolBarHelper::custom('group.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
+			JToolBarHelper::divider();
 		}
 		if ($canDo->get('core.delete')) {
-			JToolBarHelper::deleteList('', 'groups.delete','JTOOLBAR_TRASH');
+			JToolBarHelper::deleteList('', 'groups.delete','JTOOLBAR_DELETE');
+			JToolBarHelper::divider();
 		}
-
-		JToolBarHelper::divider();
 
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_users');
+			JToolBarHelper::divider();
 		}
-		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.users.groups','JTOOLBAR_HELP');
+		JToolBarHelper::help('JHELP_USERS_GROUPS');
 	}
 }

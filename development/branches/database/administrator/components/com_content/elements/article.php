@@ -25,11 +25,11 @@ class JElementArticle extends JElement
 		$doc		= JFactory::getDocument();
 		$template	= $app->getTemplate();
 		$fieldName	= $control_name.'['.$name.']';
-		$article = &JTable::getInstance('content');
+		$article = JTable::getInstance('content');
 		if ($value) {
 			$article->load($value);
 		} else {
-			$article->title = JText::_('Select an Article');
+			$article->title = JText::_('COM_CONTENT_SELECT_AN_ARTICLE');
 		}
 
 		$js = "
@@ -44,8 +44,8 @@ class JElementArticle extends JElement
 
 		JHtml::_('behavior.modal', 'a.modal');
 		$html = "\n".'<div class="fltlft"><input type="text" id="'.$name.'_name" value="'.htmlspecialchars($article->title, ENT_QUOTES, 'UTF-8').'" disabled="disabled" /></div>';
-//		$html .= "\n &nbsp; <input class=\"inputbox modal-button\" type=\"button\" value=\"".JText::_('Select')."\" />";
-		$html .= '<div class="button2-left"><div class="blank"><a class="modal" title="'.JText::_('Select an Article').'"  href="'.$link.'" rel="{handler: \'iframe\', size: {x: 650, y: 375}}">'.JText::_('Select').'</a></div></div>'."\n";
+//		$html .= "\n &#160; <input class=\"inputbox modal-button\" type=\"button\" value=\"".JText::_('JSELECT')."\" />";
+		$html .= '<div class="button2-left"><div class="blank"><a class="modal" title="'.JText::_('COM_CONTENT_SELECT_AN_ARTICLE').'"  href="'.$link.'" rel="{handler: \'iframe\', size: {x: 650, y: 375}}">'.JText::_('JSELECT').'</a></div></div>'."\n";
 		$html .= "\n".'<input type="hidden" id="'.$name.'_id" name="'.$fieldName.'" value="'.(int)$value.'" />';
 
 		return $html;

@@ -5,7 +5,6 @@
 		name="id"
 		type="text"
 		default="0"
-		required="true"
 		label="JGLOBAL_FIELD_ID_LABEL"
 		description ="JGLOBAL_FIELD_ID_DESC"
 		class="readonly"
@@ -19,8 +18,8 @@
 	<field
 		name="parent_id"
 		type="categoryparent"
-		label="CATEGORIES_PARENT_LABEL"
-		description="CATEGORIES_PARENT_DESC"
+		label="COM_CATEGORIES_FIELD_PARENT_LABEL"
+		description="COM_CATEGORIES_FIELD_PARENT_DESC"
 		class="inputbox"/>
 
 	<field
@@ -50,8 +49,8 @@
 	<field
 		name="extension"
 		type="text"
-		label="CATEGORIES_EXTENSION_LABEL"
-		description="CATEGORIES_EXTENSION_DESC"
+		label="COM_CATEGORIES_FIELD_EXTENSION_LABEL"
+		description="COM_CATEGORIES_FIELD_EXTENSION_DESC"
 		class="readonly"
 		size="40"
 		readonly="true"/>
@@ -59,7 +58,7 @@
 	<field
 		name="title"
 		type="text"
-		label="JFIELD_TITLE_LABEL"
+		label="JGLOBAL_TITLE"
 		description="JFIELD_TITLE_DESC"
 		class="inputbox"
 		size="40"
@@ -84,10 +83,12 @@
 	<field
 		name="description"
 		type="editor"
-		label="CATEGORIES_DESCRIPTION_LABEL"
-		description="CATEGORIES_DESCRIPTION_DESC"
+		label="JGLOBAL_DESCRIPTION"
+		description="COM_CATEGORIES_DESCRIPTION_DESC"
 		class="inputbox"
-		buttons="image,readmore,pagebreak"/>
+		filter="safehtml"
+		buttons="true"
+		hide="readmore,pagebreak"/>
 
 	<field
 		name="published"
@@ -95,7 +96,7 @@
 		class="inputbox"
 		default="1"
 		size="1"
-		label="JFIELD_PUBLISHED_LABEL"
+		label="JGLOBAL_STATE"
 		description="JFIELD_PUBLISHED_DESC">
 		<option
 			value="1">
@@ -133,7 +134,6 @@
 		type="textarea"
 		label="JFIELD_META_DESCRIPTION_LABEL"
 		description="JFIELD_META_DESCRIPTION_DESC"
-		default=""
 		rows="3"
 		cols="40"/>
 
@@ -142,7 +142,6 @@
 		type="textarea"
 		label="JFIELD_META_KEYWORDS_LABEL"
 		description="JFIELD_META_KEYWORDS_DESC"
-		default=""
 		rows="3"
 		cols="40"/>
 
@@ -153,8 +152,11 @@
 
 	<field
 		name="created_time"
-		type="hidden"
-		filter="unset"/>
+		type="text"
+		label="JGLOBAL_CREATED"
+		class="readonly"
+		filter="unset"
+		readonly="true" />
 
 	<field
 		name="modified_user_id"
@@ -163,8 +165,11 @@
 
 	<field
 		name="modified_time"
-		type="hidden"
-		filter="unset"/>
+		type="text"
+		label="JGLOBAL_MODIFIED"
+		class="readonly"
+		filter="unset"
+		readonly="true" />
 
 	<field
 		name="hits"
@@ -175,10 +180,9 @@
 		name="language"
 		type="contentlanguage"
 		label="JFIELD_LANGUAGE_LABEL"
-		description="JFIELD_CATEGORY_LANGUAGE_DESC"
-		class="inputbox"
-		default="">
-		<option value="">JOPTION_DEFAULT_LANGUAGE</option>
+		description="COM_CATEGORIES_FIELD_LANGUAGE_DESC"
+		class="inputbox">
+		<option value="*">JALL</option>
 	</field>
 
 	<field
@@ -190,8 +194,7 @@
 		filter="rules"
 		class="inputbox"
 		component="com_content"
-		section="category"
-		default=""/>
+		section="category"/>
 
 	<fields name="params">
 		<fieldset
@@ -207,11 +210,9 @@
 
 			<field
 				name="image"
-				type="imagelist"
-				directory="/images"
-				hide_default="1"
-				label="JFIELD_CATEGORY_IMAGE_LABEL"
-				description="JFIELD_CATEGORY_IMAGE_DESC" />
+				type="media"
+				label="COM_CATEGORIES_FIELD_IMAGE_LABEL"
+				description="COM_CATEGORIES_FIELD_IMAGE_DESC" />
 		</fieldset>
 	</fields>
 
@@ -221,35 +222,25 @@
 			type="text"
 			label="JFIELD_ALT_PAGE_TITLE_LABEL"
 			description="JFIELD_ALT_PAGE_TITLE_DESC"
-			size="30"
-			default=""/>
+			size="30"/>
 
 		<field
 			name="author"
 			type="text"
 			label="JAUTHOR"
 			description="JFIELD_METADATA_AUTHOR_DESC"
-			size="30"
-			default=""/>
+			size="30"/>
 
-		<field
-			name="robots"
+		<field name="robots"
 			type="list"
 			label="JFIELD_METADATA_ROBOTS_LABEL"
 			description="JFIELD_METADATA_ROBOTS_DESC"
-			default="">
-			<option
-				value="">JGLOBAL_USE_GLOBAL</option>
-			<option
-				value="0">JGLOBAL_INDEX_FOLLOW</option>
-			<option
-				value="1">JGLOBAL_NOINDEX_FOLLOW</option>
-			<option
-				value="2">JGLOBAL_INDEX_NOFOLLOW</option>
-			<option
-				value="3">JGLOBAL_NOINDEX_NOFOLLOW</option>
-			<option
-				value="4">JGLOBAL_NO_ROBOTS_TAG</option>
+		>
+			<option value="">JGLOBAL_USE_GLOBAL</option>
+			<option value="index, follow">JGLOBAL_INDEX_FOLLOW</option>
+			<option value="noindex, follow">JGLOBAL_NOINDEX_FOLLOW</option>
+			<option value="index, nofollow">JGLOBAL_INDEX_NOFOLLOW</option>
+			<option value="noindex, nofollow">JGLOBAL_NOINDEX_NOFOLLOW</option>
 		</field>
 	</fields>
 </form>

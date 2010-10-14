@@ -27,15 +27,15 @@ $listDirn	= $this->state->get('list.direction');
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
 		<div class="filter-select fltrt">
-			<select name="filter_client_id" class="inputbox" onchange="this.form.submit()">
-				<option value="*"><?php echo JText::_('COM_TEMPLATES_FILTER_TYPE'); ?></option>
-				<?php echo JHtml::_('select.options', TemplatesHelper::getClientOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
+			<select name="filter_template" class="inputbox" onchange="this.form.submit()">
+				<option value="0"><?php echo JText::_('COM_TEMPLATES_FILTER_TEMPLATE'); ?></option>
+				<?php echo JHtml::_('select.options', TemplatesHelper::getTemplateOptions($this->state->get('filter.client_id')), 'value', 'text', $this->state->get('filter.template'));?>
 			</select>
 		</div>
 		<div class="filter-select fltrt">
-			<select name="filter_template" class="inputbox" onchange="this.form.submit()">
-				<option value="0"><?php echo JText::_('COM_TEMPLATES_FILTER_TEMPLATE'); ?></option>
-				<?php echo JHtml::_('select.options', TemplatesHelper::getTemplateOptions($this->state->get('filter.template')), 'value', 'text', $this->state->get('filter.template'));?>
+			<select name="filter_client_id" class="inputbox" onchange="this.form.submit()">
+				<option value="*"><?php echo JText::_('JGLOBAL_FILTER_CLIENT'); ?></option>
+				<?php echo JHtml::_('select.options', TemplatesHelper::getClientOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
 			</select>
 		</div>
 	</fieldset>
@@ -45,16 +45,16 @@ $listDirn	= $this->state->get('list.direction');
 		<thead>
 			<tr>
 				<th width="5">
-					&nbsp;
+					&#160;
 				</th>
 				<th>
 					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_STYLE', 'a.title', $listDirn, $listOrder); ?>
 				</th>
+				<th width="10%">
+					<?php echo JHtml::_('grid.sort', 'JCLIENT', 'a.client_id', $listDirn, $listOrder); ?>
+				</th>
 				<th>
 					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TEMPLATE', 'a.template', $listDirn, $listOrder); ?>
-				</th>
-				<th width="10%">
-					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TYPE', 'a.client_id', $listDirn, $listOrder); ?>
 				</th>
 				<th width="5%">
 					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_DEFAULT', 'a.home', $listDirn, $listOrder); ?>
@@ -62,7 +62,7 @@ $listDirn	= $this->state->get('list.direction');
 				<th width="5%">
 					<?php echo JText::_('COM_TEMPLATES_HEADING_ASSIGNED'); ?>
 				</th>
-				<th width="1%" nowrap="nowrap">
+				<th width="1%" class="nowrap">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
@@ -81,17 +81,20 @@ $listDirn	= $this->state->get('list.direction');
 				$canChange	= $user->authorise('core.edit.state',	'com_templates');
 			?>
 			<tr class="row<?php echo $i % 2; ?>">
-				<td class="center">
+				<td width="1%" class="center">
 					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 				</td>
 
 				<td>
-					<?php if ($canCreate || $canEdit) : ?>
+					<?php if ($canEdit) : ?>
 					<a href="<?php echo JRoute::_('index.php?option=com_templates&task=style.edit&id='.(int) $item->id); ?>">
 						<?php echo $this->escape($item->title);?></a>
 					<?php else : ?>
 						<?php echo $this->escape($item->title);?>
 					<?php endif; ?>
+				</td>
+				<td class="center">
+					<?php echo $item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>
 				</td>
 				<td>
 					<label for="cb<?php echo $i;?>">
@@ -99,20 +102,13 @@ $listDirn	= $this->state->get('list.direction');
 					</label>
 				</td>
 				<td class="center">
-					<?php echo $item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>
+					<?php echo JHtml::_('jgrid.isdefault', $item->home, $i, 'styles.', $canChange && !$item->home);?>
 				</td>
 				<td class="center">
-					<?php if ($item->home == 1) : ?>
-							<?php echo JHTML::_('image','menu/icon-16-default.png', JText::_('COM_TEMPLATES_HEADING_DEFAULT'), NULL, true); ?>
-					<?php else  : ?>
-							&nbsp;
-					<?php endif; ?>
-				</td>
-				<td class="center">
-					<?php if ($item->assigned == 1) : ?>
-							<?php echo JHTML::_('image','admin/tick.png', JText::_('COM_TEMPLATES_HEADING_ASSIGNED'), NULL, true); ?>
+					<?php if ($item->assigned > 0) : ?>
+							<?php echo JHTML::_('image','admin/tick.png', JText::plural('COM_TEMPLATES_ASSIGNED',$item->assigned), array('title'=>JText::plural('COM_TEMPLATES_ASSIGNED',$item->assigned)), true); ?>
 					<?php else : ?>
-							&nbsp;
+							&#160;
 					<?php endif; ?>
 				</td>
 				<td class="center">
@@ -123,9 +119,11 @@ $listDirn	= $this->state->get('list.direction');
 		</tbody>
 	</table>
 
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<div>
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" />
+		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+		<?php echo JHtml::_('form.token'); ?>
+	</div>
 </form>

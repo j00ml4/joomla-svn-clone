@@ -8,6 +8,8 @@
 // Check to ensure this file is included in Joomla!
 defined('_JEXEC') or die;
 
+jimport('joomla.application.component.controller');
+
 /**
  * Languages Controller
  *
@@ -24,16 +26,24 @@ class LanguagesController extends JController
 	protected $default_view = 'installed';
 
 	/**
-	 * task to display the view
+	 * Method to display a view.
+	 *
+	 * @param	boolean			If true, the view output will be cached
+	 * @param	array			An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return	JController		This object to support chaining.
+	 * @since	1.5
 	 */
-	function display()
+	public function display($cachable = false, $urlparams = false)
 	{
 		require_once JPATH_COMPONENT.'/helpers/languages.php';
 
-		parent::display();
-
 		// Load the submenu.
 		LanguagesHelper::addSubmenu(JRequest::getWord('view', 'installed'));
+
+		parent::display();
+
+		return $this;
 	}
 
 	/**
@@ -43,15 +53,15 @@ class LanguagesController extends JController
 	{
 		// Check for request forgeries
 		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
-		$model = & $this->getModel('languages');
+		$model = $this->getModel('languages');
 		if ($model->publish()) {
 			$msg = JText::_('COM_LANGUAGES_MSG_DEFAULT_LANGUAGE_SAVED');
 			$type = 'message';
 		} else {
-			$msg = & $this->getError();
+			$msg = $this->getError();
 			$type = 'error';
 		}
-		$client = & $model->getClient();
+		$client = $model->getClient();
 		$this->setredirect('index.php?option=com_languages&client='.$client->id,$msg,$type);
 	}
 }

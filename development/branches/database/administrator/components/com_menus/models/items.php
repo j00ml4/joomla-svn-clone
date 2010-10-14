@@ -23,6 +23,7 @@ class MenusModelItems extends JModelList
 	 *
 	 * Note. Calling getState in this method will result in recursion.
 	 *
+	 * @return	void
 	 * @since	1.6
 	 */
 	protected function populateState()
@@ -44,8 +45,25 @@ class MenusModelItems extends JModelList
 		$level = $app->getUserStateFromRequest($this->context.'.filter.level', 'filter_level', 0, 'int');
 		$this->setState('filter.level', $level);
 
-		$menuType = $app->getUserStateFromRequest($this->context.'.filter.menutype', 'menutype', 'mainmenu');
+		$menuType = JRequest::getVar('menutype',null);
+		if ($menuType) {
+			if ($menuType != $app->getUserState($this->context.'.filter.menutype')) {
+				$app->setUserState($this->context.'.filter.menutype', $menuType);
+				JRequest::setVar('limitstart', 0);
+			}
+		}
+		else {
+			$menuType = $app->getUserState($this->context.'.filter.menutype');
+
+			if (!$menuType) {
+				$menuType = $this->getDefaultMenuType();
+			}
+		}
+
 		$this->setState('filter.menutype', $menuType);
+
+		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
+		$this->setState('filter.language', $language);
 
 		// Component parameters.
 		$params	= JComponentHelper::getParams('com_menus');
@@ -63,18 +81,43 @@ class MenusModelItems extends JModelList
 	 * ordering requirements.
 	 *
 	 * @param	string		$id	A prefix for the store id.
+	 *
 	 * @return	string		A store id.
+	 * @since	1.6
 	 */
 	protected function getStoreId($id = '')
 	{
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.access');
 		$id	.= ':'.$this->getState('filter.published');
+		$id	.= ':'.$this->getState('filter.language');
 		$id	.= ':'.$this->getState('filter.search');
 		$id	.= ':'.$this->getState('filter.parent_id');
-		$id	.= ':'.$this->getState('filter.menu_id');
+		$id	.= ':'.$this->getState('filter.menutype');
 
 		return parent::getStoreId($id);
+	}
+
+	/**
+	 * Finds the default menu type.
+	 *
+	 * In the absence of better information, this is the first menu ordered by title.
+	 *
+	 * @return	string	The default menu type
+	 * @since	1.6
+	 */
+	protected function getDefaultMenuType()
+	{
+		// Create a new query object.
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true)
+			->select('menutype')
+			->from('#__menu_types')
+			->order('title');
+		$db->setQuery($query, 0, 1);
+		$menuType = $db->loadResult();
+
+		return $menuType;
 	}
 
 	/**
@@ -92,6 +135,10 @@ class MenusModelItems extends JModelList
 		$query->select($this->getState('list.select', 'a.*'));
 		$query->from('`#__menu` AS a');
 
+		// Join over the language
+		$query->select('l.title AS language_title');
+		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
+
 		// Join over the users.
 		$query->select('u.name AS editor');
 		$query->join('LEFT', '`#__users` AS u ON u.id = a.checked_out');
@@ -106,6 +153,7 @@ class MenusModelItems extends JModelList
 
 		// Exclude the root category.
 		$query->where('a.id > 1');
+		$query->where('a.menutype <> '.$db->quote('_adminmenu'));
 
 		// Filter on the published state.
 		$published = $this->getState('filter.published');
@@ -137,12 +185,6 @@ class MenusModelItems extends JModelList
 		}
 
 		// Filter the items over the menu id if set.
-		$menuId = $this->getState('filter.menu_id');
-		if (!empty($menuId)) {
-			$query->where('a.menu_id = '.(int) $menuId);
-		}
-
-		// Filter the items over the menu id if set.
 		$menuType = $this->getState('filter.menutype');
 		if (!empty($menuType)) {
 			$query->where('a.menutype = '.$db->quote($menuType));
@@ -156,6 +198,11 @@ class MenusModelItems extends JModelList
 		// Filter on the level.
 		if ($level = $this->getState('filter.level')) {
 			$query->where('a.level <= '.(int) $level);
+		}
+
+		// Filter on the language.
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = '.$db->quote($language));
 		}
 
 		// Add the list ordering clause.

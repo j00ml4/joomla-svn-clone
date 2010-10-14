@@ -17,29 +17,27 @@ JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.keepalive');
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task) {
 		if (task == 'message.cancel' || document.formvalidator.isValid(document.id('message-form'))) {
-			submitform(task);
+			Joomla.submitform(task, document.getElementById('message-form'));
 		}
 	}
-// -->
 </script>
 <form action="<?php echo JRoute::_('index.php?option=com_messages'); ?>" method="post" name="adminForm" id="message-form" class="form-validate">
 	<div class="width-100">
 		<fieldset class="adminform">
+		<ul class="adminformlist">
+			<li><?php echo $this->form->getLabel('user_id_to'); ?>
+			<?php echo $this->form->getInput('user_id_to'); ?></li>
 
-			<?php echo $this->form->getLabel('user_id_to'); ?>
-			<?php echo $this->form->getInput('user_id_to'); ?>
+			<li><?php echo $this->form->getLabel('subject'); ?>
+			<?php echo $this->form->getInput('subject'); ?></li>
 
-			<?php echo $this->form->getLabel('subject'); ?>
-			<?php echo $this->form->getInput('subject'); ?>
-
-			<?php echo $this->form->getLabel('message'); ?>
-			<?php echo $this->form->getInput('message'); ?>
-
+			<li><?php echo $this->form->getLabel('message'); ?>
+			<?php echo $this->form->getInput('message'); ?></li>
+		</ul>
 		</fieldset>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHtml::_('form.token'); ?>
 	</div>
-	<input type="hidden" name="task" value="">
-	<?php echo JHtml::_('form.token'); ?>
 </form>

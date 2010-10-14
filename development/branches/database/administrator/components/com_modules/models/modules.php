@@ -50,6 +50,9 @@ class ModulesModelModules extends JModelList
 		$clientId = $app->getUserStateFromRequest($this->context.'.filter.client_id', 'filter_client_id', 0, 'int');
 		$this->setState('filter.client_id', $clientId);
 
+		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
+		$this->setState('filter.language', $language);
+
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_modules');
 		$this->setState('params', $params);
@@ -78,6 +81,7 @@ class ModulesModelModules extends JModelList
 		$id	.= ':'.$this->getState('filter.position');
 		$id	.= ':'.$this->getState('filter.module');
 		$id	.= ':'.$this->getState('filter.client_id');
+		$id	.= ':'.$this->getState('filter.language');
 
 		return parent::getStoreId($id);
 	}
@@ -92,11 +96,11 @@ class ModulesModelModules extends JModelList
 	protected function _getList($query, $limitstart=0, $limit=0)
 	{
 		$ordering = $this->getState('list.ordering', 'ordering');
-		if ($ordering == 'name') {
+		if (in_array($ordering, array('pages', 'name'))) {
 			$this->_db->setQuery($query);
 			$result = $this->_db->loadObjectList();
 			$this->translate($result);
-			JArrayHelper::sortObjects($result,'name', $this->getState('list.direction') == 'desc' ? -1 : 1);
+			JArrayHelper::sortObjects($result,$ordering, $this->getState('list.direction') == 'desc' ? -1 : 1);
 			$total = count($result);
 			$this->cache[$this->getStoreId('getTotal')] = $total;
 			if ($total < $limitstart) {
@@ -137,6 +141,15 @@ class ModulesModelModules extends JModelList
 			||	$lang->load("$extension.sys", constant('JPATH_' . strtoupper($client)), $lang->getDefault(), false, false)
 			||	$lang->load("$extension.sys", $source, $lang->getDefault(), false, false);
 			$item->name = JText::_($item->name);
+			if (is_null($item->pages)) {
+				$item->pages = JText::_('JNONE');
+			} else if ($item->pages < 0) {
+				$item->pages = JText::_('COM_MODULES_ASSIGNED_VARIES_EXCEPT');
+			} else if ($item->pages > 0) {
+				$item->pages = JText::_('COM_MODULES_ASSIGNED_VARIES_ONLY');
+			} else {
+				$item->pages = JText::_('JALL');
+			}
 		}
 	}
 
@@ -155,11 +168,15 @@ class ModulesModelModules extends JModelList
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.id, a.title, a.note, a.position, a.module, ' .
-				'a.checked_out, a.checked_out_time, a.published, a.access, a.ordering, a.language'
+				'a.id, a.title, a.note, a.position, a.module, a.language,' .
+				'a.checked_out, a.checked_out_time, a.published, a.access, a.ordering'
 			)
 		);
 		$query->from('`#__modules` AS a');
+
+		// Join over the language
+		$query->select('l.title AS language_title');
+		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
 
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');
@@ -223,6 +240,11 @@ class ModulesModelModules extends JModelList
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
 				$query->where('('.'a.title LIKE '.$search.' OR a.note LIKE '.$search.')');
 			}
+		}
+
+		// Filter on the language.
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = ' . $db->quote($language));
 		}
 
 		//echo nl2br(str_replace('#__','jos_',$query));

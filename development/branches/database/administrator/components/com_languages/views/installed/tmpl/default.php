@@ -10,16 +10,18 @@
 defined('_JEXEC') or die;
 
 // Add specific helper files for html generation
-JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
+$user	= JFactory::getUser();
+$userId	= $user->get('id');
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_languages&view=installed'); ?>" method="post" name="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_languages&view=installed'); ?>" method="post" id="adminForm" name="adminForm">
 
 	<?php if ($this->ftp): ?>
 		<?php echo $this->loadTemplate('ftp');?>
 	<?php endif; ?>
 
-	<fieldset class="filter clearfix">
-		<div class="right">
+	<fieldset id="filter-bar">
+		<div class="filter-select fltrt">
 			<label for="filter_client_id">
 				<?php echo JText::_('COM_LANGUAGES_FILTER_CLIENT_LABEL'); ?>
 			</label>
@@ -36,7 +38,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 					<?php echo JText::_('COM_LANGUAGES_HEADING_NUM'); ?>
 				</th>
 				<th width="30">
-					&nbsp;
+					&#160;
 				</th>
 				<th width="25%" class="title">
 					<?php echo JText::_('COM_LANGUAGES_HEADING_LANGUAGE'); ?>
@@ -66,7 +68,11 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 			</tr>
 		</tfoot>
 		<tbody>
-		<?php foreach ($this->rows as $i => $row):?>
+		<?php foreach ($this->rows as $i => $row) :
+			$canCreate	= $user->authorise('core.create',		'com_languages');
+			$canEdit	= $user->authorise('core.edit',			'com_languages');
+			$canChange	= $user->authorise('core.edit.state',	'com_languages');
+		?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td width="20">
 					<?php echo $this->pagination->getRowOffset($i); ?>
@@ -78,7 +84,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 					<?php echo $row->name;?>
 				</td>
 				<td width="5%" align="center">
-					<?php echo JHtml::_('languages.published',$row->published);?>
+					<?php echo JHtml::_('jgrid.isdefault', $row->published, $i, 'installed.',  !$row->published && $canChange);?>
 				</td>
 				<td align="center">
 					<?php echo $row->version; ?>
@@ -97,7 +103,9 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 		</tbody>
 	</table>
 
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<?php echo JHtml::_('form.token'); ?>
+	<div>
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" />
+		<?php echo JHtml::_('form.token'); ?>
+	</div>
 </form>

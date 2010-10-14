@@ -57,17 +57,16 @@ class UsersViewLevels extends JView
 		}
 		if ($canDo->get('core.edit')) {
 			JToolBarHelper::custom('level.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
+			JToolBarHelper::divider();
 		}
 		if ($canDo->get('core.delete')) {
-			JToolBarHelper::deleteList('', 'level.delete','JTOOLBAR_TRASH');
+			JToolBarHelper::deleteList('', 'level.delete','JTOOLBAR_DELETE');
+			JToolBarHelper::divider();
 		}
-
-		JToolBarHelper::divider();
-
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_users');
+			JToolBarHelper::divider();			
 		}
-		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.users.levels','JTOOLBAR_HELP');
+		JToolBarHelper::help('JHELP_USERS_ACCESS_LEVELS');
 	}
 }

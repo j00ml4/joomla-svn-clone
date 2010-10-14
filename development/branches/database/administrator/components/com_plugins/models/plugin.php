@@ -22,31 +22,35 @@ class PluginsModelPlugin extends JModelAdmin
 	protected $_cache;
 
 	/**
-	 * @var		string	The prefix to use with controller messages.
+	 * @var		string	The event to trigger after saving the data.
 	 * @since	1.6
 	 */
-	protected $text_prefix = 'COM_PLUGINS';
-	
+	protected $event_after_save = 'onExtensionAfterSave';
+
+	/**
+	 * @var		string	The event to trigger after before the data.
+	 * @since	1.6
+	 */
+	protected $event_before_save = 'onExtensionBeforeSave';
+
 	/**
 	 * Method to get the record form.
 	 *
-	 * @param	array		An optional array of source data.
-	 *
-	 * @return	mixed		JForm object on success, false on failure.
+	 * @param	array	$data		Data for the form.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	JForm	A JForm object on success, false on failure
+	 * @since	1.6
 	 */
-	public function getForm($data = null)
+	public function getForm($data = array(), $loadData = true)
 	{
-		// Initialise variables.
-		$app = JFactory::getApplication();
-
 		// The folder and element vars are passed when saving the form.
 		if (empty($data)) {
 			$item		= $this->getItem();
 			$folder		= $item->folder;
 			$element	= $item->element;
 		} else {
-			$folder		= JArrayHelper::getValue($data, 'folder', '', 'word');
-			$element	= JArrayHelper::getValue($data, 'element', '', 'word');
+			$folder		= JArrayHelper::getValue($data, 'folder', '', 'cmd');
+			$element	= JArrayHelper::getValue($data, 'element', '', 'cmd');
 		}
 
 		// These variables are used to add data from the plugin XML files.
@@ -54,22 +58,42 @@ class PluginsModelPlugin extends JModelAdmin
 		$this->setState('item.element',	$element);
 
 		// Get the form.
-		$form = parent::getForm('com_plugins.plugin', 'plugin', array('control' => 'jform'));
+		$form = $this->loadForm('com_plugins.plugin', 'plugin', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
 
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_plugins.edit.plugin.data', array());
+		// Modify the form based on access controls.
+		if (!$this->canEditState((object) $data)) {
+			// Disable fields for display.
+			$form->setFieldAttribute('ordering', 'disabled', 'true');
+			$form->setFieldAttribute('enabled', 'disabled', 'true');
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+			// Disable fields while saving.
+			// The controller has already verified this is a record you can edit.
+			$form->setFieldAttribute('ordering', 'filter', 'unset');
+			$form->setFieldAttribute('enabled', 'filter', 'unset');
 		}
 
 		return $form;
+	}
+
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_plugins.edit.plugin.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
+		}
+
+		return $data;
 	}
 
 	/**
@@ -112,7 +136,7 @@ class PluginsModelPlugin extends JModelAdmin
 			$path	= JPath::clean($client->path.'/plugins/'.$table->folder.'/'.$table->element.'/'.$table->element.'.xml');
 
 			if (file_exists($path)) {
-				$this->_cache[$pk]->xml = &JFactory::getXML($path);
+				$this->_cache[$pk]->xml = JFactory::getXML($path);
 			} else {
 				$this->_cache[$pk]->xml = null;
 			}
@@ -136,12 +160,12 @@ class PluginsModelPlugin extends JModelAdmin
 
 	/**
 	 * @param	object	A form object.
-	 *
+	 * @param	mixed	The data expected for the form.
 	 * @return	mixed	True if successful.
 	 * @throws	Exception if there is an error in the form event.
 	 * @since	1.6
 	 */
-	protected function preprocessForm($form)
+	protected function preprocessForm($form, $data)
 	{
 		jimport('joomla.filesystem.file');
 		jimport('joomla.filesystem.folder');
@@ -152,6 +176,10 @@ class PluginsModelPlugin extends JModelAdmin
 		$lang		= JFactory::getLanguage();
 		$client		= JApplicationHelper::getClientInfo(0);
 
+		if (empty($folder) || empty($element)) {
+			$app = JFactory::getApplication();
+			$app->redirect(JRoute::_('index.php?option=com_plugins&view=plugins',false));
+		}
 		// Try 1.6 format: /plugins/folder/element/element.xml
 		$formFile = JPath::clean($client->path.'/plugins/'.$folder.'/'.$element.'/'.$element.'.xml');
 		if (!file_exists($formFile)) {
@@ -172,12 +200,12 @@ class PluginsModelPlugin extends JModelAdmin
 		if (file_exists($formFile)) {
 			// Get the plugin form.
 			if (!$form->loadFile($formFile, false, '//config')) {
-				throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
+				throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
 			}
 		}
 
 		// Trigger the default form events.
-		parent::preprocessForm($form);
+		parent::preprocessForm($form, $data);
 	}
 
 	/**
@@ -193,5 +221,23 @@ class PluginsModelPlugin extends JModelAdmin
 		$condition[] = 'type = '. $this->_db->Quote($table->type);
 		$condition[] = 'folder = '. $this->_db->Quote($table->folder);
 		return $condition;
+	}
+
+	/**
+	 * Override method to save the form data.
+	 *
+	 * @param	array	The form data.
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function save($data)
+	{
+		// Load the extension plugin group.
+		JPluginHelper::importPlugin('extension');
+
+		// Setup type
+		$data['type'] = 'plugin';
+
+		return parent::save($data);
 	}
 }

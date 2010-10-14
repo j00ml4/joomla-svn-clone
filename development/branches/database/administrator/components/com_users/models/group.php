@@ -23,13 +23,13 @@ class UsersModelGroup extends JModelAdmin
 	 * @var		string	The event to trigger after saving the data.
 	 * @since	1.6
 	 */
-	protected $event_after_save = 'onAfterStoreUsergroup';
+	protected $event_after_save = 'onUserAfterSaveGroup';
 
 	/**
 	 * @var		string	The event to trigger after before the data.
 	 * @since	1.6
 	 */
-	protected $event_before_save = 'onBeforeStoreUsergroup';
+	protected $event_before_save = 'onUserBeforeSaveGroup';
 
 	/**
 	 * Returns a reference to the a Table object, always creating it.
@@ -49,31 +49,59 @@ class UsersModelGroup extends JModelAdmin
 	/**
 	 * Method to get the record form.
 	 *
-	 * @return	mixed	JForm object on success, false on failure.
+	 * @param	array	$data		An optional array of data for the form to interogate.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	JForm	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('com_users.group', 'group', array('control' => 'jform'));
+		$form = $this->loadForm('com_users.group', 'group', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
 
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_users.edit.group.data', array());
+		return $form;
+	}
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_users.edit.group.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
 		}
 
-		return $form;
+		return $data;
+	}
+
+	/**
+	 * Override preprocessForm to load the user plugin group instead of content.
+	 *
+	 * @param	object	A form object.
+	 * @param	mixed	The data expected for the form.
+	 * @throws	Exception if there is an error in the form event.
+	 * @since	1.6
+	 */
+	protected function preprocessForm(JForm $form, $data)
+	{
+		$obj = is_array($data) ? JArrayHelper::toObject($data,'JObject') : $data;
+		if (isset($obj->parent_id) && $obj->parent_id == 0 && $obj->id > 0) {
+			$form->setFieldAttribute('parent_id','type','hidden');
+			$form->setFieldAttribute('parent_id','hidden','true');
+		}
+		parent::preprocessForm($form, $data, 'user');
 	}
 
 	/**
@@ -103,14 +131,22 @@ class UsersModelGroup extends JModelAdmin
 		// Typecast variable.
 		$pks = (array) $pks;
 		$user	= JFactory::getUser();
+		$groups = JAccess::getGroupsByUser($user->get('id'));
 
 		// Get a row instance.
 		$table = $this->getTable();
 
-		// Trigger the onBeforeStoreUser event.
+		// Trigger the onUserBeforeSave event.
 		JPluginHelper::importPlugin('user');
 		$dispatcher = JDispatcher::getInstance();
 
+		// do not allow to delete groups to which the current user belong
+		foreach ($pks as $i => $pk) {
+			if (in_array($pk, $groups)) {
+				JError::raiseWarning( 403, JText::_('COM_USERS_DELETE_ERROR_INVALID_GROUP'));
+				return false;
+			}
+		}
 		// Iterate the items to delete each one.
 		foreach ($pks as $i => $pk) {
 			if ($table->load($pk)) {
@@ -118,15 +154,15 @@ class UsersModelGroup extends JModelAdmin
 				$allow = $user->authorise('core.edit.state', 'com_users');
 
 				if ($allow) {
-					// Fire the onBeforeDeleteUser event.
-					$dispatcher->trigger('onBeforeDeleteUser', array($table->getProperties()));
+					// Fire the onUserBeforeDeleteGroup event.
+					$dispatcher->trigger('onUserBeforeDeleteGroup', array($table->getProperties()));
 
 					if (!$table->delete($pk)) {
 						$this->setError($table->getError());
 						return false;
 					} else {
-						// Trigger the onAfterDeleteUsergroup event.
-						$dispatcher->trigger('onAfterDeleteUsergroup', array($user->getProperties(), true, $this->getError()));
+						// Trigger the onUserAfterDeleteGroup event.
+						$dispatcher->trigger('onUserAfterDeleteGroup', array($user->getProperties(), true, $this->getError()));
 					}
 				} else {
 					// Prune items that you can't change.

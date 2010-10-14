@@ -41,8 +41,11 @@ class NewsfeedsModelNewsfeeds extends JModelList
 		$state = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_published', '', 'string');
 		$this->setState('filter.state', $state);
 
-		$categoryId = $app->getUserStateFromRequest($this->context.'.filter.category_id', 'catid', null, 'int');
+		$categoryId = $app->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id', null);
 		$this->setState('filter.category_id', $categoryId);
+
+		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
+		$this->setState('filter.language', $language);
 
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_newsfeeds');
@@ -70,6 +73,7 @@ class NewsfeedsModelNewsfeeds extends JModelList
 		$id	.= ':'.$this->getState('filter.access');
 		$id	.= ':'.$this->getState('filter.state');
 		$id	.= ':'.$this->getState('filter.category_id');
+		$id .= ':'.$this->getState('filter.language');
 
 		return parent::getStoreId($id);
 	}
@@ -95,6 +99,10 @@ class NewsfeedsModelNewsfeeds extends JModelList
 			)
 		);
 		$query->from('`#__newsfeeds` AS a');
+
+		// Join over the language
+		$query->select('l.title AS language_title');
+		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
 
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');
@@ -138,17 +146,22 @@ class NewsfeedsModelNewsfeeds extends JModelList
 			else
 			{
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-				$query->where('a.name LIKE '.$search.' OR a.alias LIKE '.$search);
+				$query->where('(a.name LIKE '.$search.' OR a.alias LIKE '.$search.')');
 			}
 		}
-
-		if($this->getState('list.ordering', 'a.ordering') == 'a.ordering')
-		{
-			$query->order('category_title, '.$db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-		} else {
-			// Add the list ordering clause.
-			$query->order($db->getEscaped($this->getState('list.ordering', 'a.name')).', a.ordering '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		
+		// Filter on the language.
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = ' . $db->quote($language));
 		}
+
+		// Add the list ordering clause.
+		$orderCol	= $this->state->get('list.ordering');
+		$orderDirn	= $this->state->get('list.direction');
+		if ($orderCol == 'a.ordering' || $orderCol == 'category_title') {
+			$orderCol = 'category_title '.$orderDirn.', a.ordering';
+		}
+		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;

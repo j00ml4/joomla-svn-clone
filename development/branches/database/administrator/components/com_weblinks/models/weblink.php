@@ -24,7 +24,7 @@ class WeblinksModelWeblink extends JModelAdmin
 	 * @since	1.6
 	 */
 	protected $text_prefix = 'COM_WEBLINKS';
-	
+
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
@@ -38,7 +38,8 @@ class WeblinksModelWeblink extends JModelAdmin
 
 		if ($record->catid) {
 			return $user->authorise('core.delete', 'com_weblinks.category.'.(int) $record->catid);
-		} else {
+		}
+		else {
 			return parent::canDelete($record);
 		}
 	}
@@ -54,9 +55,10 @@ class WeblinksModelWeblink extends JModelAdmin
 	{
 		$user = JFactory::getUser();
 
-		if ($record->catid) {
+		if (!empty($record->catid)) {
 			return $user->authorise('core.edit.state', 'com_weblinks.category.'.(int) $record->catid);
-		} else {
+		}
+		else {
 			return parent::canEditState($record);
 		}
 	}
@@ -77,16 +79,18 @@ class WeblinksModelWeblink extends JModelAdmin
 	/**
 	 * Method to get the record form.
 	 *
-	 * @return	mixed	JForm object on success, false on failure.
+	 * @param	array	$data		An optional array of data for the form to interogate.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	JForm	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
 		// Initialise variables.
 		$app	= JFactory::getApplication();
 
 		// Get the form.
-		$form = parent::getForm('com_weblinks.weblink', 'weblink', array('control' => 'jform'));
+		$form = $this->loadForm('com_weblinks.weblink', 'weblink', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
@@ -100,17 +104,41 @@ class WeblinksModelWeblink extends JModelAdmin
 			$form->setFieldAttribute('catid', 'action', 'core.create');
 		}
 
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_weblinks.edit.weblink.data', array());
+		// Modify the form based on access controls.
+		if (!$this->canEditState((object) $data)) {
+			// Disable fields for display.
+			$form->setFieldAttribute('ordering', 'disabled', 'true');
+			$form->setFieldAttribute('state', 'disabled', 'true');
+			$form->setFieldAttribute('publish_up', 'disabled', 'true');
+			$form->setFieldAttribute('publish_down', 'disabled', 'true');
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+			// Disable fields while saving.
+			// The controller has already verified this is a record you can edit.
+			$form->setFieldAttribute('ordering', 'filter', 'unset');
+			$form->setFieldAttribute('state', 'filter', 'unset');
+			$form->setFieldAttribute('publish_up', 'filter', 'true');
+			$form->setFieldAttribute('publish_down', 'filter', 'true');
 		}
 
 		return $form;
+	}
+
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_weblinks.edit.weblink.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
+		}
+
+		return $data;
 	}
 
 	/**

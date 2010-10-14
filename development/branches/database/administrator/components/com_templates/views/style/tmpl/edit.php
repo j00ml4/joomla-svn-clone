@@ -13,43 +13,45 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+JHtml::_('behavior.keepalive');
+$user = JFactory::getUser();
+$canDo = TemplatesHelper::getActions();
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'style.cancel' || document.formvalidator.isValid(document.id('style-form'))) {
-			submitform(task);
+			Joomla.submitform(task, document.getElementById('style-form'));
 		}
 	}
-// -->
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_templates'); ?>" method="post" name="adminForm" id="style-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_templates'); ?>" method="post" name="adminForm" id="style-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
-			<legend><?php echo JText::_('JOPTION_REQUIRED');?>	</legend>
-
-
-			<?php echo $this->form->getLabel('template'); ?>
-			<?php echo $this->form->getInput('template'); ?>
+			<legend><?php echo JText::_('JDETAILS');?></legend>
 
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
 
-			<?php echo $this->form->getLabel('client_id'); ?>
-			<input type="text" size="35" value="<?php echo $this->item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>	" class="readonly" readonly="readonly" />
+			<?php echo $this->form->getLabel('template'); ?>
+			<?php echo $this->form->getInput('template'); ?>
 
+			<?php echo $this->form->getLabel('client_id'); ?>
+			<?php echo $this->form->getInput('client_id'); ?>
+			<input type="text" size="35" value="<?php echo $this->item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>	" class="readonly" readonly="readonly" />
 
 			<?php echo $this->form->getLabel('home'); ?>
 			<?php echo $this->form->getInput('home'); ?>
-		<div class="clr"></div>
+			<div class="clr"></div>
+
 			<?php if ($this->item->id) : ?>
 				<?php echo $this->form->getLabel('id'); ?>
-				<input type="text" size="35" value="<?php  echo ($text = (string) JText::_($this->item->id)); ?>" class="readonly" readonly="readonly" />
-
+				<span class="readonly"><?php echo $this->item->id; ?></span>
 			<?php endif; ?>
 		</fieldset>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHtml::_('form.token'); ?>
 	</div>
 
 	<div class="width-40 fltrt">
@@ -62,9 +64,13 @@ JHtml::_('behavior.formvalidation');
 
 	<?php echo JHtml::_('sliders.end'); ?>
 	</div>
+	<?php if ($user->authorise('core.edit','com_menu') && $this->item->client_id==0):?>
+		<?php if ($canDo->get('core.edit.state')) : ?>
+			<div class="width-60 fltlft">
+			<?php echo $this->loadTemplate('assignment'); ?>
+			</div>
+			<?php endif; ?>
+		<?php endif;?>
 
 	<div class="clr"></div>
-
-	<input type="hidden" name="task" value="" />
-	<?php echo JHtml::_('form.token'); ?>
 </form>

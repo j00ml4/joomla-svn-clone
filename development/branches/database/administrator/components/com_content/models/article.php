@@ -23,11 +23,12 @@ class ContentModelArticle extends JModelAdmin
 	 * @since	1.6
 	 */
 	protected $text_prefix = 'COM_CONTENT';
-	
+
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
 	 * @param	object	A record object.
+	 *
 	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
 	 * @since	1.6
 	 */
@@ -42,6 +43,7 @@ class ContentModelArticle extends JModelAdmin
 	 * Method to test whether a record can be deleted.
 	 *
 	 * @param	object	A record object.
+	 *
 	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
 	 * @since	1.6
 	 */
@@ -49,19 +51,42 @@ class ContentModelArticle extends JModelAdmin
 	{
 		$user = JFactory::getUser();
 
-		return $user->authorise('core.edit.state', 'com_content.article.'.(int) $record->id);
+		// Check for existing article.
+		if (!empty($record->id)) {
+			return $user->authorise('core.edit.state', 'com_content.article.'.(int) $record->id);
+		}
+		// New article, so check against the category.
+		else if (!empty($record->catid)) {
+			return $user->authorise('core.edit.state', 'com_content.category.'.(int) $record->catid);
+		}
+		// Default to component settings if neither article nor category known.
+		else {
+			return parent::canEditState($record);
+		}
 	}
 
 	/**
 	 * Prepare and sanitise the table data prior to saving.
 	 *
 	 * @param	JTable	A JTable object.
+	 *
+	 * @return	void
 	 * @since	1.6
 	 */
 	protected function prepareTable($table)
 	{
+		// Set the publish date to now
+		if($table->state == 1 && intval($table->publish_up) == 0) {
+			$table->publish_up = JFactory::getDate()->toMySQL();
+		}
+
 		// Increment the content version number.
 		$table->version++;
+		
+		// Reorder the articles within the category so the new article is first
+		if (empty($table->id)) {
+			$table->reorder('catid = '.(int) $table->catid.' AND state >= 0');
+		}
 	}
 
 	/**
@@ -70,6 +95,7 @@ class ContentModelArticle extends JModelAdmin
 	 * @param	type	The table type to instantiate
 	 * @param	string	A prefix for the table class name. Optional.
 	 * @param	array	Configuration array for model. Optional.
+	 *
 	 * @return	JTable	A database object
 	*/
 	public function getTable($type = 'Content', $prefix = 'JTable', $config = array())
@@ -106,46 +132,74 @@ class ContentModelArticle extends JModelAdmin
 	/**
 	 * Method to get the record form.
 	 *
-	 * @return	mixed	JForm object on success, false on failure.
+	 * @param	array	$data		Data for the form.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 *
+	 * @return	mixed	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
-		// Initialise variables.
-		$app	= JFactory::getApplication();
-
 		// Get the form.
-		$form = parent::getForm('com_content.article', 'article', array('control' => 'jform'));
+		$form = $this->loadForm('com_content.article', 'article', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
 
 		// Determine correct permissions to check.
-		if ($this->getState('article.id')) {
+		if ($id = (int) $this->getState('article.id')) {
 			// Existing record. Can only edit in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.edit');
-		} else {
+		}
+		else {
 			// New record. Can only create in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.create');
 		}
 
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_content.edit.article.data', array());
+		// Modify the form based on Edit State access controls.
+		if (!$this->canEditState((object) $data)) {
+			// Disable fields for display.
+			$form->setFieldAttribute('featured', 'disabled', 'true');
+			$form->setFieldAttribute('ordering', 'disabled', 'true');
+			$form->setFieldAttribute('publish_up', 'disabled', 'true');
+			$form->setFieldAttribute('publish_down', 'disabled', 'true');
+			$form->setFieldAttribute('state', 'disabled', 'true');
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+			// Disable fields while saving.
+			// The controller has already verified this is an article you can edit.
+			$form->setFieldAttribute('featured', 'filter', 'unset');
+			$form->setFieldAttribute('ordering', 'filter', 'unset');
+			$form->setFieldAttribute('publish_up', 'filter', 'unset');
+			$form->setFieldAttribute('publish_down', 'filter', 'unset');
+			$form->setFieldAttribute('state', 'filter', 'unset');
 		}
 
 		return $form;
 	}
 
 	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_content.edit.article.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
+		}
+
+		return $data;
+	}
+
+	/**
 	 * Method to save the form data.
 	 *
 	 * @param	array	The form data.
+	 *
 	 * @return	boolean	True on success.
 	 * @since	1.6
 	 */
@@ -169,56 +223,57 @@ class ContentModelArticle extends JModelAdmin
 	 *
 	 * @return	boolean	True on success.
 	 */
-	function featured($pks, $value = 0)
+	public function featured($pks, $value = 0)
 	{
 		// Sanitize the ids.
 		$pks = (array) $pks;
 		JArrayHelper::toInteger($pks);
 
 		if (empty($pks)) {
-			$this->setError(JText::_('JError_No_items_selected'));
+			$this->setError(JText::_('COM_CONTENT_NO_ITEM_SELECTED'));
 			return false;
 		}
 
 		$table = $this->getTable('Featured', 'ContentTable');
 
 		try {
-			$this->_db->setQuery(
+			$db = $this->getDbo();
+
+			$db->setQuery(
 				'UPDATE #__content AS a' .
 				' SET a.featured = '.(int) $value.
 				' WHERE a.id IN ('.implode(',', $pks).')'
 			);
-			if (!$this->_db->query()) {
-				throw new Exception($this->_db->getErrorMsg());
+			if (!$db->query()) {
+				throw new Exception($db->getErrorMsg());
 			}
 
 			// Adjust the mapping table.
-			if ($value == 0) {
-				// Unfeaturing.
-				$this->_db->setQuery(
-					'DELETE FROM #__content_frontpage' .
-					' WHERE content_id IN ('.implode(',', $pks).')'
-				);
-				if (!$this->_db->query()) {
-					throw new Exception($this->_db->getErrorMsg());
-				}
-			} else {
+			// Clear the existing features settings.
+			$db->setQuery(
+				'DELETE FROM #__content_frontpage' .
+				' WHERE content_id IN ('.implode(',', $pks).')'
+			);
+			if (!$db->query()) {
+				throw new Exception($db->getErrorMsg());
+			}
+
+			if ($value == 1) {
 				// Featuring.
 				$tuples = array();
 				foreach ($pks as $i => $pk) {
 					$tuples[] = '('.$pk.', '.(int)($i + 1).')';
 				}
-				if ($isNew){
-					$this->_db->setQuery(
-						'INSERT INTO #__content_frontpage (`content_id`, `ordering`)' .
-						' VALUES '.implode(',', $tuples)
+				$db->setQuery(
+					'INSERT INTO #__content_frontpage (`content_id`, `ordering`)' .
+					' VALUES '.implode(',', $tuples)
 				);
-				}
-				if (!$this->_db->query()) {
-					$this->setError($this->_db->getErrorMsg());
+				if (!$db->query()) {
+					$this->setError($db->getErrorMsg());
 					return false;
 				}
 			}
+
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;
@@ -236,6 +291,7 @@ class ContentModelArticle extends JModelAdmin
 	 * A protected method to get a set of ordering conditions.
 	 *
 	 * @param	object	A record object.
+	 *
 	 * @return	array	An array of conditions to add to add to ordering queries.
 	 * @since	1.6
 	 */

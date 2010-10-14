@@ -65,7 +65,7 @@ class AdminViewSysinfo extends JView
 	protected function _setSubMenu()
 	{
 		$contents = $this->loadTemplate('navigation');
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 		$document->setBuffer($contents, 'modules', 'submenu');
 	}
 
@@ -77,6 +77,6 @@ class AdminViewSysinfo extends JView
 	protected function addToolbar()
 	{
 		JToolBarHelper::title(JText::_('COM_ADMIN_SYSTEM_INFORMATION'), 'systeminfo.png');
-		JToolBarHelper::help('screen.system.info');
+		JToolBarHelper::help('JHELP_SITE_SYSTEM_INFORMATION');
 	}
 }

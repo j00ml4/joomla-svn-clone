@@ -11,7 +11,7 @@
 defined('_JEXEC') or die;
 
 // Include the module helper classes.
-if (!class_exists('MenuModuleHelper')) {
+if (!class_exists('ModMenuHelper')) {
 	require dirname(__FILE__).'/helper.php';
 }
 
@@ -20,8 +20,8 @@ if (!class_exists('JAdminCssMenu')) {
 }
 
 // Initialise variables.
-$lang		= &JFactory::getLanguage();
-$user		= &JFactory::getUser();
+$lang		= JFactory::getLanguage();
+$user		= JFactory::getUser();
 $menu		= new JAdminCSSMenu();
 $enabled	= JRequest::getInt('hidemainmenu') ? false : true;
 

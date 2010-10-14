@@ -7,7 +7,6 @@
 			name="id"
 			type="text"
 			default="0"
-			required="true"
 			readonly="true"
 			class="readonly"
 			label="JGLOBAL_FIELD_ID_LABEL"
@@ -20,7 +19,6 @@
 			label="COM_REDIRECT_FIELD_OLD_URL_LABEL"
 			description="COM_REDIRECT_FIELD_OLD_URL_DESC"
 			size="50"
-			default=""
 			required="true" />
 
 		<field
@@ -30,7 +28,7 @@
 			label="COM_REDIRECT_FIELD_NEW_URL_LABEL"
 			description="COM_REDIRECT_FIELD_NEW_URL_DESC"
 			size="50"
-			default="" />
+			required="true" />
 
 		<field
 			name="comment"
@@ -38,13 +36,12 @@
 			class="inputbox"
 			label="COM_REDIRECT_FIELD_COMMENT_LABEL"
 			description="COM_REDIRECT_FIELD_COMMENT_DESC"
-			size="40"
-			default="" />
+			size="40" />
 
 		<field
 			name="published"
 			type="list"
-			label="JFIELD_PUBLISHED_LABEL"
+			label="JGLOBAL_STATE"
 			description="JFIELD_PUBLISHED_DESC"
 			class="inputbox"
 			size="1"
@@ -71,27 +68,24 @@
 			class="inputbox"
 			label="COM_REDIRECT_FIELD_REFERRER_LABEL"
 			size="50"
-			default=""
 			readonly="true" />
 
 		<field
 			name="created_date"
 			type="text"
 			id="created_date"
-			class="inputbox"
+			class="readonly"
 			label="COM_REDIRECT_FIELD_CREATED_DATE_LABEL"
 			size="20"
-			default=""
 			readonly="true" />
 
 		<field
-			name="updated_date"
+			name="modified_date"
 			type="text"
-			id="updated_date"
-			class="inputbox"
+			id="modified_date"
+			class="readonly"
 			label="COM_REDIRECT_FIELD_UPDATED_DATE_LABEL"
 			size="20"
-			default=""
 			readonly="true" />
 	</fieldset>
 </form>

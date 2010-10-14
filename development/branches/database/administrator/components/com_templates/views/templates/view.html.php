@@ -19,18 +19,38 @@ jimport('joomla.application.component.view');
  */
 class TemplatesViewTemplates extends JView
 {
+	/**
+	 * @var		array
+	 * @since	1.6
+	 */
 	protected $items;
+
+	/**
+	 * @var		object
+	 * @since	1.6
+	 */
 	protected $pagination;
+
+	/**
+	 * @var		object
+	 * @since	1.6
+	 */
 	protected $state;
 
 	/**
-	 * Display the view
+	 * Display the view.
+	 *
+	 * @param	string
+	 *
+	 * @return	void
+	 * @since	1.6
 	 */
 	public function display($tpl = null)
 	{
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
 		$this->state		= $this->get('State');
+		$this->preview		= JComponentHelper::getParams('com_templates')->get('template_positions_display');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -45,6 +65,7 @@ class TemplatesViewTemplates extends JView
 	/**
 	 * Add the page title and toolbar.
 	 *
+	 * @return	void
 	 * @since	1.6
 	 */
 	protected function addToolbar()
@@ -55,9 +76,8 @@ class TemplatesViewTemplates extends JView
 		JToolBarHelper::title(JText::_('COM_TEMPLATES_MANAGER_TEMPLATES'), 'thememanager');
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::preferences('com_templates');
+			JToolBarHelper::divider();	
 		}
-
-		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.templates','JTOOLBAR_HELP');
+		JToolBarHelper::help('JHELP_EXTENSIONS_TEMPLATE_MANAGER_TEMPLATES');
 	}
 }

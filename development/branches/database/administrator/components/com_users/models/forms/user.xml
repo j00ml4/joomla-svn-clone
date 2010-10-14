@@ -10,7 +10,7 @@
 	<field name="name" type="text"
 		class="inputbox"
 		description="COM_USERS_USER_FIELD_NAME_DESC"
-		label="COM_USERS_USER_FIELD_NAME_LABEL"
+		label="COM_USERS_HEADING_NAME"
 		required="true"
 		size="30"
 	/>
@@ -28,7 +28,7 @@
 		class="inputbox"
 		description="COM_USERS_USER_FIELD_PASSWORD_DESC"
 		filter="raw"
-		label="COM_USERS_USER_FIELD_PASSWORD_LABEL"
+		label="JGLOBAL_PASSWORD"
 		size="30"
 	/>
 
@@ -44,7 +44,7 @@
 	<field name="email" type="text"
 		class="inputbox validate-email"
 		description="COM_USERS_USER_FIELD_EMAIL_DESC"
-		label="COM_USERS_USER_FIELD_EMAIL_LABEL"
+		label="JGLOBAL_EMAIL"
 		required="true"
 		size="30"
 		validate="email"
@@ -74,22 +74,36 @@
 	</field>
 	<field
 			name="registerDate"
-			type="text"
+			type="calendar"
 			class="readonly"
 			label="COM_USERS_USER_FIELD_REGISTERDATE_LABEL"
 			description="COM_USERS_USER_FIELD_REGISTERDATE_DESC"
 			readonly="true"
-			>
-	</field>
+			format="%Y-%m-%d %H:%M:%S"
+			size="20"
+			filter="user_utc"
+	/>
 	<field
 			name="lastvisitDate"
-			type="text"
+			type="calendar"
 			class="readonly"
 			label="COM_USERS_USER_FIELD_LASTVISIT_LABEL"
 			description="COM_USERS_USER_FIELD_LASTVISIT_DESC"
 			readonly="true"
-			>
-	</field>
+			format="%Y-%m-%d %H:%M:%S"
+			size="20"
+			filter="user_utc"
+	/>
+
+	<field
+			name="id"
+			type="text"
+			class="readonly"
+			label="JGLOBAL_FIELD_ID_LABEL"
+			description ="JGLOBAL_FIELD_ID_DESC"		
+			default="0"
+			readonly="true"
+			/>
 
 	</fieldset>
 	<field name="groups" type="hidden" />

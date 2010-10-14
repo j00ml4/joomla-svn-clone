@@ -19,9 +19,9 @@ jimport('joomla.application.component.view');
  */
 class WeblinksViewWeblinks extends JView
 {
-	protected $state;
 	protected $items;
 	protected $pagination;
+	protected $state;
 
 	/**
 	 * Display the view
@@ -54,7 +54,7 @@ class WeblinksViewWeblinks extends JView
 		$state	= $this->get('State');
 		$canDo	= WeblinksHelper::getActions($state->get('filter.category_id'));
 
-		JToolBarHelper::title(JText::_('COM_WEBLINKS_MANAGER_WEBLINKS'), 'generic.png');
+		JToolBarHelper::title(JText::_('COM_WEBLINKS_MANAGER_WEBLINKS'), 'weblinks.png');
 		if ($canDo->get('core.create')) {
 			JToolBarHelper::addNew('weblink.add','JTOOLBAR_NEW');
 		}
@@ -63,30 +63,27 @@ class WeblinksViewWeblinks extends JView
 		}
 		if ($canDo->get('core.edit.state')) {
 
-				JToolBarHelper::divider();
-				JToolBarHelper::custom('weblinks.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
-				JToolBarHelper::custom('weblinks.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
-			
-			if ($state->get('filter.state') != -1 ) {
-				JToolBarHelper::divider();
-				if ($state->get('filter.state') != 2) {
-					JToolBarHelper::archiveList('weblinks.archive','JTOOLBAR_ARCHIVE');
-				}
-				else if ($state->get('filter.state') == 2) {
-					JToolBarHelper::unarchiveList('weblinks.publish', 'JTOOLBAR_UNARCHIVE');
-				}
-			}	
+			JToolBarHelper::divider();
+			JToolBarHelper::custom('weblinks.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::custom('weblinks.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+
+
+			JToolBarHelper::divider();
+			JToolBarHelper::archiveList('weblinks.archive','JTOOLBAR_ARCHIVE');
+			JToolBarHelper::custom('weblinks.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
 		}
 		if ($state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'weblinks.delete','JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::divider();
 		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('weblinks.trash','JTOOLBAR_TRASH');
+			JToolBarHelper::divider();
 		}
 		if ($canDo->get('core.admin')) {
-			JToolBarHelper::divider();
 			JToolBarHelper::preferences('com_weblinks');
+			JToolBarHelper::divider();
 		}
-		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.weblink','JTOOLBAR_HELP');
+
+		JToolBarHelper::help('JHELP_COMPONENTS_WEBLINKS_LINKS');
 	}
 }
