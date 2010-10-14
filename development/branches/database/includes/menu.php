@@ -24,14 +24,16 @@ class JMenuSite extends JMenu
 	 */
 	public function load()
 	{
-		$cache = &JFactory::getCache('mod_menu', '');  // has to be mod_menu or this cache won't get cleaned
-		if (!$data = $cache->get('menu_items')) {
+		$cache = JFactory::getCache('mod_menu', '');  // has to be mod_menu or this cache won't get cleaned
+		if (!$data = $cache->get('menu_items'.JFactory::getLanguage()->getTag())) {
 			// Initialise variables.
 			$db		= JFactory::getDbo();
+			$app	= JFactory::getApplication();
 			$query	= $db->getQuery(true);
 
 			$query->select('m.id, m.menutype, m.title, m.alias, m.path AS route, m.link, m.type, m.level');
 			$query->select('m.browserNav, m.access, m.params, m.home, m.img, m.template_style_id, m.component_id, m.parent_id');
+			$query->select('m.language');
 			$query->select('e.element as component');
 			$query->from('#__menu AS m');
 			$query->leftJoin('#__extensions AS e ON m.component_id = e.extension_id');
@@ -39,9 +41,19 @@ class JMenuSite extends JMenu
 			$query->where('m.parent_id > 0');
 			$query->order('m.lft');
 
+			$user = JFactory::getUser();
+			$groups = implode(',', $user->authorisedLevels());
+			$query->where('m.access IN (' . $groups . ')');
+
+			// Filter by language
+			if ($app->isSite() && $app->getLanguageFilter()) {
+				$query->where('m.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+			}
+
+			// Set the query
 			$db->setQuery($query);
 			if (!($menus = $db->loadObjectList('id'))) {
-				JError::raiseWarning(500, "Error loading Menus: ".$db->getErrorMsg());
+				JError::raiseWarning(500, JText::sprintf('JERROR_LOADING_MENUS', $db->getErrorMsg()));
 				return false;
 			}
 
@@ -63,7 +75,7 @@ class JMenuSite extends JMenu
 				parse_str($url, $menu->query);
 			}
 
-			$cache->store($menus, 'menu_items');
+			$cache->store($menus, 'menu_items'.JFactory::getLanguage()->getTag());
 
 			$this->_items = $menus;
 		} else {
