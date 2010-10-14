@@ -18,14 +18,18 @@ JHtml::_('behavior.formvalidation');
 $params = $this->state->get('params');
 ?>
 
-<script language="javascript" type="text/javascript">
-function submitbutton(task) {
-	if (task == 'weblink.cancel' OR document.formvalidator.isValid(document.id('adminForm'))) {
-		submitform(task);
+<script type="text/javascript">
+	function submitbutton(task) {
+		if (task == 'weblink.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
+			<?php echo $this->form->getField('description')->save(); ?>
+			Joomla.submitform(task);
+		}
+		else {
+			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+		}
 	}
-}
 </script>
-<div class="<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
+<div class="edit<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 <?php if ($this->params->def('show_page_heading', 1)) : ?>
 <h1>
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
@@ -34,34 +38,47 @@ function submitbutton(task) {
 <form action="<?php echo JRoute::_('index.php?option=com_weblinks'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<fieldset>
 		<legend><?php echo JText::_('COM_WEBLINKS_LINK'); ?></legend>
+
+			<div class="formelm">
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
-			<br />
+			</div>
+
+			<div class="formelm">
 			<?php echo $this->form->getLabel('catid'); ?>
 			<?php echo $this->form->getInput('catid'); ?>
-			<br />
+			</div>
+			<div class="formelm">
 			<?php echo $this->form->getLabel('url'); ?>
 			<?php echo $this->form->getInput('url'); ?>
-			<br />
-			<?php if ($this->user->authorise('core.edit.state', 'com_weblinks.weblink.'.$this->item->id)): ?>
+			</div>
+			<?php if ($this->user->authorise('core.edit.state', 'com_weblinks.weblink')): ?>
+				<div class="formelm">
 				<?php echo $this->form->getLabel('state'); ?>
 				<?php echo $this->form->getInput('state'); ?>
-				<br />
+				</div>
 			<?php endif; ?>
-
+			<div class="formelm">
+			<?php echo $this->form->getLabel('language'); ?>
+			<?php echo $this->form->getInput('language'); ?>
+			</div>
+			<div class="formelm-buttons">
+			<button type="button" onclick="submitbutton('weblink.save')">
+				<?php echo JText::_('JSAVE') ?>
+			</button>
+			<button type="button" onclick="submitbutton('weblink.cancel')">
+				<?php echo JText::_('JCANCEL') ?>
+			</button>		
+			</div>			
+			<div>
 			<?php echo $this->form->getLabel('description'); ?>
 			<?php echo $this->form->getInput('description'); ?>
-	</fieldset>
-	<fieldset>
-		<button type="button" onclick="submitbutton('weblink.save')">
-			<?php echo JText::_('JSAVE') ?>
-		</button>
-		<button type="button" onclick="submitbutton('weblink.cancel')">
-			<?php echo JText::_('JCANCEL') ?>
-		</button>
+			</div>
 	</fieldset>
 
-	<input type="hidden" name="task" value="" />
-	<?php echo JHTML::_( 'form.token' ); ?>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHTML::_( 'form.token' ); ?>
+		</div>
+
 </form>
 </div>

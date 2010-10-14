@@ -21,12 +21,12 @@ $listDirn	= $this->state->get('list.direction');
 	<p> <?php echo JText::_('COM_NEWSFEEDS_NO_ARTICLES'); ?>	 </p>
 <?php else : ?>
 
-<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
+<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">
 	<fieldset class="filters">
-	<legend class="element-invisible"><?php echo JText::_('JContent_Filter_Label'); ?></legend>
+	<legend class="hidelabeltxt"><?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?></legend>
 	<?php if ($this->params->get('show_pagination_limit')) : ?>
 		<div class="display-limit">
-			<?php echo JText::_('COM_NEWSFEEDS_DISPLAY_NUM'); ?>&nbsp;
+			<?php echo JText::_('JGLOBAL_DISPLAY_NUM'); ?>&#160;
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
 	<?php endif; ?>
@@ -34,21 +34,21 @@ $listDirn	= $this->state->get('list.direction');
 	<table class="category">
 		<?php if ($this->params->get('show_headings')==1) : ?>
 		<thead><tr>
-				<?php if ($this->params->get('show_name')) : ?>
+				
 				<th class="item-title" id="tableOrdering">
-					<?php echo JHtml::_('grid.sort',  JText::_('COM_NEWSFEEDS_FEED_NAME'), 'a.name', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_NEWSFEEDS_FEED_NAME', 'a.name', $listDirn, $listOrder); ?>
 				</th>
-				<?php endif; ?>
+				
 
 				<?php if ($this->params->get('show_articles')) : ?>
 				<th class="item-num-art" id="tableOrdering2">
-					<?php echo JHtml::_('grid.sort',  JText::_('COM_NEWSFEEDS_NUM_ARTICLES'), 'a.numarticles', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_NEWSFEEDS_NUM_ARTICLES', 'a.numarticles', $listDirn, $listOrder); ?>
 				</th>
 				<?php endif; ?>
 
 				<?php if ($this->params->get('show_link')) : ?>
 				<th class="item-link" id="tableOrdering3">
-					<?php echo JHtml::_('grid.sort',  JText::_('COM_NEWSFEEDS_FEED_LINK'), 'a.link', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_NEWSFEEDS_FEED_LINK', 'a.link', $listDirn, $listOrder); ?>
 				</th>
 				<?php endif; ?>
 
@@ -93,7 +93,9 @@ $listDirn	= $this->state->get('list.direction');
 	</div>
 	<?php endif; ?>
 
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+	<div>
+		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+	</div>
 </form>
 <?php endif; ?>

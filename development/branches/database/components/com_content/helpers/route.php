@@ -24,6 +24,7 @@ jimport('joomla.application.categories');
 abstract class ContentHelperRoute
 {
 	protected static $lookup;
+
 	/**
 	 * @param	int	The route of the content item
 	 */
@@ -34,7 +35,7 @@ abstract class ContentHelperRoute
 		);
 		//Create the link
 		$link = 'index.php?option=com_content&view=article&id='. $id;
-		if ($catid > 1)
+		if ((int)$catid > 1)
 		{
 			$categories = JCategories::getInstance('Content');
 			$category = $categories->get((int)$catid);
@@ -48,7 +49,7 @@ abstract class ContentHelperRoute
 
 		if ($item = ContentHelperRoute::_findItem($needles)) {
 			$link .= '&Itemid='.$item;
-		};
+		}
 
 		return $link;
 	}
@@ -84,7 +85,19 @@ abstract class ContentHelperRoute
 
 		if ($item = ContentHelperRoute::_findItem($needles)) {
 			$link .= '&Itemid='.$item;
-		};
+		}
+
+		return $link;
+	}
+
+	public static function getFormRoute($id)
+	{ 
+		//Create the link
+		if ($id) {
+			$link = 'index.php?option=com_content&task=article.edit&id='. $id;	
+		} else {
+			$link = 'index.php?option=com_content&task=article.edit&id=0';
+		}
 
 		return $link;
 	}
@@ -96,8 +109,9 @@ abstract class ContentHelperRoute
 		{
 			self::$lookup = array();
 
-			$component	= &JComponentHelper::getComponent('com_content');
-			$menus		= &JApplication::getMenu('site');
+			$component	= JComponentHelper::getComponent('com_content');
+			$app		= JFactory::getApplication();
+			$menus		= $app->getMenu('site');
 			$items		= $menus->getItems('component_id', $component->id);
 			foreach ($items as $item)
 			{
@@ -113,6 +127,7 @@ abstract class ContentHelperRoute
 				}
 			}
 		}
+
 		foreach ($needles as $view => $ids)
 		{
 			if (isset(self::$lookup[$view]))

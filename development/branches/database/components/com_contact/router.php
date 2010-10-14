@@ -21,14 +21,15 @@ function ContactBuildRoute(&$query){
 	$segments = array();
 
 	// get a menu item based on Itemid or currently active
-	$menu = &JSite::getMenu();
-	$params = JComponentHelper::getParams('com_contact');
+	$app	= JFactory::getApplication();
+	$menu	= $app->getMenu();
+	$params	= JComponentHelper::getParams('com_contact');
 	$advanced = $params->get('sef_advanced_link', 0);
 
 	if (empty($query['Itemid'])) {
-		$menuItem = &$menu->getActive();
+		$menuItem = $menu->getActive();
 	} else {
-		$menuItem = &$menu->getItem($query['Itemid']);
+		$menuItem = $menu->getItem($query['Itemid']);
 	}
 	$mView	= (empty($menuItem->query['view'])) ? null : $menuItem->query['view'];
 	$mCatid	= (empty($menuItem->query['catid'])) ? null : $menuItem->query['catid'];
@@ -62,27 +63,26 @@ function ContactBuildRoute(&$query){
 			$menuCatid = $mId;
 			$categories = JCategories::getInstance('Contact');
 			$category = $categories->get($catid);
-			if(!$category)
+			if($category)
 			{
-				die('The category is not published or does not exist');
 				//TODO Throw error that the category either not exists or is unpublished
-			}
-			$path = array_reverse($category->getPath());
+				$path = array_reverse($category->getPath());
 
-			$array = array();
-			foreach($path as $id)
-			{
-				if((int) $id == (int)$menuCatid)
+				$array = array();
+				foreach($path as $id)
 				{
-					break;
+					if((int) $id == (int)$menuCatid)
+					{
+						break;
+					}
+					if($advanced)
+					{
+						list($tmp, $id) = explode(':', $id, 2);
+					}
+					$array[] = $id;
 				}
-				if($advanced)
-				{
-					list($tmp, $id) = explode(':', $id, 2);
-				}
-				$array[] = $id;
+				$segments = array_merge($segments, array_reverse($array));
 			}
-			$segments = array_merge($segments, array_reverse($array));
 			if($view == 'contact')
 			{
 				if($advanced)
@@ -129,8 +129,9 @@ function ContactParseRoute($segments)
 	$vars = array();
 
 	//Get the active menu item.
-	$menu = &JSite::getMenu();
-	$item = &$menu->getActive();
+	$app	= JFactory::getApplication();
+	$menu	= $app->getMenu();
+	$item	= $menu->getActive();
 	$params = JComponentHelper::getParams('com_contact');
 	$advanced = $params->get('sef_advanced_link', 0);
 

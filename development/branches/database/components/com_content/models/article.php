@@ -37,7 +37,7 @@ class ContentModelArticle extends JModelItem
 	 */
 	protected function populateState()
 	{
-		$app =& JFactory::getApplication('site');
+		$app = JFactory::getApplication('site');
 
 		// Load state from the request.
 		$pk = JRequest::getInt('id');
@@ -51,8 +51,11 @@ class ContentModelArticle extends JModelItem
 		$this->setState('params', $params);
 
 		// TODO: Tune these values based on other permissions.
-		$this->setState('filter.published', 1);
-		$this->setState('filter.archived', -1);
+		$user		= JFactory::getUser();		
+		if ((!$user->authorise('core.edit.state', 'com_content')) &&  (!$user->authorise('core.edit', 'com_content'))){
+			$this->setState('filter.published', 1);
+			$this->setState('filter.archived', 2);
+		}
 	}
 
 	/**
@@ -72,8 +75,8 @@ class ContentModelArticle extends JModelItem
 		}
 
 		if (!isset($this->_item[$pk])) {
-			try
-			{
+
+			try {
 				$db = $this->getDbo();
 				$query = $db->getQuery(true);
 
@@ -92,17 +95,23 @@ class ContentModelArticle extends JModelItem
 				$query->select('parent.title as parent_title, parent.id as parent_id, parent.path as parent_route, parent.alias as parent_alias');
 				$query->join('LEFT', '#__categories as parent ON parent.id = c.parent_id');
 
+				// Join on voting table
+				$query->select('ROUND( v.rating_sum / v.rating_count ) AS rating, v.rating_count as rating_count');
+				$query->join('LEFT', '#__content_rating AS v ON a.id = v.content_id');
+
 				$query->where('a.id = ' . (int) $pk);
 
 				// Filter by start and end dates.
 				$nullDate = $db->Quote($db->getNullDate());
 				$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
-				
+
 				$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
 				$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
+
 				// Filter by published state.
 				$published = $this->getState('filter.published');
 				$archived = $this->getState('filter.archived');
+
 				if (is_numeric($published)) {
 					$query->where('(a.state = ' . (int) $published . ' OR a.state =' . (int) $archived . ')');
 				}
@@ -116,13 +125,13 @@ class ContentModelArticle extends JModelItem
 				}
 
 				if (empty($data)) {
-					throw new Exception(JText::_('Content_Error_Article_not_found'), 404);
+					throw new JException(JText::_('COM_CONTENT_ERROR_ARTICLE_NOT_FOUND'), 404);
 				}
 
 				// Check for published state if filter set.
 				if (((is_numeric($published)) || (is_numeric($archived))) && (($data->state != $published) && ($data->state != $archived)))
 				{
-					throw new Exception(JText::_('Content_Error_Article_not_found'), 404);
+					JError::raiseError(404, JText::_('COM_CONTENT_ERROR_ARTICLE_NOT_FOUND'));
 				}
 
 				// Convert parameter fields to objects.
@@ -142,7 +151,7 @@ class ContentModelArticle extends JModelItem
 				}
 				else {
 					// If no access filter is set, the layout takes some responsibility for display of limited information.
-					$user =& JFactory::getUser();
+					$user = JFactory::getUser();
 					$groups = $user->authorisedLevels();
 
 					if ($data->catid == 0 || $data->category_access === null) {
@@ -155,7 +164,7 @@ class ContentModelArticle extends JModelItem
 
 				$this->_item[$pk] = $data;
 			}
-			catch (Exception $e)
+			catch (JException $e)
 			{
 				$this->setError($e);
 				$this->_item[$pk] = false;
@@ -174,21 +183,75 @@ class ContentModelArticle extends JModelItem
 	 */
 	public function hit($pk = 0)
 	{
-		// Initialise variables.
-		$pk = (!empty($pk)) ? $pk : (int) $this->getState('article.id');
-		$db = $this->getDbo();
+            $hitcount = JRequest::getInt('hitcount', 1);
+            
+            if ($hitcount)
+            {
+                // Initialise variables.
+                $pk = (!empty($pk)) ? $pk : (int) $this->getState('article.id');
+                $db = $this->getDbo();
 
-		$db->setQuery(
-			'UPDATE #__content' .
-			' SET hits = hits + 1' .
-			' WHERE id = '.(int) $pk
-		);
+                $db->setQuery(
+                        'UPDATE #__content' .
+                        ' SET hits = hits + 1' .
+                        ' WHERE id = '.(int) $pk
+                );
 
-		if (!$db->query()) {
-			$this->setError($db->getErrorMsg());
-			return false;
-		}
+                if (!$db->query()) {
+                        $this->setError($db->getErrorMsg());
+                        return false;
+                }
+            }
 
-		return true;
+            return true;
 	}
+
+    public function storeVote($pk = 0, $rate = 0)
+    {
+        if ( $rate >= 1 && $rate <= 5 && $pk > 0 )
+        {
+            $userIP = $_SERVER['REMOTE_ADDR'];
+            $db = $this->getDbo();
+
+            $db->setQuery(
+                    'SELECT *' .
+                    ' FROM #__content_rating' .
+                    ' WHERE content_id = '.(int) $pk
+            );
+
+            $rating = $db->loadObject();
+
+            if (!$rating)
+            {
+                // There are no ratings yet, so lets insert our rating
+                $db->setQuery(
+                        'INSERT INTO #__content_rating ( content_id, lastip, rating_sum, rating_count )' .
+                        ' VALUES ( '.(int) $pk.', '.$db->Quote($userIP).', '.(int) $rate.', 1 )'
+                );
+
+                if (!$db->query()) {
+                        $this->setError($db->getErrorMsg());
+                        return false;
+                }
+            } else {
+                if ($userIP != ($rating->lastip))
+                {
+                    $db->setQuery(
+                            'UPDATE #__content_rating' .
+                            ' SET rating_count = rating_count + 1, rating_sum = rating_sum + '.(int) $rate.', lastip = '.$db->Quote($userIP) .
+                            ' WHERE content_id = '.(int) $pk
+                    );
+                    if (!$db->query()) {
+                            $this->setError($db->getErrorMsg());
+                            return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }
+        JError::raiseWarning( 'SOME_ERROR_CODE', 'Article Rating:: Invalid Rating:' .$rate, "JModelArticle::storeVote($rate)");
+        return false;
+    }
 }

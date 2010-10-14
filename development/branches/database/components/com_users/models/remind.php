@@ -24,31 +24,33 @@ class UsersModelRemind extends JModelForm
 	/**
 	 * Method to get the username remind request form.
 	 *
-	 * @return	object	JForm object on success, JException on failure.
+	 * @param	array	$data		An optional array of data for the form to interogate.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	JForm	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = parent::getForm('com_users.remind', 'remind', array('control' => 'jform'));
+		$form = $this->loadForm('com_users.remind', 'remind', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
 
-		// Get the dispatcher and load the users plugins.
-		$dispatcher	= JDispatcher::getInstance();
-		JPluginHelper::importPlugin('users');
-
-		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onPrepareUserRemindForm', array(&$form));
-
-		// Check for errors encountered while preparing the form.
-		if (count($results) && in_array(false, $results, true)) {
-			$this->setError($dispatcher->getError());
-			return false;
-		}
-
 		return $form;
+	}
+
+	/**
+	 * Override preprocessForm to load the user plugin group instead of content.
+	 *
+	 * @param	object	A form object.
+	 * @param	mixed	The data expected for the form.
+	 * @throws	Exception if there is an error in the form event.
+	 * @since	1.6
+	 */
+	protected function preprocessForm(JForm $form)
+	{
+		parent::preprocessForm($form, 'user');
 	}
 
 	/**
@@ -89,7 +91,7 @@ class UsersModelRemind extends JModelForm
 			return false;
 		}
 
-		// Find the user id for the given e-mail address.
+		// Find the user id for the given email address.
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
 		$query->select('*');
@@ -126,7 +128,7 @@ class UsersModelRemind extends JModelForm
 		$link	= 'index.php?option=com_users&view=login'.$itemid;
 		$mode	= $config->get('force_ssl', 0) == 2 ? 1 : -1;
 
-		// Put together the e-mail template data.
+		// Put together the email template data.
 		$data = JArrayHelper::fromObject($user);
 		$data['fromname']	= $config->get('fromname');
 		$data['mailfrom']	= $config->get('mailfrom');
@@ -145,7 +147,7 @@ class UsersModelRemind extends JModelForm
 			$data['link_text']
 		);
 
-		// Send the password reset request e-mail.
+		// Send the password reset request email.
 		$return = JUtility::sendMail($data['mailfrom'], $data['fromname'], $user->email, $subject, $body);
 
 		// Check for an error.

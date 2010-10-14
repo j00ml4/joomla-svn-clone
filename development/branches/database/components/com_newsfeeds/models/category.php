@@ -67,14 +67,14 @@ class NewsfeedsModelCategory extends JModelList
 			$item = &$items[$i];
 			if (!isset($this->_params)) {
 				$params = new JRegistry();
-				$params->loadJSON($item->params);
 				$item->params = $params;
+				$params->loadJSON($item->params);
 			}
 		}
 
 		return $items;
 	}
-
+	
 	/**
 	 * Method to build an SQL query to load the list data.
 	 *
@@ -83,7 +83,7 @@ class NewsfeedsModelCategory extends JModelList
 	 */
 	protected function getListQuery()
 	{
-		$user	= &JFactory::getUser();
+		$user	= JFactory::getUser();
 		$groups	= implode(',', $user->authorisedLevels());
 
 		// Create a new query object.
@@ -103,18 +103,23 @@ class NewsfeedsModelCategory extends JModelList
 		}
 
 		// Filter by state
-		$state = $this->getState('filter.state');
+		$state = $this->getState('filter.published');
 		if (is_numeric($state)) {
-			$query->where('a.state = '.(int) $state);
+			$query->where('a.published = '.(int) $state);
 		}
-				// Filter by start and end dates.
+		
+		// Filter by start and end dates.
 		$nullDate = $db->Quote($db->getNullDate());
 		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
-				
+
 		$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
 		$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
-		
-		
+
+		// Filter by language
+		if ($this->getState('filter.language')) {
+			$query->where('a.language in ('.$db->Quote(JFactory::getLanguage()->getTag()).','.$db->Quote('*').')');
+		}
+
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
@@ -151,6 +156,9 @@ class NewsfeedsModelCategory extends JModelList
 		$this->setState('category.id', $id);
 
 		$this->setState('filter.published',	1);
+
+		$this->setState('filter.language',$app->getLanguageFilter());
+
 		// Load the parameters.
 		$this->setState('params', $params);
 	}
@@ -171,12 +179,9 @@ class NewsfeedsModelCategory extends JModelList
 			$menu = $app->getMenu();
 			$active = $menu->getActive();
 			$params = new JRegistry();
-			if ($active)
-			{
-				$params->loadJSON($active->params);
-			}
+			$params->loadJSON($active->params);
 			$options = array();
-			$options['countItems'] = $params->get('show_item_count', 0) || $params->get('show_empty_categories', 0);
+			$options['countItems'] = $params->get('show_cat_items', 1) || $params->get('show_empty_categories', 0);
 			$categories = JCategories::getInstance('Newsfeeds', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 			if(is_object($this->_item))
@@ -199,7 +204,7 @@ class NewsfeedsModelCategory extends JModelList
 	}
 
 	/**
-	 * Get the parent categorie.
+	 * Get the parent category.
 	 *
 	 * @param	int		An optional category id. If not supplied, the model state 'category.id' will be used.
 	 *
@@ -207,7 +212,7 @@ class NewsfeedsModelCategory extends JModelList
 	 */
 	public function getParent()
 	{
-		if(!is_object($this->_item))
+		if (!is_object($this->_item))
 		{
 			$this->getCategory();
 		}
@@ -221,7 +226,7 @@ class NewsfeedsModelCategory extends JModelList
 	 */
 	function &getLeftSibling()
 	{
-		if(!is_object($this->_item))
+		if (!is_object($this->_item))
 		{
 			$this->getCategory();
 		}

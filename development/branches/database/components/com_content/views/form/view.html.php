@@ -25,8 +25,8 @@ class ContentViewForm extends JView
 	public function display($tpl = null)
 	{
 		// Initialise variables.
-		$app		= &JFactory::getApplication();
-		$user		= &JFactory::getUser();
+		$app		= JFactory::getApplication();
+		$user		= JFactory::getUser();
 
 		// Get model data.
 		$state	= $this->get('State');
@@ -73,32 +73,35 @@ class ContentViewForm extends JView
 	 */
 	protected function _prepareDocument()
 	{
-		$app		= &JFactory::getApplication();
-		$menus		= &JSite::getMenu();
-		$pathway	= &$app->getPathway();
+		$app		= JFactory::getApplication();
+		$menus		= $app->getMenu();
+		$pathway	= $app->getPathway();
 		$title 		= null;
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
-		if($menu)
+		if ($menu)
 		{
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		} else {
-			$this->params->def('page_heading', JText::_('Content_Form_Edit_Article'));
+			$this->params->def('page_heading', JText::_('COM_CONTENT_FORM_EDIT_ARTICLE'));
 		}
 
-		$title = $this->params->def('page_title', JText::_('Content_Form_Edit_Article'));
+		$title = $this->params->def('page_title', JText::_('COM_CONTENT_FORM_EDIT_ARTICLE'));
+		if ($app->getCfg('sitename_pagetitles', 0)) {
+			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
+		}
 		$this->document->setTitle($title);
 
-		$pathway =& $app->getPathWay();
+		$pathway = $app->getPathWay();
 		$pathway->addItem($title, '');
 
 		// If there is a pagebreak heading or title, add it to the page title
 		if (!empty($this->item->page_title))
 		{
 			$article->title = $article->title .' - '. $article->page_title;
-			$this->document->setTitle($article->page_title.' - '.JText::sprintf('Page %s', $this->state->get('page.offset') + 1));
+			$this->document->setTitle($article->page_title.' - '.JText::sprintf('PLG_CONTENT_PAGEBREAK_PAGE_NUM', $this->state->get('page.offset') + 1));
 		}
 	}
 }

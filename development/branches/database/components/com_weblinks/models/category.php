@@ -81,7 +81,7 @@ class WeblinksModelCategory extends JModelList
 	 */
 	protected function getListQuery()
 	{
-		$user	= &JFactory::getUser();
+		$user	= JFactory::getUser();
 		$groups	= implode(',', $user->authorisedLevels());
 
 		// Create a new query object.
@@ -105,19 +105,32 @@ class WeblinksModelCategory extends JModelList
 				$query->where('c.published = '.(int) $cpublished);
 			}
 		}
+		// Join over the users for the author and modified_by names.
+		$query->select("CASE WHEN a.created_by_alias > ' ' THEN a.created_by_alias ELSE ua.name END AS author");
+ 
+		$query->join('LEFT', '#__users AS ua ON ua.id = a.created_by');
+		$query->join('LEFT', '#__users AS uam ON uam.id = a.modified_by');
 
 		// Filter by state
-		$state = $this->getState('filter.state');
-		if (is_numeric($state)) {
-			$query->where('a.state = '.(int) $state);
+
+		if ((!$user->authorise('core.edit.state', 'com_weblinks')) &&  (!$user->authorise('core.edit', 'com_weblinks'))){
+			$state = $this->getState('filter.state');		
+				if (is_numeric($state)) {
+					$query->where('a.state = '.(int) $state);	
+				}
 		}
-				// Filter by start and end dates.
-				$nullDate = $db->Quote($db->getNullDate());
-				$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
-				
-				$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
-				$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
-		
+		// Filter by start and end dates.
+		$nullDate = $db->Quote($db->getNullDate());
+		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+
+		$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
+		$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
+
+		// Filter by language
+		if ($this->getState('filter.language')) {
+			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+		}
+
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 		return $query;
@@ -153,9 +166,10 @@ class WeblinksModelCategory extends JModelList
 		$id = JRequest::getVar('id', 0, '', 'int');
 		$this->setState('category.id', $id);
 
-		$this->setState('filter.published',	1);
-		
-		
+		$this->setState('filter.state',	1);
+
+		$this->setState('filter.language',$app->getLanguageFilter());
+
 		// Load the parameters.
 		$this->setState('params', $params);
 	}
@@ -178,7 +192,7 @@ class WeblinksModelCategory extends JModelList
 			$params = new JRegistry();
 			$params->loadJSON($active->params);
 			$options = array();
-			$options['countItems'] = $params->get('show_item_count', 0) || $params->get('show_empty_categories', 0);
+			$options['countItems'] = $params->get('show_cat_num_links_cat', 1) || $params->get('show_empty_categories', 0);
 			$categories = JCategories::getInstance('Weblinks', $options);
 			$this->_item = $categories->get($this->getState('category.id', 'root'));
 			if(is_object($this->_item))

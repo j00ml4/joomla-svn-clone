@@ -39,9 +39,12 @@ abstract class WeblinksHelperRoute
 		{
 			$categories = JCategories::getInstance('Weblinks');
 			$category = $categories->get($catid);
-			$needles['category'] = array_reverse($category->getPath());
-			$needles['categories'] = $needles['category'];
-			$link .= '&catid='.$catid;
+			if($category)
+			{
+				$needles['category'] = array_reverse($category->getPath());
+				$needles['categories'] = $needles['category'];
+				$link .= '&catid='.$catid;
+			}
 		}
 
 		if ($item = WeblinksHelperRoute::_findItem($needles)) {
@@ -50,7 +53,17 @@ abstract class WeblinksHelperRoute
 
 		return $link;
 	}
+	public static function getFormRoute($id)
+	{ 
+		//Create the link
+		if ($id){
+			$link = 'index.php?option=com_weblinks&task=weblink.edit&id='. $id;	
+		} else {
+			$link = 'index.php?option=com_weblinks&task=weblink.edit&id=0';
+		}
 
+		return $link;
+	}
 	public static function getCategoryRoute($catid)
 	{
 		$categories = JCategories::getInstance('Weblinks');
@@ -77,8 +90,8 @@ abstract class WeblinksHelperRoute
 		{
 			self::$lookup = array();
 
-			$component	= &JComponentHelper::getComponent('com_weblinks');
-			$menus		= &JApplication::getMenu('site');
+			$component	= JComponentHelper::getComponent('com_weblinks');
+			$menus		= JApplication::getMenu('site');
 			$items		= $menus->getItems('component_id', $component->id);
 			foreach ($items as $item)
 			{

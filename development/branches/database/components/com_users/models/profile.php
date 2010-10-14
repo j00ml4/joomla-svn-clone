@@ -23,18 +23,24 @@ jimport('joomla.plugin.helper');
 class UsersModelProfile extends JModelForm
 {
 	/**
-	 * Method to check in a member.
+	 * @var		object	The user profile data.
+	 * @since	1.6
+	 */
+	protected $data;
+
+	/**
+	 * Method to check in a user.
 	 *
 	 * @param	integer		The id of the row to check out.
 	 * @return	boolean		True on success, false on failure.
 	 * @since	1.6
 	 */
-	public function checkin($memberId = null)
+	public function checkin($userId = null)
 	{
-		// Get the member id.
-		$memberId = (!empty($memberId)) ? $memberId : (int)$this->getState('member.id');
+		// Get the user id.
+		$userId = (!empty($userId)) ? $userId : (int)$this->getState('user.id');
 
-		if ($memberId) {
+		if ($userId) {
 			// Initialise the table with JUser.
 			$table = JUser::getTable('User', 'JTable');
 
@@ -42,7 +48,7 @@ class UsersModelProfile extends JModelForm
 			$user = JFactory::getUser();
 
 			// Attempt to check the row in.
-			if (!$table->checkin($memberId)) {
+			if (!$table->checkin($userId)) {
 				$this->setError($table->getError());
 				return false;
 			}
@@ -52,18 +58,18 @@ class UsersModelProfile extends JModelForm
 	}
 
 	/**
-	 * Method to check out a member for editing.
+	 * Method to check out a user for editing.
 	 *
 	 * @param	integer		The id of the row to check out.
 	 * @return	boolean		True on success, false on failure.
 	 * @since	1.6
 	 */
-	public function checkout($memberId = null)
+	public function checkout($userId = null)
 	{
-		// Get the member id.
-		$memberId = (!empty($memberId)) ? $memberId : (int)$this->getState('member.id');
+		// Get the user id.
+		$userId = (!empty($userId)) ? $userId : (int)$this->getState('user.id');
 
-		if ($memberId) {
+		if ($userId) {
 			// Initialise the table with JUser.
 			$table = JUser::getTable('User', 'JTable');
 
@@ -71,7 +77,7 @@ class UsersModelProfile extends JModelForm
 			$user = JFactory::getUser();
 
 			// Attempt to check the row out.
-			if (!$table->checkout($user->get('id'), $memberId)) {
+			if (!$table->checkout($user->get('id'), $userId)) {
 				$this->setError($table->getError());
 				return false;
 			}
@@ -91,41 +97,47 @@ class UsersModelProfile extends JModelForm
 	 */
 	public function getData()
 	{
-		$app	= JFactory::getApplication();
-		$false	= false;
+		if ($this->data === null) {
 
-		// Initialise the table with JUser.
-		$table	= JUser::getTable('User', 'JTable');
-		$data	= new JUser($this->getState('member.id'));
+			$app	= JFactory::getApplication();
+			$userId = $this->getState('user.id');
 
-		// Set the base user data.
-		$data->email1 = $data->get('email');
-		$data->email2 = $data->get('email');
+			// Initialise the table with JUser.
+			$table	= JUser::getTable('User', 'JTable');
+			$this->data	= new JUser($userId);
 
-		// Override the base user data with any data in the session.
-		$temp = (array)$app->getUserState('com_users.edit.profile.data', array());
-		foreach ($temp as $k => $v) {
-			$data->$k = $v;
+			// Set the base user data.
+			$this->data->email1 = $this->data->get('email');
+			$this->data->email2 = $this->data->get('email');
+
+			// Override the base user data with any data in the session.
+			$temp = (array)$app->getUserState('com_users.edit.profile.data', array());
+			foreach ($temp as $k => $v) {
+				$this->data->$k = $v;
+			}
+
+			// Unset the passwords.
+			unset($this->data->password1);
+			unset($this->data->password2);
+
+			$registry = new JRegistry($this->data->params);
+			$this->data->params = $registry->toArray();
+
+			// Get the dispatcher and load the users plugins.
+			$dispatcher	= JDispatcher::getInstance();
+			JPluginHelper::importPlugin('user');
+
+			// Trigger the data preparation event.
+			$results = $dispatcher->trigger('onContentPrepareData', array('com_users.profile', $this->data));
+
+			// Check for errors encountered while preparing the data.
+			if (count($results) && in_array(false, $results, true)) {
+				$this->setError($dispatcher->getError());
+				$this->data = false;
+			}
 		}
 
-		// Unset the passwords.
-		unset($data->password1);
-		unset($data->password2);
-
-		// Get the dispatcher and load the users plugins.
-		$dispatcher	= &JDispatcher::getInstance();
-		JPluginHelper::importPlugin('users');
-
-		// Trigger the data preparation event.
-		$results = $dispatcher->trigger('onPrepareUserProfileData', array($this->getState('member.id'), &$data));
-
-		// Check for errors encountered while preparing the data.
-		if (count($results) && in_array(false, $results, true)) {
-			$this->setError($dispatcher->getError());
-			return $false;
-		}
-
-		return $data;
+		return $this->data;
 	}
 
 	/**
@@ -134,27 +146,16 @@ class UsersModelProfile extends JModelForm
 	 * The base form is loaded from XML and then an event is fired
 	 * for users plugins to extend the form with extra fields.
 	 *
-	 * @return	mixed		JForm object on success, false on failure.
+	 * @param	array	$data		An optional array of data for the form to interogate.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	JForm	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = parent::getForm('com_users.profile', 'profile', array('control' => 'jform'));
+		$form = $this->loadForm('com_users.profile', 'profile', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
-			return false;
-		}
-
-		// Get the dispatcher and load the users plugins.
-		$dispatcher	= &JDispatcher::getInstance();
-		JPluginHelper::importPlugin('user');
-
-		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onPrepareUserProfileForm', array($this->getState('member.id'), &$form));
-
-		// Check for errors encountered while preparing the form.
-		if (count($results) && in_array(false, $results, true)) {
-			$this->setError($dispatcher->getError());
 			return false;
 		}
 
@@ -162,27 +163,34 @@ class UsersModelProfile extends JModelForm
 	}
 
 	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
 	 * @since	1.6
 	 */
-	function getProfile()
+	protected function loadFormData()
 	{
-		$false	= false;
-		$data	= array();
+		return $this->getData();
+	}
 
-		// Get the dispatcher and load the users plugins.
-		$dispatcher	= &JDispatcher::getInstance();
-		JPluginHelper::importPlugin('users');
-
-		// Trigger the profile preparation event.
-		$results = $dispatcher->trigger('onPrepareUserProfile', array($this->getState('member.id'), &$data));
-
-		// Check for errors encountered while preparing the profile.
-		if (count($results) && in_array(false, $results, true)) {
-			$this->setError($dispatcher->getError());
-			return $false;
+	/**
+	 * Override preprocessForm to load the user plugin group instead of content.
+	 *
+	 * @param	object	A form object.
+	 * @param	mixed	The data expected for the form.
+	 * @throws	Exception if there is an error in the form event.
+	 * @since	1.6
+	 */
+	protected function preprocessForm(JForm $form, $data)
+	{
+		if (JComponentHelper::getParams('com_users')->get('frontend_userparams'))
+		{
+			$form->loadFile('frontend',false);
+			if (JFactory::getUser()->authorise('core.login.admin')) {
+				$form->loadFile('frontend_admin',false);
+			}
 		}
-
-		return $data;
+		parent::preprocessForm($form, $data, 'user');
 	}
 
 	/**
@@ -199,12 +207,12 @@ class UsersModelProfile extends JModelForm
 		$user	= JFactory::getUser();
 		$params	= $app->getParams('com_users');
 
-		// Get the member id.
-		$memberId = JRequest::getInt('member_id', $app->getUserState('com_users.edit.profile.id'));
-		$memberId = !empty($memberId) ? $memberId : (int)$user->get('id');
+		// Get the user id.
+		$userId = $app->getUserState('com_users.edit.profile.id');
+		$userId = !empty($userId) ? $userId : (int)$user->get('id');
 
-		// Set the member id.
-		$this->setState('member.id', $memberId);
+		// Set the user id.
+		$this->setState('user.id', $userId);
 
 		// Load the parameters.
 		$this->setState('params', $params);
@@ -219,12 +227,11 @@ class UsersModelProfile extends JModelForm
 	 */
 	public function save($data)
 	{
-		$memberId = (!empty($data['id'])) ? $data['id'] : (int)$this->getState('member.id');
+		$userId = (!empty($data['id'])) ? $data['id'] : (int)$this->getState('user.id');
 
 		// Initialise the table with JUser.
 		JUser::getTable('User', 'JTable');
-		$user = new JUser($memberId);
-
+		$user = new JUser($userId);
 		// Prepare the data for the user object.
 		$data['email']		= $data['email1'];
 		$data['password']	= $data['password1'];

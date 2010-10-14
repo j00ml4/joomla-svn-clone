@@ -27,22 +27,23 @@ class SearchViewSearch extends JView
 		require_once JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'search.php';
 
 		// Initialise some variables
-		$app	= &JFactory::getApplication();
-		$pathway  = &$app->getPathway();
-		$uri	= &JFactory::getURI();
+		$app	= JFactory::getApplication();
+		$pathway = $app->getPathway();
+		$uri	= JFactory::getURI();
 
-		$error	= '';
+		$error	= null;
 		$rows	= null;
+		$results= null;
 		$total	= 0;
 
 		// Get some data from the model
-		$areas	= &$this->get('areas');
-		$state		= &$this->get('state');
+		$areas	= $this->get('areas');
+		$state		= $this->get('state');
 		$searchword = $state->get('keyword');
 
-		$params = &$app->getParams();
+		$params = $app->getParams();
 
-		$menus	= &JSite::getMenu();
+		$menus	= $app->getMenu();
 		$menu	= $menus->getActive();
 
 		// because the application sets a default page title, we need to get it
@@ -57,8 +58,11 @@ class SearchViewSearch extends JView
 			$params->set('page_title',	JText::_('COM_SEARCH_SEARCH'));
 		}
 
-		$document	= &JFactory::getDocument();
-		$document->setTitle($params->get('page_title'));
+		$title = $params->get('page_title');
+		if ($app->getCfg('sitename_pagetitles', 0)) {
+			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
+		}
+		$this->document->setTitle($title);
 
 		// built select lists
 		$orders = array();
@@ -66,7 +70,7 @@ class SearchViewSearch extends JView
 		$orders[] = JHtml::_('select.option',  'oldest', JText::_('COM_SEARCH_OLDEST_FIRST'));
 		$orders[] = JHtml::_('select.option',  'popular', JText::_('COM_SEARCH_MOST_POPULAR'));
 		$orders[] = JHtml::_('select.option',  'alpha', JText::_('COM_SEARCH_ALPHABETICAL'));
-		$orders[] = JHtml::_('select.option',  'category', JText::_('COM_SEARCH_CATEGORY'));
+		$orders[] = JHtml::_('select.option',  'category', JText::_('JCATEGORY'));
 
 		$lists = array();
 		$lists['ordering'] = JHtml::_('select.genericlist', $orders, 'ordering', 'class="inputbox"', 'value', 'text', $state->get('ordering'));
@@ -98,12 +102,11 @@ class SearchViewSearch extends JView
 		// put the filtered results back into the model
 		// for next release, the checks should be done in the model perhaps...
 		$state->set('keyword', $searchword);
-
-		if (!$error)
+		if ($error==null)
 		{
-			$results	= &$this->get('data');
-			$total		= &$this->get('total');
-			$pagination	= &$this->get('pagination');
+			$results	= $this->get('data');
+			$total		= $this->get('total');
+			$pagination	= $this->get('pagination');
 
 			require_once JPATH_SITE.DS.'components'.DS.'com_content'.DS.'helpers'.DS.'route.php';
 
@@ -122,7 +125,7 @@ class SearchViewSearch extends JView
 					$needle = $searchwords[0];
 				}
 
-				$row = SearchHelper::prepareSearchContent($row, 200, $needle);
+				$row = SearchHelper::prepareSearchContent($row, $needle);
 				$searchwords = array_unique($searchwords);
 				$searchRegex = '#(';
 				$x = 0;
@@ -138,7 +141,7 @@ class SearchViewSearch extends JView
 
 				$result = &$results[$i];
 				if ($result->created) {
-					$created = JHTML::_('date',$result->created);
+					$created = JHTML::_('date',$result->created, JText::_('DATE_FORMAT_LC3'));
 				}
 				else {
 					$created = '';
@@ -148,8 +151,6 @@ class SearchViewSearch extends JView
 				$result->count		= $i + 1;
 			}
 		}
-
-		$this->result	= JText::sprintf('COM_SEARCH_TOTALRESULTSFOUND', $total);
 
 		$this->assignRef('pagination',  $pagination);
 		$this->assignRef('results',		$results);

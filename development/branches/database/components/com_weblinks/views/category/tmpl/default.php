@@ -9,7 +9,7 @@
 
 // no direct access
 defined('_JEXEC') or die;
-
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 $pageClass = $this->params->get('pageclass_sfx');
 ?>
 <div class="weblink-category<?php echo $pageClass;?>">
@@ -18,15 +18,15 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php echo $this->escape($this->params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
-<?php if($this->params->get('show_category_title', 1) && $this->params->get('page_subheading')) : ?>
+<?php if($this->params->get('show_category_title', 1)) : ?>
 <h2>
-	<?php echo $this->escape($this->params->get('page_subheading')); ?>
+	<?php echo JHtml::_('content.prepare', $this->category->title); ?>
 </h2>
 <?php endif; ?>
 <?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
-	<div class="category_desc">
+	<div class="category-desc">
 	<?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
-		<img src="images/<?php echo $this->category->getParams()->get('image'); ?>"/>
+		<img src="<?php echo $this->category->getParams()->get('image'); ?>"/>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_description') && $this->category->description) : ?>
 		<?php echo JHtml::_('content.prepare', $this->category->description); ?>
@@ -34,13 +34,11 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<div class="clr"></div>
 	</div>
 <?php endif; ?>
-
 <?php echo $this->loadTemplate('items'); ?>
-
-<?php if (!empty($this->children[$this->category->id])) : ?>
-<div class="cat-children">
-	<h3><?php echo JText::_('COM_WEBLINKS_SUB_CATEGORIES') ; ?></h3>
+<?php if (!empty($this->children[$this->category->id])&& $this->maxLevel != 0) : ?>
+	<div class="cat-children">
+	<h3><?php echo JText::_('JGLOBAL_SUBCATEGORIES') ; ?></h3>
 	<?php echo $this->loadTemplate('children'); ?>
-</div>
+	</div>
 <?php endif; ?>
 </div>

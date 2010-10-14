@@ -26,34 +26,31 @@ class ContentViewArchive extends JView
 
 	function display($tpl = null)
 	{
-		$app =& JFactory::getApplication();
-		$user		= &JFactory::getUser();
+		$app = JFactory::getApplication();
+		$user		= JFactory::getUser();
 
 		$state 		= $this->get('State');
 		$items 		= $this->get('Items');
 		$pagination	= $this->get('Pagination');
 
-		$pathway	= &$app->getPathway();
-		$document	= &JFactory::getDocument();
+		$pathway	= $app->getPathway();
+		$document	= JFactory::getDocument();
 
 		// Get the page/component configuration
-		$params =& $state->params;
+		$params = &$state->params;
 
 		foreach ($items as $item)
 		{
 			$item->catslug = ($item->category_alias) ? ($item->catid . ':' . $item->category_alias) : $item->catid;
 			$item->parent_slug = ($item->parent_alias) ? ($item->parent_id . ':' . $item->parent_alias) : $item->parent_id;
-			$article_params = new JRegistry;
-			$article_params->loadJSON($item->attribs);
-			$temp = clone($params);
-			$temp->merge($article_params);
-			$item->params = $temp;
 		}
 
+		
+		
 		$form = new stdClass();
 		// Month Field
 		$months = array(
-			'' => JText::_('Month'),
+			'' => JText::_('COM_CONTENT_MONTH'),
 			'01' => JText::_('JANUARY_SHORT'),
 			'02' => JText::_('FEBRUARY_SHORT'),
 			'03' => JText::_('MARCH_SHORT'),
@@ -79,7 +76,7 @@ class ContentViewArchive extends JView
 		);
 		// Year Field
 		$years = array();
-		$years[] = JHtml::_('select.option', null, JText::_('Year'));
+		$years[] = JHtml::_('select.option', null, JText::_('JYEAR'));
 		for ($i = 2000; $i <= 2020; $i++) {
 			$years[] = JHtml::_('select.option', $i, $i);
 		}
@@ -108,25 +105,27 @@ class ContentViewArchive extends JView
 	 */
 	protected function _prepareDocument()
 	{
-		$app		= &JFactory::getApplication();
-		$menus		= &JSite::getMenu();
-		$pathway	= &$app->getPathway();
+		$app		= JFactory::getApplication();
+		$menus		= $app->getMenu();
+		$pathway	= $app->getPathway();
 		$title 		= null;
 
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
-		if($menu)
+		if ($menu)
 		{
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		} else {
-			$this->params->def('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE'));
+			$this->params->def('page_heading', JText::_('JGLOBAL_ARTICLES'));
 		}
 
 		$title = $this->params->get('page_title', '');
-		if (empty($title))
-		{
+		if (empty($title)) {
 			$title = htmlspecialchars_decode($app->getCfg('sitename'));
+		}
+		elseif ($app->getCfg('sitename_pagetitles', 0)) {
+			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
 		}
 		$this->document->setTitle($title);
 	}

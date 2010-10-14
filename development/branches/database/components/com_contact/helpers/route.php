@@ -39,9 +39,11 @@ abstract class ContactHelperRoute
 		{
 			$categories = JCategories::getInstance('Contact');
 			$category = $categories->get($catid);
-			$needles['category'] = array_reverse($category->getPath());
-			$needles['categories'] = $needles['category'];
-			$link .= '&catid='.$catid;
+			if ($category) {
+				$needles['category'] = array_reverse($category->getPath());
+				$needles['categories'] = $needles['category'];
+				$link .= '&catid='.$catid;
+			}
 		}
 
 		if ($item = ContactHelperRoute::_findItem($needles)) {
@@ -77,8 +79,8 @@ abstract class ContactHelperRoute
 		{
 			self::$lookup = array();
 
-			$component	= &JComponentHelper::getComponent('com_contact');
-			$menus		= &JApplication::getMenu('site');
+			$component	= JComponentHelper::getComponent('com_contact');
+			$menus		= JApplication::getMenu('site');
 			$items		= $menus->getItems('component_id', $component->id);
 			foreach ($items as $item)
 			{
