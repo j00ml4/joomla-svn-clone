@@ -43,7 +43,7 @@ class JInstallerLanguage extends JAdapterInstance
 			$this->parent->setPath('source', ($this->parent->extension->client_id ? JPATH_ADMINISTRATOR : JPATH_SITE) . '/language/'.$this->parent->extension->element);
 		}
 		$this->manifest = $this->parent->getManifest();
-		$root = &$this->manifest->document;
+		$root = $this->manifest->document;
 
 		// Get the client application target
 		if ((string)$this->manifest->attributes()->client == 'both')
@@ -65,7 +65,7 @@ class JInstallerLanguage extends JAdapterInstance
 		{
 			// Attempt to map the client to a base path
 			jimport('joomla.application.helper');
-			$client = &JApplicationHelper::getClientInfo($cname, true);
+			$client = JApplicationHelper::getClientInfo($cname, true);
 			if ($client === null) {
 				$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT', JText::sprintf('JLIB_INSTALLER_ERROR_UNKNOWN_CLIENT_TYPE', $cname)));
 				return false;
@@ -116,7 +116,7 @@ class JInstallerLanguage extends JAdapterInstance
 		$this->parent->setPath('extension_site', $basePath.DS.'language'.DS.$tag);
 
 		// Do we have a meta file in the file list?  In other words... is this a core language pack?
-		if ($element INSTANCEOF JXMLElement && count($element->children()))
+		if ($element && count($element->children()))
 		{
 			$files = $element->children();
 			foreach ($files as $file) {
@@ -187,6 +187,9 @@ class JInstallerLanguage extends JAdapterInstance
 			return false;
 		}
 
+		// Parse optional tags
+		$this->parent->parseMedia($this->manifest->media);
+
 		// Copy all the necessary font files to the common pdf_fonts directory
 		$this->parent->setPath('extension_site', $basePath.DS.'language'.DS.'pdf_fonts');
 		$overwrite = $this->parent->setOverwrite(true);
@@ -208,7 +211,7 @@ class JInstallerLanguage extends JAdapterInstance
 		}
 
 		// Add an entry to the extension table with a whole heap of defaults
-		$row = & JTable::getInstance('extension');
+		$row = JTable::getInstance('extension');
 		$row->set('name', $this->get('name'));
 		$row->set('type', 'language');
 		$row->set('element', $this->get('tag'));
@@ -228,7 +231,7 @@ class JInstallerLanguage extends JAdapterInstance
 		}
 
 		// Clobber any possible pending updates
-		$update = &JTable::getInstance('update');
+		$update = JTable::getInstance('update');
 		$uid = $update->find(Array('element'=>$this->get('tag'),
 								'type'=>'language',
 								'client_id'=>'',
@@ -248,7 +251,7 @@ class JInstallerLanguage extends JAdapterInstance
 	 */
 	public function update()
 	{
-		$xml = &$this->parent->getManifest();
+		$xml = $this->parent->getManifest();
 
 		$this->manifest	= $xml;
 
@@ -256,7 +259,7 @@ class JInstallerLanguage extends JAdapterInstance
 
 		// Attempt to map the client to a base path
 		jimport('joomla.application.helper');
-		$client = &JApplicationHelper::getClientInfo($cname, true);
+		$client = JApplicationHelper::getClientInfo($cname, true);
 		if ($client === null || (empty($cname) && $cname !== 0))
 		{
 			$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT', JText::sprintf('JLIB_INSTALLER_ERROR_UNKNOWN_CLIENT_TYPE', $cname)));
@@ -318,6 +321,9 @@ class JInstallerLanguage extends JAdapterInstance
 			return false;
 		}
 
+		// Parse optional tags
+		$this->parent->parseMedia($xml->media);
+
 		// Copy all the necessary font files to the common pdf_fonts directory
 		$this->parent->setPath('extension_site', $basePath.DS.'language'.DS.'pdf_fonts');
 		$overwrite = $this->parent->setOverwrite(true);
@@ -338,7 +344,7 @@ class JInstallerLanguage extends JAdapterInstance
 		 * ---------------------------------------------------------------------------------------------
 		 */
 		// Clobber any possible pending updates
-		$update = &JTable::getInstance('update');
+		$update = JTable::getInstance('update');
 		$uid = $update->find(Array('element'=>$this->get('tag'),
 								'type'=>'language',
 								'client_id'=>$clientId));
@@ -348,9 +354,9 @@ class JInstallerLanguage extends JAdapterInstance
 		}
 
 		// Update an entry to the extension table
-		$row = & JTable::getInstance('extension');
+		$row = JTable::getInstance('extension');
 		$eid = $row->find(Array('element'=>strtolower($this->get('tag')),
-						'type'=>'language'));
+						'type'=>'language', 'client_id'=>$clientId));
 		if ($eid) {
 			$row->load($eid);
 		}
@@ -405,6 +411,8 @@ class JInstallerLanguage extends JAdapterInstance
 		// load up the extension details
 		$extension = JTable::getInstance('extension');
 		$extension->load($eid);
+		// grab a copy of the client details
+		$client = JApplicationHelper::getClientInfo($extension->get('client_id'));
 
 		// check the element isn't blank to prevent nuking the languages directory...just in case
 		$element = $extension->get('element');
@@ -414,26 +422,71 @@ class JInstallerLanguage extends JAdapterInstance
 			return false;
 		}
 
-		// grab a copy of the client details
-		$client = JApplicationHelper::getClientInfo($extension->get('client_id'));
+		// verify that it's not the default language for that client
+		$params = JComponentHelper::getParams('com_languages');
+		if ($params->get($client->name)==$element) {
+			JError::raiseWarning(100, JText::_('JLIB_INSTALLER_ERROR_LANG_UNINSTALL_DEFAULT'));
+			return false;
+		}
+
 		// construct the path from the client, the language and the extension element name
 		$path = $client->path.DS.'language'.DS.$element;
+
+		// Get the package manifest object and remove media
+		$this->parent->setPath('source', $path);
+		$this->manifest = $this->parent->getManifest();
+		$this->parent->removeFiles($this->manifest->media);
 
 		// check it exists
 		if (!JFolder::exists($path))
 		{
+			// if the folder doesn't exist lets just nuke the row as well and presume the user killed it for us
+			$extension->delete();
 			JError::raiseWarning(100, JText::_('JLIB_INSTALLER_ERROR_LANG_UNINSTALL_PATH_EMPTY'));
 			return false;
 		}
 
 		if (!JFolder::delete($path))
 		{
+			// if deleting failed we'll leave the extension entry in tact just in case
 			JError::raiseWarning(100, JText::_('JLIB_INSTALLER_ERROR_LANG_UNINSTALL_DIRECTORY'));
 			return false;
 		}
 
 		// Remove the extension table entry
 		$extension->delete();
+
+		// Setting the language of users which have this language as the default language
+		$db = JFactory::getDbo();
+		$query=$db->getQuery(true);
+		$query->from('#__users');
+		$query->select('*');
+		$db->setQuery($query);
+		$users = $db->loadObjectList();
+		if($client->name == 'administrator') {
+			$param_name = 'admin_language';
+		} else {
+			$param_name = 'language';
+		}
+
+		$count = 0;
+		foreach ($users as $user) {
+			$registry = new JRegistry;
+			$registry->loadJSON($user->params);
+			if ($registry->get($param_name)==$element) {
+				$registry->set($param_name,'');
+				$query=$db->getQuery(true);
+				$query->update('#__users');
+				$query->set('params='.$db->quote($registry));
+				$query->where('id='.(int)$user->id);
+				$db->setQuery($query);
+				$db->query();
+				$count = $count + 1;
+			}
+		}
+		if (!empty($count)) {
+			JError::raiseNotice(500, JText::plural('JLIB_INSTALLER_NOTICE_LANG_RESET_USERS', $count));
+		}
 
 		// All done!
 		return true;
@@ -453,7 +506,7 @@ class JInstallerLanguage extends JAdapterInstance
 			if (file_exists(JPATH_SITE.DS.'language'.DS.$language.DS.$language.'.xml'))
 			{
 				$manifest_details = JApplicationHelper::parseXMLInstallFile(JPATH_SITE.DS.'language'.DS.$language.DS.$language.'.xml');
-				$extension = &JTable::getInstance('extension');
+				$extension = JTable::getInstance('extension');
 				$extension->set('type', 'language');
 				$extension->set('client_id', 0);
 				$extension->set('element', $language);
@@ -468,7 +521,7 @@ class JInstallerLanguage extends JAdapterInstance
 			if (file_exists(JPATH_ADMINISTRATOR.DS.'language'.DS.$language.DS.$language.'.xml'))
 			{
 				$manifest_details = JApplicationHelper::parseXMLInstallFile(JPATH_ADMINISTRATOR.DS.'language'.DS.$language.DS.$language.'.xml');
-				$extension = &JTable::getInstance('extension');
+				$extension = JTable::getInstance('extension');
 				$extension->set('type', 'language');
 				$extension->set('client_id', 1);
 				$extension->set('element', $language);

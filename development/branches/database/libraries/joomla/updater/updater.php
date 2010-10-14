@@ -55,7 +55,7 @@ class JUpdater extends JAdapter {
 	 * @return boolean If there are updates or not
 	 */
 	public function findUpdates($eid=0) {
-		$dbo =& $this->getDBO();
+		$dbo = $this->getDBO();
 		$retval = false;
 		// push it into an array
 		if(!is_array($eid)) {
@@ -66,20 +66,28 @@ class JUpdater extends JAdapter {
 		$dbo->setQuery($query);
 		$results = $dbo->loadAssocList();
 		$result_count = count($results);
-		for($i = 0; $i < $result_count; $i++) {
-			$result =& $results[$i];
+		for($i = 0; $i < $result_count; $i++)
+		{
+			$result = &$results[$i];
 			$this->setAdapter($result['type']);
+			if(!isset($this->_adapters[$result['type']])) {
+				continue; // ignore update sites requiring adapters we don't have installed
+			}
 			$update_result = $this->_adapters[$result['type']]->findUpdate($result);
-			if(is_array($update_result)) {
-				if(array_key_exists('update_sites',$update_result) && count($update_result['update_sites'])) {
+			if(is_array($update_result))
+			{
+				if(array_key_exists('update_sites',$update_result) && count($update_result['update_sites']))
+				{
 					$results = $this->arrayUnique(array_merge($results, $update_result['update_sites']));
 					$result_count = count($results);
 				}
-				if(array_key_exists('updates', $update_result) && count($update_result['updates'])) {
-					for($k = 0; $k < count($update_result['updates']); $k++) {
-						$current_update =& $update_result['updates'][$k];
-						$update =& JTable::getInstance('update');
-						$extension =& JTable::getInstance('extension');
+				if(array_key_exists('updates', $update_result) && count($update_result['updates']))
+				{
+					for($k = 0; $k < count($update_result['updates']); $k++)
+					{
+						$current_update = &$update_result['updates'][$k];
+						$update = JTable::getInstance('update');
+						$extension = JTable::getInstance('extension');
 						$uid = $update->find(Array('element'=>strtolower($current_update->get('element')),
 								'type'=>strtolower($current_update->get('type')),
 								'client_id'=>strtolower($current_update->get('client_id')),
@@ -89,30 +97,33 @@ class JUpdater extends JAdapter {
 								'type'=>strtolower($current_update->get('type')),
 								'client_id'=>strtolower($current_update->get('client_id')),
 								'folder'=>strtolower($current_update->get('folder'))));
-						if(!$uid) {
+						if(!$uid)
+						{
 							// set the extension id
-							if($eid) {
+							if($eid)
+							{
 								// we have an installed extension, check the update is actually newer
 								$extension->load($eid);
 								$data = unserialize($extension->manifest_cache);
-								if(version_compare($current_update->version, $data['version'], '>') == 1) {
-									//echo '<p>Storing extension since '. $attrs['VERSION'] .' > ' . $data['version']. '</p>';
+								if(version_compare($current_update->version, $data['version'], '>') == 1)
+								{
 									$current_update->extension_id = $eid;
 									$current_update->store();
 								}
-							} else {
+							} else
+							{
 								// a potentially new extension to be installed
-								//echo '<p>Storing since no equivalent extension is installed</p>';
 								$current_update->store();
 							}
-						} else {
+						} else
+						{
 							$update->load($uid);
 							// if there is an update, check that the version is newer then replaces
-							if(version_compare($current_update->version, $update->version, '>') == 1) {
-								//echo '<p>Storing extension since '. $attrs['VERSION'] .' > ' . $data['version']. '</p>';
+							if(version_compare($current_update->version, $update->version, '>') == 1)
+							{
 								$current_update->store();
 							}
-						}//else { echo '<p>Found a matching update for '. $attrs['NAME'] .'</p>';}
+						}
 					}
 				}
 				$update_result = true;
@@ -147,8 +158,9 @@ class JUpdater extends JAdapter {
 		return $myArray;
 	}
 
-	public function update($id) {
-		$updaterow =& JTable::getInstance('update');
+	public function update($id)
+	{
+		$updaterow = JTable::getInstance('update');
 		$updaterow->load($id);
 		$update = new JUpdate();
 		if($update->loadFromXML($updaterow->detailsurl)) {

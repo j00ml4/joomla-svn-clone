@@ -196,7 +196,7 @@ class JDocument extends JObject
 	 * @var		mixed (depends on the renderer)
 	 * @access	private
 	 */
-	var $_buffer = null;
+	protected static $_buffer = null;
 
 
 	/**
@@ -335,13 +335,23 @@ class JDocument extends JObject
 	}
 
 	/**
+	 * Set the document head data
+	 *
+	 * @access	public
+	 * @param	array	$data	The document head data in array form
+	 */
+	function mergeHeadData($data) {
+		// Impelemented in child classes
+	}
+
+	/**
 	 * Get the contents of the document buffer
 	 *
 	 * @access public
 	 * @return	The contents of the document buffer
 	 */
 	function getBuffer() {
-		return $this->_buffer;
+		return self::$_buffer;
 	}
 
 	/**
@@ -351,7 +361,7 @@ class JDocument extends JObject
 	 * @param	array	$options	Array of optional elements.
 	 */
 	public function setBuffer($content, $options = array()) {
-		$this->_buffer = $content;
+		self::$_buffer = $content;
 	}
 
 	/**
@@ -383,13 +393,14 @@ class JDocument extends JObject
 	/**
 	 * Sets or alters a meta tag.
 	 *
-	 * @param string  $name			Value of name or http-equiv tag
-	 * @param string  $content		Value of the content tag
-	 * @param bool	$http_equiv	META type "http-equiv" defaults to null
+	 * @param string	$name			Value of name or http-equiv tag
+	 * @param string	$content		Value of the content tag
+	 * @param bool		$http_equiv		META type "http-equiv" defaults to null
+	 * @param bool		$sync			Should http-equiv="content-type" by synced with HTTP-header?
 	 * @return void
 	 * @access public
 	 */
-	function setMetaData($name, $content, $http_equiv = false)
+	function setMetaData($name, $content, $http_equiv = false, $sync = true)
 	{
 		$name = strtolower($name);
 		if ($name == 'generator') {
@@ -399,6 +410,10 @@ class JDocument extends JObject
 		} else {
 			if ($http_equiv == true) {
 				$this->_metaTags['http-equiv'][$name] = $content;
+				// Syncing with HTTP-header
+				if($sync && strtolower($name) == 'content-type') {
+					$this->setMimeEncoding($content, false);
+				}
 			} else {
 				$this->_metaTags['standard'][$name] = $content;
 			}
@@ -517,7 +532,7 @@ class JDocument extends JObject
 	}
 
 	/**
-	 * Returns the document language.
+	 * Returns the document direction declaration.
 	 *
 	 * @return string
 	 * @access public
@@ -658,12 +673,28 @@ class JDocument extends JObject
 	 * ({@link http://www.w3.org/TR/xhtml-media-types/
 	 * http://www.w3.org/TR/xhtml-media-types/}) for more details.</p>
 	 *
-	 * @param	string	$type
+	 * @param	string		$type
+	 * @param	boolean		Should the type be synced with HTML?
 	 * @access	public
 	 * @return	void
 	 */
-	function setMimeEncoding($type = 'text/html') {
+	function setMimeEncoding($type = 'text/html', $sync = true) {
 		$this->_mime = strtolower($type);
+
+		// Syncing with meta-data
+		if ($sync) {
+			$this->setMetaData('content-type', $type, true, false);
+		}
+	}
+
+	/**
+	 * Return the document MIME encoding that is sent to the browser.
+	 *
+	 * @access	public
+	 * @return	string
+	 */
+	function getMimeEncoding() {
+		return $this->_mime;
 	}
 
 	/**
@@ -772,7 +803,6 @@ class JDocument extends JObject
 	 */
 	function render($cache = false, $params = array())
 	{
-		JResponse::setHeader('Expires', gmdate('D, d M Y H:i:s', time() + 900) . ' GMT');
 		if ($mdate = $this->getModifiedDate()) {
 			JResponse::setHeader('Last-Modified', $mdate /* gmdate('D, d M Y H:i:s', time() + 900) . ' GMT' */);
 		}

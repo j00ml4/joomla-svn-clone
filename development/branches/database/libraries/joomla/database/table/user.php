@@ -196,7 +196,7 @@ class JTableUser extends JTable
 		}
 
 		// Set the registration timestamp
-		if ($this->registerDate == null) {
+		if ($this->registerDate == null || $this->registerDate == '0000-00-00 00:00:00' ) {
 			$this->registerDate = JFactory::getDate()->toMySQL();
 		}
 
@@ -228,6 +228,23 @@ class JTableUser extends JTable
 			return false;
 		}
 
+		// check for root_user != username
+		$config		= JFactory::getConfig();
+		$rootUser	= $config->get('root_user');
+		if (!is_numeric($rootUser))
+		{
+			$query = $this->_db->getQuery(true);
+			$query->select('id');
+			$query->from('#__users');
+			$query->where('username = '.$this->_db->quote($rootUser));
+			$this->_db->setQuery($query);
+			$xid = intval($this->_db->loadResult());
+			if ($rootUser==$this->username && (!$xid || $xid && $xid != intval($this->id))  || $xid && $xid == intval($this->id) && $rootUser!=$this->username) {
+				$this->setError( JText::_('JLIB_DATABASE_ERROR_USERNAME_CANNOT_CHANGE'));
+				return false;
+			}
+		}
+
 		return true;
 	}
 
@@ -255,7 +272,7 @@ class JTableUser extends JTable
 		// Handle error if it exists.
 		if (!$return)
 		{
-			$this->setError(JText::sprintf('JLIB_DATABASE_ERROR_STORED_FAILED', strtolower(get_class($this)), $this->_db->getErrorMsg()));
+			$this->setError(JText::sprintf('JLIB_DATABASE_ERROR_STORE_FAILED', strtolower(get_class($this)), $this->_db->getErrorMsg()));
 			return false;
 		}
 

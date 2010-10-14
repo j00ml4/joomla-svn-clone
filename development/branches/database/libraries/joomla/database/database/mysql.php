@@ -49,8 +49,6 @@ class JDatabaseMySQL extends JDatabase
 	 */
 	function __construct($options)
 	{
-		//echo '<pre>';
-		//print_r($options);
 		$host		= array_key_exists('host', $options)	? $options['host']		: 'localhost';
 		$user		= array_key_exists('user', $options)	? $options['user']		: '';
 		$password	= array_key_exists('password',$options)	? $options['password']	: '';
@@ -64,92 +62,52 @@ class JDatabaseMySQL extends JDatabase
 			$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_ADAPTER_MYSQL');
 			return;
 		}
-//echo "slave host: " . $host . " | slave user: " . $user . " | slave pass: " . 
-		//	$password . "<br>";
+
 		// Connect to the server
 		if (!($this->_connection = @mysql_connect($host, $user, $password, true))) {
-			//$this->_errorNum = 2;
-			//$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_CONNECT_MYSQL');
-			header("HTTP/1.0 500 Internal Server Error"); 
-			print("<html>"); 
-			print("<head>"); 
-			print("<title>Whoops! We will be right back...</title>"); 
-			print("<link rel='StyleSheet' type='text/css' href=\'".JURI::base().'../templates/system/css/fail.css'." />"); 
-			print("</head>"); 
-			print("<body>"); 
-			print("<div id='fail-wrap'>"); 
-			print( "<div class='fail'>"); 
-			print("<h2>500 Internal Server Error</h2>"); 
-			$link = JURI::base().'../templates/system/images/error500-screen.jpg';
-			print("<img src=".$link.">"); 
-			//print("<img src=".JURI::base().'templates/system/images/error500-screen.jpg'.">"); 
-			print( "<div class='fail-error'>"); 
-			print("Database Error:<br>Check Database settings..."); 
-			print( "</div>"); 
-			print("</div>" ); 
-			print("</div>"); 
-			print("</body>"); 
-			print("</html>"); 
-			exit; 
+			$this->_errorNum = 2;
+			$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_CONNECT_MYSQL');
 			return;
 		}
-
+		
 		$conf = & JFactory::getConfig();
 		
-		$slave_host = array_key_exists('slavehost', $options)	? $options['slavehost']		: 'localhost';
+	    $slave_host = array_key_exists('slavehost', $options)	? $options['slavehost']		: '';
 		$slave_user = array_key_exists('slavename', $options)	? $options['slavename']		: '';
 		$slave_password = array_key_exists('slavepass', $options)	? $options['slavepass']		: '';
 		
 		if (empty($slave_host))
-			$slave_host             = $conf->get('slave_host');
+			$slave_host             = $conf->getValue('config.slave_db_host');
 
 		if (empty($slave_user))
-			$slave_user             = $conf->get('slave_user');
+			$slave_user             = $conf->getValue('config.slave_db_user');
 
 		if (empty($slave_password))
-			$slave_password         = $conf->get('slave_password');
-			
-		//echo "slave host: " . $slave_host . " | slave user: " . $slave_user . " | slave pass: " . 
-		//	$slave_password . "<br>";
-
-		if ($slave_host != "" && $slave_user != "" && $slave_password != "")
-		{
-			if (!($this->_slave_connection = @mysql_connect( $slave_host, $slave_user, $slave_password, true ))) {
-				//$this->_errorNum = 2;
-				//$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_CONNECT_MYSQL');
-				header("HTTP/1.0 500 Internal Server Error"); 
-				print("<html>"); 
-				print("<head>"); 
-				print("<title>Whoops! We will be right back...</title>"); 
-				print("<link rel='StyleSheet' type='text/css' href=\'".JURI::base().'../templates/system/css/fail.css'." />"); 
-				print("</head>"); 
-				print("<body>"); 
-				print("<div id='fail-wrap'>"); 
-				print( "<div class='fail'>"); 
-				print("<h2>500 Internal Server Error</h2>"); 
-				$link = JURI::base().'../templates/system/images/error500-screen.jpg';
-				print("<img src=".$link.">"); 
-				//print("<img src=".JURI::base().'templates/system/images/error500-screen.jpg'.">"); 
-				print( "<div class='fail-error'>"); 
-				print("Database Error:<br>Check Database settings..."); 
-				print( "</div>"); 
-				print("</div>" ); 
-				print("</div>"); 
-				print("</body>"); 
-				print("</html>"); 
-				exit; 
+			$slave_password         = $conf->getValue('config.slave_db_password');
+		
+		
+	    if ($slave_host != "" && $slave_user != "" && $slave_password != "") {
+			if (!($this->_slave_resource = @mysql_connect( $slave_host, $slave_user, $slave_password, true ))) {
+				$this->_errorNum = 2;
+				$this->_errorMsg = 'Could not connect to MySQL';
 	
 				return;
 			}
 		}
+
 		// Finalize initialisation
 		parent::__construct($options);
+
+		// Set sql_mode to non_strict mode
+		mysql_query("SET @@SESSION.sql_mode = '';", $this->_connection);
 
 		// select the database
 		if ($select) {
 			$this->select($database);
-			if ($this->_slave_connection)
+			if (is_resource($this->_slave_connection)) {
+			    mysql_query("SET @@SESSION.sql_mode = '';", $this->_slave_connection);
 				$this->selectSlave($database);
+		    }
 		}
 	}
 
@@ -164,7 +122,7 @@ class JDatabaseMySQL extends JDatabase
 		if (is_resource($this->_connection)) {
 			mysql_close($this->_connection);
 		}
-		if (is_resource($this->_slave_connection)) {
+	    if (is_resource($this->_slave_connection)) {
 			mysql_close($this->_slave_connection);
 		}
 	}
@@ -192,17 +150,10 @@ class JDatabaseMySQL extends JDatabase
 		}
 		return false;
 	}
-
-	/**
-	 * Determines if the connection to the slave server is active.
-	 *
-	 * @access	public
-	 * @return	boolean
-	 * @since	1.5
-	 */
-	public function slave_connected()
+	
+    public function slave_connected()
 	{
-		if(is_resource($this->_slave_connection)) {
+		if (is_resource($this->_slave_connection)) {
 			return mysql_ping($this->_slave_connection);
 		}
 		return false;
@@ -223,88 +174,35 @@ class JDatabaseMySQL extends JDatabase
 
 		if (!mysql_select_db($database, $this->_connection)) {
 			$this->_errorNum = 3;
-			//$this->_errorMsg = JText::_('JLIB_MASTER_DATABASE_ERROR_DATABASE_CONNECT');
-			//Implement a Fail Whale 
-			//jexit('Database Error: ' . $db->toString() ); 
-			header("HTTP/1.0 500 Internal Server Error"); 
-			print("<html>"); 
-			print("<head>"); 
-			print("<title>Whoops! We will be right back...</title>"); 
-			print("<link rel='StyleSheet' type='text/css' href=\'".JURI::base().'../templates/system/css/fail.css'." />"); 
-			print("</head>"); 
-			print("<body>"); 
-			print("<div id='fail-wrap'>"); 
-			print( "<div class='fail'>"); 
-			print("<h2>500 Internal Server Error</h2>"); 
-			$link = JURI::base().'../templates/system/images/error500-screen.jpg';
-			print("<img src=".$link.">"); 
-			//print("<img src=".JURI::base().'templates/system/images/error500-screen.jpg'.">"); 
-			print( "<div class='fail-error'>"); 
-			print("Database Error:<br>Check Database settings..."); 
-			print( "</div>"); 
-			print("</div>" ); 
-			print("</div>"); 
-			print("</body>"); 
-			print("</html>"); 
-			exit; 
+			$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_DATABASE_CONNECT');
 			return false;
 		}
-
+		
+		
 		return true;
 	}
-
+	
 	/**
-	* Select a database for use
+	 * Select a Slave database for use
 	 *
 	 * @access	public
 	 * @param	string $database
 	 * @return	boolean True if the database has been successfully selected
 	 * @since	1.5
 	 */
-	public function selectSlave($database)
-	{
-		if ( ! $database )
-		{
+	function selectSlave($database) {
+		if ( ! $database ) {
 			return false;
 		}
 
 		if ( !mysql_select_db( $database, $this->_slave_connection )) {
 			$this->_errorNum = 3;
-			//$this->_errorMsg = JText::_('JLIB_SLAVE_DATABASE_ERROR_DATABASE_CONNECT');
-			//Implement a Fail Whale 
-			//jexit('Database Error: ' . $db->toString() ); 
-			header("HTTP/1.0 500 Internal Server Error"); 
-			print("<html>"); 
-			print("<head>"); 
-			print("<title>Whoops! We will be right back...</title>"); 
-			print("<link rel='StyleSheet' type='text/css' href=\'".JURI::base().'../templates/system/css/fail.css'." />"); 
-			print("</head>"); 
-			print("<body>"); 
-			print("<div id='fail-wrap'>"); 
-			print( "<div class='fail'>"); 
-			print("<h2>500 Internal Server Error</h2>"); 
-			$link = JURI::base().'../templates/system/images/error500-screen.jpg';
-			print("<img src=".$link.">"); 
-			print( "<div class='fail-error'>"); 
-			print("Database Error: <br>Check Database 
-			settings..."); 
-			print( "</div>"); 
-			print("</div>" ); 
-			print("</div>"); 
-			print("</body>"); 
-			print("</html>"); 
-			exit; 
+			$this->_errorMsg = 'Could not connect to database';
 			return false;
 		}
 
-		
-
 		return true;
 	}
-
-
-
-
 
 	/**
 	 * Determines UTF support
@@ -342,47 +240,6 @@ class JDatabaseMySQL extends JDatabase
 	}
 
 	/**
-	 * Sets the SQL query string for later execution.
-	 *
-	 * This function replaces a string identifier <var>$prefix</var> with the
-	 * string held is the <var>_table_prefix</var> class variable.
-	 *
-	 * @access public
-	 * @param string The SQL query
-	 * @param string The offset to start selection
-	 * @param string The number of results to return
-	 * @param string The common table prefix
-	 */
-
-	public function setQuery( $sql, $offset = 0, $limit = 0)
-	{
-		// this was the bug! - logan - 11/25/09
-		jimport("joomla.utilities.string");
-
-		parent::setQuery($sql, $offset, $limit);
-
-//echo $sql . "<br>";
-		//if(isset($this->install) && $this->install != 1) {
-
-		if(preg_match('/^SELECT/i', ltrim(strtoupper($sql)))) 
-		{
-			$this->_stmt_type = 1;
-		} 
-		/*else if(JString::startsWith(ltrim(strtoupper($sql)), 'DELETE')) 
-		{
-			$this->_stmt_type = 1;
-		} */
-		else 
-		{
-			$this->_stmt_type=0;
-		}
-
-		//}
-
-
-	}
-
-	/**
 	 * Execute the query
 	 *
 	 * @return	mixed	A database resource if successful, FALSE if not.
@@ -405,27 +262,33 @@ class JDatabaseMySQL extends JDatabase
 		$this->_errorNum = 0;
 		$this->_errorMsg = '';
 		
-		if($this->_stmt_type == 1 && $this->_slave_connection) {
-			//echo 'slave'.'<br>';
+		
+		
+		jimport("joomla.utilities.string");
+		$select_in_sql = JString::startsWith(ltrim(strtoupper($sql)), 'SELECT') ;
+		
+	    if($select_in_sql && is_resource($this->_slave_connection)) {
 			$this->_cursor = mysql_query( $sql, $this->_slave_connection );
 		} else {
-			//echo 'master'.'<br>';	
-			$this->_cursor = mysql_query($sql, $this->_connection);
+			$this->_cursor = mysql_query( $sql, $this->_connection );
 		}
-		if (!$this->_cursor) {
-			if($this->_stmt_type ==1 && $this->_slave_connection) {				
-				$this->_errorNum = mysql_errno( $this->_slave_connection );
-				$this->_errorMsg = mysql_error( $this->_slave_connection )." SQL=$sql";
-			} else {	
-				$this->_errorNum = mysql_errno($this->_connection);
-				$this->_errorMsg = mysql_error($this->_connection)." SQL=$sql";
-			}
-
-			if ($this->_debug) {
-				JError::raiseError(500, 'JDatabaseMySQL::query: '.$this->_errorNum.' - '.$this->_errorMsg);
-			}
-			return false;
-		}
+		
+		//$this->_cursor = mysql_query($sql, $this->_connection);
+	    if (!$this->_cursor) {
+	        if($select_in_sql && is_resource($this->_slave_connection)) {	
+    			$this->_errorNum = mysql_errno($this->_slave_connection);
+    			$this->_errorMsg = mysql_error($this->_slave_connection)." SQL=$sql";
+	        } else {
+	            $this->_errorNum = mysql_errno($this->_connection);
+    			$this->_errorMsg = mysql_error($this->_connection)." SQL=$sql";
+	        }
+    
+    		if ($this->_debug) {
+    			JError::raiseError(500, 'JDatabaseMySQL::query: '.$this->_errorNum.' - '.$this->_errorMsg);
+    		}
+    			return false;
+    		}
+	   
 		return $this->_cursor;
 	}
 
@@ -435,11 +298,9 @@ class JDatabaseMySQL extends JDatabase
 	 */
 	public function getAffectedRows()
 	{
-		if($this->_stmt_type == 1)
-			return mysql_affected_rows( $this->_slave_connection );
-		else {
-			return mysql_affected_rows($this->_connection);
-		}
+	    if(is_resource($this->_slave_connection))
+		    return mysql_affected_rows($this->_slave_connection);
+		else return mysql_affected_rows($this->_connection);
 	}
 
 	/**
@@ -706,32 +567,6 @@ class JDatabaseMySQL extends JDatabase
 		return $array;
 	}
 
-        /**
-         * Load the next row returned by the query.
-         *
-         * @return    mixed    The result of the query as an associative array, false if there are no more rows, or null on an error.
-         *
-         * @since    1.6.0
-         */
-        public function loadNextAssoc()
-        {
-                static $cur;
-
-                if (!($cur = $this->query())) {
-                        return $this->_errorNum ? null : false;
-                }
-
-                if ($row = mysql_fetch_assoc($cur)) {
-                        return $row;
-                }
-
-                mysql_free_result($cur);
-                $cur = null;
-
-                return false;
-        }  
-
-
 	/**
 	 * Load the next row returned by the query.
 	 *
@@ -822,7 +657,7 @@ class JDatabaseMySQL extends JDatabase
 	 *
 	 * @param [type] $updateNulls
 	 */
-	public function updateObject($table, &$object, $keyName, $updateNulls=true)
+	public function updateObject($table, &$object, $keyName, $updateNulls=false)
 	{
 		$fmtsql = 'UPDATE '.$this->nameQuote($table).' SET %s WHERE %s';
 		$tmp = array();

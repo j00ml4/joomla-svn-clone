@@ -90,7 +90,7 @@ class JEditor extends JObservable
 			}
 		}
 
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 		$document->addCustomTag($return);
 	}
 
@@ -235,7 +235,7 @@ class JEditor extends JObservable
 		$plugins = JPluginHelper::getPlugin('editors-xtd');
 
 		foreach($plugins as $plugin) {
-			if (is_array($buttons) &&  !in_array($plugin->name, $buttons)) {
+			if (is_array($buttons) &&  in_array($plugin->name, $buttons)) {
 				continue;
 			}
 
@@ -288,7 +288,7 @@ class JEditor extends JObservable
 		require_once $path;
 
 		// Get the plugin
-		$plugin = &JPluginHelper::getPlugin('editors', $this->_name);
+		$plugin = JPluginHelper::getPlugin('editors', $this->_name);
 		$className = 'plgEditor'.$plugin->name;
 		if (class_exists($className)) {
 			$plugin = new $className($this, (array)$plugin);

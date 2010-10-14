@@ -96,6 +96,9 @@ class JDatabaseMySQLi extends JDatabase
 		// finalize initialization
 		parent::__construct($options);
 
+		// Set sqli_mode to non_strict mode
+		mysqli_query($this->_connection, "SET @@SESSION.sql_mode = '';");
+
 		// select the database
 		if ($select) {
 			$this->select($database);
@@ -153,7 +156,7 @@ class JDatabaseMySQLi extends JDatabase
 		if (!mysqli_select_db($this->_connection, $database))
 		{
 			$this->_errorNum = 3;
-			$this->_errorMsg = JText::_('JLIB_MASTER_DATABASE_ERROR_DATABASE_CONNECT');
+			$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_DATABASE_CONNECT');
 			return false;
 		}
 
@@ -515,31 +518,6 @@ class JDatabaseMySQLi extends JDatabase
 	/**
 	 * Load the next row returned by the query.
 	 *
-	 * @return    mixed    The result of the query as an associative array, false if there are no more rows, or null on an error.
-	 *
-	 * @since    1.6.0
-	 */
-	public function loadNextAssoc()
-	{
-		static $cur;
-
-		if (!($cur = $this->query())) {
-			return $this->_errorNum ? null : false;
-		}
-
-		if ($row = mysqli_fetch_assoc($cur)) {
-			return $row;
-		}
-
-		mysql_free_result($cur);
-		$cur = null;
-
-		return false;
-	}
-
-	/**
-	 * Load the next row returned by the query.
-	 *
 	 * @return	mixed	The result of the query as an array, false if there are no more rows, or null on an error.
 	 *
 	 * @since	1.6.0
@@ -626,7 +604,7 @@ class JDatabaseMySQLi extends JDatabase
 	 *
 	 * @param [type] $updateNulls
 	 */
-	public function updateObject($table, &$object, $keyName, $updateNulls=true)
+	public function updateObject($table, &$object, $keyName, $updateNulls=false)
 	{
 		$fmtsql = 'UPDATE '.$this->nameQuote($table).' SET %s WHERE %s';
 		$tmp = array();

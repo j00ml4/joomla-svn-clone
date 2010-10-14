@@ -16,19 +16,10 @@ jimport('joomla.cache.controller');
  *
  * @package		Joomla.Framework
  * @subpackage	Cache
- * @since		1.5
+ * @since		1.6
  */
 class JCacheControllerCallback extends JCacheController
 {
-	/**
-	* Constructor
-	*
-	* @param array $options optional parameters
-	*/
-	public function __construct($options = array())
-	{
-		parent::__construct($options);
-	}
 	/**
 	 * Executes a cacheable callback if not found in cache else returns cached output and result
 	 *
@@ -41,7 +32,7 @@ class JCacheControllerCallback extends JCacheController
 	 *	- Static method name as a string eg. 'MyClass::myMethod' for method myMethod() of class MyClass
 	 *
 	 * @return	mixed	Result of the callback
-	 * @since	1.5
+	 * @since	1.6
 	 */
 	public function call()
 	{
@@ -59,10 +50,11 @@ class JCacheControllerCallback extends JCacheController
 	 * @param	array	Callback arguments
 	 * @param	string	Cache id
 	 * @param	boolean	Perform workarounds on data?
+	 * @param	array	Workaround options
 	 * @return	mixed	Result of the callback
-	 * @since	1.5
+	 * @since	1.6
 	 */
-	public function get($callback, $args, $id=false, $wrkarounds=false)
+	public function get($callback, $args, $id=false, $wrkarounds=false, $woptions=array())
 	{
 
 		// Normalize callback
@@ -75,7 +67,7 @@ class JCacheControllerCallback extends JCacheController
 		} elseif (strstr($callback, '->')) {
 			/*
 			 * This is a really not so smart way of doing this... we provide this for backward compatability but this
-			 * WILL!!! disappear in a future version.  If you are using this syntax change your code to use the standard
+			 * WILL! disappear in a future version.  If you are using this syntax change your code to use the standard
 			 * PHP callback array syntax: <http://php.net/callback>
 			 *
 			 * We have to use some silly global notation to pull it off and this is very unreliable
@@ -99,37 +91,50 @@ class JCacheControllerCallback extends JCacheController
 		$locktest->locked = null;
 		$locktest->locklooped = null;
 
-		if ($data === false)
-		{
-			$locktest = $this->cache->lock($id,null);
-			if ($locktest->locked == true && $locktest->locklooped == true) $data = $this->cache->get($id);
-
+		if ($data === false) {
+			$locktest = $this->cache->lock($id);
+			if ($locktest->locked == true && $locktest->locklooped == true) {
+				$data = $this->cache->get($id);
+			}
 		}
-
+		
+		$coptions= array();
+		
 		if ($data !== false) {
 
-			$cached = unserialize($data);
-			$output = $wrkarounds==false ? $cached['output'] : JCache::getWorkarounds($cached['output']);
+			$cached = unserialize(trim($data));
+			$coptions['mergehead'] = isset($woptions['mergehead']) ? $woptions['mergehead'] : 0;
+			$output = ($wrkarounds == false) ? $cached['output'] : JCache::getWorkarounds($cached['output'], $coptions);
 			$result = $cached['result'];
 			if ($locktest->locked == true) $this->cache->unlock($id);
 
 		} else {
-			if(!is_array($args))
-			{
-				$args = (array) $args;
+
+			if (!is_array($args)) {
+				$Args = !empty($args) ? array( &$args) : array();
+			} else {
+				 $Args = &$args;				
 			}
-			if ($locktest->locked == false) $locktest = $this->cache->lock($id,null);
+			
+			if ($locktest->locked == false) $locktest = $this->cache->lock($id);
 			ob_start();
 			ob_implicit_flush(false);
 
-			$result = call_user_func_array($callback, $args);
+			$result = call_user_func_array($callback, $Args);
 			$output = ob_get_contents();
 
 			ob_end_clean();
 
 			$cached = array();
-			$cached['output'] = $wrkarounds==false ? $output : JCache::setWorkarounds($output);
+
+			$coptions['nopathway'] = isset($woptions['nopathway']) ? $woptions['nopathway'] : 1;
+			$coptions['nohead'] = isset($woptions['nohead']) ? $woptions['nohead'] : 1;
+			$coptions['nomodules'] = isset($woptions['nomodules']) ? $woptions['nomodules'] : 1;
+			$coptions['modulemode'] = isset($woptions['modulemode']) ? $woptions['modulemode'] : 0;
+
+			$cached['output'] = ($wrkarounds == false) ? $output : JCache::setWorkarounds($output, $coptions);
 			$cached['result'] = $result;
+
 			// Store the cache data
 			$this->cache->store(serialize($cached), $id);
 			if ($locktest->locked == true) $this->cache->unlock($id);
@@ -145,7 +150,7 @@ class JCacheControllerCallback extends JCacheController
 	 * @param	callback	$callback	Callback to cache
 	 * @param	array		$args	Arguments to the callback method to cache
 	 * @return	string	MD5 Hash : function cache id
-	 * @since	1.5
+	 * @since	1.6
 	 */
 	private function _makeId($callback, $args)
 	{
@@ -154,6 +159,7 @@ class JCacheControllerCallback extends JCacheController
 			$vars[] = strtolower(get_class($callback[0]));
 			$callback[0] = $vars;
 		}
+
 		return md5(serialize(array($callback, $args)));
 	}
 }

@@ -71,7 +71,7 @@ class JLog extends JObject
 		// Set default path if not set
 		if (!$path)
 		{
-			$config = &JFactory::getConfig();
+			$config = JFactory::getConfig();
 			$path = $config->get('log_path');
 		}
 
@@ -109,14 +109,14 @@ class JLog extends JObject
 	function addEntry($entry)
 	{
 		// Set some default field values if not already set.
-		$date = &JFactory::getDate();
+		$date = JFactory::getDate();
 		if (!isset ($entry['date'])) {
 
-			$entry['date'] = $date->toFormat("%Y-%m-%d");
+			$entry['date'] = $date->format("Y-m-d");
 		}
 		if (!isset ($entry['time'])) {
 
-			$entry['time'] = $date->toFormat("%H:%M:%S");
+			$entry['time'] = $date->format("H:i:s");
 		}
 		if (!isset ($entry['c-ip'])) {
 			$entry['c-ip'] = $_SERVER['REMOTE_ADDR'];

@@ -26,7 +26,7 @@ class JFormRuleEmail extends JFormRule
 	 * @var		string
 	 * @since	1.6
 	 */
-	protected $regex = '[\w\.\-]+@\w+[\w\.\-]*?\.\w{1,4}';
+	protected $regex = '^[\w.-]+(\+[\w.-]+)*@\w+[\w.-]*?\.\w{2,4}$';
 
 	/**
 	 * Method to test the email address and optionally check for uniqueness.
@@ -50,7 +50,7 @@ class JFormRuleEmail extends JFormRule
 	{
 		// If the field is empty and not required, the field is valid.
 		$required = ((string) $element['required'] == 'true' || (string) $element['required'] == 'required');
-		if ($required && empty($value)) {
+		if (!$required && empty($value)) {
 			return true;
 		}
 
@@ -73,11 +73,8 @@ class JFormRuleEmail extends JFormRule
 			$query->where('email = '.$db->quote($value));
 
 			// Get the extra field check attribute.
-			$extraField = (string) $element['field'];
-			if ($extraField) {
-				$extraFieldValue = ($form instanceof JForm) ? $form->getValue($extraField) : '';
-				$query->where($db->nameQuote($extraField).' = '.$db->quote($extraFieldValue));
-			}
+			$userId = ($form instanceof JForm) ? $form->getValue('id') : '';
+			$query->where($db->nameQuote('id').' <> '.(int) $userId);
 
 			// Set and query the database.
 			$db->setQuery($query);

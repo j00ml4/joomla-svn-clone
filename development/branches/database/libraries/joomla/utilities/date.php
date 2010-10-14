@@ -142,7 +142,8 @@ class JDate extends DateTime
 		}
 
 		// If the date is numeric assume a unix timestamp and convert it.
-		$date = is_numeric($date) ? @date('c', $date) : $date;
+		date_default_timezone_set('UTC');
+		$date = is_numeric($date) ? date('c', $date) : $date;
 
 		// Call the DateTime constructor.
 		parent::__construct($date, $tz);
@@ -259,6 +260,19 @@ class JDate extends DateTime
 			case 5: return $abbr ? JText::_('FRI') : JText::_('FRIDAY');
 			case 6: return $abbr ? JText::_('SAT') : JText::_('SATURDAY');
 		}
+	}
+
+	/**
+	 * Gets the date as a formatted string in a local calendar.
+	 *
+	 * @param	string	The date format specification string (see {@link PHP_MANUAL#date})
+	 * @param	boolean	True to return the date string in the local time zone, false to return it in GMT.
+	 * @return	string	The date string in the specified format format.
+	 * @since	1.6
+	 */
+	public function calendar($format, $local = false)
+	{
+		return $this->format($format, $local);
 	}
 
 	/**
@@ -438,7 +452,7 @@ class JDate extends DateTime
 	 */
 	public function toISO8601($local = false)
 	{
-		return $this->format(DATE_ISO8601, $local);
+		return $this->format(DateTime::RFC3339, $local);
 	}
 
 	/**
@@ -467,7 +481,7 @@ class JDate extends DateTime
 	 */
 	public function toRFC822($local = false)
 	{
-		return $this->format(DATE_RFC822, $local);
+		return $this->format(DateTime::RFC2822, $local);
 	}
 
 	/**

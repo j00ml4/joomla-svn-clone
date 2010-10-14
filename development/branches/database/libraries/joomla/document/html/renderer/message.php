@@ -24,7 +24,7 @@ class JDocumentRendererMessage extends JDocumentRenderer
 	 * @param	array $params	Associative array of values
 	 * @return	string			The output of the script
 	 */
-	public function render($name = null, $params = array (), $content = null)
+	public function render($name, $params = array (), $content = null)
 	{
 		// Initialise variables.
 		$buffer	= null;
@@ -53,6 +53,10 @@ class JDocumentRendererMessage extends JDocumentRenderer
 			{
 				if (count($msgs))
 				{
+					if ( ($type == 'message') || ($type == 'notice') || ($type == 'warning') || ($type == 'error') ) {
+					} else {
+						$type = 'message';
+					}									
 					$buffer .= "\n<dt class=\"".strtolower($type)."\">".JText::_($type)."</dt>";
 					$buffer .= "\n<dd class=\"".strtolower($type)." message fade\">";
 					$buffer .= "\n\t<ul>";

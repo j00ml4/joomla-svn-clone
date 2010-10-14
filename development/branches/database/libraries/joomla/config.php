@@ -5,11 +5,6 @@ class JFrameworkConfig
 	public $host		= 'localhost';
 	public $user		= '';
 	public $password	= '';
-
-	public $slave_host		= 'localhost';
-	public $slave_user		= '';
-	public $slave_password	= '';
-
 	public $db			= '';
 	public $dbprefix	= 'jos_';
 	public $ftp_host	= '127.0.0.1';

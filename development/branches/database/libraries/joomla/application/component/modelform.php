@@ -19,7 +19,7 @@ jimport('joomla.form.form');
  * @subpackage	Application
  * @since		1.6
  */
-class JModelForm extends JModel
+abstract class JModelForm extends JModel
 {
 	/**
 	 * Array of form objects.
@@ -47,7 +47,7 @@ class JModelForm extends JModel
 			}
 
 			// Check if this is the user having previously checked out the row.
-			if ($table->checked_out > 0 && $table->checked_out != $user->get('id')) {
+			if ($table->checked_out > 0 && $table->checked_out != $user->get('id') && !$user->authorise('core.manage', 'com_checkin')) {
 				$this->setError(JText::_('JLIB_APPLICATION_ERROR_CHECKIN_USER_MISMATCH'));
 				return false;
 			}
@@ -99,22 +99,32 @@ class JModelForm extends JModel
 	}
 
 	/**
+	 * Abstract method for getting the form from the model.
+	 *
+	 * @param	array	$data		Data for the form.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	mixed	A JForm object on success, false on failure
+	 * @since	1.6
+	 */
+	abstract public function getForm($data = array(), $loadData = true);
+
+	/**
 	 * Method to get a form object.
 	 *
 	 * @param	string		$name		The name of the form.
-	 * @param	string		$data		The form data. Can be XML string if file flag is set to false.
+	 * @param	string		$source		The form source. Can be XML string if file flag is set to false.
 	 * @param	array		$options	Optional array of options for the form creation.
 	 * @param	boolean		$clear		Optional argument to force load a new form.
 	 * @param	string		$xpath		An optional xpath to search for the fields.
 	 * @return	mixed		JForm object on success, False on error.
 	 */
-	function getForm($name, $data = null, $options = array(), $clear = false, $xpath = false)
+	protected function loadForm($name, $source = null, $options = array(), $clear = false, $xpath = false)
 	{
 		// Handle the optional arguments.
 		$options['control']	= JArrayHelper::getValue($options, 'control', false);
 
 		// Create a signature hash.
-		$hash = md5($data.serialize($options));
+		$hash = md5($source.serialize($options));
 
 		// Check if we can use a previously loaded form.
 		if (isset($this->_forms[$hash]) && !$clear) {
@@ -126,10 +136,22 @@ class JModelForm extends JModel
 		JForm::addFieldPath(JPATH_COMPONENT.'/models/fields');
 
 		try {
-			$form = JForm::getInstance($name, $data, $options, false, $xpath);
+			$form = JForm::getInstance($name, $source, $options, false, $xpath);
+
+			if (isset($options['load_data']) && $options['load_data']) {
+				// Get the data for the form.
+				$data = $this->loadFormData();
+			} else {
+				$data = array();
+			}
 
 			// Allow for additional modification of the form, and events to be triggered.
-			$this->preprocessForm($form);
+			// We pass the data because plugins may require it.
+			$this->preprocessForm($form, $data);
+
+			// Load the data into the form after the plugins have operated.
+			$form->bind($data);
+
 		} catch (Exception $e) {
 			$this->setError($e->getMessage());
 			return false;
@@ -142,20 +164,35 @@ class JModelForm extends JModel
 	}
 
 	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	array	The default data is an empty array.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{
+		return array();
+	}
+
+	/**
 	 * Method to allow derived classes to preprocess the form.
 	 *
 	 * @param	object	A form object.
-	 *
+	 * @param	mixed	The data expected for the form.
+	 * @param	string	The name of the plugin group to import (defaults to "content").
 	 * @throws	Exception if there is an error in the form event.
 	 * @since	1.6
 	 */
-	protected function preprocessForm($form)
+	protected function preprocessForm(JForm $form, $data, $group = 'content')
 	{
+		// Import the approriate plugin group.
+		JPluginHelper::importPlugin($group);
+
 		// Get the dispatcher.
 		$dispatcher	= JDispatcher::getInstance();
 
 		// Trigger the form preparation event.
-		$results = $dispatcher->trigger('onPrepareForm', array($form->getName(), $form));
+		$results = $dispatcher->trigger('onContentPrepareForm', array($form, $data));
 
 		// Check for errors encountered while preparing the form.
 		if (count($results) && in_array(false, $results, true)) {

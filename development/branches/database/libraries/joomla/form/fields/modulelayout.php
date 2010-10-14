@@ -13,7 +13,8 @@ jimport('joomla.html.html');
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
 jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
+jimport('joomla.form.helper');
+JFormHelper::loadFieldClass('list');
 
 /**
  * Form Field to display a list of the layouts for a module view from the module or default template overrides.
@@ -101,6 +102,7 @@ class JFormFieldModuleLayout extends JFormFieldList
 				foreach ($files as $file) {
 					$options[]	= JHTML::_('select.option', JFile::stripExt($file));
 				}
+				$options[]	= JHTML::_('select.optgroup', JText::_('JOPTION_FROM_DEFAULT_TEMPLATE'));
 			}
 		}
 

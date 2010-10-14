@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id:observer.php 6961 2007-03-15 16:06:53Z tcp $
+ * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Base
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -89,13 +89,19 @@ class JObservable extends JObject
 	 */
 	public function attach(&$observer)
 	{
-		// Make sure we haven't already attached this object as an observer
 		if (is_array($observer))
 		{
 			if (!isset($observer['handler']) || !isset($observer['event']) || !is_callable($observer['handler'])) {
 				return;
 			}
+			// Make sure we haven't already attached this array as an observer
+			foreach ($this->_observers as $check) {
+				if (is_array($check) && $check['event']==$observer['event'] && $check['handler']==$observer['handler']) {
+					return;
+				}
+			}
 			$this->_observers[] = &$observer;
+			end($this->_observers);
 			$methods = array($observer['event']);
 
 		} else {
@@ -103,6 +109,7 @@ class JObservable extends JObject
 				return;
 			}
 
+			// Make sure we haven't already attached this object as an observer
 			$class = get_class($observer);
 			foreach ($this->_observers as $check) {
 				if ($check instanceof $class) {

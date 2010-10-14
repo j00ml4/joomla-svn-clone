@@ -82,17 +82,18 @@ class JFilterOutput
 		//remove any '-' from the string they will be used as concatonater
 		$str = str_replace('-', ' ', $string);
 
-		$lang = &JFactory::getLanguage();
+		$lang = JFactory::getLanguage();
 		$str = $lang->transliterate($str);
 
 		// convert certain symbols to letter representation
 		$str = str_replace(array('&', '"', '<', '>'), array('a', 'q', 'l', 'g'), $str);
 
+		// lowercase and trim
+		$str = trim(strtolower($str));
+
 		// remove any duplicate whitespace, and ensure all characters are alphanumeric
 		$str = preg_replace(array('/\s+/','/[^A-Za-z0-9\-]/'), array('-',''), $str);
 
-		// lowercase and trim
-		$str = trim(strtolower($str));
 		return $str;
 	}
 

@@ -76,7 +76,7 @@ class JControllerAdmin extends JController
 		if (empty($this->view_list)) {
 			$r = null;
 			if (!preg_match('/(.*)Controller(.*)/i', get_class($this), $r)) {
-				JError::raiseError(500, 'JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME');
+				JError::raiseError(500, JText::_('JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME'));
 			}
 			$this->view_list = strtolower($r[2]);
 		}
@@ -119,10 +119,15 @@ class JControllerAdmin extends JController
 	/**
 	 * Display is not supported by this controller.
 	 *
+	 * @param	boolean			If true, the view output will be cached
+	 * @param	array			An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return	JController		This object to support chaining.
 	 * @since	1.6
 	 */
-	public function display()
+	public function display($cachable = false, $urlparams = false)
 	{
+		return $this;
 	}
 
 	/**
@@ -222,9 +227,50 @@ class JControllerAdmin extends JController
 		$model = $this->getModel();
 
 		// Save the ordering
-		$model->saveorder($pks, $order);
+		$return = $model->saveorder($pks, $order);
 
-		$this->setMessage(JText::_('JLIB_APPLICATION_SUCCESS_ORDERING_SAVED'));
-		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
+		if ($return === false)
+		{
+			// Reorder failed
+			$message = JText::sprintf('JLIB_APPLICATION_ERROR_REORDER_FAILED', $model->getError());
+			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false), $message, 'error');
+			return false;
+		} else
+		{
+			// Reorder succeeded.
+			$this->setMessage(JText::_('JLIB_APPLICATION_SUCCESS_ORDERING_SAVED'));
+			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
+			return true;
+		}
 	}
+
+	/**
+	 * Check in of one or more records.
+	 *
+	 * @since	1.6
+	 */
+	public function checkin()
+	{
+		// Check for request forgeries.
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		// Initialise variables.
+		$user	= JFactory::getUser();
+		$ids	= JRequest::getVar('cid', null, 'post', 'array');
+
+		$model = $this->getModel();
+		$return = $model->checkin($ids);
+		if ($return === false) {
+			// Checkin failed.
+			$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
+			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false), $message, 'error');
+			return false;
+		} else {
+			// Checkin succeeded.
+			$message =  JText::plural($this->text_prefix.'_N_ITEMS_CHECKED_IN', count($ids));
+			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false), $message);
+			return true;
+		}
+	}
+
 }
