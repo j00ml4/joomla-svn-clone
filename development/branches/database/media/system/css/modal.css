@@ -16,7 +16,6 @@
 	background-color: #000;
 	left: 0px;
 	top: 0px;
-	zoom: 1;
 }
 
 #sbox-window {
@@ -76,10 +75,6 @@
 	overflow: visible;
 }
 
-/* Hides scrollbars */
-.body-overlayed {
-	overflow: hidden;
-}
 /* Hides flash (Firefox problem) and selects (IE) */
 .body-overlayed embed, .body-overlayed object, .body-overlayed select {
 	visibility: hidden;
