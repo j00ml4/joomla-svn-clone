@@ -18,7 +18,7 @@ Joomla.editors.instances = {};
  */
 Joomla.submitform = function(task, form) {
 	if (typeof(form) === 'undefined') {
-		form = document.adminForm;
+		form = document.getElementById('adminForm');
 	}
 	form.task.value = task;
 
@@ -26,8 +26,18 @@ Joomla.submitform = function(task, form) {
 	if (typeof form.onsubmit == 'function') {
 		form.onsubmit();
 	}
+	if (typeof form.fireEvent == "function") {
+		form.fireEvent('submit');
+	}
 	form.submit();
 };
+
+/**
+ * Default function. Usually would be overriden by the component
+ */
+Joomla.submitbutton = function(pressbutton) {
+	Joomla.submitform(pressbutton);
+}
 
 /**
  * Custom behavior for JavaScript I18N in Joomla! 1.6
@@ -328,6 +338,9 @@ function submitform(pressbutton) {
 	}
 	if (typeof document.adminForm.onsubmit == "function") {
 		document.adminForm.onsubmit();
+	}
+	if (typeof document.adminForm.fireEvent == "function") {
+		document.adminForm.fireEvent('submit');
 	}
 	document.adminForm.submit();
 }
