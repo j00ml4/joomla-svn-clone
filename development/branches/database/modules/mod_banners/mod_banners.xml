@@ -18,13 +18,14 @@
 			module="mod_banners">mod_banners.php</filename>
 		<folder>tmpl</folder>
 		<filename>helper.php</filename>
-		<filename>index.php</filename>
+		<filename>index.html</filename>
 		<filename>mod_banners.xml</filename>
 	</files>
 	<languages>
 		<language
 			tag="en-GB">en-GB.mod_banners.ini</language>
 	</languages>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_BANNERS" />
 	<config>
 		<fields name="params">
 			<fieldset name="basic"
@@ -36,30 +37,25 @@
 					label="MOD_BANNERS_FIELD_TARGET_LABEL"
 					description="MOD_BANNERS_FIELD_TARGET_DESC">
 					<option
-						value="0">MOD_BANNERS_VALUE_PARENT</option>
+						value="0">JBROWSERTARGET_PARENT</option>
 					<option
-						value="1">MOD_BANNERS_VALUE_NEWWINDOWWITHBROWSERNAVIGATION</option>
+						value="1">JBROWSERTARGET_NEW</option>
 					<option
-						value="2">MOD_BANNERS_VALUE_NEWWINDOWWITHOUTBROWSERNAVIGATION</option>
+						value="2">JBROWSERTARGET_POPUP</option>
 				</field>
 
 				<field
-					name="spacer1"
-					type="spacer"
-					hr="true"
-					/>
-
-				<field
 					name="count"
-					type="text"
-					default="1"
+					type="integer"
+					first="1"
+					last="10"
+					step="1"
+					default="5"
 					label="MOD_BANNERS_FIELD_COUNT_LABEL"
 					description="MOD_BANNERS_FIELD_COUNT_DESC" />
-
 				<field
 					name="cid"
 					type="bannerclient"
-					default=""
 					label="MOD_BANNERS_FIELD_BANNERCLIENT_LABEL"
 					description="MOD_BANNERS_FIELD_BANNERCLIENT_DESC" />
 
@@ -67,8 +63,8 @@
 					name="catid"
 					type="category"
 					extension="com_banners"
-					default=""
-					label="MOD_BANNERS_FIELD_CATEGORY_LABEL"
+					label="JCATEGORY"
+					multiple="true" size="5"
 					description="MOD_BANNERS_FIELD_CATEGORY_DESC" />
 
 				<field
@@ -78,9 +74,9 @@
 					label="MOD_BANNERS_FIELD_TAG_LABEL"
 					description="MOD_BANNERS_FIELD_TAG_DESC">
 					<option
-						value="0">JNo</option>
+						value="0">JNO</option>
 					<option
-						value="1">JYes</option>
+						value="1">JYES</option>
 				</field>
 				<field
 					name="ordering"
@@ -95,28 +91,22 @@
 				</field>
 
 				<field
-					name="spacer2"
-					type="spacer"
-					hr="true"
-					/>
-
-				<field
 					name="header_text"
 					type="textarea"
+					filter="safehtml"
 					rows="3"
 					cols="40"
-					default=""
 					label="MOD_BANNERS_FIELD_HEADER_LABEL"
 					description="MOD_BANNERS_FIELD_HEADER_DESC" />
 
 				<field
 					name="footer_text"
 					type="textarea"
+					filter="safehtml"
 					rows="3"
 					cols="40"
-					default=""
 					label="MOD_BANNERS_FIELD_FOOTER_LABEL"
-					description="MOD_BANNERS_FIELD_HEADER_DESC" />
+					description="MOD_BANNERS_FIELD_FOOTER_DESC" />
 			</fieldset>
 			<fieldset
 				name="advanced">
@@ -129,7 +119,6 @@
 				<field
 					name="moduleclass_sfx"
 					type="text"
-					default=""
 					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
 					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 

@@ -35,24 +35,11 @@ abstract class modArticlesPopularHelper
 		$model->setState('filter.access', $access);
 
 		// Category filter
-		if ($catid = $params->get('catid')) {
-			$model->setState('filter.category_id', $catid);
-		}
+		$model->setState('filter.category_id', $params->get('catid', array()));
 
 		// Ordering
 		$model->setState('list.ordering', 'a.hits');
 		$model->setState('list.direction', 'DESC');
-
-		// Set ordering
-		$order_map = array(
-			'm_dsc' => 'a.hits DESC',
-		);
-
-		$ordering = JArrayHelper::getValue($order_map, $params->get('ordering'), 'a.created');
-		$dir = 'DESC';
-
-		$model->setState('list.ordering', $ordering);
-		$model->setState('list.direction', $dir);
 
 		$items = $model->getItems();
 

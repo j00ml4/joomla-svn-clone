@@ -18,39 +18,55 @@
 			module="mod_menu">mod_menu.php</filename>
 		<folder>tmpl</folder>
 		<filename>helper.php</filename>
-		<filename>index.php</filename>
-		<filename>mod_menu.xml</filename>
+		<filename>index.html</filename>		<filename>mod_menu.xml</filename>
 	</files>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_MENU" />
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
 				<field
 					name="menutype"
 					type="menu"
-					default=""
 					label="MOD_MENU_FIELD_MENUTYPE_LABEL"
 					description="MOD_MENU_FIELD_MENUTYPE_DESC" />
 				<field
 					name="startLevel"
-					type="text"
-					default="0"
-					size="5"
+					type="list"
+					default="1"
 					label="MOD_MENU_FIELD_STARTLEVEL_LABEL"
-					description="MOD_MENU_FIELD_STARTLEVEL_DESC" />
+					description="MOD_MENU_FIELD_STARTLEVEL_DESC" 
+				>
+					<option value="1">J1</option>
+					<option value="2">J2</option>
+					<option value="3">J3</option>
+					<option value="4">J4</option>
+					<option value="5">J5</option>
+					<option value="6">J6</option>
+					<option value="7">J7</option>
+					<option value="8">J8</option>
+					<option value="9">J9</option>
+					<option value="10">J10</option>
+				</field>
 
 				<field
 					name="endLevel"
-					type="text"
+					type="list"
 					default="0"
-					size="5"
 					label="MOD_MENU_FIELD_ENDLEVEL_LABEL"
-					description="MOD_MENU_FIELD_ENDLEVEL_DESC" />
-
-				<field
-					name="spacer1"
-					type="spacer"
-					hr="true"
-					/>
+					description="MOD_MENU_FIELD_ENDLEVEL_DESC" 
+					>
+					<option value="0">JALL</option>
+					<option value="1">J1</option>
+					<option value="2">J2</option>
+					<option value="3">J3</option>
+					<option value="4">J4</option>
+					<option value="5">J5</option>
+					<option value="6">J6</option>
+					<option value="7">J7</option>
+					<option value="8">J8</option>
+					<option value="9">J9</option>
+					<option value="10">J10</option>
+				</field>
 
 				<field
 					name="showAllChildren"
@@ -70,29 +86,20 @@
 				<field
 					name="tag_id"
 					type="text"
-					default=""
 					label="MOD_MENU_FIELD_TAG_ID_LABEL"
 					description="MOD_MENU_FIELD_TAG_ID_DESC" />
 
 				<field
 					name="class_sfx"
 					type="text"
-					default=""
 					label="MOD_MENU_FIELD_CLASS_LABEL"
 					description="MOD_MENU_FIELD_CLASS_DESC" />
 
 				<field
 					name="window_open"
 					type="text"
-					default=""
 					label="MOD_MENU_FIELD_TARGET_LABEL"
 					description="MOD_MENU_FIELD_TARGET_DESC" />
-
-				<field
-					name="spacer2"
-					type="spacer"
-					hr="true"
-					/>
 
 				<field
 					name="layout"
@@ -103,11 +110,10 @@
 				<field
 					name="moduleclass_sfx"
 					type="text"
-					default=""
 					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
 					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 
-								<field
+				<field
 					name="cache"
 					type="list"
 					default="1"
@@ -127,7 +133,6 @@
 				<field
 					name="cachemode"
 					type="hidden"
-					label=""
 					default="itemid">
 					<option
 						value="itemid"></option>

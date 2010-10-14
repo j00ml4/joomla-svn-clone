@@ -12,16 +12,17 @@ defined('_JEXEC') or die;
 
 require_once JPATH_SITE.DS.'components'.DS.'com_content'.DS.'helpers'.DS.'route.php';
 
-class modRelatedItemsHelper
+abstract class modRelatedItemsHelper
 {
-	function getList($params)
+	public static function getList($params)
 	{
-		$db			= &JFactory::getDbo();
-		$user		= &JFactory::getUser();
+		$db			= JFactory::getDbo();
+		$app		= JFactory::getApplication();
+		$user		= JFactory::getUser();
 		$userId		= (int) $user->get('id');
 		$count		= intval($params->get('count', 5));
 		$groups		= implode(',', $user->authorisedLevels());
-		$date		= &JFactory::getDate();
+		$date		= JFactory::getDate();
 
 		$option		= JRequest::getCmd('option');
 		$view		= JRequest::getCmd('view');
@@ -81,6 +82,11 @@ class modRelatedItemsHelper
 					$query->where('(CONCAT(",", REPLACE(a.metakey, ", ", ","), ",") LIKE "%'.implode('%" OR CONCAT(",", REPLACE(a.metakey, ", ", ","), ",") LIKE "%', $likes).'%")'); //remove single space after commas in keywords)
 					$query->where('(a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).')');
 					$query->where('(a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')');
+
+					// Filter by language
+					if ($app->getLanguageFilter()) {
+						$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+					}
 
 					$db->setQuery($query);
 					$temp = $db->loadObjectList();

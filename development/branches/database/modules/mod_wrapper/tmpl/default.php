@@ -10,7 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 	function iFrameHeight() {
 		var h = 0;
 		if (!document.all) {
@@ -32,6 +32,6 @@ defined('_JEXEC') or die;
 	scrolling="<?php echo $scroll ?>"
 	align="top"
 	frameborder="0"
-	class="wrapper<?php echo $class ?>">
+	class="wrapper<?php echo $params->get('moduleclass_sfx') ?>" >
 	<?php echo JText::_('MOD_WRAPPER_NO_IFRAMES'); ?>
 </iframe>
