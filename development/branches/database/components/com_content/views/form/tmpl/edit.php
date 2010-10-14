@@ -19,13 +19,16 @@ JHtml::_('behavior.formvalidation');
 $params = $this->state->get('params');
 ?>
 
-<script language="javascript" type="text/javascript">
-function submitbutton(task) {
-	if (task == 'article.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
-		<?php //echo $this->form->fields['introtext']->editor->save('jform[introtext]'); ?>
-		submitform(task);
+<script type="text/javascript">
+	function submitbutton(task) {
+		if (task == 'article.cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
+			<?php echo $this->form->getField('text')->save(); ?>
+			Joomla.submitform(task);
+		}
+		else {
+			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
+		}
 	}
-}
 </script>
 <div class="edit item-page<?php echo $this->escape($params->get('pageclass_sfx')); ?>">
 <?php if ($params->get('show_page_heading', 1)) : ?>
@@ -36,7 +39,7 @@ function submitbutton(task) {
 
 <form action="<?php echo JRoute::_('index.php?option=com_content'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<fieldset>
-		<legend><?php echo JText::_('Editor'); ?></legend>
+		<legend><?php echo JText::_('JEDITOR'); ?></legend>
 
 			<div class="formelm">
 			<?php echo $this->form->getLabel('title'); ?>
@@ -50,12 +53,12 @@ function submitbutton(task) {
 			</div>
 		<?php endif; ?>
 
-			<div class="formelm_buttons">
+			<div class="formelm-buttons">
 			<button type="button" onclick="submitbutton('article.save')">
-				<?php echo JText::_('JSave') ?>
+				<?php echo JText::_('JSAVE') ?>
 			</button>
 			<button type="button" onclick="submitbutton('article.cancel')">
-				<?php echo JText::_('JCancel') ?>
+				<?php echo JText::_('JCANCEL') ?>
 			</button>
 			</div>
 
@@ -65,7 +68,7 @@ function submitbutton(task) {
 	</fieldset>
 
 	<fieldset>
-		<legend><?php echo JText::_('Publishing'); ?></legend>
+		<legend><?php echo JText::_('COM_CONTENT_PUBLISHING'); ?></legend>
 		<div class="formelm">
 		<?php echo $this->form->getLabel('catid'); ?>
 		<?php echo $this->form->getInput('catid'); ?>
@@ -80,6 +83,12 @@ function submitbutton(task) {
 		<?php echo $this->form->getLabel('state'); ?>
 		<?php echo $this->form->getInput('state'); ?>
 		</div>
+		
+		<div class="formelm">
+		<?php echo $this->form->getLabel('featured'); ?>
+		<?php echo $this->form->getInput('featured'); ?>
+		</div>
+		
 		<div class="formelm">
 		<?php echo $this->form->getLabel('publish_up'); ?>
 		<?php echo $this->form->getInput('publish_up'); ?>
@@ -94,33 +103,33 @@ function submitbutton(task) {
 		<?php echo $this->form->getLabel('access'); ?>
 		<?php echo $this->form->getInput('access'); ?>
 		</div>
-		<div class="formelm">
-		<?php echo $this->form->getLabel('ordering'); ?>
-		<?php echo $this->form->getInput('ordering'); ?>
-		</div>
+		<?php if (is_null($this->item->id)):?>
+			<div class="form-note">
+			<p><?php echo JText::_('COM_CONTENT_ORDERING'); ?></p>
+			</div>
+		<?php endif; ?>
 	</fieldset>
 
 	<fieldset>
-		<legend><?php echo JText::_('Language'); ?></legend>
-		<div class="formelm_area">
+		<legend><?php echo JText::_('JFIELD_LANGUAGE_LABEL'); ?></legend>
+		<div class="formelm-area">
 		<?php echo $this->form->getLabel('language'); ?>
 		<?php echo $this->form->getInput('language'); ?>
 		</div>
 	</fieldset>
 
 	<fieldset>
-		<legend><?php echo JText::_('Metadata'); ?></legend>
-		<div class="formelm_area">
+		<legend><?php echo JText::_('COM_CONTENT_METADATA'); ?></legend>
+		<div class="formelm-area">
 		<?php echo $this->form->getLabel('metadesc'); ?>
 		<?php echo $this->form->getInput('metadesc'); ?>
 		</div>
-		<div class="formelm_area">
+		<div class="formelm-area">
 		<?php echo $this->form->getLabel('metakey'); ?>
 		<?php echo $this->form->getInput('metakey'); ?>
 		</div>
-	</fieldset>
-
-	<input type="hidden" name="task" value="" />
-	<?php echo JHTML::_( 'form.token' ); ?>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHTML::_( 'form.token' ); ?>
+	</fieldset>	
 </form>
 </div>

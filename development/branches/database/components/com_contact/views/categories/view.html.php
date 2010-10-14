@@ -42,21 +42,20 @@ class ContactViewCategories extends JView
 			return false;
 		}
 
-		if($items === false)
-		{
-			//TODO Raise error for missing category here
+		if ($items === false) {
+			return JError::raiseWarning(404, JText::_('JGLOBAL_CATEGORY_NOT_FOUND'));
+			
 		}
 
-		if($parent == false)
-		{
-			//TODO Raise error for missing parent category here
+		if ($parent == false) {
+			return JError::raiseWarning(404, JText::_('JGLOBAL_CATEGORY_NOT_FOUND'));
 		}
 
 		$params = &$state->params;
 
 		$items = array($parent->id => $items);
 
-		$this->assignRef('maxLevel',	$params->get('maxLevel', -1));
+		$this->assign('maxLevelcat',	$params->get('maxLevelcat', -1));
 		$this->assignRef('params',		$params);
 		$this->assignRef('parent',		$parent);
 		$this->assignRef('items',		$items);
@@ -71,8 +70,8 @@ class ContactViewCategories extends JView
 	 */
 	protected function _prepareDocument()
 	{
-		$app	= &JFactory::getApplication();
-		$menus	= &JSite::getMenu();
+		$app	= JFactory::getApplication();
+		$menus	= $app->getMenu();
 		$title	= null;
 
 		// Because the application sets a default page title,
@@ -84,9 +83,12 @@ class ContactViewCategories extends JView
 		} else {
 			$this->params->def('page_heading', JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
 		}
-		$title = $this->params->get('page_title');
+		$title = $this->params->get('page_title', '');
 		if (empty($title)) {
-			$title	= htmlspecialchars_decode($app->getCfg('sitename'));
+			$title = htmlspecialchars_decode($app->getCfg('sitename'));
+		}
+		elseif ($app->getCfg('sitename_pagetitles', 0)) {
+			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
 		}
 		$this->document->setTitle($title);
 	}

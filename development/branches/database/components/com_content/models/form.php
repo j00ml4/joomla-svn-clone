@@ -37,7 +37,7 @@ class ContentModelForm extends JModelForm
 	 */
 	protected function populateState()
 	{
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Load state from the request.
 		if (!($pk = (int) $app->getUserState($this->_context.'.id'))) {
@@ -64,19 +64,20 @@ class ContentModelForm extends JModelForm
 	}
 
 	/**
-	 * Method to get a form object.
+	 * Method to get the login form.
 	 *
-	 * @access	public
-	 * @param	string		$xml		The form data. Can be XML string if file flag is set to false.
-	 * @param	array		$options	Optional array of parameters.
-	 * @param	boolean		$clear		Optional argument to force load a new form.
-	 * @return	mixed		JForm object on success, False on error.
+	 * The base form is loaded from XML and then an event is fired
+	 * for users plugins to extend the form with extra fields.
+	 *
+	 * @param	array	$data		An optional array of data for the form to interogate.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	mixed	A JForm object on success, false on failure
+	 * @since	1.6
 	 */
-	public function &getForm($xml = 'article', $name = 'com_content.article', $options = array(), $clear = false)
+	public function getForm($data = array(), $loadData = true)
 	{
-		$options += array('control' => 'jform');
-
-		$form = parent::getForm($name, $xml, $options);
+		// Get the form.
+		$form = $this->loadForm('com_content.article', 'article', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
@@ -97,7 +98,7 @@ class ContentModelForm extends JModelForm
 		$itemId = (int) (!empty($itemId)) ? $itemId : $this->getState('article.id');
 
 		// Get a row instance.
-		$table = &$this->getTable();
+		$table = $this->getTable();
 
 		// Attempt to load the row.
 		$return = $table->load($itemId);
@@ -144,6 +145,25 @@ class ContentModelForm extends JModelForm
 	}
 
 	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_content.edit.article.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
+		}
+
+		return $data;
+	}
+
+
+	/**
 	 * Method to save the form data.
 	 *
 	 * @param	array	The form data.
@@ -153,10 +173,10 @@ class ContentModelForm extends JModelForm
 	public function save($data)
 	{
 		// Initialise variables
-		$dispatcher = &JDispatcher::getInstance();
-		$table		= &$this->getTable();
-		$form		= &$this->getForm();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int)$this->getState('article.id');
+		$dispatcher = JDispatcher::getInstance();
+		$table		= $this->getTable();
+		$form		= $this->getForm($data, false);
+		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('article.id');
 		$isNew		= true;
 
 		if (!$form) {
@@ -188,13 +208,24 @@ class ContentModelForm extends JModelForm
 			return false;
 		}
 
+		// Set the publish date to now
+		if($table->state == 1 && intval($table->publish_up) == 0) {
+			$table->publish_up = JFactory::getDate()->toMySQL();
+		}
+
 		// Increment the content version number
 		$table->version++;
 
+		// Reorder the articles within the category so the new article is first
+		if (empty($table->id)) {
+			$table->reorder('catid = '.(int) $table->catid.' AND state >= 0');
+		}
+		
 		// Include the content plugins for the onSave events.
 		JPluginHelper::importPlugin('content');
 
-		$result = $dispatcher->trigger('onBeforeContentSave', array(&$table, $isNew));
+		$result = $dispatcher->trigger('onContentBeforeSave', array('com_content.article', &$table, $isNew));
+
 		if (in_array(false, $result, true)) {
 			JError::raiseError(500, $table->getError());
 			return false;
@@ -206,11 +237,50 @@ class ContentModelForm extends JModelForm
 			return false;
 		}
 
+		// Adjust the mapping table.
+		// Clear the existing features settings.
+		$this->_db->setQuery(
+			'DELETE FROM #__content_frontpage' .
+			' WHERE content_id = '.$table->id
+		);
+		if (!$this->_db->query()) {
+			throw new Exception($this->_db->getErrorMsg());
+		}
+		
+		if($data['featured'] == 1) {
+			$frontpage = $this->getTable('Featured', 'ContentTable');
+
+			try {
+				$this->_db->setQuery(
+					'UPDATE #__content AS a' .
+					' SET a.featured = 1'.
+					' WHERE a.id = '.$table->id
+				);
+				if (!$this->_db->query()) {
+					throw new Exception($this->_db->getErrorMsg());
+				}
+
+				// Featuring.
+				$this->_db->setQuery(
+					'INSERT INTO #__content_frontpage (`content_id`, `ordering`)' .
+					' VALUES ('.$table->id.',1)'
+				);
+				if (!$this->_db->query()) {
+					$this->setError($this->_db->getErrorMsg());
+					return false;
+				}
+			} catch (Exception $e) {
+				$this->setError($e->getMessage());
+				return false;
+			}
+
+			$frontpage->reorder();
+		}
 		// Clean the cache.
-		$cache = &JFactory::getCache('com_content');
+		$cache = JFactory::getCache('com_content');
 		$cache->clean();
 
-		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
+		$dispatcher->trigger('onContentAfterSave', array('com_content.article', &$table, $isNew));
 
 		$this->setState('article.id', $table->id);
 
@@ -231,10 +301,10 @@ class ContentModelForm extends JModelForm
 		// Only attempt to check the row in if it exists.
 		if ($pk)
 		{
-			$user	= &JFactory::getUser();
+			$user	= JFactory::getUser();
 
 			// Get an instance of the row to checkin.
-			$table = &$this->getTable();
+			$table = $this->getTable();
 			if (!$table->load($pk)) {
 				$this->setError($table->getError());
 				return false;
@@ -242,7 +312,7 @@ class ContentModelForm extends JModelForm
 
 			// Check if this is the user having previously checked out the row.
 			if ($table->checked_out > 0 && $table->checked_out != $user->get('id')) {
-				$this->setError(JText::_('JError_Checkin_user_mismatch'));
+				$this->setError(JText::_('JLIB_APPLICATION_ERROR_CHECKIN_USER_MISMATCH'));
 				return false;
 			}
 
@@ -271,10 +341,10 @@ class ContentModelForm extends JModelForm
 		if ($pk)
 		{
 			// Get a row instance.
-			$table = &$this->getTable();
+			$table = $this->getTable();
 
 			// Get the current user object.
-			$user = &JFactory::getUser();
+			$user = JFactory::getUser();
 
 			// Attempt to check the row out.
 			if (!$table->checkout($user->get('id'), $pk)) {

@@ -26,9 +26,9 @@ class ContentViewArticle extends JView
 	function display($tpl = null)
 	{
 		// Initialise variables.
-		$app =& JFactory::getApplication();
-		$user =& JFactory::getUser();
-		$dispatcher =& JDispatcher::getInstance();
+		$app = JFactory::getApplication();
+		$user = JFactory::getUser();
+		$dispatcher = JDispatcher::getInstance();
 
 		// Get view related request variables.
 		$print = JRequest::getBool('print');
@@ -55,23 +55,30 @@ class ContentViewArticle extends JView
 
 		// Merge article params. If this is single-article view, menu params override article params
 		// Otherwise, article params override menu item params
-		$currentLink = $app->getMenu()->getActive()->link;
-		$params =& $state->get('params');
+		$params = $state->get('params');
 		$article_params = new JRegistry;
 		$article_params->loadJSON($item->attribs);
+		$active = $app->getMenu()->getActive();
 		$temp = clone ($params);
-		if (strpos($currentLink, 'view=article'))
+		if ($active)
 		{
-			$article_params->merge($temp);
-			$item->params = $article_params;
-		}
-		else
-		{
+			$currentLink = $active->link;
+			if (strpos($currentLink, 'view=article'))
+			{
+				$article_params->merge($temp);
+				$item->params = $article_params;
+			}
+			else
+			{
+				$temp->merge($article_params);
+				$item->params = $temp;
+			}
+		} else {
 			$temp->merge($article_params);
 			$item->params = $temp;
 		}
 
-		$offset = $state->get('page.offset');
+		$offset = $state->get('list.offset');
 
 		// Check the access to the article
 		$levels = $user->authorisedLevels();
@@ -82,39 +89,36 @@ class ContentViewArticle extends JView
 			{
 				// Redirect to login
 				$uri = JFactory::getURI();
-				$app->redirect('index.php?option=com_users&view=login&return=' . base64_encode($uri), JText::_('Content_Error_Login_to_view_article'));
+				$app->redirect('index.php?option=com_users&view=login&return=' . base64_encode($uri), JText::_('COM_CONTENT_ERROR_LOGIN_TO_VIEW_ARTICLE'));
 				return;
 			}
 			else
 			{
-				JError::raiseWarning(403, JText::_('Content_Error_Not_auth'));
+				JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
 				return;
 			}
+		}
+
+		if ($item->params->get('show_intro', 1) == 1) {
+			$item->text = $item->introtext . ' ' . $item->fulltext;
+		} else {
+			$item->text = $item->fulltext;
 		}
 
 		//
 		// Process the content plugins.
 		//
 		JPluginHelper::importPlugin('content');
-		//$results = $dispatcher->trigger('onPrepareContent', array (& $article, & $params, $limitstart));
-		if ($item->params->get('show_intro', 1) == 1)
-		{
-			$item->text = $item->introtext . ' ' . $item->fulltext;
-		}
-		else
-		{
-			$item->text = $item->fulltext;
-		}
-		$item->text = JHtml::_('content.prepare', $item->text);
+		$results = $dispatcher->trigger('onContentPrepare', array ('com_content.article', &$item, &$params, $offset));
 
 		$item->event = new stdClass();
-		$results = $dispatcher->trigger('onAfterDisplayTitle', array(&$item, &$params, $offset));
+		$results = $dispatcher->trigger('onContentAfterTitle', array('com_content.article', &$item, &$params, $offset));
 		$item->event->afterDisplayTitle = trim(implode("\n", $results));
 
-		$results = $dispatcher->trigger('onBeforeDisplayContent', array(&$item, &$params, $offset));
+		$results = $dispatcher->trigger('onContentBeforeDisplay', array('com_content.article', &$item, &$params, $offset));
 		$item->event->beforeDisplayContent = trim(implode("\n", $results));
 
-		$results = $dispatcher->trigger('onAfterDisplayContent', array(&$item, &$params, $offset));
+		$results = $dispatcher->trigger('onContentAfterDisplay', array('com_content.article', &$item, &$params, $offset));
 		$item->event->afterDisplayContent = trim(implode("\n", $results));
 
 		$this->assignRef('state', $state);
@@ -132,7 +136,7 @@ class ContentViewArticle extends JView
 		// Increment the hit counter of the article.
 		if (!$params->get('intro_only') && $offset == 0)
 		{
-			$model =& $this->getModel();
+			$model = $this->getModel();
 			$model->hit();
 		}
 
@@ -146,9 +150,9 @@ class ContentViewArticle extends JView
 	 */
 	protected function _prepareDocument()
 	{
-		$app =& JFactory::getApplication();
-		$menus =& JSite::getMenu();
-		$pathway =& $app->getPathway();
+		$app	= JFactory::getApplication();
+		$menus	= $app->getMenu();
+		$pathway = $app->getPathway();
 		$title = null;
 
 		// Because the application sets a default page title,
@@ -160,30 +164,34 @@ class ContentViewArticle extends JView
 		}
 		else
 		{
-			$this->params->def('page_heading', JText::_('COM_CONTENT_DEFAULT_PAGE_TITLE'));
+			$this->params->def('page_heading', JText::_('JGLOBAL_ARTICLES'));
 		}
 
 		$title = $this->params->get('page_title', '');
-		if (empty($title))
-		{
+		if (empty($title)) {
 			$title = htmlspecialchars_decode($app->getCfg('sitename'));
+		}
+		elseif ($app->getCfg('sitename_pagetitles', 0)) {
+			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
 		}
 		$this->document->setTitle($title);
 
-		if ($menu && $menu->query['view'] != 'article')
+		$id = (int) @$menu->query['id'];
+		
+		// if the menu item does not concern this article
+		if ($menu && ($menu->query['option'] != 'com_content' || $menu->query['view'] != 'article' || $id != $this->item->id))
 		{
-			$id = (int) @$menu->query['id'];
-			$path = array($this->item->title  => '');
+			$path = array(array('title' => $this->item->title, 'link' => ''));
 			$category = JCategories::getInstance('Content')->get($this->item->catid);
-			while ($id != $category->id && $category->id > 1)
+			while (($menu->query['option'] != 'com_content' || $menu->query['view'] == 'article' || $id != $category->id) && $category->id > 1)
 			{
-				$path[$category->title] = ContentHelperRoute::getCategoryRoute($category->id);
+				$path[] = array('title' => $category->title, 'link' => ContentHelperRoute::getCategoryRoute($category->id));
 				$category = $category->getParent();
 			}
 			$path = array_reverse($path);
-			foreach ($path as $title => $link)
+			foreach($path as $item)
 			{
-				$pathway->addItem($title, $link);
+				$pathway->addItem($item['title'], $item['link']);
 			}
 		}
 
@@ -225,21 +233,8 @@ class ContentViewArticle extends JView
 		// If there is a pagebreak heading or title, add it to the page title
 		if (!empty($this->item->page_title))
 		{
-			$article->title = $article->title . ' - ' . $article->page_title;
-			$this->document->setTitle($article->page_title . ' - ' . JText::sprintf('Page %s', $this->state->get('page.offset') + 1));
-		}
-
-		//
-		// Handle the breadcrumbs
-		//
-		if ($menu && $menu->query['view'] != 'article')
-		{
-			switch ($menu->query['view'])
-			{
-			case 'category':
-				$pathway->addItem($this->item->title, '');
-				break;
-			}
+			$this->item->title = $this->item->title . ' - ' . $this->item->page_title;
+			$this->document->setTitle($this->item->page_title . ' - ' . JText::sprintf('PLG_CONTENT_PAGEBREAK_PAGE_NUM', $this->state->get('list.offset') + 1));
 		}
 
 		if ($this->print)

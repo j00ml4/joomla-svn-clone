@@ -2,12 +2,10 @@
 	<!-- $Id$ -->
 <form>
 	<fieldset name="credentials"
-		label="Users_Login_Default_Label"
-	>
+		label="COM_USERS_LOGIN_DEFAULT_LABEL"	>
 
 		<field name="username" type="text"
 			class="validate-username"
-			field="id"
 			filter="username"
 			label="COM_USERS_LOGIN_USERNAME_LABEL"
 			required="true"
@@ -18,7 +16,7 @@
 		<field name="password" type="password"
 			class="validate-password"
 			filter="raw"
-			label="COM_USERS_LOGIN_PASSWORD_LABEL"
+			label="JGLOBAL_PASSWORD"
 			required="required"
 			size="25"
 		/>

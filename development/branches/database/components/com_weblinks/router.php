@@ -29,15 +29,16 @@ function WeblinksBuildRoute(&$query)
 	$segments = array();
 
 	// get a menu item based on Itemid or currently active
-	$menu = &JSite::getMenu();
-	$params = JComponentHelper::getParams('com_weblinks');
+	$app	= JFactory::getApplication();
+	$menu	= $app->getMenu();
+	$params	= JComponentHelper::getParams('com_weblinks');
 	$advanced = $params->get('sef_advanced_link', 0);
 
 	if (empty($query['Itemid'])) {
-		$menuItem = &$menu->getActive();
+		$menuItem = $menu->getActive();
 	}
 	else {
-		$menuItem = &$menu->getItem($query['Itemid']);
+		$menuItem = $menu->getItem($query['Itemid']);
 	}
 	$mView	= (empty($menuItem->query['view'])) ? null : $menuItem->query['view'];
 	$mCatid	= (empty($menuItem->query['catid'])) ? null : $menuItem->query['catid'];
@@ -57,37 +58,38 @@ function WeblinksBuildRoute(&$query)
 		unset($query['view']);
 		unset($query['catid']);
 		unset($query['id']);
-		return $segments;
-	}
+		return $segments;	}
 
-	if (isset($view) and ($view == 'category' or $view == 'weblink')) {
+	if (isset($view) and ($view == 'category' or $view == 'weblink' )) {
 		if ($mId != intval($query['id']) || $mView != $view) {
-			if($view == 'weblink' && isset($query['catid']))
-			{
+			if($view == 'weblink' && isset($query['catid'])) {
 				$catid = $query['catid'];
-			} elseif(isset($query['id'])) {
+			} elseif (isset($query['id'])) {
 				$catid = $query['id'];
 			}
 			$menuCatid = $mId;
 			$categories = JCategories::getInstance('Weblinks');
 			$category = $categories->get($catid);
-			$path = $category->getPath();
-			$path = array_reverse($path);
-
-			$array = array();
-			foreach($path as $id)
+			if ($category)
 			{
-				if((int) $id == (int)$menuCatid)
+				//TODO Throw error that the category either not exists or is unpublished
+				$path = $category->getPath();
+				$path = array_reverse($path);
+
+				$array = array();
+				foreach($path as $id)
 				{
-					break;
+					if ((int) $id == (int)$menuCatid) {
+						break;
+					}
+
+					if ($advanced) {
+						list($tmp, $id) = explode(':', $id, 2);
+					}
+					$array[] = $id;
 				}
-				if($advanced)
-				{
-					list($tmp, $id) = explode(':', $id, 2);
-				}
-				$array[] = $id;
+				$segments = array_merge($segments, array_reverse($array));
 			}
-			$segments = array_merge($segments, array_reverse($array));
 			if($view == 'weblink')
 			{
 				if($advanced)
@@ -126,12 +128,13 @@ function WeblinksBuildRoute(&$query)
  * @return	array	The URL attributes to be used by the application.
  */
 function WeblinksParseRoute($segments)
-{
+{ 
 	$vars = array();
 
 	//Get the active menu item.
-	$menu = &JSite::getMenu();
-	$item = &$menu->getActive();
+	$app 	= JFactory::getApplication();
+	$menu	= $app->getMenu();
+	$item	= $menu->getActive();
 	$params = JComponentHelper::getParams('com_weblinks');
 	$advanced = $params->get('sef_advanced_link', 0);
 
@@ -148,6 +151,8 @@ function WeblinksParseRoute($segments)
 
 	// From the categories view, we can only jump to a category.
 	$id = (isset($item->query['id']) && $item->query['id'] > 1) ? $item->query['id'] : 'root';
+
+	
 	$category = JCategories::getInstance('Weblinks')->get($id);
 
 	$categories = $category->getChildren();
@@ -183,5 +188,5 @@ function WeblinksParseRoute($segments)
 		$found = 0;
 	}
 
-	return $vars;
+	return $vars; 
 }

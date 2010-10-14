@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
 	<layout title="COM_NEWSFEEDS_NEWSFEED_VIEW_DEFAULT_TITLE">
+		<help
+			key = "JHELP_MENUS_MENU_ITEM_NEWSFEED_SINGLE_NEWSFEED"
+		/>
 		<message>
 			<![CDATA[COM_NEWSFEEDS_NEWSFEED_VIEW_DEFAULT_DESC]]>
 		</message>
@@ -12,8 +15,7 @@
 			addfieldpath="/administrator/components/com_newsfeeds/models/fields"
 		 >
 
-			<field name="id" type="newsfeed"
-				default="0"
+			<field name="id" type="modal_newsfeeds"
 				description="COM_NEWSFEEDS_FIELD_SELECT_FEED_DESC"
 				label="COM_NEWSFEEDS_FIELD_SELECT_FEED_LABEL"
 				required="true"
@@ -25,9 +27,7 @@
 	<fields name="params">
 
 		<!-- Basic options. -->
-		<fieldset name="basic"
-		>
-
+<fieldset name="basic" label="COM_NEWSFEEDS_FIELDSET_MORE_OPTIONS_LABEL">
 			<field name="show_feed_image" type="list"
 				description="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_DESC"
 				label="COM_NEWSFEEDS_FIELD_SHOW_FEED_IMAGE_LABEL"

@@ -24,29 +24,25 @@ class WeblinksViewWeblink extends JView
 
 	function display($tpl = null)
 	{
-		$app		= &JFactory::getApplication();
-		$params		= &$app->getParams();
+		$app		= JFactory::getApplication();
+		$params		= $app->getParams();
 
 		// Get some data from the models
-		$state		= &$this->get('State');
-		$item		= &$this->get('Item');
-		$category	= &$this->get('Category');
+		$state		= $this->get('State');
+		$item		= $this->get('Item');
+		$category	= $this->get('Category');
 
 		if ($this->getLayout() == 'edit') {
 			$this->_displayEdit($tpl);
 			return;
 		}
 
-		//get the weblink
-		$weblink = &$this->get('data');
-
-		if ($weblink->url) {
+		if ($item->url) {
 			// redirects to url if matching id found
-			$app->redirect($weblink->url);
+			$app->redirect($item->url);
 		} else {
 			//TODO create proper error handling
 			$app->redirect('index.php', 'Weblink not found');
 		}
 	}
 }
-?>

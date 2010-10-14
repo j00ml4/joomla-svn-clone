@@ -2,7 +2,7 @@
 	<!-- $Id$ -->
 <form>
 	<fieldset name="default"
-		label="USERS REGISTRATION DEFAULT LABEL"
+		label="COM_USERS_REGISTRATION_DEFAULT_LABEL"
 	>
 
 		<field name="name" type="text"
@@ -16,8 +16,7 @@
 
 		<field name="username" type="text"
 			class="validate-username"
-			description="COM_USERS_REGISTER_USERNAME_DESC"
-			field="id"
+			description="COM_USERS_DESIRED_USERNAME"
 			filter="username"
 			label="COM_USERS_REGISTER_USERNAME_LABEL"
 			message="COM_USERS_REGISTER_USERNAME_MESSAGE"
@@ -29,7 +28,7 @@
 		<field name="password1" type="password"
 			autocomplete="off"
 			class="validate-password"
-			description="COM_USERS_REGISTER_PASSWORD1_DESC"
+			description="COM_USERS_DESIRED_PASSWORD"
 			field="password2"
 			filter="raw"
 			label="COM_USERS_REGISTER_PASSWORD1_LABEL"

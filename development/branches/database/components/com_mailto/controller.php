@@ -27,7 +27,7 @@ class MailtoController extends JController
 	 */
 	function mailto()
 	{
-		$session = &JFactory::getSession();
+		$session = JFactory::getSession();
 		$session->set('com_mailto.formtime', time());
 		JRequest::setVar('view', 'mailto');
 		$this->display();
@@ -44,9 +44,9 @@ class MailtoController extends JController
 		// Check for request forgeries
 		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
-		$app	= &JFactory::getApplication();
-		$session = &JFactory::getSession();
-		$db	= &JFactory::getDbo();
+		$app	= JFactory::getApplication();
+		$session = JFactory::getSession();
+		$db	= JFactory::getDbo();
 
 		$timeout = $session->get('com_mailto.formtime', 0);
 		if ($timeout == 0 || time() - $timeout < 20) {
@@ -69,7 +69,7 @@ class MailtoController extends JController
 			return $this->mailto();
 		}
 
-		// An array of e-mail headers we do not want to allow as input
+		// An array of email headers we do not want to allow as input
 		$headers = array (	'Content-Type:',
 							'MIME-Version:',
 							'Content-Transfer-Encoding:',

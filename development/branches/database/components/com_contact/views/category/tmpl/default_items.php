@@ -19,53 +19,72 @@ $listDirn	= $this->state->get('list.direction');
 	<p> <?php echo JText::_('COM_CONTACT_NO_ARTICLES'); ?>	 </p>
 <?php else : ?>
 
-<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm">
+<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">
+<?php if ($this->params->get('show_pagination_limit')) : ?>
 	<fieldset class="filters">
-	<legend class="element-invisible"><?php echo JText::_('JContent_Filter_Label'); ?></legend>
-	<?php if ($this->params->get('show_pagination_limit')) : ?>
+	<legend class="hidelabeltxt"><?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?></legend>
+	
 		<div class="display-limit">
-			<?php echo JText::_('COM_CONTACT_DISPLAY_NUM'); ?>&nbsp;
+			<?php echo JText::_('JGLOBAL_DISPLAY_NUM'); ?>&#160;
 			<?php echo $this->pagination->getLimitBox(); ?>
 		</div>
-	<?php endif; ?>
 	</fieldset>
-
+<?php endif; ?>
 	<table class="category">
 		<?php if ($this->params->get('show_headings')) : ?>
 		<thead><tr>
 			<th class="item-num">
-				<?php echo JText::_('Num'); ?>
+				<?php echo JText::_('JGLOBAL_NUM'); ?>
 			</th>
 			<th class="item-title">
-				<?php echo JHtml::_('grid.sort',  'Name', 'a.name', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort', 'COM_CONTACT_CONTACT_EMAIL_NAME', 'a.name', $listDirn, $listOrder); ?>
 			</th>
-			<?php if ($this->params->get('show_position')) : ?>
+			<?php if ($this->params->get('show_position_headings')) : ?>
 			<th class="item-position">
-				<?php echo JHtml::_('grid.sort',  'Position', 'a.con_position', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort', 'COM_CONTACT_POSITION', 'a.con_position', $listDirn, $listOrder); ?>
 			</th>
 			<?php endif; ?>
-			<?php if ($this->params->get('show_email')) : ?>
+			<?php if ($this->params->get('show_email_headings')) : ?>
 			<th class="item-email">
-				<?php echo JText::_('Email'); ?>
+				<?php echo JText::_('JGLOBAL_EMAIL'); ?>
 			</th>
 			<?php endif; ?>
-			<?php if ($this->params->get('show_telephone')) : ?>
+			<?php if ($this->params->get('show_telephone_headings')) : ?>
 			<th class="item-phone">
-				<?php echo JText::_('Phone'); ?>
+				<?php echo JText::_('COM_CONTACT_TELEPHONE'); ?>
 			</th>
 			<?php endif; ?>
 
-			<?php if ($this->params->get('show_mobile')) : ?>
+			<?php if ($this->params->get('show_mobile_headings')) : ?>
 			<th class="item-phone">
-				<?php echo JText::_('Mobile'); ?>
+				<?php echo JText::_('COM_CONTACT_MOBILE'); ?>
 			</th>
 			<?php endif; ?>
 
-			<?php if ($this->params->get('show_fax')) : ?>
+			<?php if ($this->params->get('show_fax_headings')) : ?>
 			<th class="item-phone">
-				<?php echo JText::_('Fax'); ?>
+				<?php echo JText::_('COM_CONTACT_FAX'); ?>
 			</th>
 			<?php endif; ?>
+
+			<?php if ($this->params->get('show_suburb_headings')) : ?>
+			<th class="item-suburb">
+				<?php echo JHtml::_('grid.sort', 'COM_CONTACT_SUBURB', 'a.suburb', $listDirn, $listOrder); ?>
+			</th>
+			<?php endif; ?>
+
+			<?php if ($this->params->get('show_state_headings')) : ?>
+			<th class="item-state">
+				<?php echo JHtml::_('grid.sort', 'COM_CONTACT_STATE', 'a.state', $listDirn, $listOrder); ?>
+			</th>
+			<?php endif; ?>
+
+			<?php if ($this->params->get('show_country_headings')) : ?>
+			<th class="item-state">
+				<?php echo JHtml::_('grid.sort', 'COM_CONTACT_COUNTRY', 'a.country', $listDirn, $listOrder); ?>
+			</th>
+			<?php endif; ?>
+
 			</tr>
 		</thead>
 		<?php endif; ?>
@@ -82,40 +101,56 @@ $listDirn	= $this->state->get('list.direction');
 							<?php echo $item->name; ?></a>
 					</td>
 
-					<?php if ($this->params->get('show_position')) : ?>
+					<?php if ($this->params->get('show_position_headings')) : ?>
 						<td class="item-position">
 							<?php echo $item->con_position; ?>
 						</td>
 					<?php endif; ?>
 
-					<?php if ($this->params->get('show_email')) : ?>
+					<?php if ($this->params->get('show_email_headings')) : ?>
 						<td class="item-email">
 							<?php echo $item->email_to; ?>
 						</td>
 					<?php endif; ?>
 
-					<?php if ($this->params->get('show_telephone')) : ?>
+					<?php if ($this->params->get('show_telephone_headings')) : ?>
 						<td class="item-phone">
 							<?php echo $item->telephone; ?>
 						</td>
 					<?php endif; ?>
 
-					<?php if ($this->params->get('show_mobile')) : ?>
+					<?php if ($this->params->get('show_mobile_headings')) : ?>
 						<td class="item-phone">
 							<?php echo $item->mobile; ?>
 						</td>
 					<?php endif; ?>
 
-					<?php if ($this->params->get('show_fax')) : ?>
+					<?php if ($this->params->get('show_fax_headings')) : ?>
 					<td class="item-phone">
 						<?php echo $item->fax; ?>
 					</td>
 					<?php endif; ?>
 
+					<?php if ($this->params->get('show_suburb_headings')) : ?>
+					<td class="item-suburb">
+						<?php echo $item->suburb; ?>
+					</td>
+					<?php endif; ?>
+
+					<?php if ($this->params->get('show_state_headings')) : ?>
+					<td class="item-state">
+						<?php echo $item->state; ?>
+					</td>
+					<?php endif; ?>
+
+					<?php if ($this->params->get('show_country_headings')) : ?>
+					<td class="item-state">
+						<?php echo $item->country; ?>
+					</td>
+					<?php endif; ?>
+
 				</tr>
 			<?php endforeach; ?>
-
-
 
 		</tbody>
 	</table>
@@ -130,8 +165,9 @@ $listDirn	= $this->state->get('list.direction');
 		<?php echo $this->pagination->getPagesLinks(); ?>
 	</div>
 	<?php endif; ?>
-
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+	<div>
+		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+	</div>
 </form>
 <?php endif; ?>

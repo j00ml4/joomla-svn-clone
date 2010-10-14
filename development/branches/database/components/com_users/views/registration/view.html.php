@@ -20,6 +20,11 @@ jimport('joomla.application.component.view');
  */
 class UsersViewRegistration extends JView
 {
+	protected $data;
+	protected $form;
+	protected $params;
+	protected $state;
+
 	/**
 	 * Method to display the view.
 	 *
@@ -29,26 +34,16 @@ class UsersViewRegistration extends JView
 	public function display($tpl = null)
 	{
 		// Get the view data.
-		$form	= $this->get('Form');
-		$data	= $this->get('Data');
-		$state	= $this->get('State');
-		$params	= $state->get('params');
+		$this->data		= $this->get('Data');
+		$this->form		= $this->get('Form');
+		$this->state	= $this->get('State');
+		$this->params	= $this->state->get('params');
 
 		// Check for errors.
-		if (count($errors = &$this->get('Errors'))) {
+		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode('<br />', $errors));
 			return false;
 		}
-
-		// Bind the data to the form.
-		if ($form) {
-			$form->bind($data);
-		}
-
-		// Push the data into the view.
-		$this->assignRef('form',	$form);
-		$this->assignRef('data',	$data);
-		$this->assignRef('params',	$params);
 
 		$this->prepareDocument();
 
@@ -62,8 +57,8 @@ class UsersViewRegistration extends JView
 	 */
 	protected function prepareDocument()
 	{
-		$app		= &JFactory::getApplication();
-		$menus		= &JSite::getMenu();
+		$app		= JFactory::getApplication();
+		$menus		= $app->getMenu();
 		$title 		= null;
 
 		// Because the application sets a default page title,
@@ -75,9 +70,12 @@ class UsersViewRegistration extends JView
 			$this->params->def('page_heading', JText::_('COM_USERS_Registration'));
 		}
 
-		$title = $this->params->get('page_title', $this->params->get('page_heading'));
+		$title = $this->params->get('page_title', '');
 		if (empty($title)) {
 			$title = htmlspecialchars_decode($app->getCfg('sitename'));
+		}
+		elseif ($app->getCfg('sitename_pagetitles', 0)) {
+			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
 		}
 		$this->document->setTitle($title);
 	}

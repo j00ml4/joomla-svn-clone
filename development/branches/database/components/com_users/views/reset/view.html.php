@@ -20,6 +20,10 @@ jimport('joomla.application.component.view');
  */
 class UsersViewReset extends JView
 {
+	protected $form;
+	protected $params;
+	protected $state;
+
 	/**
 	 * Method to display the view.
 	 *
@@ -29,27 +33,21 @@ class UsersViewReset extends JView
 	function display($tpl = null)
 	{
 		// Get the view data.
-		$form	= $this->get('Form');
-		$data	= $this->get('Data');
-		$state	= $this->get('State');
+                if ($this->_layout == 'default') {
+                    $formname = "Form";
+                } else {
+                    $formname = ucfirst($this->_name).ucfirst($this->_layout)."Form";
+                }
+
+		$this->form	= $this->get($formname);
+		$this->state	= $this->get('State');
+		$this->params	= $this->state->params;
 
 		// Check for errors.
-		if (count($errors = &$this->get('Errors'))) {
+		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode('<br />', $errors));
 			return false;
 		}
-
-		// Bind the data to the form.
-		if ($form) {
-			$form->bind($data);
-		}
-
-		$params = &$state->params;
-
-		// Push the data into the view.
-		$this->assignRef('form',	$form);
-		$this->assignRef('data',	$data);
-		$this->assignRef('params',	$params);
 
 		$this->prepareDocument();
 
@@ -63,8 +61,8 @@ class UsersViewReset extends JView
 	 */
 	protected function prepareDocument()
 	{
-		$app		= &JFactory::getApplication();
-		$menus		= &JSite::getMenu();
+		$app		= JFactory::getApplication();
+		$menus		= $app->getMenu();
 		$title 		= null;
 
 		// Because the application sets a default page title,
@@ -74,13 +72,15 @@ class UsersViewReset extends JView
 		{
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		} else {
-			$this->params->def('page_heading', JText::_('COM_USERS_Reset'));
+			$this->params->def('page_heading', JText::_('COM_USERS_RESET'));
 		}
 
-		$title = $this->params->get('page_title', $this->params->get('page_heading'));
-		if (empty($title))
-		{
+		$title = $this->params->get('page_title', '');
+		if (empty($title)) {
 			$title = htmlspecialchars_decode($app->getCfg('sitename'));
+		}
+		elseif ($app->getCfg('sitename_pagetitles', 0)) {
+			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
 		}
 		$this->document->setTitle($title);
 	}

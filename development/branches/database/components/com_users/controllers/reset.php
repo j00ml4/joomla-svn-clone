@@ -9,7 +9,7 @@
 
 defined('_JEXEC') or die;
 
-require_once(JPATH_COMPONENT.'/controller.php');
+require_once JPATH_COMPONENT.'/controller.php';
 
 /**
  * Reset controller class for Users.
@@ -28,7 +28,7 @@ class UsersControllerReset extends UsersController
 	public function request()
 	{
 		// Check the request token.
-		JRequest::checkToken('post') or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
 
 		$app	= JFactory::getApplication();
 		$model	= $this->getModel('Reset', 'UsersModel');
@@ -73,7 +73,6 @@ class UsersControllerReset extends UsersController
 			$route	= 'index.php?option=com_users&view=reset&layout=confirm'.$itemid;
 
 			// Proceed to step two.
-			$message = JText::_('COM_USERS_RESET_REQUEST_SUCCESS');
 			$this->setRedirect(JRoute::_($route, false), $message);
 			return true;
 		}
@@ -88,10 +87,10 @@ class UsersControllerReset extends UsersController
 	function confirm()
 	{
 		// Check the request token.
-		JRequest::checkToken('request') or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken('request') or jexit(JText::_('JINVALID_TOKEN'));
 
 		$app	= JFactory::getApplication();
-		$model	= $this->getModel('User', 'UsersModel');
+		$model	= $this->getModel('Reset', 'UsersModel');
 		$data	= JRequest::getVar('jform', array(), 'request', 'array');
 
 		// Confirm the password reset request.
@@ -147,11 +146,10 @@ class UsersControllerReset extends UsersController
 	public function complete()
 	{
 		// Check for request forgeries
-		JRequest::checkToken('post') or jexit(JText::_('JInvalid_Token'));
+		JRequest::checkToken('post') or jexit(JText::_('JINVALID_TOKEN'));
 
 		$app	= JFactory::getApplication();
-		$model	= $this->getModel('User', 'UsersModel');
-		$data	= JRequest::getVar('jform', array(), 'post', 'array');
+		$model	= $this->getModel('Reset', 'UsersModel');		$data	= JRequest::getVar('jform', array(), 'post', 'array');
 
 		// Complete the password reset request.
 		$return	= $model->processResetComplete($data);

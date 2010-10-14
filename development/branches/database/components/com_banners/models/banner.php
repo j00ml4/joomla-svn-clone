@@ -54,12 +54,12 @@ class BannersModelBanner extends JModel
 		}
 
 		if ($trackClicks < 0) {
-			$config = &JComponentHelper::getParams('com_banners');
+			$config = JComponentHelper::getParams('com_banners');
 			$trackClicks = $config->get('track_clicks');
 		}
 
 		if ($trackClicks > 0) {
-			$trackDate = JFactory::getDate()->toFormat('%Y-%m-%d');
+			$trackDate = JFactory::getDate()->format('Y-m-d');
 
 			$query->clear();
 			$query->select('`count`');
@@ -143,7 +143,7 @@ class BannersModelBanner extends JModel
 	 */
 	function getUrl()
 	{
-		$item = &$this->getItem();
+		$item = $this->getItem();
 		$url = $item->clickurl;
 		// check for links
 		if (!preg_match('#http[s]?://|index[2]?\.php#', $url)) {
