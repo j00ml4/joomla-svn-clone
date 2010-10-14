@@ -28,21 +28,40 @@ abstract class JModelAdmin extends JModelForm
 	protected $text_prefix = null;
 
 	/**
+	 * @var		string	The event to trigger after deleting the data.
+	 * @since	1.6
+	 */
+	protected $event_after_delete = null;
+
+	/**
 	 * @var		string	The event to trigger after saving the data.
 	 * @since	1.6
 	 */
 	protected $event_after_save = null;
 
 	/**
-	 * @var		string	The event to trigger after before the data.
+	 * @var		string	The event to trigger after deleting the data.
+	 * @since	1.6
+	 */
+	protected $event_before_delete = null;
+
+	/**
+	 * @var		string	The event to trigger after saving the data.
 	 * @since	1.6
 	 */
 	protected $event_before_save = null;
 
 	/**
+	 * @var		string	The event to trigger after changing the published state of the data.
+	 * @since	1.6
+	 */
+	protected $event_change_state = null;
+
+	/**
 	 * Constructor.
 	 *
-	 * @param	array An optional associative array of configuration settings.
+	 * @param	array	$config	An optional associative array of configuration settings.
+	 *
 	 * @see		JController
 	 * @since	1.6
 	 */
@@ -50,16 +69,34 @@ abstract class JModelAdmin extends JModelForm
 	{
 		parent::__construct($config);
 
+		if (isset($config['event_after_delete'])) {
+			$this->event_after_delete = $config['event_after_delete'];
+		} else  if (empty($this->event_after_delete)) {
+			$this->event_after_delete = 'onContentAfterDelete';
+		}
+
 		if (isset($config['event_after_save'])) {
-			$this->eventAfterSave = $config['event_after_save'];
+			$this->event_after_save = $config['event_after_save'];
 		} else  if (empty($this->event_after_save)) {
-			$this->event_after_save = 'onAfterContentSave';
+			$this->event_after_save = 'onContentAfterSave';
+		}
+
+		if (isset($config['event_before_delete'])) {
+			$this->event_before_delete = $config['event_before_delete'];
+		} else  if (empty($this->event_before_delete)) {
+			$this->event_before_delete = 'onContentBeforeDelete';
 		}
 
 		if (isset($config['event_before_save'])) {
-			$this->eventAfterSave = $config['event_before_save'];
+			$this->event_before_save = $config['event_before_save'];
 		} else  if (empty($this->event_before_save)) {
-			$this->event_before_save = 'onBeforeContentSave';
+			$this->event_before_save = 'onContentBeforeSave';
+		}
+
+		if (isset($config['event_change_state'])) {
+			$this->event_change_state = $config['event_change_state'];
+		} else  if (empty($this->event_change_state)) {
+			$this->event_change_state = 'onContentChangeState';
 		}
 
 		// Guess the JText message prefix. Defaults to the option.
@@ -73,7 +110,8 @@ abstract class JModelAdmin extends JModelForm
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
-	 * @param	object	A record object.
+	 * @param	object	$record	A record object.
+	 *
 	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
 	 * @since	1.6
 	 */
@@ -86,7 +124,8 @@ abstract class JModelAdmin extends JModelForm
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
-	 * @param	object	A record object.
+	 * @param	object	$record	A record object.
+	 *
 	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
 	 * @since	1.6
 	 */
@@ -97,24 +136,49 @@ abstract class JModelAdmin extends JModelForm
 	}
 
 	/**
-	 * Method override to check-in a record.
+	 * Method override to check-in a record or an array of record
 	 *
-	 * @param	integer	The ID of the primary key.
+	 * @param	integer|array	$pks	The ID of the primary key or an array of IDs
+	 *
 	 * @return	boolean
 	 * @since	1.6
 	 */
-	public function checkin($pk = null)
+	public function checkin(&$pks = array())
 	{
 		// Initialise variables.
-		$pk	= (!empty($pk)) ? $pk : (int) $this->getState($this->getName().'.id');
+		$user		= JFactory::getUser();
+		$pks		= (array) $pks;
+		$table		= $this->getTable();
 
-		return parent::checkin($pk);
+		if (empty($pks)) {
+			$pks = array((int) $this->getState($this->getName().'.id'));
+		}
+
+		// Check in all items.
+		foreach ($pks as $i => $pk) {
+
+			if ($table->load($pk)) {
+
+				if ($table->checked_out>0) {
+					if(!parent::checkin($pk)) {
+						return false;
+					}
+				} else {
+					unset($pks[$i]);
+				}
+			} else {
+				$this->setError($table->getError());
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
 	 * Method override to check-out a record.
 	 *
-	 * @param	int		The ID of the primary key.
+	 * @param	int		$pk	The ID of the primary key.
+	 *
 	 * @return	boolean	True if successful, false if an error occurs.
 	 * @since	1.6
 	 */
@@ -129,37 +193,62 @@ abstract class JModelAdmin extends JModelForm
 	/**
 	 * Method to delete one or more records.
 	 *
-	 * @param	array	An array of record primary keys.
+	 * @param	array	$pks	An array of record primary keys.
+	 *
 	 * @return	boolean	True if successful, false if an error occurs.
 	 * @since	1.6
 	 */
 	public function delete(&$pks)
 	{
-		// Typecast variable.
-		$pks = (array) $pks;
-		$user = JFactory::getUser();
+		// Initialise variables.
+		$dispatcher	= JDispatcher::getInstance();
+		$user		= JFactory::getUser();
+		$pks		= (array) $pks;
+		$table		= $this->getTable();
 
-		// Get a row instance.
-		$table = $this->getTable();
+		// Include the content plugins for the on delete events.
+		JPluginHelper::importPlugin('content');
 
 		// Iterate the items to delete each one.
 		foreach ($pks as $i => $pk) {
+
 			if ($table->load($pk)) {
+
 				if ($this->canDelete($table)) {
+
+					$context = $this->option.'.'.$this->name;
+
+					// Trigger the onContentBeforeDelete event.
+					$result = $dispatcher->trigger($this->event_before_delete, array($context, $table));
+					if (in_array(false, $result, true)) {
+						$this->setError($table->getError());
+						return false;
+					}
+
 					if (!$table->delete($pk)) {
 						$this->setError($table->getError());
 						return false;
 					}
+
+					// Trigger the onContentAfterDelete event.
+					$dispatcher->trigger($this->event_after_delete, array($context, $table));
+
 				} else {
+
 					// Prune items that you can't change.
 					unset($pks[$i]);
 					JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_EDIT_STATE_NOT_PERMITTED'));
 				}
+
 			} else {
 				$this->setError($table->getError());
 				return false;
 			}
 		}
+		
+		// Clear the component's cache
+		$cache = JFactory::getCache($this->option);
+		$cache->clean();
 
 		return true;
 	}
@@ -167,7 +256,8 @@ abstract class JModelAdmin extends JModelForm
 	/**
 	 * Method to get a single record.
 	 *
-	 * @param	integer	The id of the primary key.
+	 * @param	integer	$pk	The id of the primary key.
+	 *
 	 * @return	mixed	Object on success, false on failure.
 	 * @since	1.6
 	 */
@@ -203,7 +293,8 @@ abstract class JModelAdmin extends JModelForm
 	/**
 	 * A protected method to get a set of ordering conditions.
 	 *
-	 * @param	object	A record object.
+	 * @param	object	$record	A record object.
+	 *
 	 * @return	array	An array of conditions to add to add to ordering queries.
 	 * @since	1.6
 	 */
@@ -215,6 +306,7 @@ abstract class JModelAdmin extends JModelForm
 	/**
 	 * Stock method to auto-populate the model state.
 	 *
+	 * @return	void
 	 * @since	1.6
 	 */
 	protected function populateState()
@@ -225,6 +317,7 @@ abstract class JModelAdmin extends JModelForm
 		if (!($pk = (int) $app->getUserState($this->option.'.edit.'.$this->getName().'.id'))) {
 			$pk = (int) JRequest::getInt('id');
 		}
+
 		$this->setState($this->getName().'.id', $pk);
 
 		// Load the parameters.
@@ -235,7 +328,9 @@ abstract class JModelAdmin extends JModelForm
 	/**
 	 * Prepare and sanitise the table data prior to saving.
 	 *
-	 * @param	JTable	A JTable object.
+	 * @param	JTable	$table	A JTable object.
+	 *
+	 * @return	void
 	 * @since	1.6
 	 */
 	protected function prepareTable($table)
@@ -246,20 +341,27 @@ abstract class JModelAdmin extends JModelForm
 	/**
 	 * Method to change the published state of one or more records.
 	 *
-	 * @param	array	A list of the primary keys to change.
-	 * @param	int		The value of the published state.
+	 * @param	array	$pks	A list of the primary keys to change.
+	 * @param	int		$value	The value of the published state.
+	 *
 	 * @return	boolean	True on success.
 	 * @since	1.6
 	 */
 	function publish(&$pks, $value = 1)
 	{
 		// Initialise variables.
-		$user	= JFactory::getUser();
-		$table	= $this->getTable();
-		$pks	= (array) $pks;
+		$dispatcher	= JDispatcher::getInstance();
+		$user		= JFactory::getUser();
+		$table		= $this->getTable();
+		$pks		= (array) $pks;
+
+		// Include the content plugins for the change of state event.
+		JPluginHelper::importPlugin('content');
 
 		// Access checks.
 		foreach ($pks as $i => $pk) {
+			$table->reset();
+
 			if ($table->load($pk)) {
 				if (!$this->canEditState($table)) {
 					// Prune items that you can't change.
@@ -275,15 +377,33 @@ abstract class JModelAdmin extends JModelForm
 			return false;
 		}
 
+		$context = $this->option.'.'.$this->name;
+
+		// Trigger the onContentChangeState event.
+		$result = $dispatcher->trigger($this->event_change_state, array($context, $pks, $value));
+
+		if (in_array(false, $result, true)) {
+			$this->setError($table->getError());
+			return false;
+		}
+		
+		// Clear the component's cache
+		$cache = JFactory::getCache($this->option);
+		$cache->clean();
+
 		return true;
 	}
 
 	/**
 	 * Method to adjust the ordering of a row.
 	 *
-	 * @param	int		The ID of the primary key to move.
-	 * @param	integer	Increment, usually +1 or -1
-	 * @return	boolean	False on failure or error, true otherwise.
+	 * Returns NULL if the user did not have edit
+	 * privileges for any of the selected primary keys.
+	 *
+	 * @param	int				$pks	The ID of the primary key to move.
+	 * @param	integer			$delta	Increment, usually +1 or -1
+	 *
+	 * @return	boolean|null	False on failure or error, true on success.
 	 * @since	1.6
 	 */
 	public function reorder($pks, $delta = 0)
@@ -294,23 +414,31 @@ abstract class JModelAdmin extends JModelForm
 		$pks	= (array) $pks;
 		$result	= true;
 
+		$allowed = true;
+
 		foreach ($pks as $i => $pk) {
 			$table->reset();
+
 			if ($table->load($pk) && $this->checkout($pk)) {
 				// Access checks.
 				if (!$this->canEditState($table)) {
 					// Prune items that you can't change.
 					unset($pks[$i]);
+					$this->checkin($pk);
 					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+					$allowed = false;
 					continue;
 				}
+
 				$where = array();
 				$where = $this->getReorderConditions($table);
+
 				if (!$table->move($delta, $where)) {
 					$this->setError($table->getError());
 					unset($pks[$i]);
 					$result = false;
 				}
+
 				$this->checkin($pk);
 			} else {
 				$this->setError($table->getError());
@@ -319,13 +447,24 @@ abstract class JModelAdmin extends JModelForm
 			}
 		}
 
+		if ($allowed === false && empty($pks)) {
+			$result = null;
+		}
+		
+		if ($result == true) {
+			// Clear the component's cache
+			$cache = JFactory::getCache($this->option);
+			$cache->clean();
+		}
+		
 		return $result;
 	}
 
 	/**
 	 * Method to save the form data.
 	 *
-	 * @param	array	The form data.
+	 * @param	array	$data	The form data.
+	 *
 	 * @return	boolean	True on success.
 	 * @since	1.6
 	 */
@@ -334,10 +473,11 @@ abstract class JModelAdmin extends JModelForm
 		// Initialise variables;
 		$dispatcher = JDispatcher::getInstance();
 		$table		= $this->getTable();
-		$pk			= (!empty($data['id'])) ? $data['id'] : (int)$this->getState($this->getName().'.id');
+		$key			= $table->getKeyName();
+		$pk			= (!empty($data[$key])) ? $data[$key] : (int)$this->getState($this->getName().'.id');
 		$isNew		= true;
 
-		// Include the content plugins for the onSave events.
+		// Include the content plugins for the on save events.
 		JPluginHelper::importPlugin('content');
 
 		// Load the row if saving an existing record.
@@ -361,8 +501,8 @@ abstract class JModelAdmin extends JModelForm
 			return false;
 		}
 
-		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger($this->event_before_save, array(&$table, $isNew));
+		// Trigger the onContentBeforeSave event.
+		$result = $dispatcher->trigger($this->event_before_save, array($this->option.'.'.$this->name, $table, $isNew));
 		if (in_array(false, $result, true)) {
 			$this->setError($table->getError());
 			return false;
@@ -378,10 +518,11 @@ abstract class JModelAdmin extends JModelForm
 		$cache = JFactory::getCache($this->option);
 		$cache->clean();
 
-		// Trigger the onAfterContentSave event.
-		$dispatcher->trigger($this->event_after_save, array(&$table, $isNew));
+		// Trigger the onContentAfterSave event.
+		$dispatcher->trigger($this->event_after_save, array($this->option.'.'.$this->name, $table, $isNew));
 
 		$pkName = $table->getKeyName();
+
 		if (isset($table->$pkName)) {
 			$this->setState($this->getName().'.id', $table->$pkName);
 		}
@@ -393,8 +534,10 @@ abstract class JModelAdmin extends JModelForm
 	/**
 	 * Saves the manually set order of records.
 	 *
-	 * @param	array	An array of primary key ids.
-	 * @param	int		+/-1
+	 * @param	array	$pks	An array of primary key ids.
+	 * @param	int		$order	+/-1
+	 *
+	 * @return	mixed
 	 * @since	1.6
 	 */
 	function saveorder($pks, $order)
@@ -419,19 +562,23 @@ abstract class JModelAdmin extends JModelForm
 				JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_EDIT_STATE_NOT_PERMITTED'));
 			} else if ($table->ordering != $order[$i]) {
 				$table->ordering = $order[$i];
+
 				if (!$table->store()) {
 					$this->setError($table->getError());
 					return false;
 				}
+
 				// remember to reorder within position and client_id
 				$condition = $this->getReorderConditions($table);
 				$found = false;
+
 				foreach ($conditions as $cond) {
 					if ($cond[1] == $condition) {
 						$found = true;
 						break;
 					}
 				}
+
 				if (!$found) {
 					$conditions[] = array ($table->id, $condition);
 				}

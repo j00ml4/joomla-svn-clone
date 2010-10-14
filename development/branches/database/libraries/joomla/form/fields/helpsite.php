@@ -12,7 +12,8 @@ defined('JPATH_BASE') or die;
 jimport('joomla.html.html');
 jimport('joomla.language.help');
 jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
+jimport('joomla.form.helper');
+JFormHelper::loadFieldClass('list');
 
 /**
  * Form Field class for the Joomla Framework.
@@ -39,10 +40,14 @@ class JFormFieldHelpsite extends JFormFieldList
 	 */
 	protected function getOptions()
 	{
+		// Get Joomla version.
+		$version = new JVersion();
+		$jver = explode( '.', $version->getShortVersion() );
+
 		// Merge any additional options in the XML definition.
 		$options = array_merge(
 			parent::getOptions(),
-			JHelp::createSiteList(JPATH_ADMINISTRATOR.'/help/helpsites-15.xml', $this->value)
+			JHelp::createSiteList(JPATH_ADMINISTRATOR.'/help/helpsites-'.$jver[0].$jver[1].'.xml', $this->value)
 		);
 
 		return $options;

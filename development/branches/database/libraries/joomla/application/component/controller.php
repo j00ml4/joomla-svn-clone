@@ -197,10 +197,11 @@ class JController extends JObject
 		$command	= JRequest::getVar('task', 'display');
 
 		// Check for array format.
+		$filter = JFilterInput::getInstance();
 		if (is_array($command)) {
-			$command = JFilterInput::clean(array_pop(array_keys($command)), 'cmd');
+			$command = $filter->clean(array_pop(array_keys($command)), 'cmd');
 		} else {
-			$command = JFilterInput::clean($command, 'cmd');
+			$command = $filter->clean($command, 'cmd');
 		}
 
 		// Check for a controller.task command.
@@ -233,7 +234,7 @@ class JController extends JObject
 			if (file_exists($path)) {
 				require_once $path;
 			} else {
-				throw new JException(JText::sprintf('JLIB_APPLICATION_ERROR_INVALID_CONTROLLER', $type), 1056, E_ERROR, $type, true);
+				throw new JException(JText::sprintf('JLIB_APPLICATION_ERROR_INVALID_CONTROLLER', $type, $format), 1056, E_ERROR, $type, true);
 			}
 		}
 
@@ -384,6 +385,18 @@ class JController extends JObject
 	 */
 	public function authorize($task)
 	{
+		$this->authorise($task);
+	}
+
+	/**
+	 * Authorisation check
+	 *
+	 * @param	string	$task	The ACO Section Value to check access on
+	 * @return	boolean	True if authorised
+	 * @since	1.6
+	 */
+	public function authorise($task)
+	{
 		// Only do access check if the aco section is set
 		if ($this->_acoSection) {
 			// If we have a section value set that trumps the passed task ???
@@ -393,7 +406,7 @@ class JController extends JObject
 			}
 			// Get the JUser object for the current user and return the authorization boolean
 			$user = JFactory::getUser();
-			return $user->authorize($this->_acoSection, $task);
+			return $user->authorise($this->_acoSection, $task);
 		} else {
 			// Nothing set, nothing to check... so obviously its ok :)
 			return true;
@@ -415,7 +428,7 @@ class JController extends JObject
 		$modelName		= preg_replace('/[^A-Z0-9_]/i', '', $name);
 		$classPrefix	= preg_replace('/[^A-Z0-9_]/i', '', $prefix);
 
-		$result = &JModel::getInstance($modelName, $classPrefix, $config);
+		$result = JModel::getInstance($modelName, $classPrefix, $config);
 		return $result;
 	}
 
@@ -474,6 +487,7 @@ class JController extends JObject
 	 *
 	 * @param	boolean			If true, the view output will be cached
 	 * @param	array			An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
 	 * @return	JController		This object to support chaining.
 	 * @since	1.5
 	 */
@@ -497,8 +511,10 @@ class JController extends JObject
 
 		$view->assignRef('document', $document);
 
+		$conf = JFactory::getConfig();
+
 		// Display the view
-		if ($cachable && $viewType != 'feed') {
+		if ($cachable && $viewType != 'feed' && $conf->get('caching') >= 1) {
 			$option	= JRequest::getCmd('option');
 			$cache	= JFactory::getCache($option, 'view');
 
@@ -514,8 +530,9 @@ class JController extends JObject
 				foreach ($urlparams AS $key => $value) {
 					// add your safe url parameters with variable type as value {@see JFilterInput::clean()}.
 					$registeredurlparams->$key = $value;
-					$app->set('registeredurlparams', $registeredurlparams);
 				}
+
+				$app->set('registeredurlparams', $registeredurlparams);
 			}
 
 			$cache->get($view, 'display');
@@ -551,7 +568,7 @@ class JController extends JObject
 		$this->doTask = $doTask;
 
 		// Make sure we have access
-		if ($this->authorize($doTask)) {
+		if ($this->authorise($doTask)) {
 			$retval = $this->$doTask();
 			return $retval;
 		} else {
@@ -578,7 +595,7 @@ class JController extends JObject
 			$prefix = $this->getName() . 'Model';
 		}
 
-		if ($model = & $this->createModel($name, $prefix, $config)) {
+		if ($model = $this->createModel($name, $prefix, $config)) {
 			// task is a reserved state
 			$model->setState('task', $this->task);
 
@@ -588,7 +605,7 @@ class JController extends JObject
 
 			if (is_object($menu)) {
 				if ($item = $menu->getActive()) {
-					$params	= &$menu->getParams($item->id);
+					$params	= $menu->getParams($item->id);
 					// Set Default State Data
 					$model->setState('parameters.menu', $params);
 				}
@@ -670,7 +687,7 @@ class JController extends JObject
 		}
 
 		if (empty($views[$name])) {
-			if ($view = & $this->createView($name, $prefix, $type, $config)) {
+			if ($view = $this->createView($name, $prefix, $type, $config)) {
 				$views[$name] = & $view;
 			} else {
 				$result = JError::raiseError(
@@ -792,7 +809,15 @@ class JController extends JObject
 		}
 
 		// Ensure the type is not overwritten by a previous call to setMessage.
-		$this->messageType	= ($type === null || empty($this->messageType)) ? 'message' : $type;
+		if (empty($type)) {
+			if (empty($this->messageType)) {
+				$this->messageType = 'message';
+			}
+		}
+		// If the type is explicitly set, set it.
+		else {
+			$this->messageType = $type;
+		}
 
 		return $this;
 	}

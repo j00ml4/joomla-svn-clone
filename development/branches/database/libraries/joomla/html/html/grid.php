@@ -35,7 +35,7 @@ abstract class JHtmlGrid
 
 		// Build the title.
 		$title = ($value) ? JText::_('JYES') : JText::_('JNO');
-		$title .= '::'.JText::_('JGLOBAL_CLICK_TO_TOGGLE_STATE_');
+		$title .= '::'.JText::_('JGLOBAL_CLICK_TO_TOGGLE_STATE');
 
 		// Build the <a> tag.
 		$bool	= ($value) ? 'true' : 'false';
@@ -125,7 +125,7 @@ abstract class JHtmlGrid
 
 	public static function checkedOut(&$row, $i, $identifier = 'id')
 	{
-		$user	= &JFactory::getUser();
+		$user	= JFactory::getUser();
 		$userid = $user->get('id');
 
 		$result = false;
@@ -199,7 +199,7 @@ abstract class JHtmlGrid
 			$state,
 			'filter_state',
 			array(
-				'list.attr' => 'class="inputbox" size="1" onchange="submitform();"',
+				'list.attr' => 'class="inputbox" size="1" onchange="Joomla.submitform();"',
 				'list.select' => $filter_state,
 				'option.key' => null
 			)
@@ -208,8 +208,8 @@ abstract class JHtmlGrid
 
 	public static function order($rows, $image = 'filesave.png', $task = 'saveorder')
 	{
-		$image = JHTML::_('image','admin/'.$image, JText::_('JLIB_HTML_SAVE_ORDER'), NULL, true);
-		$href = '<a href="javascript:saveorder('.(count($rows)-1).', \''.$task.'\')" title="'.JText::_('JLIB_HTML_SAVE_ORDER').'">'.$image.'</a>';
+		// $image = JHTML::_('image','admin/'.$image, JText::_('JLIB_HTML_SAVE_ORDER'), NULL, true);
+		$href = '<a href="javascript:saveorder('.(count($rows)-1).', \''.$task.'\')" class="saveorder" title="'.JText::_('JLIB_HTML_SAVE_ORDER').'"></a>';
 		return $href;
 	}
 
@@ -222,7 +222,7 @@ abstract class JHtmlGrid
 			$text = addslashes(htmlspecialchars($row->editor, ENT_COMPAT, 'UTF-8'));
 
 			$date	= JHTML::_('date',$row->checked_out_time, JText::_('DATE_FORMAT_LC1'));
-			$time	= JHTML::_('date',$row->checked_out_time, '%H:%M');
+			$time	= JHTML::_('date',$row->checked_out_time, 'H:i');
 
 			$hover = '<span class="editlinktip hasTip" title="'. JText::_('JLIB_HTML_CHECKED_OUT') .'::'. $text .'<br />'. $date .'<br />'. $time .'">';
 		}
@@ -268,7 +268,7 @@ abstract class JHtmlGrid
 		});';
 
 			// Add the behavior to the document head.
-			$document = & JFactory::getDocument();
+			$document = JFactory::getDocument();
 			$document->addScriptDeclaration($js);
 
 			$loaded = true;

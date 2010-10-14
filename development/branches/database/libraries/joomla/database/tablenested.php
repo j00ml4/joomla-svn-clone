@@ -236,12 +236,15 @@ class JTableNested extends JTable
 	{
 		// Initialise variables.
 		$k = $this->_tbl_key;
-		$pk = (is_null($pk)) ? $this->$k : $pk;
+		$pk = $this->$k;
 
 		$query = $this->_db->getQuery(true);
 		$query->select($k);
 		$query->from($this->_tbl);
 		$query->where('parent_id = '.$this->parent_id);
+		if ($where) {
+			$query->where($where);
+		}
 		$position = 'after';
 		if($delta > 0)
 		{
@@ -256,8 +259,13 @@ class JTableNested extends JTable
 
 		$this->_db->setQuery($query);
 		$referenceId = $this->_db->loadResult();
-
-		return $this->moveByReference($referenceId, $position, $pk);
+		
+		if ($referenceId) {
+			return $this->moveByReference($referenceId, $position, $pk);
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
@@ -317,6 +325,38 @@ class JTableNested extends JTable
 		// Lock the table for writing.
 		if (!$this->_lock()) return false;
 
+		/*
+		 * Move the sub-tree out of the nested sets by negating its left and right values.
+		*/
+		$query = $this->_db->getQuery(true);
+		$query->update($this->_tbl);
+		$query->set('lft = lft * (-1), rgt = rgt * (-1)');
+		$query->where('lft BETWEEN '.(int) $node->lft.' AND '.(int) $node->rgt);
+		$this->_db->setQuery($query);
+
+		$this->_runQuery($query, 'JLIB_DATABASE_ERROR_MOVE_FAILED');
+
+		/*
+		 * Close the hole in the tree that was opened by removing the sub-tree from the nested sets.
+		 */
+		// Compress the left values.
+		$query = $this->_db->getQuery(true);
+		$query->update($this->_tbl);
+		$query->set('lft = lft - '.(int) $node->width);
+		$query->where('lft > '.(int) $node->rgt);
+		$this->_db->setQuery($query);
+
+		$this->_runQuery($query, 'JLIB_DATABASE_ERROR_MOVE_FAILED');
+		
+		// Compress the right values.
+		$query = $this->_db->getQuery(true);
+		$query->update($this->_tbl);
+		$query->set('rgt = rgt - '.(int) $node->width);
+		$query->where('rgt > '.(int) $node->rgt);
+		$this->_db->setQuery($query);
+
+		$this->_runQuery($query, 'JLIB_DATABASE_ERROR_MOVE_FAILED');
+
 		// We are moving the tree relative to a reference node.
 		if ($referenceId)
 		{
@@ -328,13 +368,6 @@ class JTableNested extends JTable
 				return false;
 			}
 
-			// If moving "down" the tree, adjust $reference lft, rgt for $node width
-			if ($node->rgt < $reference->rgt)
-			{
-				$reference->lft -= $node->width;
-				$reference->rgt -= $node->width;
-			}
-
 			// Get the reposition data for shifting the tree and re-inserting the node.
 			if (!$repositionData = $this->_getTreeRepositionData($reference, $node->width, $position))
 			{
@@ -344,7 +377,7 @@ class JTableNested extends JTable
 			}
 		}
 
-		// We are moving the tree to be a new root node.
+		// We are moving the tree to be the last child of the root node
 		else
 		{
 			// Get the last root node as the reference node.
@@ -369,74 +402,12 @@ class JTableNested extends JTable
 			}
 
 			// Get the reposition data for re-inserting the node after the found root.
-			if (!$repositionData = $this->_getTreeRepositionData($reference, $node->width, 'after'))
+			if (!$repositionData = $this->_getTreeRepositionData($reference, $node->width, 'last-child'))
 			{
 				// Error message set in getNode method.
 				$this->_unlock();
 				return false;
 			}
-		}
-
-		/*
-		 * Move the sub-tree out of the nested sets by negating its left and right values.
-		 */
-		$query = $this->_db->getQuery(true);
-		$query->update($this->_tbl);
-		$query->set('lft = lft * (-1), rgt = rgt * (-1)');
-		$query->where('lft BETWEEN '.(int) $node->lft.' AND '.(int) $node->rgt);
-		$this->_db->setQuery($query);
-
-		// Check for a database error.
-		if (!$this->_db->query())
-		{
-			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_MOVE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-			$this->setError($e);
-			$this->_unlock();
-			return false;
-		}
-		if ($this->_debug) {
-			$this->_logtable();
-		}
-
-		/*
-		 * Close the hole in the tree that was opened by removing the sub-tree from the nested sets.
-		 */
-		// Compress the left values.
-		$query = $this->_db->getQuery(true);
-		$query->update($this->_tbl);
-		$query->set('lft = lft - '.(int) $node->width);
-		$query->where('lft > '.(int) $node->rgt);
-		$this->_db->setQuery($query);
-
-		// Check for a database error.
-		if (!$this->_db->query())
-		{
-			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_MOVE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-			$this->setError($e);
-			$this->_unlock();
-			return false;
-		}
-		if ($this->_debug) {
-			$this->_logtable();
-		}
-
-		// Compress the right values.
-		$query = $this->_db->getQuery(true);
-		$query->update($this->_tbl);
-		$query->set('rgt = rgt - '.(int) $node->width);
-		$query->where('rgt > '.(int) $node->rgt);
-		$this->_db->setQuery($query);
-
-		// Check for a database error.
-		if (!$this->_db->query())
-		{
-			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_MOVE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-			$this->setError($e);
-			$this->_unlock();
-			return false;
-		}
-		if ($this->_debug) {
-			$this->_logtable();
 		}
 
 		/*
@@ -449,17 +420,7 @@ class JTableNested extends JTable
 		$query->where($repositionData->left_where);
 		$this->_db->setQuery($query);
 
-		// Check for a database error.
-		if (!$this->_db->query())
-		{
-			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_MOVE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-			$this->setError($e);
-			$this->_unlock();
-			return false;
-		}
-		if ($this->_debug) {
-			$this->_logtable();
-		}
+		$this->_runQuery($query, 'JLIB_DATABASE_ERROR_MOVE_FAILED');
 
 		// Shift right values.
 		$query = $this->_db->getQuery(true);
@@ -468,17 +429,7 @@ class JTableNested extends JTable
 		$query->where($repositionData->right_where);
 		$this->_db->setQuery($query);
 
-		// Check for a database error.
-		if (!$this->_db->query())
-		{
-			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_MOVE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-			$this->setError($e);
-			$this->_unlock();
-			return false;
-		}
-		if ($this->_debug) {
-			$this->_logtable();
-		}
+		$this->_runQuery($query, 'JLIB_DATABASE_ERROR_MOVE_FAILED');
 
 		/*
 		 * Calculate the offset between where the node used to be in the tree and
@@ -496,17 +447,7 @@ class JTableNested extends JTable
 		$query->where('lft < 0');
 		$this->_db->setQuery($query);
 
-		// Check for a database error.
-		if (!$this->_db->query())
-		{
-			$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_MOVE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-			$this->setError($e);
-			$this->_unlock();
-			return false;
-		}
-		if ($this->_debug) {
-			$this->_logtable();
-		}
+		$this->_runQuery($query, 'JLIB_DATABASE_ERROR_MOVE_FAILED');
 
 		// Set the correct parent id for the moved node if required.
 		if ($node->parent_id != $repositionData->new_parent_id)
@@ -517,17 +458,7 @@ class JTableNested extends JTable
 			$query->where($this->_tbl_key.' = '.(int) $node->$k);
 			$this->_db->setQuery($query);
 
-			// Check for a database error.
-			if (!$this->_db->query())
-			{
-				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_MOVE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-				$this->setError($e);
-				$this->_unlock();
-				return false;
-			}
-			if ($this->_debug) {
-				$this->_logtable();
-			}
+			$this->_runQuery($query, 'JLIB_DATABASE_ERROR_MOVE_FAILED');
 		}
 
 		// Unlock the table for writing.
@@ -563,6 +494,37 @@ class JTableNested extends JTable
 			return false;
 		}
 
+		// If tracking assets, remove the asset first.
+		if ($this->_trackAssets)
+		{
+			$name		= $this->_getAssetName();
+			$asset		= JTable::getInstance('Asset');
+
+			// Lock the table for writing.
+			if (!$asset->_lock())
+			{
+				// Error message set in lock method.
+				return false;
+			}
+			if ($asset->loadByName($name))
+			{
+				// Delete the node in assets table.
+				if (!$asset->delete(null, $children))
+				{
+					$this->setError($asset->getError());
+					$asset->_unlock();
+					return false;
+				}
+				$asset->_unlock();
+			}
+			else
+			{
+				$this->setError($asset->getError());
+				$asset->_unlock();
+				return false;
+			}
+		}
+
 		// Get the node by id.
 		if (!$node = $this->_getNode($pk))
 		{
@@ -579,48 +541,21 @@ class JTableNested extends JTable
 			$query->delete();
 			$query->from($this->_tbl);
 			$query->where('lft BETWEEN '.(int) $node->lft.' AND '.(int) $node->rgt);
-			$this->_db->setQuery($query);
-
-			// Check for a database error.
-			if (!$this->_db->query())
-			{
-				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_DELETE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-				$this->setError($e);
-				$this->_unlock();
-				return false;
-			}
+			$this->_runQuery($query, 'JLIB_DATABASE_ERROR_DELETE_FAILED');		
 
 			// Compress the left values.
 			$query = $this->_db->getQuery(true);
 			$query->update($this->_tbl);
 			$query->set('lft = lft - '.(int) $node->width);
 			$query->where('lft > '.(int) $node->rgt);
-			$this->_db->setQuery($query);
-
-			// Check for a database error.
-			if (!$this->_db->query())
-			{
-				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_DELETE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-				$this->setError($e);
-				$this->_unlock();
-				return false;
-			}
+			$this->_runQuery($query, 'JLIB_DATABASE_ERROR_DELETE_FAILED');
 
 			// Compress the right values.
 			$query = $this->_db->getQuery(true);
 			$query->update($this->_tbl);
 			$query->set('rgt = rgt - '.(int) $node->width);
 			$query->where('rgt > '.(int) $node->rgt);
-			$this->_db->setQuery($query);
-
-			// Check for a database error.
-			if (!$this->_db->query())
-			{
-				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_DELETE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-				$this->setError($e);
-				$this->_unlock();
-				return false;
-			}
+			$this->_runQuery($query, 'JLIB_DATABASE_ERROR_DELETE_FAILED');
 		}
 
 		// Leave the children and move them up a level.
@@ -631,17 +566,7 @@ class JTableNested extends JTable
 			$query->delete();
 			$query->from($this->_tbl);
 			$query->where('lft = '.(int) $node->lft);
-			$this->_db->setQuery($query);
-
-
-			// Check for a database error.
-			if (!$this->_db->query())
-			{
-				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_DELETE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-				$this->setError($e);
-				$this->_unlock();
-				return false;
-			}
+			$this->_runQuery($query, 'JLIB_DATABASE_ERROR_DELETE_FAILED');
 
 			// Shift all node's children up a level.
 			$query = $this->_db->getQuery(true);
@@ -650,64 +575,28 @@ class JTableNested extends JTable
 			$query->set('rgt = rgt - 1');
 			$query->set('level = level - 1');
 			$query->where('lft BETWEEN '.(int) $node->lft.' AND '.(int) $node->rgt);
-			$this->_db->setQuery($query);
-
-			// Check for a database error.
-			if (!$this->_db->query())
-			{
-				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_DELETE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-				$this->setError($e);
-				$this->_unlock();
-				return false;
-			}
+			$this->_runQuery($query, 'JLIB_DATABASE_ERROR_DELETE_FAILED');
 
 			// Adjust all the parent values for direct children of the deleted node.
 			$query = $this->_db->getQuery(true);
 			$query->update($this->_tbl);
 			$query->set('parent_id = '.(int) $node->parent_id);
 			$query->where('parent_id = '.(int) $node->$k);
-			$this->_db->setQuery($query);
-
-			// Check for a database error.
-			if (!$this->_db->query())
-			{
-				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_DELETE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-				$this->setError($e);
-				$this->_unlock();
-				return false;
-			}
+			$this->_runQuery($query, 'JLIB_DATABASE_ERROR_DELETE_FAILED');
 
 			// Shift all of the left values that are right of the node.
 			$query = $this->_db->getQuery(true);
 			$query->update($this->_tbl);
 			$query->set('lft = lft - 2');
 			$query->where('lft > '.(int) $node->rgt);
-			$this->_db->setQuery($query);
-
-			// Check for a database error.
-			if (!$this->_db->query())
-			{
-				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_DELETE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-				$this->setError($e);
-				$this->_unlock();
-				return false;
-			}
+			$this->_runQuery($query, 'JLIB_DATABASE_ERROR_DELETE_FAILED');
 
 			// Shift all of the right values that are right of the node.
 			$query = $this->_db->getQuery(true);
 			$query->update($this->_tbl);
 			$query->set('rgt = rgt - 2');
 			$query->where('rgt > '.(int) $node->rgt);
-			$this->_db->setQuery($query);
-
-			// Check for a database error.
-			if (!$this->_db->query())
-			{
-				$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_DELETE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-				$this->setError($e);
-				$this->_unlock();
-				return false;
-			}
+			$this->_runQuery($query, 'JLIB_DATABASE_ERROR_DELETE_FAILED');
 		}
 
 		// Unlock the table for writing.
@@ -729,9 +618,9 @@ class JTableNested extends JTable
 		if ($this->parent_id > 0)
 		{
 			$query = $this->_db->getQuery(true);
-			$query->select('COUNT(id)');
+			$query->select('COUNT('.$this->_tbl_key.')');
 			$query->from($this->_tbl);
-			$query->where('id = '.$this->parent_id);
+			$query->where($this->_tbl_key.' = '.$this->parent_id);
 			$this->_db->setQuery($query);
 
 			if ($this->_db->loadResult()) {
@@ -846,38 +735,14 @@ class JTableNested extends JTable
 				$query->update($this->_tbl);
 				$query->set('lft = lft + 2');
 				$query->where($repositionData->left_where);
-				$this->_db->setQuery($query);
-
-				// Check for a database error.
-				if (!$this->_db->query())
-				{
-					$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_STORE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-					$this->setError($e);
-					$this->_unlock();
-					return false;
-				}
-				if ($this->_debug) {
-					$this->_logtable();
-				}
+				$this->_runQuery($query, 'JLIB_DATABASE_ERROR_STORE_FAILED');
 
 				// Create space in the tree at the new location for the new node in right ids.
 				$query = $this->_db->getQuery(true);
 				$query->update($this->_tbl);
 				$query->set('rgt = rgt + 2');
 				$query->where($repositionData->right_where);
-				$this->_db->setQuery($query);
-
-				// Check for a database error.
-				if (!$this->_db->query())
-				{
-					$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_STORE_FAILED', get_class($this), $this->_db->getErrorMsg()));
-					$this->setError($e);
-					$this->_unlock();
-					return false;
-				}
-				if ($this->_debug) {
-					$this->_logtable();
-				}
+				$this->_runQuery($query, 'JLIB_DATABASE_ERROR_STORE_FAILED');
 
 				// Set the object values.
 				$this->parent_id	= $repositionData->new_parent_id;
@@ -918,7 +783,7 @@ class JTableNested extends JTable
 		}
 
 		// Store the row to the database.
-		if (!parent::store())
+		if (!parent::store($updateNulls))
 		{
 			$this->_unlock();
 			return false;
@@ -962,7 +827,7 @@ class JTableNested extends JTable
 		if (empty($pks))
 		{
 			if ($this->$k) {
-				$pks = array($this->$k);
+				$pks = explode(',', $this->$k);
 			}
 			// Nothing to set publishing state on, return false.
 			else
@@ -1304,7 +1169,7 @@ class JTableNested extends JTable
 			}
 			elseif (property_exists($this, 'alias'))
 			{
-				// Test for a unique record with lft = 0
+				// Test for a unique record alias = root
 				$query = $this->_db->getQuery(true);
 				$query->select($k);
 				$query->from($this->_tbl);
@@ -1347,7 +1212,7 @@ class JTableNested extends JTable
 	 * @param	integer	The left id to start with in building the tree.
 	 * @param	integer	The level to assign to the current nodes.
 	 * @param	string	The path to the current nodes.
-	 * @return	boolean	True on success
+	 * @return	integer	1 + value of root rgt on success, false on failure
 	 * @since	1.6
 	 * @link	http://docs.joomla.org/JTableNested/rebuild
 	 */
@@ -1366,7 +1231,7 @@ class JTableNested extends JTable
 		if (!isset($this->_cache['rebuild.sql']))
 		{
 			$query	= $this->_db->getQuery(true);
-			$query->select('id, alias');
+			$query->select($this->_tbl_key.', alias');
 			$query->from($this->_tbl);
 			$query->where('parent_id = %d');
 
@@ -1394,7 +1259,7 @@ class JTableNested extends JTable
 			// $rightId is the current right value, which is incremented on recursion return.
 			// Increment the level for the children.
 			// Add this item's alias to the path (but avoid a leading /)
-			$rightId = $this->rebuild($node->id, $rightId, $level + 1, $path.(empty($path) ? '' : '/').$node->alias);
+			$rightId = $this->rebuild($node->{$this->_tbl_key}, $rightId, $level + 1, $path.(empty($path) ? '' : '/').$node->alias);
 
 			// If there is an update failure, return false to break out of the recursion.
 			if ($rightId === false) return false;
@@ -1408,7 +1273,7 @@ class JTableNested extends JTable
 		$query->set('rgt = '. (int) $rightId);
 		$query->set('level = '.(int) $level);
 		$query->set('path = '.$this->_db->quote($path));
-		$query->where('id = '. (int)$parentId);
+		$query->where($this->_tbl_key.' = '. (int)$parentId);
 		$this->_db->setQuery($query);
 
 		// If there is an update failure, return false to break out of the recursion.
@@ -1478,6 +1343,51 @@ class JTableNested extends JTable
 		}
 
 		return true;
+	}
+
+	/**
+	 * Method to update order of table rows
+	 *
+	 * @param	array	id's of rows to be reordered
+	 * @param	array	lft values of rows to be reordered
+	 *
+	 * @return	integer	1 + value of root rgt on success, false on failure
+	 * @since	1.6
+	 */
+	public function saveorder($idArray = null, $lft_array = null)
+	{
+		// Validate arguments
+		if (is_array($idArray) && is_array($lft_array) && count($idArray) == count($lft_array))
+		{
+			for ($i = 0; $i < count($idArray); $i++)
+			{
+				// Do an update to change the lft values in the table for each id
+				$query = $this->_db->getQuery(true);
+				$query->update($this->_tbl);
+				$query->where($this->_tbl_key . ' = ' . (int) $idArray[$i]);
+				$query->set('lft = ' . (int) $lft_array[$i]);
+				$this->_db->setQuery($query);
+
+				// Check for a database error.
+				if (!$this->_db->query())
+				{
+					$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_REORDER_FAILED', get_class($this), $this->_db->getErrorMsg()));
+					$this->setError($e);
+					$this->_unlock();
+					return false;
+				}
+				if ($this->_debug)
+				{
+					$this->_logtable();
+				}
+
+			}
+			return $this->rebuild();
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -1584,7 +1494,7 @@ class JTableNested extends JTable
 
 			case 'before':
 				$data->left_where		= 'lft >= '.$referenceNode->lft;
-				$data->right_where		= 'rgt >= '.$referenceNode->rgt;
+				$data->right_where		= 'rgt >= '.$referenceNode->lft;
 
 				$data->new_lft			= $referenceNode->lft;
 				$data->new_rgt			= $referenceNode->lft + $nodeWidth - 1;
@@ -1594,7 +1504,7 @@ class JTableNested extends JTable
 
 			default:
 			case 'after':
-				$data->left_where		= 'lft > '.$referenceNode->lft;
+				$data->left_where		= 'lft > '.$referenceNode->rgt;
 				$data->right_where		= 'rgt > '.$referenceNode->rgt;
 
 				$data->new_lft			= $referenceNode->rgt + 1;
@@ -1631,13 +1541,13 @@ class JTableNested extends JTable
 		if ($showData)
 		{
 			$query = $this->_db->getQuery(true);
-			$query->select('id, parent_id, lft, rgt, level');
+			$query->select($this->_tbl_key.', parent_id, lft, rgt, level');
 			$query->from($this->_tbl);
-			$query->order('id');
+			$query->order($this->_tbl_key);
 			$this->_db->setQuery($query);
 
 			$rows = $this->_db->loadRowList();
-			$buffer .= sprintf("\n| %4s | %4s | %4s | %4s |", 'id', 'par', 'lft', 'rgt');
+			$buffer .= sprintf("\n| %4s | %4s | %4s | %4s |", $this->_tbl_key, 'par', 'lft', 'rgt');
 			$buffer .= $sep;
 
 			foreach ($rows as $row) {
@@ -1646,6 +1556,24 @@ class JTableNested extends JTable
 			$buffer .= $sep;
 		}
 		echo $buffer;
+	}
+	
+	// Run an update query and check for a database error
+	protected function _runQuery($query, $errorMessage)
+	{
+		$this->_db->setQuery($query);
+
+		// Check for a database error.
+		if (!$this->_db->query())
+		{
+			$e = new JException(JText::sprintf('$errorMessage', get_class($this), $this->_db->getErrorMsg()));
+			$this->setError($e);
+			$this->_unlock();
+			return false;
+		}
+		if ($this->_debug) {
+			$this->_logtable();
+		}
 	}
 
 }

@@ -10,6 +10,8 @@
 // Check to ensure this file is within the rest of the framework
 defined('JPATH_BASE') or die();
 
+jimport('joomla.database.table');
+
 /**
  * Update table
  * Stores updates temporarily
@@ -76,7 +78,7 @@ class JTableUpdate extends JTable
 	}
 
 	function find($options=Array()) {
-		$dbo =& JFactory::getDBO();
+		$dbo = JFactory::getDBO();
 		$where = Array();
 		foreach($options as $col=>$val) {
 			$where[] = $col .' = '. $dbo->Quote($val);

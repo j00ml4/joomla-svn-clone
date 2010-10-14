@@ -60,15 +60,6 @@ abstract class JDatabase extends JObject
 	protected $_connection = '';
 
 	/**
-	 * The connector Slave resource
-	 *
-	 * @var slave resource
-	 */
-	protected $_slave_connection		= '';
-
-	protected $_stmt_type = 0;
-
-	/**
 	 * The last query cursor
 	 *
 	 * @var resource
@@ -76,6 +67,12 @@ abstract class JDatabase extends JObject
 	protected $_cursor = null;
 
 	/**
+	 * The slave database link identifier.
+	 *
+	 * @var mixed
+	 */
+	protected $_slave_connection = '';
+		/**
 	 * Debug option
 	 *
 	 * @var boolean
@@ -277,9 +274,14 @@ abstract class JDatabase extends JObject
 	 * @since	1.5
 	 */
 	abstract public function connected();
-	
-	abstract public function slave_connected();
 
+		/**
+	 * Determines if the connection to the server is active.
+	 *
+	 * @return	boolean
+	 * @since	1.5
+	 */
+	abstract public function slave_connected();
 	/**
 	 * Determines UTF support
 	 *
@@ -448,25 +450,24 @@ abstract class JDatabase extends JObject
 	}
 
 	/**
-	 * Quote an identifier name (field, table, etc)
+	 * Quote an identifier name (field, table, etc).
 	 *
-	 * @param	string	The name
-	 * @return	string	The quoted name
+	 * @param	string	$s	The identifier to quote.
+	 *
+	 * @return	string	The quoted identifier.
+	 * @since	1.5
 	 */
 	public function nameQuote($s)
 	{
-		// Only quote if the name is not using dot-notation
-		if (strpos($s, '.') === false) {
-			$q = $this->_nameQuote;
-			if (strlen($q) == 1) {
-				return $q . $s . $q;
-			} else {
-				return $q{0} . $s . $q{1};
-			}
+		$q = $this->_nameQuote;
+
+		if (strlen($q) == 1) {
+			return $q.$s.$q;
 		} else {
-			return $s;
+			return $q{0}.$s.$q{1};
 		}
 	}
+
 	/**
 	 * Get the database table prefix
 	 *
@@ -607,7 +608,7 @@ abstract class JDatabase extends JObject
 	 * Get the current or query, or new JDatabaseQuery object.
 	 *
 	 * @param	boolean	False to return the last query set by setQuery, True to return a new JDatabaseQuery object.
-	 * @return	string	The current value of the internal SQL vairable
+	 * @return	string	The current value of the internal SQL variable
 	 */
 	public function getQuery($new = false)
 	{
@@ -749,7 +750,7 @@ abstract class JDatabase extends JObject
 	 * @param	string
 	 * @param	boolean
 	 */
-	abstract public function updateObject($table, &$object, $keyName, $updateNulls=true);
+	abstract public function updateObject($table, &$object, $keyName, $updateNulls=false);
 
 	/**
 	 * Print out an error statement

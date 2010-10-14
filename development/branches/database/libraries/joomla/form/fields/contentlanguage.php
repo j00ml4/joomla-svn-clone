@@ -11,7 +11,8 @@ defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', dirname(__FILE__).'/list.php');
+jimport('joomla.form.helper');
+JFormHelper::loadFieldClass('list');
 
 /**
  * Form Field class for the Joomla Framework.
@@ -38,28 +39,7 @@ class JFormFieldContentLanguage extends JFormFieldList
 	 */
 	protected function getOptions()
 	{
-		// Get the database object and a new query object.
-		$db		= JFactory::getDBO();
-		$query	= $db->getQuery(true);
-
-		// Build the query.
-		$query->select('a.lang_code AS value, a.title AS text, a.title_native');
-		$query->from('#__languages AS a');
-		$query->where('a.published >= 0');
-		$query->order('a.title');
-
-		// Set the query and load the options.
-		$db->setQuery($query);
-		$options = $db->loadObjectList();
-
-		// Check for a database error.
-		if ($db->getErrorNum()) {
-			JError::raiseWarning(500, $db->getErrorMsg());
-		}
-
 		// Merge any additional options in the XML definition.
-		$options = array_merge(parent::getOptions(), $options);
-
-		return $options;
+		return array_merge(parent::getOptions(), JHtml::_('contentlanguage.existing'));
 	}
 }

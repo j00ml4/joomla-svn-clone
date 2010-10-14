@@ -87,7 +87,7 @@ class JSession extends JObject
 		ini_set('session.use_trans_sid', '0');
 
 		// create handler
-		$this->_store = &JSessionStorage::getInstance($store, $options);
+		$this->_store = JSessionStorage::getInstance($store, $options);
 
 		// set options
 		$this->_setOptions($options);
@@ -212,9 +212,10 @@ class JSession extends JObject
 	 */
 	public static function getFormToken($forceNew = false)
 	{
-		$user			= &JFactory::getUser();
-		$session		= &JFactory::getSession();
+		$user			= JFactory::getUser();
+		$session		= JFactory::getSession();
 		$hash			= JApplication::getHash($user->get('id', 0).$session->getToken($forceNew));
+
 		return $hash;
 	}
 
@@ -251,7 +252,7 @@ class JSession extends JObject
 	 *
 	 * @return array An array of available session handlers
 	 */
-	public function getStores()
+	public static function getStores()
 	{
 		jimport('joomla.filesystem.folder');
 		$handlers = JFolder::files(dirname(__FILE__).DS.'storage', '.php$');
@@ -396,6 +397,14 @@ class JSession extends JObject
 		//  start session if not startet
 		if ($this->_state == 'restart') {
 			session_id($this->_createId());
+		} else {
+			$session_name = session_name();
+			if (!JRequest::getVar($session_name, false, 'COOKIE')) {
+				if (JRequest::getVar($session_name)) {
+					session_id(JRequest::getVar($session_name));
+					setcookie($session_name, '', time() - 3600);
+				}
+			}
 		}
 
 		session_cache_limiter('none');
@@ -429,7 +438,7 @@ class JSession extends JObject
 		// must also be unset. If a cookie is used to propagate the session id (default behavior),
 		// then the session cookie must be deleted.
 		if (isset($_COOKIE[session_name()])) {
-			$config =& JFactory::getConfig();
+			$config = JFactory::getConfig();
 			$cookie_domain = $config->get('cookie_domain', '');
 			$cookie_path = $config->get('cookie_path', '/');
 			setcookie(session_name(), '', time()-42000, $cookie_path, $cookie_domain);

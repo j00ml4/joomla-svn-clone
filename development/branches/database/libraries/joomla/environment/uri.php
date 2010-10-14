@@ -184,11 +184,11 @@ class JURI extends JObject
 		// Get the base request path.
 		if (!isset($base))
 		{
-			$config = &JFactory::getConfig();
+			$config = JFactory::getConfig();
 			$live_site = $config->get('live_site');
 			if (trim($live_site) != '')
 			{
-				$uri = &JURI::getInstance($live_site);
+				$uri = self::getInstance($live_site);
 				$base['prefix'] = $uri->toString(array('scheme', 'host', 'port'));
 				$base['path'] = rtrim($uri->toString(array('path')), '/\\');
 
@@ -198,19 +198,24 @@ class JURI extends JObject
 			}
 			else
 			{
-				$uri			= &JURI::getInstance();
+				$uri			= self::getInstance();
 				$base['prefix'] = $uri->toString(array('scheme', 'host', 'port'));
 
-				if (strpos(php_sapi_name(), 'cgi') !== false && !empty($_SERVER['REQUEST_URI']))
+				if (strpos(php_sapi_name(), 'cgi') !== false && !ini_get('cgi.fix_pathinfo') && !empty($_SERVER['REQUEST_URI']))
 				{
-					//Apache CGI
-					$base['path'] =  rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+					// PHP-CGI on Apache with "cgi.fix_pathinfo = 0"
+
+					// We shouldn't have user-supplied PATH_INFO in PHP_SELF in this case
+					// because PHP will not work with PATH_INFO at all.
+					$script_name =  $_SERVER['PHP_SELF'];
 				}
 				else
 				{
 					//Others
-					$base['path'] =  rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
+					$script_name =  $_SERVER['SCRIPT_NAME'];
 				}
+
+				$base['path'] =  rtrim(dirname($script_name), '/\\');
 			}
 		}
 
@@ -231,7 +236,7 @@ class JURI extends JObject
 		// Get the scheme
 		if (!isset($root))
 		{
-			$uri			= &JURI::getInstance(JURI::base());
+			$uri			= self::getInstance(self::base());
 			$root['prefix'] = $uri->toString(array('scheme', 'host', 'port'));
 			$root['path']	= rtrim($uri->toString(array('path')), '/\\');
 		}
@@ -257,7 +262,7 @@ class JURI extends JObject
 		// Get the current URL.
 		if (!isset($current))
 		{
-			$uri	= &JURI::getInstance();
+			$uri	= self::getInstance();
 			$current = $uri->toString(array('scheme', 'host', 'port', 'path'));
 		}
 
@@ -355,6 +360,18 @@ class JURI extends JObject
 	}
 
 	/**
+	 * Checks if variable exists.
+	 *
+	 * @param	string $name Name of the query variable to check.
+	 * @return	bool exists.
+	 * @since	1.6
+	 */
+	public function hasVar($name)
+	{
+		return array_key_exists($name, $this->_vars);
+	}
+
+	/**
 	 * Returns a query variable by name.
 	 *
 	 * @param	string $name Name of the query variable to get.
@@ -363,7 +380,7 @@ class JURI extends JObject
 	 */
 	public function getVar($name = null, $default=null)
 	{
-		if (isset($this->_vars[$name])) {
+		if (array_key_exists($name, $this->_vars)) {
 			return $this->_vars[$name];
 		}
 		return $default;
@@ -377,9 +394,9 @@ class JURI extends JObject
 	 */
 	public function delVar($name)
 	{
-		if (in_array($name, array_keys($this->_vars)))
+		if (array_key_exists($name, $this->_vars))
 		{
-			unset ($this->_vars[$name]);
+			unset($this->_vars[$name]);
 
 			//empty the query
 			$this->_query = null;
@@ -424,7 +441,7 @@ class JURI extends JObject
 
 		//If the query is empty build it first
 		if (is_null($this->_query)) {
-			$this->_query = $this->buildQuery($this->_vars);
+			$this->_query = self::buildQuery($this->_vars);
 		}
 
 		return $this->_query;
@@ -433,11 +450,12 @@ class JURI extends JObject
 	/**
 	 * Build a query from a array (reverse of the PHP parse_str()).
 	 *
+	 * @static
 	 * @return	string The resulting query string.
 	 * @since	1.5
 	 * @see	parse_str()
 	 */
-	public function buildQuery($params, $akey = null)
+	public static function buildQuery($params, $akey = null)
 	{
 		if (!is_array($params) || count($params) == 0) {
 			return false;
@@ -455,7 +473,11 @@ class JURI extends JObject
 		{
 			if (is_array($val))
 			{
-				$out[] = JURI::buildQuery($val,$key);
+				if (!is_null($akey)) {
+                    $out[] = self::buildQuery($val,$akey.'['.$key.']');
+                } else {
+                    $out[] = self::buildQuery($val,$key);
+                }
 				continue;
 			}
 
@@ -645,12 +667,12 @@ class JURI extends JObject
 	 * @return	boolean True if Internal.
 	 * @since	1.5
 	 */
-	public function isInternal($url)
+	public static function isInternal($url)
 	{
-		$uri = &JURI::getInstance($url);
+		$uri = self::getInstance($url);
 		$base = $uri->toString(array('scheme', 'host', 'port', 'path'));
 		$host = $uri->toString(array('scheme', 'host', 'port'));
-		if (stripos($base, JURI::base()) !== 0 && !empty($host)) {
+		if (stripos($base, self::base()) !== 0 && !empty($host)) {
 			return false;
 		}
 		return true;

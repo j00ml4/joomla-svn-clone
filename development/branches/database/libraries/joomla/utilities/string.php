@@ -282,9 +282,9 @@ abstract class JString
 	public static function strspn($str, $mask, $start = NULL, $length = NULL)
 	{
 		jimport('phputf8.strspn');
-		if ( $start === FALSE && $length === FALSE ) {
+		if ( $start === NULL && $length === NULL ) {
 			return utf8_strspn($str, $mask);
-		} else if ( $length === FALSE ) {
+		} else if ( $length === NULL ) {
 			return utf8_strspn($str, $mask, $start);
 		} else {
 			return utf8_strspn($str, $mask, $start, $length);
@@ -329,6 +329,10 @@ abstract class JString
 	*/
 	public static function ltrim($str, $charlist = FALSE)
 	{
+		if (empty($charlist) && $charlist !== false) {
+			return $str;
+		}
+
 		jimport('phputf8.trim');
 		if ( $charlist === FALSE ) {
 			return utf8_ltrim( $str );
@@ -353,6 +357,10 @@ abstract class JString
 	*/
 	public static function rtrim($str, $charlist = FALSE)
 	{
+		if (empty($charlist) && $charlist !== false) {
+			return $str;
+		}
+
 		jimport('phputf8.trim');
 		if ( $charlist === FALSE ) {
 			return utf8_rtrim($str);
@@ -377,6 +385,10 @@ abstract class JString
 	*/
 	public static function trim($str, $charlist = FALSE)
 	{
+		if (empty($charlist) && $charlist !== false) {
+			return $str;
+		}
+
 		jimport('phputf8.trim');
 		if ( $charlist === FALSE ) {
 			return utf8_trim( $str );
@@ -594,4 +606,30 @@ abstract class JString
 		// some valid sequences
 		return (preg_match('/^.{1}/us',$str,$ar) == 1);
 	}
+	
+	function startsWith($haystack, $needle, $case = TRUE) 
+	{
+		$ret = FALSE;
+
+		if ($case)
+		{
+			if (strncmp($haystack, $needle, strlen($needle)) == 0)
+				$ret = TRUE;	
+		}
+		else
+		{
+			if (strncasecmp($haystack, $needle, strlen($needle)) == 0)
+				$ret = TRUE;
+		}
+
+		return $ret;
+	}
+
+
+
+	function endsWith($haystack, $needle, $case=true) {
+		 return startsWith(strrev($haystack),strrev($needle),$case);
+
+	}
+	
 }

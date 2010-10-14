@@ -38,7 +38,7 @@ class JFormFieldUser extends JFormField
 	{
 		// Initialize variables.
 		$html = array();
-		$link = 'index.php?option=com_users&amp;view=users&layout=modal&amp;tmpl=component&amp;field='.$this->id;
+		$link = 'index.php?option=com_users&amp;view=users&amp;layout=modal&amp;tmpl=component&amp;field='.$this->id;
 
 		// Initialize some field attributes.
 		$attr = $this->element['class'] ? ' class="'.(string) $this->element['class'].'"' : '';
@@ -83,10 +83,12 @@ class JFormFieldUser extends JFormField
 		// Create the user select button.
 		$html[] = '<div class="button2-left">';
 		$html[] = '  <div class="blank">';
-		$html[] = '		<a class="modal_'.$this->id.'" title="'.JText::_('JLIB_FORM_CHANGE_USER').'"' .
-							' href="'.($this->element['readonly'] ? '' : $link).'"' .
-							' rel="{handler: \'iframe\', size: {x: 650, y: 375}}">';
-		$html[] = '			'.JText::_('JLIB_FORM_CHANGE_USER_BUTTON').'</a>';
+		if ($this->element['readonly'] != 'true') {
+			$html[] = '		<a class="modal_'.$this->id.'" title="'.JText::_('JLIB_FORM_CHANGE_USER').'"' .
+							' href="'.$link.'"' .
+							' rel="{handler: \'iframe\', size: {x: 800, y: 500}}">';
+			$html[] = '			'.JText::_('JLIB_FORM_CHANGE_USER').'</a>';
+		}
 		$html[] = '  </div>';
 		$html[] = '</div>';
 

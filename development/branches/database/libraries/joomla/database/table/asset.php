@@ -71,14 +71,15 @@ class JTableAsset extends JTableNested
 			' WHERE `name` = '.$this->_db->Quote($name)
 		);
 		$assetId = (int) $this->_db->loadResult();
-
+		if (empty($assetId)) {
+			return false;
+		}
 		// Check for a database error.
 		if ($error = $this->_db->getErrorMsg())
 		{
 			$this->setError($error);
 			return false;
 		}
-
 		return $this->load($assetId);
 	}
 
@@ -110,7 +111,7 @@ class JTableAsset extends JTableNested
 					$this->setError($error);
 				}
 				else {
-					$this->setError(JText::_('JLIB_DATABASE_ERROR_INVALIDPARENTT_ID'));
+					$this->setError(JText::_('JLIB_DATABASE_ERROR_INVALID_PARENT_ID'));
 				}
 				return false;
 			}

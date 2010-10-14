@@ -79,20 +79,6 @@ class JTableContent extends JTable
 				$assetId = (int) $result;
 			}
 		}
-		// This is an uncategorized article that needs to parent with the extension.
-		elseif ($assetId === null) {
-			// Build the query to get the asset id for the parent category.
-			$query	= $db->getQuery(true);
-			$query->select('id');
-			$query->from('#__assets');
-			$query->where('name = "com_content"');
-
-			// Get the asset id from the database.
-			$this->_db->setQuery($query);
-			if ($result = $this->_db->loadResult()) {
-				$assetId = (int) $result;
-			}
-		}
 
 		// Return the asset id.
 		if ($assetId) {
@@ -106,6 +92,7 @@ class JTableContent extends JTable
 	 * Overloaded bind function
 	 *
 	 * @param	array		$hash named array
+	 *
 	 * @return	null|string	null is operation was satisfactory, otherwise returns an error
 	 * @see		JTable:bind
 	 * @since	1.5
@@ -119,6 +106,7 @@ class JTableContent extends JTable
 
 			if ($tagPos == 0) {
 				$this->introtext	= $array['articletext'];
+				$this->fulltext         = '';
 			} else {
 				list($this->introtext, $this->fulltext) = preg_split($pattern, $array['articletext'], 2);
 			}
@@ -162,10 +150,11 @@ class JTableContent extends JTable
 		if (empty($this->alias)) {
 			$this->alias = $this->title;
 		}
+
 		$this->alias = JApplication::stringURLSafe($this->alias);
 
 		if (trim(str_replace('-','',$this->alias)) == '') {
-			$this->alias = JFactory::getDate()->toFormat("%Y-%m-%d-%H-%M-%S");
+			$this->alias = JFactory::getDate()->format('Y-m-d-H-i-s');
 		}
 
 		if (trim(str_replace('&nbsp;', '', $this->fulltext)) == '') {
@@ -193,6 +182,7 @@ class JTableContent extends JTable
 			$after_clean = JString::str_ireplace($bad_characters, "", $this->metakey); // remove bad characters
 			$keys = explode(',', $after_clean); // create array using commas as delimiter
 			$clean_keys = array();
+
 			foreach($keys as $key) {
 				if (trim($key)) {  // ignore blank keywords
 					$clean_keys[] = trim($key);
@@ -209,6 +199,7 @@ class JTableContent extends JTable
 	 * Overriden JTable::store to set modified data and user id.
 	 *
 	 * @param	boolean	True to update fields even if they are null.
+	 *
 	 * @return	boolean	True on success.
 	 * @since	1.6
 	 */
@@ -216,6 +207,7 @@ class JTableContent extends JTable
 	{
 		$date	= JFactory::getDate();
 		$user	= JFactory::getUser();
+
 		if ($this->id) {
 			// Existing item
 			$this->modified		= $date->toMySQL();
@@ -226,11 +218,17 @@ class JTableContent extends JTable
 			if (!intval($this->created)) {
 				$this->created = $date->toMySQL();
 			}
+
 			if (empty($this->created_by)) {
 				$this->created_by = $user->get('id');
 			}
 		}
-
+	// Verify that the alias is unique
+		$table = JTable::getInstance('Content','JTable');
+		if ($table->load(array('alias'=>$this->alias,'catid'=>$this->catid)) && ($table->id != $this->id || $this->id==0)) {
+			$this->setError(JText::_('JLIB_DATABASE_ERROR_ARTICLE_UNIQUE_ALIAS'));
+			return false;
+		}
 		return parent::store($updateNulls);
 	}
 
@@ -243,6 +241,7 @@ class JTableContent extends JTable
 	 *					set the instance property value is used.
 	 * @param	integer The publishing state. eg. [0 = unpublished, 1 = published]
 	 * @param	integer The user id of the user performing the operation.
+	 *
 	 * @return	boolean	True on success.
 	 * @since	1.0.4
 	 */
@@ -307,6 +306,7 @@ class JTableContent extends JTable
 		}
 
 		$this->setError('');
+
 		return true;
 	}
 
@@ -318,7 +318,7 @@ class JTableContent extends JTable
 	 */
 	function toXML($mapKeysToText=false)
 	{
-		$db = &JFactory::getDbo();
+		$db = JFactory::getDbo();
 
 		if ($mapKeysToText) {
 			$query = 'SELECT name'

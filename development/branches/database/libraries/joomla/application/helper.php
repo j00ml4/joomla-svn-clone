@@ -130,13 +130,13 @@ class JApplicationHelper
 			return false;
 		}
 
-		$info = &self::getClientInfo();
+		$info = self::getClientInfo();
 
 		if (!isset($client->id)) {
 			$client->id = count($info);
 		}
 
-		$info[$client->id] = clone $client;
+		self::$_clients[$client->id] = clone $client;
 
 		return true;
 	}

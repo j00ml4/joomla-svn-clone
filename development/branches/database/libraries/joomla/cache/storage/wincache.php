@@ -16,13 +16,12 @@ defined('JPATH_BASE') or die;
  * @subpackage	Cache
  * @since		1.6
  */
-
 class JCacheStorageWincache extends JCacheStorage
 {
 	/**
 	 * Constructor
 	 *
-	 * @param array $options optional parameters
+	 * @param	array	$options optional parameters
 	 */
 	public function __construct( $options = array() )
 	{
@@ -32,11 +31,11 @@ class JCacheStorageWincache extends JCacheStorage
 	/**
 	 * Get cached data from WINCACHE by id and group
 	 *
-	 * @param    string    $id        The cache data id
-	 * @param    string    $group        The cache data group
-	 * @param    boolean    $checkTime    True to verify cache time expiration threshold
-	 * @return    mixed    Boolean false on failure or a cached data string
-	 * @since    1.6
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group		The cache data group
+	 * @param	boolean	$checkTime	True to verify cache time expiration threshold
+	 * @return	mixed	Boolean false on failure or a cached data string
+	 * @since	1.6
 	 */
 	public function get($id, $group, $checkTime)
 	{
@@ -54,44 +53,43 @@ class JCacheStorageWincache extends JCacheStorage
 	public function getAll()
 	{
 		parent::getAll();
-		$allinfo = wincache_ucache_info();
-		$keys = $allinfo['cache_entries'];
-		$secret = $this->_hash;
-		$data = array();
+
+		$allinfo 	= wincache_ucache_info();
+		$keys 		= $allinfo['cache_entries'];
+		$secret 	= $this->_hash;
+		$data 		= array();
 
 		foreach ($keys as $key) {
-			$name=$key['key_name'];
-			$namearr=explode('-',$name);
+			$name 		= $key['key_name'];
+			$namearr	= explode('-',$name);
 			if ($namearr !== false && $namearr[0]==$secret &&  $namearr[1]=='cache') {
 				$group = $namearr[2];
 				if (!isset($data[$group])) {
-					$item = new JCacheStorageHelper();
+					$item = new JCacheStorageHelper($group);
 				} else {
 					$item = $data[$group];
 				}
 				if (isset($key['value_size'])) {
-					$item->updateSize($key['value_size']/1024,$group);}
+					$item->updateSize($key['value_size']/1024);
+				}
 				else {
-					$item->updateSize(1,$group); } // dummy, WINCACHE version is too low
+					$item->updateSize(1);
+				} // dummy, WINCACHE version is too low
 				$data[$group] = $item;
 			}
 		}
 
-
 		return $data;
 	}
-
-
-
 
 	/**
 	 * Store the data to WINCACHE by id and group
 	 *
-	 * @param    string    $id    The cache data id
-	 * @param    string    $group    The cache data group
-	 * @param    string    $data    The data to store in cache
-	 * @return    boolean    True on success, false otherwise
-	 * @since    1.6
+	 * @param	string	$id	The cache data id
+	 * @param	string	$group	The cache data group
+	 * @param	string	$data	The data to store in cache
+	 * @return	boolean	True on success, false otherwise
+	 * @since	1.6
 	 */
 	public function store($id, $group, $data)
 	{
@@ -102,10 +100,10 @@ class JCacheStorageWincache extends JCacheStorage
 	/**
 	 * Remove a cached data entry by id and group
 	 *
-	 * @param    string    $id        The cache data id
-	 * @param    string    $group    The cache data group
-	 * @return    boolean    True on success, false otherwise
-	 * @since    1.6
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @return	boolean	True on success, false otherwise
+	 * @since	1.6
 	 */
 	public function remove($id, $group)
 	{
@@ -116,26 +114,24 @@ class JCacheStorageWincache extends JCacheStorage
 	/**
 	 * Clean cache for a group given a mode.
 	 *
-	 * group mode        : cleans all cache in the group
-	 * notgroup mode    : cleans all cache not in the group
+	 * group mode		: cleans all cache in the group
+	 * notgroup mode	: cleans all cache not in the group
 	 *
-	 * @param    string    $group    The cache data group
-	 * @param    string    $mode    The mode for cleaning cache [group|notgroup]
-	 * @return    boolean    True on success, false otherwise
-	 * @since    1.6
+	 * @param	string	$group	The cache data group
+	 * @param	string	$mode	The mode for cleaning cache [group|notgroup]
+	 * @return	boolean	True on success, false otherwise
+	 * @since	1.6
 	 */
 	public function clean($group, $mode)
 	{
-		$allinfo = wincache_ucache_info();
-
-		$keys = $allinfo['cache_entries'];
-
-		$secret = $this->_hash;
+		$allinfo 	= wincache_ucache_info();
+		$keys 		= $allinfo['cache_entries'];
+		$secret 	= $this->_hash;
 
 		foreach ($keys as $key) {
-
-			if (strpos($key['key_name'], $secret.'-cache-'.$group.'-')===0 xor $mode != 'group')
-			wincache_ucache_delete ($key['key_name']);
+			if (strpos($key['key_name'], $secret.'-cache-'.$group.'-') === 0 xor $mode != 'group') {
+				wincache_ucache_delete ($key['key_name']);
+			}
 		}
 		return true;
 	}
@@ -143,15 +139,15 @@ class JCacheStorageWincache extends JCacheStorage
 	/**
 	 * Force garbage collect expired cache data as items are removed only on get/add/delete/info etc
 	 *
-	 * @return boolean  True on success, false otherwise.
-	 * * @since	1.6
+	 * @return	boolean	True on success, false otherwise.
+	 * @since	1.6
 	 */
 	public function gc()
 	{
-		$lifetime    = $this->_lifetime;
-		$allinfo = wincache_ucache_info();
-		$keys = $allinfo['cache_entries'];
-		$secret = $this->_hash;
+		$lifetime	= $this->_lifetime;
+		$allinfo 	= wincache_ucache_info();
+		$keys 		= $allinfo['cache_entries'];
+		$secret 	= $this->_hash;
 
 		foreach ($keys as $key) {
 			if (strpos($key['key_name'], $secret.'-cache-')) {
@@ -160,7 +156,6 @@ class JCacheStorageWincache extends JCacheStorage
 		}
 	}
 
-
 	/**
 	 * Test to see if the cache storage is available.
 	 *
@@ -168,10 +163,7 @@ class JCacheStorageWincache extends JCacheStorage
 	 */
 	public static function test()
 	{
-		$test = extension_loaded('wincache') && function_exists('wincache_ucache_get') && !strcmp(ini_get('wincache.ucenabled'), "1");
+		$test = extension_loaded('wincache') && function_exists('wincache_ucache_get') && !strcmp(ini_get('wincache.ucenabled'), '1');
 		return $test;
 	}
-
-
-
 }

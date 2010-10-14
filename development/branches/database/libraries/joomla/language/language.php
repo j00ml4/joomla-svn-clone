@@ -135,12 +135,36 @@ class JLanguage extends JObject
 	protected $pluralSufficesCallback = null;
 
 	/**
-	 * Name of the ignoreSearchWordsCallback function for this language
+	 * Name of the ignoredSearchWordsCallback function for this language
 	 *
 	 * @var		string
 	 * @since	1.6
 	 */
-	protected $ignoreSearchWordsCallback = null;
+	protected $ignoredSearchWordsCallback = null;
+
+	/**
+	 * Name of the lowerLimitSearchWordCallback function for this language
+	 *
+	 * @var		string
+	 * @since	1.6
+	 */
+	protected $lowerLimitSearchWordCallback = null;
+
+	/**
+	 * Name of the uppperLimitSearchWordCallback function for this language
+	 *
+	 * @var		string
+	 * @since	1.6
+	 */
+	protected $upperLimitSearchWordCallback = null;
+
+	/**
+	 * Name of the searchDisplayedCharactersNumberCallback function for this language
+	 *
+	 * @var		string
+	 * @since	1.6
+	 */
+	protected $searchDisplayedCharactersNumberCallback = null;
 
 	/**
 	 * Constructor activating the default information of the language
@@ -183,15 +207,31 @@ class JLanguage extends JObject
 			}
 		}
 		if (class_exists($class)) {
-			// Class exists. Try to find a pluralSuffices method, a transliterate method and an ignoreSearchWords method
-			if (method_exists($class, 'getPluralSuffices')) {
-				$this->pluralSufficesCallback = array($class, 'getPluralSuffices');
-			}
+			/* Class exists. Try to find
+			 * -a transliterate method,
+			 * -a getPluralSuffixes method,
+			 * -a getIgnoredSearchWords method
+			 * -a getLowerLimitSearchWord method
+			 * -a getUpperLimitSearchWord method
+			 * -a getSearchDisplayCharactersNumber method
+			 */
 			if (method_exists($class, 'transliterate')) {
 				$this->transliterator = array($class, 'transliterate');
 			}
-			if (method_exists($class, 'getIgnoreSearchWords')) {
-				$this->ignoreSearchWordsCallback = array($class, 'getIgnoreSearchWords');
+			if (method_exists($class, 'getPluralSuffixes')) {
+				$this->pluralSufficesCallback = array($class, 'getPluralSuffixes');
+			}
+			if (method_exists($class, 'getIgnoredSearchWords')) {
+				$this->ignoredSearchWordsCallback = array($class, 'getIgnoredSearchWords');
+			}
+			if (method_exists($class, 'getLowerLimitSearchWord')) {
+				$this->lowerLimitSearchWordCallback = array($class, 'getLowerLimitSearchWord');
+			}
+			if (method_exists($class, 'getUpperLimitSearchWord')) {
+				$this->upperLimitSearchWordCallback = array($class, 'getUpperLimitSearchWord');
+			}
+			if (method_exists($class, 'getSearchDisplayedCharactersNumber')) {
+				$this->searchDisplayedCharactersNumberCallback = array($class, 'getSearchDisplayedCharactersNumber');
 			}
 		}
 
@@ -216,10 +256,12 @@ class JLanguage extends JObject
 	 *
 	 * @param	string		$string	The string to translate
 	 * @param	boolean	$jsSafe		Make the result javascript safe
+	 * @param	boolean	$interpreteBackslashes		Interprete \t and \n
 	 * @return	string	The translation of the string
+	 * @note	The function check if $jsSafe is true then if $interpreteBackslashes is true
 	 * @since	1.5
 	 */
-	public function _($string, $jsSafe = false)
+	public function _($string, $jsSafe = false, $interpreteBackSlashes = true)
 	{
 		$key = strtoupper($string);
 		if (isset ($this->strings[$key])) {
@@ -251,7 +293,12 @@ class JLanguage extends JObject
 		}
 
 		if ($jsSafe) {
+			// javascript filter
 			$string = addslashes($string);
+		}
+		elseif ($interpreteBackSlashes) {
+			// interprete \n and \t characters
+			$string = str_replace(array('\\\\','\t','\n'),array("\\", "\t","\n"),$string);
 		}
 
 		return $string;
@@ -314,7 +361,7 @@ class JLanguage extends JObject
 	 * @return	array	The array of suffices
 	 * @since	1.6
 	 */
-	public function getPluralSuffices($count) {
+	public function getPluralSuffixes($count) {
 		if ($this->pluralSufficesCallback !== null) {
 			return call_user_func($this->pluralSufficesCallback, $count);
 		}
@@ -329,7 +376,7 @@ class JLanguage extends JObject
 	 * @return      string|function Function name or the actual function for PHP 5.3
 	 * @since       1.6
 	 */
-	public function getPluralSufficesCallback() {
+	public function getPluralSuffixesCallback() {
 		return $this->pluralSufficesCallback;
 	}
 
@@ -346,16 +393,16 @@ class JLanguage extends JObject
 	}
 
 	/**
-	 * getIgnoreSearchWords function
+	 * getIgnoredSearchWords function
 	 *
-	 * This method return an array of ignored search words
+	 * This method returns an array of ignored search words
 	 *
 	 * @return	array	The array of ignored search words
 	 * @since	1.6
 	 */
-	public function getIgnoreSearchWords() {
-		if ($this->ignoreSearchWordsCallback !== null) {
-			return call_user_func($this->ignoreSearchWordsCallback);
+	public function getIgnoredSearchWords() {
+		if ($this->ignoredSearchWordsCallback !== null) {
+			return call_user_func($this->ignoredSearchWordsCallback);
 		}
 		else {
 			return array();
@@ -363,24 +410,141 @@ class JLanguage extends JObject
 	}
 
 	/**
-	 * Getter for ignoreSearchWordsCallback function
+	 * Getter for ignoredSearchWordsCallback function
 	 *
 	 * @return      string|function Function name or the actual function for PHP 5.3
 	 * @since       1.6
 	 */
-	public function getIgnoreSearchWordsCallback() {
-		return $this->ignoreSearchWordsCallback;
+	public function getIgnoredSearchWordsCallback() {
+		return $this->ignoredSearchWordsCallback;
 	}
 
 	/**
-	 * Set the ignoreSearchWords function
+	 * Setter for the ignoredSearchWordsCallback function
 	 *
 	 * @return      string|function Function name or the actual function for PHP 5.3
 	 * @since       1.6
 	 */
-	public function setIgnoreSearchWordsCallback($function) {
-		$previous = $this->ignoreSearchWordsCallback;
-		$this->ignoreSearchWordsCallback = $function;
+	public function setIgnoredSearchWordsCallback($function) {
+		$previous = $this->ignoredSearchWordsCallback;
+		$this->ignoredSearchWordsCallback = $function;
+		return $previous;
+	}
+
+	/**
+	 * getLowerLimitSearchWord function
+	 *
+	 * This method returns a lower limit integer for length of search words
+	 *
+	 * @return	integer	The lower limit integer for length of search words (3 if no value was set for a specific language)
+	 * @since	1.6
+	 */
+	public function getLowerLimitSearchWord() {
+		if ($this->lowerLimitSearchWordCallback !== null) {
+			return call_user_func($this->lowerLimitSearchWordCallback);
+		}
+		else {
+			return 3;
+		}
+	}
+
+	/**
+	 * Getter for lowerLimitSearchWordCallback function
+	 *
+	 * @return      string|function Function name or the actual function for PHP 5.3
+	 * @since       1.6
+	 */
+	public function getLowerLimitSearchWordCallback() {
+		return $this->lowerLimitSearchWordCallback;
+	}
+
+	/**
+	 * Setter for the lowerLimitSearchWordCallback function
+	 *
+	 * @return      string|function Function name or the actual function for PHP 5.3
+	 * @since       1.6
+	 */
+	public function setLowerLimitSearchWordCallback($function) {
+		$previous = $this->lowerLimitSearchWordCallback;
+		$this->lowerLimitSearchWordCallback = $function;
+		return $previous;
+	}
+
+	/**
+	 * getUpperLimitSearchWord function
+	 *
+	 * This method returns an upper limit integer for length of search words
+	 *
+	 * @return	integer	The upper limit integer for length of search words (20 if no value was set for a specific language)
+	 * @since	1.6
+	 */
+	public function getUpperLimitSearchWord() {
+		if ($this->upperLimitSearchWordCallback !== null) {
+			return call_user_func($this->upperLimitSearchWordCallback);
+		}
+		else {
+			return 20;
+		}
+	}
+
+	/**
+	 * Getter for upperLimitSearchWordCallback function
+	 *
+	 * @return      string|function Function name or the actual function for PHP 5.3
+	 * @since       1.6
+	 */
+	public function getUpperLimitSearchWordCallback() {
+		return $this->upperLimitSearchWordCallback;
+	}
+
+	/**
+	 * Setter for the upperLimitSearchWordCallback function
+	 *
+	 * @return      string|function Function name or the actual function for PHP 5.3
+	 * @since       1.6
+	 */
+	public function setUpperLimitSearchWordCallback($function) {
+		$previous = $this->upperLimitSearchWordCallback;
+		$this->upperLimitSearchWordCallback = $function;
+		return $previous;
+	}
+
+	/**
+	 * getSearchDisplayedCharactersNumber function
+	 *
+	 * This method returns the number of characters displayed during research
+	 *
+	 * @return	integer	The number of characters displayed during research (200 if no value was set for a specific language)
+	 * @since	1.6
+	 */
+	public function getSearchDisplayedCharactersNumber() {
+		if ($this->searchDisplayedCharactersNumberCallback !== null) {
+			return call_user_func($this->searchDisplayedCharactersNumberCallback);
+		}
+		else {
+			return 200;
+		}
+	}
+
+	/**
+	 * Getter for searchDisplayedCharactersNumberCallback function
+	 *
+	 * @return      string|function Function name or the actual function for PHP 5.3
+	 * @since       1.6
+	 */
+	public function getSearchDisplayedCharactersNumberCallback() {
+		return $this->searchDisplayedCharactersNumberCallback;
+	}
+
+	/**
+	 * Setter for the searchDisplayedCharactersNumberCallback function
+	 *
+	 * @return      string|function Function name or the actual function for PHP 5.3
+	 * @since       1.6
+	 */
+	public function setSearchDisplayedCharactersNumberCallback($function) {
+		$previous = $this->searchDisplayedCharactersNumberCallback;
+		$this->searchDisplayedCharactersNumberCallback = $function;
 		return $previous;
 	}
 
@@ -515,50 +679,84 @@ class JLanguage extends JObject
 	/**
 	 * Parses a language file
 	 *
-	 * @param	string The name of the file
+	 * @param	string	$filename	The name of the file.
+	 *
+	 * @return	array	The array of parsed strings.
 	 * @since	1.6
 	 */
 	protected function parse($filename)
 	{
 		$version = phpversion();
-		if($version >= "5.3.1") {
+
+		// Capture hidden PHP errors from the parsing.
+		$php_errormsg	= null;
+		$track_errors	= ini_get('track_errors');
+		ini_set('track_errors', true);
+
+		if ($version >= '5.3.1') {
 			$contents = file_get_contents($filename);
 			$contents = str_replace('_QQ_','"\""',$contents);
-			$strings = (array) @parse_ini_string($contents);
-		} else {
-			$strings = (array) @parse_ini_file($filename);
-			if ($version == "5.3.0") {
+			$strings = @parse_ini_string($contents);
+		}
+		else {
+			$strings = @parse_ini_file($filename);
+			if ($version == '5.3.0' && is_array($strings)) {
 				foreach($strings as $key => $string) {
 					$strings[$key]=str_replace('_QQ_','"',$string);
 				}
 			}
 		}
+
+		// Restore error tracking to what it was before.
+		ini_set('track_errors',$track_errors);
+
+		if (!is_array($strings)) {
+			$strings = array();
+		}
+
 		if ($this->debug) {
+			// Initialise variables for manually parsing the file for common errors.
+			$blacklist	= array('YES','NO','NULL','FALSE','ON','OFF','NONE','TRUE');
+			$regex		= '/^(|(\[[^\]]*\])|([A-Z][A-Z0-9_\-]*\s*=(\s*(("[^"]*")|(_QQ_)))+))\s*(;.*)?$/';
 			$this->debug = false;
-			$errors = array();
-			$lineNumber = 0;
-			$stream = new JStream();
+			$errors		= array();
+			$lineNumber	= 0;
+
+			// Open the file as a stream.
+			$stream		= new JStream();
 			$stream->open($filename);
-			while(!$stream->eof())
+
+			while (!$stream->eof())
 			{
 				$line = $stream->gets();
 				$lineNumber++;
-				if (!preg_match('/^(|(\[[^\]]*\])|([A-Z][A-Z0-9_\-]*\s*=(\s*(("[^"]*")|(_QQ_)))+))\s*(;.*)?$/',$line))
-				{
+
+				// Check that the key is not in the blacklist and that the line format passes the regex.
+				$key = strtoupper(trim(substr($line, 0, strpos($line, '='))));
+				if (!preg_match($regex, $line) || in_array($key, $blacklist)) {
 					$errors[] = $lineNumber;
 				}
 			}
+
 			$stream->close();
+
+			// Check if we encountered any errors.
 			if (count($errors)) {
-				if (basename($filename)!=$this->lang.'.ini') {
-					$this->errorfiles[$filename] = $filename.JText::sprintf('JERROR_PARSING_LANGUAGE_FILE',implode(', ',$errors));
+				if (basename($filename) != $this->lang.'.ini') {
+					$this->errorfiles[$filename] = $filename.JText::sprintf('JERROR_PARSING_LANGUAGE_FILE', implode(', ', $errors));
 				}
 				else {
-					$this->errorfiles[$filename] = $filename . '&nbsp;: error(s) in line(s) ' . implode(', ',$errors);
+					$this->errorfiles[$filename] = $filename . '&#160;: error(s) in line(s) ' . implode(', ', $errors);
 				}
 			}
+			else if ($php_errormsg) {
+				// We didn't find any errors but there's probably a parse notice.
+				$this->errorfiles['PHP'.$filename] = 'PHP parser errors :'.$php_errormsg;
+			}
+
 			$this->debug = true;
 		}
+
 		return $strings;
 	}
 

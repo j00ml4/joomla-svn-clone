@@ -248,7 +248,7 @@ class JPagination extends JObject
 	 */
 	public function getPagesLinks()
 	{
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Build the page navigation list.
 		$data = $this->_buildDataObject();
@@ -389,7 +389,7 @@ class JPagination extends JObject
 
 		// Build the select list.
 		if ($app->isAdmin()) {
-			$html = JHtml::_('select.genericlist',  $limits, $this->prefix . 'limit', 'class="inputbox" size="1" onchange="submitform();"', 'value', 'text', $selected);
+			$html = JHtml::_('select.genericlist',  $limits, $this->prefix . 'limit', 'class="inputbox" size="1" onchange="Joomla.submitform();"', 'value', 'text', $selected);
 		}
 		else {
 			$html = JHtml::_('select.genericlist',  $limits, $this->prefix . 'limit', 'class="inputbox" size="1" onchange="this.form.submit()"', 'value', 'text', $selected);
@@ -400,68 +400,55 @@ class JPagination extends JObject
 	/**
 	 * Return the icon to move an item UP.
 	 *
-	 * @param	integer	The row index.
-	 * @param	boolean	True to show the icon.
-	 * @param	string	The task to fire.
-	 * @param	string	The image alternate text string.
+	 * @param	int				$i			The row index.
+	 * @param	boolean			$condition	True to show the icon.
+	 * @param	string			$task		The task to fire.
+	 * @param	string			$alt		The image alternative text string.
+	 * @param	boolean			$enabled	An optional setting for access control on the action.
+	 * @param	string			$checkbox	An optional prefix for checkboxes.
+	 *
 	 * @return	string	Either the icon to move an item up or a space.
 	 * @since	1.0
 	 */
-	public function orderUpIcon($i, $condition = true, $task = 'orderup', $alt = 'JLIB_HTML_MOVE_UP', $enabled = true)
+	public function orderUpIcon($i, $condition = true, $task = 'orderup', $alt = 'JLIB_HTML_MOVE_UP', $enabled = true, $checkbox='cb')
 	{
-		$alt = JText::_($alt);
-
-		$html = '&nbsp;';
-		if (($i > 0 || ($i + $this->limitstart > 0)) && $condition)
-		{
-			if ($enabled) {
-				$html	= '<a href="#reorder" onclick="return listItemTask(\'cb'.$i.'\',\''.$task.'\')" title="'.$alt.'">';
-				$html	.= JHTML::_('image','admin/uparrow.png', $alt, array( 'width' => 16, 'height' => 16, 'border' => 0), true);
-				$html	.= '</a>';
-			}
-			else {
-				$html	= JHTML::_('image','admin/uparrow0.png', $alt, array( 'width' => 16, 'height' => 16, 'border' => 0), true);
-			}
+		if (($i > 0 || ($i + $this->limitstart > 0)) && $condition) {
+			return JHtml::_('jgrid.orderUp', $i, $task, '', $alt, $enabled, $checkbox);
 		}
-
-		return $html;
+		else {
+			return '&#160;';
+		}
 	}
 
 	/**
 	 * Return the icon to move an item DOWN.
 	 *
-	 * @param	int		The row index.
-	 * @param	int		The number of items in the list.
-	 * @param	boolean	True to show the icon.
-	 * @param	string	The task to fire.
-	 * @param	string	The image alternate text string.
+	 * @param	int				$i			The row index.
+	 * @param	int				$n			The number of items in the list.
+	 * @param	boolean			$condition	True to show the icon.
+	 * @param	string			$task		The task to fire.
+	 * @param	string			$alt		The image alternative text string.
+	 * @param	boolean			$enabled	An optional setting for access control on the action.
+	 * @param	string			$checkbox	An optional prefix for checkboxes.
+	 *
 	 * @return	string	Either the icon to move an item down or a space.
 	 * @since	1.0
 	 */
-	public function orderDownIcon($i, $n, $condition = true, $task = 'orderdown', $alt = 'JLIB_HTML_MOVE_DOWN', $enabled = true)
+	public function orderDownIcon($i, $n, $condition = true, $task = 'orderdown', $alt = 'JLIB_HTML_MOVE_DOWN', $enabled = true, $checkbox='cb')
 	{
-		$alt = JText::_($alt);
-
-		$html = '&nbsp;';
-		if (($i < $n -1 || $i + $this->limitstart < $this->total - 1) && $condition)
-		{
-			if ($enabled) {
-				$html	= '<a href="#reorder" onclick="return listItemTask(\'cb'.$i.'\',\''.$task.'\')" title="'.$alt.'">';
-				$html	.= JHTML::_('image','admin/downarrow.png', $alt, array( 'width' => 16, 'height' => 16, 'border' =>0), true);
-				$html	.= '</a>';
-			} else {
-				$html	= JHTML::_('image','admin/downarrow0.png', $alt, array( 'width' => 16, 'height' => 16, 'border' => 0), true);
-			}
+		if (($i < $n -1 || $i + $this->limitstart < $this->total - 1) && $condition) {
+			return JHtml::_('jgrid.orderDown', $i, $task, '', $alt, $enabled, $checkbox);
 		}
-
-		return $html;
+		else {
+			return '&#160;';
+		}
 	}
 
 	protected function _list_footer($list)
 	{
 		$html = "<div class=\"list-footer\">\n";
 
-		$html .= "\n<div class=\"limit\">".JText::_('JLIB_HTML_DISPLAY_NUM').$list['limitfield']."</div>";
+		$html .= "\n<div class=\"limit\">".JText::_('JGLOBAL_DISPLAY_NUM').$list['limitfield']."</div>";
 		$html .= $list['pageslinks'];
 		$html .= "\n<div class=\"counter\">".$list['pagescounter']."</div>";
 
@@ -489,14 +476,14 @@ class JPagination extends JObject
 
 	protected function _item_active(&$item)
 	{
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
 		if ($app->isAdmin())
 		{
 			if ($item->base > 0) {
-				return "<a title=\"".$item->text."\" onclick=\"javascript: document.adminForm.." . $this->prefix . "limitstart.value=".$item->base."; submitform();return false;\">".$item->text."</a>";
+				return "<a title=\"".$item->text."\" onclick=\"javascript: document.adminForm.." . $this->prefix . "limitstart.value=".$item->base."; Joomla.submitform();return false;\">".$item->text."</a>";
 			}
 			else {
-				return "<a title=\"".$item->text."\" onclick=\"javascript: document.adminForm.." . $this->prefix . "limitstart.value=0; submitform();return false;\">".$item->text."</a>";
+				return "<a title=\"".$item->text."\" onclick=\"javascript: document.adminForm.." . $this->prefix . "limitstart.value=0; Joomla.submitform();return false;\">".$item->text."</a>";
 			}
 		}
 		else {
@@ -506,7 +493,7 @@ class JPagination extends JObject
 
 	protected function _item_inactive(&$item)
 	{
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
 		if ($app->isAdmin()) {
 			return "<span>".$item->text."</span>";
 		}

@@ -74,7 +74,7 @@ class JControllerForm extends JController
 		if (empty($this->context)) {
 			$r = null;
 			if (!preg_match('/(.*)Controller(.*)/i', get_class($this), $r)) {
-				JError::raiseError(500, 'JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME');
+				JError::raiseError(500, JText::_('JLIB_APPLICATION_ERROR_CONTROLLER_GET_NAME'));
 			}
 			$this->context = strtolower($r[2]);
 		}
@@ -138,7 +138,7 @@ class JControllerForm extends JController
 		// Access check.
 		if (!$this->allowAdd()) {
 			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
-			return JError::raiseWarning(403, 'JLIB_APPLICATION_ERROR_CREATE_RECORD_NOT_PERMITTED');
+			return JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_CREATE_RECORD_NOT_PERMITTED'));
 		}
 
 		// Clear the record edit information from the session.
@@ -209,7 +209,7 @@ class JControllerForm extends JController
 
 		// Initialise variables.
 		$app		= JFactory::getApplication();
-		$model		= &$this->getModel();
+		$model		= $this->getModel();
 		$table		= $model->getTable();
 		$checkin	= property_exists($table, 'checked_out');
 		$context	= "$this->option.edit.$this->context";
@@ -246,8 +246,14 @@ class JControllerForm extends JController
 
 	/**
 	 * This controller does not have a display method. Redirect back to the list view of the component.
+	 *
+	 * @param	boolean			If true, the view output will be cached
+	 * @param	array			An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return	void
+	 * @since	1.5
 	 */
-	public function display()
+	public function display($cachable = false, $urlparams = false)
 	{
 		$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
 	}
@@ -284,7 +290,7 @@ class JControllerForm extends JController
 		$key		= $table->getKeyName();
 		if (!$this->allowEdit(array($key => $recordId), $key)) {
 			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
-			return JError::raiseWarning(403, 'JLIB_APPLICATION_ERROR_EDIT_NOT_PERMITTED');
+			return JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_EDIT_NOT_PERMITTED'));
 		}
 
 		// If record ids do not match, checkin previous record.
@@ -331,7 +337,22 @@ class JControllerForm extends JController
 	}
 
 	/**
+	 * Function that allows child controller access to model data after the data has been saved.
+	 *
+	 * @param	JModel	$model	The data model object.
+	 *
+	 * @return	void
+	 * @since	1.6
+	 */
+	protected function postSaveHook(JModel &$model)
+	{
+	}
+
+	/**
 	 * Method to save a record.
+	 *
+	 * @return	boolean
+	 * @since	1.6
 	 */
 	public function save()
 	{
@@ -375,36 +396,39 @@ class JControllerForm extends JController
 			}
 
 			// Reset the ID and then treat the request as for Apply.
-			$data['id']	= 0;
+			$data[$key]	= 0;
 			$task		= 'apply';
 		}
 
 		// Access check.
 		if (!$this->allowSave($data)) {
 			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
-			return JError::raiseWarning(403, 'JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED');
+			return JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_SAVE_NOT_PERMITTED'));
 		}
 
 		// Validate the posted data.
 		// Sometimes the form needs some posted data, such as for plugins and modules.
-		$form = $model->getForm($data);
+		$form = $model->getForm($data, false);
+
 		if (!$form) {
 			JError::raiseError(500, $model->getError());
 			return false;
 		}
-		$data = $model->validate($form, $data);
+
+		// Test if the data is valid.
+		$validData = $model->validate($form, $data);
 
 		// Check for validation errors.
-		if ($data === false) {
+		if ($validData === false) {
 			// Get the validation messages.
 			$errors	= $model->getErrors();
 
 			// Push up to three validation messages out to the user.
 			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
 				if (JError::isError($errors[$i])) {
-					$app->enqueueMessage($errors[$i]->getMessage(), 'notice');
+					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				} else {
-					$app->enqueueMessage($errors[$i], 'notice');
+					$app->enqueueMessage($errors[$i], 'warning');
 				}
 			}
 
@@ -417,20 +441,20 @@ class JControllerForm extends JController
 		}
 
 		// Attempt to save the data.
-		if (!$model->save($data)) {
+		if (!$model->save($validData)) {
 			// Save the data in the session.
-			$app->setUserState($context.'.data', $data);
+			$app->setUserState($context.'.data', $validData);
 
 			// Redirect back to the edit screen.
-			$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'notice');
+			$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'warning');
 			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_item.$append, false));
 			return false;
 		}
 
 		// Save succeeded, check-in the record.
-		if ($checkin && !$model->checkin($data[$key])) {
+		if ($checkin && !$model->checkin($validData[$key])) {
 			// Save the data in the session.
-			$app->setUserState($context.'.data', $data);
+			$app->setUserState($context.'.data', $validData);
 
 			// Check-in failed, go back to the record and display a notice.
 			$message = JText::sprintf('JError_Checkin_saved', $model->getError());
@@ -469,6 +493,9 @@ class JControllerForm extends JController
 				$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list, false));
 				break;
 		}
+
+		// Invoke the postSave method to allow for the child class to access the model.
+		$this->postSaveHook($model);
 
 		return true;
 	}

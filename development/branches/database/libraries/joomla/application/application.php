@@ -76,7 +76,7 @@ class JApplication extends JObject
 	/**
 	 * Class constructor.
 	 *
-	 * @param	integer	A client identifier.
+	 * @param	integer	$config	A client identifier.
 	 * @since	1.5
 	 */
 	public function __construct($config = array())
@@ -121,9 +121,9 @@ class JApplication extends JObject
 	 * Returns the global JApplication object, only creating it if it
 	 * doesn't already exist.
 	 *
-	 * @param	mixed		A client identifier or name.
-	 * @param	array		An optional associative array of configuration settings.
-	 * @return	JApplication	The appliction object.
+	 * @param	mixed			$client	A client identifier or name.
+	 * @param	array			$config	An optional associative array of configuration settings.
+	 * @return	JApplication	$prefix	The appliction object.
 	 * @since	1.5
 	 */
 	public static function getInstance($client, $config = array(), $prefix = 'J')
@@ -137,7 +137,7 @@ class JApplication extends JObject
 		if (empty($instances[$client])) {
 			// Load the router object.
 			jimport('joomla.application.helper');
-			$info = &JApplicationHelper::getClientInfo($client, true);
+			$info = JApplicationHelper::getClientInfo($client, true);
 
 			$path = $info->path.DS.'includes'.DS.'application.php';
 			if (file_exists($path)) {
@@ -146,7 +146,8 @@ class JApplication extends JObject
 				// Create a JRouter object.
 				$classname = $prefix.ucfirst($client);
 				$instance = new $classname($config);
-			} else {
+			}
+			else {
 				$error = JError::raiseError(500, JText::sprintf('JLIB_APPLICATION_ERROR_APPLICATION_LOAD', $client));
 				return $error;
 			}
@@ -201,7 +202,7 @@ class JApplication extends JObject
 		// Get the full request URI.
 		$uri	= clone JURI::getInstance();
 
-		$router = &$this->getRouter();
+		$router = $this->getRouter();
 		$result = $router->parse($uri);
 
 		JRequest::set($result, 'get', false);
@@ -218,9 +219,12 @@ class JApplication extends JObject
 	 * mapping them to a component. If the component does not exist, it handles
 	 * determining a default component to dispatch.
 	 *
+	 * @param	string	$component	The component to dispatch.
+	 *
+	 * @return	void
 	 * @since	1.5
 	 */
-	public function dispatch($component)
+	public function dispatch($component = null)
 	{
 		$document = JFactory::getDocument();
 
@@ -254,7 +258,7 @@ class JApplication extends JObject
 		);
 
 		// Parse the document.
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 		$document->parse($params);
 
 		// Trigger the onBeforeRender event.
@@ -262,7 +266,8 @@ class JApplication extends JObject
 		$this->triggerEvent('onBeforeRender');
 
 		// Render the document.
-		JResponse::setBody($document->render($this->getCfg('caching'), $params));
+		$caching = ($this->getCfg('caching') >= 2) ? true : false;
+		JResponse::setBody($document->render($caching, $params));
 
 		// Trigger the onAfterRender event.
 		$this->triggerEvent('onAfterRender');
@@ -311,12 +316,14 @@ class JApplication extends JObject
 		// We could validly start with something else (e.g. ftp), though this would
 		// be unlikely and isn't supported by this API.
 		if (!preg_match('#^http#i', $url)) {
-			$uri = &JURI::getInstance();
+			$uri = JURI::getInstance();
 			$prefix = $uri->toString(Array('scheme', 'user', 'pass', 'host', 'port'));
+
 			if ($url[0] == '/') {
 				// We just need the prefix since we have a path relative to the root.
 				$url = $prefix . $url;
-			} else {
+			}
+			else {
 				// It's relative to where we are now, so lets add that.
 				$parts = explode('/', $uri->toString(Array('path')));
 				array_pop($parts);
@@ -333,7 +340,7 @@ class JApplication extends JObject
 
 		// Persist messages if they exist.
 		if (count($this->_messageQueue)) {
-			$session = &JFactory::getSession();
+			$session = JFactory::getSession();
 			$session->set('application.queue', $this->_messageQueue);
 		}
 
@@ -341,9 +348,17 @@ class JApplication extends JObject
 		// so we will output a javascript redirect statement.
 		if (headers_sent()) {
 			echo "<script>document.location.href='$url';</script>\n";
-		} else {
-			header($moved ? 'HTTP/1.1 301 Moved Permanently' : 'HTTP/1.1 303 See other');
-			header('Location: '.$url);
+		}
+		else {
+			if (!$moved && strstr(strtolower($_SERVER['HTTP_USER_AGENT']),'webkit') !== false) {
+				// WebKit browser - Do not use 303, as it causes subresources reload (https://bugs.webkit.org/show_bug.cgi?id=38690)
+				echo '<html><head><meta http-equiv="refresh" content="0;'. $url .'" /></head><body></body></html>';
+			}
+			else {
+				// All other browsers, use the more efficient HTTP header method
+				header($moved ? 'HTTP/1.1 301 Moved Permanently' : 'HTTP/1.1 303 See other');
+				header('Location: '.$url);
+			}
 		}
 		$this->close();
 	}
@@ -360,8 +375,9 @@ class JApplication extends JObject
 	{
 		// For empty queue, if messages exists in the session, enqueue them first.
 		if (!count($this->_messageQueue)) {
-			$session = &JFactory::getSession();
+			$session = JFactory::getSession();
 			$sessionQueue = $session->get('application.queue');
+
 			if (count($sessionQueue)) {
 				$this->_messageQueue = $sessionQueue;
 				$session->set('application.queue', null);
@@ -381,8 +397,9 @@ class JApplication extends JObject
 	{
 		// For empty queue, if messages exists in the session, enqueue them.
 		if (!count($this->_messageQueue)) {
-			$session = &JFactory::getSession();
+			$session = JFactory::getSession();
 			$sessionQueue = $session->get('application.queue');
+
 			if (count($sessionQueue)) {
 				$this->_messageQueue = $sessionQueue;
 				$session->set('application.queue', null);
@@ -439,11 +456,13 @@ class JApplication extends JObject
 	 */
 	public function getUserState($key)
 	{
-		$session	= &JFactory::getSession();
+		$session	= JFactory::getSession();
 		$registry	= $session->get('registry');
+
 		if (!is_null($registry)) {
 			return $registry->get($key);
 		}
+
 		return null;
 	}
 
@@ -459,9 +478,11 @@ class JApplication extends JObject
 	{
 		$session	= JFactory::getSession();
 		$registry	= $session->get('registry');
+
 		if (!is_null($registry)) {
 			return $registry->set($key, $value);
 		}
+
 		return null;
 	}
 
@@ -484,7 +505,8 @@ class JApplication extends JObject
 		// Save the new value only if it was set in this request.
 		if ($new_state !== null) {
 			$this->setUserState($key, $new_state);
-		} else {
+		}
+		else {
 			$new_state = $cur_state;
 		}
 
@@ -516,13 +538,14 @@ class JApplication extends JObject
 	function triggerEvent($event, $args=null)
 	{
 		$dispatcher = JDispatcher::getInstance();
+
 		return $dispatcher->trigger($event, $args);
 	}
 
 	/**
 	 * Login authentication function.
 	 *
-	 * Username and encoded password are passed the the onLoginUser event which
+	 * Username and encoded password are passed the the onUserLogin event which
 	 * is responsible for the user validation. A successful validation updates
 	 * the current session record with the users details.
 	 *
@@ -533,6 +556,7 @@ class JApplication extends JObject
 	 *
 	 * @param	array	Array('username' => string, 'password' => string)
 	 * @param	array	Array('remember' => boolean)
+	 *
 	 * @return	boolean True on success.
 	 * @since	1.5
 	 */
@@ -549,7 +573,7 @@ class JApplication extends JObject
 			JPluginHelper::importPlugin('user');
 
 			// OK, the credentials are authenticated.  Lets fire the onLogin event.
-			$results = $this->triggerEvent('onLoginUser', array((array)$response, $options));
+			$results = $this->triggerEvent('onUserLogin', array((array)$response, $options));
 
 			/*
 			 * If any of the user plugins did not successfully complete the login routine
@@ -577,12 +601,13 @@ class JApplication extends JObject
 					$cookie_path = $this->getCfg('cookie_path', '/');
 					setcookie( JUtility::getHash('JLOGIN_REMEMBER'), $rcookie, $lifetime, $cookie_path, $cookie_domain );
 				}
+
 				return true;
 			}
 		}
 
-		// Trigger onLoginFailure Event.
-		$this->triggerEvent('onLoginFailure', array((array)$response));
+		// Trigger onUserLoginFailure Event.
+		$this->triggerEvent('onUserLoginFailure', array((array)$response));
 
 		// If silent is set, just return false.
 		if (isset($options['silent']) && $options['silent']) {
@@ -596,7 +621,7 @@ class JApplication extends JObject
 	/**
 	 * Logout authentication function.
 	 *
-	 * Passed the current user information to the onLogoutUser event and reverts the current
+	 * Passed the current user information to the onUserLogout event and reverts the current
 	 * session record back to 'anonymous' parameters.
 	 *
 	 * @param	int		The user to load - Can be an integer or string - If string, it is converted to ID automatically
@@ -624,7 +649,7 @@ class JApplication extends JObject
 		JPluginHelper::importPlugin('user');
 
 		// OK, the credentials are built. Lets fire the onLogout event.
-		$results = $this->triggerEvent('onLogoutUser', array($parameters, $options));
+		$results = $this->triggerEvent('onUserLogout', array($parameters, $options));
 
 		/*
 		 * If any of the authentication plugins did not successfully complete
@@ -636,12 +661,13 @@ class JApplication extends JObject
 			// Use domain and path set in config for cookie if it exists.
 			$cookie_domain = $this->getCfg('cookie_domain', '');
 			$cookie_path = $this->getCfg('cookie_path', '/');
-			setcookie(JUtility::getHash('JLOGIN_REMEMBER'), false, time() - 86400, $cookie_path, $cookie_domain );
+			setcookie(JUtility::getHash('JLOGIN_REMEMBER'), false, time() - 86400, $cookie_path, $cookie_domain);
+
 			return true;
 		}
 
-		// Trigger onLoginFailure Event.
-		$this->triggerEvent('onLogoutFailure', array($parameters));
+		// Trigger onUserLoginFailure Event.
+		$this->triggerEvent('onUserLogoutFailure', array($parameters));
 
 		return false;
 	}
@@ -660,7 +686,9 @@ class JApplication extends JObject
 	/**
 	 * Returns the application JRouter object.
 	 *
-	 * @param	array	An optional associative array of configuration settings.
+	 * @param	string	$name		The name of the application.
+	 * @param	array	$options	An optional associative array of configuration settings.
+	 *
 	 * @return	JRouter
 	 * @since	1.5
 	 */
@@ -672,10 +700,12 @@ class JApplication extends JObject
 		}
 
 		jimport('joomla.application.router');
-		$router = &JRouter::getInstance($name, $options);
+		$router = JRouter::getInstance($name, $options);
+
 		if (JError::isError($router)) {
 			return null;
 		}
+
 		return $router;
 	}
 
@@ -690,19 +720,24 @@ class JApplication extends JObject
 	 */
 	static public function stringURLSafe($string)
 	{
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
+
 		if (self::getCfg('unicodeslugs') == 1) {
 			$output = JFilterOutput::stringURLUnicodeSlug($string);
-		} else {
+		}
+		else {
 			$output = JFilterOutput::stringURLSafe($string);
 		}
+
 		return $output;
 	}
 
 	/**
 	 * Returns the application JPathway object.
 	 *
+	 * @param	string	$name		The name of the application.
 	 * @param	array	$options	An optional associative array of configuration settings.
+	 *
 	 * @return	object JPathway.
 	 * @since	1.5
 	 */
@@ -713,17 +748,21 @@ class JApplication extends JObject
 		}
 
 		jimport('joomla.application.pathway');
-		$pathway = &JPathway::getInstance($name, $options);
+		$pathway = JPathway::getInstance($name, $options);
+
 		if (JError::isError($pathway)) {
 			return null;
 		}
+
 		return $pathway;
 	}
 
 	/**
 	 * Returns the application JPathway object.
 	 *
-	 * @param	array	An optional associative array of configuration settings.
+	 * @param	string	$name		The name of the application/client.
+	 * @param	array	$options	An optional associative array of configuration settings.
+	 *
 	 * @return	object	JMenu.
 	 * @since	1.5
 	 */
@@ -734,10 +773,12 @@ class JApplication extends JObject
 		}
 
 		jimport('joomla.application.menu');
-		$menu = &JMenu::getInstance($name, $options);
+		$menu = JMenu::getInstance($name, $options);
+
 		if (JError::isError($menu)) {
 			return null;
 		}
+
 		return $menu;
 	}
 
@@ -751,6 +792,7 @@ class JApplication extends JObject
 	public static function getHash($seed)
 	{
 		$conf = JFactory::getConfig();
+
 		return md5($conf->get('secret').$seed);
 	}
 
@@ -795,12 +837,15 @@ class JApplication extends JObject
 	{
 		$options = array();
 		$options['name'] = $name;
-		switch($this->_clientId) {
+
+		switch($this->_clientId)
+		{
 			case 0:
 				if ($this->getCfg('force_ssl') == 2) {
 					$options['force_ssl'] = true;
 				}
 				break;
+
 			case 1:
 				if ($this->getCfg('force_ssl') >= 1) {
 					$options['force_ssl'] = true;
@@ -895,7 +940,8 @@ class JApplication extends JObject
 	 * @since	1.5
 	 * @static
 	 */
-	static function isWinOS() {
+	static function isWinOS()
+	{
 		return strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
 	}
 
@@ -908,6 +954,7 @@ class JApplication extends JObject
 	public function __toString()
 	{
 		$compress = $this->getCfg('gzip', false);
+
 		return JResponse::toString($compress);
 	}
 }

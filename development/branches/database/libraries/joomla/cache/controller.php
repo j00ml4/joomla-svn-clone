@@ -3,13 +3,12 @@
  * @version		$Id:storage.php 6961 2007-03-15 16:06:53Z tcp $
  * @package		Joomla.Framework
  * @subpackage	Cache
+ * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
 // No direct access
 defined('JPATH_BASE') or die;
-
-
 
 /**
  * Public cache handler
@@ -20,21 +19,27 @@ defined('JPATH_BASE') or die;
  * @since		1.6
  */
 class JCacheController
-
 {
+	/**
+	 * @since	1.6
+	 */
 	public $cache;
+
+	/**
+	 * @since	1.6
+	 */
 	public $options;
 
 	/**
 	 * Constructor
 	 *
 	 * @param	array	$options	options
-	*/
-
-	public function __construct($options) {
-
-		$this->cache = new JCache($options);
-		$this->options = $this->cache->_options;
+	 * @since	1.6
+	 */
+	public function __construct($options)
+	{
+		$this->cache 	= new JCache($options);
+		$this->options 	= & $this->cache->_options;
 
 		// Overwrite default options with given options
 		foreach ($options AS $option=>$value) {
@@ -44,9 +49,12 @@ class JCacheController
 		}
 	}
 
-	public function __call ($name, $arguments) {
-
-		$nazaj = call_user_func_array (array ($this->cache,$name),$arguments);
+	/**
+	 * @since	1.6
+	 */
+	public function __call ($name, $arguments)
+	{
+		$nazaj = call_user_func_array (array ($this->cache, $name), $arguments);
 		return $nazaj;
 	}
 
@@ -65,10 +73,10 @@ class JCacheController
 
 		$class = 'JCacheController'.ucfirst($type);
 
-		if (!class_exists($class))
-		{
+		if (!class_exists($class)) {
 			// Search for the class file in the JCache include paths.
 			jimport('joomla.filesystem.path');
+
 			if ($path = JPath::find(JCacheController::addIncludePath(), strtolower($type).'.php')) {
 				require_once $path;
 			} else {
@@ -76,7 +84,7 @@ class JCacheController
 			}
 		}
 
-		return new $class($options); 
+		return new $class($options);
 	}
 
 	/**
@@ -87,15 +95,14 @@ class JCacheController
 	 * @since	1.6
 	 */
 	public function setCaching($enabled)
-	{
-		$this->options['caching'] = (bool) $enabled;
-		$this->cache->setCaching($enabled);
+	{	
+		$this->cache->setCaching($enabled);	
 	}
 
 	/**
 	 * Set cache lifetime
 	 *
-	 * @param	int	$lt	Cache lifetime
+	 * @param	int		$lt	Cache lifetime
 	 * @return	void
 	 * @since	1.6
 	 */
@@ -112,7 +119,6 @@ class JCacheController
 	 * @return	array	An array with directory elements
 	 * @since	1.6
 	 */
-
 	public static function addIncludePath($path='')
 	{
 		static $paths;
@@ -128,31 +134,61 @@ class JCacheController
 	}
 
 	/**
-	 * Store the cached data by id and group
+	 * Get stored cached data by id and group
 	 *
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
-	 * @param	mixed	$data	The data to store
-	 * @return	boolean	True if cache stored
+	 * @return	mixed	False on no result, cached object otherwise
 	 * @since	1.6
 	 */
 	public function get($id, $group=null)
-	{	$data = unserialize($this->cache->get($id, $group=null));
+	{
+		$data = false;
+		$data = $this->cache->get($id, $group);
+
+		if ($data === false) {
+			$locktest = new stdClass;
+			$locktest->locked = null;
+			$locktest->locklooped = null;
+			$locktest = $this->cache->lock($id, $group);
+			if ($locktest->locked == true && $locktest->locklooped == true) {
+				$data = $this->cache->get($id, $group);
+			}
+			if ($locktest->locked == true) $this->cache->unlock($id, $group);
+		}
+
+		// check again, we might got it from second attempt
+		if ($data !== false) {
+			$data = unserialize(trim($data));  // trim to fix unserialize errors
+		}
 		return $data;
 	}
 
 	/**
-	 * Store the cached data by id and group
+	 * Store data to cache by id and group
 	 *
 	 * @param	string	$id		The cache data id
 	 * @param	string	$group	The cache data group
 	 * @param	mixed	$data	The data to store
-	 * @return	boolean	True if cache stored
+	 * @return	boolean	True if cache was stored
 	 * @since	1.6
 	 */
 	public function store($data, $id, $group=null)
 	{
-		return $this->cache->store(serialize($data), $id, $group=null);
-	}
+		$locktest = new stdClass;
+		$locktest->locked = null;
+		$locktest->locklooped = null;
 
+		$locktest = $this->cache->lock($id, $group);
+
+		if ($locktest->locked == false && $locktest->locklooped == true) {
+			$locktest = $this->cache->lock($id, $group);
+		}
+
+		$sucess = $this->cache->store(serialize($data), $id,  $group);
+
+		if ($locktest->locked == true) $this->cache->unlock($id, $group);
+
+		return $sucess;
+	}
 }
