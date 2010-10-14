@@ -22,8 +22,6 @@ require_once dirname(__FILE__) . '/extension.php';
  */
 class InstallerModelManage extends InstallerModel
 {
-	protected $_context = 'com_installer.manage';
-
 	/**
 	 * Method to auto-populate the model state.
 	 *
@@ -33,22 +31,28 @@ class InstallerModelManage extends InstallerModel
 	 */
 	protected function populateState()
 	{
-		$app = JFactory::getApplication('administrator');
-		$this->setState($this->_context.'.message',$app->getUserState('com_installer.message'));
-		$this->setState($this->_context.'.extension_message',$app->getUserState('com_installer.extension_message'));
+		// Initialise variables.
+		$app = JFactory::getApplication();
+		$filters = JRequest::getVar('filters');
+		if (empty($filters)) {
+			$data = $app->getUserState($this->context.'.data');
+			$filters = $data['filters'];
+		}
+		else {
+			$app->setUserState($this->context.'.data', array('filters'=>$filters));
+		}
+
+		$this->setState($this->context.'.message',$app->getUserState('com_installer.message'));
+		$this->setState($this->context.'.extension_message',$app->getUserState('com_installer.extension_message'));
 		$app->setUserState('com_installer.message','');
 		$app->setUserState('com_installer.extension_message','');
-		$data = JRequest::getVar('filters');
-		if (empty($data)) {
-			$data = $app->getUserState('com_installer.manage.data', array());
-		} else {
-			$app->setUserState('com_installer.manage.data', $data);
-		}
-		$this->setState('filter.search', isset($data['search']['expr']) ? $data['search']['expr'] : '');
-		$this->setState('filter.hideprotected', isset($data['search']['hideprotected']) ? $data['search']['hideprotected'] : 0);
-		$this->setState('filter.type', isset($data['select']['type']) ? $data['select']['type'] : '');
-		$this->setState('filter.group', isset($data['select']['group']) ? $data['select']['group'] : '');
-		$this->setState('filter.client', isset($data['select']['client']) ? $data['select']['client'] : '');
+
+		$this->setState('filter.search', isset($filters['search']) ? $filters['search'] : '');
+		$this->setState('filter.hideprotected', isset($filters['hideprotected']) ? $filters['hideprotected'] : 0);
+		$this->setState('filter.enabled', isset($filters['enabled']) ? $filters['enabled'] : '');
+		$this->setState('filter.type', isset($filters['type']) ? $filters['type'] : '');
+		$this->setState('filter.group', isset($filters['group']) ? $filters['group'] : '');
+		$this->setState('filter.client_id', isset($filters['client_id']) ? $filters['client_id'] : '');
 		parent::populateState('name', 'asc');
 	}
 
@@ -82,7 +86,7 @@ class InstallerModelManage extends InstallerModel
 			// Enable the extension in the table and store it in the database
 			foreach($eid as $id) {
 				$table->load($id);
-				$table->enabled = $value || $table->protected;
+				$table->enabled = $value;
 				if (!$table->store()) {
 					$this->setError($table->getError());
 					$result = false;
@@ -149,7 +153,7 @@ class InstallerModelManage extends InstallerModel
 			}
 
 			// Get a database connector
-			$db = & JFactory::getDBO();
+			$db = JFactory::getDBO();
 
 			// Get an installer object for the extension type
 			jimport('joomla.installer.installer');
@@ -172,15 +176,22 @@ class InstallerModelManage extends InstallerModel
 					$failed[] = $id;
 				}
 			}
+			
+			$langstring = 'COM_INSTALLER_TYPE_'. strtoupper($row->type);
+			$rowtype = JText::_($langstring);
+			if(strpos($rowtype, $langstring) !== false) {
+				$rowtype = $row->type;
+			}
+			
 			if (count($failed)) {
 
 				// There was an error in uninstalling the package
-				$msg = JText::sprintf('COM_INSTALLER_UNINSTALL_ERROR', $row->type);
+				$msg = JText::sprintf('COM_INSTALLER_UNINSTALL_ERROR', $rowtype);
 				$result = false;
 			} else {
 
 				// Package uninstalled sucessfully
-				$msg = JText::sprintf('COM_INSTALLER_UNINSTALL_SUCCESS', $row->type);
+				$msg = JText::sprintf('COM_INSTALLER_UNINSTALL_SUCCESS', $rowtype);
 				$result = true;
 			}
 			$app = JFactory::getApplication();
@@ -204,8 +215,9 @@ class InstallerModelManage extends InstallerModel
 	 */
 	protected function getListQuery()
 	{
+		$enabled= $this->getState('filter.enabled');
 		$type = $this->getState('filter.type');
-		$client = $this->getState('filter.client');
+		$client = $this->getState('filter.client_id');
 		$group = $this->getState('filter.group');
 		$hideprotected = $this->getState('filter.hideprotected');
 		$query = new JDatabaseQuery;
@@ -214,6 +226,9 @@ class InstallerModelManage extends InstallerModel
 		$query->where('state=0');
 		if ($hideprotected) {
 			$query->where('protected!=1');
+		}
+		if ($enabled != '') {
+			$query->where('enabled=' . intval($enabled));
 		}
 		if ($type) {
 			$query->where('type=' . $this->_db->Quote($type));
@@ -238,19 +253,19 @@ class InstallerModelManage extends InstallerModel
 	/**
 	 * Method to get the row form.
 	 *
-	 * @return	mixed	JForm object on success, false on failure.
+	 * @param	array	$data		Data for the form.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	mixed	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
-		// Initialise variables.
-		$app = JFactory::getApplication();
-
 		// Get the form.
 		jimport('joomla.form.form');
+		$app = JFactory::getApplication();
 		JForm::addFormPath(JPATH_COMPONENT . '/models/forms');
 		JForm::addFieldPath(JPATH_COMPONENT . '/models/fields');
-		$form = JForm::getInstance('com_installer.manage', 'manage', array('control' => 'filters', 'event' => 'onPrepareForm'));
+		$form = JForm::getInstance('com_installer.manage', 'manage', array('load_data' => $loadData));
 
 		// Check for an error.
 		if ($form == false) {
@@ -258,7 +273,7 @@ class InstallerModelManage extends InstallerModel
 			return false;
 		}
 		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_installer.manage.data', array());
+		$data = $this->loadFormData();
 
 		// Bind the form data if present.
 		if (!empty($data)) {
@@ -266,5 +281,19 @@ class InstallerModelManage extends InstallerModel
 		}
 
 		return $form;
+	}
+
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_installer.manage.data', array());
+
+		return $data;
 	}
 }

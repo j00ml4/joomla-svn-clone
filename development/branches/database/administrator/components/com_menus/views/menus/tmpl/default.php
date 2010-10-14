@@ -15,20 +15,29 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 // Load the tooltip behavior.
 JHtml::_('behavior.tooltip');
 
-$uri	= &JFactory::getUri();
+$uri	= JFactory::getUri();
 $return	= base64_encode($uri);
+$user	= JFactory::getUser();
+$userId	= $user->get('id');
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_menus&view=menus');?>" method="post" name="adminForm">
+<script type="text/javascript">
+	function submitbutton(task) {
+		if (task != 'menus.delete' || confirm('<?php echo JText::_('COM_MENUS_MENU_CONFIRM_DELETE',true);?>')) {
+			Joomla.submitform(task);
+		}
+	}
+</script>
+<form action="<?php echo JRoute::_('index.php?option=com_menus&view=menus');?>" method="post" name="adminForm" id="adminForm">
 	<table class="adminlist">
 		<thead>
 			<tr>
-				<th width="20" rowspan="2">
-					<input type="checkbox" name="toggle" value="" onclick="checkAll(this)" />
+				<th width="1%" rowspan="2">
+					<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
 				</th>
 				<th rowspan="2">
-					<?php echo JHtml::_('grid.sort',  'JGRID_HEADING_TITLE', 'a.title', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder); ?>
 				</th>
 				<th width="30%" colspan="3">
 					<?php echo JText::_('COM_MENUS_HEADING_NUMBER_MENU_ITEMS'); ?>
@@ -60,7 +69,11 @@ $listDirn	= $this->state->get('list.direction');
 			</tr>
 		</tfoot>
 		<tbody>
-		<?php foreach ($this->items as $i => $item) : ?>
+		<?php foreach ($this->items as $i => $item) :
+			$canCreate	= $user->authorise('core.create',		'com_menus');
+			$canEdit	= $user->authorise('core.edit',			'com_menus');
+			$canChange	= $user->authorise('core.edit.state',	'com_menus');
+		?>
 			<tr class="row<?php echo $i % 2; ?>">
 				<td class="center">
 					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
@@ -68,9 +81,14 @@ $listDirn	= $this->state->get('list.direction');
 				<td>
 					<a href="<?php echo JRoute::_('index.php?option=com_menus&view=items&menutype='.$item->menutype) ?> ">
 						<?php echo $this->escape($item->title); ?></a>
-					<p class="smallsub">(<span><?php echo JText::_('COM_MENUS_MENU_MENUTYPE_LABEL') ?>:</span>
-						<?php echo '<a href="'. JRoute::_('index.php?option=com_menus&task=menu.edit&cid[]='.$item->id).' title='.$this->escape($item->description).'">'.
-						$this->escape($item->menutype).'</a>'; ?>)</p>
+					<p class="smallsub">(<span><?php echo JText::_('COM_MENUS_MENU_MENUTYPE_LABEL') ?></span>
+						<?php if ($canEdit) : ?>
+							<?php echo '<a href="'. JRoute::_('index.php?option=com_menus&task=menu.edit&cid[]='.$item->id).' title='.$this->escape($item->description).'">'.
+							$this->escape($item->menutype).'</a>'; ?>)
+						<?php else : ?>
+							<?php echo $this->escape($item->menutype)?>)
+						<?php endif; ?>
+					</p>
 				</td>
 				<td class="center btns">
 					<a href="<?php echo JRoute::_('index.php?option=com_menus&view=items&menutype='.$item->menutype.'&filter_published=1');?>">
@@ -85,17 +103,24 @@ $listDirn	= $this->state->get('list.direction');
 						<?php echo $item->count_trashed; ?></a>
 				</td>
 				<td class="left">
+				<ul>
 					<?php
 					if (isset($this->modules[$item->menutype])) :
 						foreach ($this->modules[$item->menutype] as &$module) :
 						?>
-						<a href="<?php echo JRoute::_('index.php?option=com_modules&task=module.edit&module_id='.$module->id.'&return='.$return);?>">
-							<?php echo $this->escape($module->title); ?></a>
-						<p class="smallsub">(<?php echo $this->escape($module->position);?>)</p>
+						<li>
+							<?php if ($canEdit) : ?>
+								<a class="modal" href="<?php echo JRoute::_('index.php?option=com_modules&task=module.edit&id='.$module->id.'&return='.$return.'&tmpl=component&layout=modal');?>" rel="{handler: 'iframe', size: {x: 1024, y: 450}}"  title="<?php echo JText::_('COM_MENUS_EDIT_MODULE_SETTINGS');?>">
+								<?php echo JText::sprintf('COM_MENUS_MODULE_ACCESS_POSITION', $this->escape($module->title), $this->escape($module->access_title), $this->escape($module->position)); ?></a>
+							<?php else :?>
+								<?php echo JText::sprintf('COM_MENUS_MODULE_ACCESS_POSITION', $this->escape($module->title), $this->escape($module->access_title), $this->escape($module->position)); ?>
+							<?php endif; ?>
+						</li>
 						<?php
 						endforeach;
 					endif;
 					?>
+					</ul>
 				</td>
 				<td class="center">
 					<?php echo $item->id; ?>
@@ -105,9 +130,11 @@ $listDirn	= $this->state->get('list.direction');
 		</tbody>
 	</table>
 
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<div>
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" />
+		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+		<?php echo JHtml::_('form.token'); ?>
+	</div>
 </form>

@@ -13,74 +13,78 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+$canDo	= BannersHelper::getActions();
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'client.cancel' || document.formvalidator.isValid(document.id('client-form'))) {
-			submitform(task);
+			Joomla.submitform(task, document.getElementById('client-form'));
 		}
-		// @todo Deal with the editor methods
-		submitform(task);
 	}
-// -->
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_banners'); ?>" method="post" name="adminForm" id="client-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_banners'); ?>" method="post" name="adminForm" id="client-form" class="form-validate">
 
-<div class="width-50 fltlft">
+<div class="width-60 fltlft">
 	<fieldset class="adminform">
 		<legend><?php echo empty($this->item->id) ? JText::_('COM_BANNERS_NEW_CLIENT') : JText::sprintf('COM_BANNERS_EDIT_CLIENT', $this->item->id); ?></legend>
-				<?php echo $this->form->getLabel('name'); ?>
-				<?php echo $this->form->getInput('name'); ?>
+		<ul class="adminformlist">
+				<li><?php echo $this->form->getLabel('name'); ?>
+				<?php echo $this->form->getInput('name'); ?></li>
 
-				<?php echo $this->form->getLabel('contact'); ?>
-				<?php echo $this->form->getInput('contact'); ?>
+				<li><?php echo $this->form->getLabel('contact'); ?>
+				<?php echo $this->form->getInput('contact'); ?></li>
 
-				<?php echo $this->form->getLabel('email'); ?>
-				<?php echo $this->form->getInput('email'); ?>
+				<li><?php echo $this->form->getLabel('email'); ?>
+				<?php echo $this->form->getInput('email'); ?></li>
 
-				<?php echo $this->form->getLabel('state'); ?>
-				<?php echo $this->form->getInput('state'); ?>
+				<?php if ($canDo->get('core.edit.state')) { ?>
+						<li><?php echo $this->form->getLabel('state'); ?>
+						<?php echo $this->form->getInput('state'); ?></li>
+				<?php }?>		
 
-				<?php echo $this->form->getLabel('purchase_type'); ?>
-				<?php echo $this->form->getInput('purchase_type'); ?>
+				<li><?php echo $this->form->getLabel('purchase_type'); ?>
+				<?php echo $this->form->getInput('purchase_type'); ?></li>
 
-				<?php echo $this->form->getLabel('track_impressions'); ?>
-				<?php echo $this->form->getInput('track_impressions'); ?>
+				<li><?php echo $this->form->getLabel('track_impressions'); ?>
+				<?php echo $this->form->getInput('track_impressions'); ?></li>
 
-				<?php echo $this->form->getLabel('track_clicks'); ?>
-				<?php echo $this->form->getInput('track_clicks'); ?>
+				<li><?php echo $this->form->getLabel('track_clicks'); ?>
+				<?php echo $this->form->getInput('track_clicks'); ?></li>
 
-				<?php echo $this->form->getLabel('id'); ?>
-				<?php echo $this->form->getInput('id'); ?>
-
+				<li><?php echo $this->form->getLabel('id'); ?>
+				<?php echo $this->form->getInput('id'); ?></li>
+		</ul>
 
 	</fieldset>
 </div>
 
-<div class="width-50 fltrt">
+<div class="width-40 fltrt">
 	<?php echo JHtml::_('sliders.start','banner-client-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
 
-	<?php echo JHtml::_('sliders.panel',JText::_('COM_BANNERS_GROUP_LABEL_METADATA_OPTIONS'), 'publishing-details'); ?>
-		<fieldset class="adminform">
+	<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'publishing-details'); ?>
+		<fieldset class="panelform">
+		<ul class="adminformlist">
 			<?php foreach($this->form->getFieldset('metadata') as $field): ?>
-				<?php if (!$field->hidden): ?>
+				<li><?php if (!$field->hidden): ?>
 					<?php echo $field->label; ?>
 				<?php endif; ?>
-				<?php echo $field->input; ?>
+				<?php echo $field->input; ?></li>
 			<?php endforeach; ?>
+			</ul>
 		</fieldset>
 
 	<?php echo JHtml::_('sliders.panel',JText::_('COM_BANNERS_EXTRA'), 'extra'); ?>
-		<fieldset class="adminform">
+		<fieldset class="panelform">
+		<ul class="adminformlist">
 			<?php foreach($this->form->getFieldset('extra') as $field): ?>
-				<?php if (!$field->hidden): ?>
+				<li><?php if (!$field->hidden): ?>
 					<?php echo $field->label; ?>
 				<?php endif; ?>
-				<?php echo $field->input; ?>
+				<?php echo $field->input; ?></li>
 			<?php endforeach; ?>
+			</ul>
 		</fieldset>
 
 	<?php echo JHtml::_('sliders.end'); ?>

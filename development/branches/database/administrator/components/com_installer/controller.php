@@ -21,12 +21,16 @@ jimport('joomla.application.component.controller');
  */
 class InstallerController extends JController
 {
-/**
+	/**
 	 * Method to display a view.
 	 *
+	 * @param	boolean			If true, the view output will be cached
+	 * @param	array			An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return	JController		This object to support chaining.
 	 * @since	1.5
 	 */
-	function display()
+	public function display($cachable = false, $urlparams = false)
 	{
 		require_once JPATH_COMPONENT.'/helpers/installer.php';
 
@@ -52,11 +56,11 @@ class InstallerController extends JController
 
 			// Push document object into the view.
 			$view->assignRef('document', $document);
-
-			$view->display();
-
 			// Load the submenu.
 			InstallerHelper::addSubmenu($vName);
+			$view->display();
 		}
+
+		return $this;
 	}
 }

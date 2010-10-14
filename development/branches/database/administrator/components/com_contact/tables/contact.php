@@ -59,8 +59,8 @@ class ContactTableContact extends JTable
 	 * @return	boolean	True on success, false on failure.
 	 * @since	1.6
 	 */
-	public function store($updateNulls = false){
-
+	public function store($updateNulls = false)
+	{
 		// Transform the params field
 		if (is_array($this->params)) {
 			$registry = new JRegistry();
@@ -84,6 +84,13 @@ class ContactTableContact extends JTable
 				$this->created_by = $user->get('id');
 			}
 		}
+		// Verify that the alias is unique
+		$table = JTable::getInstance('Contact', 'ContactTable');
+		if ($table->load(array('alias'=>$this->alias,'catid'=>$this->catid)) && ($table->id != $this->id || $this->id==0)) {
+			$this->setError(JText::_('COM_CONTACT_ERROR_UNIQUE_ALIAS'));
+			return false;
+		}
+
 		// Attempt to store the data.
 		return parent::store($updateNulls);
 	}
@@ -124,7 +131,7 @@ class ContactTableContact extends JTable
 
 		$xid = intval($this->_db->loadResult());
 		if ($xid && $xid != intval($this->id)) {
-			$this->setError(JText::sprintf('CONTACT_WARNING_SAME_NAME', $this->id));
+			$this->setError(JText::_('COM_CONTACT_WARNING_SAME_NAME'));
 			return false;
 		}
 
@@ -133,7 +140,7 @@ class ContactTableContact extends JTable
 		}
 		$this->alias = JApplication::stringURLSafe($this->alias);
 		if (trim(str_replace('-','',$this->alias)) == '') {
-			$this->alias = JFactory::getDate()->toFormat("%Y-%m-%d-%H-%M-%S");
+			$this->alias = JFactory::getDate()->format("Y-m-d-H-i-s");
 		}
 		/** check for valid category */
 		if (trim($this->catid) == '') {

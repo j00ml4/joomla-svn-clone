@@ -7,6 +7,9 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
+// no direct access
+defined('_JEXEC') or die;
+
 /**
  * Note: this view is intended only to be opened in a popup
  * @package		Joomla.Administrator
@@ -50,7 +53,7 @@ class ConfigControllerComponent extends JController
 		$option	= JRequest::getWord('component');
 
 		// Check if the user is authorized to do this.
-		if (!JFactory::getUser()->authorize('core.admin', $option))
+		if (!JFactory::getUser()->authorise('core.admin', $option))
 		{
 			JFactory::getApplication()->redirect('index.php', JText::_('JERROR_ALERTNOAUTHOR'));
 			return;
@@ -67,9 +70,9 @@ class ConfigControllerComponent extends JController
 			// Push up to three validation messages out to the user.
 			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
 				if (JError::isError($errors[$i])) {
-					$app->enqueueMessage($errors[$i]->getMessage(), 'notice');
+					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				} else {
-					$app->enqueueMessage($errors[$i], 'notice');
+					$app->enqueueMessage($errors[$i], 'warning');
 				}
 			}
 
@@ -96,7 +99,7 @@ class ConfigControllerComponent extends JController
 			$app->setUserState('com_config.config.global.data', $data);
 
 			// Save failed, go back to the screen and display a notice.
-			$message = JText::sprintf('JError_Save_Failed', $model->getError());
+			$message = JText::sprintf('JERROR_SAVE_FAILED', $model->getError());
 			$this->setRedirect('index.php?option=com_config&view=component&component='.$option.'&tmpl=component', $message, 'error');
 			return false;
 		}

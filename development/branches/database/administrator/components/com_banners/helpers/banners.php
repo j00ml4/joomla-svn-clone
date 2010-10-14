@@ -8,6 +8,7 @@
 /**
  * @package		Joomla.Administrator
  * @subpackage	com_banners
+ * @since		1.6
  */
 class BannersHelper
 {
@@ -15,6 +16,9 @@ class BannersHelper
 	 * Configure the Linkbar.
 	 *
 	 * @param	string	The name of the active view.
+	 *
+	 * @return	void
+	 * @since	1.6
 	 */
 	public static function addSubmenu($vName)
 	{
@@ -23,20 +27,24 @@ class BannersHelper
 			'index.php?option=com_banners&view=banners',
 			$vName == 'banners'
 		);
-		JSubMenuHelper::addEntry(
-			JText::_('COM_BANNERS_SUBMENU_CLIENTS'),
-			'index.php?option=com_banners&view=clients',
-			$vName == 'clients'
-		);
-
+		
 		JSubMenuHelper::addEntry(
 			JText::_('COM_BANNERS_SUBMENU_CATEGORIES'),
 			'index.php?option=com_categories&extension=com_banners',
 			$vName == 'categories'
 		);
 		if ($vName=='categories') {
-			JToolBarHelper::title(JText::_('COM_BANNERS_MANAGER_CATEGORIES'), 'categories');
+			JToolBarHelper::title(
+				JText::sprintf('COM_CATEGORIES_CATEGORIES_TITLE',JText::_('com_banners')),
+				'banners-categories');
 		}
+
+		JSubMenuHelper::addEntry(
+			JText::_('COM_BANNERS_SUBMENU_CLIENTS'),
+			'index.php?option=com_banners&view=clients',
+			$vName == 'clients'
+		);
+
 		JSubMenuHelper::addEntry(
 			JText::_('COM_BANNERS_SUBMENU_TRACKS'),
 			'index.php?option=com_banners&view=tracks',
@@ -50,6 +58,7 @@ class BannersHelper
 	 * @param	int		The category ID.
 	 *
 	 * @return	JObject
+	 * @since	1.6
 	 */
 	public static function getActions($categoryId = 0)
 	{
@@ -58,8 +67,7 @@ class BannersHelper
 
 		if (empty($categoryId)) {
 			$assetName = 'com_banners';
-		}
-		else {
+		} else {
 			$assetName = 'com_banners.category.'.(int) $categoryId;
 		}
 
@@ -73,16 +81,21 @@ class BannersHelper
 
 		return $result;
 	}
+
+	/**
+	 * @return	boolean
+	 * @since	1.6
+	 */
 	public static function updateReset()
 	{
 		$user = JFactory::getUser();
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		$query->select('*');
-		$query->from("#__banners");
-		$query->where("NOW() >= `reset`");
-		$query->where("`reset` != '0000-00-00 00:00:00' AND `reset`!=NULL");
-		$query->where("(`checked_out` = 0 OR `checked_out` = ".$db->Quote($user->id).")");
+		$query->from('#__banners');
+		$query->where('NOW() >= `reset`');
+		$query->where('`reset` != '.$db->quote('0000-00-00 00:00:00').' AND `reset`!=NULL');
+		$query->where('(`checked_out` = 0 OR `checked_out` = '.(int) $db->Quote($user->id).')');
 		$db->setQuery((string)$query);
 		$rows = $db->loadObjectList();
 
@@ -93,13 +106,16 @@ class BannersHelper
 		}
 
 		JTable::addIncludePath(JPATH_ROOT.'/administrator/components/com_banners/tables');
+
 		foreach ($rows as $row) {
 			$purchase_type = $row->purchase_type;
+
 			if ($purchase_type < 0 && $row->cid) {
 				$client = JTable::getInstance('Client','BannersTable');
 				$client->load($row->cid);
 				$purchase_type = $client->purchase_type;
 			}
+
 			if ($purchase_type < 0) {
 				$params = JComponentHelper::getParams('com_banners');
 				$purchase_type = $params->get('purchase_type');
@@ -139,6 +155,7 @@ class BannersHelper
 				return false;
 			}
 		}
+
 		return true;
 	}
 }

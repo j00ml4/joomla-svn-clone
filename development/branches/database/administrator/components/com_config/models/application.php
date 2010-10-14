@@ -21,13 +21,15 @@ class ConfigModelApplication extends JModelForm
 	/**
 	 * Method to get a form object.
 	 *
-	 * @return	mixed		A JForm object on success, false on failure.
+	 * @param	array	$data		Data for the form.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	mixed	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
 		// Get the form.
-		$form = parent::getForm('com_config.application', 'application', array('control' => 'jform'));
+		$form = $this->loadForm('com_config.application', 'application', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
@@ -136,6 +138,10 @@ class ConfigModelApplication extends JModelForm
 			$table->purge(-1);
 		}
 
+		if (empty($data['cache_handler'])) {
+			$data['caching'] = 0;
+		}
+
 		// Clean the cache if disabled but previously enabled.
 		if (!$data['caching'] && $prev['caching']) {
 			$cache = JFactory::getCache();
@@ -180,6 +186,74 @@ class ConfigModelApplication extends JModelForm
 
 		// Attempt to make the file unwriteable if using FTP.
 		if ($data['ftp_enable'] == 0 && !$ftp['enabled'] && JPath::isOwner($file) && !JPath::setPermissions($file, '0444')) {
+			JError::raiseNotice('SOME_ERROR_CODE', JText::_('COM_CONFIG_ERROR_CONFIGURATION_PHP_NOTUNWRITABLE'));
+		}
+
+		return true;
+	}
+
+	/**
+	 * Method to unset the root_user value from configuration data.
+	 *
+	 * This method will load the global configuration data straight from
+	 * JConfig and remove the root_user value for security, then save the configuration.
+	 *
+	 * @since	1.6
+	 */
+	function removeroot()
+	{
+		// Include client helper
+		jimport('joomla.client.helper');
+
+		// Get the previous configuration.
+		$prev = new JConfig();
+		$prev = JArrayHelper::fromObject($prev);
+
+		// Clean the cache if disabled but previously enabled.
+		if ($prev['caching']) {
+			$cache = JFactory::getCache();
+			$cache->clean();
+		}
+
+		// Create the new configuration object, and unset the root_user property
+		$config = new JRegistry('config');
+		unset($prev['root_user']);
+		$config->loadArray($prev);
+
+		/*
+		 * Write the configuration file.
+		 */
+		jimport('joomla.filesystem.path');
+		jimport('joomla.filesystem.file');
+
+		// Set the configuration file path.
+		$file = JPATH_CONFIGURATION.DS.'configuration.php';
+
+		// Overwrite the old FTP credentials with the new ones.
+		$temp = JFactory::getConfig();
+		$temp->set('ftp_enable', $prev['ftp_enable']);
+		$temp->set('ftp_host', $prev['ftp_host']);
+		$temp->set('ftp_port', $prev['ftp_port']);
+		$temp->set('ftp_user', $prev['ftp_user']);
+		$temp->set('ftp_pass', $prev['ftp_pass']);
+		$temp->set('ftp_root', $prev['ftp_root']);
+
+		// Get the new FTP credentials.
+		$ftp = JClientHelper::getCredentials('ftp', true);
+
+		// Attempt to make the file writeable if using FTP.
+		if (!$ftp['enabled'] && JPath::isOwner($file) && !JPath::setPermissions($file, '0644')) {
+			JError::raiseNotice('SOME_ERROR_CODE', JText::_('COM_CONFIG_ERROR_CONFIGURATION_PHP_NOTWRITABLE'));
+		}
+
+		// Attempt to write the configuration file as a PHP class named JConfig.
+		if (!JFile::write($file, $config->toString('PHP', 'config', array('class' => 'JConfig', 'closingtag' => false)))) {
+			$this->setError(JText::_('COM_CONFIG_ERROR_WRITE_FAILED'));
+			return false;
+		}
+
+		// Attempt to make the file unwriteable if using FTP.
+		if ($prev['ftp_enable'] == 0 && !$ftp['enabled'] && JPath::isOwner($file) && !JPath::setPermissions($file, '0444')) {
 			JError::raiseNotice('SOME_ERROR_CODE', JText::_('COM_CONFIG_ERROR_CONFIGURATION_PHP_NOTUNWRITABLE'));
 		}
 

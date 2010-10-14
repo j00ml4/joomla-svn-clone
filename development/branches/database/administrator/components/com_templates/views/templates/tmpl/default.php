@@ -5,6 +5,7 @@
  * @subpackage	com_templates
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
+ * @since		1.6
  */
 
 // No direct access.
@@ -15,7 +16,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.modal');
 
-$user = & JFactory::getUser();
+$user		= JFactory::getUser();
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 ?>
@@ -30,7 +31,7 @@ $listDirn	= $this->state->get('list.direction');
 		</div>
 		<div class="filter-select fltrt">
 			<select name="filter_client_id" class="inputbox" onchange="this.form.submit()">
-				<option value="*"><?php echo JText::_('COM_TEMPLATES_TEMPLATES_FILTER_CLIENT'); ?></option>
+				<option value="*"><?php echo JText::_('JGLOBAL_FILTER_CLIENT'); ?></option>
 				<?php echo JHtml::_('select.options', TemplatesHelper::getClientOptions(), 'value', 'text', $this->state->get('filter.client_id'));?>
 			</select>
 		</div>
@@ -41,13 +42,13 @@ $listDirn	= $this->state->get('list.direction');
 		<thead>
 			<tr>
 				<th class="col1template">
-					&nbsp;
+					&#160;
 				</th>
 				<th>
 					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TEMPLATE', 'a.element', $listDirn, $listOrder); ?>
 				</th>
 				<th width="10%">
-					<?php echo JHtml::_('grid.sort', 'COM_TEMPLATES_HEADING_TYPE', 'a.client_id', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'JCLIENT', 'a.client_id', $listDirn, $listOrder); ?>
 				</th>
 				<th width="10%" class="center">
 					<?php echo JText::_('JVERSION'); ?>
@@ -73,9 +74,20 @@ $listDirn	= $this->state->get('list.direction');
 				<td class="center">
 					<?php echo JHtml::_('templates.thumb', $item->element, $item->client_id); ?>
 				</td>
-				<td class="template-name"> 
-					<a href="<?php echo JRoute::_('index.php?option=com_templates&view=template&id='.(int) $item->extension_id); ?>">
-					<?php echo  JText::sprintf( 'COM_TEMPLATES_TEMPLATE_DETAILS', $item->name) ;?></a>
+				<td class="template-name">
+						<a href="<?php echo JRoute::_('index.php?option=com_templates&view=template&id='.(int) $item->extension_id); ?>">
+							<?php echo  JText::sprintf( 'COM_TEMPLATES_TEMPLATE_DETAILS', $item->name) ;?></a>			
+					<p>
+					<?php if($this->preview && $item->client_id == '0'): ?>
+						<a href="<?php echo JURI::root(true).'?tp=1&template='.$item->element; ?>" target="_blank">
+							<?php echo  JText::sprintf('COM_TEMPLATES_TEMPLATE_PREVIEW'); ?></a>
+					<?php elseif ($item->client_id == '1'): ?>
+						<?php echo  JText::sprintf('COM_TEMPLATES_TEMPLATE_NO_PREVIEW_ADMIN'); ?>
+					<?php else: ?>
+						<span class="hasTip" title="<?php echo JText::sprintf('COM_TEMPLATES_TEMPLATE_NO_PREVIEW'); ?>::<?php echo JText::sprintf('COM_TEMPLATES_TEMPLATE_NO_PREVIEW_DESC'); ?>">
+							<?php echo  JText::sprintf('COM_TEMPLATES_TEMPLATE_NO_PREVIEW'); ?></span>
+					<?php endif; ?>
+					</p>
 				</td>
 				<td class="center">
 					<?php echo $item->client_id == 0 ? JText::_('JSITE') : JText::_('JADMINISTRATOR'); ?>
@@ -84,7 +96,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo $this->escape($item->xmldata->get('version')); ?>
 				</td>
 				<td class="center">
-					<?php echo $this->escape($item->xmldata->get('creationdate')); ?>
+					<?php echo $this->escape($item->xmldata->get('creationDate')); ?>
 				</td>
 				<td>
 					<?php if ($author = $item->xmldata->get('author')) : ?>
@@ -105,9 +117,11 @@ $listDirn	= $this->state->get('list.direction');
 		</tbody>
 	</table>
 
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<div>
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" />
+		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+		<?php echo JHtml::_('form.token'); ?>
+	</div>
 </form>

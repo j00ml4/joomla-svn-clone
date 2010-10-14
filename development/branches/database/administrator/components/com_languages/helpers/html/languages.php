@@ -29,7 +29,7 @@ abstract class JHtmlLanguages {
 			return JHTML::_('image','menu/icon-16-default.png', JText::_('COM_LANGUAGES_HEADING_DEFAULT'), NULL, true);
 		}
 		else {
-			return '&nbsp;';
+			return '&#160;';
 		}
 	}
 
@@ -66,7 +66,6 @@ abstract class JHtmlLanguages {
 		$options	= array();
 		$options[]	= JHtml::_('select.option', '1', 'JPUBLISHED');
 		$options[]	= JHtml::_('select.option', '0', 'JUNPUBLISHED');
-		$options[]	= JHtml::_('select.option', '-1', 'JDISABLED');
 		$options[]	= JHtml::_('select.option', '-2', 'JTRASH');
 		$options[]	= JHtml::_('select.option', '*', 'JALL');
 

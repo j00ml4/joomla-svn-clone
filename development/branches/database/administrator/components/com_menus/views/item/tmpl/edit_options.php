@@ -19,16 +19,24 @@ defined('_JEXEC') or die;
 		if (isset($fieldSet->description) && trim($fieldSet->description)) :
 			echo '<p class="tip">'.$this->escape(JText::_($fieldSet->description)).'</p>';
 		endif;
-		?>
+	?>
 		<fieldset class="panelform">
-			<?php foreach ($this->form->getFieldset('request') as $field) : ?>
-				<?php echo $field->label; ?>
-				<?php echo $field->input; ?>
-			<?php endforeach; ?>
+			<?php $hidden_fields = ''; ?>
+			<ul class="adminformlist">
+				<?php foreach ($this->form->getFieldset('request') as $field) : ?>
+				<?php if (!$field->hidden) : ?>
+				<li>
+					<?php echo $field->label; ?>
+					<?php echo $field->input; ?>
+				</li>
+				<?php else : $hidden_fields.= $field->input; ?>
+				<?php endif; ?>
+				<?php endforeach; ?>
+			</ul>
+			<?php echo $hidden_fields; ?>
 		</fieldset>
 <?php
 	}
-
 
 	$fieldSets = $this->form->getFieldsets('params');
 
@@ -40,9 +48,11 @@ defined('_JEXEC') or die;
 			endif;
 			?>
 		<fieldset class="panelform">
-			<?php foreach ($this->form->getFieldset($name) as $field) : ?>
-				<?php echo $field->label; ?>
-				<?php echo $field->input; ?>
-			<?php endforeach; ?>
+			<ul class="adminformlist">
+				<?php foreach ($this->form->getFieldset($name) as $field) : ?>
+					<li><?php echo $field->label; ?>
+					<?php echo $field->input; ?></li>
+				<?php endforeach; ?>
+			</ul>
 		</fieldset>
 <?php endforeach;?>

@@ -7,12 +7,11 @@
 			description="JGLOBAL_FIELD_ID_DESC"
 			default="0"
 			readonly="true"
-			required="true"
 		/>
 
 		<field name="title" type="text"
 			description="COM_MODULES_FIELD_TITLE_DESC"
-			label="COM_MODULES_FIELD_TITLE_LABEL"
+			label="JGLOBAL_TITLE"
 			maxlength="100"
 			required="true"
 			size="35"
@@ -32,7 +31,7 @@
 			size="20"
 		/>
 
-		<field name="showtitle" type="list"
+		<field name="showtitle" type="radio"
 			default="1"
 			description="COM_MODULES_FIELD_SHOWTITLE_DESC"
 			label="COM_MODULES_FIELD_SHOWTITLE_LABEL"
@@ -57,7 +56,7 @@
 			filter="user_utc"
 			format="%Y-%m-%d %H:%M:%S"
 			label="COM_MODULES_FIELD_PUBLISH_UP_LABEL"
-			size="16"
+			size="20"
 		/>
 
 		<field name="publish_down" type="calendar"
@@ -65,20 +64,18 @@
 			filter="user_utc"
 			format="%Y-%m-%d %H:%M:%S"
 			label="COM_MODULES_FIELD_PUBLISH_DOWN_LABEL"
-			size="16"
+			size="20"
 		/>
 
-		<field name="client_id" type="text"
+		<field name="client_id" type="hidden"
 			description="COM_MODULES_FIELD_CLIENT_ID_DESC"
 			label="COM_MODULES_FIELD_CLIENT_ID_LABEL"
 			readonly="true"
 			size="1"
-		>
-
-		</field>
+		/>
 
 		<field name="position" type="moduleposition"
-			default="position-7"
+			default=""
 			description="COM_MODULES_FIELD_POSITION_DESC"
 			label="COM_MODULES_FIELD_POSITION_LABEL"
 			maxlength="50"
@@ -112,7 +109,7 @@
 			description="JFIELD_MODULE_LANGUAGE_DESC"
 			label="JFIELD_LANGUAGE_LABEL"
 		>
-			<option value="">JOPTION_DEFAULT_LANGUAGE</option>
+			<option value="*">JALL</option>
 		</field>
 
 		<field name="params" type="hidden" />

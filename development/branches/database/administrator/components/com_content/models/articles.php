@@ -29,6 +29,12 @@ class ContentModelArticles extends JModelList
 	{
 		// Initialise variables.
 		$app = JFactory::getApplication();
+		$session = JFactory::getSession();
+
+		// Adjust the context to support modal layouts.
+		if ($layout = JRequest::getVar('layout', 'default')) {
+			$this->context .= '.'.$layout;
+		}
 
 		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
@@ -36,11 +42,18 @@ class ContentModelArticles extends JModelList
 		$access = $app->getUserStateFromRequest($this->context.'.filter.access', 'filter_access', 0, 'int');
 		$this->setState('filter.access', $access);
 
-		$published = $app->getUserStateFromRequest($this->context.'.filter.state', 'filter_published', '');
+		$published = $app->getUserStateFromRequest($this->context.'.filter.published', 'filter_published', '');
 		$this->setState('filter.published', $published);
 
 		$categoryId = $app->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id');
 		$this->setState('filter.category_id', $categoryId);
+
+		// set the value of the category filter for the single record edit view
+		$session->set('com_content.article.filter.category_id',$categoryId);
+
+		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
+		$this->setState('filter.language', $language);
+
 
 		// List state information.
 		parent::populateState('a.title', 'asc');
@@ -63,8 +76,9 @@ class ContentModelArticles extends JModelList
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
 		$id .= ':'.$this->getState('filter.access');
-		$id	.= ':'.$this->getState('filter.state');
+		$id	.= ':'.$this->getState('filter.published');
 		$id	.= ':'.$this->getState('filter.category_id');
+		$id	.= ':'.$this->getState('filter.language');
 
 		return parent::getStoreId($id);
 	}
@@ -85,9 +99,13 @@ class ContentModelArticles extends JModelList
 			$this->getState(
 				'list.select',
 				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid,' .
-				' a.state, a.access, a.created, a.hits, a.ordering, a.featured')
+				'a.state, a.access, a.created, a.hits, a.ordering, a.featured, a.language')
 		);
 		$query->from('#__content AS a');
+
+		// Join over the language
+		$query->select('l.title AS language_title');
+		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
 
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');
@@ -142,20 +160,25 @@ class ContentModelArticles extends JModelList
 				$query->where('a.id = '.(int) substr($search, 3));
 			} else if (stripos($search, 'author:') === 0) {
 				$search = $db->Quote('%'.$db->getEscaped(substr($search, 7), true).'%');
-				$query->where('ua.name LIKE '.$search.' OR ua.username LIKE '.$search);
+				$query->where('(ua.name LIKE '.$search.' OR ua.username LIKE '.$search.')');
 			} else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
-				$query->where('a.title LIKE '.$search.' OR a.alias LIKE '.$search);
+				$query->where('(a.title LIKE '.$search.' OR a.alias LIKE '.$search.')');
 			}
 		}
 
-		if($this->getState('list.ordering', 'a.ordering') == 'a.ordering')
-		{
-			$query->order('category_title, '.$db->getEscaped($this->getState('list.ordering', 'a.ordering')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
-		} else {
-			// Add the list ordering clause.
-			$query->order($db->getEscaped($this->getState('list.ordering', 'a.title')).', a.ordering '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		// Filter on the language.
+		if ($language = $this->getState('filter.language')) {
+			$query->where('a.language = '.$db->quote($language));
 		}
+
+		// Add the list ordering clause.
+		$orderCol	= $this->state->get('list.ordering');
+		$orderDirn	= $this->state->get('list.direction');
+		if ($orderCol == 'a.ordering' || $orderCol == 'category_title') {
+			$orderCol = 'category_title '.$orderDirn.', a.ordering';
+		}
+		$query->order($db->getEscaped($orderCol.' '.$orderDirn));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;

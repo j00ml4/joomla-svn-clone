@@ -9,7 +9,8 @@ defined('JPATH_BASE') or die;
 
 jimport('joomla.html.html');
 jimport('joomla.form.formfield');
-JLoader::register('JFormFieldList', JPATH_LIBRARIES.'/joomla/form/fields/list.php');
+jimport('joomla.form.helper');
+JFormHelper::loadFieldClass('list');
 
 /**
  * Form Field class for the Joomla Framework.
@@ -48,7 +49,7 @@ class JFormFieldMenuType extends JFormFieldList
 		$types = $this->_getTypeList();
 
 		$size	= ($v = $this->element['size']) ? ' size="'.$v.'"' : '';
-		$class	= ($v = $this->element['class']) ? 'class="'.$v.'"' : 'class="text_area"';
+		$class	= ($v = $this->element['class']) ? ' class="'.$v.'"' : 'class="text_area"';
 
 		switch ($this->value)
 		{
@@ -88,7 +89,7 @@ class JFormFieldMenuType extends JFormFieldList
 		});");
 
 		$html[] = '<input type="text" readonly="readonly" disabled="disabled" value="'.$value.'"'.$size.$class.'>';
-		$html[] = '<input type="button" class="modal" value="'.JText::_('COM_MENUS_CHANGE_LINKTYPE').'" rel="{handler:\'clone\', target:\'menu-types\'}">';
+		$html[] = '<input type="button" class="modal" value="'.JText::_('JSELECT').'" rel="{handler:\'clone\', target:\'menu-types\'}">';
 		$html[] = '<input type="hidden" name="'.$this->name.'" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'">';
 
 		$html[] = '<div id="menu-types">';
@@ -119,9 +120,9 @@ class JFormFieldMenuType extends JFormFieldList
 			foreach ($list as $item)
 			{
 		$html[] = '			<li>';
-		$html[] = '				<a class="choose_type" href="index.php?option=com_menus&amp;task=item.setType&amp;type='.base64_encode(json_encode(array('title'=>$item->title, 'request'=>$item->request))).'" title="'.JText::_($item->description).'">'.JText::_($item->title).'</a>';
+		$html[] = '				<a class="choose_type" href="#" onclick="javascript:submitbutton(\'item.setType\', \''.base64_encode(json_encode(array('title'=>$item->title, 'request'=>$item->request))).'\')" title="'.JText::_($item->description).'">'.JText::_($item->title).'</a>';		
 		$html[] = '			</li>';
-			}
+							}
 		$html[] = '		</ul>';
 		$html[] = '	</dd>';
 		$html[] = '</dl>';
@@ -135,13 +136,13 @@ class JFormFieldMenuType extends JFormFieldList
 		// $html[] = '		'.JText::_('COM_MENUS_TYPE_SYSTEM_DESC');
 		$html[] = '		<ul>';
 		$html[] = '			<li>';
-		$html[] = '				<a class="choose_type" href="index.php?option=com_menus&amp;task=item.setType&amp;type='.base64_encode(json_encode(array('title'=>'url'))).'" title="'.JText::_('COM_MENUS_TYPE_EXTERNAL_URL_DESC').'">'.JText::_('COM_MENUS_TYPE_EXTERNAL_URL').'</a>';
+		$html[] = '				<a class="choose_type" href="#" onclick="javascript:submitbutton(\'item.setType\', \''.base64_encode(json_encode(array('title'=>'url'))).'\')" title="'.JText::_('COM_MENUS_TYPE_EXTERNAL_URL_DESC').'">'.JText::_('COM_MENUS_TYPE_EXTERNAL_URL').'</a>';
 		$html[] = '			</li>';
 		$html[] = '			<li>';
-		$html[] = '				<a class="choose_type" href="index.php?option=com_menus&amp;task=item.setType&amp;type='.base64_encode(json_encode(array('title'=>'alias'))).'" title="'.JText::_('COM_MENUS_TYPE_ALIAS_DESC').'">'.JText::_('COM_MENUS_TYPE_ALIAS').'</a>';
+		$html[] = '				<a class="choose_type" href="#" onclick="javascript:submitbutton(\'item.setType\', \''.base64_encode(json_encode(array('title'=>'alias'))).'\')" title="'.JText::_('COM_MENUS_TYPE_ALIAS_DESC').'">'.JText::_('COM_MENUS_TYPE_ALIAS').'</a>';
 		$html[] = '			</li>';
 		$html[] = '			<li>';
-		$html[] = '				<a class="choose_type" href="index.php?option=com_menus&amp;task=item.setType&amp;type='.base64_encode(json_encode(array('title'=>'separator'))).'" title="'.JText::_('COM_MENUS_TYPE_SEPARATOR_DESC').'">'.JText::_('COM_MENUS_TYPE_SEPARATOR').'</a>';
+		$html[] = '				<a class="choose_type" href="#" onclick="javascript:submitbutton(\'item.setType\', \''.base64_encode(json_encode(array('title'=>'separator'))).'\')" title="'.JText::_('COM_MENUS_TYPE_SEPARATOR_DESC').'">'.JText::_('COM_MENUS_TYPE_SEPARATOR').'</a>';
 		$html[] = '			</li>';
 		$html[] = '		</ul>';
 		$html[] = '	</dd>';
@@ -162,11 +163,11 @@ class JFormFieldMenuType extends JFormFieldList
 		jimport('joomla.filesystem.file');
 
 		// Initialise variables.
-		$lang = &JFactory::getLanguage();
+		$lang = JFactory::getLanguage();
 		$list = array();
 
 		// Get the list of components.
-		$db = & JFactory::getDBO();
+		$db = JFactory::getDBO();
 		$db->setQuery(
 			'SELECT `name`, `element` AS "option"' .
 			' FROM `#__extensions`' .

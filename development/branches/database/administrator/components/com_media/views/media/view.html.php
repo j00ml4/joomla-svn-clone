@@ -21,17 +21,18 @@ class MediaViewMedia extends JView
 {
 	function display($tpl = null)
 	{
-		$app	= &JFactory::getApplication();
-		$config = &JComponentHelper::getParams('com_media');
+		$app	= JFactory::getApplication();
+		$config = JComponentHelper::getParams('com_media');
 
 		$style = $app->getUserStateFromRequest('media.list.layout', 'layout', 'thumbs', 'word');
 
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 		$document->setBuffer($this->loadTemplate('navigation'), 'modules', 'submenu');
 
 		JHtml::_('behavior.framework', true);
-		$document->addScript('../media/media/js/mediamanager.js');
-		$document->addStyleSheet('../media/media/css/mediamanager.css');
+
+		JHTML::_('script','media/mediamanager.js', true, true);
+		JHTML::_('stylesheet','media/mediamanager.css', array(), true);
 
 		JHtml::_('behavior.modal');
 		$document->addScriptDeclaration("
@@ -39,7 +40,7 @@ class MediaViewMedia extends JView
 			document.preview = SqueezeBox;
 		});");
 
-		JHTML::_('script','system/mootree.js', false, true);
+		JHTML::_('script','system/mootree.js', true, true, false, false);
 		JHTML::_('stylesheet','system/mootree.css', array(), true);
 
 		if ($config->get('enable_flash', 1)) {
@@ -66,7 +67,7 @@ class MediaViewMedia extends JView
 					'onComplete' 	=> 'function(){ MediaManager.refreshFrame(); }',
 					'targetURL' 	=> '\\$(\'uploadForm\').action',
 					'typeFilter' 	=> $typeString,
-					'fileSizeMax'	=> $config->get('upload_maxsize')
+					'fileSizeMax'	=> $config->get('upload_maxsize'),
 				)
 			);
 		}
@@ -113,21 +114,21 @@ class MediaViewMedia extends JView
 	protected function addToolbar()
 	{
 		// Get the toolbar object instance
-		$bar = &JToolBar::getInstance('toolbar');
+		$bar = JToolBar::getInstance('toolbar');
 
 		// Set the titlebar text
 		JToolBarHelper::title(JText::_('COM_MEDIA'), 'mediamanager.png');
 
 		// Add a delete button
-		$title = JText::_('Delete');
+		$title = JText::_('JTOOLBAR_DELETE');
 		$dhtml = "<a href=\"#\" onclick=\"MediaManager.submit('folder.delete')\" class=\"toolbar\">
 					<span class=\"icon-32-delete\" title=\"$title\"></span>
 					$title</a>";
 		$bar->appendButton('Custom', $dhtml, 'delete');
 		JToolBarHelper::divider();
-		JToolBarHelper::preferences('com_media');
+		JToolBarHelper::preferences('com_media', 450, 800, 'JToolbar_Options', '', 'window.location.reload()');
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.mediamanager','JTOOLBAR_HELP');
+		JToolBarHelper::help('JHELP_CONTENT_MEDIA_MANAGER');
 	}
 
 	function getFolderLevel($folder)

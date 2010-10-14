@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- $Id$ -->
 <config>
-	<fieldset name="component">
+	<fieldset name="component"
+		label="COM_BANNERS_FIELDSET_CONFIG_CLIENT_OPTIONS_LABEL"
+		description="COM_BANNERS_FIELDSET_CONFIG_CLIENT_OPTIONS_DESC">
 		<field
 			id="purchase_type"
 			name="purchase_type"
@@ -49,7 +51,6 @@
 		<field
 			name="metakey_prefix"
 			type="text"
-			default=""
 			label="COM_BANNERS_FIELD_METAKEYWORDPREFIX_LABEL"
 			description="COM_BANNERS_FIELD_METAKEYWORDPREFIX_DESC" />
 

@@ -19,24 +19,15 @@ jimport( 'joomla.application.component.controllerform' );
 class MenusControllerItem extends JControllerForm
 {
 	/**
-	 * Dummy method to redirect back to standard controller
-	 *
-	 * @return	void
-	 */
-	public function display()
-	{
-		$this->setRedirect(JRoute::_('index.php?option=com_menus', false));
-	}
-
-	/**
 	 * Method to add a new menu item.
 	 *
 	 * @return	void
+	 * @since	1.6
 	 */
 	public function add()
 	{
 		// Initialise variables.
-		$app = &JFactory::getApplication();
+		$app = JFactory::getApplication();
 
 		// Clear the row edit information from the session.
 		$app->setUserState('com_menus.edit.item.id',	null);
@@ -52,9 +43,78 @@ class MenusControllerItem extends JControllerForm
 	}
 
 	/**
+	 * Method to run batch opterations.
+	 *
+	 * @return	void
+	 * @since	1.6
+	 */
+	function batch()
+	{
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		// Initialise variables.
+		$app	= JFactory::getApplication();
+		$model	= $this->getModel('Item', '', array());
+		$vars	= JRequest::getVar('batch', array(), 'post', 'array');
+		$cid	= JRequest::getVar('cid', array(), 'post', 'array');
+
+		// Preset the redirect
+		$this->setRedirect('index.php?option=com_menus&view=items');
+
+		// Attempt to run the batch operation.
+		if ($model->batch($vars, $cid)) {
+			$this->setMessage(JText::_('COM_MENUS_BATCH_SUCCESS'));
+			return true;
+		} else {
+			$this->setMessage(JText::_(JText::sprintf('COM_MENUS_ERROR_BATCH_FAILED', $model->getError())));
+			return false;
+		}
+	}
+
+	/**
+	 * Method to cancel an edit
+	 *
+	 * Checks the item in, sets item ID in the session to null, and then redirects to the list page.
+	 *
+	 * @return	void
+	 * @since	1.6
+	 */
+	public function cancel()
+	{
+		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+		// Initialise variables.
+
+		$app	= JFactory::getApplication();
+		// Get the previous menu item id (if any) and the current menu item id.
+		$previousId	= (int) $app->getUserState('com_menus.edit.item.id');
+
+		$model	= $this->getModel('Item');
+
+		// If rows ids do not match, checkin previous row.
+		if (!$model->checkin($previousId)) {
+		// Check-in failed, go back to the menu item and display a notice.
+			$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
+			$this->setRedirect('index.php?option=com_content&view=item&layout=edit', $message, 'error');
+			return false;
+
+		}
+
+		// Clear the row edit information from the session.
+		$app->setUserState('com_menus.edit.item.id',	null);
+		$app->setUserState('com_menus.edit.item.data',	null);
+		$app->setUserState('com_menus.edit.item.type',	null);
+		$app->setUserState('com_menus.edit.item.link',	null);
+
+	// Redirect to the list screen.
+		$this->setRedirect(JRoute::_('index.php?option=com_menus&view=items', false));
+	}
+
+	/**
 	 * Method to edit an existing menu item.
 	 *
 	 * @return	void
+	 * @since	1.6
 	 */
 	public function edit()
 	{
@@ -66,7 +126,7 @@ class MenusControllerItem extends JControllerForm
 		$id		=  (empty($pks) ? JRequest::getInt('item_id') : (int) array_pop($pks));
 
 		// Get the menu item model.
-		$model	= &$this->getModel('Item');
+		$model	= $this->getModel('Item');
 
 		// Check that this is not a new item.
 		if ($id > 0) {
@@ -76,7 +136,7 @@ class MenusControllerItem extends JControllerForm
 			if ($item->checked_out == 0) {
 				if (!$model->checkout($id)) {
 					// Check-out failed, go back to the list and display a notice.
-					$this->setMessage(JText::sprintf('JERROR_CHECKOUT_FAILED', $model->getError()), 'warning');
+					$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKOUT_FAILED', $model->getError()), 'warning');
 					return false;
 				}
 			}
@@ -94,47 +154,10 @@ class MenusControllerItem extends JControllerForm
 	}
 
 	/**
-	 * Method to cancel an edit
-	 *
-	 * Checks the item in, sets item ID in the session to null, and then redirects to the list page.
-	 *
-	 * @return	void
-	 */
-	public function cancel()
-	{
-		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
-
-		// Initialise variables.
-
-		$app	= &JFactory::getApplication();
-		// Get the previous menu item id (if any) and the current menu item id.
-		$previousId	= (int) $app->getUserState('com_menus.edit.item.id');
-
-		$model	= &$this->getModel('Item');
-
-		// If rows ids do not match, checkin previous row.
-		if (!$model->checkin($previousId)) {
-		// Check-in failed, go back to the menu item and display a notice.
-			$message = JText::sprintf('JERROR_CHECKIN_FAILED', $model->getError());
-			$this->setRedirect('index.php?option=com_content&view=item&layout=edit', $message, 'error');
-			return false;
-
-		}
-
-		// Clear the row edit information from the session.
-		$app->setUserState('com_menus.edit.item.id',	null);
-		$app->setUserState('com_menus.edit.item.data',	null);
-		$app->setUserState('com_menus.edit.item.type',	null);
-		$app->setUserState('com_menus.edit.item.link',	null);
-
-	// Redirect to the list screen.
-		$this->setRedirect(JRoute::_('index.php?option=com_menus&view=items', false));
-	}
-
-	/**
 	 * Method to save a menu item.
 	 *
 	 * @return	void
+	 * @since	1.6
 	 */
 	public function save()
 	{
@@ -143,7 +166,7 @@ class MenusControllerItem extends JControllerForm
 
 		// Initialise variables.
 		$app	= JFactory::getApplication();
-		$model	= $this->getModel('Item');
+		$model	= $this->getModel('Item', '', array());
 		$task	= $this->getTask();
 
 		// Get the posted values from the request.
@@ -157,7 +180,7 @@ class MenusControllerItem extends JControllerForm
 			// Check-in the original row.
 			if (!$model->checkin()) {
 				// Check-in failed, go back to the item and display a notice.
-				$this->setMessage(JText::sprintf('JERROR_CHECKIN_SAVED', $model->getError()), 'warning');
+				$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()), 'warning');
 				return false;
 			}
 
@@ -183,7 +206,7 @@ class MenusControllerItem extends JControllerForm
 
 			// Merge in the user supplied request arguments.
 			$args = array_merge($args, $data['request']);
-			$data['link'] = 'index.php?'.http_build_query($args,'','&');
+			$data['link'] = 'index.php?'.urldecode(http_build_query($args,'','&'));
 			unset($data['request']);
 		}
 
@@ -195,9 +218,9 @@ class MenusControllerItem extends JControllerForm
 			// Push up to three validation messages out to the user.
 			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
 				if (JError::isError($errors[$i])) {
-					$app->enqueueMessage($errors[$i]->getMessage(), 'notice');
+					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				} else {
-					$app->enqueueMessage($errors[$i], 'notice');
+					$app->enqueueMessage($errors[$i], 'warning');
 				}
 			}
 
@@ -215,14 +238,16 @@ class MenusControllerItem extends JControllerForm
 			$app->setUserState('com_menus.edit.item.data', $data);
 
 			// Redirect back to the edit screen.
-			$this->setMessage(JText::sprintf('JERROR_SAVE_FAILED', $model->getError()), 'warning');
+			$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'warning');
+			$this->setRedirect(JRoute::_('index.php?option=com_menus&view=item&layout=edit', false));
 			return false;
 		}
 
 		// Save succeeded, check-in the row.
 		if (!$model->checkin()) {
 			// Check-in failed, go back to the row and display a notice.
-			$this->setMessage(JText::sprintf('JERROR_CHECKIN_SAVED', $model->getError()), 'warning');
+			$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()), 'warning');
+			$this->setRedirect(JRoute::_('index.php?option=com_menus&view=item&layout=edit', false));
 			return false;
 		}
 
@@ -247,6 +272,7 @@ class MenusControllerItem extends JControllerForm
 				$app->setUserState('com_menus.edit.item.data',	null);
 				$app->setUserState('com_menus.edit.item.type',	null);
 				$app->setUserState('com_menus.edit.item.link',	null);
+				$app->setUserState('com_menus.edit.item.menutype',	$model->getState('item.menutype'));
 
 				// Redirect back to the edit screen.
 				$this->setRedirect(JRoute::_('index.php?option=com_menus&view=item&layout=edit', false));
@@ -265,13 +291,23 @@ class MenusControllerItem extends JControllerForm
 		}
 	}
 
+	/**
+	 * Sets the type of the menu item currently being editted.
+	 *
+	 * @return	void
+	 * @since	1.6
+	 */
 	function setType()
 	{
 		// Initialise variables.
-		$app	= &JFactory::getApplication();
+		$app = JFactory::getApplication();
+
+		// Get the posted values from the request.
+		$data	= JRequest::getVar('jform', array(), 'post', 'array');
 
 		// Get the type.
-		$type = JRequest::getVar('type');
+		$type = $data['type'];
+
 		$type = json_decode(base64_decode($type));
 		$title = isset($type->title) ? $type->title : null;
 		if ($title != 'alias' && $title != 'separator' && $title != 'url') {
@@ -279,9 +315,10 @@ class MenusControllerItem extends JControllerForm
 		}
 
 		$app->setUserState('com_menus.edit.item.type',	$title);
-
-		if ($title=='component') {
+		if ($title == 'component') {
 			if (isset($type->request)) {
+				$component = JComponentHelper::getComponent($type->request->option);
+				$data['component_id'] = $component->id;
 				if (isset($type->request->layout)) {
 					$app->setUserState(
 						'com_menus.edit.item.link',
@@ -292,59 +329,21 @@ class MenusControllerItem extends JControllerForm
 						'com_menus.edit.item.link',
 						'index.php?option='.$type->request->option.'&view='.$type->request->view);
 				}
-				//	$app->setUserState('com_menus.edit.item.id',	$model->getState('item.id'));
-				//	$app->setUserState('com_menus.edit.item.data',	null);
-				//$app->setUserState('com_menus.edit.item.type',	$type->type);
-				//	$app->setUserState('com_menus.edit.item.link',	null);
 			}
 		}
 		// If the type is alias you just need the item id from the menu item referenced.
-		else if ($title=='alias') {
+		else if ($title == 'alias') {
 			$app->setUserState('com_menus.edit.item.link', 'index.php?Itemid=');
-
-			//	$app->setUserState('com_menus.edit.item.id',	$model->getState('item.id'));
-			//	$app->setUserState('com_menus.edit.item.data',	null);
-			//$app->setUserState('com_menus.edit.item.type',	$type->type);
-			//	$app->setUserState('com_menus.edit.item.link',	null);
 		}
-		//else if ($title=='url'){
-			//	$app->setUserState('com_menus.edit.item.link', null );
 
-				//	$app->setUserState('com_menus.edit.item.id',	$model->getState('item.id'));
-				//	$app->setUserState('com_menus.edit.item.data',	null);
-				//$app->setUserState('com_menus.edit.item.type',	$type->type);
-				//	$app->setUserState('com_menus.edit.item.link',	null);
-		//}
+		unset($data['request']);
+		$data['type'] = $title;
+		$data['link'] = $app->getUserState('com_menus.edit.item.link');
+
+		//Save the data in the session.
+		$app->setUserState('com_menus.edit.item.data', $data);
 
 		$this->type = $type;
 		$this->setRedirect('index.php?option=com_menus&view=item&layout=edit');
-	}
-
-	/**
-	 * Method to run batch opterations.
-	 *
-	 * @return	void
-	 */
-	function batch()
-	{
-		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
-
-		// Initialise variables.
-		$app	= JFactory::getApplication();
-		$model	= $this->getModel('Item');
-		$vars	= JRequest::getVar('batch', array(), 'post', 'array');
-		$cid	= JRequest::getVar('cid', array(), 'post', 'array');
-
-		// Preset the redirect
-		$this->setRedirect('index.php?option=com_menus&view=items');
-
-		// Attempt to run the batch operation.
-		if ($model->batch($vars, $cid)) {
-			$this->setMessage(JText::_('COM_MENUS_BATCH_SUCCESS'));
-			return true;
-		} else {
-			$this->setMessage(JText::_(JText::sprintf('COM_MENUS_ERROR_BATCH_FAILED', $model->getError())));
-			return false;
-		}
 	}
 }

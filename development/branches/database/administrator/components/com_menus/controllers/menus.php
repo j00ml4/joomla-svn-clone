@@ -20,8 +20,14 @@ class MenusControllerMenus extends JController
 {
 	/**
 	 * Display the view
+	 *
+	 * @param	boolean			If true, the view output will be cached
+	 * @param	array			An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return	JController		This object to support chaining.
+	 * @since	1.5
 	 */
-	public function display()
+	public function display($cachable = false, $urlparams = false)
 	{
 	}
 
@@ -58,6 +64,8 @@ class MenusControllerMenus extends JController
 			// Remove the items.
 			if (!$model->delete($cid)) {
 				$this->setMessage($model->getError());
+			} else {
+			$this->setMessage(JText::plural('COM_MENUS_N_MENUS_DELETED', count($cid)));
 			}
 		}
 
@@ -76,7 +84,7 @@ class MenusControllerMenus extends JController
 		$this->setRedirect('index.php?option=com_menus&view=menus');
 
 		// Initialise variables.
-		$model = &$this->getModel('Item');
+		$model = $this->getModel('Item');
 
 		if ($model->rebuild()) {
 			// Reorder succeeded.

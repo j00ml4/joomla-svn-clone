@@ -4,7 +4,7 @@
 	<fieldset name="details"
 		addfieldpath="/administrator/components/com_banners/models/fields"
 	>
-		<field name="id" type="text" default="0" required="true"
+		<field name="id" type="text" default="0" 
 			readonly="true" class="readonly"
 			label="JGLOBAL_FIELD_ID_LABEL" description ="JGLOBAL_FIELD_ID_DESC"/>
 
@@ -25,7 +25,7 @@
 			required="true" />
 
 		<field name="state" type="list"
-			label="COM_BANNERS_FIELD_CLIENT_STATE_LABEL" description="COM_BANNERS_FIELD_CLIENT_STATE_DESC"
+			label="JGLOBAL_STATE" description="COM_BANNERS_FIELD_CLIENT_STATE_DESC"
 			class="inputbox" size="1" default="1"
 		>
 			<option value="1">JPUBLISHED</option>
@@ -38,8 +38,7 @@
 			label="COM_BANNERS_FIELD_PURCHASETYPE_LABEL" description="COM_BANNERS_FIELD_PURCHASETYPE_DESC"
 			default="0" class="inputbox"
 		>
-			<option value="-1">COM_BANNERS_FIELD_VALUE_USECLIENTDEFAULT
-			</option>
+			<option value="">JGLOBAL_USE_GLOBAL</option>
 			<option value="1">COM_BANNERS_FIELD_VALUE_1</option>
 			<option value="2">COM_BANNERS_FIELD_VALUE_2</option>
 			<option value="3">COM_BANNERS_FIELD_VALUE_3</option>
@@ -51,8 +50,7 @@
 			label="COM_BANNERS_FIELD_TRACKIMPRESSION_LABEL"
 			description="COM_BANNERS_FIELD_TRACKIMPRESSION_DESC"
 		>
-			<option value="-1">COM_BANNERS_FIELD_VALUE_USECOMPONENTDEFAULT
-			</option>
+			<option value="">JGLOBAL_USE_GLOBAL</option>
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 		</field>
@@ -60,8 +58,7 @@
 		<field name="track_clicks" type="list" default="0"
 			label="COM_BANNERS_FIELD_TRACKCLICK_LABEL" description="COM_BANNERS_FIELD_TRACKCLICK_DESC"
 		>
-			<option value="-1">COM_BANNERS_FIELD_VALUE_USECOMPONENTDEFAULT
-			</option>
+			<option value="">JGLOBAL_USE_GLOBAL</option>
 			<option value="0">JNO</option>
 			<option value="1">JYES</option>
 		</field>
@@ -69,7 +66,7 @@
 	</fieldset>
 
 	<fieldset name="metadata"
-		label="COM_BANNERS_GROUP_LABEL_METADATA_OPTIONS"
+		label="JGLOBAL_FIELDSET_METADATA_OPTIONS"
 	>
 
 		<field name="metakey" type="textarea" class="inputbox"

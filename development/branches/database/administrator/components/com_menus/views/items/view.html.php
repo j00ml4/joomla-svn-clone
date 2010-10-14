@@ -10,6 +10,8 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
+jimport('joomla.filesystem.file');
+jimport('joomla.filesystem.folder');
 
 /**
  * The HTML Menus Menu Items View.
@@ -30,7 +32,7 @@ class MenusViewItems extends JView
 	 */
 	public function display($tpl = null)
 	{
-		$lang 		= &JFactory::getLanguage();
+		$lang 		= JFactory::getLanguage();
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
 		$this->state		= $this->get('State');
@@ -69,39 +71,49 @@ class MenusViewItems extends JView
 					||	$lang->load($item->componentname.'.sys', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false)
 					||	$lang->load($item->componentname.'.sys', JPATH_ADMINISTRATOR.'/components/'.$item->componentname, $lang->getDefault(), false, false);
 
-					$value	= JText::_($item->componentname);
-					$vars	= null;
+					if (!empty($item->componentname)) {
+						$value	= JText::_($item->componentname);
+						$vars	= null;
 
-					parse_str($item->link, $vars);
-					if (isset($vars['view'])) {
-						// Attempt to load the view xml file.
-						$file = JPATH_SITE.'/components/'.$item->componentname.'/views/'.$vars['view'].'/metadata.xml';
-						if (is_file($file) && $xml = simplexml_load_file($file)) {
-							// Look for the first view node off of the root node.
-							if ($view = $xml->xpath('view[1]')) {
-								if (!empty($view[0]['title'])) {
-									$vars['layout'] = isset($vars['layout']) ? $vars['layout'] : 'default';
+						parse_str($item->link, $vars);
+						if (isset($vars['view'])) {
+							// Attempt to load the view xml file.
+							$file = JPATH_SITE.'/components/'.$item->componentname.'/views/'.$vars['view'].'/metadata.xml';
+							if (JFile::exists($file) && $xml = simplexml_load_file($file)) {
+								// Look for the first view node off of the root node.
+								if ($view = $xml->xpath('view[1]')) {
+									if (!empty($view[0]['title'])) {
+										$vars['layout'] = isset($vars['layout']) ? $vars['layout'] : 'default';
 
-									// Attempt to load the layout xml file.
-									$file = JPATH_SITE.'/components/'.$item->componentname.'/views/'.$vars['view'].'/tmpl/'.$vars['layout'].'.xml';
-									if (is_file($file) && $xml = simplexml_load_file($file)) {
-										// Look for the first view node off of the root node.
-										if ($layout = $xml->xpath('layout[1]')) {
-											if (!empty($layout[0]['title'])) {
-												$value .= ' » ' . JText::_(trim((string) $layout[0]['title']));
+										// Attempt to load the layout xml file.
+										$file = JPATH_SITE.'/components/'.$item->componentname.'/views/'.$vars['view'].'/tmpl/'.$vars['layout'].'.xml';
+										if (JFile::exists($file) && $xml = simplexml_load_file($file)) {
+											// Look for the first view node off of the root node.
+											if ($layout = $xml->xpath('layout[1]')) {
+												if (!empty($layout[0]['title'])) {
+													$value .= ' » ' . JText::_(trim((string) $layout[0]['title']));
+												}
 											}
-										}
-										if (!empty($layout[0]->message[0])) {
-											$items->item_type_desc = JText::_(trim((string) $layout[0]->message[0]));
+											if (!empty($layout[0]->message[0])) {
+												$items->item_type_desc = JText::_(trim((string) $layout[0]->message[0]));
+											}
 										}
 									}
 								}
+								unset($xml);
 							}
-							unset($xml);
+							else {
+								// Special case for absent views
+								$value .= ' » ' . JText::_($item->componentname.'_'.$vars['view'].'_VIEW_DEFAULT_TITLE');
+							}
+						}
+					}
+					else {
+						if (preg_match("/^index.php\?option=([a-zA-Z\-0-9_]*)/", $item->link, $result)) {
+							$value = JText::sprintf('COM_MENUS_TYPE_UNEXISTING',$result[1]);
 						}
 						else {
-							// Special case for absent views
-							$value .= ' » ' . JText::_($item->componentname.'_'.$vars['view'].'_VIEW_DEFAULT_TITLE');
+							$value = JText::_('COM_MENUS_TYPE_UNKNOWN');
 						}
 					}
 					break;
@@ -111,10 +123,17 @@ class MenusViewItems extends JView
 
 		// Levels filter.
 		$options	= array();
-		$options[]	= JHtml::_('select.option', '1');
-		$options[]	= JHtml::_('select.option', '2');
-		$options[]	= JHtml::_('select.option', '3');
-		$options[]	= JHtml::_('select.option', '4');
+		$options[]	= JHtml::_('select.option', '1', JText::_('J1'));
+		$options[]	= JHtml::_('select.option', '2', JText::_('J2'));
+		$options[]	= JHtml::_('select.option', '3', JText::_('J3'));
+		$options[]	= JHtml::_('select.option', '4', JText::_('J4'));
+		$options[]	= JHtml::_('select.option', '5', JText::_('J5'));
+		$options[]	= JHtml::_('select.option', '6', JText::_('J6'));
+		$options[]	= JHtml::_('select.option', '7', JText::_('J7'));
+		$options[]	= JHtml::_('select.option', '8', JText::_('J8'));
+		$options[]	= JHtml::_('select.option', '9', JText::_('J9'));
+		$options[]	= JHtml::_('select.option', '10', JText::_('J10'));
+
 		$this->assign('f_levels', $options);
 
 		parent::display($tpl);
@@ -128,24 +147,43 @@ class MenusViewItems extends JView
 	 */
 	protected function addToolbar()
 	{
+		require_once JPATH_COMPONENT.'/helpers/menus.php';
+
+		$canDo	= MenusHelper::getActions($this->state->get('filter.parent_id'));
+
 		JToolBarHelper::title(JText::_('COM_MENUS_VIEW_ITEMS_TITLE'), 'menumgr.png');
-		JToolBarHelper::custom('item.add', 'new.png', 'new_f2.png','JTOOLBAR_NEW', false);
-		JToolBarHelper::custom('item.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
 
-		JToolBarHelper::divider();
-
-		JToolBarHelper::custom('items.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
-		JToolBarHelper::custom('items.unpublish', 'unpublish.png', 'unpublish_f2.png','JTOOLBAR_UNPUBLISH', true);
-		if ($this->state->get('filter.published') == -2) {
+		if ($canDo->get('core.create')) {
+			JToolBarHelper::custom('item.add', 'new.png', 'new_f2.png','JTOOLBAR_NEW', false);
+		}
+		if ($canDo->get('core.edit')) {
+			JToolBarHelper::custom('item.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
+		}
+		if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::divider();
+			JToolBarHelper::custom('items.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
+			JToolBarHelper::custom('items.unpublish', 'unpublish.png', 'unpublish_f2.png','JTOOLBAR_UNPUBLISH', true);
+		}
+		if (JFactory::getUser()->authorise('core.admin')) {
+			JToolBarHelper::divider();
+			JToolBarHelper::custom('items.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+		}
+		
+		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'items.delete','JTOOLBAR_EMPTY_TRASH');
-		} else {
+		}
+		else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('items.trash','JTOOLBAR_TRASH');
 		}
-		JToolBarHelper::divider();
-		JToolBarHelper::custom('items.rebuild', 'refresh.png', 'refresh_f2.png', 'JToolbar_Rebuild', false);
-		JToolBarHelper::divider();
-
-
-		JToolBarHelper::help('screen.menus.items','JTOOLBAR_HELP');
+		
+		if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::makeDefault('items.setDefault', 'COM_MENUS_TOOLBAR_SET_HOME');
+			JToolBarHelper::divider();
+		}
+		if (JFactory::getUser()->authorise('core.admin')) {
+			JToolBarHelper::custom('items.rebuild', 'refresh.png', 'refresh_f2.png', 'JToolbar_Rebuild', false);
+			JToolBarHelper::divider();
+		}
+		JToolBarHelper::help('JHELP_MENUS_MENU_ITEM_MANAGER');
 	}
 }

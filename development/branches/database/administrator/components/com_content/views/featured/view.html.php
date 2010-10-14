@@ -46,9 +46,10 @@ class ContentViewFeatured extends JView
 	 */
 	protected function addToolbar()
 	{
+		$state	= $this->get('State');
 		$canDo	= ContentHelper::getActions($this->state->get('filter.category_id'));
 
-		JToolBarHelper::title(JText::_('Content_Featured_Title'), 'featured.png');
+		JToolBarHelper::title(JText::_('COM_CONTENT_FEATURED_TITLE'), 'featured.png');
 
 		if ($canDo->get('core.create')) {
 			JToolBarHelper::custom('article.add', 'new.png', 'new_f2.png','JTOOLBAR_NEW', false);
@@ -56,21 +57,29 @@ class ContentViewFeatured extends JView
 		if ($canDo->get('core.edit')) {
 			JToolBarHelper::custom('article.edit', 'edit.png', 'edit_f2.png','JTOOLBAR_EDIT', true);
 		}
-		JToolBarHelper::divider();
+
 		if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::divider();
 			JToolBarHelper::custom('articles.publish', 'publish.png', 'publish_f2.png','JTOOLBAR_PUBLISH', true);
 			JToolBarHelper::custom('articles.unpublish', 'unpublish.png', 'unpublish_f2.png','JTOOLBAR_UNPUBLISH', true);
-			JToolBarHelper::custom('featured.delete','remove.png','remove_f2.png','JToolbar_Remove', true);
-			if ($this->state->get('filter.published') != -1) {
-				JToolBarHelper::archiveList('articles.archive','JTOOLBAR_ARCHIVE');
-			}
-
-		}
-		if ($canDo->get('core.admin')) {
 			JToolBarHelper::divider();
-			JToolBarHelper::preferences('com_content');
+			JToolBarHelper::archiveList('articles.archive','JTOOLBAR_ARCHIVE');
+			JToolBarHelper::custom('articles.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
+			JToolBarHelper::custom('featured.delete','remove.png','remove_f2.png','JTOOLBAR_REMOVE', true);
 		}
-		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.content.featured','JTOOLBAR_HELP');
+		
+		if ($state->get('filter.published') == -2 && $canDo->get('core.delete')) {
+			JToolBarHelper::deleteList('', 'articles.delete','JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::divider();
+		} else if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::divider();
+			JToolBarHelper::trash('articles.trash','JTOOLBAR_TRASH');
+		}
+		
+		if ($canDo->get('core.admin')) {
+			JToolBarHelper::preferences('com_content');
+			JToolBarHelper::divider();
+		}
+		JToolBarHelper::help('JHELP_CONTENT_FEATURED_ARTICLES');
 	}
 }

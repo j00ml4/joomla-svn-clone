@@ -11,35 +11,35 @@
 defined('_JEXEC') or die;
 
 // Load tooltips behavior
-JHtml::_('behavior.tooltip');
+JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.switcher');
+JHtml::_('behavior.tooltip');
 
-// Special treatment to get the submenu to work.
+// Load submenu template, using element id 'submenu' as needed by behavior.switcher
 $this->document->setBuffer($this->loadTemplate('navigation'), 'modules', 'submenu');
-$this->document->addScriptDeclaration("
-	document.switcher = null;
-	window.addEvent('domready', function(){
-		var toggler = document.id('submenu')
-		var element = document.id('config-document')
-		if (element) {
-			document.switcher = new JSwitcher(toggler, element, {cookieName: toggler.getAttribute('class')});
-		}
-	});
-");
 
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_config');?>" method="post" name="adminForm">
+<script type="text/javascript">
+	function submitbutton(task)
+	{
+		if (task == 'application.cancel' || document.formvalidator.isValid(document.id('application-form'))) {
+			Joomla.submitform(task, document.getElementById('application-form'));
+		}
+	}
+</script>
+
+<form action="<?php echo JRoute::_('index.php?option=com_config');?>" id="application-form" method="post" name="adminForm" class="form-validate">
 	<?php if ($this->ftp) : ?>
 		<?php echo $this->loadTemplate('ftplogin'); ?>
 	<?php endif; ?>
 	<div id="config-document">
 		<div id="page-site" class="tab">
 			<div class="noshow">
-				<div class="width-65 fltlft">
+				<div class="width-60 fltlft">
 					<?php echo $this->loadTemplate('site'); ?>
 					<?php echo $this->loadTemplate('metadata'); ?>
 				</div>
-				<div class="width-35 fltrt">
+				<div class="width-40 fltrt">
 					<?php echo $this->loadTemplate('seo'); ?>
 					<?php echo $this->loadTemplate('cookie'); ?>
 				</div>
@@ -75,9 +75,8 @@ $this->document->addScriptDeclaration("
 				<?php echo $this->loadTemplate('permissions'); ?>
 			</div>
 		</div>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHtml::_('form.token'); ?>
 	</div>
 	<div class="clr"></div>
-
-	<input type="hidden" name="task" value="" />
-	<?php echo JHtml::_('form.token'); ?>
 </form>

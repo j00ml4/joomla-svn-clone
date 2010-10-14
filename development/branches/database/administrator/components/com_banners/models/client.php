@@ -30,9 +30,10 @@ class BannersModelClient extends JModelAdmin
 	{
 		$user = JFactory::getUser();
 
-		if ($record->catid) {
+		if (!empty($record->catid)) {
 			return $user->authorise('core.delete', 'com_banners.category.'.(int) $record->catid);
-		} else {
+		}
+		else {
 			return $user->authorise('core.delete', 'com_banners');
 		}
 	}
@@ -48,9 +49,10 @@ class BannersModelClient extends JModelAdmin
 	{
 		$user = JFactory::getUser();
 
-		if ($record->catid) {
+		if (!empty($record->catid)) {
 			return $user->authorise('core.edit.state', 'com_banners.category.'.(int) $record->catid);
-		} else {
+		}
+		else {
 			return $user->authorise('core.edit.state', 'com_banners');
 		}
 	}
@@ -72,31 +74,38 @@ class BannersModelClient extends JModelAdmin
 	/**
 	 * Method to get the record form.
 	 *
-	 * @return	mixed	JForm object on success, false on failure.
+	 * @param	array	$data		Data for the form.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	mixed	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
-		// Initialise variables.
-		$app = JFactory::getApplication();
-
 		// Get the form.
-		$form = parent::getForm('com_banners.client', 'client', array('control' => 'jform'));
+		$form = $this->loadForm('com_banners.client', 'client', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
 
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_banners.edit.client.data', array());
+		return $form;
+	}
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_banners.edit.client.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
 		}
 
-		return $form;
+		return $data;
 	}
 
 	/**

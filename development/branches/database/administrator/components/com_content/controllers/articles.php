@@ -28,52 +28,14 @@ class ContentControllerArticles extends JControllerAdmin
 	 */
 	public function __construct($config = array())
 	{
+		// Articles default form can come from the articles or featured view.
+		// Adjust the redirect view on the value of 'view' in the request.
+		if (JRequest::getCmd('view') == 'featured') {
+			$this->view_list = 'featured';
+		}
 		parent::__construct($config);
 
 		$this->registerTask('unfeatured',	'featured');
-	}
-
-	/**
-	 * Remove a record.
-	 * @since	1.6
-	 */
-	public function delete()
-	{
-		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JInvalid_Token'));
-
-		// Initialise variables.
-		$user	= JFactory::getUser();
-		$ids	= JRequest::getVar('cid', array(), '', 'array');
-
-		// Access checks.
-		foreach ($ids as $i => $id)
-		{
-			if (!$user->authorise('core.delete', 'com_content.article.'.(int) $id))
-			{
-				// Prune items that you can't delete.
-				unset($ids[$i]);
-				JError::raiseNotice(403, JText::_('JError_Core_Delete_not_permitted'));
-			}
-		}
-
-		if (empty($ids)) {
-			JError::raiseWarning(500, JText::_('JError_No_items_selected'));
-		}
-		else {
-			// Get the model.
-			$model = $this->getModel();
-
-			// Remove the items.
-			if (!$model->delete($ids)) {
-				JError::raiseWarning(500, $model->getError());
-			}
-			else {
-				$this->setMessage(JText::plural('COM_CONTENT_N_ITEMS_DELETED', count($ids)));
-			}
-		}
-
-		$this->setRedirect('index.php?option=com_content&view=articles');
 	}
 
 	/**

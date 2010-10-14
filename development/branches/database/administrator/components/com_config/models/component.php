@@ -23,6 +23,7 @@ class ConfigModelComponent extends JModelForm
 	 *
 	 * Note. Calling getState in this method will result in recursion.
 	 *
+	 * @return	void
 	 * @since	1.6
 	 */
 	protected function populateState()
@@ -42,29 +43,34 @@ class ConfigModelComponent extends JModelForm
 	/**
 	 * Method to get a form object.
 	 *
-	 * @return	mixed		A JForm object on success, false on failure.
+	 * @param	array	$data		Data for the form.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 *
+	 * @return	mixed	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
 		jimport('joomla.form.form');
 
 		if ($path = $this->getState('component.path')) {
 			// Add the search path for the admin component config.xml file.
 			JForm::addFormPath($path);
-		} else {
+		}
+		else {
 			// Add the search path for the admin component config.xml file.
 			JForm::addFormPath(JPATH_ADMINISTRATOR.'/components/'.$this->getState('component.option'));
 		}
 
 		// Get the form.
-		$form = parent::getForm(
+		$form = $this->loadForm(
 				'com_config.component',
 				'config',
-				array('control' => 'jform'),
+				array('control' => 'jform', 'load_data' => $loadData),
 				false,
 				'/config'
 			);
+
 		if (empty($form)) {
 			return false;
 		}
@@ -84,7 +90,7 @@ class ConfigModelComponent extends JModelForm
 		$option = $this->getState('component.option');
 
 		// Load common and local language files.
-		$lang = &JFactory::getLanguage();
+		$lang = JFactory::getLanguage();
 			$lang->load($option, JPATH_BASE, null, false, false)
 		||	$lang->load($option, JPATH_BASE . "/components/$option", null, false, false)
 		||	$lang->load($option, JPATH_BASE, $lang->getDefault(), false, false)
@@ -99,12 +105,13 @@ class ConfigModelComponent extends JModelForm
 	 * Method to save the configuration data.
 	 *
 	 * @param	array	An array containing all global config data.
+	 *
 	 * @return	bool	True on success, false on failure.
 	 * @since	1.6
 	 */
 	public function save($data)
 	{
-		$table	= &JTable::getInstance('extension');
+		$table	= JTable::getInstance('extension');
 
 		// Save the rules.
 		if (isset($data['params']) && isset($data['params']['rules'])) {
@@ -125,6 +132,7 @@ class ConfigModelComponent extends JModelForm
 				$this->setError($asset->getError());
 				return false;
 			}
+
 			// We don't need this anymore
 			unset($data['option']);
 			unset($data['params']['rules']);
@@ -135,6 +143,7 @@ class ConfigModelComponent extends JModelForm
 			$this->setError($table->getError());
 			return false;
 		}
+
 		unset($data['id']);
 
 		// Bind the data.
@@ -156,7 +165,7 @@ class ConfigModelComponent extends JModelForm
 		}
 
 		// Clean the cache.
-		$cache = &JFactory::getCache('com_config');
+		$cache = JFactory::getCache('_system');
 		$cache->clean();
 
 		return true;

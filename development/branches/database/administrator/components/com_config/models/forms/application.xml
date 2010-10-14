@@ -6,16 +6,26 @@
 		label="COM_CONFIG_CACHE_SETTINGS_LABEL">
 		<field
 			name="caching"
-			type="radio"
-			default="0"
+			type="list"
+			default="2"
 			label="COM_CONFIG_FIELD_CACHE_LABEL"
 			description="COM_CONFIG_FIELD_CACHE_DESC"
 			required="true"
 			filter="integer">
 			<option
-				value="1">JYES</option>
+				value="0">COM_CONFIG_FIELD_VALUE_CACHE_OFF</option>
 			<option
-				value="0">JNO</option>
+				value="1">COM_CONFIG_FIELD_VALUE_CACHE_CONSERVATIVE</option>
+			<option
+				value="2">COM_CONFIG_FIELD_VALUE_CACHE_PROGRESSIVE</option>
+		</field>
+		<field
+			name="cache_handler"
+			type="cachehandler"
+			default=""
+			label="COM_CONFIG_FIELD_CACHE_HANDLER_LABEL"
+			description="COM_CONFIG_FIELD_CACHE_HANDLER_DESC"
+			filter="word">
 		</field>
 
 		<field
@@ -27,16 +37,8 @@
 			required="true"
 			filter="integer"
 			size="6" />
-
-		<field
-			name="cache_handler"
-			type="cachehandler"
-			default="file"
-			label="COM_CONFIG_FIELD_CACHE_HANDLER_LABEL"
-			description="COM_CONFIG_FIELD_CACHE_HANDLER_DESC"
-			required="true"
-			filter="word" />
 	</fieldset>
+
 	<fieldset
 		name="memcache"
 		label="COM_CONFIG_MEMCACHE_SETTINGS_LABEL">
@@ -98,6 +100,12 @@
 				value="mysql">COM_CONFIG_FIELD_VALUE_MYSQL</option>
 			<option
 				value="mysqli">COM_CONFIG_FIELD_VALUE_MYSQLI</option>
+			<option
+				value="oracle">COM_CONFIG_FIELD_VALUE_ORACLE</option>
+			<option
+				value="mssql">COM_CONFIG_FIELD_VALUE_MSSQL</option>
+			<option
+				value="azure">COM_CONFIG_FIELD_VALUE_SQL_AZURE</option>
 		</field>
 
 		<field
@@ -132,6 +140,23 @@
 			description="COM_CONFIG_FIELD_DATABASE_PREFIX_DESC"
 			filter="string"
 			size="10" />
+			
+			<field
+			name="slave_db_host"
+			type="text"
+			label="COM_CONFIG_FIELD_DATABASE_SLAVE_HOST_LABEL"
+			description="COM_CONFIG_FIELD_DATABASE_SLAVE_HOST_DESC"
+			filter="string"
+			size="30" />
+
+		<field
+			name="slave_db_user"
+			type="text"
+			label="COM_CONFIG_FIELD_DATABASE_SLAVE_USERNAME_LABEL"
+			description="COM_CONFIG_FIELD_DATABASE_SLAVE_USERNAME_DESC"
+			filter="string"
+			size="30" />
+
 
 	</fieldset>
 
@@ -144,7 +169,6 @@
 			default="0"
 			label="COM_CONFIG_FIELD_DEBUG_SYSTEM_LABEL"
 			description="COM_CONFIG_FIELD_DEBUG_SYSTEM_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
@@ -158,21 +182,6 @@
 			default="0"
 			label="COM_CONFIG_FIELD_DEBUG_LANG_LABEL"
 			description="COM_CONFIG_FIELD_DEBUG_LANG_DESC"
-			required="true"
-			filter="integer">
-			<option
-				value="1">JYES</option>
-			<option
-				value="0">JNO</option>
-		</field>
-
-		<field
-			name="debug_modules"
-			type="radio"
-			default="1"
-			label="COM_CONFIG_FIELD_DEBUG_MODULES_LABEL"
-			description="COM_CONFIG_FIELD_DEBUG_MODULES_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
@@ -190,7 +199,6 @@
 			default="0"
 			label="COM_CONFIG_FIELD_FTP_ENABLE_LABEL"
 			description="COM_CONFIG_FIELD_FTP_ENABLE_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYes</option>
@@ -224,7 +232,7 @@
 
 		<field
 			name="ftp_pass"
-			type="text"
+			type="password"
 			label="COM_CONFIG_FIELD_FTP_PASSWORD_LABEL"
 			description="COM_CONFIG_FIELD_FTP_PASSWORD_DESC"
 			filter="string"
@@ -241,13 +249,16 @@
 
 	<fieldset
 		name="locale"
-		label="CONFIG_LOCALE_SETTINGS_LABEL">
+		label="CONFIG_LOCATION_SETTINGS_LABEL">
 		<field
 			name="offset"
 			type="timezone"
+			default="UTC"
 			label="COM_CONFIG_FIELD_SERVER_TIMEZONE_LABEL"
 			description="COM_CONFIG_FIELD_SERVER_TIMEZONE_DESC"
-			required="true" />
+			required="true">
+			<option value="UTC">JLIB_FORM_VALUE_TIMEZONE_UTC</option>
+		</field>
 	</fieldset>
 
 	<fieldset
@@ -272,10 +283,12 @@
 		<field
 			name="mailfrom"
 			type="text"
+			class="validate-email"
 			label="COM_CONFIG_FIELD_MAIL_FROM_EMAIL_LABEL"
 			description="COM_CONFIG_FIELD_MAIL_FROM_EMAIL_DESC"
 			filter="string"
-			size="30" />
+			size="30"
+			validate="email" />
 
 		<field
 			name="fromname"
@@ -300,7 +313,6 @@
 			default="0"
 			label="COM_CONFIG_FIELD_MAIL_SMTP_AUTH_LABEL"
 			description="COM_CONFIG_FIELD_MAIL_SMTP_AUTH_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
@@ -314,7 +326,6 @@
 			default="none"
 			label="COM_CONFIG_FIELD_MAIL_SMTP_SECURE_LABEL"
 			description="COM_CONFIG_FIELD_MAIL_SMTP_SECURE_DESC"
-			required="true"
 			filter="word">
 			<option
 				value="none">COM_CONFIG_FIELD_VALUE_NONE</option>
@@ -344,7 +355,7 @@
 
 		<field
 			name="smtppass"
-			type="text"
+			type="password"
 			label="COM_CONFIG_FIELD_MAIL_SMTP_PASSWORD_LABEL"
 			description="COM_CONFIG_FIELD_MAIL_SMTP_PASSWORD_DESC"
 			filter="string"
@@ -396,7 +407,6 @@
 			default="1"
 			label="COM_CONFIG_FIELD_METATITLE_LABEL"
 			description="COM_CONFIG_FIELD_METATITLE_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
@@ -410,13 +420,13 @@
 			default="1"
 			label="COM_CONFIG_FIELD_METAAUTHOR_LABEL"
 			description="COM_CONFIG_FIELD_METAAUTHOR_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
 			<option
 				value="0">JNO</option>
 		</field>
+
 	</fieldset>
 
 	<fieldset
@@ -425,10 +435,9 @@
 		<field
 			name="sef"
 			type="radio"
-			default="0"
+			default="1"
 			label="COM_CONFIG_FIELD_SEF_URL_LABEL"
 			description="COM_CONFIG_FIELD_SEF_URL_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
@@ -442,7 +451,6 @@
 			default="0"
 			label="COM_CONFIG_FIELD_SEF_REWRITE_LABEL"
 			description="COM_CONFIG_FIELD_SEF_REWRITE_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
@@ -456,7 +464,6 @@
 			default="0"
 			label="COM_CONFIG_FIELD_SEF_SUFFIX_LABEL"
 			description="COM_CONFIG_FIELD_SEF_SUFFIX_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYes</option>
@@ -470,13 +477,27 @@
 			default="0"
 			label="COM_CONFIG_FIELD_UNICODESLUGS_LABEL"
 			description="COM_CONFIG_FIELD_UNICODESLUGS_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
 			<option
 				value="0">JNO</option>
 		</field>
+
+
+		<field
+			name="sitename_pagetitles"
+			type="radio"
+			default="0"
+			label="COM_CONFIG_FIELD_SITENAME_PAGETITLES_LABEL"
+			description="COM_CONFIG_FIELD_SITENAME_PAGETITLES_DESC"
+			filter="integer">
+			<option
+				value="1">JYES</option>
+			<option
+				value="0">JNO</option>
+		</field>
+
 	</fieldset>
 
 	<fieldset
@@ -487,7 +508,6 @@
 			type="text"
 			label="COM_CONFIG_FIELD_TEMP_PATH_LABEL"
 			description="COM_CONFIG_FIELD_TEMP_PATH_DESC"
-			required="true"
 			filter="string"
 			size="50" />
 
@@ -497,7 +517,6 @@
 			default="0"
 			label="COM_CONFIG_FIELD_GZIP_COMPRESSION_LABEL"
 			description="COM_CONFIG_FIELD_GZIP_COMPRESSION_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
@@ -511,7 +530,6 @@
 			default="-1"
 			label="COM_CONFIG_FIELD_ERROR_REPORTING_LABEL"
 			description="COM_CONFIG_FIELD_ERROR_REPORTING_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="-1">COM_CONFIG_FIELD_VALUE_SYSTEM_DEFAULT</option>
@@ -529,7 +547,6 @@
 			default="-1"
 			label="COM_CONFIG_FIELD_FORCE_SSL_LABEL"
 			description="COM_CONFIG_FIELD_FORCE_SSL_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="0">COM_CONFIG_FIELD_VALUE_NONE</option>
@@ -582,7 +599,6 @@
 			default="0"
 			label="COM_CONFIG_FIELD_SITE_OFFLINE_LABEL"
 			description="COM_CONFIG_FIELD_SITE_OFFLINE_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
@@ -595,26 +611,9 @@
 			type="textarea"
 			label="COM_CONFIG_FIELD_OFFLINE_MESSAGE_LABEL"
 			description="COM_CONFIG_FIELD_OFFLINE_MESSAGE_DESC"
-			required="true"
 			filter="safehtml"
 			cols="60"
 			rows="2" />
-
-
-
-		<field
-			name="sitename_pagetitles"
-			type="radio"
-			default="0"
-			label="COM_CONFIG_FIELD_SITENAME_PAGETITLES_LABEL"
-			description="COM_CONFIG_FIELD_SITENAME_PAGETITLES_DESC"
-			required="true"
-			filter="integer">
-			<option
-				value="1">JYES</option>
-			<option
-				value="0">JNO</option>
-		</field>
 
 		<field
 			name="editor"
@@ -640,7 +639,6 @@
 			default="20"
 			label="COM_CONFIG_FIELD_DEFAULT_LIST_LIMIT_LABEL"
 			description="COM_CONFIG_FIELD_DEFAULT_LIST_LIMIT_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="5">J5</option>
@@ -666,7 +664,6 @@
 			default="10"
 			label="COM_CONFIG_FIELD_DEFAULT_FEED_LIMIT_LABEL"
 			description="COM_CONFIG_FIELD_DEFAULT_FEED_LIMIT_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="5">J5</option>
@@ -692,7 +689,6 @@
 			default="author"
 			label="COM_CONFIG_FIELD_FEED_EMAIL_LABEL"
 			description="COM_CONFIG_FIELD_FEED_EMAIL_DESC"
-			required="true"
 			filter="word">
 			<option
 				value="author">COM_CONFIG_FIELD_VALUE_AUTHOR_EMAIL</option>
@@ -728,7 +724,6 @@
 			default="0"
 			label="COM_CONFIG_FIELD_WEB_SERVICES_LABEL"
 			description="COM_CONFIG_FIELD_WEB_SERVICES_DESC"
-			required="true"
 			filter="integer">
 			<option
 				value="1">JYES</option>
@@ -774,41 +769,40 @@
 			name="rules"
 			type="rules"
 			label="COM_CONFIG_FIELD_RULES_LABEL"
-			description="COM_CONFIG_FIELD_RULES_DESC"
 			class="inputbox"
 			filter="rules">
 			<action
 				name="core.login.site"
 				title="JACTION_LOGIN_SITE"
-				description="JACTION_LOGIN_SITE_DESC" />
+				description="COM_CONFIG_ACTION_LOGIN_SITE_DESC" />
 			<action
 				name="core.login.admin"
 				title="JACTION_LOGIN_ADMIN"
-				description="JACTION_LOGIN_ADMIN_DESC" />
+				description="COM_CONFIG_ACTION_LOGIN_ADMIN_DESC" />
 			<action
 				name="core.admin"
-				title="JAction_Admin"
-				description="JACTION_ADMIN_DESC" />
+				title="JACTION_ADMIN"
+				description="COM_CONFIG_ACTION_ADMIN_DESC" />
 			<action
 				name="core.manage"
 				title="JACTION_MANAGE"
-				description="JACTION_MANAGE_DESC" />
+				description="COM_CONFIG_ACTION_MANAGE_DESC" />
 			<action
 				name="core.create"
 				title="JACTION_CREATE"
-				description="JACTION_CREATE_DESC" />
+				description="COM_CONFIG_ACTION_CREATE_DESC" />
 			<action
 				name="core.delete"
 				title="JACTION_DELETE"
-				description="JACTION_DELETE_DESC" />
+				description="COM_CONFIG_ACTION_DELETE_DESC" />
 			<action
 				name="core.edit"
 				title="JACTION_EDIT"
-				description="JACTION_EDIT_DESC" />
+				description="COM_CONFIG_ACTION_EDIT_DESC" />
 			<action
 				name="core.edit.state"
 				title="JACTION_EDIT_STATE"
-				description="JACTION_EDIT_STATE_DESC" />
+				description="COM_CONFIG_ACTION_EDIT_STATE_DESC" />
 		</field>
 
 	</fieldset>

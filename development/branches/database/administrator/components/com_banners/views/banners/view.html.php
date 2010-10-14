@@ -57,7 +57,7 @@ class BannersViewBanners extends JView
 
 		$canDo	= BannersHelper::getActions($this->state->get('filter.category_id'));
 
-		JToolBarHelper::title(JText::_('COM_BANNERS_MANAGER_BANNERS'), 'generic.png');
+		JToolBarHelper::title(JText::_('COM_BANNERS_MANAGER_BANNERS'), 'banners.png');
 		if ($canDo->get('core.create')) {
 			JToolBarHelper::addNew('banner.add','JTOOLBAR_NEW');
 		}
@@ -78,18 +78,22 @@ class BannersViewBanners extends JView
 				else if ($this->state->get('filter.state') == 2) {
 					JToolBarHelper::unarchiveList('banners.publish', 'JTOOLBAR_UNARCHIVE');
 				}
-			}	
+			}
+		}
+		if ($canDo->get('core.edit.state')) {
+			JToolBarHelper::custom('banners.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
 		}
 		if ($this->state->get('filter.state') == -2 && $canDo->get('core.delete')) {
 			JToolBarHelper::deleteList('', 'banners.delete','JTOOLBAR_EMPTY_TRASH');
+			JToolBarHelper::divider();
 		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('banners.trash','JTOOLBAR_TRASH');
+			JToolBarHelper::divider();
 		}
 		if ($canDo->get('core.admin')) {
-			JToolBarHelper::divider();
 			JToolBarHelper::preferences('com_banners');
+			JToolBarHelper::divider();
 		}
-		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.banners.banners','JTOOLBAR_HELP');
+		JToolBarHelper::help('JHELP_COMPONENTS_BANNERS_BANNERS');
 	}
 }

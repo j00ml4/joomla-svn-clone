@@ -43,6 +43,13 @@ class InstallerViewManage extends InstallerViewDefault
 			return false;
 		}
 
+		//Check if there are no matching items
+		if(!count($this->items)){
+			JFactory::getApplication()->enqueueMessage(
+				JText::_('COM_INSTALLER_MSG_MANAGE_NOEXTENSION')
+			);
+		}
+
 		// Display the view
 		parent::display($tpl);
 	}
@@ -56,8 +63,8 @@ class InstallerViewManage extends InstallerViewDefault
 	{
 		$canDo	= InstallerHelper::getActions();
 		if ($canDo->get('core.edit.state')) {
-			JToolBarHelper::custom('manage.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
-			JToolBarHelper::custom('manage.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+			JToolBarHelper::custom('manage.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_ENABLE', true);
+			JToolBarHelper::custom('manage.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_DISABLE', true);
 			JToolBarHelper::divider();
 		}
 		JToolBarHelper::custom('manage.refresh', 'refresh', 'refresh','JTOOLBAR_REFRESH_CACHE',true);
@@ -67,5 +74,6 @@ class InstallerViewManage extends InstallerViewDefault
 			JToolBarHelper::divider();
 		}
 		parent::addToolbar();
+		JToolBarHelper::help('JHELP_EXTENSIONS_EXTENSION_MANAGER_MANAGE');
 	}
 }

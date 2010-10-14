@@ -20,13 +20,10 @@ jimport('joomla.application.component.modeladmin');
 class LanguagesModelLanguage extends JModelAdmin
 {
 	/**
-	 * @var		string	The prefix to use with controller messages.
-	 * @since	1.6
-	 */
-	protected $text_prefix = 'COM_LANGUAGES';
-	
-	/**
 	 * Override to get the table
+	 *
+	 * @return	JTable
+	 * @since	1.6
 	 */
 	public function getTable()
 	{
@@ -38,21 +35,20 @@ class LanguagesModelLanguage extends JModelAdmin
 	 *
 	 * Note. Calling getState in this method will result in recursion.
 	 *
+	 * @return	void
 	 * @since	1.6
 	 */
 	protected function populateState()
 	{
-		$app		= &JFactory::getApplication('administrator');
-		$params		= &JComponentHelper::getParams('com_languages');
+		$app		= JFactory::getApplication('administrator');
+		$params		= JComponentHelper::getParams('com_languages');
 
 		// Load the User state.
-		if (JRequest::getWord('layout') === 'edit')
-		{
+		if (JRequest::getWord('layout') === 'edit') {
 			$langId = (int) $app->getUserState('com_languages.edit.language.id');
 			$this->setState('language.id', $langId);
 		}
-		else
-		{
+		else {
 			$langId = (int) JRequest::getInt('id');
 			$this->setState('language.id', $langId);
 		}
@@ -65,6 +61,7 @@ class LanguagesModelLanguage extends JModelAdmin
 	 * Method to get a member item.
 	 *
 	 * @param	integer	The id of the member to get.
+	 *
 	 * @return	mixed	User data object on success, false on failure.
 	 * @since	1.0
 	 */
@@ -75,7 +72,7 @@ class LanguagesModelLanguage extends JModelAdmin
 		$false		= false;
 
 		// Get a member row instance.
-		$table = &$this->getTable();
+		$table = $this->getTable();
 
 		// Attempt to load the row.
 		$return = $table->load($langId);
@@ -87,48 +84,65 @@ class LanguagesModelLanguage extends JModelAdmin
 		}
 
 		$value = JArrayHelper::toObject($table->getProperties(1), 'JObject');
+
 		return $value;
 	}
 
 	/**
 	 * Method to get the group form.
 	 *
-	 * @return	mixed	JForm object on success, false on failure.
-	 * @since	1.0
+	 * @param	array	$data		Data for the form.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 *
+	 * @return	mixed	A JForm object on success, false on failure
+	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
-		// Initialise variables.
-		$app	= JFactory::getApplication();
-
 		// Get the form.
-		$form = parent::getForm('com_languages.language', 'language', array('control' => 'jform'));
+		$form = $this->loadForm('com_languages.language', 'language', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
-		}
-
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_languages.edit.language.data', array());
-
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
 		}
 
 		return $form;
 	}
 
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_languages.edit.language.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
+		}
+
+		return $data;
+	}
+
+	/**
+	 * Method to save the form data.
+	 *
+	 * @param	array	The form data.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
 	public function save($data)
 	{
 		$langId	= (int) $this->getState('language.id');
-		$isNew		= true;
+		$isNew	= true;
 
-		$dispatcher = &JDispatcher::getInstance();
-		JPluginHelper::importPlugin('content');
+		$dispatcher = JDispatcher::getInstance();
+		JPluginHelper::importPlugin('extension');
 
-		$table = &$this->getTable();
+		$table = $this->getTable();
 
 		// Load the row if saving an existing item.
 		if ($langId > 0) {
@@ -148,8 +162,8 @@ class LanguagesModelLanguage extends JModelAdmin
 			return false;
 		}
 
-		// Trigger the onBeforeSaveContent event.
-		$result = $dispatcher->trigger('onBeforeContentSave', array(&$table, $isNew));
+		// Trigger the onExtensionBeforeSave event.
+		$result = $dispatcher->trigger('onExtensionBeforeSave', array('com_languages.language', &$table, $isNew));
 
 		// Check the event responses.
 		if (in_array(false, $result, true)) {
@@ -163,10 +177,14 @@ class LanguagesModelLanguage extends JModelAdmin
 			return false;
 		}
 
-		// Trigger the onAfterContentSave event.
-		$dispatcher->trigger('onAfterContentSave', array(&$table, $isNew));
+		// Trigger the onExtensionAfterSave event.
+		$dispatcher->trigger('onExtensionAfterSave', array('com_languages.language', &$table, $isNew));
 
 		$this->setState('language.id', $table->lang_id);
+
+		// Clean the cache.
+		$cache = JFactory::getCache('com_languages');
+		$cache->clean();
 
 		return true;
 	}
@@ -175,13 +193,16 @@ class LanguagesModelLanguage extends JModelAdmin
 	 * Method to delete from the database.
 	 *
 	 * @param	integer	$cid	An array of	numeric ids of the rows.
+	 *
 	 * @return	boolean	True on success/false on failure.
+	 * @since	1.6
 	 */
 	public function delete($cid)
 	{
 		$table = $this->getTable();
 
-		for ($i = 0, $c = count($cid); $i < $c; $i++) {
+		for ($i = 0, $c = count($cid); $i < $c; $i++)
+		{
 			// Load the row.
 			$return = $table->load($cid[$i]);
 
@@ -201,12 +222,10 @@ class LanguagesModelLanguage extends JModelAdmin
 			}
 		}
 
-		return true;
-	}
+		// Clean the cache.
+		$cache = JFactory::getCache('com_languages');
+		$cache->clean();
 
-	function _orderConditions($table = null)
-	{
-		$condition = array();
-		return $condition;
+		return true;
 	}
 }

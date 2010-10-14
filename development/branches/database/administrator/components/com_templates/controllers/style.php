@@ -24,6 +24,23 @@ class TemplatesControllerStyle extends JControllerForm
 	 * @since	1.6
 	 */
 	protected $text_prefix = 'COM_TEMPLATES_STYLE';
-	
 
+	/**
+	 * Proxy for execute.
+	 *
+	 * If the task is an action which modifies data, the component cache is cleared.
+	 *
+	 * @since	1.6
+ 	 */
+	public function execute($task)
+	{
+		parent::execute($task);
+
+		// Clear the component's cache
+		if (!in_array($task, array('display', 'edit', 'cancel'))) {
+			$cache = JFactory::getCache();
+			$cache->clean('com_templates');
+			$cache->clean('_system');
+		}
+	}
 }

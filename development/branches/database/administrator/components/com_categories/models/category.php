@@ -24,7 +24,7 @@ class CategoriesModelCategory extends JModelAdmin
 	 * @since	1.6
 	 */
 	protected $text_prefix = 'COM_CATEGORIES';
-	
+
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
@@ -50,7 +50,18 @@ class CategoriesModelCategory extends JModelAdmin
 	{
 		$user = JFactory::getUser();
 
-		return $user->authorise('core.edit.state', $record->extension.'.category.'.(int) $record->id);
+		// Check for existing category.
+		if (!empty($record->id)) {
+			return $user->authorise('core.edit.state', $record->extension.'.category.'.(int) $record->id);
+		}
+		// New category, so check against the parent.
+		else if (!empty($record->parent_id)) {
+			return $user->authorise('core.edit.state', $record->extension.'.category.'.(int) $record->parent_id);
+		}
+		// Default to component settings if neither category nor parent known.
+		else {
+			return $user->authorise('core.edit.state', $record->extension);
+		}
 	}
 
 	/**
@@ -78,20 +89,21 @@ class CategoriesModelCategory extends JModelAdmin
 	{
 		$app = JFactory::getApplication('administrator');
 
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_categories.edit.category.id'))) {
-			$pk = (int) JRequest::getInt('item_id');
-		}
-		$this->setState('category.id', $pk);
-
-		if (!($parentId = $app->getUserState('com_categories.edit.category.parent_id'))) {
+		if (!($parentId = $app->getUserState('com_categories.edit.'.$this->getName().'.parent_id'))) {
 			$parentId = JRequest::getInt('parent_id');
 		}
 		$this->setState('category.parent_id', $parentId);
 
-		if (!($extension = $app->getUserState('com_categories.edit.category.extension'))) {
+		if (!($extension = $app->getUserState('com_categories.edit.'.$this->getName().'.extension'))) {
 			$extension = JRequest::getCmd('extension', 'com_content');
 		}
+		// Load the User state.
+		if (!($pk = (int) $app->getUserState('com_categories.edit.'.$this->getName().'.id'))) {
+			$pk = (int) JRequest::getInt('item_id');
+		}
+		$this->setState($this->getName().'.id', $pk);
+
+
 		$this->setState('category.extension', $extension);
 		$parts = explode('.',$extension);
 		// extract the component name
@@ -114,6 +126,7 @@ class CategoriesModelCategory extends JModelAdmin
 	public function getItem($pk = null)
 	{
 		if ($result = parent::getItem($pk)) {
+
 			// Prime required properties.
 			if (empty($result->id)) {
 				$result->parent_id	= $this->getState('category.parent_id');
@@ -124,6 +137,26 @@ class CategoriesModelCategory extends JModelAdmin
 			$registry = new JRegistry();
 			$registry->loadJSON($result->metadata);
 			$result->metadata = $registry->toArray();
+
+			// Convert the created and modified dates to local user time for display in the form.
+			jimport('joomla.utilities.date');
+			$tz	= new DateTimeZone(JFactory::getApplication()->getCfg('offset'));
+
+			if (intval($result->created_time)) {
+				$date = new JDate($result->created_time);
+				$date->setTimezone($tz);
+				$result->created_time = $date->toMySQL(true);
+			} else {
+				$result->created_time = null;
+			}
+
+			if (intval($result->modified_time)) {
+				$date = new JDate($result->modified_time);
+				$date->setTimezone($tz);
+				$result->modified_time = $date->toMySQL(true);
+			} else {
+				$result->modified_time = null;
+			}
 		}
 
 		return $result;
@@ -132,41 +165,80 @@ class CategoriesModelCategory extends JModelAdmin
 	/**
 	 * Method to get the row form.
 	 *
-	 * @return	mixed	JForm object on success, false on failure.
+	 * @param	array	$data		Data for the form.
+	 * @param	boolean	$loadData	True if the form is to load its own data (default case), false if not.
+	 * @return	mixed	A JForm object on success, false on failure
 	 * @since	1.6
 	 */
-	public function getForm()
+	public function getForm($data = array(), $loadData = true)
 	{
 		// Initialise variables.
-		$app		= JFactory::getApplication();
 		$extension	= $this->getState('category.extension');
 
 		// Get the form.
-		$form = parent::getForm('com_categories.category'.$extension, 'category', array('control' => 'jform'));
+		$form = $this->loadForm('com_categories.category'.$extension, 'category', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
 			return false;
 		}
 
-		// Check the session for previously entered form data.
-		$data = $app->getUserState('com_categories.edit.category.data', array());
+		// Modify the form based on Edit State access controls.
+		if (empty($data['extension'])) {
+			$data['extension'] = $extension;
+		}
 
-		// Bind the form data if present.
-		if (!empty($data)) {
-			$form->bind($data);
-		} else {
-			$form->bind($this->getItem());
+		if (!$this->canEditState((object) $data)) {
+			// Disable fields for display.
+			$form->setFieldAttribute('ordering', 'disabled', 'true');
+			$form->setFieldAttribute('published', 'disabled', 'true');
+
+			// Disable fields while saving.
+			// The controller has already verified this is a record you can edit.
+			$form->setFieldAttribute('ordering', 'filter', 'unset');
+			$form->setFieldAttribute('published', 'filter', 'unset');
 		}
 
 		return $form;
 	}
 
 	/**
-	 * @param	object	A form object.
+	 * A protected method to get the where clause for the reorder
+	 * This ensures that the row will be moved relative to a row with the same extension
 	 *
+	 * @param	JCategoryTable	current table instance
+	 *
+	 * @return	array	An array of conditions to add to add to ordering queries.
+	 * @since	1.6
+	 */
+	protected function getReorderConditions($table)
+	{
+		return 'extension = ' . $this->_db->Quote($table->extension);
+	}
+
+	/**
+	 * Method to get the data that should be injected in the form.
+	 *
+	 * @return	mixed	The data for the form.
+	 * @since	1.6
+	 */
+	protected function loadFormData()
+	{
+		// Check the session for previously entered form data.
+		$data = JFactory::getApplication()->getUserState('com_categories.edit.'.$this->getName().'.data', array());
+
+		if (empty($data)) {
+			$data = $this->getItem();
+		}
+
+		return $data;
+	}
+
+	/**
+	 * @param	object	A form object.
+	 * @param	mixed	The data expected for the form.
 	 * @throws	Exception if there is an error loading the form.
 	 * @since	1.6
 	 */
-	protected function preprocessForm($form)
+	protected function preprocessForm($form, $data)
 	{
 		jimport('joomla.filesystem.path');
 
@@ -186,7 +258,7 @@ class CategoriesModelCategory extends JModelAdmin
 			$lang->load($component, JPATH_BASE, $lang->getDefault(), false, false);
 
 			if (!$form->loadFile($path, false)) {
-				throw new Exception(JText::_('JModelForm_Error_loadFile_failed'));
+				throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
 			}
 		}
 
@@ -218,7 +290,7 @@ class CategoriesModelCategory extends JModelAdmin
 		$form->setFieldAttribute('rules', 'section', $name);
 
 		// Trigger the default form events.
-		parent::preprocessForm($form);
+		parent::preprocessForm($form, $data);
 	}
 
 	/**
@@ -230,11 +302,11 @@ class CategoriesModelCategory extends JModelAdmin
 	 */
 	public function save($data)
 	{
-		$pk		= (!empty($data['id'])) ? $data['id'] : (int)$this->getState('category.id');
+		$pk		= (!empty($data['id'])) ? $data['id'] : (int)$this->getState($this->getName().'.id');
 		$isNew	= true;
 
 		// Get a row instance.
-		$table = &$this->getTable();
+		$table = $this->getTable();
 
 		// Load the row if saving an existing category.
 		if ($pk > 0) {
@@ -242,9 +314,20 @@ class CategoriesModelCategory extends JModelAdmin
 			$isNew = false;
 		}
 
-		// Set the new parent id if set.
-		if ($table->parent_id != $data['parent_id']) {
+		// Set the new parent id if parent id not matched OR while New/Save as Copy .
+		if ($table->parent_id != $data['parent_id'] || $data['id'] == 0) {
 			$table->setLocation($data['parent_id'], 'last-child');
+		}
+
+		// Alter the title for save as copy
+		if (!$isNew && $data['id'] == 0 && $table->parent_id == $data['parent_id']) {
+			$m = null;
+			$data['alias'] = '';
+			if (preg_match('#\((\d+)\)$#', $table->title, $m)) {
+				$data['title'] = preg_replace('#\(\d+\)$#', '('.($m[1] + 1).')', $table->title);
+			} else {
+				$data['title'] .= ' (2)';
+			}
 		}
 
 		// Bind the data.
@@ -277,7 +360,7 @@ class CategoriesModelCategory extends JModelAdmin
 			return false;
 		}
 
-		$this->setState('category.id', $table->id);
+		$this->setState($this->getName().'.id', $table->id);
 
 		return true;
 	}
@@ -302,6 +385,28 @@ class CategoriesModelCategory extends JModelAdmin
 	}
 
 	/**
+	 * Method to save the reordered nested set tree.
+	 * First we save the new order values in the lft values of the changed ids.
+	 * Then we invoke the table rebuild to implement the new ordering.
+	 *
+	 * @return	boolean false on failuer or error, true otherwise
+	 * @since	1.6
+	*/
+	public function saveorder($idArray = null, $lft_array = null)
+	{
+		// Get an instance of the table object.
+		$table = $this->getTable();
+
+		if (!$table->saveorder($idArray, $lft_array)) {
+			$this->setError($table->getError());
+			return false;
+		}
+
+		return true;
+
+	}
+
+	/**
 	 * Method to perform batch operations on a category or a set of categories.
 	 *
 	 * @param	array	An array of commands to perform.
@@ -321,7 +426,7 @@ class CategoriesModelCategory extends JModelAdmin
 		}
 
 		if (empty($pks)) {
-			$this->setError(JText::_('JError_No_items_selected'));
+			$this->setError(JText::_('COM_CATEGORIES_NO_ITEM_SELECTED'));
 			return false;
 		}
 
@@ -346,7 +451,7 @@ class CategoriesModelCategory extends JModelAdmin
 		}
 
 		if (!$done) {
-			$this->setError('Categories_Error_Insufficient_batch_information');
+			$this->setError('COM_CATEGORIES_ERROR_INSUFFICIENT_BATCH_INFORMATION');
 			return false;
 		}
 

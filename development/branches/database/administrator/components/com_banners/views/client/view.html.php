@@ -57,13 +57,16 @@ class BannersViewClient extends JView
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
 		$canDo		= BannersHelper::getActions();
 
-		JToolBarHelper::title($isNew ? JText::_('COM_BANNERS_MANAGER_CLIENT_NEW') : JText::_('COM_BANNERS_MANAGER_CLIENT_EDIT'));
+		JToolBarHelper::title($isNew ? JText::_('COM_BANNERS_MANAGER_CLIENT_NEW') : JText::_('COM_BANNERS_MANAGER_CLIENT_EDIT'), 'banners-clients.png');
 
 		// If not checked out, can save the item.
-		if (!$checkedOut && $canDo->get('core.edit')) {
+		if (!$checkedOut && ($canDo->get('core.edit')||$canDo->get('core.create'))) {	
 			JToolBarHelper::apply('client.apply', 'JTOOLBAR_APPLY');
 			JToolBarHelper::save('client.save', 'JTOOLBAR_SAVE');
-			JToolBarHelper::addNew('client.save2new', 'JTOOLBAR_SAVE_AND_NEW');
+		}
+		if (!$checkedOut && $canDo->get('core.create')) {
+		
+			JToolBarHelper::custom('client.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
 		}
 		// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
@@ -77,6 +80,6 @@ class BannersViewClient extends JView
 		}
 
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.banners.client');
+		JToolBarHelper::help('JHELP_COMPONENTS_BANNERS_CLIENTS_EDIT');
 	}
 }

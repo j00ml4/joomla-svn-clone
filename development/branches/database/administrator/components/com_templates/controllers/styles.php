@@ -8,7 +8,7 @@
 // No direct access.
 defined('_JEXEC') or die;
 
-jimport('joomla.application.component.controller');
+jimport('joomla.application.component.controlleradmin');
 
 /**
  * Template styles list controller class.
@@ -17,24 +17,8 @@ jimport('joomla.application.component.controller');
  * @subpackage	com_templates
  * @since		1.6
  */
-class TemplatesControllerStyles extends JController
+class TemplatesControllerStyles extends JControllerAdmin
 {
-	/**
-	 * Display is not supported by this class.
-	 */
-	public function display()
-	{
-	}
-
-	/**
-	 * Proxy for getModel.
-	 */
-	public function &getModel($name = 'Style', $prefix = 'TemplatesModel')
-	{
-		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
-		return $model;
-	}
-
 	/**
 	 * Method to clone and existing template style.
 	 */
@@ -64,37 +48,40 @@ class TemplatesControllerStyles extends JController
 	}
 
 	/**
-	 * Method to delete a list of selected records.
-	 */
-	public function delete()
+	 * Proxy for execute.
+	 *
+	 * If the task is an action which modifies data, the component cache is cleared.
+	 *
+	 * @since	1.6
+ 	 */
+	public function execute($task)
 	{
-		// Check for request forgeries.
-		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		parent::execute($task);
 
-		// Initialise variables.
-		$pks = JRequest::getVar('cid', array(), 'post', 'array');
-
-		try
-		{
-			if (empty($pks)) {
-				throw new Exception(JText::_('COM_TEMPLATES_NO_TEMPLATE_SELECTED'));
-			}
-			$model = $this->getModel();
-			$model->delete($pks);
-			$this->setMessage(JText::plural('COM_TEMPLATES_N_TEMPLATES_DELETED', count($pks)));
+		// Clear the component's cache
+		if ($task != 'display') {
+			$cache = JFactory::getCache('com_templates');
+			$cache->clean();
 		}
-		catch (Exception $e)
-		{
-			JError::raiseWarning(500, $e->getMessage());
-		}
+	}
 
-		$this->setRedirect('index.php?option=com_templates&view=styles');
+	/**
+	 * Proxy for getModel.
+	 *
+	 * @since	1.6
+	 */
+	public function &getModel($name = 'Style', $prefix = 'TemplatesModel')
+	{
+		$model = parent::getModel($name, $prefix, array('ignore_request' => true));
+		return $model;
 	}
 
 	/**
 	 * Method to set the home template for a client.
+	 *
+	 * @since	1.6
 	 */
-	public function sethome()
+	public function setDefault()
 	{
 		// Check for request forgeries
 		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
@@ -102,8 +89,7 @@ class TemplatesControllerStyles extends JController
 		// Initialise variables.
 		$pks = JRequest::getVar('cid', array(), 'post', 'array');
 
-		try
-		{
+		try {
 			if (empty($pks)) {
 				throw new Exception(JText::_('COM_TEMPLATES_NO_TEMPLATE_SELECTED'));
 			}
@@ -113,9 +99,8 @@ class TemplatesControllerStyles extends JController
 			$model = $this->getModel();
 			$model->setHome($id);
 			$this->setMessage(JText::_('COM_TEMPLATES_SUCCESS_HOME_SET'));
-		}
-		catch (Exception $e)
-		{
+
+		} catch (Exception $e) {
 			JError::raiseWarning(500, $e->getMessage());
 		}
 

@@ -44,6 +44,9 @@ class PluginsModelPlugins extends JModelList
 		$folder = $app->getUserStateFromRequest($this->context.'.filter.folder', 'filter_folder', null, 'cmd');
 		$this->setState('filter.folder', $folder);
 
+		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
+		$this->setState('filter.language', $language);
+
 		// Load the parameters.
 		$params = JComponentHelper::getParams('com_plugins');
 		$this->setState('params', $params);
@@ -70,6 +73,7 @@ class PluginsModelPlugins extends JModelList
 		$id	.= ':'.$this->getState('filter.access');
 		$id	.= ':'.$this->getState('filter.state');
 		$id	.= ':'.$this->getState('filter.folder');
+		$id	.= ':'.$this->getState('filter.language');
 
 		return parent::getStoreId($id);
 	}
@@ -110,10 +114,10 @@ class PluginsModelPlugins extends JModelList
 			if ($ordering == 'ordering') {
 				$query->order('folder ASC');
 			}
-			elseif($ordering == 'folder') {
+			$query->order($this->_db->nameQuote($ordering) . ' ' . $this->getState('list.direction'));
+			if($ordering == 'folder') {
 				$query->order('ordering ASC');
 			}
-			$query->order($this->_db->nameQuote($ordering) . ' ' . $this->getState('list.direction'));
 			$result = parent::_getList($query, $limitstart, $limit);
 			$this->translate($result);
 			return $result;

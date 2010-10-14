@@ -15,12 +15,11 @@ JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.combobox');
 
 jimport('joomla.html.pane');
-$pane = &JPane::getInstance('sliders');
+$pane = JPane::getInstance('sliders');
 
 $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $this->item->module == 'mod_custom';
 ?>
 <script type="text/javascript">
-<!--
 	function submitbutton(task)
 	{
 		if (task == 'module.cancel' || document.formvalidator.isValid(document.id('module-form'))) {
@@ -29,16 +28,14 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 				echo $this->form->getField('articletext')->save();
 			endif;
 			?>
-			submitform(task);
-		}
-		else {
+			Joomla.submitform(task, document.getElementById('module-form'));
+		} else {
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');
 		}
 	}
-// -->
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_modules'); ?>" method="post" name="adminForm" id="module-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_modules&layout=modal&tmpl=component'); ?>" method="post" name="adminForm" id="module-form" class="form-validate">
 
 		<div class="fltrt">
 			<button type="button" onclick="Joomla.submitform('module.save', this.form);window.top.setTimeout('window.parent.SqueezeBox.close()', 1400);">
@@ -122,7 +119,7 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 					<label>
 						<?php echo JText::_('COM_MODULES_MODULE_DESCRIPTION'); ?>
 					</label>
-					<?php echo $this->escape($text); ?>
+					<span class="readonly mod-desc"><?php echo JText::_($text); ?></span>
 				<?php endif; ?>
 			<?php else : ?>
 				<?php echo JText::_('COM_MODULES_ERR_XML'); ?>
@@ -157,6 +154,8 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 		</fieldset>	endif;
 	<?php endif; ?>
 
-	<input type="hidden" name="task" value="" />
-	<?php echo JHtml::_('form.token'); ?>
+	<div>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHtml::_('form.token'); ?>
+	</div>
 </form>

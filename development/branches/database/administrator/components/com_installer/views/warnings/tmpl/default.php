@@ -11,7 +11,7 @@
 // no direct access
 defined('_JEXEC') or die;
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_installer&view=warnings');?>" method="post" name="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_installer&view=warnings');?>" method="post" name="adminForm" id="adminForm">
 <?php
 
 if (!count($this->messages)) {
@@ -28,6 +28,8 @@ if (!count($this->messages)) {
 }
 ?>
 <div class="clr"> </div>
-<input type="hidden" name="boxchecked" value="0" />
-<?php echo JHTML::_('form.token'); ?>
+<div>
+	<input type="hidden" name="boxchecked" value="0" />
+	<?php echo JHTML::_('form.token'); ?>
+</div>
 </form>

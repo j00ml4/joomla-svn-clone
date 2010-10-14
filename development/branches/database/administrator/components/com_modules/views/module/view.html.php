@@ -61,17 +61,19 @@ class ModulesViewModule extends JView
 		$item		= $this->get('Item');
 		$client		= $item->client_id;
 
-		JToolBarHelper::title( JText::_('COM_MODULES_MANAGER_MODULE').' '.JText::_($this->item->module));
+		JToolBarHelper::title( JText::sprintf('COM_MODULES_MANAGER_MODULE', JText::_($this->item->module)), 'module.png');
 
 		// If not checked out, can save the item.
-		if (!$checkedOut && $canDo->get('core.edit')) {
+		if (!$checkedOut && ($canDo->get('core.edit') || $canDo->get('core.create') )) {
 			JToolBarHelper::apply('module.apply', 'JTOOLBAR_APPLY');
 			JToolBarHelper::save('module.save', 'JTOOLBAR_SAVE');
-			JToolBarHelper::addNew('module.save2new', 'JTOOLBAR_SAVE_AND_NEW');
+		}
+		if (!$checkedOut && $canDo->get('core.create')) {		
+			JToolBarHelper::custom('module.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
 		}
 			// If an existing item, can save to a copy.
 		if (!$isNew && $canDo->get('core.create')) {
-			JToolBarHelper::custom('module.save2copy', 'copy.png', 'copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
+			JToolBarHelper::custom('module.save2copy', 'save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY', false);
 		}
 		if (empty($this->item->id))  {
 			JToolBarHelper::cancel('module.cancel', 'JTOOLBAR_CANCEL');
@@ -79,6 +81,8 @@ class ModulesViewModule extends JView
 			JToolBarHelper::cancel('module.cancel', 'JTOOLBAR_CLOSE');
 		}
 
-		JToolBarHelper::help('screen.module.edit','JTOOLBAR_HELP');
+		// Get the help information for the menu item.
+		$help = $this->get('Help');
+		JToolBarHelper::help($help->key, $help->local, $help->url);
 	}
 }

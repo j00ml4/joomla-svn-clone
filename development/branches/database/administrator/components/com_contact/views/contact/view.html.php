@@ -54,15 +54,20 @@ class ContactViewContact extends JView
 		$user		= JFactory::getUser();
 		$isNew		= ($this->item->id == 0);
 		$checkedOut	= !($this->item->checked_out == 0 || $this->item->checked_out == $user->get('id'));
+		$canDo		= ContactHelper::getActions($this->state->get('filter.category_id'));		
 		JRequest::setVar('hidemainmenu', 1);
 
-		JToolBarHelper::title(JText::_('COM_CONTACT_MANAGER_CONTACT'));
+		JToolBarHelper::title(JText::_('COM_CONTACT_MANAGER_CONTACT'), 'contact.png');
+		if (!$checkedOut && ($canDo->get('core.edit')||$canDo->get('core.create'))) {
 		JToolBarHelper::apply('contact.apply','JTOOLBAR_APPLY');
 		JToolBarHelper::save('contact.save','JTOOLBAR_SAVE');
-		JToolBarHelper::addNew('contact.save2new', 'JTOOLBAR_SAVE_AND_NEW');
-				// If an existing item, can save to a copy.
-		if (!$isNew) {
-			JToolBarHelper::custom('contact.save2copy','save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY',false );
+		}
+		if (!$checkedOut && $canDo->get('core.create')) {		
+		JToolBarHelper::custom('contact.save2new', 'save-new.png', 'save-new_f2.png', 'JTOOLBAR_SAVE_AND_NEW', false);
+		// If an existing item, can save to a copy.
+			if (!$isNew) {
+				JToolBarHelper::custom('contact.save2copy','save-copy.png', 'save-copy_f2.png', 'JTOOLBAR_SAVE_AS_COPY',false );
+			}
 		}
 
 		if (empty($this->item->id))  {
@@ -71,6 +76,6 @@ class ContactViewContact extends JView
 			JToolBarHelper::cancel('contact.cancel', 'JTOOLBAR_CLOSE');
 		}
 		JToolBarHelper::divider();
-		JToolBarHelper::help('screen.contact.edit'.'JTOOLBAR_HELP');
+		JToolBarHelper::help('JHELP_COMPONENTS_CONTACTS_CONTACTS_EDIT');
 	}
 }

@@ -20,16 +20,16 @@ class JElementContact extends JElement
 
 	public function fetchElement($name, $value, &$node, $control_name)
 	{
-		$app		= &JFactory::getApplication();
-		$db			= &JFactory::getDbo();
-		$doc		= &JFactory::getDocument();
+		$app		= JFactory::getApplication();
+		$db			= JFactory::getDbo();
+		$doc		= JFactory::getDocument();
 		$template	= $app->getTemplate();
 		$fieldName	= $control_name.'['.$name.']';
-		$contact	= &JTable::getInstance('contact');
+		$contact	= JTable::getInstance('contact');
 		if ($value) {
 			$contact->load($value);
 		} else {
-			$contact->title = JText::_('Contact_Element_Contact_Select');
+			$contact->title = JText::_('COM_CONTENT_SELECT_A_CONTACT');
 		}
 				$js = "
 		function jSelectContact(id, name, object) {
@@ -42,8 +42,8 @@ class JElementContact extends JElement
 
 		JHtml::_('behavior.modal', 'a.modal');
 		$html = "\n".'<div class="fltlft"><input type="text" id="'.$name.'_name" value="'.htmlspecialchars($contact->name, ENT_QUOTES, 'UTF-8').'" disabled="disabled" /></div>';
-//		$html .= "\n &nbsp; <input class=\"inputbox modal-button\" type=\"button\" value=\"".JText::_('Select')."\" />";
-		$html .= '<div class="button2-left"><div class="blank"><a class="modal" title="'.JText::_('Contact_Select_Contact').'"  href="'.$link.'" rel="{handler: \'iframe\', size: {x: 650, y: 375}}">'.JText::_('Contact_Select').'</a></div></div>'."\n";
+//		$html .= "\n &#160; <input class=\"inputbox modal-button\" type=\"button\" value=\"".JText::_('JSELECT')."\" />";
+		$html .= '<div class="button2-left"><div class="blank"><a class="modal" title="'.JText::_('COM_CONTENT_SELECT_A_CONTACT').'"  href="'.$link.'" rel="{handler: \'iframe\', size: {x: 650, y: 375}}">'.JText::_('JSELECT').'</a></div></div>'."\n";
 		$html .= "\n".'<input type="hidden" id="'.$name.'_id" name="'.$fieldName.'" value="'.(int)$value.'" />';
 
 		return $html;

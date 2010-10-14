@@ -40,7 +40,7 @@ $listDirn	= $this->state->get('list.direction');
 		<thead>
 			<tr>
 				<th width="20">
-					<input type="checkbox" name="toggle" value="" onclick="checkAll(this)" />
+					<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
 				</th>
 				<th class="title">
 					<?php echo JHtml::_('grid.sort', 'COM_REDIRECT_HEADING_OLD_URL', 'a.old_url', $listDirn, $listOrder); ?>
@@ -87,7 +87,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo JHtml::_('grid.id', $i, $item->id); ?>
 				</td>
 				<td>
-					<?php if ($canCreate || $canEdit) : ?>
+					<?php if ($canEdit) : ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_redirect&task=link.edit&id='.$item->id);?>" title="<?php echo $this->escape($item->old_url); ?>">
 							<?php echo $this->escape(str_replace(JURI::root(), '', $item->old_url)); ?></a>
 					<?php else : ?>
@@ -101,7 +101,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo $this->escape($item->referer); ?>
 				</td>
 				<td class="center">
-					<?php echo JHTML::_('date',$item->created_date); ?>
+					<?php echo JHTML::_('date',$item->created_date, JText::_('DATE_FORMAT_LC4')); ?>
 				</td>
 				<td class="center">
 					<?php echo JHtml::_('redirect.published', $item->published, $i); ?>
@@ -118,9 +118,11 @@ $listDirn	= $this->state->get('list.direction');
 		<?php echo $this->loadTemplate('addform'); ?>
 	<?php endif; ?>
 
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="boxchecked" value="0" />
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
-	<?php echo JHtml::_('form.token'); ?>
+	<div>
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" />
+		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+		<?php echo JHtml::_('form.token'); ?>
+	</div>
 </form>
