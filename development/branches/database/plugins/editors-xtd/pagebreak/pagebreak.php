@@ -28,7 +28,7 @@ class plgButtonPagebreak extends JPlugin
 	{
 		$app = JFactory::getApplication();
 
-		$doc = & JFactory::getDocument();
+		$doc = JFactory::getDocument();
 		$template = $app->getTemplate();
 
 		$link = 'index.php?option=com_content&amp;view=article&amp;layout=pagebreak&amp;tmpl=component&amp;e_name='.$name;
@@ -40,7 +40,7 @@ class plgButtonPagebreak extends JPlugin
 		$button->set('link', $link);
 		$button->set('text', JText::_('PLG_EDITORSXTD_PAGEBREAK_BUTTON_PAGEBREAK'));
 		$button->set('name', 'pagebreak');
-		$button->set('options', "{handler: 'iframe', size: {x: 400, y: 85}}");
+		$button->set('options', "{handler: 'iframe', size: {x: 400, y: 100}}");
 
 		return $button;
 	}

@@ -7,7 +7,7 @@
  */
 
 // Do not allow direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 jimport('joomla.plugin.plugin');
 
@@ -336,7 +336,6 @@ class plgEditorTinymce extends JPlugin
 		// blockquote
 		$blockquote	= $this->params->def( 'blockquote', 1 );
 		if ( $blockquote ) {
-			$plugins[] = 'blockquote';
 			$buttons4[] = 'blockquote';
 		}
 
@@ -367,7 +366,13 @@ class plgEditorTinymce extends JPlugin
 			$plugins[]	= 'advlink';
 			$elements[]	= 'a[id|class|name|href|target|title|onclick|rel|style]';
 		}
-
+		
+		//advlist
+		$advlist	= $this->params->def('advlist', 1);
+		if ($advlist) {
+			$plugins[]	= 'advlist';
+		}
+		
 		// autosave
 		$autosave = $this->params->def('autosave', 1);
 		if ($autosave) {
@@ -387,12 +392,6 @@ class plgEditorTinymce extends JPlugin
 			$dialog_type = "dialog_type : \"modal\",";
 		} else {
 			$dialog_type = "";
-		}
-
-		// Safari compatibility
-		$safari	= $this->params->def('safari', 0);
-		if ($safari) {
-			$plugins[]	= 'safari';
 		}
 
 		$custom_plugin = $this->params->def('custom_plugin', '');
@@ -455,7 +454,7 @@ class plgEditorTinymce extends JPlugin
 					remove_script_host : false,
 					// Layout
 					$content_css
-					document_base_url : \"". JURI::root() ."\",
+					document_base_url : \"". JURI::root() ."\"
 				});
 				</script>";
 				break;
@@ -612,7 +611,7 @@ class plgEditorTinymce extends JPlugin
 
 	function onGetInsertMethod($name)
 	{
-		$doc =& JFactory::getDocument();
+		$doc = JFactory::getDocument();
 
 		$js= "
 			function isBrowserIE() {
@@ -692,7 +691,7 @@ class plgEditorTinymce extends JPlugin
 			}
 		}
 
-		if(!empty($buttons))
+		if(is_array($buttons) || (is_bool($buttons) && $buttons))
 		{
 			$results = $this->_subject->getButtons($name, $buttons);
 
@@ -709,7 +708,7 @@ class plgEditorTinymce extends JPlugin
 				{
 					$modal		= ($button->get('modal')) ? 'class="modal-button"' : null;
 					$href		= ($button->get('link')) ? 'href="'.JURI::base().$button->get('link').'"' : null;
-                    $onclick	= ($button->get('onclick')) ? 'onclick="'.$button->get('onclick').'"' : 'onclick="IeCursorFix(); return false;"';
+					$onclick	= ($button->get('onclick')) ? 'onclick="'.$button->get('onclick').'"' : 'onclick="IeCursorFix(); return false;"';
 					$return .= "<div class=\"button2-left\"><div class=\"".$button->get('name')."\"><a ".$modal." title=\"".$button->get('text')."\" ".$href." ".$onclick." rel=\"".$button->get('options')."\">".$button->get('text')."</a></div></div>\n";
 				}
 			}
@@ -723,7 +722,7 @@ class plgEditorTinymce extends JPlugin
 	{
 		$return  = '';
 		$return .= "\n<div class=\"toggle-editor\">\n";
-		$return .= "<div class=\"button2-left\"><div class=\"blank\"><a href=\"#\" onclick=\"javascript:tinyMCE.execCommand('mceToggleEditor', false, '$name');return false;\"title=\"".JText::_('PLG_TINY_BUTTON_TOGGLE_EDITOR')."\">".JText::_('PLG_TINY_BUTTON_TOGGLE_EDITOR')."</a></div></div>";
+		$return .= "<div class=\"button2-left\"><div class=\"blank\"><a href=\"#\" onclick=\"javascript:tinyMCE.execCommand('mceToggleEditor', false, '$name');return false;\" title=\"".JText::_('PLG_TINY_BUTTON_TOGGLE_EDITOR')."\">".JText::_('PLG_TINY_BUTTON_TOGGLE_EDITOR')."</a></div></div>";
 		$return .= "</div>\n";
 		return $return;
 	}

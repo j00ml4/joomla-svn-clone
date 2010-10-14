@@ -1,13 +1,16 @@
 <?php
 /**
+ * @version	$Id$
+ *
  * Contact Creator
  * A tool to automatically create and synchronise contacts with a user
-  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  * @package Contact_Creator
  */
 
-defined('_JEXEC') or die('');
+// No direct access.
+defined('_JEXEC') or die;
 
 jimport('joomla.plugins.plugin');
 
@@ -20,7 +23,7 @@ jimport('joomla.plugins.plugin');
 class plgUserContactCreator extends JPlugin
 {
 
-	function onAfterStoreUser($user, $isnew, $success, $msg)
+	function onUserAfterSave($user, $isnew, $success, $msg)
 	{
 		if(!$success) {
 			return false; // if the user wasn't stored we don't resync
@@ -41,13 +44,13 @@ class plgUserContactCreator extends JPlugin
 			return false; // bail out if we don't have a category
 		}
 
-		$dbo =& JFactory::getDBO();
+		$dbo = JFactory::getDBO();
 		// grab the contact ID for this user; note $user_id is cleaned above
 		$dbo->setQuery('SELECT id FROM #__contact_details WHERE user_id = '. $user_id );
 		$id = $dbo->loadResult();
 
 		JTable::addIncludePath(JPATH_ADMINISTRATOR.'/components/com_contact/tables');
-		$contact =& JTable::getInstance('contact', 'ContactTable');
+		$contact = JTable::getInstance('contact', 'ContactTable');
 		if(!$contact) {
 			return false;
 		}
@@ -73,11 +76,11 @@ class plgUserContactCreator extends JPlugin
 			// now replace it in together
 			$contact->webpage = str_replace($search_array, $replace_array, $autowebpage);
 		}
-
-		$result = $contact->store();
-		if(!$result)
-		{
-			JError::raiseError(42, JText::sprintf('Failed to update contact: %s', $contact->getErrorMsg()));
+		if($contact->check()) {
+			$result = $contact->store();
+		}
+		if(!(isset($result)) || !$result) {
+			JError::raiseError(42, JText::sprintf('PLG_CONTACTCREATOR_ERR_FAILED_UPDATE', $db->getErrorMsg()));
 		}
 	}
 

@@ -7,10 +7,11 @@
 	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
 	<authorEmail>admin@joomla.org</authorEmail>
 	<authorUrl>www.joomla.org</authorUrl>
-	<version>1.5</version>
+	<version>1.6.0</version>
 	<description>PLG_DEBUG_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="debug">debug.php</filename>
+		<filename>index.html</filename>
 	</files>
 
 	<config>
@@ -37,6 +38,15 @@
 					default="1"
 					description="PLG_DEBUG_FIELD_QUERIES_DESC"
 					label="PLG_DEBUG_FIELD_QUERIES_LABEL"
+				>
+					<option value="1">JYes</option>
+					<option value="0">JNo</option>
+				</field>
+
+				<field name="query_types" type="radio"
+					default="1"
+					description="PLG_DEBUG_FIELD_QUERY_TYPES_DESC"
+					label="PLG_DEBUG_FIELD_QUERY_TYPES_LABEL"
 				>
 					<option value="1">JYes</option>
 					<option value="0">JNo</option>

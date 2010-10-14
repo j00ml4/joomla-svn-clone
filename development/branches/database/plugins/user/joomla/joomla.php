@@ -26,11 +26,14 @@ class plgUserJoomla extends JPlugin
 	 *
 	 * Method is called after user data is deleted from the database
 	 *
-	 * @param	array		Holds the user data
-	 * @param	boolean		True if user was succesfully stored in the database
-	 * @param	string		Message
+	 * @param	array		$user	Holds the user data
+	 * @param	boolean		$succes	True if user was succesfully stored in the database
+	 * @param	string		$msg	Message
+	 *
+	 * @return	boolean
+	 * @since	1.6
 	 */
-	public function onAfterDeleteUser($user, $succes, $msg)
+	public function onUserAfterDelete($user, $succes, $msg)
 	{
 		if (!$succes) {
 			return false;
@@ -47,15 +50,83 @@ class plgUserJoomla extends JPlugin
 	}
 
 	/**
+	 * Utility method to act on a user after it has been saved.
+	 *
+	 * This method sends a registration email to new users created in the backend.
+	 *
+	 * @param	array		$user		Holds the new user data.
+	 * @param	boolean		$isnew		True if a new user is stored.
+	 * @param	boolean		$success	True if user was succesfully stored in the database.
+	 * @param	string		$msg		Message.
+	 *
+	 * @return	void
+	 * @since	1.6
+	 */
+	public function onUserAfterSave($user, $isnew, $success, $msg)
+	{
+		// Initialise variables.
+		$app	= JFactory::getApplication();
+		$config	= JFactory::getConfig();
+
+		if ($isnew) {
+			// TODO: Suck in the frontend registration emails here as well. Job for a rainy day.
+
+			if ($app->isAdmin()) {
+
+				// Load user_joomla plugin language (not done automatically).
+				$lang = JFactory::getLanguage();
+				$lang->load('plg_user_joomla', JPATH_ADMINISTRATOR);
+
+				// Compute the mail subject.
+				$emailSubject = JText::sprintf(
+					'PLG_USER_JOOMLA_NEW_USER_EMAIL_SUBJECT',
+					$user['name'],
+					$config->get('sitename')
+				);
+
+				// Compute the mail body.
+				$emailBody = JText::sprintf(
+					'PLG_USER_JOOMLA_NEW_USER_EMAIL_BODY',
+					$user['name'],
+					$config->get('sitename'),
+					JUri::root(),
+					$user['username'],
+					$user['password_clear']
+				);
+
+				// Assemble the email data...the sexy way!
+				$mail = JFactory::getMailer()
+					->setSender(
+						array(
+							$config->get('mailfrom'),
+							$config->get('fromname')
+						)
+					)
+					->addRecipient($user['email'])
+					->setSubject($emailSubject)
+					->setBody($emailBody);
+
+				if (!$mail->Send()) {
+					// TODO: Probably should raise a plugin error but this event is not error checked.
+					JError::raiseWarning(500, JText::_('ERROR_SENDING_EMAIL'));
+				}
+			}
+		}
+		else {
+			// Existing user - nothing to do...yet.
+		}
+	}
+
+	/**
 	 * This method should handle any login logic and report back to the subject
 	 *
-	 * @access	public
-	 * @param	array	holds the user data
-	 * @param	array	array holding options (remember, autoregister, group)
+	 * @param	array	$user		Holds the user data
+	 * @param	array	$options	Array holding options (remember, autoregister, group)
+	 *
 	 * @return	boolean	True on success
 	 * @since	1.5
 	 */
-	function onLoginUser($user, $options = array())
+	public function onUserLogin($user, $options = array())
 	{
 		jimport('joomla.user.helper');
 
@@ -68,7 +139,7 @@ class plgUserJoomla extends JPlugin
 
 		// If the user is blocked, redirect with an error
 		if ($instance->get('block') == 1) {
-			return JError::raiseWarning('SOME_ERROR_CODE', JText::_('E_NOLOGIN_BLOCKED'));
+			return JError::raiseWarning('SOME_ERROR_CODE', JText::_('JERROR_NOLOGIN_BLOCKED'));
 		}
 
 		// Authorise the user based on the group information
@@ -79,7 +150,7 @@ class plgUserJoomla extends JPlugin
 		// Chek the user can login.
 		$result	= $instance->authorise($options['action']);
 		if (!$result) {
-			return JError::raiseWarning(401, JText::_('JError_Login_denied'));
+			return JError::raiseWarning(401, JText::_('JERROR_LOGIN_DENIED'));
 		}
 
 		// Mark the user as logged in
@@ -109,17 +180,17 @@ class plgUserJoomla extends JPlugin
 	/**
 	 * This method should handle any logout logic and report back to the subject
 	 *
-	 * @access public
-	 * @param  array	holds the user data
-	 * @param	array	array holding options (client, ...)
-	 * @return object	True on success
-	 * @since 1.5
+	 * @param	array	$user		Holds the user data.
+	 * @param	array	$options	Array holding options (client, ...).
+	 *
+	 * @return	object	True on success
+	 * @since	1.5
 	 */
-	function onLogoutUser($user, $options = array())
+	public function onUserLogout($user, $options = array())
 	{
-		$my 		= &JFactory::getUser();
-		$session 	= &JFactory::getSession();
-		$app 		= &JFactory::getApplication();
+		$my 		= JFactory::getUser();
+		$session 	= JFactory::getSession();
+		$app 		= JFactory::getApplication();
 
 		// Make sure we're a valid user first
 		if ($user['id'] == 0 && !$my->get('tmp_user')) {
@@ -133,7 +204,8 @@ class plgUserJoomla extends JPlugin
 
 			// Destroy the php session for this user
 			$session->destroy();
-		} else {
+		}
+		else {
 			// Force logout all users with that userid
 			$db = JFactory::getDBO();
 			$db->setQuery(
@@ -143,6 +215,7 @@ class plgUserJoomla extends JPlugin
 			);
 			$db->query();
 		}
+
 		return true;
 	}
 
@@ -151,13 +224,13 @@ class plgUserJoomla extends JPlugin
 	 *
 	 * If options['autoregister'] is true, if the user doesn't exist yet he will be created
 	 *
-	 * @access	public
-	 * @param	array	holds the user data
-	 * @param	array	array holding options (remember, autoregister, group)
+	 * @param	array	$user		Holds the user data.
+	 * @param	array	$options	Array holding options (remember, autoregister, group).
+	 *
 	 * @return	object	A JUser object
 	 * @since	1.5
 	 */
-	function &_getUser($user, $options = array())
+	protected function &_getUser($user, $options = array())
 	{
 		$instance = JUser::getInstance();
 		if ($id = intval(JUserHelper::getUserId($user['username'])))  {
@@ -187,7 +260,8 @@ class plgUserJoomla extends JPlugin
 			if (!$instance->save()) {
 				return JError::raiseWarning('SOME_ERROR_CODE', $instance->getError());
 			}
-		} else {
+		}
+		else {
 			// No existing user and autoregister off, this is a temporary user.
 			$instance->set('tmp_user', true);
 		}

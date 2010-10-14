@@ -18,11 +18,19 @@ jimport('joomla.plugin.plugin');
  */
 class plgContentPagenavigation extends JPlugin
 {
-	public function onBeforeDisplayContent(&$row, &$params, $page=0)
+	/**
+	 * @since	1.6
+	 */
+	public function onContentBeforeDisplay($context, &$row, &$params, $page=0)
 	{
 		$view = JRequest::getCmd('view');
+		$print = JRequest::getBool('print');
 
-		if ($params->get('show_item_navigation') && ($view == 'article')) {
+		if ($print) {
+			return false;
+		}
+
+		if ($params->get('show_item_navigation') && ($context == 'com_content.article')) {
 			$html = '';
 			$db		= JFactory::getDbo();
 			$user	= JFactory::getUser();
@@ -34,7 +42,7 @@ class plgContentPagenavigation extends JPlugin
 
 			$uid	= $row->id;
 			$option	= 'com_content';
-			$canPublish = $user->authorize('core.edit.state', $option.'.'.$view.'.'.$row->id);
+			$canPublish = $user->authorise('core.edit.state', $option.'.'.$view.'.'.$row->id);
 
 			// The following is needed as different menu items types utilise a different param to control ordering.
 			// For Blogs the `orderby_sec` param is the order controlling param.
@@ -99,7 +107,7 @@ class plgContentPagenavigation extends JPlugin
 			$query->from('#__content AS a');
 			$query->leftJoin('#__categories AS cc ON cc.id = a.catid');
 			$query->where('a.catid = '. (int)$row->catid .' AND a.state = '. (int)$row->state
-						. ($canPublish ? '' : ' AND a.access <= ' .(int)$user->get('aid', 0)) . $xwhere);
+						. ($canPublish ? '' : ' AND a.access = ' .(int)$row->access) . $xwhere);
 			$query->order($orderby);
 
 			$db->setQuery($query);
@@ -136,13 +144,13 @@ class plgContentPagenavigation extends JPlugin
 			}
 
 			if ($row->prev) {
-				$row->prev = JRoute::_('index.php?option=com_content&view=article&catid='.$row->prev->catslug.'&id='.$row->prev->slug);
+				$row->prev = JRoute::_(ContentHelperRoute::getArticleRoute($row->prev->slug, $row->prev->catslug));
 			} else {
 				$row->prev = '';
 			}
 
 			if ($row->next) {
-				$row->next = JRoute::_('index.php?option=com_content&view=article&catid='.$row->next->catslug.'&id='.$row->next->slug);
+				$row->next = JRoute::_(ContentHelperRoute::getArticleRoute($row->next->slug, $row->next->catslug));
 			} else {
 				$row->next = '';
 			}
@@ -150,37 +158,29 @@ class plgContentPagenavigation extends JPlugin
 			// Output.
 			if ($row->prev || $row->next) {
 				$html = '
-				<table align="center" class="pagenav">
-				<tr>'
+				<ul class="pagenav">'
 				;
 				if ($row->prev) {
 					$html .= '
-					<th class="pagenav_prev">
+					<li class="pagenav_prev">
 						<a href="'. $row->prev .'">'
 							. JText::_('JGLOBAL_LT') . $pnSpace . JText::_('JPREV') . '</a>
-					</th>'
+					</li>'
 					;
 				}
 
-				if ($row->prev && $row->next) {
-					$html .= '
-					<td width="50">
-						&nbsp;
-					</td>'
-					;
-				}
+				
 
 				if ($row->next) {
 					$html .= '
-					<th class="pagenav_next">
+					<li class="pagenav_next">
 						<a href="'. $row->next .'">'
 							. JText::_('JNEXT') . $pnSpace . JText::_('JGLOBAL_GT') .'</a>
-					</th>'
+					</li>'
 					;
 				}
 				$html .= '
-				</tr>
-				</table>'
+				<ul>'
 				;
 
 				$position	= $this->params->get('position', 1);
