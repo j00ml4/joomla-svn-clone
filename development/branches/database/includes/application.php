@@ -27,6 +27,16 @@ final class JSite extends JApplication
 	private $template = null;
 
 	/**
+	 * Option to filter by language
+	 */
+	private $_language_filter = false;
+
+	/**
+	 * Option to detect language by the browser
+	 */
+	private $_detect_browser = false;
+
+	/**
 	 * Class constructor
 	 *
 	 * @param	array An optional associative array of configuration settings.
@@ -45,29 +55,59 @@ final class JSite extends JApplication
 	 */
 	public function initialise($options = array())
 	{
-		$config =& JFactory::getConfig();
+		$config = JFactory::getConfig();
+
+		jimport('joomla.language.helper');
+
 		// if a language was specified it has priority
 		// otherwise use user or default language settings
-		if (empty($options['language']))
-		{
-			$user = & JFactory::getUser();
-			$lang	= $user->getParam('language');
+		jimport('joomla.plugin.helper');
+		JPluginHelper::importPlugin('system');
 
+		if (empty($options['language'])) {
+			$lang = JRequest::getString('language', null);
+			if ($lang && JLanguage::exists($lang)) {
+				$options['language'] = $lang;
+			}
+		}
+
+		if ($this->_language_filter && empty($options['language'])) {
+			// Detect cookie language
+			jimport('joomla.utilities.utility');
+			$lang = JRequest::getString(JUtility::getHash('language'), null ,'cookie');
 			// Make sure that the user's language exists
 			if ($lang && JLanguage::exists($lang)) {
 				$options['language'] = $lang;
 			}
-			else
-			{
-				$params =  JComponentHelper::getParams('com_languages');
-				$client	= &JApplicationHelper::getClientInfo($this->getClientId());
-				$options['language'] = $params->get($client->name, $config->get('language','en-GB'));
+		}
+
+		if (empty($options['language'])) {
+			// Detect user language
+			$lang = JFactory::getUser()->getParam('language');
+			// Make sure that the user's language exists
+			if ($lang && JLanguage::exists($lang)) {
+				$options['language'] = $lang;
 			}
 		}
 
+		if ($this->_detect_browser && empty($options['language'])) {
+			// Detect browser language
+			$lang = JLanguageHelper::detectLanguage();
+			// Make sure that the user's language exists
+			if ($lang && JLanguage::exists($lang)) {
+				$options['language'] = $lang;
+			}
+		}
+
+		if (empty($options['language'])) {
+			// Detect default language
+			$params =  JComponentHelper::getParams('com_languages');
+			$client	= JApplicationHelper::getClientInfo($this->getClientId());
+			$options['language'] = $params->get($client->name, $config->get('language', 'en-GB'));
+		}
+
 		// One last check to make sure we have something
-		if (!JLanguage::exists($options['language']))
-		{
+		if (!JLanguage::exists($options['language'])) {
 			$lang = $config->get('language','en-GB');
 			if (JLanguage::exists($lang)) {
 				$options['language'] = $lang;
@@ -89,7 +129,7 @@ final class JSite extends JApplication
 		parent::route();
 
 		$Itemid = JRequest::getInt('Itemid');
-		$this->authorize($Itemid);
+		$this->authorise($Itemid);
 	}
 
 	/**
@@ -104,20 +144,26 @@ final class JSite extends JApplication
 			$component = JRequest::getCmd('option');
 		}
 
-		$document	= &JFactory::getDocument();
-		$user		= &JFactory::getUser();
-		$router		= &$this->getRouter();
-		$params		= &$this->getParams();
+		$document	= JFactory::getDocument();
+		$user		= JFactory::getUser();
+		$router		= $this->getRouter();
+		$params		= $this->getParams();
 
 		switch($document->getType())
 		{
 			case 'html':
-				//set metadata
-				$table = JTable::getInstance('Language');
-				$lang = JFactory::getLanguage();
-				$table->load(array('lang_code'=>$lang->getTag()));
-				$document->setMetaData('keywords', $this->getCfg('MetaKeys').($table->metakey ? (', '.$table->metakey):''));
+				// Get language
+				$lang_code = JFactory::getLanguage()->getTag();
+				$languages = JLanguageHelper::getLanguages('lang_code');
+
+				// Set metadata
+				if (isset($languages[$lang_code]) && $languages[$lang_code]->metakey) {
+					$document->setMetaData('keywords', $languages[$lang_code]->metakey);
+				} else {
+					$document->setMetaData('keywords', $this->getCfg('MetaKeys'));
+				}
 				$document->setMetaData('rights', $this->getCfg('MetaRights'));
+				$document->setMetaData('language', $lang_code);
 				if ($router->getMode() == JROUTER_MODE_SEF) {
 					$document->setBase(JURI::current());
 				}
@@ -130,7 +176,6 @@ final class JSite extends JApplication
 
 		$document->setTitle($params->get('page_title'));
 		$document->setDescription($params->get('page_description'));
-
 		$contents = JComponentHelper::renderComponent($component);
 		$document->setBuffer($contents, 'component');
 
@@ -144,8 +189,8 @@ final class JSite extends JApplication
 	 */
 	public function render()
 	{
-		$document	= &JFactory::getDocument();
-		$user		= &JFactory::getUser();
+		$document	= JFactory::getDocument();
+		$user		= JFactory::getUser();
 
 		// get the format to render
 		$format = $document->getType();
@@ -161,7 +206,10 @@ final class JSite extends JApplication
 				$template	= $this->getTemplate(true);
 				$file		= JRequest::getCmd('tmpl', 'index');
 
-				if ($this->getCfg('offline') && $user->get('gid') < '23') {
+				if ($this->getCfg('offline') && !$user->authorise('core.admin')) {
+					$uri		= JFactory::getURI();
+					$return		= (string)$uri;
+					$this->setUserState('users.login.form.data',array( 'return' => $return ) );
 					$file = 'offline';
 				}
 				if (!is_dir(JPATH_THEMES.DS.$template->template) && !$this->getCfg('offline')) {
@@ -177,15 +225,20 @@ final class JSite extends JApplication
 		}
 
 		// Parse the document.
-		$document = &JFactory::getDocument();
+		$document = JFactory::getDocument();
 		$document->parse($params);
 
 		// Trigger the onBeforeRender event.
 		JPluginHelper::importPlugin('system');
 		$this->triggerEvent('onBeforeRender');
+		
+		$caching = false;
+		if ($this->getCfg('caching') && $this->getCfg('caching',2) == 2 && !$user->get('id')) {
+			$caching = true;
+		}
 
 		// Render the document.
-		JResponse::setBody($document->render($this->getCfg('caching'), $params));
+		JResponse::setBody($document->render($caching, $params));
 
 		// Trigger the onAfterRender event.
 		$this->triggerEvent('onAfterRender');
@@ -213,12 +266,20 @@ final class JSite extends JApplication
 	}
 
 	/**
-	 * Check if the user can access the application
+	 * @deprecated 1.6	Use the authorise method instead.
 	 */
 	public function authorize($itemid)
 	{
-		$menus	= &JSite::getMenu();
-		$user	= &JFactory::getUser();
+		return $this->authorise($itemid);
+	}
+
+	/**
+	 * Check if the user can access the application
+	 */
+	public function authorise($itemid)
+	{
+		$menus	= $this->getMenu();
+		$user	= JFactory::getUser();
 
 		if (!$menus->authorise($itemid))
 		{
@@ -233,7 +294,7 @@ final class JSite extends JApplication
 				$url	= 'index.php?option=com_users&view=login';
 				$url	= JRoute::_($url, false);
 
-				$this->redirect($url, JText::_('YOU_MUST_LOGIN_FIRST'));
+				$this->redirect($url, JText::_('JGLOBAL_YOU_MUST_LOGIN_FIRST'));
 			}
 			else {
 				JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
@@ -248,7 +309,7 @@ final class JSite extends JApplication
 	 * @return	object	The parameters object
 	 * @since	1.5
 	 */
-	public function &getParams($option = null)
+	public function getParams($option = null)
 	{
 		static $params = array();
 
@@ -266,15 +327,20 @@ final class JSite extends JApplication
 			$params[$hash] = clone JComponentHelper::getParams($option);
 
 			// Get menu parameters
-			$menus	= &JSite::getMenu();
+			$menus	= $this->getMenu();
 			$menu	= $menus->getActive();
 
+			// Get language
+			$lang_code = JFactory::getLanguage()->getTag();
+			$languages = JLanguageHelper::getLanguages('lang_code');
+
 			$title = htmlspecialchars_decode($this->getCfg('sitename'));
-			$table = JTable::getInstance('Language');
-			$lang = JFactory::getLanguage();
-			$table->load(array('lang_code'=>$lang->getTag()));
-			$description = $this->getCfg('MetaDesc').$table->metadesc;
-			$rights=$this->getCfg('MetaRights');
+			if (isset($languages[$lang_code]) && $languages[$lang_code]->metadesc) {
+				$description = $languages[$lang_code]->metadesc;
+			} else {
+				$description = $this->getCfg('MetaDesc');
+			}
+			$rights = $this->getCfg('MetaRights');
 			// Lets cascade the parameters if we have menu item parameters
 			if (is_object($menu)) {
 				$temp = new JRegistry;
@@ -299,7 +365,7 @@ final class JSite extends JApplication
 	 * @return	object	The parameters object
 	 * @since	1.5
 	 */
-	public function &getPageParameters($option = null)
+	public function getPageParameters($option = null)
 	{
 		return $this->getParams($option);
 	}
@@ -320,8 +386,11 @@ final class JSite extends JApplication
 			return $this->template->template;
 		}
 		// Get the id of the active menu item
-		$menu = &$this->getMenu();
+		$menu = $this->getMenu();
 		$item = $menu->getActive();
+		if (!$item) {
+			$item = $menu->getItem(JRequest::getVar('Itemid'));
+		}
 
 		$id = 0;
 		if (is_object($item)) { // valid item retrieved
@@ -329,25 +398,37 @@ final class JSite extends JApplication
 		}
 		$condition = '';
 
-		$tid = JRequest::getInt('template', 0);
-		if ((int) $tid > 0) {
+		$tid = JRequest::getVar('template', 0);
+		if (is_int($tid) && $tid > 0) {
 			$id = (int) $tid;
 		}
-		if ($id == 0) {
-			$condition = 'home = 1';
-		}
-		else {
-			$condition = 'id = '.(int) $id;
+
+
+		$cache = JFactory::getCache('com_templates', '');
+		if (!$templates = $cache->get('templates0')) {
+			// Load styles
+			$db = JFactory::getDbo();
+			$query = $db->getQuery(true);
+			$query->select('id, home, template, params');
+			$query->from('#__template_styles');
+			$query->where('client_id = 0');
+
+			$db->setQuery($query);
+			$templates = $db->loadObjectList('id');
+			foreach($templates as &$template) {
+				$registry = new JRegistry;
+				$registry->loadJSON($template->params);
+				$template->params = $registry;
+
+				// Create home element
+				if ($template->home == 1) {
+					$templates[0] = clone $template;
+				}
+			}
+			$cache->store($templates, 'templates0');
 		}
 
-		// Load template entries for the active menuid and the default template
-		$db = &JFactory::getDbo();
-		$query = 'SELECT template, params'
-			. ' FROM #__template_styles'
-			. ' WHERE client_id = 0 AND '.$condition
-			;
-		$db->setQuery($query, 0, 1);
-		$template = $db->loadObject();
+		$template = $templates[$id];
 
 		// Allows for overriding the active template from the request
 		$template->template = JRequest::getCmd('template', $template->template);
@@ -355,12 +436,12 @@ final class JSite extends JApplication
 
 		// Fallback template
 		if (!file_exists(JPATH_THEMES.DS.$template->template.DS.'index.php')) {
-			$template->template = 'rhuk_milkyway';
+			JError::raiseWarning(0, JText::_('JERROR_ALERTNOTEMPLATE'));
+		    $template->template = 'beez_20';
+		    if (!file_exists(JPATH_THEMES.DS.'beez_20'.DS.'index.php')) {
+		    	$template->template = '';
+		    }
 		}
-
-		$registry = new JRegistry;
-		$registry->loadJSON($template->params);
-		$template->params = $registry;
 
 		// Cache the result
 		$this->template = $template;
@@ -387,40 +468,96 @@ final class JSite extends JApplication
 	/**
 	 * Return a reference to the JPathway object.
 	 *
-	 * @return object JPathway.
-	 * @since 1.5
+	 * @param	string	$name		The name of the application/client.
+	 * @param	array	$options	An optional associative array of configuration settings.
+	 *
+	 * @return	object	JMenu.
+	 * @since	1.5
 	 */
-	public function &getMenu()
+	public function getMenu($name = null, $options = array())
 	{
 		$options	= array();
-		$menu		= &parent::getMenu('site', $options);
+		$menu		= parent::getMenu('site', $options);
 		return $menu;
 	}
 
 	/**
 	 * Return a reference to the JPathway object.
 	 *
-	 * @return object JPathway.
-	 * @since 1.5
+	 * @param	string	$name		The name of the application.
+	 * @param	array	$options	An optional associative array of configuration settings.
+	 *
+	 * @return	object JPathway.
+	 * @since	1.5
 	 */
-	public function &getPathWay()
+	public function getPathway($name = null, $options = array())
 	{
 		$options = array();
-		$pathway = &parent::getPathway('site', $options);
+		$pathway = parent::getPathway('site', $options);
 		return $pathway;
 	}
 
 	/**
 	 * Return a reference to the JRouter object.
 	 *
-	 * @return	JRouter.
+	 * @param	string	$name		The name of the application.
+	 * @param	array	$options	An optional associative array of configuration settings.
+	 *
+	 * @return	JRouter
 	 * @since	1.5
 	 */
-	static public function &getRouter()
+	static public function getRouter($name = null, array $options = array())
 	{
-		$config = &JFactory::getConfig();
+		$config = JFactory::getConfig();
 		$options['mode'] = $config->get('sef');
-		$router = &parent::getRouter('site', $options);
+		$router = parent::getRouter('site', $options);
 		return $router;
+	}
+
+	/**
+	 * Return the current state of the language filter.
+	 *
+	 * @return	boolean
+	 * @since	1.6
+	 */
+	public function getLanguageFilter()
+	{
+		return $this->_language_filter;
+	}
+
+	/**
+	 * Set the current state of the language filter.
+	 *
+	 * @return	boolean	The old state
+	 * @since	1.6
+	 */
+	public function setLanguageFilter($state=false)
+	{
+		$old = $this->_language_filter;
+		$this->_language_filter=$state;
+		return $old;
+	}
+	/**
+	 * Return the current state of the detect browser option.
+	 *
+	 * @return	boolean
+	 * @since	1.6
+	 */
+	public function getDetectBrowser()
+	{
+		return $this->_detect_browser;
+	}
+
+	/**
+	 * Set the current state of the detect browser option.
+	 *
+	 * @return	boolean	The old state
+	 * @since	1.6
+	 */
+	public function setDetectBrowser($state=false)
+	{
+		$old = $this->_detect_browser;
+		$this->_detect_browser=$state;
+		return $old;
 	}
 }
