@@ -11,7 +11,7 @@ defined('_JEXEC') or die;
 
 jimport('joomla.plugin.plugin');
 
-require_once(JPATH_SITE.'/components/com_content/helpers/route.php');
+require_once JPATH_SITE.'/components/com_content/helpers/route.php';
 
 /**
  * Categories Search plugin
@@ -25,10 +25,10 @@ class plgSearchCategories extends JPlugin
 	/**
 	 * @return array An array of search areas
 	 */
-	function onSearchAreas()
+	function onContentSearchAreas()
 	{
 		static $areas = array(
-		'categories' => 'Categories'
+		'categories' => 'PLG_SEARCH_CATEGORIES_CATEGORIES'
 		);
 		return $areas;
 	}
@@ -44,20 +44,31 @@ class plgSearchCategories extends JPlugin
 	 * @param string ordering option, newest|oldest|popular|alpha|category
 	 * @param mixed An array if restricted to areas, null if search all
 	 */
-	function onSearch($text, $phrase='', $ordering='', $areas=null)
+	function onContentSearch($text, $phrase='', $ordering='', $areas=null)
 	{
-		$db		= &JFactory::getDbo();
-		$user	= &JFactory::getUser();
+		$db		= JFactory::getDbo();
+		$user	= JFactory::getUser();
+		$app	= JFactory::getApplication();
 		$groups	= implode(',', $user->authorisedLevels());
 		$searchText = $text;
 
 		if (is_array($areas)) {
-			if (!array_intersect($areas, array_keys($this->onSearchAreas()))) {
+			if (!array_intersect($areas, array_keys($this->onContentSearchAreas()))) {
 				return array();
 			}
 		}
 
-		$limit = $this->params->def('search_limit', 50);
+		$sContent		= $this->params->get('search_content',		1);
+		$sArchived		= $this->params->get('search_archived',		1);
+		$limit			= $this->params->def('search_limit',		50);
+		$state			= array();
+		if ($sContent) {
+			$state[]=1;
+		}
+		if ($sArchived) {
+			$state[]=2;
+		}
+
 
 		$text = trim($text);
 		if ($text == '') {
@@ -80,30 +91,37 @@ class plgSearchCategories extends JPlugin
 		$text	= $db->Quote('%'.$db->getEscaped($text, true).'%', false);
 		$query	= $db->getQuery(true);
 
-		$query->select('a.title, a.description AS text, "" AS created, "2" AS browsernav, a.id AS catid, '
-					.'CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug');
-		$query->from('#__categories AS a');
-		$query->where('(a.title LIKE '. $text .' OR a.description LIKE '. $text .') AND a.published = 1 AND a.extension = \'com_content\''
-					.'AND a.access IN ('. $groups .')' );
-		$query->group('a.id');
-		$query->order($order);
-
-		$db->setQuery($query, 0, $limit);
-		$rows = $db->loadObjectList();
-
-		$count = count($rows);
-		for ($i = 0; $i < $count; $i++) {
-			$rows[$i]->href = ContentHelperRoute::getCategoryRoute($rows[$i]->slug);
-			$rows[$i]->section	= JText::_('PLG_SEARCH_CATEGORIES_CATEGORY');
-		}
-
 		$return = array();
-		foreach($rows AS $key => $category) {
-			if (searchHelper::checkNoHTML($category, $searchText, array('name', 'title', 'text'))) {
-				$return[] = $category;
+		if (!empty($state)) {
+			$query->select('a.title, a.description AS text, "" AS created, "2" AS browsernav, a.id AS catid, '
+						.'CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug');
+			$query->from('#__categories AS a');
+			$query->where('(a.title LIKE '. $text .' OR a.description LIKE '. $text .') AND a.published IN ('.implode(',',$state).') AND a.extension = \'com_content\''
+						.'AND a.access IN ('. $groups .')' );
+			$query->group('a.id');
+			$query->order($order);
+			if ($app->isSite() && $app->getLanguageFilter()) {
+				$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+			}
+
+			$db->setQuery($query, 0, $limit);
+			$rows = $db->loadObjectList();
+
+			if ($rows) {
+				$count = count($rows);
+				for ($i = 0; $i < $count; $i++) {
+					$rows[$i]->href = ContentHelperRoute::getCategoryRoute($rows[$i]->slug);
+					$rows[$i]->section	= JText::_('JCATEGORY');
+				}
+
+				$return = array();
+				foreach($rows AS $key => $category) {
+					if (searchHelper::checkNoHTML($category, $searchText, array('name', 'title', 'text'))) {
+						$return[] = $category;
+					}
+				}
 			}
 		}
-
 		return $return;
 	}
 }
