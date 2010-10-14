@@ -1,5 +1,5 @@
 <?php // no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 $config = JFactory::getConfig();
 $publish_up = JHTML::_('date',$this->article->publish_up);
@@ -11,8 +11,7 @@ if (! isset($this->article->publish_down) || $this->article->publish_down == 'Ne
 }
 ?>
 
-<script language="javascript" type="text/javascript">
-<!--
+<script type="text/javascript">
 function setgood() {
 	// TODO: Put setGood back
 	return true;
@@ -30,9 +29,9 @@ foreach ($this->lists['sectioncategories'] as $k=>$items) {
 
 
 function submitbutton(pressbutton) {
-	var form = document.adminForm;
+	var form = document.getElementById('adminForm');
 	if (pressbutton == 'cancel') {
-		submitform( pressbutton );
+		Joomla.submitform( pressbutton );
 		return;
 	}
 	try {
@@ -54,14 +53,13 @@ function submitbutton(pressbutton) {
 		}
 	}
 	<?php echo $this->editor->save( 'text' ); ?>
-	submitform(pressbutton);
+	Joomla.submitform(pressbutton);
 }
-//-->
 </script>
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
 <div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>"><?php echo $this->escape($this->params->get('page_title')); ?></div>
 <?php endif; ?>
-<form action="<?php echo $this->action ?>" method="post" name="adminForm" onSubmit="setgood();">
+<form action="<?php echo $this->action ?>" method="post" name="adminForm" id="adminForm" onSubmit="setgood();">
 <fieldset>
 <legend><?php echo JText::_('Editor'); ?></legend>
 <table class="adminform" width="100%">
@@ -113,7 +111,7 @@ echo $this->editor->display('text', $this->article->text, '100%', '400', '70', '
 		<?php echo $this->lists['catid']; ?>
 	</td>
 </tr>
-<?php if ($this->user->authorize('core.edit.state', 'com_content')) : ?>
+<?php if ($this->user->authorise('core.edit.state', 'com_content')) : ?>
 <tr>
 	<td class="key">
 		<label for="state">

@@ -4,7 +4,7 @@
  */
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-$cparams =& JComponentHelper::getParams('com_media');
+$cparams = JComponentHelper::getParams('com_media');
 ?>
 
 <?php if ( $this->params->get( 'show_page_heading', 1 ) ) : ?>
@@ -23,7 +23,7 @@ $cparams =& JComponentHelper::getParams('com_media');
 	<?php echo $this->category->description; ?>
 	</div>
 <?php endif; ?>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 	function tableOrdering( order, dir, task ) {
 	var form = document.adminForm;
 
@@ -32,13 +32,13 @@ $cparams =& JComponentHelper::getParams('com_media');
 	document.adminForm.submit( task );
 }
 </script>
-<form action="<?php echo $this->action; ?>" method="post" name="adminForm">
+<form action="<?php echo $this->action; ?>" method="post" name="adminForm" id="adminForm">
 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<thead>
 		<tr>
 			<td align="right" colspan="6">
 			<?php if ($this->params->get('show_limit')) :
-				echo JText::_('JLIB_HTML_DISPLAY_NUM') .'&nbsp;';
+				echo JText::_('JGLOBAL_DISPLAY_NUM') .'&#160;';
 				echo $this->pagination->getLimitBox();
 			endif; ?>
 			</td>

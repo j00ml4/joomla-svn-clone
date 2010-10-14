@@ -1,12 +1,10 @@
 <?php // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die; ?>
 
 <script type="text/javascript">
-<!--
 	Window.onDomReady(function(){
 		document.formvalidator.setHandler('passverify', function (value) { return (document.id('password').value == value); }	);
 	});
-// -->
 </script>
 
 <form action="<?php echo JRoute::_( 'index.php' ); ?>" method="post" name="userform" autocomplete="off" class="form-validate">

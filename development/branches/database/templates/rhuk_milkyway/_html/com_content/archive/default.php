@@ -1,12 +1,12 @@
 <?php // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die; ?>
 <form id="jForm" action="<?php JRoute::_('index.php')?>" method="post">
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
 	<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>"><?php echo $this->escape($this->params->get('page_title')); ?></div>
 <?php endif; ?>
 	<p>
 		<?php if ($this->params->get('filter')) : ?>
-		<?php echo JText::_('Filter').'&nbsp;'; ?>
+		<?php echo JText::_('Filter').'&#160;'; ?>
 		<input type="text" name="filter" value="<?php echo $this->escape($this->filter); ?>" class="inputbox" onchange="document.jForm.submit();" />
 		<?php endif; ?>
 		<?php echo $this->form->monthField; ?>

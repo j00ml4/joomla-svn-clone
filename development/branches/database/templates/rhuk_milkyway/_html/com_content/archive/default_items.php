@@ -1,5 +1,5 @@
 <?php // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die; ?>
 <ul id="archive-list" style="list-style: none;">
 <?php foreach ($this->items as $item) : ?>
 	<li class="row<?php echo ($item->odd +1 ); ?>">
@@ -59,7 +59,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	</li>
 <?php endforeach; ?>
 </ul>
-<div id="navigation">
+<div id="pagination">
 	<span><?php echo $this->pagination->getPagesLinks(); ?></span>
 	<span><?php echo $this->pagination->getPagesCounter(); ?></span>
 </div>

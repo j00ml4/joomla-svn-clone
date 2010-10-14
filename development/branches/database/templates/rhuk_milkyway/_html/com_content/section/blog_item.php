@@ -1,6 +1,6 @@
 <?php // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
-<?php if ($this->user->authorize('core.edit', 'com_content.article.'.$this->item->id)) : ?>
+defined('_JEXEC') or die; ?>
+<?php if ($this->user->authorise('core.edit', 'com_content.article.'.$this->item->id)) : ?>
 	<div class="contentpaneopen_edit<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>">
 		<?php echo JHTML::_('icon.edit', $this->item, $this->item->params, $this->access); ?>
 	</div>
@@ -86,7 +86,7 @@ endif; ?>
 		<span class="small">
 			<?php JText::printf( 'WRITTEN_BY', ($this->escape($this->item->created_by_alias) ? $this->escape($this->item->created_by_alias) : $this->escape($this->item->author)) ); ?>
 		</span>
-		&nbsp;&nbsp;
+		&#160;&#160;
 	</td>
 </tr>
 <?php endif; ?>
@@ -120,7 +120,7 @@ endif; ?>
 <?php if ( intval($this->item->modified) != 0 && $this->item->params->get('show_modify_date')) : ?>
 <tr>
 	<td colspan="2"  class="modifydate">
-		<?php echo JText::sprintf('LAST_UPDATED2', JHTML::_('date',$this->item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
+		<?php echo JText::sprintf('COM_CONTENT_LAST_UPDATED', JHTML::_('date',$this->item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
 	</td>
 </tr>
 <?php endif; ?>
@@ -144,5 +144,5 @@ endif; ?>
 <?php if ($this->item->state == 0) : ?>
 </div>
 <?php endif; ?>
-<span class="article_separator">&nbsp;</span>
+<span class="article_separator">&#160;</span>
 <?php echo $this->item->event->afterDisplayContent; ?>

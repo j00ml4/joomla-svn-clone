@@ -1,12 +1,12 @@
 <?php // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
-<form action="<?php echo JRoute::_('index.php?view=category&id='.$this->category->slug); ?>" method="post" name="adminForm">
+defined('_JEXEC') or die; ?>
+<form action="<?php echo JRoute::_('index.php?view=category&id='.$this->category->slug); ?>" method="post" name="adminForm" id="adminForm">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <?php if ($this->params->get('show_limit')) : ?>
 <tr>
 	<td align="right" colspan="4">
 	<?php
-		echo JText::_('JLIB_HTML_DISPLAY_NUM') .'&nbsp;';
+		echo JText::_('JGLOBAL_DISPLAY_NUM') .'&#160;';
 		echo $this->pagination->getLimitBox();
 	?>
 	</td>
@@ -23,7 +23,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	</td>
 	<?php endif; ?>
 	<?php if ( $this->params->get( 'show_articles' ) ) : ?>
-	<td height="20" width="10%" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" align="center" nowrap="nowrap">
+	<td height="20" width="10%" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" align="center" class="nowrap">
 		<?php echo JText::_( 'Num Articles' ); ?>
 	</td>
 	<?php endif; ?>
