@@ -1,7 +1,6 @@
 <?php // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
-<script language="javascript" type="text/javascript">
-<!--
+defined('_JEXEC') or die; ?>
+<script type="text/javascript">
 	function submitbutton(pressbutton) {
 		var form = document.mailtoForm;
 
@@ -12,7 +11,6 @@ defined('_JEXEC') or die('Restricted access'); ?>
 		}
 		form.submit();
 	}
--->
 </script>
 <?php
 $data	= $this->get('data');

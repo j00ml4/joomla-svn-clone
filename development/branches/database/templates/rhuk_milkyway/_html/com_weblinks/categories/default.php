@@ -1,5 +1,5 @@
 <?php // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
+defined('_JEXEC') or die; ?>
 <?php if ( $this->params->def( 'show_page_heading', 1 ) ) : ?>
 	<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 		<?php echo $this->escape($this->params->get('page_title')); ?>
@@ -23,7 +23,7 @@ defined('_JEXEC') or die('Restricted access'); ?>
 	<li>
 		<a href="<?php echo $category->link; ?>" class="category<?php echo $this->escape($this->params->get( 'pageclass_sfx' )); ?>">
 			<?php echo $this->escape($category->title);?></a>
-		&nbsp;
+		&#160;
 		<span class="small">
 			(<?php echo $category->numlinks;?>)
 		</span>

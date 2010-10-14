@@ -42,6 +42,8 @@ p { margin-top: 0; margin-bottom: 5px; }
 
 img { border: 0 none; }
 
+.nowrap { white-space: nowrap; }
+
 /*****************************************/
 /*** Template specific layout elements ***/
 /*****************************************/
@@ -781,15 +783,10 @@ td.key {
 }
 
 /* System Standard Messages */
+
 #system-message { margin-bottom: 20px; }
 
-#system-message dd.message ul { background: #C3D2E5 url(../../system/images/notice-info.png) 4px center no-repeat;border-top: 3px solid #DE7A7B; border-bottom: 3px solid #DE7A7B; margin:0px; padding-left: 40px; text-indent:0px;}
-
-/* System Error Messages */
-#system-message dd.error ul { color: #c00; background: #E6C0C0 url(../../system/images/notice-alert.png) 4px center no-repeat; border-top: 3px solid #DE7A7B; border-bottom: 3px solid #DE7A7B; margin:0px; padding-left: 40px; text-indent:0px;}
-
-/* System Notice Messages */
-#system-message dd.notice ul { color: #c00; background: #EFE7B8 url(../../system/images/notice-note.png) 4px center no-repeat; border-top: 3px solid #F0DC7E; border-bottom: 3px solid #F0DC7E; margin:0px; padding-left: 40px; text-indent:0px;}
+#system-message dd.message ul {margin:0px; padding-left: 40px; text-indent:0px; background-position: 4px center;}
 
 #syndicate{
         float:left;
@@ -912,3 +909,24 @@ fieldset.filters {
         width:30%
 }
 
+/* ++++++++++++++  Modal popups with adminlist grid  ++++++++++++++ */
+.contentpane a.pointer { cursor: pointer }
+.contentpane .left  { float: left }
+.contentpane .right { float: right}
+
+.contentpane {
+	margin: 10px;
+	font-size: 68.8%;
+}
+
+.contentpane input,
+.contentpane textarea,
+.contentpane select,
+.contentpane button
+{
+	font-size: 0.8em;
+}
+
+.contentpane .list-footer .limit {
+	margin-bottom: 9px;
+}

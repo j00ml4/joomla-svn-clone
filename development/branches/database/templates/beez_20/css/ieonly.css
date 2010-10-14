@@ -15,29 +15,39 @@
 
 
 #all { width: expression(document . body . clientWidth > 1050 ? "1050" : "auto");  }
-#footer-inner, #footer { width: expression(document . body . clientWidth > 1050 ? "1025" : "auto");  }
+#footer-inner { width: expression(document . body . clientWidth > 1050 ? "1025" : "auto");  }
+#footer { width: expression(document . body . clientWidth > 1050 ? "1020" : "auto");  }
 
 #all
 {
-	border:solid 1px #fff
+        border:solid 1px #fff;
+                zoom:1
 }
+
+#header
+{ position:relative; zoom:1}
 
 .logoheader
 {
-	height:159px
+        height:159px
 }
 
 #line
 {
         width:19.0em;
         margin-right:20px;
+
 }
 
-#header ul
+
+#header ul.skiplinks li a
 {
-	padding:10px 0 10px 0 ;
-	margin:0
+
+background:#cc0000;
+border:0px solid #000
+
 }
+
 
 #contentarea,
 #contentarea2
@@ -54,7 +64,7 @@
 #back
 {
         margin: 0;
-        padding:0 10px;
+        padding:0 0px;
 }
 
 #right
@@ -66,7 +76,7 @@
 
 .left
 {
-            margin:0px 0px 10px 18px;
+            margin:10px 0px 10px 18px;
 
 }
 
@@ -94,7 +104,8 @@
 }
 
 #nav ul li,
-#right ul li
+#right ul li,
+#bottom ul li
 {
             height:1%
 }
@@ -111,18 +122,37 @@ h1
 
 ul.tabs
 {
-	text-align:left
+        text-align:left
 }
 
 ul.newsflash-horiz,
 #footer-outer,
 ul.tabs
 {
-	zoom:1
+        zoom:1
 }
 
 .tabcontent
 {
-	overflow:hidden !important;
-	width:90%
+        overflow:hidden !important;
+        position:relative
 }
+
+#main h1
+{ zoom:1}
+
+.box {width:26%}
+
+#bottom
+{display:inline-block}
+
+.panel,
+div.current
+{zoom:1}
+
+.contact-image
+{
+	display:inline-block
+}
+.item-page
+{ width:100%}

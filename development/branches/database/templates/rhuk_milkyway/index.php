@@ -37,6 +37,7 @@ defined('_JEXEC') or die;
 						<div id="logo"></div>
 						<jdoc:include type="modules" name="top" />
 						<jdoc:include type="modules" name="position-12" />
+
 					</div>
 				</div>
 			</div>
@@ -47,14 +48,14 @@ defined('_JEXEC') or die;
 						<div id="tabmenu">
 						<table cellpadding="0" cellspacing="0" class="pill">
 							<tr>
-								<td class="pill_l">&nbsp;</td>
+								<td class="pill_l">&#160;</td>
 								<td class="pill_m">
 								<div id="pillmenu">
 									<jdoc:include type="modules" name="user3" />
 									<jdoc:include type="modules" name="position-1" />
 								</div>
 								</td>
-								<td class="pill_r">&nbsp;</td>
+								<td class="pill_r">&#160;</td>
 							</tr>
 							</table>
 						</div>
@@ -64,7 +65,7 @@ defined('_JEXEC') or die;
 
 			<div id="search">
 				<jdoc:include type="modules" name="user4" />
-				<jdoc:include type="modules" name="position-12" />
+				<jdoc:include type="modules" name="position-0" />
 			</div>
 
 			<div id="pathway">
@@ -100,7 +101,7 @@ defined('_JEXEC') or die;
 						<div id="maincolumn_full">
 						<?php endif; ?>
 							<?php if ($this->countModules('user1')  or  $this->countModules('user2')
-							or ($this->countModules('position-9')  or  $this->countModules('position-10') ) ) : ?>hello
+							or ($this->countModules('position-9')  or  $this->countModules('position-10') ) ) : ?>
 								<table class="nopad user1user2">
 									<tr valign="top">
 										<?php if ($this->countModules('user1') or $this->countModules('position-9')) : ?>
@@ -111,7 +112,7 @@ defined('_JEXEC') or die;
 										<?php endif; ?>
 										<?php if ($this->countModules('user1') or $this->countModules('position-9')
 										and $this->countModules('user2') or $this->countModules('position-10')) : ?>
-											<td class="greyline">&nbsp;</td>
+											<td class="greyline">&#160;</td>
 										<?php endif; ?>
 										<?php if ($this->countModules('user2') or $this->countModules('position-10')) : ?>
 											<td>
@@ -140,7 +141,7 @@ defined('_JEXEC') or die;
 											$this->countModules('position-4')
 											)
 									and JRequest::getCmd('layout') != 'form') : ?>
-										<td class="greyline">&nbsp;</td>
+										<td class="greyline">&#160;</td>
 										<td width="170">
 											<jdoc:include type="modules" name="right" style="xhtml"/>
 											<jdoc:include type="modules" name="position-3" style="xhtml"/>

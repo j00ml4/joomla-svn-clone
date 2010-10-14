@@ -1,6 +1,6 @@
 <?php // no direct access
-defined('_JEXEC') or die('Restricted access'); ?>
-<?php $canEdit	= ($this->user->authorize('core.edit', 'com_content.article.'.$this->item->id)); ?>
+defined('_JEXEC') or die; ?>
+<?php $canEdit	= ($this->user->authorise('core.edit', 'com_content.article.'.$this->item->id)); ?>
 <?php if ($this->item->state == 0) : ?>
 <div class="system-unpublished">
 <?php endif; ?>
@@ -85,9 +85,9 @@ endif; ?>
 <tr>
 	<td width="70%"  valign="top" colspan="2">
 		<span class="small">
-			<?php JText::printf( 'WRITTEN_BY', ($this->escape($this->item->created_by_alias) ? $this->escape($this->item->created_by_alias) : $this->escape($this->item->author)) ); ?>
+			<?php JText::printf( 'COM_CONTENT_WRITTEN_BY', ($this->escape($this->item->created_by_alias) ? $this->escape($this->item->created_by_alias) : $this->escape($this->item->author)) ); ?>
 		</span>
-		&nbsp;&nbsp;
+		&#160;&#160;
 	</td>
 </tr>
 <?php endif; ?>
@@ -121,7 +121,7 @@ endif; ?>
 <?php if ( intval($this->item->modified) != 0 && $this->item->params->get('show_modify_date')) : ?>
 <tr>
 	<td colspan="2"  class="modifydate">
-		<?php echo JText::sprintf('LAST_UPDATED2', JHTML::_('date',$this->item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
+		<?php echo JText::sprintf('COM_CONTENT_LAST_UPDATED', JHTML::_('date',$this->item->modified, JText::_('DATE_FORMAT_LC2'))); ?>
 	</td>
 </tr>
 <?php endif; ?>
@@ -131,11 +131,11 @@ endif; ?>
 	<td  colspan="2">
 		<a href="<?php echo $this->item->readmore_link; ?>" class="readon<?php echo $this->escape($this->item->params->get('pageclass_sfx')); ?>">
 			<?php if ($this->item->readmore_register) :
-				echo JText::_('Register to read more...');
+				echo JText::_('COM_CONTENT_REGISTER_TO_READ_MORE');
 			elseif ($readmore = $this->item->params->get('readmore')) :
 				echo $readmore;
 			else :
-				echo JText::sprintf('READ_MORE');
+				echo JText::sprintf('COM_CONTENT_READ_MORE');
 			endif; ?></a>
 	</td>
 </tr>
@@ -145,5 +145,5 @@ endif; ?>
 <?php if ($this->item->state == 0) : ?>
 </div>
 <?php endif; ?>
-<span class="article_separator">&nbsp;</span>
+<span class="article_separator">&#160;</span>
 <?php echo $this->item->event->afterDisplayContent; ?>

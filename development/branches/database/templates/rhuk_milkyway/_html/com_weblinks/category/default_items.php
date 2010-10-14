@@ -1,5 +1,5 @@
-<?php defined('_JEXEC') or die('Restricted access'); ?>
-<script language="javascript" type="text/javascript">
+<?php defined('_JEXEC') or die; ?>
+<script type="text/javascript">
 	function tableOrdering( order, dir, task ) {
 	var form = document.adminForm;
 
@@ -9,12 +9,12 @@
 }
 </script>
 
-<form action="<?php echo JFilterOutput::ampReplace($this->action); ?>" method="post" name="adminForm">
+<form action="<?php echo JFilterOutput::ampReplace($this->action); ?>" method="post" name="adminForm" id="adminForm">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
 	<td align="right" colspan="4">
 	<?php
-		echo JText::_('JLIB_HTML_DISPLAY_NUM') .'&nbsp;';
+		echo JText::_('JGLOBAL_DISPLAY_NUM') .'&#160;';
 		echo $this->pagination->getLimitBox();
 	?>
 	</td>
@@ -29,7 +29,7 @@
 	</td>
 	<?php if ( $this->params->get( 'show_link_hits' ) ) : ?>
 
-	<td width="30" height="20" class="sectiontableheader<?php echo $this->escape($this->params->get( 'pageclass_sfx' )); ?>" style="text-align:center;" nowrap="nowrap">
+	<td width="30" height="20" class="sectiontableheader<?php echo $this->escape($this->params->get( 'pageclass_sfx' )); ?>" style="text-align:center;" class="nowrap">
 		<?php echo JHTML::_('grid.sort',  'JGLOBAL_HITS', 'hits', $this->lists['order_Dir'], $this->lists['order'] ); ?>
 	</td>
 	<?php endif; ?>
@@ -42,7 +42,7 @@
 	</td>
 	<td height="20">
 		<?php if ( $item->image ) : ?>
-		&nbsp;&nbsp;<?php echo $item->image;?>&nbsp;&nbsp;
+		&#160;&#160;<?php echo $item->image;?>&#160;&#160;
 		<?php endif; ?>
 		<?php echo $item->link; ?>
 		<?php if ( $this->params->get( 'show_link_description' ) ) : ?>
