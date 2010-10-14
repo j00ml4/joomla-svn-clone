@@ -54,6 +54,14 @@ form {
 	padding: 0;
 }
 
+td:first-child {
+	width: 100px;
+}
+
+td.item + td {
+	text-align: center;
+}
+
 /* installer */
 #header1 {
 	background: url(../images/j_header_middle.png) repeat-x;
@@ -123,7 +131,7 @@ form {
 }
 
 #stepbar div.box {
-	background:  url(../images/j_joomla_box.jpg) 50% 20px no-repeat;
+	background:  url(../images/j_joomla_box.png) 50% 20px no-repeat;
 	height: 140px;
 }
 
@@ -315,6 +323,33 @@ span.step {
 	color: #c00;
 }
 
+dl#system-message {
+	border-left: 1px solid #cccccc;
+	border-right: 1px solid #cccccc;
+	margin: 0;
+	padding: 0.5em;
+}
+
+dl#system-message dt.error {
+	display: block;
+	color: black;
+	font-size: x-large;
+	font-weight: bold;
+}
+
+dl#system-message dd.error {
+	display: block;
+	padding-left: 0em;
+}
+
+dl#system-message dd.error ul {
+	display: block;
+}
+
+dl#system-message dd.error ul li {
+	display: block;
+}
+
 h3.title-smenu, h3.moofx-toggler {
 	margin: 0;
 	border: 1px solid #ccc;
@@ -334,7 +369,10 @@ div.moofx-slider {
   background: #fbfbfb;
 }
 
-.final-table { width: 100%; }
+.final-table {
+	width: 100%;
+	text-align: center;
+}
 
 td em {
 	color: #666;
@@ -352,6 +390,10 @@ div#javascript-warning {
 
 #theDefault input {
 
+}
+
+input.hidden {
+	display: none;
 }
 
 /* corners */
@@ -474,3 +516,67 @@ div#installer div.b div.b div.b {
    background: url(../images/j_crn_bl_light.png) 0 0 no-repeat;
 }
 
+/* error messages and notices */
+
+.invalid {
+	color: red;
+	font-weight: bold;
+}
+
+input.invalid {
+	border: 1px solid red;
+}
+
+div.inlineError {
+	margin: 0 0.3em;
+	padding: 0.2em;
+	border-top: thick solid red;
+	border-bottom: thick solid red;
+	background: #ffff99;
+}
+
+#theDefaultErrorMessage {
+	font-family: monospace;
+}
+
+#system-message {
+	padding: 6pt 6pt;
+	margin: 0;
+	border-left: thin solid #cccccc;
+	border-right: thin solid #cccccc;
+}
+
+.message {
+	background: #fff6f6;
+}
+
+.notice {
+	background: #fff6f6;
+}
+
+#system-message dt,
+#system-message dd {
+	margin: 0;
+	padding: 3pt 6pt;
+	color: #cc0000;
+}
+
+#system-message dt.notice {
+	border-top: medium solid red;
+	font-size: larger;
+	font-weight: bold;
+}
+
+#system-message dd.notice {
+	border-bottom: medium solid red;
+}
+
+#system-message dt.message  {
+	border-top: medium solid red;
+	font-size: larger;
+	font-weight: bold;
+}
+
+#system-message dd.message {
+	border-bottom: medium solid red;
+}

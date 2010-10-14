@@ -22,29 +22,31 @@ class JInstallationController extends JController
 	/**
 	 * Method to display a view.
 	 *
-	 * @return	void
-	 * @since	1.0
+	 * @param	boolean			If true, the view output will be cached
+	 * @param	array			An array of safe url parameters and their variable types, for valid values see {@link JFilterInput::clean()}.
+	 *
+	 * @return	JController		This object to support chaining.
+	 * @since	1.5
 	 */
-	public function display()
+	public function display($cachable = false, $urlparams = false)
 	{
 		// Get the current URI to redirect to.
-		$uri		= &JURI::getInstance();
+		$uri		= JURI::getInstance();
 		$redirect	= base64_encode($uri);
 
 		// Get the document object.
-		$document = &JFactory::getDocument();
+		$document	= JFactory::getDocument();
 
 		// Set the default view name and format from the Request.
 		$vName		= JRequest::getWord('view', 'language');
 		$vFormat	= $document->getType();
 		$lName		= JRequest::getWord('layout', 'default');
 
-		if ($view = &$this->getView($vName, $vFormat))
-		{
-			switch ($vName)
-			{
+		if ($view = $this->getView($vName, $vFormat)) {
+
+			switch ($vName) {
 				default:
-					$model = &$this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
+					$model = $this->getModel('Setup', 'JInstallationModel', array('dbo' => null));
 					break;
 			}
 
@@ -57,58 +59,7 @@ class JInstallationController extends JController
 
 			$view->display();
 		}
-	}
 
-	/**
-	 * Method to get the appropriate controller.
-	 *
-	 * @return	object	JInstallation Controller
-	 * @since	1.0
-	 */
-	public static function &getInstance()
-	{
-		static $instance;
-
-		if (!empty($instance)) {
-			return $instance;
-		}
-
-		$cmd = JRequest::getCmd('task', 'display');
-
-		// Check for a controller.task command.
-		if (strpos($cmd, '.') != false)
-		{
-			// Explode the controller.task command.
-			list($type, $task) = explode('.', $cmd);
-
-			// Define the controller name and path
-			$protocol	= JRequest::getWord('protocol');
-			$type		= strtolower($type);
-			$file		= (!empty($protocol)) ? $type.'.'.$protocol.'.php' : $type.'.php';
-			$path		= JPATH_COMPONENT.DS.'controllers'.DS.$file;
-
-			// If the controller file path exists, include it ... else die with a 500 error.
-			if (file_exists($path)) {
-				require_once $path;
-			} else {
-				JError::raiseError(500, JText::sprintf('Invalid_Controller', $type));
-			}
-
-			JRequest::setVar('task', $task);
-		} else {
-			// Base controller, just set the task.
-			$type = null;
-			$task = $cmd;
-		}
-
-		// Set the name for the controller and instantiate it.
-		$class = 'JInstallationController'.ucfirst($type);
-		if (class_exists($class)) {
-			$instance = new $class();
-		} else {
-			JError::raiseError(500, JText::sprintf('Invalid_Controller_Class', $class));
-		}
-
-		return $instance;
+		return $this;
 	}
 }

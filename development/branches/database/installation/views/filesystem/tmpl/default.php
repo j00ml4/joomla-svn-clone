@@ -12,17 +12,11 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
 // Load the JavaScript behaviors.
+JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+JHtml::_('script', 'installation/template/js/installation.js', true, false, false, false);
 ?>
-
-<script language="JavaScript" type="text/javascript">
-<!--
-	function validateForm(frm, task) {
-		Joomla.submitform(task);
-	}
-// -->
-</script>
 
 <div id="stepbar">
 	<div class="t">
@@ -41,7 +35,7 @@ JHtml::_('behavior.formvalidation');
 	</div>
 </div>
 
-<form action="index.php" method="post" name="adminForm" class="form-validate">
+<form action="index.php" method="post" id="adminForm" class="form-validate">
 <div id="right">
 	<div id="rightpad">
 		<div id="step">
@@ -54,13 +48,13 @@ JHtml::_('behavior.formvalidation');
 				<div class="far-right">
 <?php if ($this->document->direction == 'ltr') : ?>
 					<div class="button1-right"><div class="prev"><a href="index.php?view=database" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
-					<div class="button1-left"><div class="next"><a onclick="validateForm(adminForm, 'setup.filesystem');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+					<div class="button1-left"><div class="next"><a onclick="validateForm(document.getElementById('adminForm'), 'setup.filesystem');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 <?php elseif ($this->document->direction == 'rtl') : ?>
-					<div class="button1-right"><div class="prev"><a onclick="validateForm(adminForm, 'setup.filesystem');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+					<div class="button1-right"><div class="prev"><a onclick="validateForm(document.getElementById('adminForm'), 'setup.filesystem');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 					<div class="button1-left"><div class="next"><a href="index.php?view=database" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
 <?php endif; ?>
 				</div>
-				<span class="step"><?php echo JText::_('FTP_CONFIGURATION'); ?></span>
+				<span class="step"><?php echo JText::_('INSTL_FTP'); ?></span>
 			</div>
 			<div class="b">
 				<div class="b">
@@ -76,23 +70,10 @@ JHtml::_('behavior.formvalidation');
 			</div>
 			<div class="m">
 				<h2>
-					<?php echo JText::_('FTP_CONFIGURATION'); ?>:
+					<?php echo JText::_('INSTL_FTP_TITLE'); ?>
 				</h2>
 				<div class="install-text">
-					<?php echo JText::_('
-						<p>Due to filesystem permission restrictions and PHP Safe Mode restrictions.
-						For all users to utilize the Joomla! installers an FTP layer exists to handle
-						filesystem manipulation.
-						<br />
-						<br />
-						Enter an FTP username and password with access to the Joomla! root directory,
-						this will be the FTP account that handles all filesystem operations when Joomla!
-						requires FTP access to complete a task.
-						<br />
-						<br />
-						For security reasons, it is best if a separate FTP user account is created with
-						access only to the Joomla! installation.</p>
-					'); ?>
+					<?php echo JText::_('INSTL_FTP_DESC'); ?>
 				</div>
 				<div class="install-body">
 					<div class="t">
@@ -101,13 +82,13 @@ JHtml::_('behavior.formvalidation');
 						</div>
 					</div>
 					<div class="m">
-						<h3 class="title-smenu" title="<?php echo JText::_('Basic'); ?>">
-							<?php echo JText::_('BASIC_SETTINGS'); ?>
+						<h3 class="title-smenu" title="<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>">
+							<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>
 						</h3>
 						<div class="section-smenu">
 							<table class="content2">
 								<tr>
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_enable'); ?>
 									</td>
 									<td>
@@ -115,12 +96,17 @@ JHtml::_('behavior.formvalidation');
 									</td>
 								</tr>
 								<tr>
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_user'); ?>
 									</td>
 									<td>
 										<?php echo $this->form->getInput('ftp_user'); ?>
 									</td>
+									<td>
+										<em>
+										<?php echo JText::_('INSTL_FTP_USER_DESC'); ?>
+										</em>
+									</td>	
 								</tr>
 								<tr>
 									<td>
@@ -128,6 +114,11 @@ JHtml::_('behavior.formvalidation');
 									</td>
 									<td>
 										<?php echo $this->form->getInput('ftp_pass'); ?>
+									</td>
+									<td>
+										<em>
+										<?php echo JText::_('INSTL_FTP_PASSWORD_DESC'); ?>
+										</em>
 									</td>
 								</tr>
 								<tr id="rootPath">
@@ -140,18 +131,18 @@ JHtml::_('behavior.formvalidation');
 								</tr>
 							</table>
 
-							<input type="button" id="findbutton" class="button" value="<?php echo JText::_('AUTOFIND_FTP_PATH'); ?>" onclick="Install.detectFtpRoot(this);" />
-							<input type="button" id="verifybutton" class="button" value="<?php echo JText::_('VERIFY_FTP_SETTINGS'); ?>" onclick="Install.verifyFtpSettings(this);" />
+							<input type="button" id="findbutton" class="button" value="<?php echo JText::_('INSTL_AUTOFIND_FTP_PATH'); ?>" onclick="Install.detectFtpRoot(this);" />
+							<input type="button" id="verifybutton" class="button" value="<?php echo JText::_('INSTL_VERIFY_FTP_SETTINGS'); ?>" onclick="Install.verifyFtpSettings(this);" />
 							<br /><br />
 						</div>
 
-						<h3 class="title-smenu moofx-toggler" title="<?php echo JText::_('Advanced'); ?>">
-							<?php echo JText::_('ADVANCED_SETTINGS'); ?>
+						<h3 class="title-smenu moofx-toggler" title="<?php echo JText::_('INSTL_ADVANCED_SETTINGS'); ?>">
+							<?php echo JText::_('INSTL_ADVANCED_SETTINGS'); ?>
 						</h3>
 						<div class="section-smenu moofx-slider">
 							<table class="content2">
 								<tr id="host">
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_host'); ?>
 									</td>
 									<td>
@@ -159,7 +150,7 @@ JHtml::_('behavior.formvalidation');
 									</td>
 								</tr>
 								<tr id="port">
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_port'); ?>
 									</td>
 									<td>
@@ -167,7 +158,7 @@ JHtml::_('behavior.formvalidation');
 									</td>
 								</tr>
 								<tr>
-									<td width="100">
+									<td>
 										<?php echo $this->form->getLabel('ftp_save'); ?>
 									</td>
 									<td>
@@ -194,10 +185,8 @@ JHtml::_('behavior.formvalidation');
 			</div>
 		</div>
 	</div>
-</div>
-
-<div class="clr"></div>
-
 	<input type="hidden" name="task" value="" />
 	<?php echo JHtml::_('form.token'); ?>
+</div>
+<div class="clr"></div>
 </form>

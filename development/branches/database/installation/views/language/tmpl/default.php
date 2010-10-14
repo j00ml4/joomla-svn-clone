@@ -12,17 +12,11 @@ defined('_JEXEC') or die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
 // Load the JavaScript behaviors.
+JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+JHtml::_('script', 'installation/template/js/installation.js', true, false, false, false);
 ?>
-
-<script language="JavaScript" type="text/javascript">
-<!--
-	function validateForm(frm, task) {
-		Joomla.submitform(task);
-	}
-// -->
-</script>
 
 <div id="stepbar">
 	<div class="t">
@@ -41,7 +35,15 @@ JHtml::_('behavior.formvalidation');
 	</div>
 </div>
 
-<form action="index.php" method="post" name="adminForm" class="form-validate">
+<div id="warning">
+	<noscript>
+		<div id="javascript-warning">
+			<?php echo JText::_('INSTL_WARNJAVASCRIPT'); ?>
+		</div>
+	</noscript>
+</div>
+
+<form action="index.php" method="post" id="adminForm" class="form-validate">
 	<div id="right">
 		<div id="rightpad">
 			<div id="step">
@@ -53,12 +55,12 @@ JHtml::_('behavior.formvalidation');
 				<div class="m">
 					<div class="far-right">
 					<?php if ($this->document->direction == 'ltr') : ?>
-						<div class="button1-left"><div class="next"><a onclick="validateForm(adminForm, 'setup.setlanguage');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+						<div class="button1-left"><div class="next"><a onclick="validateForm(document.getElementById('adminForm'), 'setup.setlanguage');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 					<?php elseif ($this->document->direction == 'rtl') : ?>
-						<div class="button1-right"><div class="prev"><a onclick="validateForm(adminForm, 'setup.setlanguage');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+						<div class="button1-right"><div class="prev"><a onclick="validateForm(document.getElementById('adminForm'), 'setup.setlanguage');" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 					<?php endif; ?>
 					</div>
-					<span class="step"><?php echo JText::_('Instl_Language_Title'); ?></span>
+					<span class="step"><?php echo JText::_('INSTL_LANGUAGE_TITLE'); ?></span>
 				</div>
 				<div class="b">
 					<div class="b">
@@ -73,9 +75,9 @@ JHtml::_('behavior.formvalidation');
 					</div>
 				</div>
 				<div class="m">
-					<h2><?php echo JText::_('Instl_Select_Language_Title'); ?></h2>
+					<h2><?php echo JText::_('INSTL_SELECT_LANGUAGE_TITLE'); ?></h2>
 					<div class="install-text">
-						<?php echo JText::_('Instl_Select_Language_Desc'); ?>
+						<?php echo JText::_('INSTL_SELECT_LANGUAGE_DESC'); ?>
 					</div>
 					<div class="install-body">
 						<div class="t">
@@ -105,9 +107,8 @@ JHtml::_('behavior.formvalidation');
 				</div>
 			</div>
 		</div>
+		<input type="hidden" name="task" value="" />
+		<?php echo JHtml::_('form.token'); ?>
 	</div>
 	<div class="clr"></div>
-
-	<input type="hidden" name="task" value="" />
-	<?php echo JHtml::_('form.token'); ?>
 </form>
