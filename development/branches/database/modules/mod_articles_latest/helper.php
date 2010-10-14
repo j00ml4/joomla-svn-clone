@@ -17,6 +17,9 @@ abstract class modArticlesLatestHelper
 {
 	public static function getList(&$params)
 	{
+		// Get the dbo
+		$db = JFactory::getDbo();
+
 		// Get an instance of the generic articles model
 		$model = JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
 
@@ -35,36 +38,50 @@ abstract class modArticlesLatestHelper
 		$model->setState('filter.access', $access);
 
 		// Category filter
-		if ($catid = $params->get('catid')) {
-			$model->setState('filter.category_id', $catid);
-		}
+		$model->setState('filter.category_id', $params->get('catid', array()));
 
 		// User filter
 		$userId = JFactory::getUser()->get('id');
 		switch ($params->get('user_id'))
 		{
 			case 'by_me':
-				$model->setState('filter.author_id', $userId);
+				$model->setState('filter.author_id', (int) $userId);
 				break;
 			case 'not_me':
 				$model->setState('filter.author_id', $userId);
 				$model->setState('filter.author_id.include', false);
+				break;
+
+			case 0:
+				break;
+
+			default:
+				$model->setState('filter.author_id', (int) $params->get('user_id'));
+				break;
+		}
+
+		//  Featured switch
+		switch ($params->get('show_featured'))
+		{
+			case 1:
+				$model->setState('filter.featured', 'only');
+				break;
+			case 0:
+				$model->setState('filter.featured', 'hide');
+				break;
+			default:
+				$model->setState('filter.featured', 'show');
 				break;
 		}
 
 		// Set ordering
 		$order_map = array(
 			'm_dsc' => 'a.modified DESC, a.created',
-			/*
-			 * TODO below line does not work because it's running through JDatabase::_getEscaped
-			 * which adds unnecessary quotes before and after the null date.
-			 * This should be uncommented when it's fixed.
-			 */
-			//'mc_dsc' => 'CASE WHEN (a.modified = \'0000-00-00 00:00:00\') THEN a.created ELSE a.modified END',
-			'c_dsc' => 'a.created'
+			'mc_dsc' => 'CASE WHEN (a.modified = '.$db->quote($db->getNullDate()).') THEN a.created ELSE a.modified END',
+			'c_dsc' => 'a.created',
+			'p_dsc' => 'a.publish_up',
 		);
-
-		$ordering = JArrayHelper::getValue($order_map, $params->get('ordering'), 'a.created');
+		$ordering = JArrayHelper::getValue($order_map, $params->get('ordering'), 'a.publish_up');
 		$dir = 'DESC';
 
 		$model->setState('list.ordering', $ordering);

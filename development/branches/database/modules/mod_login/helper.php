@@ -14,13 +14,17 @@ class modLoginHelper
 {
 	static function getReturnURL($params, $type)
 	{
+		$url = null;
 		if ($itemid =  $params->get($type))
 		{
-			$menu = &JSite::getMenu();
-			$item = $menu->getItem($itemid);
-			$url = JRoute::_($item->link.'&Itemid='.$itemid, false);
+			$app	= JFactory::getApplication();
+			$menu	= $app->getMenu();
+			$item	= $menu->getItem($itemid);
+			if ($item) {
+				$url = JRoute::_($item->link.'&Itemid='.$itemid, false);
+			}
 		}
-		else
+		if (!$url)
 		{
 			// stay on the same page
 			$uri = JFactory::getURI();
@@ -32,7 +36,7 @@ class modLoginHelper
 
 	static function getType()
 	{
-		$user = & JFactory::getUser();
+		$user = JFactory::getUser();
 		return (!$user->get('guest')) ? 'logout' : 'login';
 	}
 }

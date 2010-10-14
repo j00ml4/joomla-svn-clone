@@ -26,6 +26,7 @@
 		<language tag="en-GB">en-GB.mod_articles_category.ini
 		</language>
 	</languages>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_ARTICLES_CATEGORY" />
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
@@ -48,10 +49,8 @@
 					label="MOD_ARTICLES_CATEGORY_FIELD_SHOWONARTICLEPAGE_LABEL"
 					description="MOD_ARTICLES_CATEGORY_FIELD_SHOWONARTICLEPAGE_DESC"
 				>
-					<option value="1">MOD_ARTICLES_CATEGORY_OPTION_SHOW_VALUE
-					</option>
-					<option value="0">MOD_ARTICLES_CATEGORY_OPTION_HIDE_VALUE
-					</option>
+					<option value="1">JSHOW</option>
+					<option value="0">JHIDE</option>
 				</field>
 			</fieldset>
 
@@ -62,9 +61,9 @@
 					label="MOD_ARTICLES_CATEGORY_FIELD_SHOWFEATURED_LABEL"
 					description="MOD_ARTICLES_CATEGORY_FIELD_SHOWFEATURED_DESC"
 				>
-					<option value="show">MOD_ARTICLES_CATEGORY_OPTION_SHOWFEATURED_VALUE
+					<option value="show">JSHOW
 					</option>
-					<option value="hide">MOD_ARTICLES_CATEGORY_OPTION_HIDEFEATURED_VALUE
+					<option value="hide">JHIDE
 					</option>
 					<option value="only">MOD_ARTICLES_CATEGORY_OPTION_ONLYFEATURED_VALUE
 					</option>
@@ -88,8 +87,8 @@
 				</field>
 
 				<field name="catid" type="category" extension="com_content"
-					default="" multiple="true" size="5"
-					label="MOD_ARTICLES_CATEGORY_FIELD_CATEGORY_LABEL"
+					multiple="true" size="5"
+					label="JCATEGORY"
 					description="MOD_ARTICLES_CATEGORY_FIELD_CATEGORY_DESC"
 				>
 					<option value="">JOPTION_ALL_CATEGORIES</option>
@@ -123,7 +122,7 @@
 					</option>
 				</field>
 
-				<field name="created_by" type="sql" default=""
+				<field name="created_by" type="sql"
 					multiple="true" size="5"
 					label="MOD_ARTICLES_CATEGORY_FIELD_AUTHOR_LABEL"
 					description="MOD_ARTICLES_CATEGORY_FIELD_AUTHOR_DESC"
@@ -146,7 +145,7 @@
 					</option>
 				</field>
 
-				<field name="created_by_alias" type="sql" default=""
+				<field name="created_by_alias" type="sql"
 					multiple="true" size="5"
 					label="MOD_ARTICLES_CATEGORY_FIELD_AUTHORALIAS_LABEL"
 					description="MOD_ARTICLES_CATEGORY_FIELD_AUTHORALIAS_DESC"
@@ -160,7 +159,7 @@
 				<field name="filteringspacer4" type="spacer" hr="true" />
 
 				<field name="excluded_articles" type="textarea"
-					cols="10" rows="3" default=""
+					cols="10" rows="3"
 					label="MOD_ARTICLES_CATEGORY_FIELD_EXCLUDEDARTICLES_LABEL"
 					description="MOD_ARTICLES_CATEGORY_FIELD_EXCLUDEDARTICLES_DESC" />
 
@@ -193,14 +192,18 @@
 				</field>
 
 				<field name="start_date_range" type="calendar"
-					default="" format="%Y-%m-%d %H:%M:%S"
+					format="%Y-%m-%d %H:%M:%S"
 					label="MOD_ARTICLES_CATEGORY_FIELD_STARTDATE_LABEL"
-					description="MOD_ARTICLES_CATEGORY_FIELD_STARTDATE_DESC" />
+					description="MOD_ARTICLES_CATEGORY_FIELD_STARTDATE_DESC"
+					size="20"
+					filter="user_utc" />
 
 				<field name="end_date_range" type="calendar"
-					default="" format="%Y-%m-%d %H:%M:%S"
+					format="%Y-%m-%d %H:%M:%S"
 					label="MOD_ARTICLES_CATEGORY_FIELD_ENDDATE_LABEL"
-					description="MOD_ARTICLES_CATEGORY_FIELD_ENDDATE_DESC" />
+					description="MOD_ARTICLES_CATEGORY_FIELD_ENDDATE_DESC"
+					size="20"
+					filter="user_utc" />
 
 				<field name="relative_date" type="text" default="30"
 					label="MOD_ARTICLES_CATEGORY_FIELD_RELATIVEDATE_LABEL"
@@ -219,11 +222,11 @@
 					</option>
 					<option value="a.hits">MOD_ARTICLES_CATEGORY_OPTION_HITS_VALUE
 					</option>
-					<option value="a.title">MOD_ARTICLES_CATEGORY_OPTION_TITLE_VALUE
+					<option value="a.title">JGLOBAL_TITLE
 					</option>
 					<option value="a.id">MOD_ARTICLES_CATEGORY_OPTION_ID_VALUE
 					</option>
-					<option value="a.alias">MOD_ARTICLES_CATEGORY_OPTION_ALIAS_VALUE
+					<option value="a.alias">JFIELD_ALIAS_LABEL
 					</option>
 				</field>
 
@@ -247,7 +250,7 @@
 					label="MOD_ARTICLES_CATEGORY_FIELD_ARTICLEGROUPING_LABEL"
 					description="MOD_ARTICLES_CATEGORY_FIELD_ARTICLEGROUPING_DESC"
 				>
-					<option value="none">MOD_ARTICLES_CATEGORY_OPTION_NONE_VALUE
+					<option value="none">JNONE
 					</option>
 					<option value="year">MOD_ARTICLES_CATEGORY_OPTION_YEAR_VALUE
 					</option>
@@ -255,7 +258,7 @@
 					</option>
 					<option value="author_name">JAUTHOR
 					</option>
-					<option value="category_title">MOD_ARTICLES_CATEGORY_OPTION_CATEGORY_VALUE
+					<option value="category_title">JCATEGORY
 					</option>
 				</field>
 
@@ -295,9 +298,9 @@
 					label="JDATE"
 					description="MOD_ARTICLES_CATEGORY_FIELD_SHOWDATE_DESC"
 				>
-					<option value="1">MOD_ARTICLES_CATEGORY_OPTION_SHOW_VALUE
+					<option value="1">JSHOW
 					</option>
-					<option value="0">MOD_ARTICLES_CATEGORY_OPTION_HIDE_VALUE
+					<option value="0">JHIDE
 					</option>
 				</field>
 
@@ -319,12 +322,12 @@
 					description="MOD_ARTICLES_CATEGORY_FIELD_DATEFIELDFORMAT_DESC" />
 
 				<field name="show_category" type="radio" default="0"
-					label="MOD_ARTICLES_CATEGORY_FIELD_SHOWCATEGORY_LABEL"
+					label="JCATEGORY"
 					description="MOD_ARTICLES_CATEGORY_FIELD_SHOWCATEGORY_DESC"
 				>
-					<option value="1">MOD_ARTICLES_CATEGORY_OPTION_SHOW_VALUE
+					<option value="1">JSHOW
 					</option>
-					<option value="0">MOD_ARTICLES_CATEGORY_OPTION_HIDE_VALUE
+					<option value="0">JHIDE
 					</option>
 				</field>
 
@@ -332,9 +335,9 @@
 					label="MOD_ARTICLES_CATEGORY_FIELD_SHOWHITS_LABEL"
 					description="MOD_ARTICLES_CATEGORY_FIELD_SHOWHITS_DESC"
 				>
-					<option value="1">MOD_ARTICLES_CATEGORY_OPTION_SHOW_VALUE
+					<option value="1">JSHOW
 					</option>
-					<option value="0">MOD_ARTICLES_CATEGORY_OPTION_HIDE_VALUE
+					<option value="0">JHIDE
 					</option>
 				</field>
 
@@ -342,9 +345,9 @@
 					label="JAUTHOR"
 					description="MOD_ARTICLES_CATEGORY_FIELD_SHOWAUTHOR_DESC"
 				>
-					<option value="1">MOD_ARTICLES_CATEGORY_OPTION_SHOW_VALUE
+					<option value="1">JSHOW
 					</option>
-					<option value="0">MOD_ARTICLES_CATEGORY_OPTION_HIDE_VALUE
+					<option value="0">JHIDE
 					</option>
 				</field>
 
@@ -352,9 +355,9 @@
 					label="MOD_ARTICLES_CATEGORY_FIELD_SHOWINTROTEXT_LABEL"
 					description="MOD_ARTICLES_CATEGORY_FIELD_SHOWINTROTEXT_DESC"
 				>
-					<option value="1">MOD_ARTICLES_CATEGORY_OPTION_SHOW_VALUE
+					<option value="1">JSHOW
 					</option>
-					<option value="0">MOD_ARTICLES_CATEGORY_OPTION_HIDE_VALUE
+					<option value="0">JHIDE
 					</option>
 				</field>
 
@@ -367,7 +370,7 @@
 				<field name="layout" type="modulelayout"
 					label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
 
-				<field name="moduleclass_sfx" type="text" default=""
+				<field name="moduleclass_sfx" type="text"
 					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
 					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 

@@ -18,27 +18,28 @@
 			module="mod_login">mod_login.php</filename>
 		<folder>tmpl</folder>
 		<filename>helper.php</filename>
-		<filename>index.php</filename>
-		<filename>mod_login.xml</filename>
+		<filename>index.html</filename>		<filename>mod_login.xml</filename>
 	</files>
 	<languages>
 		<language
 			tag="en-GB">en-GB.mod_login.ini</language>
 	</languages>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_LOGIN" />
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
 				<field
 					name="pretext"
 					type="textarea"
+					filter="safehtml"
 					cols="30"
 					rows="5"
-					default=""
 					label="MOD_LOGIN_FIELD_PRE_TEXT_LABEL"
 					description="MOD_LOGIN_FIELD_PRE_TEXT_DESC" />
 				<field
 					name="posttext"
 					type="textarea"
+					filter="safehtml"
 					cols="30"
 					rows="5"
 					label="MOD_LOGIN_FIELD_POST_TEXT_LABEL"
@@ -46,17 +47,21 @@
 				<field
 					name="login"
 					type="menuitem"
-					default=""
 					disable="separator"
 					label="MOD_LOGIN_FIELD_LOGIN_REDIRECTURL_LABEL"
-					description="MOD_LOGIN_FIELD_LOGIN_REDIRECTURL_DESC" />
+					description="MOD_LOGIN_FIELD_LOGIN_REDIRECTURL_DESC" >
+					<option 
+						value="">JDEFAULT</option>
+				</field>
 				<field
 					name="logout"
 					type="menuitem"
-					default=""
 					disable="separator"
 					label="MOD_LOGIN_FIELD_LOGOUT_REDIRECTURL_LABEL"
-					description="MOD_LOGIN_FIELD_LOGOUT_REDIRECTURL_DESC" />
+					description="MOD_LOGIN_FIELD_LOGOUT_REDIRECTURL_DESC" >
+					<option 
+						value="">JDEFAULT</option>
+				</field>
 				<field
 					name="greeting"
 					type="radio"
@@ -101,7 +106,6 @@
 				<field
 					name="moduleclass_sfx"
 					type="text"
-					default=""
 					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
 					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 				<field

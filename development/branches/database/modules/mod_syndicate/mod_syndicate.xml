@@ -18,13 +18,13 @@
 			module="mod_syndicate">mod_syndicate.php</filename>
 		<folder>tmpl</folder>
 		<filename>helper.php</filename>
-		<filename>index.php</filename>
-		<filename>mod_syndicate.xml</filename>
+		<filename>index.html</filename>		<filename>mod_syndicate.xml</filename>
 	</files>
 	<languages>
 		<language
 			tag="en-GB">en-GB.mod_syndicate.ini</language>
 	</languages>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_SYNDICATION_FEEDS" />
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
@@ -56,7 +56,6 @@
 				<field
 					name="moduleclass_sfx"
 					type="text"
-					default=""
 					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
 					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 				<field

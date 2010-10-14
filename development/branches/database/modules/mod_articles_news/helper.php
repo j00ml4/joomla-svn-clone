@@ -17,7 +17,8 @@ abstract class modArticlesNewsHelper
 {
 	public static function getList(&$params)
 	{
-		$app	= &JFactory::getApplication();
+		$app	= JFactory::getApplication();
+		$db		= JFactory::getDbo();
 
 		// Get an instance of the generic articles model
 		$model = JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
@@ -42,28 +43,18 @@ abstract class modArticlesNewsHelper
 		$model->setState('filter.access', $access);
 
 		// Category filter
-		if ($catid = $params->get('catid')) {
-			$model->setState('filter.category_id', $catid);
-		}
+		$model->setState('filter.category_id', $params->get('catid', array()));
 
 		// Set ordering
-		$order_map = array(
-			'm_dsc' => 'a.modified DESC, a.created',
-			/*
-			 * TODO below line does not work because it's running through JDatabase::_getEscaped
-			 * which adds unnecessary quotes before and after the null date.
-			 * This should be uncommented when it's fixed.
-			 */
-			//'mc_dsc' => 'CASE WHEN (a.modified = \'0000-00-00 00:00:00\') THEN a.created ELSE a.modified END',
-			'c_dsc' => 'a.created'
-		);
-
-		$ordering = JArrayHelper::getValue($order_map, $params->get('ordering'), 'a.created');
-		$dir = 'DESC';
-
+		$ordering = $params->get('ordering', 'a.publish_up');
 		$model->setState('list.ordering', $ordering);
-		$model->setState('list.direction', $dir);
+		if (trim($ordering) == 'rand()') {
+			$model->setState('list.direction', '');			
+		} else {
+			$model->setState('list.direction', 'DESC');
+		}
 
+		//	Retrieve Content
 		$items = $model->getItems();
 
 		foreach ($items as &$item) {
@@ -84,19 +75,18 @@ abstract class modArticlesNewsHelper
 
 			$item->introtext = JHtml::_('content.prepare', $item->introtext);
 
-
 			//new
 			if (!$params->get('image')) {
 				$item->introtext = preg_replace('/<img[^>]*>/', '', $item->introtext);
 			}
 
-			$results = $app->triggerEvent('onAfterDisplayTitle', array (&$item, &$params, 1));
+			$results = $app->triggerEvent('onContentAfterDisplay', array('com_content.article', &$item, &$params, 1));
 			$item->afterDisplayTitle = trim(implode("\n", $results));
 
-			$results = $app->triggerEvent('onBeforeDisplayContent', array (&$item, &$params, 1));
+			$results = $app->triggerEvent('onContentBeforeDisplay', array('com_content.article', &$item, &$params, 1));
 			$item->beforeDisplayContent = trim(implode("\n", $results));
 		}
-//echo "<pre>";print_r($item);echo "</pre>";
+
 		return $items;
 	}
 }

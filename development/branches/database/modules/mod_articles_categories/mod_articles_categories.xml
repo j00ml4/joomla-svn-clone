@@ -21,6 +21,7 @@
 	<languages>
 		<language tag="en-GB">en-GB.mod_articles_categories.ini</language>
 	</languages>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_ARTICLES_CATEGORIES" />
 	<config>
 	<fields name="params">
 		<fieldset name="basic">
@@ -53,28 +54,58 @@
 				<option
 					 value="1">JYES</option>
 			</field>
-			<field
-				name="maxlevel"
-				type="text"
-				default="0"
-				first="0"
-				last="100"
-				label="MOD_ARTICLES_CATEGORIES_FIELD_MAXLEVEL_LABEL"
-				description="MOD_ARTICLES_CATEGORIES_FIELD_MAXLEVEL_DESC"/>
-			<field
-				name="count"
-				type="text"
-				default="0"
-				first="0"
-				last="100"
+			<field name="count" type="list"
 				label="MOD_ARTICLES_CATEGORIES_FIELD_COUNT_LABEL"
-				description="MOD_ARTICLES_CATEGORIES_FIELD_COUNT_DESC"/>
+				description="MOD_ARTICLES_CATEGORIES_FIELD_COUNT_DESC"
+				default="0"
+			>
+				<option value="0">JALL</option>
+				<option value="1">J1</option>
+				<option value="2">J2</option>
+				<option value="3">J3</option>
+				<option value="4">J4</option>
+				<option value="5">J5</option>
+				<option value="6">J6</option>
+				<option value="7">J7</option>
+				<option value="8">J8</option>
+				<option value="9">J9</option>
+				<option value="10">J10</option>
+		</field>
+			
+			<field name="maxlevel" type="list"
+				label="MOD_ARTICLES_CATEGORIES_FIELD_MAXLEVEL_LABEL"
+				description="MOD_ARTICLES_CATEGORIES_FIELD_MAXLEVEL_DESC"
+				default="0"
+			>
+				<option value="0">JALL</option>
+				<option value="1">J1</option>
+				<option value="2">J2</option>
+				<option value="3">J3</option>
+				<option value="4">J4</option>
+				<option value="5">J5</option>
+				<option value="6">J6</option>
+				<option value="7">J7</option>
+				<option value="8">J8</option>
+				<option value="9">J9</option>
+				<option value="10">J10</option>
+		</field>
+				
 		</fieldset>
 		<fieldset name="advanced">
 			<field name="layout" type="modulelayout"
 				label="JFIELD_ALT_LAYOUT_LABEL" description="JFIELD_ALT_MODULE_LAYOUT_DESC" />
+			<field name="item_heading" type="list" default="4"
+				label="MOD_ARTICLES_CATEGORIES_TITLE_HEADING_LABEL"
+				description="MOD_ARTICLES_CATEGORIES_TITLE_HEADING_DESC"
+			>
+				<option value="1">JH1</option>
+				<option value="2">JH2</option>
+				<option value="3">JH3</option>
+				<option value="4">JH4</option>
+				<option value="5">JH5</option>
+			</field>
 
-			<field name="moduleclass_sfx" type="text" default=""
+			<field name="moduleclass_sfx" type="text"
 				label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
 				description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
 
