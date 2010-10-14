@@ -85,7 +85,10 @@ class JAccess
 		$query	= $db->getQuery(true);
 		$query->select($recursive ? 'b.rules' : 'a.rules');
 		$query->from('#__assets AS a');
-		$query->group($recursive ? 'b.id, b.rules, b.lft' : 'a.id, a.rules, a.lft');
+    if($db->name == 'mssql')
+		  $query->group($recursive ? 'b.id, b.rules, b.lft' : 'a.id, a.rules, a.lft');
+    elseif($db->name == 'mysql')
+      $query->group($recursive ? 'b.id' : 'a.id');
 
 		// If the asset identifier is numeric assume it is a primary key, else lookup by name.
 		if (is_numeric($asset)) {
