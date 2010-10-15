@@ -6,15 +6,15 @@ CREATE TABLE jos_assets (
   level int NOT NULL,
   name varchar(50) NOT NULL,
   title varchar(100) NOT NULL ,
-  rules varchar(5120) NOT NULL,
+  rules varchar(MAX) NOT NULL,
   PRIMARY KEY (id)
 );
 
-CREATE INDEX [idx_assets_lft_rgt] ON jos_assets (lft,rgt)
-CREATE INDEX idx_parent_id ON jos_assets (parent_id)
-CREATE UNIQUE INDEX idx_asset_name On jos_assets (name)
+CREATE INDEX [idx_assets_lft_rgt] ON jos_assets (lft,rgt);
+CREATE INDEX idx_parent_id ON jos_assets (parent_id);
+CREATE UNIQUE INDEX idx_asset_name On jos_assets (name);
 
-SET IDENTITY_INSERT jos_assets  ON 
+SET IDENTITY_INSERT jos_assets  ON;
 
 INSERT INTO jos_assets (id, parent_id, lft, rgt, level, name, title, rules)
 SELECT 1,0,0,61,0,'root.1','Root Asset','{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'
@@ -79,7 +79,7 @@ SELECT 30, 19, 42, 43, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.c
 UNION ALL
 SELECT 31, 25, 56, 57, 2, 'com_weblinks.category.6', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 
-SET IDENTITY_INSERT jos_assets  OFF 
+SET IDENTITY_INSERT jos_assets  OFF;
 
 
 CREATE TABLE jos_banners (
@@ -95,7 +95,7 @@ CREATE TABLE jos_banners (
   state smallint NOT NULL DEFAULT '0',
   catid INTEGER NOT NULL DEFAULT 0,
   description TEXT NOT NULL,
-  custombannercode VARCHAR(2048) NOT NULL,
+  custombannercode VARCHAR(MAX) NOT NULL,
   sticky smallint NOT NULL DEFAULT 0,
   ordering INTEGER NOT NULL DEFAULT 0,
   metakey TEXT NOT NULL,
@@ -115,11 +115,11 @@ CREATE TABLE jos_banners (
   PRIMARY KEY  (id)  
 );
 
- CREATE INDEX idx_state ON jos_banners (state)
- CREATE INDEX idx_own_prefix ON  jos_banners (own_prefix)
- CREATE INDEX idx_metakey_prefix ON jos_banners (metakey_prefix)
- CREATE INDEX idx_banner_catid ON jos_banners (catid)
- CREATE INDEX idx_language ON jos_banners (language)
+ CREATE INDEX idx_state ON jos_banners (state);
+ CREATE INDEX idx_own_prefix ON  jos_banners (own_prefix);
+ CREATE INDEX idx_metakey_prefix ON jos_banners (metakey_prefix);
+ CREATE INDEX idx_banner_catid ON jos_banners (catid);
+ CREATE INDEX idx_language ON jos_banners (language);
 
 
 CREATE TABLE jos_banner_clients (
@@ -140,8 +140,8 @@ CREATE TABLE jos_banner_clients (
   PRIMARY KEY  (id)
 );
 
-CREATE INDEX idx_own_prefix ON jos_banner_clients (own_prefix)
-CREATE INDEX idx_metakey_prefix ON jos_banner_clients (metakey_prefix)
+CREATE INDEX idx_own_prefix ON jos_banner_clients (own_prefix);
+CREATE INDEX idx_metakey_prefix ON jos_banner_clients (metakey_prefix);
 
 
 
@@ -153,9 +153,9 @@ CREATE TABLE  jos_banner_tracks (
   PRIMARY KEY (track_date, track_type, banner_id)
 );
 
- CREATE INDEX idx_track_date ON jos_banner_tracks (track_date)
- CREATE INDEX idx_track_type ON jos_banner_tracks (track_type)
- CREATE INDEX idx_banner_id ON jos_banner_tracks (banner_id)
+ CREATE INDEX idx_track_date ON jos_banner_tracks (track_date);
+ CREATE INDEX idx_track_type ON jos_banner_tracks (track_type);
+ CREATE INDEX idx_banner_id ON jos_banner_tracks (banner_id);
 
 
 CREATE TABLE jos_categories (
@@ -170,15 +170,15 @@ CREATE TABLE jos_categories (
   title varchar(255) NOT NULL,
   alias varchar(255) NOT NULL default '',
   note varchar(255) NOT NULL default '',
-  description varchar(5120) NOT NULL default '',
+  description varchar(MAX) NOT NULL default '',
   published smallint NOT NULL default '0',
   checked_out int NOT NULL default '0',
   checked_out_time datetime NOT NULL default '1900-01-01 00:00:00',
   access smallint NOT NULL default '0',
-  params varchar(2048) NOT NULL default '',
-  metadesc varchar(1024) NOT NULL,
-  metakey varchar(1024) NOT NULL,
-  metadata varchar(2048) NOT NULL,
+  params varchar(MAX) NOT NULL default '',
+  metadesc varchar(MAX) NOT NULL,
+  metakey varchar(MAX) NOT NULL,
+  metadata varchar(MAX) NOT NULL,
   created_user_id int NOT NULL default '0',
   created_time datetime NOT NULL DEFAULT '1900-01-01 00:00:00',
   modified_user_id int NOT NULL default '0',
@@ -188,15 +188,15 @@ CREATE TABLE jos_categories (
   PRIMARY KEY  (id)
 ) ;
 
- CREATE INDEX cat_idx ON jos_categories (extension,published,access)
-  CREATE INDEX idx_access ON jos_categories (access)
-  CREATE INDEX idx_checkout ON jos_categories (checked_out)
-  CREATE INDEX idx_path ON jos_categories  (path)
-  CREATE INDEX idx_left_right ON jos_categories (lft,rgt)
-  CREATE INDEX idx_alias ON jos_categories (alias)
-  CREATE INDEX idx_language ON jos_categories (language)
+ CREATE INDEX cat_idx ON jos_categories (extension,published,access);
+  CREATE INDEX idx_access ON jos_categories (access);
+  CREATE INDEX idx_checkout ON jos_categories (checked_out);
+  CREATE INDEX idx_path ON jos_categories  (path);
+  CREATE INDEX idx_left_right ON jos_categories (lft,rgt);
+  CREATE INDEX idx_alias ON jos_categories (alias);
+  CREATE INDEX idx_language ON jos_categories (language);
 
-SET IDENTITY_INSERT jos_categories  ON 
+SET IDENTITY_INSERT jos_categories  ON;
 
 INSERT INTO jos_categories (id, asset_id, parent_id, lft, rgt,level, path, extension, title, alias, note, description, published, checked_out, checked_out_time, access, params, metadesc, metakey, metadata, created_user_id,created_time, modified_user_id, modified_time, hits,language)
 SELECT 1, 0, 0, 0, 11, 0, '', 'system', 'ROOT', 'root', '', '', 1, 0, '1900-01-01 00:00:00', 1, '{}', '', '', '', 0, '2009-10-18 16:07:09', 0, '1900-01-01 00:00:00', 0, '*'
@@ -211,7 +211,7 @@ SELECT 5, 30, 1, 7, 8, 1, 'uncategorised', 'com_newsfeeds', 'Uncategorised', 'un
 UNION ALL
 SELECT 6, 31, 1, 9, 10, 1, 'uncategorised', 'com_weblinks', 'Uncategorised', 'uncategorised', '', '', 1, 0, '1900-01-01 00:00:00', 1, '{"target":"","image":""}', '', '', '{"page_title":"","author":"","robots":""}', 42, '2010-06-28 13:28:33', 0, '1900-01-01 00:00:00', 0, '*'
 
-SET IDENTITY_INSERT jos_categories  OFF 
+SET IDENTITY_INSERT jos_categories  OFF;
 
 CREATE TABLE jos_contact_details (
   id integer NOT NULL identity(1,1),
@@ -259,14 +259,14 @@ CREATE TABLE jos_contact_details (
   PRIMARY KEY  (id)
 ) ;
 
-  CREATE INDEX idx_access ON jos_contact_details (access)
-  CREATE INDEX idx_checkout ON jos_contact_details (checked_out)
-  CREATE INDEX idx_state ON jos_contact_details (published)
-  CREATE INDEX idx_catid ON jos_contact_details (catid)
-  CREATE INDEX idx_createdby ON jos_contact_details (created_by)
-  CREATE INDEX idx_featured_catid ON jos_contact_details (featured,catid)
-  CREATE INDEX idx_language ON jos_contact_details (language)
-  CREATE INDEX idx_xreference ON jos_contact_details (xreference)
+  CREATE INDEX idx_access ON jos_contact_details (access);
+  CREATE INDEX idx_checkout ON jos_contact_details (checked_out);
+  CREATE INDEX idx_state ON jos_contact_details (published);
+  CREATE INDEX idx_catid ON jos_contact_details (catid);
+  CREATE INDEX idx_createdby ON jos_contact_details (created_by);
+  CREATE INDEX idx_featured_catid ON jos_contact_details (featured,catid);
+  CREATE INDEX idx_language ON jos_contact_details (language);
+  CREATE INDEX idx_xreference ON jos_contact_details (xreference);
 
 
 
@@ -293,7 +293,7 @@ CREATE TABLE jos_content (
   publish_down datetime NOT NULL default '1900-01-01 00:00:00',
   images text NOT NULL,
   urls text NOT NULL,
-  attribs varchar(5120) NOT NULL,
+  attribs varchar(MAX) NOT NULL,
   version integer  NOT NULL default '1',
   parentid integer  NOT NULL default '0',
   ordering integer NOT NULL default '0',
@@ -308,14 +308,14 @@ CREATE TABLE jos_content (
   PRIMARY KEY  (id)
 );
 
-CREATE INDEX idx_access ON jos_content (access)
-  CREATE INDEX idx_checkout ON jos_content (checked_out)
-  CREATE INDEX idx_state ON jos_content (state)
-  CREATE INDEX idx_catid ON jos_content (catid)
-  CREATE INDEX idx_createdby ON jos_content (created_by)
-  CREATE INDEX idx_featured_catid ON jos_content (featured,catid)
-  CREATE INDEX idx_language ON jos_content (language)
-  CREATE INDEX idx_xreference ON jos_content (xreference)
+CREATE INDEX idx_access ON jos_content (access);
+  CREATE INDEX idx_checkout ON jos_content (checked_out);
+  CREATE INDEX idx_state ON jos_content (state);
+  CREATE INDEX idx_catid ON jos_content (catid);
+  CREATE INDEX idx_createdby ON jos_content (created_by);
+  CREATE INDEX idx_featured_catid ON jos_content (featured,catid);
+  CREATE INDEX idx_language ON jos_content (language);
+  CREATE INDEX idx_xreference ON jos_content (xreference);
 
 
 CREATE TABLE jos_content_frontpage (
@@ -363,11 +363,11 @@ CREATE TABLE jos_extensions (
   PRIMARY KEY (extension_id)
 ) ;
 
-CREATE INDEX element_clientid ON jos_extensions (element, client_id)
- CREATE INDEX element_folder_clientid ON jos_extensions (element, folder, client_id)
- CREATE INDEX extension ON jos_extensions (type,element,folder,client_id)
+CREATE INDEX element_clientid ON jos_extensions (element, client_id);
+ CREATE INDEX element_folder_clientid ON jos_extensions (element, folder, client_id);
+ CREATE INDEX extension ON jos_extensions (type,element,folder,client_id);
 
-SET IDENTITY_INSERT jos_extensions  ON 
+SET IDENTITY_INSERT jos_extensions  ON;
 INSERT INTO jos_extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
 SELECT 1, 'com_mailto', 'component', 'com_mailto', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
 UNION ALL
@@ -608,7 +608,7 @@ SELECT 605, 'XXTestLang', 'language', 'xx-XX', '', 0, 1, 1, 0, '', '', '', '', 0
 INSERT INTO jos_extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
 SELECT 700, 'Joomla! CMS', 'file', 'joomla', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
 
-SET IDENTITY_INSERT jos_extensions  OFF 
+SET IDENTITY_INSERT jos_extensions  OFF;
 
 CREATE TABLE jos_languages (
   lang_id int  NOT NULL identity(1,1),
@@ -624,16 +624,16 @@ CREATE TABLE jos_languages (
   PRIMARY KEY  (lang_id)
 );
 
-CREATE UNIQUE INDEX idx_sef ON jos_languages (sef)
+CREATE UNIQUE INDEX idx_sef ON jos_languages (sef);
 
-SET IDENTITY_INSERT jos_languages  ON 
+SET IDENTITY_INSERT jos_languages  ON;
 
 INSERT INTO jos_languages (lang_id,lang_code,title,title_native,sef,image,description,metakey,metadesc,published)
 SELECT 1, 'en-GB', 'English (UK)', 'English (UK)', 'en', 'en', '', '', '', 1
 UNION ALL
 SELECT 3, 'xx-XX', 'xx (Test)', 'xx (Test)', 'xx', 'br', '', '', '', 1
 
-SET IDENTITY_INSERT jos_languages  OFF 
+SET IDENTITY_INSERT jos_languages  OFF;
 
 CREATE TABLE jos_menu (
   id integer NOT NULL identity(1,1),
@@ -642,7 +642,7 @@ CREATE TABLE jos_menu (
   alias varchar(255) NOT NULL,
   note varchar(255) NOT NULL default '',
   path varchar(900) NOT NULL,
-  link varchar(1024) NOT NULL,
+  link varchar(MAX) NOT NULL,
   type varchar(16) NOT NULL,
   published smallint NOT NULL default '0',
   parent_id integer  NOT NULL default '1',
@@ -655,7 +655,7 @@ CREATE TABLE jos_menu (
   access smallint  NOT NULL default '0',
   img varchar(255) NOT NULL,
   template_style_id integer  NOT NULL default '0',
-  params varchar(8000) NOT NULL,
+  params varchar(MAX) NOT NULL,
   lft integer NOT NULL default '0',
   rgt integer NOT NULL default '0',
   home smallint  NOT NULL default '0',
@@ -663,16 +663,16 @@ CREATE TABLE jos_menu (
   PRIMARY KEY  (id)
 );
 
- CREATE INDEX idx_componentid ON jos_menu (component_id,menutype,published,access)
- CREATE INDEX  idx_menutype ON jos_menu (menutype)
- CREATE INDEX  idx_left_right ON jos_menu (lft,rgt)
- CREATE INDEX  idx_alias ON jos_menu (alias)
- CREATE INDEX idx_path ON jos_menu (path)  
- CREATE UNIQUE INDEX idx_alias_parent_id ON jos_menu (alias, parent_id) 
- CREATE INDEX idx_language ON jos_menu (language)  
+ CREATE INDEX idx_componentid ON jos_menu (component_id,menutype,published,access);
+ CREATE INDEX  idx_menutype ON jos_menu (menutype);
+ CREATE INDEX  idx_left_right ON jos_menu (lft,rgt);
+ CREATE INDEX  idx_alias ON jos_menu (alias);
+ CREATE INDEX idx_path ON jos_menu (path);
+ CREATE UNIQUE INDEX idx_alias_parent_id ON jos_menu (alias, parent_id);
+ CREATE INDEX idx_language ON jos_menu (language);
 
 
-SET IDENTITY_INSERT jos_menu  ON 
+SET IDENTITY_INSERT jos_menu  ON;
 
 INSERT INTO jos_menu (id, menutype, title, alias, note, path, link,type, published,parent_id, level, component_id,ordering, checked_out, checked_out_time, browserNav,
   access, img, template_style_id, params, lft, rgt, home, language)
@@ -718,7 +718,7 @@ SELECT 20,'_adminmenu','com_weblinks_categories','Categories','','Weblinks/Categ
 UNION ALL
 SELECT 101, 'mainmenu', 'Home', 'home', '', 'home', 'index.php?option=com_content&view=featured', 'component', 1, 1, 1, 22, 0, 0, '1900-01-01 00:00:00', 0, 1, '', 0, '{"num_leading_articles":"1","num_intro_articles":"3","num_columns":"3","num_links":"0","orderby_pri":"","orderby_sec":"front","order_date":"","multi_column_order":"1","show_pagination":"2","show_pagination_results":"1","show_noauth":"","article-allow_ratings":"","article-allow_comments":"","show_feed_link":"1","feed_summary":"","show_title":"","link_titles":"","show_intro":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_readmore":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","show_page_heading":1,"page_title":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 231, 232, 1,'*'
 
-SET IDENTITY_INSERT jos_menu  OFF
+SET IDENTITY_INSERT jos_menu  OFF;
 
 CREATE TABLE jos_menu_types (
   id integer  NOT NULL identity(1,1),
@@ -728,7 +728,7 @@ CREATE TABLE jos_menu_types (
   PRIMARY KEY  (id)
 );
 
-CREATE UNIQUE Index idx_menutype on jos_menu_types (menutype)
+CREATE UNIQUE Index idx_menutype on jos_menu_types (menutype);
 
 
 
@@ -745,7 +745,7 @@ CREATE TABLE jos_messages (
   PRIMARY KEY  (message_id)
 );
 
-CREATE Index useridto_state on jos_messages (user_id_to, state)
+CREATE Index useridto_state on jos_messages (user_id_to, state);
 
 
 
@@ -755,7 +755,7 @@ CREATE TABLE jos_messages_cfg (
   cfg_value varchar(255) NOT NULL default ''
 );
 
-CREATE  UNIQUE Index  idx_user_var_name on jos_messages_cfg (user_id,cfg_name)
+CREATE  UNIQUE Index  idx_user_var_name on jos_messages_cfg (user_id,cfg_name);
 
 
 
@@ -774,18 +774,18 @@ CREATE TABLE jos_modules (
   module varchar(50) NULL DEFAULT NULL,
   access smallint  NOT NULL DEFAULT '0',
   showtitle smallint  NOT NULL DEFAULT '1',
-  params varchar(5120) NOT NULL DEFAULT '',
+  params varchar(MAX) NOT NULL DEFAULT '',
   client_id smallint NOT NULL DEFAULT '0',
   language char(7) NOT NULL,
   PRIMARY KEY  (id)
 );
 
-CREATE  Index  published on jos_modules (published,access)
-CREATE  Index  newsfeeds on jos_modules (module,published)
-CREATE  Index  idx_language on jos_modules (language)
+CREATE  Index  published on jos_modules (published,access);
+CREATE  Index  newsfeeds on jos_modules (module,published);
+CREATE  Index  idx_language on jos_modules (language);
 
 
-SET IDENTITY_INSERT jos_modules  ON 
+SET IDENTITY_INSERT jos_modules  ON;
 
 INSERT INTO jos_modules (id, title, note, content, ordering, position, checked_out,checked_out_time, publish_up, publish_down, published, module, access, showtitle, params,
   client_id, language)
@@ -821,7 +821,7 @@ SELECT 17, 'Breadcrumbs', '', '', 1, 'position-2', 0, '1900-01-01 00:00:00', '19
 UNION ALL
 SELECT 18, 'Banners', '', '', 1, 'position-5', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 0, 'mod_banners', 1, 1, '{"target":"1","count":"1","cid":"1","catid":["27"],"tag_search":"0","ordering":"0","header_text":"","footer_text":"","layout":"","moduleclass_sfx":"","cache":"1","cache_time":"900"}', 0, '*'
 
-SET IDENTITY_INSERT jos_modules  OFF
+SET IDENTITY_INSERT jos_modules  OFF;
 
 
 CREATE TABLE jos_modules_menu (
@@ -898,13 +898,13 @@ CREATE TABLE jos_newsfeeds (
   PRIMARY KEY  (id)
 );
 
- CREATE INDEX idx_access on jos_newsfeeds (access)
- CREATE INDEX idx_checkout on jos_newsfeeds (checked_out)
- CREATE INDEX idx_state on jos_newsfeeds (published)
- CREATE INDEX idx_catid on jos_newsfeeds(catid)
-  CREATE INDEX idx_createdby on jos_newsfeeds(created_by)
-  CREATE INDEX idx_language on jos_newsfeeds(language)
-  CREATE INDEX idx_xreference on jos_newsfeeds(xreference)
+ CREATE INDEX idx_access on jos_newsfeeds (access);
+ CREATE INDEX idx_checkout on jos_newsfeeds (checked_out);
+ CREATE INDEX idx_state on jos_newsfeeds (published);
+ CREATE INDEX idx_catid on jos_newsfeeds(catid);
+  CREATE INDEX idx_createdby on jos_newsfeeds(created_by);
+  CREATE INDEX idx_language on jos_newsfeeds(language);
+  CREATE INDEX idx_xreference on jos_newsfeeds(xreference);
 
 
 
@@ -920,8 +920,8 @@ CREATE TABLE jos_redirect_links (
   PRIMARY KEY  (id)
 );
 
- CREATE UNIQUE INDEX idx_link_old on jos_redirect_links(old_url)
- CREATE UNIQUE INDEX idx_link_modifed on jos_redirect_links(modified_date)
+ CREATE UNIQUE INDEX idx_link_old on jos_redirect_links(old_url);
+ CREATE UNIQUE INDEX idx_link_modifed on jos_redirect_links(modified_date);
 
 
 CREATE TABLE jos_schemas (
@@ -937,16 +937,16 @@ CREATE TABLE jos_session (
   client_id smallint  NOT NULL default '0',
   guest smallint  NULL default '1',
   time varchar(14) NULL default '',
-  data varchar(8000) NULL default NULL,
+  data varchar(MAX) NULL default NULL,
   userid int NULL default '0',
   username varchar(150) NULL default '',
   usertype varchar(50) NULL default '',
   PRIMARY KEY  (session_id)
 );
 
-CREATE INDEX whosonline on jos_session(guest,usertype)
-CREATE INDEX userid on jos_session(userid)
-CREATE INDEX time on jos_session(time)
+CREATE INDEX whosonline on jos_session(guest,usertype);
+CREATE INDEX userid on jos_session(userid);
+CREATE INDEX time on jos_session(time);
 
 
 
@@ -978,14 +978,14 @@ CREATE TABLE  jos_update_sites (
   PRIMARY KEY  (update_site_id)
 );
 
-SET IDENTITY_INSERT jos_update_sites  ON 
+SET IDENTITY_INSERT jos_update_sites  ON;
 
 INSERT INTO jos_update_sites (update_site_id, name, type, location, enabled)
 SELECT 1, 'Joomla Core', 'collection', 'http://update.joomla.org/core/list.xml', 1
 UNION ALL
 SELECT 2, 'Joomla Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1
 
-SET IDENTITY_INSERT jos_update_sites  OFF 
+SET IDENTITY_INSERT jos_update_sites  OFF;
 
 CREATE TABLE jos_update_sites_extensions (
   update_site_id INT DEFAULT 0,
@@ -1016,20 +1016,20 @@ CREATE TABLE jos_template_styles (
   client_id smallint  NOT NULL DEFAULT 0,
   home smallint  NOT NULL DEFAULT 0,
   title varchar(255) NOT NULL DEFAULT '',
-  params varchar(2048) NOT NULL DEFAULT '',
+  params varchar(MAX) NOT NULL DEFAULT '',
   PRIMARY KEY  (id)
 ) ;
 
-CREATE INDEX idx_template on jos_template_styles (template)
-  CREATE INDEX  idx_home on jos_template_styles(home)
-SET IDENTITY_INSERT jos_template_styles  ON 
+CREATE INDEX idx_template on jos_template_styles (template);
+  CREATE INDEX  idx_home on jos_template_styles(home);
+SET IDENTITY_INSERT jos_template_styles  ON;
 INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (1, 'rhuk_milkyway', '0', '0', 'Milkyway - Default', '{"colorVariation":"blue","backgroundVariation":"blue","widthStyle":"fmax"}');
 INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (2, 'bluestork', '1', '1', 'Bluestork - Default', '{"useRoundedCorners":"1","showSiteName":"0"}');
 INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (3, 'atomic', '0', '0', 'Atomic - Default', '{}');
 INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (4, 'beez_20', 0, 1, 'Beez2 - Default', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/joomla_black.gif","sitetitle":"Joomla!","sitedescription":"Open Source Content Management Beta","navposition":"left","templatecolor":"personal","html5":"0"}');
 INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (5, 'hathor', '1', '0', 'Hathor - Default', '{"showSiteName":"0","highContrast":"0","boldText":"0","altMenu":"0"}');
 INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (6, 'beez5', 0, 0, 'Beez5 - Default-Fruit Shop', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/sampledata\\/fruitshop\\/fruits.gif","sitetitle":"Matuna Market ","sitedescription":"Fruit Shop Sample Site","navposition":"left","html5":"0"}');
-SET IDENTITY_INSERT jos_template_styles  OFF 
+SET IDENTITY_INSERT jos_template_styles  OFF;
 
 CREATE TABLE jos_user_usergroup_map (
   user_id integer  NOT NULL default '0',
@@ -1048,12 +1048,12 @@ CREATE TABLE jos_usergroups (
   PRIMARY KEY  (id)
 );
 
- CREATE UNIQUE INDEX   idx_usergroup_title_lookup on jos_usergroups(title)
- CREATE INDEX  idx_usergroup_adjacency_lookup on jos_usergroups (parent_id)
- CREATE INDEX  idx_usergroup_nested_set_lookup on jos_usergroups (lft,rgt) -- using BTREE not allowed
+ CREATE UNIQUE INDEX   idx_usergroup_title_lookup on jos_usergroups(title);
+ CREATE INDEX  idx_usergroup_adjacency_lookup on jos_usergroups (parent_id);
+ CREATE INDEX  idx_usergroup_nested_set_lookup on jos_usergroups (lft,rgt); -- using BTREE not allowed
 
 
-SET IDENTITY_INSERT jos_usergroups  ON 
+SET IDENTITY_INSERT jos_usergroups  ON;
 INSERT INTO jos_usergroups (id ,parent_id ,lft ,rgt ,title)
 SELECT 1, 0, 1, 20, 'Public'
 UNION ALL
@@ -1071,7 +1071,7 @@ SELECT 7, 6, 3, 4, 'Administrator'
 UNION ALL
 SELECT 8, 1, 18, 19, 'Super Users'
 
-SET IDENTITY_INSERT jos_usergroups  OFF
+SET IDENTITY_INSERT jos_usergroups  OFF;
 
 CREATE TABLE jos_users (
   id integer NOT NULL identity(1,1),
@@ -1089,11 +1089,11 @@ CREATE TABLE jos_users (
   PRIMARY KEY  (id)
 );
 
- CREATE INDEX usertype on jos_users (usertype)
- CREATE INDEX idx_name on jos_users (name)
- CREATE INDEX idx_block on jos_users (block)
- CREATE INDEX username on jos_users (username)
- CREATE INDEX email on jos_users (email)
+ CREATE INDEX usertype on jos_users (usertype);
+ CREATE INDEX idx_name on jos_users (name);
+ CREATE INDEX idx_block on jos_users (block);
+ CREATE INDEX username on jos_users (username);
+ CREATE INDEX email on jos_users (email);
 
 
 CREATE TABLE jos_user_profiles (
@@ -1103,7 +1103,7 @@ CREATE TABLE jos_user_profiles (
   ordering int NOT NULL default '0'
 ) ;
 
-CREATE UNIQUE INDEX idx_user_id_profile_key on jos_user_profiles(user_id,profile_key)
+CREATE UNIQUE INDEX idx_user_id_profile_key on jos_user_profiles(user_id,profile_key);
 
 
 CREATE TABLE jos_weblinks (
@@ -1141,14 +1141,14 @@ CREATE TABLE jos_weblinks (
   PRIMARY KEY  (id)
 );
 
-  CREATE INDEX idx_access on jos_weblinks (access)
-  CREATE INDEX idx_checkout on jos_weblinks(checked_out)
-  CREATE INDEX idx_state on jos_weblinks(state)
-  CREATE INDEX idx_catid on jos_weblinks(catid)
-  CREATE INDEX idx_createdby on jos_weblinks(created_by)
-  CREATE INDEX idx_featured_catid on jos_weblinks(featured,catid)
-  CREATE INDEX idx_language on jos_weblinks(language)
-  CREATE INDEX idx_xreference on jos_weblinks(xreference)
+  CREATE INDEX idx_access on jos_weblinks (access);
+  CREATE INDEX idx_checkout on jos_weblinks(checked_out);
+  CREATE INDEX idx_state on jos_weblinks(state);
+  CREATE INDEX idx_catid on jos_weblinks(catid);
+  CREATE INDEX idx_createdby on jos_weblinks(created_by);
+  CREATE INDEX idx_featured_catid on jos_weblinks(featured,catid);
+  CREATE INDEX idx_language on jos_weblinks(language);
+  CREATE INDEX idx_xreference on jos_weblinks(xreference);
 
 
 
@@ -1156,11 +1156,11 @@ CREATE TABLE jos_viewlevels (
   id int  NOT NULL identity(1,1),
   title varchar(100) NOT NULL DEFAULT '',
   ordering int NOT NULL DEFAULT '0',
-  rules varchar(5120) NOT NULL,
+  rules varchar(MAX) NOT NULL,
   PRIMARY KEY (id)
 );
 
- CREATE UNIQUE INDEX idx_assetgroup_title_lookup ON jos_viewlevels (title)
+ CREATE UNIQUE INDEX idx_assetgroup_title_lookup ON jos_viewlevels (title);
 
 SET IDENTITY_INSERT jos_viewlevels  ON 
 INSERT INTO jos_viewlevels (id, title, ordering, rules) 
@@ -1170,4 +1170,4 @@ SELECT 2, 'Registered', 1, '[6,2]'
 UNION ALL
 SELECT 3, 'Special', 2, '[6,7,8]'
 
-SET IDENTITY_INSERT jos_viewlevels  OFF
+SET IDENTITY_INSERT jos_viewlevels  OFF;
