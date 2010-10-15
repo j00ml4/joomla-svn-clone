@@ -227,8 +227,8 @@ class JSession extends JObject
 	public function getName()
 	{
 		if ($this->_state === 'destroyed') {
-			// @TODO : raise error
-			return null;
+			
+			return JError::raise('E_ERROR', 403 , 'Session Destroyed');
 		}
 		return session_name();
 	}
@@ -241,8 +241,7 @@ class JSession extends JObject
 	public function getId()
 	{
 		if ($this->_state === 'destroyed') {
-			// @TODO : raise error
-			return null;
+			return JError::raise('E_ERROR', 403 , 'Session Destroyed');
 		}
 		return session_id();
 	}
@@ -302,9 +301,7 @@ class JSession extends JObject
 		$namespace = '__'.$namespace; //add prefix to namespace to avoid collisions
 
 		if ($this->_state !== 'active' && $this->_state !== 'expired') {
-			// @TODO :: generated error here
-			$error = null;
-			return $error;
+			return JError::raise('E_ERROR', 403 , 'Session expired');
 		}
 
 		if (isset($_SESSION[$namespace][$name])) {
@@ -326,8 +323,7 @@ class JSession extends JObject
 		$namespace = '__'.$namespace; //add prefix to namespace to avoid collisions
 
 		if ($this->_state !== 'active') {
-			// @TODO :: generated error here
-			return null;
+			return JError::raise('E_ERROR', 403 , 'Session Inactive');
 		}
 
 		$old = isset($_SESSION[$namespace][$name]) ?  $_SESSION[$namespace][$name] : null;
@@ -353,8 +349,7 @@ class JSession extends JObject
 		$namespace = '__'.$namespace; //add prefix to namespace to avoid collisions
 
 		if ($this->_state !== 'active') {
-			// @TODO :: generated error here
-			return null;
+			return JError::raise('E_ERROR', 403 , 'Session Inactive');
 		}
 
 		return isset($_SESSION[$namespace][$name]);
@@ -372,8 +367,7 @@ class JSession extends JObject
 		$namespace = '__'.$namespace; //add prefix to namespace to avoid collisions
 
 		if ($this->_state !== 'active') {
-			// @TODO :: generated error here
-			return null;
+			return JError::raise('E_ERROR', 403 , 'Session Inactive');
 		}
 
 		$value	=	null;
@@ -461,8 +455,7 @@ class JSession extends JObject
 	{
 		$this->destroy();
 		if ($this->_state !==  'destroyed') {
-			// @TODO :: generated error here
-			return false;
+			return JError::raise('E_ERROR', 403 , 'Session Expired');
 		}
 
 		// Re-register the session handler after a session has been destroyed, to avoid PHP bug
@@ -489,8 +482,7 @@ class JSession extends JObject
 	public function fork()
 	{
 		if ($this->_state !== 'active') {
-			// @TODO :: generated error here
-			return false;
+			return JError::raise('E_ERROR', 403 , 'Session Inactive');
 		}
 
 		// save values
