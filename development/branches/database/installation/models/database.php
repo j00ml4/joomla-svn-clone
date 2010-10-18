@@ -332,9 +332,18 @@ class JInstallationModelDatabase extends JModel
 					$backupTable = str_replace($prefix, $backup, $table);
 
 					// Drop the backup table.
+					if($db->name == 'mysql')
+          {
 					$db->setQuery(
 						'DROP TABLE IF EXISTS '.$db->nameQuote($backupTable)
 					);
+        }elseif($db->name == 'mssql')
+        {
+          $db->setQuery(
+            'IF EXISTS(SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '
+            .$db->Quote($backupTable).') DROP TABLE '.$db->nameQuote($backupTable)
+          );
+        }
 					$db->query();
 
 					// Check for errors.
@@ -344,9 +353,18 @@ class JInstallationModelDatabase extends JModel
 					}
 
 					// Rename the current table to the backup table.
+					
+					if($db->name == 'mysql')
+    {
 					$db->setQuery(
 						'RENAME TABLE '.$db->nameQuote($table).' TO '.$db->nameQuote($backupTable)
 					);
+    }elseif($db->name == 'mssql')
+    {
+      $db->setQuery(
+            'sp_rename '.$table.', '.$backupTable
+          );
+    }
 					$db->query();
 
 					// Check for errors.
@@ -429,9 +447,18 @@ class JInstallationModelDatabase extends JModel
 				if (strpos($table, $prefix) === 0)
 				{
 					// Drop the table.
+					if($db->name == 'mysql')
+          {
 					$db->setQuery(
 						'DROP TABLE IF EXISTS '.$db->nameQuote($table)
 					);
+          }elseif($db->name == 'mssql')
+        {
+          $db->setQuery(
+            'IF EXISTS(SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '
+            .$db->Quote($table).') DROP TABLE '.$db->nameQuote($table)
+          );
+        }
 					$db->query();
 
 					// Check for errors.
