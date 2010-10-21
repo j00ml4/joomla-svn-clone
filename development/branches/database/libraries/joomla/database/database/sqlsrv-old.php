@@ -22,21 +22,21 @@ defined('JPATH_BASE') or die();
  * @subpackage	Database
  * @since		1.0
  */
-class JDatabaseMSSql extends JDatabase
+class JDatabaseSQLSrv extends JDatabase
 {
 	/**
 	 * The database driver name
 	 *
 	 * @var string
 	 */
-	var $name			= 'mssql';
+	var $name			= 'sqlsrv';
 
 	/**
 	 *  The null/zero date string
 	 *
 	 * @var string
 	 */
-	var $_nullDate		= '1900-01-01 00:00:00';
+	var $_nullDate		= '0000-00-00 00:00:00';
 
 	/**
 	 * Quote for named objects
@@ -70,39 +70,12 @@ class JDatabaseMSSql extends JDatabase
 		}
 
 		// connect to the server
-		if (!($this->_connection = sqlsrv_connect( $host, Array('uid'=>$user, 'pwd'=>$password, 'CharacterSet'=>'UTF-8') ) )) {
+		if (!($this->_resource = sqlsrv_connect( $host, Array('uid'=>$user, 'pwd'=>$password, 'CharacterSet'=>'UTF-8') ) )) {
 			$this->_errorNum = 2;
 			$this->_errorMsg = 'Could not connect to MS SQL';
 			return;
 		}
 
-		$conf = & JFactory::getConfig();
-		
-	    $slave_host = array_key_exists('slavehost', $options)	? $options['slavehost']		: '';
-		$slave_user = array_key_exists('slavename', $options)	? $options['slavename']		: '';
-		$slave_password = array_key_exists('slavepass', $options)	? $options['slavepass']		: '';
-	
-		if (empty($slave_host))
-			$slave_host             = $conf->getValue('config.slave_db_host');
-
-		if (empty($slave_user))
-			$slave_user             = $conf->getValue('config.slave_db_user');
-
-		if (empty($slave_password))
-			$slave_password         = $conf->getValue('config.slave_db_password');
-		
-	
-	    if ($slave_host != "" && $slave_user != "" && $slave_password != "") {
-			if (!($this->_slave_connection = sqlsrv_connect( $slave_host, Array('uid'=>$slave_user, 'pwd'=>$slave_password, 'CharacterSet'=>'UTF-8') ))) {
-				$this->_errorNum = 2;
-				$this->_errorMsg = 'Could not connect to Slave mssql';
-	
-				return;
-			}
-			
-			
-		}
-		
 		sqlsrv_configure('WarningsReturnAsErrors', 1);
 		
 		
@@ -112,10 +85,6 @@ class JDatabaseMSSql extends JDatabase
 		// select the database
 		if ( $select ) {
 			$this->select($database);
-		if (is_resource($this->_slave_connection)) {
-			   // mssql_query("SET @@SESSION.sql_mode = '';", $this->_slave_connection);
-				$this->selectSlave($database);
-		    }
 		}
 	}
 
@@ -128,11 +97,8 @@ class JDatabaseMSSql extends JDatabase
 	function __destruct()
 	{
 		$return = false;
-		if (is_resource($this->_connection)) {
-			$return = sqlsrv_close($this->_connection);
-		}
-	 	if (is_resource($this->_slave_connection)) {
-			sqlsrv_close($this->_slave_connection);
+		if (is_resource($this->_resource)) {
+			$return = sqlsrv_close($this->_resource);
 		}
 		return $return;
 	}
@@ -158,8 +124,8 @@ class JDatabaseMSSql extends JDatabase
 	 */
 	function connected()
 	{
-		/*if(is_resource($this->_connection)) {
-			return mysql_ping($this->_connection);
+		/*if(is_resource($this->_resource)) {
+			return mysql_ping($this->_resource);
 		}
 		return false;
 		*/
@@ -167,14 +133,6 @@ class JDatabaseMSSql extends JDatabase
 		return true;
 	}
 
-   public function slave_connected()
-	{
-		/*if (is_resource($this->_slave_connection)) {
-			return mssql_ping($this->_slave_connection);
-		}
-		return false;*/
-		return true;
-	}
 	/**
 	 * Select a database for use
 	 *
@@ -190,43 +148,16 @@ class JDatabaseMSSql extends JDatabase
 			return false;
 		}
 
-		if(!sqlsrv_query( $this->_connection, 'USE '. $database, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) ))
-		{
-			$this->_errorNum = 3;
-			$this->_errorMsg = 'Could not connect to Master database '.$database;
-			return false;
-		}
-		//$this->setQuery('USE '. $database);
-		/*if ( !$this->Query() ) {
+		$this->setQuery('USE '. $database);
+		if ( !$this->Query() ) {
 			$this->_errorNum = 3;
 			$this->_errorMsg = 'Could not connect to database';
 			return false;
-		}*/
+		}
 		
 		return true;
 	}
-/**
-	 * Select a Slave database for use
-	 *
-	 * @access	public
-	 * @param	string $database
-	 * @return	boolean True if the database has been successfully selected
-	 * @since	1.5
-	 */
-	function selectSlave($database) {
-		if ( ! $database ) {
-			return false;
-		}
 
-		if(!sqlsrv_query( $this->_slave_connection, 'USE '. $database, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) ))
-		{
-			$this->_errorNum = 3;
-			$this->_errorMsg = 'Could not connect to Slave database '.$database;
-			return false;
-		}
-
-		return true;
-	}
 	/**
 	 * Determines UTF support
 	 *
@@ -264,12 +195,7 @@ class JDatabaseMSSql extends JDatabase
 		// however it should be (it'd be nice), so we need
 		// to do this ourselves.
 		// It should just be ' to '' but not sure
-		//$result = str_replace("'", "''", $text);
-		//return $result;
-		$result = addslashes($text);
-		if ($extra) {
-			$result = addcslashes($result, '%_');
-		}
+		$result = str_replace("'", "''", $text);
 		return $result;
 	}
 
@@ -281,15 +207,12 @@ class JDatabaseMSSql extends JDatabase
 	 */
 	function query()
 	{
-		if (!is_resource($this->_connection)) {
+		if (!is_resource($this->_resource)) {
 			return false;
 		}
 
 		// Take a local copy so that we don't modify the original query and cause issues later
-		$sql = $this->replacePrefix((string) $this->_sql);
-		$sql = str_replace('`', '', $sql);
-		$sql = str_replace('LENGTH', 'DATALENGTH', $sql);
-		$sql = str_ireplace('insert ignore into', 'insert into', $sql);
+		$sql = $this->_sql;
 		if ($this->_limit > 0 || $this->_offset > 0) {
 			if($this->_limit > 0 && $this->_offset <= 0) {
 				// we have a limit with zero or no offset, we can use top here	
@@ -309,20 +232,13 @@ class JDatabaseMSSql extends JDatabase
 		}
 		$this->_errorNum = 0;
 		$this->_errorMsg = '';
+		$this->_cursor = sqlsrv_query( $this->_resource, $sql, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) );
 		
-	jimport("joomla.utilities.string");
-		
-		$select_in_sql = JString::startsWith(ltrim(strtoupper($sql)), 'SELECT') ;
-		
-	    if($select_in_sql && is_resource($this->_slave_connection)) {
-			$this->_cursor = sqlsrv_query( $this->_slave_connection, $sql, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) );
-		} else {
-			$this->_cursor = sqlsrv_query( $this->_connection, $sql, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) );
-		}
 		
 		if (!$this->_cursor)
 		{
 			$errors = sqlsrv_errors( );
+			print_R($errors);
 			$this->_errorNum = $errors[0]['sqlstate'];
 			$this->_errorMsg = $errors[0]['message'];
 			// $errors[0]['errorcode']; // Holds the SQL Server Native Error Code
@@ -334,21 +250,7 @@ class JDatabaseMSSql extends JDatabase
 		}
 		return $this->_cursor;
 	}
-/**
-   * Get the current or query, or new JDatabaseQuery object.
-   *
-   * @param boolean False to return the last query set by setQuery, True to return a new JDatabaseQuery object.
-   * @return  string  The current value of the internal SQL variable
-   */
-  public function getQuery($new = false)
-  {
-    if ($new) {
-      jimport('joomla.database.databasequerymssql');
-      return new JDatabaseQueryMsSQL;
-    } else {
-      return $this->_sql;
-    }
-  }
+
 	/**
 	 * Description
 	 *
@@ -358,7 +260,7 @@ class JDatabaseMSSql extends JDatabase
 	 */
 	function getAffectedRows()
 	{
-		 return sqlsrv_rows_affected($this->_cursor);
+		return sqlsrv_rows_affected( $this->_resource );
 	}
 
 	/**
@@ -377,7 +279,7 @@ class JDatabaseMSSql extends JDatabase
 		foreach ($query_split as $command_line) {
 			$command_line = trim( $command_line );
 			if ($command_line != '') {
-				$this->_cursor = sqlsrv_query( $this->_connection, $command_line, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) );
+				$this->_cursor = sqlsrv_query( $this->_resource, $command_line, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) );
 				if ($this->_debug) {
 					$this->_ticker++;
 					$this->_log[] = $command_line;
@@ -521,14 +423,13 @@ class JDatabaseMSSql extends JDatabase
 	* @param string The field name of a primary key
 	* @return array If <var>key</var> is empty as sequential list of returned records.
 	*/
-	function loadAssocList( $key='', $column = null )
+	function loadAssocList( $key='' )
 	{
 		if (!($cur = $this->query())) {
 			return null;
 		}
 		$array = array();
 		while ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_ASSOC )) {
-			$value = ($column) ? (isset($row[$column]) ? $row[$column] : $row) : $row;
 			if ($key) {
 				$array[$row[$key]] = $row;
 			} else {
@@ -545,7 +446,7 @@ class JDatabaseMSSql extends JDatabase
 	* @access	public
 	* @return 	object
 	*/
-	function loadObject($className = 'stdClass')
+	function loadObject( )
 	{
 		if (!($cur = $this->query())) {
 			return null;
@@ -568,7 +469,7 @@ class JDatabaseMSSql extends JDatabase
 	* @param string The field name of a primary key
 	* @return array If <var>key</var> is empty as sequential list of returned records.
 	*/
-	function loadObjectList( $key='', $className = 'stdClass' )
+	function loadObjectList( $key='' )
 	{
 		if (!($cur = $this->query())) {
 			return null;
@@ -662,7 +563,7 @@ class JDatabaseMSSql extends JDatabase
          *
          * @since       1.6.0
          */
-        public function loadNextObject($className = 'stdClass')
+        public function loadNextObject()
         {
                 static $cur;
 
@@ -744,12 +645,6 @@ class JDatabaseMSSql extends JDatabase
 			}
 			$tmp[] = $this->nameQuote( $k ) . '=' . $val;
 		}
-		
-	// Nothing to update.
-		if (empty($tmp)) {
-			return true;
-		}
-		
 		$this->setQuery( sprintf( $fmtsql, implode( ",", $tmp ) , $where ) );
 		return $this->query();
 	}
@@ -773,8 +668,7 @@ class JDatabaseMSSql extends JDatabase
 	 */
 	function getVersion()
 	{
-		//return sqlsrv_server_info( $this->_connection );
-		return '5.1.0';
+		return sqlsrv_server_info( $this->_resource );
 	}
 
 	/**
@@ -827,7 +721,7 @@ class JDatabaseMSSql extends JDatabase
 		settype($tables, 'array'); //force to array
 		$result = array();
 
-		/*foreach ($tables as $tblval)
+		foreach ($tables as $tblval)
 		{
 			// TODO: Should run this through namequote
 			$this->setQuery('select top 0 * from '. $tblval);
@@ -848,23 +742,6 @@ class JDatabaseMSSql extends JDatabase
 				}
 			} else {
 				$result[$tblval] = Array();
-			}
-		}*/
-			foreach ($tables as $tblval) {
-			//$this->setQuery('SHOW FIELDS FROM ' . $tblval);
-			
-			$tblval = $this->replacePrefix((string) $tblval);
-			$this->setQuery('select column_name as Field, data_type as Type, is_nullable as \'Null\', column_default as \'Default\' from information_schema.columns where table_name= ' . $this->Quote($tblval));
-			$fields = $this->loadObjectList();
-
-			if ($typeonly) {
-				foreach ($fields as $field) {
-					$result[$tblval][$field->Field] = preg_replace("/[(0-9)]/",'', $field->Type);
-				}
-			} else {
-				foreach ($fields as $field) {
-					$result[$tblval][$field->Field] = $field;
-				}
 			}
 		}
 
