@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: language0001Test.php 18925 2010-09-16 01:16:29Z dextercowley $
+ * @version		$Id: language0001Test.php 19096 2010-10-13 00:12:39Z dextercowley $
  * @package		Joomla.SystemTest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -61,7 +61,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
     }
 
 	$this->jClick('Groups');
-	$screen="User Manager: Groups";
+	$screen="User Manager: Action Permission Groups";
 	$this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Delete");
@@ -70,7 +70,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
     $this->waitForPageToLoad("30000");
     try
 	{
-        $this->assertTrue($this->isTextPresent("No Groups selected"),$screen .' '. $button .' button with nothing selected error message not displayed or changed');
+        $this->assertTrue($this->isTextPresent("No Action Permission Groups selected"),$screen .' '. $button .' button with nothing selected error message not displayed or changed');
     }
 	catch (PHPUnit_Framework_AssertionFailedError $e)
 	{
@@ -87,7 +87,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
     $this->waitForPageToLoad("30000");
     try
 	{
-        $this->assertTrue($this->isTextPresent("No Access Levels selected"),$screen .' '. $button .' button with nothing selected error message not displayed or changed');
+        $this->assertTrue($this->isTextPresent("No View Permission Levels selected"),$screen .' '. $button .' button with nothing selected error message not displayed or changed');
     }
 	catch (PHPUnit_Framework_AssertionFailedError $e)
 	{
@@ -232,9 +232,9 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
-    $this->click("link=Categories");
-	$screen='Category Manager';
-    $this->waitForPageToLoad("30000");
+    $this->click("//div/ul[@id='submenu']/li/a[contains(., 'Categories')]");
+	$this->waitForPageToLoad("30000");
+    $screen='Category Manager';
 	$this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Publish");
@@ -249,6 +249,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("//li[@id='toolbar-unpublish']/a/span");
 	$button='Unpublish';
@@ -262,6 +263,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Archive");
 	$button='Archive';
@@ -275,6 +277,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Check In");
 	$button='Check In';
@@ -288,6 +291,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("//li[@id='toolbar-trash']/a/span");
 	$button='Trash';
@@ -526,6 +530,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Unpublish");
 	$button='Unpublish';
@@ -539,6 +544,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Archive");
 	$button='Archive';
@@ -552,6 +558,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("//li[@id='toolbar-checkin']/a/span");
 	$button='Check in';
@@ -565,6 +572,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Trash");
 	$button='Trash';
@@ -664,6 +672,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Unpublish");
 	$button='Unpublish';
@@ -677,6 +686,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("//li[@id='toolbar-archive']/a/span");
 	$button='Archive';
@@ -703,6 +713,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Trash");
 	$button='Trash';
@@ -802,6 +813,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Unpublish");
 	$button='Unpublish';
@@ -815,6 +827,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Archive");
 	$button='Archive';
@@ -841,6 +854,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Trash");
 	$button='Trash';
@@ -940,6 +954,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("//li[@id='toolbar-unpublish']/a/span");
 	$button='Unpublish';
@@ -953,6 +968,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("//li[@id='toolbar-archive']/a/span");
 	$button='Archive';
@@ -979,6 +995,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
 	{
         array_push($this->verificationErrors, $this->getTraceFiles($e));
     }
+    $this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Trash");
 	$button='Trash';

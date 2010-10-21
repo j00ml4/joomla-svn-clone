@@ -118,7 +118,7 @@ abstract class JHtmlBehavior
 				toggler = document.id('submenu');
 				element = document.id('config-document');
 				if(element) {
-					document.switcher = new JSwitcher(toggler, element, {cookieName: toggler.getAttribute('class')});
+					document.switcher = new JSwitcher(toggler, element, {cookieName: toggler.getProperty('class')});
 				}
 			});";
 
@@ -547,6 +547,19 @@ abstract class JHtmlBehavior
 		$document->addScriptDeclaration($script);
 
 		return;
+	}
+
+	/**
+	 * Break us out of any containing iframes
+	 *
+	 * @return	void
+	 * @since	1.5
+	 */
+	public static function noframes($location='top.location.href')
+	{
+		$js = "window.addEvent('domready', function () {if (top != self) {top.location.replace(".$location.");}});";
+		$document = JFactory::getDocument();
+		$document->addScriptDeclaration($js);
 	}
 
 	/**
