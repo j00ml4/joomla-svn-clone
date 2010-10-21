@@ -27,10 +27,162 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+21-Oct-2010 Christophe Demko
+ # [#22811] Get the proper model in the category controller (bill richardson)
+ # [#22936] Update Hathor with permissions changes from Tracker #22529 (Andrea Tarr)
+ # [#22951] PHP semi colon closing issue. (Vasanth V, bill richardson)
+ # [#22519] Image caption does not work (Jean-Marie Simonnet)
+ # [#22960] Sliders within sliders do not work
+ # [#21300] Problem with Options Lightbox and Sessions (Omar Ramos)
+ # [#22935] Automatic site language change when a user change its frontend language
+
+20-Oct-2010 Andrew Eddie
+ # Fixed issue [#22251] params field in table #__template_styles too small (Jason D'Souza, Bill Richardson, Christophe Demko).
+
+19-Oct-2010 Andrew Eddie
+ # Fixed issue [#21635] fail to copy menu item (Brian Teeman, Mathavan Jeyadev, Jean-Marie Simonet, Louis Landry).
+
+-------------------- 1.6.0 Beta12 Release [18-Oct-2010] ------------------
+
+18-Oct-2010 Andrew Eddie
+ # Reverting changes in [#22659] (causing very annoying screen flicker).
+
+18-Oct-2010 Christophe Demko
+ # [#22802] Contact category feed is blank (Elin Waring)
+ # [#22918] install file not working when using method "update" (marius van rijnsoever)
+ # [#21345] Form field Select list does not handle <optgroup>
+ # Fix JHtmlSelect class
+ # [#22843] Enable the capacity to use specific help url when editing a plugin or a template style
+ # [#22833] The com_modules component cannot redirect help to specific international help site
+ # [#21946] Redirect component produces error (Joseph LeBlanc, bill richardson)
+
+16-Oct-2010 Jean-Marie Simonet
+ # [#21635] fail to copy menu item. Thanks Mathavan and Louis
+ $ [#22914] COM_SEARCH_EXACT_PHRASE doesn't need the colon at end. Thanks Bill.
+ # Reverting [#21635] as it breaks re-save article when debug on.
+ 
+15-Oct-2010 Jean-Marie Simonet
+ # Making core site templates installable/uninstallable. Changed protected template from milkyway to beez2.
+
+14-Oct-2010 Louis Landry
+ ^ Decoupled JPATH_ADMINISTRATOR from JApplication::initialise() method call when loading framework language file.
+ # [#22825] Duplicated queries in global configuration.  (Thanks to Dennis Hermacki)
+ # [#22553] Switcher function for submenu uses incompatible function for IE7 and chrome. (Thanks to Angie Radtke)
+ # [#21541] When trying to delete a folder which contains images, the error message only displays for < 1 second. (Thanks to Mathavan Jeyadev)
+ # [#21225] Copy and Move missing from each Manager - Categories & Menus. (Thanks to Michael Babker)
+ # [#21842] Update GeSHI to current version. (Thanks to Michael Babker)
+
+14-Oct-2010 Jean-Marie Simonet
+ # [#22659] Debug plugin doesn't show 'afterRender' profiler mark and can't gather statistics of other system plugins. Thanks Dennis.
+ $ Updating language xml files.
+ # Changing Algerian flag to Arab League flag in langswitcher for ar.gif.
+
+14-Oct-2010 Ian MacLennan
+ # [#21189] vcard not working in contact, needs a vcard class in JView
+
+14-Oct-2010 Mark Dexter
+ # [#21661] Article access check is only using the current category, not checking further up the branch
+
+14-Oct-2010 Christophe Demko
+ ^ Fix loading .ini files instead of .sys.ini files for #22710
+ # [#21780] JHtmlTabs not compatible with JHtmlRules
+
+13-Oct-2010 Mark Dexter
++ [#22848] Debug User Group View
+
+13-Oct-2010 Christophe Demko
+ # [#22846] Joomla.submitform does not act exactly as submitform
+ ! Respecting coding convention
+ # [#20830] missing error messages when fields empty when installing
+ # [#22820] The css style label#jform_params_subslider-lbl cannot be applied on nested groups
+
+13-Oct-2010 Jean-Marie Simonet
+ # Loading new lib_joomla.ini file through includes/application.php breaks langswitcher. Correcting until final decision is taken to separate Framework.
+ # [#22835] Enabling browser lang sniffing in langfilter system plugin.
+ # [#22858] news feed - 2 level subcategory feed name link causes error. Thanks Bill.
+ # [#22535] Missing always fulltext value in com_content article view. Thanks Angie and Christophe.
+ 
+13-Oct-2010 Andrew Eddie
+ # Fixed issue [#21343] Email is not spamprotected in search (Janich Rasmussen, Joseph LeBlanc, Hannes Papenberg).
+ # Fixed issue [#22809] [patch] loadmodule plugin incorrectly handles positions with the same name (Artyom Bisyarin).
+
+12-Oct-2010 Mark Dexter
+# [#22837] Commit of #22710 leads to display errors when trashing, deleting or archiving category
+
+12-Oct-2010 Jean-Marie Simonet
+ # [#22755] Backend module menu assignment improvements and fixes. Thanks Dennis.
+ # [#21792] Alternate Page Title does not show. Thanks Bill.
+ $# Separating joomla libraries ini strings from main ini. Temporary load via application.php. TBD: load through library to prepare for framework separation.
+ 
+11-Oct-2010 Mark Dexter
+# [#22819] Clean up errors in new ACL UI
+
+11-Oct-2010 Christophe Demko
+ # Fix language filter plugin for routing
+ # [#22038] PHP information (Dennis Hermacki)
+ # [#22813] Installation language file - missing entry for STEPS (Serge Litvinov)
+
+10-Oct-2010 Mark Dexter
+# Fix invalid lft,rgt values in jos_menus in sample data
+
+10-Oct-2010 Christophe Demko
+ # [#22794] XML self closing tag syntax used on li in com_media (Rouven Weßling)
+
+9-Oct-2010 Christophe Demko
+ # [#22057] [patch] Broken unit tests for some form fields (Artyom Bisyarin)
+ # [#21644] [patch] Unable to get group of a form field (Artyom Bisyarin)
+ # [#22770] System - Language filter plugin is buggy if the link is comes from the home page menu
+ # [#22769] Some language filtering missing
+ # [#22777] Module breadcrumbs does not deal correctly with language filter plugin
+ # [#22557] Remove all occurrences name attribute on the a element (Rouven Weßling, Andrea Tarr)
+ # [#22168] patch for [#21804] "Your Profile" has too narrow a focus (Tomasz Narloch)
+ # [#21804] "Your Profile" has too narrow a focus (Mathavan Jeyadev, Boris Baddenoff)
+ # [#22555] Use Joomla.submitbutton() instead of submitbutton() (Rouven Weßling)
+ # [#22775] Router does not redirect correctly
+ # [#22621] Boolean validation in JForm (Rune Sjøen)
+ # [#22775] Router does not redirect correctly (removing accidently one line)
+
+8-Oct-2010 Christophe Demko
+ # [#22759] Add version, date, author to Hathor (from Tracker # 22482) (thanks Andrea Tarr)
+ # [#22734] Add Hathor support for tracker #21614 (thanks Andrea Tarr, Ole Bang Ottosen, bill richardson)
+ # [#22754] Global values not used as default in blog and featured (thanks Elin Waring, bill richardson)
+
+6-Oct-2010 Ron Severdia
+ ^ Updated Blueprint to 1.0 in Atomic (Thanks Christian Montoya)
+ 
+6-Oct-2010 Andrew Eddie
+ # Partially Fixed [#21260] ACL Permissions for Authors to Edit Own Content Items Missing.
+ # Partially Fixed [#22529] Permissions UI patch backend (Angie Radtke, Michael Babker, Elin Waring, Christophe Demko).
+ 
+5-Oct-2010 Christophe Demko
+ # [#22438] Wrong value before the search input box (I think) (thanks Ronald de Vries, bill richardson, Rouven Weßling, Elin Waring)
+ # [#22675] Com_Categories mistake in xml (thanks Elin)
+ # [#22595] Users with Edit permission assigned at category level in com_content cannot edit (thanks Michael Babker)
+ # [#22711] Fixes to example content plugin (thanks Matt Thomas)
+ # [#22269] JModelAdmin uses hard coded "id" field (Thanks Sam)
+ # [#21656] Ability to limit System Info access (thanks Mathavan Jeyadev)
+ # [#22335] Random "HTTP 500 Internal Server Error" on Contact (single) page (thanks Artyom Bisyarin)
+ # [#22710] com_categories component does not manage well help url
+ # [#22679] Files installer uses name not element to find unique instances
+
+5-Oct-2010 Jean-Marie Simonet
+ $ Normalizing some strings.
+ 
+4-oct-2010 Christophe Demko
+ # [#22049] Site Maintenance Menu (thanks bill richardson, Mathavan Jeyadev)
+
+-------------------- 1.6.0 Beta11 Release [04-Oct-2010] ------------------
+
+4-oct-2010 Christophe Demko
+ # [#22580] Categories - No reset to show - when moving between components (thanks bill richardson and Mathavan Jeyadev)
+
+3-Oct-2010 Jean-Marie Simonet
+ # [#22683] Pagebreak_css. Thanks Angie.
 
 2-Oct-2010 Jean-Marie Simonet
  # [#22306] Module CSS class and id changes  Thanks Angie.
  # [#22487] Separating weblink from content on 22100. Thanks Elin.
+ # [#22663] Pagebreak output. Thanks Angie.
 
 30-Sep-2010 Jean-Marie Simonet
  # [#22582] Menu location lost after pressing "Save & New". Thanks Mathavan

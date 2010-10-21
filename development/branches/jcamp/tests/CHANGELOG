@@ -27,6 +27,23 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+14-Oct-2010 Mark Dexter
++ article0003Test added to test effect of up-path category state on article menu items
+# fix bug in controlpanel0004Test
+
+12-Oct-2010 Mark Dexter
+# Fix multiple system tests for ACL UI changes
+# Fix problem in language0001test.php from Category Manager UI change
+
+10-Oct-2010 Mark Dexter
+^ Added option in configdef.php and doInstall.php to install without sample data
+
+09-Oct-2010 Mark Dexter
+^ Changed JAccessTest to provide 100% code coverage
+
+08-Oct-2010 Mark Dexter
+^ Changed JAccessTest to use test.xml data instead of database data and added testCheckGroup method
+
 15-Sep-2010 Mark Dexter
 # [#22419] Fixes for Language0001 System Test (Thanks Matt Thomas)
 # Fixed restoreDefaultGlobalPermissions method in SeleniumJoomlaTestCase

@@ -10,8 +10,10 @@
 // no direct access
 defined('_JEXEC') or die;
 
-require_once JPATH_SITE.DS.'components'.DS.'com_content'.DS.'router.php';
-JModel::addIncludePath(JPATH_SITE.DS.'components'.DS.'com_content'.DS.'models');
+$com_path = JPATH_SITE.DS.'components'.DS.'com_content';
+require_once $com_path.DS.'router.php';
+require_once $com_path.DS.'helpers'.DS.'route.php';
+JModel::addIncludePath($com_path.DS.'models');
 
 abstract class modArticlesCategoryHelper
 {
@@ -21,7 +23,8 @@ abstract class modArticlesCategoryHelper
 		$articles = JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
 
 		// Set application parameters in model
-		$appParams = JFactory::getApplication()->getParams();
+		$app = JFactory::getApplication();
+		$appParams = $app->getParams();
 		$articles->setState('params', $appParams);
 
 		// Set the filters based on the module params
@@ -135,6 +138,9 @@ abstract class modArticlesCategoryHelper
 			$articles->setState('filter.end_date_range', $params->get('end_date_range', '9999-12-31 23:59:59'));
 			$articles->setState('filter.relative_date', $params->get('relative_date', 30));
 		}
+		
+		// Filter by language
+		$articles->setState('filter.language',$app->getLanguageFilter());
 
 		$items = $articles->getItems();
 
