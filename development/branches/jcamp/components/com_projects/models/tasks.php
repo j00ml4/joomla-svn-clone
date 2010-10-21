@@ -43,11 +43,7 @@ class ProjectsModelTasks extends JModelList
     	 
         $type = $app->getUserStateFromRequest('task.type', 'type');
         $this->setState('type', $type); 
-    	$this->context .= $type;
-               
-    	$value = JRequest::getInt('parent_id', 0);
-        $this->setState('parent.id', $value);  
-    	$this->context .= '.'.$value;
+    	$this->context .= '.'.$type;
     	
         $params = $app->getParams();
         $this->setState('params', $params);
@@ -60,11 +56,11 @@ class ProjectsModelTasks extends JModelList
         $app->setUserState('project.id', $id);
 
         // Filters
-        if($type == 3)
-	        $value = $app->getUserStateFromRequest($this->context.'.state', 'filter_state',$params->get('listing_tickets_view'));
-	      else
-	        $value = $app->getUserStateFromRequest($this->context.'.state', 'filter_state',$params->get('listing_tasks_view'));
-	      
+        if($type == 3){
+	        $value = $app->getUserStateFromRequest($this->context.'.state', 'filter_state',$params->get('listing_tickets'));
+    	} else {
+	        $value = $app->getUserStateFromRequest($this->context.'.state', 'filter_state',$params->get('listing_tasks'));
+    	}
         $this->setState('filter.state', $value);
        
         $value = $app->getUserStateFromRequest($this->context.'.catid', 'filter_catid');
