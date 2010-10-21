@@ -130,19 +130,19 @@ abstract class JHtmlTool
 			case 'task':
 				$prefix = 'tasks.';
 				$states	= array(
-					2	=> array('publish',		'COM_PROJECTS_STATE_FINISHED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JARCHIVED',	false,	'archive',		'archive'),	
-					1	=> array('archive',		'COM_PROJECTS_STATE_PENDING',	'JLIB_HTML_UNPUBLISH_ITEM',	'JPUBLISHED',	false,	'publish',		'publish'),
-					0	=> array('report',		'COM_PROJECTS_STATE_DENIED',	'JLIB_HTML_PUBLISH_ITEM',	'JUNPUBLISHED',	false,	'unpublish',	'unpublish'),
+					2	=> array('publish',		'COM_PROJECTS_STATE_FINISHED',	'COM_PROJECTS_STATE_PENDING_ACTION',	'COM_PROJECTS_STATE_FINISHED',	false,	'archive',		'archive'),	
+					1	=> array('archive',		'COM_PROJECTS_STATE_PENDING',	'COM_PROJECTS_STATE_FINISHED_ACTION',	'COM_PROJECTS_STATE_PENDING',	false,	'publish',		'publish'),
+					0	=> array('report',		'COM_PROJECTS_STATE_DENIED',	'COM_PROJECTS_STATE_APPROVED_ACTION',	'COM_PROJECTS_STATE_DENIED',	false,	'unpublish',	'unpublish'),
 				);
 				break;
 				
 			case 'ticket':
 				$prefix = 'tasks.';
 				$states	= array(	
-					2	=> array('publish',		'COM_PROJECTS_STATE_FINISHED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JARCHIVED',	false,	'archive',		'archive'),
-					1	=> array('unpublish',	'COM_PROJECTS_STATE_APPROVED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JPUBLISHED',	false,	'publish',		'publish'),
-					-3	=> array('publish',		'COM_PROJECTS_STATE_REPORTED',	'JLIB_HTML_UNPUBLISH_ITEM',	'JREPORTED',	false,	'report',		'report'),
-					0	=> array('publish',		'COM_PROJECTS_STATE_DENIED',	'JLIB_HTML_PUBLISH_ITEM',	'JUNPUBLISHED',	false,	'unpublish',	'unpublish'),
+					2	=> array('publish',		'COM_PROJECTS_STATE_FINISHED',	'COM_PROJECTS_STATE_APPROVED_ACTION',	'JARCHIVED',	false,	'archive',		'archive'),
+					1	=> array('unpublish',	'COM_PROJECTS_STATE_APPROVED',	'COM_PROJECTS_STATE_DENIED_ACTION',		'JPUBLISHED',	false,	'publish',		'publish'),
+					-3	=> array('publish',		'COM_PROJECTS_STATE_REPORTED',	'COM_PROJECTS_STATE_APPROVED_ACTION',	'JREPORTED',	false,	'report',		'report'),
+					0	=> array('publish',		'COM_PROJECTS_STATE_DENIED',	'COM_PROJECTS_STATE_APPROVED_ACTION',	'JUNPUBLISHED',	false,	'unpublish',	'unpublish'),
 				);
 				break;
 				

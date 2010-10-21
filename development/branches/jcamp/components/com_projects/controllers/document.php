@@ -8,14 +8,13 @@
 // no direct access
 defined('_JEXEC') or die;
 
-//jimport('joomla.application.component.controllerform');
-require_once JPATH_SITE.DS.'components'.DS.'com_content'.DS.'controllers'.DS.'article.php';
+jimport('joomla.application.component.controllerform');
 
 /**
  * @package		Joomla.Site
  * @subpackage	com_project
  */
-class ProjectsControllerDocument extends ContentControllerArticle
+class ProjectsControllerDocument extends JControllerForm
 {
 	protected $text_prefix = 'COM_PROJECTS_DOCUMENT';
 	protected $_context = 'com_projects.edit.document';

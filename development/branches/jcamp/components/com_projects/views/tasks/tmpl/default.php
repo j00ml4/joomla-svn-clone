@@ -25,8 +25,9 @@ $params =  $this->params;
 	        }
 			?>
 	        <fieldset class="filters">
-				<legend><?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?></legend>
-		
+				<legend class="hidelabeltxt">
+					<?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?>
+				</legend>
 				<div class="filter-search">
 					<p>
 						<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
