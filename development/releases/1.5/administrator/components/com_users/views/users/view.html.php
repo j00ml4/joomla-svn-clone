@@ -93,7 +93,7 @@ class UsersViewUsers extends JView
 		}
 
 		// ensure filter_order has a valid value.
-		if (!in_array($filter_order, array('a.name', 'a.username', 'a.block', 'groupname', 'a.email', 'a.lastvisitdate', 'a.id'))) {
+		if (!in_array($filter_order, array('a.name', 'a.username', 'a.block', 'groupname', 'a.email', 'a.lastvisitDate', 'a.id'))) {
 			$filter_order = 'a.name';
 		}
 
