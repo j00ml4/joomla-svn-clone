@@ -1,200 +1,380 @@
-CREATE TABLE jos_assets (
-  id int NOT NULL IDENTITY(1,1),
-  parent_id int NOT NULL DEFAULT '0',
-  lft int NOT NULL DEFAULT '0',
-  rgt int NOT NULL DEFAULT '0',
-  level int NOT NULL,
-  name varchar(50) NOT NULL,
-  title varchar(100) NOT NULL ,
-  rules varchar(MAX) NOT NULL,
-  PRIMARY KEY (id)
-);
 
-CREATE INDEX [idx_assets_lft_rgt] ON jos_assets (lft,rgt);
-CREATE INDEX idx_parent_id ON jos_assets (parent_id);
-CREATE UNIQUE INDEX idx_asset_name On jos_assets (name);
+/****** Object:  Table [dbo].[jos_weblinks]    Script Date: 10/20/2010 14:35:59 ******/
+SET ANSI_NULLS ON
 
-SET IDENTITY_INSERT jos_assets  ON;
+SET QUOTED_IDENTIFIER ON
 
-INSERT INTO jos_assets (id, parent_id, lft, rgt, level, name, title, rules)
-SELECT 1,0,0,61,0,'root.1','Root Asset','{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'
-UNION ALL
-SELECT 2,1,1,2,1,'com_admin','com_admin','{}'
-UNION ALL
-SELECT 3,1,3,6,1,'com_banners','com_banners','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 4,1,7,8,1,'com_cache','com_cache','{"core.admin":{"7":1},"core.manage":{"7":1}}'
-UNION ALL
-SELECT 5,1,9,10,1,'com_checkin','com_checkin','{"core.admin":{"7":1},"core.manage":{"7":1}}'
-UNION ALL
-SELECT 6,1,11,12,1,'com_config','com_config','{}'
-UNION ALL
-SELECT 7,1,13,16,1,'com_contact','com_contact','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 8,1,17,20,1,'com_content','com_content','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'
-UNION ALL
-SELECT 9,1,21,22,1,'com_cpanel','com_cpanel','{}'
-UNION ALL
-SELECT 10,1,23,24,1,'com_installer','com_installer','{"core.admin":{"7":1},"core.manage":{"7":1},"core.create":[],"core.delete":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 11,1,25,26,1,'com_languages','com_languages','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 12,1,27,28,1,'com_login','com_login','{}'
-UNION ALL
-SELECT 13,1,29,30,1,'com_mailto','com_mailto','{}'
-UNION ALL
-SELECT 14,1,31,32,1,'com_massmail','com_massmail','{}'
-UNION ALL
-SELECT 15,1,33,34,1,'com_media','com_media','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":{"5":1},"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 16,1,35,36,1,'com_menus','com_menus','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 17,1,37,38,1,'com_messages','com_messages','{"core.admin":{"7":1},"core.manage":{"7":1}}'
-UNION ALL
-SELECT 18,1,39,40,1,'com_modules','com_modules','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 19,1,41,44,1,'com_newsfeeds','com_newsfeeds','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 20,1,45,46,1,'com_plugins','com_plugins','{"core.admin":{"7":1},"core.manage":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 21,1,47,48,1,'com_redirect','com_redirect','{"core.admin":{"7":1},"core.manage":[]}'
-UNION ALL
-SELECT 22,1,49,50,1,'com_search','com_search','{"core.admin":{"7":1},"core.manage":{"6":1}}'
-UNION ALL
-SELECT 23,1,51,52,1,'com_templates','com_templates','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 24,1,53,54,1,'com_users','com_users','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 25,1,55,58,1,'com_weblinks','com_weblinks','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'
-UNION ALL
-SELECT 26,1,59,60,1,'com_wrapper','com_wrapper','{}'
-UNION ALL
-SELECT 27, 8, 18, 19, 2, 'com_content.category.2', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 28, 3, 4, 5, 2, 'com_banners.category.3', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 29, 7, 14, 15, 2, 'com_contact.category.4', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 30, 19, 42, 43, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 31, 25, 56, 57, 2, 'com_weblinks.category.6', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_weblinks]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_weblinks](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[catid] [int] NOT NULL DEFAULT ((0)),
+	[sid] [int] NOT NULL DEFAULT ((0)),
+	[title] [nvarchar](250) NOT NULL DEFAULT (N''),
+	[alias] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[url] [nvarchar](250) NOT NULL DEFAULT (N''),
+	[description] [nvarchar](max) NOT NULL,
+	[date] [datetime] NOT NULL DEFAULT (getdate()),
+	[hits] [int] NOT NULL DEFAULT ((0)),
+	[state] [smallint] NOT NULL DEFAULT ((0)),
+	[checked_out] [int] NOT NULL DEFAULT ((0)),
+	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[ordering] [int] NOT NULL DEFAULT ((0)),
+	[archived] [smallint] NOT NULL DEFAULT ((0)),
+	[approved] [smallint] NOT NULL DEFAULT ((1)),
+	[access] [int] NOT NULL DEFAULT ((1)),
+	[params] [nvarchar](max) NOT NULL,
+	[language] [nchar](7) NOT NULL DEFAULT (N''),
+	[created] [datetime] NOT NULL DEFAULT (getdate()),
+	[created_by] [bigint] NOT NULL DEFAULT ((0)),
+	[created_by_alias] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[modified] [datetime] NOT NULL DEFAULT (getdate()),
+	[modified_by] [bigint] NOT NULL DEFAULT ((0)),
+	[metakey] [nvarchar](max) NOT NULL,
+	[metadesc] [nvarchar](max) NOT NULL,
+	[metadata] [nvarchar](max) NOT NULL,
+	[featured] [tinyint] NOT NULL DEFAULT ((0)),
+	[xreference] [nvarchar](50) NOT NULL,
+	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
+	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
+ CONSTRAINT [PK_jos_weblinks_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 
-SET IDENTITY_INSERT jos_assets  OFF;
+/****** Object:  Table [dbo].[jos_menu]    Script Date: 10/20/2010 14:29:39 ******/
+SET ANSI_NULLS ON
 
+SET QUOTED_IDENTIFIER ON
 
-CREATE TABLE jos_banners (
-  id INTEGER NOT NULL IDENTITY(1,1),
-  cid INTEGER NOT NULL DEFAULT '0',
-  type INTEGER NOT NULL DEFAULT '0',
-  name VARCHAR(255) NOT NULL DEFAULT '',
-  alias VARCHAR(255) NOT NULL DEFAULT '',
-  imptotal INTEGER NOT NULL DEFAULT '0',
-  impmade INTEGER NOT NULL DEFAULT '0',
-  clicks INTEGER NOT NULL DEFAULT '0',
-  clickurl VARCHAR(200) NOT NULL DEFAULT '',
-  state smallint NOT NULL DEFAULT '0',
-  catid INTEGER NOT NULL DEFAULT 0,
-  description TEXT NOT NULL,
-  custombannercode VARCHAR(MAX) NOT NULL,
-  sticky smallint NOT NULL DEFAULT 0,
-  ordering INTEGER NOT NULL DEFAULT 0,
-  metakey TEXT NOT NULL,
-  params TEXT NOT NULL,
-  own_prefix smallint NOT NULL DEFAULT '0',
-  metakey_prefix VARCHAR(255) NOT NULL DEFAULT '',
-  purchase_type smallint NOT NULL DEFAULT '-1',
-  track_clicks smallint NOT NULL DEFAULT '-1',
-  track_impressions smallint NOT NULL DEFAULT '-1',
-  checked_out INTEGER NOT NULL DEFAULT '0',
-  checked_out_time DATETIME NOT NULL DEFAULT '1900-01-01 00:00:00',
-  publish_up DATETIME NOT NULL DEFAULT '1900-01-01 00:00:00',
-  publish_down DATETIME NOT NULL DEFAULT '1900-01-01 00:00:00',
-  reset DATETIME NOT NULL DEFAULT '1900-01-01 00:00:00',
-  created DATETIME NOT NULL DEFAULT '1900-01-01 00:00:00',
-  language char NOT NULL DEFAULT '',
-  PRIMARY KEY  (id)  
-);
-
- CREATE INDEX idx_state ON jos_banners (state);
- CREATE INDEX idx_own_prefix ON  jos_banners (own_prefix);
- CREATE INDEX idx_metakey_prefix ON jos_banners (metakey_prefix);
- CREATE INDEX idx_banner_catid ON jos_banners (catid);
- CREATE INDEX idx_language ON jos_banners (language);
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_menu]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_menu](
+	[id] [int] IDENTITY(102,1) NOT NULL,
+	[menutype] [nvarchar](24) NOT NULL,
+	[title] [nvarchar](255) NOT NULL,
+	[alias] [nvarchar](255) NOT NULL,
+	[note] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[path] [nvarchar](1024) NOT NULL,
+	[link] [nvarchar](1024) NOT NULL,
+	[type] [nvarchar](16) NOT NULL,
+	[published] [smallint] NOT NULL DEFAULT ((0)),
+	[parent_id] [bigint] NOT NULL DEFAULT ((1)),
+	[level] [bigint] NOT NULL DEFAULT ((0)),
+	[component_id] [bigint] NOT NULL DEFAULT ((0)),
+	[ordering] [int] NOT NULL DEFAULT ((0)),
+	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
+	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[browserNav] [smallint] NOT NULL DEFAULT ((0)),
+	[access] [tinyint] NOT NULL DEFAULT ((0)),
+	[img] [nvarchar](255) NOT NULL,
+	[template_style_id] [bigint] NOT NULL DEFAULT ((0)),
+	[params] [nvarchar](max) NOT NULL,
+	[lft] [int] NOT NULL DEFAULT ((0)),
+	[rgt] [int] NOT NULL DEFAULT ((0)),
+	[home] [tinyint] NOT NULL DEFAULT ((0)),
+	[language] [nchar](7) NOT NULL DEFAULT (N''),
+ CONSTRAINT [PK_jos_menu_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [jos_menu$idx_alias_parent_id] UNIQUE NONCLUSTERED 
+(
+	[alias] ASC,
+	[parent_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 
 
-CREATE TABLE jos_banner_clients (
-  id INTEGER NOT NULL IDENTITY(1,1),
-  name VARCHAR(255) NOT NULL DEFAULT '',
-  contact VARCHAR(255) NOT NULL DEFAULT '',
-  email VARCHAR(255) NOT NULL DEFAULT '',
-  extrainfo TEXT NOT NULL,
-  state smallint NOT NULL DEFAULT '0',
-  checked_out INTEGER NOT NULL DEFAULT '0',
-  checked_out_time DATETIME NOT NULL default '1900-01-01 00:00:00',
-  metakey TEXT NOT NULL,
-  own_prefix smallint NOT NULL DEFAULT '0',
-  metakey_prefix VARCHAR(255) NOT NULL default '',
-  purchase_type smallint NOT NULL DEFAULT '-1',
-  track_clicks smallint NOT NULL DEFAULT '-1',
-  track_impressions smallint NOT NULL DEFAULT '-1',
-  PRIMARY KEY  (id)
-);
+SET IDENTITY_INSERT jos_menu  ON;
 
-CREATE INDEX idx_own_prefix ON jos_banner_clients (own_prefix);
-CREATE INDEX idx_metakey_prefix ON jos_banner_clients (metakey_prefix);
+INSERT INTO jos_menu (id, menutype, title, alias, note, path, link,type, published,parent_id, level, component_id,ordering, checked_out, checked_out_time, browserNav,
+  access, img, template_style_id, params, lft, rgt, home, language)
+SELECT 1,'','Menu_Item_Root','root','','','','',1,0,0,0,0,0,'1900-01-01 00:00:00',0,0,'',0,'',0,217,0,'*'
+UNION ALL
+SELECT 2,'_adminmenu','com_banners','Banners','','Banners','index.php?option=com_banners','component',0,1,1,4,0,0,'1900-01-01 00:00:00',0,0,'class:banners',0,'',1,10,0,'*'
+UNION ALL
+SELECT 3,'_adminmenu','com_banners','Banners','','Banners/Banners','index.php?option=com_banners','component',0,2,2,4,0,0,'1900-01-01 00:00:00',0,0,'class:banners',0,'',2,3,0,'*'
+UNION ALL
+SELECT 4,'_adminmenu','com_banners_clients','Clients','','Banners/Clients','index.php?option=com_banners&view=clients','component',0,2,2,4,0,0,'1900-01-01 00:00:00',0,0,'class:banners-clients',0,'',4,5,0,'*'
+UNION ALL
+SELECT 5,'_adminmenu','com_banners_tracks','Tracks','','Banners/Tracks','index.php?option=com_banners&view=tracks','component',0,2,2,4,0,0,'1900-01-01 00:00:00',0,0,'class:banners-tracks',0,'',6,7,0,'*'
+UNION ALL
+SELECT 6,'_adminmenu','com_banners_categories','Categories','','Banners/Categories','index.php?option=com_categories&extension=com_banners','component',0,2,2,6,0,0,'1900-01-01 00:00:00',0,0,'class:banners-cat',0,'',8,9,0,'*'
+UNION ALL
+SELECT 7,'_adminmenu','com_contact','Contacts','','Contacts','index.php?option=com_contact','component',0,1,1,8,0,0,'1900-01-01 00:00:00',0,0,'class:contact',0,'',11,16,0,'*'
+UNION ALL
+SELECT 8,'_adminmenu','com_contact','Contacts','','Contacts/Contacts','index.php?option=com_contact','component',0,7,2,8,0,0,'1900-01-01 00:00:00',0,0,'class:contact',0,'',12,13,0,'*'
+UNION ALL
+SELECT 9,'_adminmenu','com_contact_categories','Categories','','Contacts/Categories','index.php?option=com_categories&extension=com_contact','component',0,7,2,6,0,0,'1900-01-01 00:00:00',0,0,'class:contact-cat',0,'',14,15,0,'*'
+UNION ALL
+SELECT 10,'_adminmenu','com_messages','Messaging','','Messaging','index.php?option=com_messages','component',0,1,1,15,0,0,'1900-01-01 00:00:00',0,0,'class:messages',0,'',17,22,0,'*'
+UNION ALL
+SELECT 11,'_adminmenu','com_messages_add','New Private Message','','Messaging/New Private Message','index.php?option=com_messages&task=message.add','component',0,10,2,15,0,0,'1900-01-01 00:00:00',0,0,'class:messages-add',0,'',18,19,0,'*'
+UNION ALL
+SELECT 12,'_adminmenu','com_messages_read','Read Private Message','','Messaging/Read Private Message','index.php?option=com_messages','component',0,10,2,15,0,0,'1900-01-01 00:00:00',0,0,'class:messages-read',0,'',20,21,0,'*'
+UNION ALL
+SELECT 13,'_adminmenu','com_newsfeeds','News Feeds','','News Feeds','index.php?option=com_newsfeeds','component',0,1,1,17,0,0,'1900-01-01 00:00:00',0,0,'class:newsfeeds',0,'',23,28,0,'*'
+UNION ALL
+SELECT 14,'_adminmenu','com_newsfeeds_feeds','Feeds','','News Feeds/Feeds','index.php?option=com_newsfeeds','component',0,13,2,17,0,0,'1900-01-01 00:00:00',0,0,'class:newsfeeds',0,'',24,25,0,'*'
+UNION ALL
+SELECT 15,'_adminmenu','com_newsfeeds_categories','Categories','','News Feeds/Categories','index.php?option=com_categories&extension=com_newsfeeds','component',0,13,2,6,0,0,'1900-01-01 00:00:00',0,0,'class:newsfeeds-cat',0,'',26,27,0,'*'
+UNION ALL
+SELECT 16,'_adminmenu','com_redirect','Redirect','','Redirect','index.php?option=com_redirect','component',0,1,1,24,0,0,'1900-01-01 00:00:00',0,0,'class:redirect',0,'',37,38,0,'*'
+UNION ALL
+SELECT 17,'_adminmenu','com_search','Search','','Search','index.php?option=com_search','component',0,1,1,19,0,0,'1900-01-01 00:00:00',0,0,'class:search',0,'',29,30,0,'*'
+UNION ALL
+SELECT 18,'_adminmenu','com_weblinks','Weblinks','','Weblinks','index.php?option=com_weblinks','component',0,1,1,21,0,0,'1900-01-01 00:00:00',0,0,'class:weblinks',0,'',31,36,0,'*'
+UNION ALL
+SELECT 19,'_adminmenu','com_weblinks_links','Links','','Weblinks/Links','index.php?option=com_weblinks','component',0,18,2,21,0,0,'1900-01-01 00:00:00',0,0,'class:weblinks',0,'',32,33,0,'*'
+UNION ALL
+SELECT 20,'_adminmenu','com_weblinks_categories','Categories','','Weblinks/Categories','index.php?option=com_categories&extension=com_weblinks','component',0,18,2,6,0,0,'1900-01-01 00:00:00',0,0,'class:weblinks-cat',0,'',34,35,0,'*'
+UNION ALL
+SELECT 101, 'mainmenu', 'Home', 'home', '', 'home', 'index.php?option=com_content&view=featured', 'component', 1, 1, 1, 22, 0, 0, '1900-01-01 00:00:00', 0, 1, '', 0, '{"num_leading_articles":"1","num_intro_articles":"3","num_columns":"3","num_links":"0","orderby_pri":"","orderby_sec":"front","order_date":"","multi_column_order":"1","show_pagination":"2","show_pagination_results":"1","show_noauth":"","article-allow_ratings":"","article-allow_comments":"","show_feed_link":"1","feed_summary":"","show_title":"","link_titles":"","show_intro":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_readmore":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","show_page_heading":1,"page_title":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 231, 232, 1,'*'
 
+SET IDENTITY_INSERT jos_menu  OFF;
+/****** Object:  Table [dbo].[jos_banner_tracks]    Script Date: 10/20/2010 14:23:38 ******/
+SET ANSI_NULLS ON
 
+SET QUOTED_IDENTIFIER ON
 
-CREATE TABLE  jos_banner_tracks (
-  track_date DATETIME NOT NULL,
-  track_type INTEGER NOT NULL,
-  banner_id INTEGER NOT NULL,
-  count INTEGER NOT NULL DEFAULT '0',
-  PRIMARY KEY (track_date, track_type, banner_id)
-);
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_banner_tracks]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_banner_tracks](
+	[track_date] [datetime] NOT NULL,
+	[track_type] [bigint] NOT NULL,
+	[banner_id] [bigint] NOT NULL,
+	[count] [bigint] NOT NULL DEFAULT ((0)),
+ CONSTRAINT [PK_jos_banner_tracks_track_date] PRIMARY KEY CLUSTERED 
+(
+	[track_date] ASC,
+	[track_type] ASC,
+	[banner_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 
- CREATE INDEX idx_track_date ON jos_banner_tracks (track_date);
- CREATE INDEX idx_track_type ON jos_banner_tracks (track_type);
- CREATE INDEX idx_banner_id ON jos_banner_tracks (banner_id);
+/****** Object:  Table [dbo].[jos_banners]    Script Date: 10/20/2010 14:24:17 ******/
+SET ANSI_NULLS ON
 
+SET QUOTED_IDENTIFIER ON
 
-CREATE TABLE jos_categories (
-  id int NOT NULL IDENTITY(1,1),
-  asset_id INTEGER NOT NULL DEFAULT 0,
-  parent_id int NOT NULL default '0',
-  lft int NOT NULL default '0',
-  rgt int NOT NULL default '0',
-  level int NOT NULL default '0',
-  path varchar(255) NOT NULL default '',
-  extension varchar(50) NOT NULL default '',
-  title varchar(255) NOT NULL,
-  alias varchar(255) NOT NULL default '',
-  note varchar(255) NOT NULL default '',
-  description varchar(MAX) NOT NULL default '',
-  published smallint NOT NULL default '0',
-  checked_out int NOT NULL default '0',
-  checked_out_time datetime NOT NULL default '1900-01-01 00:00:00',
-  access smallint NOT NULL default '0',
-  params varchar(MAX) NOT NULL default '',
-  metadesc varchar(MAX) NOT NULL,
-  metakey varchar(MAX) NOT NULL,
-  metadata varchar(MAX) NOT NULL,
-  created_user_id int NOT NULL default '0',
-  created_time datetime NOT NULL DEFAULT '1900-01-01 00:00:00',
-  modified_user_id int NOT NULL default '0',
-  modified_time datetime NOT NULL default '1900-01-01 00:00:00',
-  hits int NOT NULL default '0',
-  language char NOT NULL,
-  PRIMARY KEY  (id)
-) ;
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_banners]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_banners](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[cid] [int] NOT NULL DEFAULT ((0)),
+	[type] [int] NOT NULL DEFAULT ((0)),
+	[name] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[alias] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[imptotal] [int] NOT NULL DEFAULT ((0)),
+	[impmade] [int] NOT NULL DEFAULT ((0)),
+	[clicks] [int] NOT NULL DEFAULT ((0)),
+	[clickurl] [nvarchar](200) NOT NULL DEFAULT (N''),
+	[state] [smallint] NOT NULL DEFAULT ((0)),
+	[catid] [bigint] NOT NULL DEFAULT ((0)),
+	[description] [nvarchar](max) NOT NULL,
+	[custombannercode] [nvarchar](2048) NOT NULL,
+	[sticky] [tinyint] NOT NULL DEFAULT ((0)),
+	[ordering] [int] NOT NULL DEFAULT ((0)),
+	[metakey] [nvarchar](max) NOT NULL,
+	[params] [nvarchar](max) NOT NULL,
+	[own_prefix] [smallint] NOT NULL DEFAULT ((0)),
+	[metakey_prefix] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[purchase_type] [smallint] NOT NULL DEFAULT ((-1)),
+	[track_clicks] [smallint] NOT NULL DEFAULT ((-1)),
+	[track_impressions] [smallint] NOT NULL DEFAULT ((-1)),
+	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
+	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
+	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
+	[reset] [datetime] NOT NULL DEFAULT (getdate()),
+	[created] [datetime] NOT NULL DEFAULT (getdate()),
+	[language] [nchar](7) NOT NULL DEFAULT (N''),
+ CONSTRAINT [PK_jos_banners_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 
- CREATE INDEX cat_idx ON jos_categories (extension,published,access);
-  CREATE INDEX idx_access ON jos_categories (access);
-  CREATE INDEX idx_checkout ON jos_categories (checked_out);
-  CREATE INDEX idx_path ON jos_categories  (path);
-  CREATE INDEX idx_left_right ON jos_categories (lft,rgt);
-  CREATE INDEX idx_alias ON jos_categories (alias);
-  CREATE INDEX idx_language ON jos_categories (language);
+/****** Object:  Table [dbo].[jos_menu_types]    Script Date: 10/20/2010 14:29:46 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_menu_types]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_menu_types](
+	[id] [bigint] IDENTITY(2,1) NOT NULL,
+	[menutype] [nvarchar](24) NOT NULL,
+	[title] [nvarchar](48) NOT NULL,
+	[description] [nvarchar](255) NOT NULL DEFAULT (N''),
+ CONSTRAINT [PK_jos_menu_types_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [jos_menu_types$idx_menutype] UNIQUE NONCLUSTERED 
+(
+	[menutype] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_messages]    Script Date: 10/20/2010 14:29:59 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_messages]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_messages](
+	[message_id] [bigint] IDENTITY(1,1) NOT NULL,
+	[user_id_from] [bigint] NOT NULL DEFAULT ((0)),
+	[user_id_to] [bigint] NOT NULL DEFAULT ((0)),
+	[folder_id] [tinyint] NOT NULL DEFAULT ((0)),
+	[date_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[state] [smallint] NOT NULL DEFAULT ((0)),
+	[priority] [tinyint] NOT NULL DEFAULT ((0)),
+	[subject] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[message] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_jos_messages_message_id] PRIMARY KEY CLUSTERED 
+(
+	[message_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_messages_cfg]    Script Date: 10/20/2010 14:30:08 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_messages_cfg]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_messages_cfg](
+	[user_id] [bigint] NOT NULL DEFAULT ((0)),
+	[cfg_name] [nvarchar](100) NOT NULL DEFAULT (N''),
+	[cfg_value] [nvarchar](255) NOT NULL DEFAULT (N''),
+ CONSTRAINT [jos_messages_cfg$idx_user_var_name] UNIQUE CLUSTERED 
+(
+	[user_id] ASC,
+	[cfg_name] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_modules]    Script Date: 10/20/2010 14:30:34 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_modules]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_modules](
+	[id] [int] IDENTITY(19,1) NOT NULL,
+	[title] [nvarchar](100) NOT NULL DEFAULT (N''),
+	[note] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[content] [nvarchar](max) NOT NULL,
+	[ordering] [int] NOT NULL DEFAULT ((0)),
+	[position] [nvarchar](50) NULL DEFAULT (NULL),
+	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
+	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
+	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
+	[published] [smallint] NOT NULL DEFAULT ((0)),
+	[module] [nvarchar](50) NULL DEFAULT (NULL),
+	[access] [tinyint] NOT NULL DEFAULT ((0)),
+	[showtitle] [tinyint] NOT NULL DEFAULT ((1)),
+	[params] [nvarchar](max) NOT NULL DEFAULT (N''),
+	[client_id] [smallint] NOT NULL DEFAULT ((0)),
+	[language] [nchar](7) NOT NULL,
+ CONSTRAINT [PK_jos_modules_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+SET IDENTITY_INSERT jos_modules  ON;
+INSERT INTO jos_modules (id, title, note, content, ordering, position, checked_out,checked_out_time, publish_up, publish_down, published, module, access, showtitle, params,
+  client_id, language)
+SELECT 1, 'Main Menu', '', '', 1, 'position-7', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_menu', 1, 1, '{"menutype":"mainmenu","startLevel":"0","endLevel":"0","showAllChildren":"0","tag_id":"","class_sfx":"","window_open":"","layout":"","moduleclass_sfx":"_menu","cache":"1","cache_time":"900","cachemode":"itemid"}', 0, '*'
+UNION ALL
+SELECT 2, 'Login', '', '', 1, 'login', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_login', 1, 1, '', 1, '*'
+UNION ALL
+SELECT 3, 'Popular Articles', '', '', 3, 'cpanel', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_popular', 3, 1, '{"count":"5","catid":"","user_id":"0","layout":"","moduleclass_sfx":"","cache":"0"}', 1, '*'
+UNION ALL
+SELECT 4, 'Recently Added Articles', '', '', 4, 'cpanel', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_latest', 3, 1, '{"count":"5","ordering":"c_dsc","catid":"","user_id":"0","layout":"","moduleclass_sfx":"","cache":"0"}', 1, '*'
+UNION ALL
+SELECT 6, 'Unread Messages', '', '', 1, 'header', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_unread', 3, 1, '', 1, '*'
+UNION ALL
+SELECT 7, 'Online Users', '', '', 2, 'header', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_online', 3, 1, '', 1, '*'
+UNION ALL
+SELECT 8, 'Toolbar', '', '', 1, 'toolbar', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_toolbar', 3, 1, '', 1, '*'
+UNION ALL
+SELECT 9, 'Quick Icons', '', '', 1, 'icon', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_quickicon', 3, 1, '', 1, '*'
+UNION ALL
+SELECT 10, 'Logged-in Users', '', '', 2, 'cpanel', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_logged', 3, 1, '', 1, '*'
+UNION ALL
+SELECT 12, 'Admin Menu', '', '', 1, 'menu', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_menu', 3, 1, '{"layout":"","moduleclass_sfx":"","shownew":"1","showhelp":"1","cache":"0"}', 1, '*'
+UNION ALL
+SELECT 13, 'Admin Submenu', '', '', 1, 'submenu', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_submenu', 3, 1, '', 1, '*'
+UNION ALL
+SELECT 14, 'User Status', '', '', 1, 'status', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_status', 3, 1, '', 1, '*'
+UNION ALL
+SELECT 15, 'Title', '', '', 1, 'title', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_title', 3, 1, '', 1, '*'
+UNION ALL
+SELECT 16, 'Login Form', '', '', 7, 'position-7', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_login', 1, 1, '{"greeting":"1","name":"0"}', 0, '*'
+UNION ALL
+SELECT 17, 'Breadcrumbs', '', '', 1, 'position-2', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_breadcrumbs', 1, 1, '{"moduleclass_sfx":"","showHome":"1","homeText":"Home","showComponent":"1","separator":"","cache":"1","cache_time":"900","cachemode":"itemid"}', 0, '*'
+UNION ALL
+SELECT 18, 'Banners', '', '', 1, 'position-5', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 0, 'mod_banners', 1, 1, '{"target":"1","count":"1","cid":"1","catid":["27"],"tag_search":"0","ordering":"0","header_text":"","footer_text":"","layout":"","moduleclass_sfx":"","cache":"1","cache_time":"900"}', 0, '*'
+
+SET IDENTITY_INSERT jos_modules  OFF;
+/****** Object:  Table [dbo].[jos_categories]    Script Date: 10/20/2010 14:24:56 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_categories]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_categories](
+	[id] [int] IDENTITY(7,1) NOT NULL,
+	[asset_id] [bigint] NOT NULL DEFAULT ((0)),
+	[parent_id] [bigint] NOT NULL DEFAULT ((0)),
+	[lft] [int] NOT NULL DEFAULT ((0)),
+	[rgt] [int] NOT NULL DEFAULT ((0)),
+	[level] [bigint] NOT NULL DEFAULT ((0)),
+	[path] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[extension] [nvarchar](50) NOT NULL DEFAULT (N''),
+	[title] [nvarchar](255) NOT NULL,
+	[alias] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[note] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[description] [nvarchar](max) NOT NULL DEFAULT (N''),
+	[published] [smallint] NOT NULL DEFAULT ((0)),
+	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
+	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[access] [tinyint] NOT NULL DEFAULT ((0)),
+	[params] [nvarchar](2048) NOT NULL DEFAULT (N''),
+	[metadesc] [nvarchar](1024) NOT NULL,
+	[metakey] [nvarchar](1024) NOT NULL,
+	[metadata] [nvarchar](2048) NOT NULL,
+	[created_user_id] [bigint] NOT NULL DEFAULT ((0)),
+	[created_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[modified_user_id] [bigint] NOT NULL DEFAULT ((0)),
+	[modified_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[hits] [bigint] NOT NULL DEFAULT ((0)),
+	[language] [nchar](7) NOT NULL,
+ CONSTRAINT [PK_jos_categories_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 
 SET IDENTITY_INSERT jos_categories  ON;
 
@@ -212,160 +392,588 @@ UNION ALL
 SELECT 6, 31, 1, 9, 10, 1, 'uncategorised', 'com_weblinks', 'Uncategorised', 'uncategorised', '', '', 1, 0, '1900-01-01 00:00:00', 1, '{"target":"","image":""}', '', '', '{"page_title":"","author":"","robots":""}', 42, '2010-06-28 13:28:33', 0, '1900-01-01 00:00:00', 0, '*'
 
 SET IDENTITY_INSERT jos_categories  OFF;
+/****** Object:  Table [dbo].[jos_modules_menu]    Script Date: 10/20/2010 14:30:39 ******/
+SET ANSI_NULLS ON
 
-CREATE TABLE jos_contact_details (
-  id integer NOT NULL identity(1,1),
-  name varchar(255) NOT NULL default '',
-  alias varchar(255) NOT NULL default '',
-  con_position varchar(255) NULL default NULL,
-  address text NULL,
-  suburb varchar(100) NULL default NULL,
-  state varchar(100) NULL default NULL,
-  country varchar(100) NULL  default NULL,
-  postcode varchar(100) NULL default NULL,
-  telephone varchar(255) NULL default NULL,
-  fax varchar(255) NULL default NULL,
-  misc text NULL,
-  image varchar(255) NULL default NULL,
-  imagepos varchar(20) NULL default NULL,
-  email_to varchar(255) NULL default NULL,
-  default_con smallint NOT NULL default '0',
-  published smallint NOT NULL default '0',
-  checked_out integer NOT NULL default '0',
-  checked_out_time datetime NOT NULL default '1900-01-01 00:00:00',
-  ordering integer NOT NULL default '0',
-  params text NOT NULL,
-  user_id integer NOT NULL default '0',
-  catid integer NOT NULL default '0',
-  access smallint NOT NULL default '0',
-  mobile varchar(255) NOT NULL default '',
-  webpage varchar(255) NOT NULL default '',
-  sortname1 varchar(255) NOT NULL,
-  sortname2 varchar(255) NOT NULL,
-  sortname3 varchar(255) NOT NULL,
-  language char(7) NOT NULL,
-  created datetime NOT NULL default '1900-01-01 00:00:00',
-  created_by int NOT NULL default '0',
-  created_by_alias varchar(255) NOT NULL default '',
-  modified datetime NOT NULL default '1900-01-01 00:00:00',
-  modified_by int NOT NULL default '0',
-  metakey text NOT NULL,
-  metadesc text NOT NULL,
-  metadata text NOT NULL,
-  featured smallint NOT NULL default '0', 
-  xreference varchar(50) NOT NULL,
-  publish_up datetime NOT NULL default '1900-01-01 00:00:00',
-  publish_down datetime NOT NULL default '1900-01-01 00:00:00',
-  PRIMARY KEY  (id)
-) ;
+SET QUOTED_IDENTIFIER ON
 
-  CREATE INDEX idx_access ON jos_contact_details (access);
-  CREATE INDEX idx_checkout ON jos_contact_details (checked_out);
-  CREATE INDEX idx_state ON jos_contact_details (published);
-  CREATE INDEX idx_catid ON jos_contact_details (catid);
-  CREATE INDEX idx_createdby ON jos_contact_details (created_by);
-  CREATE INDEX idx_featured_catid ON jos_contact_details (featured,catid);
-  CREATE INDEX idx_language ON jos_contact_details (language);
-  CREATE INDEX idx_xreference ON jos_contact_details (xreference);
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_modules_menu]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_modules_menu](
+	[moduleid] [int] NOT NULL DEFAULT ((0)),
+	[menuid] [int] NOT NULL DEFAULT ((0)),
+ CONSTRAINT [PK_jos_modules_menu_moduleid] PRIMARY KEY CLUSTERED 
+(
+	[moduleid] ASC,
+	[menuid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+INSERT INTO jos_modules_menu (moduleid,menuid)
+SELECT 1,0
+UNION ALL
+SELECT 2,0
+UNION ALL
+SELECT 3,0
+UNION ALL
+SELECT 4,0
+UNION ALL
+SELECT 6,0
+UNION ALL
+SELECT 7,0
+UNION ALL
+SELECT 8,0
+UNION ALL
+SELECT 9,0
+UNION ALL
+SELECT 10,0
+UNION ALL
+SELECT 12,0
+UNION ALL
+SELECT 13,0
+UNION ALL
+SELECT 14,0
+UNION ALL
+SELECT 15,0
+UNION ALL
+SELECT 16,0
+UNION ALL
+SELECT 17,0
+UNION ALL
+SELECT 18,0
+/****** Object:  Table [dbo].[jos_newsfeeds]    Script Date: 10/20/2010 14:31:23 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_newsfeeds]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_newsfeeds](
+	[catid] [int] NOT NULL DEFAULT ((0)),
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](100) NOT NULL DEFAULT (N''),
+	[alias] [nvarchar](100) NOT NULL DEFAULT (N''),
+	[link] [nvarchar](200) NOT NULL DEFAULT (N''),
+	[filename] [nvarchar](200) NULL DEFAULT (NULL),
+	[published] [smallint] NOT NULL DEFAULT ((0)),
+	[numarticles] [bigint] NOT NULL DEFAULT ((1)),
+	[cache_time] [bigint] NOT NULL DEFAULT ((3600)),
+	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
+	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[ordering] [int] NOT NULL DEFAULT ((0)),
+	[rtl] [smallint] NOT NULL DEFAULT ((0)),
+	[access] [tinyint] NOT NULL DEFAULT ((0)),
+	[language] [nchar](7) NOT NULL DEFAULT (N''),
+	[params] [nvarchar](max) NOT NULL,
+	[created] [datetime] NOT NULL DEFAULT (getdate()),
+	[created_by] [bigint] NOT NULL DEFAULT ((0)),
+	[created_by_alias] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[modified] [datetime] NOT NULL DEFAULT (getdate()),
+	[modified_by] [bigint] NOT NULL DEFAULT ((0)),
+	[metakey] [nvarchar](max) NOT NULL,
+	[metadesc] [nvarchar](max) NOT NULL,
+	[metadata] [nvarchar](max) NOT NULL,
+	[xreference] [nvarchar](50) NOT NULL,
+	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
+	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
+ CONSTRAINT [PK_jos_newsfeeds_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_contact_details]    Script Date: 10/20/2010 14:25:56 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_contact_details]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_contact_details](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[alias] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[con_position] [nvarchar](255) NULL DEFAULT (NULL),
+	[address] [nvarchar](max) NULL,
+	[suburb] [nvarchar](100) NULL DEFAULT (NULL),
+	[state] [nvarchar](100) NULL DEFAULT (NULL),
+	[country] [nvarchar](100) NULL DEFAULT (NULL),
+	[postcode] [nvarchar](100) NULL DEFAULT (NULL),
+	[telephone] [nvarchar](255) NULL DEFAULT (NULL),
+	[fax] [nvarchar](255) NULL DEFAULT (NULL),
+	[misc] [nvarchar](max) NULL,
+	[image] [nvarchar](255) NULL DEFAULT (NULL),
+	[imagepos] [nvarchar](20) NULL DEFAULT (NULL),
+	[email_to] [nvarchar](255) NULL DEFAULT (NULL),
+	[default_con] [tinyint] NOT NULL DEFAULT ((0)),
+	[published] [smallint] NOT NULL DEFAULT ((0)),
+	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
+	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[ordering] [int] NOT NULL DEFAULT ((0)),
+	[params] [nvarchar](max) NOT NULL,
+	[user_id] [int] NOT NULL DEFAULT ((0)),
+	[catid] [int] NOT NULL DEFAULT ((0)),
+	[access] [tinyint] NOT NULL DEFAULT ((0)),
+	[mobile] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[webpage] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[sortname1] [nvarchar](255) NOT NULL,
+	[sortname2] [nvarchar](255) NOT NULL,
+	[sortname3] [nvarchar](255) NOT NULL,
+	[language] [nchar](7) NOT NULL,
+	[created] [datetime] NOT NULL DEFAULT (getdate()),
+	[created_by] [bigint] NOT NULL DEFAULT ((0)),
+	[created_by_alias] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[modified] [datetime] NOT NULL DEFAULT (getdate()),
+	[modified_by] [bigint] NOT NULL DEFAULT ((0)),
+	[metakey] [nvarchar](max) NOT NULL,
+	[metadesc] [nvarchar](max) NOT NULL,
+	[metadata] [nvarchar](max) NOT NULL,
+	[featured] [tinyint] NOT NULL DEFAULT ((0)),
+	[xreference] [nvarchar](50) NOT NULL,
+	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
+	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
+ CONSTRAINT [PK_jos_contact_details_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_redirect_links]    Script Date: 10/20/2010 14:31:36 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_redirect_links]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_redirect_links](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[old_url] [nvarchar](150) NOT NULL,
+	[new_url] [nvarchar](150) NOT NULL,
+	[referer] [nvarchar](150) NOT NULL,
+	[comment] [nvarchar](255) NOT NULL,
+	[published] [smallint] NOT NULL,
+	[created_date] [datetime] NOT NULL DEFAULT (getdate()),
+	[modified_date] [datetime] NOT NULL DEFAULT (getdate()),
+ CONSTRAINT [PK_jos_redirect_links_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [jos_redirect_links$idx_link_old] UNIQUE NONCLUSTERED 
+(
+	[old_url] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_schemas]    Script Date: 10/20/2010 14:31:42 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_schemas]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_schemas](
+	[extension_id] [int] NOT NULL,
+	[version_id] [nvarchar](20) NOT NULL,
+ CONSTRAINT [PK_jos_schemas_extension_id] PRIMARY KEY CLUSTERED 
+(
+	[extension_id] ASC,
+	[version_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_session]    Script Date: 10/20/2010 14:32:07 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_session]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_session](
+	[session_id] [nvarchar](32) NOT NULL DEFAULT (N''),
+	[client_id] [tinyint] NOT NULL DEFAULT ((0)),
+	[guest] [tinyint] NULL DEFAULT ((1)),
+	[time] [nvarchar](14) NULL DEFAULT (N''),
+	[data] [nvarchar](max) NULL DEFAULT (NULL),
+	[userid] [int] NULL DEFAULT ((0)),
+	[username] [nvarchar](150) NULL DEFAULT (N''),
+	[usertype] [nvarchar](50) NULL DEFAULT (N''),
+ CONSTRAINT [PK_jos_session_session_id] PRIMARY KEY CLUSTERED 
+(
+	[session_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_template_styles]    Script Date: 10/20/2010 14:32:26 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_template_styles]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_template_styles](
+	[id] [bigint] IDENTITY(7,1) NOT NULL,
+	[template] [nvarchar](50) NOT NULL DEFAULT (N''),
+	[client_id] [tinyint] NOT NULL DEFAULT ((0)),
+	[home] [tinyint] NOT NULL DEFAULT ((0)),
+	[title] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[params] [nvarchar](2048) NOT NULL DEFAULT (N''),
+ CONSTRAINT [PK_jos_template_styles_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+SET IDENTITY_INSERT jos_template_styles  ON;
+INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (1, 'rhuk_milkyway', '0', '0', 'Milkyway - Default', '{"colorVariation":"blue","backgroundVariation":"blue","widthStyle":"fmax"}');
+INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (2, 'bluestork', '1', '1', 'Bluestork - Default', '{"useRoundedCorners":"1","showSiteName":"0"}');
+INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (3, 'atomic', '0', '0', 'Atomic - Default', '{}');
+INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (4, 'beez_20', 0, 1, 'Beez2 - Default', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/joomla_black.gif","sitetitle":"Joomla!","sitedescription":"Open Source Content Management Beta","navposition":"left","templatecolor":"personal","html5":"0"}');
+INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (5, 'hathor', '1', '0', 'Hathor - Default', '{"showSiteName":"0","highContrast":"0","boldText":"0","altMenu":"0"}');
+INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (6, 'beez5', 0, 0, 'Beez5 - Default-Fruit Shop', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/sampledata\\/fruitshop\\/fruits.gif","sitetitle":"Matuna Market ","sitedescription":"Fruit Shop Sample Site","navposition":"left","html5":"0"}');
+SET IDENTITY_INSERT jos_template_styles  OFF;
+/****** Object:  Table [dbo].[jos_update_categories]    Script Date: 10/20/2010 14:32:35 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_update_categories]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_update_categories](
+	[categoryid] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](20) NULL DEFAULT (N''),
+	[description] [nvarchar](max) NOT NULL,
+	[parent] [int] NULL DEFAULT ((0)),
+	[updatesite] [int] NULL DEFAULT ((0)),
+ CONSTRAINT [PK_jos_update_categories_categoryid] PRIMARY KEY CLUSTERED 
+(
+	[categoryid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_content]    Script Date: 10/20/2010 14:27:20 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_content]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_content](
+	[id] [bigint] IDENTITY(1,1) NOT NULL,
+	[asset_id] [bigint] NOT NULL DEFAULT ((0)),
+	[title] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[alias] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[title_alias] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[introtext] [nvarchar](max) NOT NULL,
+	[fulltext] [nvarchar](max) NOT NULL,
+	[state] [smallint] NOT NULL DEFAULT ((0)),
+	[sectionid] [bigint] NOT NULL DEFAULT ((0)),
+	[mask] [bigint] NOT NULL DEFAULT ((0)),
+	[catid] [bigint] NOT NULL DEFAULT ((0)),
+	[created] [datetime] NOT NULL DEFAULT (getdate()),
+	[created_by] [bigint] NOT NULL DEFAULT ((0)),
+	[created_by_alias] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[modified] [datetime] NOT NULL DEFAULT (getdate()),
+	[modified_by] [bigint] NOT NULL DEFAULT ((0)),
+	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
+	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
+	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
+	[images] [nvarchar](max) NOT NULL,
+	[urls] [nvarchar](max) NOT NULL,
+	[attribs] [nvarchar](max) NOT NULL,
+	[version] [bigint] NOT NULL DEFAULT ((1)),
+	[parentid] [bigint] NOT NULL DEFAULT ((0)),
+	[ordering] [int] NOT NULL DEFAULT ((0)),
+	[metakey] [nvarchar](max) NOT NULL,
+	[metadesc] [nvarchar](max) NOT NULL,
+	[access] [bigint] NOT NULL DEFAULT ((0)),
+	[hits] [bigint] NOT NULL DEFAULT ((0)),
+	[metadata] [nvarchar](max) NOT NULL,
+	[featured] [tinyint] NOT NULL DEFAULT ((0)),
+	[language] [nchar](7) NOT NULL,
+	[xreference] [nvarchar](50) NOT NULL,
+ CONSTRAINT [PK_jos_content_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_update_sites]    Script Date: 10/20/2010 14:32:44 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_update_sites]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_update_sites](
+	[update_site_id] [int] IDENTITY(3,1) NOT NULL,
+	[name] [nvarchar](100) NULL DEFAULT (N''),
+	[type] [nvarchar](20) NULL DEFAULT (N''),
+	[location] [nvarchar](max) NOT NULL,
+	[enabled] [int] NULL DEFAULT ((0)),
+ CONSTRAINT [PK_jos_update_sites_update_site_id] PRIMARY KEY CLUSTERED 
+(
+	[update_site_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 
 
+SET IDENTITY_INSERT jos_update_sites  ON;
 
-CREATE TABLE jos_content (
-  id integer  NOT NULL identity(1,1),
-  asset_id INTEGER  NOT NULL DEFAULT 0,
-  title varchar(255) NOT NULL default '',
-  alias varchar(255) NOT NULL default '',
-  title_alias varchar(255) NOT NULL default '',
-  introtext text NOT NULL,
-  fulltext text NOT NULL,
-  state smallint NOT NULL default '0',
-  sectionid integer  NOT NULL default '0',
-  mask integer  NOT NULL default '0',
-  catid integer  NOT NULL default '0',
-  created datetime NOT NULL default '1900-01-01 00:00:00',
-  created_by integer  NOT NULL default '0',
-  created_by_alias varchar(255) NOT NULL default '',
-  modified datetime NOT NULL default '1900-01-01 00:00:00',
-  modified_by integer  NOT NULL default '0',
-  checked_out integer  NOT NULL default '0',
-  checked_out_time datetime NOT NULL default '1900-01-01 00:00:00',
-  publish_up datetime NOT NULL default '1900-01-01 00:00:00',
-  publish_down datetime NOT NULL default '1900-01-01 00:00:00',
-  images text NOT NULL,
-  urls text NOT NULL,
-  attribs varchar(MAX) NOT NULL,
-  version integer  NOT NULL default '1',
-  parentid integer  NOT NULL default '0',
-  ordering integer NOT NULL default '0',
-  metakey text NOT NULL,
-  metadesc text NOT NULL,
-  access integer  NOT NULL default '0',
-  hits integer  NOT NULL default '0',
-  metadata text NOT NULL,
-  featured smallint  NOT NULL default '0',
-  language char(7) NOT NULL,
-  xreference varchar(50) NOT NULL,
-  PRIMARY KEY  (id)
-);
+INSERT INTO jos_update_sites (update_site_id, name, type, location, enabled)
+SELECT 1, 'Joomla Core', 'collection', 'http://update.joomla.org/core/list.xml', 1
+UNION ALL
+SELECT 2, 'Joomla Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1
 
-CREATE INDEX idx_access ON jos_content (access);
-  CREATE INDEX idx_checkout ON jos_content (checked_out);
-  CREATE INDEX idx_state ON jos_content (state);
-  CREATE INDEX idx_catid ON jos_content (catid);
-  CREATE INDEX idx_createdby ON jos_content (created_by);
-  CREATE INDEX idx_featured_catid ON jos_content (featured,catid);
-  CREATE INDEX idx_language ON jos_content (language);
-  CREATE INDEX idx_xreference ON jos_content (xreference);
+SET IDENTITY_INSERT jos_update_sites  OFF;
+/****** Object:  Table [dbo].[jos_update_sites_extensions]    Script Date: 10/20/2010 14:32:48 ******/
+SET ANSI_NULLS ON
 
+SET QUOTED_IDENTIFIER ON
 
-CREATE TABLE jos_content_frontpage (
-  content_id integer NOT NULL default '0',
-  ordering integer NOT NULL default '0',
-  PRIMARY KEY  (content_id)
-);
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_update_sites_extensions]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_update_sites_extensions](
+	[update_site_id] [int] NOT NULL DEFAULT ((0)),
+	[extension_id] [int] NOT NULL DEFAULT ((0)),
+ CONSTRAINT [PK_jos_update_sites_extensions_update_site_id] PRIMARY KEY CLUSTERED 
+(
+	[update_site_id] ASC,
+	[extension_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 
+INSERT INTO jos_update_sites_extensions (update_site_id, extension_id)
+SELECT 1, 700
+UNION ALL
+SELECT 2, 700
+/****** Object:  Table [dbo].[jos_updates]    Script Date: 10/20/2010 14:33:21 ******/
+SET ANSI_NULLS ON
 
-CREATE TABLE jos_content_rating (
-  content_id integer NOT NULL default '0',
-  rating_sum integer  NOT NULL default '0',
-  rating_count integer  NOT NULL default '0',
-  lastip varchar(50) NOT NULL default '',
-  PRIMARY KEY  (content_id)
-);
+SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_updates]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_updates](
+	[update_id] [int] IDENTITY(1,1) NOT NULL,
+	[update_site_id] [int] NULL DEFAULT ((0)),
+	[extension_id] [int] NULL DEFAULT ((0)),
+	[categoryid] [int] NULL DEFAULT ((0)),
+	[name] [nvarchar](100) NULL DEFAULT (N''),
+	[description] [nvarchar](max) NOT NULL,
+	[element] [nvarchar](100) NULL DEFAULT (N''),
+	[type] [nvarchar](20) NULL DEFAULT (N''),
+	[folder] [nvarchar](20) NULL DEFAULT (N''),
+	[client_id] [smallint] NULL DEFAULT ((0)),
+	[version] [nvarchar](10) NULL DEFAULT (N''),
+	[data] [nvarchar](max) NOT NULL,
+	[detailsurl] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_jos_updates_update_id] PRIMARY KEY CLUSTERED 
+(
+	[update_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 
+/****** Object:  Table [dbo].[jos_user_profiles]    Script Date: 10/20/2010 14:33:29 ******/
+SET ANSI_NULLS ON
 
-CREATE TABLE jos_core_log_searches (
-  search_term varchar(128) NOT NULL default '',
-  hits integer  NOT NULL default '0'
-) ;
+SET QUOTED_IDENTIFIER ON
 
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_user_profiles]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_user_profiles](
+	[user_id] [int] NOT NULL,
+	[profile_key] [nvarchar](100) NOT NULL,
+	[profile_value] [nvarchar](255) NOT NULL,
+	[ordering] [int] NOT NULL DEFAULT ((0)),
+ CONSTRAINT [jos_user_profiles$idx_user_id_profile_key] UNIQUE CLUSTERED 
+(
+	[user_id] ASC,
+	[profile_key] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 
+/****** Object:  Table [dbo].[jos_user_usergroup_map]    Script Date: 10/20/2010 14:33:35 ******/
+SET ANSI_NULLS ON
 
-CREATE TABLE jos_extensions (
-  extension_id INT  NOT NULL identity(1,1),
-  name VARCHAR(100)  NOT NULL,
-  type VARCHAR(20)  NOT NULL,
-  element VARCHAR(100) NOT NULL,
-  folder VARCHAR(100) NOT NULL,
-  client_id smallint NOT NULL,
-  enabled smallint NOT NULL DEFAULT '1',
-  access smallint  NOT NULL DEFAULT '1',
-  protected smallint NOT NULL DEFAULT '0',
-  manifest_cache TEXT  NOT NULL,
-  params TEXT NOT NULL,
-  custom_data text NOT NULL,
-  system_data text NOT NULL,
-  checked_out int  NOT NULL default '0',
-  checked_out_time datetime NOT NULL default '1900-01-01 00:00:00',
-  ordering int default '0',
-  state int default '0',
-  PRIMARY KEY (extension_id)
-) ;
+SET QUOTED_IDENTIFIER ON
 
-CREATE INDEX element_clientid ON jos_extensions (element, client_id);
- CREATE INDEX element_folder_clientid ON jos_extensions (element, folder, client_id);
- CREATE INDEX extension ON jos_extensions (type,element,folder,client_id);
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_user_usergroup_map]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_user_usergroup_map](
+	[user_id] [bigint] NOT NULL DEFAULT ((0)),
+	[group_id] [bigint] NOT NULL DEFAULT ((0)),
+ CONSTRAINT [PK_jos_user_usergroup_map_user_id] PRIMARY KEY CLUSTERED 
+(
+	[user_id] ASC,
+	[group_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_content_frontpage]    Script Date: 10/20/2010 14:27:28 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_content_frontpage]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_content_frontpage](
+	[content_id] [int] NOT NULL DEFAULT ((0)),
+	[ordering] [int] NOT NULL DEFAULT ((0)),
+ CONSTRAINT [PK_jos_content_frontpage_content_id] PRIMARY KEY CLUSTERED 
+(
+	[content_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_usergroups]    Script Date: 10/20/2010 14:33:50 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_usergroups]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_usergroups](
+	[id] [bigint] IDENTITY(9,1) NOT NULL,
+	[parent_id] [bigint] NOT NULL DEFAULT ((0)),
+	[lft] [int] NOT NULL DEFAULT ((0)),
+	[rgt] [int] NOT NULL DEFAULT ((0)),
+	[title] [nvarchar](100) NOT NULL DEFAULT (N''),
+ CONSTRAINT [PK_jos_usergroups_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [jos_usergroups$idx_usergroup_title_lookup] UNIQUE NONCLUSTERED 
+(
+	[title] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+SET IDENTITY_INSERT jos_usergroups  ON;
+INSERT INTO jos_usergroups (id ,parent_id ,lft ,rgt ,title)
+SELECT 1, 0, 1, 20, 'Public'
+UNION ALL
+SELECT 2, 1, 6, 17, 'Registered'
+UNION ALL
+SELECT 3, 2, 7, 14, 'Author'
+UNION ALL
+SELECT 4, 3, 8, 11, 'Editor'
+UNION ALL
+SELECT 5, 4, 9, 10, 'Publisher'
+UNION ALL
+SELECT 6, 1, 2, 5, 'Manager'
+UNION ALL
+SELECT 7, 6, 3, 4, 'Administrator'
+UNION ALL
+SELECT 8, 1, 18, 19, 'Super Users'
+
+SET IDENTITY_INSERT jos_usergroups  OFF;
+/****** Object:  Table [dbo].[jos_content_rating]    Script Date: 10/20/2010 14:27:48 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_content_rating]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_content_rating](
+	[content_id] [int] NOT NULL DEFAULT ((0)),
+	[rating_sum] [bigint] NOT NULL DEFAULT ((0)),
+	[rating_count] [bigint] NOT NULL DEFAULT ((0)),
+	[lastip] [nvarchar](50) NOT NULL DEFAULT (N''),
+ CONSTRAINT [PK_jos_content_rating_content_id] PRIMARY KEY CLUSTERED 
+(
+	[content_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_users]    Script Date: 10/20/2010 14:34:32 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_users]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_users](
+	[id] [int] IDENTITY(43,1) NOT NULL,
+	[name] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[username] [nvarchar](150) NOT NULL DEFAULT (N''),
+	[email] [nvarchar](100) NOT NULL DEFAULT (N''),
+	[password] [nvarchar](100) NOT NULL DEFAULT (N''),
+	[usertype] [nvarchar](25) NOT NULL DEFAULT (N''),
+	[block] [smallint] NOT NULL DEFAULT ((0)),
+	[sendEmail] [smallint] NULL DEFAULT ((0)),
+	[registerDate] [datetime] NOT NULL DEFAULT (getdate()),
+	[lastvisitDate] [datetime] NOT NULL DEFAULT (getdate()),
+	[activation] [nvarchar](100) NOT NULL DEFAULT (N''),
+	[params] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_jos_users_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_core_log_searches]    Script Date: 10/20/2010 14:27:58 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_core_log_searches]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_core_log_searches](
+	[search_term] [nvarchar](128) NOT NULL DEFAULT (N''),
+	[hits] [bigint] NOT NULL DEFAULT ((0))
+) ON [PRIMARY]
+END
+
+/****** Object:  Table [dbo].[jos_extensions]    Script Date: 10/20/2010 14:28:42 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_extensions]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_extensions](
+	[extension_id] [int] IDENTITY(10000,1) NOT NULL,
+	[name] [nvarchar](100) NOT NULL,
+	[type] [nvarchar](20) NOT NULL,
+	[element] [nvarchar](100) NOT NULL,
+	[folder] [nvarchar](100) NOT NULL,
+	[client_id] [smallint] NOT NULL,
+	[enabled] [smallint] NOT NULL DEFAULT ((1)),
+	[access] [tinyint] NOT NULL DEFAULT ((1)),
+	[protected] [smallint] NOT NULL DEFAULT ((0)),
+	[manifest_cache] [nvarchar](max) NOT NULL,
+	[params] [nvarchar](max) NOT NULL,
+	[custom_data] [nvarchar](max) NOT NULL,
+	[system_data] [nvarchar](max) NOT NULL,
+	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
+	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[ordering] [int] NULL DEFAULT ((0)),
+	[state] [int] NULL DEFAULT ((0)),
+ CONSTRAINT [PK_jos_extensions_extension_id] PRIMARY KEY CLUSTERED 
+(
+	[extension_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 
 SET IDENTITY_INSERT jos_extensions  ON;
 INSERT INTO jos_extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
@@ -609,558 +1217,121 @@ INSERT INTO jos_extensions (extension_id, name, type, element, folder, client_id
 SELECT 700, 'Joomla! CMS', 'file', 'joomla', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
 
 SET IDENTITY_INSERT jos_extensions  OFF;
+/****** Object:  Table [dbo].[jos_assets]    Script Date: 10/20/2010 14:23:13 ******/
+SET ANSI_NULLS ON
 
-CREATE TABLE jos_languages (
-  lang_id int  NOT NULL identity(1,1),
-  lang_code char(7) NOT NULL,
-  title varchar(50) NOT NULL,
-  title_native varchar(50) NOT NULL,
-  sef varchar(50) NOT NULL,
-  image varchar(50) NOT NULL,
-  description varchar(512) NOT NULL,
-  metakey text NOT NULL,
-  metadesc text NOT NULL,
-  published int NOT NULL default '0',
-  PRIMARY KEY  (lang_id)
-);
+SET QUOTED_IDENTIFIER ON
 
-CREATE UNIQUE INDEX idx_sef ON jos_languages (sef);
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_assets]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_assets](
+	[id] [bigint] IDENTITY(32,1) NOT NULL,
+	[parent_id] [int] NOT NULL DEFAULT ((0)),
+	[lft] [int] NOT NULL DEFAULT ((0)),
+	[rgt] [int] NOT NULL DEFAULT ((0)),
+	[level] [bigint] NOT NULL,
+	[name] [nvarchar](50) NOT NULL,
+	[title] [nvarchar](100) NOT NULL,
+	[rules] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_jos_assets_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [jos_assets$idx_asset_name] UNIQUE NONCLUSTERED 
+(
+	[name] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 
-SET IDENTITY_INSERT jos_languages  ON;
+SET IDENTITY_INSERT jos_assets  ON;
 
-INSERT INTO jos_languages (lang_id,lang_code,title,title_native,sef,image,description,metakey,metadesc,published)
-SELECT 1, 'en-GB', 'English (UK)', 'English (UK)', 'en', 'en', '', '', '', 1
+INSERT INTO jos_assets (id, parent_id, lft, rgt, level, name, title, rules)
+SELECT 1,0,0,61,0,'root.1','Root Asset','{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'
 UNION ALL
-SELECT 3, 'xx-XX', 'xx (Test)', 'xx (Test)', 'xx', 'br', '', '', '', 1
-
-SET IDENTITY_INSERT jos_languages  OFF;
-
-CREATE TABLE jos_menu (
-  id integer NOT NULL identity(1,1),
-  menutype varchar(24) NOT NULL,
-  title varchar(255) NOT NULL,
-  alias varchar(255) NOT NULL,
-  note varchar(255) NOT NULL default '',
-  path varchar(900) NOT NULL,
-  link varchar(MAX) NOT NULL,
-  type varchar(16) NOT NULL,
-  published smallint NOT NULL default '0',
-  parent_id integer  NOT NULL default '1',
-  level integer  NOT NULL default '0',
-  component_id integer  NOT NULL default '0',
-  ordering integer NOT NULL default '0',
-  checked_out integer  NOT NULL default '0',
-  checked_out_time datetime NOT NULL default '1900-01-01 00:00:00',
-  browserNav smallint NOT NULL default '0',
-  access smallint  NOT NULL default '0',
-  img varchar(255) NOT NULL,
-  template_style_id integer  NOT NULL default '0',
-  params varchar(MAX) NOT NULL,
-  lft integer NOT NULL default '0',
-  rgt integer NOT NULL default '0',
-  home smallint  NOT NULL default '0',
-  language char(7) NOT NULL DEFAULT '',
-  PRIMARY KEY  (id)
-);
-
- CREATE INDEX idx_componentid ON jos_menu (component_id,menutype,published,access);
- CREATE INDEX  idx_menutype ON jos_menu (menutype);
- CREATE INDEX  idx_left_right ON jos_menu (lft,rgt);
- CREATE INDEX  idx_alias ON jos_menu (alias);
- CREATE INDEX idx_path ON jos_menu (path);
- CREATE UNIQUE INDEX idx_alias_parent_id ON jos_menu (alias, parent_id);
- CREATE INDEX idx_language ON jos_menu (language);
-
-
-SET IDENTITY_INSERT jos_menu  ON;
-
-INSERT INTO jos_menu (id, menutype, title, alias, note, path, link,type, published,parent_id, level, component_id,ordering, checked_out, checked_out_time, browserNav,
-  access, img, template_style_id, params, lft, rgt, home, language)
-SELECT 1,'','Menu_Item_Root','root','','','','',1,0,0,0,0,0,'1900-01-01 00:00:00',0,0,'',0,'',0,217,0,'*'
+SELECT 2,1,1,2,1,'com_admin','com_admin','{}'
 UNION ALL
-SELECT 2,'_adminmenu','com_banners','Banners','','Banners','index.php?option=com_banners','component',0,1,1,4,0,0,'1900-01-01 00:00:00',0,0,'class:banners',0,'',1,10,0,'*'
+SELECT 3,1,3,6,1,'com_banners','com_banners','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 3,'_adminmenu','com_banners','Banners','','Banners/Banners','index.php?option=com_banners','component',0,2,2,4,0,0,'1900-01-01 00:00:00',0,0,'class:banners',0,'',2,3,0,'*'
+SELECT 4,1,7,8,1,'com_cache','com_cache','{"core.admin":{"7":1},"core.manage":{"7":1}}'
 UNION ALL
-SELECT 4,'_adminmenu','com_banners_clients','Clients','','Banners/Clients','index.php?option=com_banners&view=clients','component',0,2,2,4,0,0,'1900-01-01 00:00:00',0,0,'class:banners-clients',0,'',4,5,0,'*'
+SELECT 5,1,9,10,1,'com_checkin','com_checkin','{"core.admin":{"7":1},"core.manage":{"7":1}}'
 UNION ALL
-SELECT 5,'_adminmenu','com_banners_tracks','Tracks','','Banners/Tracks','index.php?option=com_banners&view=tracks','component',0,2,2,4,0,0,'1900-01-01 00:00:00',0,0,'class:banners-tracks',0,'',6,7,0,'*'
+SELECT 6,1,11,12,1,'com_config','com_config','{}'
 UNION ALL
-SELECT 6,'_adminmenu','com_banners_categories','Categories','','Banners/Categories','index.php?option=com_categories&extension=com_banners','component',0,2,2,6,0,0,'1900-01-01 00:00:00',0,0,'class:banners-cat',0,'',8,9,0,'*'
+SELECT 7,1,13,16,1,'com_contact','com_contact','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 7,'_adminmenu','com_contact','Contacts','','Contacts','index.php?option=com_contact','component',0,1,1,8,0,0,'1900-01-01 00:00:00',0,0,'class:contact',0,'',11,16,0,'*'
+SELECT 8,1,17,20,1,'com_content','com_content','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'
 UNION ALL
-SELECT 8,'_adminmenu','com_contact','Contacts','','Contacts/Contacts','index.php?option=com_contact','component',0,7,2,8,0,0,'1900-01-01 00:00:00',0,0,'class:contact',0,'',12,13,0,'*'
+SELECT 9,1,21,22,1,'com_cpanel','com_cpanel','{}'
 UNION ALL
-SELECT 9,'_adminmenu','com_contact_categories','Categories','','Contacts/Categories','index.php?option=com_categories&extension=com_contact','component',0,7,2,6,0,0,'1900-01-01 00:00:00',0,0,'class:contact-cat',0,'',14,15,0,'*'
+SELECT 10,1,23,24,1,'com_installer','com_installer','{"core.admin":{"7":1},"core.manage":{"7":1},"core.create":[],"core.delete":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 10,'_adminmenu','com_messages','Messaging','','Messaging','index.php?option=com_messages','component',0,1,1,15,0,0,'1900-01-01 00:00:00',0,0,'class:messages',0,'',17,22,0,'*'
+SELECT 11,1,25,26,1,'com_languages','com_languages','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 11,'_adminmenu','com_messages_add','New Private Message','','Messaging/New Private Message','index.php?option=com_messages&task=message.add','component',0,10,2,15,0,0,'1900-01-01 00:00:00',0,0,'class:messages-add',0,'',18,19,0,'*'
+SELECT 12,1,27,28,1,'com_login','com_login','{}'
 UNION ALL
-SELECT 12,'_adminmenu','com_messages_read','Read Private Message','','Messaging/Read Private Message','index.php?option=com_messages','component',0,10,2,15,0,0,'1900-01-01 00:00:00',0,0,'class:messages-read',0,'',20,21,0,'*'
+SELECT 13,1,29,30,1,'com_mailto','com_mailto','{}'
 UNION ALL
-SELECT 13,'_adminmenu','com_newsfeeds','News Feeds','','News Feeds','index.php?option=com_newsfeeds','component',0,1,1,17,0,0,'1900-01-01 00:00:00',0,0,'class:newsfeeds',0,'',23,28,0,'*'
+SELECT 14,1,31,32,1,'com_massmail','com_massmail','{}'
 UNION ALL
-SELECT 14,'_adminmenu','com_newsfeeds_feeds','Feeds','','News Feeds/Feeds','index.php?option=com_newsfeeds','component',0,13,2,17,0,0,'1900-01-01 00:00:00',0,0,'class:newsfeeds',0,'',24,25,0,'*'
+SELECT 15,1,33,34,1,'com_media','com_media','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":{"5":1},"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 15,'_adminmenu','com_newsfeeds_categories','Categories','','News Feeds/Categories','index.php?option=com_categories&extension=com_newsfeeds','component',0,13,2,6,0,0,'1900-01-01 00:00:00',0,0,'class:newsfeeds-cat',0,'',26,27,0,'*'
+SELECT 16,1,35,36,1,'com_menus','com_menus','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 16,'_adminmenu','com_redirect','Redirect','','Redirect','index.php?option=com_redirect','component',0,1,1,24,0,0,'1900-01-01 00:00:00',0,0,'class:redirect',0,'',37,38,0,'*'
+SELECT 17,1,37,38,1,'com_messages','com_messages','{"core.admin":{"7":1},"core.manage":{"7":1}}'
 UNION ALL
-SELECT 17,'_adminmenu','com_search','Search','','Search','index.php?option=com_search','component',0,1,1,19,0,0,'1900-01-01 00:00:00',0,0,'class:search',0,'',29,30,0,'*'
+SELECT 18,1,39,40,1,'com_modules','com_modules','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 18,'_adminmenu','com_weblinks','Weblinks','','Weblinks','index.php?option=com_weblinks','component',0,1,1,21,0,0,'1900-01-01 00:00:00',0,0,'class:weblinks',0,'',31,36,0,'*'
+SELECT 19,1,41,44,1,'com_newsfeeds','com_newsfeeds','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 19,'_adminmenu','com_weblinks_links','Links','','Weblinks/Links','index.php?option=com_weblinks','component',0,18,2,21,0,0,'1900-01-01 00:00:00',0,0,'class:weblinks',0,'',32,33,0,'*'
+SELECT 20,1,45,46,1,'com_plugins','com_plugins','{"core.admin":{"7":1},"core.manage":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 20,'_adminmenu','com_weblinks_categories','Categories','','Weblinks/Categories','index.php?option=com_categories&extension=com_weblinks','component',0,18,2,6,0,0,'1900-01-01 00:00:00',0,0,'class:weblinks-cat',0,'',34,35,0,'*'
+SELECT 21,1,47,48,1,'com_redirect','com_redirect','{"core.admin":{"7":1},"core.manage":[]}'
 UNION ALL
-SELECT 101, 'mainmenu', 'Home', 'home', '', 'home', 'index.php?option=com_content&view=featured', 'component', 1, 1, 1, 22, 0, 0, '1900-01-01 00:00:00', 0, 1, '', 0, '{"num_leading_articles":"1","num_intro_articles":"3","num_columns":"3","num_links":"0","orderby_pri":"","orderby_sec":"front","order_date":"","multi_column_order":"1","show_pagination":"2","show_pagination_results":"1","show_noauth":"","article-allow_ratings":"","article-allow_comments":"","show_feed_link":"1","feed_summary":"","show_title":"","link_titles":"","show_intro":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_readmore":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","show_page_heading":1,"page_title":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 231, 232, 1,'*'
-
-SET IDENTITY_INSERT jos_menu  OFF;
-
-CREATE TABLE jos_menu_types (
-  id integer  NOT NULL identity(1,1),
-  menutype varchar(24) NOT NULL,
-  title varchar(48) NOT NULL,
-  description varchar(255) NOT NULL default '',
-  PRIMARY KEY  (id)
-);
-
-CREATE UNIQUE Index idx_menutype on jos_menu_types (menutype);
-
-
-
-CREATE TABLE jos_messages (
-  message_id integer  NOT NULL identity(1,1),
-  user_id_from integer  NOT NULL default '0',
-  user_id_to integer  NOT NULL default '0',
-  folder_id smallint  NOT NULL DEFAULT '0',
-  date_time datetime NOT NULL default '1900-01-01 00:00:00',
-  state smallint NOT NULL DEFAULT '0',
-  priority smallint  NOT NULL DEFAULT '0',
-  subject varchar(255) NOT NULL DEFAULT '',
-  message text NOT NULL,
-  PRIMARY KEY  (message_id)
-);
-
-CREATE Index useridto_state on jos_messages (user_id_to, state);
-
-
-
-CREATE TABLE jos_messages_cfg (
-  user_id integer  NOT NULL default '0',
-  cfg_name varchar(100) NOT NULL default '',
-  cfg_value varchar(255) NOT NULL default ''
-);
-
-CREATE  UNIQUE Index  idx_user_var_name on jos_messages_cfg (user_id,cfg_name);
-
-
-
-CREATE TABLE jos_modules (
-  id int NOT NULL identity(1,1),
-  title varchar(100) NOT NULL DEFAULT '',
-  note varchar(255) NOT NULL default '',
-  content text NOT NULL,
-  ordering int NOT NULL DEFAULT '0',
-  position varchar(50) NULL DEFAULT NULL,
-  checked_out int  NOT NULL DEFAULT '0',
-  checked_out_time datetime NOT NULL DEFAULT '1900-01-01 00:00:00',
-  publish_up datetime NOT NULL default '1900-01-01 00:00:00',
-  publish_down datetime NOT NULL default '1900-01-01 00:00:00',
-  published smallint NOT NULL DEFAULT '0',
-  module varchar(50) NULL DEFAULT NULL,
-  access smallint  NOT NULL DEFAULT '0',
-  showtitle smallint  NOT NULL DEFAULT '1',
-  params varchar(MAX) NOT NULL DEFAULT '',
-  client_id smallint NOT NULL DEFAULT '0',
-  language char(7) NOT NULL,
-  PRIMARY KEY  (id)
-);
-
-CREATE  Index  published on jos_modules (published,access);
-CREATE  Index  newsfeeds on jos_modules (module,published);
-CREATE  Index  idx_language on jos_modules (language);
-
-
-SET IDENTITY_INSERT jos_modules  ON;
-
-INSERT INTO jos_modules (id, title, note, content, ordering, position, checked_out,checked_out_time, publish_up, publish_down, published, module, access, showtitle, params,
-  client_id, language)
-SELECT 1, 'Main Menu', '', '', 1, 'position-7', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_menu', 1, 1, '{"menutype":"mainmenu","startLevel":"0","endLevel":"0","showAllChildren":"0","tag_id":"","class_sfx":"","window_open":"","layout":"","moduleclass_sfx":"_menu","cache":"1","cache_time":"900","cachemode":"itemid"}', 0, '*'
+SELECT 22,1,49,50,1,'com_search','com_search','{"core.admin":{"7":1},"core.manage":{"6":1}}'
 UNION ALL
-SELECT 2, 'Login', '', '', 1, 'login', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_login', 1, 1, '', 1, '*'
+SELECT 23,1,51,52,1,'com_templates','com_templates','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 3, 'Popular Articles', '', '', 3, 'cpanel', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_popular', 3, 1, '{"count":"5","catid":"","user_id":"0","layout":"","moduleclass_sfx":"","cache":"0"}', 1, '*'
+SELECT 24,1,53,54,1,'com_users','com_users','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 4, 'Recently Added Articles', '', '', 4, 'cpanel', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_latest', 3, 1, '{"count":"5","ordering":"c_dsc","catid":"","user_id":"0","layout":"","moduleclass_sfx":"","cache":"0"}', 1, '*'
+SELECT 25,1,55,58,1,'com_weblinks','com_weblinks','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'
 UNION ALL
-SELECT 6, 'Unread Messages', '', '', 1, 'header', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_unread', 3, 1, '', 1, '*'
+SELECT 26,1,59,60,1,'com_wrapper','com_wrapper','{}'
 UNION ALL
-SELECT 7, 'Online Users', '', '', 2, 'header', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_online', 3, 1, '', 1, '*'
+SELECT 27, 8, 18, 19, 2, 'com_content.category.2', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 8, 'Toolbar', '', '', 1, 'toolbar', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_toolbar', 3, 1, '', 1, '*'
+SELECT 28, 3, 4, 5, 2, 'com_banners.category.3', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 9, 'Quick Icons', '', '', 1, 'icon', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_quickicon', 3, 1, '', 1, '*'
+SELECT 29, 7, 14, 15, 2, 'com_contact.category.4', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 10, 'Logged-in Users', '', '', 2, 'cpanel', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_logged', 3, 1, '', 1, '*'
+SELECT 30, 19, 42, 43, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 UNION ALL
-SELECT 12, 'Admin Menu', '', '', 1, 'menu', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_menu', 3, 1, '{"layout":"","moduleclass_sfx":"","shownew":"1","showhelp":"1","cache":"0"}', 1, '*'
-UNION ALL
-SELECT 13, 'Admin Submenu', '', '', 1, 'submenu', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_submenu', 3, 1, '', 1, '*'
-UNION ALL
-SELECT 14, 'User Status', '', '', 1, 'status', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_status', 3, 1, '', 1, '*'
-UNION ALL
-SELECT 15, 'Title', '', '', 1, 'title', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_title', 3, 1, '', 1, '*'
-UNION ALL
-SELECT 16, 'Login Form', '', '', 7, 'position-7', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_login', 1, 1, '{"greeting":"1","name":"0"}', 0, '*'
-UNION ALL
-SELECT 17, 'Breadcrumbs', '', '', 1, 'position-2', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_breadcrumbs', 1, 1, '{"moduleclass_sfx":"","showHome":"1","homeText":"Home","showComponent":"1","separator":"","cache":"1","cache_time":"900","cachemode":"itemid"}', 0, '*'
-UNION ALL
-SELECT 18, 'Banners', '', '', 1, 'position-5', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 0, 'mod_banners', 1, 1, '{"target":"1","count":"1","cid":"1","catid":["27"],"tag_search":"0","ordering":"0","header_text":"","footer_text":"","layout":"","moduleclass_sfx":"","cache":"1","cache_time":"900"}', 0, '*'
+SELECT 31, 25, 56, 57, 2, 'com_weblinks.category.6', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 
-SET IDENTITY_INSERT jos_modules  OFF;
+SET IDENTITY_INSERT jos_assets  OFF;
+/****** Object:  Table [dbo].[jos_viewlevels]    Script Date: 10/20/2010 14:34:45 ******/
+SET ANSI_NULLS ON
 
+SET QUOTED_IDENTIFIER ON
 
-CREATE TABLE jos_modules_menu (
-  moduleid integer NOT NULL default '0',
-  menuid integer NOT NULL default '0',
-  PRIMARY KEY  (moduleid,menuid)
-);
-
-
-INSERT INTO jos_modules_menu (moduleid,menuid)
-SELECT 1,0
-UNION ALL
-SELECT 2,0
-UNION ALL
-SELECT 3,0
-UNION ALL
-SELECT 4,0
-UNION ALL
-SELECT 6,0
-UNION ALL
-SELECT 7,0
-UNION ALL
-SELECT 8,0
-UNION ALL
-SELECT 9,0
-UNION ALL
-SELECT 10,0
-UNION ALL
-SELECT 12,0
-UNION ALL
-SELECT 13,0
-UNION ALL
-SELECT 14,0
-UNION ALL
-SELECT 15,0
-UNION ALL
-SELECT 16,0
-UNION ALL
-SELECT 17,0
-UNION ALL
-SELECT 18,0
-
-
-
-CREATE TABLE jos_newsfeeds (
-  catid integer NOT NULL default '0',
-  id integer  NOT NULL identity(1,1),
-  name  varchar(100) NOT NULL DEFAULT '',
-  alias varchar(100) NOT NULL default '',
-  link varchar(200) NOT NULL DEFAULT '',
-  filename varchar(200) NULL default NULL,
-  published smallint NOT NULL default '0',
-  numarticles integer  NOT NULL default '1',
-  cache_time integer  NOT NULL default '3600',
-  checked_out integer  NOT NULL default '0',
-  checked_out_time datetime NOT NULL default '1900-01-01 00:00:00',
-  ordering integer NOT NULL default '0',
-  rtl smallint NOT NULL default '0',
-  access smallint  NOT NULL DEFAULT '0',
-  language char(7) NOT NULL DEFAULT '',
-  params text NOT NULL,
-  created datetime NOT NULL default '1900-01-01 00:00:00',
-  created_by int  NOT NULL default '0',
-  created_by_alias varchar(255) NOT NULL default '',
-  modified datetime NOT NULL default '1900-01-01 00:00:00',
-  modified_by int  NOT NULL default '0',
-  metakey text NOT NULL,
-  metadesc text NOT NULL,
-  metadata text NOT NULL,
-  xreference varchar(50) NOT NULL,
-  publish_up datetime NOT NULL default '1900-01-01 00:00:00',
-  publish_down datetime NOT NULL default '1900-01-01 00:00:00',
-
-  PRIMARY KEY  (id)
-);
-
- CREATE INDEX idx_access on jos_newsfeeds (access);
- CREATE INDEX idx_checkout on jos_newsfeeds (checked_out);
- CREATE INDEX idx_state on jos_newsfeeds (published);
- CREATE INDEX idx_catid on jos_newsfeeds(catid);
-  CREATE INDEX idx_createdby on jos_newsfeeds(created_by);
-  CREATE INDEX idx_language on jos_newsfeeds(language);
-  CREATE INDEX idx_xreference on jos_newsfeeds(xreference);
-
-
-
-CREATE TABLE jos_redirect_links (
-  id integer  NOT NULL identity(1,1),
-  old_url varchar(150) NOT NULL,
-  new_url varchar(150) NOT NULL,
-  referer varchar(150) NOT NULL,
-  comment varchar(255) NOT NULL,
-  published smallint NOT NULL,
-  created_date datetime NOT NULL DEFAULT '1900-01-01 00:00:00',
-  modified_date datetime NOT NULL DEFAULT '1900-01-01 00:00:00',
-  PRIMARY KEY  (id)
-);
-
- CREATE UNIQUE INDEX idx_link_old on jos_redirect_links(old_url);
- CREATE UNIQUE INDEX idx_link_modifed on jos_redirect_links(modified_date);
-
-
-CREATE TABLE jos_schemas (
-  extension_id int NOT NULL,
-  version_id varchar(20) NOT NULL,
-  PRIMARY KEY (extension_id, version_id)
-);
-
-
-
-CREATE TABLE jos_session (
-  session_id varchar(32) NOT NULL default '',
-  client_id smallint  NOT NULL default '0',
-  guest smallint  NULL default '1',
-  time varchar(14) NULL default '',
-  data varchar(MAX) NULL default NULL,
-  userid int NULL default '0',
-  username varchar(150) NULL default '',
-  usertype varchar(50) NULL default '',
-  PRIMARY KEY  (session_id)
-);
-
-CREATE INDEX whosonline on jos_session(guest,usertype);
-CREATE INDEX userid on jos_session(userid);
-CREATE INDEX time on jos_session(time);
-
-
-
-CREATE TABLE  jos_updates (
-  update_id int NOT NULL identity(1,1),
-  update_site_id int NULL default '0',
-  extension_id int NULL default '0',
-  categoryid int NULL default '0',
-  name varchar(100) NULL default '',
-  description text NOT NULL,
-  element varchar(100) NULL default '',
-  type varchar(20) NULL default '',
-  folder varchar(20) NULL default '',
-  client_id smallint NULL default '0',
-  version varchar(10) NULL default '',
-  data text NOT NULL,
-  detailsurl text NOT NULL,
-  PRIMARY KEY  (update_id)
-);
-
-
-
-CREATE TABLE  jos_update_sites (
-  update_site_id int NOT NULL identity(1,1),
-  name varchar(100) NULL default '',
-  type varchar(20) NULL default '',
-  location text NOT NULL,
-  enabled int NULL default '0',
-  PRIMARY KEY  (update_site_id)
-);
-
-SET IDENTITY_INSERT jos_update_sites  ON;
-
-INSERT INTO jos_update_sites (update_site_id, name, type, location, enabled)
-SELECT 1, 'Joomla Core', 'collection', 'http://update.joomla.org/core/list.xml', 1
-UNION ALL
-SELECT 2, 'Joomla Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1
-
-SET IDENTITY_INSERT jos_update_sites  OFF;
-
-CREATE TABLE jos_update_sites_extensions (
-  update_site_id INT DEFAULT 0,
-  extension_id INT DEFAULT 0,
-  PRIMARY KEY(update_site_id, extension_id)
-);
-INSERT INTO jos_update_sites_extensions (update_site_id, extension_id)
-SELECT 1, 700
-UNION ALL
-SELECT 2, 700
-
- 
-
-CREATE TABLE  jos_update_categories (
-  categoryid int NOT NULL identity(1,1),
-  name varchar(20) NULL default '',
-  description text NOT NULL,
-  parent int NULL default '0',
-  updatesite int NULL default '0',
-  PRIMARY KEY  (categoryid)
-) ;
-
-
-
-CREATE TABLE jos_template_styles (
-  id integer  NOT NULL identity(1,1),
-  template varchar(50) NOT NULL DEFAULT '',
-  client_id smallint  NOT NULL DEFAULT 0,
-  home smallint  NOT NULL DEFAULT 0,
-  title varchar(255) NOT NULL DEFAULT '',
-  params varchar(MAX) NOT NULL DEFAULT '',
-  PRIMARY KEY  (id)
-) ;
-
-CREATE INDEX idx_template on jos_template_styles (template);
-  CREATE INDEX  idx_home on jos_template_styles(home);
-SET IDENTITY_INSERT jos_template_styles  ON;
-INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (1, 'rhuk_milkyway', '0', '0', 'Milkyway - Default', '{"colorVariation":"blue","backgroundVariation":"blue","widthStyle":"fmax"}');
-INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (2, 'bluestork', '1', '1', 'Bluestork - Default', '{"useRoundedCorners":"1","showSiteName":"0"}');
-INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (3, 'atomic', '0', '0', 'Atomic - Default', '{}');
-INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (4, 'beez_20', 0, 1, 'Beez2 - Default', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/joomla_black.gif","sitetitle":"Joomla!","sitedescription":"Open Source Content Management Beta","navposition":"left","templatecolor":"personal","html5":"0"}');
-INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (5, 'hathor', '1', '0', 'Hathor - Default', '{"showSiteName":"0","highContrast":"0","boldText":"0","altMenu":"0"}');
-INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (6, 'beez5', 0, 0, 'Beez5 - Default-Fruit Shop', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/sampledata\\/fruitshop\\/fruits.gif","sitetitle":"Matuna Market ","sitedescription":"Fruit Shop Sample Site","navposition":"left","html5":"0"}');
-SET IDENTITY_INSERT jos_template_styles  OFF;
-
-CREATE TABLE jos_user_usergroup_map (
-  user_id integer  NOT NULL default '0',
-  group_id integer  NOT NULL default '0',
-  PRIMARY KEY  (user_id,group_id)
-);
-
-
-
-CREATE TABLE jos_usergroups (
-  id integer  NOT NULL identity(1,1),
-  parent_id integer  NOT NULL default '0',
-  lft integer NOT NULL default '0',
-  rgt integer NOT NULL default '0',
-  title varchar(100) NOT NULL default '',
-  PRIMARY KEY  (id)
-);
-
- CREATE UNIQUE INDEX   idx_usergroup_title_lookup on jos_usergroups(title);
- CREATE INDEX  idx_usergroup_adjacency_lookup on jos_usergroups (parent_id);
- CREATE INDEX  idx_usergroup_nested_set_lookup on jos_usergroups (lft,rgt); -- using BTREE not allowed
-
-
-SET IDENTITY_INSERT jos_usergroups  ON;
-INSERT INTO jos_usergroups (id ,parent_id ,lft ,rgt ,title)
-SELECT 1, 0, 1, 20, 'Public'
-UNION ALL
-SELECT 2, 1, 6, 17, 'Registered'
-UNION ALL
-SELECT 3, 2, 7, 14, 'Author'
-UNION ALL
-SELECT 4, 3, 8, 11, 'Editor'
-UNION ALL
-SELECT 5, 4, 9, 10, 'Publisher'
-UNION ALL
-SELECT 6, 1, 2, 5, 'Manager'
-UNION ALL
-SELECT 7, 6, 3, 4, 'Administrator'
-UNION ALL
-SELECT 8, 1, 18, 19, 'Super Users'
-
-SET IDENTITY_INSERT jos_usergroups  OFF;
-
-CREATE TABLE jos_users (
-  id integer NOT NULL identity(1,1),
-  name varchar(255) NOT NULL default '',
-  username varchar(150) NOT NULL default '',
-  email varchar(100) NOT NULL default '',
-  password varchar(100) NOT NULL default '',
-  usertype varchar(25) NOT NULL default '',
-  block smallint NOT NULL default '0',
-  sendEmail smallint NULL default '0',
-  registerDate datetime NOT NULL default '1900-01-01 00:00:00',
-  lastvisitDate datetime NOT NULL default '1900-01-01 00:00:00',
-  activation varchar(100) NOT NULL default '',
-  params text NOT NULL,
-  PRIMARY KEY  (id)
-);
-
- CREATE INDEX usertype on jos_users (usertype);
- CREATE INDEX idx_name on jos_users (name);
- CREATE INDEX idx_block on jos_users (block);
- CREATE INDEX username on jos_users (username);
- CREATE INDEX email on jos_users (email);
-
-
-CREATE TABLE jos_user_profiles (
-  user_id int NOT NULL,
-  profile_key varchar(100) NOT NULL,
-  profile_value varchar(255) NOT NULL,
-  ordering int NOT NULL default '0'
-) ;
-
-CREATE UNIQUE INDEX idx_user_id_profile_key on jos_user_profiles(user_id,profile_key);
-
-
-CREATE TABLE jos_weblinks (
-  id integer  NOT NULL identity(1,1),
-  catid integer NOT NULL default '0',
-  sid integer NOT NULL default '0',
-  title varchar(250) NOT NULL default '',
-  alias varchar(255) NOT NULL default '',
-  url varchar(250) NOT NULL default '',
-  description TEXT NOT NULL,
-  date datetime NOT NULL default '1900-01-01 00:00:00',
-  hits integer NOT NULL default '0',
-  state smallint NOT NULL default '0',
-  checked_out integer NOT NULL default '0',
-  checked_out_time datetime NOT NULL default '1900-01-01 00:00:00',
-  ordering integer NOT NULL default '0',
-  archived smallint NOT NULL default '0',
-  approved smallint NOT NULL default '1',
-  access integer NOT NULL default '1',
-  params text NOT NULL,
-  language char(7) NOT NULL DEFAULT '',
-  created datetime NOT NULL default '1900-01-01 00:00:00',
-  created_by int  NOT NULL default '0',
-  created_by_alias varchar(255) NOT NULL default '',
-  modified datetime NOT NULL default '1900-01-01 00:00:00',
-  modified_by int  NOT NULL default '0',
-  metakey text NOT NULL,
-  metadesc text NOT NULL,
-  metadata text NOT NULL,
-  featured smallint  NOT NULL default '0',
-  xreference varchar(50) NOT NULL,
-  publish_up datetime NOT NULL default '1900-01-01 00:00:00',
-  publish_down datetime NOT NULL default '1900-01-01 00:00:00',
-
-  PRIMARY KEY  (id)
-);
-
-  CREATE INDEX idx_access on jos_weblinks (access);
-  CREATE INDEX idx_checkout on jos_weblinks(checked_out);
-  CREATE INDEX idx_state on jos_weblinks(state);
-  CREATE INDEX idx_catid on jos_weblinks(catid);
-  CREATE INDEX idx_createdby on jos_weblinks(created_by);
-  CREATE INDEX idx_featured_catid on jos_weblinks(featured,catid);
-  CREATE INDEX idx_language on jos_weblinks(language);
-  CREATE INDEX idx_xreference on jos_weblinks(xreference);
-
-
-
-CREATE TABLE jos_viewlevels (
-  id int  NOT NULL identity(1,1),
-  title varchar(100) NOT NULL DEFAULT '',
-  ordering int NOT NULL DEFAULT '0',
-  rules varchar(MAX) NOT NULL,
-  PRIMARY KEY (id)
-);
-
- CREATE UNIQUE INDEX idx_assetgroup_title_lookup ON jos_viewlevels (title);
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_viewlevels]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_viewlevels](
+	[id] [bigint] IDENTITY(4,1) NOT NULL,
+	[title] [nvarchar](100) NOT NULL DEFAULT (N''),
+	[ordering] [int] NOT NULL DEFAULT ((0)),
+	[rules] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_jos_viewlevels_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [jos_viewlevels$idx_assetgroup_title_lookup] UNIQUE NONCLUSTERED 
+(
+	[title] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
 
 SET IDENTITY_INSERT jos_viewlevels  ON 
 INSERT INTO jos_viewlevels (id, title, ordering, rules) 
@@ -1171,3 +1342,70 @@ UNION ALL
 SELECT 3, 'Special', 2, '[6,7,8]'
 
 SET IDENTITY_INSERT jos_viewlevels  OFF;
+
+/****** Object:  Table [dbo].[jos_languages]    Script Date: 10/20/2010 14:28:57 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_languages]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_languages](
+	[lang_id] [bigint] IDENTITY(4,1) NOT NULL,
+	[lang_code] [nchar](7) NOT NULL,
+	[title] [nvarchar](50) NOT NULL,
+	[title_native] [nvarchar](50) NOT NULL,
+	[sef] [nvarchar](50) NOT NULL,
+	[image] [nvarchar](50) NOT NULL,
+	[description] [nvarchar](512) NOT NULL,
+	[metakey] [nvarchar](max) NOT NULL,
+	[metadesc] [nvarchar](max) NOT NULL,
+	[published] [int] NOT NULL DEFAULT ((0)),
+ CONSTRAINT [PK_jos_languages_lang_id] PRIMARY KEY CLUSTERED 
+(
+	[lang_id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+ CONSTRAINT [jos_languages$idx_sef] UNIQUE NONCLUSTERED 
+(
+	[sef] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
+SET IDENTITY_INSERT jos_languages  ON;
+
+INSERT INTO jos_languages (lang_id,lang_code,title,title_native,sef,image,description,metakey,metadesc,published)
+SELECT 1, 'en-GB', 'English (UK)', 'English (UK)', 'en', 'en', '', '', '', 1
+UNION ALL
+SELECT 3, 'xx-XX', 'xx (Test)', 'xx (Test)', 'xx', 'br', '', '', '', 1
+
+SET IDENTITY_INSERT jos_languages  OFF;
+/****** Object:  Table [dbo].[jos_banner_clients]    Script Date: 10/20/2010 14:23:32 ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_banner_clients]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[jos_banner_clients](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[contact] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[email] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[extrainfo] [nvarchar](max) NOT NULL,
+	[state] [smallint] NOT NULL DEFAULT ((0)),
+	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
+	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
+	[metakey] [nvarchar](max) NOT NULL,
+	[own_prefix] [smallint] NOT NULL DEFAULT ((0)),
+	[metakey_prefix] [nvarchar](255) NOT NULL DEFAULT (N''),
+	[purchase_type] [smallint] NOT NULL DEFAULT ((-1)),
+	[track_clicks] [smallint] NOT NULL DEFAULT ((-1)),
+	[track_impressions] [smallint] NOT NULL DEFAULT ((-1)),
+ CONSTRAINT [PK_jos_banner_clients_id] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+
