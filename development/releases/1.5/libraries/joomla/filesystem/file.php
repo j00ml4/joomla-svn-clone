@@ -3,7 +3,7 @@
  * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	FileSystem
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters. All rights reserved.
+ * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
  * @license		GNU/GPL, see LICENSE.php
  * Joomla! is free software. This version may have been modified pursuant
  * to the GNU General Public License, and as distributed it includes or
@@ -35,8 +35,14 @@ class JFile
 	 * @since 1.5
 	 */
 	function getExt($file) {
-		$dot = strrpos($file, '.') + 1;
-		return substr($file, $dot);
+		$chunks = explode('.', $file);
+		$chunksCount = count($chunks) - 1;
+
+		if($chunksCount > 0) {
+			return $chunks[$chunksCount];
+		}
+		
+		return false;
 	}
 
 	/**
