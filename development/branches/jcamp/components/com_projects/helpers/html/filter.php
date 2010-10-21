@@ -35,6 +35,7 @@ abstract class JHtmlFilter
         			$options[] = JHtml::_('select.option', '-3', JText::_('COM_PROJECTS_STATE_REPORTED'));
         			$options[] = JHtml::_('select.option', '1', JText::_('COM_PROJECTS_STATE_APPROVED'));
         			$options[] = JHtml::_('select.option', '2', JText::_('COM_PROJECTS_STATE_FINISHED'));
+        			$options[] = JHtml::_('select.option', '4', JText::_('COM_PROJECTS_STATE_ACTIVE'));
         			break;	
         	}
 		

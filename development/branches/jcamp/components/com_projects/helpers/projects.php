@@ -29,22 +29,10 @@ abstract class ProjectsHelper {
     	if($project_id)
 	    	$q->where('t.`project_id` = '.$project_id);
 	    	
-	    // filter by type
-	    $type = $params->get('task.type',3);
-	   	if(is_int($type))
-				$q->where('(t.`type` = '.$type.')');
-			else
-				$q->where('((t.`type` '.$type.')');
-	    
-	    // filter by state
-	    $state = $params->get('state',false);
-	    if($state !== false)
-	    {
-	    	if(is_int($state))
-					$q->where('t.`state` = '.$state);
-				else
-					$q->where('t.`state` '.$state);
-	    }
+	    // filter by selected filter (state)
+	    $filter = $params->get('filter',false);
+	    if($filter)
+	    	$q->where($filter);
 	    
 	    // order and limit
 	    $ord = $params->get('order.list','t.`ordering`');
@@ -54,7 +42,7 @@ abstract class ProjectsHelper {
 	    	$q->order($ord.' '.$params->get('order.dir','ASC').' LIMIT '.$start.','.$limit);
 	    else
 	    	$q->order('LIMIT '.$start.','.$limit);
-	    
+	    echo $q;
 	    $db->setQuery($q);
 	    return $db->loadObjectList();
     }
@@ -225,6 +213,50 @@ abstract class ProjectsHelper {
 		$results = $dispatcher->trigger('onContentAfterDisplay', array('com_content.article', &$item, &$params, $offset));
 		$item->event->afterDisplayContent = trim(implode("\n", $results));	
 	}
+
+	/**
+	 * Method to generate string for db query to get items corresponding to the filter
+	 * 
+	 * @param $state  Filter
+	 * @param $type   Type of the task (ticket/task)
+	 * @param $prefix Prefix used for table with tasks (default is t)
+	 * @return String for db query to get the right items for this filter
+	 */
+	public static function getFilterStateQuery($state, $type, $prefix = 't')
+	{
+		if($type == 3) // tickets
+		{
+			switch($state)
+			{
+				case -3: // reported
+				case 2 : // finished
+				case -2 : // denied
+				case 1 : // approved
+					return $prefix.'.`type` = 3 AND '.$prefix.'.`state` = '.$state;
+				case 0: // all (reported+approved+finished)
+					return $prefix.'.`type` = 3 AND '.$prefix.'.`state` IN (1,2,-3)';
+				case 4 : // active
+					return $prefix.'.`type` = 3 AND '.$prefix.'.`state` IN (-3,1)';
+			}
+		}
+		else // tasks
+		{
+			switch($state)
+			{
+				case -3: // reported
+				case 2 : // finished
+				case -2 : // denied
+					return $prefix.'.`type` =2 AND '.$prefix.'.`state` = '.$state;
+				case 1 : // pending
+					return $prefix.'.`type` IN (2,3) AND '.$prefix.'.`state` = 1';
+				case 0: // all (reported+approved+finished)
+					return $prefix.'(.`type` = 2 AND '.$prefix.'.`state` IN (1,2)) OR ('.$prefix.'.`type`=3 AND '.$prefix.'.`state`=1)';
+				case 4 : // pending
+					return $prefix.'.`type` IN (2,3) AND '.$prefix.'.`state` = 1';
+			}
+		}
+	}
+	
 }
 
 ?>
