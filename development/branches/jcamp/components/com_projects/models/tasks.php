@@ -41,9 +41,9 @@ class ProjectsModelTasks extends JModelList
     protected function populateState() {
     	$app = &JFactory::getApplication();
     	 
-        $value = $app->getUserStateFromRequest('task.type', 'type');
-        $this->setState('type', $value); 
-    	$this->context .= $value;
+        $type = $app->getUserStateFromRequest('task.type', 'type');
+        $this->setState('type', $type); 
+    	$this->context .= $type;
                
     	$value = JRequest::getInt('parent_id', 0);
         $this->setState('parent.id', $value);  
@@ -60,7 +60,11 @@ class ProjectsModelTasks extends JModelList
         $app->setUserState('project.id', $id);
 
         // Filters
-        $value = $app->getUserStateFromRequest($this->context.'.state', 'filter_state');
+        if($type == 3)
+	        $value = $app->getUserStateFromRequest($this->context.'.state', 'filter_state',$params->get('listing_tickets_view'));
+	      else
+	        $value = $app->getUserStateFromRequest($this->context.'.state', 'filter_state',$params->get('listing_tasks_view'));
+	      
         $this->setState('filter.state', $value);
        
         $value = $app->getUserStateFromRequest($this->context.'.catid', 'filter_catid');
@@ -127,11 +131,9 @@ class ProjectsModelTasks extends JModelList
         
         // Filter by state
         $value = $this->getState('filter.state');
-        if (is_numeric($value)) {
-        	$query->where('a.state = ' . (int) $value);
-        }
+        $query->where(ProjectsHelper::getFilterStateQuery($value, $this->getState('type'), 'a'));
 
-    	// Filter by state
+    	// Filter by category
         if ($value = $this->getState('filter.catid')) {
         	$query->where('a.catid = ' . (int) $value);
         }

@@ -46,6 +46,9 @@
 			default="1">
 			<option	value="0">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_ALL</option>
 			<option	value="1">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_PENDING</option>
+			<option	value="2">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_FINISHED</option>
+			<option	value="-3">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_REPORTED</option>
+			<option	value="-2">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_DENIED</option>
 		</field>
 
 		<field name="listing_tickets"
@@ -56,9 +59,41 @@
 			size="1"
 			default="1">
 			<option	value="0">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_ALL</option>
-			<option	value="1">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_REPORTED</option>
+			<option	value="-3">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_REPORTED</option>
+			<option	value="1">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_APPROVED</option>
+			<option	value="2">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_FINISHED</option>
+			<option	value="4">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_ACTIVE</option>
+			<option	value="-2">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_DENIED</option>
 		</field>
 
+		<field name="listing_tasks_view"
+			type="radio"
+			label="COM_PROJECTS_CONFIGURATION_LISTING_TASKS_VIEW_LABEL"
+			description="COM_PROJECTS_CONFIGURATION_LISTING_TASKS_VIEW_DESC"
+			class="inputbox"
+			size="1"
+			default="1">
+			<option	value="0">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_ALL</option>
+			<option	value="1">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_PENDING</option>
+			<option	value="2">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_FINISHED</option>
+			<option	value="-3">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_REPORTED</option>
+			<option	value="-2">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_DENIED</option>
+		</field>
+
+		<field name="listing_tickets_view"
+			type="radio"
+			label="COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_VIEW_LABEL"
+			description="COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_VIEW_DESC"
+			class="inputbox"
+			size="1"
+			default="4">
+			<option	value="0">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_ALL</option>
+			<option	value="-3">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_REPORTED</option>
+			<option	value="1">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_APPROVED</option>
+			<option	value="2">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_FINISHED</option>
+			<option	value="4">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_ACTIVE</option>
+			<option	value="-2">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_DENIED</option>
+		</field>
 
 		<field name="spacer2"
 			type="spacer"
