@@ -40,6 +40,7 @@ $ -> Language fix or change
  # [#21489] CHANGELOG.php - segment twice exists
  # [#21769] toolbar.content.html.php allow direct access
  # [#21466] Backend user list ordering
+ # [#20256] Message "Database Error: Unable to connect to the database..." should return "500 Internal Server Error"
 
 -------------------- 1.5.21 Stable Release [08-October-2010] ------------------
 
