@@ -224,7 +224,7 @@ class JInstallationModelConfiguration extends JModel
 		date_default_timezone_set('UTC');
 		$installdate	= date('Y-m-d H:i:s');
 		$nullDate		= $db->getNullDate();
-    if($db->name == 'mssql')
+    if($db->name == 'sqlsrv')
     {
 		  $query = 'SET IDENTITY_INSERT jos_users ON';
 		  $db->setQuery($query);
@@ -257,7 +257,7 @@ class JInstallationModelConfiguration extends JModel
 			return false;
 		}
     
-    if($db->name == 'mssql')
+    if($db->name == 'sqlsrv')
     {
   		$query = 'SET IDENTITY_INSERT jos_users OFF';
   		$db->setQuery($query);

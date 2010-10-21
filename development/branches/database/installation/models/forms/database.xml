@@ -11,7 +11,7 @@
 				<option value="mysql">MySQL</option>
 				<option value="mysqli">MySQLi</option>
 				<option value="oracle">Oracle</option>
-				<option value="mssql">MSSql</option>
+				<option value="sqlsrv">SQLSrv</option>
 				<option value="azure">SQL Azure</option>
 			</field>
 			<field name="db_host" type="text" id="db_host" class="inputbox"

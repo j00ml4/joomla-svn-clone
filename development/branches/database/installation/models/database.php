@@ -202,16 +202,16 @@ class JInstallationModelDatabase extends JModel
 					'UPDATE `#__extensions`' .
 					' SET `params` = '.$db->Quote($params) .
 					' WHERE `element`="com_languages"'
-				);
+					);
 
-				// Execute the query.
-				$db->query();
+					// Execute the query.
+					$db->query();
 
-				// Check for errors.
-				if ($db->getErrorNum()) {
-					$this->setError($db->getErrorMsg());
-					$return = false;
-				}
+					// Check for errors.
+					if ($db->getErrorNum()) {
+						$this->setError($db->getErrorMsg());
+						$return = false;
+					}
 			}
 		}
 
@@ -307,20 +307,21 @@ class JInstallationModelDatabase extends JModel
 		$return = true;
 		$backup = 'bak_';
 
+
 		// Get the tables in the database.
 		if($db->name == 'mysql')
-    {
-		  $db->setQuery(
+		{
+			$db->setQuery(
 		  	'SHOW TABLES' .
 		  	' FROM '.$db->nameQuote($name)
-		  );
-    }elseif($db->name == 'mssql'){
-      $db->setQuery(
+			);
+		}elseif($db->name == 'sqlsrv'){
+			$db->setQuery(
       'SELECT NAME' .
       ' FROM '.$db->nameQuote($name).'..sysobjects WHERE xtype = \'U\''
-    );
-    }
-		
+      );
+		}
+
 		if ($tables = $db->loadResultArray())
 		{
 			foreach ($tables as $table)
@@ -333,17 +334,17 @@ class JInstallationModelDatabase extends JModel
 
 					// Drop the backup table.
 					if($db->name == 'mysql')
-          {
-					$db->setQuery(
-						'DROP TABLE IF EXISTS '.$db->nameQuote($backupTable)
-					);
-        }elseif($db->name == 'mssql')
-        {
-          $db->setQuery(
-            'IF EXISTS(SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '
-            .$db->Quote($backupTable).') DROP TABLE '.$db->nameQuote($backupTable)
-          );
-        }
+					{
+						$db->setQuery(
+								'DROP TABLE IF EXISTS '.$db->nameQuote($backupTable)
+						);
+					} elseif($db->name == 'sqlsrv')
+					{
+						$db->setQuery(
+	            'IF EXISTS(SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '
+	            .$db->Quote($backupTable).') DROP TABLE '.$db->nameQuote($backupTable)
+	            );
+					}
 					$db->query();
 
 					// Check for errors.
@@ -353,18 +354,18 @@ class JInstallationModelDatabase extends JModel
 					}
 
 					// Rename the current table to the backup table.
-					
+
 					if($db->name == 'mysql')
-    {
-					$db->setQuery(
-						'RENAME TABLE '.$db->nameQuote($table).' TO '.$db->nameQuote($backupTable)
-					);
-    }elseif($db->name == 'mssql')
-    {
-      $db->setQuery(
-            'sp_rename '.$table.', '.$backupTable
-          );
-    }
+					{
+						$db->setQuery(
+										'RENAME TABLE '.$db->nameQuote($table).' TO '.$db->nameQuote($backupTable)
+						);
+					} elseif ($db->name == 'sqlsrv')
+					{
+						$db->setQuery(
+				            'sp_rename '.$table.', '.$backupTable
+						);
+					}
 					$db->query();
 
 					// Check for errors.
@@ -428,17 +429,17 @@ class JInstallationModelDatabase extends JModel
 
 		// Get the tables in the database.
 		if($db->name == 'mysql')
-    {
-		$db->setQuery(
+		{
+			$db->setQuery(
 			'SHOW TABLES FROM '.$db->nameQuote($name)
-		);
-    }elseif($db->name == 'mssql')
-    {
-		$db->setQuery(
+			);
+		}elseif($db->name == 'sqlsrv')
+		{
+			$db->setQuery(
 			'SELECT NAME' .
 			' FROM '.$db->nameQuote($name).'..sysobjects WHERE xtype = \'U\''
-		);
-  }
+			);
+		}
 		if ($tables = $db->loadResultArray())
 		{
 			foreach ($tables as $table)
@@ -448,17 +449,17 @@ class JInstallationModelDatabase extends JModel
 				{
 					// Drop the table.
 					if($db->name == 'mysql')
-          {
-					$db->setQuery(
+					{
+						$db->setQuery(
 						'DROP TABLE IF EXISTS '.$db->nameQuote($table)
-					);
-          }elseif($db->name == 'mssql')
-        {
-          $db->setQuery(
+						);
+					}elseif($db->name == 'sqlsrv')
+					{
+						$db->setQuery(
             'IF EXISTS(SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '
             .$db->Quote($table).') DROP TABLE '.$db->nameQuote($table)
-          );
-        }
+            );
+					}
 					$db->query();
 
 					// Check for errors.
@@ -532,17 +533,17 @@ class JInstallationModelDatabase extends JModel
 		// Only alter the database if it supports the character set.
 		/*if ($db->hasUTF())
 		{
-			// Run the create database query.
-			$db->setQuery(
-				'ALTER DATABASE '.$db->nameQuote($name).' CHARACTER' .
-				' SET `utf8`'
-			);
-			$db->query();
+		// Run the create database query.
+		$db->setQuery(
+		'ALTER DATABASE '.$db->nameQuote($name).' CHARACTER' .
+		' SET `utf8`'
+		);
+		$db->query();
 
-			// If an error occurred return false.
-			if ($db->getErrorNum()) {
-				return false;
-			}
+		// If an error occurred return false.
+		if ($db->getErrorNum()) {
+		return false;
+		}
 		}*/
 
 		return true;
