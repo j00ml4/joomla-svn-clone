@@ -85,7 +85,7 @@ class JAccess
 		$query	= $db->getQuery(true);
 		$query->select($recursive ? 'b.rules' : 'a.rules');
 		$query->from('#__assets AS a');
-    if($db->name == 'mssql')
+    if($db->name == 'sqlsrv')
 		  $query->group($recursive ? 'b.id, b.rules, b.lft' : 'a.id, a.rules, a.lft');
     elseif($db->name == 'mysql')
       $query->group($recursive ? 'b.id' : 'a.id');

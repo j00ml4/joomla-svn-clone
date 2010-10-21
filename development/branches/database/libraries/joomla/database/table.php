@@ -122,7 +122,7 @@ abstract class JTable extends JObject
 			// Lookup the fields for this table only once.
 			if($this->_db->name == 'mysql')
 			 $name	= $this->_tbl;
-      elseif($this->_db->name == 'mssql')
+      elseif($this->_db->name == 'sqlsrv')
         $name = $this->_db->replacePrefix((string) $this->_tbl);
         
 			$fields	= $this->_db->getTableFields($name, false);
