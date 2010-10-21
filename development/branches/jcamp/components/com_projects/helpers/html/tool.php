@@ -132,7 +132,8 @@ abstract class JHtmlTool
 				$states	= array(
 					2	=> array('publish',		'COM_PROJECTS_STATE_FINISHED',	'COM_PROJECTS_STATE_PENDING_ACTION',	'COM_PROJECTS_STATE_FINISHED',	false,	'archive',		'archive'),	
 					1	=> array('archive',		'COM_PROJECTS_STATE_PENDING',	'COM_PROJECTS_STATE_FINISHED_ACTION',	'COM_PROJECTS_STATE_PENDING',	false,	'publish',		'publish'),
-					0	=> array('report',		'COM_PROJECTS_STATE_DENIED',	'COM_PROJECTS_STATE_APPROVED_ACTION',	'COM_PROJECTS_STATE_DENIED',	false,	'unpublish',	'unpublish'),
+					-3	=> array('publish',		'COM_PROJECTS_STATE_REPORTED',	'COM_PROJECTS_STATE_APPROVED_ACTION',	'JREPORTED',	false,	'report',		'report'),
+					0	=> array('publish',		'COM_PROJECTS_STATE_DENIED',	'COM_PROJECTS_STATE_APPROVED_ACTION',	'JUNPUBLISHED',	false,	'unpublish',	'unpublish'),
 				);
 				break;
 				
