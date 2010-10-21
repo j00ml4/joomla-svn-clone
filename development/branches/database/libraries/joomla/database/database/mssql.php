@@ -1,14 +1,19 @@
 <?php
 /**
- * @version		$Id: mssql.php 18554 2010-08-21 03:19:19Z ian $
- * @package		Joomla.Framework
- * @subpackage	Database
- * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
- * @license		GNU General Public License version 2 or later; see LICENSE.txt
- */
+* @version		$Id: sqlsrv.php 11316 2008-11-27 03:11:24Z ian $
+* @package		Joomla.Framework
+* @subpackage	Database
+* @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+* @license		GNU/GPL, see LICENSE.php
+* Joomla! is free software. This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*/
 
-// No direct access
-defined('JPATH_BASE') or die;
+// Check to ensure this file is within the rest of the framework
+defined('JPATH_BASE') or die();
 
 /**
  * SQL Server database driver
@@ -24,30 +29,31 @@ class JDatabaseMSSql extends JDatabase
 	 *
 	 * @var string
 	 */
-	public $name = 'mssql';
+	var $name			= 'mssql';
 
 	/**
 	 *  The null/zero date string
 	 *
 	 * @var string
 	 */
-	protected $_nullDate = '1900-01-01 00:00:00';
+	var $_nullDate		= '1900-01-01 00:00:00';
 
 	/**
 	 * Quote for named objects
 	 *
 	 * @var string
 	 */
-	protected $_nameQuote = null;
+	var $_nameQuote		= "'";
 
 	/**
-	 * Database object constructor
-	 *
-	 * @param	array	List of options used to configure the connection
-	 * @since	1.5
-	 * @see		JDatabase
-	 */
-	function __construct($options)
+	* Database object constructor
+	*
+	* @access	public
+	* @param	array	List of options used to configure the connection
+	* @since	1.5
+	* @see		JDatabase
+	*/
+	function __construct( $options )
 	{
 		$host		= array_key_exists('host', $options)	? $options['host']		: 'localhost';
 		$user		= array_key_exists('user', $options)	? $options['user']		: '';
@@ -55,22 +61,21 @@ class JDatabaseMSSql extends JDatabase
 		$database	= array_key_exists('database',$options)	? $options['database']	: '';
 		$prefix		= array_key_exists('prefix', $options)	? $options['prefix']	: 'jos_';
 		$select		= array_key_exists('select', $options)	? $options['select']	: true;
-	
-		
-		// Perform a number of fatality checks, then return gracefully
-		if (!function_exists('mssql_connect')) {
+
+		// perform a number of fatality checks, then return gracefully
+		if (!function_exists( 'sqlsrv_connect' )) {
 			$this->_errorNum = 1;
-			$this->_errorMsg = 'The MS SQL adapter "mssql" is not available.';
+			$this->_errorMsg = 'The MS SQL adapter "sqlsrv" is not available.';
 			return;
 		}
 
-		// Connect to the server
-		if (!($this->_connection = @mssql_connect($host, $user, $password, true))) {
+		// connect to the server
+		if (!($this->_connection = sqlsrv_connect( $host, Array('uid'=>$user, 'pwd'=>$password, 'CharacterSet'=>'UTF-8') ) )) {
 			$this->_errorNum = 2;
-			$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_CONNECT_mssql');
+			$this->_errorMsg = 'Could not connect to MS SQL';
 			return;
 		}
-		
+
 		$conf = & JFactory::getConfig();
 		
 	    $slave_host = array_key_exists('slavehost', $options)	? $options['slavehost']		: '';
@@ -88,36 +93,30 @@ class JDatabaseMSSql extends JDatabase
 		
 	
 	    if ($slave_host != "" && $slave_user != "" && $slave_password != "") {
-			if (!($this->_slave_resource = @mssql_connect( $slave_host, $slave_user, $slave_password, true ))) {
+			if (!($this->_slave_connection = sqlsrv_connect( $slave_host, Array('uid'=>$slave_user, 'pwd'=>$slave_password, 'CharacterSet'=>'UTF-8') ))) {
 				$this->_errorNum = 2;
-				$this->_errorMsg = 'Could not connect to mssql';
+				$this->_errorMsg = 'Could not connect to Slave mssql';
 	
 				return;
 			}
 			
 			
 		}
-
-		// Finalize initialisation
+		
+		sqlsrv_configure('WarningsReturnAsErrors', 1);
+		
+		
+		// finalize initialization
 		parent::__construct($options);
 
-		// Set sql_mode to non_strict mode
-		//mssql_query("SET @@SESSION.sql_mode = '';", $this->_connection);
-		
-
 		// select the database
-	$select=true;
-		if ($select) {
-					
+		if ( $select ) {
 			$this->select($database);
-	
-			if (is_resource($this->_slave_connection)) {
+		if (is_resource($this->_slave_connection)) {
 			   // mssql_query("SET @@SESSION.sql_mode = '';", $this->_slave_connection);
 				$this->selectSlave($database);
 		    }
-		   
 		}
-		 
 	}
 
 	/**
@@ -126,42 +125,49 @@ class JDatabaseMSSql extends JDatabase
 	 * @return boolean
 	 * @since 1.5
 	 */
-	public function __destruct()
+	function __destruct()
 	{
+		$return = false;
 		if (is_resource($this->_connection)) {
-			mssql_close($this->_connection);
+			$return = sqlsrv_close($this->_connection);
 		}
-	    if (is_resource($this->_slave_connection)) {
-			mssql_close($this->_slave_connection);
+	 	if (is_resource($this->_slave_connection)) {
+			sqlsrv_close($this->_slave_connection);
 		}
+		return $return;
 	}
 
 	/**
 	 * Test to see if the SQL Server connector is available
 	 *
+	 * @static
+	 * @access public
 	 * @return boolean  True on success, false otherwise.
 	 */
-	public function test()
+	function test()
 	{
-		return (function_exists('mssql_connect'));
+		return (function_exists( 'sqlsrv_connect' ));
 	}
 
 	/**
 	 * Determines if the connection to the server is active.
 	 *
+	 * @access	public
 	 * @return	boolean
 	 * @since	1.5
 	 */
-	public function connected()
+	function connected()
 	{
-		/*if (is_resource($this->_connection)) {
-			return mssql_ping($this->_connection);
+		/*if(is_resource($this->_connection)) {
+			return mysql_ping($this->_connection);
 		}
-		return false;*/
+		return false;
+		*/
+		// TODO: Run a blank query here
 		return true;
 	}
-	
-    public function slave_connected()
+
+   public function slave_connected()
 	{
 		/*if (is_resource($this->_slave_connection)) {
 			return mssql_ping($this->_slave_connection);
@@ -169,31 +175,37 @@ class JDatabaseMSSql extends JDatabase
 		return false;*/
 		return true;
 	}
-
 	/**
 	 * Select a database for use
 	 *
+	 * @access	public
 	 * @param	string $database
 	 * @return	boolean True if the database has been successfully selected
 	 * @since	1.5
 	 */
-	public function select($database)
+	function select($database)
 	{
-		if (!$database) {
+		if ( ! $database )
+		{
 			return false;
 		}
 
-		if (!mssql_select_db($database, $this->_connection)) {
+		if(!sqlsrv_query( $this->_connection, 'USE '. $database, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) ))
+		{
 			$this->_errorNum = 3;
-			$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_DATABASE_CONNECT');
+			$this->_errorMsg = 'Could not connect to Master database '.$database;
 			return false;
 		}
-		
+		//$this->setQuery('USE '. $database);
+		/*if ( !$this->Query() ) {
+			$this->_errorNum = 3;
+			$this->_errorMsg = 'Could not connect to database';
+			return false;
+		}*/
 		
 		return true;
 	}
-	
-	/**
+/**
 	 * Select a Slave database for use
 	 *
 	 * @access	public
@@ -206,35 +218,34 @@ class JDatabaseMSSql extends JDatabase
 			return false;
 		}
 
-		if ( !mssql_select_db( $database, $this->_slave_connection )) {
+		if(!sqlsrv_query( $this->_slave_connection, 'USE '. $database, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) ))
+		{
 			$this->_errorNum = 3;
-			$this->_errorMsg = 'Could not connect to database';
+			$this->_errorMsg = 'Could not connect to Slave database '.$database;
 			return false;
 		}
 
 		return true;
 	}
-	
-
 	/**
 	 * Determines UTF support
 	 *
-	 * @return	boolean	True - UTF is supported
+	 * @access	public
+	 * @return boolean True - UTF is supported
 	 */
-	public function hasUTF()
+	function hasUTF()
 	{
-	//	$verParts = explode('.', $this->getVersion());
-	//	return ($verParts[0] == 5 || ($verParts[0] == 4 && $verParts[1] == 1 && (int)$verParts[2] >= 2));
-	return true;
+		return true;
 	}
 
 	/**
 	 * Custom settings for UTF support
+	 *
+	 * @access	public
 	 */
-	public function setUTF()
+	function setUTF()
 	{
-		return mssql_query("SET NAMES 'utf8'", $this->_connection);
-		//return true;
+		// TODO: Remove this?
 	}
 
 	/**
@@ -243,10 +254,18 @@ class JDatabaseMSSql extends JDatabase
 	 * @param	string	The string to be escaped
 	 * @param	boolean	Optional parameter to provide extra escaping
 	 * @return	string
+	 * @access	public
+	 * @abstract
 	 */
-	public function getEscaped($text, $extra = false)
+	function getEscaped( $text, $extra = false )
 	{
-		//$result = mssql_real_escape_string($text, $this->_connection);
+		// TODO: MSSQL Compatible escaping
+		// The quoting for MSSQL isn't handled in the driver
+		// however it should be (it'd be nice), so we need
+		// to do this ourselves.
+		// It should just be ' to '' but not sure
+		//$result = str_replace("'", "''", $text);
+		//return $result;
 		$result = addslashes($text);
 		if ($extra) {
 			$result = addcslashes($result, '%_');
@@ -257,25 +276,32 @@ class JDatabaseMSSql extends JDatabase
 	/**
 	 * Execute the query
 	 *
-	 * @return	mixed	A database resource if successful, FALSE if not.
+	 * @access	public
+	 * @return mixed A database resource if successful, FALSE if not.
 	 */
-	public function query()
+	function query()
 	{
-		ini_set('display_errors',1);
-    error_reporting(E_ALL);
 		if (!is_resource($this->_connection)) {
 			return false;
 		}
-	//echo $this->_sql;
+
 		// Take a local copy so that we don't modify the original query and cause issues later
 		$sql = $this->replacePrefix((string) $this->_sql);
 		$sql = str_replace('`', '', $sql);
-    $sql = str_replace('LENGTH', 'DATALENGTH', $sql);
-    $sql = str_ireplace('insert ignore into', 'insert into', $sql);
+		$sql = str_replace('LENGTH', 'DATALENGTH', $sql);
+		$sql = str_ireplace('insert ignore into', 'insert into', $sql);
 		if ($this->_limit > 0 || $this->_offset > 0) {
-		  if($this->_offset == 0)
-        $sql = str_ireplace('select', 'select top '.$this->_limit, $sql);
-			//$sql .= ' LIMIT '.$this->_offset.', '.$this->_limit;
+			if($this->_limit > 0 && $this->_offset <= 0) {
+				// we have a limit with zero or no offset, we can use top here	
+				$this->_sql = preg_replace(
+					'/(^\s*select\s+(distinctrow|distinct)?)/i',
+					'\\1 TOP '.$this->_limit.' ',
+					$this->_sql);
+			} else {
+				// TODO: Work this bit out!
+				// Combination of top vs row_number() over (order by)
+				// but both require at least one column to sort on
+			}
 		}
 		if ($this->_debug) {
 			$this->_ticker++;
@@ -284,42 +310,30 @@ class JDatabaseMSSql extends JDatabase
 		$this->_errorNum = 0;
 		$this->_errorMsg = '';
 		
-		
-		//echo $sql;echo '<br>';
-		jimport("joomla.utilities.string");
+	jimport("joomla.utilities.string");
 		
 		$select_in_sql = JString::startsWith(ltrim(strtoupper($sql)), 'SELECT') ;
 		
 	    if($select_in_sql && is_resource($this->_slave_connection)) {
-			$this->_cursor = mssql_query( $sql, $this->_slave_connection );
+			$this->_cursor = sqlsrv_query( $this->_slave_connection, $sql, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) );
 		} else {
-			$this->_cursor = mssql_query( $sql, $this->_connection );
+			$this->_cursor = sqlsrv_query( $this->_connection, $sql, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) );
 		}
 		
-		//$this->_cursor = mssql_query($sql, $this->_connection);
-	    if (!$this->_cursor) {
-	      //echo $sql;echo '<br>';
-	        if($select_in_sql && is_resource($this->_slave_connection)) {	
-    			//$this->_errorNum = mssql_errno($this->_slave_connection);
-    			//$this->_errorMsg = mssql_error($this->_slave_connection)." SQL=$sql";
-    			$this->_errorNum = '1';
-			$this->_errorMsg = 'DId not execute';
-	        } else {
-	           // $this->_errorNum = mssql_errno($this->_connection);
-    			//$this->_errorMsg = mssql_error($this->_connection)." SQL=$sql";
-    			$this->_errorNum = '1';
-			$this->_errorMsg = 'DId not execute';
-	        }
-    
-    		if ($this->_debug) {
-    			JError::raiseError(500, 'JDatabasemssql::query: '.$this->_errorNum.' - '.$this->_errorMsg);
-    		}
-    			return false;
-    		}
-	   
+		if (!$this->_cursor)
+		{
+			$errors = sqlsrv_errors( );
+			$this->_errorNum = $errors[0]['sqlstate'];
+			$this->_errorMsg = $errors[0]['message'];
+			// $errors[0]['errorcode']; // Holds the SQL Server Native Error Code
+
+			if ($this->_debug) {
+				JError::raiseError(500, 'JDatabaseSQLSrv::query: '.$this->_errorNum.' - '.$this->_errorMsg );
+			}
+			return false;
+		}
 		return $this->_cursor;
 	}
-
 /**
    * Get the current or query, or new JDatabaseQuery object.
    *
@@ -335,75 +349,70 @@ class JDatabaseMSSql extends JDatabase
       return $this->_sql;
     }
   }
-
 	/**
-	 * @return	int		The number of affected rows in the previous operation
-	 * @since	1.0.5
+	 * Description
+	 *
+	 * @access	public
+	 * @return int The number of affected rows in the previous operation
+	 * @since 1.0.5
 	 */
-	public function getAffectedRows()
+	function getAffectedRows()
 	{
-	    if(is_resource($this->_slave_connection))
-		    return mssql_rows_affected($this->_slave_connection);
-		else return mssql_rows_affected($this->_connection);
+		 return sqlsrv_rows_affected($this->_cursor);
 	}
 
 	/**
 	 * Execute a batch query
 	 *
-	 * @return	mixed	A database resource if successful, FALSE if not.
+	 * @access	public
+	 * @return mixed A database resource if successful, FALSE if not.
 	 */
-	public function queryBatch($abort_on_error=true, $p_transaction_safe = false)
+	function queryBatch( $abort_on_error=true, $p_transaction_safe = false)
 	{
-		/*$sql = $this->replacePrefix((string) $this->_sql);
 		$this->_errorNum = 0;
 		$this->_errorMsg = '';
-
-		if ($p_transaction_safe) {
-			$sql = rtrim($sql, "; \t\r\n\0");
-			$si = $this->getVersion();
-			preg_match_all("/(\d+)\.(\d+)\.(\d+)/i", $si, $m);
-			if ($m[1] >= 4) {
-				$sql = 'START TRANSACTION;' . $sql . '; COMMIT;';
-			} else if ($m[2] >= 23 && $m[3] >= 19) {
-				$sql = 'BEGIN WORK;' . $sql . '; COMMIT;';
-			} else if ($m[2] >= 23 && $m[3] >= 17) {
-				$sql = 'BEGIN;' . $sql . '; COMMIT;';
-			}
-		}
-		$query_split = $this->splitSql($sql);
+		$this->_sql = 'BEGIN TRANSACTION;' . $this->_sql . '; COMMIT TRANSACTION;';
+		$query_split = $this->splitSql($this->_sql);
 		$error = 0;
 		foreach ($query_split as $command_line) {
-			$command_line = trim($command_line);
+			$command_line = trim( $command_line );
 			if ($command_line != '') {
-				$this->_cursor = mssql_query($command_line, $this->_connection);
+				$this->_cursor = sqlsrv_query( $this->_connection, $command_line, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) );
 				if ($this->_debug) {
 					$this->_ticker++;
 					$this->_log[] = $command_line;
 				}
 				if (!$this->_cursor) {
 					$error = 1;
-					$this->_errorNum .= mssql_errno($this->_connection) . ' ';
-					$this->_errorMsg .= mssql_error($this->_connection)." SQL=$command_line <br />";
+					$errors = sqlsrv_errors( );
+					$this->_errorNum = $errors[0]['sqlstate'];
+					$this->_errorMsg = $errors[0]['message'];
+					// $errors[0]['errorcode']; // Holds the SQL Server Native Error Code
 					if ($abort_on_error) {
 						return $this->_cursor;
 					}
 				}
 			}
 		}
-		return $error ? false : true;*/
-		return true;
+		return $error ? false : true;
 	}
 
 	/**
 	 * Diagnostic function
 	 *
+	 * @access	public
 	 * @return	string
 	 */
-	public function explain()
+	function explain()
 	{
-		/*$temp = $this->_sql;
-		$this->_sql = "EXPLAIN $this->_sql";
+		$temp = $this->_sql;
 
+		// SET SHOWPLAN_ALL ON - will make sqlsrv to show some explain of query instead of run it
+		// see also: http://msdn.microsoft.com/en-us/library/aa259203%28SQL.80%29.aspx
+		$this->setQuery("SET SHOWPLAN_ALL ON");
+		$this->query();
+
+		$this->setQuery($temp);
 		if (!($cur = $this->query())) {
 			return null;
 		}
@@ -411,283 +420,289 @@ class JDatabaseMSSql extends JDatabase
 
 		$buffer = '<table id="explain-sql">';
 		$buffer .= '<thead><tr><td colspan="99">'.$this->getQuery().'</td></tr>';
-		while ($row = mssql_fetch_assoc($cur)) {
+		while ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_ASSOC )) {
 			if ($first) {
 				$buffer .= '<tr>';
 				foreach ($row as $k=>$v) {
 					$buffer .= '<th>'.$k.'</th>';
 				}
-				$buffer .= '</tr></thead><tbody>';
+				$buffer .= '</tr></thead>';
 				$first = false;
 			}
-			$buffer .= '<tr>';
+			$buffer .= '<tbody><tr>';
 			foreach ($row as $k=>$v) {
 				$buffer .= '<td>'.$v.'</td>';
 			}
 			$buffer .= '</tr>';
 		}
 		$buffer .= '</tbody></table>';
-		mssql_free_result($cur);
+		sqlsrv_free_stmt( $cur );
 
-		$this->_sql = $temp;
+		// remove the explain status
+		$this->setQuery("SET SHOWPLAN_ALL OFF");
+		$this->query();
+		
+		$this->setQuery($temp);
 
-		return $buffer;*/
+		return $buffer;
 	}
 
 	/**
 	 * Description
 	 *
-	 * @return	int	The number of rows returned from the most recent query.
+	 * @access	public
+	 * @return int The number of rows returned from the most recent query.
 	 */
-	public function getNumRows($cur=null)
+	function getNumRows( $cur=null )
 	{
-		return mssql_num_rows($cur ? $cur : $this->_cursor);
+		return sqlsrv_num_rows( $cur ? $cur : $this->_cursor );
 	}
 
 	/**
 	 * This method loads the first field of the first row returned by the query.
 	 *
-	 * @return	mixed	The value returned in the query or null if the query failed.
+	 * @access	public
+	 * @return The value returned in the query or null if the query failed.
 	 */
-	public function loadResult()
+	function loadResult()
 	{
 		if (!($cur = $this->query())) {
 			return null;
 		}
 		$ret = null;
-		if ($row = mssql_fetch_row($cur)) {
+		if ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
 			$ret = $row[0];
 		}
-		mssql_free_result($cur);
+		sqlsrv_free_stmt( $cur );
 		return $ret;
 	}
 
 	/**
 	 * Load an array of single field results into an array
+	 *
+	 * @access	public
 	 */
-	public function loadResultArray($numinarray = 0)
+	function loadResultArray($numinarray = 0)
 	{
 		if (!($cur = $this->query())) {
 			return null;
 		}
 		$array = array();
-		while ($row = mssql_fetch_row($cur)) {
+		while ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
 			$array[] = $row[$numinarray];
 		}
-		mssql_free_result($cur);
+		sqlsrv_free_stmt( $cur );
 		return $array;
 	}
 
 	/**
-	 * Fetch a result row as an associative array
-	 *
-	 * @return	array
-	 */
-	public function loadAssoc()
+	* Fetch a result row as an associative array
+	*
+	* @access	public
+	* @return array
+	*/
+	function loadAssoc()
 	{
 		if (!($cur = $this->query())) {
 			return null;
 		}
 		$ret = null;
-		if ($array = mssql_fetch_assoc($cur)) {
+		if ($array = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_ASSOC )) {
 			$ret = $array;
 		}
-		mssql_free_result($cur);
+		sqlsrv_free_stmt( $cur );
 		return $ret;
 	}
 
 	/**
-	 * Load a assoc list of database rows.
-	 *
-	 * @param	string	The field name of a primary key.
-	 * @param	string	An optional column name. Instead of the whole row, only this column value will be in the return array.
-	 * @return	array	If <var>key</var> is empty as sequential list of returned records.
-	 */
-	public function loadAssocList($key = null, $column = null)
+	* Load a assoc list of database rows
+	*
+	* @access	public
+	* @param string The field name of a primary key
+	* @return array If <var>key</var> is empty as sequential list of returned records.
+	*/
+	function loadAssocList( $key='', $column = null )
 	{
 		if (!($cur = $this->query())) {
 			return null;
 		}
 		$array = array();
-		while ($row = mssql_fetch_assoc($cur)) {
+		while ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_ASSOC )) {
 			$value = ($column) ? (isset($row[$column]) ? $row[$column] : $row) : $row;
 			if ($key) {
-				$array[$row[$key]] = $value;
+				$array[$row[$key]] = $row;
 			} else {
-				$array[] = $value;
+				$array[] = $row;
 			}
 		}
-		mssql_free_result($cur);
+		sqlsrv_free_stmt( $cur );
 		return $array;
 	}
 
 	/**
-	 * This global function loads the first row of a query into an object.
-	 *
-	 * @param	string	The name of the class to return (stdClass by default).
-	 *
-	 * @return	object
-	 */
-	public function loadObject($className = 'stdClass')
+	* This global function loads the first row of a query into an object
+	*
+	* @access	public
+	* @return 	object
+	*/
+	function loadObject($className = 'stdClass')
 	{
 		if (!($cur = $this->query())) {
 			return null;
 		}
 		$ret = null;
-		if ($object = mssql_fetch_object($cur)) {
+		if ($object = sqlsrv_fetch_object( $cur )) {
 			$ret = $object;
 		}
-		mssql_free_result($cur);
+		sqlsrv_free_stmt( $cur );
 		return $ret;
 	}
 
 	/**
-	 * Load a list of database objects
-	 *
-	 * If <var>key</var> is not empty then the returned array is indexed by the value
-	 * the database key.  Returns <var>null</var> if the query fails.
-	 *
-	 * @param	string	The field name of a primary key
-	 * @param	string	The name of the class to return (stdClass by default).
-	 *
-	 * @return	array	If <var>key</var> is empty as sequential list of returned records.
-	 */
-	public function loadObjectList($key='', $className = 'stdClass')
+	* Load a list of database objects
+	*
+	* If <var>key</var> is not empty then the returned array is indexed by the value
+	* the database key.  Returns <var>null</var> if the query fails.
+	*
+	* @access	public
+	* @param string The field name of a primary key
+	* @return array If <var>key</var> is empty as sequential list of returned records.
+	*/
+	function loadObjectList( $key='', $className = 'stdClass' )
 	{
 		if (!($cur = $this->query())) {
 			return null;
 		}
 		$array = array();
-		while ($row = mssql_fetch_object($cur)) {
+		while ($row = sqlsrv_fetch_object( $cur )) {
 			if ($key) {
 				$array[$row->$key] = $row;
 			} else {
 				$array[] = $row;
 			}
 		}
-		mssql_free_result($cur);
+		sqlsrv_free_stmt( $cur );
 		return $array;
 	}
 
 	/**
 	 * Description
 	 *
+	 * @access	public
 	 * @return The first row of the query.
 	 */
-	public function loadRow()
+	function loadRow()
 	{
 		if (!($cur = $this->query())) {
 			return null;
 		}
 		$ret = null;
-		if ($row = mssql_fetch_row($cur)) {
+		if ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
 			$ret = $row;
 		}
-		mssql_free_result($cur);
+		sqlsrv_free_stmt( $cur );
 		return $ret;
 	}
 
 	/**
-	 * Load a list of database rows (numeric column indexing)
-	 *
-	 * @param	string	The field name of a primary key
-	 * @return	array	If <var>key</var> is empty as sequential list of returned records.
-	 * If <var>key</var> is not empty then the returned array is indexed by the value
-	 * the database key.  Returns <var>null</var> if the query fails.
-	 */
-	public function loadRowList($key=null)
+	* Load a list of database rows (numeric column indexing)
+	*
+	* @access public
+	* @param string The field name of a primary key
+	* @return array If <var>key</var> is empty as sequential list of returned records.
+	* If <var>key</var> is not empty then the returned array is indexed by the value
+	* the database key.  Returns <var>null</var> if the query fails.
+	*/
+	function loadRowList( $key=null )
 	{
 		if (!($cur = $this->query())) {
 			return null;
 		}
 		$array = array();
-		while ($row = mssql_fetch_row($cur)) {
+		while ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
 			if ($key !== null) {
 				$array[$row[$key]] = $row;
 			} else {
 				$array[] = $row;
 			}
 		}
-		mssql_free_result($cur);
+		sqlsrv_free_stmt( $cur );
 		return $array;
 	}
 
-	/**
-	 * Load the next row returned by the query.
-	 *
-	 * @return	mixed	The result of the query as an array, false if there are no more rows, or null on an error.
-	 *
-	 * @since	1.6.0
-	 */
-	public function loadNextRow()
-	{
-		static $cur;
+        /**
+         * Load the next row returned by the query.
+         *
+         * @return      mixed   The result of the query as an array, false if there are no more rows, or null on an error.
+         *
+         * @since       1.6.0
+         */
+        public function loadNextRow()
+        {
+                static $cur;
 
-		if (!($cur = $this->query())) {
-			return $this->_errorNum ? null : false;
-		}
+                if (!($cur = $this->query())) {
+                        return $this->_errorNum ? null : false;
+                }
 
-		if ($row = mssql_fetch_row($cur)) {
-			return $row;
-		}
+                if ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
+                        return $row;
+                }
 
-		mssql_free_result($cur);
-		$cur = null;
+                sqlsrv_free_stmt($cur);
+                $cur = null;
 
-		return false;
-	}
+                return false;
+        }
 
-	/**
-	 * Load the next row returned by the query.
-	 *
-	 * @param	string	The name of the class to return (stdClass by default).
-	 *
-	 * @return	mixed	The result of the query as an object, false if there are no more rows, or null on an error.
-	 *
-	 * @since	1.6.0
-	 */
-	public function loadNextObject($className = 'stdClass')
-	{
-		static $cur;
+        /**
+         * Load the next row returned by the query.
+         *
+         * @return      mixed   The result of the query as an object, false if there are no more rows, or null on an error.
+         *
+         * @since       1.6.0
+         */
+        public function loadNextObject($className = 'stdClass')
+        {
+                static $cur;
 
-		if (!($cur = $this->query())) {
-			return $this->_errorNum ? null : false;
-		}
+                if (!($cur = $this->query())) {
+                        return $this->_errorNum ? null : false;
+                }
 
-		if ($row = mssql_fetch_object($cur)) {
-			return $row;
-		}
+                if ($row =  sqlsrv_fetch_object( $cur )) {
+                        return $row;
+                }
 
-		mssql_free_result($cur);
-		$cur = null;
+                sqlsrv_free_stmt($cur);
+                $cur = null;
 
-		return false;
-	}
+                return false;
+        }
 
 	/**
 	 * Inserts a row into a table based on an objects properties
 	 *
+	 * @access	public
 	 * @param	string	The name of the table
 	 * @param	object	An object whose properties match table fields
 	 * @param	string	The name of the primary key. If provided the object property is updated.
 	 */
-	public function insertObject($table, &$object, $keyName = NULL)
+	function insertObject( $table, &$object, $keyName = NULL )
 	{
-		$fmtsql = 'INSERT INTO '.$this->nameQuote($table).' (%s) VALUES (%s) ';
+		$fmtsql = 'INSERT INTO '.$this->nameQuote($table).' ( %s ) VALUES ( %s ) ';
 		$fields = array();
-
-		foreach (get_object_vars($object) as $k => $v) {
+		foreach (get_object_vars( $object ) as $k => $v) {
 			if (is_array($v) or is_object($v) or $v === NULL) {
 				continue;
 			}
 			if ($k[0] == '_') { // internal field
 				continue;
 			}
-			$fields[] = $this->nameQuote($k);
-			$values[] = $this->isQuoted($k) ? $this->Quote($v) : (int) $v;
+			$fields[] = $this->nameQuote( $k );
+			$values[] = $this->isQuoted( $k ) ? $this->Quote( $v ) : (int) $v;
 		}
-		$this->setQuery(sprintf($fmtsql, implode(",", $fields) ,  implode(",", $values)));
-		
+		$this->setQuery( sprintf( $fmtsql, implode( ",", $fields ) ,  implode( ",", $values ) ) );
 		if (!$this->query()) {
 			return false;
 		}
@@ -701,126 +716,141 @@ class JDatabaseMSSql extends JDatabase
 	/**
 	 * Description
 	 *
+	 * @access public
 	 * @param [type] $updateNulls
 	 */
-	public function updateObject($table, &$object, $keyName, $updateNulls=false)
+	function updateObject( $table, &$object, $keyName, $updateNulls=true )
 	{
 		$fmtsql = 'UPDATE '.$this->nameQuote($table).' SET %s WHERE %s';
 		$tmp = array();
-
-		foreach (get_object_vars($object) as $k => $v) {
-			if (is_array($v) or is_object($v) or $k[0] == '_') { // internal or NA field
+		foreach (get_object_vars( $object ) as $k => $v)
+		{
+			if( is_array($v) or is_object($v) or $k[0] == '_' ) { // internal or NA field
 				continue;
 			}
-
-			if ($k == $keyName) {
-				// PK not to be updated
-				$where = $keyName . '=' . $this->Quote($v);
+			if( $k == $keyName ) { // PK not to be updated
+				$where = $keyName . '=' . $this->Quote( $v );
 				continue;
 			}
-
-			if ($v === null) {
+			if ($v === null)
+			{
 				if ($updateNulls) {
 					$val = 'NULL';
 				} else {
 					continue;
 				}
 			} else {
-				$val = $this->isQuoted($k) ? $this->Quote($v) : (int) $v;
+				$val = $this->isQuoted( $k ) ? $this->Quote( $v ) : (int) $v;
 			}
-			$tmp[] = $this->nameQuote($k) . '=' . $val;
+			$tmp[] = $this->nameQuote( $k ) . '=' . $val;
 		}
-
-		// Nothing to update.
+		
+	// Nothing to update.
 		if (empty($tmp)) {
 			return true;
 		}
-
-		$this->setQuery(sprintf($fmtsql, implode(",", $tmp) , $where));
+		
+		$this->setQuery( sprintf( $fmtsql, implode( ",", $tmp ) , $where ) );
 		return $this->query();
 	}
 
 	/**
 	 * Description
+	 *
+	 * @access public
 	 */
-	public function insertid()
+	function insertid()
 	{
-		//return mssql_insert_id($this->_connection);
+		// TODO: SELECT IDENTITY
 		$this->setQuery('SELECT @@IDENTITY');
 		return $this->loadResult();
 	}
 
 	/**
 	 * Description
+	 *
+	 * @access public
 	 */
-	public function getVersion()
+	function getVersion()
 	{
-		//return mssql_get_server_info($this->_connection);
+		//return sqlsrv_server_info( $this->_connection );
 		return '5.1.0';
 	}
 
 	/**
 	 * Assumes database collation in use by sampling one text field in one table
 	 *
-	 * @return	string	Collation in use
+	 * @access	public
+	 * @return string Collation in use
 	 */
-	public function getCollation ()
+	function getCollation ()
 	{
-		/*if ($this->hasUTF()) {
-			$this->setQuery('SHOW FULL COLUMNS FROM #__content');
-			$array = $this->loadAssocList();
-			return $array['4']['Collation'];
-		} else {
-			return "N/A (mssql < 4.1.2)";
-		}*/
+		// TODO: Not fake this
+		return 'MSSQL UTF-8 (UCS2)';
 	}
 
 	/**
 	 * Description
 	 *
-	 * @return	array	A list of all the tables in the database
+	 * @access	public
+	 * @return array A list of all the tables in the database
 	 */
-	public function getTableList()
+	function getTableList()
 	{
-		$this->setQuery('SHOW TABLES');
+		$this->setQuery( 'SELECT name from sysobjects WHERE xtype = \'U\';' );
 		return $this->loadResultArray();
 	}
 
 	/**
 	 * Shows the CREATE TABLE statement that creates the given tables
 	 *
-	 * @param	array|string	A table name or a list of table names
-	 * @return	array	A list the create SQL for the tables
+	 * @access	public
+	 * @param 	array|string 	A table name or a list of table names
+	 * @return 	array A list the create SQL for the tables
 	 */
-	public function getTableCreate($tables)
+	function getTableCreate( $tables )
 	{
-		settype($tables, 'array'); //force to array
-		$result = array();
-
-		foreach ($tables as $tblval) {
-			$this->setQuery('SHOW CREATE table ' . $this->getEscaped($tblval));
-			$rows = $this->loadRowList();
-			foreach ($rows as $row) {
-				$result[$tblval] = $row[1];
-			}
-		}
-
-		return $result;
+		// MSSQL doesn't support that
+		return '';
 	}
 
 	/**
 	 * Retrieves information about the given tables
 	 *
-	 * @param	array|string	A table name or a list of table names
+	 * @access	public
+	 * @param 	array|string 	A table name or a list of table names
 	 * @param	boolean			Only return field types, default true
-	 * @return	array	An array of fields by table
+	 * @return	array An array of fields by table
 	 */
-	public function getTableFields($tables, $typeonly = true)
+	function getTableFields( $tables, $typeonly = true )
 	{
 		settype($tables, 'array'); //force to array
 		$result = array();
 
-		foreach ($tables as $tblval) {
+		/*foreach ($tables as $tblval)
+		{
+			// TODO: Should run this through namequote
+			$this->setQuery('select top 0 * from '. $tblval);
+			if($this->Query()) {
+				$fields = sqlsrv_field_metadata( $this->_cursor ); 
+
+				if($typeonly)
+				{
+					foreach ($fields as $field) {
+						$result[$tblval][$field->Name] = preg_replace("/[(0-9)]/",'', $field->Type );
+					}
+				}
+				else
+				{
+					foreach ($fields as $field) {
+						$result[$tblval][$field->Name] = $field;
+					}
+				}
+			} else {
+				$result[$tblval] = Array();
+			}
+		}*/
+			foreach ($tables as $tblval) {
 			//$this->setQuery('SHOW FIELDS FROM ' . $tblval);
 			
 			$tblval = $this->replacePrefix((string) $tblval);
