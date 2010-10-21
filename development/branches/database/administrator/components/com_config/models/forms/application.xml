@@ -103,7 +103,7 @@
 			<option
 				value="oracle">COM_CONFIG_FIELD_VALUE_ORACLE</option>
 			<option
-				value="mssql">COM_CONFIG_FIELD_VALUE_MSSQL</option>
+				value="sqlsrv">COM_CONFIG_FIELD_VALUE_SQLSRV</option>
 			<option
 				value="azure">COM_CONFIG_FIELD_VALUE_SQL_AZURE</option>
 		</field>
