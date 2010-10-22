@@ -42,7 +42,7 @@ abstract class ProjectsHelper {
 	    	$q->order($ord.' '.$params->get('order.dir','ASC').' LIMIT '.$start.','.$limit);
 	    else
 	    	$q->order('LIMIT '.$start.','.$limit);
-	    	
+
 	    $db->setQuery($q);
 	    return $db->loadObjectList();
     }

@@ -130,4 +130,16 @@ class ProjectsViewTasks extends JView {
         echo ToolBar::render();
     }
 
+    
+    /**
+     * Method to get the link from a number of type of an item
+     * @param $type Number of the type of an item
+     * @param $add String to add to the URI
+     * 
+     * @return URI for the item
+     */
+    public function getTypeLink($type, $add=''){
+    	return $type == 3 ? ProjectsHelper::getLink('ticket', $add) :
+    					ProjectsHelper::getLink('task', $add);
+    }
 }

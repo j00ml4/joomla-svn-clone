@@ -20,12 +20,12 @@ jimport('joomla.application.component.view');
 class ProjectsViewTask extends JView 
 {
 	protected $state;
-    protected $item;
-    protected $project;
-    protected $form;
-    protected $params;
-    protected $canDo;
-    protected $prefix;
+  protected $item;
+  protected $project;
+  protected $form;
+  protected $params;
+  protected $canDo;
+  protected $prefix;
 	protected $type; 
 	protected $pagination;
 	protected $items;
@@ -114,6 +114,10 @@ class ProjectsViewTask extends JView
 			default:
 				$title = JText::sprintf('COM_PROJECTS_TASK_VIEW_'.$this->type.'_TITLE', $this->item->title);
 				$icon = 'archive';			
+				
+				if($this->getModel()->getState('type') == 2 && $this->canDo->get('ticket.create'))
+					ToolBar::addNew('task.add');
+				
 				if($this->canDo->get($this->type . '.edit')){
 					if($this->item->state == 1){
 						if(empty($this->items) || $this->item->progress == 100){

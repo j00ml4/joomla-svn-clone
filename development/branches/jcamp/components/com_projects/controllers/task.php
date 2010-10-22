@@ -114,7 +114,7 @@ class ProjectsControllerTask extends JControllerForm
 		
 		$model	= $this->getModel();
 		$id = $model->getState('task.id');
-		
+				
 		if($id){
 			$this->setRedirect(ProjectsHelper::getLink('task', $id));
 		}else{
@@ -134,5 +134,28 @@ class ProjectsControllerTask extends JControllerForm
 			$this->setRedirect(ProjectsHelper::getLink('tasks', $model->getState('project.id')));
 		}	
 	}
+	
+	/**
+	 * Method to redirect to adding form
+	 *
+	 * Checks if the call is from tasks view or a task overview and save the task ID if neccesary
+	 *
+	 * @access	public
+	 * @return	void
+	 */
+	public function add()
+	{
+		$task = JRequest::getCmd('task');	
+		$app = JFactory::getApplication();
+		if($task == 'add')
+		{
+			$app->setUserState('parent.task.id', JRequest::getInt('id',0));
+		}
+		else
+		{
+			$app->setUserState('parent.task.id', 0);
+		}
+		parent::add();
+	}	
 	
 }
