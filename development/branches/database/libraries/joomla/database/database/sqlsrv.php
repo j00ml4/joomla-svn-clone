@@ -323,10 +323,8 @@ class JDatabaseSQLSrv extends JDatabase
 		}
 		if (!$this->_cursor)
 		{
-			echo $sql;echo '<br>';
 			$errors = sqlsrv_errors( );
-			echo '<pre>';
-			print_r($errors);
+			
 			$this->_errorNum = $errors[0]['SQLSTATE'];
 			$this->_errorMsg = $errors[0]['message'];
 			// $errors[0]['errorcode']; // Holds the SQL Server Native Error Code
