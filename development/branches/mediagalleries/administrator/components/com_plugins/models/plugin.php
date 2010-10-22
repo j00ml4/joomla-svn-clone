@@ -19,6 +19,18 @@ jimport('joomla.application.component.modeladmin');
  */
 class PluginsModelPlugin extends JModelAdmin
 {
+	/**
+	 * @var		string	The help screen key for the module.
+	 * @since	1.6
+	 */
+	protected $helpKey = 'JHELP_EXTENSIONS_PLUGIN_MANAGER_EDIT';
+
+	/**
+	 * @var		string	The help screen base URL for the module.
+	 * @since	1.6
+	 */
+	protected $helpURL;
+
 	protected $_cache;
 
 	/**
@@ -186,7 +198,7 @@ class PluginsModelPlugin extends JModelAdmin
 			// Try 1.5 format: /plugins/folder/element/element.xml
 			$formFile = JPath::clean($client->path.'/plugins/'.$folder.'/'.$element.'.xml');
 			if (!file_exists($formFile)) {
-				throw new Exception(JText::sprintf('JError_File_not_found', $element.'.xml'));
+				throw new Exception(JText::sprintf('COM_PLUGINS_ERROR_FILE_NOT_FOUND', $element.'.xml'));
 				return false;
 			}
 		}
@@ -202,6 +214,21 @@ class PluginsModelPlugin extends JModelAdmin
 			if (!$form->loadFile($formFile, false, '//config')) {
 				throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
 			}
+		}
+
+		// Attempt to load the xml file.
+		if (!$xml = simplexml_load_file($formFile)) {
+			throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
+		}
+
+		// Get the help data from the XML file if present.
+		$help = $xml->xpath('/extension/help');
+		if (!empty($help)) {
+			$helpKey = trim((string) $help[0]['key']);
+			$helpURL = trim((string) $help[0]['url']);
+
+			$this->helpKey = $helpKey ? $helpKey : $this->helpKey;
+			$this->helpURL = $helpURL ? $helpURL : $this->helpURL;
 		}
 
 		// Trigger the default form events.
@@ -239,5 +266,16 @@ class PluginsModelPlugin extends JModelAdmin
 		$data['type'] = 'plugin';
 
 		return parent::save($data);
+	}
+
+	/**
+	 * Get the necessary data to load an item help screen.
+	 *
+	 * @return	object	An object with key, url, and local properties for loading the item help screen.
+	 * @since	1.6
+	 */
+	public function getHelp()
+	{
+		return (object) array('key' => $this->helpKey, 'url' => $this->helpURL);
 	}
 }

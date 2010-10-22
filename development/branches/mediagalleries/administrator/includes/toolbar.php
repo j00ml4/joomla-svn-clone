@@ -123,13 +123,14 @@ abstract class JToolBarHelper
 	 * @param	string	$ref		The name of the popup file (excluding the file extension for an xml file).
 	 * @param	bool	$com		Use the help file in the component directory.
 	 * @param	string	$override	Use this URL instead of any other
+	 * @param	string	$component	Name of component to get Help (null for current component)
 	 * @since	1.0
 	 */
-	public static function help($ref, $com = false, $override = null)
+	public static function help($ref, $com = false, $override = null, $component = null)
 	{
 		$bar = JToolBar::getInstance('toolbar');
 		// Add a help button.
-		$bar->appendButton('Help', $ref, $com, $override);
+		$bar->appendButton('Help', $ref, $com, $override, $component);
 	}
 
 	/**
@@ -205,7 +206,7 @@ abstract class JToolBarHelper
 
 	/**
 	 * Writes the common 'new' icon for the button bar.
-	 * Extended version of addNew() calling hideMainMenu() before submitbutton().
+	 * Extended version of addNew() calling hideMainMenu() before Joomla.submitbutton().
 	 *
 	 * @param	string	$task	An override for the task.
 	 * @param	string	$alt	An override for the alt text.
@@ -317,7 +318,7 @@ abstract class JToolBarHelper
 
 	/**
 	 * Writes a common 'edit' button for a list of records.
-	 * Extended version of editList() calling hideMainMenu() before submitbutton().
+	 * Extended version of editList() calling hideMainMenu() before Joomla.submitbutton().
 	 *
 	 * @param	string	$task	An override for the task.
 	 * @param	string	$alt	An override for the alt text.
@@ -345,7 +346,7 @@ abstract class JToolBarHelper
 
 	/**
 	 * Writes a common 'edit' button for a template html.
-	 * Extended version of editHtml() calling hideMainMenu() before submitbutton().
+	 * Extended version of editHtml() calling hideMainMenu() before Joomla.submitbutton().
 	 *
 	 * @param	string	$task	An override for the task.
 	 * @param	string	$alt	An override for the alt text.
@@ -373,7 +374,7 @@ abstract class JToolBarHelper
 
 	/**
 	 * Writes a common 'edit' button for a template css.
-	 * Extended version of editCss() calling hideMainMenu() before submitbutton().
+	 * Extended version of editCss() calling hideMainMenu() before Joomla.submitbutton().
 	 *
 	 * @param	string	$task	An override for the task.
 	 * @param	string	$alt	An override for the alt text.
@@ -406,7 +407,7 @@ abstract class JToolBarHelper
 
 	/**
 	 * Writes a common 'delete' button for a list of records.
-	 * Extended version of deleteList() calling hideMainMenu() before submitbutton().
+	 * Extended version of deleteList() calling hideMainMenu() before Joomla.submitbutton().
 	 *
 	 * @param	string	$msg	Postscript for the 'are you sure' message.
 	 * @param	string	$task	An override for the task.

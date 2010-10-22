@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: featured0001Test.php 18212 2010-07-22 06:02:54Z eddieajau $
+ * @version		$Id: featured0001Test.php 19095 2010-10-12 17:34:50Z dextercowley $
  * @package		Joomla.SystemTest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -33,7 +33,7 @@ class Featured0001Test extends SeleniumJoomlaTestCase
 			if ($second >= 15) $this->fail("timeout");
 			try
 			{
-				if (!$this->isElementPresent("//dl[@id='config-tabs-com_content_configuration']")) break;
+				if (!$this->isElementPresent("//dl[contains(@id, 'configuration')]")) break;
 			}
 			catch (Exception $e)
 			{

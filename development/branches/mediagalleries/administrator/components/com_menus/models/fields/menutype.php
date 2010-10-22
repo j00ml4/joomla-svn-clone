@@ -120,7 +120,7 @@ class JFormFieldMenuType extends JFormFieldList
 			foreach ($list as $item)
 			{
 		$html[] = '			<li>';
-		$html[] = '				<a class="choose_type" href="#" onclick="javascript:submitbutton(\'item.setType\', \''.base64_encode(json_encode(array('title'=>$item->title, 'request'=>$item->request))).'\')" title="'.JText::_($item->description).'">'.JText::_($item->title).'</a>';		
+		$html[] = '				<a class="choose_type" href="#" onclick="javascript:Joomla.submitbutton(\'item.setType\', \''.base64_encode(json_encode(array('title'=>$item->title, 'request'=>$item->request))).'\')" title="'.JText::_($item->description).'">'.JText::_($item->title).'</a>';		
 		$html[] = '			</li>';
 							}
 		$html[] = '		</ul>';
@@ -136,13 +136,13 @@ class JFormFieldMenuType extends JFormFieldList
 		// $html[] = '		'.JText::_('COM_MENUS_TYPE_SYSTEM_DESC');
 		$html[] = '		<ul>';
 		$html[] = '			<li>';
-		$html[] = '				<a class="choose_type" href="#" onclick="javascript:submitbutton(\'item.setType\', \''.base64_encode(json_encode(array('title'=>'url'))).'\')" title="'.JText::_('COM_MENUS_TYPE_EXTERNAL_URL_DESC').'">'.JText::_('COM_MENUS_TYPE_EXTERNAL_URL').'</a>';
+		$html[] = '				<a class="choose_type" href="#" onclick="javascript:Joomla.submitbutton(\'item.setType\', \''.base64_encode(json_encode(array('title'=>'url'))).'\')" title="'.JText::_('COM_MENUS_TYPE_EXTERNAL_URL_DESC').'">'.JText::_('COM_MENUS_TYPE_EXTERNAL_URL').'</a>';
 		$html[] = '			</li>';
 		$html[] = '			<li>';
-		$html[] = '				<a class="choose_type" href="#" onclick="javascript:submitbutton(\'item.setType\', \''.base64_encode(json_encode(array('title'=>'alias'))).'\')" title="'.JText::_('COM_MENUS_TYPE_ALIAS_DESC').'">'.JText::_('COM_MENUS_TYPE_ALIAS').'</a>';
+		$html[] = '				<a class="choose_type" href="#" onclick="javascript:Joomla.submitbutton(\'item.setType\', \''.base64_encode(json_encode(array('title'=>'alias'))).'\')" title="'.JText::_('COM_MENUS_TYPE_ALIAS_DESC').'">'.JText::_('COM_MENUS_TYPE_ALIAS').'</a>';
 		$html[] = '			</li>';
 		$html[] = '			<li>';
-		$html[] = '				<a class="choose_type" href="#" onclick="javascript:submitbutton(\'item.setType\', \''.base64_encode(json_encode(array('title'=>'separator'))).'\')" title="'.JText::_('COM_MENUS_TYPE_SEPARATOR_DESC').'">'.JText::_('COM_MENUS_TYPE_SEPARATOR').'</a>';
+		$html[] = '				<a class="choose_type" href="#" onclick="javascript:Joomla.submitbutton(\'item.setType\', \''.base64_encode(json_encode(array('title'=>'separator'))).'\')" title="'.JText::_('COM_MENUS_TYPE_SEPARATOR_DESC').'">'.JText::_('COM_MENUS_TYPE_SEPARATOR').'</a>';
 		$html[] = '			</li>';
 		$html[] = '		</ul>';
 		$html[] = '	</dd>';
@@ -390,6 +390,7 @@ class JFormFieldMenuType extends JFormFieldList
 		$layouts = array();
 		$layoutNames = array();
 		$templateLayouts = array();
+		$lang = JFactory::getLanguage();
 
 		// Get the layouts from the view folder.
 		$path = JPATH_SITE.'/components/'.$component.'/views/'.$view.'/tmpl';
@@ -418,6 +419,12 @@ class JFormFieldMenuType extends JFormFieldList
 		foreach($folders as $folder)
 		{
 			if (JFolder::exists($folder.DS.'html'.DS.$component.DS.$view)) {
+				$template = JFile::getName($folder);
+					$lang->load('tpl_'.$template.'.sys', JPATH_SITE, null, false, false)
+				||	$lang->load('tpl_'.$template.'.sys', JPATH_SITE.'/templates/'.$template, null, false, false)
+				||	$lang->load('tpl_'.$template.'.sys', JPATH_SITE, $lang->getDefault(), false, false)
+				||	$lang->load('tpl_'.$template.'.sys', JPATH_SITE.'/templates/'.$template, $lang->getDefault(), false, false);
+
 				$templateLayouts = JFolder::files($folder.DS.'html'.DS.$component.DS.$view, '.xml$', false, true);
 
 				foreach ($templateLayouts as $layout)

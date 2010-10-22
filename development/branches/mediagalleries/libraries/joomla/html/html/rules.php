@@ -29,10 +29,6 @@ abstract class JHtmlRules
 	 */
 	public static function assetFormWidget($actions, $assetId = null, $parent = null, $control = 'jform[rules]', $idPrefix = 'jform_rules')
 	{
-		// Load the behavior.
-		self::_loadBehavior();
-
-		// Load the behavior.
 		$images = self::_getImagesArray();
 
 		// Get the user groups.
@@ -43,13 +39,11 @@ abstract class JHtmlRules
 		$inherited = JAccess::getAssetRules($assetId, true);
 		$rules = JAccess::getAssetRules($assetId);
 
-
 		$html = array();
 
 		$html[] = '<div class="acl-options">';
-		$html[] = '	<dl class="tabs">';
-		$html[] = '		<dt><a href="#">'.JText::_('JLIB_HTML_ACCESS_SUMMARY').'</a></dt>';
-		$html[] = '		<dd>';
+		$html[] = 		JHtml::_('tabs.start','acl-rules-'.$assetId, array('useCookie'=>1));
+		$html[] = 		JHtml::_('tabs.panel',JText::_('JLIB_HTML_ACCESS_SUMMARY'), 'summary');
 		$html[] = '			<p>'.JText::_('JLIB_HTML_ACCESS_SUMMARY_DESC').'</p>';
 		$html[] = '			<table class="aclsummary-table" summary="'.JText::_('JLIB_HTML_ACCESS_SUMMARY_DESC').'">';
 		$html[] = '			<caption>'.JText::_('JLIB_HTML_ACCESS_SUMMARY_DESC_CAPTION').'</caption>';
@@ -72,15 +66,13 @@ abstract class JHtmlRules
 			$html[] = '			</tr>';
 		}
 
-		$html[] = '		</table>';
-		$html[] = '	</dd>';
+		$html[] = ' 		</table>';
 
 		foreach ($actions as $action)
 		{
 			$actionTitle = JText::_($action->title);
 			$actionDesc	= JText::_($action->description);
-			$html[] = '		<dt><a href="#">'.$actionTitle.'</a></dt>';
-			$html[] = '		<dd>';
+			$html[] = 		JHtml::_('tabs.panel',$actionTitle, $action->name);
 			$html[] = '			<p>'.$actionDesc.'</p>';
 			$html[] = '			<table class="aclmodify-table" summary="'.strip_tags($actionDesc).'">';
 			$html[] = '			<caption>'.JText::_('JLIB_HTML_ACCESS_MODIFY_DESC_CAPTION_ACL').' '.$actionTitle.' '.JText::_('JLIB_HTML_ACCESS_MODIFY_DESC_CAPTION_TABLE').'</caption>';
@@ -101,26 +93,25 @@ abstract class JHtmlRules
 				$html[] = '				<td class="col3">';
 				$html[] = '					<select id="'.$idPrefix.'_'.$action->name.'_'.$group->value.'" class="inputbox" size="1" name="'.$control.'['.$action->name.']['.$group->value.']" title="'.JText::sprintf('JSELECT_ALLOW_DENY_GROUP', $actionTitle, $group->text).'">';
 				$html[] = '						<option value=""'.($selected === null ? ' selected="selected"' : '').'>'.JText::_('JINHERIT').'</option>';
-				$html[] = '						<option value="1"'.($selected === true ? ' selected="selected"' : '').'>'.JText::_('JALLOW').'</option>';
-				$html[] = '						<option value="0"'.($selected === false ? ' selected="selected"' : '').'>'.JText::_('JDENY').'</option>';
+				$html[] = '						<option value="1"'.($selected === true ? ' selected="selected"' : '').'>'.JText::_('JRULE_ALLOWED').'</option>';
+				$html[] = '						<option value="0"'.($selected === false ? ' selected="selected"' : '').'>'.JText::_('JRULE_FORBIDDEN').'</option>';
 				$html[] = '					</select>';
 				$html[] = '				</td>';
 				$html[] = '				<td class="col4">'.($assetId ? ($inherited->allow($action->name, $group->identities) ? $images['allow'] : $images['deny']) : ($inheriting->allow($action->name, $group->identities) ? $images['allow'] : $images['deny'])).'</td>';
 				$html[] = '			</tr>';
 			}
 
-			$html[] = '		</table>';
-			$html[] = '	</dd>';
+			$html[] = '			</table>';
 		}
 
-		$html[] = ' </dl>';
+		$html[] = JHtml::_('tabs.end');
 
 		// Build the footer with legend and special purpose buttons.
 		$html[] = '	<div class="clr"></div>';
 		$html[] = '	<ul class="acllegend fltlft">';
-		$html[] = '		<li class="acl-allowed">'.JText::_('JALLOWED').'</li>';
-		$html[] = '		<li class="acl-denied">'.JText::_('JDENIED').'</li>';
-		$html[] = '	</ul>';		
+		$html[] = '		<li class="acl-allowed">'.JText::_('JRULE_ALLOWED').'</li>';
+		$html[] = '		<li class="acl-denied">'.JText::_('JRULE_FORBIDDEN').'</li>';
+		$html[] = '	</ul>';
 		$html[] = '</div>';
 
 		return implode("\n", $html);
@@ -168,20 +159,15 @@ abstract class JHtmlRules
 		return $options;
 	}
 
-	protected static function _loadBehavior()
-	{
-		JHTML::_('script','system/rules.js', false, true);
-	}
-
 	protected static function _getImagesArray()
 	{
 		$base = JURI::root(true);
-		$images['allow-l'] = '<label class="icon-16-allow" title="'.JText::_('JALLOWED').'">'.JText::_('JALLOWED').'</label>';
-		$images['deny-l'] = '<label class="icon-16-deny" title="'.JText::_('JDENIED').'">'.JText::_('JDENIED').'</label>';
-		$images['allow'] = '<a class="icon-16-allow" title="'.JText::_('JALLOWED').'"> </a>';
-		$images['deny'] = '<a class="icon-16-deny" title="'.JText::_('JDENIED').'"> </a>';
-		$images['allow-i'] = '<a class="icon-16-allowinactive" title="'.JText::_('JALLOW_INHERITED').'"> </a>';
-		$images['deny-i'] = '<a class="icon-16-denyinactive" title="'.JText::_('JDENY_INHERITED').'"> </a>';
+		$images['allow-l'] = '<label class="icon-16-allow" title="'.JText::_('JRULE_ALLOWED').'">'.JText::_('JRULE_ALLOWED').'</label>';
+		$images['deny-l'] = '<label class="icon-16-deny" title="'.JText::_('JRULE_FORBIDDEN').'">'.JText::_('JRULE_FORBIDDEN').'</label>';
+		$images['allow'] = '<a class="icon-16-allow" title="'.JText::_('JRULE_ALLOWED').'"> </a>';
+		$images['deny'] = '<a class="icon-16-deny" title="'.JText::_('JRULE_FORBIDDEN').'"> </a>';
+		$images['allow-i'] = '<a class="icon-16-allowinactive" title="'.JText::_('JRULE_ALLOWED_INHERITED').'"> </a>';
+		$images['deny-i'] = '<a class="icon-16-denyinactive" title="'.JText::_('JRULE_FORBIDDEN_INHERITED').'"> </a>';
 
 		return $images;
 	}
