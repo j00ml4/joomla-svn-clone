@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit.php 18871 2010-09-13 14:27:48Z chdemko $
+ * @version		$Id: edit.php 19073 2010-10-09 15:44:28Z chdemko $
  * @package		Joomla.Administrator
  * @subpackage	com_languages
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -16,7 +16,7 @@ JHtml::_('behavior.formvalidation');
 $canDo = LanguagesHelper::getActions();
 ?>
 <script type="text/javascript">
-	function submitbutton(task)
+	Joomla.submitbutton = function(task)
 	{
 		if (task == 'language.cancel' || document.formvalidator.isValid(document.id('language-form'))) {
 			Joomla.submitform(task, document.getElementByID('language-form'));

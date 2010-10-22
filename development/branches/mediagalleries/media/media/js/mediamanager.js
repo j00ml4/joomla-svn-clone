@@ -70,7 +70,7 @@ var MediaManager = this.MediaManager = {
 		}
 
 		if (node) {
-			this.tree.select(node);
+			this.tree.select(node, true);
 		}
 
 		$(viewstyle).addClass('active');
@@ -97,7 +97,7 @@ var MediaManager = this.MediaManager = {
 	{
 		if ($('foldername').value.length) {
 			$('dirpath').value = this.getFolder();
-			submitbutton('createfolder');
+			Joomla.submitbutton('createfolder');
 		}
 	},
 
@@ -179,5 +179,5 @@ window.addEvent('domready', function(){
 	MediaManager.initialize();
 	MediaManager.trace = 'start';
 	document.updateUploader = function() { MediaManager.onloadframe(); };
-	// MediaManager.onloadframe();
+	MediaManager.onloadframe();
 });

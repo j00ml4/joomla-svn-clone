@@ -70,26 +70,22 @@ class CategoriesViewCategories extends JView
 	protected function addToolbar()
 	{
 		// Initialise variables.
-		$extension	= JRequest::getCmd('extension');
 		$categoryId	= $this->state->get('filter.category_id');
+		$component	= $this->state->get('filter.component');
 		$section	= $this->state->get('filter.section');
 		$canDo		= null;
 
 		// Avoid nonsense situation.
-		if ($extension == 'com_categories') {
+		if ($component == 'com_categories') {
 			return;
 		}
 
- 		// The extension can be in the form com_foo.section
-		$parts		= explode('.',$extension);
-		$component	= $parts[0];
-
 		// Need to load the menu language file as mod_menu hasn't been loaded yet.
 		$lang = JFactory::getLanguage();
-			$lang->load($component.'.sys', JPATH_BASE, null, false, false)
-		||	$lang->load($component.'.sys', JPATH_ADMINISTRATOR.'/components/'.$component, null, false, false)
-		||	$lang->load($component.'.sys', JPATH_BASE, $lang->getDefault(), false, false)
-		||	$lang->load($component.'.sys', JPATH_ADMINISTRATOR.'/components/'.$component, $lang->getDefault(), false, false);
+			$lang->load($component, JPATH_BASE, null, false, false)
+		||	$lang->load($component, JPATH_ADMINISTRATOR.'/components/'.$component, null, false, false)
+		||	$lang->load($component, JPATH_BASE, $lang->getDefault(), false, false)
+		||	$lang->load($component, JPATH_ADMINISTRATOR.'/components/'.$component, $lang->getDefault(), false, false);
 
  		// Load the category helper.
 		require_once JPATH_COMPONENT.'/helpers/categories.php';
@@ -98,11 +94,11 @@ class CategoriesViewCategories extends JView
 		$canDo = CategoriesHelper::getActions($component, $categoryId);
 
 		// If a component categories title string is present, let's use it.
-		if ($lang->hasKey($component_title_key = $component.($section?"_$section":'').'_CATEGORIES'.'_TITLE')) {
+		if ($lang->hasKey($component_title_key = strtoupper($component.($section?"_$section":'')).'_CATEGORIES_TITLE')) {
 			$title = JText::_($component_title_key);
 		}
 		// Else if the component section string exits, let's use it
-		elseif ($lang->hasKey($component_section_key = $component.($section?"_$section":''))) {
+		elseif ($lang->hasKey($component_section_key = strtoupper($component.($section?"_$section":'')))) {
 			$title = JText::sprintf( 'COM_CATEGORIES_CATEGORIES_TITLE', $this->escape(JText::_($component_section_key)));
 		}
 		// Else use the base title
@@ -136,7 +132,7 @@ class CategoriesViewCategories extends JView
 			JToolBarHelper::custom('categories.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
 		}
 
-		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete', $extension)) {
+		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete', $component)) {
 			JToolBarHelper::deleteList('', 'categories.delete','JTOOLBAR_EMPTY_TRASH');
 		}
 		else if ($canDo->get('core.edit.state')) {
@@ -146,10 +142,24 @@ class CategoriesViewCategories extends JView
 
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::custom('categories.rebuild', 'refresh.png', 'refresh_f2.png', 'JTOOLBAR_REBUILD', false);
-			JToolBarHelper::preferences($extension);
+			JToolBarHelper::preferences($component);
 			JToolBarHelper::divider();
 		}
 
-		JToolBarHelper::help('JHELP_COMPONENTS_'.strtoupper(substr($component,4)).'_CATEGORIES');
+		// Compute the ref_key if it does exist in the component
+		if (!$lang->hasKey($ref_key = strtoupper($component.($section?"_$section":'')).'_CATEGORIES_HELP_KEY')) {
+			$ref_key = 'JHELP_COMPONENTS_'.strtoupper(substr($component,4).($section?"_$section":'')).'_CATEGORIES';
+		}
+
+		// Get help for the categories view for the component by
+		// -remotely searching in a language defined dedicated URL: *component*_HELP_URL
+		// -locally  searching in a component help file if helpURL param exists in the component and is set to ''
+		// -remotely searching in a component URL if helpURL param exists in the component and is NOT set to ''
+		JToolBarHelper::help(
+			$ref_key,
+			JComponentHelper::getParams( $component )->exists('helpURL'),
+			$lang->hasKey($lang_help_url = strtoupper($component).'_HELP_URL') ? JText::_($lang_help_url) : null,
+			$component
+		);
 	}
 }

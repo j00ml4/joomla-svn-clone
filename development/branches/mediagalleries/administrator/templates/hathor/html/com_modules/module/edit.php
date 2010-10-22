@@ -20,7 +20,7 @@ $canDo		= ModulesHelper::getActions();
 $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $this->item->module == 'mod_custom';
 ?>
 <script type="text/javascript">
-	function submitbutton(task)
+	Joomla.submitbutton = function(task)
 	{
 		if (task == 'module.cancel' || document.formvalidator.isValid(document.id('module-form'))) {
 			<?php
@@ -29,6 +29,9 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 			endif;
 			?>
 			Joomla.submitform(task, document.getElementById('module-form'));
+			if (self != top) {
+				window.top.setTimeout('window.parent.SqueezeBox.close()', 1000);
+			}
 		}
 		else {
 			alert('<?php echo $this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'));?>');

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <metadata>
-	<layout title="COM_CONTENT_FEATURED_VIEW_DEFAULT_TITLE">
+	<layout title="COM_CONTENT_FEATURED_VIEW_DEFAULT_TITLE" option="COM_CONTENT_FEATURED_VIEW_DEFAULT_OPTION">
 		<help
 			key = "JHELP_MENUS_MENU_ITEM_ARTICLE_FEATURED"
 		/>
@@ -14,28 +14,24 @@
 <fieldset name="advanced" label="COM_MENUS_LAYOUT_FEATURED_OPTIONS">
 			
 			<field name="num_leading_articles" type="text"
-				default="1"
 				description="JGLOBAL_NUM_LEADING_ARTICLES_DESC"
 				label="JGLOBAL_NUM_LEADING_ARTICLES_LABEL"
 				size="3"
 			/>
 
 			<field name="num_intro_articles" type="text"
-				default="4"
 				description="JGLOBAL_NUM_INTRO_ARTICLES_DESC"
 				label="JGLOBAL_NUM_INTRO_ARTICLES_LABEL"
 				size="3"
 			/>
 
 			<field name="num_columns" type="text"
-				default="2"
 				description="JGLOBAL_NUM_COLUMNS_DESC"
 				label="JGLOBAL_NUM_COLUMNS_LABEL"
 				size="3"
 			/>
 
 			<field name="num_links" type="text"
-				default="4"
 				description="JGLOBAL_NUM_LINKS_DESC"
 				label="JGLOBAL_NUM_LINKS_LABEL"
 				size="3"

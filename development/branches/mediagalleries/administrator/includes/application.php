@@ -78,7 +78,12 @@ class JAdministrator extends JApplication
 			}
 		}
 
+		// Execute the parent initialise method.
 		parent::initialise($options);
+
+		// Load Library language
+		$lang = JFactory::getLanguage();
+		$lang->load('lib_joomla', JPATH_ADMINISTRATOR);
 	}
 
 	/**
