@@ -610,15 +610,7 @@ abstract class JDatabase extends JObject
 	 * @param	boolean	False to return the last query set by setQuery, True to return a new JDatabaseQuery object.
 	 * @return	string	The current value of the internal SQL variable
 	 */
-	public function getQuery($new = false)
-	{
-		if ($new) {
-			jimport('joomla.database.databasequery');
-			return new JDatabaseQuery;
-		} else {
-			return $this->_sql;
-		}
-	}
+	abstract public function getQuery($new = false);
 
 	/**
 	 * Execute the query

@@ -6,7 +6,6 @@
  */
 
 defined('JPATH_BASE') or die;
-//jimport('joomla.database.databasequery');
 require_once('databasequery.php');
 /**
  * Query Element Class.
@@ -15,7 +14,7 @@ require_once('databasequery.php');
  * @subpackage	Database
  * @since		1.6
  */
-class JDatabaseQueryElementSQLSrv extends JDatabaseQueryElement
+class JDatabaseQueryElementMySQL extends JDatabaseQueryElement
 {
 	/**
 	 * Constructor.
@@ -24,7 +23,7 @@ class JDatabaseQueryElementSQLSrv extends JDatabaseQueryElement
 	 * @param	mixed	$elements	String or array.
 	 * @param	string	$glue		The glue for elements.
 	 *
-	 * @return	JDatabaseQueryMsSQLElementMsSQL
+	 * @return	JDatabaseQueryElementMySQL
 	 * @since	1.6
 	 */
 	public function __construct($name, $elements, $glue = ',')
@@ -40,20 +39,20 @@ class JDatabaseQueryElementSQLSrv extends JDatabaseQueryElement
  * @subpackage	Database
  * @since		1.6
  */
-class JDatabaseQuerySQLSrv extends JDatabaseQuery
+class JDatabaseQueryMySQL extends JDatabaseQuery
 {
 	/**
 	 * @param	mixed	$columns	A string or an array of field names.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryElementMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function select($columns)
+	public function select($columns)
 	{
 		$this->_type = 'select';
 
 		if (is_null($this->_select)) {
-			$this->_select = new JDatabaseQueryElementSQLSrv('SELECT', $columns);
+			$this->_select = new JDatabaseQueryElementMySQL('SELECT', $columns);
 		}
 		else {
 			$this->_select->append($columns);
@@ -65,13 +64,13 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	string	$table	The name of the table to delete from.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryElementMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function delete($table = null)
+	public function delete($table = null)
 	{
 		$this->_type	= 'delete';
-		$this->_delete	= new JDatabaseQueryElementSQLSrv('DELETE', null);
+		$this->_delete	= new JDatabaseQueryElementMySQL('DELETE', null);
 
 		if (!empty($table)) {
 			$this->from($table);
@@ -83,13 +82,13 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	mixed	$tables	A string or array of table names.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryElementMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function insert($tables)
+	public function insert($tables)
 	{
 		$this->_type	= 'insert';
-		$this->_insert	= new JDatabaseQueryElementSQLSrv('INSERT INTO', $tables);
+		$this->_insert	= new JDatabaseQueryElementMySQL('INSERT INTO', $tables);
 
 		return $this;
 	}
@@ -97,13 +96,13 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	mixed	$tables	A string or array of table names.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryElementMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function update($tables)
+	public function update($tables)
 	{
 		$this->_type = 'update';
-		$this->_update = new JDatabaseQueryElementSQLSrv('UPDATE', $tables);
+		$this->_update = new JDatabaseQueryElementMySQL('UPDATE', $tables);
 
 		return $this;
 	}
@@ -111,13 +110,13 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	mixed	A string or array of table names.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryElementMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function from($tables)
+	public function from($tables)
 	{
 		if (is_null($this->_from)) {
-			$this->_from = new JDatabaseQueryElementSQLSrv('FROM', $tables);
+			$this->_from = new JDatabaseQueryElementMySQL('FROM', $tables);
 		}
 		else {
 			$this->_from->append($tables);
@@ -130,15 +129,15 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @param	string	$type
 	 * @param	string	$conditions
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryElementMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function join($type, $conditions)
+	public function join($type, $conditions)
 	{
 		if (is_null($this->_join)) {
 			$this->_join = array();
 		}
-		$this->_join[] = new JDatabaseQueryElementSQLSrv(strtoupper($type) . ' JOIN', $conditions);
+		$this->_join[] = new JDatabaseQueryElementMySQL(strtoupper($type) . ' JOIN', $conditions);
 
 		return $this;
 	}
@@ -149,7 +148,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function innerJoin($conditions)
+	public function innerJoin($conditions)
 	{
 		$this->join('INNER', $conditions);
 
@@ -162,7 +161,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function outerJoin($conditions)
+	public function outerJoin($conditions)
 	{
 		$this->join('OUTER', $conditions);
 
@@ -175,7 +174,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function leftJoin($conditions)
+	public function leftJoin($conditions)
 	{
 		$this->join('LEFT', $conditions);
 
@@ -188,7 +187,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function rightJoin($conditions)
+	public function rightJoin($conditions)
 	{
 		$this->join('RIGHT', $conditions);
 
@@ -202,11 +201,11 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function set($conditions, $glue=',')
+	public function set($conditions, $glue=',')
 	{
 		if (is_null($this->_set)) {
 			$glue = strtoupper($glue);
-			$this->_set = new JDatabaseQueryElementSQLSrv('SET', $conditions, "\n\t$glue ");
+			$this->_set = new JDatabaseQueryElementMySQL('SET', $conditions, "\n\t$glue ");
 		}
 		else {
 			$this->_set->append($conditions);
@@ -222,11 +221,11 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function where($conditions, $glue='AND')
+	public function where($conditions, $glue='AND')
 	{
 		if (is_null($this->_where)) {
 			$glue = strtoupper($glue);
-			$this->_where = new JDatabaseQueryElementSQLSrv('WHERE', $conditions, " $glue ");
+			$this->_where = new JDatabaseQueryElementMySQL('WHERE', $conditions, " $glue ");
 		}
 		else {
 			$this->_where->append($conditions);
@@ -241,10 +240,10 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function group($columns)
+	public function group($columns)
 	{
 		if (is_null($this->_group)) {
-			$this->_group = new JDatabaseQueryElementSQLSrv('GROUP BY', $columns);
+			$this->_group = new JDatabaseQueryElementMySQL('GROUP BY', $columns);
 		}
 		else {
 			$this->_group->append($columns);
@@ -260,11 +259,11 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function having($conditions, $glue='AND')
+	public function having($conditions, $glue='AND')
 	{
 		if (is_null($this->_having)) {
 			$glue = strtoupper($glue);
-			$this->_having = new JDatabaseQueryElementSQLSrv('HAVING', $conditions, " $glue ");
+			$this->_having = new JDatabaseQueryElementMySQL('HAVING', $conditions, " $glue ");
 		}
 		else {
 			$this->_having->append($conditions);
@@ -279,10 +278,10 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	function order($columns)
+	public function order($columns)
 	{
 		if (is_null($this->_order)) {
-			$this->_order = new JDatabaseQueryElementSQLSrv('ORDER BY', $columns);
+			$this->_order = new JDatabaseQueryElementMySQL('ORDER BY', $columns);
 		}
 		else {
 			$this->_order->append($columns);

@@ -291,7 +291,21 @@ class JDatabaseMySQL extends JDatabase
 	   
 		return $this->_cursor;
 	}
-
+/**
+   * Get the current or query, or new JDatabaseQuery object.
+   *
+   * @param boolean False to return the last query set by setQuery, True to return a new JDatabaseQuery object.
+   * @return  string  The current value of the internal SQL variable
+   */
+  function getQuery($new = false)
+  {
+    if ($new) {
+      jimport('joomla.database.databasequerymysql');
+      return new JDatabaseQueryMySQL;
+    } else {
+      return $this->_sql;
+    }
+  }
 	/**
 	 * @return	int		The number of affected rows in the previous operation
 	 * @since	1.0.5
