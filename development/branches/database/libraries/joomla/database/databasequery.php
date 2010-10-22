@@ -90,7 +90,7 @@ class JDatabaseQueryElement
  * @subpackage	Database
  * @since		1.6
  */
-class JDatabaseQuery
+abstract class JDatabaseQuery
 {
 	/**
 	 * @var		string	The query type.
@@ -250,37 +250,15 @@ class JDatabaseQuery
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function select($columns)
-	{
-		$this->_type = 'select';
-
-		if (is_null($this->_select)) {
-			$this->_select = new JDatabaseQueryElement('SELECT', $columns);
-		}
-		else {
-			$this->_select->append($columns);
-		}
-
-		return $this;
-	}
-
+	abstract public function select($columns);
+	
 	/**
 	 * @param	string	$table	The name of the table to delete from.
 	 *
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function delete($table = null)
-	{
-		$this->_type	= 'delete';
-		$this->_delete	= new JDatabaseQueryElement('DELETE', null);
-
-		if (!empty($table)) {
-			$this->from($table);
-		}
-
-		return $this;
-	}
+	abstract public function delete($table = null);	
 
 	/**
 	 * @param	mixed	$tables	A string or array of table names.
@@ -288,13 +266,7 @@ class JDatabaseQuery
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function insert($tables)
-	{
-		$this->_type	= 'insert';
-		$this->_insert	= new JDatabaseQueryElement('INSERT INTO', $tables);
-
-		return $this;
-	}
+	abstract public function insert($tables);
 
 	/**
 	 * @param	mixed	$tables	A string or array of table names.
@@ -302,32 +274,16 @@ class JDatabaseQuery
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function update($tables)
-	{
-		$this->_type = 'update';
-		$this->_update = new JDatabaseQueryElement('UPDATE', $tables);
-
-		return $this;
-	}
-
+	abstract public function update($tables);
+	
 	/**
 	 * @param	mixed	A string or array of table names.
 	 *
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function from($tables)
-	{
-		if (is_null($this->_from)) {
-			$this->_from = new JDatabaseQueryElement('FROM', $tables);
-		}
-		else {
-			$this->_from->append($tables);
-		}
-
-		return $this;
-	}
-
+	abstract public function from($tables);
+	
 	/**
 	 * @param	string	$type
 	 * @param	string	$conditions
@@ -335,68 +291,40 @@ class JDatabaseQuery
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function join($type, $conditions)
-	{
-		if (is_null($this->_join)) {
-			$this->_join = array();
-		}
-		$this->_join[] = new JDatabaseQueryElement(strtoupper($type) . ' JOIN', $conditions);
-
-		return $this;
-	}
-
+	abstract public function join($type, $conditions);
+	
 	/**
 	 * @param	string	$conditions
 	 *
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function innerJoin($conditions)
-	{
-		$this->join('INNER', $conditions);
-
-		return $this;
-	}
-
+	abstract public function innerJoin($conditions);
+	
 	/**
 	 * @param	string	$conditions
 	 *
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function outerJoin($conditions)
-	{
-		$this->join('OUTER', $conditions);
-
-		return $this;
-	}
-
+	abstract public function outerJoin($conditions);
+	
 	/**
 	 * @param	string	$conditions
 	 *
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function leftJoin($conditions)
-	{
-		$this->join('LEFT', $conditions);
-
-		return $this;
-	}
-
+	abstract public function leftJoin($conditions);
+	
 	/**
 	 * @param	string	$conditions
 	 *
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function rightJoin($conditions)
-	{
-		$this->join('RIGHT', $conditions);
-
-		return $this;
-	}
-
+	abstract public function rightJoin($conditions);
+	
 	/**
 	 * @param	mixed	$conditions	A string or array of conditions.
 	 * @param	string	$glue
@@ -404,19 +332,8 @@ class JDatabaseQuery
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function set($conditions, $glue=',')
-	{
-		if (is_null($this->_set)) {
-			$glue = strtoupper($glue);
-			$this->_set = new JDatabaseQueryElement('SET', $conditions, "\n\t$glue ");
-		}
-		else {
-			$this->_set->append($conditions);
-		}
-
-		return $this;
-	}
-
+	abstract public function set($conditions, $glue=',');
+	
 	/**
 	 * @param	mixed	$conditions	A string or array of where conditions.
 	 * @param	string	$glue
@@ -424,37 +341,16 @@ class JDatabaseQuery
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function where($conditions, $glue='AND')
-	{
-		if (is_null($this->_where)) {
-			$glue = strtoupper($glue);
-			$this->_where = new JDatabaseQueryElement('WHERE', $conditions, " $glue ");
-		}
-		else {
-			$this->_where->append($conditions);
-		}
-
-		return $this;
-	}
-
+	abstract public function where($conditions, $glue='AND');
+	
 	/**
 	 * @param	mixed	$columns	A string or array of ordering columns.
 	 *
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function group($columns)
-	{
-		if (is_null($this->_group)) {
-			$this->_group = new JDatabaseQueryElement('GROUP BY', $columns);
-		}
-		else {
-			$this->_group->append($columns);
-		}
-
-		return $this;
-	}
-
+	abstract public function group($columns);
+	
 	/**
 	 * @param	mixed	$conditions	A string or array of columns.
 	 * @param	string	$glue
@@ -462,37 +358,16 @@ class JDatabaseQuery
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function having($conditions, $glue='AND')
-	{
-		if (is_null($this->_having)) {
-			$glue = strtoupper($glue);
-			$this->_having = new JDatabaseQueryElement('HAVING', $conditions, " $glue ");
-		}
-		else {
-			$this->_having->append($conditions);
-		}
-
-		return $this;
-	}
-
+	abstract public function having($conditions, $glue='AND');
+	
 	/**
 	 * @param	mixed	$columns	A string or array of ordering columns.
 	 *
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	public function order($columns)
-	{
-		if (is_null($this->_order)) {
-			$this->_order = new JDatabaseQueryElement('ORDER BY', $columns);
-		}
-		else {
-			$this->_order->append($columns);
-		}
-
-		return $this;
-	}
-
+	abstract public function order($columns);
+	
 	/**
 	 * Magic function to convert the query to a string.
 	 *

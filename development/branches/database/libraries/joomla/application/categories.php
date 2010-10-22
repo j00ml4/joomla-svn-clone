@@ -158,7 +158,8 @@ class JCategories
 		$user = JFactory::getUser();
 		$extension = $this->_extension;
 
-		$query = new JDatabaseQuery;
+		//$query = new JDatabaseQuery;
+		$query = $db->getQuery(true);
 
 		// right join with c for category
 		$query->select('c.*');
