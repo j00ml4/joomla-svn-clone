@@ -85,9 +85,10 @@ class ProjectsModelTask extends JModelAdmin
         if (!($pk = (int) $app->getUserState($this->context.'.id'))) {
             $pk = (int) JRequest::getInt('id');
         }
-        $this->setState('task.id', $pk);
-        $app->setUserState('task.id', $pk);
 
+        // parent task id (if adding is called from a task overview)
+        $this->setState('task.id',$pk);
+  	    $this->setState('parent.task.id', $app->getUserState('parent.task.id'));
         // project
         $this->setState('project.id', $app->getUserState('project.id'));
 
@@ -153,6 +154,7 @@ class ProjectsModelTask extends JModelAdmin
 			}else{						
 				$date = &JFactory::getDate();
 				$this->item->start_at = $date->toMySQL();
+				$this->item->parent_id = $this->getState('parent.task.id');
 			}
 		}
 		return $this->item;

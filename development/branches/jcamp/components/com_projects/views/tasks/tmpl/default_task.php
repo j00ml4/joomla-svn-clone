@@ -53,7 +53,7 @@ $canChange  = $this->canDo->get($this->type.'.edit');
 			
 			<td>
 				<div style="padding-left:<?php echo (($item->level - 1) * 3); ?>em;">
-					<a class="state-<?php echo $item->state; ?>" href="<?php echo ProjectsHelper::getLink($this->type, $item->id); ?>">
+					<a class="state-<?php echo $item->state; ?>" href="<?php echo $this->getTypeLink($item->type, $item->id); ?>">
 						<?php echo $item->title; ?></a>	
 					<?php if(!empty($item->category_title)): ?>
 					<span class="category">
