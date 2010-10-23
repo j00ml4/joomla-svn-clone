@@ -221,7 +221,7 @@ class plgContentMedia extends JPlugin
 			$type = substr($media, strrpos($media, '.') );			
 			$type = strtolower($type);
 			$filename="extensions".DS."embed".$type.".php";
-			if(include_once($filename))
+			if(@include_once($filename))
 			{
 				//CALL THE mediaembed() of THE RESPECTIVE FILE
 				$params=array('width'=>$width,'height'=>$height,'autostart'=>$autostart);
@@ -247,8 +247,8 @@ class plgContentMedia extends JPlugin
 				//$params= self::addParams($params);
 				return host( $media,$params );
 			}
-			//Embed using the code..
 			//Else see the extension...if available...and embed
+			
 			//Else give an error...
 		}
 		
