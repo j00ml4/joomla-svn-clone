@@ -181,9 +181,10 @@ class plgContentMedia extends JPlugin
 	 * @param int $width [optional]
 	 * @param boolean $autoplay True if yes [optional]
 	 */
-	public function addMedia1( $media, $width='', $height ='', $autostart=0 )
+	public function addMedia( $media, $width='', $height ='', $autostart=0 )
 	{
-		// The propose of this is to get the defaults set by the admin -> Fixed :D 
+		
+		//Preprocess the media data to make it standard for the functions...
 		$pparams	= $this->params;// make it work
 		
 		// Fix Video UrL
@@ -209,12 +210,52 @@ class plgContentMedia extends JPlugin
 		// AutoStart
 		$autostart = (boolean)$autostart;
 		
-		$host=parse_url($url, PHP_URL_HOST);
-		// Embedding based on extension
+		//The show begins...
+		
+		$local=strtolower($_SERVER['SERVER_NAME']);
+		$host=strtolower(parse_url($media,PHP_URL_HOST)); //Get the host of the file...
+		
+		if(!strcmp($local,$host) || !$host)
+		{
+			//this is for sure that the file is on the server...
+			$type = substr($media, strrpos($media, '.') );			
+			$type = strtolower($type);
+			$filename="extensions".DS."embed".$type.".php";
+			if(include_once($filename))
+			{
+				//CALL THE mediaembed() of THE RESPECTIVE FILE
+				$params=array('width'=>$width,'height'=>$height,'autostart'=>$autostart);
+				return extension( $media,$params );
+			}
+			else{
+				return "INVALID MEDIA";
+			}
+		}
+		else
+		{
+			
+			//In this case...1 check the list of hosts...
+			//If the host is there...
+			
+			if(!include_once("hosts".DS.$host.".php"))
+			{
+				return "INVALID HOST";
+			}
+			else{
+				$params=array('width'=>$width,'height'=>$height,'autostart'=>$autostart);
+				//Add special parameters from the plugin configuration
+				//$params= self::addParams($params);
+				return host( $media,$params );
+			}
+			//Embed using the code..
+			//Else see the extension...if available...and embed
+			//Else give an error...
+		}
 		
 	}
 
-	public function addMedia( $media, $width='', $height ='', $autostart=0 )
+
+	public function addMedia1( $media, $width='', $height ='', $autostart=0 )
 	{	
 		// The propose of this is to get the defaults set by the admin -> Fixed :D 
 		$pparams	= $this->params;// make it work
@@ -636,5 +677,28 @@ class plgContentMedia extends JPlugin
 		
 	}
 	
+	public function getParams()
+	{
+		$db= JFactory::getDbo();
+		$db->setQuery("select params from #__extensions where name='PLG_CONTENT_MEDIA' ");
+		$res= $db->query();
+		if($res){
+			$params=$db->loadResult();
+			//We get the params in serialized JSON form :) But let's reduce efforts by converting to an Array
+			$reg=JRegistry::getInstance(0);
+			$reg->loadJSON($params);
+			$params=$reg->toArray();
+			//Wuhoo we have the params...now send it...
+			return $params;
+		}
+		else{
+			return false;
+		}
+	}
 	
+	
+	public function getExtension($extension)
+	{
+		include(JPATH_PLUGINS.DS.'content'.DS.'media'.DS.'extensions'.DS.'embed.'.$extension.'.php');
+	}
 }
