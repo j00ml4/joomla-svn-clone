@@ -1,12 +1,12 @@
 
-/****** Object:  Table [dbo].[jos_weblinks]    Script Date: 10/20/2010 14:35:59 ******/
+/****** Object:  Table [#__weblinks]    Script Date: 10/20/2010 14:35:59 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_weblinks]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__weblinks]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_weblinks](
+CREATE TABLE [#__weblinks](
 	[id] [bigint] IDENTITY(1,1) NOT NULL,
 	[catid] [int] NOT NULL DEFAULT ((0)),
 	[sid] [int] NOT NULL DEFAULT ((0)),
@@ -37,21 +37,21 @@ CREATE TABLE [dbo].[jos_weblinks](
 	[xreference] [nvarchar](50) NOT NULL,
 	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
 	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
- CONSTRAINT [PK_jos_weblinks_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__weblinks_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_menu]    Script Date: 10/20/2010 14:29:39 ******/
+/****** Object:  Table [#__menu]    Script Date: 10/20/2010 14:29:39 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_menu]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__menu]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_menu](
+CREATE TABLE [#__menu](
 	[id] [int] IDENTITY(102,1) NOT NULL,
 	[menutype] [nvarchar](24) NOT NULL,
 	[title] [nvarchar](255) NOT NULL,
@@ -76,11 +76,11 @@ CREATE TABLE [dbo].[jos_menu](
 	[rgt] [int] NOT NULL DEFAULT ((0)),
 	[home] [tinyint] NOT NULL DEFAULT ((0)),
 	[language] [nchar](7) NOT NULL DEFAULT (N''),
- CONSTRAINT [PK_jos_menu_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__menu_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
- CONSTRAINT [jos_menu$idx_alias_parent_id] UNIQUE NONCLUSTERED 
+ CONSTRAINT [#__menu$idx_alias_parent_id] UNIQUE NONCLUSTERED 
 (
 	[alias] ASC,
 	[parent_id] ASC
@@ -89,9 +89,9 @@ CREATE TABLE [dbo].[jos_menu](
 END
 
 
-SET IDENTITY_INSERT jos_menu  ON;
+SET IDENTITY_INSERT #__menu  ON;
 
-INSERT INTO jos_menu (id, menutype, title, alias, note, path, link,type, published,parent_id, level, component_id,ordering, checked_out, checked_out_time, browserNav,
+INSERT INTO #__menu (id, menutype, title, alias, note, path, link,type, published,parent_id, level, component_id,ordering, checked_out, checked_out_time, browserNav,
   access, img, template_style_id, params, lft, rgt, home, language)
 SELECT 1,'','Menu_Item_Root','root','','','','',1,0,0,0,0,0,'1900-01-01 00:00:00',0,0,'',0,'',0,217,0,'*'
 UNION ALL
@@ -135,20 +135,20 @@ SELECT 20,'_adminmenu','com_weblinks_categories','Categories','','Weblinks/Categ
 UNION ALL
 SELECT 101, 'mainmenu', 'Home', 'home', '', 'home', 'index.php?option=com_content&view=featured', 'component', 1, 1, 1, 22, 0, 0, '1900-01-01 00:00:00', 0, 1, '', 0, '{"num_leading_articles":"1","num_intro_articles":"3","num_columns":"3","num_links":"0","orderby_pri":"","orderby_sec":"front","order_date":"","multi_column_order":"1","show_pagination":"2","show_pagination_results":"1","show_noauth":"","article-allow_ratings":"","article-allow_comments":"","show_feed_link":"1","feed_summary":"","show_title":"","link_titles":"","show_intro":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_readmore":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","show_page_heading":1,"page_title":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 231, 232, 1,'*'
 
-SET IDENTITY_INSERT jos_menu  OFF;
-/****** Object:  Table [dbo].[jos_banner_tracks]    Script Date: 10/20/2010 14:23:38 ******/
+SET IDENTITY_INSERT #__menu  OFF;
+/****** Object:  Table [#__banner_tracks]    Script Date: 10/20/2010 14:23:38 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_banner_tracks]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__banner_tracks]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_banner_tracks](
+CREATE TABLE [#__banner_tracks](
 	[track_date] [datetime] NOT NULL,
 	[track_type] [bigint] NOT NULL,
 	[banner_id] [bigint] NOT NULL,
 	[count] [bigint] NOT NULL DEFAULT ((0)),
- CONSTRAINT [PK_jos_banner_tracks_track_date] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__banner_tracks_track_date] PRIMARY KEY CLUSTERED 
 (
 	[track_date] ASC,
 	[track_type] ASC,
@@ -157,14 +157,14 @@ CREATE TABLE [dbo].[jos_banner_tracks](
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_banners]    Script Date: 10/20/2010 14:24:17 ******/
+/****** Object:  Table [#__banners]    Script Date: 10/20/2010 14:24:17 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_banners]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__banners]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_banners](
+CREATE TABLE [#__banners](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[cid] [int] NOT NULL DEFAULT ((0)),
 	[type] [int] NOT NULL DEFAULT ((0)),
@@ -194,44 +194,44 @@ CREATE TABLE [dbo].[jos_banners](
 	[reset] [datetime] NOT NULL DEFAULT (getdate()),
 	[created] [datetime] NOT NULL DEFAULT (getdate()),
 	[language] [nchar](7) NOT NULL DEFAULT (N''),
- CONSTRAINT [PK_jos_banners_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__banners_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_menu_types]    Script Date: 10/20/2010 14:29:46 ******/
+/****** Object:  Table [#__menu_types]    Script Date: 10/20/2010 14:29:46 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_menu_types]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__menu_types]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_menu_types](
+CREATE TABLE [#__menu_types](
 	[id] [bigint] IDENTITY(2,1) NOT NULL,
 	[menutype] [nvarchar](24) NOT NULL,
 	[title] [nvarchar](48) NOT NULL,
 	[description] [nvarchar](255) NOT NULL DEFAULT (N''),
- CONSTRAINT [PK_jos_menu_types_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__menu_types_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
- CONSTRAINT [jos_menu_types$idx_menutype] UNIQUE NONCLUSTERED 
+ CONSTRAINT [#__menu_types$idx_menutype] UNIQUE NONCLUSTERED 
 (
 	[menutype] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_messages]    Script Date: 10/20/2010 14:29:59 ******/
+/****** Object:  Table [#__messages]    Script Date: 10/20/2010 14:29:59 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_messages]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__messages]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_messages](
+CREATE TABLE [#__messages](
 	[message_id] [bigint] IDENTITY(1,1) NOT NULL,
 	[user_id_from] [bigint] NOT NULL DEFAULT ((0)),
 	[user_id_to] [bigint] NOT NULL DEFAULT ((0)),
@@ -241,25 +241,25 @@ CREATE TABLE [dbo].[jos_messages](
 	[priority] [tinyint] NOT NULL DEFAULT ((0)),
 	[subject] [nvarchar](255) NOT NULL DEFAULT (N''),
 	[message] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_jos_messages_message_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__messages_message_id] PRIMARY KEY CLUSTERED 
 (
 	[message_id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_messages_cfg]    Script Date: 10/20/2010 14:30:08 ******/
+/****** Object:  Table [#__messages_cfg]    Script Date: 10/20/2010 14:30:08 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_messages_cfg]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__messages_cfg]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_messages_cfg](
+CREATE TABLE [#__messages_cfg](
 	[user_id] [bigint] NOT NULL DEFAULT ((0)),
 	[cfg_name] [nvarchar](100) NOT NULL DEFAULT (N''),
 	[cfg_value] [nvarchar](255) NOT NULL DEFAULT (N''),
- CONSTRAINT [jos_messages_cfg$idx_user_var_name] UNIQUE CLUSTERED 
+ CONSTRAINT [#__messages_cfg$idx_user_var_name] UNIQUE CLUSTERED 
 (
 	[user_id] ASC,
 	[cfg_name] ASC
@@ -267,14 +267,14 @@ CREATE TABLE [dbo].[jos_messages_cfg](
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_modules]    Script Date: 10/20/2010 14:30:34 ******/
+/****** Object:  Table [#__modules]    Script Date: 10/20/2010 14:30:34 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_modules]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__modules]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_modules](
+CREATE TABLE [#__modules](
 	[id] [int] IDENTITY(19,1) NOT NULL,
 	[title] [nvarchar](100) NOT NULL DEFAULT (N''),
 	[note] [nvarchar](255) NOT NULL DEFAULT (N''),
@@ -292,15 +292,15 @@ CREATE TABLE [dbo].[jos_modules](
 	[params] [nvarchar](max) NOT NULL DEFAULT (N''),
 	[client_id] [smallint] NOT NULL DEFAULT ((0)),
 	[language] [nchar](7) NOT NULL,
- CONSTRAINT [PK_jos_modules_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__modules_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-SET IDENTITY_INSERT jos_modules  ON;
-INSERT INTO jos_modules (id, title, note, content, ordering, position, checked_out,checked_out_time, publish_up, publish_down, published, module, access, showtitle, params,
+SET IDENTITY_INSERT #__modules  ON;
+INSERT INTO #__modules (id, title, note, content, ordering, position, checked_out,checked_out_time, publish_up, publish_down, published, module, access, showtitle, params,
   client_id, language)
 SELECT 1, 'Main Menu', '', '', 1, 'position-7', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_menu', 1, 1, '{"menutype":"mainmenu","startLevel":"0","endLevel":"0","showAllChildren":"0","tag_id":"","class_sfx":"","window_open":"","layout":"","moduleclass_sfx":"_menu","cache":"1","cache_time":"900","cachemode":"itemid"}', 0, '*'
 UNION ALL
@@ -334,15 +334,15 @@ SELECT 17, 'Breadcrumbs', '', '', 1, 'position-2', 0, '1900-01-01 00:00:00', '19
 UNION ALL
 SELECT 18, 'Banners', '', '', 1, 'position-5', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 0, 'mod_banners', 1, 1, '{"target":"1","count":"1","cid":"1","catid":["27"],"tag_search":"0","ordering":"0","header_text":"","footer_text":"","layout":"","moduleclass_sfx":"","cache":"1","cache_time":"900"}', 0, '*'
 
-SET IDENTITY_INSERT jos_modules  OFF;
-/****** Object:  Table [dbo].[jos_categories]    Script Date: 10/20/2010 14:24:56 ******/
+SET IDENTITY_INSERT #__modules  OFF;
+/****** Object:  Table [#__categories]    Script Date: 10/20/2010 14:24:56 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_categories]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__categories]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_categories](
+CREATE TABLE [#__categories](
 	[id] [int] IDENTITY(7,1) NOT NULL,
 	[asset_id] [bigint] NOT NULL DEFAULT ((0)),
 	[parent_id] [bigint] NOT NULL DEFAULT ((0)),
@@ -369,16 +369,16 @@ CREATE TABLE [dbo].[jos_categories](
 	[modified_time] [datetime] NOT NULL DEFAULT (getdate()),
 	[hits] [bigint] NOT NULL DEFAULT ((0)),
 	[language] [nchar](7) NOT NULL,
- CONSTRAINT [PK_jos_categories_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__categories_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-SET IDENTITY_INSERT jos_categories  ON;
+SET IDENTITY_INSERT #__categories  ON;
 
-INSERT INTO jos_categories (id, asset_id, parent_id, lft, rgt,level, path, extension, title, alias, note, description, published, checked_out, checked_out_time, access, params, metadesc, metakey, metadata, created_user_id,created_time, modified_user_id, modified_time, hits,language)
+INSERT INTO #__categories (id, asset_id, parent_id, lft, rgt,level, path, extension, title, alias, note, description, published, checked_out, checked_out_time, access, params, metadesc, metakey, metadata, created_user_id,created_time, modified_user_id, modified_time, hits,language)
 SELECT 1, 0, 0, 0, 11, 0, '', 'system', 'ROOT', 'root', '', '', 1, 0, '1900-01-01 00:00:00', 1, '{}', '', '', '', 0, '2009-10-18 16:07:09', 0, '1900-01-01 00:00:00', 0, '*'
 UNION ALL
 SELECT 2, 27, 1, 1, 2, 1, 'uncategorised', 'com_content', 'Uncategorised', 'uncategorised', '', '', 1, 0, '1900-01-01 00:00:00', 1, '{"target":"","image":""}', '', '', '{"page_title":"","author":"","robots":""}', 42, '2010-06-28 13:26:37', 0, '1900-01-01 00:00:00', 0, '*'
@@ -391,18 +391,18 @@ SELECT 5, 30, 1, 7, 8, 1, 'uncategorised', 'com_newsfeeds', 'Uncategorised', 'un
 UNION ALL
 SELECT 6, 31, 1, 9, 10, 1, 'uncategorised', 'com_weblinks', 'Uncategorised', 'uncategorised', '', '', 1, 0, '1900-01-01 00:00:00', 1, '{"target":"","image":""}', '', '', '{"page_title":"","author":"","robots":""}', 42, '2010-06-28 13:28:33', 0, '1900-01-01 00:00:00', 0, '*'
 
-SET IDENTITY_INSERT jos_categories  OFF;
-/****** Object:  Table [dbo].[jos_modules_menu]    Script Date: 10/20/2010 14:30:39 ******/
+SET IDENTITY_INSERT #__categories  OFF;
+/****** Object:  Table [#__modules_menu]    Script Date: 10/20/2010 14:30:39 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_modules_menu]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__modules_menu]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_modules_menu](
+CREATE TABLE [#__modules_menu](
 	[moduleid] [int] NOT NULL DEFAULT ((0)),
 	[menuid] [int] NOT NULL DEFAULT ((0)),
- CONSTRAINT [PK_jos_modules_menu_moduleid] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__modules_menu_moduleid] PRIMARY KEY CLUSTERED 
 (
 	[moduleid] ASC,
 	[menuid] ASC
@@ -410,7 +410,7 @@ CREATE TABLE [dbo].[jos_modules_menu](
 ) ON [PRIMARY]
 END
 
-INSERT INTO jos_modules_menu (moduleid,menuid)
+INSERT INTO #__modules_menu (moduleid,menuid)
 SELECT 1,0
 UNION ALL
 SELECT 2,0
@@ -442,14 +442,14 @@ UNION ALL
 SELECT 17,0
 UNION ALL
 SELECT 18,0
-/****** Object:  Table [dbo].[jos_newsfeeds]    Script Date: 10/20/2010 14:31:23 ******/
+/****** Object:  Table [#__newsfeeds]    Script Date: 10/20/2010 14:31:23 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_newsfeeds]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__newsfeeds]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_newsfeeds](
+CREATE TABLE [#__newsfeeds](
 	[catid] [int] NOT NULL DEFAULT ((0)),
 	[id] [bigint] IDENTITY(1,1) NOT NULL,
 	[name] [nvarchar](100) NOT NULL DEFAULT (N''),
@@ -477,21 +477,21 @@ CREATE TABLE [dbo].[jos_newsfeeds](
 	[xreference] [nvarchar](50) NOT NULL,
 	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
 	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
- CONSTRAINT [PK_jos_newsfeeds_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__newsfeeds_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_contact_details]    Script Date: 10/20/2010 14:25:56 ******/
+/****** Object:  Table [#__contact_details]    Script Date: 10/20/2010 14:25:56 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_contact_details]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__contact_details]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_contact_details](
+CREATE TABLE [#__contact_details](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [nvarchar](255) NOT NULL DEFAULT (N''),
 	[alias] [nvarchar](255) NOT NULL DEFAULT (N''),
@@ -534,21 +534,21 @@ CREATE TABLE [dbo].[jos_contact_details](
 	[xreference] [nvarchar](50) NOT NULL,
 	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
 	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
- CONSTRAINT [PK_jos_contact_details_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__contact_details_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_redirect_links]    Script Date: 10/20/2010 14:31:36 ******/
+/****** Object:  Table [#__redirect_links]    Script Date: 10/20/2010 14:31:36 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_redirect_links]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__redirect_links]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_redirect_links](
+CREATE TABLE [#__redirect_links](
 	[id] [bigint] IDENTITY(1,1) NOT NULL,
 	[old_url] [nvarchar](150) NOT NULL,
 	[new_url] [nvarchar](150) NOT NULL,
@@ -557,28 +557,28 @@ CREATE TABLE [dbo].[jos_redirect_links](
 	[published] [smallint] NOT NULL,
 	[created_date] [datetime] NOT NULL DEFAULT (getdate()),
 	[modified_date] [datetime] NOT NULL DEFAULT (getdate()),
- CONSTRAINT [PK_jos_redirect_links_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__redirect_links_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
- CONSTRAINT [jos_redirect_links$idx_link_old] UNIQUE NONCLUSTERED 
+ CONSTRAINT [#__redirect_links$idx_link_old] UNIQUE NONCLUSTERED 
 (
 	[old_url] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_schemas]    Script Date: 10/20/2010 14:31:42 ******/
+/****** Object:  Table [#__schemas]    Script Date: 10/20/2010 14:31:42 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_schemas]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__schemas]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_schemas](
+CREATE TABLE [#__schemas](
 	[extension_id] [int] NOT NULL,
 	[version_id] [nvarchar](20) NOT NULL,
- CONSTRAINT [PK_jos_schemas_extension_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__schemas_extension_id] PRIMARY KEY CLUSTERED 
 (
 	[extension_id] ASC,
 	[version_id] ASC
@@ -586,14 +586,14 @@ CREATE TABLE [dbo].[jos_schemas](
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_session]    Script Date: 10/20/2010 14:32:07 ******/
+/****** Object:  Table [#__session]    Script Date: 10/20/2010 14:32:07 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_session]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__session]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_session](
+CREATE TABLE [#__session](
 	[session_id] [nvarchar](32) NOT NULL DEFAULT (N''),
 	[client_id] [tinyint] NOT NULL DEFAULT ((0)),
 	[guest] [tinyint] NULL DEFAULT ((1)),
@@ -602,70 +602,70 @@ CREATE TABLE [dbo].[jos_session](
 	[userid] [int] NULL DEFAULT ((0)),
 	[username] [nvarchar](150) NULL DEFAULT (N''),
 	[usertype] [nvarchar](50) NULL DEFAULT (N''),
- CONSTRAINT [PK_jos_session_session_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__session_session_id] PRIMARY KEY CLUSTERED 
 (
 	[session_id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_template_styles]    Script Date: 10/20/2010 14:32:26 ******/
+/****** Object:  Table [#__template_styles]    Script Date: 10/20/2010 14:32:26 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_template_styles]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__template_styles]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_template_styles](
+CREATE TABLE [#__template_styles](
 	[id] [bigint] IDENTITY(7,1) NOT NULL,
 	[template] [nvarchar](50) NOT NULL DEFAULT (N''),
 	[client_id] [tinyint] NOT NULL DEFAULT ((0)),
 	[home] [tinyint] NOT NULL DEFAULT ((0)),
 	[title] [nvarchar](255) NOT NULL DEFAULT (N''),
 	[params] [nvarchar](2048) NOT NULL DEFAULT (N''),
- CONSTRAINT [PK_jos_template_styles_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__template_styles_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-SET IDENTITY_INSERT jos_template_styles  ON;
-INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (1, 'rhuk_milkyway', '0', '0', 'Milkyway - Default', '{"colorVariation":"blue","backgroundVariation":"blue","widthStyle":"fmax"}');
-INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (2, 'bluestork', '1', '1', 'Bluestork - Default', '{"useRoundedCorners":"1","showSiteName":"0"}');
-INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (3, 'atomic', '0', '0', 'Atomic - Default', '{}');
-INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (4, 'beez_20', 0, 1, 'Beez2 - Default', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/joomla_black.gif","sitetitle":"Joomla!","sitedescription":"Open Source Content Management Beta","navposition":"left","templatecolor":"personal","html5":"0"}');
-INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (5, 'hathor', '1', '0', 'Hathor - Default', '{"showSiteName":"0","highContrast":"0","boldText":"0","altMenu":"0"}');
-INSERT INTO jos_template_styles (id, template, client_id, home, title, params) VALUES (6, 'beez5', 0, 0, 'Beez5 - Default-Fruit Shop', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/sampledata\\/fruitshop\\/fruits.gif","sitetitle":"Matuna Market ","sitedescription":"Fruit Shop Sample Site","navposition":"left","html5":"0"}');
-SET IDENTITY_INSERT jos_template_styles  OFF;
-/****** Object:  Table [dbo].[jos_update_categories]    Script Date: 10/20/2010 14:32:35 ******/
+SET IDENTITY_INSERT #__template_styles  ON;
+INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (1, 'rhuk_milkyway', '0', '0', 'Milkyway - Default', '{"colorVariation":"blue","backgroundVariation":"blue","widthStyle":"fmax"}');
+INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (2, 'bluestork', '1', '1', 'Bluestork - Default', '{"useRoundedCorners":"1","showSiteName":"0"}');
+INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (3, 'atomic', '0', '0', 'Atomic - Default', '{}');
+INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (4, 'beez_20', 0, 1, 'Beez2 - Default', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/joomla_black.gif","sitetitle":"Joomla!","sitedescription":"Open Source Content Management Beta","navposition":"left","templatecolor":"personal","html5":"0"}');
+INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (5, 'hathor', '1', '0', 'Hathor - Default', '{"showSiteName":"0","highContrast":"0","boldText":"0","altMenu":"0"}');
+INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (6, 'beez5', 0, 0, 'Beez5 - Default-Fruit Shop', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/sampledata\\/fruitshop\\/fruits.gif","sitetitle":"Matuna Market ","sitedescription":"Fruit Shop Sample Site","navposition":"left","html5":"0"}');
+SET IDENTITY_INSERT #__template_styles  OFF;
+/****** Object:  Table [#__update_categories]    Script Date: 10/20/2010 14:32:35 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_update_categories]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__update_categories]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_update_categories](
+CREATE TABLE [#__update_categories](
 	[categoryid] [int] IDENTITY(1,1) NOT NULL,
 	[name] [nvarchar](20) NULL DEFAULT (N''),
 	[description] [nvarchar](max) NOT NULL,
 	[parent] [int] NULL DEFAULT ((0)),
 	[updatesite] [int] NULL DEFAULT ((0)),
- CONSTRAINT [PK_jos_update_categories_categoryid] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__update_categories_categoryid] PRIMARY KEY CLUSTERED 
 (
 	[categoryid] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_content]    Script Date: 10/20/2010 14:27:20 ******/
+/****** Object:  Table [#__content]    Script Date: 10/20/2010 14:27:20 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_content]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__content]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_content](
+CREATE TABLE [#__content](
 	[id] [bigint] IDENTITY(1,1) NOT NULL,
 	[asset_id] [bigint] NOT NULL DEFAULT ((0)),
 	[title] [nvarchar](255) NOT NULL DEFAULT (N''),
@@ -700,27 +700,27 @@ CREATE TABLE [dbo].[jos_content](
 	[featured] [tinyint] NOT NULL DEFAULT ((0)),
 	[language] [nchar](7) NOT NULL,
 	[xreference] [nvarchar](50) NOT NULL,
- CONSTRAINT [PK_jos_content_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__content_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_update_sites]    Script Date: 10/20/2010 14:32:44 ******/
+/****** Object:  Table [#__update_sites]    Script Date: 10/20/2010 14:32:44 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_update_sites]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__update_sites]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_update_sites](
+CREATE TABLE [#__update_sites](
 	[update_site_id] [int] IDENTITY(3,1) NOT NULL,
 	[name] [nvarchar](100) NULL DEFAULT (N''),
 	[type] [nvarchar](20) NULL DEFAULT (N''),
 	[location] [nvarchar](max) NOT NULL,
 	[enabled] [int] NULL DEFAULT ((0)),
- CONSTRAINT [PK_jos_update_sites_update_site_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__update_sites_update_site_id] PRIMARY KEY CLUSTERED 
 (
 	[update_site_id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -728,25 +728,25 @@ CREATE TABLE [dbo].[jos_update_sites](
 END
 
 
-SET IDENTITY_INSERT jos_update_sites  ON;
+SET IDENTITY_INSERT #__update_sites  ON;
 
-INSERT INTO jos_update_sites (update_site_id, name, type, location, enabled)
+INSERT INTO #__update_sites (update_site_id, name, type, location, enabled)
 SELECT 1, 'Joomla Core', 'collection', 'http://update.joomla.org/core/list.xml', 1
 UNION ALL
 SELECT 2, 'Joomla Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1
 
-SET IDENTITY_INSERT jos_update_sites  OFF;
-/****** Object:  Table [dbo].[jos_update_sites_extensions]    Script Date: 10/20/2010 14:32:48 ******/
+SET IDENTITY_INSERT #__update_sites  OFF;
+/****** Object:  Table [#__update_sites_extensions]    Script Date: 10/20/2010 14:32:48 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_update_sites_extensions]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__update_sites_extensions]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_update_sites_extensions](
+CREATE TABLE [#__update_sites_extensions](
 	[update_site_id] [int] NOT NULL DEFAULT ((0)),
 	[extension_id] [int] NOT NULL DEFAULT ((0)),
- CONSTRAINT [PK_jos_update_sites_extensions_update_site_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__update_sites_extensions_update_site_id] PRIMARY KEY CLUSTERED 
 (
 	[update_site_id] ASC,
 	[extension_id] ASC
@@ -754,18 +754,18 @@ CREATE TABLE [dbo].[jos_update_sites_extensions](
 ) ON [PRIMARY]
 END
 
-INSERT INTO jos_update_sites_extensions (update_site_id, extension_id)
+INSERT INTO #__update_sites_extensions (update_site_id, extension_id)
 SELECT 1, 700
 UNION ALL
 SELECT 2, 700
-/****** Object:  Table [dbo].[jos_updates]    Script Date: 10/20/2010 14:33:21 ******/
+/****** Object:  Table [#__updates]    Script Date: 10/20/2010 14:33:21 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_updates]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__updates]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_updates](
+CREATE TABLE [#__updates](
 	[update_id] [int] IDENTITY(1,1) NOT NULL,
 	[update_site_id] [int] NULL DEFAULT ((0)),
 	[extension_id] [int] NULL DEFAULT ((0)),
@@ -779,26 +779,26 @@ CREATE TABLE [dbo].[jos_updates](
 	[version] [nvarchar](10) NULL DEFAULT (N''),
 	[data] [nvarchar](max) NOT NULL,
 	[detailsurl] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_jos_updates_update_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__updates_update_id] PRIMARY KEY CLUSTERED 
 (
 	[update_id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_user_profiles]    Script Date: 10/20/2010 14:33:29 ******/
+/****** Object:  Table [#__user_profiles]    Script Date: 10/20/2010 14:33:29 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_user_profiles]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__user_profiles]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_user_profiles](
+CREATE TABLE [#__user_profiles](
 	[user_id] [int] NOT NULL,
 	[profile_key] [nvarchar](100) NOT NULL,
 	[profile_value] [nvarchar](255) NOT NULL,
 	[ordering] [int] NOT NULL DEFAULT ((0)),
- CONSTRAINT [jos_user_profiles$idx_user_id_profile_key] UNIQUE CLUSTERED 
+ CONSTRAINT [#__user_profiles$idx_user_id_profile_key] UNIQUE CLUSTERED 
 (
 	[user_id] ASC,
 	[profile_key] ASC
@@ -806,17 +806,17 @@ CREATE TABLE [dbo].[jos_user_profiles](
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_user_usergroup_map]    Script Date: 10/20/2010 14:33:35 ******/
+/****** Object:  Table [#__user_usergroup_map]    Script Date: 10/20/2010 14:33:35 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_user_usergroup_map]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__user_usergroup_map]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_user_usergroup_map](
+CREATE TABLE [#__user_usergroup_map](
 	[user_id] [bigint] NOT NULL DEFAULT ((0)),
 	[group_id] [bigint] NOT NULL DEFAULT ((0)),
- CONSTRAINT [PK_jos_user_usergroup_map_user_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__user_usergroup_map_user_id] PRIMARY KEY CLUSTERED 
 (
 	[user_id] ASC,
 	[group_id] ASC
@@ -824,49 +824,49 @@ CREATE TABLE [dbo].[jos_user_usergroup_map](
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_content_frontpage]    Script Date: 10/20/2010 14:27:28 ******/
+/****** Object:  Table [#__content_frontpage]    Script Date: 10/20/2010 14:27:28 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_content_frontpage]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__content_frontpage]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_content_frontpage](
+CREATE TABLE [#__content_frontpage](
 	[content_id] [int] NOT NULL DEFAULT ((0)),
 	[ordering] [int] NOT NULL DEFAULT ((0)),
- CONSTRAINT [PK_jos_content_frontpage_content_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__content_frontpage_content_id] PRIMARY KEY CLUSTERED 
 (
 	[content_id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_usergroups]    Script Date: 10/20/2010 14:33:50 ******/
+/****** Object:  Table [#__usergroups]    Script Date: 10/20/2010 14:33:50 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_usergroups]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__usergroups]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_usergroups](
+CREATE TABLE [#__usergroups](
 	[id] [bigint] IDENTITY(9,1) NOT NULL,
 	[parent_id] [bigint] NOT NULL DEFAULT ((0)),
 	[lft] [int] NOT NULL DEFAULT ((0)),
 	[rgt] [int] NOT NULL DEFAULT ((0)),
 	[title] [nvarchar](100) NOT NULL DEFAULT (N''),
- CONSTRAINT [PK_jos_usergroups_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__usergroups_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
- CONSTRAINT [jos_usergroups$idx_usergroup_title_lookup] UNIQUE NONCLUSTERED 
+ CONSTRAINT [#__usergroups$idx_usergroup_title_lookup] UNIQUE NONCLUSTERED 
 (
 	[title] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-SET IDENTITY_INSERT jos_usergroups  ON;
-INSERT INTO jos_usergroups (id ,parent_id ,lft ,rgt ,title)
+SET IDENTITY_INSERT #__usergroups  ON;
+INSERT INTO #__usergroups (id ,parent_id ,lft ,rgt ,title)
 SELECT 1, 0, 1, 20, 'Public'
 UNION ALL
 SELECT 2, 1, 6, 17, 'Registered'
@@ -883,34 +883,34 @@ SELECT 7, 6, 3, 4, 'Administrator'
 UNION ALL
 SELECT 8, 1, 18, 19, 'Super Users'
 
-SET IDENTITY_INSERT jos_usergroups  OFF;
-/****** Object:  Table [dbo].[jos_content_rating]    Script Date: 10/20/2010 14:27:48 ******/
+SET IDENTITY_INSERT #__usergroups  OFF;
+/****** Object:  Table [#__content_rating]    Script Date: 10/20/2010 14:27:48 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_content_rating]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__content_rating]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_content_rating](
+CREATE TABLE [#__content_rating](
 	[content_id] [int] NOT NULL DEFAULT ((0)),
 	[rating_sum] [bigint] NOT NULL DEFAULT ((0)),
 	[rating_count] [bigint] NOT NULL DEFAULT ((0)),
 	[lastip] [nvarchar](50) NOT NULL DEFAULT (N''),
- CONSTRAINT [PK_jos_content_rating_content_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__content_rating_content_id] PRIMARY KEY CLUSTERED 
 (
 	[content_id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_users]    Script Date: 10/20/2010 14:34:32 ******/
+/****** Object:  Table [#__users]    Script Date: 10/20/2010 14:34:32 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_users]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__users]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_users](
+CREATE TABLE [#__users](
 	[id] [int] IDENTITY(43,1) NOT NULL,
 	[name] [nvarchar](255) NOT NULL DEFAULT (N''),
 	[username] [nvarchar](150) NOT NULL DEFAULT (N''),
@@ -923,34 +923,34 @@ CREATE TABLE [dbo].[jos_users](
 	[lastvisitDate] [datetime] NOT NULL DEFAULT (getdate()),
 	[activation] [nvarchar](100) NOT NULL DEFAULT (N''),
 	[params] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_jos_users_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__users_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_core_log_searches]    Script Date: 10/20/2010 14:27:58 ******/
+/****** Object:  Table [#__core_log_searches]    Script Date: 10/20/2010 14:27:58 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_core_log_searches]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__core_log_searches]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_core_log_searches](
+CREATE TABLE [#__core_log_searches](
 	[search_term] [nvarchar](128) NOT NULL DEFAULT (N''),
 	[hits] [bigint] NOT NULL DEFAULT ((0))
 ) ON [PRIMARY]
 END
 
-/****** Object:  Table [dbo].[jos_extensions]    Script Date: 10/20/2010 14:28:42 ******/
+/****** Object:  Table [#__extensions]    Script Date: 10/20/2010 14:28:42 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_extensions]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__extensions]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_extensions](
+CREATE TABLE [#__extensions](
 	[extension_id] [int] IDENTITY(10000,1) NOT NULL,
 	[name] [nvarchar](100) NOT NULL,
 	[type] [nvarchar](20) NOT NULL,
@@ -968,15 +968,15 @@ CREATE TABLE [dbo].[jos_extensions](
 	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
 	[ordering] [int] NULL DEFAULT ((0)),
 	[state] [int] NULL DEFAULT ((0)),
- CONSTRAINT [PK_jos_extensions_extension_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__extensions_extension_id] PRIMARY KEY CLUSTERED 
 (
 	[extension_id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-SET IDENTITY_INSERT jos_extensions  ON;
-INSERT INTO jos_extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
+SET IDENTITY_INSERT #__extensions  ON;
+INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
 SELECT 1, 'com_mailto', 'component', 'com_mailto', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
 UNION ALL
 SELECT 2, 'com_wrapper', 'component', 'com_wrapper', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
@@ -1027,7 +1027,7 @@ SELECT 24, 'com_redirect', 'component', 'com_redirect', '', 1, 1, 0, 1, '', '{}'
 UNION ALL
 SELECT 25, 'com_users', 'component', 'com_users', '', 1, 1, 0, 1, '', '{"allowUserRegistration":"1","new_usertype":"2","useractivation":"1","frontend_userparams":"1","mailSubjectPrefix":"","mailBodySuffix":""}', '', '', 0, '1900-01-01 00:00:00', 0, 0
 
-INSERT INTO jos_extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
+INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
 SELECT 100, 'PHPMailer', 'library', 'phpmailer', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
 UNION ALL
 SELECT 101, 'SimplePie', 'library', 'simplepie', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
@@ -1038,7 +1038,7 @@ SELECT 103, 'phputf8', 'library', 'simplepie', '', 0, 1, 1, 1, '', '', '', '', 0
 
 
 
-INSERT INTO jos_extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
+INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
 SELECT 200, 'mod_articles_archive', 'module', 'mod_articles_archive', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
 UNION ALL
 SELECT 201, 'mod_articles_latest', 'module', 'mod_articles_latest', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
@@ -1087,7 +1087,7 @@ SELECT 222, 'mod_languages', 'module', 'mod_languages', '', 0, 1, 1, 1, '', '', 
 
 
 
-INSERT INTO jos_extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
+INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
 SELECT 300, 'mod_custom', 'module', 'mod_custom', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
 UNION ALL
 SELECT 301, 'mod_feed', 'module', 'mod_feed', '', 1, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
@@ -1119,7 +1119,7 @@ SELECT 313, 'mod_unread', 'module', 'mod_unread', '', 1, 1, 1, 1, '', '', '', ''
 
 
 
-INSERT INTO jos_extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
+INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
 SELECT 400, 'plg_authentication_gmail', 'plugin', 'gmail', 'authentication', 0, 0, 1, 0, '', '{"applysuffix":"0","suffix":"","verifypeer":"1","user_blacklist":""}', '', '', 0, '1900-01-01 00:00:00', 1, 0
 UNION ALL
 SELECT 401, 'plg_authentication_joomla', 'plugin', 'joomla', 'authentication', 0, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 0, 0
@@ -1190,7 +1190,7 @@ SELECT 432, 'plg_system_languagefilter', 'plugin', 'languagefilter', 'system', 0
 
 
 
-INSERT INTO jos_extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
+INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
 SELECT 500, 'atomic', 'template', 'atomic', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
 UNION ALL
 SELECT 501, 'rhuk_milkyway', 'template', 'rhuk_milkyway', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
@@ -1204,7 +1204,7 @@ UNION ALL
 SELECT 505, 'Beez5', 'template', 'beez5', '', 0, 1, 1, 0, 'a:11:{s:6:"legacy";b:1;s:4:"name";s:5:"Beez5";s:4:"type";s:8:"template";s:12:"creationDate";s:11:"21 May 2010";s:6:"author";s:12:"Angie Radtke";s:9:"copyright";s:72:"Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.";s:11:"authorEmail";s:23:"a.radtke@derauftritt.de";s:9:"authorUrl";s:26:"http://www.der-auftritt.de";s:7:"version";s:5:"1.6.0";s:11:"description";s:22:"A Easy Version of Beez";s:5:"group";s:0:"";}', '{"wrapperSmall":"53","wrapperLarge":"72","sitetitle":"BEEZ 2.0","sitedescription":"Your site name","navposition":"center","html5":"0"}', '', '', 0, '1900-01-01 00:00:00', 0, 0
 
 
-INSERT INTO jos_extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
+INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
 SELECT 600, 'English (United Kingdom)', 'language', 'en-GB', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
 UNION ALL
 SELECT 601, 'English (United Kingdom)', 'language', 'en-GB', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
@@ -1213,18 +1213,18 @@ SELECT 604, 'XXTestLang', 'language', 'xx-XX', '', 1, 1, 1, 0, '', '', '', '', 0
 UNION ALL
 SELECT 605, 'XXTestLang', 'language', 'xx-XX', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
 
-INSERT INTO jos_extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
+INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
 SELECT 700, 'Joomla! CMS', 'file', 'joomla', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
 
-SET IDENTITY_INSERT jos_extensions  OFF;
-/****** Object:  Table [dbo].[jos_assets]    Script Date: 10/20/2010 14:23:13 ******/
+SET IDENTITY_INSERT #__extensions  OFF;
+/****** Object:  Table [#__assets]    Script Date: 10/20/2010 14:23:13 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_assets]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__assets]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_assets](
+CREATE TABLE [#__assets](
 	[id] [bigint] IDENTITY(32,1) NOT NULL,
 	[parent_id] [int] NOT NULL DEFAULT ((0)),
 	[lft] [int] NOT NULL DEFAULT ((0)),
@@ -1233,20 +1233,20 @@ CREATE TABLE [dbo].[jos_assets](
 	[name] [nvarchar](50) NOT NULL,
 	[title] [nvarchar](100) NOT NULL,
 	[rules] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_jos_assets_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__assets_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
- CONSTRAINT [jos_assets$idx_asset_name] UNIQUE NONCLUSTERED 
+ CONSTRAINT [#__assets$idx_asset_name] UNIQUE NONCLUSTERED 
 (
 	[name] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-SET IDENTITY_INSERT jos_assets  ON;
+SET IDENTITY_INSERT #__assets  ON;
 
-INSERT INTO jos_assets (id, parent_id, lft, rgt, level, name, title, rules)
+INSERT INTO #__assets (id, parent_id, lft, rgt, level, name, title, rules)
 SELECT 1,0,0,61,0,'root.1','Root Asset','{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'
 UNION ALL
 SELECT 2,1,1,2,1,'com_admin','com_admin','{}'
@@ -1309,48 +1309,48 @@ SELECT 30, 19, 42, 43, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.c
 UNION ALL
 SELECT 31, 25, 56, 57, 2, 'com_weblinks.category.6', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
 
-SET IDENTITY_INSERT jos_assets  OFF;
-/****** Object:  Table [dbo].[jos_viewlevels]    Script Date: 10/20/2010 14:34:45 ******/
+SET IDENTITY_INSERT #__assets  OFF;
+/****** Object:  Table [#__viewlevels]    Script Date: 10/20/2010 14:34:45 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_viewlevels]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__viewlevels]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_viewlevels](
+CREATE TABLE [#__viewlevels](
 	[id] [bigint] IDENTITY(4,1) NOT NULL,
 	[title] [nvarchar](100) NOT NULL DEFAULT (N''),
 	[ordering] [int] NOT NULL DEFAULT ((0)),
 	[rules] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_jos_viewlevels_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__viewlevels_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
- CONSTRAINT [jos_viewlevels$idx_assetgroup_title_lookup] UNIQUE NONCLUSTERED 
+ CONSTRAINT [#__viewlevels$idx_assetgroup_title_lookup] UNIQUE NONCLUSTERED 
 (
 	[title] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-SET IDENTITY_INSERT jos_viewlevels  ON 
-INSERT INTO jos_viewlevels (id, title, ordering, rules) 
+SET IDENTITY_INSERT #__viewlevels  ON 
+INSERT INTO #__viewlevels (id, title, ordering, rules) 
 SELECT 1, 'Public', 0, '[]'
 UNION ALL
 SELECT 2, 'Registered', 1, '[6,2]'
 UNION ALL
 SELECT 3, 'Special', 2, '[6,7,8]'
 
-SET IDENTITY_INSERT jos_viewlevels  OFF;
+SET IDENTITY_INSERT #__viewlevels  OFF;
 
-/****** Object:  Table [dbo].[jos_languages]    Script Date: 10/20/2010 14:28:57 ******/
+/****** Object:  Table [#__languages]    Script Date: 10/20/2010 14:28:57 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_languages]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__languages]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_languages](
+CREATE TABLE [#__languages](
 	[lang_id] [bigint] IDENTITY(4,1) NOT NULL,
 	[lang_code] [nchar](7) NOT NULL,
 	[title] [nvarchar](50) NOT NULL,
@@ -1361,33 +1361,33 @@ CREATE TABLE [dbo].[jos_languages](
 	[metakey] [nvarchar](max) NOT NULL,
 	[metadesc] [nvarchar](max) NOT NULL,
 	[published] [int] NOT NULL DEFAULT ((0)),
- CONSTRAINT [PK_jos_languages_lang_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__languages_lang_id] PRIMARY KEY CLUSTERED 
 (
 	[lang_id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
- CONSTRAINT [jos_languages$idx_sef] UNIQUE NONCLUSTERED 
+ CONSTRAINT [#__languages$idx_sef] UNIQUE NONCLUSTERED 
 (
 	[sef] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 
-SET IDENTITY_INSERT jos_languages  ON;
+SET IDENTITY_INSERT #__languages  ON;
 
-INSERT INTO jos_languages (lang_id,lang_code,title,title_native,sef,image,description,metakey,metadesc,published)
+INSERT INTO #__languages (lang_id,lang_code,title,title_native,sef,image,description,metakey,metadesc,published)
 SELECT 1, 'en-GB', 'English (UK)', 'English (UK)', 'en', 'en', '', '', '', 1
 UNION ALL
 SELECT 3, 'xx-XX', 'xx (Test)', 'xx (Test)', 'xx', 'br', '', '', '', 1
 
-SET IDENTITY_INSERT jos_languages  OFF;
-/****** Object:  Table [dbo].[jos_banner_clients]    Script Date: 10/20/2010 14:23:32 ******/
+SET IDENTITY_INSERT #__languages  OFF;
+/****** Object:  Table [#__banner_clients]    Script Date: 10/20/2010 14:23:32 ******/
 SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[jos_banner_clients]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__banner_clients]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[jos_banner_clients](
+CREATE TABLE [#__banner_clients](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[name] [nvarchar](255) NOT NULL DEFAULT (N''),
 	[contact] [nvarchar](255) NOT NULL DEFAULT (N''),
@@ -1402,7 +1402,7 @@ CREATE TABLE [dbo].[jos_banner_clients](
 	[purchase_type] [smallint] NOT NULL DEFAULT ((-1)),
 	[track_clicks] [smallint] NOT NULL DEFAULT ((-1)),
 	[track_impressions] [smallint] NOT NULL DEFAULT ((-1)),
- CONSTRAINT [PK_jos_banner_clients_id] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_#__banner_clients_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
