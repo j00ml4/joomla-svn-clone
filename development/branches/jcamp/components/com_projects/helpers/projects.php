@@ -250,7 +250,7 @@ abstract class ProjectsHelper {
 				case 1 : // pending
 					return $prefix.'.`type` IN (2,3) AND '.$prefix.'.`state` = 1';
 				case 0: // all (reported+approved+finished)
-					return $prefix.'(.`type` = 2 AND '.$prefix.'.`state` IN (1,2)) OR ('.$prefix.'.`type`=3 AND '.$prefix.'.`state`=1)';
+					return '('.$prefix.'.`type` = 2 AND '.$prefix.'.`state` IN (1,2)) OR ('.$prefix.'.`type`=3 AND '.$prefix.'.`state`=1)';
 				case 4 : // pending
 					return $prefix.'.`type` IN (2,3) AND '.$prefix.'.`state` = 1';
 			}
