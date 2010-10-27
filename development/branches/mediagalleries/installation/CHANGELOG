@@ -1,6 +1,6 @@
 0. Metadata
 -----------
-File version:	$Id: CHANGELOG 19204 2010-10-22 16:34:09Z chdemko $
+File version:	$Id: CHANGELOG 19231 2010-10-27 09:43:49Z infograf768 $
 Copyright:		Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
 License:		GNU General Public License version 2 or later; see LICENSE.txt
 
@@ -27,6 +27,38 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+27-Oct-2010 Jean-Marie Simonet
+ # [#23002] jgrid.published does not show all possible statuses as was shown in 1.5. Thanks Dennis.
+ # [#23018] Clean up Legacy() method from content/contact helpers. Thanks Louis.
+
+26-Oct-2010 Ian MacLennan
+ # [#22987] using getElementById('adminForm') in submitform breaks Joomla 1.5 compatibility
+
+26-Oct-2010 Jean-Marie Simonet
+ # [#23011] RTL fixes for form controls in the option modals and menu assignments. Thanks Andrea
+ # [#23024] Backend image file missed - j_arrow_right.png. RTL CSS added to fit.
+ # [#23025] Show "Linked user" in "Contact Manager: Contacts". Thanks Dennis.
+
+25-Oct-2010 Jean-Marie Simonet
+ # Forgotten getLayout() change for pagebreak in rev 22932
+ # [#23004] pagenavigation plugin generates incorrect XHTML. Thanks Bill and Rouven.
+ # [#22981] Hathor RTL login CSS issues in Safari. Thanks Andrea.
+ 
+24-Oct-2010 Jean-Marie Simonet
+ # [#22667] Login/Logout Redirect not working. Thanks Mathavan and Christophe.
+ # [#22626] Parent Item selection does not update when Menu Location is changed. Thanks Mathavan.
+
+23-Oct-2010 Jean-Marie Simonet
+ # [#22928] Module edit - option to show/hide title in wrong position. Thanks Bill.
+ $ Correcting module position desc string.
+ # [#22989] Implement a way to choose between sample data at install. Thanks Christophe.
+ # [#22879] [patch] com_content: it's not possible to set title, introtext or fulltext to zero ("0"). Thanks Artyom.
+ # [#22980] RTL fix for ACL Permission in Bluestork and Hathor. Thanks Andrea.
+ # [#22876] Shifting of Elements on Screen when Options Box with Blocking Opens. Thanks Mathavan.
+ 
+23-Oct-2010 Christophe Demko
+ # [#22442] available module positions
+
 22-Oct-2010 Jean-Marie Simonet
  # [#22970] Menu item set to "registered" does not display when superuser logs in. Thanks Elin
  # [#22959] Language switcher forbids you from reading content in a second language. No way to disable filtering. Thanks Christophe.
@@ -35,7 +67,7 @@ $ -> Language fix or change
 22-Oct-2010 Christophe Demko
  # [#21386] Category field includes categories user does not have permission to save to. (Elin Waring)
  # [#22932] Several issues in layouts
- # [#22990] *Internal link issue in featured article display
+ # [#22990] Internal link issue in featured article display
 
 21-Oct-2010 Christophe Demko
  # [#22811] Get the proper model in the category controller (bill richardson)
