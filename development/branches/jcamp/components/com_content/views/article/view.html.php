@@ -99,10 +99,13 @@ class ContentViewArticle extends JView
 			}
 		}
 
-		if (!$item->params->get('show_intro') && !empty($item->fulltext)) {
+		if ($item->params->get('show_intro','1')=='1') {
+			$item->text = $item->introtext.' '.$item->fulltext;
+		}
+		else if ($item->fulltext) {
 			$item->text = $item->fulltext;
 		}
-		else {
+		else  {
 			$item->text = $item->introtext;
 		}
 
@@ -129,7 +132,7 @@ class ContentViewArticle extends JView
 		$this->assign('print', $print);
 
 		// Override the layout.
-		if ($layout = $params->get('layout'))
+		if ($layout = $item->params->get('layout'))
 		{
 			$this->setLayout($layout);
 		}

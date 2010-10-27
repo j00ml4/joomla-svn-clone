@@ -11,6 +11,7 @@
 defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
+JHtml::_('behavior.noframes');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.combobox');
@@ -18,12 +19,6 @@ $hasContent = empty($this->item->module) || $this->item->module == 'custom' || $
 
 $script = "Joomla.submitbutton = function(task)
 	{
-		if (task != 'module.cancel' && $('jform_custom_position').get('value') == '' && $('jform_position').get('value') == '') {
-			$('jform_custom_position').addClass('invalid');
-			$('jform_position').addClass('invalid');
-			alert('".$this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'))."');
-			return false;
-		} else {
 			if (task == 'module.cancel' || document.formvalidator.isValid(document.id('module-form'))) {";
 if ($hasContent) {
 	$script .= $this->form->getField('content')->save();
@@ -35,7 +30,6 @@ $script .= "	Joomla.submitform(task, document.getElementById('module-form'));
 			} else {
 				alert('".$this->escape(JText::_('JGLOBAL_VALIDATION_FORM_FAILED'))."');
 			}
-		}
 	}";
 
 JFactory::getDocument()->addScriptDeclaration($script);
@@ -49,10 +43,11 @@ JFactory::getDocument()->addScriptDeclaration($script);
 			<li><?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?></li>
 
+			<li><?php echo $this->form->getLabel('showtitle'); ?>
+			<?php echo $this->form->getInput('showtitle'); ?></li>
+
 			<li><?php echo $this->form->getLabel('position'); ?>
-			<?php echo $this->form->getInput('custom_position'); ?>
 			<?php echo $this->form->getInput('position'); ?></li>
-			<script type="text/javascript">$('jform_position-lbl').addClass('required');</script>
 			
 			<?php if ((string) $this->item->xml->name != 'Login Form'): ?>
 			<li><?php echo $this->form->getLabel('published'); ?>
@@ -63,10 +58,7 @@ JFactory::getDocument()->addScriptDeclaration($script);
 			<?php echo $this->form->getInput('access'); ?></li>
 
 			<li><?php echo $this->form->getLabel('ordering'); ?>
-			<?php echo $this->form->getInput('ordering'); ?></li>
-
-			<li><?php echo $this->form->getLabel('showtitle'); ?>
-			<?php echo $this->form->getInput('showtitle'); ?></li>
+			<?php echo $this->form->getInput('ordering'); ?></li>			
 
 			<?php if ((string) $this->item->xml->name != 'Login Form'): ?>
 			<li><?php echo $this->form->getLabel('publish_up'); ?>
