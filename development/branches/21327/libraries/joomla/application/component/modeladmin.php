@@ -313,15 +313,12 @@ abstract class JModelAdmin extends JModelForm
 	{
 		$app = JFactory::getApplication('administrator');
 
-		// Load the User state.
-		if (!($pk = (int) $app->getUserState($this->option.'.edit.'.$this->getName().'.id'))) {
-			$pk = (int) JRequest::getInt('id');
-		}
-
+		// Get the pk of the record from the request.
+		$pk = (int) JRequest::getInt('id');
 		$this->setState($this->getName().'.id', $pk);
 
 		// Load the parameters.
-		$value	= JComponentHelper::getParams($this->option);
+		$value = JComponentHelper::getParams($this->option);
 		$this->setState('params', $value);
 	}
 
