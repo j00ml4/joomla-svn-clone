@@ -794,11 +794,13 @@ class JController extends JObject
 	/**
 	 * Set a URL for browser redirection.
 	 *
-	 * @param	string 		URL to redirect to.
-	 * @param	string		Message to display on redirect. Optional, defaults to value set internally by controller, if any.
-	 * @param	string		Message type. Optional, defaults to 'message'.
-	 * @return	JController	This object to support chaining.
-	 * @since	1.5
+	 * @param   string  $url   URL to redirect to.
+	 * @param   string  $msg   Message to display on redirect. Optional, defaults to value set internally by controller, if any.
+	 * @param   string  $type  Message type. Optional, defaults to 'message' or the type set by a previous call to setMessage.
+	 *
+	 * @return  JController  This object to support chaining.
+	 *
+	 * @since   1.5
 	 */
 	public function setRedirect($url, $msg = null, $type = null)
 	{
