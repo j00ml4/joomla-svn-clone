@@ -257,29 +257,6 @@ class JControllerForm extends JController
 	}
 
 	/**
-	 * Method to check whether an ID is in the edit list.
-	 *
-	 * @param	string	$context	The context for the session storage.
-	 * @param	int		$id			The ID of the record to add to the edit list.
-	 *
-	 * @return	boolean	True if the ID is in the edit list.
-	 * @since	1.6
-	 */
-	protected function checkEditId($context, $id)
-	{
-		if ($id) {
-			$app	= JFactory::getApplication();
-			$values = (array) $app->getUserState($context.'.id');
-
-			return in_array((int) $id, $values);
-		}
-		else {
-			// No id for a new item.
-			return true;
-		}
-	}
-
-	/**
 	 * Method to edit an existing record.
 	 *
 	 * @return	Boolean	True if access level check and checkout passes, false otherwise.
@@ -353,11 +330,12 @@ class JControllerForm extends JController
 	 * Gets the URL arguments to append to an item redirect.
 	 *
 	 * @param	int		$recordId	The primary key id for the item.
+	 * @param	string	$key		The name of the primary key variable.
 	 *
 	 * @return	string	The arguments to append to the redirect URL.
 	 * @since	1.6
 	 */
-	protected function getRedirectToItemAppend($recordId = null)
+	protected function getRedirectToItemAppend($recordId = null, $key = 'id')
 	{
 		$tmpl		= JRequest::getString('tmpl');
 		$layout		= JRequest::getString('layout', 'edit');
@@ -373,7 +351,7 @@ class JControllerForm extends JController
 		}
 
 		if ($recordId) {
-			$append .= '&id='.$recordId;
+			$append .= '&'.$key.'='.$recordId;
 		}
 
 		return $append;
@@ -399,29 +377,6 @@ class JControllerForm extends JController
 	}
 
 	/**
-	 * Method to add a record ID to the edit list.
-	 *
-	 * @param	string	$context	The context for the session storage.
-	 * @param	int		$id			The ID of the record to add to the edit list.
-	 *
-	 * @return	void
-	 * @since	1.6
-	 */
-	protected function holdEditId($context, $id)
-	{
-		// Initialise variables.
-		$app	= JFactory::getApplication();
-		$values	= (array) $app->getUserState($context.'.id');
-
-		// Add the id to the list if non-zero.
-		if (!empty($id)) {
-			array_push($values, (int) $id);
-			$values = array_unique($values);
-			$app->setUserState($context.'.id', $values);
-		}
-	}
-
-	/**
 	 * Function that allows child controller access to model data after the data has been saved.
 	 *
 	 * @param	JModel	$model	The data model object.
@@ -431,28 +386,6 @@ class JControllerForm extends JController
 	 */
 	protected function postSaveHook(JModel &$model)
 	{
-	}
-
-	/**
-	 * Method to check whether an ID is in the edit list.
-	 *
-	 * @param	string	$context	The context for the session storage.
-	 * @param	int		$id			The ID of the record to add to the edit list.
-	 *
-	 * @return	void
-	 * @since	1.6
-	 */
-	protected function releaseEditId($context, $id)
-	{
-		$app	= JFactory::getApplication();
-		$values = (array) $app->getUserState($context.'.id');
-
-		// Do a strict search of the edit list values.
-		$index = array_search((int) $id, $values, true);
-		if (is_int($index)) {
-			unset($values[$index]);
-			$app->setUserState($context.'.id', $values);
-		}
 	}
 
 	/**
