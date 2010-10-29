@@ -143,7 +143,7 @@ abstract class JModelAdmin extends JModelForm
 	 * @return	mixed	Boolean false if there is an error, otherwise the count of records checked in.
 	 * @since	1.6
 	 */
-	public function checkin(&$pks = array())
+	public function checkin($pks = array())
 	{
 		// Initialise variables.
 		$user		= JFactory::getUser();
