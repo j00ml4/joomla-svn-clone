@@ -48,7 +48,7 @@ class ContentController extends JController
 		if ($view == 'article' && $layout == 'edit') {
 			if (!$this->checkEditId('com_content.edit.article', $id)) {
 				// Somehow the person just went to the form - we don't allow that.
-				$this->setError(JText::_('JLIB_APPLICATION_ERROR_UNHELD_ID'));
+				$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
 				$this->setMessage($this->getError(), 'error');
 				$this->setRedirect(JRoute::_('index.php?option=com_content&view=articles', false));
 

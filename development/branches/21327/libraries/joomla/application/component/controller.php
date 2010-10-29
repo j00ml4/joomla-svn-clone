@@ -428,7 +428,16 @@ class JController extends JObject
 			$app	= JFactory::getApplication();
 			$values = (array) $app->getUserState($context.'.id');
 
-			return in_array((int) $id, $values);
+			$result	= in_array((int) $id, $values);
+
+			if (JDEBUG) {
+				jimport('joomla.error.log');
+				$log = JLog::getInstance('jcontroller.log.php')->addEntry(
+					array('comment' => sprintf('Checking edit ID %s.%s: %d %s', $context, $id, (int) $result, str_replace("\n", ' ', print_r($values, 1))))
+				);
+			}
+
+			return $result;
 		}
 		else {
 			// No id for a new item.
@@ -742,6 +751,13 @@ class JController extends JObject
 			array_push($values, (int) $id);
 			$values = array_unique($values);
 			$app->setUserState($context.'.id', $values);
+
+			if (JDEBUG) {
+				jimport('joomla.error.log');
+				$log = JLog::getInstance('jcontroller.log.php')->addEntry(
+					array('comment' => sprintf('Holding edit ID %s.%s %s', $context, $id, str_replace("\n", ' ', print_r($values, 1))))
+				);
+			}
 		}
 	}
 
@@ -808,6 +824,13 @@ class JController extends JObject
 		if (is_int($index)) {
 			unset($values[$index]);
 			$app->setUserState($context.'.id', $values);
+
+			if (JDEBUG) {
+				jimport('joomla.error.log');
+				$log = JLog::getInstance('jcontroller.log.php')->addEntry(
+					array('comment' => sprintf('Releasing edit ID %s.%s %s', $context, $id, str_replace("\n", ' ', print_r($values, 1))))
+				);
+			}
 		}
 	}
 
