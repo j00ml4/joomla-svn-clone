@@ -140,7 +140,7 @@ abstract class JModelAdmin extends JModelForm
 	 *
 	 * @param	integer|array	$pks	The ID of the primary key or an array of IDs
 	 *
-	 * @return	boolean
+	 * @return	mixed	Boolean false if there is an error, otherwise the count of records checked in.
 	 * @since	1.6
 	 */
 	public function checkin(&$pks = array())
@@ -149,29 +149,32 @@ abstract class JModelAdmin extends JModelForm
 		$user		= JFactory::getUser();
 		$pks		= (array) $pks;
 		$table		= $this->getTable();
+		$count		= 0;
 
 		if (empty($pks)) {
 			$pks = array((int) $this->getState($this->getName().'.id'));
 		}
 
 		// Check in all items.
-		foreach ($pks as $i => $pk) {
-
+		foreach ($pks as $i => $pk)
+		{
 			if ($table->load($pk)) {
 
-				if ($table->checked_out>0) {
-					if(!parent::checkin($pk)) {
+				if ($table->checked_out > 0) {
+					if (!parent::checkin($pk)) {
 						return false;
 					}
-				} else {
-					unset($pks[$i]);
+					$count++;
 				}
-			} else {
+			}
+			else {
 				$this->setError($table->getError());
+
 				return false;
 			}
 		}
-		return true;
+
+		return $count;
 	}
 
 	/**
