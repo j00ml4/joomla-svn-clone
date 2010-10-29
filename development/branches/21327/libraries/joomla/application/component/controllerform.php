@@ -521,7 +521,6 @@ class JControllerForm extends JController
 			$this->setMessage($this->getError(), 'error');
 			$this->setRedirect('index.php?option='.$this->option.'&view='.$this->view_item.$this->getRedirectToItemAppend($recordId));
 
-
 			return false;
 		}
 
