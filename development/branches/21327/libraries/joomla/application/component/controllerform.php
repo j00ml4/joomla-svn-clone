@@ -237,7 +237,8 @@ class JControllerForm extends JController
 			}
 
 			if ($checkin) {
-				if (!$model->checkin($recordId)) {
+				$tempId = $recordId;
+				if (!$model->checkin($tempId)) {
 					// Check-in failed, go back to the record and display a notice.
 					$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()));
 					$this->setMessage($this->getError(), 'error');
@@ -429,8 +430,10 @@ class JControllerForm extends JController
 
 		// The save2copy task needs to be handled slightly differently.
 		if ($task == 'save2copy') {
+			$tempId = $data[$key];
+
 			// Check-in the original row.
-			if ($checkin  && !$model->checkin($data[$key])) {
+			if ($checkin  && !$model->checkin($tempId)) {
 				// Check-in failed, go back to the item and display a notice.
 				$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()));
 				$this->setMessage($this->getError(), 'error');
@@ -508,7 +511,8 @@ class JControllerForm extends JController
 		}
 
 		// Save succeeded, check-in the record.
-		if ($checkin && !$model->checkin($validData[$key])) {
+		$tempId = $validData[$key];
+		if ($checkin && !$model->checkin($tempId)) {
 			// Save the data in the session.
 			$app->setUserState($context.'.data', $validData);
 

@@ -821,6 +821,7 @@ class JController extends JObject
 
 		// Do a strict search of the edit list values.
 		$index = array_search((int) $id, $values, true);
+
 		if (is_int($index)) {
 			unset($values[$index]);
 			$app->setUserState($context.'.id', $values);
