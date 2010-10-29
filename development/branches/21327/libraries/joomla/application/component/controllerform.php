@@ -259,10 +259,12 @@ class JControllerForm extends JController
 	/**
 	 * Method to edit an existing record.
 	 *
+	 * @param	string	$key	The name of the primary key of the URL variable.
+	 *
 	 * @return	Boolean	True if access level check and checkout passes, false otherwise.
 	 * @since	1.6
 	 */
-	public function edit()
+	public function edit($key = null)
 	{
 		// Initialise variables.
 		$app		= JFactory::getApplication();
@@ -272,12 +274,15 @@ class JControllerForm extends JController
 		$context	= "$this->option.edit.$this->context";
 		$append		= '';
 
+		if (empty($key)) {
+			$key = $table->getKeyName();
+		}
+
 		// Get the previous record id (if any) and the current record id.
-		$recordId	= (int) (count($cid) ? $cid[0] : JRequest::getInt('id'));
+		$recordId	= (int) (count($cid) ? $cid[0] : JRequest::getInt($key));
 		$checkin	= property_exists($table, 'checked_out');
 
 		// Access check.
-		$key		= $table->getKeyName();
 		if (!$this->allowEdit(array($key => $recordId), $key)) {
 			$this->setError(JText::_('JLIB_APPLICATION_ERROR_EDIT_NOT_PERMITTED'));
 			$this->setMessage($this->getError(), 'error');
@@ -291,8 +296,7 @@ class JControllerForm extends JController
 			// Check-out failed, display a notice but allow the user to see the record.
 			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKOUT_FAILED', $model->getError()));
 			$this->setMessage($this->getError(), 'error');
-			$this->setRedirect('index.php?option='.$this->option.'&view='.$this->view_item.$this->getRedirectToItemAppend($recordId));
-
+			$this->setRedirect('index.php?option='.$this->option.'&view='.$this->view_item.$this->getRedirectToItemAppend($recordId, $key));
 
 			return false;
 		}
@@ -300,8 +304,7 @@ class JControllerForm extends JController
 			// Check-out succeeded, push the new record id into the session.
 			$this->holdEditId($context, $recordId);
 			$app->setUserState($context.'.data', null);
-			$this->setRedirect('index.php?option='.$this->option.'&view='.$this->view_item.$this->getRedirectToItemAppend($recordId));
-
+			$this->setRedirect('index.php?option='.$this->option.'&view='.$this->view_item.$this->getRedirectToItemAppend($recordId, $key));
 
 			return true;
 		}
@@ -410,7 +413,6 @@ class JControllerForm extends JController
 		$task		= $this->getTask();
 		$recordId	= JRequest::getInt('id');
 
-
 		$session	= JFactory::getSession();
 		$registry	= $session->get('registry');
 
@@ -436,7 +438,6 @@ class JControllerForm extends JController
 				$this->setMessage($this->getError(), 'error');
 				$this->setRedirect('index.php?option='.$this->option.'&view='.$this->view_item.$this->getRedirectToItemAppend($recordId));
 
-
 				return false;
 			}
 
@@ -460,7 +461,6 @@ class JControllerForm extends JController
 
 		if (!$form) {
 			$app->enqueueMessage($model->getError(), 'error');
-
 
 			return false;
 		}
