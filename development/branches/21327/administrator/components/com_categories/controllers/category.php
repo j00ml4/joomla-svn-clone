@@ -105,20 +105,6 @@ class CategoriesControllerCategory extends JControllerForm
  		}
 	}
 
-	/**
-	 * Method to check whether an ID is in the edit list.
-	 *
-	 * @param	string	$context	The context for the session storage.
-	 * @param	int		$id			The ID of the record to add to the edit list.
-	 *
-	 * @return	boolean	True if the ID is in the edit list.
-	 * @since	1.6
-	 */
-	protected function checkEditId($context, $id)
-	{
-		return parent::checkEditId($context.'.'.$this->extension, $id);
-	}
-
  	/**
 	 * Gets the URL arguments to append to an item redirect.
  	 *
@@ -148,32 +134,4 @@ class CategoriesControllerCategory extends JControllerForm
 
 		return $append;
  	}
-
- 	/**
-	 * Method to add a record ID to the edit list.
- 	 *
-	 * @param	string	$context	The context for the session storage.
-	 * @param	int		$id			The ID of the record to add to the edit list.
-	 *
- 	 * @return	void
-	 * @since	1.6
- 	 */
-	protected function holdEditId($context, $id)
- 	{
-		parent::holdEditId($context.'.'.$this->extension, $id);
-	}
-
-	/**
-	 * Method to check whether an ID is in the edit list.
-	 *
-	 * @param	string	$context	The context for the session storage.
-	 * @param	int		$id			The ID of the record to add to the edit list.
-	 *
-	 * @return	void
-	 * @since	1.6
-	 */
-	protected function releaseEditId($context, $id)
-	{
-		parent::releaseEditId($context.'.'.$this->extension, $id);
- 	}
- }
+}
