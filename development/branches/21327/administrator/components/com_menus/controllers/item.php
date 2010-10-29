@@ -92,12 +92,12 @@ class MenusControllerItem extends JControllerForm
 		$model	= $this->getModel('Item');
 
 		// If rows ids do not match, checkin previous row.
-		if (!$model->checkin($previousId)) {
-		// Check-in failed, go back to the menu item and display a notice.
+		if ($model->checkin($previousId) === false) {
+			// Check-in failed, go back to the menu item and display a notice.
 			$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
 			$this->setRedirect('index.php?option=com_content&view=item&layout=edit', $message, 'error');
-			return false;
 
+			return false;
 		}
 
 		// Clear the row edit information from the session.
@@ -178,7 +178,7 @@ class MenusControllerItem extends JControllerForm
 		// The save2copy task needs to be handled slightly differently.
 		if ($task == 'save2copy') {
 			// Check-in the original row.
-			if (!$model->checkin()) {
+			if ($model->checkin($data['id']) === false) {
 				// Check-in failed, go back to the item and display a notice.
 				$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()), 'warning');
 				return false;
@@ -194,6 +194,7 @@ class MenusControllerItem extends JControllerForm
 		$form = $model->getForm($data);
 		if (!$form) {
 			JError::raiseError(500, $model->getError());
+
 			return false;
 		}
 		$data = $model->validate($form, $data);
@@ -216,7 +217,8 @@ class MenusControllerItem extends JControllerForm
 			$errors	= $model->getErrors();
 
 			// Push up to three validation messages out to the user.
-			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++) {
+			for ($i = 0, $n = count($errors); $i < $n && $i < 3; $i++)
+			{
 				if (JError::isError($errors[$i])) {
 					$app->enqueueMessage($errors[$i]->getMessage(), 'warning');
 				} else {
@@ -229,6 +231,7 @@ class MenusControllerItem extends JControllerForm
 
 			// Redirect back to the edit screen.
 			$this->setRedirect(JRoute::_('index.php?option=com_menus&view=item&layout=edit', false));
+
 			return false;
 		}
 
@@ -240,14 +243,16 @@ class MenusControllerItem extends JControllerForm
 			// Redirect back to the edit screen.
 			$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_SAVE_FAILED', $model->getError()), 'warning');
 			$this->setRedirect(JRoute::_('index.php?option=com_menus&view=item&layout=edit', false));
+
 			return false;
 		}
 
 		// Save succeeded, check-in the row.
-		if (!$model->checkin()) {
+		if ($model->checkin($data['id']) === false) {
 			// Check-in failed, go back to the row and display a notice.
 			$this->setMessage(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError()), 'warning');
 			$this->setRedirect(JRoute::_('index.php?option=com_menus&view=item&layout=edit', false));
+
 			return false;
 		}
 

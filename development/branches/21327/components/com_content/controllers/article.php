@@ -337,7 +337,7 @@ class ContentControllerArticle extends JControllerForm
 		if ($task == 'save2copy')
 		{
 			// Check-in the original row.
-			if (!$model->checkin())
+			if ($model->checkin() === false)
 			{
 				// Check-in failed, go back to the item and display a notice.
 				$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
@@ -396,7 +396,7 @@ class ContentControllerArticle extends JControllerForm
 		}
 
 		// Save succeeded, check-in the row.
-		if (!$model->checkin())
+		if ($model->checkin() === false)
 		{
 			// Check-in failed, go back to the row and display a notice.
 			$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
