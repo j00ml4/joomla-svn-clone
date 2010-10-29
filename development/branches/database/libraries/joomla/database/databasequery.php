@@ -75,10 +75,10 @@ class JDatabaseQueryElement
 	public function append($elements)
 	{
 		if (is_array($elements)) {
-			$this->_elements = array_unique(array_merge($this->_elements, $elements));
+			$this->_elements = array_merge($this->_elements, $elements);
 		}
 		else {
-			$this->_elements = array_unique(array_merge($this->_elements, array($elements)));
+			$this->_elements = array_merge($this->_elements, array($elements));
 		}
 	}
 }
@@ -164,6 +164,47 @@ abstract class JDatabaseQuery
 	 */
 	protected $_order = null;
 
+  /**
+   * @var   object  The show table element.
+   * @since 1.6
+   */
+  protected $_show_tables = null;
+  
+  /**
+   * @var   object  The drop table element.
+   * @since 1.6
+   */
+  protected $_drop = null;
+  
+  /**
+   * @var   object  The rename table element.
+   * @since 1.6
+   */
+  protected $_rename = null;
+  
+  /**
+   * @var   object  The insert element.
+   * @since 1.6
+   */
+  protected $_insert_into = null;
+  
+  /**
+   * @var   object  The insert value element.
+   * @since 1.6
+   */
+  protected $_values = null;
+  
+  /**
+   * @var   object  The insert field element.
+   * @since 1.6
+   */
+  protected $_fields = null;
+  
+  /**
+   * @var   object  The insert field element.
+   * @since 1.6
+   */
+  protected $_auto_increment_field = null;
 	/**
 	 * Clear data from the query or a specific clause of the query.
 	 *
@@ -224,6 +265,25 @@ abstract class JDatabaseQuery
 				$this->_order = null;
 				break;
 
+			case 'showTables':
+        $this->_show_tables = null;
+        break;
+        
+      case 'drop':
+        $this->_drop = null;
+        break;
+      
+      case 'rename':
+        $this->_rename = null;
+        break;
+      
+      case 'insert_into':
+        $this->_insert_into = null;
+        $this->_fields = null;
+        $this->_values = null;
+        $this->_auto_increment_field = null;
+        break;
+        
 			default:
 				$this->_type = null;
 				$this->_select = null;
@@ -237,6 +297,13 @@ abstract class JDatabaseQuery
 				$this->_group = null;
 				$this->_having = null;
 				$this->_order = null;
+        $this->_show_tables = null;
+        $this->_drop = null;
+        $this->_rename = null;
+        $this->_insert_into = null;
+        $this->_values = null;
+        $this->_fields = null;
+        $this->_auto_increment_field = null;
 				break;
 		}
 
@@ -368,6 +435,62 @@ abstract class JDatabaseQuery
 	 */
 	abstract public function order($columns);
 	
+  /**
+   * @param string $name  A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   abstract public function showTables($name);
+   
+   /**
+   * @param string $table_name  A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   abstract public function dropIfExists($table_name);
+   
+   /**
+   * @param string $table_name  A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   abstract public function renameTable($table_name);
+   
+   /**
+   * @param string $table_name  A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   abstract public function insertInto($table_name, $increment_field=false);
+   
+   /**
+   * @param string $fields  A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   abstract public function fields($fields);
+   
+   /**
+   * @param string $values  A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   abstract public function values($values);
+   
+   /**
+   * 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   abstract public function auto_increment($query);
+   
 	/**
 	 * Magic function to convert the query to a string.
 	 *
@@ -443,7 +566,38 @@ abstract class JDatabaseQuery
 					$query .= (string) $this->_where;
 				}
 
+        break;
+        
+      case 'showTables':
+        $query .= (string) $this->_show_tables;
+        
 				break;
+        
+      case 'drop':
+        $query .= (string) $this->_drop;
+        
+        break;
+      
+      case 'rename':
+        $query .= (string) $this->_rename;
+        
+        break;
+      
+      case 'insert_into':
+        $query .= (string) $this->_insert_into;
+        
+        if ($this->_fields) {
+          $query .= (string) $this->_fields;
+          $query .= ')';
+        }
+        
+        $query .= (string) $this->_values;
+        $query .= ')';
+
+        if($this->_auto_increment_field)
+          $query = $this->auto_increment($query);
+          
+        break;
 		}
 
 		return $query;

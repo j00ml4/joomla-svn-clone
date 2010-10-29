@@ -289,4 +289,120 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 
 		return $this;
 	}
+  
+  /**
+   * @param string $table_name  A string 
+   * 
+   * @return  JDatabaseQuerySQLSrv  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function showTables($name)
+   {
+      $this->_type = 'showTables';
+
+      $this->_show_tables = new JDatabaseQueryElementMySQL('SHOW TABLES FROM', $name);
+
+      return $this;
+   }
+   
+   /**
+   * @param string $table_name  A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function dropIfExists($table_name)
+   {
+     $this->_type = 'drop';
+
+      if (is_null($this->_drop)) {
+        $this->_drop = new JDatabaseQueryElementMySQL('DROP TABLE IF EXISTS', $table_name);
+      }
+      else {
+        $this->_drop->append($table_name);
+      }
+
+      return $this;
+   }
+   
+   /**
+   * @param string $table_name  A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function renameTable($table_name)
+   {
+     $this->_type = 'rename';
+
+      if (is_null($this->_rename)) {
+        $this->_rename = new JDatabaseQueryElementMySQL('RENAME TABLE', $table_name, ' TO ');
+      }
+      else {
+        $this->_rename->append($table_name);
+      }
+
+      return $this;
+   }
+
+   /**
+   * @param string $table_name  A string 
+   * @param boolean $increment_field Provinding value for autoincrement primary key or not
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function insertInto($table_name, $increment_field=false)
+   {
+     $this->_type = 'insert_into';
+     $this->_insert_into = new JDatabaseQueryElementMySQL('INSERT INTO', $table_name);
+     
+      return $this;
+   }
+   
+   /**
+   * @param string $fields A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function fields($fields)
+   {
+     if (is_null($this->_fields)) {
+      $this->_fields = new JDatabaseQueryElementMySQL('(', $fields);
+    }
+    else {
+      $this->_fields->append($fields);
+    }
+
+    return $this;
+   }
+   
+   /**
+   * @param string $values  A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function values($values)
+   {
+     if (is_null($this->_values)) {
+      $this->_values = new JDatabaseQueryElementMySQL('VALUES (', $values);
+    }
+    else {
+      $this->_values->append($values);
+    }
+
+    return $this;
+   }
+   
+   /**
+   * 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function auto_increment($query)
+   {
+     return $query;
+   }
 }

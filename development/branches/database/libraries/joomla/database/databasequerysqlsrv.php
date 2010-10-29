@@ -6,7 +6,6 @@
  */
 
 defined('JPATH_BASE') or die;
-//jimport('joomla.database.databasequery');
 require_once('databasequery.php');
 /**
  * Query Element Class.
@@ -290,4 +289,124 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 
 		return $this;
 	}
+  
+  /**
+   * @param string $table_name  A string 
+   * 
+   * @return  JDatabaseQuerySQLSrv  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function showTables($name)
+   {
+     $this->select('NAME');
+     $this->from($name.'..sysobjects');
+     $this->where('xtype = \'U\'');
+     
+     return $this;
+   }
+   
+   /**
+   * @param string $table_name  A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function dropIfExists($table_name)
+   {
+     $this->_type = 'drop';
+
+     $drop_syntax = 'IF EXISTS(SELECT TABLE_NAME FROM'.
+                    ' INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = \''
+                      .$table_name.'\') DROP TABLE';
+              
+      if (is_null($this->_drop)) {
+        $this->_drop = new JDatabaseQueryElementSQLSrv($drop_syntax, $table_name);
+      }
+
+      return $this;
+   }
+   
+   /**
+   * @param string $table_name  A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function renameTable($table_name)
+   {
+     $this->_type = 'rename';
+
+      if (is_null($this->_rename)) {
+        $this->_rename = new JDatabaseQueryElementSQLSrv('sp_rename', $table_name);
+      }
+      else {
+        $this->_rename->append($table_name);
+      }
+
+      return $this;
+   }
+   
+   /**
+   * @param string $table_name  A string 
+   * @param boolean $increment_field Provinding value for autoincrement primary key or not
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function insertInto($table_name, $increment_field=false)
+   {
+     $this->_type = 'insert_into';
+     if($increment_field)
+        $this->_auto_increment_field = 'SET IDENTITY_INSERT '.$table_name;
+     
+     $this->_insert_into = new JDatabaseQueryElementSQLSrv('INSERT INTO', $table_name);
+     
+      return $this;
+   }
+   
+   /**
+   * @param string $fields A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function fields($fields)
+   {
+     if (is_null($this->_fields)) {
+      $this->_fields = new JDatabaseQueryElementSQLSrv('(', $fields);
+    }
+    else {
+      $this->_fields->append($fields);
+    }
+
+    return $this;
+   }
+   
+   /**
+   * @param string $values  A string 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function values($values)
+   {
+     if (is_null($this->_values)) {
+      $this->_values = new JDatabaseQueryElementSQLSrv('VALUES (', $values);
+    }
+    else {
+      $this->_values->append($values);
+    }
+
+    return $this;
+   }
+   
+   /**
+   * 
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function auto_increment($query)
+   {
+     return $this->_auto_increment_field.' ON;'.$query.';'.$this->_auto_increment_field.' OFF;' ;
+   }
 }
