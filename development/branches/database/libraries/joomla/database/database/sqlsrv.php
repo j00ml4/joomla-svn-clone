@@ -267,6 +267,7 @@ class JDatabaseSQLSrv extends JDatabase
 		//$result = str_replace("'", "''", $text);
 		//return $result;
 		$result = addslashes($text);
+    //$result = str_replace("\\", "''", $result);
 		if ($extra) {
 			$result = addcslashes($result, '%_');
 		}
@@ -475,6 +476,7 @@ class JDatabaseSQLSrv extends JDatabase
 		if ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
 			$ret = $row[0];
 		}
+    $ret = stripslashes($ret);
 		sqlsrv_free_stmt( $cur );
 		return $ret;
 	}
