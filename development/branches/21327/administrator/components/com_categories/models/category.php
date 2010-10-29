@@ -94,7 +94,7 @@ class CategoriesModelCategory extends JModelAdmin
 
 		// Load the User state.
 		$pk = (int) JRequest::getInt('id');
- 		$this->setState('category.id', $pk);
+ 		$this->setState($this->getName().'.id', $pk);
 
 		$extension = JRequest::getCmd('extension', 'com_content');
 		$this->setState('category.extension', $extension);
