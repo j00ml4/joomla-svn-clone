@@ -251,7 +251,7 @@ class ContentControllerArticle extends JControllerForm
 		$this->setReturnPage();
 
 		// ItemID required on redirect for correct Template Style
-		$redirect = 'index.php?option=com_content&view=form&layout=edit';
+		$redirect = 'index.php?option=com_content&view=form&layout=edit&id='.$id;
 
 		if (JRequest::getInt('Itemid') != 0) {
 			$redirect .= '&Itemid='.JRequest::getInt('Itemid');
