@@ -37,11 +37,27 @@ class ContentController extends JController
 	{
 		require_once JPATH_COMPONENT.'/helpers/content.php';
 
+		$view		= JRequest::getWord('view', 'articles');
+		$layout 	= JRequest::getWord('layout', 'articles');
+		$id			= JRequest::getInt('id');
+
 		// Load the submenu.
 		ContentHelper::addSubmenu(JRequest::getWord('view', 'articles'));
 
+		// Check for edit form.
+		if ($view == 'article' && $layout == 'edit') {
+			if (!$this->checkEditId('com_content.edit.article', $id)) {
+				// Somehow the person just went to the form - we don't allow that.
+				$this->setError(JText::_('JLIB_APPLICATION_ERROR_UNHELD_ID'));
+				$this->setMessage($this->getError(), 'error');
+				$this->setRedirect(JRoute::_('index.php?option=com_content&view=articles', false));
+
+				return false;
+			}
+		}
+
 		parent::display();
-		
+
 		return $this;
 	}
 }
