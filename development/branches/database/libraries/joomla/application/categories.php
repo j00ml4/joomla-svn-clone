@@ -163,7 +163,16 @@ class JCategories
 
 		// right join with c for category
 		$query->select('c.*');
-		$query->select('CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as slug');
+    $case_when = ' CASE WHEN ';
+    $case_when .= $query->charLength('c.alias');
+    $case_when .= ' THEN ';
+    $c_id = $query->castToChar('c.id');
+    $case_when .= $query->concat($c_id, 'c.alias', ':');
+    $case_when .= ' ELSE ';
+    $case_when .= $c_id.' END as slug'; 
+    $query->select($case_when); 
+    
+		//$query->select('CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as slug');
 		$query->from('#__categories as c');
 		$query->where('(c.extension='.$db->Quote($extension).' OR c.extension='.$db->Quote('system').')');
 		if($this->_options['access'])

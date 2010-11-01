@@ -101,9 +101,24 @@ class plgContentPagenavigation extends JPlugin
 
 			// Array of articles in same category correctly ordered.
 			$query	= $db->getQuery(true);
-			$query->select('a.id, '
-					.'CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug, '
-					.'CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(":", cc.id, cc.alias) ELSE cc.id END as catslug');
+      //sqlsrv changes
+      $case_when = ' CASE WHEN ';
+      $case_when .= $query->charLength('a.alias');
+      $case_when .= ' THEN ';
+      $a_id = $query->castToChar('a.id');
+      $case_when .= $query->concat($a_id, 'a.alias', ':');
+      $case_when .= ' ELSE ';
+      $case_when .= $a_id.' END as slug';   
+            
+      $case_when1 = ' CASE WHEN ';
+      $case_when1 .= $query->charLength('cc.alias');
+      $case_when1 .= ' THEN ';
+      $c_id = $query->castToChar('cc.id');
+      $case_when1 .= $query->concat($c_id, 'cc.alias', ':');
+      $case_when1 .= ' ELSE ';
+      $case_when1 .= $c_id.' END as catslug'; 
+      
+			$query->select('a.id,'.$case_when.','.$case_when1);
 			$query->from('#__content AS a');
 			$query->leftJoin('#__categories AS cc ON cc.id = a.catid');
 			$query->where('a.catid = '. (int)$row->catid .' AND a.state = '. (int)$row->state
