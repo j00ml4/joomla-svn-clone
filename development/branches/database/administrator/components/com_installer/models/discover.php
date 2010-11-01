@@ -69,12 +69,23 @@ class InstallerModelDiscover extends InstallerModel
 	{
 		$installer	= JInstaller::getInstance();
 		$results	= $installer->discover();
-
+    $dbo = JFactory::getDBO();
+    $query = $dbo->getQuery(true);
 		// Get all templates, including discovered ones
+		//sqlsrv changes
+    $case_when = ' CASE WHEN ';
+    $case_when .= $query->charLength('folder');
+    $case_when .= ' THEN ';
+    $case_when .= $query->concat('folder', 'element', ':');
+    $case_when .= ' ELSE ';
+    $case_when .= 'element END as elementkey'; 
+    
+    $query->select('*,'.$case_when);
+    $query->from('#__extensions');
+    /*
 		$query = 'SELECT *,'
 				.' CASE WHEN CHAR_LENGTH(folder) THEN CONCAT_WS(":", folder, element) ELSE element END as elementkey'
-				.' FROM #__extensions';
-		$dbo = JFactory::getDBO();
+				.' FROM #__extensions';*/
 		$dbo->setQuery($query);
 		$installed = $dbo->loadObjectList('elementkey');
 		foreach($results as $result) {

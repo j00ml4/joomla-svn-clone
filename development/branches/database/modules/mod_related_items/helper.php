@@ -71,8 +71,26 @@ abstract class modRelatedItemsHelper
 					$query->select('a.catid');
 					$query->select('cc.access AS cat_access');
 					$query->select('cc.published AS cat_state');
-					$query->select('CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug');
-					$query->select('CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(":", cc.id, cc.alias) ELSE cc.id END as catslug');
+          //sqlsrv changes
+          $case_when = ' CASE WHEN ';
+          $case_when .= $query->charLength('a.alias');
+          $case_when .= ' THEN ';
+          $a_id = $query->castToChar('a.id');
+          $case_when .= $query->concat($a_id, 'a.alias', ':');
+          $case_when .= ' ELSE ';
+          $case_when .= $a_id.' END as slug';
+					//$query->select('CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug');
+					$query->select($case_when);
+    
+          $case_when = ' CASE WHEN ';
+          $case_when .= $query->charLength('cc.alias');
+          $case_when .= ' THEN ';
+          $c_id = $query->castToChar('cc.id');
+          $case_when .= $query->concat($c_id, 'cc.alias', ':');
+          $case_when .= ' ELSE ';
+          $case_when .= $c_id.' END as catslug'; 
+          $query->select($case_when); 
+					//$query->select('CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(":", cc.id, cc.alias) ELSE cc.id END as catslug');
 					$query->from('#__content AS a');
 					$query->leftJoin('#__content_frontpage AS f ON f.content_id = a.id');
 					$query->leftJoin('#__categories AS cc ON cc.id = a.catid');

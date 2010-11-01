@@ -40,14 +40,31 @@ class ContactViewCategory extends JView
 		if ($catid) {
 			$where .= ' AND a.catid = '. (int) $catid;
 		}
+    $sql = $db->getQuery(true);
+    //sqlsrv changes
+    $case_when = ' CASE WHEN ';
+    $case_when .= $sql->charLength('a.alias');
+    $case_when .= ' THEN ';
+    $a_id = $sql->castToChar('a.id');
+    $case_when .= $sql->concat($a_id, 'a.alias', ':');
+    $case_when .= ' ELSE ';
+    $case_when .= $a_id.' END as slug';   
+    
+    $case_when1 = ' CASE WHEN ';
+    $case_when1 .= $sql->charLength('c.alias');
+    $case_when1 .= ' THEN ';
+    $c_id = $sql->castToChar('c.id');
+    $case_when1 .= $sql->concat($c_id, 'c.alias', ':');
+    $case_when1 .= ' ELSE ';
+    $case_when1 .= $c_id.' END as catslug'; 
 
 		$query = 'SELECT'
 		. ' a.name AS title,'
-		. ' CONCAT(a.con_position, \' - \', a.misc) AS description,'
-		. ' "" AS date,'
+		//. ' CONCAT(a.con_position, \' - \', a.misc) AS description,'
+		. $sql->concat('a.con_position', 'a.misc', ' - ').' AS description,'
+		. ' \'\' AS date,'
 		. ' c.title AS category,'
-		. ' CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug,'
-		. ' CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as catslug'
+		. $case_when.','.$case_when1
 		. ' FROM #__contact_details AS a'
 		. ' LEFT JOIN #__categories AS c ON c.id = a.catid'
 		. $where
