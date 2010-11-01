@@ -23,7 +23,7 @@ class JDatabaseQueryElementSQLSrv extends JDatabaseQueryElement
 	 * @param	mixed	$elements	String or array.
 	 * @param	string	$glue		The glue for elements.
 	 *
-	 * @return	JDatabaseQueryMsSQLElementMsSQL
+	 * @return	JDatabaseQueryElementSQLSrv
 	 * @since	1.6
 	 */
 	public function __construct($name, $elements, $glue = ',')
@@ -44,7 +44,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	mixed	$columns	A string or an array of field names.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function select($columns)
@@ -64,7 +64,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	string	$table	The name of the table to delete from.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function delete($table = null)
@@ -82,7 +82,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	mixed	$tables	A string or array of table names.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function insert($tables)
@@ -96,7 +96,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	mixed	$tables	A string or array of table names.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function update($tables)
@@ -110,7 +110,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	mixed	A string or array of table names.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function from($tables)
@@ -129,7 +129,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @param	string	$type
 	 * @param	string	$conditions
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function join($type, $conditions)
@@ -145,7 +145,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	string	$conditions
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function innerJoin($conditions)
@@ -158,7 +158,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	string	$conditions
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function outerJoin($conditions)
@@ -171,7 +171,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	string	$conditions
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function leftJoin($conditions)
@@ -184,7 +184,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	string	$conditions
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function rightJoin($conditions)
@@ -198,7 +198,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @param	mixed	$conditions	A string or array of conditions.
 	 * @param	string	$glue
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function set($conditions, $glue=',')
@@ -218,7 +218,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @param	mixed	$conditions	A string or array of where conditions.
 	 * @param	string	$glue
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function where($conditions, $glue='AND')
@@ -237,7 +237,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	mixed	$columns	A string or array of ordering columns.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function group($columns)
@@ -256,7 +256,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 * @param	mixed	$conditions	A string or array of columns.
 	 * @param	string	$glue
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function having($conditions, $glue='AND')
@@ -275,7 +275,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	/**
 	 * @param	mixed	$columns	A string or array of ordering columns.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQuerySQLSrv	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	function order($columns)
@@ -291,9 +291,9 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	}
   
   /**
-   * @param string $table_name  A string 
+   * @param string $name  A string 
    * 
-   * @return  JDatabaseQuerySQLSrv  Returns this object to allow chaining.
+   * @return  Show table query syntax
    * @since 1.6
    */
    function showTables($name)
@@ -308,7 +308,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
    /**
    * @param string $table_name  A string 
    * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  Drop if exists syntax
    * @since 1.6
    */
    function dropIfExists($table_name)
@@ -326,10 +326,10 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
       return $this;
    }
    
-   /**
+    /**
    * @param string $table_name  A string 
    * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  Rename table syntax
    * @since 1.6
    */
    function renameTable($table_name)
@@ -349,7 +349,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
    /**
    * @param string $table_name  A string 
    * @param boolean $increment_field Provinding value for autoincrement primary key or not
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  JDatabaseQuerySQLSrv  Returns this object to allow chaining.
    * @since 1.6
    */
    function insertInto($table_name, $increment_field=false)
@@ -366,7 +366,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
    /**
    * @param string $fields A string 
    * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  JDatabaseQuerySQLSrv  Returns this object to allow chaining.
    * @since 1.6
    */
    function fields($fields)
@@ -384,7 +384,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
    /**
    * @param string $values  A string 
    * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  JDatabaseQuerySQLSrv  Returns this object to allow chaining.
    * @since 1.6
    */
    function values($values)
@@ -399,14 +399,51 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
     return $this;
    }
    
-   /**
+    /**
+   * @param string $query A string
    * 
-   * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  JDatabaseQuerySQLSrv  Returns this object to allow chaining.
    * @since 1.6
    */
    function auto_increment($query)
    {
      return $this->_auto_increment_field.' ON;'.$query.';'.$this->_auto_increment_field.' OFF;' ;
+   }
+   
+   /**
+   * @param $field A string
+   * 
+   * @return  JDatabaseQuerySQLSrv  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function castToChar($field)
+   {
+     return 'CAST('.$field.' as nvarchar(10))';
+   }
+   
+   /**
+   * @param $field A string
+   * 
+   * @return  JDatabaseQuerySQLSrv  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function charLength($field)
+   {
+     return 'DATALENGTH('.$field.') IS NOT NULL';
+   }
+   
+   /**
+   * @param string $field1 A String
+   * @param string $field2
+   * @param string separator
+   * @return  String concantenaation of all the fields
+   * @since 1.6
+   */
+   function concat($field1, $field2, $separator = null)
+   {
+     if($separator)
+     {
+       return "(".$field1."+'".$separator."'+".$field2.")";
+     }
    }
 }
