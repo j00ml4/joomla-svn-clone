@@ -44,7 +44,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	/**
 	 * @param	mixed	$columns	A string or an array of field names.
 	 *
-	 * @return	JDatabaseQueryElementMySQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function select($columns)
@@ -64,7 +64,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	/**
 	 * @param	string	$table	The name of the table to delete from.
 	 *
-	 * @return	JDatabaseQueryElementMySQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function delete($table = null)
@@ -82,7 +82,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	/**
 	 * @param	mixed	$tables	A string or array of table names.
 	 *
-	 * @return	JDatabaseQueryElementMySQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function insert($tables)
@@ -96,7 +96,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	/**
 	 * @param	mixed	$tables	A string or array of table names.
 	 *
-	 * @return	JDatabaseQueryElementMySQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function update($tables)
@@ -110,7 +110,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	/**
 	 * @param	mixed	A string or array of table names.
 	 *
-	 * @return	JDatabaseQueryElementMySQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function from($tables)
@@ -129,7 +129,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	 * @param	string	$type
 	 * @param	string	$conditions
 	 *
-	 * @return	JDatabaseQueryElementMySQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function join($type, $conditions)
@@ -145,7 +145,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	/**
 	 * @param	string	$conditions
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function innerJoin($conditions)
@@ -158,7 +158,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	/**
 	 * @param	string	$conditions
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function outerJoin($conditions)
@@ -171,7 +171,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	/**
 	 * @param	string	$conditions
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function leftJoin($conditions)
@@ -184,7 +184,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	/**
 	 * @param	string	$conditions
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function rightJoin($conditions)
@@ -198,7 +198,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	 * @param	mixed	$conditions	A string or array of conditions.
 	 * @param	string	$glue
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function set($conditions, $glue=',')
@@ -218,7 +218,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	 * @param	mixed	$conditions	A string or array of where conditions.
 	 * @param	string	$glue
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function where($conditions, $glue='AND')
@@ -237,7 +237,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	/**
 	 * @param	mixed	$columns	A string or array of ordering columns.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function group($columns)
@@ -256,7 +256,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	 * @param	mixed	$conditions	A string or array of columns.
 	 * @param	string	$glue
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function having($conditions, $glue='AND')
@@ -275,7 +275,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 	/**
 	 * @param	mixed	$columns	A string or array of ordering columns.
 	 *
-	 * @return	JDatabaseQueryMsSQL	Returns this object to allow chaining.
+	 * @return	JDatabaseQueryMySQL	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
 	public function order($columns)
@@ -290,10 +290,10 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 		return $this;
 	}
   
-  /**
-   * @param string $table_name  A string 
+   /**
+   * @param string $name  A string 
    * 
-   * @return  JDatabaseQuerySQLSrv  Returns this object to allow chaining.
+   * @return  Show table query syntax
    * @since 1.6
    */
    function showTables($name)
@@ -308,7 +308,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
    /**
    * @param string $table_name  A string 
    * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  Drop if exists syntax
    * @since 1.6
    */
    function dropIfExists($table_name)
@@ -328,7 +328,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
    /**
    * @param string $table_name  A string 
    * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  Rename table syntax
    * @since 1.6
    */
    function renameTable($table_name)
@@ -348,7 +348,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
    /**
    * @param string $table_name  A string 
    * @param boolean $increment_field Provinding value for autoincrement primary key or not
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  JDatabaseQueryMySQL  Returns this object to allow chaining.
    * @since 1.6
    */
    function insertInto($table_name, $increment_field=false)
@@ -362,7 +362,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
    /**
    * @param string $fields A string 
    * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  JDatabaseQueryMySQL  Returns this object to allow chaining.
    * @since 1.6
    */
    function fields($fields)
@@ -380,7 +380,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
    /**
    * @param string $values  A string 
    * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  JDatabaseQueryMySQL  Returns this object to allow chaining.
    * @since 1.6
    */
    function values($values)
@@ -396,13 +396,51 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
    }
    
    /**
+   * @param string $query A string
    * 
-   * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  JDatabaseQueryMySQL  Returns this object to allow chaining.
    * @since 1.6
    */
    function auto_increment($query)
    {
      return $query;
+   }
+   
+    
+   /**
+   * @param $field A string
+   * 
+   * @return  JDatabaseQueryMySQL  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function castToChar($field)
+   {
+     return $field;
+   }
+   
+   /**
+   * @param $field A string
+   * 
+   * @return  JDatabaseQueryMySQL  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   function charLength($field)
+   {
+     return 'CHAR_LENGTH('.$field.')';
+   }
+   
+  /**
+   * @param string $field1 A String
+   * @param string $field2
+   * @param string separator
+   * @return  String concantenaation of all the fields
+   * @since 1.6
+   */
+   function concat($field1, $field2, $separator = null)
+   {
+     if($separator)
+     {
+       return "CONCAT_WS('".$separator."', ".$field1.", ".$field2.")";
+     }
    }
 }

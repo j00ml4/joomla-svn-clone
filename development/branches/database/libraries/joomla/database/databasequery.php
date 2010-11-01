@@ -201,7 +201,7 @@ abstract class JDatabaseQuery
   protected $_fields = null;
   
   /**
-   * @var   object  The insert field element.
+   * @var   object  The auto increment insert field element.
    * @since 1.6
    */
   protected $_auto_increment_field = null;
@@ -438,7 +438,7 @@ abstract class JDatabaseQuery
   /**
    * @param string $name  A string 
    * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  Show table query syntax
    * @since 1.6
    */
    abstract public function showTables($name);
@@ -446,7 +446,7 @@ abstract class JDatabaseQuery
    /**
    * @param string $table_name  A string 
    * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  Drop if exists syntax
    * @since 1.6
    */
    abstract public function dropIfExists($table_name);
@@ -454,14 +454,14 @@ abstract class JDatabaseQuery
    /**
    * @param string $table_name  A string 
    * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @return  Rename table syntax
    * @since 1.6
    */
    abstract public function renameTable($table_name);
    
    /**
    * @param string $table_name  A string 
-   * 
+   * @param boolean $increment_field Provinding value for autoincrement primary key or not
    * @return  JDatabaseQuery  Returns this object to allow chaining.
    * @since 1.6
    */
@@ -470,26 +470,49 @@ abstract class JDatabaseQuery
    /**
    * @param string $fields  A string 
    * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
    * @since 1.6
    */
    abstract public function fields($fields);
    
    /**
    * @param string $values  A string 
-   * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   *
    * @since 1.6
    */
    abstract public function values($values);
    
    /**
+   * @param string $query A string
    * 
+   * @return The auto increment syntax
+   * @since 1.6
+   */
+   abstract public function auto_increment($query);
+   
+   /**
+   * @param $field A string
    * 
    * @return  JDatabaseQuery  Returns this object to allow chaining.
    * @since 1.6
    */
-   abstract public function auto_increment($query);
+   abstract public function castToChar($field);
+   
+   /**
+   * @param $field A string
+   * 
+   * @return  JDatabaseQuery  Returns this object to allow chaining.
+   * @since 1.6
+   */
+   abstract public function charLength($field);
+   
+   /**
+   * @param string $field1 A String
+   * @param string $field2
+   * @param string separator
+   * @return  String concantenaation of all the fields
+   * @since 1.6
+   */
+   abstract public function concat($field1, $field2, $separator = null);
    
 	/**
 	 * Magic function to convert the query to a string.
