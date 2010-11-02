@@ -506,13 +506,13 @@ abstract class JDatabaseQuery
    abstract public function charLength($field);
    
    /**
-   * @param string $field1 A String
-   * @param string $field2
+   * @param array $fields
+   * 
    * @param string separator
    * @return  String concantenaation of all the fields
    * @since 1.6
    */
-   abstract public function concat($field1, $field2, $separator = null);
+   abstract public function concat($fields, $separator = null);
    
 	/**
 	 * Magic function to convert the query to a string.

@@ -433,17 +433,19 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
    }
    
    /**
-   * @param string $field1 A String
-   * @param string $field2
+   * @param array $fields
+   * 
    * @param string separator
    * @return  String concantenaation of all the fields
    * @since 1.6
    */
-   function concat($field1, $field2, $separator = null)
+   function concat($fields, $separator = null)
    {
      if($separator)
      {
-       return "(".$field1."+'".$separator."'+".$field2.")";
+       return '('.implode("+'".$separator."'+", $fields).')';
+     }else{
+       return '('.implode('+', $fields).')';
      }
    }
 }
