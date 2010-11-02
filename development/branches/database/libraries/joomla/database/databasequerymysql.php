@@ -430,17 +430,24 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
    }
    
   /**
-   * @param string $field1 A String
-   * @param string $field2
+   * @param array $fields
+   * 
    * @param string separator
    * @return  String concantenaation of all the fields
    * @since 1.6
    */
-   function concat($field1, $field2, $separator = null)
+   function concat($fields, $separator = null)
    {
      if($separator)
      {
-       return "CONCAT_WS('".$separator."', ".$field1.", ".$field2.")";
+       $concat_string = "CONCAT_WS('".$separator."'";
+       foreach($fields as $field)
+       {
+         $concat_string .= ', '.$field;
+       }
+       return $concat_string.')';
+     }else{
+       return 'CONCAT('.implode(',', $fields).')';
      }
    }
 }
