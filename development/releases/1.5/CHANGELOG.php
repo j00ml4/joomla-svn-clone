@@ -36,6 +36,10 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+02-Nov-2010 Jean-Marie Simonet
+ ^ [#22961] Installation language modifications: aa-AA et-EE
+ ^ [#23098] Credits.php update
+ 
 20-Oct-2010 Ian MacLennan
  # [#21489] CHANGELOG.php - segment twice exists
  # [#21769] toolbar.content.html.php allow direct access
