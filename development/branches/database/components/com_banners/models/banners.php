@@ -246,11 +246,18 @@ class BannersModelBanners extends JModelList
 					$query->where('track_date='.$db->Quote($trackDate));
 				} else {
 					// insert new count
-					$query->insert('#__banner_tracks');
-					$query->set('`count` = 1');
-					$query->set('track_type=1');
-					$query->set('banner_id='.(int)$id);
-					$query->set('track_date='.$db->Quote($trackDate));
+					//sqlsrv change
+					$query->insertInto('#__banner_tracks');
+          $query->fields('count, track_type, banner_id, track_date');
+          $query->values('1');
+          $query->values('1');
+          $query->values((int)$id);
+          $query->values($db->Quote($trackDate));
+					//$query->insert('#__banner_tracks');
+					//$query->set('`count` = 1');
+					//$query->set('track_type=1');
+					//$query->set('banner_id='.(int)$id);
+					//$query->set('track_date='.$db->Quote($trackDate));
 				}
 
 				$db->setQuery((string)$query);

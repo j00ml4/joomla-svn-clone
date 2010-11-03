@@ -76,7 +76,7 @@ class InstallerModelDiscover extends InstallerModel
     $case_when = ' CASE WHEN ';
     $case_when .= $query->charLength('folder');
     $case_when .= ' THEN ';
-    $case_when .= $query->concat('folder', 'element', ':');
+    $case_when .= $query->concat(array('folder', 'element'), ':');
     $case_when .= ' ELSE ';
     $case_when .= 'element END as elementkey'; 
     

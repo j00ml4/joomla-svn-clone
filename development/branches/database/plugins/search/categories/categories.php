@@ -98,7 +98,7 @@ class plgSearchCategories extends JPlugin
       $case_when .= $query->charLength('a.alias');
       $case_when .= ' THEN ';
       $a_id = $query->castToChar('a.id');
-      $case_when .= $query->concat($a_id, 'a.alias', ':');
+      $case_when .= $query->concat(array($a_id, 'a.alias'), ':');
       $case_when .= ' ELSE ';
       $case_when .= $a_id.' END as slug'; 
 			$query->select('a.title, a.description AS text, "" AS created, "2" AS browsernav, a.id AS catid, '

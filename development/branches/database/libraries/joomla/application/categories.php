@@ -167,7 +167,7 @@ class JCategories
     $case_when .= $query->charLength('c.alias');
     $case_when .= ' THEN ';
     $c_id = $query->castToChar('c.id');
-    $case_when .= $query->concat($c_id, 'c.alias', ':');
+    $case_when .= $query->concat(array($c_id, 'c.alias'), ':');
     $case_when .= ' ELSE ';
     $case_when .= $c_id.' END as slug'; 
     $query->select($case_when); 
