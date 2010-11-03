@@ -514,6 +514,15 @@ abstract class JDatabaseQuery
    */
    abstract public function concat($fields, $separator = null);
    
+   /**
+   * @param string $field
+   * 
+   * @param string separator
+   * @return  Length function for the field
+   * @since 1.6
+   */
+   abstract public function length($field);
+   
 	/**
 	 * Magic function to convert the query to a string.
 	 *
