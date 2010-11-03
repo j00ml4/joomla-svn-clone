@@ -175,9 +175,9 @@ class JFilterInput extends JObject
 				$lang = &JFactory::getLanguage();
 				$result = $lang->transliterate($result);
 				$result = (string) preg_replace(
-					array('/\s+/','/[^A-Za-z0-9\-\_]/'), array('-',''), $result
+					array('/\s+/','/[^A-Za-z0-9\-\_ ]/'), array('-',''), $result
 				);
-				$result = strtolower(trim($result));
+				$result = trim($result);
 				break;
 
 
