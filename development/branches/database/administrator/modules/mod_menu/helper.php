@@ -29,7 +29,8 @@ abstract class ModMenuHelper
 		$query->select('a.*, SUM(b.home) AS home');
 		$query->from('#__menu_types AS a');
 		$query->leftJoin('#__menu AS b ON b.menutype = a.menutype');
-		$query->group('a.id');
+    //sqlsrv change
+		$query->group('a.id, a.menutype, a.description, a.title, b.menutype');
 
 		$db->setQuery($query);
 

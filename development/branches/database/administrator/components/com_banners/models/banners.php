@@ -29,7 +29,7 @@ class BannersModelBanners extends JModelList
 			$db		= $this->getDbo();
 			$query	= $db->getQuery(true);
 			$query->select('MAX(ordering) as `max`, catid');
-			$query->select('catid');
+			//$query->select('catid');
 			$query->from('#__banners');
 			$query->group('catid');
 			$db->setQuery($query);
