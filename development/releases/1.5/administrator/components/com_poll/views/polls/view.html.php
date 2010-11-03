@@ -69,7 +69,7 @@ class PollViewPolls extends JView
 			$filter_order = 'm.id';
 		}
 
-		if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+		if (!in_array(strtoupper($filter_order_Dir), array('ASC', 'DESC'))) {
 			$filter_order_Dir = '';
 		}
 

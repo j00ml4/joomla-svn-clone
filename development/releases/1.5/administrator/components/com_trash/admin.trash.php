@@ -100,7 +100,7 @@ function viewTrashContent( $option )
 		$filter_order = 'sectname';
 	}
 
-	if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+	if (!in_array(strtoupper($filter_order_Dir), array('ASC', 'DESC'))) {
 		$filter_order_Dir = '';
 	}
 
@@ -179,6 +179,10 @@ function viewTrashMenu( $option )
 	// ensure filter_order has a valid value
 	if (!in_array($filter_order, array('m.name', 'm.id', 'm.menutype', 'm.type'))) {
 		$filter_order = 'm.menutype';
+	}
+
+	if (!in_array(strtoupper($filter_order_Dir), array('ASC', 'DESC'))) {
+		$filter_order_Dir = '';
 	}
 
 	$orderby 	= ' ORDER BY '. $filter_order . ' ' . $filter_order_Dir .', m.menutype, m.ordering, m.ordering,  m.name';

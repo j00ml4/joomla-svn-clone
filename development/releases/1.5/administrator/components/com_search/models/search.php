@@ -63,12 +63,12 @@ class SearchModelSearch extends JModel
 			$filter_order = 'hits';
 		}
 
-		if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+		if (!in_array(strtoupper($filter_order_Dir), array('ASC', 'DESC'))) {
 			$filter_order_Dir = '';
 		}
 
 		// table ordering
-		if ( $filter_order_Dir == 'ASC' ) {
+		if ( strtoupper($filter_order_Dir) == 'ASC' ) {
 			$this->lists['order_Dir'] = 'ASC';
 		} else {
 			$this->lists['order_Dir'] = 'DESC';

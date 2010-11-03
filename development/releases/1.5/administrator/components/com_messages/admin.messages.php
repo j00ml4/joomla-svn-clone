@@ -83,7 +83,7 @@ function showMessages( $option )
 		$filter_order = 'a.date_time';
 	}
 
-	if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+	if (!in_array(strtoupper($filter_order_Dir), array('ASC', 'DESC'))) {
 		$filter_order_Dir = 'DESC';
 	}
 
