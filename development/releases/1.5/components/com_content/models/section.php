@@ -447,14 +447,6 @@ class ContentModelSection extends JModel
 			$filter_order = 'a.ordering';
 		}
 
-		if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
-			$filter_order_Dir = '';
-		}
-
-		if (!in_array($filter_order, array('a.id', 'a.title', 'a.alias', 'a.introtext', 'a.fulltext', 'a.catid', 'a.created', 'a.modified', 'a.publish_up', 'a.hits', 'a.ordering'))) {
-			$filter_order = '';
-		}
-
 		if (!in_array(trim(strtoupper($filter_order_Dir)), array('ASC', 'DESC'))) {
 			$filter_order_Dir = 'ASC';
 		}
