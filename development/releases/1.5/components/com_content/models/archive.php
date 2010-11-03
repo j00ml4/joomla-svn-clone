@@ -134,8 +134,17 @@ class ContentModelArchive extends JModel
 		$filter_order		= JRequest::getCmd('filter_order');
 		$filter_order_Dir	= JRequest::getWord('filter_order_Dir');
 
+		if (!in_array($filter_order, array('a.id', 'a.title', 'a.alias', 'a.title_alias', 'a.introtext', 'a.sectionid', 'a.state', 'a.catid',
+			'a.created', 'a.created_by', 'a.created_by_alias', 'a.modified', 'a.modified_by', 'a.hits', 'a.ordering', 'cc.title', 's.title'))) {
+			$filter_order = '';
+		}
+
+		if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+			$filter_order_Dir = '';
+		}
+
 		$orderby = ' ORDER BY ';
-		if ($filter_order && $filter_order_Dir) {
+		if ($filter_order) {
 			$orderby .= $filter_order.' '.$filter_order_Dir.', ';
 		}
 

@@ -49,6 +49,10 @@ class WeblinksViewWeblinks extends JView
 			$filter_order = 'a.ordering';
 		}
 
+		if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+			$filter_order_Dir = '';
+		}
+
 		// Get data from the model
 		$items		= & $this->get( 'Data');
 		$total		= & $this->get( 'Total');

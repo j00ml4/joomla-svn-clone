@@ -119,6 +119,10 @@ function showNewsFeeds(  )
 		$filter_order = 'a.ordering';
 	}
 
+	if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+		$filter_order_Dir = '';
+	}
+
 	$where 		= ( count( $where ) ? ' WHERE ' . implode( ' AND ', $where ) : '' );
 	if ($filter_order == 'a.ordering'){
 		$orderby 	= ' ORDER BY catname, a.ordering';

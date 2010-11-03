@@ -36,8 +36,12 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+
+-------------------- 1.5.22 Stable Release [03-November-2010] ------------------
+
 03-Nov-2010 Ian MacLennan
  # [#20255] 1.5.17 Session Bug
+ # [#21538] Empty menu item if menu type contains space or uppercase letter
 
 02-Nov-2010 Jean-Marie Simonet
  ^ [#22961] Installation language modifications: aa-AA et-EE
