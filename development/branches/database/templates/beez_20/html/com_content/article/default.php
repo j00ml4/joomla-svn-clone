@@ -16,8 +16,8 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 // Create shortcut to parameters.
 $params = $this->item->params;
 
-
-
+require(JPATH_BASE.'/components/com_content/views/article/tmpl/default.php');
+/*
 if($templateparams->get('html5')!=1)
 {
 	require(JPATH_BASE.'/components/com_content/views/article/tmpl/default.php');
@@ -152,4 +152,4 @@ JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 	<?php echo $this->item->event->afterDisplayContent; ?>
 </article>
 
-<?php } ?>
+<?php } */?>
