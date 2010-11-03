@@ -36,6 +36,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+03-Nov-2010 Ian MacLennan
+ # [#20255] 1.5.17 Session Bug
+
 02-Nov-2010 Jean-Marie Simonet
  ^ [#22961] Installation language modifications: aa-AA et-EE
  ^ [#23098] Credits.php update
