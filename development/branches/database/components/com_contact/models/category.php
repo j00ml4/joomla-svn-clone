@@ -93,7 +93,7 @@ class ContactModelCategory extends JModelList
     $case_when .= $query->charLength('a.alias');
     $case_when .= ' THEN ';
     $a_id = $query->castToChar('a.id');
-    $case_when .= $query->concat($a_id, 'a.alias', ':');
+    $case_when .= $query->concat(array($a_id, 'a.alias'), ':');
     $case_when .= ' ELSE ';
     $case_when .= $a_id.' END as slug';   
     
@@ -101,7 +101,7 @@ class ContactModelCategory extends JModelList
     $case_when1 .= $query->charLength('c.alias');
     $case_when1 .= ' THEN ';
     $c_id = $query->castToChar('c.id');
-    $case_when1 .= $query->concat($c_id, 'c.alias', ':');
+    $case_when1 .= $query->concat(array($c_id, 'c.alias'), ':');
     $case_when1 .= ' ELSE ';
     $case_when1 .= $c_id.' END as catslug'; 
     

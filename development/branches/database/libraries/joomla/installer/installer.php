@@ -834,7 +834,13 @@ class JInstaller extends JAdapter
 					$db->setQuery($query);
 					if($db->Query()) {
 						$query->clear();
-						$query->insert('#__schemas')->set('extension_id = '. $eid)->set('version_id = '. end($files));
+            //sqlsrv change
+						$query->insertInto('#__schemas');
+            $query->fields('extension_id, version_id');
+            $query->values($eid);
+            $query->values(end($files));
+						//$query->set('extension_id = '. $eid);
+						//$query->set('version_id = '. end($files));
 						$db->setQuery($query);
 						$db->Query();
 					}
@@ -947,7 +953,14 @@ class JInstaller extends JAdapter
 					$db->setQuery($query);
 					if($db->Query()) {
 						$query->clear();
-						$query->insert('#__schemas')->set('extension_id = '. $eid)->set('version_id = '. end($files));
+            //sqlsrv change
+            $query->insertInto('#__schemas');
+            $query->fields('extension_id, version_id');
+            $query->values($eid);
+            $query->values(end($files));
+						//$query->insert('#__schemas');
+						//$query->set('extension_id = '. $eid);
+						//$query->set('version_id = '. end($files));
 						$db->setQuery($query);
 						$db->Query();
 					}

@@ -46,7 +46,7 @@ class ContactViewCategory extends JView
     $case_when .= $sql->charLength('a.alias');
     $case_when .= ' THEN ';
     $a_id = $sql->castToChar('a.id');
-    $case_when .= $sql->concat($a_id, 'a.alias', ':');
+    $case_when .= $sql->concat(array($a_id, 'a.alias'), ':');
     $case_when .= ' ELSE ';
     $case_when .= $a_id.' END as slug';   
     
@@ -54,14 +54,14 @@ class ContactViewCategory extends JView
     $case_when1 .= $sql->charLength('c.alias');
     $case_when1 .= ' THEN ';
     $c_id = $sql->castToChar('c.id');
-    $case_when1 .= $sql->concat($c_id, 'c.alias', ':');
+    $case_when1 .= $sql->concat(array($c_id, 'c.alias'), ':');
     $case_when1 .= ' ELSE ';
     $case_when1 .= $c_id.' END as catslug'; 
 
 		$query = 'SELECT'
 		. ' a.name AS title,'
 		//. ' CONCAT(a.con_position, \' - \', a.misc) AS description,'
-		. $sql->concat('a.con_position', 'a.misc', ' - ').' AS description,'
+		. $sql->concat(array('a.con_position', 'a.misc'), ' - ').' AS description,'
 		. ' \'\' AS date,'
 		. ' c.title AS category,'
 		. $case_when.','.$case_when1

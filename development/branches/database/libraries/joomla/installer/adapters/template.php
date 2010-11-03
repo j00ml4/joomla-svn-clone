@@ -204,12 +204,19 @@ class JInstallerTemplate extends JAdapterInstance
 
 		//insert record in #__template_styles
 		$query = $db->getQuery(true);
-		$query->insert('#__template_styles');
-		$query->set('template='.$db->Quote($row->name));
-		$query->set('client_id='.$db->Quote($clientId));
-		$query->set('home=0');
-		$query->set('title='.$db->Quote(JText::sprintf('JLIB_INSTALLER_DEFAULT_STYLE', $this->get('name'))));
-		$query->set('params='.$db->Quote($row->params));
+    //sqlsrv change
+		$query->insertInto('#__template_styles');
+    $query->fields('template, client_id, home, title, params');
+    $query->values($db->Quote($row->name));
+    $query->values($db->Quote($clientId));
+    $query->values('0');
+    $query->values($db->Quote(JText::sprintf('JLIB_INSTALLER_DEFAULT_STYLE', $this->get('name'))));
+    $query->values($db->Quote($row->params));
+		//$query->set('template='.$db->Quote($row->name));
+		//$query->set('client_id='.$db->Quote($clientId));
+		//$query->set('home=0');
+		//$query->set('title='.$db->Quote(JText::sprintf('JLIB_INSTALLER_DEFAULT_STYLE', $this->get('name'))));
+		//$query->set('params='.$db->Quote($row->params));
 		$db->setQuery($query);
 		$db->query(); // There is a chance this could fail but we don't care...
 		return $row->get('extension_id');
@@ -405,12 +412,20 @@ class JInstallerTemplate extends JAdapterInstance
 			//insert record in #__template_styles
 			$db = $this->parent->getDbo();
 			$query = $db->getQuery(true);
-			$query->insert('#__template_styles');
+       //sqlsrv change
+      $query->insertInto('#__template_styles');
+      $query->fields('template, client_id, home, title, params');
+      $query->values($db->Quote($this->parent->extension->name));
+      $query->values($db->Quote($this->parent->extension->client_id));
+      $query->values('0');
+      $query->values($db->Quote(JText::sprintf('JLIB_INSTALLER_DEFAULT_STYLE', $this->parent->extension->name)));
+      $query->values($db->Quote($this->parent->extension->params));
+			/*$query->insert('#__template_styles');
 			$query->set('template='.$db->Quote($this->parent->extension->name));
 			$query->set('client_id='.$db->Quote($this->parent->extension->client_id));
 			$query->set('home=0');
 			$query->set('title='.$db->Quote(JText::sprintf('JLIB_INSTALLER_DEFAULT_STYLE', $this->parent->extension->name)));
-			$query->set('params='.$db->Quote($this->parent->extension->params));
+			$query->set('params='.$db->Quote($this->parent->extension->params));*/
 			$db->setQuery($query);
 			$db->query();
 
