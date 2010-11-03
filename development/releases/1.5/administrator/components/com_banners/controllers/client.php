@@ -64,6 +64,10 @@ class BannerControllerClient extends JController
 			$filter_order = 'a.name';
 		}
 
+		if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+			$filter_order_Dir = '';
+		}
+
 		$orderby = ' ORDER BY '. $filter_order .' '. $filter_order_Dir .', a.cid';
 
 		// get the total number of records

@@ -134,6 +134,10 @@ function showCategories( $section, $option )
 		$filter_order = 'c.ordering';
 	}
 
+	if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+		$filter_order_Dir = '';
+	}
+
 	if (intval($section) <= 0 && $section != 'com_content' && $filter_order == 'section_name') {
 		$filter_order = 'c.ordering';
 	}

@@ -152,6 +152,10 @@ class WeblinksModelWeblinks extends JModel
 			$filter_order = 'a.ordering';
 		}
 
+		if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+			$filter_order_Dir = '';
+		}
+
 		if ($filter_order == 'a.ordering'){
 			$orderby 	= ' ORDER BY category, a.ordering '.$filter_order_Dir;
 		} else {

@@ -136,6 +136,10 @@ function showContacts( $option )
 		$filter_order = 'cd.ordering';
 	}
 
+	if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+		$filter_order_Dir = '';
+	}
+
 	$where 		= ( count( $where ) ? ' WHERE ' . implode( ' AND ', $where ) : '' );
 	if ($filter_order == 'cd.ordering'){
 		$orderby 	= ' ORDER BY category, cd.ordering';

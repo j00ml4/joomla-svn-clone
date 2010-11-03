@@ -97,6 +97,10 @@ class UsersViewUsers extends JView
 			$filter_order = 'a.name';
 		}
 
+		if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+			$filter_order_Dir = '';
+		}
+
 		$orderby = ' ORDER BY '. $filter_order .' '. $filter_order_Dir;
 		$where = ( count( $where ) ? ' WHERE (' . implode( ') AND (', $where ) . ')' : '' );
 

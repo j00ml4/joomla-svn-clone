@@ -81,6 +81,10 @@ class MenusModelList extends JModel
 			$filter_order = 'm.ordering';
 		}
 
+		if (!in_array($filter_order_Dir, array('ASC', 'DESC', ''))) {
+			$filter_order_Dir = 'ASC';
+		}
+
 		// just in case filter_order get's messed up
 		if ($filter_order) {
 			$orderby = ' ORDER BY '.$filter_order .' '. $filter_order_Dir .', m.parent, m.ordering';

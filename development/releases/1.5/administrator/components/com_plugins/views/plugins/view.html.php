@@ -79,6 +79,10 @@ class PluginsViewPlugins extends JView
 			$filter_order = 'p.folder';
 		}
 
+		if (!in_array($filter_order_Dir, array('ASC', 'DESC'))) {
+			$filter_order_Dir = '';
+		}
+
 		if ($filter_order == 'p.ordering') {
 			$orderby = ' ORDER BY p.folder, p.ordering '. $filter_order_Dir;
 		} else {
