@@ -123,7 +123,7 @@ class ContentModelArticles extends JModelList
 				// use created if publish_up is 0
 				'CASE WHEN a.publish_up = 0 THEN a.created ELSE a.publish_up END as publish_up,' .
 					'a.publish_down, a.attribs, a.metadata, a.metakey, a.metadesc, a.access,'.
-					'a.hits, a.xreference, a.featured,'.' LENGTH(a.fulltext) AS readmore'
+					'a.hits, a.xreference, a.featured,'.' '.$query->length('a.fulltext').' AS readmore'
 			)
 		);
 		$query->from('#__content AS a');

@@ -450,4 +450,16 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
        return 'CONCAT('.implode(',', $fields).')';
      }
    }
+   
+   /**
+   * @param string $field
+   * 
+   * @param string separator
+   * @return  Length function for the field
+   * @since 1.6
+   */
+   function length($field)
+   {
+     return 'LENGTH('.$field.')';
+   }
 }
