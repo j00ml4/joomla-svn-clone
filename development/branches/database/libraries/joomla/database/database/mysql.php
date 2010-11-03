@@ -69,7 +69,8 @@ class JDatabaseMySQL extends JDatabase
 			$this->_errorMsg = JText::_('JLIB_DATABASE_ERROR_CONNECT_MYSQL');
 			return;
 		}
-		
+		ini_set("display_errors", 1);
+error_reporting(E_ALL);
 		$conf = & JFactory::getConfig();
 		
 	    $slave_host = array_key_exists('slavehost', $options)	? $options['slavehost']		: '';

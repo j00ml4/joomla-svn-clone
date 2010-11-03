@@ -70,12 +70,14 @@ class JDatabaseSQLSrv extends JDatabase
 		}
 
 		// connect to the server
-		if (!($this->_connection = sqlsrv_connect( $host, Array('uid'=>$user, 'pwd'=>$password, 'CharacterSet'=>'UTF-8') ) )) {
+		if (!($this->_connection = sqlsrv_connect( $host, Array('uid'=>$user, 'pwd'=>$password, 'CharacterSet'=>'UTF-8','ReturnDatesAsStrings' => true) ) )) {
 			$this->_errorNum = 2;
 			$this->_errorMsg = 'Could not connect to MS SQL';
 			return;
 		}
-
+    ini_set("display_errors", 1);
+error_reporting(E_ALL);
+ 
 		$conf = & JFactory::getConfig();
 		
 	    $slave_host = array_key_exists('slavehost', $options)	? $options['slavehost']		: '';
@@ -93,7 +95,7 @@ class JDatabaseSQLSrv extends JDatabase
 		
 	
 	    if ($slave_host != "" && $slave_user != "" && $slave_password != "") {
-			if (!($this->_slave_connection = sqlsrv_connect( $slave_host, Array('uid'=>$slave_user, 'pwd'=>$slave_password, 'CharacterSet'=>'UTF-8') ))) {
+			if (!($this->_slave_connection = sqlsrv_connect( $slave_host, Array('uid'=>$slave_user, 'pwd'=>$slave_password, 'CharacterSet'=>'UTF-8', 'ReturnDatesAsStrings' => true,) ))) {
 				$this->_errorNum = 2;
 				$this->_errorMsg = 'Could not connect to Slave mssql';
 	
