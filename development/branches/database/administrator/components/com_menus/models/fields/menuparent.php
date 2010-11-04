@@ -59,7 +59,7 @@ class JFormFieldMenuParent extends JFormFieldList
 		}
 
 		$query->where('a.published != -2');
-		$query->group('a.id');
+		$query->group('a.id, a.title, a.level, a.lft, a.rgt, a.menutype, a.parent_id, a.published');
 		$query->order('a.lft ASC');
 
 		// Get the options.

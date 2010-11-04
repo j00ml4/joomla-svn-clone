@@ -171,7 +171,7 @@ class JFormFieldMenuType extends JFormFieldList
 		$db->setQuery(
 			'SELECT `name`, `element` AS "option"' .
 			' FROM `#__extensions`' .
-			' WHERE `type` = "component"' .
+			' WHERE `type` = \'component\'' .
 			' AND `enabled` = 1' .
 			' ORDER BY `name`'
 		);
