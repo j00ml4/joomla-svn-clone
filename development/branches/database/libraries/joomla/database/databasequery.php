@@ -523,6 +523,13 @@ abstract class JDatabaseQuery
    */
    abstract public function length($field);
    
+   /**
+   * 
+   * @return  NOW function
+   * @since 1.6
+   */
+   abstract public function now();
+   
 	/**
 	 * Magic function to convert the query to a string.
 	 *

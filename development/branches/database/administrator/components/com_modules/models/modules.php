@@ -189,12 +189,14 @@ class ModulesModelModules extends JModelList
 		// Join over the module menus
 		$query->select('MIN(mm.menuid) AS pages');
 		$query->join('LEFT', '#__modules_menu AS mm ON mm.moduleid = a.id');
-		$query->group('a.id');
+		//$query->group('a.id');
 
 		// Join over the extensions
 		$query->select('e.name AS name');
 		$query->join('LEFT', '#__extensions AS e ON e.element = a.module');
-		$query->group('a.id');
+		$query->group('a.id, a.title, a.note, a.position, a.module, a.language,a.checked_out,'. 
+						'a.checked_out_time, a.published, a.access, a.ordering,l.title, uc.name, ag.title, e.name,'.
+						'l.lang_code, uc.id, ag.id, mm.moduleid, e.element');
 
 		// Filter by access level.
 		if ($access = $this->getState('filter.access')) {

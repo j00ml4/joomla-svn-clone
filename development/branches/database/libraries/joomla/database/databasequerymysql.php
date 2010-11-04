@@ -462,4 +462,14 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
    {
      return 'LENGTH('.$field.')';
    }
+   
+   /**
+   * 
+   * @return  NOW function
+   * @since 1.6
+   */
+   function now()
+   {
+   	 return 'NOW()';
+   }
 }

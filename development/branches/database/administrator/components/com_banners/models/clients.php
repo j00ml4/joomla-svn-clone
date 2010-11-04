@@ -114,7 +114,7 @@ class BannersModelClients extends JModelList
 			$query->where('(a.state IN (0, 1))');
 		}
 
-		$query->group('a.id');
+		$query->group('a.id, a.name, a.contact, a.checked_out, a.checked_out_time, a.state, a.metakey, a.purchase_type, uc.name, b.cid, uc.id');
 
 		// Filter by search in title
 		$search = $this->getState('filter.search');
