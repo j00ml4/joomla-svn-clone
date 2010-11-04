@@ -460,4 +460,14 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
    {
      return 'LEN('.$field.')';
    }
+   
+   /**
+   * 
+   * @return  NOW function
+   * @since 1.6
+   */
+   function now()
+   {
+   	 return 'GETDATE()';
+   }
 }
