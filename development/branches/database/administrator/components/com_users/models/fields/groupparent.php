@@ -53,7 +53,7 @@ class JFormFieldGroupParent extends JFormFieldList
 			$query->where('NOT(a.lft >= p.lft AND a.rgt <= p.rgt)');
 		}
 
-		$query->group('a.id');
+		$query->group('a.id, a.title, a.lft, a.rgt');
 		$query->order('a.lft ASC');
 
 		// Get the options.

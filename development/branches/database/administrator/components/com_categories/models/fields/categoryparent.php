@@ -66,7 +66,7 @@ class JFormFieldCategoryParent extends JFormFieldList
 		}
 
 		$query->where('a.published IN (0,1)');
-		$query->group('a.id');
+		$query->group('a.id, a.title, a.level, a.lft, a.rgt, a.extension, a.parent_id');
 		$query->order('a.lft ASC');
 
 		// Get the options.

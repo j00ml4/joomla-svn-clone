@@ -151,7 +151,7 @@ abstract class JHtmlRules
 			' , GROUP_CONCAT(b.id SEPARATOR \',\') AS parents' .
 			' FROM #__usergroups AS a' .
 			' LEFT JOIN `#__usergroups` AS b ON a.lft > b.lft AND a.rgt < b.rgt' .
-			' GROUP BY a.id' .
+			' GROUP BY a.id, a.title, a.lft, a.rgt' .
 			' ORDER BY a.lft ASC'
 		);
 		$options = $db->loadObjectList();

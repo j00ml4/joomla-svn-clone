@@ -40,7 +40,7 @@ abstract class JHtmlAccess
 
 		$query->select('a.id AS value, a.title AS text');
 		$query->from('#__viewlevels AS a');
-		$query->group('a.id');
+		$query->group('a.id, a.title, a.ordering');
 		$query->order('a.ordering ASC');
 		$query->order('`title` ASC');
 
@@ -88,7 +88,7 @@ abstract class JHtmlAccess
 			'SELECT a.id AS value, a.title AS text, COUNT(DISTINCT b.id) AS level' .
 			' FROM #__usergroups AS a' .
 			' LEFT JOIN `#__usergroups` AS b ON a.lft > b.lft AND a.rgt < b.rgt' .
-			' GROUP BY a.id' .
+			' GROUP BY a.id, a.title, a.lft, a.rgt' .
 			' ORDER BY a.lft ASC'
 		);
 		$options = $db->loadObjectList();
@@ -135,7 +135,7 @@ abstract class JHtmlAccess
 			'SELECT a.*, COUNT(DISTINCT b.id) AS level' .
 			' FROM #__usergroups AS a' .
 			' LEFT JOIN `#__usergroups` AS b ON a.lft > b.lft AND a.rgt < b.rgt' .
-			' GROUP BY a.id' .
+			' GROUP BY a.id, a.title, a.lft, a.rgt, a.parent_id' .
 			' ORDER BY a.lft ASC'
 		);
 		$groups = $db->loadObjectList();
@@ -231,7 +231,7 @@ abstract class JHtmlAccess
 
 			$query->select('a.id AS value, a.title AS text');
 			$query->from('#__viewlevels AS a');
-			$query->group('a.id');
+			$query->group('a.id, a.title, a.ordering');
 			$query->order('a.ordering ASC');
 
 			$db->setQuery($query);

@@ -47,7 +47,7 @@ class MenusModelMenus extends JModelList
 		$query->select('COUNT(DISTINCT m3.id) AS count_trashed');
 		$query->join('LEFT', '`#__menu` AS m3 ON m3.menutype = a.menutype AND m3.published = -2');
 
-		$query->group('a.id');
+		$query->group('a.id, a.menutype, a.title, a.description, m1.published');
 
 		// Add the list ordering clause.
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.id')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
