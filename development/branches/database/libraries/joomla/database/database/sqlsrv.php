@@ -291,20 +291,10 @@ error_reporting(E_ALL);
 		// Take a local copy so that we don't modify the original query and cause issues later
 		$sql = $this->replacePrefix((string) $this->_sql);
 		$sql = str_replace('`', '', $sql);
-		$sql = str_replace('LENGTH', 'DATALENGTH', $sql);
 		$sql = str_ireplace('insert ignore into', 'insert into', $sql);
 		if ($this->_limit > 0 || $this->_offset > 0) {
-			if($this->_limit > 0 && $this->_offset <= 0) {
-				// we have a limit with zero or no offset, we can use top here	
-				$this->_sql = preg_replace(
-					'/(^\s*select\s+(distinctrow|distinct)?)/i',
-					'\\1 TOP '.$this->_limit.' ',
-					$this->_sql);
-			} else {
-				// TODO: Work this bit out!
-				// Combination of top vs row_number() over (order by)
-				// but both require at least one column to sort on
-			}
+			$i = $this->_limit + $this->_offset;
+			$sql = preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$i.' ', $sql);	
 		}
 		if ($this->_debug) {
 			$this->_ticker++;
@@ -313,7 +303,7 @@ error_reporting(E_ALL);
 		$this->_errorNum = 0;
 		$this->_errorMsg = '';
 		
-	jimport("joomla.utilities.string");
+		jimport("joomla.utilities.string");
 		
 		$select_in_sql = JString::startsWith(ltrim(strtoupper($sql)), 'SELECT') ;
 				
@@ -327,7 +317,7 @@ error_reporting(E_ALL);
 		if (!$this->_cursor)
 		{
 			$errors = sqlsrv_errors( );
-			
+						
 			$this->_errorNum = $errors[0]['SQLSTATE'];
 			$this->_errorMsg = $errors[0]['message'];
 			// $errors[0]['errorcode']; // Holds the SQL Server Native Error Code
