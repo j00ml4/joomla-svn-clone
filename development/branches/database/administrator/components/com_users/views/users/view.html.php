@@ -28,10 +28,15 @@ class UsersViewUsers extends JView
 	 */
 	public function display($tpl = null)
 	{
-		$this->items		= $this->get('Items');
-		$this->pagination	= $this->get('Pagination');
-		$this->state		= $this->get('State');
-
+		$this->items				= $this->get('Items');
+		$model 						= $this->getModel('Users');
+		$this->pagination			= $this->get('Pagination');
+		$this->state				= $this->get('State');
+		//get the associated groups, sqlsrv change
+		foreach($this->items as $user_values)
+		{
+			$user_values->group_names 	= $model->getUserGroups($user_values->id);
+		}
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));

@@ -104,10 +104,12 @@ class UsersModelUsers extends JModelList
 		// Join over the group mapping table.
 		$query->select('COUNT(map.group_id) AS group_count');
 		$query->join('LEFT', '#__user_usergroup_map AS map ON map.user_id = a.id');
-		$query->group('a.id');
+		$query->group('a.id, a.name, a.username, a.activation, a.block, a.email, a.lastvisitDate, a.params,
+a.password, a.registerDate, a.sendEmail, a.usertype');
 
 		// Join over the user groups table.
-		$query->select('GROUP_CONCAT(g2.title SEPARATOR '.$db->Quote("\n").') AS group_names');
+		//$query->select('GROUP_CONCAT(g2.title SEPARATOR '.$db->Quote("\n").') AS group_names');
+		$query->select('\'\' AS group_names');
 		$query->join('LEFT', '#__usergroups AS g2 ON g2.id = map.group_id');
 
 		// If the model is set to check item state, add to the query.
@@ -154,5 +156,16 @@ class UsersModelUsers extends JModelList
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
+	}
+	//sqlsrv change
+	public function getUserGroups($user_id)
+	{
+		$sql = "SELECT title FROM `jos_usergroups` ug left join".
+				" `jos_user_usergroup_map` map on (ug.id = map.group_id)".
+				" WHERE map.user_id=".$user_id;
+		$db = &JFactory::getDbo();
+		$db->setQuery($sql);
+		$result = $db->loadResultArray();
+		return implode("\n", $result);
 	}
 }
