@@ -68,9 +68,9 @@ class JDatabaseSQLSrv extends JDatabase
 			$this->_errorMsg = 'The MS SQL adapter "sqlsrv" is not available.';
 			return;
 		}
-
+		
 		// connect to the server
-		if (!($this->_connection = sqlsrv_connect( $host, Array('uid'=>$user, 'pwd'=>$password, 'CharacterSet'=>'UTF-8','ReturnDatesAsStrings' => true) ) )) {
+		if (!($this->_connection = sqlsrv_connect( $host, Array("Database" => $database, 'uid'=>$user, 'pwd'=>$password, 'CharacterSet'=>'UTF-8','ReturnDatesAsStrings' => true) ) )) {
 			$this->_errorNum = 2;
 			$this->_errorMsg = 'Could not connect to MS SQL';
 			return;
@@ -95,7 +95,7 @@ error_reporting(E_ALL);
 		
 	
 	    if ($slave_host != "" && $slave_user != "" && $slave_password != "") {
-			if (!($this->_slave_connection = sqlsrv_connect( $slave_host, Array('uid'=>$slave_user, 'pwd'=>$slave_password, 'CharacterSet'=>'UTF-8', 'ReturnDatesAsStrings' => true,) ))) {
+			if (!($this->_slave_connection = sqlsrv_connect( $slave_host, Array("Database" => $database,'uid'=>$slave_user, 'pwd'=>$slave_password, 'CharacterSet'=>'UTF-8', 'ReturnDatesAsStrings' => true,) ))) {
 				$this->_errorNum = 2;
 				$this->_errorMsg = 'Could not connect to Slave mssql';
 	
