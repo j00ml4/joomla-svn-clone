@@ -51,13 +51,28 @@ class ContentModelArticle extends JModelItem
 		$this->setState('params', $params);
 
 		// TODO: Tune these values based on other permissions.
-		$user		= JFactory::getUser();		
+		$user		= JFactory::getUser();
 		if ((!$user->authorise('core.edit.state', 'com_content')) &&  (!$user->authorise('core.edit', 'com_content'))){
 			$this->setState('filter.published', 1);
 			$this->setState('filter.archived', 2);
 		}
+
+		$this->setState('layout', JRequest::getCmd('layout'));
 	}
 
+	public function getParams()
+	{
+		if (!isset($this->params))
+		{
+			parent::getParams();
+			// Set the layout parameter from the request
+			if ($this->getState('layout')) {
+				$this->params->set('article_layout', $this->getState('layout'));
+			}
+			$this->getItem();
+		}
+		return $this->params;
+	}
 	/**
 	 * Method to get article data.
 	 *
@@ -80,7 +95,17 @@ class ContentModelArticle extends JModelItem
 				$db = $this->getDbo();
 				$query = $db->getQuery(true);
 
-				$query->select($this->getState('item.select', 'a.*'));
+				$query->select($this->getState(
+					'item.select', 'a.id, a.asset_id, a.title, a.alias, a.title_alias, a.introtext, a.fulltext, ' .
+					// If badcats is not null, this means that the article is inside an unpublished category
+					// In this case, the state is set to 0 to indicate Unpublished (even if the article state is Published)
+					'CASE WHEN badcats.id is null THEN a.state ELSE 0 END AS state, ' .
+					'a.mask, a.catid, a.created, a.created_by, a.created_by_alias, ' .
+					'a.modified, a.modified_by, a.checked_out, a.checked_out_time, a.publish_up, a.publish_down, ' .
+					'a.images, a.urls, a.attribs, a.version, a.parentid, a.ordering, ' .
+					'a.metakey, a.metadesc, a.access, a.hits, a.metadata, a.featured, a.language, a.xreference'
+					)
+				);
 				$query->from('#__content AS a');
 
 				// Join on category table.
@@ -108,6 +133,14 @@ class ContentModelArticle extends JModelItem
 				$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
 				$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
 
+				// Join to check for category published state in parent categories up the tree
+				// If all categories are published, badcats.id will be null, and we just use the article state
+				$subquery = ' (SELECT cat.id as id FROM #__categories AS cat JOIN #__categories AS parent ';
+				$subquery .= 'ON cat.lft BETWEEN parent.lft AND parent.rgt ';
+				$subquery .= 'WHERE parent.extension = ' . $db->quote('com_content');
+				$subquery .= ' AND parent.published <= 0 GROUP BY cat.id)';
+				$query->join('LEFT OUTER', $subquery . ' AS badcats ON badcats.id = c.id');
+
 				// Filter by published state.
 				$published = $this->getState('filter.published');
 				$archived = $this->getState('filter.archived');
@@ -129,25 +162,45 @@ class ContentModelArticle extends JModelItem
 				}
 
 				// Check for published state if filter set.
-				if (((is_numeric($published)) || (is_numeric($archived))) && (($data->state != $published) && ($data->state != $archived)))
-				{
-					JError::raiseError(404, JText::_('COM_CONTENT_ERROR_ARTICLE_NOT_FOUND'));
+				if (((is_numeric($published)) || (is_numeric($archived))) && (($data->state != $published) && ($data->state != $archived))) {
+					throw new JException(JText::_('COM_CONTENT_ERROR_ARTICLE_NOT_FOUND'), 404);
 				}
 
 				// Convert parameter fields to objects.
 				$registry = new JRegistry;
 				$registry->loadJSON($data->attribs);
-				$data->params = clone $this->getState('params');
-				$data->params->merge($registry);
+				$this->getParams();
+				$this->params->merge($registry);
 
 				$registry = new JRegistry;
 				$registry->loadJSON($data->metadata);
 				$data->metadata = $registry;
 
-				// Compute access permissions.
+				// Compute selected asset permissions.
+				$user	= JFactory::getUser();
+
+				// Technically guest could edit an article, but lets not check that to improve performance a little.
+				if (!$user->get('guest')) {
+					$userId	= $user->get('id');
+					$asset	= 'com_content.article.'.$data->id;
+
+					// Check general edit permission first.
+					if ($user->authorise('core.edit', $asset)) {
+						$this->params->set('access-edit', true);
+					}
+					// Now check if edit.own is available.
+					else if (!empty($userId) && $user->authorise('core.edit.own', $asset)) {
+						// Check for a valid user and that they are the owner.
+						if ($userId == $data->created_by) {
+							$this->params->set('access-edit', true);
+						}
+					}
+				}
+
+				// Compute view access permissions.
 				if ($access = $this->getState('filter.access')) {
 					// If the access filter has been set, we already know this user can view.
-					$data->params->set('access-view', true);
+					$this->params->set('access-view', true);
 				}
 				else {
 					// If no access filter is set, the layout takes some responsibility for display of limited information.
@@ -155,10 +208,10 @@ class ContentModelArticle extends JModelItem
 					$groups = $user->authorisedLevels();
 
 					if ($data->catid == 0 || $data->category_access === null) {
-						$data->params->set('access-view', in_array($data->access, $groups));
+						$this->params->set('access-view', in_array($data->access, $groups));
 					}
 					else {
-						$data->params->set('access-view', in_array($data->access, $groups) && in_array($data->category_access, $groups));
+						$this->params->set('access-view', in_array($data->access, $groups) && in_array($data->category_access, $groups));
 					}
 				}
 
@@ -184,7 +237,7 @@ class ContentModelArticle extends JModelItem
 	public function hit($pk = 0)
 	{
             $hitcount = JRequest::getInt('hitcount', 1);
-            
+
             if ($hitcount)
             {
                 // Initialise variables.

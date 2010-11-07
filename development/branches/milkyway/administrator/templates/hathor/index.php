@@ -147,7 +147,7 @@ $app = JFactory::getApplication();
 
 		<!-- Beginning of Actual Content -->
 		<div id="element-box">
-			<p id="skiptargetholder"><a id="skiptarget" name="skiptarget" class="skip" tabindex="-1"></a></p>
+			<p id="skiptargetholder"><a id="skiptarget" class="skip" tabindex="-1"></a></p>
 
 			<!-- The main component -->
 			<jdoc:include type="component" />
@@ -169,6 +169,7 @@ $app = JFactory::getApplication();
 <!-- Footer -->
 <div id="footer">
 	<p class="copyright">
+		<jdoc:include type="modules" name="footer" style="none"  />
 		<?php $joomla= '<a href="http://www.joomla.org">Joomla!</a>';
 			echo JText::sprintf('JGLOBAL_ISFREESOFTWARE', $joomla) ?>
 		<span class="version"><?php echo  JText::_('JVERSION') ?> <?php echo  JVERSION; ?></span>

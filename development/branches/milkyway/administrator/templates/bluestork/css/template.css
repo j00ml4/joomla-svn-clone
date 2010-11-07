@@ -618,8 +618,6 @@ div.current {
 	clear: both;
 	border: 1px solid #ccc;
 	padding: 10px 10px;
-	width: 740px;
-	
 }
 
 
@@ -632,7 +630,8 @@ dl#content-pane.tabs {
 	margin: 1px 0 0 0;
 }
 
-div.current label {
+div.current label,
+div.current span.faux-label {
 	display: block;
 	min-width: 150px;
 	float: left;
@@ -815,7 +814,8 @@ ul.adminformlist li {
 	list-style: none;
 }
 
-fieldset label {
+fieldset label,
+fieldset span.faux-label {
 	float: left;
 	clear: left;
 	display:block;
@@ -826,7 +826,8 @@ fieldset ul {
 	padding: 0;
 }
 
-form label {
+form label,
+form span.faux-label {
 	font-size: 1.091em;
 }
 
@@ -924,7 +925,7 @@ label#jform_grouptitle-lbl {
 	padding-top: 3px;
 }
 
-label#jform_params_subslider-lbl {
+span.spacer label {
 	white-space: nowrap;
 	font-weight: bold;
 	color: #666;
@@ -993,11 +994,7 @@ label#batch-access-lbl {
 
 /* -------- Menu Assigments ---------- */
 div#menu-assignment {
-	height: 300px;
-	overflow: auto;
 	clear:left;
-	border: 1px solid #CCCCCC;
-	padding: 0 17px;
 }
 div#menu-assignment input,
 div#menu-assignment h3 {
@@ -1005,23 +1002,25 @@ div#menu-assignment h3 {
 	padding-bottom: 0;
 	margin-bottom: 0;
 }
-div#menu-assignment h3 {
-	border-bottom: 1px solid #CCCCCC;
-	width: 90%;
-	line-height: 1.182em;
+div#menu-assignment ul.menu-links {
+	float:left;
+	width:49%;
 }
 div#menu-assignment ul.menu-links li:last-child label {
 	margin-bottom: 20px;
 }
 
 fieldset.adminform .menu-links label {
-	width:400px;
+	white-space:nowrap;
 }
 fieldset.adminform .menu-links input {
-	margin-top: 1px;
+	margin: 8px 5px 0 0;
 }
 
-button.jform-rightbtn { float:right;margin-right: 0; }
+button.jform-rightbtn { 
+	float:right;
+	margin-right: 0;
+}
 
 #jform_impmade,
 #jform_clicks {
@@ -1029,13 +1028,15 @@ button.jform-rightbtn { float:right;margin-right: 0; }
 }
 
 /* Field label widths - long label */
-fieldset.adminform.long label {
+fieldset.adminform.long label, 
+fieldset.adminform.long span.faux-label {
 	min-width: 180px;
 }
 fieldset.adminform.long input { }
 
 /* Field label widths - short label */
-fieldset.adminform label {
+fieldset.adminform label, 
+fieldset.adminform span.faux-label {
 	width: 135px;
 }
 
@@ -1043,7 +1044,8 @@ fieldset.panelform {
 	overflow: hidden;
 }
 fieldset.panelform label,
-fieldset.panelform div.paramrow label {
+fieldset.panelform div.paramrow label,
+fieldset.panelform span.faux-label {
 	min-width: 145px;
 	max-width: 145px;
 }
@@ -1608,8 +1610,9 @@ a.saveorder.inactive {
 }
 
 .button2-left a,
-.button2-left button,
 .button2-right a,
+.button2-left button,
+.button2-right button,
 .button2-left span,
 .button2-right span {
 	display: block;
@@ -1634,6 +1637,7 @@ a.saveorder.inactive {
 .button2-right .blank a,
 .button2-left .blank span,
 .button2-right .blank span,
+.button2-left .blank button,
 .button2-right .blank button {
 	padding: 0 6px;
 }
@@ -1645,18 +1649,21 @@ a.saveorder.inactive {
 
 .button2-left a:hover,
 .button2-right a:hover,
+.button2-left button:hover,
 .button2-left button:hover	{
 	text-decoration: none;
 	color: #0B55C4;
 }
 
 .button2-left a,
-.button2-left span {
+.button2-left span,
+.button2-left button {
 	padding: 0 24px 0 6px;
 }
 
 .button2-right a,
-.button2-right span {
+.button2-right span,
+.button2-right button {
 	padding: 0 6px 0 24px;
 }
 
@@ -1703,6 +1710,17 @@ button:hover {
 	background: #E8F6FE;
 	text-decoration: none;
 	border: 1px solid #aaa;
+}
+
+div.button2-left button {
+	background: transparent;
+	margin-top: 0;
+	border: 0 solid #ccc;
+}
+
+div.button2-left button {
+	background: transparent;
+	border: 0 solid #aaa;
 }
 
 
@@ -1764,7 +1782,7 @@ a img.calendar {
 
 .login {
 	margin: 50px auto 100px;
-	width: 500px;
+	width: 575px;
 }
 
 form#form-login {
@@ -1784,7 +1802,7 @@ p {
 
 #section-box {
 	float: right;
-	width: 300px;
+	width: 340px;
 	margin-left: 10px;
 	margin-right: 10px;
 	background-color: #fff;
@@ -1867,6 +1885,9 @@ a.jgrid:hover {	text-decoration: none;}
 .jgrid span.downarrow_disabled		{ background-image: url(../images/admin/downarrow0.png); background-position: 0 -12px; }
 .jgrid span.uparrow					{ background-image: url(../images/admin/uparrow.png); }
 .jgrid span.uparrow_disabled		{ background-image: url(../images/admin/uparrow0.png); background-position: 0 -12px; }
+.jgrid span.published				{ background-image: url(../images/admin/publish_g.png); }
+.jgrid span.expired					{ background-image: url(../images/admin/publish_r.png); }
+.jgrid span.pending					{ background-image: url(../images/admin/publish_y.png); }
 
 /* -- ICON STYLES ----------------------------- */
 .icon-16-archive					{	background-image: url(../images/menu/icon-16-archive.png);	}
@@ -2579,13 +2600,14 @@ table.aclmodify-table select {
 
 /* Summary Tab */
 table.aclsummary-table th.col1 {
-	width: 40%;
+	width: 25%;
 }
 
 table.aclsummary-table th.col2,
 table.aclsummary-table th.col3,
 table.aclsummary-table th.col4,
-table.aclsummary-table th.col5	{
+table.aclsummary-table th.col5,
+table.aclsummary-table th.col6	{
 	width: 15%;
 	vertical-align: bottom;
 	text-align: center;
@@ -2599,12 +2621,37 @@ table.aclsummary-table td.col4,
 table.aclsummary-table th.col4,
 table.aclsummary-table td.col5,
 table.aclsummary-table th.col5,
+table.aclsummary-table td.col6,
+table.aclsummary-table th.col6,
 table.aclmodify-table td.col2,
 table.aclmodify-table th.col2	{
 	border-left: 1px solid #cbcbcb;
 }
 
 /* Icons */
+span.icon-16-unset,
+span.icon-16-allowed,
+span.icon-16-denied,
+span.icon-16-locked {
+	padding-left: 18px;
+}
+
+span.icon-16-unset {
+	background: url(../images/admin/icon-16-denyinactive.png) no-repeat;
+}
+
+span.icon-16-allowed {
+	background: url(../images/admin/icon-16-allow.png) no-repeat;
+}
+
+span.icon-16-denied {
+	background: url(../images/admin/icon-16-deny.png) no-repeat;
+}
+
+span.icon-16-locked {
+	background: url(../images/admin/checked_out.png) 0 0 no-repeat;
+}
+
 label.icon-16-allow,
 label.icon-16-deny,
 a.icon-16-allow,
@@ -2746,6 +2793,13 @@ label#jform_rules-lbl {
 	white-space: nowrap;
 	display: none;
 }
+
+label#jform_filters-lbl {
+	float: none;
+	white-space: nowrap;
+	display: none;
+}
+
 /**
 * Mod_rewrite Warning
 */
@@ -2913,7 +2967,7 @@ table.group-rules td select
 
 #permissions-sliders ul#rules 
 {	
-	min-height:25em ;
+	min-height:35em ;
 	padding:5px
 }
 
@@ -2944,7 +2998,7 @@ table.group-rules td select
 
 #permissions-sliders ul#rules .panel h3
 	{
-	background:#f5f5f5 url(../images/j_arrow_right.png) top right no-repeat
+	background:#f5f5f5 url(../images/j_arrow_right.png) center right no-repeat
 }
 	
 /* global_config permissions */

@@ -21,7 +21,7 @@ $canDo		= ContentHelper::getActions();
 ?>
 
 <script type="text/javascript">
-	function submitbutton(task)
+	Joomla.submitbutton = function(task)
 	{
 		if (task == 'article.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
 			<?php echo $this->form->getField('articletext')->save(); ?>
@@ -35,7 +35,7 @@ $canDo		= ContentHelper::getActions();
 
 <div class="article-edit">
 
-<form action="<?php JRoute::_('index.php?option=com_content'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_content&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 	<div class="col main-section">
 	<fieldset class="adminform">
 	<legend><?php echo empty($this->item->id) ? JText::_('COM_CONTENT_NEW_ARTICLE') : JText::sprintf('COM_CONTENT_EDIT_ARTICLE', $this->item->id); ?></legend>
@@ -46,26 +46,26 @@ $canDo		= ContentHelper::getActions();
 		<li><?php echo $this->form->getLabel('alias'); ?>
 		<?php echo $this->form->getInput('alias'); ?></li>
 
-		<?php if ($canDo->get('core.create')) { ?>
-			<li><?php echo $this->form->getLabel('catid'); ?>
-			<?php echo $this->form->getInput('catid'); ?></li>
-		<?php }?>
-
-		<?php if ($canDo->get('core.edit.state')) { ?>		
-			<li><?php echo $this->form->getLabel('state'); ?>
-			<?php echo $this->form->getInput('state'); ?></li>
-		<?php }?>
+		<li><?php echo $this->form->getLabel('catid'); ?>
+		<?php echo $this->form->getInput('catid'); ?></li>
+	
+		<li><?php echo $this->form->getLabel('state'); ?>
+		<?php echo $this->form->getInput('state'); ?></li>
 		
 		<li><?php echo $this->form->getLabel('access'); ?>
 		<?php echo $this->form->getInput('access'); ?></li>
+		
 
+		<li><span class="faux-label"><?php echo JText::_('JGLOBAL_ACTION_PERMISSIONS_LABEL'); ?></span>
+      		<button type="button" onclick="document.location.href='#access-rules';">
+      		<?php echo JText::_('JGLOBAL_PERMISSIONS_ANCHOR'); ?></button>
+    	</li>
+				
 		<li><?php echo $this->form->getLabel('language'); ?>
 		<?php echo $this->form->getInput('language'); ?></li>
-
-		<?php if ($canDo->get('core.edit.state')) { ?>	
-			<li><?php echo $this->form->getLabel('featured'); ?>
-			<?php echo $this->form->getInput('featured'); ?></li>
-		<?php }?>
+	
+		<li><?php echo $this->form->getLabel('featured'); ?>
+		<?php echo $this->form->getInput('featured'); ?></li>
 
 		<li><?php echo $this->form->getLabel('id'); ?>
 		<?php echo $this->form->getInput('id'); ?></li>
@@ -136,13 +136,6 @@ $canDo		= ContentHelper::getActions();
 			</fieldset>
 		<?php endforeach; ?>
 
-		<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTENT_FIELDSET_RULES'), 'access-rules'); ?>
-		<fieldset class="panelform">
-		<legend class="element-invisible"><?php echo JText::_('COM_CONTENT_FIELDSET_RULES'); ?></legend>
-			<?php // echo $this->form->getLabel('rules'); ?>
-			<?php echo $this->form->getInput('rules'); ?>
-		</fieldset>
-
 		<?php echo JHtml::_('sliders.panel',JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'), 'meta-options'); ?>
 		<fieldset class="panelform">
 		<legend class="element-invisible"><?php echo JText::_('JGLOBAL_FIELDSET_METADATA_OPTIONS'); ?></legend>
@@ -150,6 +143,20 @@ $canDo		= ContentHelper::getActions();
 		</fieldset>
 
 		<?php echo JHtml::_('sliders.end'); ?>
+				</div>
+		<div class="clr"></div>
+		<div  class="col rules-section">
+
+			<?php echo JHtml::_('sliders.start','permissions-sliders-'.$this->item->id, array('useCookie'=>1)); ?>
+		
+			<?php echo JHtml::_('sliders.panel',JText::_('COM_CONTENT_FIELDSET_RULES'), 'access-rules'); ?>	
+			<fieldset class="panelform">
+			<legend class="element-invisible"><?php echo JText::_('COM_CONTENT_FIELDSET_RULES'); ?></legend>
+				<?php echo $this->form->getLabel('rules'); ?>
+				<?php echo $this->form->getInput('rules'); ?>
+			</fieldset>
+				
+			<?php echo JHtml::_('sliders.end'); ?>
 
 		<input type="hidden" name="task" value="" />
 		<input type="hidden" name="return" value="<?php echo JRequest::getCmd('return');?>" />

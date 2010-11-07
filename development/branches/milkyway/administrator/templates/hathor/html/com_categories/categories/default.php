@@ -12,7 +12,7 @@
 defined('_JEXEC') or die;
 
 // Include the component HTML helpers.
-JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 
 $user	= JFactory::getUser();
@@ -21,7 +21,6 @@ $extension	= $this->escape($this->state->get('filter.extension'));
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 $ordering 	= ($listOrder == 'a.lft');
-$canOrder	= $user->authorise('core.edit.state');
 $saveOrder 	= ($listOrder == 'a.lft' && $listDirn == 'asc');
 $n = count($this->items);
 ?>
@@ -32,14 +31,14 @@ $n = count($this->items);
 		<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
 		<div class="filter-search">
 			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_CATEGORIES_ITEMS_SEARCH_FILTER'); ?>" />
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" title="<?php echo JText::_('COM_CATEGORIES_ITEMS_SEARCH_FILTER'); ?>" />
 
 			<button type="submit" class="btn"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
 
 		<div class="filter-select">
-			
+
 
 			<label class="selectlabel" for="filter_level"><?php echo JText::_('COM_CATEGORIES_OPTION_SELECT_LEVEL'); ?></label>
 			<select name="filter_level" class="inputbox" id="filter_level">
@@ -53,7 +52,7 @@ $n = count($this->items);
 				<option value=""><?php echo JText::_('JOPTION_SELECT_PUBLISHED');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('jgrid.publishedOptions'), 'value', 'text', $this->state->get('filter.published'), true);?>
 			</select>
-            
+
             <label class="selectlabel" for="filter_access"><?php echo JText::_('JOPTION_SELECT_ACCESS'); ?></label>
 			<select name="filter_access" class="inputbox" id="filter_access">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_ACCESS');?></option>
@@ -86,7 +85,7 @@ $n = count($this->items);
 				</th>
 				<th class="nowrap ordering-col">
 					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ORDERING', 'a.lft', $listDirn, $listOrder); ?>
-					<?php if ($canOrder && $saveOrder) :?>
+					<?php if ($saveOrder) :?>
 						<?php echo JHtml::_('grid.order',  $this->items, 'filesave.png', 'categories.saveorder'); ?>
 					<?php endif; ?>
 				</th>
@@ -107,8 +106,10 @@ $n = count($this->items);
 			$originalOrders = array();
 			foreach ($this->items as $i => $item) :
 				$orderkey = array_search($item->id, $this->ordering[$item->parent_id]);
+				$canEdit	= $user->authorise('core.edit',			$extension.'.category.'.$item->id);
 				$canCheckin	= $user->authorise('core.manage',	'com_checkin') || $item->checked_out==$user->get('id');
-				$canChange = $canCheckin;
+				$canEditOwn	= $user->authorise('core.edit.own',		$extension.'.category.'.$item->id) && $item->created_user_id == $userId;
+				$canChange	= $user->authorise('core.edit.state',	$extension.'.category.'.$item->id) && $canCheckin;
 			?>
 				<tr class="row<?php echo $i % 2; ?>">
 					<th class="center">
@@ -119,8 +120,12 @@ $n = count($this->items);
 						<?php if ($item->checked_out) : ?>
 							<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'categories.', $canCheckin); ?>
 						<?php endif; ?>
-						<a href="<?php echo JRoute::_('index.php?option=com_categories&task=category.edit&cid[]='.$item->id.'&extension='.$extension);?>">
-							<?php echo $this->escape($item->title); ?></a>
+						<?php if ($canEdit || $canEditOwn) : ?>
+							<a href="<?php echo JRoute::_('index.php?option=com_categories&task=category.edit&id='.$item->id.'&extension='.$extension);?>">
+								<?php echo $this->escape($item->title); ?></a>
+						<?php else : ?>
+							<?php echo $this->escape($item->title); ?>
+						<?php endif; ?>
 						<p class="smallsub" title="<?php echo $this->escape($item->path);?>">
 							<?php echo str_repeat('<span class="gtr">|&mdash;</span>', $item->level-1) ?>
 							<?php if (empty($item->note)) : ?>
@@ -148,7 +153,7 @@ $n = count($this->items);
 					<td class="center">
 						<?php echo $this->escape($item->access_level); ?>
 					</td>
-					<td class="center">
+					<td class="center nowrap">
 					<?php if ($item->language=='*'):?>
 						<?php echo JText::_('JALL'); ?>
 					<?php else:?>
@@ -165,6 +170,9 @@ $n = count($this->items);
 	</table>
 
 <?php echo $this->pagination->getListFooter(); ?>
+	<div class="clr"> </div>
+
+	<?php echo $this->loadTemplate('batch'); ?>
 
 	<input type="hidden" name="extension" value="<?php echo $extension;?>" />
 	<input type="hidden" name="task" value="" />

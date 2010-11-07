@@ -12,14 +12,14 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers');
 
-// Create shortcut to parameters.
-$params = $this->item->params;
-$canEdit = $this->user->authorise('core.edit', 'com_content.frontpage.'.$this->item->id);
+// Create shortcuts to some parameters.
+$params		= $this->params;
+$canEdit	= $params->get('access-edit');
 ?>
 <div class="item-page<?php echo $params->get('pageclass_sfx')?>">
-<?php if ($this->params->get('show_page_heading', 1)) : ?>
+<?php if ($params->get('show_page_heading', 1)) : ?>
 <h1>
-	<?php echo $this->escape($this->params->get('page_heading')); ?>
+	<?php echo $this->escape($params->get('page_heading')); ?>
 </h1>
 <?php endif; ?>
 <?php if ($params->get('show_title')|| $params->get('access-edit')) : ?>

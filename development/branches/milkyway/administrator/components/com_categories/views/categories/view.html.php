@@ -70,26 +70,22 @@ class CategoriesViewCategories extends JView
 	protected function addToolbar()
 	{
 		// Initialise variables.
-		$extension	= JRequest::getCmd('extension');
 		$categoryId	= $this->state->get('filter.category_id');
+		$component	= $this->state->get('filter.component');
 		$section	= $this->state->get('filter.section');
 		$canDo		= null;
 
 		// Avoid nonsense situation.
-		if ($extension == 'com_categories') {
+		if ($component == 'com_categories') {
 			return;
 		}
 
- 		// The extension can be in the form com_foo.section
-		$parts		= explode('.',$extension);
-		$component	= $parts[0];
-
 		// Need to load the menu language file as mod_menu hasn't been loaded yet.
 		$lang = JFactory::getLanguage();
-			$lang->load($component.'.sys', JPATH_BASE, null, false, false)
-		||	$lang->load($component.'.sys', JPATH_ADMINISTRATOR.'/components/'.$component, null, false, false)
-		||	$lang->load($component.'.sys', JPATH_BASE, $lang->getDefault(), false, false)
-		||	$lang->load($component.'.sys', JPATH_ADMINISTRATOR.'/components/'.$component, $lang->getDefault(), false, false);
+			$lang->load($component, JPATH_BASE, null, false, false)
+		||	$lang->load($component, JPATH_ADMINISTRATOR.'/components/'.$component, null, false, false)
+		||	$lang->load($component, JPATH_BASE, $lang->getDefault(), false, false)
+		||	$lang->load($component, JPATH_ADMINISTRATOR.'/components/'.$component, $lang->getDefault(), false, false);
 
  		// Load the category helper.
 		require_once JPATH_COMPONENT.'/helpers/categories.php';
@@ -117,10 +113,10 @@ class CategoriesViewCategories extends JView
 		JToolBarHelper::title($title, substr($component,4).($section?"-$section":'').'-categories.png');
 
 		if ($canDo->get('core.create')) {
-			JToolBarHelper::custom('category.edit', 'new.png', 'new_f2.png', 'JTOOLBAR_NEW', false);
+			 JToolBarHelper::custom('category.add', 'new.png', 'new_f2.png', 'JTOOLBAR_NEW', false);
 		}
 
-		if ($canDo->get('core.edit' )) {
+		if ($canDo->get('core.edit' ) || $canDo->get('core.edit.own')) {
 			JToolBarHelper::custom('category.edit', 'edit.png', 'edit_f2.png', 'JTOOLBAR_EDIT', true);
 			JToolBarHelper::divider();
 		}
@@ -136,7 +132,7 @@ class CategoriesViewCategories extends JView
 			JToolBarHelper::custom('categories.checkin', 'checkin.png', 'checkin_f2.png', 'JTOOLBAR_CHECKIN', true);
 		}
 
-		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete', $extension)) {
+		if ($this->state->get('filter.published') == -2 && $canDo->get('core.delete', $component)) {
 			JToolBarHelper::deleteList('', 'categories.delete','JTOOLBAR_EMPTY_TRASH');
 		}
 		else if ($canDo->get('core.edit.state')) {
@@ -146,7 +142,7 @@ class CategoriesViewCategories extends JView
 
 		if ($canDo->get('core.admin')) {
 			JToolBarHelper::custom('categories.rebuild', 'refresh.png', 'refresh_f2.png', 'JTOOLBAR_REBUILD', false);
-			JToolBarHelper::preferences($extension);
+			JToolBarHelper::preferences($component);
 			JToolBarHelper::divider();
 		}
 
@@ -159,11 +155,14 @@ class CategoriesViewCategories extends JView
 		// -remotely searching in a language defined dedicated URL: *component*_HELP_URL
 		// -locally  searching in a component help file if helpURL param exists in the component and is set to ''
 		// -remotely searching in a component URL if helpURL param exists in the component and is NOT set to ''
-		JToolBarHelper::help(
-			$ref_key,
-			JComponentHelper::getParams( $component )->exists('helpURL'),
-			$lang->hasKey($lang_help_url = strtoupper($component).'_HELP_URL') ? JText::_($lang_help_url) : null,
-			$component
-		);
+		if ($lang->hasKey($lang_help_url = strtoupper($component).'_HELP_URL')) {
+			$debug = $lang->setDebug(false);
+			$url = JText::_($lang_help_url);
+			$lang->setDebug($debug);
+		}
+		else {
+			$url = null;
+		}
+		JToolBarHelper::help($ref_key, JComponentHelper::getParams( $component )->exists('helpURL'), $url);
 	}
 }

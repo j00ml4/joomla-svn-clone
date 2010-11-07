@@ -138,6 +138,12 @@ class BannersModelBanner extends JModelAdmin
 
 		if (empty($data)) {
 			$data = $this->getItem();
+
+			// Prime some default values.
+			if ($this->getState('banner.id') == 0) {
+				$app = JFactory::getApplication();
+				$data->set('catid', JRequest::getInt('catid', $app->getUserState('com_banners.banners.filter.category_id')));
+			}
 		}
 
 		return $data;
@@ -164,7 +170,7 @@ class BannersModelBanner extends JModelAdmin
 				if (!$this->canEditState($table)) {
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JERROR_CORE_EDIT_STATE_NOT_PERMITTED'));
+					JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'));
 				}
 			}
 		}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE install PUBLIC "-//Joomla! 1.6//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
-<install
+<extension
 	type="template"
 	version="1.6"
 	client="administrator">
@@ -18,10 +18,13 @@
 		<filename>login.php</filename>
 		<filename>component.php</filename>
 		<filename>cpanel.php</filename>
-		<filename>fields.ini</filename>
+		<filename>error.php</filename>
 		<filename>favicon.ico</filename>
 		<filename>index.html</filename>
+		<filename>params.ini</filename>
+		<filename>template_preview.png</filename>		
 		<filename>template_thumbnail.png</filename>
+		<filename>templateDetails.xml</filename>
 		<folder>images</folder>
 		<folder>js</folder>
 		<folder>css</folder>
@@ -93,4 +96,4 @@
 			</fieldset>
 		</fields>
 	</config>
-</install>
+</extension>

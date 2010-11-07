@@ -10,13 +10,13 @@
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 $canDo		= LanguagesHelper::getActions();
 ?>
 <script type="text/javascript">
-	function submitbutton(task)
+	Joomla.submitbutton = function(task)
 	{
 		if (task == 'language.cancel' || document.formvalidator.isValid(document.id('language-form'))) {
 			Joomla.submitform(task, document.getElementById('language-form'));
@@ -24,7 +24,7 @@ $canDo		= LanguagesHelper::getActions();
 	}
 </script>
 
-<form action="<?php echo JRoute::_('index.php?option=com_languages'); ?>" method="post" name="adminForm" id="language-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_languages&layout=edit&lang_id='.(int) $this->item->lang_id); ?>" method="post" name="adminForm" id="language-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 			<?php if ($this->item->lang_id) : ?>
@@ -50,7 +50,7 @@ $canDo		= LanguagesHelper::getActions();
 				<?php echo $this->form->getLabel('published'); ?>
 				<?php echo $this->form->getInput('published'); ?>
 			<?php endif; ?>
-			
+
 			<?php echo $this->form->getLabel('description'); ?>
 			<?php echo $this->form->getInput('description'); ?>
 

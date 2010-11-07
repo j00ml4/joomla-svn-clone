@@ -1,6 +1,8 @@
 <?php
 /**
  * @version		$Id$
+ * @package		Joomla.Administrator
+ * @subpackage	com_content
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -10,11 +12,14 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modeladmin');
 
+require_once JPATH_COMPONENT_ADMINISTRATOR.DS.'helpers'.DS.'content.php';
+
 /**
- * Article model.
+ * Item Model for an Article.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_content
+ * @since		1.6
  */
 class ContentModelArticle extends JModelAdmin
 {
@@ -27,7 +32,7 @@ class ContentModelArticle extends JModelAdmin
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
-	 * @param	object	A record object.
+	 * @param	object	$record	A record object.
 	 *
 	 * @return	boolean	True if allowed to delete the record. Defaults to the permission set in the component.
 	 * @since	1.6
@@ -42,7 +47,7 @@ class ContentModelArticle extends JModelAdmin
 	/**
 	 * Method to test whether a record can be deleted.
 	 *
-	 * @param	object	A record object.
+	 * @param	object	$record	A record object.
 	 *
 	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
 	 * @since	1.6
@@ -82,7 +87,7 @@ class ContentModelArticle extends JModelAdmin
 
 		// Increment the content version number.
 		$table->version++;
-		
+
 		// Reorder the articles within the category so the new article is first
 		if (empty($table->id)) {
 			$table->reorder('catid = '.(int) $table->catid.' AND state >= 0');
@@ -123,7 +128,7 @@ class ContentModelArticle extends JModelAdmin
 			$registry->loadJSON($item->metadata);
 			$item->metadata = $registry->toArray();
 
-			$item->articletext = trim($item->fulltext) ? $item->introtext . "<hr id=\"system-readmore\" />" . $item->fulltext : $item->introtext;
+			$item->articletext = trim($item->fulltext) != '' ? $item->introtext . "<hr id=\"system-readmore\" />" . $item->fulltext : $item->introtext;
 		}
 
 		return $item;
@@ -150,6 +155,8 @@ class ContentModelArticle extends JModelAdmin
 		if ($id = (int) $this->getState('article.id')) {
 			// Existing record. Can only edit in selected categories.
 			$form->setFieldAttribute('catid', 'action', 'core.edit');
+			// Existing record. Can only edit own articles in selected categories.
+			$form->setFieldAttribute('catid', 'action', 'core.edit.own');
 		}
 		else {
 			// New record. Can only create in selected categories.
@@ -190,6 +197,12 @@ class ContentModelArticle extends JModelAdmin
 
 		if (empty($data)) {
 			$data = $this->getItem();
+
+			// Prime some default values.
+			if ($this->getState('article.id') == 0) {
+				$app = JFactory::getApplication();
+				$data->set('catid', JRequest::getInt('catid', $app->getUserState('com_content.articles.filter.category_id')));
+			}
 		}
 
 		return $data;

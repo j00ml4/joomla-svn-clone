@@ -22,7 +22,7 @@ $fieldsets = $this->form->getFieldsets();
 ?>
 
 <script type="text/javascript">
-	function submitbutton(task)
+	Joomla.submitbutton = function(task)
 	{
 		if (task == 'user.cancel' || document.formvalidator.isValid(document.id('user-form'))) {
 			Joomla.submitform(task, document.getElementById('user-form'));
@@ -30,7 +30,7 @@ $fieldsets = $this->form->getFieldsets();
 	}
 </script>
 
-<form action="<?php echo JRoute::_('index.php?option=com_users'); ?>" method="post" name="adminForm" id="user-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_users&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="user-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 			<legend><?php echo JText::_('COM_USERS_USER_ACCOUNT_DETAILS'); ?></legend>

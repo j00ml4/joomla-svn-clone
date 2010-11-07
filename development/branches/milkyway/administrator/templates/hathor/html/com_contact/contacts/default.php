@@ -11,7 +11,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('script','system/multiselect.js',false,true);
 $user	= JFactory::getUser();
@@ -27,12 +27,12 @@ $saveOrder	= $listOrder == 'a.ordering';
 	<legend class="element-invisible"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></legend>
 		<div class="filter-search">
 			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('JSEARCH_FILTER_LABEL'); ?></label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_CONTACT_SEARCH_IN_NAME'); ?>" />
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" title="<?php echo JText::_('COM_CONTACT_SEARCH_IN_NAME'); ?>" />
 			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?></button>
 		</div>
 		<div class="filter-select">
-			
+
 			<label class="selectlabel" for="filter_published">
 				<?php echo JText::_('JOPTION_SELECT_PUBLISHED'); ?>
 			</label>
@@ -56,7 +56,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 			</select>
 			<label class="selectlabel" for="filter_language">
 				<?php echo JText::_('JOPTION_SELECT_LANGUAGE'); ?>
-			</label>            
+			</label>
 			<select name="filter_language" id="filter_language" class="inputbox">
 				<option value=""><?php echo JText::_('JOPTION_SELECT_LANGUAGE');?></option>
 				<?php echo JHtml::_('select.options', JHtml::_('contentlanguage.existing', true, true), 'value', 'text', $this->state->get('filter.language'));?>
@@ -110,6 +110,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 			$canCreate	= $user->authorise('core.create',		'com_contact.category.'.$item->catid);
 			$canEdit	= $user->authorise('core.edit',			'com_contact.category.'.$item->catid);
 			$canCheckin	= $user->authorise('core.manage',		'com_checkin') || $item->checked_out==$user->get('id') || $item->checked_out==0;
+			$canEditOwn	= $user->authorise('core.edit.own',		'com_contact.category.'.$item->catid) && $item->created_by == $userId;
 			$canChange	= $user->authorise('core.edit.state',	'com_contact.category.'.$item->catid) && $canCheckin;
 
 			$item->cat_link = JRoute::_('index.php?option=com_categories&extension=com_contact&task=edit&type=other&='. $item->catid);
@@ -122,7 +123,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 					<?php if ($item->checked_out) : ?>
 						<?php echo JHtml::_('jgrid.checkedout', $i, $item->editor, $item->checked_out_time, 'contacts.', $canCheckin); ?>
 					<?php endif; ?>
-					<?php if ($canEdit) : ?>
+					<?php if ($canEdit || $canEditOwn) : ?>
 						<a href="<?php echo JRoute::_('index.php?option=com_contact&task=contact.edit&id='.(int) $item->id); ?>">
 							<?php echo $this->escape($item->name); ?></a>
 					<?php else : ?>
@@ -132,7 +133,7 @@ $saveOrder	= $listOrder == 'a.ordering';
 						<?php echo JText::sprintf('JGLOBAL_LIST_ALIAS', $this->escape($item->alias));?></p>
 				</td>
 				<td class="center">
-					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'contacts.', $canChange);?>
+					<?php echo JHtml::_('jgrid.published', $item->published, $i, 'contacts.', $canChange, 'cb', $item->publish_up, $item->publish_down); ?>
 				</td>
 				<td class="order">
 					<?php if ($canChange) : ?>
