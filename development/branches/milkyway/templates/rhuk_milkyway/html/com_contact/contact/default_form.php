@@ -14,9 +14,9 @@ defined('_JEXEC') or die;
 			if (valid == false) {
 				// do field validation
 				if (frm.email.invalid) {
-					alert( "' . JText::_( 'PLEASE_ENTER_A_VALID_E_MAIL_ADDRESS', true ) . '" );
+					alert( "' . JText::_( 'COM_CONTACT_CONTACT_ENTER_VALID_EMAIL', true ) . '" );
 				} else if (frm.text.invalid) {
-					alert( "' . JText::_( 'CONTACT_FORM_NC', true ) . '" );
+					alert( "' . JText::_( 'COM_CONTACT_FORM_NC', true ) . '" );
 				}
 				return false;
 			} else {
@@ -37,25 +37,25 @@ defined('_JEXEC') or die;
 	<form action="<?php echo JRoute::_( 'index.php' );?>" method="post" name="emailForm" id="emailForm" class="form-validate">
 		<div class="contact-email<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 			<label for="contact_name">
-				&#160;<?php echo JText::_( 'Enter your name' );?>:
+				&#160;<?php echo JText::_( 'COM_CONTACT_CONTACT_EMAIL_NAME' );?>:
 			</label>
 			<br />
 			<input type="text" name="name" id="contact-name" size="30" class="inputbox" value="" />
 			<br />
 			<label id="contact-emailmsg" for="contact_email">
-				&#160;<?php echo JText::_( 'Email address' );?>:
+				&#160;<?php echo JText::_( 'JGLOBAL_EMAIL' );?>:
 			</label>
 			<br />
 			<input type="text" id="contact_email" name="email" size="30" value="" class="inputbox required validate-email" maxlength="100" />
 			<br />
 			<label for="contact_subject">
-				&#160;<?php echo JText::_( 'COM_CONTACT_MESSAGE_SUBJECT' );?>:
+				&#160;<?php echo JText::_( 'COM_CONTACT_CONTACT_MESSAGE_SUBJECT' );?>:
 			</label>
 			<br />
 			<input type="text" name="subject" id="contact-subject" size="30" class="inputbox" value="" />
 			<br /><br />
 			<label id="contact_textmsg" for="contact_text">
-				&#160;<?php echo JText::_( 'Enter your message' );?>:
+				&#160;<?php echo JText::_( 'COM_CONTACT_CONTACT_ENTER_MESSAGE' );?>:
 			</label>
 			<br />
 			<textarea cols="50" rows="10" name="text" id="contact-text" class="inputbox required"></textarea>
@@ -63,7 +63,7 @@ defined('_JEXEC') or die;
 			<br />
 				<input type="checkbox" name="email_copy" id="contact-email-copy" value="1"  />
 				<label for="contact_email_copy">
-					<?php echo JText::_( 'EMAIL_A_COPY' ); ?>
+					<?php echo JText::_( 'COM_CONTACT_CONTACT_EMAIL_A_COPY' ); ?>
 				</label>
 			<?php endif; ?>
 			<br />
