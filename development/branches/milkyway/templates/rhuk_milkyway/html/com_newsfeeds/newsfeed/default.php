@@ -75,10 +75,14 @@ defined('_JEXEC') or die; ?>
 			<?php endif; ?>
 			<?php if ( $this->params->get( 'show_item_description' ) && $item->get_description()) : ?>
 				<br />
-				<?php $text = $this->limitText($item->get_description(), $this->params->get( 'feed_word_count' ));
+				<?php $text = $item->get_description();
+				if($this->params->get('show_feed_image', 0) == 0)
+				{
+					$text = JFilterOutput::stripImages($text);
+				}
+				$text = JHTML::_('string.truncate', $text, $this->params->get('feed_character_count'));
 					echo str_replace('&apos;', "'", $text);
-				?>
-				<br />
+				?>				<br />
 				<br />
 			<?php endif; ?>
 			</li>
