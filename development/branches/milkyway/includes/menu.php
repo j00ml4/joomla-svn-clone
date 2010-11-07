@@ -39,16 +39,12 @@ class JMenuSite extends JMenu
 			$query->leftJoin('#__extensions AS e ON m.component_id = e.extension_id');
 			$query->where('m.published = 1');
 			$query->where('m.parent_id > 0');
+			$query->where('m.client_id = 0');
 			$query->order('m.lft');
 
 			$user = JFactory::getUser();
 			$groups = implode(',', $user->authorisedLevels());
 			$query->where('m.access IN (' . $groups . ')');
-
-			// Filter by language
-			if ($app->isSite() && $app->getLanguageFilter()) {
-				$query->where('m.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
-			}
 
 			// Set the query
 			$db->setQuery($query);
@@ -81,5 +77,26 @@ class JMenuSite extends JMenu
 		} else {
 			$this->_items = $data;
 		}
+	}
+	/**
+	 * Gets menu items by attribute
+	 *
+	 * @param	string	$attributes	The field name
+	 * @param	string	$values		The value of the field
+	 * @param	boolean	$firstonly	If true, only returns the first item found
+	 *
+	 * @return	array
+	 */
+	public function getItems($attributes, $values, $firstonly = false)
+	{
+		$attributes = (array) $attributes;
+		$values = (array) $values;
+		$app	= JFactory::getApplication();
+		// Filter by language if not set
+		if ($app->isSite() && $app->getLanguageFilter() && !array_key_exists('language',$attributes)) {
+			$attributes[]='language';
+			$values[]=array(JFactory::getLanguage()->getTag(), '*');
+		}
+		return parent::getItems($attributes, $values, $firstonly);
 	}
 }
