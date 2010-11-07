@@ -129,7 +129,7 @@ class MenusModelItem extends JModelAdmin
 		}
 
 		if (!$done) {
-			$this->setError('COM_MENUS_ERROR_INSUFFICIENT_BATCH_INFORMATION');
+			$this->setError(JText::_('JGLOBAL_ERROR_INSUFFICIENT_BATCH_INFORMATION'));
 			return false;
 		}
 
@@ -198,7 +198,7 @@ class MenusModelItem extends JModelAdmin
 				}
 				else {
 					// Non-fatal error
-					$this->setError(JText::_('COM_MENUS_BATCH_MOVE_PARENT_NOT_FOUND'));
+					$this->setError(JText::_('JGLOBAL_BATCH_MOVE_PARENT_NOT_FOUND'));
 					$parentId = 0;
 				}
 			}
@@ -244,7 +244,7 @@ class MenusModelItem extends JModelAdmin
 				}
 				else {
 					// Not fatal error
-					$this->setError(JText::sprintf('COM_MENUS_BATCH_MOVE_ROW_NOT_FOUND', $pk));
+					$this->setError(JText::sprintf('JGLOBAL_BATCH_MOVE_ROW_NOT_FOUND', $pk));
 					continue;
 				}
 			}
@@ -276,11 +276,20 @@ class MenusModelItem extends JModelAdmin
 			// otherwise it's a new top level item
 			$table->parent_id	= isset($parents[$oldParentId]) ? $parents[$oldParentId] : $parentId;
 			$table->menutype	= $menuType;
+
+			// Set the new location in the tree for the node.
+			$table->setLocation($table->parent_id, 'last-child');
+
 			// TODO: Deal with ordering?
 			//$table->ordering	= 1;
 			$table->level		= null;
 			$table->lft		= null;
 			$table->rgt	= null;
+
+			// Alter the title & alias
+			list($title,$alias) = $this->generateNewTitle($table->parent_id, $table->alias, $table->title);
+			$table->title   = $title;
+			$table->alias   = $alias;
 
 			// Store the row.
 			if (!$table->store()) {
@@ -343,7 +352,7 @@ class MenusModelItem extends JModelAdmin
 				}
 				else {
 					// Non-fatal error
-					$this->setError(JText::_('COM_MENUS_BATCH_MOVE_PARENT_NOT_FOUND'));
+					$this->setError(JText::_('JGLOBAL_BATCH_MOVE_PARENT_NOT_FOUND'));
 					$parentId = 0;
 				}
 			}
@@ -364,13 +373,16 @@ class MenusModelItem extends JModelAdmin
 				}
 				else {
 					// Not fatal error
-					$this->setError(JText::sprintf('COM_MENUS_BATCH_MOVE_ROW_NOT_FOUND', $pk));
+					$this->setError(JText::sprintf('JGLOBAL_BATCH_MOVE_ROW_NOT_FOUND', $pk));
 					continue;
 				}
 			}
 
 			// Set the new location in the tree for the node.
 			$table->setLocation($parentId, 'last-child');
+
+			// Set the new Parent Id
+			$table->parent_id = $parentId;
 
 			// Check if we are moving to a different menu
 			if ($menuType != $table->menutype) {
@@ -716,9 +728,7 @@ class MenusModelItem extends JModelAdmin
 		$app = JFactory::getApplication('administrator');
 
 		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_menus.edit.item.id'))) {
-			$pk = (int) JRequest::getInt('item_id');
-		}
+		$pk = (int) JRequest::getInt('id');
 		$this->setState('item.id', $pk);
 
 		if (!($parentId = $app->getUserState('com_menus.edit.item.parent_id'))) {
@@ -824,7 +834,7 @@ class MenusModelItem extends JModelAdmin
 				// If an XML file was found in the component, load it first.
 				// We need to qualify the full path to avoid collisions with component file names.
 
-				if ($form->loadFile($formFile, false, '/metadata') == false) {
+				if ($form->loadFile($formFile, true, '/metadata') == false) {
 					throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
 				}
 
@@ -953,8 +963,8 @@ class MenusModelItem extends JModelAdmin
 			$isNew = false;
 		}
 
-		// Set the new parent id if set.
-		if ($table->parent_id != $data['parent_id']) {
+		// Set the new parent id if parent id not matched OR while New/Save as Copy .
+		if ($table->parent_id != $data['parent_id'] || $data['id'] == 0) {
 			$table->setLocation($data['parent_id'], 'last-child');
 		}
 
@@ -962,6 +972,13 @@ class MenusModelItem extends JModelAdmin
 		if (!$table->bind($data)) {
 			$this->setError($table->getError());
 			return false;
+		}
+
+		// Alter the title & alias for save as copy.
+		if(!$isNew && $data['id'] == 0){
+			list($title,$alias) = $this->generateNewTitle($table->parent_id, $table->alias, $table->title);
+			$table->title = $title;
+			$table->alias = $alias;
 		}
 
 		// Check the data.
@@ -1158,5 +1175,35 @@ class MenusModelItem extends JModelAdmin
 		$cache->clean('mod_menu');
 
 		return parent::reorder($pks, $delta);
+	}
+
+	/**
+	* Method to change the title & alias.
+	*
+	* @param	int     The value of the menu Parent Id.
+	* @param   sting   The value of the menu Alias.
+	* @param   sting   The value of the menu Title.
+	* @return	array   Contains title and alias.
+	* @since	1.6
+	*/
+	function generateNewTitle(&$parent_id, &$alias, &$title)
+	{
+		// Alter the title & alias
+		$MenuTable = JTable::getInstance('Menu','JTable');
+		while($MenuTable->load(array('alias'=>$alias,'parent_id'=>$parent_id))){
+			$m = null;
+			if (preg_match('#-(\d+)$#', $alias, $m)) {
+				$alias = preg_replace('#-(\d+)$#', '-'.($m[1] + 1).'', $alias);
+			} else {
+				$alias .= '-2';
+			}
+			if (preg_match('#\((\d+)\)$#', $title, $m)) {
+				$title = preg_replace('#\(\d+\)$#', '('.($m[1] + 1).')', $title);
+			} else {
+				$title .= ' (2)';
+			}
+		}
+
+		return array($title ,$alias);
 	}
 }

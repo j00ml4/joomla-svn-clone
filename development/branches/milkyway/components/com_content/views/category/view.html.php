@@ -39,7 +39,7 @@ class ContentViewCategory extends JView
 
 		// Get some data from the models
 		$state		= $this->get('State');
-		$params		= $state->params;
+		$params		= $this->get('Params');
 		$items		= $this->get('Items');
 		$category	= $this->get('Category');
 		$children	= $this->get('Children');
@@ -57,8 +57,13 @@ class ContentViewCategory extends JView
 		}
 
 		if ($parent == false) {
-			//TODO Raise error for missing parent category here
+			return JError::raiseWarning(404, JText::_('JGLOBAL_CATEGORY_NOT_FOUND'));
 		}
+
+		// Setup the category parameters.
+//		$cparams = $category->getParams();
+//		$category->params = clone($params);
+//		$category->params->merge($cparams);
 
 		// Check whether category access level allows access.
 		$user	= JFactory::getUser();
@@ -73,8 +78,12 @@ class ContentViewCategory extends JView
 		$numIntro	= $params->def('num_intro_articles', 4);
 		$numLinks	= $params->def('num_links', 4);
 
+		// Override the layout if you want to.
+		$this->setLayout($params->get('category_layout', $this->getLayout()));
+
 		// Compute the article slugs and prepare introtext (runs content plugins).
-		for ($i = 0, $n = count($items); $i < $n; $i++) {
+		for ($i = 0, $n = count($items); $i < $n; $i++)
+		{
 			$item = &$items[$i];
 			$item->slug = $item->alias ? ($item->id . ':' . $item->alias) : $item->id;
 
@@ -88,7 +97,7 @@ class ContentViewCategory extends JView
 			$dispatcher = JDispatcher::getInstance();
 
 			// Ignore content plugins on links.
-			if ($i < $numLeading + $numIntro) {
+			if ($i < $numLeading + $numIntro && $this->getLayout() == 'blog') {
 				$item->introtext = JHtml::_('content.prepare', $item->introtext);
 
 				$results = $dispatcher->trigger('onContentAfterTitle', array('com_content.article', &$item, &$item->params, 0));
@@ -104,7 +113,7 @@ class ContentViewCategory extends JView
 
 		// For blog layouts, preprocess the breakdown of leading, intro and linked articles.
 		// This makes it much easier for the designer to just interrogate the arrays.
-		if ($this->_layout == 'blog') {
+		if ($this->getLayout() == 'blog') {
 			$max = count($items);
 
 			// The first group is the leading articles.
@@ -129,9 +138,17 @@ class ContentViewCategory extends JView
 			}
 
 			// The remainder are the links.
-			for ($i = $numLeading + $numIntro; $i < $max; $i++) {
+			$limit = $numLeading + $numIntro + $numLinks;
+			for ($i = $numLeading + $numIntro; $i < $limit && $i < $max; $i++)
+			{
 				$this->link_items[$i] = &$items[$i];
 			}
+
+			// Set the pagination
+			$pagination = new JPagination($pagination->total, $state->get('list.start'), $numLeading + $numIntro);
+		}
+		else {
+			$items = array_slice($items, 0, $pagination->limit);
 		}
 
 		$children = array($category->id => $children);
@@ -164,15 +181,17 @@ class ContentViewCategory extends JView
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
+
 		if ($menu) {
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
-		} else {
+		}
+		else {
 			$this->params->def('page_heading', JText::_('JGLOBAL_ARTICLES'));
 		}
 
 		$id = (int) @$menu->query['id'];
-		if ($menu && ($menu->query['option'] != 'com_content' || $menu->query['view'] == 'article' || $id != $this->category->id))
-		{
+
+		if ($menu && ($menu->query['option'] != 'com_content' || $menu->query['view'] == 'article' || $id != $this->category->id)) {
 			$path = array(array('title' => $this->category->title, 'link' => ''));
 			$category = $this->category->getParent();
 
@@ -184,7 +203,8 @@ class ContentViewCategory extends JView
 
 			$path = array_reverse($path);
 
-			foreach ($path as $item) {
+			foreach ($path as $item)
+			{
 				$pathway->addItem($item['title'], $item['link']);
 			}
 		}
@@ -193,7 +213,8 @@ class ContentViewCategory extends JView
 
 		if (empty($title)) {
 			$title = htmlspecialchars_decode($app->getCfg('sitename'));
-		} elseif ($app->getCfg('sitename_pagetitles', 0)) {
+		}
+		elseif ($app->getCfg('sitename_pagetitles', 0)) {
 			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
 		}
 
@@ -217,7 +238,8 @@ class ContentViewCategory extends JView
 
 		$mdata = $this->category->getMetadata()->toArray();
 
-		foreach ($mdata as $k => $v) {
+		foreach ($mdata as $k => $v)
+		{
 			if ($v) {
 				$this->document->setMetadata($k, $v);
 			}

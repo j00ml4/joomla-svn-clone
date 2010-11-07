@@ -18,7 +18,7 @@ $user = JFactory::getUser();
 $canDo = TemplatesHelper::getActions();
 ?>
 <script type="text/javascript">
-	function submitbutton(task)
+	Joomla.submitbutton = function(task)
 	{
 		if (task == 'style.cancel' || document.formvalidator.isValid(document.id('style-form'))) {
 			Joomla.submitform(task, document.getElementById('style-form'));
@@ -26,7 +26,7 @@ $canDo = TemplatesHelper::getActions();
 	}
 </script>
 
-<form action="<?php echo JRoute::_('index.php?option=com_templates'); ?>" method="post" name="adminForm" id="style-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_templates&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="style-form" class="form-validate">
 	<div class="width-60 fltlft">
 		<fieldset class="adminform">
 			<legend><?php echo JText::_('JDETAILS');?></legend>
@@ -49,6 +49,18 @@ $canDo = TemplatesHelper::getActions();
 				<?php echo $this->form->getLabel('id'); ?>
 				<span class="readonly"><?php echo $this->item->id; ?></span>
 			<?php endif; ?>
+			<div class="clr"></div>
+			<?php if ($this->item->xml) : ?>
+				<?php if ($text = trim($this->item->xml->description)) : ?>
+					<label>
+						<?php echo JText::_('COM_TEMPLATES_TEMPLATE_DESCRIPTION'); ?>
+					</label>
+					<span class="readonly mod-desc"><?php echo JText::_($text); ?></span>
+				<?php endif; ?>
+			<?php else : ?>
+				<p class="error"><?php echo JText::_('COM_TEMPLATES_ERR_XML'); ?></p>
+			<?php endif; ?>
+			<div class="clr"></div>
 		</fieldset>
 		<input type="hidden" name="task" value="" />
 		<?php echo JHtml::_('form.token'); ?>

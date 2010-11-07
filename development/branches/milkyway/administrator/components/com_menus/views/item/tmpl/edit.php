@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 // Include the component HTML helpers.
-JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 
 // Load the tooltip behavior.
 JHtml::_('behavior.tooltip');
@@ -19,11 +19,16 @@ JHTML::_('behavior.modal');
 ?>
 
 <script type="text/javascript">
-	function submitbutton(task, type)
+	Joomla.submitbutton = function(task, type)
 	{
-		if (task == 'item.setType') {
-			document.id('item-form').elements['jform[type]'].value = type;
-			Joomla.submitform(task, document.getElementById('item-form'));
+		if (task == 'item.setType' || task == 'item.setMenuType') {
+			if(task == 'item.setType') {
+				document.id('item-form').elements['jform[type]'].value = type;
+				document.getElementById('fieldtype').value = 'type';
+			} else {
+				document.id('item-form').elements['jform[menutype]'].value = type;
+			}
+			Joomla.submitform('item.setType', document.getElementById('item-form'));
 		} else if (task == 'item.cancel' || document.formvalidator.isValid(document.id('item-form'))) {
 			Joomla.submitform(task, document.getElementById('item-form'));
 		} else {
@@ -38,7 +43,7 @@ JHTML::_('behavior.modal');
 	}
 </script>
 
-<form action="<?php echo JRoute::_('index.php?option=com_menus'); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_menus&layout=edit&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
 
 <div class="width-60 fltlft">
 	<fieldset class="adminform">
@@ -121,6 +126,7 @@ JHTML::_('behavior.modal');
 	<?php echo $this->form->getInput('component_id'); ?>
 	<?php echo JHtml::_('form.token'); ?>
 </div>
+<input type="hidden" id="fieldtype" name="fieldtype" value="" />
 </form>
 
 

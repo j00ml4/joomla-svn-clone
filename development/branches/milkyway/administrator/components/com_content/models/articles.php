@@ -1,6 +1,8 @@
 <?php
 /**
  * @version		$Id$
+ * @package		Joomla.Administrator
+ * @subpackage	com_content
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -23,6 +25,7 @@ class ContentModelArticles extends JModelList
 	 *
 	 * Note. Calling getState in this method will result in recursion.
 	 *
+	 * @return	void
 	 * @since	1.6
 	 */
 	protected function populateState()
@@ -32,7 +35,7 @@ class ContentModelArticles extends JModelList
 		$session = JFactory::getSession();
 
 		// Adjust the context to support modal layouts.
-		if ($layout = JRequest::getVar('layout', 'default')) {
+		if ($layout = JRequest::getVar('layout')) {
 			$this->context .= '.'.$layout;
 		}
 
@@ -48,12 +51,8 @@ class ContentModelArticles extends JModelList
 		$categoryId = $app->getUserStateFromRequest($this->context.'.filter.category_id', 'filter_category_id');
 		$this->setState('filter.category_id', $categoryId);
 
-		// set the value of the category filter for the single record edit view
-		$session->set('com_content.article.filter.category_id',$categoryId);
-
 		$language = $app->getUserStateFromRequest($this->context.'.filter.language', 'filter_language', '');
 		$this->setState('filter.language', $language);
-
 
 		// List state information.
 		parent::populateState('a.title', 'asc');
@@ -75,7 +74,7 @@ class ContentModelArticles extends JModelList
 	{
 		// Compile the store id.
 		$id	.= ':'.$this->getState('filter.search');
-		$id .= ':'.$this->getState('filter.access');
+		$id	.= ':'.$this->getState('filter.access');
 		$id	.= ':'.$this->getState('filter.published');
 		$id	.= ':'.$this->getState('filter.category_id');
 		$id	.= ':'.$this->getState('filter.language');
@@ -87,6 +86,7 @@ class ContentModelArticles extends JModelList
 	 * Build an SQL query to load the list data.
 	 *
 	 * @return	JDatabaseQuery
+	 * @since	1.6
 	 */
 	protected function getListQuery()
 	{
@@ -98,8 +98,10 @@ class ContentModelArticles extends JModelList
 		$query->select(
 			$this->getState(
 				'list.select',
-				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid,' .
-				'a.state, a.access, a.created, a.hits, a.ordering, a.featured, a.language')
+				'a.id, a.title, a.alias, a.checked_out, a.checked_out_time, a.catid' .
+				', a.state, a.access, a.created, a.created_by, a.ordering, a.featured, a.language, a.hits' .
+				', a.publish_up, a.publish_down'
+			)
 		);
 		$query->from('#__content AS a');
 
@@ -132,7 +134,8 @@ class ContentModelArticles extends JModelList
 		$published = $this->getState('filter.published');
 		if (is_numeric($published)) {
 			$query->where('a.state = ' . (int) $published);
-		} else if ($published === '') {
+		}
+		else if ($published === '') {
 			$query->where('(a.state = 0 OR a.state = 1)');
 		}
 
@@ -140,7 +143,8 @@ class ContentModelArticles extends JModelList
 		$categoryId = $this->getState('filter.category_id');
 		if (is_numeric($categoryId)) {
 			$query->where('a.catid = '.(int) $categoryId);
-		} else if (is_array($categoryId)) {
+		}
+		else if (is_array($categoryId)) {
 			JArrayHelper::toInteger($categoryId);
 			$categoryId = implode(',', $categoryId);
 			$query->where('a.catid IN ('.$categoryId.')');
@@ -153,15 +157,17 @@ class ContentModelArticles extends JModelList
 			$query->where('a.created_by '.$type.(int) $authorId);
 		}
 
-		// Filter by search in title
+		// Filter by search in title.
 		$search = $this->getState('filter.search');
 		if (!empty($search)) {
 			if (stripos($search, 'id:') === 0) {
 				$query->where('a.id = '.(int) substr($search, 3));
-			} else if (stripos($search, 'author:') === 0) {
+			}
+			else if (stripos($search, 'author:') === 0) {
 				$search = $db->Quote('%'.$db->getEscaped(substr($search, 7), true).'%');
 				$query->where('(ua.name LIKE '.$search.' OR ua.username LIKE '.$search.')');
-			} else {
+			}
+			else {
 				$search = $db->Quote('%'.$db->getEscaped($search, true).'%');
 				$query->where('(a.title LIKE '.$search.' OR a.alias LIKE '.$search.')');
 			}

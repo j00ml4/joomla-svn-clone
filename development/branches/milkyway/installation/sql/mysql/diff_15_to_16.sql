@@ -626,8 +626,12 @@ ALTER TABLE `#__menu`
 ALTER TABLE `#__menu`
  ADD COLUMN `language` char(7) NOT NULL DEFAULT '' AFTER `home`;
 
+ALTER TABLE `jos_menu` ADD COLUMN `client_id` TINYINT(4) NOT NULL DEFAULT 0 AFTER `language`;
+
 ALTER TABLE `#__menu`
  ADD INDEX idx_language(`language`);
+
+ALTER TABLE `jos_menu` ADD UNIQUE `idx_alias_parent_id` (`client_id`,`parent_id`,`alias`);
 
 INSERT INTO `#__menu` VALUES
 	('','Menu_Item_Root','root','','','','',1,0,0,0,0,0,'0000-00-00 00:00:00',0,0,'',0,'',0,217,0,'*');
@@ -795,7 +799,7 @@ CREATE TABLE IF NOT EXISTS `#__template_styles` (
   `client_id` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `home` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL DEFAULT '',
-  `params` varchar(2048) NOT NULL DEFAULT '',
+  `params` varchar(10240) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `idx_template` (`template`),
   KEY `idx_home` (`home`)
