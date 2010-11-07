@@ -67,17 +67,35 @@ $cparams = JComponentHelper::getParams ('com_media');
 	</td>
 	<td>&#160;</td>
 </tr>
-<?php if ( $this->contact->params->get( 'allow_vcard' ) ) : ?>
-<tr>
-	<td colspan="2">
-	<?php echo JText::_( 'DOWNLOAD_INFORMATION_AS' );?>
-		<a href="<?php echo JURI::base(); ?>index.php?option=com_contact&amp;task=vcard&amp;contact_id=<?php echo $this->contact->id; ?>&amp;format=raw&amp;tmpl=component">
-			<?php echo JText::_( 'VCard' );?></a>
-	</td>
-</tr>
-<?php endif;
+	<?php if ($this->params->get('allow_vcard')) :	?>
+		<?php echo JText::_('COM_CONTACT_DOWNLOAD_INFORMATION_AS');?>
+			<a href="<?php echo JURI::base(); ?>index.php?option=com_contact&amp;view=contact&amp;id=<?php echo $this->contact->id; ?>&amp;format=vcf">
+				<?php echo JText::_('COM_CONTACT_VCARD');?></a>
+	<?php endif; ?>
+<?php 
 if ( $this->contact->params->get('show_email_form') && ($this->contact->email_to || $this->contact->user_id))
 	echo $this->loadTemplate('form');
 ?>
 </table>
+	<?php if ($this->params->get('show_links')) : ?>
+		<?php echo $this->loadTemplate('links'); ?>
+	<?php endif; ?>
+	<?php if ($this->params->get('show_articles') && $this->contact->user_id) : ?>
+		<?php if ($this->params->get('presentation_style')!='plain'):?>
+			<?php echo JHtml::_($this->params->get('presentation_style').'.panel', JText::_('JGLOBAL_ARTICLES'), 'display-articles'); ?>
+			<?php endif; ?>
+			<?php if  ($this->params->get('presentation_style')=='plain'):?>
+			<?php echo '<h3>'. JText::_('JGLOBAL_ARTICLES').'</h3>'; ?>
+			<?php endif; ?>
+			<?php echo $this->loadTemplate('articles'); ?>
+	<?php endif; ?>
+	<?php if ($this->params->get('show_profile') && $this->contact->user_id && JPluginHelper::isEnabled('user', 'profile')) : ?>
+		<?php if ($this->params->get('presentation_style')!='plain'):?>
+			<?php echo JHtml::_($this->params->get('presentation_style').'.panel', JText::_('COM_CONTACT_PROFILE'), 'display-profile'); ?>
+		<?php endif; ?>
+		<?php if ($this->params->get('presentation_style')=='plain'):?>
+			<?php echo '<h3>'. JText::_('COM_CONTACT_PROFILE').'</h3>'; ?>
+		<?php endif; ?>
+		<?php echo $this->loadTemplate('profile'); ?>
+	<?php endif; ?>
 </div>

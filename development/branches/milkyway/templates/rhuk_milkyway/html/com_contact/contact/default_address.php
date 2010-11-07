@@ -114,15 +114,24 @@ defined('_JEXEC') or die;?>
 <?php endif; ?>
 <br />
 <?php if ( $this->contact->misc && $this->contact->params->get( 'show_misc' ) ) : ?>
-<table width="100%" cellpadding="0" cellspacing="0" border="0">
-<tr>
-	<td width="<?php echo $this->contact->params->get( 'column_width' ); ?>" valign="top" >
-		<?php echo $this->contact->params->get( 'marker_misc' ); ?>
-	</td>
-	<td>
-		<?php echo $this->escape($this->contact->misc); ?>
-	</td>
-</tr>
-</table>
+	<table width="100%" cellpadding="0" cellspacing="0" border="0">
+	<tr>
+		<td width="<?php echo $this->contact->params->get( 'column_width' ); ?>" valign="top" >
+			<?php echo $this->contact->params->get( 'marker_misc' ); ?>
+		</td>
+		<td>
+			<?php echo '<h3>'. JText::_('COM_CONTACT_OTHER_INFORMATION').'</h3>'; ?>
+			
+					<div class="contact-miscinfo">
+						<span class="<?php echo $this->params->get('marker_class'); ?>">
+							<?php echo $this->params->get('marker_misc'); ?>
+						</span>
+						<span class="contact-misc">
+							<?php echo $this->contact->misc; ?>
+						</span>
+					</div>
+		</td>
+	</tr>
+	</table>
 <br />
 <?php endif; ?>
