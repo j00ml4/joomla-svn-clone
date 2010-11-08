@@ -67,12 +67,6 @@ abstract class JDatabase extends JObject
 	protected $_cursor = null;
 
 	/**
-	 * The slave database link identifier.
-	 *
-	 * @var mixed
-	 */
-	protected $_slave_connection = '';
-		/**
 	 * Debug option
 	 *
 	 * @var boolean
@@ -275,13 +269,6 @@ abstract class JDatabase extends JObject
 	 */
 	abstract public function connected();
 
-		/**
-	 * Determines if the connection to the server is active.
-	 *
-	 * @return	boolean
-	 * @since	1.5
-	 */
-	abstract public function slave_connected();
 	/**
 	 * Determines UTF support
 	 *

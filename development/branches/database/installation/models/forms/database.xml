@@ -12,7 +12,7 @@
 				<option value="mysqli">MySQLi</option>
 				<option value="oracle">Oracle</option>
 				<option value="sqlsrv">SQLSrv</option>
-				<option value="azure">SQL Azure</option>
+				<option value="sqlazure">SQL Azure</option>
 			</field>
 			<field name="db_host" type="text" id="db_host" class="inputbox"
 				label="INSTL_DATABASE_HOST_LABEL"
@@ -30,23 +30,6 @@
 				label="INSTL_DATABASE_NAME_LABEL"
 				required="true"
 			/>
-		</fieldset>
-		
-		<fieldset name="slave_db">
-			
-			<field name="slave_db_host" type="text" id="slave_db_host" class="inputbox"
-				label="INSTL_DATABASE_HOST_LABEL"
-				default="localhost"
-				required="false"
-			/>
-			<field name="slave_db_user" type="text" id="slave_db_user" class="inputbox"
-				label="INSTL_DATABASE_USER_LABEL"
-				required="false"
-			/>
-			<field name="slave_db_pass" type="password" id="slave_db_pass" class="inputbox"
-				label="INSTL_DATABASE_PASSWORD_LABEL"
-			/>
-			
 		</fieldset>
 
 		<!-- Advanced Settings -->

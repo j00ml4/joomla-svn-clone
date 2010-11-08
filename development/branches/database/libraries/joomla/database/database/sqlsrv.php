@@ -75,49 +75,17 @@ class JDatabaseSQLSrv extends JDatabase
 			$this->_errorMsg = 'Could not connect to MS SQL';
 			return;
 		}
-    ini_set("display_errors", 1);
-error_reporting(E_ALL);
- 
-		$conf = & JFactory::getConfig();
-		
-	    $slave_host = array_key_exists('slavehost', $options)	? $options['slavehost']		: '';
-		$slave_user = array_key_exists('slavename', $options)	? $options['slavename']		: '';
-		$slave_password = array_key_exists('slavepass', $options)	? $options['slavepass']		: '';
-	
-		if (empty($slave_host))
-			$slave_host             = $conf->getValue('config.slave_db_host');
-
-		if (empty($slave_user))
-			$slave_user             = $conf->getValue('config.slave_db_user');
-
-		if (empty($slave_password))
-			$slave_password         = $conf->getValue('config.slave_db_password');
-		
-	
-	    if ($slave_host != "" && $slave_user != "" && $slave_password != "") {
-			if (!($this->_slave_connection = sqlsrv_connect( $slave_host, Array("Database" => $database,'uid'=>$slave_user, 'pwd'=>$slave_password, 'CharacterSet'=>'UTF-8', 'ReturnDatesAsStrings' => true,) ))) {
-				$this->_errorNum = 2;
-				$this->_errorMsg = 'Could not connect to Slave mssql';
-	
-				return;
-			}
-			
-			
-		}
-		
+   	 	ini_set("display_errors", 1);
+		error_reporting(E_ALL);
+ 		
 		//sqlsrv_configure('WarningsReturnAsErrors', 1);
-		
-		
+
 		// finalize initialization
 		parent::__construct($options);
 
 		// select the database
 		if ( $select ) {
 			$this->select($database);
-		if (is_resource($this->_slave_connection)) {
-			   // mssql_query("SET @@SESSION.sql_mode = '';", $this->_slave_connection);
-				$this->selectSlave($database);
-		    }
 		}
 	}
 
@@ -132,9 +100,6 @@ error_reporting(E_ALL);
 		$return = false;
 		if (is_resource($this->_connection)) {
 			$return = sqlsrv_close($this->_connection);
-		}
-	 	if (is_resource($this->_slave_connection)) {
-			sqlsrv_close($this->_slave_connection);
 		}
 		return $return;
 	}
@@ -169,14 +134,6 @@ error_reporting(E_ALL);
 		return true;
 	}
 
-   public function slave_connected()
-	{
-		/*if (is_resource($this->_slave_connection)) {
-			return mssql_ping($this->_slave_connection);
-		}
-		return false;*/
-		return true;
-	}
 	/**
 	 * Select a database for use
 	 *
@@ -207,28 +164,7 @@ error_reporting(E_ALL);
 		
 		return true;
 	}
-/**
-	 * Select a Slave database for use
-	 *
-	 * @access	public
-	 * @param	string $database
-	 * @return	boolean True if the database has been successfully selected
-	 * @since	1.5
-	 */
-	function selectSlave($database) {
-		if ( ! $database ) {
-			return false;
-		}
 
-		if(!sqlsrv_query( $this->_slave_connection, 'USE '. $database, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) ))
-		{
-			$this->_errorNum = 3;
-			$this->_errorMsg = 'Could not connect to Slave database '.$database;
-			return false;
-		}
-
-		return true;
-	}
 	/**
 	 * Determines UTF support
 	 *
@@ -303,17 +239,9 @@ error_reporting(E_ALL);
 		$this->_errorNum = 0;
 		$this->_errorMsg = '';
 		
-		jimport("joomla.utilities.string");
 		
-		$select_in_sql = JString::startsWith(ltrim(strtoupper($sql)), 'SELECT') ;
-				
-	    if($select_in_sql && is_resource($this->_slave_connection)) {
-			$this->_cursor = sqlsrv_query( $this->_slave_connection, $sql );
-			//sqlsrv_commit($this->_slave_connection);
-		} else {
-			$this->_cursor = sqlsrv_query( $this->_connection, $sql );
-			//sqlsrv_commit($this->_connection);
-		}
+		$this->_cursor = sqlsrv_query( $this->_connection, $sql );
+			
 		if (!$this->_cursor)
 		{
 			$errors = sqlsrv_errors( );
@@ -328,7 +256,7 @@ error_reporting(E_ALL);
 		}
 		return $this->_cursor;
 	}
-/**
+   /**
    * Get the current or query, or new JDatabaseQuery object.
    *
    * @param boolean False to return the last query set by setQuery, True to return a new JDatabaseQuery object.
@@ -467,7 +395,7 @@ error_reporting(E_ALL);
 		if ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
 			$ret = $row[0];
 		}
-    $ret = stripslashes($ret);
+    	$ret = stripslashes($ret);
 		sqlsrv_free_stmt( $cur );
 		return $ret;
 	}
