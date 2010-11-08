@@ -213,10 +213,10 @@ class ContentModelCategory extends JModelItem
 		$articleOrderby		= $params->get('orderby_sec', 'rdate');
 		$articleOrderDate	= $params->get('order_date');
 		$categoryOrderby	= $params->def('orderby_pri', '');
-		$secondary			= ContentHelperQuery::orderbySecondary($articleOrderby, $articleOrderDate) . ', ';
+		$secondary			= ContentHelperQuery::orderbySecondary($articleOrderby, $articleOrderDate);
 		$primary			= ContentHelperQuery::orderbyPrimary($categoryOrderby);
 
-		$orderby .= $primary . ' ' . $secondary . ' a.created ';
+		$orderby .= $primary . ' ' . $secondary . '';
 
 		return $orderby;
 	}
