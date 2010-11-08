@@ -65,14 +65,14 @@ class JDatabaseSQLAzure extends JDatabase
 		// perform a number of fatality checks, then return gracefully
 		if (!function_exists( 'sqlsrv_connect' )) {
 			$this->_errorNum = 1;
-			$this->_errorMsg = 'The MS SQL adapter "sqlsrv" is not available.';
+			$this->_errorMsg = 'The SQLSrv adapter "sqlsrv" is not available.';
 			return;
 		}
 		
 		// connect to the server
 		if (!($this->_connection = sqlsrv_connect( $host, Array("Database" => $database, 'uid'=>$user, 'pwd'=>$password, 'CharacterSet'=>'UTF-8','ReturnDatesAsStrings' => true) ) )) {
 			$this->_errorNum = 2;
-			$this->_errorMsg = 'Could not connect to MS SQL';
+			$this->_errorMsg = 'Could not connect to SQL Azure';
 			return;
 		}
    	 	ini_set("display_errors", 1);
