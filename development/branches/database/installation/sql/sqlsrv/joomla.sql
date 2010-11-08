@@ -1,6 +1,5 @@
 
 /****** Object:  Table [#__weblinks]    Script Date: 10/20/2010 14:35:59 ******/
-SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
@@ -40,12 +39,11 @@ CREATE TABLE [#__weblinks](
  CONSTRAINT [PK_#__weblinks_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__menu]    Script Date: 10/20/2010 14:29:39 ******/
-SET ANSI_NULLS ON
 
 SET QUOTED_IDENTIFIER ON
 
@@ -79,13 +77,13 @@ CREATE TABLE [#__menu](
  CONSTRAINT [PK_#__menu_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
  CONSTRAINT [#__menu$idx_alias_parent_id] UNIQUE NONCLUSTERED 
 (
 	[alias] ASC,
 	[parent_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 
@@ -137,7 +135,7 @@ SELECT 101, 'mainmenu', 'Home', 'home', '', 'home', 'index.php?option=com_conten
 
 SET IDENTITY_INSERT #__menu  OFF;
 /****** Object:  Table [#__banner_tracks]    Script Date: 10/20/2010 14:23:38 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -153,12 +151,12 @@ CREATE TABLE [#__banner_tracks](
 	[track_date] ASC,
 	[track_type] ASC,
 	[banner_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__banners]    Script Date: 10/20/2010 14:24:17 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -197,12 +195,12 @@ CREATE TABLE [#__banners](
  CONSTRAINT [PK_#__banners_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__menu_types]    Script Date: 10/20/2010 14:29:46 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -216,16 +214,16 @@ CREATE TABLE [#__menu_types](
  CONSTRAINT [PK_#__menu_types_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
  CONSTRAINT [#__menu_types$idx_menutype] UNIQUE NONCLUSTERED 
 (
 	[menutype] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__messages]    Script Date: 10/20/2010 14:29:59 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -244,12 +242,12 @@ CREATE TABLE [#__messages](
  CONSTRAINT [PK_#__messages_message_id] PRIMARY KEY CLUSTERED 
 (
 	[message_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__messages_cfg]    Script Date: 10/20/2010 14:30:08 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -263,12 +261,12 @@ CREATE TABLE [#__messages_cfg](
 (
 	[user_id] ASC,
 	[cfg_name] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__modules]    Script Date: 10/20/2010 14:30:34 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -295,8 +293,8 @@ CREATE TABLE [#__modules](
  CONSTRAINT [PK_#__modules_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 SET IDENTITY_INSERT #__modules  ON;
@@ -336,7 +334,7 @@ SELECT 18, 'Banners', '', '', 1, 'position-5', 0, '1900-01-01 00:00:00', '1900-0
 
 SET IDENTITY_INSERT #__modules  OFF;
 /****** Object:  Table [#__categories]    Script Date: 10/20/2010 14:24:56 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -372,8 +370,8 @@ CREATE TABLE [#__categories](
  CONSTRAINT [PK_#__categories_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 SET IDENTITY_INSERT #__categories  ON;
@@ -393,7 +391,7 @@ SELECT 6, 31, 1, 9, 10, 1, 'uncategorised', 'com_weblinks', 'Uncategorised', 'un
 
 SET IDENTITY_INSERT #__categories  OFF;
 /****** Object:  Table [#__modules_menu]    Script Date: 10/20/2010 14:30:39 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -406,8 +404,8 @@ CREATE TABLE [#__modules_menu](
 (
 	[moduleid] ASC,
 	[menuid] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 INSERT INTO #__modules_menu (moduleid,menuid)
@@ -443,7 +441,7 @@ SELECT 17,0
 UNION ALL
 SELECT 18,0
 /****** Object:  Table [#__newsfeeds]    Script Date: 10/20/2010 14:31:23 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -480,12 +478,12 @@ CREATE TABLE [#__newsfeeds](
  CONSTRAINT [PK_#__newsfeeds_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__contact_details]    Script Date: 10/20/2010 14:25:56 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -537,12 +535,12 @@ CREATE TABLE [#__contact_details](
  CONSTRAINT [PK_#__contact_details_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__redirect_links]    Script Date: 10/20/2010 14:31:36 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -560,16 +558,16 @@ CREATE TABLE [#__redirect_links](
  CONSTRAINT [PK_#__redirect_links_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
  CONSTRAINT [#__redirect_links$idx_link_old] UNIQUE NONCLUSTERED 
 (
 	[old_url] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__schemas]    Script Date: 10/20/2010 14:31:42 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -582,12 +580,12 @@ CREATE TABLE [#__schemas](
 (
 	[extension_id] ASC,
 	[version_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__session]    Script Date: 10/20/2010 14:32:07 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -605,12 +603,12 @@ CREATE TABLE [#__session](
  CONSTRAINT [PK_#__session_session_id] PRIMARY KEY CLUSTERED 
 (
 	[session_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__template_styles]    Script Date: 10/20/2010 14:32:26 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -626,8 +624,8 @@ CREATE TABLE [#__template_styles](
  CONSTRAINT [PK_#__template_styles_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 SET IDENTITY_INSERT #__template_styles  ON;
@@ -639,7 +637,7 @@ INSERT INTO #__template_styles (id, template, client_id, home, title, params) VA
 INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (6, 'beez5', 0, 0, 'Beez5 - Default-Fruit Shop', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/sampledata\\/fruitshop\\/fruits.gif","sitetitle":"Matuna Market ","sitedescription":"Fruit Shop Sample Site","navposition":"left","html5":"0"}');
 SET IDENTITY_INSERT #__template_styles  OFF;
 /****** Object:  Table [#__update_categories]    Script Date: 10/20/2010 14:32:35 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -654,12 +652,12 @@ CREATE TABLE [#__update_categories](
  CONSTRAINT [PK_#__update_categories_categoryid] PRIMARY KEY CLUSTERED 
 (
 	[categoryid] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__content]    Script Date: 10/20/2010 14:27:20 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -703,12 +701,12 @@ CREATE TABLE [#__content](
  CONSTRAINT [PK_#__content_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__update_sites]    Script Date: 10/20/2010 14:32:44 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -723,8 +721,8 @@ CREATE TABLE [#__update_sites](
  CONSTRAINT [PK_#__update_sites_update_site_id] PRIMARY KEY CLUSTERED 
 (
 	[update_site_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 
@@ -737,7 +735,7 @@ SELECT 2, 'Joomla Extension Directory', 'collection', 'http://update.joomla.org/
 
 SET IDENTITY_INSERT #__update_sites  OFF;
 /****** Object:  Table [#__update_sites_extensions]    Script Date: 10/20/2010 14:32:48 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -750,8 +748,8 @@ CREATE TABLE [#__update_sites_extensions](
 (
 	[update_site_id] ASC,
 	[extension_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 INSERT INTO #__update_sites_extensions (update_site_id, extension_id)
@@ -759,7 +757,7 @@ SELECT 1, 700
 UNION ALL
 SELECT 2, 700
 /****** Object:  Table [#__updates]    Script Date: 10/20/2010 14:33:21 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -782,12 +780,12 @@ CREATE TABLE [#__updates](
  CONSTRAINT [PK_#__updates_update_id] PRIMARY KEY CLUSTERED 
 (
 	[update_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__user_profiles]    Script Date: 10/20/2010 14:33:29 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -802,12 +800,12 @@ CREATE TABLE [#__user_profiles](
 (
 	[user_id] ASC,
 	[profile_key] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__user_usergroup_map]    Script Date: 10/20/2010 14:33:35 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -820,12 +818,12 @@ CREATE TABLE [#__user_usergroup_map](
 (
 	[user_id] ASC,
 	[group_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__content_frontpage]    Script Date: 10/20/2010 14:27:28 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -837,12 +835,12 @@ CREATE TABLE [#__content_frontpage](
  CONSTRAINT [PK_#__content_frontpage_content_id] PRIMARY KEY CLUSTERED 
 (
 	[content_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__usergroups]    Script Date: 10/20/2010 14:33:50 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -857,12 +855,12 @@ CREATE TABLE [#__usergroups](
  CONSTRAINT [PK_#__usergroups_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
  CONSTRAINT [#__usergroups$idx_usergroup_title_lookup] UNIQUE NONCLUSTERED 
 (
 	[title] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 SET IDENTITY_INSERT #__usergroups  ON;
@@ -885,7 +883,7 @@ SELECT 8, 1, 18, 19, 'Super Users'
 
 SET IDENTITY_INSERT #__usergroups  OFF;
 /****** Object:  Table [#__content_rating]    Script Date: 10/20/2010 14:27:48 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -899,12 +897,12 @@ CREATE TABLE [#__content_rating](
  CONSTRAINT [PK_#__content_rating_content_id] PRIMARY KEY CLUSTERED 
 (
 	[content_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__users]    Script Date: 10/20/2010 14:34:32 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -926,12 +924,12 @@ CREATE TABLE [#__users](
  CONSTRAINT [PK_#__users_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 /****** Object:  Table [#__core_log_searches]    Script Date: 10/20/2010 14:27:58 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -940,11 +938,11 @@ BEGIN
 CREATE TABLE [#__core_log_searches](
 	[search_term] [nvarchar](128) NOT NULL DEFAULT (N''),
 	[hits] [bigint] NOT NULL DEFAULT ((0))
-) ON [PRIMARY]
+) 
 END
 
 /****** Object:  Table [#__extensions]    Script Date: 10/20/2010 14:28:42 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -971,8 +969,8 @@ CREATE TABLE [#__extensions](
  CONSTRAINT [PK_#__extensions_extension_id] PRIMARY KEY CLUSTERED 
 (
 	[extension_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 SET IDENTITY_INSERT #__extensions  ON;
@@ -1218,7 +1216,7 @@ SELECT 700, 'Joomla! CMS', 'file', 'joomla', '', 0, 1, 1, 1, '', '', '', '', 0, 
 
 SET IDENTITY_INSERT #__extensions  OFF;
 /****** Object:  Table [#__assets]    Script Date: 10/20/2010 14:23:13 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -1236,12 +1234,12 @@ CREATE TABLE [#__assets](
  CONSTRAINT [PK_#__assets_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
  CONSTRAINT [#__assets$idx_asset_name] UNIQUE NONCLUSTERED 
 (
 	[name] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 SET IDENTITY_INSERT #__assets  ON;
@@ -1311,7 +1309,7 @@ SELECT 31, 25, 56, 57, 2, 'com_weblinks.category.6', 'Uncategorised', '{"core.cr
 
 SET IDENTITY_INSERT #__assets  OFF;
 /****** Object:  Table [#__viewlevels]    Script Date: 10/20/2010 14:34:45 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -1325,12 +1323,12 @@ CREATE TABLE [#__viewlevels](
  CONSTRAINT [PK_#__viewlevels_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
  CONSTRAINT [#__viewlevels$idx_assetgroup_title_lookup] UNIQUE NONCLUSTERED 
 (
 	[title] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 SET IDENTITY_INSERT #__viewlevels  ON 
@@ -1344,7 +1342,7 @@ SELECT 3, 'Special', 2, '[6,7,8]'
 SET IDENTITY_INSERT #__viewlevels  OFF;
 
 /****** Object:  Table [#__languages]    Script Date: 10/20/2010 14:28:57 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -1364,12 +1362,12 @@ CREATE TABLE [#__languages](
  CONSTRAINT [PK_#__languages_lang_id] PRIMARY KEY CLUSTERED 
 (
 	[lang_id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
  CONSTRAINT [#__languages$idx_sef] UNIQUE NONCLUSTERED 
 (
 	[sef] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
 SET IDENTITY_INSERT #__languages  ON;
@@ -1381,7 +1379,7 @@ SELECT 3, 'xx-XX', 'xx (Test)', 'xx (Test)', 'xx', 'br', '', '', '', 1
 
 SET IDENTITY_INSERT #__languages  OFF;
 /****** Object:  Table [#__banner_clients]    Script Date: 10/20/2010 14:23:32 ******/
-SET ANSI_NULLS ON
+
 
 SET QUOTED_IDENTIFIER ON
 
@@ -1405,7 +1403,7 @@ CREATE TABLE [#__banner_clients](
  CONSTRAINT [PK_#__banner_clients_id] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
+) 
 END
 
