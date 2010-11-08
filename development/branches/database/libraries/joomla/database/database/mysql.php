@@ -71,31 +71,7 @@ class JDatabaseMySQL extends JDatabase
 		}
 		ini_set("display_errors", 1);
 error_reporting(E_ALL);
-		$conf = & JFactory::getConfig();
 		
-	    $slave_host = array_key_exists('slavehost', $options)	? $options['slavehost']		: '';
-		$slave_user = array_key_exists('slavename', $options)	? $options['slavename']		: '';
-		$slave_password = array_key_exists('slavepass', $options)	? $options['slavepass']		: '';
-		
-		if (empty($slave_host))
-			$slave_host             = $conf->getValue('config.slave_db_host');
-
-		if (empty($slave_user))
-			$slave_user             = $conf->getValue('config.slave_db_user');
-
-		if (empty($slave_password))
-			$slave_password         = $conf->getValue('config.slave_db_password');
-		
-		
-	    if ($slave_host != "" && $slave_user != "" && $slave_password != "") {
-			if (!($this->_slave_resource = @mysql_connect( $slave_host, $slave_user, $slave_password, true ))) {
-				$this->_errorNum = 2;
-				$this->_errorMsg = 'Could not connect to MySQL';
-	
-				return;
-			}
-		}
-
 		// Finalize initialisation
 		parent::__construct($options);
 
@@ -105,10 +81,6 @@ error_reporting(E_ALL);
 		// select the database
 		if ($select) {
 			$this->select($database);
-			if (is_resource($this->_slave_connection)) {
-			    mysql_query("SET @@SESSION.sql_mode = '';", $this->_slave_connection);
-				$this->selectSlave($database);
-		    }
 		}
 	}
 
@@ -122,9 +94,6 @@ error_reporting(E_ALL);
 	{
 		if (is_resource($this->_connection)) {
 			mysql_close($this->_connection);
-		}
-	    if (is_resource($this->_slave_connection)) {
-			mysql_close($this->_slave_connection);
 		}
 	}
 
@@ -151,14 +120,6 @@ error_reporting(E_ALL);
 		}
 		return false;
 	}
-	
-    public function slave_connected()
-	{
-		if (is_resource($this->_slave_connection)) {
-			return mysql_ping($this->_slave_connection);
-		}
-		return false;
-	}
 
 	/**
 	 * Select a database for use
@@ -180,28 +141,6 @@ error_reporting(E_ALL);
 		}
 		
 		
-		return true;
-	}
-	
-	/**
-	 * Select a Slave database for use
-	 *
-	 * @access	public
-	 * @param	string $database
-	 * @return	boolean True if the database has been successfully selected
-	 * @since	1.5
-	 */
-	function selectSlave($database) {
-		if ( ! $database ) {
-			return false;
-		}
-
-		if ( !mysql_select_db( $database, $this->_slave_connection )) {
-			$this->_errorNum = 3;
-			$this->_errorMsg = 'Could not connect to database';
-			return false;
-		}
-
 		return true;
 	}
 
@@ -262,33 +201,18 @@ error_reporting(E_ALL);
 		}
 		$this->_errorNum = 0;
 		$this->_errorMsg = '';
-		
-		
-		
-		jimport("joomla.utilities.string");
-		$select_in_sql = JString::startsWith(ltrim(strtoupper($sql)), 'SELECT') ;
-		
-	    if($select_in_sql && is_resource($this->_slave_connection)) {
-			$this->_cursor = mysql_query( $sql, $this->_slave_connection );
-		} else {
-			$this->_cursor = mysql_query( $sql, $this->_connection );
-		}
-		
-		//$this->_cursor = mysql_query($sql, $this->_connection);
+			
+		$this->_cursor = mysql_query( $sql, $this->_connection );
+				
 	    if (!$this->_cursor) {
-	        if($select_in_sql && is_resource($this->_slave_connection)) {	
-    			$this->_errorNum = mysql_errno($this->_slave_connection);
-    			$this->_errorMsg = mysql_error($this->_slave_connection)." SQL=$sql";
-	        } else {
-	            $this->_errorNum = mysql_errno($this->_connection);
-    			$this->_errorMsg = mysql_error($this->_connection)." SQL=$sql";
-	        }
-    
+	         $this->_errorNum = mysql_errno($this->_connection);
+    		 $this->_errorMsg = mysql_error($this->_connection)." SQL=$sql";
+	    
     		if ($this->_debug) {
     			JError::raiseError(500, 'JDatabaseMySQL::query: '.$this->_errorNum.' - '.$this->_errorMsg);
     		}
     			return false;
-    		}
+    	}
 	   
 		return $this->_cursor;
 	}
@@ -313,9 +237,7 @@ error_reporting(E_ALL);
 	 */
 	public function getAffectedRows()
 	{
-	    if(is_resource($this->_slave_connection))
-		    return mysql_affected_rows($this->_slave_connection);
-		else return mysql_affected_rows($this->_connection);
+	   return mysql_affected_rows($this->_connection);
 	}
 
 	/**

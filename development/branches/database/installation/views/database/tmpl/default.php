@@ -179,54 +179,6 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 						<div class="clr"></div>
 					</div>
 					
-					<div class="m">
-						<h3 class="title-smenu" title="<?php echo JText::_('Slave DB Settings'); ?>">
-							<?php echo JText::_('INSTL_SLAVE_DB_SETTINGS'); ?>
-						</h3>
-						<div class="section-smenu">
-							<table class="content2">
-								
-								<tr>
-									<td colspan="2">
-										<?php echo $this->form->getLabel('slave_db_host'); ?>
-										<br />
-										<?php echo $this->form->getInput('slave_db_host'); ?>
-									</td>
-									<td>
-										<em>
-										<?php echo JText::_('INSTL_SLAVE_DATABASE_HOST_DESC'); ?>
-										</em>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<?php echo $this->form->getLabel('slave_db_user'); ?>
-										<br />
-										<?php echo $this->form->getInput('slave_db_user'); ?>
-									</td>
-									<td>
-										<em>
-										<?php echo JText::_('INSTL_DATABASE_USER_DESC'); ?>
-										</em>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<?php echo $this->form->getLabel('slave_db_pass'); ?>
-										<br />
-										<?php echo $this->form->getInput('slave_db_pass'); ?>
-									</td>
-									<td>
-										<em>
-										<?php echo JText::_('INSTL_DATABASE_PASSWORD_DESC'); ?>
-										</em>
-									</td>
-								</tr>
-																			
-							</table>
-						</div>
-						<div class="clr"></div>
-					</div>
 					<div class="b">
 						<div class="b">
 							<div class="b"></div>
