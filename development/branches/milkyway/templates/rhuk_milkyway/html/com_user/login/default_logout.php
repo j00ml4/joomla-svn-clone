@@ -20,7 +20,10 @@ defined('_JEXEC') or die; ?>
 <tr>
 	<td valign="top">
 		<div>
-		<?php echo $this->image; ?>
+		<?php if (($this->params->get('logout_image')!='')) :?>
+			<img src="<?php echo $this->params->get('logout_image'); ?>" class="logout-image" alt="<?php echo JTEXT::_('COM_USER_LOGOUT_IMAGE_ALT')?>"/>
+		<?php endif; ?>
+
 		<?php
 			if ($this->params->get('description_logout')) :
 				echo $this->escape($this->params->get('description_logout_text'));
@@ -32,7 +35,7 @@ defined('_JEXEC') or die; ?>
 <tr>
 	<td align="center">
 		<div align="center">
-			<input type="submit" name="Submit" class="button" value="<?php echo JText::_( 'Logout' ); ?>" />
+			<input type="submit" name="Submit" class="button" value="<?php echo JText::_( 'JLOGOUT' ); ?>" />
 		</div>
 	</td>
 </tr>
