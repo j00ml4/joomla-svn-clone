@@ -308,16 +308,16 @@ error_reporting(E_ALL);
 		$select_in_sql = JString::startsWith(ltrim(strtoupper($sql)), 'SELECT') ;
 				
 	    if($select_in_sql && is_resource($this->_slave_connection)) {
-			$this->_cursor = sqlsrv_query( $this->_slave_connection, $sql, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) );
+			$this->_cursor = sqlsrv_query( $this->_slave_connection, $sql );
 			//sqlsrv_commit($this->_slave_connection);
 		} else {
-			$this->_cursor = sqlsrv_query( $this->_connection, $sql, null, Array('scrollable' => SQLSRV_CURSOR_STATIC) );
+			$this->_cursor = sqlsrv_query( $this->_connection, $sql );
 			//sqlsrv_commit($this->_connection);
 		}
 		if (!$this->_cursor)
 		{
 			$errors = sqlsrv_errors( );
-						
+		   
 			$this->_errorNum = $errors[0]['SQLSTATE'];
 			$this->_errorMsg = $errors[0]['message'];
 			// $errors[0]['errorcode']; // Holds the SQL Server Native Error Code
