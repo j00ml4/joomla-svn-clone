@@ -1,1409 +1,1 @@
-
-/****** Object:  Table [#__weblinks]    Script Date: 10/20/2010 14:35:59 ******/
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__weblinks]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__weblinks](
-	[id] [bigint] IDENTITY(1,1) NOT NULL,
-	[catid] [int] NOT NULL DEFAULT ((0)),
-	[sid] [int] NOT NULL DEFAULT ((0)),
-	[title] [nvarchar](250) NOT NULL DEFAULT (N''),
-	[alias] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[url] [nvarchar](250) NOT NULL DEFAULT (N''),
-	[description] [nvarchar](max) NOT NULL,
-	[date] [datetime] NOT NULL DEFAULT (getdate()),
-	[hits] [int] NOT NULL DEFAULT ((0)),
-	[state] [smallint] NOT NULL DEFAULT ((0)),
-	[checked_out] [int] NOT NULL DEFAULT ((0)),
-	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[ordering] [int] NOT NULL DEFAULT ((0)),
-	[archived] [smallint] NOT NULL DEFAULT ((0)),
-	[approved] [smallint] NOT NULL DEFAULT ((1)),
-	[access] [int] NOT NULL DEFAULT ((1)),
-	[params] [nvarchar](max) NOT NULL,
-	[language] [nchar](7) NOT NULL DEFAULT (N''),
-	[created] [datetime] NOT NULL DEFAULT (getdate()),
-	[created_by] [bigint] NOT NULL DEFAULT ((0)),
-	[created_by_alias] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[modified] [datetime] NOT NULL DEFAULT (getdate()),
-	[modified_by] [bigint] NOT NULL DEFAULT ((0)),
-	[metakey] [nvarchar](max) NOT NULL,
-	[metadesc] [nvarchar](max) NOT NULL,
-	[metadata] [nvarchar](max) NOT NULL,
-	[featured] [tinyint] NOT NULL DEFAULT ((0)),
-	[xreference] [nvarchar](50) NOT NULL,
-	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
-	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
- CONSTRAINT [PK_#__weblinks_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__menu]    Script Date: 10/20/2010 14:29:39 ******/
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__menu]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__menu](
-	[id] [int] IDENTITY(102,1) NOT NULL,
-	[menutype] [nvarchar](24) NOT NULL,
-	[title] [nvarchar](255) NOT NULL,
-	[alias] [nvarchar](255) NOT NULL,
-	[note] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[path] [nvarchar](1024) NOT NULL,
-	[link] [nvarchar](1024) NOT NULL,
-	[type] [nvarchar](16) NOT NULL,
-	[published] [smallint] NOT NULL DEFAULT ((0)),
-	[parent_id] [bigint] NOT NULL DEFAULT ((1)),
-	[level] [bigint] NOT NULL DEFAULT ((0)),
-	[component_id] [bigint] NOT NULL DEFAULT ((0)),
-	[ordering] [int] NOT NULL DEFAULT ((0)),
-	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
-	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[browserNav] [smallint] NOT NULL DEFAULT ((0)),
-	[access] [tinyint] NOT NULL DEFAULT ((0)),
-	[img] [nvarchar](255) NOT NULL,
-	[template_style_id] [bigint] NOT NULL DEFAULT ((0)),
-	[params] [nvarchar](max) NOT NULL,
-	[lft] [int] NOT NULL DEFAULT ((0)),
-	[rgt] [int] NOT NULL DEFAULT ((0)),
-	[home] [tinyint] NOT NULL DEFAULT ((0)),
-	[language] [nchar](7) NOT NULL DEFAULT (N''),
- CONSTRAINT [PK_#__menu_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
- CONSTRAINT [#__menu$idx_alias_parent_id] UNIQUE NONCLUSTERED 
-(
-	[alias] ASC,
-	[parent_id] ASC
-)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-
-SET IDENTITY_INSERT #__menu  ON;
-
-INSERT INTO #__menu (id, menutype, title, alias, note, path, link,type, published,parent_id, level, component_id,ordering, checked_out, checked_out_time, browserNav,
-  access, img, template_style_id, params, lft, rgt, home, language)
-SELECT 1,'','Menu_Item_Root','root','','','','',1,0,0,0,0,0,'1900-01-01 00:00:00',0,0,'',0,'',0,217,0,'*'
-UNION ALL
-SELECT 2,'_adminmenu','com_banners','Banners','','Banners','index.php?option=com_banners','component',0,1,1,4,0,0,'1900-01-01 00:00:00',0,0,'class:banners',0,'',1,10,0,'*'
-UNION ALL
-SELECT 3,'_adminmenu','com_banners','Banners','','Banners/Banners','index.php?option=com_banners','component',0,2,2,4,0,0,'1900-01-01 00:00:00',0,0,'class:banners',0,'',2,3,0,'*'
-UNION ALL
-SELECT 4,'_adminmenu','com_banners_clients','Clients','','Banners/Clients','index.php?option=com_banners&view=clients','component',0,2,2,4,0,0,'1900-01-01 00:00:00',0,0,'class:banners-clients',0,'',4,5,0,'*'
-UNION ALL
-SELECT 5,'_adminmenu','com_banners_tracks','Tracks','','Banners/Tracks','index.php?option=com_banners&view=tracks','component',0,2,2,4,0,0,'1900-01-01 00:00:00',0,0,'class:banners-tracks',0,'',6,7,0,'*'
-UNION ALL
-SELECT 6,'_adminmenu','com_banners_categories','Categories','','Banners/Categories','index.php?option=com_categories&extension=com_banners','component',0,2,2,6,0,0,'1900-01-01 00:00:00',0,0,'class:banners-cat',0,'',8,9,0,'*'
-UNION ALL
-SELECT 7,'_adminmenu','com_contact','Contacts','','Contacts','index.php?option=com_contact','component',0,1,1,8,0,0,'1900-01-01 00:00:00',0,0,'class:contact',0,'',11,16,0,'*'
-UNION ALL
-SELECT 8,'_adminmenu','com_contact','Contacts','','Contacts/Contacts','index.php?option=com_contact','component',0,7,2,8,0,0,'1900-01-01 00:00:00',0,0,'class:contact',0,'',12,13,0,'*'
-UNION ALL
-SELECT 9,'_adminmenu','com_contact_categories','Categories','','Contacts/Categories','index.php?option=com_categories&extension=com_contact','component',0,7,2,6,0,0,'1900-01-01 00:00:00',0,0,'class:contact-cat',0,'',14,15,0,'*'
-UNION ALL
-SELECT 10,'_adminmenu','com_messages','Messaging','','Messaging','index.php?option=com_messages','component',0,1,1,15,0,0,'1900-01-01 00:00:00',0,0,'class:messages',0,'',17,22,0,'*'
-UNION ALL
-SELECT 11,'_adminmenu','com_messages_add','New Private Message','','Messaging/New Private Message','index.php?option=com_messages&task=message.add','component',0,10,2,15,0,0,'1900-01-01 00:00:00',0,0,'class:messages-add',0,'',18,19,0,'*'
-UNION ALL
-SELECT 12,'_adminmenu','com_messages_read','Read Private Message','','Messaging/Read Private Message','index.php?option=com_messages','component',0,10,2,15,0,0,'1900-01-01 00:00:00',0,0,'class:messages-read',0,'',20,21,0,'*'
-UNION ALL
-SELECT 13,'_adminmenu','com_newsfeeds','News Feeds','','News Feeds','index.php?option=com_newsfeeds','component',0,1,1,17,0,0,'1900-01-01 00:00:00',0,0,'class:newsfeeds',0,'',23,28,0,'*'
-UNION ALL
-SELECT 14,'_adminmenu','com_newsfeeds_feeds','Feeds','','News Feeds/Feeds','index.php?option=com_newsfeeds','component',0,13,2,17,0,0,'1900-01-01 00:00:00',0,0,'class:newsfeeds',0,'',24,25,0,'*'
-UNION ALL
-SELECT 15,'_adminmenu','com_newsfeeds_categories','Categories','','News Feeds/Categories','index.php?option=com_categories&extension=com_newsfeeds','component',0,13,2,6,0,0,'1900-01-01 00:00:00',0,0,'class:newsfeeds-cat',0,'',26,27,0,'*'
-UNION ALL
-SELECT 16,'_adminmenu','com_redirect','Redirect','','Redirect','index.php?option=com_redirect','component',0,1,1,24,0,0,'1900-01-01 00:00:00',0,0,'class:redirect',0,'',37,38,0,'*'
-UNION ALL
-SELECT 17,'_adminmenu','com_search','Search','','Search','index.php?option=com_search','component',0,1,1,19,0,0,'1900-01-01 00:00:00',0,0,'class:search',0,'',29,30,0,'*'
-UNION ALL
-SELECT 18,'_adminmenu','com_weblinks','Weblinks','','Weblinks','index.php?option=com_weblinks','component',0,1,1,21,0,0,'1900-01-01 00:00:00',0,0,'class:weblinks',0,'',31,36,0,'*'
-UNION ALL
-SELECT 19,'_adminmenu','com_weblinks_links','Links','','Weblinks/Links','index.php?option=com_weblinks','component',0,18,2,21,0,0,'1900-01-01 00:00:00',0,0,'class:weblinks',0,'',32,33,0,'*'
-UNION ALL
-SELECT 20,'_adminmenu','com_weblinks_categories','Categories','','Weblinks/Categories','index.php?option=com_categories&extension=com_weblinks','component',0,18,2,6,0,0,'1900-01-01 00:00:00',0,0,'class:weblinks-cat',0,'',34,35,0,'*'
-UNION ALL
-SELECT 101, 'mainmenu', 'Home', 'home', '', 'home', 'index.php?option=com_content&view=featured', 'component', 1, 1, 1, 22, 0, 0, '1900-01-01 00:00:00', 0, 1, '', 0, '{"num_leading_articles":"1","num_intro_articles":"3","num_columns":"3","num_links":"0","orderby_pri":"","orderby_sec":"front","order_date":"","multi_column_order":"1","show_pagination":"2","show_pagination_results":"1","show_noauth":"","article-allow_ratings":"","article-allow_comments":"","show_feed_link":"1","feed_summary":"","show_title":"","link_titles":"","show_intro":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_readmore":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_hits":"","menu-anchor_title":"","menu-anchor_css":"","menu_image":"","show_page_heading":1,"page_title":"","page_heading":"","pageclass_sfx":"","menu-meta_description":"","menu-meta_keywords":"","robots":"","secure":0}', 231, 232, 1,'*'
-
-SET IDENTITY_INSERT #__menu  OFF;
-/****** Object:  Table [#__banner_tracks]    Script Date: 10/20/2010 14:23:38 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__banner_tracks]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__banner_tracks](
-	[track_date] [datetime] NOT NULL,
-	[track_type] [bigint] NOT NULL,
-	[banner_id] [bigint] NOT NULL,
-	[count] [bigint] NOT NULL DEFAULT ((0)),
- CONSTRAINT [PK_#__banner_tracks_track_date] PRIMARY KEY CLUSTERED 
-(
-	[track_date] ASC,
-	[track_type] ASC,
-	[banner_id] ASC
-)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__banners]    Script Date: 10/20/2010 14:24:17 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__banners]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__banners](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[cid] [int] NOT NULL DEFAULT ((0)),
-	[type] [int] NOT NULL DEFAULT ((0)),
-	[name] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[alias] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[imptotal] [int] NOT NULL DEFAULT ((0)),
-	[impmade] [int] NOT NULL DEFAULT ((0)),
-	[clicks] [int] NOT NULL DEFAULT ((0)),
-	[clickurl] [nvarchar](200) NOT NULL DEFAULT (N''),
-	[state] [smallint] NOT NULL DEFAULT ((0)),
-	[catid] [bigint] NOT NULL DEFAULT ((0)),
-	[description] [nvarchar](max) NOT NULL,
-	[custombannercode] [nvarchar](2048) NOT NULL,
-	[sticky] [tinyint] NOT NULL DEFAULT ((0)),
-	[ordering] [int] NOT NULL DEFAULT ((0)),
-	[metakey] [nvarchar](max) NOT NULL,
-	[params] [nvarchar](max) NOT NULL,
-	[own_prefix] [smallint] NOT NULL DEFAULT ((0)),
-	[metakey_prefix] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[purchase_type] [smallint] NOT NULL DEFAULT ((-1)),
-	[track_clicks] [smallint] NOT NULL DEFAULT ((-1)),
-	[track_impressions] [smallint] NOT NULL DEFAULT ((-1)),
-	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
-	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
-	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
-	[reset] [datetime] NOT NULL DEFAULT (getdate()),
-	[created] [datetime] NOT NULL DEFAULT (getdate()),
-	[language] [nchar](7) NOT NULL DEFAULT (N''),
- CONSTRAINT [PK_#__banners_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__menu_types]    Script Date: 10/20/2010 14:29:46 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__menu_types]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__menu_types](
-	[id] [bigint] IDENTITY(2,1) NOT NULL,
-	[menutype] [nvarchar](24) NOT NULL,
-	[title] [nvarchar](48) NOT NULL,
-	[description] [nvarchar](255) NOT NULL DEFAULT (N''),
- CONSTRAINT [PK_#__menu_types_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
- CONSTRAINT [#__menu_types$idx_menutype] UNIQUE NONCLUSTERED 
-(
-	[menutype] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__messages]    Script Date: 10/20/2010 14:29:59 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__messages]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__messages](
-	[message_id] [bigint] IDENTITY(1,1) NOT NULL,
-	[user_id_from] [bigint] NOT NULL DEFAULT ((0)),
-	[user_id_to] [bigint] NOT NULL DEFAULT ((0)),
-	[folder_id] [tinyint] NOT NULL DEFAULT ((0)),
-	[date_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[state] [smallint] NOT NULL DEFAULT ((0)),
-	[priority] [tinyint] NOT NULL DEFAULT ((0)),
-	[subject] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[message] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_#__messages_message_id] PRIMARY KEY CLUSTERED 
-(
-	[message_id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__messages_cfg]    Script Date: 10/20/2010 14:30:08 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__messages_cfg]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__messages_cfg](
-	[user_id] [bigint] NOT NULL DEFAULT ((0)),
-	[cfg_name] [nvarchar](100) NOT NULL DEFAULT (N''),
-	[cfg_value] [nvarchar](255) NOT NULL DEFAULT (N''),
- CONSTRAINT [#__messages_cfg$idx_user_var_name] UNIQUE CLUSTERED 
-(
-	[user_id] ASC,
-	[cfg_name] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__modules]    Script Date: 10/20/2010 14:30:34 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__modules]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__modules](
-	[id] [int] IDENTITY(19,1) NOT NULL,
-	[title] [nvarchar](100) NOT NULL DEFAULT (N''),
-	[note] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[content] [nvarchar](max) NOT NULL,
-	[ordering] [int] NOT NULL DEFAULT ((0)),
-	[position] [nvarchar](50) NULL DEFAULT (NULL),
-	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
-	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
-	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
-	[published] [smallint] NOT NULL DEFAULT ((0)),
-	[module] [nvarchar](50) NULL DEFAULT (NULL),
-	[access] [tinyint] NOT NULL DEFAULT ((0)),
-	[showtitle] [tinyint] NOT NULL DEFAULT ((1)),
-	[params] [nvarchar](max) NOT NULL DEFAULT (N''),
-	[client_id] [smallint] NOT NULL DEFAULT ((0)),
-	[language] [nchar](7) NOT NULL,
- CONSTRAINT [PK_#__modules_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-SET IDENTITY_INSERT #__modules  ON;
-INSERT INTO #__modules (id, title, note, content, ordering, position, checked_out,checked_out_time, publish_up, publish_down, published, module, access, showtitle, params,
-  client_id, language)
-SELECT 1, 'Main Menu', '', '', 1, 'position-7', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_menu', 1, 1, '{"menutype":"mainmenu","startLevel":"0","endLevel":"0","showAllChildren":"0","tag_id":"","class_sfx":"","window_open":"","layout":"","moduleclass_sfx":"_menu","cache":"1","cache_time":"900","cachemode":"itemid"}', 0, '*'
-UNION ALL
-SELECT 2, 'Login', '', '', 1, 'login', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_login', 1, 1, '', 1, '*'
-UNION ALL
-SELECT 3, 'Popular Articles', '', '', 3, 'cpanel', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_popular', 3, 1, '{"count":"5","catid":"","user_id":"0","layout":"","moduleclass_sfx":"","cache":"0"}', 1, '*'
-UNION ALL
-SELECT 4, 'Recently Added Articles', '', '', 4, 'cpanel', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_latest', 3, 1, '{"count":"5","ordering":"c_dsc","catid":"","user_id":"0","layout":"","moduleclass_sfx":"","cache":"0"}', 1, '*'
-UNION ALL
-SELECT 6, 'Unread Messages', '', '', 1, 'header', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_unread', 3, 1, '', 1, '*'
-UNION ALL
-SELECT 7, 'Online Users', '', '', 2, 'header', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_online', 3, 1, '', 1, '*'
-UNION ALL
-SELECT 8, 'Toolbar', '', '', 1, 'toolbar', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_toolbar', 3, 1, '', 1, '*'
-UNION ALL
-SELECT 9, 'Quick Icons', '', '', 1, 'icon', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_quickicon', 3, 1, '', 1, '*'
-UNION ALL
-SELECT 10, 'Logged-in Users', '', '', 2, 'cpanel', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_logged', 3, 1, '', 1, '*'
-UNION ALL
-SELECT 12, 'Admin Menu', '', '', 1, 'menu', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_menu', 3, 1, '{"layout":"","moduleclass_sfx":"","shownew":"1","showhelp":"1","cache":"0"}', 1, '*'
-UNION ALL
-SELECT 13, 'Admin Submenu', '', '', 1, 'submenu', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_submenu', 3, 1, '', 1, '*'
-UNION ALL
-SELECT 14, 'User Status', '', '', 1, 'status', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_status', 3, 1, '', 1, '*'
-UNION ALL
-SELECT 15, 'Title', '', '', 1, 'title', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_title', 3, 1, '', 1, '*'
-UNION ALL
-SELECT 16, 'Login Form', '', '', 7, 'position-7', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_login', 1, 1, '{"greeting":"1","name":"0"}', 0, '*'
-UNION ALL
-SELECT 17, 'Breadcrumbs', '', '', 1, 'position-2', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 1, 'mod_breadcrumbs', 1, 1, '{"moduleclass_sfx":"","showHome":"1","homeText":"Home","showComponent":"1","separator":"","cache":"1","cache_time":"900","cachemode":"itemid"}', 0, '*'
-UNION ALL
-SELECT 18, 'Banners', '', '', 1, 'position-5', 0, '1900-01-01 00:00:00', '1900-01-01 00:00:00', '1900-01-01 00:00:00', 0, 'mod_banners', 1, 1, '{"target":"1","count":"1","cid":"1","catid":["27"],"tag_search":"0","ordering":"0","header_text":"","footer_text":"","layout":"","moduleclass_sfx":"","cache":"1","cache_time":"900"}', 0, '*'
-
-SET IDENTITY_INSERT #__modules  OFF;
-/****** Object:  Table [#__categories]    Script Date: 10/20/2010 14:24:56 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__categories]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__categories](
-	[id] [int] IDENTITY(7,1) NOT NULL,
-	[asset_id] [bigint] NOT NULL DEFAULT ((0)),
-	[parent_id] [bigint] NOT NULL DEFAULT ((0)),
-	[lft] [int] NOT NULL DEFAULT ((0)),
-	[rgt] [int] NOT NULL DEFAULT ((0)),
-	[level] [bigint] NOT NULL DEFAULT ((0)),
-	[path] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[extension] [nvarchar](50) NOT NULL DEFAULT (N''),
-	[title] [nvarchar](255) NOT NULL,
-	[alias] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[note] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[description] [nvarchar](max) NOT NULL DEFAULT (N''),
-	[published] [smallint] NOT NULL DEFAULT ((0)),
-	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
-	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[access] [tinyint] NOT NULL DEFAULT ((0)),
-	[params] [nvarchar](2048) NOT NULL DEFAULT (N''),
-	[metadesc] [nvarchar](1024) NOT NULL,
-	[metakey] [nvarchar](1024) NOT NULL,
-	[metadata] [nvarchar](2048) NOT NULL,
-	[created_user_id] [bigint] NOT NULL DEFAULT ((0)),
-	[created_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[modified_user_id] [bigint] NOT NULL DEFAULT ((0)),
-	[modified_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[hits] [bigint] NOT NULL DEFAULT ((0)),
-	[language] [nchar](7) NOT NULL,
- CONSTRAINT [PK_#__categories_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-SET IDENTITY_INSERT #__categories  ON;
-
-INSERT INTO #__categories (id, asset_id, parent_id, lft, rgt,level, path, extension, title, alias, note, description, published, checked_out, checked_out_time, access, params, metadesc, metakey, metadata, created_user_id,created_time, modified_user_id, modified_time, hits,language)
-SELECT 1, 0, 0, 0, 11, 0, '', 'system', 'ROOT', 'root', '', '', 1, 0, '1900-01-01 00:00:00', 1, '{}', '', '', '', 0, '2009-10-18 16:07:09', 0, '1900-01-01 00:00:00', 0, '*'
-UNION ALL
-SELECT 2, 27, 1, 1, 2, 1, 'uncategorised', 'com_content', 'Uncategorised', 'uncategorised', '', '', 1, 0, '1900-01-01 00:00:00', 1, '{"target":"","image":""}', '', '', '{"page_title":"","author":"","robots":""}', 42, '2010-06-28 13:26:37', 0, '1900-01-01 00:00:00', 0, '*'
-UNION ALL
-SELECT 3, 28, 1, 3, 4, 1, 'uncategorised', 'com_banners', 'Uncategorised', 'uncategorised', '', '', 1, 0, '1900-01-01 00:00:00', 1, '{"target":"","image":"","foobar":""}', '', '', '{"page_title":"","author":"","robots":""}', 42, '2010-06-28 13:27:35', 0, '1900-01-01 00:00:00', 0, '*'
-UNION ALL
-SELECT 4, 29, 1, 5, 6, 1, 'uncategorised', 'com_contact', 'Uncategorised', 'uncategorised', '', '', 1, 0, '1900-01-01 00:00:00', 1, '{"target":"","image":""}', '', '', '{"page_title":"","author":"","robots":""}', 42, '2010-06-28 13:27:57', 0, '1900-01-01 00:00:00', 0, '*'
-UNION ALL
-SELECT 5, 30, 1, 7, 8, 1, 'uncategorised', 'com_newsfeeds', 'Uncategorised', 'uncategorised', '', '', 1, 0, '1900-01-01 00:00:00', 1, '{"target":"","image":""}', '', '', '{"page_title":"","author":"","robots":""}', 42, '2010-06-28 13:28:15', 0, '1900-01-01 00:00:00', 0, '*'
-UNION ALL
-SELECT 6, 31, 1, 9, 10, 1, 'uncategorised', 'com_weblinks', 'Uncategorised', 'uncategorised', '', '', 1, 0, '1900-01-01 00:00:00', 1, '{"target":"","image":""}', '', '', '{"page_title":"","author":"","robots":""}', 42, '2010-06-28 13:28:33', 0, '1900-01-01 00:00:00', 0, '*'
-
-SET IDENTITY_INSERT #__categories  OFF;
-/****** Object:  Table [#__modules_menu]    Script Date: 10/20/2010 14:30:39 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__modules_menu]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__modules_menu](
-	[moduleid] [int] NOT NULL DEFAULT ((0)),
-	[menuid] [int] NOT NULL DEFAULT ((0)),
- CONSTRAINT [PK_#__modules_menu_moduleid] PRIMARY KEY CLUSTERED 
-(
-	[moduleid] ASC,
-	[menuid] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-INSERT INTO #__modules_menu (moduleid,menuid)
-SELECT 1,0
-UNION ALL
-SELECT 2,0
-UNION ALL
-SELECT 3,0
-UNION ALL
-SELECT 4,0
-UNION ALL
-SELECT 6,0
-UNION ALL
-SELECT 7,0
-UNION ALL
-SELECT 8,0
-UNION ALL
-SELECT 9,0
-UNION ALL
-SELECT 10,0
-UNION ALL
-SELECT 12,0
-UNION ALL
-SELECT 13,0
-UNION ALL
-SELECT 14,0
-UNION ALL
-SELECT 15,0
-UNION ALL
-SELECT 16,0
-UNION ALL
-SELECT 17,0
-UNION ALL
-SELECT 18,0
-/****** Object:  Table [#__newsfeeds]    Script Date: 10/20/2010 14:31:23 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__newsfeeds]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__newsfeeds](
-	[catid] [int] NOT NULL DEFAULT ((0)),
-	[id] [bigint] IDENTITY(1,1) NOT NULL,
-	[name] [nvarchar](100) NOT NULL DEFAULT (N''),
-	[alias] [nvarchar](100) NOT NULL DEFAULT (N''),
-	[link] [nvarchar](200) NOT NULL DEFAULT (N''),
-	[filename] [nvarchar](200) NULL DEFAULT (NULL),
-	[published] [smallint] NOT NULL DEFAULT ((0)),
-	[numarticles] [bigint] NOT NULL DEFAULT ((1)),
-	[cache_time] [bigint] NOT NULL DEFAULT ((3600)),
-	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
-	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[ordering] [int] NOT NULL DEFAULT ((0)),
-	[rtl] [smallint] NOT NULL DEFAULT ((0)),
-	[access] [tinyint] NOT NULL DEFAULT ((0)),
-	[language] [nchar](7) NOT NULL DEFAULT (N''),
-	[params] [nvarchar](max) NOT NULL,
-	[created] [datetime] NOT NULL DEFAULT (getdate()),
-	[created_by] [bigint] NOT NULL DEFAULT ((0)),
-	[created_by_alias] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[modified] [datetime] NOT NULL DEFAULT (getdate()),
-	[modified_by] [bigint] NOT NULL DEFAULT ((0)),
-	[metakey] [nvarchar](max) NOT NULL,
-	[metadesc] [nvarchar](max) NOT NULL,
-	[metadata] [nvarchar](max) NOT NULL,
-	[xreference] [nvarchar](50) NOT NULL,
-	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
-	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
- CONSTRAINT [PK_#__newsfeeds_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__contact_details]    Script Date: 10/20/2010 14:25:56 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__contact_details]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__contact_details](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[name] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[alias] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[con_position] [nvarchar](255) NULL DEFAULT (NULL),
-	[address] [nvarchar](max) NULL,
-	[suburb] [nvarchar](100) NULL DEFAULT (NULL),
-	[state] [nvarchar](100) NULL DEFAULT (NULL),
-	[country] [nvarchar](100) NULL DEFAULT (NULL),
-	[postcode] [nvarchar](100) NULL DEFAULT (NULL),
-	[telephone] [nvarchar](255) NULL DEFAULT (NULL),
-	[fax] [nvarchar](255) NULL DEFAULT (NULL),
-	[misc] [nvarchar](max) NULL,
-	[image] [nvarchar](255) NULL DEFAULT (NULL),
-	[imagepos] [nvarchar](20) NULL DEFAULT (NULL),
-	[email_to] [nvarchar](255) NULL DEFAULT (NULL),
-	[default_con] [tinyint] NOT NULL DEFAULT ((0)),
-	[published] [smallint] NOT NULL DEFAULT ((0)),
-	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
-	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[ordering] [int] NOT NULL DEFAULT ((0)),
-	[params] [nvarchar](max) NOT NULL,
-	[user_id] [int] NOT NULL DEFAULT ((0)),
-	[catid] [int] NOT NULL DEFAULT ((0)),
-	[access] [tinyint] NOT NULL DEFAULT ((0)),
-	[mobile] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[webpage] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[sortname1] [nvarchar](255) NOT NULL,
-	[sortname2] [nvarchar](255) NOT NULL,
-	[sortname3] [nvarchar](255) NOT NULL,
-	[language] [nchar](7) NOT NULL,
-	[created] [datetime] NOT NULL DEFAULT (getdate()),
-	[created_by] [bigint] NOT NULL DEFAULT ((0)),
-	[created_by_alias] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[modified] [datetime] NOT NULL DEFAULT (getdate()),
-	[modified_by] [bigint] NOT NULL DEFAULT ((0)),
-	[metakey] [nvarchar](max) NOT NULL,
-	[metadesc] [nvarchar](max) NOT NULL,
-	[metadata] [nvarchar](max) NOT NULL,
-	[featured] [tinyint] NOT NULL DEFAULT ((0)),
-	[xreference] [nvarchar](50) NOT NULL,
-	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
-	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
- CONSTRAINT [PK_#__contact_details_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__redirect_links]    Script Date: 10/20/2010 14:31:36 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__redirect_links]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__redirect_links](
-	[id] [bigint] IDENTITY(1,1) NOT NULL,
-	[old_url] [nvarchar](150) NOT NULL,
-	[new_url] [nvarchar](150) NOT NULL,
-	[referer] [nvarchar](150) NOT NULL,
-	[comment] [nvarchar](255) NOT NULL,
-	[published] [smallint] NOT NULL,
-	[created_date] [datetime] NOT NULL DEFAULT (getdate()),
-	[modified_date] [datetime] NOT NULL DEFAULT (getdate()),
- CONSTRAINT [PK_#__redirect_links_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
- CONSTRAINT [#__redirect_links$idx_link_old] UNIQUE NONCLUSTERED 
-(
-	[old_url] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__schemas]    Script Date: 10/20/2010 14:31:42 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__schemas]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__schemas](
-	[extension_id] [int] NOT NULL,
-	[version_id] [nvarchar](20) NOT NULL,
- CONSTRAINT [PK_#__schemas_extension_id] PRIMARY KEY CLUSTERED 
-(
-	[extension_id] ASC,
-	[version_id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__session]    Script Date: 10/20/2010 14:32:07 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__session]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__session](
-	[session_id] [nvarchar](32) NOT NULL DEFAULT (N''),
-	[client_id] [tinyint] NOT NULL DEFAULT ((0)),
-	[guest] [tinyint] NULL DEFAULT ((1)),
-	[time] [nvarchar](14) NULL DEFAULT (N''),
-	[data] [nvarchar](max) NULL DEFAULT (NULL),
-	[userid] [int] NULL DEFAULT ((0)),
-	[username] [nvarchar](150) NULL DEFAULT (N''),
-	[usertype] [nvarchar](50) NULL DEFAULT (N''),
- CONSTRAINT [PK_#__session_session_id] PRIMARY KEY CLUSTERED 
-(
-	[session_id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__template_styles]    Script Date: 10/20/2010 14:32:26 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__template_styles]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__template_styles](
-	[id] [bigint] IDENTITY(7,1) NOT NULL,
-	[template] [nvarchar](50) NOT NULL DEFAULT (N''),
-	[client_id] [tinyint] NOT NULL DEFAULT ((0)),
-	[home] [tinyint] NOT NULL DEFAULT ((0)),
-	[title] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[params] [nvarchar](2048) NOT NULL DEFAULT (N''),
- CONSTRAINT [PK_#__template_styles_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-SET IDENTITY_INSERT #__template_styles  ON;
-INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (1, 'rhuk_milkyway', '0', '0', 'Milkyway - Default', '{"colorVariation":"blue","backgroundVariation":"blue","widthStyle":"fmax"}');
-INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (2, 'bluestork', '1', '1', 'Bluestork - Default', '{"useRoundedCorners":"1","showSiteName":"0"}');
-INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (3, 'atomic', '0', '0', 'Atomic - Default', '{}');
-INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (4, 'beez_20', 0, 1, 'Beez2 - Default', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/joomla_black.gif","sitetitle":"Joomla!","sitedescription":"Open Source Content Management Beta","navposition":"left","templatecolor":"personal","html5":"0"}');
-INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (5, 'hathor', '1', '0', 'Hathor - Default', '{"showSiteName":"0","highContrast":"0","boldText":"0","altMenu":"0"}');
-INSERT INTO #__template_styles (id, template, client_id, home, title, params) VALUES (6, 'beez5', 0, 0, 'Beez5 - Default-Fruit Shop', '{"wrapperSmall":"53","wrapperLarge":"72","logo":"images\\/sampledata\\/fruitshop\\/fruits.gif","sitetitle":"Matuna Market ","sitedescription":"Fruit Shop Sample Site","navposition":"left","html5":"0"}');
-SET IDENTITY_INSERT #__template_styles  OFF;
-/****** Object:  Table [#__update_categories]    Script Date: 10/20/2010 14:32:35 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__update_categories]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__update_categories](
-	[categoryid] [int] IDENTITY(1,1) NOT NULL,
-	[name] [nvarchar](20) NULL DEFAULT (N''),
-	[description] [nvarchar](max) NOT NULL,
-	[parent] [int] NULL DEFAULT ((0)),
-	[updatesite] [int] NULL DEFAULT ((0)),
- CONSTRAINT [PK_#__update_categories_categoryid] PRIMARY KEY CLUSTERED 
-(
-	[categoryid] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__content]    Script Date: 10/20/2010 14:27:20 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__content]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__content](
-	[id] [bigint] IDENTITY(1,1) NOT NULL,
-	[asset_id] [bigint] NOT NULL DEFAULT ((0)),
-	[title] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[alias] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[title_alias] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[introtext] [nvarchar](max) NOT NULL,
-	[fulltext] [nvarchar](max) NOT NULL,
-	[state] [smallint] NOT NULL DEFAULT ((0)),
-	[sectionid] [bigint] NOT NULL DEFAULT ((0)),
-	[mask] [bigint] NOT NULL DEFAULT ((0)),
-	[catid] [bigint] NOT NULL DEFAULT ((0)),
-	[created] [datetime] NOT NULL DEFAULT (getdate()),
-	[created_by] [bigint] NOT NULL DEFAULT ((0)),
-	[created_by_alias] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[modified] [datetime] NOT NULL DEFAULT (getdate()),
-	[modified_by] [bigint] NOT NULL DEFAULT ((0)),
-	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
-	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[publish_up] [datetime] NOT NULL DEFAULT (getdate()),
-	[publish_down] [datetime] NOT NULL DEFAULT (getdate()),
-	[images] [nvarchar](max) NOT NULL,
-	[urls] [nvarchar](max) NOT NULL,
-	[attribs] [nvarchar](max) NOT NULL,
-	[version] [bigint] NOT NULL DEFAULT ((1)),
-	[parentid] [bigint] NOT NULL DEFAULT ((0)),
-	[ordering] [int] NOT NULL DEFAULT ((0)),
-	[metakey] [nvarchar](max) NOT NULL,
-	[metadesc] [nvarchar](max) NOT NULL,
-	[access] [bigint] NOT NULL DEFAULT ((0)),
-	[hits] [bigint] NOT NULL DEFAULT ((0)),
-	[metadata] [nvarchar](max) NOT NULL,
-	[featured] [tinyint] NOT NULL DEFAULT ((0)),
-	[language] [nchar](7) NOT NULL,
-	[xreference] [nvarchar](50) NOT NULL,
- CONSTRAINT [PK_#__content_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__update_sites]    Script Date: 10/20/2010 14:32:44 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__update_sites]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__update_sites](
-	[update_site_id] [int] IDENTITY(3,1) NOT NULL,
-	[name] [nvarchar](100) NULL DEFAULT (N''),
-	[type] [nvarchar](20) NULL DEFAULT (N''),
-	[location] [nvarchar](max) NOT NULL,
-	[enabled] [int] NULL DEFAULT ((0)),
- CONSTRAINT [PK_#__update_sites_update_site_id] PRIMARY KEY CLUSTERED 
-(
-	[update_site_id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-
-SET IDENTITY_INSERT #__update_sites  ON;
-
-INSERT INTO #__update_sites (update_site_id, name, type, location, enabled)
-SELECT 1, 'Joomla Core', 'collection', 'http://update.joomla.org/core/list.xml', 1
-UNION ALL
-SELECT 2, 'Joomla Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1
-
-SET IDENTITY_INSERT #__update_sites  OFF;
-/****** Object:  Table [#__update_sites_extensions]    Script Date: 10/20/2010 14:32:48 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__update_sites_extensions]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__update_sites_extensions](
-	[update_site_id] [int] NOT NULL DEFAULT ((0)),
-	[extension_id] [int] NOT NULL DEFAULT ((0)),
- CONSTRAINT [PK_#__update_sites_extensions_update_site_id] PRIMARY KEY CLUSTERED 
-(
-	[update_site_id] ASC,
-	[extension_id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-INSERT INTO #__update_sites_extensions (update_site_id, extension_id)
-SELECT 1, 700
-UNION ALL
-SELECT 2, 700
-/****** Object:  Table [#__updates]    Script Date: 10/20/2010 14:33:21 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__updates]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__updates](
-	[update_id] [int] IDENTITY(1,1) NOT NULL,
-	[update_site_id] [int] NULL DEFAULT ((0)),
-	[extension_id] [int] NULL DEFAULT ((0)),
-	[categoryid] [int] NULL DEFAULT ((0)),
-	[name] [nvarchar](100) NULL DEFAULT (N''),
-	[description] [nvarchar](max) NOT NULL,
-	[element] [nvarchar](100) NULL DEFAULT (N''),
-	[type] [nvarchar](20) NULL DEFAULT (N''),
-	[folder] [nvarchar](20) NULL DEFAULT (N''),
-	[client_id] [smallint] NULL DEFAULT ((0)),
-	[version] [nvarchar](10) NULL DEFAULT (N''),
-	[data] [nvarchar](max) NOT NULL,
-	[detailsurl] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_#__updates_update_id] PRIMARY KEY CLUSTERED 
-(
-	[update_id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__user_profiles]    Script Date: 10/20/2010 14:33:29 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__user_profiles]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__user_profiles](
-	[user_id] [int] NOT NULL,
-	[profile_key] [nvarchar](100) NOT NULL,
-	[profile_value] [nvarchar](255) NOT NULL,
-	[ordering] [int] NOT NULL DEFAULT ((0)),
- CONSTRAINT [#__user_profiles$idx_user_id_profile_key] UNIQUE CLUSTERED 
-(
-	[user_id] ASC,
-	[profile_key] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__user_usergroup_map]    Script Date: 10/20/2010 14:33:35 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__user_usergroup_map]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__user_usergroup_map](
-	[user_id] [bigint] NOT NULL DEFAULT ((0)),
-	[group_id] [bigint] NOT NULL DEFAULT ((0)),
- CONSTRAINT [PK_#__user_usergroup_map_user_id] PRIMARY KEY CLUSTERED 
-(
-	[user_id] ASC,
-	[group_id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__content_frontpage]    Script Date: 10/20/2010 14:27:28 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__content_frontpage]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__content_frontpage](
-	[content_id] [int] NOT NULL DEFAULT ((0)),
-	[ordering] [int] NOT NULL DEFAULT ((0)),
- CONSTRAINT [PK_#__content_frontpage_content_id] PRIMARY KEY CLUSTERED 
-(
-	[content_id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__usergroups]    Script Date: 10/20/2010 14:33:50 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__usergroups]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__usergroups](
-	[id] [bigint] IDENTITY(9,1) NOT NULL,
-	[parent_id] [bigint] NOT NULL DEFAULT ((0)),
-	[lft] [int] NOT NULL DEFAULT ((0)),
-	[rgt] [int] NOT NULL DEFAULT ((0)),
-	[title] [nvarchar](100) NOT NULL DEFAULT (N''),
- CONSTRAINT [PK_#__usergroups_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
- CONSTRAINT [#__usergroups$idx_usergroup_title_lookup] UNIQUE NONCLUSTERED 
-(
-	[title] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-SET IDENTITY_INSERT #__usergroups  ON;
-INSERT INTO #__usergroups (id ,parent_id ,lft ,rgt ,title)
-SELECT 1, 0, 1, 20, 'Public'
-UNION ALL
-SELECT 2, 1, 6, 17, 'Registered'
-UNION ALL
-SELECT 3, 2, 7, 14, 'Author'
-UNION ALL
-SELECT 4, 3, 8, 11, 'Editor'
-UNION ALL
-SELECT 5, 4, 9, 10, 'Publisher'
-UNION ALL
-SELECT 6, 1, 2, 5, 'Manager'
-UNION ALL
-SELECT 7, 6, 3, 4, 'Administrator'
-UNION ALL
-SELECT 8, 1, 18, 19, 'Super Users'
-
-SET IDENTITY_INSERT #__usergroups  OFF;
-/****** Object:  Table [#__content_rating]    Script Date: 10/20/2010 14:27:48 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__content_rating]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__content_rating](
-	[content_id] [int] NOT NULL DEFAULT ((0)),
-	[rating_sum] [bigint] NOT NULL DEFAULT ((0)),
-	[rating_count] [bigint] NOT NULL DEFAULT ((0)),
-	[lastip] [nvarchar](50) NOT NULL DEFAULT (N''),
- CONSTRAINT [PK_#__content_rating_content_id] PRIMARY KEY CLUSTERED 
-(
-	[content_id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__users]    Script Date: 10/20/2010 14:34:32 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__users]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__users](
-	[id] [int] IDENTITY(43,1) NOT NULL,
-	[name] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[username] [nvarchar](150) NOT NULL DEFAULT (N''),
-	[email] [nvarchar](100) NOT NULL DEFAULT (N''),
-	[password] [nvarchar](100) NOT NULL DEFAULT (N''),
-	[usertype] [nvarchar](25) NOT NULL DEFAULT (N''),
-	[block] [smallint] NOT NULL DEFAULT ((0)),
-	[sendEmail] [smallint] NULL DEFAULT ((0)),
-	[registerDate] [datetime] NOT NULL DEFAULT (getdate()),
-	[lastvisitDate] [datetime] NOT NULL DEFAULT (getdate()),
-	[activation] [nvarchar](100) NOT NULL DEFAULT (N''),
-	[params] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_#__users_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-/****** Object:  Table [#__core_log_searches]    Script Date: 10/20/2010 14:27:58 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__core_log_searches]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__core_log_searches](
-	[search_term] [nvarchar](128) NOT NULL DEFAULT (N''),
-	[hits] [bigint] NOT NULL DEFAULT ((0))
-) 
-END
-
-/****** Object:  Table [#__extensions]    Script Date: 10/20/2010 14:28:42 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__extensions]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__extensions](
-	[extension_id] [int] IDENTITY(10000,1) NOT NULL,
-	[name] [nvarchar](100) NOT NULL,
-	[type] [nvarchar](20) NOT NULL,
-	[element] [nvarchar](100) NOT NULL,
-	[folder] [nvarchar](100) NOT NULL,
-	[client_id] [smallint] NOT NULL,
-	[enabled] [smallint] NOT NULL DEFAULT ((1)),
-	[access] [tinyint] NOT NULL DEFAULT ((1)),
-	[protected] [smallint] NOT NULL DEFAULT ((0)),
-	[manifest_cache] [nvarchar](max) NOT NULL,
-	[params] [nvarchar](max) NOT NULL,
-	[custom_data] [nvarchar](max) NOT NULL,
-	[system_data] [nvarchar](max) NOT NULL,
-	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
-	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[ordering] [int] NULL DEFAULT ((0)),
-	[state] [int] NULL DEFAULT ((0)),
- CONSTRAINT [PK_#__extensions_extension_id] PRIMARY KEY CLUSTERED 
-(
-	[extension_id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-SET IDENTITY_INSERT #__extensions  ON;
-INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
-SELECT 1, 'com_mailto', 'component', 'com_mailto', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 2, 'com_wrapper', 'component', 'com_wrapper', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 3, 'com_admin', 'component', 'com_admin', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 4, 'com_banners', 'component', 'com_banners', '', 1, 1, 1, 0, '', '{"purchase_type":"3","track_impressions":"0","track_clicks":"0","metakey_prefix":""}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 5, 'com_cache', 'component', 'com_cache', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 6, 'com_categories', 'component', 'com_categories', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 7, 'com_checkin', 'component', 'com_checkin', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 8, 'com_contact', 'component', 'com_contact', '', 1, 1, 1, 0, '', '{"show_contact_category":"hide","show_contact_list":"0","presentation_style":"sliders","show_name":"1","show_position":"1","show_email":"0","show_street_address":"1","show_suburb":"1","show_state":"1","show_postcode":"1","show_country":"1","show_telephone":"1","show_mobile":"1","show_fax":"1","show_webpage":"1","show_misc":"1","show_image":"1","image":"","allow_vcard":"0","show_articles":"0","show_profile":"0","show_links":"0","linka_name":"","linkb_name":"","linkc_name":"","linkd_name":"","linke_name":"","contact_icons":"0","icon_address":"","icon_email":"","icon_telephone":"","icon_mobile":"","icon_fax":"","icon_misc":"","show_headings":"1","show_position_headings":"1","show_email_headings":"0","show_telephone_headings":"1","show_mobile_headings":"0","show_fax_headings":"0","allow_vcard_headings":"0","show_suburb_headings":"1","show_state_headings":"1","show_country_headings":"1","show_email_form":"1","show_email_copy":"1","banned_email":"","banned_subject":"","banned_text":"","validate_session":"1","custom_reply":"0","redirect":"","show_category_crumb":"0","metakey":"","metadesc":"","robots":"","author":"","rights":"","xreference":""}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 9, 'com_cpanel', 'component', 'com_cpanel', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 10, 'com_installer', 'component', 'com_installer', '', 1, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 11, 'com_languages', 'component', 'com_languages', '', 1, 1, 1, 1, '', '{"administrator":"en-GB","site":"en-GB"}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 12, 'com_login', 'component', 'com_login', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 13, 'com_media', 'component', 'com_media', '', 1, 1, 0, 1, '', '{"upload_extensions":"bmp,csv,doc,gif,ico,jpg,jpeg,odg,odp,ods,odt,pdf,png,ppt,swf,txt,xcf,xls,BMP,CSV,DOC,GIF,ICO,JPG,JPEG,ODG,ODP,ODS,ODT,PDF,PNG,PPT,SWF,TXT,XCF,XLS","upload_maxsize":"10485760","file_path":"images","image_path":"images","restrict_uploads":"1","allowed_media_usergroup":"3","check_mime":"1","image_extensions":"bmp,gif,jpg,png","ignore_extensions":"","upload_mime":"image\\/jpeg,image\\/gif,image\\/png,image\\/bmp,application\\/x-shockwave-flash,application\\/msword,application\\/excel,application\\/pdf,application\\/powerpoint,text\\/plain,application\\/x-zip","upload_mime_illegal":"text\\/html","enable_flash":"0"}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 14, 'com_menus', 'component', 'com_menus', '', 1, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 15, 'com_messages', 'component', 'com_messages', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 16, 'com_modules', 'component', 'com_modules', '', 1, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 17, 'com_newsfeeds', 'component', 'com_newsfeeds', '', 1, 1, 1, 0, '', '{"show_feed_image":"1","show_feed_description":"1","show_item_description":"1","feed_word_count":"0","show_headings":"1","show_name":"1","show_articles":"0","show_link":"1","show_description":"1","show_description_image":"1","display_num":"","show_pagination_limit":"1","show_pagination":"1","show_pagination_results":"1","show_cat_items":"1"}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 18, 'com_plugins', 'component', 'com_plugins', '', 1, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 19, 'com_search', 'component', 'com_search', '', 1, 1, 1, 1, '', '{"enabled":"0","show_date":"1"}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 20, 'com_templates', 'component', 'com_templates', '', 1, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 21, 'com_weblinks', 'component', 'com_weblinks', '', 1, 1, 1, 0, '', '{"show_comp_description":"1","comp_description":"","show_link_hits":"1","show_link_description":"1","show_other_cats":"0","show_headings":"0","show_numbers":"0","show_report":"1","count_clicks":"1","target":"0","link_icons":""}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 22, 'com_content', 'component', 'com_content', '', 1, 1, 0, 1, '', '{"show_title":"1","link_titles":"1","show_intro":"1","show_category":"1","link_category":"1","show_parent_category":"0","link_parent_category":"0","show_author":"1","link_author":"0","show_create_date":"0","show_modify_date":"0","show_publish_date":"1","show_item_navigation":"1","show_readmore":"1","show_icons":"1","show_print_icon":"1","show_email_icon":"1","show_hits":"1","num_leading_articles":"1","num_intro_articles":"4","num_columns":"2","num_links":"4","multi_column_order":"0","show_pagination":"2","show_pagination_results":"1","display_num":"10","show_headings":"1","list_show_title":"0","show_date":"hide","date_format":"","list_hits":"1","list_author":"1","filter_field":"hide","show_pagination_limit":"1","maxLevel":"1","show_category_title":"0","show_empty_categories":"0","show_description":"0","show_description_image":"0","show_cat_num_articles":"0","drill_down_layout":"0","orderby_pri":"order","orderby_sec":"rdate","show_noauth":"0","show_feed_link":"1","feed_summary":"0","filter_type":"BL","filter_tags":"","filter_attritbutes":""}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 23, 'com_config', 'component', 'com_config', '', 1, 1, 0, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 24, 'com_redirect', 'component', 'com_redirect', '', 1, 1, 0, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 25, 'com_users', 'component', 'com_users', '', 1, 1, 0, 1, '', '{"allowUserRegistration":"1","new_usertype":"2","useractivation":"1","frontend_userparams":"1","mailSubjectPrefix":"","mailBodySuffix":""}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-
-INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
-SELECT 100, 'PHPMailer', 'library', 'phpmailer', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 101, 'SimplePie', 'library', 'simplepie', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 102, 'Bitfolge', 'library', 'simplepie', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 103, 'phputf8', 'library', 'simplepie', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-
-
-
-INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
-SELECT 200, 'mod_articles_archive', 'module', 'mod_articles_archive', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 201, 'mod_articles_latest', 'module', 'mod_articles_latest', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 202, 'mod_articles_popular', 'module', 'mod_articles_popular', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 203, 'mod_banners', 'module', 'mod_banners', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 204, 'mod_breadcrumbs', 'module', 'mod_breadcrumbs', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 205, 'mod_custom', 'module', 'mod_custom', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 206, 'mod_feed', 'module', 'mod_feed', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 207, 'mod_footer', 'module', 'mod_footer', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 208, 'mod_login', 'module', 'mod_login', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 209, 'mod_menu', 'module', 'mod_menu', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 210, 'mod_articles_news', 'module', 'mod_articles_news', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 211, 'mod_random_image', 'module', 'mod_random_image', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 212, 'mod_related_items', 'module', 'mod_related_items', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 213, 'mod_search', 'module', 'mod_search', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 214, 'mod_stats', 'module', 'mod_stats', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 215, 'mod_syndicate', 'module', 'mod_syndicate', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 216, 'mod_users_latest', 'module', 'mod_users_latest', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 217, 'mod_weblinks', 'module', 'mod_weblinks', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 218, 'mod_whosonline', 'module', 'mod_whosonline', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 219, 'mod_wrapper', 'module', 'mod_wrapper', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 220, 'mod_articles_category', 'module', 'mod_articles_category', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 221, 'mod_articles_categories', 'module', 'mod_articles_categories', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 222, 'mod_languages', 'module', 'mod_languages', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-
-
-
-INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
-SELECT 300, 'mod_custom', 'module', 'mod_custom', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 301, 'mod_feed', 'module', 'mod_feed', '', 1, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 302, 'mod_latest', 'module', 'mod_latest', '', 1, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 303, 'mod_logged', 'module', 'mod_logged', '', 1, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 304, 'mod_login', 'module', 'mod_login', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 305, 'mod_menu', 'module', 'mod_menu', '', 1, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 306, 'mod_online', 'module', 'mod_online', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 307, 'mod_popular', 'module', 'mod_popular', '', 1, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 308, 'mod_quickicon', 'module', 'mod_quickicon', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 309, 'mod_status', 'module', 'mod_status', '', 1, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 310, 'mod_submenu', 'module', 'mod_submenu', '', 1, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 311, 'mod_title', 'module', 'mod_title', '', 1, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 312, 'mod_toolbar', 'module', 'mod_toolbar', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 313, 'mod_unread', 'module', 'mod_unread', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-
-
-
-
-INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
-SELECT 400, 'plg_authentication_gmail', 'plugin', 'gmail', 'authentication', 0, 0, 1, 0, '', '{"applysuffix":"0","suffix":"","verifypeer":"1","user_blacklist":""}', '', '', 0, '1900-01-01 00:00:00', 1, 0
-UNION ALL
-SELECT 401, 'plg_authentication_joomla', 'plugin', 'joomla', 'authentication', 0, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 402, 'plg_authentication_ldap', 'plugin', 'ldap', 'authentication', 0, 0, 1, 0, '', '{"host":"","port":"389","use_ldapV3":"0","negotiate_tls":"0","no_referrals":"0","auth_method":"bind","base_dn":"","search_string":"","users_dn":"","username":"admin","password":"bobby7","ldap_fullname":"fullName","ldap_email":"mail","ldap_uid":"uid"}', '', '', 0, '1900-01-01 00:00:00', 3, 0
-UNION ALL
-SELECT 403, 'plg_authentication_openid', 'plugin', 'openid', 'authentication', 0, 0, 1, 0, '', '{"usermode":"2","phishing-resistant":"0","multi-factor":"0","multi-factor-physical":"0"}', '', '', 0, '1900-01-01 00:00:00', 4, 0
-UNION ALL
-SELECT 404, 'plg_content_emailcloak', 'plugin', 'emailcloak', 'content', 0, 1, 1, 0, '', '{"mode":"1"}', '', '', 0, '1900-01-01 00:00:00', 1, 0
-UNION ALL
-SELECT 405, 'plg_content_geshi', 'plugin', 'geshi', 'content', 0, 1, 1, 0, '', '{}', '', '', 0, '1900-01-01 00:00:00', 2, 0
-UNION ALL
-SELECT 406, 'plg_content_loadmodule', 'plugin', 'loadmodule', 'content', 0, 1, 1, 0, '', '{"style":"table"}', '', '', 0, '1900-01-01 00:00:00', 3, 0
-UNION ALL
-SELECT 407, 'plg_content_pagebreak', 'plugin', 'pagebreak', 'content', 0, 1, 1, 1, '', '{"title":"1","multipage_toc":"1","showall":"1"}', '', '', 0, '1900-01-01 00:00:00', 4, 0
-UNION ALL
-SELECT 408, 'plg_content_pagenavigation', 'plugin', 'pagenavigation', 'content', 0, 1, 1, 1, '', '{"position":"1"}', '', '', 0, '1900-01-01 00:00:00', 5, 0
-UNION ALL
-SELECT 409, 'plg_content_vote', 'plugin', 'vote', 'content', 0, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 6, 0
-UNION ALL
-SELECT 410, 'plg_editors_codemirror', 'plugin', 'codemirror', 'editors', 0, 1, 1, 1, '', '{"linenumbers":"0","tabmode":"indent"}', '', '', 0, '1900-01-01 00:00:00', 1, 0
-UNION ALL
-SELECT 411, 'plg_editors_none', 'plugin', 'none', 'editors', 0, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 2, 0
-UNION ALL
-SELECT 412, 'plg_editors_tinymce', 'plugin', 'tinymce', 'editors', 0, 1, 1, 1, '', '{"mode":"1","skin":"0","compressed":"0","cleanup_startup":"0","cleanup_save":"2","entity_encoding":"raw","lang_mode":"0","lang_code":"en","text_direction":"ltr","content_css":"1","content_css_custom":"","relative_urls":"1","newlines":"0","invalid_elements":"script,applet,iframe","extended_elements":"","toolbar":"top","toolbar_align":"left","html_height":"550","html_width":"750","element_path":"1","fonts":"1","paste":"1","searchreplace":"1","insertdate":"1","format_date":"%Y-%m-%d","inserttime":"1","format_time":"%H:%M:%S","colors":"1","table":"1","smilies":"1","media":"1","hr":"1","directionality":"1","fullscreen":"1","style":"1","layer":"1","xhtmlxtras":"1","visualchars":"1","nonbreaking":"1","template":"1","blockquote":"1","wordcount":"1","advimage":"1","advlink":"1","autosave":"1","contextmenu":"1","inlinepopups":"1","safari":"0","custom_plugin":"","custom_button":""}', '', '', 0, '1900-01-01 00:00:00', 3, 0
-UNION ALL
-SELECT 413, 'plg_editors-xtd_article', 'plugin', 'article', 'editors-xtd', 0, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 1, 0
-UNION ALL
-SELECT 414, 'plg_editors-xtd_image', 'plugin', 'image', 'editors-xtd', 0, 1, 1, 0, '', '{}', '', '', 0, '1900-01-01 00:00:00', 2, 0
-UNION ALL
-SELECT 415, 'plg_editors-xtd_pagebreak', 'plugin', 'pagebreak', 'editors-xtd', 0, 1, 1, 0, '', '{}', '', '', 0, '1900-01-01 00:00:00', 3, 0
-UNION ALL
-SELECT 416, 'plg_editors-xtd_readmore', 'plugin', 'readmore', 'editors-xtd', 0, 1, 1, 0, '', '{}', '', '', 0, '1900-01-01 00:00:00', 4, 0
-UNION ALL
-SELECT 417, 'plg_search_categories', 'plugin', 'categories', 'search', 0, 1, 1, 0, '', '{"search_limit":"50","search_content":"1","search_archived":"1"}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 418, 'plg_search_contacts', 'plugin', 'contacts', 'search', 0, 1, 1, 0, '', '{"search_limit":"50","search_content":"1","search_archived":"1"}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 419, 'plg_search_content', 'plugin', 'content', 'search', 0, 1, 1, 0, '', '{"search_limit":"50","search_content":"1","search_archived":"1"}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 420, 'plg_search_newsfeeds', 'plugin', 'newsfeeds', 'search', 0, 1, 1, 0, '', '{"search_limit":"50","search_content":"1","search_archived":"1"}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 421, 'plg_search_weblinks', 'plugin', 'weblinks', 'search', 0, 1, 1, 0, '', '{"search_limit":"50","search_content":"1","search_archived":"1"}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 422, 'plg_system_cache', 'plugin', 'cache', 'system', 0, 0, 1, 1, '', '{"browsercache":"0","cachetime":"15"}', '', '', 0, '1900-01-01 00:00:00', 1, 0
-UNION ALL
-SELECT 423, 'plg_system_debug', 'plugin', 'debug', 'system', 0, 1, 1, 0, '', '{"profile":"1","queries":"1","memory":"1","language_files":"1","language_strings":"1","strip-first":"1","strip-prefix":"","strip-suffix":""}', '', '', 0, '1900-01-01 00:00:00', 2, 0
-UNION ALL
-SELECT 424, 'plg_system_log', 'plugin', 'log', 'system', 0, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 3, 0
-UNION ALL
-SELECT 425, 'plg_system_redirect', 'plugin', 'redirect', 'system', 0, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 4, 0
-UNION ALL
-SELECT 426, 'plg_system_remember', 'plugin', 'remember', 'system', 0, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 5, 0
-UNION ALL
-SELECT 427, 'plg_system_sef', 'plugin', 'sef', 'system', 0, 1, 1, 0, '', '{}', '', '', 0, '1900-01-01 00:00:00', 6, 0
-UNION ALL
-SELECT 428, 'plg_user_contactcreator', 'plugin', 'contactcreator', 'user', 0, 0, 1, 1, '', '{"autowebpage":"","category":"26","autopublish":"0"}', '', '', 0, '1900-01-01 00:00:00', 1, 0
-UNION ALL
-SELECT 429, 'plg_user_joomla', 'plugin', 'joomla', 'user', 0, 1, 1, 0, '', '{"autoregister":"1"}', '', '', 0, '1900-01-01 00:00:00', 2, 0
-UNION ALL
-SELECT 430, 'plg_user_profile', 'plugin', 'profile', 'user', 0, 0, 1, 1, '', '{"register-require_address1":"0","register-require_address2":"0","register-require_city":"0","register-require_region":"0","register-require_country":"0","register-require_postal_code":"0","register-require_phone":"0","register-require_website":"0","profile-require_address1":"1","profile-require_address2":"1","profile-require_city":"1","profile-require_region":"1","profile-require_country":"1","profile-require_postal_code":"1","profile-require_phone":"1","profile-require_website":"1"}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 431, 'plg_extension_joomla', 'plugin', 'joomla', 'extension', 0, 1, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 1, 0
-UNION ALL
-SELECT 432, 'plg_system_languagefilter', 'plugin', 'languagefilter', 'system', 0, 0, 1, 1, '', '{}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-
-
-
-
-
-INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
-SELECT 500, 'atomic', 'template', 'atomic', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 501, 'rhuk_milkyway', 'template', 'rhuk_milkyway', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 502, 'bluestork', 'template', 'bluestork', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 503, 'beez_20', 'template', 'beez_20', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 504, 'hathor', 'template', 'hathor', '', 1, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 505, 'Beez5', 'template', 'beez5', '', 0, 1, 1, 0, 'a:11:{s:6:"legacy";b:1;s:4:"name";s:5:"Beez5";s:4:"type";s:8:"template";s:12:"creationDate";s:11:"21 May 2010";s:6:"author";s:12:"Angie Radtke";s:9:"copyright";s:72:"Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.";s:11:"authorEmail";s:23:"a.radtke@derauftritt.de";s:9:"authorUrl";s:26:"http://www.der-auftritt.de";s:7:"version";s:5:"1.6.0";s:11:"description";s:22:"A Easy Version of Beez";s:5:"group";s:0:"";}', '{"wrapperSmall":"53","wrapperLarge":"72","sitetitle":"BEEZ 2.0","sitedescription":"Your site name","navposition":"center","html5":"0"}', '', '', 0, '1900-01-01 00:00:00', 0, 0
-
-
-INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
-SELECT 600, 'English (United Kingdom)', 'language', 'en-GB', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 601, 'English (United Kingdom)', 'language', 'en-GB', '', 1, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 604, 'XXTestLang', 'language', 'xx-XX', '', 1, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-UNION ALL
-SELECT 605, 'XXTestLang', 'language', 'xx-XX', '', 0, 1, 1, 0, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-
-INSERT INTO #__extensions (extension_id, name, type, element, folder, client_id, enabled, access, protected, manifest_cache, params, custom_data, system_data, checked_out, checked_out_time, ordering, state) 
-SELECT 700, 'Joomla! CMS', 'file', 'joomla', '', 0, 1, 1, 1, '', '', '', '', 0, '1900-01-01 00:00:00', 0, 0
-
-SET IDENTITY_INSERT #__extensions  OFF;
-/****** Object:  Table [#__assets]    Script Date: 10/20/2010 14:23:13 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__assets]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__assets](
-	[id] [bigint] IDENTITY(32,1) NOT NULL,
-	[parent_id] [int] NOT NULL DEFAULT ((0)),
-	[lft] [int] NOT NULL DEFAULT ((0)),
-	[rgt] [int] NOT NULL DEFAULT ((0)),
-	[level] [bigint] NOT NULL,
-	[name] [nvarchar](50) NOT NULL,
-	[title] [nvarchar](100) NOT NULL,
-	[rules] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_#__assets_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
- CONSTRAINT [#__assets$idx_asset_name] UNIQUE NONCLUSTERED 
-(
-	[name] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-SET IDENTITY_INSERT #__assets  ON;
-
-INSERT INTO #__assets (id, parent_id, lft, rgt, level, name, title, rules)
-SELECT 1,0,0,61,0,'root.1','Root Asset','{"core.login.site":{"6":1,"2":1},"core.login.admin":{"6":1},"core.admin":{"8":1},"core.manage":{"7":1},"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'
-UNION ALL
-SELECT 2,1,1,2,1,'com_admin','com_admin','{}'
-UNION ALL
-SELECT 3,1,3,6,1,'com_banners','com_banners','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 4,1,7,8,1,'com_cache','com_cache','{"core.admin":{"7":1},"core.manage":{"7":1}}'
-UNION ALL
-SELECT 5,1,9,10,1,'com_checkin','com_checkin','{"core.admin":{"7":1},"core.manage":{"7":1}}'
-UNION ALL
-SELECT 6,1,11,12,1,'com_config','com_config','{}'
-UNION ALL
-SELECT 7,1,13,16,1,'com_contact','com_contact','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 8,1,17,20,1,'com_content','com_content','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'
-UNION ALL
-SELECT 9,1,21,22,1,'com_cpanel','com_cpanel','{}'
-UNION ALL
-SELECT 10,1,23,24,1,'com_installer','com_installer','{"core.admin":{"7":1},"core.manage":{"7":1},"core.create":[],"core.delete":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 11,1,25,26,1,'com_languages','com_languages','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 12,1,27,28,1,'com_login','com_login','{}'
-UNION ALL
-SELECT 13,1,29,30,1,'com_mailto','com_mailto','{}'
-UNION ALL
-SELECT 14,1,31,32,1,'com_massmail','com_massmail','{}'
-UNION ALL
-SELECT 15,1,33,34,1,'com_media','com_media','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":{"5":1},"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 16,1,35,36,1,'com_menus','com_menus','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 17,1,37,38,1,'com_messages','com_messages','{"core.admin":{"7":1},"core.manage":{"7":1}}'
-UNION ALL
-SELECT 18,1,39,40,1,'com_modules','com_modules','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 19,1,41,44,1,'com_newsfeeds','com_newsfeeds','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 20,1,45,46,1,'com_plugins','com_plugins','{"core.admin":{"7":1},"core.manage":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 21,1,47,48,1,'com_redirect','com_redirect','{"core.admin":{"7":1},"core.manage":[]}'
-UNION ALL
-SELECT 22,1,49,50,1,'com_search','com_search','{"core.admin":{"7":1},"core.manage":{"6":1}}'
-UNION ALL
-SELECT 23,1,51,52,1,'com_templates','com_templates','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 24,1,53,54,1,'com_users','com_users','{"core.admin":{"7":1},"core.manage":[],"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 25,1,55,58,1,'com_weblinks','com_weblinks','{"core.admin":{"7":1},"core.manage":{"6":1},"core.create":{"3":1},"core.delete":[],"core.edit":{"4":1},"core.edit.state":{"5":1}}'
-UNION ALL
-SELECT 26,1,59,60,1,'com_wrapper','com_wrapper','{}'
-UNION ALL
-SELECT 27, 8, 18, 19, 2, 'com_content.category.2', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 28, 3, 4, 5, 2, 'com_banners.category.3', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 29, 7, 14, 15, 2, 'com_contact.category.4', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 30, 19, 42, 43, 2, 'com_newsfeeds.category.5', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-UNION ALL
-SELECT 31, 25, 56, 57, 2, 'com_weblinks.category.6', 'Uncategorised', '{"core.create":[],"core.delete":[],"core.edit":[],"core.edit.state":[]}'
-
-SET IDENTITY_INSERT #__assets  OFF;
-/****** Object:  Table [#__viewlevels]    Script Date: 10/20/2010 14:34:45 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__viewlevels]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__viewlevels](
-	[id] [bigint] IDENTITY(4,1) NOT NULL,
-	[title] [nvarchar](100) NOT NULL DEFAULT (N''),
-	[ordering] [int] NOT NULL DEFAULT ((0)),
-	[rules] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_#__viewlevels_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
- CONSTRAINT [#__viewlevels$idx_assetgroup_title_lookup] UNIQUE NONCLUSTERED 
-(
-	[title] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-SET IDENTITY_INSERT #__viewlevels  ON 
-INSERT INTO #__viewlevels (id, title, ordering, rules) 
-SELECT 1, 'Public', 0, '[]'
-UNION ALL
-SELECT 2, 'Registered', 1, '[6,2]'
-UNION ALL
-SELECT 3, 'Special', 2, '[6,7,8]'
-
-SET IDENTITY_INSERT #__viewlevels  OFF;
-
-/****** Object:  Table [#__languages]    Script Date: 10/20/2010 14:28:57 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__languages]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__languages](
-	[lang_id] [bigint] IDENTITY(4,1) NOT NULL,
-	[lang_code] [nchar](7) NOT NULL,
-	[title] [nvarchar](50) NOT NULL,
-	[title_native] [nvarchar](50) NOT NULL,
-	[sef] [nvarchar](50) NOT NULL,
-	[image] [nvarchar](50) NOT NULL,
-	[description] [nvarchar](512) NOT NULL,
-	[metakey] [nvarchar](max) NOT NULL,
-	[metadesc] [nvarchar](max) NOT NULL,
-	[published] [int] NOT NULL DEFAULT ((0)),
- CONSTRAINT [PK_#__languages_lang_id] PRIMARY KEY CLUSTERED 
-(
-	[lang_id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) ,
- CONSTRAINT [#__languages$idx_sef] UNIQUE NONCLUSTERED 
-(
-	[sef] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
-SET IDENTITY_INSERT #__languages  ON;
-
-INSERT INTO #__languages (lang_id,lang_code,title,title_native,sef,image,description,metakey,metadesc,published)
-SELECT 1, 'en-GB', 'English (UK)', 'English (UK)', 'en', 'en', '', '', '', 1
-UNION ALL
-SELECT 3, 'xx-XX', 'xx (Test)', 'xx (Test)', 'xx', 'br', '', '', '', 1
-
-SET IDENTITY_INSERT #__languages  OFF;
-/****** Object:  Table [#__banner_clients]    Script Date: 10/20/2010 14:23:32 ******/
-
-
-SET QUOTED_IDENTIFIER ON
-
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[#__banner_clients]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [#__banner_clients](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[name] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[contact] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[email] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[extrainfo] [nvarchar](max) NOT NULL,
-	[state] [smallint] NOT NULL DEFAULT ((0)),
-	[checked_out] [bigint] NOT NULL DEFAULT ((0)),
-	[checked_out_time] [datetime] NOT NULL DEFAULT (getdate()),
-	[metakey] [nvarchar](max) NOT NULL,
-	[own_prefix] [smallint] NOT NULL DEFAULT ((0)),
-	[metakey_prefix] [nvarchar](255) NOT NULL DEFAULT (N''),
-	[purchase_type] [smallint] NOT NULL DEFAULT ((-1)),
-	[track_clicks] [smallint] NOT NULL DEFAULT ((-1)),
-	[track_impressions] [smallint] NOT NULL DEFAULT ((-1)),
- CONSTRAINT [PK_#__banner_clients_id] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH ( STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF) 
-) 
-END
-
+/****** Object:  Table [jos_weblinks]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_weblinks]') AND type in (N'U'))BEGINCREATE TABLE [jos_weblinks](	[id] [bigint] IDENTITY(10,1) NOT NULL,	[catid] [int] NOT NULL,	[sid] [int] NOT NULL,	[title] [nvarchar](250) NOT NULL,	[alias] [nvarchar](255) NOT NULL,	[url] [nvarchar](250) NOT NULL,	[description] [nvarchar](max) NOT NULL,	[date] [datetime2](0) NOT NULL,	[hits] [int] NOT NULL,	[state] [smallint] NOT NULL,	[checked_out] [int] NOT NULL,	[checked_out_time] [datetime2](0) NOT NULL,	[ordering] [int] NOT NULL,	[archived] [smallint] NOT NULL,	[approved] [smallint] NOT NULL,	[access] [int] NOT NULL,	[params] [nvarchar](max) NOT NULL,	[language] [nchar](7) NOT NULL,	[created] [datetime2](0) NOT NULL,	[created_by] [bigint] NOT NULL,	[created_by_alias] [nvarchar](255) NOT NULL,	[modified] [datetime2](0) NOT NULL,	[modified_by] [bigint] NOT NULL,	[metakey] [nvarchar](max) NOT NULL,	[metadesc] [nvarchar](max) NOT NULL,	[metadata] [nvarchar](max) NOT NULL,	[featured] [tinyint] NOT NULL,	[xreference] [nvarchar](50) NOT NULL,	[publish_up] [datetime2](0) NOT NULL,	[publish_down] [datetime2](0) NOT NULL, CONSTRAINT [PK_jos_weblinks_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_weblinks]') AND name = N'idx_access')CREATE NONCLUSTERED INDEX [idx_access] ON [jos_weblinks] (	[access] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_weblinks]') AND name = N'idx_catid')CREATE NONCLUSTERED INDEX [idx_catid] ON [jos_weblinks] (	[catid] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_weblinks]') AND name = N'idx_checkout')CREATE NONCLUSTERED INDEX [idx_checkout] ON [jos_weblinks] (	[checked_out] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_weblinks]') AND name = N'idx_createdby')CREATE NONCLUSTERED INDEX [idx_createdby] ON [jos_weblinks] (	[created_by] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_weblinks]') AND name = N'idx_featured_catid')CREATE NONCLUSTERED INDEX [idx_featured_catid] ON [jos_weblinks] (	[featured] ASC,	[catid] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_weblinks]') AND name = N'idx_language')CREATE NONCLUSTERED INDEX [idx_language] ON [jos_weblinks] (	[language] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_weblinks]') AND name = N'idx_state')CREATE NONCLUSTERED INDEX [idx_state] ON [jos_weblinks] (	[state] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_weblinks]') AND name = N'idx_xreference')CREATE NONCLUSTERED INDEX [idx_xreference] ON [jos_weblinks] (	[xreference] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_viewlevels]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_viewlevels]') AND type in (N'U'))BEGINCREATE TABLE [jos_viewlevels](	[id] [bigint] IDENTITY(5,1) NOT NULL,	[title] [nvarchar](100) NOT NULL,	[ordering] [int] NOT NULL,	[rules] [nvarchar](max) NOT NULL, CONSTRAINT [PK_jos_viewlevels_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF), CONSTRAINT [jos_viewlevels$idx_assetgroup_title_lookup] UNIQUE NONCLUSTERED (	[title] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_users]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_users]') AND type in (N'U'))BEGINCREATE TABLE [jos_users](	[id] [int] IDENTITY(1,1) NOT NULL,	[name] [nvarchar](255) NOT NULL,	[username] [nvarchar](150) NOT NULL,	[email] [nvarchar](100) NOT NULL,	[password] [nvarchar](100) NOT NULL,	[usertype] [nvarchar](25) NOT NULL,	[block] [smallint] NOT NULL,	[sendEmail] [smallint] NULL,	[registerDate] [datetime2](0) NOT NULL,	[lastvisitDate] [datetime2](0) NOT NULL,	[activation] [nvarchar](100) NOT NULL,	[params] [nvarchar](max) NOT NULL, CONSTRAINT [PK_jos_users_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_users]') AND name = N'email')CREATE NONCLUSTERED INDEX [email] ON [jos_users] (	[email] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_users]') AND name = N'idx_block')CREATE NONCLUSTERED INDEX [idx_block] ON [jos_users] (	[block] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_users]') AND name = N'idx_name')CREATE NONCLUSTERED INDEX [idx_name] ON [jos_users] (	[name] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_users]') AND name = N'username')CREATE NONCLUSTERED INDEX [username] ON [jos_users] (	[username] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_users]') AND name = N'usertype')CREATE NONCLUSTERED INDEX [usertype] ON [jos_users] (	[usertype] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_usergroups]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_usergroups]') AND type in (N'U'))BEGINCREATE TABLE [jos_usergroups](	[id] [bigint] IDENTITY(13,1) NOT NULL,	[parent_id] [bigint] NOT NULL,	[lft] [int] NOT NULL,	[rgt] [int] NOT NULL,	[title] [nvarchar](100) NOT NULL, CONSTRAINT [PK_jos_usergroups_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF), CONSTRAINT [jos_usergroups$idx_usergroup_title_lookup] UNIQUE NONCLUSTERED (	[title] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_usergroups]') AND name = N'idx_usergroup_adjacency_lookup')CREATE NONCLUSTERED INDEX [idx_usergroup_adjacency_lookup] ON [jos_usergroups] (	[parent_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_usergroups]') AND name = N'idx_usergroup_nested_set_lookup')CREATE NONCLUSTERED INDEX [idx_usergroup_nested_set_lookup] ON [jos_usergroups] (	[lft] ASC,	[rgt] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_user_usergroup_map]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_user_usergroup_map]') AND type in (N'U'))BEGINCREATE TABLE [jos_user_usergroup_map](	[user_id] [bigint] NOT NULL,	[group_id] [bigint] NOT NULL, CONSTRAINT [PK_jos_user_usergroup_map_user_id] PRIMARY KEY CLUSTERED (	[user_id] ASC,	[group_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_user_profiles]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_user_profiles]') AND type in (N'U'))BEGINCREATE TABLE [jos_user_profiles](	[user_id] [int] NOT NULL,	[profile_key] [nvarchar](100) NOT NULL,	[profile_value] [nvarchar](255) NOT NULL,	[ordering] [int] NOT NULL, CONSTRAINT [jos_user_profiles$idx_user_id_profile_key] UNIQUE CLUSTERED (	[user_id] ASC,	[profile_key] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_updates]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_updates]') AND type in (N'U'))BEGINCREATE TABLE [jos_updates](	[update_id] [int] IDENTITY(1,1) NOT NULL,	[update_site_id] [int] NULL,	[extension_id] [int] NULL,	[cateryid] [int] NULL,	[name] [nvarchar](100) NULL,	[description] [nvarchar](max) NOT NULL,	[element] [nvarchar](100) NULL,	[type] [nvarchar](20) NULL,	[folder] [nvarchar](20) NULL,	[client_id] [smallint] NULL,	[version] [nvarchar](10) NULL,	[data] [nvarchar](max) NOT NULL,	[detailsurl] [nvarchar](max) NOT NULL, CONSTRAINT [PK_jos_updates_update_id] PRIMARY KEY CLUSTERED (	[update_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_update_sites_extensions]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_update_sites_extensions]') AND type in (N'U'))BEGINCREATE TABLE [jos_update_sites_extensions](	[update_site_id] [int] NOT NULL,	[extension_id] [int] NOT NULL, CONSTRAINT [PK_jos_update_sites_extensions_update_site_id] PRIMARY KEY CLUSTERED (	[update_site_id] ASC,	[extension_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_update_sites]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_update_sites]') AND type in (N'U'))BEGINCREATE TABLE [jos_update_sites](	[update_site_id] [int] IDENTITY(3,1) NOT NULL,	[name] [nvarchar](100) NULL,	[type] [nvarchar](20) NULL,	[location] [nvarchar](max) NOT NULL,	[enabled] [int] NULL, CONSTRAINT [PK_jos_update_sites_update_site_id] PRIMARY KEY CLUSTERED (	[update_site_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_update_cateries]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_update_cateries]') AND type in (N'U'))BEGINCREATE TABLE [jos_update_cateries](	[cateryid] [int] IDENTITY(1,1) NOT NULL,	[name] [nvarchar](20) NULL,	[description] [nvarchar](max) NOT NULL,	[parent] [int] NULL,	[updatesite] [int] NULL, CONSTRAINT [PK_jos_update_cateries_cateryid] PRIMARY KEY CLUSTERED (	[cateryid] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_template_styles]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_template_styles]') AND type in (N'U'))BEGINCREATE TABLE [jos_template_styles](	[id] [bigint] IDENTITY(115,1) NOT NULL,	[template] [nvarchar](50) NOT NULL,	[client_id] [tinyint] NOT NULL,	[home] [tinyint] NOT NULL,	[title] [nvarchar](255) NOT NULL,	[params] [nvarchar](max) NOT NULL, CONSTRAINT [PK_jos_template_styles_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_template_styles]') AND name = N'idx_home')CREATE NONCLUSTERED INDEX [idx_home] ON [jos_template_styles] (	[home] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_template_styles]') AND name = N'idx_template')CREATE NONCLUSTERED INDEX [idx_template] ON [jos_template_styles] (	[template] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_session]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_session]') AND type in (N'U'))BEGINCREATE TABLE [jos_session](	[session_id] [nvarchar](32) NOT NULL,	[client_id] [tinyint] NOT NULL,	[guest] [tinyint] NULL,	[time] [nvarchar](14) NULL,	[data] [nvarchar](max) NULL,	[userid] [int] NULL,	[username] [nvarchar](150) NULL,	[usertype] [nvarchar](50) NULL, CONSTRAINT [PK_jos_session_session_id] PRIMARY KEY CLUSTERED (	[session_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_session]') AND name = N'time')CREATE NONCLUSTERED INDEX [time] ON [jos_session] (	[time] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_session]') AND name = N'userid')CREATE NONCLUSTERED INDEX [userid] ON [jos_session] (	[userid] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_session]') AND name = N'whosonline')CREATE NONCLUSTERED INDEX [whosonline] ON [jos_session] (	[guest] ASC,	[usertype] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_schemas]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_schemas]') AND type in (N'U'))BEGINCREATE TABLE [jos_schemas](	[extension_id] [int] NOT NULL,	[version_id] [nvarchar](20) NOT NULL, CONSTRAINT [PK_jos_schemas_extension_id] PRIMARY KEY CLUSTERED (	[extension_id] ASC,	[version_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_redirect_links]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_redirect_links]') AND type in (N'U'))BEGINCREATE TABLE [jos_redirect_links](	[id] [bigint] IDENTITY(1,1) NOT NULL,	[old_url] [nvarchar](150) NOT NULL,	[new_url] [nvarchar](150) NOT NULL,	[referer] [nvarchar](150) NOT NULL,	[comment] [nvarchar](255) NOT NULL,	[published] [smallint] NOT NULL,	[created_date] [datetime2](0) NOT NULL,	[modified_date] [datetime2](0) NOT NULL, CONSTRAINT [PK_jos_redirect_links_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF), CONSTRAINT [jos_redirect_links$idx_link_old] UNIQUE NONCLUSTERED (	[old_url] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_redirect_links]') AND name = N'idx_link_modifed')CREATE NONCLUSTERED INDEX [idx_link_modifed] ON [jos_redirect_links] (	[modified_date] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_newsfeeds]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_newsfeeds]') AND type in (N'U'))BEGINCREATE TABLE [jos_newsfeeds](	[catid] [int] NOT NULL,	[id] [bigint] IDENTITY(5,1) NOT NULL,	[name] [nvarchar](100) NOT NULL,	[alias] [nvarchar](100) NOT NULL,	[link] [nvarchar](200) NOT NULL,	[filename] [nvarchar](200) NULL,	[published] [smallint] NOT NULL,	[numarticles] [bigint] NOT NULL,	[cache_time] [bigint] NOT NULL,	[checked_out] [bigint] NOT NULL,	[checked_out_time] [datetime2](0) NOT NULL,	[ordering] [int] NOT NULL,	[rtl] [smallint] NOT NULL,	[access] [tinyint] NOT NULL,	[language] [nchar](7) NOT NULL,	[params] [nvarchar](max) NOT NULL,	[created] [datetime2](0) NOT NULL,	[created_by] [bigint] NOT NULL,	[created_by_alias] [nvarchar](255) NOT NULL,	[modified] [datetime2](0) NOT NULL,	[modified_by] [bigint] NOT NULL,	[metakey] [nvarchar](max) NOT NULL,	[metadesc] [nvarchar](max) NOT NULL,	[metadata] [nvarchar](max) NOT NULL,	[xreference] [nvarchar](50) NOT NULL,	[publish_up] [datetime2](0) NOT NULL,	[publish_down] [datetime2](0) NOT NULL, CONSTRAINT [PK_jos_newsfeeds_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_newsfeeds]') AND name = N'idx_access')CREATE NONCLUSTERED INDEX [idx_access] ON [jos_newsfeeds] (	[access] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_newsfeeds]') AND name = N'idx_catid')CREATE NONCLUSTERED INDEX [idx_catid] ON [jos_newsfeeds] (	[catid] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_newsfeeds]') AND name = N'idx_checkout')CREATE NONCLUSTERED INDEX [idx_checkout] ON [jos_newsfeeds] (	[checked_out] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_newsfeeds]') AND name = N'idx_createdby')CREATE NONCLUSTERED INDEX [idx_createdby] ON [jos_newsfeeds] (	[created_by] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_newsfeeds]') AND name = N'idx_language')CREATE NONCLUSTERED INDEX [idx_language] ON [jos_newsfeeds] (	[language] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_newsfeeds]') AND name = N'idx_state')CREATE NONCLUSTERED INDEX [idx_state] ON [jos_newsfeeds] (	[published] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_newsfeeds]') AND name = N'idx_xreference')CREATE NONCLUSTERED INDEX [idx_xreference] ON [jos_newsfeeds] (	[xreference] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_modules_menu]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_modules_menu]') AND type in (N'U'))BEGINCREATE TABLE [jos_modules_menu](	[moduleid] [int] NOT NULL,	[menuid] [int] NOT NULL, CONSTRAINT [PK_jos_modules_menu_moduleid] PRIMARY KEY CLUSTERED (	[moduleid] ASC,	[menuid] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_modules]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_modules]') AND type in (N'U'))BEGINCREATE TABLE [jos_modules](	[id] [int] IDENTITY(77,1) NOT NULL,	[title] [nvarchar](100) NOT NULL,	[note] [nvarchar](255) NOT NULL,	[content] [nvarchar](max) NOT NULL,	[ordering] [int] NOT NULL,	[position] [nvarchar](50) NULL,	[checked_out] [bigint] NOT NULL,	[checked_out_time] [datetime2](0) NOT NULL,	[publish_up] [datetime2](0) NOT NULL,	[publish_down] [datetime2](0) NOT NULL,	[published] [smallint] NOT NULL,	[module] [nvarchar](50) NULL,	[access] [tinyint] NOT NULL,	[showtitle] [tinyint] NOT NULL,	[params] [nvarchar](max) NOT NULL,	[client_id] [smallint] NOT NULL,	[language] [nchar](7) NOT NULL, CONSTRAINT [PK_jos_modules_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_modules]') AND name = N'idx_language')CREATE NONCLUSTERED INDEX [idx_language] ON [jos_modules] (	[language] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_modules]') AND name = N'newsfeeds')CREATE NONCLUSTERED INDEX [newsfeeds] ON [jos_modules] (	[module] ASC,	[published] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_modules]') AND name = N'published')CREATE NONCLUSTERED INDEX [published] ON [jos_modules] (	[published] ASC,	[access] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_messages_cfg]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_messages_cfg]') AND type in (N'U'))BEGINCREATE TABLE [jos_messages_cfg](	[user_id] [bigint] NOT NULL,	[cfg_name] [nvarchar](100) NOT NULL,	[cfg_value] [nvarchar](255) NOT NULL, CONSTRAINT [jos_messages_cfg$idx_user_var_name] UNIQUE CLUSTERED (	[user_id] ASC,	[cfg_name] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_messages]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_messages]') AND type in (N'U'))BEGINCREATE TABLE [jos_messages](	[message_id] [bigint] IDENTITY(1,1) NOT NULL,	[user_id_from] [bigint] NOT NULL,	[user_id_to] [bigint] NOT NULL,	[folder_id] [tinyint] NOT NULL,	[date_time] [datetime2](0) NOT NULL,	[state] [smallint] NOT NULL,	[priority] [tinyint] NOT NULL,	[subject] [nvarchar](255) NOT NULL,	[message] [nvarchar](max) NOT NULL, CONSTRAINT [PK_jos_messages_message_id] PRIMARY KEY CLUSTERED (	[message_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_messages]') AND name = N'useridto_state')CREATE NONCLUSTERED INDEX [useridto_state] ON [jos_messages] (	[user_id_to] ASC,	[state] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_menu_types]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_menu_types]') AND type in (N'U'))BEGINCREATE TABLE [jos_menu_types](	[id] [bigint] IDENTITY(8,1) NOT NULL,	[menutype] [nvarchar](24) NOT NULL,	[title] [nvarchar](48) NOT NULL,	[description] [nvarchar](255) NOT NULL, CONSTRAINT [PK_jos_menu_types_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF), CONSTRAINT [jos_menu_types$idx_menutype] UNIQUE NONCLUSTERED (	[menutype] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_menu]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_menu]') AND type in (N'U'))BEGINCREATE TABLE [jos_menu](	[id] [int] IDENTITY(465,1) NOT NULL,	[menutype] [nvarchar](24) NOT NULL,	[title] [nvarchar](255) NOT NULL,	[alias] [nvarchar](255) NOT NULL,	[note] [nvarchar](255) NOT NULL,	[path] [nvarchar](1024) NOT NULL,	[link] [nvarchar](1024) NOT NULL,	[type] [nvarchar](16) NOT NULL,	[published] [smallint] NOT NULL,	[parent_id] [bigint] NOT NULL,	[level] [bigint] NOT NULL,	[component_id] [bigint] NOT NULL,	[ordering] [int] NOT NULL,	[checked_out] [bigint] NOT NULL,	[checked_out_time] [datetime] NOT NULL,	[browserNav] [smallint] NOT NULL,	[access] [tinyint] NOT NULL,	[img] [nvarchar](255) NOT NULL,	[template_style_id] [bigint] NOT NULL,	[params] [nvarchar](max) NOT NULL,	[lft] [int] NOT NULL,	[rgt] [int] NOT NULL,	[home] [tinyint] NOT NULL,	[language] [nchar](7) NOT NULL,	[client_id] [smallint] NOT NULL, CONSTRAINT [PK_jos_menu_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF), CONSTRAINT [jos_menu$idx_client_id_parent_id_alias] UNIQUE NONCLUSTERED (	[client_id] ASC,	[parent_id] ASC,	[alias] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_menu]') AND name = N'idx_alias')CREATE NONCLUSTERED INDEX [idx_alias] ON [jos_menu] (	[alias] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_menu]') AND name = N'idx_componentid')CREATE NONCLUSTERED INDEX [idx_componentid] ON [jos_menu] (	[component_id] ASC,	[menutype] ASC,	[published] ASC,	[access] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_menu]') AND name = N'idx_language')CREATE NONCLUSTERED INDEX [idx_language] ON [jos_menu] (	[language] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_menu]') AND name = N'idx_left_right')CREATE NONCLUSTERED INDEX [idx_left_right] ON [jos_menu] (	[lft] ASC,	[rgt] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_menu]') AND name = N'idx_menutype')CREATE NONCLUSTERED INDEX [idx_menutype] ON [jos_menu] (	[menutype] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_languages]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_languages]') AND type in (N'U'))BEGINCREATE TABLE [jos_languages](	[lang_id] [bigint] IDENTITY(4,1) NOT NULL,	[lang_code] [nchar](7) NOT NULL,	[title] [nvarchar](50) NOT NULL,	[title_native] [nvarchar](50) NOT NULL,	[sef] [nvarchar](50) NOT NULL,	[image] [nvarchar](50) NOT NULL,	[description] [nvarchar](512) NOT NULL,	[metakey] [nvarchar](max) NOT NULL,	[metadesc] [nvarchar](max) NOT NULL,	[published] [int] NOT NULL, CONSTRAINT [PK_jos_languages_lang_id] PRIMARY KEY CLUSTERED (	[lang_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF), CONSTRAINT [jos_languages$idx_sef] UNIQUE NONCLUSTERED (	[sef] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_extensions]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_extensions]') AND type in (N'U'))BEGINCREATE TABLE [jos_extensions](	[extension_id] [int] IDENTITY(10000,1) NOT NULL,	[name] [nvarchar](100) NOT NULL,	[type] [nvarchar](20) NOT NULL,	[element] [nvarchar](100) NOT NULL,	[folder] [nvarchar](100) NOT NULL,	[client_id] [smallint] NOT NULL,	[enabled] [smallint] NOT NULL,	[access] [tinyint] NOT NULL,	[protected] [smallint] NOT NULL,	[manifest_cache] [nvarchar](max) NOT NULL,	[params] [nvarchar](max) NOT NULL,	[custom_data] [nvarchar](max) NOT NULL,	[system_data] [nvarchar](max) NOT NULL,	[checked_out] [bigint] NOT NULL,	[checked_out_time] [datetime2](0) NOT NULL,	[ordering] [int] NULL,	[state] [int] NULL, CONSTRAINT [PK_jos_extensions_extension_id] PRIMARY KEY CLUSTERED (	[extension_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_extensions]') AND name = N'element_clientid')CREATE NONCLUSTERED INDEX [element_clientid] ON [jos_extensions] (	[element] ASC,	[client_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_extensions]') AND name = N'element_folder_clientid')CREATE NONCLUSTERED INDEX [element_folder_clientid] ON [jos_extensions] (	[element] ASC,	[folder] ASC,	[client_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_extensions]') AND name = N'extension')CREATE NONCLUSTERED INDEX [extension] ON [jos_extensions] (	[type] ASC,	[element] ASC,	[folder] ASC,	[client_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_core_log_searches]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_core_log_searches]') AND type in (N'U'))BEGINCREATE TABLE [jos_core_log_searches](	[search_term] [nvarchar](128) NOT NULL,	[hits] [bigint] NOT NULL)END/****** Object:  Table [jos_content_rating]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_content_rating]') AND type in (N'U'))BEGINCREATE TABLE [jos_content_rating](	[content_id] [int] NOT NULL,	[rating_sum] [bigint] NOT NULL,	[rating_count] [bigint] NOT NULL,	[lastip] [nvarchar](50) NOT NULL, CONSTRAINT [PK_jos_content_rating_content_id] PRIMARY KEY CLUSTERED (	[content_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_content_frontpage]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_content_frontpage]') AND type in (N'U'))BEGINCREATE TABLE [jos_content_frontpage](	[content_id] [int] NOT NULL,	[ordering] [int] NOT NULL, CONSTRAINT [PK_jos_content_frontpage_content_id] PRIMARY KEY CLUSTERED (	[content_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))END/****** Object:  Table [jos_content]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_content]') AND type in (N'U'))BEGINCREATE TABLE [jos_content](	[id] [bigint] IDENTITY(69,1) NOT NULL,	[asset_id] [bigint] NOT NULL,	[title] [nvarchar](255) NOT NULL,	[alias] [nvarchar](255) NOT NULL,	[title_alias] [nvarchar](255) NOT NULL,	[introtext] [nvarchar](max) NOT NULL,	[fulltext] [nvarchar](max) NOT NULL,	[state] [smallint] NOT NULL,	[sectionid] [bigint] NOT NULL,	[mask] [bigint] NOT NULL,	[catid] [bigint] NOT NULL,	[created] [datetime2](0) NOT NULL,	[created_by] [bigint] NOT NULL,	[created_by_alias] [nvarchar](255) NOT NULL,	[modified] [datetime2](0) NOT NULL,	[modified_by] [bigint] NOT NULL,	[checked_out] [bigint] NOT NULL,	[checked_out_time] [datetime2](0) NOT NULL,	[publish_up] [datetime2](0) NOT NULL,	[publish_down] [datetime2](0) NOT NULL,	[images] [nvarchar](max) NOT NULL,	[urls] [nvarchar](max) NOT NULL,	[attribs] [nvarchar](max) NOT NULL,	[version] [bigint] NOT NULL,	[parentid] [bigint] NOT NULL,	[ordering] [int] NOT NULL,	[metakey] [nvarchar](max) NOT NULL,	[metadesc] [nvarchar](max) NOT NULL,	[access] [bigint] NOT NULL,	[hits] [bigint] NOT NULL,	[metadata] [nvarchar](max) NOT NULL,	[featured] [tinyint] NOT NULL,	[language] [nchar](7) NOT NULL,	[xreference] [nvarchar](50) NOT NULL, CONSTRAINT [PK_jos_content_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_content]') AND name = N'idx_access')CREATE NONCLUSTERED INDEX [idx_access] ON [jos_content] (	[access] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_content]') AND name = N'idx_catid')CREATE NONCLUSTERED INDEX [idx_catid] ON [jos_content] (	[catid] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_content]') AND name = N'idx_checkout')CREATE NONCLUSTERED INDEX [idx_checkout] ON [jos_content] (	[checked_out] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_content]') AND name = N'idx_createdby')CREATE NONCLUSTERED INDEX [idx_createdby] ON [jos_content] (	[created_by] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_content]') AND name = N'idx_featured_catid')CREATE NONCLUSTERED INDEX [idx_featured_catid] ON [jos_content] (	[featured] ASC,	[catid] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_content]') AND name = N'idx_language')CREATE NONCLUSTERED INDEX [idx_language] ON [jos_content] (	[language] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_content]') AND name = N'idx_state')CREATE NONCLUSTERED INDEX [idx_state] ON [jos_content] (	[state] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_content]') AND name = N'idx_xreference')CREATE NONCLUSTERED INDEX [idx_xreference] ON [jos_content] (	[xreference] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_contact_details]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_contact_details]') AND type in (N'U'))BEGINCREATE TABLE [jos_contact_details](	[id] [int] IDENTITY(9,1) NOT NULL,	[name] [nvarchar](255) NOT NULL,	[alias] [nvarchar](255) NOT NULL,	[con_position] [nvarchar](255) NULL,	[address] [nvarchar](max) NULL,	[suburb] [nvarchar](100) NULL,	[state] [nvarchar](100) NULL,	[country] [nvarchar](100) NULL,	[postcode] [nvarchar](100) NULL,	[telephone] [nvarchar](255) NULL,	[fax] [nvarchar](255) NULL,	[misc] [nvarchar](max) NULL,	[image] [nvarchar](255) NULL,	[imagepos] [nvarchar](20) NULL,	[email_to] [nvarchar](255) NULL,	[default_con] [tinyint] NOT NULL,	[published] [smallint] NOT NULL,	[checked_out] [bigint] NOT NULL,	[checked_out_time] [datetime2](0) NOT NULL,	[ordering] [int] NOT NULL,	[params] [nvarchar](max) NOT NULL,	[user_id] [int] NOT NULL,	[catid] [int] NOT NULL,	[access] [tinyint] NOT NULL,	[mobile] [nvarchar](255) NOT NULL,	[webpage] [nvarchar](255) NOT NULL,	[sortname1] [nvarchar](255) NOT NULL,	[sortname2] [nvarchar](255) NOT NULL,	[sortname3] [nvarchar](255) NOT NULL,	[language] [nchar](7) NOT NULL,	[created] [datetime2](0) NOT NULL,	[created_by] [bigint] NOT NULL,	[created_by_alias] [nvarchar](255) NOT NULL,	[modified] [datetime2](0) NOT NULL,	[modified_by] [bigint] NOT NULL,	[metakey] [nvarchar](max) NOT NULL,	[metadesc] [nvarchar](max) NOT NULL,	[metadata] [nvarchar](max) NOT NULL,	[featured] [tinyint] NOT NULL,	[xreference] [nvarchar](50) NOT NULL,	[publish_up] [datetime2](0) NOT NULL,	[publish_down] [datetime2](0) NOT NULL, CONSTRAINT [PK_jos_contact_details_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_contact_details]') AND name = N'idx_access')CREATE NONCLUSTERED INDEX [idx_access] ON [jos_contact_details] (	[access] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_contact_details]') AND name = N'idx_catid')CREATE NONCLUSTERED INDEX [idx_catid] ON [jos_contact_details] (	[catid] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_contact_details]') AND name = N'idx_checkout')CREATE NONCLUSTERED INDEX [idx_checkout] ON [jos_contact_details] (	[checked_out] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_contact_details]') AND name = N'idx_createdby')CREATE NONCLUSTERED INDEX [idx_createdby] ON [jos_contact_details] (	[created_by] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_contact_details]') AND name = N'idx_featured_catid')CREATE NONCLUSTERED INDEX [idx_featured_catid] ON [jos_contact_details] (	[featured] ASC,	[catid] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_contact_details]') AND name = N'idx_language')CREATE NONCLUSTERED INDEX [idx_language] ON [jos_contact_details] (	[language] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_contact_details]') AND name = N'idx_state')CREATE NONCLUSTERED INDEX [idx_state] ON [jos_contact_details] (	[published] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_contact_details]') AND name = N'idx_xreference')CREATE NONCLUSTERED INDEX [idx_xreference] ON [jos_contact_details] (	[xreference] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_cateries]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_cateries]') AND type in (N'U'))BEGINCREATE TABLE [jos_cateries](	[id] [int] IDENTITY(77,1) NOT NULL,	[asset_id] [bigint] NOT NULL,	[parent_id] [bigint] NOT NULL,	[lft] [int] NOT NULL,	[rgt] [int] NOT NULL,	[level] [bigint] NOT NULL,	[path] [nvarchar](255) NOT NULL,	[extension] [nvarchar](50) NOT NULL,	[title] [nvarchar](255) NOT NULL,	[alias] [nvarchar](255) NOT NULL,	[note] [nvarchar](255) NOT NULL,	[description] [nvarchar](max) NOT NULL,	[published] [smallint] NOT NULL,	[checked_out] [bigint] NOT NULL,	[checked_out_time] [datetime2](0) NOT NULL,	[access] [tinyint] NOT NULL,	[params] [nvarchar](2048) NOT NULL,	[metadesc] [nvarchar](1024) NOT NULL,	[metakey] [nvarchar](1024) NOT NULL,	[metadata] [nvarchar](2048) NOT NULL,	[created_user_id] [bigint] NOT NULL,	[created_time] [datetime2](0) NOT NULL,	[modified_user_id] [bigint] NOT NULL,	[modified_time] [datetime2](0) NOT NULL,	[hits] [bigint] NOT NULL,	[language] [nchar](7) NOT NULL, CONSTRAINT [PK_jos_cateries_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_cateries]') AND name = N'cat_idx')CREATE NONCLUSTERED INDEX [cat_idx] ON [jos_cateries] (	[extension] ASC,	[published] ASC,	[access] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_cateries]') AND name = N'idx_access')CREATE NONCLUSTERED INDEX [idx_access] ON [jos_cateries] (	[access] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_cateries]') AND name = N'idx_alias')CREATE NONCLUSTERED INDEX [idx_alias] ON [jos_cateries] (	[alias] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_cateries]') AND name = N'idx_checkout')CREATE NONCLUSTERED INDEX [idx_checkout] ON [jos_cateries] (	[checked_out] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_cateries]') AND name = N'idx_language')CREATE NONCLUSTERED INDEX [idx_language] ON [jos_cateries] (	[language] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_cateries]') AND name = N'idx_left_right')CREATE NONCLUSTERED INDEX [idx_left_right] ON [jos_cateries] (	[lft] ASC,	[rgt] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_cateries]') AND name = N'idx_path')CREATE NONCLUSTERED INDEX [idx_path] ON [jos_cateries] (	[path] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_banners]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_banners]') AND type in (N'U'))BEGINCREATE TABLE [jos_banners](	[id] [int] IDENTITY(5,1) NOT NULL,	[cid] [int] NOT NULL,	[type] [int] NOT NULL,	[name] [nvarchar](255) NOT NULL,	[alias] [nvarchar](255) NOT NULL,	[imptotal] [int] NOT NULL,	[impmade] [int] NOT NULL,	[clicks] [int] NOT NULL,	[clickurl] [nvarchar](200) NOT NULL,	[state] [smallint] NOT NULL,	[catid] [bigint] NOT NULL,	[description] [nvarchar](max) NOT NULL,	[custombannercode] [nvarchar](2048) NOT NULL,	[sticky] [tinyint] NOT NULL,	[ordering] [int] NOT NULL,	[metakey] [nvarchar](max) NOT NULL,	[params] [nvarchar](max) NOT NULL,	[own_prefix] [smallint] NOT NULL,	[metakey_prefix] [nvarchar](255) NOT NULL,	[purchase_type] [smallint] NOT NULL,	[track_clicks] [smallint] NOT NULL,	[track_impressions] [smallint] NOT NULL,	[checked_out] [bigint] NOT NULL,	[checked_out_time] [datetime2](0) NOT NULL,	[publish_up] [datetime2](0) NOT NULL,	[publish_down] [datetime2](0) NOT NULL,	[reset] [datetime2](0) NOT NULL,	[created] [datetime2](0) NOT NULL,	[language] [nchar](7) NOT NULL, CONSTRAINT [PK_jos_banners_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_banners]') AND name = N'idx_banner_catid')CREATE NONCLUSTERED INDEX [idx_banner_catid] ON [jos_banners] (	[catid] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_banners]') AND name = N'idx_language')CREATE NONCLUSTERED INDEX [idx_language] ON [jos_banners] (	[language] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_banners]') AND name = N'idx_metakey_prefix')CREATE NONCLUSTERED INDEX [idx_metakey_prefix] ON [jos_banners] (	[metakey_prefix] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_banners]') AND name = N'idx_own_prefix')CREATE NONCLUSTERED INDEX [idx_own_prefix] ON [jos_banners] (	[own_prefix] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_banners]') AND name = N'idx_state')CREATE NONCLUSTERED INDEX [idx_state] ON [jos_banners] (	[state] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_banner_tracks]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_banner_tracks]') AND type in (N'U'))BEGINCREATE TABLE [jos_banner_tracks](	[track_date] [date] NOT NULL,	[track_type] [bigint] NOT NULL,	[banner_id] [bigint] NOT NULL,	[count] [bigint] NOT NULL, CONSTRAINT [PK_jos_banner_tracks_track_date] PRIMARY KEY CLUSTERED (	[track_date] ASC,	[track_type] ASC,	[banner_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_banner_tracks]') AND name = N'idx_banner_id')CREATE NONCLUSTERED INDEX [idx_banner_id] ON [jos_banner_tracks] (	[banner_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_banner_tracks]') AND name = N'idx_track_date')CREATE NONCLUSTERED INDEX [idx_track_date] ON [jos_banner_tracks] (	[track_date] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_banner_tracks]') AND name = N'idx_track_type')CREATE NONCLUSTERED INDEX [idx_track_type] ON [jos_banner_tracks] (	[track_type] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_banner_clients]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_banner_clients]') AND type in (N'U'))BEGINCREATE TABLE [jos_banner_clients](	[id] [int] IDENTITY(2,1) NOT NULL,	[name] [nvarchar](255) NOT NULL,	[contact] [nvarchar](255) NOT NULL,	[email] [nvarchar](255) NOT NULL,	[extrainfo] [nvarchar](max) NOT NULL,	[state] [smallint] NOT NULL,	[checked_out] [bigint] NOT NULL,	[checked_out_time] [datetime2](0) NOT NULL,	[metakey] [nvarchar](max) NOT NULL,	[own_prefix] [smallint] NOT NULL,	[metakey_prefix] [nvarchar](255) NOT NULL,	[purchase_type] [smallint] NOT NULL,	[track_clicks] [smallint] NOT NULL,	[track_impressions] [smallint] NOT NULL, CONSTRAINT [PK_jos_banner_clients_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_banner_clients]') AND name = N'idx_metakey_prefix')CREATE NONCLUSTERED INDEX [idx_metakey_prefix] ON [jos_banner_clients] (	[metakey_prefix] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_banner_clients]') AND name = N'idx_own_prefix')CREATE NONCLUSTERED INDEX [idx_own_prefix] ON [jos_banner_clients] (	[own_prefix] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Table [jos_assets]    Script Date: 11/08/2010 18:41:22 ******/SET QUOTED_IDENTIFIER ONIF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[jos_assets]') AND type in (N'U'))BEGINCREATE TABLE [jos_assets](	[id] [bigint] IDENTITY(169,1) NOT NULL,	[parent_id] [int] NOT NULL,	[lft] [int] NOT NULL,	[rgt] [int] NOT NULL,	[level] [bigint] NOT NULL,	[name] [nvarchar](50) NOT NULL,	[title] [nvarchar](100) NOT NULL,	[rules] [nvarchar](max) NOT NULL, CONSTRAINT [PK_jos_assets_id] PRIMARY KEY CLUSTERED (	[id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF), CONSTRAINT [jos_assets$idx_asset_name] UNIQUE NONCLUSTERED (	[name] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF))ENDIF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_assets]') AND name = N'idx_lft_rgt')CREATE NONCLUSTERED INDEX [idx_lft_rgt] ON [jos_assets] (	[lft] ASC,	[rgt] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)IF NOT EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[jos_assets]') AND name = N'idx_parent_id')CREATE NONCLUSTERED INDEX [idx_parent_id] ON [jos_assets] (	[parent_id] ASC)WITH (STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF)/****** Object:  Default [DF__jos_webli__catid__04AFB25B]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__catid__04AFB25B]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__catid__04AFB25B]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ((0)) FOR [catid]ENDEnd/****** Object:  Default [DF__jos_weblink__sid__05A3D694]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_weblink__sid__05A3D694]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_weblink__sid__05A3D694]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ((0)) FOR [sid]ENDEnd/****** Object:  Default [DF__jos_webli__title__0697FACD]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__title__0697FACD]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__title__0697FACD]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT (N'') FOR [title]ENDEnd/****** Object:  Default [DF__jos_webli__alias__078C1F06]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__alias__078C1F06]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__alias__078C1F06]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT (N'') FOR [alias]ENDEnd/****** Object:  Default [DF__jos_weblink__url__0880433F]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_weblink__url__0880433F]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_weblink__url__0880433F]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT (N'') FOR [url]ENDEnd/****** Object:  Default [DF__jos_weblin__date__09746778]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_weblin__date__09746778]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_weblin__date__09746778]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [date]ENDEnd/****** Object:  Default [DF__jos_weblin__hits__0A688BB1]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_weblin__hits__0A688BB1]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_weblin__hits__0A688BB1]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ((0)) FOR [hits]ENDEnd/****** Object:  Default [DF__jos_webli__state__0B5CAFEA]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__state__0B5CAFEA]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__state__0B5CAFEA]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ((0)) FOR [state]ENDEnd/****** Object:  Default [DF__jos_webli__check__0C50D423]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__check__0C50D423]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__check__0C50D423]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ((0)) FOR [checked_out]ENDEnd/****** Object:  Default [DF__jos_webli__check__0D44F85C]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__check__0D44F85C]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__check__0D44F85C]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [checked_out_time]ENDEnd/****** Object:  Default [DF__jos_webli__order__0E391C95]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__order__0E391C95]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__order__0E391C95]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ((0)) FOR [ordering]ENDEnd/****** Object:  Default [DF__jos_webli__archi__0F2D40CE]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__archi__0F2D40CE]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__archi__0F2D40CE]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ((0)) FOR [archived]ENDEnd/****** Object:  Default [DF__jos_webli__appro__10216507]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__appro__10216507]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__appro__10216507]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ((1)) FOR [approved]ENDEnd/****** Object:  Default [DF__jos_webli__acces__11158940]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__acces__11158940]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__acces__11158940]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ((1)) FOR [access]ENDEnd/****** Object:  Default [DF__jos_webli__langu__1209AD79]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__langu__1209AD79]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__langu__1209AD79]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT (N'') FOR [language]ENDEnd/****** Object:  Default [DF__jos_webli__creat__12FDD1B2]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__creat__12FDD1B2]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__creat__12FDD1B2]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [created]ENDEnd/****** Object:  Default [DF__jos_webli__creat__13F1F5EB]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__creat__13F1F5EB]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__creat__13F1F5EB]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ((0)) FOR [created_by]ENDEnd/****** Object:  Default [DF__jos_webli__creat__14E61A24]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__creat__14E61A24]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__creat__14E61A24]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT (N'') FOR [created_by_alias]ENDEnd/****** Object:  Default [DF__jos_webli__modif__15DA3E5D]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__modif__15DA3E5D]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__modif__15DA3E5D]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [modified]ENDEnd/****** Object:  Default [DF__jos_webli__modif__16CE6296]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__modif__16CE6296]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__modif__16CE6296]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ((0)) FOR [modified_by]ENDEnd/****** Object:  Default [DF__jos_webli__featu__17C286CF]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__featu__17C286CF]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__featu__17C286CF]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ((0)) FOR [featured]ENDEnd/****** Object:  Default [DF__jos_webli__publi__18B6AB08]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__publi__18B6AB08]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__publi__18B6AB08]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [publish_up]ENDEnd/****** Object:  Default [DF__jos_webli__publi__19AACF41]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_webli__publi__19AACF41]') AND parent_object_id = OBJECT_ID(N'[jos_weblinks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_webli__publi__19AACF41]') AND type = 'D')BEGINALTER TABLE [jos_weblinks] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [publish_down]ENDEnd/****** Object:  Default [DF__jos_viewl__title__01D345B0]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_viewl__title__01D345B0]') AND parent_object_id = OBJECT_ID(N'[jos_viewlevels]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_viewl__title__01D345B0]') AND type = 'D')BEGINALTER TABLE [jos_viewlevels] ADD  DEFAULT (N'') FOR [title]ENDEnd/****** Object:  Default [DF__jos_viewl__order__02C769E9]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_viewl__order__02C769E9]') AND parent_object_id = OBJECT_ID(N'[jos_viewlevels]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_viewl__order__02C769E9]') AND type = 'D')BEGINALTER TABLE [jos_viewlevels] ADD  DEFAULT ((0)) FOR [ordering]ENDEnd/****** Object:  Default [DF__jos_users__name__7755B73D]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_users__name__7755B73D]') AND parent_object_id = OBJECT_ID(N'[jos_users]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_users__name__7755B73D]') AND type = 'D')BEGINALTER TABLE [jos_users] ADD  DEFAULT (N'') FOR [name]ENDEnd/****** Object:  Default [DF__jos_users__usern__7849DB76]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_users__usern__7849DB76]') AND parent_object_id = OBJECT_ID(N'[jos_users]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_users__usern__7849DB76]') AND type = 'D')BEGINALTER TABLE [jos_users] ADD  DEFAULT (N'') FOR [username]ENDEnd/****** Object:  Default [DF__jos_users__email__793DFFAF]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_users__email__793DFFAF]') AND parent_object_id = OBJECT_ID(N'[jos_users]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_users__email__793DFFAF]') AND type = 'D')BEGINALTER TABLE [jos_users] ADD  DEFAULT (N'') FOR [email]ENDEnd/****** Object:  Default [DF__jos_users__passw__7A3223E8]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_users__passw__7A3223E8]') AND parent_object_id = OBJECT_ID(N'[jos_users]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_users__passw__7A3223E8]') AND type = 'D')BEGINALTER TABLE [jos_users] ADD  DEFAULT (N'') FOR [password]ENDEnd/****** Object:  Default [DF__jos_users__usert__7B264821]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_users__usert__7B264821]') AND parent_object_id = OBJECT_ID(N'[jos_users]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_users__usert__7B264821]') AND type = 'D')BEGINALTER TABLE [jos_users] ADD  DEFAULT (N'') FOR [usertype]ENDEnd/****** Object:  Default [DF__jos_users__block__7C1A6C5A]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_users__block__7C1A6C5A]') AND parent_object_id = OBJECT_ID(N'[jos_users]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_users__block__7C1A6C5A]') AND type = 'D')BEGINALTER TABLE [jos_users] ADD  DEFAULT ((0)) FOR [block]ENDEnd/****** Object:  Default [DF__jos_users__sendE__7D0E9093]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_users__sendE__7D0E9093]') AND parent_object_id = OBJECT_ID(N'[jos_users]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_users__sendE__7D0E9093]') AND type = 'D')BEGINALTER TABLE [jos_users] ADD  DEFAULT ((0)) FOR [sendEmail]ENDEnd/****** Object:  Default [DF__jos_users__regis__7E02B4CC]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_users__regis__7E02B4CC]') AND parent_object_id = OBJECT_ID(N'[jos_users]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_users__regis__7E02B4CC]') AND type = 'D')BEGINALTER TABLE [jos_users] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [registerDate]ENDEnd/****** Object:  Default [DF__jos_users__lastv__7EF6D905]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_users__lastv__7EF6D905]') AND parent_object_id = OBJECT_ID(N'[jos_users]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_users__lastv__7EF6D905]') AND type = 'D')BEGINALTER TABLE [jos_users] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [lastvisitDate]ENDEnd/****** Object:  Default [DF__jos_users__activ__7FEAFD3E]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_users__activ__7FEAFD3E]') AND parent_object_id = OBJECT_ID(N'[jos_users]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_users__activ__7FEAFD3E]') AND type = 'D')BEGINALTER TABLE [jos_users] ADD  DEFAULT (N'') FOR [activation]ENDEnd/****** Object:  Default [DF__jos_userg__paren__72910220]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_userg__paren__72910220]') AND parent_object_id = OBJECT_ID(N'[jos_usergroups]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_userg__paren__72910220]') AND type = 'D')BEGINALTER TABLE [jos_usergroups] ADD  DEFAULT ((0)) FOR [parent_id]ENDEnd/****** Object:  Default [DF__jos_usergro__lft__73852659]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_usergro__lft__73852659]') AND parent_object_id = OBJECT_ID(N'[jos_usergroups]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_usergro__lft__73852659]') AND type = 'D')BEGINALTER TABLE [jos_usergroups] ADD  DEFAULT ((0)) FOR [lft]ENDEnd/****** Object:  Default [DF__jos_usergro__rgt__74794A92]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_usergro__rgt__74794A92]') AND parent_object_id = OBJECT_ID(N'[jos_usergroups]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_usergro__rgt__74794A92]') AND type = 'D')BEGINALTER TABLE [jos_usergroups] ADD  DEFAULT ((0)) FOR [rgt]ENDEnd/****** Object:  Default [DF__jos_userg__title__756D6ECB]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_userg__title__756D6ECB]') AND parent_object_id = OBJECT_ID(N'[jos_usergroups]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_userg__title__756D6ECB]') AND type = 'D')BEGINALTER TABLE [jos_usergroups] ADD  DEFAULT (N'') FOR [title]ENDEnd/****** Object:  Default [DF__jos_user___user___6FB49575]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_user___user___6FB49575]') AND parent_object_id = OBJECT_ID(N'[jos_user_usergroup_map]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_user___user___6FB49575]') AND type = 'D')BEGINALTER TABLE [jos_user_usergroup_map] ADD  DEFAULT ((0)) FOR [user_id]ENDEnd/****** Object:  Default [DF__jos_user___group__70A8B9AE]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_user___group__70A8B9AE]') AND parent_object_id = OBJECT_ID(N'[jos_user_usergroup_map]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_user___group__70A8B9AE]') AND type = 'D')BEGINALTER TABLE [jos_user_usergroup_map] ADD  DEFAULT ((0)) FOR [group_id]ENDEnd/****** Object:  Default [DF__jos_user___order__6DCC4D03]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_user___order__6DCC4D03]') AND parent_object_id = OBJECT_ID(N'[jos_user_profiles]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_user___order__6DCC4D03]') AND type = 'D')BEGINALTER TABLE [jos_user_profiles] ADD  DEFAULT ((0)) FOR [ordering]ENDEnd/****** Object:  Default [DF__jos_updat__updat__6442E2C9]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_updat__updat__6442E2C9]') AND parent_object_id = OBJECT_ID(N'[jos_updates]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_updat__updat__6442E2C9]') AND type = 'D')BEGINALTER TABLE [jos_updates] ADD  DEFAULT ((0)) FOR [update_site_id]ENDEnd/****** Object:  Default [DF__jos_updat__exten__65370702]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_updat__exten__65370702]') AND parent_object_id = OBJECT_ID(N'[jos_updates]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_updat__exten__65370702]') AND type = 'D')BEGINALTER TABLE [jos_updates] ADD  DEFAULT ((0)) FOR [extension_id]ENDEnd/****** Object:  Default [DF__jos_updat__categ__662B2B3B]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_updat__categ__662B2B3B]') AND parent_object_id = OBJECT_ID(N'[jos_updates]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_updat__categ__662B2B3B]') AND type = 'D')BEGINALTER TABLE [jos_updates] ADD  DEFAULT ((0)) FOR [cateryid]ENDEnd/****** Object:  Default [DF__jos_update__name__671F4F74]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_update__name__671F4F74]') AND parent_object_id = OBJECT_ID(N'[jos_updates]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_update__name__671F4F74]') AND type = 'D')BEGINALTER TABLE [jos_updates] ADD  DEFAULT (N'') FOR [name]ENDEnd/****** Object:  Default [DF__jos_updat__eleme__681373AD]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_updat__eleme__681373AD]') AND parent_object_id = OBJECT_ID(N'[jos_updates]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_updat__eleme__681373AD]') AND type = 'D')BEGINALTER TABLE [jos_updates] ADD  DEFAULT (N'') FOR [element]ENDEnd/****** Object:  Default [DF__jos_update__type__690797E6]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_update__type__690797E6]') AND parent_object_id = OBJECT_ID(N'[jos_updates]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_update__type__690797E6]') AND type = 'D')BEGINALTER TABLE [jos_updates] ADD  DEFAULT (N'') FOR [type]ENDEnd/****** Object:  Default [DF__jos_updat__folde__69FBBC1F]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_updat__folde__69FBBC1F]') AND parent_object_id = OBJECT_ID(N'[jos_updates]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_updat__folde__69FBBC1F]') AND type = 'D')BEGINALTER TABLE [jos_updates] ADD  DEFAULT (N'') FOR [folder]ENDEnd/****** Object:  Default [DF__jos_updat__clien__6AEFE058]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_updat__clien__6AEFE058]') AND parent_object_id = OBJECT_ID(N'[jos_updates]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_updat__clien__6AEFE058]') AND type = 'D')BEGINALTER TABLE [jos_updates] ADD  DEFAULT ((0)) FOR [client_id]ENDEnd/****** Object:  Default [DF__jos_updat__versi__6BE40491]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_updat__versi__6BE40491]') AND parent_object_id = OBJECT_ID(N'[jos_updates]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_updat__versi__6BE40491]') AND type = 'D')BEGINALTER TABLE [jos_updates] ADD  DEFAULT (N'') FOR [version]ENDEnd/****** Object:  Default [DF__jos_updat__updat__6166761E]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_updat__updat__6166761E]') AND parent_object_id = OBJECT_ID(N'[jos_update_sites_extensions]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_updat__updat__6166761E]') AND type = 'D')BEGINALTER TABLE [jos_update_sites_extensions] ADD  DEFAULT ((0)) FOR [update_site_id]ENDEnd/****** Object:  Default [DF__jos_updat__exten__625A9A57]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_updat__exten__625A9A57]') AND parent_object_id = OBJECT_ID(N'[jos_update_sites_extensions]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_updat__exten__625A9A57]') AND type = 'D')BEGINALTER TABLE [jos_update_sites_extensions] ADD  DEFAULT ((0)) FOR [extension_id]ENDEnd/****** Object:  Default [DF__jos_update__name__5D95E53A]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_update__name__5D95E53A]') AND parent_object_id = OBJECT_ID(N'[jos_update_sites]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_update__name__5D95E53A]') AND type = 'D')BEGINALTER TABLE [jos_update_sites] ADD  DEFAULT (N'') FOR [name]ENDEnd/****** Object:  Default [DF__jos_update__type__5E8A0973]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_update__type__5E8A0973]') AND parent_object_id = OBJECT_ID(N'[jos_update_sites]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_update__type__5E8A0973]') AND type = 'D')BEGINALTER TABLE [jos_update_sites] ADD  DEFAULT (N'') FOR [type]ENDEnd/****** Object:  Default [DF__jos_updat__enabl__5F7E2DAC]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_updat__enabl__5F7E2DAC]') AND parent_object_id = OBJECT_ID(N'[jos_update_sites]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_updat__enabl__5F7E2DAC]') AND type = 'D')BEGINALTER TABLE [jos_update_sites] ADD  DEFAULT ((0)) FOR [enabled]ENDEnd/****** Object:  Default [DF__jos_update__name__59C55456]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_update__name__59C55456]') AND parent_object_id = OBJECT_ID(N'[jos_update_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_update__name__59C55456]') AND type = 'D')BEGINALTER TABLE [jos_update_cateries] ADD  DEFAULT (N'') FOR [name]ENDEnd/****** Object:  Default [DF__jos_updat__paren__5AB9788F]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_updat__paren__5AB9788F]') AND parent_object_id = OBJECT_ID(N'[jos_update_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_updat__paren__5AB9788F]') AND type = 'D')BEGINALTER TABLE [jos_update_cateries] ADD  DEFAULT ((0)) FOR [parent]ENDEnd/****** Object:  Default [DF__jos_updat__updat__5BAD9CC8]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_updat__updat__5BAD9CC8]') AND parent_object_id = OBJECT_ID(N'[jos_update_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_updat__updat__5BAD9CC8]') AND type = 'D')BEGINALTER TABLE [jos_update_cateries] ADD  DEFAULT ((0)) FOR [updatesite]ENDEnd/****** Object:  Default [DF__jos_templ__templ__540C7B00]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_templ__templ__540C7B00]') AND parent_object_id = OBJECT_ID(N'[jos_template_styles]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_templ__templ__540C7B00]') AND type = 'D')BEGINALTER TABLE [jos_template_styles] ADD  DEFAULT (N'') FOR [template]ENDEnd/****** Object:  Default [DF__jos_templ__clien__55009F39]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_templ__clien__55009F39]') AND parent_object_id = OBJECT_ID(N'[jos_template_styles]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_templ__clien__55009F39]') AND type = 'D')BEGINALTER TABLE [jos_template_styles] ADD  DEFAULT ((0)) FOR [client_id]ENDEnd/****** Object:  Default [DF__jos_templa__home__55F4C372]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_templa__home__55F4C372]') AND parent_object_id = OBJECT_ID(N'[jos_template_styles]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_templa__home__55F4C372]') AND type = 'D')BEGINALTER TABLE [jos_template_styles] ADD  DEFAULT ((0)) FOR [home]ENDEnd/****** Object:  Default [DF__jos_templ__title__56E8E7AB]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_templ__title__56E8E7AB]') AND parent_object_id = OBJECT_ID(N'[jos_template_styles]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_templ__title__56E8E7AB]') AND type = 'D')BEGINALTER TABLE [jos_template_styles] ADD  DEFAULT (N'') FOR [title]ENDEnd/****** Object:  Default [DF__jos_templ__param__57DD0BE4]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_templ__param__57DD0BE4]') AND parent_object_id = OBJECT_ID(N'[jos_template_styles]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_templ__param__57DD0BE4]') AND type = 'D')BEGINALTER TABLE [jos_template_styles] ADD  DEFAULT (N'') FOR [params]ENDEnd/****** Object:  Default [DF__jos_sessi__sessi__4B7734FF]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_sessi__sessi__4B7734FF]') AND parent_object_id = OBJECT_ID(N'[jos_session]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_sessi__sessi__4B7734FF]') AND type = 'D')BEGINALTER TABLE [jos_session] ADD  DEFAULT (N'') FOR [session_id]ENDEnd/****** Object:  Default [DF__jos_sessi__clien__4C6B5938]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_sessi__clien__4C6B5938]') AND parent_object_id = OBJECT_ID(N'[jos_session]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_sessi__clien__4C6B5938]') AND type = 'D')BEGINALTER TABLE [jos_session] ADD  DEFAULT ((0)) FOR [client_id]ENDEnd/****** Object:  Default [DF__jos_sessi__guest__4D5F7D71]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_sessi__guest__4D5F7D71]') AND parent_object_id = OBJECT_ID(N'[jos_session]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_sessi__guest__4D5F7D71]') AND type = 'D')BEGINALTER TABLE [jos_session] ADD  DEFAULT ((1)) FOR [guest]ENDEnd/****** Object:  Default [DF__jos_sessio__time__4E53A1AA]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_sessio__time__4E53A1AA]') AND parent_object_id = OBJECT_ID(N'[jos_session]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_sessio__time__4E53A1AA]') AND type = 'D')BEGINALTER TABLE [jos_session] ADD  DEFAULT (N'') FOR [time]ENDEnd/****** Object:  Default [DF__jos_sessio__data__4F47C5E3]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_sessio__data__4F47C5E3]') AND parent_object_id = OBJECT_ID(N'[jos_session]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_sessio__data__4F47C5E3]') AND type = 'D')BEGINALTER TABLE [jos_session] ADD  DEFAULT (NULL) FOR [data]ENDEnd/****** Object:  Default [DF__jos_sessi__useri__503BEA1C]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_sessi__useri__503BEA1C]') AND parent_object_id = OBJECT_ID(N'[jos_session]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_sessi__useri__503BEA1C]') AND type = 'D')BEGINALTER TABLE [jos_session] ADD  DEFAULT ((0)) FOR [userid]ENDEnd/****** Object:  Default [DF__jos_sessi__usern__51300E55]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_sessi__usern__51300E55]') AND parent_object_id = OBJECT_ID(N'[jos_session]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_sessi__usern__51300E55]') AND type = 'D')BEGINALTER TABLE [jos_session] ADD  DEFAULT (N'') FOR [username]ENDEnd/****** Object:  Default [DF__jos_sessi__usert__5224328E]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_sessi__usert__5224328E]') AND parent_object_id = OBJECT_ID(N'[jos_session]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_sessi__usert__5224328E]') AND type = 'D')BEGINALTER TABLE [jos_session] ADD  DEFAULT (N'') FOR [usertype]ENDEnd/****** Object:  Default [DF__jos_redir__creat__47A6A41B]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_redir__creat__47A6A41B]') AND parent_object_id = OBJECT_ID(N'[jos_redirect_links]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_redir__creat__47A6A41B]') AND type = 'D')BEGINALTER TABLE [jos_redirect_links] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [created_date]ENDEnd/****** Object:  Default [DF__jos_redir__modif__489AC854]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_redir__modif__489AC854]') AND parent_object_id = OBJECT_ID(N'[jos_redirect_links]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_redir__modif__489AC854]') AND type = 'D')BEGINALTER TABLE [jos_redirect_links] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [modified_date]ENDEnd/****** Object:  Default [DF__jos_newsf__catid__32AB8735]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__catid__32AB8735]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__catid__32AB8735]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ((0)) FOR [catid]ENDEnd/****** Object:  Default [DF__jos_newsfe__name__339FAB6E]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsfe__name__339FAB6E]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsfe__name__339FAB6E]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT (N'') FOR [name]ENDEnd/****** Object:  Default [DF__jos_newsf__alias__3493CFA7]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__alias__3493CFA7]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__alias__3493CFA7]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT (N'') FOR [alias]ENDEnd/****** Object:  Default [DF__jos_newsfe__link__3587F3E0]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsfe__link__3587F3E0]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsfe__link__3587F3E0]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT (N'') FOR [link]ENDEnd/****** Object:  Default [DF__jos_newsf__filen__367C1819]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__filen__367C1819]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__filen__367C1819]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT (NULL) FOR [filename]ENDEnd/****** Object:  Default [DF__jos_newsf__publi__37703C52]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__publi__37703C52]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__publi__37703C52]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ((0)) FOR [published]ENDEnd/****** Object:  Default [DF__jos_newsf__numar__3864608B]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__numar__3864608B]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__numar__3864608B]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ((1)) FOR [numarticles]ENDEnd/****** Object:  Default [DF__jos_newsf__cache__395884C4]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__cache__395884C4]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__cache__395884C4]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ((3600)) FOR [cache_time]ENDEnd/****** Object:  Default [DF__jos_newsf__check__3A4CA8FD]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__check__3A4CA8FD]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__check__3A4CA8FD]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ((0)) FOR [checked_out]ENDEnd/****** Object:  Default [DF__jos_newsf__check__3B40CD36]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__check__3B40CD36]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__check__3B40CD36]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [checked_out_time]ENDEnd/****** Object:  Default [DF__jos_newsf__order__3C34F16F]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__order__3C34F16F]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__order__3C34F16F]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ((0)) FOR [ordering]ENDEnd/****** Object:  Default [DF__jos_newsfee__rtl__3D2915A8]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsfee__rtl__3D2915A8]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsfee__rtl__3D2915A8]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ((0)) FOR [rtl]ENDEnd/****** Object:  Default [DF__jos_newsf__acces__3E1D39E1]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__acces__3E1D39E1]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__acces__3E1D39E1]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ((0)) FOR [access]ENDEnd/****** Object:  Default [DF__jos_newsf__langu__3F115E1A]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__langu__3F115E1A]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__langu__3F115E1A]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT (N'') FOR [language]ENDEnd/****** Object:  Default [DF__jos_newsf__creat__40058253]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__creat__40058253]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__creat__40058253]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [created]ENDEnd/****** Object:  Default [DF__jos_newsf__creat__40F9A68C]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__creat__40F9A68C]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__creat__40F9A68C]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ((0)) FOR [created_by]ENDEnd/****** Object:  Default [DF__jos_newsf__creat__41EDCAC5]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__creat__41EDCAC5]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__creat__41EDCAC5]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT (N'') FOR [created_by_alias]ENDEnd/****** Object:  Default [DF__jos_newsf__modif__42E1EEFE]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__modif__42E1EEFE]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__modif__42E1EEFE]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [modified]ENDEnd/****** Object:  Default [DF__jos_newsf__modif__43D61337]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__modif__43D61337]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__modif__43D61337]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ((0)) FOR [modified_by]ENDEnd/****** Object:  Default [DF__jos_newsf__publi__44CA3770]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__publi__44CA3770]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__publi__44CA3770]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [publish_up]ENDEnd/****** Object:  Default [DF__jos_newsf__publi__45BE5BA9]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_newsf__publi__45BE5BA9]') AND parent_object_id = OBJECT_ID(N'[jos_newsfeeds]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_newsf__publi__45BE5BA9]') AND type = 'D')BEGINALTER TABLE [jos_newsfeeds] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [publish_down]ENDEnd/****** Object:  Default [DF__jos_modul__modul__2FCF1A8A]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__modul__2FCF1A8A]') AND parent_object_id = OBJECT_ID(N'[jos_modules_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__modul__2FCF1A8A]') AND type = 'D')BEGINALTER TABLE [jos_modules_menu] ADD  DEFAULT ((0)) FOR [moduleid]ENDEnd/****** Object:  Default [DF__jos_modul__menui__30C33EC3]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__menui__30C33EC3]') AND parent_object_id = OBJECT_ID(N'[jos_modules_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__menui__30C33EC3]') AND type = 'D')BEGINALTER TABLE [jos_modules_menu] ADD  DEFAULT ((0)) FOR [menuid]ENDEnd/****** Object:  Default [DF__jos_modul__title__2180FB33]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__title__2180FB33]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__title__2180FB33]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT (N'') FOR [title]ENDEnd/****** Object:  Default [DF__jos_module__note__22751F6C]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_module__note__22751F6C]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_module__note__22751F6C]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT (N'') FOR [note]ENDEnd/****** Object:  Default [DF__jos_modul__order__236943A5]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__order__236943A5]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__order__236943A5]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT ((0)) FOR [ordering]ENDEnd/****** Object:  Default [DF__jos_modul__posit__245D67DE]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__posit__245D67DE]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__posit__245D67DE]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT (NULL) FOR [position]ENDEnd/****** Object:  Default [DF__jos_modul__check__25518C17]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__check__25518C17]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__check__25518C17]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT ((0)) FOR [checked_out]ENDEnd/****** Object:  Default [DF__jos_modul__check__2645B050]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__check__2645B050]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__check__2645B050]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [checked_out_time]ENDEnd/****** Object:  Default [DF__jos_modul__publi__2739D489]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__publi__2739D489]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__publi__2739D489]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [publish_up]ENDEnd/****** Object:  Default [DF__jos_modul__publi__282DF8C2]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__publi__282DF8C2]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__publi__282DF8C2]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [publish_down]ENDEnd/****** Object:  Default [DF__jos_modul__publi__29221CFB]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__publi__29221CFB]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__publi__29221CFB]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT ((0)) FOR [published]ENDEnd/****** Object:  Default [DF__jos_modul__modul__2A164134]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__modul__2A164134]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__modul__2A164134]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT (NULL) FOR [module]ENDEnd/****** Object:  Default [DF__jos_modul__acces__2B0A656D]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__acces__2B0A656D]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__acces__2B0A656D]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT ((0)) FOR [access]ENDEnd/****** Object:  Default [DF__jos_modul__showt__2BFE89A6]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__showt__2BFE89A6]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__showt__2BFE89A6]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT ((1)) FOR [showtitle]ENDEnd/****** Object:  Default [DF__jos_modul__param__2CF2ADDF]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__param__2CF2ADDF]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__param__2CF2ADDF]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT (N'') FOR [params]ENDEnd/****** Object:  Default [DF__jos_modul__clien__2DE6D218]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_modul__clien__2DE6D218]') AND parent_object_id = OBJECT_ID(N'[jos_modules]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_modul__clien__2DE6D218]') AND type = 'D')BEGINALTER TABLE [jos_modules] ADD  DEFAULT ((0)) FOR [client_id]ENDEnd/****** Object:  Default [DF__jos_messa__user___1DB06A4F]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_messa__user___1DB06A4F]') AND parent_object_id = OBJECT_ID(N'[jos_messages_cfg]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_messa__user___1DB06A4F]') AND type = 'D')BEGINALTER TABLE [jos_messages_cfg] ADD  DEFAULT ((0)) FOR [user_id]ENDEnd/****** Object:  Default [DF__jos_messa__cfg_n__1EA48E88]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_messa__cfg_n__1EA48E88]') AND parent_object_id = OBJECT_ID(N'[jos_messages_cfg]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_messa__cfg_n__1EA48E88]') AND type = 'D')BEGINALTER TABLE [jos_messages_cfg] ADD  DEFAULT (N'') FOR [cfg_name]ENDEnd/****** Object:  Default [DF__jos_messa__cfg_v__1F98B2C1]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_messa__cfg_v__1F98B2C1]') AND parent_object_id = OBJECT_ID(N'[jos_messages_cfg]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_messa__cfg_v__1F98B2C1]') AND type = 'D')BEGINALTER TABLE [jos_messages_cfg] ADD  DEFAULT (N'') FOR [cfg_value]ENDEnd/****** Object:  Default [DF__jos_messa__user___160F4887]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_messa__user___160F4887]') AND parent_object_id = OBJECT_ID(N'[jos_messages]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_messa__user___160F4887]') AND type = 'D')BEGINALTER TABLE [jos_messages] ADD  DEFAULT ((0)) FOR [user_id_from]ENDEnd/****** Object:  Default [DF__jos_messa__user___17036CC0]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_messa__user___17036CC0]') AND parent_object_id = OBJECT_ID(N'[jos_messages]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_messa__user___17036CC0]') AND type = 'D')BEGINALTER TABLE [jos_messages] ADD  DEFAULT ((0)) FOR [user_id_to]ENDEnd/****** Object:  Default [DF__jos_messa__folde__17F790F9]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_messa__folde__17F790F9]') AND parent_object_id = OBJECT_ID(N'[jos_messages]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_messa__folde__17F790F9]') AND type = 'D')BEGINALTER TABLE [jos_messages] ADD  DEFAULT ((0)) FOR [folder_id]ENDEnd/****** Object:  Default [DF__jos_messa__date___18EBB532]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_messa__date___18EBB532]') AND parent_object_id = OBJECT_ID(N'[jos_messages]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_messa__date___18EBB532]') AND type = 'D')BEGINALTER TABLE [jos_messages] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [date_time]ENDEnd/****** Object:  Default [DF__jos_messa__state__19DFD96B]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_messa__state__19DFD96B]') AND parent_object_id = OBJECT_ID(N'[jos_messages]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_messa__state__19DFD96B]') AND type = 'D')BEGINALTER TABLE [jos_messages] ADD  DEFAULT ((0)) FOR [state]ENDEnd/****** Object:  Default [DF__jos_messa__prior__1AD3FDA4]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_messa__prior__1AD3FDA4]') AND parent_object_id = OBJECT_ID(N'[jos_messages]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_messa__prior__1AD3FDA4]') AND type = 'D')BEGINALTER TABLE [jos_messages] ADD  DEFAULT ((0)) FOR [priority]ENDEnd/****** Object:  Default [DF__jos_messa__subje__1BC821DD]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_messa__subje__1BC821DD]') AND parent_object_id = OBJECT_ID(N'[jos_messages]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_messa__subje__1BC821DD]') AND type = 'D')BEGINALTER TABLE [jos_messages] ADD  DEFAULT (N'') FOR [subject]ENDEnd/****** Object:  Default [DF__jos_menu___descr__14270015]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu___descr__14270015]') AND parent_object_id = OBJECT_ID(N'[jos_menu_types]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu___descr__14270015]') AND type = 'D')BEGINALTER TABLE [jos_menu_types] ADD  DEFAULT (N'') FOR [description]ENDEnd/****** Object:  Default [DF__jos_menu__note__03F0984C]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__note__03F0984C]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__note__03F0984C]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT (N'') FOR [note]ENDEnd/****** Object:  Default [DF__jos_menu__publis__04E4BC85]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__publis__04E4BC85]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__publis__04E4BC85]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((0)) FOR [published]ENDEnd/****** Object:  Default [DF__jos_menu__parent__05D8E0BE]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__parent__05D8E0BE]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__parent__05D8E0BE]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((1)) FOR [parent_id]ENDEnd/****** Object:  Default [DF__jos_menu__level__06CD04F7]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__level__06CD04F7]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__level__06CD04F7]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((0)) FOR [level]ENDEnd/****** Object:  Default [DF__jos_menu__compon__07C12930]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__compon__07C12930]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__compon__07C12930]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((0)) FOR [component_id]ENDEnd/****** Object:  Default [DF__jos_menu__orderi__08B54D69]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__orderi__08B54D69]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__orderi__08B54D69]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((0)) FOR [ordering]ENDEnd/****** Object:  Default [DF__jos_menu__checke__09A971A2]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__checke__09A971A2]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__checke__09A971A2]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((0)) FOR [checked_out]ENDEnd/****** Object:  Default [DF__jos_menu__checke__0A9D95DB]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__checke__0A9D95DB]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__checke__0A9D95DB]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [checked_out_time]ENDEnd/****** Object:  Default [DF__jos_menu__browse__0B91BA14]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__browse__0B91BA14]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__browse__0B91BA14]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((0)) FOR [browserNav]ENDEnd/****** Object:  Default [DF__jos_menu__access__0C85DE4D]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__access__0C85DE4D]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__access__0C85DE4D]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((0)) FOR [access]ENDEnd/****** Object:  Default [DF__jos_menu__templa__0D7A0286]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__templa__0D7A0286]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__templa__0D7A0286]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((0)) FOR [template_style_id]ENDEnd/****** Object:  Default [DF__jos_menu__lft__0E6E26BF]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__lft__0E6E26BF]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__lft__0E6E26BF]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((0)) FOR [lft]ENDEnd/****** Object:  Default [DF__jos_menu__rgt__0F624AF8]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__rgt__0F624AF8]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__rgt__0F624AF8]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((0)) FOR [rgt]ENDEnd/****** Object:  Default [DF__jos_menu__home__10566F31]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__home__10566F31]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__home__10566F31]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((0)) FOR [home]ENDEnd/****** Object:  Default [DF__jos_menu__langua__114A936A]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__langua__114A936A]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__langua__114A936A]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT (N'') FOR [language]ENDEnd/****** Object:  Default [DF__jos_menu__client__123EB7A3]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_menu__client__123EB7A3]') AND parent_object_id = OBJECT_ID(N'[jos_menu]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_menu__client__123EB7A3]') AND type = 'D')BEGINALTER TABLE [jos_menu] ADD  DEFAULT ((0)) FOR [client_id]ENDEnd/****** Object:  Default [DF__jos_langu__publi__02084FDA]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_langu__publi__02084FDA]') AND parent_object_id = OBJECT_ID(N'[jos_languages]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_langu__publi__02084FDA]') AND type = 'D')BEGINALTER TABLE [jos_languages] ADD  DEFAULT ((0)) FOR [published]ENDEnd/****** Object:  Default [DF__jos_exten__enabl__7A672E12]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_exten__enabl__7A672E12]') AND parent_object_id = OBJECT_ID(N'[jos_extensions]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_exten__enabl__7A672E12]') AND type = 'D')BEGINALTER TABLE [jos_extensions] ADD  DEFAULT ((1)) FOR [enabled]ENDEnd/****** Object:  Default [DF__jos_exten__acces__7B5B524B]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_exten__acces__7B5B524B]') AND parent_object_id = OBJECT_ID(N'[jos_extensions]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_exten__acces__7B5B524B]') AND type = 'D')BEGINALTER TABLE [jos_extensions] ADD  DEFAULT ((1)) FOR [access]ENDEnd/****** Object:  Default [DF__jos_exten__prote__7C4F7684]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_exten__prote__7C4F7684]') AND parent_object_id = OBJECT_ID(N'[jos_extensions]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_exten__prote__7C4F7684]') AND type = 'D')BEGINALTER TABLE [jos_extensions] ADD  DEFAULT ((0)) FOR [protected]ENDEnd/****** Object:  Default [DF__jos_exten__check__7D439ABD]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_exten__check__7D439ABD]') AND parent_object_id = OBJECT_ID(N'[jos_extensions]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_exten__check__7D439ABD]') AND type = 'D')BEGINALTER TABLE [jos_extensions] ADD  DEFAULT ((0)) FOR [checked_out]ENDEnd/****** Object:  Default [DF__jos_exten__check__7E37BEF6]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_exten__check__7E37BEF6]') AND parent_object_id = OBJECT_ID(N'[jos_extensions]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_exten__check__7E37BEF6]') AND type = 'D')BEGINALTER TABLE [jos_extensions] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [checked_out_time]ENDEnd/****** Object:  Default [DF__jos_exten__order__7F2BE32F]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_exten__order__7F2BE32F]') AND parent_object_id = OBJECT_ID(N'[jos_extensions]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_exten__order__7F2BE32F]') AND type = 'D')BEGINALTER TABLE [jos_extensions] ADD  DEFAULT ((0)) FOR [ordering]ENDEnd/****** Object:  Default [DF__jos_exten__state__00200768]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_exten__state__00200768]') AND parent_object_id = OBJECT_ID(N'[jos_extensions]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_exten__state__00200768]') AND type = 'D')BEGINALTER TABLE [jos_extensions] ADD  DEFAULT ((0)) FOR [state]ENDEnd/****** Object:  Default [DF__jos_core___searc__778AC167]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_core___searc__778AC167]') AND parent_object_id = OBJECT_ID(N'[jos_core_log_searches]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_core___searc__778AC167]') AND type = 'D')BEGINALTER TABLE [jos_core_log_searches] ADD  DEFAULT (N'') FOR [search_term]ENDEnd/****** Object:  Default [DF__jos_core_l__hits__787EE5A0]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_core_l__hits__787EE5A0]') AND parent_object_id = OBJECT_ID(N'[jos_core_log_searches]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_core_l__hits__787EE5A0]') AND type = 'D')BEGINALTER TABLE [jos_core_log_searches] ADD  DEFAULT ((0)) FOR [hits]ENDEnd/****** Object:  Default [DF__jos_conte__conte__72C60C4A]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__conte__72C60C4A]') AND parent_object_id = OBJECT_ID(N'[jos_content_rating]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__conte__72C60C4A]') AND type = 'D')BEGINALTER TABLE [jos_content_rating] ADD  DEFAULT ((0)) FOR [content_id]ENDEnd/****** Object:  Default [DF__jos_conte__ratin__73BA3083]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__ratin__73BA3083]') AND parent_object_id = OBJECT_ID(N'[jos_content_rating]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__ratin__73BA3083]') AND type = 'D')BEGINALTER TABLE [jos_content_rating] ADD  DEFAULT ((0)) FOR [rating_sum]ENDEnd/****** Object:  Default [DF__jos_conte__ratin__74AE54BC]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__ratin__74AE54BC]') AND parent_object_id = OBJECT_ID(N'[jos_content_rating]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__ratin__74AE54BC]') AND type = 'D')BEGINALTER TABLE [jos_content_rating] ADD  DEFAULT ((0)) FOR [rating_count]ENDEnd/****** Object:  Default [DF__jos_conte__lasti__75A278F5]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__lasti__75A278F5]') AND parent_object_id = OBJECT_ID(N'[jos_content_rating]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__lasti__75A278F5]') AND type = 'D')BEGINALTER TABLE [jos_content_rating] ADD  DEFAULT (N'') FOR [lastip]ENDEnd/****** Object:  Default [DF__jos_conte__conte__6FE99F9F]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__conte__6FE99F9F]') AND parent_object_id = OBJECT_ID(N'[jos_content_frontpage]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__conte__6FE99F9F]') AND type = 'D')BEGINALTER TABLE [jos_content_frontpage] ADD  DEFAULT ((0)) FOR [content_id]ENDEnd/****** Object:  Default [DF__jos_conte__order__70DDC3D8]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__order__70DDC3D8]') AND parent_object_id = OBJECT_ID(N'[jos_content_frontpage]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__order__70DDC3D8]') AND type = 'D')BEGINALTER TABLE [jos_content_frontpage] ADD  DEFAULT ((0)) FOR [ordering]ENDEnd/****** Object:  Default [DF__jos_conte__asset__59063A47]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__asset__59063A47]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__asset__59063A47]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [asset_id]ENDEnd/****** Object:  Default [DF__jos_conte__title__59FA5E80]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__title__59FA5E80]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__title__59FA5E80]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT (N'') FOR [title]ENDEnd/****** Object:  Default [DF__jos_conte__alias__5AEE82B9]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__alias__5AEE82B9]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__alias__5AEE82B9]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT (N'') FOR [alias]ENDEnd/****** Object:  Default [DF__jos_conte__title__5BE2A6F2]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__title__5BE2A6F2]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__title__5BE2A6F2]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT (N'') FOR [title_alias]ENDEnd/****** Object:  Default [DF__jos_conte__state__5CD6CB2B]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__state__5CD6CB2B]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__state__5CD6CB2B]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [state]ENDEnd/****** Object:  Default [DF__jos_conte__secti__5DCAEF64]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__secti__5DCAEF64]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__secti__5DCAEF64]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [sectionid]ENDEnd/****** Object:  Default [DF__jos_conten__mask__5EBF139D]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conten__mask__5EBF139D]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conten__mask__5EBF139D]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [mask]ENDEnd/****** Object:  Default [DF__jos_conte__catid__5FB337D6]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__catid__5FB337D6]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__catid__5FB337D6]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [catid]ENDEnd/****** Object:  Default [DF__jos_conte__creat__60A75C0F]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__creat__60A75C0F]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__creat__60A75C0F]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [created]ENDEnd/****** Object:  Default [DF__jos_conte__creat__619B8048]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__creat__619B8048]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__creat__619B8048]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [created_by]ENDEnd/****** Object:  Default [DF__jos_conte__creat__628FA481]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__creat__628FA481]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__creat__628FA481]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT (N'') FOR [created_by_alias]ENDEnd/****** Object:  Default [DF__jos_conte__modif__6383C8BA]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__modif__6383C8BA]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__modif__6383C8BA]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [modified]ENDEnd/****** Object:  Default [DF__jos_conte__modif__6477ECF3]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__modif__6477ECF3]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__modif__6477ECF3]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [modified_by]ENDEnd/****** Object:  Default [DF__jos_conte__check__656C112C]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__check__656C112C]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__check__656C112C]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [checked_out]ENDEnd/****** Object:  Default [DF__jos_conte__check__66603565]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__check__66603565]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__check__66603565]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [checked_out_time]ENDEnd/****** Object:  Default [DF__jos_conte__publi__6754599E]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__publi__6754599E]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__publi__6754599E]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [publish_up]ENDEnd/****** Object:  Default [DF__jos_conte__publi__68487DD7]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__publi__68487DD7]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__publi__68487DD7]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [publish_down]ENDEnd/****** Object:  Default [DF__jos_conte__versi__693CA210]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__versi__693CA210]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__versi__693CA210]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((1)) FOR [version]ENDEnd/****** Object:  Default [DF__jos_conte__paren__6A30C649]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__paren__6A30C649]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__paren__6A30C649]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [parentid]ENDEnd/****** Object:  Default [DF__jos_conte__order__6B24EA82]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__order__6B24EA82]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__order__6B24EA82]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [ordering]ENDEnd/****** Object:  Default [DF__jos_conte__acces__6C190EBB]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__acces__6C190EBB]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__acces__6C190EBB]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [access]ENDEnd/****** Object:  Default [DF__jos_conten__hits__6D0D32F4]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conten__hits__6D0D32F4]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conten__hits__6D0D32F4]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [hits]ENDEnd/****** Object:  Default [DF__jos_conte__featu__6E01572D]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conte__featu__6E01572D]') AND parent_object_id = OBJECT_ID(N'[jos_content]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conte__featu__6E01572D]') AND type = 'D')BEGINALTER TABLE [jos_content] ADD  DEFAULT ((0)) FOR [featured]ENDEnd/****** Object:  Default [DF__jos_contac__name__3B75D760]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_contac__name__3B75D760]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_contac__name__3B75D760]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (N'') FOR [name]ENDEnd/****** Object:  Default [DF__jos_conta__alias__3C69FB99]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__alias__3C69FB99]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__alias__3C69FB99]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (N'') FOR [alias]ENDEnd/****** Object:  Default [DF__jos_conta__con_p__3D5E1FD2]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__con_p__3D5E1FD2]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__con_p__3D5E1FD2]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (NULL) FOR [con_position]ENDEnd/****** Object:  Default [DF__jos_conta__subur__3E52440B]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__subur__3E52440B]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__subur__3E52440B]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (NULL) FOR [suburb]ENDEnd/****** Object:  Default [DF__jos_conta__state__3F466844]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__state__3F466844]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__state__3F466844]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (NULL) FOR [state]ENDEnd/****** Object:  Default [DF__jos_conta__count__403A8C7D]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__count__403A8C7D]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__count__403A8C7D]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (NULL) FOR [country]ENDEnd/****** Object:  Default [DF__jos_conta__postc__412EB0B6]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__postc__412EB0B6]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__postc__412EB0B6]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (NULL) FOR [postcode]ENDEnd/****** Object:  Default [DF__jos_conta__telep__4222D4EF]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__telep__4222D4EF]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__telep__4222D4EF]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (NULL) FOR [telephone]ENDEnd/****** Object:  Default [DF__jos_contact__fax__4316F928]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_contact__fax__4316F928]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_contact__fax__4316F928]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (NULL) FOR [fax]ENDEnd/****** Object:  Default [DF__jos_conta__image__440B1D61]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__image__440B1D61]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__image__440B1D61]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (NULL) FOR [image]ENDEnd/****** Object:  Default [DF__jos_conta__image__44FF419A]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__image__44FF419A]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__image__44FF419A]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (NULL) FOR [imagepos]ENDEnd/****** Object:  Default [DF__jos_conta__email__45F365D3]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__email__45F365D3]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__email__45F365D3]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (NULL) FOR [email_to]ENDEnd/****** Object:  Default [DF__jos_conta__defau__46E78A0C]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__defau__46E78A0C]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__defau__46E78A0C]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ((0)) FOR [default_con]ENDEnd/****** Object:  Default [DF__jos_conta__publi__47DBAE45]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__publi__47DBAE45]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__publi__47DBAE45]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ((0)) FOR [published]ENDEnd/****** Object:  Default [DF__jos_conta__check__48CFD27E]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__check__48CFD27E]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__check__48CFD27E]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ((0)) FOR [checked_out]ENDEnd/****** Object:  Default [DF__jos_conta__check__49C3F6B7]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__check__49C3F6B7]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__check__49C3F6B7]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [checked_out_time]ENDEnd/****** Object:  Default [DF__jos_conta__order__4AB81AF0]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__order__4AB81AF0]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__order__4AB81AF0]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ((0)) FOR [ordering]ENDEnd/****** Object:  Default [DF__jos_conta__user___4BAC3F29]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__user___4BAC3F29]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__user___4BAC3F29]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ((0)) FOR [user_id]ENDEnd/****** Object:  Default [DF__jos_conta__catid__4CA06362]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__catid__4CA06362]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__catid__4CA06362]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ((0)) FOR [catid]ENDEnd/****** Object:  Default [DF__jos_conta__acces__4D94879B]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__acces__4D94879B]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__acces__4D94879B]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ((0)) FOR [access]ENDEnd/****** Object:  Default [DF__jos_conta__mobil__4E88ABD4]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__mobil__4E88ABD4]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__mobil__4E88ABD4]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (N'') FOR [mobile]ENDEnd/****** Object:  Default [DF__jos_conta__webpa__4F7CD00D]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__webpa__4F7CD00D]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__webpa__4F7CD00D]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (N'') FOR [webpage]ENDEnd/****** Object:  Default [DF__jos_conta__creat__5070F446]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__creat__5070F446]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__creat__5070F446]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [created]ENDEnd/****** Object:  Default [DF__jos_conta__creat__5165187F]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__creat__5165187F]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__creat__5165187F]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ((0)) FOR [created_by]ENDEnd/****** Object:  Default [DF__jos_conta__creat__52593CB8]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__creat__52593CB8]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__creat__52593CB8]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT (N'') FOR [created_by_alias]ENDEnd/****** Object:  Default [DF__jos_conta__modif__534D60F1]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__modif__534D60F1]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__modif__534D60F1]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [modified]ENDEnd/****** Object:  Default [DF__jos_conta__modif__5441852A]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__modif__5441852A]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__modif__5441852A]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ((0)) FOR [modified_by]ENDEnd/****** Object:  Default [DF__jos_conta__featu__5535A963]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__featu__5535A963]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__featu__5535A963]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ((0)) FOR [featured]ENDEnd/****** Object:  Default [DF__jos_conta__publi__5629CD9C]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__publi__5629CD9C]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__publi__5629CD9C]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [publish_up]ENDEnd/****** Object:  Default [DF__jos_conta__publi__571DF1D5]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_conta__publi__571DF1D5]') AND parent_object_id = OBJECT_ID(N'[jos_contact_details]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_conta__publi__571DF1D5]') AND type = 'D')BEGINALTER TABLE [jos_contact_details] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [publish_down]ENDEnd/****** Object:  Default [DF__jos_categ__asset__276EDEB3]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__asset__276EDEB3]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__asset__276EDEB3]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ((0)) FOR [asset_id]ENDEnd/****** Object:  Default [DF__jos_categ__paren__286302EC]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__paren__286302EC]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__paren__286302EC]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ((0)) FOR [parent_id]ENDEnd/****** Object:  Default [DF__jos_cater__lft__29572725]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_cater__lft__29572725]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_cater__lft__29572725]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ((0)) FOR [lft]ENDEnd/****** Object:  Default [DF__jos_cater__rgt__2A4B4B5E]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_cater__rgt__2A4B4B5E]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_cater__rgt__2A4B4B5E]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ((0)) FOR [rgt]ENDEnd/****** Object:  Default [DF__jos_categ__level__2B3F6F97]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__level__2B3F6F97]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__level__2B3F6F97]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ((0)) FOR [level]ENDEnd/****** Object:  Default [DF__jos_cate__path__2C3393D0]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_cate__path__2C3393D0]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_cate__path__2C3393D0]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT (N'') FOR [path]ENDEnd/****** Object:  Default [DF__jos_categ__exten__2D27B809]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__exten__2D27B809]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__exten__2D27B809]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT (N'') FOR [extension]ENDEnd/****** Object:  Default [DF__jos_categ__alias__2E1BDC42]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__alias__2E1BDC42]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__alias__2E1BDC42]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT (N'') FOR [alias]ENDEnd/****** Object:  Default [DF__jos_cate__note__2F10007B]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_cate__note__2F10007B]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_cate__note__2F10007B]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT (N'') FOR [note]ENDEnd/****** Object:  Default [DF__jos_categ__descr__300424B4]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__descr__300424B4]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__descr__300424B4]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT (N'') FOR [description]ENDEnd/****** Object:  Default [DF__jos_categ__publi__30F848ED]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__publi__30F848ED]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__publi__30F848ED]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ((0)) FOR [published]ENDEnd/****** Object:  Default [DF__jos_categ__check__31EC6D26]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__check__31EC6D26]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__check__31EC6D26]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ((0)) FOR [checked_out]ENDEnd/****** Object:  Default [DF__jos_categ__check__32E0915F]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__check__32E0915F]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__check__32E0915F]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [checked_out_time]ENDEnd/****** Object:  Default [DF__jos_categ__acces__33D4B598]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__acces__33D4B598]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__acces__33D4B598]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ((0)) FOR [access]ENDEnd/****** Object:  Default [DF__jos_categ__param__34C8D9D1]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__param__34C8D9D1]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__param__34C8D9D1]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT (N'') FOR [params]ENDEnd/****** Object:  Default [DF__jos_categ__creat__35BCFE0A]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__creat__35BCFE0A]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__creat__35BCFE0A]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ((0)) FOR [created_user_id]ENDEnd/****** Object:  Default [DF__jos_categ__creat__36B12243]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__creat__36B12243]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__creat__36B12243]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [created_time]ENDEnd/****** Object:  Default [DF__jos_categ__modif__37A5467C]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__modif__37A5467C]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__modif__37A5467C]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ((0)) FOR [modified_user_id]ENDEnd/****** Object:  Default [DF__jos_categ__modif__38996AB5]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_categ__modif__38996AB5]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_categ__modif__38996AB5]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [modified_time]ENDEnd/****** Object:  Default [DF__jos_cate__hits__398D8EEE]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_cate__hits__398D8EEE]') AND parent_object_id = OBJECT_ID(N'[jos_cateries]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_cate__hits__398D8EEE]') AND type = 'D')BEGINALTER TABLE [jos_cateries] ADD  DEFAULT ((0)) FOR [hits]ENDEnd/****** Object:  Default [DF__jos_banners__cid__0F975522]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banners__cid__0F975522]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banners__cid__0F975522]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((0)) FOR [cid]ENDEnd/****** Object:  Default [DF__jos_banner__type__108B795B]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banner__type__108B795B]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banner__type__108B795B]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((0)) FOR [type]ENDEnd/****** Object:  Default [DF__jos_banner__name__117F9D94]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banner__name__117F9D94]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banner__name__117F9D94]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT (N'') FOR [name]ENDEnd/****** Object:  Default [DF__jos_banne__alias__1273C1CD]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__alias__1273C1CD]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__alias__1273C1CD]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT (N'') FOR [alias]ENDEnd/****** Object:  Default [DF__jos_banne__impto__1367E606]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__impto__1367E606]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__impto__1367E606]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((0)) FOR [imptotal]ENDEnd/****** Object:  Default [DF__jos_banne__impma__145C0A3F]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__impma__145C0A3F]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__impma__145C0A3F]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((0)) FOR [impmade]ENDEnd/****** Object:  Default [DF__jos_banne__click__15502E78]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__click__15502E78]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__click__15502E78]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((0)) FOR [clicks]ENDEnd/****** Object:  Default [DF__jos_banne__click__164452B1]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__click__164452B1]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__click__164452B1]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT (N'') FOR [clickurl]ENDEnd/****** Object:  Default [DF__jos_banne__state__173876EA]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__state__173876EA]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__state__173876EA]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((0)) FOR [state]ENDEnd/****** Object:  Default [DF__jos_banne__catid__182C9B23]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__catid__182C9B23]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__catid__182C9B23]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((0)) FOR [catid]ENDEnd/****** Object:  Default [DF__jos_banne__stick__1920BF5C]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__stick__1920BF5C]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__stick__1920BF5C]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((0)) FOR [sticky]ENDEnd/****** Object:  Default [DF__jos_banne__order__1A14E395]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__order__1A14E395]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__order__1A14E395]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((0)) FOR [ordering]ENDEnd/****** Object:  Default [DF__jos_banne__own_p__1B0907CE]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__own_p__1B0907CE]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__own_p__1B0907CE]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((0)) FOR [own_prefix]ENDEnd/****** Object:  Default [DF__jos_banne__metak__1BFD2C07]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__metak__1BFD2C07]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__metak__1BFD2C07]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT (N'') FOR [metakey_prefix]ENDEnd/****** Object:  Default [DF__jos_banne__purch__1CF15040]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__purch__1CF15040]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__purch__1CF15040]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((-1)) FOR [purchase_type]ENDEnd/****** Object:  Default [DF__jos_banne__track__1DE57479]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__track__1DE57479]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__track__1DE57479]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((-1)) FOR [track_clicks]ENDEnd/****** Object:  Default [DF__jos_banne__track__1ED998B2]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__track__1ED998B2]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__track__1ED998B2]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((-1)) FOR [track_impressions]ENDEnd/****** Object:  Default [DF__jos_banne__check__1FCDBCEB]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__check__1FCDBCEB]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__check__1FCDBCEB]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ((0)) FOR [checked_out]ENDEnd/****** Object:  Default [DF__jos_banne__check__20C1E124]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__check__20C1E124]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__check__20C1E124]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [checked_out_time]ENDEnd/****** Object:  Default [DF__jos_banne__publi__21B6055D]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__publi__21B6055D]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__publi__21B6055D]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [publish_up]ENDEnd/****** Object:  Default [DF__jos_banne__publi__22AA2996]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__publi__22AA2996]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__publi__22AA2996]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [publish_down]ENDEnd/****** Object:  Default [DF__jos_banne__reset__239E4DCF]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__reset__239E4DCF]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__reset__239E4DCF]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [reset]ENDEnd/****** Object:  Default [DF__jos_banne__creat__24927208]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__creat__24927208]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__creat__24927208]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [created]ENDEnd/****** Object:  Default [DF__jos_banne__langu__25869641]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__langu__25869641]') AND parent_object_id = OBJECT_ID(N'[jos_banners]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__langu__25869641]') AND type = 'D')BEGINALTER TABLE [jos_banners] ADD  DEFAULT (N'') FOR [language]ENDEnd/****** Object:  Default [DF__jos_banne__count__0DAF0CB0]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__count__0DAF0CB0]') AND parent_object_id = OBJECT_ID(N'[jos_banner_tracks]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__count__0DAF0CB0]') AND type = 'D')BEGINALTER TABLE [jos_banner_tracks] ADD  DEFAULT ((0)) FOR [count]ENDEnd/****** Object:  Default [DF__jos_banner__name__023D5A04]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banner__name__023D5A04]') AND parent_object_id = OBJECT_ID(N'[jos_banner_clients]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banner__name__023D5A04]') AND type = 'D')BEGINALTER TABLE [jos_banner_clients] ADD  DEFAULT (N'') FOR [name]ENDEnd/****** Object:  Default [DF__jos_banne__conta__03317E3D]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__conta__03317E3D]') AND parent_object_id = OBJECT_ID(N'[jos_banner_clients]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__conta__03317E3D]') AND type = 'D')BEGINALTER TABLE [jos_banner_clients] ADD  DEFAULT (N'') FOR [contact]ENDEnd/****** Object:  Default [DF__jos_banne__email__0425A276]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__email__0425A276]') AND parent_object_id = OBJECT_ID(N'[jos_banner_clients]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__email__0425A276]') AND type = 'D')BEGINALTER TABLE [jos_banner_clients] ADD  DEFAULT (N'') FOR [email]ENDEnd/****** Object:  Default [DF__jos_banne__state__0519C6AF]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__state__0519C6AF]') AND parent_object_id = OBJECT_ID(N'[jos_banner_clients]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__state__0519C6AF]') AND type = 'D')BEGINALTER TABLE [jos_banner_clients] ADD  DEFAULT ((0)) FOR [state]ENDEnd/****** Object:  Default [DF__jos_banne__check__060DEAE8]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__check__060DEAE8]') AND parent_object_id = OBJECT_ID(N'[jos_banner_clients]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__check__060DEAE8]') AND type = 'D')BEGINALTER TABLE [jos_banner_clients] ADD  DEFAULT ((0)) FOR [checked_out]ENDEnd/****** Object:  Default [DF__jos_banne__check__07020F21]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__check__07020F21]') AND parent_object_id = OBJECT_ID(N'[jos_banner_clients]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__check__07020F21]') AND type = 'D')BEGINALTER TABLE [jos_banner_clients] ADD  DEFAULT ('1999-01-01 00:00:00') FOR [checked_out_time]ENDEnd/****** Object:  Default [DF__jos_banne__own_p__07F6335A]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__own_p__07F6335A]') AND parent_object_id = OBJECT_ID(N'[jos_banner_clients]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__own_p__07F6335A]') AND type = 'D')BEGINALTER TABLE [jos_banner_clients] ADD  DEFAULT ((0)) FOR [own_prefix]ENDEnd/****** Object:  Default [DF__jos_banne__metak__08EA5793]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__metak__08EA5793]') AND parent_object_id = OBJECT_ID(N'[jos_banner_clients]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__metak__08EA5793]') AND type = 'D')BEGINALTER TABLE [jos_banner_clients] ADD  DEFAULT (N'') FOR [metakey_prefix]ENDEnd/****** Object:  Default [DF__jos_banne__purch__09DE7BCC]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__purch__09DE7BCC]') AND parent_object_id = OBJECT_ID(N'[jos_banner_clients]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__purch__09DE7BCC]') AND type = 'D')BEGINALTER TABLE [jos_banner_clients] ADD  DEFAULT ((-1)) FOR [purchase_type]ENDEnd/****** Object:  Default [DF__jos_banne__track__0AD2A005]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__track__0AD2A005]') AND parent_object_id = OBJECT_ID(N'[jos_banner_clients]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__track__0AD2A005]') AND type = 'D')BEGINALTER TABLE [jos_banner_clients] ADD  DEFAULT ((-1)) FOR [track_clicks]ENDEnd/****** Object:  Default [DF__jos_banne__track__0BC6C43E]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_banne__track__0BC6C43E]') AND parent_object_id = OBJECT_ID(N'[jos_banner_clients]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_banne__track__0BC6C43E]') AND type = 'D')BEGINALTER TABLE [jos_banner_clients] ADD  DEFAULT ((-1)) FOR [track_impressions]ENDEnd/****** Object:  Default [DF__jos_asset__paren__7E6CC920]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_asset__paren__7E6CC920]') AND parent_object_id = OBJECT_ID(N'[jos_assets]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_asset__paren__7E6CC920]') AND type = 'D')BEGINALTER TABLE [jos_assets] ADD  DEFAULT ((0)) FOR [parent_id]ENDEnd/****** Object:  Default [DF__jos_assets__lft__7F60ED59]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_assets__lft__7F60ED59]') AND parent_object_id = OBJECT_ID(N'[jos_assets]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_assets__lft__7F60ED59]') AND type = 'D')BEGINALTER TABLE [jos_assets] ADD  DEFAULT ((0)) FOR [lft]ENDEnd/****** Object:  Default [DF__jos_assets__rgt__00551192]    Script Date: 11/08/2010 18:41:22 ******/IF Not EXISTS (SELECT * FROM sys.default_constraints WHERE object_id = OBJECT_ID(N'[DF__jos_assets__rgt__00551192]') AND parent_object_id = OBJECT_ID(N'[jos_assets]'))BeginIF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF__jos_assets__rgt__00551192]') AND type = 'D')BEGINALTER TABLE [jos_assets] ADD  DEFAULT ((0)) FOR [rgt]ENDEnd
