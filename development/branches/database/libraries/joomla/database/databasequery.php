@@ -164,47 +164,48 @@ abstract class JDatabaseQuery
 	 */
 	protected $_order = null;
 
-  /**
-   * @var   object  The show table element.
-   * @since 1.6
-   */
-  protected $_show_tables = null;
-  
-  /**
-   * @var   object  The drop table element.
-   * @since 1.6
-   */
-  protected $_drop = null;
-  
-  /**
-   * @var   object  The rename table element.
-   * @since 1.6
-   */
-  protected $_rename = null;
-  
-  /**
-   * @var   object  The insert element.
-   * @since 1.6
-   */
-  protected $_insert_into = null;
-  
-  /**
-   * @var   object  The insert value element.
-   * @since 1.6
-   */
-  protected $_values = null;
-  
-  /**
-   * @var   object  The insert field element.
-   * @since 1.6
-   */
-  protected $_fields = null;
-  
-  /**
-   * @var   object  The auto increment insert field element.
-   * @since 1.6
-   */
-  protected $_auto_increment_field = null;
+	/**
+	 * @var   object  The show table element.
+	 * @since 1.6
+	 */
+	protected $_show_tables = null;
+
+	/**
+	 * @var   object  The drop table element.
+	 * @since 1.6
+	 */
+	protected $_drop = null;
+
+	/**
+	 * @var   object  The rename table element.
+	 * @since 1.6
+	 */
+	protected $_rename = null;
+
+	/**
+	 * @var   object  The insert element.
+	 * @since 1.6
+	 */
+	protected $_insert_into = null;
+
+	/**
+	 * @var   object  The insert value element.
+	 * @since 1.6
+	 */
+	protected $_values = null;
+
+	/**
+	 * @var   object  The insert field element.
+	 * @since 1.6
+	 */
+	protected $_fields = null;
+
+	/**
+	 * @var   object  The auto increment insert field element.
+	 * @since 1.6
+	 */
+	protected $_auto_increment_field = null;
+
 	/**
 	 * Clear data from the query or a specific clause of the query.
 	 *
@@ -266,24 +267,24 @@ abstract class JDatabaseQuery
 				break;
 
 			case 'showTables':
-        $this->_show_tables = null;
-        break;
-        
-      case 'drop':
-        $this->_drop = null;
-        break;
-      
-      case 'rename':
-        $this->_rename = null;
-        break;
-      
-      case 'insert_into':
-        $this->_insert_into = null;
-        $this->_fields = null;
-        $this->_values = null;
-        $this->_auto_increment_field = null;
-        break;
-        
+				$this->_show_tables = null;
+				break;
+
+			case 'drop':
+				$this->_drop = null;
+				break;
+
+			case 'rename':
+				$this->_rename = null;
+				break;
+
+			case 'insert_into':
+				$this->_insert_into = null;
+				$this->_fields = null;
+				$this->_values = null;
+				$this->_auto_increment_field = null;
+				break;
+
 			default:
 				$this->_type = null;
 				$this->_select = null;
@@ -297,13 +298,13 @@ abstract class JDatabaseQuery
 				$this->_group = null;
 				$this->_having = null;
 				$this->_order = null;
-        $this->_show_tables = null;
-        $this->_drop = null;
-        $this->_rename = null;
-        $this->_insert_into = null;
-        $this->_values = null;
-        $this->_fields = null;
-        $this->_auto_increment_field = null;
+				$this->_show_tables = null;
+				$this->_drop = null;
+				$this->_rename = null;
+				$this->_insert_into = null;
+				$this->_values = null;
+				$this->_fields = null;
+				$this->_auto_increment_field = null;
 				break;
 		}
 
@@ -318,14 +319,14 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function select($columns);
-	
+
 	/**
 	 * @param	string	$table	The name of the table to delete from.
 	 *
 	 * @return	JDatabaseQuery	Returns this object to allow chaining.
 	 * @since	1.6
 	 */
-	abstract public function delete($table = null);	
+	abstract public function delete($table = null);
 
 	/**
 	 * @param	mixed	$tables	A string or array of table names.
@@ -342,7 +343,7 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function update($tables);
-	
+
 	/**
 	 * @param	mixed	A string or array of table names.
 	 *
@@ -350,7 +351,7 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function from($tables);
-	
+
 	/**
 	 * @param	string	$type
 	 * @param	string	$conditions
@@ -359,7 +360,7 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function join($type, $conditions);
-	
+
 	/**
 	 * @param	string	$conditions
 	 *
@@ -367,7 +368,7 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function innerJoin($conditions);
-	
+
 	/**
 	 * @param	string	$conditions
 	 *
@@ -375,7 +376,7 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function outerJoin($conditions);
-	
+
 	/**
 	 * @param	string	$conditions
 	 *
@@ -383,7 +384,7 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function leftJoin($conditions);
-	
+
 	/**
 	 * @param	string	$conditions
 	 *
@@ -391,7 +392,7 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function rightJoin($conditions);
-	
+
 	/**
 	 * @param	mixed	$conditions	A string or array of conditions.
 	 * @param	string	$glue
@@ -400,7 +401,7 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function set($conditions, $glue=',');
-	
+
 	/**
 	 * @param	mixed	$conditions	A string or array of where conditions.
 	 * @param	string	$glue
@@ -409,7 +410,7 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function where($conditions, $glue='AND');
-	
+
 	/**
 	 * @param	mixed	$columns	A string or array of ordering columns.
 	 *
@@ -417,7 +418,7 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function group($columns);
-	
+
 	/**
 	 * @param	mixed	$conditions	A string or array of columns.
 	 * @param	string	$glue
@@ -426,7 +427,7 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function having($conditions, $glue='AND');
-	
+
 	/**
 	 * @param	mixed	$columns	A string or array of ordering columns.
 	 *
@@ -434,102 +435,105 @@ abstract class JDatabaseQuery
 	 * @since	1.6
 	 */
 	abstract public function order($columns);
-	
-  /**
-   * @param string $name  A string 
-   * 
-   * @return  Show table query syntax
-   * @since 1.6
-   */
-   abstract public function showTables($name);
-   
-   /**
-   * @param string $table_name  A string 
-   * 
-   * @return  Drop if exists syntax
-   * @since 1.6
-   */
-   abstract public function dropIfExists($table_name);
-   
-   /**
-   * @param string $table_name  A string 
-   * 
-   * @return  Rename table syntax
-   * @since 1.6
-   */
-   abstract public function renameTable($table_name);
-   
-   /**
-   * @param string $table_name  A string 
-   * @param boolean $increment_field Provinding value for autoincrement primary key or not
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
-   * @since 1.6
-   */
-   abstract public function insertInto($table_name, $increment_field=false);
-   
-   /**
-   * @param string $fields  A string 
-   * 
-   * @since 1.6
-   */
-   abstract public function fields($fields);
-   
-   /**
-   * @param string $values  A string 
-   *
-   * @since 1.6
-   */
-   abstract public function values($values);
-   
-   /**
-   * @param string $query A string
-   * 
-   * @return The auto increment syntax
-   * @since 1.6
-   */
-   abstract public function auto_increment($query);
-   
-   /**
-   * @param $field A string
-   * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
-   * @since 1.6
-   */
-   abstract public function castToChar($field);
-   
-   /**
-   * @param $field A string
-   * 
-   * @return  JDatabaseQuery  Returns this object to allow chaining.
-   * @since 1.6
-   */
-   abstract public function charLength($field);
-   
-   /**
-   * @param array $fields
-   * 
-   * @param string separator
-   * @return  String concantenaation of all the fields
-   * @since 1.6
-   */
-   abstract public function concat($fields, $separator = null);
-   
-   /**
-   * @param string $field
-   * 
-   * @param string separator
-   * @return  Length function for the field
-   * @since 1.6
-   */
-   abstract public function length($field);
-   
-   /**
-   * 
-   * @return  NOW function
-   * @since 1.6
-   */
-   abstract public function now();
-   
+
+	/**
+	 * @param string $name  A string
+	 *
+	 * @return  Show table query syntax
+	 * @since 1.6
+	 */
+	abstract public function showTables($name);
+	 
+	/**
+	 * @param string $table_name  A string
+	 *
+	 * @return  Drop if exists syntax
+	 * @since 1.6
+	 */
+	abstract public function dropIfExists($table_name);
+	 
+	/**
+	 * @param string $table_name  A string
+	 * @param object $db  Database object
+	 * @param string $prefix  A string
+	 * @param string $backup  A string
+	 * 
+	 * @return  Rename table syntax
+	 * @since 1.6
+	 */
+	abstract public function renameTable($table_name, &$db, $prefix = null, $backup = null);
+	 
+	/**
+	 * @param string $table_name  A string
+	 * @param boolean $increment_field Provinding value for autoincrement primary key or not
+	 * @return  JDatabaseQuery  Returns this object to allow chaining.
+	 * @since 1.6
+	 */
+	abstract public function insertInto($table_name, $increment_field=false);
+	 
+	/**
+	 * @param string $fields  A string
+	 *
+	 * @since 1.6
+	 */
+	abstract public function fields($fields);
+	 
+	/**
+	 * @param string $values  A string
+	 *
+	 * @since 1.6
+	 */
+	abstract public function values($values);
+	 
+	/**
+	 * @param string $query A string
+	 *
+	 * @return The auto increment syntax
+	 * @since 1.6
+	 */
+	abstract public function auto_increment($query);
+	 
+	/**
+	 * @param $field A string
+	 *
+	 * @return  JDatabaseQuery  Returns this object to allow chaining.
+	 * @since 1.6
+	 */
+	abstract public function castToChar($field);
+	 
+	/**
+	 * @param $field A string
+	 *
+	 * @return  JDatabaseQuery  Returns this object to allow chaining.
+	 * @since 1.6
+	 */
+	abstract public function charLength($field);
+	 
+	/**
+	 * @param array $fields
+	 *
+	 * @param string separator
+	 * @return  String concantenaation of all the fields
+	 * @since 1.6
+	 */
+	abstract public function concat($fields, $separator = null);
+	 
+	/**
+	 * @param string $field
+	 *
+	 * @param string separator
+	 * @return  Length function for the field
+	 * @since 1.6
+	 */
+	abstract public function length($field);
+	 
+	/**
+	 *
+	 * @return  NOW function
+	 * @since 1.6
+	 */
+	abstract public function now();
+	 
 	/**
 	 * Magic function to convert the query to a string.
 	 *
@@ -605,38 +609,38 @@ abstract class JDatabaseQuery
 					$query .= (string) $this->_where;
 				}
 
-        break;
-        
-      case 'showTables':
-        $query .= (string) $this->_show_tables;
-        
 				break;
-        
-      case 'drop':
-        $query .= (string) $this->_drop;
-        
-        break;
-      
-      case 'rename':
-        $query .= (string) $this->_rename;
-        
-        break;
-      
-      case 'insert_into':
-        $query .= (string) $this->_insert_into;
-        
-        if ($this->_fields) {
-          $query .= (string) $this->_fields;
-          $query .= ')';
-        }
-        
-        $query .= (string) $this->_values;
-        $query .= ')';
 
-        if($this->_auto_increment_field)
-          $query = $this->auto_increment($query);
-          
-        break;
+			case 'showTables':
+				$query .= (string) $this->_show_tables;
+
+				break;
+
+			case 'drop':
+				$query .= (string) $this->_drop;
+
+				break;
+
+			case 'rename':
+				$query .= (string) $this->_rename;
+
+				break;
+
+			case 'insert_into':
+				$query .= (string) $this->_insert_into;
+
+				if ($this->_fields) {
+					$query .= (string) $this->_fields;
+					$query .= ')';
+				}
+
+				$query .= (string) $this->_values;
+				$query .= ')';
+
+				if($this->_auto_increment_field)
+				$query = $this->auto_increment($query);
+
+				break;
 		}
 
 		return $query;

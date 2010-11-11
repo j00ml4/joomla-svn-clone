@@ -77,7 +77,7 @@ class JDatabaseSQLAzure extends JDatabase
 		}
    	 	ini_set("display_errors", 1);
 		error_reporting(E_ALL);
- 		
+ 		sqlsrv_configure("WarningsReturnAsErrors", 0);
 		//sqlsrv_configure('WarningsReturnAsErrors', 1);
 
 		// finalize initialization

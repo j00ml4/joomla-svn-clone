@@ -201,7 +201,7 @@ class JInstallationModelDatabase extends JModel
 				$db->setQuery(
 					'UPDATE `#__extensions`' .
 					' SET `params` = '.$db->Quote($params) .
-					' WHERE `element`="com_languages"'
+					' WHERE `element`=\'com_languages\''
 				);
 
 				// Execute the query.
@@ -315,8 +315,8 @@ class JInstallationModelDatabase extends JModel
 		// Get the tables in the database.
 		//sqlsrv change
 		$query = $db->getQuery(true);
-    $query->showTables($name);
-    $db->setQuery($query);
+	    $query->showTables($name);
+	    $db->setQuery($query);
 		
 		if ($tables = $db->loadResultArray())
 		{
@@ -331,8 +331,8 @@ class JInstallationModelDatabase extends JModel
 					// Drop the backup table.
 					//sqlsrv change
 					$query = $db->getQuery(true);
-          $query->dropIfExists($backupTable);
-          $db->setQuery($query);
+          			$query->dropIfExists($backupTable);
+         			$db->setQuery($query);
           
 					$db->query();
 
@@ -343,14 +343,14 @@ class JInstallationModelDatabase extends JModel
 					}
 
 					// Rename the current table to the backup table.
-          //sqlsrv change
-          $query = $db->getQuery(true);
+			          //sqlsrv change
+			          $query = $db->getQuery(true);
+			          
+			          $query->renameTable($table, $db, $prefix, $backup);
+			          $query->renameTable($backupTable, $db);
           
-          $query->renameTable($table);
-          $query->renameTable($backupTable);
-          
-          $db->setQuery($query);
-					$db->query();
+         			  $db->setQuery($query);
+					  $db->query();
 
 					// Check for errors.
 					if ($db->getErrorNum()) {
@@ -412,10 +412,10 @@ class JInstallationModelDatabase extends JModel
 		$return = true;
 
 		// Get the tables in the database.
-  	//sqlsrv change
-    $query = $db->getQuery(true);
-    $query->showTables($name);
-    $db->setQuery($query);
+	  	//sqlsrv change
+	    $query = $db->getQuery(true);
+	    $query->showTables($name);
+	    $db->setQuery($query);
     
 		if ($tables = $db->loadResultArray())
 		{
@@ -426,10 +426,10 @@ class JInstallationModelDatabase extends JModel
 				{
 					// Drop the table.
 					//sqlsrv change
-          $query = $db->getQuery(true);
-          $query->dropIfExists($table);
-          
-          $db->setQuery($query);
+		            $query = $db->getQuery(true);
+		            $query->dropIfExists($table);
+		          
+		            $db->setQuery($query);
           
 					$db->query();
 
@@ -467,6 +467,7 @@ class JInstallationModelDatabase extends JModel
 
 		// Get an array of queries from the schema and process them.
 		$queries = $this->_splitQueries($buffer);
+		
 		foreach ($queries as $query)
 		{
 			// Trim any whitespace.

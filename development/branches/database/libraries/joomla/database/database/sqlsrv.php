@@ -77,7 +77,7 @@ class JDatabaseSQLSrv extends JDatabase
 		}
    	 	ini_set("display_errors", 1);
 		error_reporting(E_ALL);
- 		
+ 		sqlsrv_configure("WarningsReturnAsErrors", 0);
 		//sqlsrv_configure('WarningsReturnAsErrors', 1);
 
 		// finalize initialization
@@ -239,9 +239,8 @@ class JDatabaseSQLSrv extends JDatabase
 		$this->_errorNum = 0;
 		$this->_errorMsg = '';
 		
-		
 		$this->_cursor = sqlsrv_query( $this->_connection, $sql );
-			
+		
 		if (!$this->_cursor)
 		{
 			$errors = sqlsrv_errors( );
@@ -616,12 +615,14 @@ class JDatabaseSQLSrv extends JDatabase
 		$fmtsql = 'INSERT INTO '.$this->nameQuote($table).' ( %s ) VALUES ( %s ) ';
 		$fields = array();
 		foreach (get_object_vars( $object ) as $k => $v) {
-			if (is_array($v) or is_object($v) or $v === NULL) {
+			/*if (is_array($v) or is_object($v) or $v === NULL) {
 				continue;
-			}
+			}*/
 			if ($k[0] == '_') { // internal field
 				continue;
 			}
+			if($k == $keyName && $keyName == 0)
+				continue;
 			$fields[] = $this->nameQuote( $k );
 			$values[] = $this->isQuoted( $k ) ? $this->Quote( $v ) : (int) $v;
 		}
