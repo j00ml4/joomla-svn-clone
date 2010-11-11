@@ -326,26 +326,74 @@ class JDatabaseQuerySQLAzure extends JDatabaseQuery
       return $this;
    }
    
-    /**
-   * @param string $table_name  A string 
-   * 
-   * @return  Rename table syntax
-   * @since 1.6
-   */
-   function renameTable($table_name)
-   {
-     $this->_type = 'rename';
-
-      if (is_null($this->_rename)) {
-        $this->_rename = new JDatabaseQueryElementSQLAzure('sp_rename', $table_name);
-      }
-      else {
-        $this->_rename->append($table_name);
-      }
-
-      return $this;
-   }
+	 /**
+	 * @param string $table_name  A string
+	 * @param object $db  Database object
+	 * @param string $prefix  A string
+	 * @param string $backup  A string
+	 * 
+	 * @return  Rename table syntax
+	 * @since 1.6
+	 */
+	function renameTable($table_name, &$db, $prefix = null, $backup = null)
+	{
+		 $this->_type = 'rename';
+		 $constraints = array();
+		 
+		 if(!is_null($prefix) && !is_null($backup)){
+		 	$constraints = $this->_get_table_constraints($table_name, $db);
+		 }
+		 
+		 if(!empty($constraints))
+		 	$this->_renameConstraints($constraints, $prefix, $backup, $db);
+		  
+		 if (is_null($this->_rename)) {
+		 	$this->_rename = new JDatabaseQueryElementSQLAzure('sp_rename', $table_name);
+		 }
+		 else {
+		 	$this->_rename->append($table_name);
+		 }
+	
+		 return $this;
+	}
    
+	 /**
+	 * @param string $table_name  A string
+	 * @param string $prefix  A string
+	 * @param string $backup  A string
+	 * @param object $db  Database object
+	 * @return  Rename Constraints syntax
+	 * @since 1.6
+	 */
+	private function _renameConstraints($constraints = array(), $prefix = null, $backup = null, $db)
+	{
+		foreach($constraints as $constraint)
+		{
+			$db->setQuery('sp_rename '.$constraint.','.str_replace($prefix, $backup, $constraint));
+			$db->query();
+			
+			// Check for errors.
+			if ($db->getErrorNum()) {
+				
+			}
+		}
+	}
+	
+	/**
+	 * @param string $table_name  A string
+	 * @param object $db  Database object
+	 * @return  Any constraints available for the table
+	 * @since 1.6
+	 */
+	private function _get_table_constraints($table_name, $db)
+	{
+		$sql = "SELECT CONSTRAINT_NAME FROM".
+				" INFORMATION_SCHEMA.TABLE_CONSTRAINTS".
+				" WHERE TABLE_NAME = ".$db->quote($table_name);
+		$db->setQuery($sql);
+		return $db->loadResultArray();
+	}
+	
    /**
    * @param string $table_name  A string 
    * @param boolean $increment_field Provinding value for autoincrement primary key or not

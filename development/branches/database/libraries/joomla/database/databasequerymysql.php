@@ -326,12 +326,15 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
    }
    
    /**
-   * @param string $table_name  A string 
-   * 
-   * @return  Rename table syntax
-   * @since 1.6
-   */
-   function renameTable($table_name)
+	 * @param string $table_name  A string
+	 * @param object $db  Database object
+	 * @param string $prefix  A string
+	 * @param string $backup  A string
+	 * 
+	 * @return  Rename table syntax
+	 * @since 1.6
+	 */
+   function renameTable($table_name, &$db, $prefix = null, $backup = null)
    {
      $this->_type = 'rename';
 
