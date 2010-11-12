@@ -211,7 +211,6 @@ class plgContentMedia extends JPlugin
 		$autostart = (boolean)$autostart;
 		
 		//The show begins...
-		
 		$local=strtolower($_SERVER['SERVER_NAME']);
 		$host=strtolower(parse_url($media,PHP_URL_HOST)); //Get the host of the file...
 		
@@ -518,6 +517,13 @@ class plgContentMedia extends JPlugin
 		return $replace;
 	}	
 
+	public static function getHost($type) {
+        require_once dirname(__FILE__).DS.$type.'.php';
+        
+        $host = new $type(); 
+        return $host;
+    }
+    
 	/**
 	 * getThumb Method To Get The Thumbnail Of Any Media, If Proper Thumbnail Is Not Generated A Thumbnail Based On The Media Type Is Generated
 	 *
