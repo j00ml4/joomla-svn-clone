@@ -1,5 +1,4 @@
 <?php 
-
 function host($video, $params){
 	plgContentMedia::getExtension('swf');
 	$plgParams=plgContentMedia::getParams();
