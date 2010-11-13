@@ -606,4 +606,35 @@ abstract class JString
 		// some valid sequences
 		return (preg_match('/^.{1}/us',$str,$ar) == 1);
 	}
+	function startsWith($haystack, $needle, $case = TRUE) 
+	{
+		$ret = FALSE;
+
+		if ($case)
+		{
+			if (strncmp($haystack, $needle, strlen($needle)) == 0)
+				$ret = TRUE;	
+		}
+		else
+		{
+			if (strncasecmp($haystack, $needle, strlen($needle)) == 0)
+				$ret = TRUE;
+		}
+
+		return $ret;
+	}
+
+/*
+	function startsWith($haystack, $needle, $case=true) {
+		if ($case)
+			return strncmp($haystack, $needle, strlen($needle)) == 0;
+		else
+			return strncasecmp($haystack, $needle, strlen($needle)) == 0;
+	}
+*/
+
+	function endsWith($haystack, $needle, $case=true) {
+		 return startsWith(strrev($haystack),strrev($needle),$case);
+
+	}
 }
