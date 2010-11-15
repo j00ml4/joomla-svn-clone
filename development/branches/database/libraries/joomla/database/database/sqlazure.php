@@ -75,8 +75,8 @@ class JDatabaseSQLAzure extends JDatabase
 			$this->_errorMsg = 'Could not connect to SQL Azure';
 			return;
 		}
-   	 	ini_set("display_errors", 1);
-		error_reporting(E_ALL);
+   	 	//ini_set("display_errors", 1);
+		//error_reporting(E_ALL);
  		sqlsrv_configure("WarningsReturnAsErrors", 0);
 		//sqlsrv_configure('WarningsReturnAsErrors', 1);
 
