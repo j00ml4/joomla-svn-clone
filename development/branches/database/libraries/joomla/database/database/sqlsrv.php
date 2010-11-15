@@ -72,11 +72,11 @@ class JDatabaseSQLSrv extends JDatabase
 		// connect to the server
 		if (!($this->_connection = sqlsrv_connect( $host, Array("Database" => $database, 'uid'=>$user, 'pwd'=>$password, 'CharacterSet'=>'UTF-8','ReturnDatesAsStrings' => true) ) )) {
 			$this->_errorNum = 2;
-			$this->_errorMsg = 'Could not connect to SQL Azure';
+			$this->_errorMsg = 'Could not connect to SQL Server';
 			return;
 		}
-   	 	ini_set("display_errors", 1);
-		error_reporting(E_ALL);
+   	 	//ini_set("display_errors", 1);
+		//error_reporting(E_ALL);
  		sqlsrv_configure("WarningsReturnAsErrors", 0);
 		//sqlsrv_configure('WarningsReturnAsErrors', 1);
 
