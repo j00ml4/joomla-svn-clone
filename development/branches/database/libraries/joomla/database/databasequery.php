@@ -535,6 +535,21 @@ abstract class JDatabaseQuery
 	abstract public function now();
 	 
 	/**
+	 * Method to lock the database table for writing.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	abstract public function lock($table_name, &$db);
+	/**
+	 * Method to unlock the database table for writing.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	abstract public function unlock(&$db);
+	
+	/**
 	 * Magic function to convert the query to a string.
 	 *
 	 * @return	string	The completed query.

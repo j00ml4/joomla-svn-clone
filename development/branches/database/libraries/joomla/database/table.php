@@ -529,9 +529,9 @@ abstract class JTable extends JObject
 		if (!$this->_trackAssets) {
 			return true;
 		}
-
+		$query = $this->_db->getQuery(true);
 		if ($this->_locked) {
-			$this->_unlock();
+			$query->unlock($this->_db);
 		}
 
 		//

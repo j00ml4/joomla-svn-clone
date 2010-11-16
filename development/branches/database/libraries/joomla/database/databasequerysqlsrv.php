@@ -517,4 +517,28 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	{
 		return 'GETDATE()';
 	}
+	
+/**
+	 * Method to lock the database table for writing.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function lock($table_name, &$db)
+	{
+		//No implementation for sql server for now
+		return true;
+	}
+
+	/**
+	 * Method to unlock the database table for writing.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	public function unlock(&$db)
+	{
+		//No implementation for sql server for now
+		return true;
+	}
 }
