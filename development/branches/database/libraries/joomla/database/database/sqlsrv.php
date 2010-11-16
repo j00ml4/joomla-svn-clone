@@ -205,7 +205,8 @@ class JDatabaseSQLSrv extends JDatabase
 		//$result = str_replace("'", "''", $text);
 		//return $result;
 		$result = addslashes($text);
-    //$result = str_replace("\\", "''", $result);
+		$result = str_replace("\'", "''", $result);
+    	//$result = str_replace("\\", "''", $result);
 		if ($extra) {
 			$result = addcslashes($result, '%_');
 		}
