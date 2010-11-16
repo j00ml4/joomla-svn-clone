@@ -56,13 +56,13 @@ class JDatabasePostgreSQL extends JDatabase
 
 
 	/**
-	* Database object constructor
-	*
-	* @access	public
-	* @param	array	List of options used to configure the connection
-	* @since	1.5
-	* @see		JDatabase
-	*/
+	 * Database object constructor
+	 *
+	 * @access	public
+	 * @param	array	List of options used to configure the connection
+	 * @since	1.5
+	 * @see		JDatabase
+	 */
 	function __construct( $options )
 	{
 		$host		= array_key_exists('host', $options)	? $options['host']		: 'localhost';
@@ -418,11 +418,11 @@ class JDatabasePostgreSQL extends JDatabase
 	}
 
 	/**
-	* Fetch a result row as an associative array
-	*
-	* @access	public
-	* @return array
-	*/
+	 * Fetch a result row as an associative array
+	 *
+	 * @access	public
+	 * @return array
+	 */
 	function loadAssoc()
 	{
 		if (!($cur = $this->query())) {
@@ -437,12 +437,12 @@ class JDatabasePostgreSQL extends JDatabase
 	}
 
 	/**
-	* Load a assoc list of database rows
-	*
-	* @access	public
-	* @param string The field name of a primary key
-	* @return array If <var>key</var> is empty as sequential list of returned records.
-	*/
+	 * Load a assoc list of database rows
+	 *
+	 * @access	public
+	 * @param string The field name of a primary key
+	 * @return array If <var>key</var> is empty as sequential list of returned records.
+	 */
 	function loadAssocList( $key='' )
 	{
 		if (!($cur = $this->query())) {
@@ -461,11 +461,11 @@ class JDatabasePostgreSQL extends JDatabase
 	}
 
 	/**
-	* This global function loads the first row of a query into an object
-	*
-	* @access	public
-	* @return 	object
-	*/
+	 * This global function loads the first row of a query into an object
+	 *
+	 * @access	public
+	 * @return 	object
+	 */
 	function loadObject( )
 	{
 		if (!($cur = $this->query())) {
@@ -480,15 +480,15 @@ class JDatabasePostgreSQL extends JDatabase
 	}
 
 	/**
-	* Load a list of database objects
-	*
-	* If <var>key</var> is not empty then the returned array is indexed by the value
-	* the database key.  Returns <var>null</var> if the query fails.
-	*
-	* @access	public
-	* @param string The field name of a primary key
-	* @return array If <var>key</var> is empty as sequential list of returned records.
-	*/
+	 * Load a list of database objects
+	 *
+	 * If <var>key</var> is not empty then the returned array is indexed by the value
+	 * the database key.  Returns <var>null</var> if the query fails.
+	 *
+	 * @access	public
+	 * @param string The field name of a primary key
+	 * @return array If <var>key</var> is empty as sequential list of returned records.
+	 */
 	function loadObjectList( $key='' )
 	{
 		if (!($cur = $this->query())) {
@@ -526,14 +526,14 @@ class JDatabasePostgreSQL extends JDatabase
 	}
 
 	/**
-	* Load a list of database rows (numeric column indexing)
-	*
-	* @access public
-	* @param string The field name of a primary key
-	* @return array If <var>key</var> is empty as sequential list of returned records.
-	* If <var>key</var> is not empty then the returned array is indexed by the value
-	* the database key.  Returns <var>null</var> if the query fails.
-	*/
+	 * Load a list of database rows (numeric column indexing)
+	 *
+	 * @access public
+	 * @param string The field name of a primary key
+	 * @return array If <var>key</var> is empty as sequential list of returned records.
+	 * If <var>key</var> is not empty then the returned array is indexed by the value
+	 * the database key.  Returns <var>null</var> if the query fails.
+	 */
 	function loadRowList( $key=null )
 	{
 		if (!($cur = $this->query())) {
@@ -560,48 +560,48 @@ class JDatabasePostgreSQL extends JDatabase
 	 * @param	string	The name of the primary key. If provided the object property is updated.
 	 */
 	function insertObject( $table, &$object, $keyName = NULL )
-        {
-                $fmtsql = 'INSERT INTO '.$table.' ( %s ) VALUES ( %s ) ';
+	{
+		$fmtsql = 'INSERT INTO '.$table.' ( %s ) VALUES ( %s ) ';
 		$verParts = explode( '.', $this->getVersion() );
 
-                $fields = array();
-                foreach (get_object_vars( $object ) as $k => $v) {
-                        if (is_array($v) or is_object($v) or $v === NULL) {
-                                continue;
-                        }
-                        if ($k[0] == '_') { // internal field
-                                continue;
-                        }
+		$fields = array();
+		foreach (get_object_vars( $object ) as $k => $v) {
+			if (is_array($v) or is_object($v) or $v === NULL) {
+				continue;
+			}
+			if ($k[0] == '_') { // internal field
+				continue;
+			}
 
-                        $fields[] = $this->nameQuote( $k );
-                        $values[] = $this->isQuoted( $k ) ? $this->Quote( $v ) : (int) $v;
-                }
+			$fields[] = $this->nameQuote( $k );
+			$values[] = $this->isQuoted( $k ) ? $this->Quote( $v ) : (int) $v;
+		}
 
 		if ( !in_array($this->nameQuote($keyName), $fields) ) {
 			if ( $verParts[0] > 8 || ($verParts[0] == 8 && $verParts[1] >= 2) ) {
-                	        $fmtsql .= "RETURNING $keyName AS ".$this->nameQuote('id').";";
-                	} else {
-                        	$fmtsql .= ";
+				$fmtsql .= "RETURNING $keyName AS ".$this->nameQuote('id').";";
+			} else {
+				$fmtsql .= ";
                                 	SELECT $keyName AS \"id\" FROM $table;";
-                	}
+			}
 		}
-                $this->setQuery( sprintf( $fmtsql, implode( ",", $fields ) ,  implode( ",", $values ) ) );
+		$this->setQuery( sprintf( $fmtsql, implode( ",", $fields ) ,  implode( ",", $values ) ) );
 
-              $result = $this->query();
+		$result = $this->query();
 
-                if (!$result) {
-                        return false;
-                }
+		if (!$result) {
+			return false;
+		}
 
 		if ( $results[0][0]['id'] ) {
 			$this->_insert_id = $results[0][0]['id'];
 		}
 
-                if ($keyName && $id) {
-                        $object->$keyName = $this->_insert_id;
-                }
-                return true;
-        }
+		if ($keyName && $id) {
+			$object->$keyName = $this->_insert_id;
+		}
+		return true;
+	}
 
 	/**
 	 * Description
@@ -646,7 +646,7 @@ class JDatabasePostgreSQL extends JDatabase
 		return $this->_insert_id;
 	}
 
-	 /**
+	/**
 	 * Description
 	 *
 	 * @access public

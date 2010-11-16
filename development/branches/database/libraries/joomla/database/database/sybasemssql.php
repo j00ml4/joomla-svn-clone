@@ -41,13 +41,13 @@ class JDatabaseSybaseMSSQL extends JDatabase
 	var $_nameQuote		= '';
 
 	/**
-	* Database object constructor
-	*
-	* @access	public
-	* @param	array	List of options used to configure the connection
-	* @since	1.5
-	* @see		JDatabase
-	*/
+	 * Database object constructor
+	 *
+	 * @access	public
+	 * @param	array	List of options used to configure the connection
+	 * @since	1.5
+	 * @see		JDatabase
+	 */
 	function __construct($options)
 	{
 		$host		= array_key_exists('host', $options)	? $options['host']		: 'localhost';
@@ -343,11 +343,11 @@ class JDatabaseSybaseMSSQL extends JDatabase
 	}
 
 	/**
-	* Fetch a result row as an associative array
-	*
-	* @access	public
-	* @return array
-	*/
+	 * Fetch a result row as an associative array
+	 *
+	 * @access	public
+	 * @return array
+	 */
 	function loadAssoc()
 	{
 		if (!($cur = $this->query())) {
@@ -362,12 +362,12 @@ class JDatabaseSybaseMSSQL extends JDatabase
 	}
 
 	/**
-	* Load a assoc list of database rows
-	*
-	* @access	public
-	* @param string The field name of a primary key
-	* @return array If <var>key</var> is empty as sequential list of returned records.
-	*/
+	 * Load a assoc list of database rows
+	 *
+	 * @access	public
+	 * @param string The field name of a primary key
+	 * @return array If <var>key</var> is empty as sequential list of returned records.
+	 */
 	function loadAssocList($key='')
 	{
 		if (!($cur = $this->query())) {
@@ -386,11 +386,11 @@ class JDatabaseSybaseMSSQL extends JDatabase
 	}
 
 	/**
-	* This global function loads the first row of a query into an object
-	*
-	* @access	public
-	* @return 	object
-	*/
+	 * This global function loads the first row of a query into an object
+	 *
+	 * @access	public
+	 * @return 	object
+	 */
 	function loadObject()
 	{
 		if (!($cur = $this->query())) {
@@ -405,15 +405,15 @@ class JDatabaseSybaseMSSQL extends JDatabase
 	}
 
 	/**
-	* Load a list of database objects
-	*
-	* If <var>key</var> is not empty then the returned array is indexed by the value
-	* the database key.  Returns <var>null</var> if the query fails.
-	*
-	* @access	public
-	* @param string The field name of a primary key
-	* @return array If <var>key</var> is empty as sequential list of returned records.
-	*/
+	 * Load a list of database objects
+	 *
+	 * If <var>key</var> is not empty then the returned array is indexed by the value
+	 * the database key.  Returns <var>null</var> if the query fails.
+	 *
+	 * @access	public
+	 * @param string The field name of a primary key
+	 * @return array If <var>key</var> is empty as sequential list of returned records.
+	 */
 	function loadObjectList($key='')
 	{
 		if (!($cur = $this->query())) {
@@ -452,14 +452,14 @@ class JDatabaseSybaseMSSQL extends JDatabase
 	}
 
 	/**
-	* Load a list of database rows (numeric column indexing)
-	*
-	* @access public
-	* @param string The field name of a primary key
-	* @return array If <var>key</var> is empty as sequential list of returned records.
-	* If <var>key</var> is not empty then the returned array is indexed by the value
-	* the database key.  Returns <var>null</var> if the query fails.
-	*/
+	 * Load a list of database rows (numeric column indexing)
+	 *
+	 * @access public
+	 * @param string The field name of a primary key
+	 * @return array If <var>key</var> is empty as sequential list of returned records.
+	 * If <var>key</var> is not empty then the returned array is indexed by the value
+	 * the database key.  Returns <var>null</var> if the query fails.
+	 */
 	function loadRowList($key=null)
 	{
 		if (!($cur = $this->query())) {
