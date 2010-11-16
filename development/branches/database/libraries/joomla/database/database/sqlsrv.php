@@ -227,7 +227,7 @@ class JDatabaseSQLSrv extends JDatabase
 		// Take a local copy so that we don't modify the original query and cause issues later
 		$sql = $this->replacePrefix((string) $this->_sql);
 		$sql = str_replace('`', '', $sql);
-		$sql = str_ireplace('insert ignore into', 'insert into', $sql);
+
 		if ($this->_limit > 0 || $this->_offset > 0) {
 			$i = $this->_limit + $this->_offset;
 			$sql = preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$i.' ', $sql);
@@ -778,12 +778,12 @@ class JDatabaseSQLSrv extends JDatabase
 
 		foreach ($tables as $tblval) {
 			//$this->setQuery('SHOW FIELDS FROM ' . $tblval);
-				
+
 			$tblval_temp = $this->replacePrefix((string) $tblval);
-				
+
 			$this->setQuery('select column_name as Field, data_type as Type, is_nullable as \'Null\', column_default as \'Default\' from information_schema.columns where table_name= ' . $this->Quote($tblval_temp));
 			$fields = $this->loadObjectList();
-				
+
 			if ($typeonly) {
 				foreach ($fields as $field) {
 					$result[$tblval][$field->Field] = preg_replace("/[(0-9)]/",'', $field->Type);
