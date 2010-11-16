@@ -196,7 +196,7 @@ class JTableUser extends JTable
 		}
 
 		// Set the registration timestamp
-		if ($this->registerDate == null || $this->registerDate == '0000-00-00 00:00:00' ) {
+		if ($this->registerDate == null || $this->registerDate == $this->_db->_nullDate ) {
 			$this->registerDate = JFactory::getDate()->toMySQL();
 		}
 

@@ -11,6 +11,9 @@
 defined('_JEXEC') or die;
 
 jimport('joomla.user.helper');
+
+$db = JFactory::getDBO();
+$nullDate = $db->_nullDate;
 ?>
 
 <fieldset id="users-profile-core">
@@ -40,7 +43,7 @@ jimport('joomla.user.helper');
 			<?php echo JText::_('COM_USERS_PROFILE_LAST_VISITED_DATE_LABEL'); ?>
 		</dt>
 
-		<?php if ($this->data->lastvisitDate != '0000-00-00 00:00:00'){?>
+		<?php if ($this->data->lastvisitDate != $nullDate){?>
 			<dd>
 				<?php echo JHTML::_('date',$this->data->lastvisitDate); ?>
 			</dd>

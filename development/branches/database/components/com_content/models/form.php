@@ -293,9 +293,9 @@ class ContentModelForm extends JModelForm
 
 			try {
 				$this->_db->setQuery(
-					'UPDATE #__content AS a' .
-					' SET a.featured = 1'.
-					' WHERE a.id = '.$table->id
+					'UPDATE #__content' .
+					' SET featured = 1'.
+					' WHERE id = '.$table->id
 				);
 				if (!$this->_db->query()) {
 					throw new Exception($this->_db->getErrorMsg());

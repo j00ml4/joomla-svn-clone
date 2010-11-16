@@ -111,11 +111,11 @@ class ModulesModelModules extends JModelList
 		}
 		else {
 			if ($ordering == 'ordering') {
-				$query->order('position ASC');
+				$query->order('a.position ASC');
 			}
 			$query->order($this->_db->nameQuote($ordering) . ' ' . $this->getState('list.direction'));
 			if ($ordering == 'position') {
-				$query->order('ordering ASC');
+				$query->order('a.ordering ASC');
 			}
 			$result = parent::_getList($query, $limitstart, $limit);
 			$this->translate($result);

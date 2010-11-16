@@ -447,7 +447,7 @@ class UsersModelUser extends JModelAdmin
 				}
 
 				$this->_db->setQuery(
-					'INSERT IGNORE INTO `#__user_usergroup_map` (`user_id`, `group_id`)' .
+					'INSERT INTO `#__user_usergroup_map` (`user_id`, `group_id`)' .
 					' VALUES '.implode(',', $tuples)
 				);
 

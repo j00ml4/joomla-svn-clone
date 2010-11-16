@@ -200,6 +200,6 @@ class BannersModelBanners extends JModelList
 		$this->setState('params', $params);
 
 		// List state information.
-		parent::populateState('name', 'asc');
+		parent::populateState('a.name', 'asc');
 	}
 }
