@@ -20,6 +20,9 @@ JHtml::_('behavior.tooltip');
 $canDo = UsersHelper::getActions();
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
+
+$db = JFactory::getDBO();
+$nullDate = $db->_nullDate;
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_users&view=users');?>" method="post" name="adminForm" id="adminForm">
@@ -131,7 +134,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo $this->escape($item->email); ?>
 				</td>
 				<td class="center">
-					<?php if ($item->lastvisitDate!='0000-00-00 00:00:00'):?>
+					<?php if ($item->lastvisitDate!=$nullDate):?>
 						<?php echo JHTML::_('date',$item->lastvisitDate, 'Y-m-d H:i:s'); ?>
 					<?php else:?>
 						<?php echo JText::_('JNEVER'); ?>

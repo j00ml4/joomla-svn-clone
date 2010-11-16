@@ -92,11 +92,13 @@ class BannersHelper
 	{
 		$user = JFactory::getUser();
 		$db = JFactory::getDBO();
+		$nullDate = $db->_nullDate;
+		
 		$query = $db->getQuery(true);
 		$query->select('*');
 		$query->from('#__banners');
 		$query->where($query->now().' >= `reset`');
-		$query->where('`reset` != '.$db->quote('0000-00-00 00:00:00').' AND `reset`!=NULL');
+		$query->where('`reset` != '.$db->quote($nullDate).' AND `reset`!=NULL');
 		$query->where('(`checked_out` = 0 OR `checked_out` = '.(int) $db->Quote($user->id).')');
 		$db->setQuery((string)$query);
 		$rows = $db->loadObjectList();
@@ -125,7 +127,7 @@ class BannersHelper
 
 			switch($purchase_type) {
 				case 1:
-					$reset='0000-00-00 00:00:00';
+					$reset = $nullDate;
 					break;
 				case 2:
 					$reset = JFactory::getDate('+1 year '.date('Y-m-d',strtotime('now')))->toMySQL();
