@@ -202,8 +202,7 @@ class JDatabaseSQLSrv extends JDatabase
 		// however it should be (it'd be nice), so we need
 		// to do this ourselves.
 		// It should just be ' to '' but not sure
-		//$result = str_replace("'", "''", $text);
-		//return $result;
+		// Hooduku: Not sure if this is the right implementation. But it works in all cases
 		$result = addslashes($text);
 		$result = str_replace("\'", "''", $result);
 		//$result = str_replace("\\", "''", $result);
@@ -777,29 +776,6 @@ class JDatabaseSQLSrv extends JDatabase
 		settype($tables, 'array'); //force to array
 		$result = array();
 
-		/*foreach ($tables as $tblval)
-		 {
-			// TODO: Should run this through namequote
-			$this->setQuery('select top 0 * from '. $tblval);
-			if($this->Query()) {
-			$fields = sqlsrv_field_metadata( $this->_cursor );
-
-			if($typeonly)
-			{
-			foreach ($fields as $field) {
-			$result[$tblval][$field->Name] = preg_replace("/[(0-9)]/",'', $field->Type );
-			}
-			}
-			else
-			{
-			foreach ($fields as $field) {
-			$result[$tblval][$field->Name] = $field;
-			}
-			}
-			} else {
-			$result[$tblval] = Array();
-			}
-			}*/
 		foreach ($tables as $tblval) {
 			//$this->setQuery('SHOW FIELDS FROM ' . $tblval);
 				
