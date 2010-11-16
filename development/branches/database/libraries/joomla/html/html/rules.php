@@ -135,14 +135,14 @@ abstract class JHtmlRules
 	{
 		// Get a database object.
 		$db = JFactory::getDBO();
-
+		//sqlsrv change
 		// Get the user groups from the database.
 		$db->setQuery(
 			'SELECT a.id AS value, a.title AS text, COUNT(DISTINCT b.id) AS level' .
-			' , GROUP_CONCAT(b.id SEPARATOR \',\') AS parents' .
+			//' , GROUP_CONCAT(b.id SEPARATOR \',\') AS parents' .
 			' FROM #__usergroups AS a' .
 			' LEFT JOIN `#__usergroups` AS b ON a.lft > b.lft AND a.rgt < b.rgt' .
-			' GROUP BY a.id' .
+			' GROUP BY a.id,a.id, a.title, a.lft' .
 			' ORDER BY a.lft ASC'
 		);
 		$options = $db->loadObjectList();
@@ -152,7 +152,7 @@ abstract class JHtmlRules
 		{
 			// Pad the option text with spaces using depth level as a multiplier.
 			//$option->text = str_repeat('&#160;&#160;',$option->level).$option->text;
-
+			$option->parents = '';
 			$option->identities = ($option->parents) ? explode(',', $option->parents.','.$option->value) : array($option->value);
 		}
 

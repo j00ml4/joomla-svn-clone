@@ -231,6 +231,7 @@ class JDatabaseSQLSrv extends JDatabase
 		if ($this->_limit > 0 || $this->_offset > 0) {
 			$i = $this->_limit + $this->_offset;
 			$sql = preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$i.' ', $sql);	
+			//$sql = $this->_limit($sql, $this->_limit, $this->_offset);
 		}
 		if ($this->_debug) {
 			$this->_ticker++;
@@ -239,10 +240,17 @@ class JDatabaseSQLSrv extends JDatabase
 		$this->_errorNum = 0;
 		$this->_errorMsg = '';
 		
-		$this->_cursor = sqlsrv_query( $this->_connection, $sql );
+		//sqlsrv_num_rows requires a static or keyset cursor
+		$array = array();
+		jimport("joomla.utilities.string");
+		if(JString::startsWith(ltrim(strtoupper($sql)), 'SELECT'))
+			$array = array( "Scrollable" => SQLSRV_CURSOR_KEYSET );
+		 
+		$this->_cursor = sqlsrv_query( $this->_connection, $sql, array(), $array );
 		
 		if (!$this->_cursor)
 		{
+			echo $sql;die();
 			$errors = sqlsrv_errors( );
 		 	$this->_errorNum = $errors[0]['SQLSTATE'];
 			$this->_errorMsg = $errors[0]['message'].'SQL='.$sql;
@@ -254,6 +262,21 @@ class JDatabaseSQLSrv extends JDatabase
 			return false;
 		}
 		return $this->_cursor;
+	}
+	
+	private function _limit($sql, $limit, $offset)
+	{
+		$order_by  = stristr($sql, 'ORDER BY');
+		if(is_null($order_by) || empty($order_by))
+			$order_by = 'ORDER BY (select 0)';
+		$sql = str_ireplace($order_by, '', $sql);
+		
+		$row_number_text = ',ROW_NUMBER() OVER ('.$order_by.') AS RowNumber FROM ';
+		
+		$sql = preg_replace('/\\s+FROM/','\\1 '.$row_number_text.' ', $sql);
+		$sql = 'SELECT TOP '.$this->_limit.' * FROM ('.$sql.') _myResults WHERE RowNumber > '.$this->_offset;
+		
+		return $sql;
 	}
    /**
    * Get the current or query, or new JDatabaseQuery object.
@@ -615,9 +638,11 @@ class JDatabaseSQLSrv extends JDatabase
 		$fmtsql = 'INSERT INTO '.$this->nameQuote($table).' ( %s ) VALUES ( %s ) ';
 		$fields = array();
 		foreach (get_object_vars( $object ) as $k => $v) {
-			/*if (is_array($v) or is_object($v) or $v === NULL) {
+			if (is_array($v) or is_object($v)) {
 				continue;
-			}*/
+			}
+			if(!$this->_checkFieldExists($table, $k))
+				continue;
 			if ($k[0] == '_') { // internal field
 				continue;
 			}
@@ -794,5 +819,18 @@ class JDatabaseSQLSrv extends JDatabase
 		}
 
 		return $result;
+	}
+	
+	private function _checkFieldExists($table_name, $field)
+	{
+		$table_name = $this->replacePrefix((string) $table_name);
+		$sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS".
+ 				" WHERE TABLE_NAME = '$table_name' AND COLUMN_NAME = '$field'".
+ 				" ORDER BY ORDINAL_POSITION";
+		$this->setQuery($sql);
+		if($this->loadResult())
+			return true;
+		else
+			return false;
 	}
 }
