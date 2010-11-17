@@ -228,7 +228,7 @@ class JUserHelper
 		. ' FROM #__users'
 		. ' WHERE activation = '.$db->Quote($activation)
 		. ' AND block = 1'
-		. ' AND lastvisitDate = '.$db->Quote($db->_nullDate);
+		. ' AND lastvisitDate = '.$db->Quote($db->getNullDate());
 		;
 		$db->setQuery($query);
 		$id = intval($db->loadResult());

@@ -44,13 +44,13 @@ $listDirn	= $this->state->get('list.direction');
 					<input type="checkbox" name="checkall-toggle" value="" onclick="checkAll(this)" />
 				</th>
 				<th>
-					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CLIENT', 'name', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CLIENT', 'a.name', $listDirn, $listOrder); ?>
 				</th>
 				<th width="30%">
 					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_CONTACT', 'contact', $listDirn, $listOrder); ?>
 				</th>
 				<th width="5%">
-					<?php echo JHtml::_('grid.sort',  'JPUBLISHED', 'state', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort',  'JPUBLISHED', 'a.state', $listDirn, $listOrder); ?>
 				</th>
 				<th width="5%">
 					<?php echo JHtml::_('grid.sort', 'COM_BANNERS_HEADING_ACTIVE', 'nbanners', $listDirn, $listOrder); ?>
@@ -62,7 +62,7 @@ $listDirn	= $this->state->get('list.direction');
 					<?php echo JText::_('COM_BANNERS_HEADING_PURCHASETYPE'); ?>
 				</th>
 				<th width="1%" class="nowrap">
-					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'id', $listDirn, $listOrder); ?>
+					<?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'a.id', $listDirn, $listOrder); ?>
 				</th>
 			</tr>
 		</thead>

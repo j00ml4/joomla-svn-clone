@@ -92,7 +92,7 @@ class BannersHelper
 	{
 		$user = JFactory::getUser();
 		$db = JFactory::getDBO();
-		$nullDate = $db->_nullDate;
+		$nullDate = $db->getNullDate();
 		
 		$query = $db->getQuery(true);
 		$query->select('*');

@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 jimport('joomla.user.helper');
 
 $db = JFactory::getDBO();
-$nullDate = $db->_nullDate;
+$nullDate = $db->getNullDate();
 ?>
 
 <fieldset id="users-profile-core">

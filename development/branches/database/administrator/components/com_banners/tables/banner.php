@@ -143,7 +143,7 @@ class BannersTableBanner extends JTable
 			switch($purchase_type)
 			{
 			case 1:
-				$this->reset=$this->_db->_nullDate;
+				$this->reset=$this->_db->getNullDate();
 			break;
 			case 2:
 				$this->reset = JFactory::getDate('+1 year '.date('Y-m-d',strtotime('now')))->toMySQL();
@@ -236,7 +236,7 @@ class BannersTableBanner extends JTable
 				// Change the state
 				$table->state = $state;
 				$table->checked_out=0;
-				$table->checked_out_time=$this->_db->_nullDate;
+				$table->checked_out_time=$this->_db->getNullDate();
 
 				// Check the row
 				$table->check();
@@ -303,7 +303,7 @@ class BannersTableBanner extends JTable
 				// Change the state
 				$table->sticky = $state;
 				$table->checked_out=0;
-				$table->checked_out_time=$this->_db->_nullDate;
+				$table->checked_out_time=$this->_db->getNullDate();
 
 				// Check the row
 				$table->check();
