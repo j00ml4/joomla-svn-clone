@@ -14,8 +14,9 @@ jimport('joomla.plugin.plugin');
 jimport( 'joomla.html.parameter' );
 
 // This lib adds the media 
-include_once dirname(__FILE__).DS.'media'.DS.'htmlembed.php';
-include_once dirname(__FILE__).DS.'media'.DS.'thumbnails.php';
+//include_once dirname(__FILE__).DS.'media'.DS.'htmlembed.php';
+//include_once dirname(__FILE__).DS.'media'.DS.'thumbnails.php';
+include_once dirname(__FILE__).DS.'host'.DS.'mediaserver.php';
 
 
 /**
@@ -187,10 +188,13 @@ class plgContentMedia extends JPlugin
 		//Preprocess the media data to make it standard for the functions...
 		$pparams	= $this->params;// make it work
 		
+		
 		// Fix Video UrL
 		$media		= strpos($media,"http://")? 
 			$media: // Custom PATH
 			$pparams->get('uri_img').$media; // Default PATH
+		
+			
 		
 		// Size Style
 		if( $width ){			
@@ -213,6 +217,9 @@ class plgContentMedia extends JPlugin
 		//The show begins...
 		$local=strtolower($_SERVER['SERVER_NAME']);
 		$host=strtolower(parse_url($media,PHP_URL_HOST)); //Get the host of the file...
+		$media = $this->getHost('server');	
+		
+		return $media->getMedia();
 		
 		if(!strcmp($local,$host) || !$host)
 		{
@@ -358,6 +365,7 @@ class plgContentMedia extends JPlugin
 			$type = substr( $media, strrpos($media, '.') );			
 			$type = strtolower($type);
 			switch( $type ){
+				
 				
 			/* Flash .SWF 
 			*****************************************************/
@@ -508,6 +516,7 @@ class plgContentMedia extends JPlugin
 			/* Error
 			*****************************************************/
 			default: 
+				
 				$replace = addMediaError($media, 'Invalid Media');
 				break;
 			}
@@ -518,9 +527,10 @@ class plgContentMedia extends JPlugin
 	}	
 
 	public static function getHost($type) {
-        require_once dirname(__FILE__).DS.$type.'.php';
+        require_once dirname(__FILE__).DS.'types'.DS.$type.'.php';
         
-        $host = new $type(); 
+        $class = 'plgMediaType'.$type;
+        $host = new $class(); 
         return $host;
     }
     
