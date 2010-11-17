@@ -22,7 +22,7 @@ $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 
 $db = JFactory::getDBO();
-$nullDate = $db->_nullDate;
+$nullDate = $db->getNullDate();
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_users&view=users');?>" method="post" name="adminForm" id="adminForm">
