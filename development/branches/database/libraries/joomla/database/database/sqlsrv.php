@@ -254,7 +254,7 @@ class JDatabaseSQLSrv extends JDatabase
 			//echo $sql;die();
 			$errors = sqlsrv_errors( );
 			$this->_errorNum = $errors[0]['SQLSTATE'];
-			$this->_errorMsg = $errors[0]['message'].'SQL='.$sql;
+			$this->_errorMsg = $errors[0]['message'].'SQL='.$sql.'<br>';
 			// $errors[0]['errorcode']; // Holds the SQL Server Native Error Code
 
 			if ($this->_debug) {
@@ -274,7 +274,7 @@ class JDatabaseSQLSrv extends JDatabase
 
 		$row_number_text = ',ROW_NUMBER() OVER ('.$order_by.') AS RowNumber FROM ';
 
-		$sql = preg_replace('/\\s+FROM/','\\1 '.$row_number_text.' ', $sql);
+		$sql = preg_replace('/\\s+FROM/','\\1 '.$row_number_text.' ', $sql, 1);
 		$sql = 'SELECT TOP '.$this->_limit.' * FROM ('.$sql.') _myResults WHERE RowNumber > '.$this->_offset;
 
 		return $sql;
