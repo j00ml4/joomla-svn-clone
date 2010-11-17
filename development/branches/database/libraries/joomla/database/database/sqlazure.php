@@ -205,6 +205,7 @@ class JDatabaseSQLAzure extends JDatabase
 		// Hooduku: Not sure if this is the right implementation. But it works in all cases
 		$result = addslashes($text);
 		$result = str_replace("\'", "''", $result);
+		$result = str_replace('\"', '"', $result);
 		//$result = str_replace("\\", "''", $result);
 		if ($extra) {
 			$result = addcslashes($result, '%_');
@@ -229,9 +230,9 @@ class JDatabaseSQLAzure extends JDatabase
 		$sql = str_replace('`', '', $sql);
 
 		if ($this->_limit > 0 || $this->_offset > 0) {
-			$i = $this->_limit + $this->_offset;
-			$sql = preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$i.' ', $sql);
-			//$sql = $this->_limit($sql, $this->_limit, $this->_offset);
+			//$i = $this->_limit + $this->_offset;
+			//$sql = preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$i.' ', $sql);
+			$sql = $this->_limit($sql, $this->_limit, $this->_offset);
 		}
 		if ($this->_debug) {
 			$this->_ticker++;

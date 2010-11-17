@@ -251,7 +251,7 @@ class JDatabaseSQLSrv extends JDatabase
 
 		if (!$this->_cursor)
 		{
-			echo $sql;die();
+			//echo $sql;die();
 			$errors = sqlsrv_errors( );
 			$this->_errorNum = $errors[0]['SQLSTATE'];
 			$this->_errorMsg = $errors[0]['message'].'SQL='.$sql;
