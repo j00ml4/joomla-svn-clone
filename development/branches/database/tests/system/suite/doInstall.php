@@ -39,13 +39,14 @@ class DoInstall extends SeleniumJoomlaTestCase
 		$this->click("link=Next");
 		$this->waitForPageToLoad("30000");
 
-		echo "Enter database information\n";
+		echo "Enter database information\n";		
+		$this->select("jform_db_type", "label=".$cfg->db_type);
 		$this->type("jform_db_host", $cfg->db_host);
 		$this->type("jform_db_user", $cfg->db_user);
 		$this->type("jform_db_pass", $cfg->db_pass);
 		$this->type("jform_db_name", $cfg->db_name);
-		$this->click("jform_db_old0");
-		$this->click("link=Next");
+		$this->click("jform_db_old0");		
+		$this->click("link=Next"); 
 		$this->waitForPageToLoad("30000");
 
 		echo "Enter site information\n";
@@ -122,6 +123,6 @@ class DoInstall extends SeleniumJoomlaTestCase
 
 		$this->click("//li[@id='toolbar-save']/a/span");
 		$this->waitForPageToLoad("30000");
-		$this->doAdminLogout();
+		$this->doAdminLogout(); 
 	}
 }
