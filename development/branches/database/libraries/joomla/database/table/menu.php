@@ -99,7 +99,7 @@ class JTableMenu extends JTableNested
 	public function store($updateNulls = false)
 	{
 		$db = JFactory::getDBO();
-		$nullDate = $db->_nullDate;
+		
 		// Verify that the home page for this language is unique
 		if ($this->home=='1') {
 			$table = JTable::getInstance('Menu','JTable');
@@ -110,7 +110,7 @@ class JTableMenu extends JTableNested
 				}
 				$table->home=0;
 				$table->checked_out=0;
-				$table->checked_out_time=$nullDate;
+				$table->checked_out_time=$db->getNullDate();
 				$table->store();
 			}
 		}
