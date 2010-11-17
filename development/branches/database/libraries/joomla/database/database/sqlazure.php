@@ -273,7 +273,7 @@ class JDatabaseSQLAzure extends JDatabase
 
 		$row_number_text = ',ROW_NUMBER() OVER ('.$order_by.') AS RowNumber FROM ';
 
-		$sql = preg_replace('/\\s+FROM/','\\1 '.$row_number_text.' ', $sql);
+		$sql = preg_replace('/\\s+FROM/','\\1 '.$row_number_text.' ', $sql, 1);
 		$sql = 'SELECT TOP '.$this->_limit.' * FROM ('.$sql.') _myResults WHERE RowNumber > '.$this->_offset;
 
 		return $sql;
