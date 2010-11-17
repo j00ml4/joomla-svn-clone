@@ -161,7 +161,7 @@ class MenusHelper
 		}
 
 		$query->where('a.published != -2');
-		$query->group('a.id');
+		$query->group('a.id, a.title, a.level, a.menutype, a.type, a.template_style_id, a.checked_out, a.lft');
 		$query->order('a.lft ASC');
 
 		// Get the options.
