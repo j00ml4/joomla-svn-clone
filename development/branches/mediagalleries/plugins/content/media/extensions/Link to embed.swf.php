@@ -1,1 +1,0 @@
-/home/amangautam/workspace/jsop/plugins/content/media/extensions/embed.swf.php
