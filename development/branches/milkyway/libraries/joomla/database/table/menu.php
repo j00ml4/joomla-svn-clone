@@ -82,6 +82,12 @@ class JTableMenu extends JTableNested
 		// Cast the home property to an int for checking.
 		$this->home = (int) $this->home;
 
+		// Verify that a first level menu item alias is not 'component'.
+		if ($this->parent_id==1 && $this->alias == 'component') {
+			$this->setError(JText::_('JLIB_DATABASE_ERROR_MENU_ROOT_ALIAS_COMPONENT'));
+			return false;
+		}
+
 		// Verify that the home item a component.
 		if ($this->home && $this->type != 'component') {
 			$this->setError(JText::_('JLIB_DATABASE_ERROR_MENU_HOME_NOT_COMPONENT'));
@@ -124,6 +130,22 @@ class JTableMenu extends JTableNested
 			}
 			return false;
 		}
-		return parent::store($updateNulls);
+		
+		if(!parent::store($updateNulls)) {
+			return false;
+		}
+		// Get the new path in case the node was moved
+		$pathNodes = $this->getPath();
+		$segments = array();
+		foreach ($pathNodes as $node) {
+			// Don't include root in path
+			if ($node->alias != 'root') {
+				$segments[] = $node->alias;
+			}
+		}
+		$newPath = trim(implode('/', $segments), ' /\\');
+		// Use new path for partial rebuild of table
+		// rebuild will return positive integer on success, false on failure
+		return ($this->rebuild($this->{$this->_tbl_key}, $this->lft, $this->level, $newPath) > 0);
 	}
 }

@@ -112,18 +112,18 @@ class UsersModelUser extends JModelAdmin
 	}
 
 	/**
-	 * Override preprocessForm to load the user plugin group instead of content.
+	 * Override JModelAdmin::preprocessForm to ensure the correct plugin group is loaded.
 	 *
-	 * @param	object	A form object.
-	 * @param	mixed	The data expected for the form.
+	 * @param	object	$form	A form object.
+	 * @param	mixed	$data	The data expected for the form.
+	 * @param	string	$group	The name of the plugin group to import (defaults to "content").
 	 *
-	 * @return	void
 	 * @throws	Exception if there is an error in the form event.
 	 * @since	1.6
 	 */
-	protected function preprocessForm(JForm $form, $data)
+	protected function preprocessForm(JForm $form, $data, $group = 'user')
 	{
-		parent::preprocessForm($form, $data, 'user');
+		parent::preprocessForm($form, $data, $group);
 	}
 
 	/**
@@ -139,6 +139,13 @@ class UsersModelUser extends JModelAdmin
 		// Initialise variables;
 		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('user.id');
 		$user		= JUser::getInstance($pk);
+
+		$my = JFactory::getUser();
+
+		if ($data['block'] && $pk == $my->id && !$my->block) {
+			$this->setError(JText::_('COM_USERS_USERS_ERROR_CANNOT_BLOCK_SELF'));
+			return false;
+		}
 
 		// Bind the data.
 		if (!$user->bind($data)) {
@@ -269,22 +276,36 @@ class UsersModelUser extends JModelAdmin
 
 					$table->block = (int) $value;
 
-					if (!$table->check()) {
-						$this->setError($table->getError());
+					// Allow an exception to be thrown.
+					try
+					{
+						if (!$table->check()) {
+							$this->setError($table->getError());
+							return false;
+						}
+
+						// Trigger the onUserBeforeSave event.
+						$result = $dispatcher->trigger('onUserBeforeSave', array($old, false));
+						if (in_array(false, $result, true)) {
+							// Plugin will have to raise it's own error or throw an exception.
+							return false;
+						}
+
+						// Store the table.
+						if (!$table->store()) {
+							$this->setError($table->getError());
+							return false;
+						}
+
+						// Trigger the onAftereStoreUser event
+						$dispatcher->trigger('onUserAfterSave', array($table->getProperties(), false, true, null));
+					}
+					catch (Exception $e)
+					{
+						$this->setError($e->getMessage());
+
 						return false;
 					}
-
-					// Trigger the onUserBeforeSave event.
-					$dispatcher->trigger('onUserBeforeSave', array($old, false));
-
-					// Store the table.
-					if (!$table->store()) {
-						$this->setError($table->getError());
-						return false;
-					}
-
-					// Trigger the onAftereStoreUser event
-					$dispatcher->trigger('onUserAfterSave', array($table->getProperties(), false, true, null));
 
 					// Log the user out.
 					if ($value) {
@@ -333,22 +354,36 @@ class UsersModelUser extends JModelAdmin
 					$table->block		= 0;
 					$table->activation	= '';
 
-					if (!$table->check()) {
-						$this->setError($table->getError());
+					// Allow an exception to be thrown.
+					try
+					{
+						if (!$table->check()) {
+							$this->setError($table->getError());
+							return false;
+						}
+
+						// Trigger the onUserBeforeSave event.
+						$result = $dispatcher->trigger('onUserBeforeSave', array($old, false));
+						if (in_array(false, $result, true)) {
+							// Plugin will have to raise it's own error or throw an exception.
+							return false;
+						}
+
+						// Store the table.
+						if (!$table->store()) {
+							$this->setError($table->getError());
+							return false;
+						}
+
+						// Fire the onAftereStoreUser event
+						$dispatcher->trigger('onUserAfterSave', array($table->getProperties(), false, true, null));
+					}
+					catch (Exception $e)
+					{
+						$this->setError($e->getMessage());
+
 						return false;
 					}
-
-					// Trigger the onUserBeforeSave event.
-					$dispatcher->trigger('onUserBeforeSave', array($old, false));
-
-					// Store the table.
-					if (!$table->store()) {
-						$this->setError($table->getError());
-						return false;
-					}
-
-					// Fire the onAftereStoreUser event
-					$dispatcher->trigger('onUserAfterSave', array($table->getProperties(), false, true, null));
 				}
 				else {
 					// Prune items that you can't change.
@@ -473,9 +508,16 @@ class UsersModelUser extends JModelAdmin
 	 */
 	public function getGroups()
 	{
-		$model = JModel::getInstance('Groups', 'UsersModel', array('ignore_request' => true));
-
-		return $model->getItems();
+		$user = JFactory::getUser();
+		if ($user->authorise('core.edit', 'com_users') && $user->authorise('core.manage', 'com_users'))
+		{
+			$model = JModel::getInstance('Groups', 'UsersModel', array('ignore_request' => true));
+			return $model->getItems();
+		}
+		else
+		{
+			return null;
+		}
 	}
 
 	/**

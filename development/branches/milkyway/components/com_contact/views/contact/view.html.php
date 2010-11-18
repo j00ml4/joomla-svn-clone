@@ -55,12 +55,10 @@ class ContactViewContact extends JView
 		$menu	= $menus->getActive();
 		$params	= $app->getParams();
 
-		$item_params = new JRegistry;
-		$item_params->loadJSON($item->params);
-		$params->merge($item_params);
+		$params->merge($item->params);
 
 		// check if access is not public
-		$groups	= $user->authorisedLevels();
+		$groups	= $user->getAuthorisedViewLevels();
 
 		$return = '';
 
@@ -153,9 +151,17 @@ class ContactViewContact extends JView
 		$this->assignRef('user', 		$user);
 		$this->assignRef('contacts', 	$contacts);
 
-		// Override the layout if you want to.
-		if ($layout = $params->get('layout')) {
-			$this->setLayout($layout);
+		// Override the layout only if this is not the active menu item
+		// If it is the active menu item, then the view and item id will match
+		$active	= $app->getMenu()->getActive();
+		if ((!$active) || ((strpos($active->link, 'view=contact') === false) || (strpos($active->link, '&id=' . (string) $this->item->id) === false))) {
+			if ($layout = $params->get('contact_layout')) {
+				$this->setLayout($layout);
+			}
+		}
+		elseif (isset($active->query['layout'])) {
+			// We need to set the layout in case this is an alternative menu item (with an alternative layout)
+			$this->setLayout($active->query['layout']);
 		}
 
 		$this->_prepareDocument();
@@ -191,7 +197,7 @@ class ContactViewContact extends JView
 			$path = array(array('title' => $this->contact->name, 'link' => ''));
 			$category = JCategories::getInstance('Contact')->get($this->contact->catid);
 
-			while (($menu->query['option'] != 'com_contact' || $menu->query['view'] == 'contact' || $id != $category->id) && $category->id > 1)
+			while ($category && ($menu->query['option'] != 'com_contact' || $menu->query['view'] == 'contact' || $id != $category->id) && $category->id > 1)
 			{
 				$path[] = array('title' => $category->title, 'link' => ContactHelperRoute::getCategoryRoute($this->contact->catid));
 				$category = $category->getParent();

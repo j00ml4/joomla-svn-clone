@@ -164,6 +164,10 @@ class ContentModelArticles extends JModelList
 		$query->join('LEFT', '#__users AS ua ON ua.id = a.created_by');
 		$query->join('LEFT', '#__users AS uam ON uam.id = a.modified_by');
 
+		// Join on contact table
+		$query->select('contact.id as contactid' ) ;
+		$query->join('LEFT','#__contact_details AS contact on contact.user_id = a.created_by');
+			
 		// Join over the categories to get parent category titles
 		$query->select('parent.title as parent_title, parent.id as parent_id, parent.path as parent_route, parent.alias as parent_alias');
 		$query->join('LEFT', '#__categories as parent ON parent.id = c.parent_id');
@@ -197,7 +201,7 @@ class ContentModelArticles extends JModelList
 		// Filter by access level.
 		if ($access = $this->getState('filter.access')) {
 			$user	= JFactory::getUser();
-			$groups	= implode(',', $user->authorisedLevels());
+			$groups	= implode(',', $user->getAuthorisedViewLevels());
 			$query->where('a.access IN ('.$groups.')');
 		}
 
@@ -425,7 +429,7 @@ class ContentModelArticles extends JModelList
 		$user	= JFactory::getUser();
 		$userId	= $user->get('id');
 		$guest	= $user->get('guest');
-		$groups	= $user->authorisedLevels();
+		$groups	= $user->getAuthorisedViewLevels();
 
 		// Get the global params
 		$globalParams = JComponentHelper::getParams('com_content', true);

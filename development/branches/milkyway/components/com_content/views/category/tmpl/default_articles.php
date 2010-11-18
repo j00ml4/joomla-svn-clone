@@ -87,10 +87,10 @@ $listDirn	= $this->state->get('list.direction');
 
 		<tbody>
 
-			<?php foreach ($this->items as $i => $article) : ?>
+		<?php foreach ($this->items as $i => $article) : ?>
 			<tr class="cat-list-row<?php echo $i % 2; ?>">
 
-				<?php if (in_array($article->access, $this->user->authorisedLevels())) : ?>
+				<?php if (in_array($article->access, $this->user->getAuthorisedViewLevels())) : ?>
 
 					<td class="list-title">
 
@@ -114,12 +114,20 @@ $listDirn	= $this->state->get('list.direction');
 					</td>
 					<?php endif; ?>
 
-					<?php if ($this->params->get('list_show_author',1)) : ?>
-					<td class="list-author">
-						<?php echo $this->params->get('link_author', 0) ? JHTML::_('link',JRoute::_('index.php?option=com_users&view=profile&id='.$article->created_by),$article->author) : $article->author; ?>
-					</td>
-					<?php endif; ?>
-
+					<?php if ($this->params->get('list_show_author',1) && !empty($article->author )) : ?>	
+							<td class="createdby"> 
+								<?php $author =  $article->author ?>
+								<?php $author = ($article->created_by_alias ? $article->created_by_alias : $author);?>
+				
+									<?php if (!empty($article->contactid ) &&  $this->params->get('link_author') == true):?>
+										<?php 	echo 
+										 JHTML::_('link',JRoute::_('index.php?option=com_contact&view=contact&id='.$article->contactid),$author); ?>
+						
+									<?php else :?>
+										<?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', $author); ?>
+									<?php endif; ?>
+							</td>
+					<?php endif; ?>	
 					<?php if ($this->params->get('list_show_hits',1)) : ?>
 					<td class="list-hits">
 						<?php echo $article->hits; ?>
@@ -150,7 +158,7 @@ $listDirn	= $this->state->get('list.direction');
 <?php // Code to add a link to submit an article. ?>
 <?php if ($this->category->getParams()->get('access-create')) : ?>
 <span class="hasTip" title="<?php echo JText::_('COM_CONTENT_CREATE_ARTICLE'); ?>"><a href="<?php echo JRoute::_('index.php?option=com_content&task=article.add');?>">
-	<img src="media/system/images/edit.png" alt="Edit"></img></a></span>
+	<img src="media/system/images/edit.png" alt="Edit" /></a></span>
 <?php  endif; ?>
 	<?php if (($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) : ?>
 	<div class="pagination">

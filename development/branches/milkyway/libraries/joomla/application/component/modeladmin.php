@@ -240,7 +240,13 @@ abstract class JModelAdmin extends JModelForm
 
 					// Prune items that you can't change.
 					unset($pks[$i]);
-					JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_EDITSTATE_NOT_PERMITTED'));
+					$error = $this->getError();
+					if ($error) {
+						JError::raiseWarning(500, $error);
+					}
+					else {
+						JError::raiseWarning(403, JText::_('JLIB_APPLICATION_ERROR_DELETE_NOT_PERMITTED'));
+					}
 				}
 
 			} else {
@@ -314,10 +320,13 @@ abstract class JModelAdmin extends JModelForm
 	 */
 	protected function populateState()
 	{
+		// Initialise variables.
 		$app = JFactory::getApplication('administrator');
+		$table = $this->getTable();
+		$key = $table->getKeyName();
 
 		// Get the pk of the record from the request.
-		$pk = (int) JRequest::getInt('id');
+		$pk = JRequest::getInt($key);
 		$this->setState($this->getName().'.id', $pk);
 
 		// Load the parameters.
@@ -480,46 +489,56 @@ abstract class JModelAdmin extends JModelForm
 		// Include the content plugins for the on save events.
 		JPluginHelper::importPlugin('content');
 
-		// Load the row if saving an existing record.
-		if ($pk > 0) {
-			$table->load($pk);
-			$isNew = false;
-		}
+		// Allow an exception to be throw.
+		try
+		{
+			// Load the row if saving an existing record.
+			if ($pk > 0) {
+				$table->load($pk);
+				$isNew = false;
+			}
 
-		// Bind the data.
-		if (!$table->bind($data)) {
-			$this->setError($table->getError());
+			// Bind the data.
+			if (!$table->bind($data)) {
+				$this->setError($table->getError());
+				return false;
+			}
+
+			// Prepare the row for saving
+			$this->prepareTable($table);
+
+			// Check the data.
+			if (!$table->check()) {
+				$this->setError($table->getError());
+				return false;
+			}
+
+			// Trigger the onContentBeforeSave event.
+			$result = $dispatcher->trigger($this->event_before_save, array($this->option.'.'.$this->name, $table, $isNew));
+			if (in_array(false, $result, true)) {
+				$this->setError($table->getError());
+				return false;
+			}
+
+			// Store the data.
+			if (!$table->store()) {
+				$this->setError($table->getError());
+				return false;
+			}
+
+			// Clean the cache.
+			$cache = JFactory::getCache($this->option);
+			$cache->clean();
+
+			// Trigger the onContentAfterSave event.
+			$dispatcher->trigger($this->event_after_save, array($this->option.'.'.$this->name, $table, $isNew));
+		}
+		catch (Exception $e)
+		{
+			$this->setError($e->getMessage());
+
 			return false;
 		}
-
-		// Prepare the row for saving
-		$this->prepareTable($table);
-
-		// Check the data.
-		if (!$table->check()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Trigger the onContentBeforeSave event.
-		$result = $dispatcher->trigger($this->event_before_save, array($this->option.'.'.$this->name, $table, $isNew));
-		if (in_array(false, $result, true)) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Store the data.
-		if (!$table->store()) {
-			$this->setError($table->getError());
-			return false;
-		}
-
-		// Clean the cache.
-		$cache = JFactory::getCache($this->option);
-		$cache->clean();
-
-		// Trigger the onContentAfterSave event.
-		$dispatcher->trigger($this->event_after_save, array($this->option.'.'.$this->name, $table, $isNew));
 
 		$pkName = $table->getKeyName();
 

@@ -57,7 +57,7 @@ class WeblinksViewCategory extends JView
 		// Check whether category access level allows access.
 		// TODO: SHould already be computed in $category->params->get('access-view')
 		$user	= JFactory::getUser();
-		$groups	= $user->authorisedLevels();
+		$groups	= $user->getAuthorisedViewLevels();
 		if (!in_array($category->access, $groups)) {
 			return JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
 		}
@@ -98,9 +98,17 @@ class WeblinksViewCategory extends JView
 		$this->assignRef('parent',		$parent);
 		$this->assignRef('pagination',	$pagination);
 
-		// Override the layout.
-		if ($layout = $category->params->get('layout')){
+		// Check for layout override only if this is not the active menu item
+		// If it is the active menu item, then the view and category id will match
+		$active	= $app->getMenu()->getActive();
+		if ((!$active) || ((strpos($active->link, 'view=category') === false) || (strpos($active->link, '&id=' . (string) $this->category->id) === false))) {			
+			if ($layout = $category->params->get('category_layout')) {
 			$this->setLayout($layout);
+			}
+		}
+		elseif (isset($active->query['layout'])) {
+			// We need to set the layout in case this is an alternative menu item (with an alternative layout)
+			$this->setLayout($active->query['layout']);
 		}
 
 		$this->_prepareDocument();
