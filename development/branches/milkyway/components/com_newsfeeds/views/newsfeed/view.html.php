@@ -91,42 +91,60 @@ class NewsfeedsViewNewsfeed extends JView
 		// Merge newsfeed params. If this is single-newsfeed view, menu params override newsfeed params
 		// Otherwise, newsfeed params override menu item params
 		$params = $state->get('params');
-		$newsfeed_params = new JRegistry;
-		$newsfeed_params->loadJSON($item->params);
+		$newsfeed_params = clone $item->params;
 		$active = $app->getMenu()->getActive();
 		$temp = clone ($params);
-
-		if ($active) {
+		
+		// Check to see which parameters should take priority
+		if ($active)
+		{
 			$currentLink = $active->link;
-
-			if (strpos($currentLink, 'view=newsfeed')) {
+			// If the current view is the active item and an newsfeed view for this feed, then the menu item params take priority
+			if (strpos($currentLink, 'view=newsfeed') && (strpos($currentLink, '&id='.(string) $item->id)))
+			{
+				// $item->params are the newsfeed params, $temp are the menu item params
+				// Merge so that the menu item params take priority
 				$newsfeed_params->merge($temp);
 				$item->params = $newsfeed_params;
+				// Load layout from active query (in case it is an alternative menu item)
+				if (isset($active->query['layout']))
+				{
+					$this->setLayout($active->query['layout']);
+				}
 			}
-			else {
+			else
+			{
+				// Current view is not a single newsfeed, so the newsfeed params take priority here
+				// Merge the menu item params with the newsfeed params so that the newsfeed params take priority
 				$temp->merge($newsfeed_params);
 				$item->params = $temp;
+				// Check for alternative layouts (since we are not in a single-newsfeed menu item)
+				if ($layout = $item->params->get('newsfeed_layout'))
+				{
+					$this->setLayout($layout);
+				}
 			}
 		}
-		else {
+		else
+		{
+			// Merge so that newsfeed params take priority
 			$temp->merge($newsfeed_params);
 			$item->params = $temp;
+			// Check for alternative layouts (since we are not in a single-newsfeed menu item)
+			if ($layout = $item->params->get('newsfeed_layout')) 
+			{
+				$this->setLayout($layout);
+			}
 		}
 
 		$offset = $state->get('list.offset');
 
 		// Check the access to the newsfeed
-		$levels = $user->authorisedLevels();
+		$levels = $user->getAuthorisedViewLevels();
 
 		if (!in_array($item->access, $levels) OR ((in_array($item->access,$levels) AND (!in_array($item->category_access, $levels))))) {
 			JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
-
 			return;
-		}
-
-		// Override the layout.
-		if ($layout = $params->get('layout')) {
-			$this->setLayout($layout);
 		}
 
 		// Get the current menu item
@@ -136,7 +154,7 @@ class NewsfeedsViewNewsfeed extends JView
 
 		// Get the newsfeed
 		$newsfeed = $item;
-
+		
 		$temp = new JRegistry();
 		$temp->loadJSON($item->params);
 		$params->merge($temp);
@@ -206,7 +224,7 @@ class NewsfeedsViewNewsfeed extends JView
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
 		}
 		else {
-			$this->params->def('page_heading', JText::_('JGLOBAL_NEWSFEEDS'));
+			$this->params->def('page_heading', JText::_('COM_NEWSFEEDS_DEFAULT_PAGE_TITLE'));
 		}
 
 		$title = $this->params->get('page_title', '');

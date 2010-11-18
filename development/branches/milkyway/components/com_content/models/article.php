@@ -56,23 +56,8 @@ class ContentModelArticle extends JModelItem
 			$this->setState('filter.published', 1);
 			$this->setState('filter.archived', 2);
 		}
-
-		$this->setState('layout', JRequest::getCmd('layout'));
 	}
 
-	public function getParams()
-	{
-		if (!isset($this->params))
-		{
-			parent::getParams();
-			// Set the layout parameter from the request
-			if ($this->getState('layout')) {
-				$this->params->set('article_layout', $this->getState('layout'));
-			}
-			$this->getItem();
-		}
-		return $this->params;
-	}
 	/**
 	 * Method to get article data.
 	 *
@@ -116,6 +101,11 @@ class ContentModelArticle extends JModelItem
 				$query->select('u.name AS author');
 				$query->join('LEFT', '#__users AS u on u.id = a.created_by');
 
+				// Join on contact table
+				$query->select('contact.id as contactid' ) ;
+				$query->join('LEFT','#__contact_details AS contact on contact.user_id = a.created_by');
+				
+				
 				// Join over the categories to get parent category titles
 				$query->select('parent.title as parent_title, parent.id as parent_id, parent.path as parent_route, parent.alias as parent_alias');
 				$query->join('LEFT', '#__categories as parent ON parent.id = c.parent_id');
@@ -169,8 +159,8 @@ class ContentModelArticle extends JModelItem
 				// Convert parameter fields to objects.
 				$registry = new JRegistry;
 				$registry->loadJSON($data->attribs);
-				$this->getParams();
-				$this->params->merge($registry);
+				$data->params = clone $this->getState('params');
+				$data->params->merge($registry);
 
 				$registry = new JRegistry;
 				$registry->loadJSON($data->metadata);
@@ -186,13 +176,13 @@ class ContentModelArticle extends JModelItem
 
 					// Check general edit permission first.
 					if ($user->authorise('core.edit', $asset)) {
-						$this->params->set('access-edit', true);
+						$data->params->set('access-edit', true);
 					}
 					// Now check if edit.own is available.
 					else if (!empty($userId) && $user->authorise('core.edit.own', $asset)) {
 						// Check for a valid user and that they are the owner.
 						if ($userId == $data->created_by) {
-							$this->params->set('access-edit', true);
+							$data->params->set('access-edit', true);
 						}
 					}
 				}
@@ -200,18 +190,18 @@ class ContentModelArticle extends JModelItem
 				// Compute view access permissions.
 				if ($access = $this->getState('filter.access')) {
 					// If the access filter has been set, we already know this user can view.
-					$this->params->set('access-view', true);
+					$data->params->set('access-view', true);
 				}
 				else {
 					// If no access filter is set, the layout takes some responsibility for display of limited information.
 					$user = JFactory::getUser();
-					$groups = $user->authorisedLevels();
+					$groups = $user->getAuthorisedViewLevels();
 
 					if ($data->catid == 0 || $data->category_access === null) {
-						$this->params->set('access-view', in_array($data->access, $groups));
+						$data->params->set('access-view', in_array($data->access, $groups));
 					}
 					else {
-						$this->params->set('access-view', in_array($data->access, $groups) && in_array($data->category_access, $groups));
+						$data->params->set('access-view', in_array($data->access, $groups) && in_array($data->category_access, $groups));
 					}
 				}
 

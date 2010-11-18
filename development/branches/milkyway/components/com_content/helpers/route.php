@@ -47,7 +47,10 @@ abstract class ContentHelperRoute
 			}
 		}
 
-		if ($item = ContentHelperRoute::_findItem($needles)) {
+		if ($item = self::_findItem($needles)) {
+			$link .= '&Itemid='.$item;
+		}
+		elseif ($item = self::_findItem()) {
 			$link .= '&Itemid='.$item;
 		}
 
@@ -56,35 +59,50 @@ abstract class ContentHelperRoute
 
 	public static function getCategoryRoute($catid)
 	{
-		if((int) $catid < 1)
+		if ($catid instanceof JCategoryNode)
 		{
-			return;
-		}
-
-		if($catid instanceof JCategoryNode)
-		{
-			$catids = array_reverse($catid->getPath());
 			$id = $catid->id;
-			//Create the link
-			$link = 'index.php?option=com_content&view=category&id='.$id;
-		} else {
-			$id = (int)$catid;
-			//Create the link
-			$link = 'index.php?option=com_content&view=category&id='.$id;
-			$categories = JCategories::getInstance('Content');
-			$category = $categories->get((int)$catid);
-			if(!$category)
-			{
-				return $link;
-			}
-			$catids = array_reverse($category->getPath());
+			$category = $catid;
 		}
-		$needles = array(
-			'category' => $catids
-		);
+		else
+		{
+			$id = (int) $catid;
+			$category = JCategories::getInstance('Content')->get($id);
+		}
 
-		if ($item = ContentHelperRoute::_findItem($needles)) {
-			$link .= '&Itemid='.$item;
+		if($id < 1)
+		{
+			$link = '';
+		}
+		else
+		{
+			$needles = array(
+				'category' => array($id)
+			);
+
+			if ($item = self::_findItem($needles))
+			{
+				$link = '&Itemid='.$item;
+			}
+			else
+			{
+				//Create the link
+				$link = 'index.php?option=com_content&view=category&id='.$id;
+				if($category)
+				{
+					$catids = array_reverse($category->getPath());
+					$needles = array(
+						'category' => $catids,
+						'categories' => $catids
+					);
+					if ($item = self::_findItem($needles)) {
+						$link .= '&Itemid='.$item;
+					}
+					elseif ($item = self::_findItem()) {
+						$link .= '&Itemid='.$item;
+					}
+				}
+			}
 		}
 
 		return $link;
@@ -102,16 +120,17 @@ abstract class ContentHelperRoute
 		return $link;
 	}
 
-	protected static function _findItem($needles)
+	protected static function _findItem($needles = null)
 	{
+		$app		= JFactory::getApplication();
+		$menus		= $app->getMenu('site');
+
 		// Prepare the reverse lookup array.
 		if (self::$lookup === null)
 		{
 			self::$lookup = array();
 
 			$component	= JComponentHelper::getComponent('com_content');
-			$app		= JFactory::getApplication();
-			$menus		= $app->getMenu('site');
 			$items		= $menus->getItems('component_id', $component->id);
 			foreach ($items as $item)
 			{
@@ -128,16 +147,26 @@ abstract class ContentHelperRoute
 			}
 		}
 
-		foreach ($needles as $view => $ids)
+		if ($needles)
 		{
-			if (isset(self::$lookup[$view]))
+			foreach ($needles as $view => $ids)
 			{
-				foreach($ids as $id)
+				if (isset(self::$lookup[$view]))
 				{
-					if (isset(self::$lookup[$view][(int)$id])) {
-						return self::$lookup[$view][(int)$id];
+					foreach($ids as $id)
+					{
+						if (isset(self::$lookup[$view][(int)$id])) {
+							return self::$lookup[$view][(int)$id];
+						}
 					}
 				}
+			}
+		}
+		else
+		{
+			$active = $menus->getActive();
+			if ($active) {
+				return $active->id;
 			}
 		}
 

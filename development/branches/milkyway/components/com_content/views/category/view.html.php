@@ -39,7 +39,7 @@ class ContentViewCategory extends JView
 
 		// Get some data from the models
 		$state		= $this->get('State');
-		$params		= $this->get('Params');
+		$params		= $state->params;
 		$items		= $this->get('Items');
 		$category	= $this->get('Category');
 		$children	= $this->get('Children');
@@ -61,13 +61,13 @@ class ContentViewCategory extends JView
 		}
 
 		// Setup the category parameters.
-//		$cparams = $category->getParams();
-//		$category->params = clone($params);
-//		$category->params->merge($cparams);
+		$cparams = $category->getParams();
+		$category->params = clone($params);
+		$category->params->merge($cparams);
 
 		// Check whether category access level allows access.
 		$user	= JFactory::getUser();
-		$groups	= $user->authorisedLevels();
+		$groups	= $user->getAuthorisedViewLevels();
 		if (!in_array($category->access, $groups)) {
 			return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));
 		}
@@ -77,9 +77,6 @@ class ContentViewCategory extends JView
 		$numLeading	= $params->def('num_leading_articles', 1);
 		$numIntro	= $params->def('num_intro_articles', 4);
 		$numLinks	= $params->def('num_links', 4);
-
-		// Override the layout if you want to.
-		$this->setLayout($params->get('category_layout', $this->getLayout()));
 
 		// Compute the article slugs and prepare introtext (runs content plugins).
 		for ($i = 0, $n = count($items); $i < $n; $i++)
@@ -97,7 +94,7 @@ class ContentViewCategory extends JView
 			$dispatcher = JDispatcher::getInstance();
 
 			// Ignore content plugins on links.
-			if ($i < $numLeading + $numIntro && $this->getLayout() == 'blog') {
+			if ($i < $numLeading + $numIntro) {
 				$item->introtext = JHtml::_('content.prepare', $item->introtext);
 
 				$results = $dispatcher->trigger('onContentAfterTitle', array('com_content.article', &$item, &$item->params, 0));
@@ -110,10 +107,25 @@ class ContentViewCategory extends JView
 				$item->event->afterDisplayContent = trim(implode("\n", $results));
 			}
 		}
+		
+		// Check for layout override only if this is not the active menu item
+		// If it is the active menu item, then the view and category id will match
+		$active	= $app->getMenu()->getActive();
+		if ((!$active) || ((strpos($active->link, 'view=category') === false) || (strpos($active->link, '&id=' . (string) $category->id) === false))) {
+			// Get the layout from the merged category params
+			if ($layout = $category->params->get('category_layout')) {
+				$this->setLayout($layout);
+			}
+		}
+		// At this point, we are in a menu item, so we don't override the layout
+		elseif (isset($active->query['layout'])) {
+			// We need to set the layout from the query in case this is an alternative menu item (with an alternative layout)
+			$this->setLayout($active->query['layout']);
+		}
 
 		// For blog layouts, preprocess the breakdown of leading, intro and linked articles.
 		// This makes it much easier for the designer to just interrogate the arrays.
-		if ($this->getLayout() == 'blog') {
+		if ($this->getLayout() != 'default') {
 			$max = count($items);
 
 			// The first group is the leading articles.
@@ -138,17 +150,10 @@ class ContentViewCategory extends JView
 			}
 
 			// The remainder are the links.
-			$limit = $numLeading + $numIntro + $numLinks;
-			for ($i = $numLeading + $numIntro; $i < $limit && $i < $max; $i++)
+			for ($i = $numLeading + $numIntro; $i < $max; $i++)
 			{
 				$this->link_items[$i] = &$items[$i];
 			}
-
-			// Set the pagination
-			$pagination = new JPagination($pagination->total, $state->get('list.start'), $numLeading + $numIntro);
-		}
-		else {
-			$items = array_slice($items, 0, $pagination->limit);
 		}
 
 		$children = array($category->id => $children);
@@ -162,7 +167,7 @@ class ContentViewCategory extends JView
 		$this->assignRef('parent', $parent);
 		$this->assignRef('pagination', $pagination);
 		$this->assignRef('user', $user);
-
+		
 		$this->_prepareDocument();
 
 		parent::display($tpl);

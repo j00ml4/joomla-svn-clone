@@ -1406,6 +1406,7 @@ table.adminlist thead th {
 	text-align: center;
 	background: #ffffff;
 	color: #2c2c2c;
+	border-bottom:1px solid #C7C8B2;
 }
 
 table.adminlist thead a:hover {
@@ -1463,7 +1464,7 @@ table.adminlist tbody tr td:last-child {
 
 table.adminlist tbody tr.row0:first-child td,
 table.adminlist tbody tr.row0:first-child th {
-	border-top: 1px solid #c7c8b2;
+	/* border-top: 1px solid #c7c8b2; */
 }
 
 table.adminlist tbody tr.row0:last-child td,
@@ -1699,6 +1700,11 @@ button:hover,button:focus {
 	-webkit-border-radius: 3px;
 }
 
+.button2-left.smallsub,.button2-right.smallsub {
+	line-height: 1.2em;
+	font-size: .9em;
+}
+
 .button2-left a,.button2-right a,.button2-left span,.button2-right span
 	{
 	display: block;
@@ -1750,64 +1756,49 @@ button:hover,button:focus {
 	margin-left: 5px;
 }
 
+/* Note: use these references to add images/arrows to the buttons */
+
 .button2-right .prev {
-	background-image: url(../images/j_button2_prev.png);
+	/* background-image: url(../images/j_button2_prev.png);
 	background-position: left center;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; */
 }
 
 .button2-right.off .prev {
-	background: url(../images/j_button2_prev_off.png) no-repeat;
+	/* background: url(../images/j_button2_prev_off.png) no-repeat; */
 }
 
 .button2-right .start {
-	background-image: url(../images/j_button2_first.png);
-	background-position: left center;
-	background-repeat: no-repeat;
 }
 
 .button2-right.off .start {
-	background: url(../images/j_button2_first_off.png) no-repeat;
 }
 
 .button2-left .page,.button2-left .blank {
-
 }
 
 .button2-left .next {
-	background-image: url(../images/j_button2_next.png);
-	background-position: right center;
-	background-repeat: no-repeat;
 }
 
 .button2-left.off .next {
-	background: url(../images/j_button2_next_off.png) 100% 0 no-repeat;
 }
 
 .button2-left .end {
-	background-image: url(../images/j_arrow.png);
-	background-position: right center;
-	background-repeat: no-repeat;
 }
 
 .button2-left.off .end {
-	background: url(../images/j_button2_last_off.png) 100% 0 no-repeat;
 }
 
 .button2-left .image {
-	background: url(../images/j_button2_image.png) 100% 0 no-repeat;
 }
 
 .button2-left .readmore {
-	background: url(../images/j_button2_readmore.png) 100% 0 no-repeat;
 }
 
 .button2-left .pagebreak {
-	background: url(../images/j_button2_pagebreak.png) 100% 0 no-repeat;
 }
 
 .button2-left .blank {
-
 }
 
 /**
@@ -2279,6 +2270,10 @@ a.jgrid:hover {
 	background-image: url(../images/menu/icon-16-plugin.png);
 }
 
+.icon-16-profile {
+	background-image: url(../images/menu/icon-16-user.png);
+}
+
 .icon-16-purge {
 	background-image: url(../images/menu/icon-16-purge.png);
 }
@@ -2589,6 +2584,14 @@ a.jgrid:hover {
 
 .icon-48-user-add {
 	background-image: url(../images/header/icon-48-user-add.png);
+}
+
+.icon-48-user-edit {
+	background-image: url(../images/header/icon-48-user-edit.png);
+}
+
+.icon-48-user-profile {
+	background-image: url(../images/header/icon-48-user-profile.png);
 }
 
 .icon-48-inbox {
@@ -3480,3 +3483,30 @@ table.group-rules td select
 #permissions-sliders
 	{ min-height:35em; width:100%; }
 
+/*
+ * Debug styles
+ */
+	.check-0,
+	table.adminlist tbody td.check-0 {
+		background-color: #FFFFCF;
+	}
+
+	.check-a,
+	table.adminlist tbody td.check-a {
+		background-color: #CFFFDA;
+	}
+
+	.check-d,
+	table.adminlist tbody td.check-d {
+		background-color: #FFCFCF;
+	}
+
+	.swatch {
+		text-align: center;
+		padding: 0 15px 0 15px;
+	}
+/* Tab changes for accessibility */
+dl.tabs dt h3 {
+	padding: 0;
+	font-size:100%;
+}

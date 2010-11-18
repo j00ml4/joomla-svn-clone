@@ -25,6 +25,9 @@ new JMenuNode(JText::_('MOD_MENU_CONTROL_PANEL'), 'index.php', 'class:cpanel')
 
 $menu->addSeparator();
 
+$menu->addChild(new JMenuNode(JText::_('MOD_MENU_USER_PROFILE'), 'index.php?option=com_admin&task=profile.edit', 'class:profile'));
+$menu->addSeparator();
+
 if ($user->authorise('core.admin')) {
 	$menu->addChild(new JMenuNode(JText::_('MOD_MENU_CONFIGURATION'), 'index.php?option=com_config', 'class:config'));
 	$menu->addSeparator();
@@ -75,34 +78,40 @@ if ($user->authorise('core.manage', 'com_users'))
 	new JMenuNode(JText::_('MOD_MENU_COM_USERS_USERS'), '#'), true
 	);
 	$createUser = $shownew && $user->authorise('core.create', 'com_users');
+	$createGrp	= $createUser &&  $user->authorise('core.admin', 'com_users');
 
 	$menu->addChild(
-	new JMenuNode(JText::_('MOD_MENU_COM_USERS_USER_MANAGER'), 'index.php?option=com_users&view=users', 'class:user'), $createUser
+		new JMenuNode(JText::_('MOD_MENU_COM_USERS_USER_MANAGER'), 'index.php?option=com_users&view=users', 'class:user'),
+		$createUser
 	);
 	if ($createUser) {
 		$menu->addChild(
-		new JMenuNode(JText::_('MOD_MENU_COM_USERS_ADD_USER'), 'index.php?option=com_users&task=user.add', 'class:newarticle')
+			new JMenuNode(JText::_('MOD_MENU_COM_USERS_ADD_USER'), 'index.php?option=com_users&task=user.add', 'class:newarticle')
 		);
 		$menu->getParent();
 	}
 
-	$menu->addChild(
-	new JMenuNode(JText::_('MOD_MENU_COM_USERS_GROUPS'), 'index.php?option=com_users&view=groups', 'class:groups'), $createUser
-	);
-	if ($createUser) {
+	if ($createGrp) {
 		$menu->addChild(
-		new JMenuNode(JText::_('MOD_MENU_COM_USERS_ADD_GROUP'), 'index.php?option=com_users&task=group.add', 'class:newarticle')
+			new JMenuNode(JText::_('MOD_MENU_COM_USERS_GROUPS'), 'index.php?option=com_users&view=groups', 'class:groups'),
+			$createUser
 		);
-		$menu->getParent();
-	}
-	$menu->addChild(
-	new JMenuNode(JText::_('MOD_MENU_COM_USERS_LEVELS'), 'index.php?option=com_users&view=levels', 'class:levels'), $createUser
-	);
-	if ($createUser) {
+		if ($createUser) {
+			$menu->addChild(
+				new JMenuNode(JText::_('MOD_MENU_COM_USERS_ADD_GROUP'), 'index.php?option=com_users&task=group.add', 'class:newarticle')
+			);
+			$menu->getParent();
+		}
 		$menu->addChild(
-		new JMenuNode(JText::_('MOD_MENU_COM_USERS_ADD_LEVEL'), 'index.php?option=com_users&task=level.add', 'class:newarticle')
+			new JMenuNode(JText::_('MOD_MENU_COM_USERS_LEVELS'), 'index.php?option=com_users&view=levels', 'class:levels'),
+			$createUser
 		);
-		$menu->getParent();
+		if ($createUser) {
+			$menu->addChild(
+			new JMenuNode(JText::_('MOD_MENU_COM_USERS_ADD_LEVEL'), 'index.php?option=com_users&task=level.add', 'class:newarticle')
+			);
+			$menu->getParent();
+		}
 	}
 
 	$menu->addSeparator();
@@ -136,7 +145,7 @@ if ($user->authorise('core.manage', 'com_menus'))
 
 	// Menu Types
 	foreach (ModMenuHelper::getMenus() as $menuType)
-	{	
+	{
 		$titleicon = $menuType->home ? ' <span>'.JHTML::_('image','menu/icon-16-default.png', NULL, NULL, true).'</span>' : '';
 		$menu->addChild(
 		new JMenuNode($menuType->title,	'index.php?option=com_menus&view=items&menutype='.$menuType->menutype, 'class:menu', null, null, $titleicon), $createMenu
@@ -194,28 +203,29 @@ if ($user->authorise('core.manage', 'com_content'))
 //
 // Components Submenu
 //
-$menu->addChild(new JMenuNode(JText::_('MOD_MENU_COMPONENTS'), '#'), true);
 
 // Get the authorised components and sub-menus.
 $components = ModMenuHelper::getComponents( true );
 
-foreach ($components as &$component)
-{
-	if (!empty($component->submenu))
-	{
-		// This component has a db driven submenu.
-		$menu->addChild(new JMenuNode($component->text, $component->link, $component->img), true);
-		foreach ($component->submenu as $sub)
-		{
-			$menu->addChild(new JMenuNode($sub->text, $sub->link, $sub->img));
+// Check if there are any components, otherwise, don't render the menu
+if ($components) {
+	$menu->addChild(new JMenuNode(JText::_('MOD_MENU_COMPONENTS'), '#'), true);
+
+	foreach ($components as &$component) {
+		if (!empty($component->submenu)) {
+			// This component has a db driven submenu.
+			$menu->addChild(new JMenuNode($component->text, $component->link, $component->img), true);
+			foreach ($component->submenu as $sub) {
+				$menu->addChild(new JMenuNode($sub->text, $sub->link, $sub->img));
+			}
+			$menu->getParent();
 		}
-		$menu->getParent();
+		else {
+			$menu->addChild(new JMenuNode($component->text, $component->link, $component->img));
+		}
 	}
-	else {
-		$menu->addChild(new JMenuNode($component->text, $component->link, $component->img));
-	}
+	$menu->getParent();
 }
-$menu->getParent();
 
 //
 // Extensions Submenu

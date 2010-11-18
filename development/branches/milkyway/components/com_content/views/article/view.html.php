@@ -37,7 +37,6 @@ class ContentViewArticle extends JView
 		$this->print	= JRequest::getBool('print');
 		$this->state	= $this->get('State');
 		$this->user		= $user;
-		$this->params	= $this->get('Params');
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -57,10 +56,53 @@ class ContentViewArticle extends JView
 		// TODO: Change based on shownoauth
 		$item->readmore_link = JRoute::_(ContentHelperRoute::getArticleRoute($item->slug, $item->catslug));
 
+		// Merge article params. If this is single-article view, menu params override article params
+		// Otherwise, article params override menu item params
+		$this->params	= $this->state->get('params');
+		$active	= $app->getMenu()->getActive();
+		$temp	= clone ($this->params);
+
+		// Check to see which parameters should take priority
+		if ($active) {
+			$currentLink = $active->link;
+			// If the current view is the active item and an article view for this article, then the menu item params take priority
+			if (strpos($currentLink, 'view=article') && (strpos($currentLink, '&id='.(string) $item->id))) {
+				// $item->params are the article params, $temp are the menu item params
+				// Merge so that the menu item params take priority
+				$item->params->merge($temp);
+				// Load layout from active query (in case it is an alternative menu item)
+				if (isset($active->query['layout'])) {
+					$this->setLayout($active->query['layout']);
+				}
+			}
+			else {
+				// Current view is not a single article, so the article params take priority here
+				// Merge the menu item params with the article params so that the article params take priority
+				$temp->merge($item->params);
+				$item->params = $temp;
+
+				// Check for alternative layouts (since we are not in a single-article menu item)
+				// Single-article menu item layout takes priority over alt layout for an article
+				if ($layout = $item->params->get('article_layout')) {
+					$this->setLayout($layout);
+				}
+			}
+		}
+		else {
+			// Merge so that article params take priority
+			$temp->merge($item->params);
+			$item->params = $temp;
+			// Check for alternative layouts (since we are not in a single-article menu item)
+			// Single-article menu item layout takes priority over alt layout for an article
+			if ($layout = $item->params->get('article_layout')) {
+				$this->setLayout($layout);
+			}
+		}
+
 		$offset = $this->state->get('list.offset');
 
 		// Check the view access to the article (the model has already computed the values).
-		if ($this->params->get('access-view') != true) {
+		if ($item->params->get('access-view') != true) {
 			// TODO: This curtails the ability for a layout to show teaser information!!!
 			// If a guest user, they may be able to log in to view the full article
 			if (($this->params->get('show_noauth')) AND ($user->get('guest'))) {
@@ -77,7 +119,7 @@ class ContentViewArticle extends JView
 			}
 		}
 
-		if ($this->params->get('show_intro','1')=='1') {
+		if ($item->params->get('show_intro','1')=='1') {
 			$item->text = $item->introtext.' '.$item->fulltext;
 		}
 		else if ($item->fulltext) {
@@ -102,11 +144,6 @@ class ContentViewArticle extends JView
 
 		$results = $dispatcher->trigger('onContentAfterDisplay', array('com_content.article', &$item, &$this->params, $offset));
 		$item->event->afterDisplayContent = trim(implode("\n", $results));
-
-		// Override the layout.
-		if ($layout = $this->params->get('layout')) {
-			$this->setLayout($layout);
-		}
 
 		// Increment the hit counter of the article.
 		if (!$this->params->get('intro_only') && $offset == 0) {
@@ -157,7 +194,7 @@ class ContentViewArticle extends JView
 		{
 			$path = array(array('title' => $this->item->title, 'link' => ''));
 			$category = JCategories::getInstance('Content')->get($this->item->catid);
-			while (($menu->query['option'] != 'com_content' || $menu->query['view'] == 'article' || $id != $category->id) && $category->id > 1)
+			while ($category && ($menu->query['option'] != 'com_content' || $menu->query['view'] == 'article' || $id != $category->id) && $category->id > 1)
 			{
 				$path[] = array('title' => $category->title, 'link' => ContentHelperRoute::getCategoryRoute($category->id));
 				$category = $category->getParent();
