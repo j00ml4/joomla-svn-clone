@@ -4,18 +4,47 @@
 	<fieldset name="permissions"
 		label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC">
+		
+		<field name="access_tasks"
+			type="accesslevel"
+			label="COM_PROJECTS_FIELD_ACCESS_TASKS_LABEL"
+			description="COM_PROJECTS_FIELD_ACCESS_TASKS_DESC" />
+			
+
+		<field name="access_tickets"
+			type="accesslevel"
+			label="COM_PROJECTS_FIELD_ACCESS_TICKETS_LABEL"
+			description="COM_PROJECTS_FIELD_ACCESS_TICKETS_DESC" />
+
+		<field name="access_documents"
+			type="accesslevel"
+			label="COM_PROJECTS_FIELD_ACCESS_DOCUMENTS_LABEL"
+			description="COM_PROJECTS_FIELD_ACCESS_DOCUMENTS_DESC" />
+		
+		<field name="access_members"
+			type="accesslevel"
+			label="COM_PROJECTS_FIELD_ACCESS_MEMBERS_LABEL"
+			description="COM_PROJECTS_FIELD_ACCESS_MEMBERS_DESC" />
+		
+		
+		<field name="spacer_access"
+			type="spacer"
+			hr="true"
+			/>
+			
 		<field name="rules"	type="rules" label="JCONFIG_PERMISSIONS_LABEL"
 			filter="rules" component="com_projects"	section="component"/>	
+			
 	</fieldset>
 
-	<fieldset name="basic"
-		label="COM_PROJCETS_CONFIGURATION_GENERAL_SETTINGS_LABEL"
-		description="COM_PROJCETS_CONFIGURATION_GENERAL_SETTINGS_LABEL">
+	<fieldset name="layout"
+		label="COM_PROJCETS_FIELD_LAYOUTS_SETTINGS_LABEL"
+		description="COM_PROJCETS_FIELD_LAYOUTS_SETTINGS_DESC">
 		
 		<field name="style"
 			type="filelist"
-			label="COM_PROJECTS_CONFIGURATION_SELECT_STYLE_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_SELECT_STYLE_DESC"
+			label="COM_PROJECTS_FIELD_SELECT_STYLE_LABEL"
+			description="COM_PROJECTS_FIELD_SELECT_STYLE_DESC"
 			directory="media/com_projects/css"
 			hide_default="1"
 			filter="css" 
@@ -23,8 +52,8 @@
 						
 		<field name="show_back_button"
 			type="radio"
-			label="COM_PROJECTS_CONFIGURATION_SHOW_BACK_BUTTON_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_SHOW_BACK_BUTTON_DESC"
+			label="COM_PROJECTS_FIELD_SHOW_BACK_BUTTON_LABEL"
+			description="COM_PROJECTS_FIELD_SHOW_BACK_BUTTON_DESC"
 			class="inputbox"
 			size="1"
 			default="0">
@@ -32,106 +61,71 @@
 			<option	value="1">JYES</option>
 		</field>
 		
-		<field name="spacer1"
+		<field name="spacer_lists"
 			type="spacer"
 			hr="true"
 			/>
 		
 		<field name="number_listers_items"
 			type="text"
-			label="COM_PROJECTS_CONFIGURATION_NUMBER_LISTERS_ITEMS_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_NUMBER_LISTERS_ITEMS_DESC"
+			label="COM_PROJECTS_FIELD_NUMBER_LISTERS_ITEMS_LABEL"
+			description="COM_PROJECTS_FIELD_NUMBER_LISTERS_ITEMS_DESC"
 			class="inputbox"
 			size="5"
 			default="5" />
 
 		<field name="listing_tasks"
 			type="radio"
-			label="COM_PROJECTS_CONFIGURATION_LISTING_TASKS_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_LISTING_TASKS_DESC"
+			label="COM_PROJECTS_FIELD_LISTING_TASKS_LABEL"
+			description="COM_PROJECTS_FIELD_LISTING_TASKS_DESC"
 			class="inputbox"
 			size="1"
 			default="1">
-			<option	value="0">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_ALL</option>
-			<option	value="1">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_PENDING</option>
-			<option	value="2">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_FINISHED</option>
-			<option	value="-3">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_REPORTED</option>
-			<option	value="-2">COM_PROJECTS_CONFIGURATION_LISTING_TASKS_DENIED</option>
+			<option	value="">COM_PROJECTS_FIELD_LISTING_TASKS_ALL</option>
+			<option	value="1">COM_PROJECTS_FIELD_LISTING_TASKS_PENDING</option>
+			<option	value="2">COM_PROJECTS_FIELD_LISTING_TASKS_FINISHED</option>
+			<option	value="-3">COM_PROJECTS_FIELD_LISTING_TASKS_REPORTED</option>
+			<option	value="-2">COM_PROJECTS_FIELD_LISTING_TASKS_DENIED</option>
 		</field>
 
 		<field name="listing_tickets"
 			type="radio"
-			label="COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_DESC"
+			label="COM_PROJECTS_FIELD_LISTING_TICKETS_LABEL"
+			description="COM_PROJECTS_FIELD_LISTING_TICKETS_DESC"
 			class="inputbox"
 			size="1"
 			default="1">
-			<option	value="0">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_ALL</option>
-			<option	value="-3">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_REPORTED</option>
-			<option	value="1">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_APPROVED</option>
-			<option	value="2">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_FINISHED</option>
-			<option	value="4">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_ACTIVE</option>
-			<option	value="-2">COM_PROJECTS_CONFIGURATION_LISTING_TICKETS_DENIED</option>
+			<option	value="">COM_PROJECTS_FIELD_LISTING_TICKETS_ALL</option>
+			<option	value="-3">COM_PROJECTS_FIELD_LISTING_TICKETS_REPORTED</option>
+			<option	value="1">COM_PROJECTS_FIELD_LISTING_TICKETS_APPROVED</option>
+			<option	value="2">COM_PROJECTS_FIELD_LISTING_TICKETS_FINISHED</option>
+			<option	value="4">COM_PROJECTS_FIELD_LISTING_TICKETS_ACTIVE</option>
+			<option	value="-2">COM_PROJECTS_FIELD_LISTING_TICKETS_DENIED</option>
 		</field>
 
-		<field name="spacer2"
-			type="spacer"
-			hr="true"
-			/>
-
-		<field name="show_tasks"
-			type="radio"
-			label="COM_PROJECTS_CONFIGURATION_SHOW_TASKS_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_SHOW_TASKS_DESC"
-			class="inputbox"
-			size="1"
-			default="0">
-			<option	value="0">JNO</option>
-			<option	value="1">JYES</option>
-		</field>
-
-		<field name="show_tickets"
-			type="radio"
-			label="COM_PROJECTS_CONFIGURATION_SHOW_TICKETS_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_SHOW_TICKETS_DESC"
-			class="inputbox"
-			size="1"
-			default="0">
-			<option	value="0">JNO</option>
-			<option	value="1">JYES</option>
-		</field>
-
-		<field name="show_documents"
-			type="radio"
-			label="COM_PROJECTS_CONFIGURATION_SHOW_DOCUMENTS_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_SHOW_DOCUMENTS_DESC"
-			class="inputbox"
-			size="1"
-			default="0">
-			<option	value="0">JNO</option>
-			<option	value="1">JYES</option>
-		</field>
+	</fieldset>
+	
+	
+	<fieldset name="integration"
+		label="JGLOBAL_INTEGRATION_LABEL"
+		description="COM_PROJECTS_CONFIG_INTEGRATION_SETTINGS_DESC">
 		
-		<field name="show_members"
-			type="radio"
-			label="COM_PROJECTS_CONFIGURATION_SHOW_MEMBERS_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_SHOW_MEMBERS_DESC"
+				
+		<field name="use_content_plugins"
+			type="checkboxes"
+			label="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_LABEL"
 			class="inputbox"
-			size="1"
-			default="0">
-			<option	value="0">JNO</option>
-			<option	value="1">JYES</option>
+			description="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_DESC">
+			<option	value="portfolios">COM_PROJECTS_PORTFOLIOS</option>
+			<option	value="projects">COM_PROJECTS_PROJECTS</option>
+			<option	value="documents">COM_PROJECTS_DOCUMENTS</option>
+			<option	value="tasks">COM_PROJECTS_TASKS</option>
 		</field>
-
-		<field name="spacer3"
-			type="spacer"
-			hr="true"
-			/>
-
+				
 		<field name="use_content_plugins_portfolios"
 			type="radio"
-			label="COM_PROJECTS_CONFIGURATION_USE_CONTENT_PLUGINS_PORTFOLIOS_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_USE_CONTENT_PLUGINS_PORTFOLIOS_DESC"
+			label="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_PORTFOLIOS_LABEL"
+			description="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_PORTFOLIOS_DESC"
 			class="inputbox"
 			size="1"
 			default="1">
@@ -141,8 +135,8 @@
 
 		<field name="use_content_plugins_projects"
 			type="radio"
-			label="COM_PROJECTS_CONFIGURATION_USE_CONTENT_PLUGINS_PROJECTS_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_USE_CONTENT_PLUGINS_PROJECTS_DESC"
+			label="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_PROJECTS_LABEL"
+			description="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_PROJECTS_DESC"
 			class="inputbox"
 			size="1"
 			default="1">
@@ -152,8 +146,8 @@
 
 		<field name="use_content_plugins_documents"
 			type="radio"
-			label="COM_PROJECTS_CONFIGURATION_USE_CONTENT_PLUGINS_DOCUMENTS_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_USE_CONTENT_PLUGINS_DOCUMENTS_DESC"
+			label="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_DOCUMENTS_LABEL"
+			description="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_DOCUMENTS_DESC"
 			class="inputbox"
 			size="1"
 			default="1">
@@ -163,23 +157,37 @@
 
 		<field name="use_content_plugins_tasks"
 			type="radio"
-			label="COM_PROJECTS_CONFIGURATION_USE_CONTENT_PLUGINS_TASKS_LABEL"
-			description="COM_PROJECTS_CONFIGURATION_USE_CONTENT_PLUGINS_TASKS_DESC"
+			label="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_TASKS_LABEL"
+			description="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_TASKS_DESC"
 			class="inputbox"
 			size="1"
 			default="1">
 			<option	value="0">JNO</option>
 			<option	value="1">JYES</option>
 		</field>
-	</fieldset>
-	
-	<fieldset name="menu"
-		label="COM_PROJECTS_CONFIGURATION_MENU_SETTINGS_LABEL"
-		description="COM_PROJECTS_CONFIGURATION_MENU_SETTINGS_DESC">
+		
+		<field
+			name="spacer1"
+			label="COM_PROJECTS_CONFIG_PLUGINS_SETTINGS_LABEL"
+			description="COM_PROJECTS_CONFIG_PLUGINS_SETTINGS_DESC"
+			type="spacer"
+			hr="true"
+			/>
+		
+		<field name="menu_integration"
+			type="checkboxes"
+			label="COM_PROJECTS_FIELD_MENU_INTEGRATION_LABEL"
+			description="COM_PROJECTS_FIELD_MENU_INTEGRATION_DESC">
+			<option	value="portfolio">COM_PROJECTS_PORTFOLIOS</option>
+			<option	value="porject">COM_PROJECTS_PROJECTS</option>
+		
+		</field>
 		<field
 				name="menutype"
 				type="menu"
 				label="COM_PROJECTS_FIELD_MENUTYPE_LABEL"
-				description="COM_PROJECTS_FIELD_MENUTYPE_DESC" />
+				description="COM_PROJECTS_FIELD_MENUTYPE_DESC" >
+				<option value="0">JOPTION_DO_NOT_USE</option>
+		</field>				
 	</fieldset>
 </config>
