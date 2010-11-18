@@ -94,7 +94,6 @@ class CategoriesViewCategories extends JView
 		$canDo = CategoriesHelper::getActions($component, $categoryId);
 
 		// If a component categories title string is present, let's use it.
-		echo strtoupper($component.($section?"_$section":'')).'_CATEGORIES_TITLE';
 		if ($lang->hasKey($component_title_key = strtoupper($component.($section?"_$section":'')).'_CATEGORIES_TITLE')) {
 			$title = JText::_($component_title_key);
 		}
