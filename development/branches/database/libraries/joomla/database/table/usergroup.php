@@ -48,10 +48,10 @@ class JTableUsergroup extends JTable
 		// There is a unique index on the title field in the table.
 		$db = $this->getDbo();
 		$query = $db->getQuery(true)
-			->select('COUNT(title)')
-			->from($this->_tbl)
-			->where('title = '.$db->quote(trim($this->title)))
-			->where('id <> '.(int) $this->id);
+		->select('COUNT(title)')
+		->from($this->_tbl)
+		->where('title = '.$db->quote(trim($this->title)))
+		->where('id <> '.(int) $this->id);
 		$db->setQuery($query);
 
 		if ($db->loadResult() > 0) {
@@ -81,38 +81,38 @@ class JTableUsergroup extends JTable
 			'SELECT id FROM '. $this->_tbl .
 			' WHERE parent_id='. (int)$parent_id .
 			' ORDER BY parent_id, title'
-		);
-		$children = $db->loadResultArray();
+			);
+			$children = $db->loadResultArray();
 
-		// the right value of this node is the left value + 1
-		$right = $left + 1;
+			// the right value of this node is the left value + 1
+			$right = $left + 1;
 
-		// execute this function recursively over all children
-		for ($i=0,$n=count($children); $i < $n; $i++)
-		{
-			// $right is the current right value, which is incremented on recursion return
-			$right = $this->rebuild($children[$i], $right);
+			// execute this function recursively over all children
+			for ($i=0,$n=count($children); $i < $n; $i++)
+			{
+				// $right is the current right value, which is incremented on recursion return
+				$right = $this->rebuild($children[$i], $right);
 
-			// if there is an update failure, return false to break out of the recursion
-			if ($right === false) {
-				return false;
+				// if there is an update failure, return false to break out of the recursion
+				if ($right === false) {
+					return false;
+				}
 			}
-		}
 
-		// we've got the left value, and now that we've processed
-		// the children of this node we also know the right value
-		$db->setQuery(
+			// we've got the left value, and now that we've processed
+			// the children of this node we also know the right value
+			$db->setQuery(
 			'UPDATE '. $this->_tbl .
 			' SET lft='. (int)$left .', rgt='. (int)$right .
 			' WHERE id='. (int)$parent_id
-		);
-		// if there is an update failure, return false to break out of the recursion
-		if (!$db->query()) {
-			return false;
-		}
+			);
+			// if there is an update failure, return false to break out of the recursion
+			if (!$db->query()) {
+				return false;
+			}
 
-		// return the right value of this node + 1
-		return $right + 1;
+			// return the right value of this node + 1
+			return $right + 1;
 	}
 
 	/**
@@ -178,45 +178,66 @@ class JTableUsergroup extends JTable
 		$db->setQuery(
 			'DELETE FROM `'.$this->_tbl.'`' .
 			' WHERE id IN ('.implode(',', $ids).')'
-		);
-		if (!$db->query()) {
-			$this->setError($db->getErrorMsg());
-			return false;
-		}
+			);
+			if (!$db->query()) {
+				$this->setError($db->getErrorMsg());
+				return false;
+			}
 
-		// Delete the usergroup in view levels
-		$replace = array();
-		foreach ($ids as $id)
-		{
-			$replace []= ','.$db->quote("[$id,").','.$db->quote("[").')';
-			$replace []= ','.$db->quote(",$id,").','.$db->quote(",").')';
-			$replace []= ','.$db->quote(",$id]").','.$db->quote("]").')';
-			$replace []= ','.$db->quote("[$id]").','.$db->quote("[]").')';
-		}
+			// Delete the usergroup in view levels
+			$replace = array();
+			foreach ($ids as $id)
+			{
+				$replace []= ','.$db->quote("[$id,").','.$db->quote("[").')';
+				$replace []= ','.$db->quote(",$id,").','.$db->quote(",").')';
+				$replace []= ','.$db->quote(",$id]").','.$db->quote("]").')';
+				$replace []= ','.$db->quote("[$id]").','.$db->quote("[]").')';
+			}
+			//sqlsrv change. Alternative for regexp
+			$query = $db->getQuery(true);
+			$query->select('id, rules');
+			$query->from('#__viewlevels');
+			$db->setQuery($query);
+			$rules = $db->loadObjectList();
+			
+			$match_ids = array();
+			foreach($rules as $rule)
+			{
+				foreach($ids as $id)
+				{
+					if(strstr($rule->rules, '['.$id) || strstr($rule->rules, ','.$id) || strstr($rule->rules, $id.']'))
+						$match_ids[] = $rule->id;
+				}
+			}
+			
+			if(!empty($match_ids))
+			{
+				$query = $db->getQuery(true);
+				$query->set('rules='.str_repeat('replace(',4*count($ids)).'rules'.implode('',$replace));
+				$query->update('#__viewlevels');
+				//$query->where('rules REGEXP "(,|\\\\[)('.implode('|', $ids).')(,|\\\\])"');
+				$query->where('id IN ('.implode(',', $match_ids).')');
+				$db->setQuery($query);
+				if (!$db->query()) {
+					$this->setError($db->getErrorMsg());
+					return false;
+				}
+			}
 
-		$query = $db->getQuery(true);
-		$query->set('rules='.str_repeat('replace(',4*count($ids)).'rules'.implode('',$replace));
-		$query->update('#__viewlevels');
-		$query->where('rules REGEXP "(,|\\\\[)('.implode('|', $ids).')(,|\\\\])"');
-		$db->setQuery($query);
-		if (!$db->query()) {
-			$this->setError($db->getErrorMsg());
-			return false;
-		}
 
-		// Delete the user to usergroup mappings for the group(s) from the database.
-		$db->setQuery(
+			// Delete the user to usergroup mappings for the group(s) from the database.
+			$db->setQuery(
 			'DELETE FROM `#__user_usergroup_map`' .
 			' WHERE `group_id` IN ('.implode(',', $ids).')'
-		);
-		$db->query();
+			);
+			$db->query();
 
-		// Check for a database error.
-		if ($db->getErrorNum()) {
-			$this->setError($db->getErrorMsg());
-			return false;
-		}
+			// Check for a database error.
+			if ($db->getErrorNum()) {
+				$this->setError($db->getErrorMsg());
+				return false;
+			}
 
-		return true;
+			return true;
 	}
 }
