@@ -109,7 +109,7 @@ a.password, a.registerDate, a.sendEmail, a.usertype');
 
 		// Join over the user groups table.
 		//$query->select('GROUP_CONCAT(g2.title SEPARATOR '.$db->Quote("\n").') AS group_names');
-		$query->select('\'\' AS group_names');
+		$query->select('COUNT(g2.title) AS group_names');
 		$query->join('LEFT', '#__usergroups AS g2 ON g2.id = map.group_id');
 
 		// If the model is set to check item state, add to the query.
