@@ -34,6 +34,7 @@ class BannersTableClient extends JTable
 
 	function __construct(&$_db)
 	{
+		$this->checked_out_time = $_db->getNullDate();
 		parent::__construct('#__banner_clients', 'id', $_db);
 	}
 
