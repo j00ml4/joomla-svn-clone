@@ -113,7 +113,7 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.frontpage.'.$this->i
 		<?php if (isset ($this->item->toc)) : ?>
 			<?php echo $this->item->toc; ?>
 		<?php endif; ?>
-		<?php echo $this->item->text; ?>
+		<?php echo $this->item->introtext; ?>
 		</td>
 		</tr>
 		
@@ -124,22 +124,34 @@ $canEdit = $this->user->authorise('core.edit', 'com_content.frontpage.'.$this->i
 			</td>
 		</tr>
 		<?php endif; ?>
-		
+<?php if ($params->get('show_readmore') && $this->item->readmore) :
+	if ($params->get('access-view')) :
+		$link = JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid));
+	else :
+		$menu = JFactory::getApplication()->getMenu();
+		$active = $menu->getActive();
+		$itemId = $active->id;
+		$link1 = JRoute::_('index.php?option=com_users&view=login&&Itemid=' . $itemId);
+		$returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid));
+		$link = new JURI($link1);
+		$link->setVar('return', base64_encode($returnURL));
+	endif;
+?>		
 		<?php if ($this->item->params->get('show_readmore') && $this->item->readmore) : ?>
 		<tr>
 			<td  colspan="2">
-				<a href="<?php echo $this->item->readmore_link; ?>" class="readon<?php echo $this->escape($this->item->params->get('pageclass_sfx')); ?>">
-					<?php if ($this->item->readmore_register) :
+				<a href="<?php echo $link; ?>">
+					<?php if (!$params->get('access-view')) :
 						echo JText::_('COM_CONTENT_REGISTER_TO_READ_MORE');
-					elseif ($readmore = $this->item->params->get('readmore')) :
+					elseif ($readmore = $this->item->alternative_readmore) :
 						echo $readmore;
 					else :
-						echo JText::sprintf('COM_CONTENT_READ_MORE');
+						echo JText::sprintf('COM_CONTENT_READ_MORE', $this->escape($this->item->title));
 					endif; ?></a>
 			</td>
 		</tr>
 		<?php endif; ?>
-
+<?php endif; ?>
 </table>
 <?php if ($this->item->state == 0) : ?>
 	</div>

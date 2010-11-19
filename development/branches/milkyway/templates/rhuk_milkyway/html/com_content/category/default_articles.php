@@ -63,7 +63,7 @@ $listDirn	= $this->state->get('list.direction')
 <?php if ($this->params->get('show_headings')) :?>
 <tr>
 	<td class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" align="right" width="5%">
-		<?php echo JText::_('Num'); ?>
+		<?php echo JText::_('JGLOBAL_NUM'); ?>
 	</td>
 	<?php if ($this->params->get('show_title')) : ?>
 	<td class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" width="45%">
