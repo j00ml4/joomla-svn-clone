@@ -59,7 +59,7 @@ class BannersTableBanner extends JTable
 		}
 
 		// Check the publish down date is not earlier than publish up.
-		if (intval($this->publish_down) > 0 && $this->publish_down < $this->publish_up) {
+		if ($this->publish_down > $this->_db->getNullDate() && $this->publish_down < $this->publish_up) {
 			// Swap the dates.
 			$temp = $this->publish_up;
 			$this->publish_up = $this->publish_down;
@@ -142,21 +142,21 @@ class BannersTableBanner extends JTable
 
 			switch($purchase_type)
 			{
-			case 1:
-				$this->reset=$this->_db->getNullDate();
-			break;
-			case 2:
-				$this->reset = JFactory::getDate('+1 year '.date('Y-m-d',strtotime('now')))->toMySQL();
-			break;
-			case 3:
-				$this->reset = JFactory::getDate('+1 month '.date('Y-m-d',strtotime('now')))->toMySQL();
-			break;
-			case 4:
-				$this->reset = JFactory::getDate('+7 day '.date('Y-m-d',strtotime('now')))->toMySQL();
-			break;
-			case 5:
-				$this->reset = JFactory::getDate('+1 day '.date('Y-m-d',strtotime('now')))->toMySQL();
-			break;
+				case 1:
+					$this->reset=$this->_db->getNullDate();
+					break;
+				case 2:
+					$this->reset = JFactory::getDate('+1 year '.date('Y-m-d',strtotime('now')))->toMySQL();
+					break;
+				case 3:
+					$this->reset = JFactory::getDate('+1 month '.date('Y-m-d',strtotime('now')))->toMySQL();
+					break;
+				case 4:
+					$this->reset = JFactory::getDate('+7 day '.date('Y-m-d',strtotime('now')))->toMySQL();
+					break;
+				case 5:
+					$this->reset = JFactory::getDate('+1 day '.date('Y-m-d',strtotime('now')))->toMySQL();
+					break;
 			}
 			// Store the row
 			parent::store($updateNulls);

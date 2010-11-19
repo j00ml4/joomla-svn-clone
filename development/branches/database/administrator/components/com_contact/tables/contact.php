@@ -113,9 +113,9 @@ class ContactTableContact extends JTable
 
 		// check for http, https, ftp on webpage
 		if ((strlen($this->webpage) > 0)
-			&& (stripos($this->webpage, 'http://') === false)
-			&& (stripos($this->webpage, 'https://') === false)
-			&& (stripos($this->webpage, 'ftp://') === false))
+		&& (stripos($this->webpage, 'http://') === false)
+		&& (stripos($this->webpage, 'https://') === false)
+		&& (stripos($this->webpage, 'ftp://') === false))
 		{
 			$this->webpage = 'http://'.$this->webpage;
 		}
@@ -125,7 +125,7 @@ class ContactTableContact extends JTable
 			$this->setError(JText::_('COM_CONTACT_WARNING_PROVIDE_VALID_NAME'));
 			return false;
 		}
-				/** check for existing name */
+		/** check for existing name */
 		$query = 'SELECT id FROM #__contact_details WHERE name = '.$this->_db->Quote($this->name).' AND catid = '.(int) $this->catid;
 		$this->_db->setQuery($query);
 
@@ -149,7 +149,7 @@ class ContactTableContact extends JTable
 		}
 
 		// Check the publish down date is not earlier than publish up.
-		if (intval($this->publish_down) > 0 && $this->publish_down < $this->publish_up) {
+		if ($this->publish_down > $this->_db->getNullDate() && $this->publish_down < $this->publish_up) {
 			// Swap the dates.
 			$temp = $this->publish_up;
 			$this->publish_up = $this->publish_down;
