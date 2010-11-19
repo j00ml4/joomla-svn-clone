@@ -8,8 +8,11 @@
  */
 defined('_JEXEC') or die;
 $cparams = JComponentHelper::getParams('com_media');
-?>
+JHtml::core();
 
+$listOrder	= $this->state->get('list.ordering');
+$listDirn	= $this->state->get('list.direction');
+?>
 <?php if ( $this->params->get( 'show_page_heading', 1 ) ) : ?>
 <div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 <?php echo $this->escape($this->params->get('page_title')); ?>
@@ -63,35 +66,40 @@ $cparams = JComponentHelper::getParams('com_media');
 	<?php if ($this->params->get( 'show_headings' )) : ?>
 		<tr>
 			<td width="5" align="right" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-				<?php echo JText::_('JGLOBAL_NUM'); ?>
+
 				<?php echo $this->pagination->getLimitBox(); ?>
 			</td>
+		</tr>
+		<tr>	
+		<td height="20" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
+				<?php echo JText::_('JGLOBAL_NUM'); ?>
+		</td>		
 			<td height="20" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-				<?php echo JHTML::_('grid.sort',  'Name', 'cd.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+								<?php echo JHtml::_('grid.sort', 'COM_CONTACT_CONTACT_EMAIL_NAME', 'a.name', $listDirn, $listOrder); ?>
 			</td>
 			<?php if ( $this->params->get( 'show_position' ) ) : ?>
 			<td height="20" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-				<?php echo JHTML::_('grid.sort',  'Position', 'cd.con_position', $this->lists['order_Dir'], $this->lists['order'] ); ?>
+				<?php echo JHtml::_('grid.sort', 'COM_CONTACT_POSITION', 'a.con_position', $listDirn, $listOrder); ?>
 			</td>
 			<?php endif; ?>
 			<?php if ( $this->params->get( 'show_email' ) ) : ?>
 			<td height="20" width="20%" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-				<?php echo JText::_( 'Email' ); ?>
+				<?php echo JText::_( 'JGLOBAL_EMAIL' ); ?>
 			</td>
 			<?php endif; ?>
 			<?php if ( $this->params->get( 'show_telephone' ) ) : ?>
 			<td height="20" width="15%" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-				<?php echo JText::_( 'Phone' ); ?>
+				<?php echo JText::_( 'COM_CONTACT_TELEPHONE' ); ?>
 			</td>
 			<?php endif; ?>
 			<?php if ( $this->params->get( 'show_mobile' ) ) : ?>
 			<td height="20" width="15%" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-				<?php echo JText::_( 'Mobile' ); ?>
+				<?php echo JText::_( 'COM_CONTACT_MOBILE' ); ?>
 			</td>
 			<?php endif; ?>
 			<?php if ( $this->params->get( 'show_fax' ) ) : ?>
 				<td height="20" width="15%" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-					<?php echo JText::_( 'Fax' ); ?>
+					<?php echo JText::_( 'COM_CONTACT_FAX' ); ?>
 				</td>
 			<?php endif; ?>
 		</tr>
@@ -100,9 +108,18 @@ $cparams = JComponentHelper::getParams('com_media');
 </tbody>
 </table>
 
+<?php if (!empty($this->children[$this->category->id])&& $this->maxLevel != 0) : ?>
+<div class="cat-children">
+	<h3><?php echo JText::_('JGLOBAL_SUBCATEGORIES') ; ?></h3>
+	<?php echo $this->loadTemplate('children'); ?>
+</div>
+<?php endif; ?>
+	<div>
+		<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
+		<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
+	</div>
 <input type="hidden" name="option" value="com_contact" />
 <input type="hidden" name="catid" value="<?php echo $this->category->id;?>" />
-<input type="hidden" name="filter_order" value="<?php echo $this->lists['order']; ?>" />
-<input type="hidden" name="filter_order_Dir" value="" />
+
 </form>
 </div>
