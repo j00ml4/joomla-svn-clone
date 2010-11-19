@@ -67,7 +67,7 @@ class WeblinksTableWeblink extends JTable
 			// Existing item
 			$this->modified		= $date->toMySQL();
 			$this->modified_by	= $user->get('id');
-			} else {
+		} else {
 			// New article. An article created and created_by field can be set by the user,
 			// so we don't touch either of these if they are set.
 			if (!intval($this->created)) {
@@ -77,30 +77,30 @@ class WeblinksTableWeblink extends JTable
 				$this->created_by = $user->get('id');
 			}
 		}
-			$date	= JFactory::getDate();
-			$user	= JFactory::getUser();
-			if ($this->id) {
-				// Existing item
-				$this->modified		= $date->toMySQL();
-				$this->modified_by	= $user->get('id');
-				} else {
-				// New weblink. A weblink created and created_by field can be set by the user,
-				// so we don't touch either of these if they are set.
-				if (!intval($this->created)) {
-					$this->created = $date->toMySQL();
-				}
-				if (empty($this->created_by)) {
-					$this->created_by = $user->get('id');
-				}
-				
+		$date	= JFactory::getDate();
+		$user	= JFactory::getUser();
+		if ($this->id) {
+			// Existing item
+			$this->modified		= $date->toMySQL();
+			$this->modified_by	= $user->get('id');
+		} else {
+			// New weblink. A weblink created and created_by field can be set by the user,
+			// so we don't touch either of these if they are set.
+			if (!intval($this->created)) {
+				$this->created = $date->toMySQL();
 			}
+			if (empty($this->created_by)) {
+				$this->created_by = $user->get('id');
+			}
+
+		}
 			
-	// Verify that the alias is unique
-			$table = JTable::getInstance('Weblink', 'WeblinksTable');
-			if ($table->load(array('alias'=>$this->alias,'catid'=>$this->catid)) && ($table->id != $this->id || $this->id==0)) {
-				$this->setError(JText::_('COM_WEBLINKS_ERROR_UNIQUE_ALIAS'));
-				return false;
-			}
+		// Verify that the alias is unique
+		$table = JTable::getInstance('Weblink', 'WeblinksTable');
+		if ($table->load(array('alias'=>$this->alias,'catid'=>$this->catid)) && ($table->id != $this->id || $this->id==0)) {
+			$this->setError(JText::_('COM_WEBLINKS_ERROR_UNIQUE_ALIAS'));
+			return false;
+		}
 		// Attempt to store the user data.
 		return parent::store($updateNulls);
 	}
@@ -125,8 +125,8 @@ class WeblinksTableWeblink extends JTable
 
 		// check for http, https, ftp on webpage
 		if ((stripos($this->url, 'http://') === false)
-			&& (stripos($this->url, 'https://') === false)
-			&& (stripos($this->url, 'ftp://') === false))
+		&& (stripos($this->url, 'https://') === false)
+		&& (stripos($this->url, 'ftp://') === false))
 		{
 			$this->url = 'http://'.$this->url;
 		}
@@ -150,7 +150,7 @@ class WeblinksTableWeblink extends JTable
 		}
 
 		// Check the publish down date is not earlier than publish up.
-		if (intval($this->publish_down) > 0 && $this->publish_down < $this->publish_up) {
+		if ($this->publish_down > $this->_db->getNullDate() && $this->publish_down < $this->publish_up) {
 			// Swap the dates.
 			$temp = $this->publish_up;
 			$this->publish_up = $this->publish_down;
@@ -227,7 +227,7 @@ class WeblinksTableWeblink extends JTable
 			'UPDATE `'.$this->_tbl.'`' .
 			' SET `state` = '.(int) $state .
 			' WHERE ('.$where.')' .
-			$checkin
+		$checkin
 		);
 		$this->_db->query();
 

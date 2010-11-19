@@ -72,7 +72,7 @@ class NewsfeedsTableNewsfeed extends JTable
 		}
 
 		// Check the publish down date is not earlier than publish up.
-		if (intval($this->publish_down) > 0 && $this->publish_down < $this->publish_up) {
+		if ($this->publish_down > $this->_db->getNullDate() && $this->publish_down < $this->publish_up) {
 			// Swap the dates.
 			$temp = $this->publish_up;
 			$this->publish_up = $this->publish_down;
@@ -129,7 +129,7 @@ class NewsfeedsTableNewsfeed extends JTable
 				$this->created_by = $user->get('id');
 			}
 		}
-	// Verify that the alias is unique
+		// Verify that the alias is unique
 		$table = JTable::getInstance('Newsfeed', 'NewsfeedsTable');
 		if ($table->load(array('alias'=>$this->alias,'catid'=>$this->catid)) && ($table->id != $this->id || $this->id==0)) {
 			$this->setError(JText::_('COM_NEWSFEEDS_ERROR_UNIQUE_ALIAS'));
