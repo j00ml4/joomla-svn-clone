@@ -6,15 +6,24 @@
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
-defined('_JEXEC') or die;?>
-<?php foreach($this->items as $item) : ?>
-<tr class="sectiontableentry<?php echo $item->odd + 1; ?>">
+defined('_JEXEC') or die;
+JHtml::core();
+
+$listOrder	= $this->state->get('list.ordering');
+$listDirn	= $this->state->get('list.direction');
+?>
+
+		<?php foreach($this->items as $i => $item) : ?>
+				<tr class="sectiontableentry<?php echo ($i % 2) ? "odd" : "even"; ?>">
+
 	<td align="right" width="5">
-		<?php echo $item->count +1; ?>
+		<?php echo $i; ?>
 	</td>
 	<td height="20">
 		<a href="<?php echo $item->link; ?>" class="category<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 			<?php echo $item->name; ?></a>
+				<a href="<?php echo JRoute::_(ContactHelperRoute::getContactRoute($item->slug, $item->catid)); ?>" class="category<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
+				<?php echo $item->name; ?></a>
 	</td>
 	<?php if ( $this->params->get( 'show_position' ) ) : ?>
 	<td>
