@@ -189,21 +189,20 @@ class JRouterSite extends JRouter
 		/*
 		 * Parse the application route
 		 */
-		if (substr($route, 0, 9) == 'component') {
-			$segments	= explode('/', $route);
-			$route		= str_replace('component/'.$segments[1], '', $route);
-
+		$segments	= explode('/', $route);
+		if (count($segments) > 1 && $segments[0] == 'component') {
 			$vars['option'] = 'com_'.$segments[1];
 			$vars['Itemid'] = null;
+			$route = implode('/', array_slice($segments, 2));
 		} else {
 			//Need to reverse the array (highest sublevels first)
 			$items = array_reverse($menu->getMenu());
 
 			$found = false;
+			$route_lowercase = JString::strtolower($route);
 			foreach ($items as $item) {
 				$length = strlen($item->route); //get the length of the route
-
-				if ($length > 0 && strpos($route.'/', $item->route.'/') === 0 && $item->type != 'menulink') {
+				if ($length > 0 && JString::strpos($route_lowercase.'/', $item->route.'/') === 0 && $item->type != 'menulink') {
 					$route = substr($route, $length);
 					if ($route) {
 						$route = substr($route, 1);
@@ -227,7 +226,7 @@ class JRouterSite extends JRouter
 
 		//Set the variables
 		$this->setVars($vars);
-
+		
 		/*
 		 * Parse the component route
 		 */
@@ -264,6 +263,7 @@ class JRouterSite extends JRouter
 			}
 		} else {
 			//Set active menu item
+
 			if ($item = $menu->getActive()) {
 				$vars = $item->query;
 			}
@@ -382,6 +382,7 @@ class JRouterSite extends JRouter
 	{
 		// Make sure any menu vars are used if no others are specified
 		if (($this->_mode != JROUTER_MODE_SEF) && $uri->getVar('Itemid') && count($uri->getQuery(true)) == 2) {
+
 			$app	= JFactory::getApplication();
 			$menu	= $app->getMenu();
 

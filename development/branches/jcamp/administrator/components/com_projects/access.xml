@@ -3,6 +3,11 @@
 	
 	<!-- All in one component permition just becose we dont support sections yet -->
 	<section name="component">
+		<!-- Projects -->
+		<action name="core.create" title="COM_PROJECTS_ACTION_PROJECT_CREATE_LABEL" description="COM_PROJECTS_ACTION_PROJECT_CREATE_DESC" />
+		<action name="core.delete" title="COM_PROJECTS_ACTION_PROJECT_DELETE_LABEL" description="COM_PROJECTS_ACTION_PROJECT_DELETE_DESC" />
+		<action name="core.edit" title="COM_PROJECTS_ACTION_PROJECT_EDIT_LABEL" description="COM_PROJECTS_ACTION_PROJECT_EDIT_DESC" />
+		
 		<!-- Tasks -->
 		<action name="task.create" title="COM_PROJECTS_ACTION_TASK_CREATE_LABEL" description="COM_PROJECTS_ACTION_TASK_CREATE_DESC" />
 		<action name="task.edit" title="COM_PROJECTS_ACTION_TASK_EDIT_LABEL" description="COM_PROJECTS_ACTION_TASK_EDIT_LABEL" />
@@ -25,11 +30,9 @@
 	</section>
 	
 	
-	
 	<section name="category">
 		<action name="core.create" title="COM_CATEGORY_ACCESS_CREATE" description="COM_CATEGORY_ACCESS_CREATE_DESC" />
 		<action name="core.delete" title="COM_CATEGORY_ACCESS_DELETE" description="COM_CATEGORY_ACCESS_DELETE_DESC" />
 		<action name="core.edit" title="COM_CATEGORY_ACCESS_EDIT" description="COM_CATEGORY_ACCESS_EDIT_DESC" />
-		<action name="core.edit.state" title="COM_CATEGORY_ACCESS_EDITSTATE" description="COM_CATEGORY_ACCESS_EDITSTATE_DESC" />
 	</section>
 </access>

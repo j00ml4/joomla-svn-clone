@@ -13,7 +13,7 @@ defined('_JEXEC') or die;
 jimport('joomla.application.component.modeladmin');
 
 /**
- * Item Model for Contacts.
+ * Item Model for a Contact.
  *
  * @package		Joomla.Administrator
  * @subpackage	com_contact
@@ -148,6 +148,12 @@ class ContactModelContact extends JModelAdmin
 
 		if (empty($data)) {
 			$data = $this->getItem();
+
+			// Prime some default values.
+			if ($this->getState('contact.id') == 0) {
+				$app = JFactory::getApplication();
+				$data->set('catid', JRequest::getInt('catid', $app->getUserState('com_contact.contacts.filter.category_id')));
+			}
 		}
 
 		return $data;

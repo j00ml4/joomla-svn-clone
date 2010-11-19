@@ -19,13 +19,14 @@ JHtml::_('behavior.tooltip');
 $canDo = UsersHelper::getActions();
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
+$loggeduser = JFactory::getUser();
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_users&view=users');?>" method="post" name="adminForm" id="adminForm">
 	<fieldset id="filter-bar">
 		<div class="filter-search fltlft">
 			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('COM_USERS_SEARCH_USERS'); ?></label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_USERS_SEARCH_USERS'); ?>" />
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" title="<?php echo JText::_('COM_USERS_SEARCH_USERS'); ?>" />
 			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_RESET'); ?></button>
 		</div>
@@ -108,15 +109,19 @@ $listDirn	= $this->state->get('list.direction');
 						<?php echo $this->escape($item->name); ?>
 					<?php endif; ?>
 					<?php if (JDEBUG) : ?>
-					<br /><small><a href="<?php echo JRoute::_('index.php?option=com_users&view=debuguser&user_id='.(int) $item->id);?>">
-						<?php echo JText::_('COM_USERS_DEBUG_USER');?></a></small>
+					<br /><div class="button2-left smallsub"><div class="blank"><a href="<?php echo JRoute::_('index.php?option=com_users&view=debuguser&user_id='.(int) $item->id);?>">
+						<?php echo JText::_('COM_USERS_DEBUG_USER');?></a></div></div>
 					<?php endif; ?>
 				</td>
 				<td class="center">
 					<?php echo $this->escape($item->username); ?>
 				</td>
 				<td class="center">
-					<?php echo JHtml::_('grid.boolean', $i, !$item->block, 'users.unblock', 'users.block'); ?>
+					<?php if ($loggeduser->id != $item->id) : ?>
+						<?php echo JHtml::_('grid.boolean', $i, !$item->block, 'users.unblock', 'users.block'); ?>
+					<?php else : ?>
+						<?php echo JHtml::_('grid.boolean', $i, !$item->block, 'users.block', null); ?>
+					<?php endif; ?>
 				</td>
 				<td class="center">
 					<?php echo JHtml::_('grid.boolean', $i, !$item->activation, 'users.activate', null); ?>

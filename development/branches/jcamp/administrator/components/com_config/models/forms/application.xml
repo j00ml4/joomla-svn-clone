@@ -744,6 +744,7 @@
 			name="rules"
 			type="rules"
 			label="COM_CONFIG_FIELD_RULES_LABEL"
+			validate="rules"
 			class="inputbox"
 			filter="rules">
 			<action
@@ -756,7 +757,7 @@
 				description="COM_CONFIG_ACTION_LOGIN_ADMIN_DESC" />
 			<action
 				name="core.admin"
-				title="JACTION_ADMIN"
+				title="JACTION_ADMIN_GLOBAL"
 				description="COM_CONFIG_ACTION_ADMIN_DESC" />
 			<action
 				name="core.manage"
@@ -776,8 +777,12 @@
 				description="COM_CONFIG_ACTION_EDIT_DESC" />
 			<action
 				name="core.edit.state"
-				title="JACTION_EDIT_STATE"
-				description="COM_CONFIG_ACTION_EDIT_STATE_DESC" />
+				title="JACTION_EDITSTATE"
+				description="COM_CONFIG_ACTION_EDITSTATE_DESC" />
+			<action 
+				name="core.edit.own" 
+				title="JACTION_EDITOWN" 
+				description="COM_CONFIG_ACTION_EDITOWN_DESC" />				
 		</field>
 
 	</fieldset>

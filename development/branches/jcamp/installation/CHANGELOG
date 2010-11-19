@@ -27,10 +27,299 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+19-Nov-2010 Jean-Marie Simonet
+ # [#23367] The secure parameter in menu item is not used. Thanks Christophe.
+ # [#23304] List Weblinks in a Category doesn't show unpublished weblinks for logged in users. Thanks Mark.
+ # [#22525] Mod_menu menu image no span with link-title anymore. Thanks Angie.
+ $ Deleting libraries strings from lang installation as the library is now loaded there.
+
+18-Nov-2010 Jean-Marie Simonet
+$ Adding missing strings
+
+18-Nov-2010 Andrew Eddie
+ ! Added SQL diff for beta 14 to 'next version'.
+
+17-Nov-2010 Mark Dexter
+ # [#22484] JFolder::files() does not pass exclude parameters when recursing
+ # Follow up on [#23360] to include two image files
+
+17-Nov-2010 Christophe Demko
+ # [#23197] onUserBeforeSave needs to be able cancel the creation of an account (Andrew Eddie)
+ # [#23208] Logout from edit screen gives 403
+ # [#23150] Error if menu alias = "component" (Elin Waring)
+ # [#23325] Component Setting should get an apply button (Dennis Hermacki)
+ # [#23305] No checking to ensure behavior.keepalive only gets loaded once. (Ian MacLennan)
+ # [#23360] component_view Email to a friend etc. Patch attached (Angie Radtke)
+ # [#23352] Text alignment issues at Pre-Installation check screen (Tim Plummer)
+ # [#23310] Empty Components Sub-menu Displayed (Michael Babker)
+ # [#23333] User information lost if get error message when trying to create (Michael Babker)
+ # [#22712] *Port issue when uploading image with image button (Ian MacLennan)
+ # [#23345] Attaching onFireEvent causes plugins to return an extra (empty) result set
+
+17-Nov-2010 Jean-Marie Simonet
+ # Added icon for the new My Profile menu [#23347]
+ # [#23363] Menu_Item_Root is not translatable + some strings
+ $ Missing string values
+ # [#23365] Images can be inserted anymore. Thanks Rouven.
+ 
+17-Nov-2010 Andrew Eddie
+ # Fixed issue [#23347] Move profile editing out of com_users and into com_admin
+ # Fixed issue [#23110] Any user with create or edit rights to com_user can make a group a superadmin group (Elin Waring).
+ # Fixed issue [#23348] Improve scaling architecture for users and groups lists.
+ # Fixed issue [#23241] Saving category while validating rules fails (Mark Dexter, Christophe Demko).
+ # Fixed issue [#21837] @todo ACL - Disallow creation of Super User & Admin group by non Super User (Michael Babker, Christopher Garvis, Elin Waring).
+ # Fixed issue [#23306] "Add New Article" quick icon permissions check (Michael Babker, Elin Waring, Christophe Demko).
+ # Fixed issue [#22868] Improving permissions debug (Dennis Hermacki, Andrea Tarr).
+  
+16-Nov-2010 Christophe Demko
+ # Fix the Edit profile permission
+
+16-Nov-2010 Mark Dexter
+# [#23328] Unpublished category - Featured - Errors in content and contact component
+
+16-Nov-2010 Jean-Marie Simonet
+ $ Deleting redundant strings.
+ $ Correcting wrong EOL from [#23184]
+ # [#23334] error in sample data. Thanks Dennis.
+
+-------------------- 1.6.0 Beta14 Release [15-Nov-2010] ------------------
+
+15-Nov-2010 Mark Dexter
+# Sample data fixes (thanks Elin Waring)
+# [#23184] Need to handle content, modules, menu items when a viewing permission level is deleted
+# [#23319] Can't install Joomla or choose the accessible admin template without a mouse (thanks Andrea Tarr)
+# Fix About Parks module assignment in sample data
+# [#23324] PATCH: Modeladmin using wrong key while loading (thanks Harald Leithner)
+
+15-Nov-2010 Andrew Eddie
+ # Fixed issue [#23247] behavior.keepalive with long session lifetime is causing firefox to freeze/crash (Markus Bopp, Ian MacLennan).
+ # Fixed issue [#23007] locked categories still available (Adrian Louter, Elin Waring).
+ # Fixed issue [#23069] Theoretical com_config exploit (Matt Thomas).
+
+15-Nov-2010 Jean-Marie Simonet
+ $ Adding missing string
+ # [#23318] Remove hardcoded style so that RTL will work. Thanks Andrea.
+ $ Moving and consolidated some strings
+ 
+14-Nov-2010 Mark Dexter
+# [#21571] category blog view drill down does not maintain layout style
+
+14-Nov-2010 Jean-Marie Simonet
+ # [#23217] Move rules strings to library language file and rename keys for consistency. Consolidated some strings.
+ # [#21264] RTL issues with media manager. Thanks Andrea.
+ 
+14-Nov-2010 Christophe Demko
+ # [#23167] Remove align and valign attributes from the site (Rouven Weßling)
+ # [#23126] Missing images in hathor template (Andrea Tarr)
+ $ Fix a language key in com_newsfeeds
+
+13-Nov-2010 Jean-Marie Simonet
+ # [#23292] Unicode slugs lets Upper case in url, which can cause issues when SEF is on
+ # [#23299] calendar css don't display week-end days
+ $ [#23199] Database Error: JLIB_DATABASE_ERROR_CONNECT_DATABASE
+ # [#23284] Make tabs accessible for keyboard/screen readers. Thanks Andrea.
+ # [#23294] Allow archiving of category when parent category is published. Thanks Mark.
+ # [#23285] Incorrect markup in com_media. Thanks Rouven.
+ # [#23277] JToolbarHelper has wrong variable in generated URL. Thanks Michael and Bill.
+
+12-Nov-2010 Jean-Marie Simonet
+$ Deleted some redundant ini string
+
+12-Nov-2010 Christophe Demko
+ # Sort modules by name when selecting a new one
+ + Add missing file [#23160]
+ # [#23280] User can block himself in the admin
+ # Fix a bad named param in mod_search
+
+11-Nov-2010 Jean-Marie Simonet
+ # [#23205] Untranslated COM_CONFIG_ACTION_ADMIN_GLOBAL_DESC. Thanks Bill
+ $ Updated some xx-XX.ini files
+
+11-Nov-2010 Christophe Demko
+ # [#23242] Component Layout fields shows an error if frontend view does not exist (Andrew Eddie)
+
+11-Nov-2010 Mark Dexter
+# Temporary fix for category save bug introduced with [#23068] commit
+
+10-Nov-2010 Christophe Demko
+ # Removing an extra div + some formatting while testing [#23068]
+ # [#23206] Improving permissions rules output (Dennis Hermacki)
+ # [#23068] Add admin rights to article security exploit (Louis Landry)
+
+10-Nov-2010 Jean-Marie Simonet
+ $ Updating admin lang xmls
+ # [#23195] Prevent defacement of sites by specifying ?tmpl=offline. Thanks Rouven.
+ # [#23161] Improve the markup of the Pagenavigation plugin. Thanks Rouven.
+ $ [#23198] Remove unnecessary keys in X.plg_system_p3p.sys.ini. Thanks Rouven.
+ $ Applying JText::alt to JALL_LANGUAGE see [#23132]
+
+10-Nov-2010 Andrew Eddie
+ # Fixed issue [#23175] modal dialog not displaying drop shadows on all sides (Al Kent).
+ # Fixed issue [#23168] Category Blog view: Articles get edit permission from the category with its same id number (Juan Felix Mateos, Elin Waring).
+
+09-Nov-2010 Christophe Demko
+ # [#23170] Itemid is lost when browsing from content which is not linked to a menu item
+ # [#22298] Renaming JUser method (Dennis Hermacki)
+ # [#22488] set_magic_quotes_runtime() is deprecated as of PHP 5.3.0
+ # [#23163] Remove closing tags for empty elements (Rouven Weßling)
+ # [#23162] Remove the last occurrence of the <font> element (Rouven Weßling)
+
+09-Nov-2010 Jean-Marie Simonet
+ # [#23177] Ability to set a default template style per language when System - Language Filter plugin is on. Thanks Christophe.
+ # [#23132] Some language have issues when translating global strings such as JALL. Thanks Christophe.
+ # [#22839] author link redirects to login form and not to profile of author. Thanks Elin and Bill.
+ $ [#23149] COM_USERS_ACTIVATION_TOKEN_NOT_FOUND message has no translation. Thanks Ronald
+  
+09-Nov-2010 Mark Dexter
+# [#23054] Follow up on Issue 22932 - Alternate Layouts for Components
+# Fix PHP notice problem with [#23054] 
+
+08-Nov-2010 Ian MacLennan
+ # [21571] Reverting commit to examine closer
+
+08-Nov-2010 Christophe Demko
+ # [#23160] Give each manager the possibility to choose its own admin template style
+
+07-Nov-2010 Jean-Marie Simonet
+ # [#22757] Wrong urls being produced for drill downs. Thanks Christophe.
+ # [#23159] Improving display of back-end mod_latest module
+ $ Added ® to Joomla! instances in footers
+ $ Deleted some redundant or obsolete ini strings
+
+07-Nov-2010 Mark Dexter
+# [#22776] Incorrect path field and child item path fields not being changed on save.
+
+07-Nov-2010 Christophe Demko
+ # [#21789] Category Manger save alias as date instead of category name when renaming a category (Elin Waring)
+ # [#21571] category blog view drill down does not maintain layout style
+ # [#22515] P3P tags are hardcoded in JSession (Nicholas Dionysopoulos)
+ ^ Fix some issues relative to #21571
+
+06-Nov-2010 Christophe Demko
+ # [#21577] Pagebreak Plugin called via JHtml::_('content.prepare') issue
+
+06-Nov-2010 Jean-Marie Simonet
+ # [#23134] Template description is only displayed at installation, no where else
+ # [#23141] Module Position Fixes for Hathor. Thanks Andrea.
+ # [#23028] Install Sample Data button reactivated when there is error on Main Configuration Page. Thanks Nicolai.
+
+06-Nov-2010 Andrew Eddie
+ # Fixed issue [#22628] Module Assignment in Module Manager changes to No pages incorrectly (Zachary Draper, Mathavan Jeyadev, Elin Waring).
+
+05-Nov-2010 Mark Dexter
+# [#22444] JRegistry fails when binding an object which contains a JRegistry object
+
+05-Nov-2010 Christophe Demko
+ $ Storing the default style name without ** when language debug is on while installing template
+ # [#23128] Incorrect Calendar field width (Dennis Hermacki)
+ # [#22949] Custom error types are always shown as 'Message' (Dennis Hermacki)
+
+05-Nov-2010 Jean-Marie Simonet
+ # [#21798] Saving Profile Plugin configuration disables Profile, Thanks Mathavan and Elin.
+ #$ Enabling dashes in template ini keys for positions. Adding these strings for admin templates. + some.
+ 
+04-Nov-2010 Christophe Demko
+ # [#23096] Clarification & Simplification of ACL UI (Andrew Eddie, Andrew Tarr)
+
+04-Nov-2010 Jean-Marie Simonet
+ # [#23113] Clean up extraneous plus sign in user group edit screen. Thanks Andrea.
+ # [#22860] Invalid icon paths in com_media/models/list.php. Thanks Christophe.
+
+03-Nov-2010 Andrew Eddie
+ ! Updated Beta 13 SQL upgrade diff.
+
+02-Nov-2010 Christophe Demko
+ # [#23092] Save and New menu item displays error
+ # [#22562] Uninstalling core templates triggers multiple errors
+ # [#21512] mod_login does not redirect to menu item with access level greater than current
+ # [#23082] Help system does not work correctly when debug language is ON
+ # [#23095] Missing author_email in components/com_content/views/featured
+ # [#23029] JHtml::stylesheet not backward compatible and broken (Andrew, Mark)
+ # [#22188] Optimize beez font loading for IE (Rouven Weßling)
+
+02-Nov-2010 Jean-Marie Simonet
+ # [#23071] Provide template_preview.png for both Beez templates. Thanks Michael and Ramindu.
+ # [#23090] Acl - edit own - message "edit not permitted" in categories. Thanks Christophe.
+ # [#23094] Double translation in JHtmlJGrid. Thanks Christophe.
+ # [#23097] Contact edit screen is not consistent with the other compnents. Thanks Elin and Christophe.
+ # [#23106] Globally define commonly used module position names. Thanks Matt.
+
+01-Nov-2010 Jean-Marie Simonet
+ # [#23085] Improved UI for Article/Category permissions. Thanks Andrea.
+
+-------------------- 1.6.0 Beta13 Release [01-Nov-2010] ------------------
+
+01-Nov-2010 Jean-Marie Simonet
+ # [#22658] Flash uploader always shows "Images (...)" text in file selection popup. Thanks Dennis.
+
+01-Nov-2010 Christophe Demko
+ # [#21446] Use local storage for the font size changer in the Beez templates (Rouven Weßling)
+ # [#22003] Missing onXXXBeforeSave event in com_categories (Andrew Eddie)
+ # [#23077] Error (JTableMenu: :store failed - Duplicate entry) when creating 2 menu items with same alias (even in different menus)
+ # [#23005] Upgrade TinyMCE to 3.9.2 (Rouven Weßling)
+ # [#23059] Incorrect table ordering behavior (Dennis Hermacki)
+
+31-Oct-2010 Christophe Demko
+ # [#23073] Module position selection popup does not display administrator positions
+
+31-Oct-2010 Jean-Marie Simonet
+ # [#23076] Plugin Edits not checking back in in Bluestork. Thanks Andrea.
+ # [#23066] Single edit fix issues in Hathor. Thanks Andrea
+ # [#23080] Hathor menu batch copy strings. Thanks Bill.
+ 
+30-Oct-2010 Mark Dexter
+# [#21529] Aliases for _adminmenu items [sample data/joomla.sql]
+# [#23046] Delete unused vcard files
+# Clean out extraneous characters in sample data
+
+30-Oct-2010 Jean-Marie Simonet
+ # [#23058] Debug shows language debug info if "Debug Language" is disabled. Thanks Dennis.
+ + [#22940] missing images in beez or css wrong. Thanks Bill and Christophe.
+ # [#23063] Can't access plugins in the backend. Thanks Rouven and Louis.
+ $ Correcting some xx-XX ini files.
+ # [#23074] JLIB_HTML_BEHAVIOR_PREV_YEAR_HOLD_FOR_MENU. Thanks Bill.
+
+29-Oct-2010 Mark Dexter
+# Recommitting [#22178] When 'No Editor' is selected for user, HTML still re-formats when a file is saved (with joomla.sql fix)
+# Reverting issue [#22178] When 'No Editor' is selected for user, HTML still re-formats when a file is saved (dani shap, Ian MacLennan, Hannes Papenberg, Elin Waring). 
+
+29-Oct-2010 Jean-Marie Simonet
+ $ Updatings templates language folder sys.ini files for modules positions.
+ 
+29-Oct-2010 Andrew Eddie
+ # Fixed issue [#21260] ACL Permissions for Authors to Edit Own Content Items Missing (James Brice, Elin Waring, Michael Babker).
+ # Fixed issue [#22389] JFormFieldCategory et al not selecting default from list view (Boris Baddenoff, Mathavan Jeyadev).
+ # Fixed issue [#22483] "Empty Trash" does not delete all items in nested tables when there are multiple branches (categories, menus, groups) (Douglas Machado, Mathavan Jeyadev).
+ # Fixed issue [#21327] Cannot edit more than one thing at a time (Amy Stephen).
+ # Fixed issue [#22178] When 'No Editor' is selected for user, HTML still re-formats when a file is saved (dani shap, Ian MacLennan, Hannes Papenberg, Elin Waring).
+ # Fixed issue [#22556] *Wrong messages when uninstalling core components (Jean-Marie Simonet, Ramindu Deshapriya).
+ # Fixed bug in JTableNested unit test due to changes in the publish method.
+ 
+28-Oct-2010 Mark Dexter
+ # [#22878] Contact menu items don't work correctly with published state of contacts and contact categories
+
+28-Oct-2010 Jean-Marie Simonet
+ # [#21910] installation of module does not create module listing. Thanks Dennis and Troy.
+ # [#23031] RTL fix for display of menus in menu assignments. Thanks Andrea.
+ # [#22994] Contacts metadata options - registry errors. Thanks Andrew.
+ # [#23037] TinyMCE resizing settings. Thanks Dennis.
+ # [#23040] Right arrows aren't vertically centered in "Permissions setting". Thanks Dennis.
+ ^ Updating pending and expired old 1.5 icons to new format (Temp)
+ 
+28-Oct-2010 Andrew Eddie
+ # Fixed issue [#23041] Incorrect testing for variable is an instance of a class (marius van rijnsoever).
+ # Fixed issue [#23032] Help system is generating incorrect URLs (Chris Davenport, Dennis Hermacki).
+ # Fixed issue [#23030] Bluestork Menu Model Assignments modal is closing immediately upon display (Andrea Tarr, Dennis Hermacki).
+ # Fixed issue [#23039] Cross site scripting Revision 19231 (Ervis Tusha, Ian MacLennan).
+ # Fixed issue [#23036] Undefined property: stdClass::$cachable in \libraries\joomla\environment\response.php on line 49 (Dennis Hermacki).
+ # Fixed issue [#22677] The treatment of the componentlayout parameter in categories is incorrect (Elin Waring).
+
 27-Oct-2010 Jean-Marie Simonet
  # [#23002] jgrid.published does not show all possible statuses as was shown in 1.5. Thanks Dennis.
  # [#23018] Clean up Legacy() method from content/contact helpers. Thanks Louis.
-
+ # Missing RTL css in bluestork.
+ # [#22619] SEF issue with mod_rewrite on when period in the alias.
+ 
 26-Oct-2010 Ian MacLennan
  # [#22987] using getElementById('adminForm') in submitform breaks Joomla 1.5 compatibility
 

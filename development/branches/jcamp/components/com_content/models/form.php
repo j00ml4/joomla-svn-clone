@@ -40,14 +40,16 @@ class ContentModelForm extends JModelForm
 		$app = JFactory::getApplication();
 
 		// Load state from the request.
-		if (!($pk = (int) $app->getUserState($this->_context.'.id'))) {
-			$pk = (int) JRequest::getInt('id');
-		}
+		$pk = JRequest::getInt('id');
 		$this->setState('article.id', $pk);
+
+		$this->setState('article.catid', JRequest::getInt('catid'));
 
 		// Load the parameters.
 		$params	= $app->getParams();
 		$this->setState('params', $params);
+
+		$this->setState('layout', JRequest::getCmd('layout'));
 	}
 
 	/**
@@ -82,6 +84,17 @@ class ContentModelForm extends JModelForm
 			return false;
 		}
 
+		if ($id = (int) $this->getState('article.id')) {
+			// Existing record. Can only edit in selected categories.
+			$form->setFieldAttribute('catid', 'action', 'core.edit');
+			// Existing record. Can only edit own articles in selected categories.
+			$form->setFieldAttribute('catid', 'action', 'core.edit.own');
+		}
+		else {
+			// New record. Can only create in selected categories.
+			$form->setFieldAttribute('catid', 'action', 'core.create');
+		}
+
 		return $form;
 	}
 
@@ -111,11 +124,47 @@ class ContentModelForm extends JModelForm
 
 		$value = JArrayHelper::toObject($table->getProperties(1), 'JObject');
 
+		// Convert attrib field to Registry.
+		$value->params = new JRegistry;
+		$value->params->loadJSON($value->attribs);
+
+		// Compute selected asset permissions.
+		$user	= JFactory::getUser();
+		$userId	= $user->get('id');
+		$asset	= 'com_content.article.'.$value->id;
+
+		// Check general edit permission first.
+		if ($user->authorise('core.edit', $asset)) {
+			$value->params->set('access-edit', true);
+		}
+		// Now check if edit.own is available.
+		else if (!empty($userId) && $user->authorise('core.edit.own', $asset)) {
+			// Check for a valid user and that they are the owner.
+			if ($userId == $value->created_by) {
+				$value->params->set('access-edit', true);
+			}
+		}
+
+		// Check edit state permission.
+		if ($itemId) {
+			// Existing item
+			$value->params->set('access-change', $user->authorise('core.edit.state', $asset));
+		}
+		else {
+			// New item.
+			$catId = (int) $this->getState('article.catid');
+			if ($catId) {
+				$value->params->set('access-change', $user->authorise('core.edit.state', 'com_content.category.'.$catId));
+			}
+			else {
+				$value->params->set('access-change', $user->authorise('core.edit.state', 'com_content'));
+			}
+		}
+
 		$value->text = $value->introtext;
 		if (!empty($value->fulltext)) {
 			$value->text .= '<hr id="system-readmore" />'.$value->fulltext;
 		}
-
 
 		return $value;
 	}
@@ -138,6 +187,11 @@ class ContentModelForm extends JModelForm
 	protected function _setAccessFilters(&$form, $data)
 	{
 		$user = JFactory::getUser();
+
+		//
+		// TODO: MAJOR WORK HERE TO SYNC WITH THE EDIT FORM!!!
+		// TODO: Do we check this in the backend?? Hrm.
+		//
 
 		if (!$user->authorise('core.edit.state', 'com_content')) {
 			$form->setFieldAttribute('state', 'filter', 'unset');
@@ -209,7 +263,7 @@ class ContentModelForm extends JModelForm
 		}
 
 		// Set the publish date to now
-		if($table->state == 1 && intval($table->publish_up) == 0) {
+		if ($table->state == 1 && intval($table->publish_up) == 0) {
 			$table->publish_up = JFactory::getDate()->toMySQL();
 		}
 
@@ -220,7 +274,7 @@ class ContentModelForm extends JModelForm
 		if (empty($table->id)) {
 			$table->reorder('catid = '.(int) $table->catid.' AND state >= 0');
 		}
-		
+
 		// Include the content plugins for the onSave events.
 		JPluginHelper::importPlugin('content');
 
@@ -243,14 +297,16 @@ class ContentModelForm extends JModelForm
 			'DELETE FROM #__content_frontpage' .
 			' WHERE content_id = '.$table->id
 		);
+
 		if (!$this->_db->query()) {
 			throw new Exception($this->_db->getErrorMsg());
 		}
-		
-		if($data['featured'] == 1) {
+
+		if (isset($data['featured']) && $data['featured'] == 1) {
 			$frontpage = $this->getTable('Featured', 'ContentTable');
 
-			try {
+			try
+			{
 				$this->_db->setQuery(
 					'UPDATE #__content AS a' .
 					' SET a.featured = 1'.
@@ -265,17 +321,21 @@ class ContentModelForm extends JModelForm
 					'INSERT INTO #__content_frontpage (`content_id`, `ordering`)' .
 					' VALUES ('.$table->id.',1)'
 				);
+
 				if (!$this->_db->query()) {
 					$this->setError($this->_db->getErrorMsg());
 					return false;
 				}
-			} catch (Exception $e) {
+			}
+			catch (Exception $e)
+			{
 				$this->setError($e->getMessage());
 				return false;
 			}
 
 			$frontpage->reorder();
 		}
+
 		// Clean the cache.
 		$cache = JFactory::getCache('com_content');
 		$cache->clean();
@@ -299,8 +359,7 @@ class ContentModelForm extends JModelForm
 		$pk	= (!empty($pk)) ? $pk : (int) $this->getState('article.id');
 
 		// Only attempt to check the row in if it exists.
-		if ($pk)
-		{
+		if ($pk) {
 			$user	= JFactory::getUser();
 
 			// Get an instance of the row to checkin.
@@ -338,8 +397,7 @@ class ContentModelForm extends JModelForm
 		$pk		= (!empty($pk)) ? $pk : (int) $this->getState('article.id');
 
 		// Only attempt to check the row in if it exists.
-		if ($pk)
-		{
+		if ($pk) {
 			// Get a row instance.
 			$table = $this->getTable();
 

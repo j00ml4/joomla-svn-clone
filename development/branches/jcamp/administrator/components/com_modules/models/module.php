@@ -52,12 +52,9 @@ class ModulesModelModule extends JModelAdmin
 		$app = JFactory::getApplication('administrator');
 
 		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_modules.edit.module.id'))) {
+		if (!($pk = (int) JRequest::getInt('id'))) {
 			if ($extensionId = (int) $app->getUserState('com_modules.add.module.extension_id')) {
 				$this->setState('extension.id', $extensionId);
-			}
-			else {
-				$pk = (int) JRequest::getInt('id');
 			}
 		}
 		$this->setState('module.id', $pk);
@@ -578,7 +575,7 @@ class ModulesModelModule extends JModelAdmin
 		$query	= $db->getQuery(true);
 		$query->delete();
 		$query->from('#__modules_menu');
-		$query->where('moduleid='.(int)$table->id);
+		$query->where('moduleid = '.(int)$table->id);
 		$db->setQuery((string)$query);
 		$db->query();
 
@@ -591,6 +588,11 @@ class ModulesModelModule extends JModelAdmin
 		if (is_numeric($assignment)) {
 			// Variable is numeric, but could be a string.
 			$assignment = (int) $assignment;
+
+			// Logic check: if no module excluded then convert to display on all.
+			if ($assignment == -1 && empty($data['assigned'])){
+				$assignment = 0;
+			}
 
 			// Check needed to stop a module being assigned to `All`
 			// and other menu items resulting in a module being displayed twice.

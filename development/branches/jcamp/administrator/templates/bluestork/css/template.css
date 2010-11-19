@@ -496,7 +496,9 @@ div.toolbar-list a {
 	cursor: pointer;
 }
 
-div.toolbar-list a:hover {
+div.toolbar-list a:hover,
+div.toolbar-list a:focus, 
+div.toolbar-list a:active {
 	border-left: 1px solid #eee;
 	border-top: 1px solid #eee;
 	border-right: 1px solid #ccc;
@@ -630,7 +632,8 @@ dl#content-pane.tabs {
 	margin: 1px 0 0 0;
 }
 
-div.current label {
+div.current label,
+div.current span.faux-label {
 	display: block;
 	min-width: 150px;
 	float: left;
@@ -728,7 +731,9 @@ li.acl-resetbtn:hover {
 	text-decoration: none;
 }
 
-#cpanel div.icon a:hover {
+#cpanel div.icon a:hover,
+#cpanel div.icon a:focus,
+#cpanel div.icon a:active {
 	border-left: 1px solid #eee;
 	border-top: 1px solid #eee;
 	border-right: 1px solid #ccc;
@@ -813,7 +818,8 @@ ul.adminformlist li {
 	list-style: none;
 }
 
-fieldset label {
+fieldset label,
+fieldset span.faux-label {
 	float: left;
 	clear: left;
 	display:block;
@@ -824,7 +830,8 @@ fieldset ul {
 	padding: 0;
 }
 
-form label {
+form label,
+form span.faux-label {
 	font-size: 1.091em;
 }
 
@@ -1025,13 +1032,15 @@ button.jform-rightbtn {
 }
 
 /* Field label widths - long label */
-fieldset.adminform.long label {
+fieldset.adminform.long label, 
+fieldset.adminform.long span.faux-label {
 	min-width: 180px;
 }
 fieldset.adminform.long input { }
 
 /* Field label widths - short label */
-fieldset.adminform label {
+fieldset.adminform label, 
+fieldset.adminform span.faux-label {
 	width: 135px;
 }
 
@@ -1039,7 +1048,8 @@ fieldset.panelform {
 	overflow: hidden;
 }
 fieldset.panelform label,
-fieldset.panelform div.paramrow label {
+fieldset.panelform div.paramrow label,
+fieldset.panelform span.faux-label {
 	min-width: 145px;
 	max-width: 145px;
 }
@@ -1453,6 +1463,11 @@ table.adminlist tr td.btns a {
 div#element-box div.m form table.adminlist tr td a {
 	font-size: 1.1em;
 }
+
+div#element-box div.m form table.adminlist tr td div.button2-left.smallsub a {
+	font-size: 1em;
+}
+
 div#element-box div.m form table.adminlist tr td p.smallsub a,
 div#element-box div.m div.jpane-slider form table.adminlist a {
 	font-size: 1em;
@@ -1604,8 +1619,9 @@ a.saveorder.inactive {
 }
 
 .button2-left a,
-.button2-left button,
 .button2-right a,
+.button2-left button,
+.button2-right button,
 .button2-left span,
 .button2-right span {
 	display: block;
@@ -1630,6 +1646,7 @@ a.saveorder.inactive {
 .button2-right .blank a,
 .button2-left .blank span,
 .button2-right .blank span,
+.button2-left .blank button,
 .button2-right .blank button {
 	padding: 0 6px;
 }
@@ -1641,18 +1658,21 @@ a.saveorder.inactive {
 
 .button2-left a:hover,
 .button2-right a:hover,
+.button2-left button:hover,
 .button2-left button:hover	{
 	text-decoration: none;
 	color: #0B55C4;
 }
 
 .button2-left a,
-.button2-left span {
+.button2-left span,
+.button2-left button {
 	padding: 0 24px 0 6px;
 }
 
 .button2-right a,
-.button2-right span {
+.button2-right span,
+.button2-right button {
 	padding: 0 6px 0 24px;
 }
 
@@ -1701,6 +1721,16 @@ button:hover {
 	border: 1px solid #aaa;
 }
 
+div.button2-left button {
+	background: transparent;
+	margin-top: 0;
+	border: 0 solid #ccc;
+}
+
+div.button2-left button {
+	background: transparent;
+	border: 0 solid #aaa;
+}
 
 /* -- TOOLTIP STYLES ----------------------------- */
 .tip {
@@ -1917,6 +1947,7 @@ a.jgrid:hover {	text-decoration: none;}
 .icon-16-newlevel					{	background-image: url(../images/menu/icon-16-newlevel.png);	}
 .icon-16-newuser					{	background-image: url(../images/menu/icon-16-newuser.png);	}
 .icon-16-plugin						{	background-image: url(../images/menu/icon-16-plugin.png);	}
+.icon-16-profile					{	background-image: url(../images/menu/icon-16-user.png);	}
 .icon-16-purge						{	background-image: url(../images/menu/icon-16-purge.png);	}
 .icon-16-readmess					{	background-image: url(../images/menu/icon-16-readmess.png);	}
 .icon-16-redirect					{	background-image: url(../images/menu/icon-16-redirect.png);	}
@@ -2005,6 +2036,8 @@ a.jgrid:hover {	text-decoration: none;}
 .icon-48-trash						{	background-image: url(../images/header/icon-48-trash.png);	}
 .icon-48-user						{	background-image: url(../images/header/icon-48-user.png);	}
 .icon-48-user-add					{	background-image: url(../images/header/icon-48-user-add.png);	}
+.icon-48-user-edit					{	background-image: url(../images/header/icon-48-user-edit.png);	}
+.icon-48-user-profile					{	background-image: url(../images/header/icon-48-user-profile.png);	}
 .icon-48-inbox						{	background-image: url(../images/header/icon-48-inbox.png);	}
 .icon-48-new-privatemessage			{	background-image: url(../images/header/icon-48-new-privatemessage.png);	}
 .icon-48-msgconfig					{	background-image: url(../images/header/icon-48-message_config.png);	}
@@ -2578,13 +2611,14 @@ table.aclmodify-table select {
 
 /* Summary Tab */
 table.aclsummary-table th.col1 {
-	width: 40%;
+	width: 25%;
 }
 
 table.aclsummary-table th.col2,
 table.aclsummary-table th.col3,
 table.aclsummary-table th.col4,
-table.aclsummary-table th.col5	{
+table.aclsummary-table th.col5,
+table.aclsummary-table th.col6	{
 	width: 15%;
 	vertical-align: bottom;
 	text-align: center;
@@ -2598,12 +2632,37 @@ table.aclsummary-table td.col4,
 table.aclsummary-table th.col4,
 table.aclsummary-table td.col5,
 table.aclsummary-table th.col5,
+table.aclsummary-table td.col6,
+table.aclsummary-table th.col6,
 table.aclmodify-table td.col2,
 table.aclmodify-table th.col2	{
 	border-left: 1px solid #cbcbcb;
 }
 
 /* Icons */
+span.icon-16-unset,
+span.icon-16-allowed,
+span.icon-16-denied,
+span.icon-16-locked {
+	padding-left: 18px;
+}
+
+span.icon-16-unset {
+	background: url(../images/admin/icon-16-denyinactive.png) no-repeat;
+}
+
+span.icon-16-allowed {
+	background: url(../images/admin/icon-16-allow.png) no-repeat;
+}
+
+span.icon-16-denied {
+	background: url(../images/admin/icon-16-deny.png) no-repeat;
+}
+
+span.icon-16-locked {
+	background: url(../images/admin/checked_out.png) 0 0 no-repeat;
+}
+
 label.icon-16-allow,
 label.icon-16-deny,
 a.icon-16-allow,
@@ -2745,6 +2804,13 @@ label#jform_rules-lbl {
 	white-space: nowrap;
 	display: none;
 }
+
+label#jform_filters-lbl {
+	float: none;
+	white-space: nowrap;
+	display: none;
+}
+
 /**
 * Mod_rewrite Warning
 */
@@ -2912,7 +2978,7 @@ table.group-rules td select
 
 #permissions-sliders ul#rules 
 {	
-	min-height:25em ;
+	min-height:35em ;
 	padding:5px
 }
 
@@ -2943,7 +3009,7 @@ table.group-rules td select
 
 #permissions-sliders ul#rules .panel h3
 	{
-	background:#f5f5f5 url(../images/j_arrow_right.png) top right no-repeat
+	background:#f5f5f5 url(../images/j_arrow_right.png) center right no-repeat
 }
 	
 /* global_config permissions */
@@ -2953,3 +3019,38 @@ table.group-rules td select
 
 #permissions-sliders
 	{ min-height:29em; width:100%; }
+	
+/* Debug acl styling */	
+.check-0,
+table.adminlist tbody td.check-0 {
+	background-color: #FFFFCF;
+}
+
+.check-a,
+table.adminlist tbody td.check-a {
+	background-color: #CFFFDA;
+}
+
+.check-d,
+table.adminlist tbody td.check-d {
+	background-color: #FFCFCF;
+}
+
+.swatch {
+	text-align: center;
+	padding: 0 15px 0 15px;
+}
+
+/* Tab changes for accessibility */
+dl.tabs dt h3 {
+	margin:0;
+	padding: 0;
+	font-size: 1em;
+	font-weight: normal;
+}
+
+dl.tabs dt h3 a:link {
+	color:#333333;
+	outline:medium none;
+	text-decoration:none;
+}

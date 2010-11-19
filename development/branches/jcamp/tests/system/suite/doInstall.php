@@ -15,7 +15,7 @@ class DoInstall extends SeleniumJoomlaTestCase
 	{
 		$this->setUp();
 		$cfg = $this->cfg;
-		$configFile = "../../configuration.php";
+		$configFile = $cfg->folder.$cfg->path."configuration.php";
 
 		if (file_exists($configFile)) {
 			echo "Delete configuration file\n";
@@ -40,6 +40,8 @@ class DoInstall extends SeleniumJoomlaTestCase
 		$this->waitForPageToLoad("30000");
 
 		echo "Enter database information\n";
+		$dbtype = (isset($cfg->db_type)) ? $cfg->db_type : 'MySQL';
+		$this->select("jform_db_type", "label=".$dbtype);
 		$this->type("jform_db_host", $cfg->db_host);
 		$this->type("jform_db_user", $cfg->db_user);
 		$this->type("jform_db_pass", $cfg->db_pass);
@@ -83,7 +85,7 @@ class DoInstall extends SeleniumJoomlaTestCase
 		else {
 			echo "Install without sample data\n";
 		}
-		
+
 		echo "Finish installation\n";
 		$this->click("link=Next");
 		$this->waitForPageToLoad("30000");
@@ -113,7 +115,7 @@ class DoInstall extends SeleniumJoomlaTestCase
 			case 'on-full' :
 				$this->select("jform_caching", "label=ON - Progressive caching");
 				break;
-					
+
 			case 'off'	:
 			default:
 				$this->select("jform_caching", "label=OFF - Caching disabled");

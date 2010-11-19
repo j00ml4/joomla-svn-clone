@@ -38,7 +38,8 @@ class WeblinksController extends JController
 		$document = JFactory::getDocument();
 
 		// Set the default view name and format from the Request.
-		$vName		= JRequest::getWord('view', 'categories');
+		$id		= JRequest::getInt('id');
+		$vName	= JRequest::getWord('view', 'categories');
 		JRequest::setVar('view', $vName);
 
 		$user = JFactory::getUser();
@@ -46,6 +47,12 @@ class WeblinksController extends JController
 			$cachable = false;
 		}
 		$safeurlparams = array('id'=>'INT','limit'=>'INT','limitstart'=>'INT','filter_order'=>'CMD','filter_order_Dir'=>'CMD','lang'=>'CMD');
+
+		// Check for edit form.
+		if ($vName == 'form' && !$this->checkEditId('com_weblinks.edit.weblink', $id)) {
+			// Somehow the person just went to the form - we don't allow that.
+			return JError::raiseError(403, JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
+		}
 
 		return parent::display($cachable,$safeurlparams);
 	}

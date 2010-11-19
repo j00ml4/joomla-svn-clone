@@ -37,7 +37,7 @@ $params = $this->state->get('params');
 </h1>
 <?php endif; ?>
 
-<form action="<?php echo JRoute::_('index.php?option=com_content'); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_content&id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<fieldset>
 		<legend><?php echo JText::_('JEDITOR'); ?></legend>
 
@@ -78,17 +78,17 @@ $params = $this->state->get('params');
 		<?php echo $this->form->getInput('created_by_alias'); ?>
 		</div>
 
-	<?php if ($this->user->authorise('core.edit.state', 'com_content.article.'.$this->item->id)): ?>
+	<?php if ($this->item->params->get('access-change')): ?>
 		<div class="formelm">
 		<?php echo $this->form->getLabel('state'); ?>
 		<?php echo $this->form->getInput('state'); ?>
 		</div>
-		
+
 		<div class="formelm">
 		<?php echo $this->form->getLabel('featured'); ?>
 		<?php echo $this->form->getInput('featured'); ?>
 		</div>
-		
+
 		<div class="formelm">
 		<?php echo $this->form->getLabel('publish_up'); ?>
 		<?php echo $this->form->getInput('publish_up'); ?>
@@ -130,6 +130,6 @@ $params = $this->state->get('params');
 		</div>
 		<input type="hidden" name="task" value="" />
 		<?php echo JHTML::_( 'form.token' ); ?>
-	</fieldset>	
+	</fieldset>
 </form>
 </div>

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: language0001Test.php 19096 2010-10-13 00:12:39Z dextercowley $
+ * @version		$Id: language0001Test.php 19348 2010-11-04 14:18:37Z chdemko $
  * @package		Joomla.SystemTest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -61,7 +61,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
     }
 
 	$this->jClick('Groups');
-	$screen="User Manager: Action Permission Groups";
+	$screen="User Manager: User Groups";
 	$this->filterView($filterOn);
     $this->click("checkall-toggle");
     $this->click("link=Delete");
@@ -70,7 +70,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
     $this->waitForPageToLoad("30000");
     try
 	{
-        $this->assertTrue($this->isTextPresent("No Action Permission Groups selected"),$screen .' '. $button .' button with nothing selected error message not displayed or changed');
+        $this->assertTrue($this->isTextPresent("No User Groups selected"),$screen .' '. $button .' button with nothing selected error message not displayed or changed');
     }
 	catch (PHPUnit_Framework_AssertionFailedError $e)
 	{
@@ -87,7 +87,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
     $this->waitForPageToLoad("30000");
     try
 	{
-        $this->assertTrue($this->isTextPresent("No View Permission Levels selected"),$screen .' '. $button .' button with nothing selected error message not displayed or changed');
+        $this->assertTrue($this->isTextPresent("No Viewing Access Levels selected"),$screen .' '. $button .' button with nothing selected error message not displayed or changed');
     }
 	catch (PHPUnit_Framework_AssertionFailedError $e)
 	{

@@ -294,7 +294,8 @@ select#lang {
 	margin: 0 20px 0 0;
 	clear:left;
 }
-fieldset label {
+fieldset label,
+fieldset span.faux-label {
 	float: right;
 	clear: right;
 }
@@ -406,6 +407,32 @@ label#batch-access-lbl {
 	margin-right: 0px;
 }
 
+/* Icons */
+span.icon-16-unset,
+span.icon-16-allowed,
+span.icon-16-denied,
+span.icon-16-locked {
+	padding-left: 0px;
+	padding-right: 18px;
+}
+
+span.icon-16-unset {
+	background: url(../images/admin/icon-16-denyinactive.png) no-repeat right;
+}
+
+span.icon-16-allowed {
+	background: url(../images/admin/icon-16-allow.png) no-repeat right;
+}
+
+span.icon-16-denied {
+	background: url(../images/admin/icon-16-deny.png) no-repeat right;
+}
+
+span.icon-16-locked {
+	background: url(../images/admin/checked_out.png) no-repeat right;
+}
+
+
 /* CSS Rules Permission Angie with changes for RTL */
 
 #permissions-sliders ul#rules,
@@ -501,12 +528,13 @@ margin:3px 2px 0 2px;
 
 #permissions-sliders ul#rules .panel h3
 {
-	background:#f5f5f5 url(../images/j_arrow_left.png) top left no-repeat
+	background:#f5f5f5 url(../images/j_arrow_left.png) center left no-repeat
 }
 
 /* Additional RTL fixes for forms */
 
-div.current label {
+div.current label,
+div.current span.faux-label {
 	float: right;
 	clear: none;
 	clear: right;
@@ -543,13 +571,9 @@ div#menu-assignment {
 	clear:right;
 }
 
-div#menu-assignment h3 {
-	clear:right;
-}
-
-div#menu-assignment {
-	clear:right;
-}
+ div#menu-assignment ul.menu-links {
+	float: right;
+} 
 
 div#menu-assignment h3 {
 	clear:right;
@@ -562,4 +586,11 @@ div#menu-assignment ul.menu-links li.menu-link label {
 div#menu-assignment ul.menu-links li.menu-link input {
 	clear: right;
 	float: right;
+}
+
+/**
+* Mod_rewrite Warning
+*/
+#jform_sef_rewrite-lbl {
+	background: url(../images/admin/icon-16-notice-note.png) left top no-repeat;
 }
