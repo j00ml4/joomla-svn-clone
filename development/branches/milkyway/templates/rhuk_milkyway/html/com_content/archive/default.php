@@ -13,7 +13,7 @@ defined('_JEXEC') or die;?>
 <?php endif; ?>
 	<p>
 		<?php if ($this->params->get('filter')) : ?>
-		<?php echo JText::_('Filter').'&#160;'; ?>
+			<?php echo JText::_('JGLOBAL_FILTER_LABEL'); ?>
 		<input type="text" name="filter" value="<?php echo $this->escape($this->filter); ?>" class="inputbox" onchange="document.jForm.submit();" />
 		<?php endif; ?>
 		<?php echo $this->form->monthField; ?>
