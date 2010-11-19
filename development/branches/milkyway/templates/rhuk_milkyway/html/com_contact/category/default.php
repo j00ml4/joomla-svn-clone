@@ -16,11 +16,11 @@ $cparams = JComponentHelper::getParams('com_media');
 </div>
 <?php endif; ?>
 <div class="contentpane<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-<?php if ($this->category->image || $this->category->description) : ?>
+<?php if ($this->params->def('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
 	<div class="contentdescription<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 	<?php if ($this->params->get('image') != -1 && $this->params->get('image') != '') : ?>
 		<img src="<?php echo $this->baseurl .'/'. 'images' . '/'. $this->params->get('image'); ?>" align="<?php echo $this->params->get('image_align'); ?>" hspace="6" alt="<?php echo JText::_( 'Contacts' ); ?>" />
-	<?php elseif ($this->category->image) : ?>
+	<?php elseif ($this->params->get('image')) : ?>
 		<img src="<?php echo $this->baseurl .'/'. 'images' . '/'. $this->category->image; ?>" align="<?php echo $this->category->image_position; ?>" hspace="6" alt="<?php echo JText::_( 'Contacts' ); ?>" />
 	<?php endif; ?>
 	<?php echo $this->category->description; ?>
@@ -35,7 +35,7 @@ $cparams = JComponentHelper::getParams('com_media');
 	document.adminForm.submit( task );
 }
 </script>
-<form action="<?php echo $this->action; ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">
 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<thead>
 		<tr>
@@ -63,7 +63,8 @@ $cparams = JComponentHelper::getParams('com_media');
 	<?php if ($this->params->get( 'show_headings' )) : ?>
 		<tr>
 			<td width="5" align="right" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-				<?php echo JText::_('Num'); ?>
+				<?php echo JText::_('JGLOBAL_NUM'); ?>
+				<?php echo $this->pagination->getLimitBox(); ?>
 			</td>
 			<td height="20" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 				<?php echo JHTML::_('grid.sort',  'Name', 'cd.name', $this->lists['order_Dir'], $this->lists['order'] ); ?>

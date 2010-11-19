@@ -25,12 +25,13 @@ $pageClass = $this->params->get('pageclass_sfx');
 <?php endif; ?>
 <?php if ($this->params->def('show_description', 1) || $this->params->def('show_description_image', 1)) : ?>
 	<div class="category-desc">
-	<?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
-		<img src="<?php echo $this->category->getParams()->get('image'); ?>"/>
+	<?php if ($this->params->get('image') != -1 && $this->params->get('image') != '') : ?>
+		<img src="<?php echo $this->baseurl .'/'. 'images' . '/'. $this->params->get('image'); ?>" align="<?php echo $this->params->get('image_align'); ?>" hspace="6" alt="<?php echo JText::_( 'Contacts' ); ?>" />
+	<?php elseif ($this->category->image) : ?>
+		<img src="<?php echo $this->baseurl .'/'. 'images' . '/'. $this->category->image; ?>" align="<?php echo $this->category->image_position; ?>" hspace="6" alt="<?php echo JText::_( 'Contacts' ); ?>" />
 	<?php endif; ?>
-	<?php if ($this->params->get('show_description') && $this->category->description) : ?>
-		<?php echo JHtml::_('content.prepare', $this->category->description); ?>
-	<?php endif; ?>
+	
+	<?php echo $this->category->description; ?>
 	<div class="clr"></div>
 	</div>
 <?php endif; ?>
