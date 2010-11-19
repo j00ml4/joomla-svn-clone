@@ -861,9 +861,14 @@ div.main-section {
 }
 
 div.options-section {
-	width: 40%;
+	width: 39%;
+	margin-top: 10px;
 }
 
+div.rules-section {
+	width: 98%;
+	margin: 10px;
+}
 /**
  * Form Styles
  */
@@ -1401,6 +1406,7 @@ table.adminlist thead th {
 	text-align: center;
 	background: #ffffff;
 	color: #2c2c2c;
+	border-bottom:1px solid #C7C8B2;
 }
 
 table.adminlist thead a:hover {
@@ -1458,7 +1464,7 @@ table.adminlist tbody tr td:last-child {
 
 table.adminlist tbody tr.row0:first-child td,
 table.adminlist tbody tr.row0:first-child th {
-	border-top: 1px solid #c7c8b2;
+	/* border-top: 1px solid #c7c8b2; */
 }
 
 table.adminlist tbody tr.row0:last-child td,
@@ -1527,6 +1533,13 @@ table.adminlist tr td.btns a {
 table.adminlist tr td.btns a:hover, table.adminlist tr td.btns a:active, table.adminlist tr td.btns a:focus {
 	background-color: #f9fade;
 	text-decoration: none;
+}
+
+/**
+ * Adminlist lists
+ */
+table.adminlist td li {
+	list-style: inside;
 }
 
 /**
@@ -1687,6 +1700,11 @@ button:hover,button:focus {
 	-webkit-border-radius: 3px;
 }
 
+.button2-left.smallsub,.button2-right.smallsub {
+	line-height: 1.2em;
+	font-size: .9em;
+}
+
 .button2-left a,.button2-right a,.button2-left span,.button2-right span
 	{
 	display: block;
@@ -1738,64 +1756,49 @@ button:hover,button:focus {
 	margin-left: 5px;
 }
 
+/* Note: use these references to add images/arrows to the buttons */
+
 .button2-right .prev {
-	background-image: url(../images/j_button2_prev.png);
+	/* background-image: url(../images/j_button2_prev.png);
 	background-position: left center;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; */
 }
 
 .button2-right.off .prev {
-	background: url(../images/j_button2_prev_off.png) no-repeat;
+	/* background: url(../images/j_button2_prev_off.png) no-repeat; */
 }
 
 .button2-right .start {
-	background-image: url(../images/j_button2_first.png);
-	background-position: left center;
-	background-repeat: no-repeat;
 }
 
 .button2-right.off .start {
-	background: url(../images/j_button2_first_off.png) no-repeat;
 }
 
 .button2-left .page,.button2-left .blank {
-
 }
 
 .button2-left .next {
-	background-image: url(../images/j_button2_next.png);
-	background-position: right center;
-	background-repeat: no-repeat;
 }
 
 .button2-left.off .next {
-	background: url(../images/j_button2_next_off.png) 100% 0 no-repeat;
 }
 
 .button2-left .end {
-	background-image: url(../images/j_arrow.png);
-	background-position: right center;
-	background-repeat: no-repeat;
 }
 
 .button2-left.off .end {
-	background: url(../images/j_button2_last_off.png) 100% 0 no-repeat;
 }
 
 .button2-left .image {
-	background: url(../images/j_button2_image.png) 100% 0 no-repeat;
 }
 
 .button2-left .readmore {
-	background: url(../images/j_button2_readmore.png) 100% 0 no-repeat;
 }
 
 .button2-left .pagebreak {
-	background: url(../images/j_button2_pagebreak.png) 100% 0 no-repeat;
 }
 
 .button2-left .blank {
-
 }
 
 /**
@@ -2267,6 +2270,10 @@ a.jgrid:hover {
 	background-image: url(../images/menu/icon-16-plugin.png);
 }
 
+.icon-16-profile {
+	background-image: url(../images/menu/icon-16-user.png);
+}
+
 .icon-16-purge {
 	background-image: url(../images/menu/icon-16-purge.png);
 }
@@ -2577,6 +2584,14 @@ a.jgrid:hover {
 
 .icon-48-user-add {
 	background-image: url(../images/header/icon-48-user-add.png);
+}
+
+.icon-48-user-edit {
+	background-image: url(../images/header/icon-48-user-edit.png);
+}
+
+.icon-48-user-profile {
+	background-image: url(../images/header/icon-48-user-profile.png);
 }
 
 .icon-48-inbox {
@@ -2945,8 +2960,8 @@ fieldset.panelform fieldset.radio span.faux-label {
 }
 
 
-fieldset.adminform input, fieldset.adminform span.faux-input, fieldset.adminform textarea, fieldset.adminform select, fieldset.adminform img,
-fieldset.panelform input, fieldset.panelform span.faux-input, fieldset.panelform textarea, fieldset.panelform select, fieldset.panelform img {
+fieldset.adminform input, fieldset.adminform span.faux-input, fieldset.adminform textarea, fieldset.adminform select, fieldset.adminform img, fieldset.adminform button,
+fieldset.panelform input, fieldset.panelform span.faux-input, fieldset.panelform textarea, fieldset.panelform select, fieldset.panelform img, fieldset.panelform button {
 	float:left;
 	margin:5px 5px 5px 0;
 	width:auto;
@@ -3029,12 +3044,13 @@ table.aclmodify-table caption{
 
 /* Summary Tab */
 table.aclsummary-table th.col1 {
-	width:40%;
+	width:25%;
 }
 table.aclsummary-table th.col2,
 table.aclsummary-table th.col3,
 table.aclsummary-table th.col4,
-table.aclsummary-table th.col5 {
+table.aclsummary-table th.col5,
+table.aclsummary-table th.col6 {
 	width:15%;
 	vertical-align: bottom;
 	text-align:center;
@@ -3047,12 +3063,37 @@ table.aclsummary-table td.col4,
 table.aclsummary-table th.col4,
 table.aclsummary-table td.col5,
 table.aclsummary-table th.col5,
+table.aclsummary-table td.col6,
+table.aclsummary-table th.col6,
 table.aclmodify-table td.col2,
 table.aclmodify-table th.col2 {
 	border-left: 1px solid #cbcbcb;
 }
 
 /* Icons */
+span.icon-16-unset,
+span.icon-16-allowed,
+span.icon-16-denied,
+span.icon-16-locked {
+	padding-left: 18px;
+}
+
+span.icon-16-unset {
+	background: url(../images/admin/icon-16-denyinactive.png) no-repeat;
+}
+
+span.icon-16-allowed {
+	background: url(../images/admin/icon-16-allow.png) no-repeat;
+}
+
+span.icon-16-denied {
+	background: url(../images/admin/icon-16-deny.png) no-repeat;
+}
+
+span.icon-16-locked {
+	background: url(../images/admin/checked_out.png) 0 0 no-repeat;
+}
+
 label.icon-16-allow,
 label.icon-16-deny,
 a.icon-16-allow,
@@ -3396,7 +3437,7 @@ table.group-rules td select
 
 #permissions-sliders ul#rules 
 {	
-	min-height:30em ;
+	min-height:45em ;
 	padding:5px;
 }
 
@@ -3431,7 +3472,7 @@ table.group-rules td select
 
 #permissions-sliders ul#rules .panel h3
 	{
-	background:#f9fade url(../images/j_arrow_right.png) top right no-repeat
+	background:#f9fade url(../images/j_arrow_right.png) center right no-repeat
 }
 	
 /* global_config permissions */
@@ -3442,3 +3483,30 @@ table.group-rules td select
 #permissions-sliders
 	{ min-height:35em; width:100%; }
 
+/*
+ * Debug styles
+ */
+	.check-0,
+	table.adminlist tbody td.check-0 {
+		background-color: #FFFFCF;
+	}
+
+	.check-a,
+	table.adminlist tbody td.check-a {
+		background-color: #CFFFDA;
+	}
+
+	.check-d,
+	table.adminlist tbody td.check-d {
+		background-color: #FFCFCF;
+	}
+
+	.swatch {
+		text-align: center;
+		padding: 0 15px 0 15px;
+	}
+/* Tab changes for accessibility */
+dl.tabs dt h3 {
+	padding: 0;
+	font-size:100%;
+}

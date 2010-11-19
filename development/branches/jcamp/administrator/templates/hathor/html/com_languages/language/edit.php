@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: edit.php 19073 2010-10-09 15:44:28Z chdemko $
+ * @version		$Id: edit.php 19304 2010-10-31 17:30:03Z infograf768 $
  * @package		Joomla.Administrator
  * @subpackage	com_languages
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
@@ -10,7 +10,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-JHtml::addIncludePath(JPATH_COMPONENT.DS.'helpers'.DS.'html');
+JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 $canDo = LanguagesHelper::getActions();
@@ -19,12 +19,12 @@ $canDo = LanguagesHelper::getActions();
 	Joomla.submitbutton = function(task)
 	{
 		if (task == 'language.cancel' || document.formvalidator.isValid(document.id('language-form'))) {
-			Joomla.submitform(task, document.getElementByID('language-form'));
+			Joomla.submitform(task, document.getElementById('language-form'));
 		}
 	}
 </script>
 
-<form action="<?php JRoute::_('index.php?option=com_languages'); ?>" method="post" name="adminForm" id="language-form" class="form-validate">
+<form action="<?php echo JRoute::_('index.php?option=com_languages&layout=edit&lang_id='.(int) $this->item->lang_id); ?>" method="post" name="adminForm" id="language-form" class="form-validate">
 	<div class="col main-section">
 		<fieldset class="adminform">
 		<legend><?php echo JText::sprintf('JGLOBAL_RECORD_NUMBER', $this->item->lang_id); ?></legend>
@@ -51,7 +51,7 @@ $canDo = LanguagesHelper::getActions();
 				<?php echo $this->form->getLabel('published'); ?>
 				<?php echo $this->form->getInput('published'); ?>
 			<?php endif ?>
-			
+
 			<?php echo $this->form->getLabel('description'); ?>
 			<?php echo $this->form->getInput('description'); ?>
 
@@ -74,6 +74,7 @@ $canDo = LanguagesHelper::getActions();
 						<?php echo $field->input; ?>
 					</li>
 				<?php endforeach; ?>
+				</ul>
 			</fieldset>
 
 		<?php echo JHtml::_('sliders.end'); ?>

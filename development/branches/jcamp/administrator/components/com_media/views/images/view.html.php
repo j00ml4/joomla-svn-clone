@@ -26,9 +26,14 @@ class MediaViewImages extends JView
 		$app = JFactory::getApplication();
 		$append = '';
 		// if ($app->getClientId() == 1) $append = 'administrator/';
+		
+		$lang	= JFactory::getLanguage();
 
 		JHTML::_('script','media/popup-imagemanager.js', true, true);
 		JHTML::_('stylesheet','media/popup-imagemanager.css', array(), true);
+		if ($lang->isRTL()) :
+			JHTML::_('stylesheet','media/popup-imagemanager_rtl.css', array(), true);
+		endif;
 
 		if ($config->get('enable_flash', 1)) {
 			$fileTypes = $config->get('image_extensions', 'bmp,gif,jpg,png,jpeg');
@@ -46,7 +51,7 @@ class MediaViewImages extends JView
 				$displayTypes .= '*.'.$type;
 				$filterTypes .= '*.'.$type;
 			}
-			$typeString = '{ \'Images ('.$displayTypes.')\': \''.$filterTypes.'\' }';
+			$typeString = '{ \''.JText::_('COM_MEDIA_FILES','true').' ('.$displayTypes.')\': \''.$filterTypes.'\' }';
 
 			JHtml::_('behavior.uploader', 'upload-flash',
 				array(

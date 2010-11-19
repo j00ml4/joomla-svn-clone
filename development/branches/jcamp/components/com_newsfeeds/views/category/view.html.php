@@ -56,7 +56,7 @@ class NewsfeedsViewCategory extends JView
 		}
 
 		// Check whether category access level allows access.
-		$groups	= $user->authorisedLevels();
+		$groups	= $user->getAuthorisedViewLevels();
 		if (!in_array($category->access, $groups)) {
 			return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));
 		}
@@ -73,6 +73,11 @@ class NewsfeedsViewCategory extends JView
 			$item->params->merge($temp);
 		}
 
+		// Setup the category parameters.
+		$cparams = $category->getParams();
+		$category->params = clone($params);
+		$category->params->merge($cparams);
+
 		$children = array($category->id => $children);
 
 		$this->assignRef('maxLevel',	$params->get('maxLevel', -1));
@@ -83,6 +88,19 @@ class NewsfeedsViewCategory extends JView
 		$this->assignRef('params',		$params);
 		$this->assignRef('parent',		$parent);
 		$this->assignRef('pagination',	$pagination);
+
+		// Check for layout override only if this is not the active menu item
+		// If it is the active menu item, then the view and category id will match
+		$active	= $app->getMenu()->getActive();
+		if ((!$active) || ((strpos($active->link, 'view=category') === false) || (strpos($active->link, '&id=' . (string) $this->category->id) === false))) {			
+			if ($layout = $category->params->get('category_layout')) {
+			$this->setLayout($layout);
+			}
+		}
+		elseif (isset($active->query['layout'])) {
+			// We need to set the layout in case this is an alternative menu item (with an alternative layout)
+			$this->setLayout($active->query['layout']);
+		}
 
 		$this->_prepareDocument();
 
@@ -102,24 +120,28 @@ class NewsfeedsViewCategory extends JView
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
-		if($menu)
-		{
+
+		if ($menu) {
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
-		} else {
+		}
+		else {
 			$this->params->def('page_heading', JText::_('COM_NEWSFEEDS_DEFAULT_PAGE_TITLE'));
 		}
+
 		$id = (int) @$menu->query['id'];
-		if ($menu && ($menu->query['option'] != 'com_newsfeeds' || $menu->query['view'] == 'newsfeed' || $id != $this->category->id))
-		{
-		
+
+		if ($menu && ($menu->query['option'] != 'com_newsfeeds' || $menu->query['view'] == 'newsfeed' || $id != $this->category->id)) {
 			$path = array(array('title' => $this->category->title, 'link' => ''));
 			$category = $this->category->getParent();
+
 			while (($menu->query['option'] != 'com_newsfeeds' || $menu->query['view'] == 'newsfeed' || $id != $category->id) && $category->id > 1)
 			{
 				$path[] = array('title' => $category->title, 'link' => NewsfeedsHelperRoute::getCategoryRoute($category->id));
 				$category = $category->getParent();
 			}
+
 			$path = array_reverse($path);
+
 			foreach($path as $item)
 			{
 				$pathway->addItem($item['title'], $item['link']);
@@ -127,12 +149,14 @@ class NewsfeedsViewCategory extends JView
 		}
 
 		$title = $this->params->get('page_title', '');
+
 		if (empty($title)) {
 			$title = htmlspecialchars_decode($app->getCfg('sitename'));
 		}
 		elseif ($app->getCfg('sitename_pagetitles', 0)) {
 			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
 		}
+
 		$this->document->setTitle($title);
 
 		if ($this->category->metadesc) {
@@ -153,12 +177,11 @@ class NewsfeedsViewCategory extends JView
 
 		$mdata = $this->category->getMetadata()->toArray();
 
-		foreach ($mdata as $k => $v) {
+		foreach ($mdata as $k => $v)
+		{
 			if ($v) {
 				$this->document->setMetadata($k, $v);
 			}
 		}
-		
 	}
 }
-

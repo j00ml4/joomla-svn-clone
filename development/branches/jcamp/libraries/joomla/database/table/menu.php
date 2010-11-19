@@ -68,6 +68,7 @@ class JTableMenu extends JTableNested
 	public function check()
 	{
 		// If the alias field is empty, set it to the title.
+		$this->alias = trim($this->alias);
 		if (empty($this->alias)) {
 			$this->alias = $this->title;
 		}
@@ -80,6 +81,12 @@ class JTableMenu extends JTableNested
 
 		// Cast the home property to an int for checking.
 		$this->home = (int) $this->home;
+
+		// Verify that a first level menu item alias is not 'component'.
+		if ($this->parent_id==1 && $this->alias == 'component') {
+			$this->setError(JText::_('JLIB_DATABASE_ERROR_MENU_ROOT_ALIAS_COMPONENT'));
+			return false;
+		}
 
 		// Verify that the home item a component.
 		if ($this->home && $this->type != 'component') {
@@ -114,10 +121,31 @@ class JTableMenu extends JTableNested
 		}
 		// Verify that the alias is unique
 		$table = JTable::getInstance('Menu','JTable');
-		if ($table->load(array('alias'=>$this->alias,'parent_id'=>$this->parent_id)) && ($table->id != $this->id || $this->id==0)) {
-			$this->setError(JText::_('JLIB_DATABASE_ERROR_MENU_UNIQUE_ALIAS'));
+		if ($table->load(array('alias'=>$this->alias,'parent_id'=>$this->parent_id,'client_id'=>$this->client_id)) && ($table->id != $this->id || $this->id==0)) {
+			if ($this->menutype==$table->menutype) {
+				$this->setError(JText::_('JLIB_DATABASE_ERROR_MENU_UNIQUE_ALIAS'));
+			}
+			else {
+				$this->setError(JText::_('JLIB_DATABASE_ERROR_MENU_UNIQUE_ALIAS_ROOT'));
+			}
 			return false;
 		}
-		return parent::store($updateNulls);
+		
+		if(!parent::store($updateNulls)) {
+			return false;
+		}
+		// Get the new path in case the node was moved
+		$pathNodes = $this->getPath();
+		$segments = array();
+		foreach ($pathNodes as $node) {
+			// Don't include root in path
+			if ($node->alias != 'root') {
+				$segments[] = $node->alias;
+			}
+		}
+		$newPath = trim(implode('/', $segments), ' /\\');
+		// Use new path for partial rebuild of table
+		// rebuild will return positive integer on success, false on failure
+		return ($this->rebuild($this->{$this->_tbl_key}, $this->lft, $this->level, $newPath) > 0);
 	}
 }

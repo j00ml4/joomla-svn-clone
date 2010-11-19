@@ -27,7 +27,7 @@ $listDirn	= $this->state->get('list.direction');
 	<legend class="element-invisible"><?php echo JText::_('COM_USERS_SEARCH_USERS'); ?></legend>
 		<div class="filter-search">
 			<label class="filter-search-lbl" for="filter_search"><?php echo JText::_('COM_USERS_SEARCH_USERS'); ?></label>
-			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->state->get('filter.search'); ?>" title="<?php echo JText::_('COM_USERS_SEARCH_USERS'); ?>" />
+			<input type="text" name="filter_search" id="filter_search" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" title="<?php echo JText::_('COM_USERS_SEARCH_USERS'); ?>" />
 			<button type="submit"><?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?></button>
 			<button type="button" onclick="document.id('filter_search').value='';this.form.submit();"><?php echo JText::_('JSEARCH_RESET'); ?></button>
 		</div>
@@ -113,6 +113,10 @@ $listDirn	= $this->state->get('list.direction');
 						<?php echo $this->escape($item->name); ?></a>
 					<?php else : ?>
 						<?php echo $this->escape($item->name); ?>
+					<?php endif; ?>
+					<?php if (JDEBUG) : ?>
+					<br /><div class="button2-left smallsub"><div class="blank"><a href="<?php echo JRoute::_('index.php?option=com_users&view=debuguser&user_id='.(int) $item->id);?>">
+						<?php echo JText::_('COM_USERS_DEBUG_USER');?></a></div></div>
 					<?php endif; ?>
 				</td>
 				<td class="center">

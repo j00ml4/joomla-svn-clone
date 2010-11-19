@@ -211,6 +211,10 @@ final class JSite extends JApplication
 				$template	= $this->getTemplate(true);
 				$file		= JRequest::getCmd('tmpl', 'index');
 
+				if (!$this->getCfg('offline') && ($file == 'offline')) {
+					$file = 'index';
+				}
+
 				if ($this->getCfg('offline') && !$user->authorise('core.admin')) {
 					$uri		= JFactory::getURI();
 					$return		= (string)$uri;
@@ -410,7 +414,13 @@ final class JSite extends JApplication
 
 
 		$cache = JFactory::getCache('com_templates', '');
-		if (!$templates = $cache->get('templates0')) {
+		if ($this->_language_filter) {
+			$tag = JFactory::getLanguage()->getTag();
+		}
+		else {
+			$tag ='';
+		}
+		if (!$templates = $cache->get('templates0'.$tag)) {
 			// Load styles
 			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
@@ -426,11 +436,11 @@ final class JSite extends JApplication
 				$template->params = $registry;
 
 				// Create home element
-				if ($template->home == 1) {
+				if ($template->home == '1' && !isset($templates[0]) || $this->_language_filter && $template->home == $tag) {
 					$templates[0] = clone $template;
 				}
 			}
-			$cache->store($templates, 'templates0');
+			$cache->store($templates, 'templates0'.$tag);
 		}
 
 		$template = $templates[$id];

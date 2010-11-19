@@ -12,7 +12,7 @@ defined('_JEXEC') or die;
 
 jimport('joomla.application.component.view');
 require_once JPATH_COMPONENT.'/models/category.php';
-	
+
 /**
  * HTML Contact View class for the Contact component
  *
@@ -30,24 +30,23 @@ class ContactViewContact extends JView
 		// Initialise variables.
 		$app		= JFactory::getApplication();
 		$user		= JFactory::getUser();
-		$dispatcher =& JDispatcher::getInstance();
+		$dispatcher = JDispatcher::getInstance();
+		$state		= $this->get('State');
+		$item		= $this->get('Item');
 
-		// Get model data.
-		$state = $this->get('State');
-		$item = $this->get('Item');
-		
 		// Get Category Model data
-		if ($item)
-		{
+		if ($item) {
 			$categoryModel = JModel::getInstance('Category', 'ContactModel', array('ignore_request' => true));
 			$categoryModel->setState('category.id', $item->catid);
 			$categoryModel->setState('list.ordering', 'a.name');
-			$categoryModel->setState('list.direction', 'asc');		
+			$categoryModel->setState('list.direction', 'asc');
 			$contacts = $categoryModel->getItems();
 		}
+
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseWarning(500, implode("\n", $errors));
+
 			return false;
 		}
 
@@ -56,21 +55,19 @@ class ContactViewContact extends JView
 		$menu	= $menus->getActive();
 		$params	= $app->getParams();
 
-		$item_params = new JRegistry;
-		$item_params->loadJSON($item->params);
-		$params->merge($item_params);
+		$params->merge($item->params);
 
 		// check if access is not public
-		$groups	= $user->authorisedLevels();
+		$groups	= $user->getAuthorisedViewLevels();
 
-		$return ="";
+		$return = '';
+
 		if ((!in_array($item->access, $groups)) || (!in_array($item->category_access, $groups))) {
 			$uri		= JFactory::getURI();
 			$return		= (string)$uri;
 
-				JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
-				return;
-			
+			JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
+			return;
 		}
 
 		$options['category_id']	= $item->catid;
@@ -82,12 +79,12 @@ class ContactViewContact extends JView
 			$item->email_to = JHtml::_('email.cloak', $item->email_to);
 		}
 
-		if ($params->get('show_street_address') || $params->get('show_suburb') || $params->get('show_state') || $params->get('show_postcode') || $params->get('show_country'))
-		{
+		if ($params->get('show_street_address') || $params->get('show_suburb') || $params->get('show_state') || $params->get('show_postcode') || $params->get('show_country')) {
 			if (!empty ($item->address) || !empty ($item->suburb) || !empty ($item->state) || !empty ($item->country) || !empty ($item->postcode)) {
 				$params->set('address_check', 1);
 			}
-		} else {
+		}
+		else {
 			$params->set('address_check', 0);
 		}
 
@@ -134,10 +131,11 @@ class ContactViewContact extends JView
 				$params->set('marker_class',		'jicons-icons');
 				break;
 		}
-		
+
 		// Add links to contacts
 		if ($params->get('show_contact_list') && count($contacts) > 1) {
-			foreach($contacts as &$contact) {
+			foreach($contacts as &$contact)
+			{
 				$contact->link = JRoute::_(ContactHelperRoute::getContactRoute($contact->slug, $contact->catid));
 			}
 			$item->link = JRoute::_(ContactHelperRoute::getContactRoute($item->slug, $item->catid));
@@ -152,6 +150,19 @@ class ContactViewContact extends JView
 		$this->assignRef('item', 		$item);
 		$this->assignRef('user', 		$user);
 		$this->assignRef('contacts', 	$contacts);
+
+		// Override the layout only if this is not the active menu item
+		// If it is the active menu item, then the view and item id will match
+		$active	= $app->getMenu()->getActive();
+		if ((!$active) || ((strpos($active->link, 'view=contact') === false) || (strpos($active->link, '&id=' . (string) $this->item->id) === false))) {
+			if ($layout = $params->get('contact_layout')) {
+				$this->setLayout($layout);
+			}
+		}
+		elseif (isset($active->query['layout'])) {
+			// We need to set the layout in case this is an alternative menu item (with an alternative layout)
+			$this->setLayout($active->query['layout']);
+		}
 
 		$this->_prepareDocument();
 
@@ -171,25 +182,29 @@ class ContactViewContact extends JView
 		// Because the application sets a default page title,
 		// we need to get it from the menu item itself
 		$menu = $menus->getActive();
-		if($menu)
-		{
+
+		if ($menu) {
 			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
-		} else {
+		}
+		else {
 			$this->params->def('page_heading', JText::_('COM_CONTACT_DEFAULT_PAGE_TITLE'));
 		}
+
 		$id = (int) @$menu->query['id'];
 
 		// if the menu item does not concern this newsfeed
-		if ($menu && ($menu->query['option'] != 'com_contact' || $menu->query['view'] != 'contact' || $id != $this->item->id))
-		{
+		if ($menu && ($menu->query['option'] != 'com_contact' || $menu->query['view'] != 'contact' || $id != $this->item->id)) {
 			$path = array(array('title' => $this->contact->name, 'link' => ''));
 			$category = JCategories::getInstance('Contact')->get($this->contact->catid);
-			while (($menu->query['option'] != 'com_contact' || $menu->query['view'] == 'contact' || $id != $category->id) && $category->id > 1)
+
+			while ($category && ($menu->query['option'] != 'com_contact' || $menu->query['view'] == 'contact' || $id != $category->id) && $category->id > 1)
 			{
 				$path[] = array('title' => $category->title, 'link' => ContactHelperRoute::getCategoryRoute($this->contact->catid));
 				$category = $category->getParent();
 			}
+
 			$path = array_reverse($path);
+
 			foreach($path as $item)
 			{
 				$pathway->addItem($item['title'], $item['link']);
@@ -197,46 +212,40 @@ class ContactViewContact extends JView
 		}
 
 		$title = $this->params->get('page_title', '');
+
 		if (empty($title)) {
 			$title = htmlspecialchars_decode($app->getCfg('sitename'));
 		}
 		elseif ($app->getCfg('sitename_pagetitles', 0)) {
 			$title = JText::sprintf('JPAGETITLE', htmlspecialchars_decode($app->getCfg('sitename')), $title);
 		}
+
 		$this->document->setTitle($title);
 
-		if (empty($title))
-		{
+		if (empty($title)) {
 			$title = $this->item->title;
 			$this->document->setTitle($title);
 		}
 
-
-		if ($this->item->metadesc)
-		{
+		if ($this->item->metadesc) {
 			$this->document->setDescription($this->item->metadesc);
 		}
 
-		if ($this->item->metakey)
-		{
+		if ($this->item->metakey) {
 			$this->document->setMetadata('keywords', $this->item->metakey);
 		}
 
-		if ($app->getCfg('MetaTitle') == '1')
-		{
+		if ($app->getCfg('MetaTitle') == '1') {
 			$this->document->setMetaData('title', $this->item->name);
 		}
 
-	
 		$mdata = $this->item->metadata->toArray();
+
 		foreach ($mdata as $k => $v)
 		{
-			if ($v)
-			{
+			if ($v) {
 				$this->document->setMetadata($k, $v);
 			}
 		}
-
 	}
 }
-

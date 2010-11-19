@@ -168,7 +168,7 @@ class WeblinksControllerWeblink extends JControllerForm
 		}
 
 		// Save succeeded, check-in the row.
-		if (!$model->checkin()) {
+		if ($model->checkin() === false) {
 			// Check-in failed, go back to the row and display a notice.
 			$message = JText::sprintf('JLIB_APPLICATION_ERROR_CHECKIN_FAILED', $model->getError());
 			$this->setRedirect('index.php?option=com_weblinks&view=form&layout=edit', $message, 'error');
@@ -318,7 +318,7 @@ class WeblinksControllerWeblink extends JControllerForm
 
 		// Check whether item access level allows access.
 		$user	= JFactory::getUser();
-		$groups	= $user->authorisedLevels();
+		$groups	= $user->getAuthorisedViewLevels();
 
 		if (!in_array($link->access, $groups)) {
 			return JError::raiseError(403, JText::_("JERROR_ALERTNOAUTHOR"));

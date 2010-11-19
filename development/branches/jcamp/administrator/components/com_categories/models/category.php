@@ -5,7 +5,7 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-// Check to ensure this file is included in Joomla!
+// No direct access.
 defined('_JEXEC') or die;
 
 jimport('joomla.application.component.modeladmin');
@@ -89,26 +89,21 @@ class CategoriesModelCategory extends JModelAdmin
 	{
 		$app = JFactory::getApplication('administrator');
 
-		if (!($parentId = $app->getUserState('com_categories.edit.'.$this->getName().'.parent_id'))) {
-			$parentId = JRequest::getInt('parent_id');
-		}
+		$parentId = JRequest::getInt('parent_id');
 		$this->setState('category.parent_id', $parentId);
 
-		if (!($extension = $app->getUserState('com_categories.edit.'.$this->getName().'.extension'))) {
-			$extension = JRequest::getCmd('extension', 'com_content');
-		}
 		// Load the User state.
-		if (!($pk = (int) $app->getUserState('com_categories.edit.'.$this->getName().'.id'))) {
-			$pk = (int) JRequest::getInt('item_id');
-		}
+		$pk = (int) JRequest::getInt('id');
 		$this->setState($this->getName().'.id', $pk);
 
-
+		$extension = JRequest::getCmd('extension', 'com_content');
 		$this->setState('category.extension', $extension);
 		$parts = explode('.',$extension);
-		// extract the component name
+
+		// Extract the component name
 		$this->setState('category.component', $parts[0]);
-		// extract the optional section name
+
+		// Extract the optional section name
 		$this->setState('category.section', (count($parts)>1)?$parts[1]:null);
 
 		// Load the parameters.
@@ -146,7 +141,8 @@ class CategoriesModelCategory extends JModelAdmin
 				$date = new JDate($result->created_time);
 				$date->setTimezone($tz);
 				$result->created_time = $date->toMySQL(true);
-			} else {
+			}
+			else {
 				$result->created_time = null;
 			}
 
@@ -154,7 +150,8 @@ class CategoriesModelCategory extends JModelAdmin
 				$date = new JDate($result->modified_time);
 				$date->setTimezone($tz);
 				$result->modified_time = $date->toMySQL(true);
-			} else {
+			}
+			else {
 				$result->modified_time = null;
 			}
 		}
@@ -175,6 +172,15 @@ class CategoriesModelCategory extends JModelAdmin
 		// Initialise variables.
 		$extension	= $this->getState('category.extension');
 
+		// A workaround to get the extension into the model for save requests.
+		if (empty($extension) && isset($data['extension'])) {
+			$extension	= $data['extension'];
+			$parts		= explode('.',$extension);
+
+			$this->setState('category.extension', $extension);
+			$this->setState('category.component', $parts[0]);
+		}
+
 		// Get the form.
 		$form = $this->loadForm('com_categories.category'.$extension, 'category', array('control' => 'jform', 'load_data' => $loadData));
 		if (empty($form)) {
@@ -185,6 +191,7 @@ class CategoriesModelCategory extends JModelAdmin
 		if (empty($data['extension'])) {
 			$data['extension'] = $extension;
 		}
+
 
 		if (!$this->canEditState((object) $data)) {
 			// Disable fields for display.
@@ -286,8 +293,8 @@ class CategoriesModelCategory extends JModelAdmin
 		}
 
 		// Set the access control rules field component value.
-		$form->setFieldAttribute('rules', 'component', $component);
-		$form->setFieldAttribute('rules', 'section', $name);
+		$form->setFieldAttribute('rules', 'component',	$component);
+		$form->setFieldAttribute('rules', 'section',	$name);
 
 		// Trigger the default form events.
 		parent::preprocessForm($form, $data);
@@ -302,11 +309,14 @@ class CategoriesModelCategory extends JModelAdmin
 	 */
 	public function save($data)
 	{
-		$pk		= (!empty($data['id'])) ? $data['id'] : (int)$this->getState($this->getName().'.id');
-		$isNew	= true;
+		// Initialise variables;
+		$dispatcher = JDispatcher::getInstance();
+		$table		= $this->getTable();
+		$pk			= (!empty($data['id'])) ? $data['id'] : (int)$this->getState($this->getName().'.id');
+		$isNew		= true;
 
-		// Get a row instance.
-		$table = $this->getTable();
+		// Include the content plugins for the on save events.
+		JPluginHelper::importPlugin('content');
 
 		// Load the row if saving an existing category.
 		if ($pk > 0) {
@@ -325,7 +335,8 @@ class CategoriesModelCategory extends JModelAdmin
 			$data['alias'] = '';
 			if (preg_match('#\((\d+)\)$#', $table->title, $m)) {
 				$data['title'] = preg_replace('#\(\d+\)$#', '('.($m[1] + 1).')', $table->title);
-			} else {
+			}
+			else {
 				$data['title'] .= ' (2)';
 			}
 		}
@@ -348,11 +359,21 @@ class CategoriesModelCategory extends JModelAdmin
 			return false;
 		}
 
+		// Trigger the onContentBeforeSave event.
+		$result = $dispatcher->trigger($this->event_before_save, array($this->option.'.'.$this->name, $table, $isNew));
+		if (in_array(false, $result, true)) {
+			$this->setError($table->getError());
+			return false;
+		}
+
 		// Store the data.
 		if (!$table->store()) {
 			$this->setError($table->getError());
 			return false;
 		}
+
+		// Trigger the onContentAfterSave event.
+		$dispatcher->trigger($this->event_after_save, array($this->option.'.'.$this->name, $table, $isNew));
 
 		// Rebuild the tree path.
 		if (!$table->rebuildPath($table->id)) {
@@ -587,17 +608,17 @@ class CategoriesModelCategory extends JModelAdmin
 			// If we a copying children, the Old ID will turn up in the parents list
 			// otherwise it's a new top level item
 			$table->parent_id	= isset($parents[$oldParentId]) ? $parents[$oldParentId] : $parentId;
-			
+
 			// Set the new location in the tree for the node.
 			$table->setLocation($table->parent_id, 'last-child');
-			
+
 			// TODO: Deal with ordering?
 			//$table->ordering	= 1;
 			$table->level		= null;
 			$table->asset_id	= null;
 			$table->lft			= null;
 			$table->rgt			= null;
-			
+
 			// Store the row.
 			if (!$table->store()) {
 				$this->setError($table->getError());

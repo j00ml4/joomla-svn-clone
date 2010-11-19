@@ -27,6 +27,30 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+17-Nov-2010 Mark Dexter
+# Fix doInstall to allow selection of different database types
+^ Added two methods to JFolderTest (Christophe Demoko) as part of [#22484]
+
+15-Nov-2010 Mark Dexter
+# Fix failing system test for sample data changes
+
+05-Nov-2010 Mark Dexter
+# Fix failing system tests for ACL language changes
+# Unit test for [#22444] JRegistry fails when binding an object which contains a JRegistry object
+
+01-Nov-2010 Mark Dexter
+# Fix doInstall so it can be run against a different Joomla! instance
+# Small fix for featured0001Test due to default ordering in Featured Articles Manager
+
+30-Oct-2010 Mark Dexter
+# Remove tests/system/server/configdef.php file accidentally added to version control
+
+29-Oct-2010 Mark Dexter
+# Fix problem in controlpanel004Test for small change in category ui
+
+28-Oct-2010 Mark Dexter
+# Fix bugs in menu0001Test from new template position modal
+
 22-Oct-2010 Mark Dexter
 # Fix bug in JAccessTest and JAccess class when invalid group id is checked
 + Add unit tests for JSession

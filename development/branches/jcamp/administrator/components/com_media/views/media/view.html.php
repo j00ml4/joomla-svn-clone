@@ -23,6 +23,8 @@ class MediaViewMedia extends JView
 	{
 		$app	= JFactory::getApplication();
 		$config = JComponentHelper::getParams('com_media');
+		
+		$lang	= JFactory::getLanguage();
 
 		$style = $app->getUserStateFromRequest('media.list.layout', 'layout', 'thumbs', 'word');
 
@@ -33,6 +35,9 @@ class MediaViewMedia extends JView
 
 		JHTML::_('script','media/mediamanager.js', true, true);
 		JHTML::_('stylesheet','media/mediamanager.css', array(), true);
+		if ($lang->isRTL()) :
+			JHTML::_('stylesheet','media/mediamanager_rtl.css', array(), true);
+		endif;
 
 		JHtml::_('behavior.modal');
 		$document->addScriptDeclaration("
@@ -41,10 +46,13 @@ class MediaViewMedia extends JView
 		});");
 
 		JHTML::_('script','system/mootree.js', true, true, false, false);
-		JHTML::_('stylesheet','system/mootree.css', array(), true);
+		JHTML::_('stylesheet','system/mootree.css', array(), true);	
+		if ($lang->isRTL()) :
+			JHTML::_('stylesheet','media/mootree_rtl.css', array(), true);
+		endif;
 
 		if ($config->get('enable_flash', 1)) {
-			$fileTypes = $config->get('image_extensions', 'bmp,gif,jpg,png,jpeg');
+			$fileTypes = $config->get('upload_extensions', 'bmp,gif,jpg,png,jpeg');
 			$types = explode(',', $fileTypes);
 			$displayTypes = '';		// this is what the user sees
 			$filterTypes = '';		// this is what controls the logic
@@ -59,7 +67,7 @@ class MediaViewMedia extends JView
 				$displayTypes .= '*.'.$type;
 				$filterTypes .= '*.'.$type;
 			}
-			$typeString = '{ \'Images ('.$displayTypes.')\': \''.$filterTypes.'\' }';
+			$typeString = '{ \''.JText::_('COM_MEDIA_FILES','true').' ('.$displayTypes.')\': \''.$filterTypes.'\' }';
 
 			JHtml::_('behavior.uploader', 'upload-flash',
 				array(

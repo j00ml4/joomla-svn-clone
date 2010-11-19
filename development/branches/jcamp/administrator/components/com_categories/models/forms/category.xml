@@ -111,7 +111,11 @@
 			value="-2">
 			JTRASHED</option>
 	</field>
-
+	<field
+		name="buttonspacer"
+		label="JGLOBAL_ACTION_PERMISSIONS_LABEL" 
+		description="JGLOBAL_ACTION_PERMISSIONS_DESCRIPTION"
+		type="spacer" />
 	<field
 		name="checked_out"
 		type="hidden"
@@ -192,6 +196,7 @@
 		label="JFIELD_RULES_LABEL"
 		description="JFIELD_RULES_DESC"
 		filter="rules"
+		validate="rules"
 		class="inputbox"
 		component="com_content"
 		section="category"/>
@@ -201,11 +206,12 @@
 			name="basic">
 
 			<field
-				name="layout"
+				name="category_layout"
 				type="componentlayout"
 				label="JFIELD_ALT_LAYOUT_LABEL"
 				description="JFIELD_ALT_COMPONENT_LAYOUT_DESC"
 				view="category"
+				useglobal="true"
 				/>
 
 			<field

@@ -250,8 +250,13 @@ div.current table#acl-config th.acl-groups {
 	text-align: right;
 }
 
+/* -------- Menu Assigments ---------- */
 div#menu-assignment {
 	clear:right;
+}
+
+div#menu-assignment ul.menu-links {
+	float:right;
 }
 
 div#menu-assignment h3 {
@@ -1020,8 +1025,8 @@ fieldset.panelform fieldset.radio span.faux-label {
 }
 
 
-fieldset.adminform input, fieldset.adminform span.faux-input, fieldset.adminform textarea, fieldset.adminform select, fieldset.adminform img,
-fieldset.panelform input, fieldset.panelform span.faux-input, fieldset.panelform textarea, fieldset.panelform select, fieldset.panelform img {
+fieldset.adminform input, fieldset.adminform span.faux-input, fieldset.adminform textarea, fieldset.adminform select, fieldset.adminform img, fieldset.adminform button,
+fieldset.panelform input, fieldset.panelform span.faux-input, fieldset.panelform textarea, fieldset.panelform select, fieldset.panelform img, fieldset.panelform button {
 	float:right;
 	margin:5px 0 5px 5px;
 }
@@ -1124,6 +1129,31 @@ table#acl-config th.acl-groups {
 
 .acl-action {
 	margin: auto 0;
+}
+
+/* Icons */
+span.icon-16-unset,
+span.icon-16-allowed,
+span.icon-16-denied,
+span.icon-16-locked {
+	padding-left: 0px;
+	padding-right: 18px;
+}
+
+span.icon-16-unset {
+	background: url(../images/admin/icon-16-denyinactive.png) no-repeat right;
+}
+
+span.icon-16-allowed {
+	background: url(../images/admin/icon-16-allow.png) no-repeat right;
+}
+
+span.icon-16-denied {
+	background: url(../images/admin/icon-16-deny.png) no-repeat right;
+}
+
+span.icon-16-locked {
+	background: url(../images/admin/checked_out.png) no-repeat right;
 }
 
 /**
@@ -1231,7 +1261,7 @@ table.group-rules td select
 
 #permissions-sliders ul#rules .panel h3
 {
-	background:#f9fade url(../images/j_arrow_left.png) top left no-repeat
+	background:#f9fade url(../images/j_arrow_left.png) center left no-repeat
 }
 
 /* global_config permissions */

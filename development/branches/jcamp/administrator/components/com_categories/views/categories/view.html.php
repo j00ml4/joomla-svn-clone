@@ -113,10 +113,10 @@ class CategoriesViewCategories extends JView
 		JToolBarHelper::title($title, substr($component,4).($section?"-$section":'').'-categories.png');
 
 		if ($canDo->get('core.create')) {
-			JToolBarHelper::custom('category.edit', 'new.png', 'new_f2.png', 'JTOOLBAR_NEW', false);
+			 JToolBarHelper::custom('category.add', 'new.png', 'new_f2.png', 'JTOOLBAR_NEW', false);
 		}
 
-		if ($canDo->get('core.edit' )) {
+		if ($canDo->get('core.edit' ) || $canDo->get('core.edit.own')) {
 			JToolBarHelper::custom('category.edit', 'edit.png', 'edit_f2.png', 'JTOOLBAR_EDIT', true);
 			JToolBarHelper::divider();
 		}
@@ -155,11 +155,14 @@ class CategoriesViewCategories extends JView
 		// -remotely searching in a language defined dedicated URL: *component*_HELP_URL
 		// -locally  searching in a component help file if helpURL param exists in the component and is set to ''
 		// -remotely searching in a component URL if helpURL param exists in the component and is NOT set to ''
-		JToolBarHelper::help(
-			$ref_key,
-			JComponentHelper::getParams( $component )->exists('helpURL'),
-			$lang->hasKey($lang_help_url = strtoupper($component).'_HELP_URL') ? JText::_($lang_help_url) : null,
-			$component
-		);
+		if ($lang->hasKey($lang_help_url = strtoupper($component).'_HELP_URL')) {
+			$debug = $lang->setDebug(false);
+			$url = JText::_($lang_help_url);
+			$lang->setDebug($debug);
+		}
+		else {
+			$url = null;
+		}
+		JToolBarHelper::help($ref_key, JComponentHelper::getParams( $component )->exists('helpURL'), $url);
 	}
 }
