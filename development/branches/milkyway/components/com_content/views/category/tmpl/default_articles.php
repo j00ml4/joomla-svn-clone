@@ -15,7 +15,6 @@ defined('_JEXEC') or die;
 $params = &$this->item->params;
 // Check if user is allowed to add/edit based on content permissions.
 
-//var_dump($this->items);die;
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::core();

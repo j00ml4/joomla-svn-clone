@@ -42,7 +42,7 @@ $pageClass = $this->params->get('pageclass_sfx');
 		<div class="clr"></div>
 	</div>
 	<?php endif; ?>
-<?php // var_dump($this->items );die; ?>
+
 	<div class="cat-items">			
 		<?php echo $this->loadTemplate('articles'); ?>
 	
