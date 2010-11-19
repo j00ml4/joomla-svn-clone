@@ -810,4 +810,17 @@ class JDatabaseSQLAzure extends JDatabase
 		else
 		return false;
 	}
+	
+	/**
+	 * Gets the date as an SQL Server datetime string.
+	 *
+	 *
+	 * @param	boolean	True to return the date string in the local time zone, false to return it in GMT.
+	 * @return	string	The date string in SQL Server datetime format.
+	 * @since	1.6
+	 */
+	public function toSQLDate(&$date, $local = false)
+	{
+		return $date->toSQLSrv($local);
+	}
 }

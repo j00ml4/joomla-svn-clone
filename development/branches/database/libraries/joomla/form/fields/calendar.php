@@ -69,7 +69,7 @@ class JFormFieldCalendar extends JFormField
 		// Get some system objects.
 		$config = JFactory::getConfig();
 		$user	= JFactory::getUser();
-
+		$db     = JFactory::getDbo();
 		// If a known filter is given use it.
 		switch (strtoupper((string) $this->element['filter']))
 		{
@@ -81,7 +81,7 @@ class JFormFieldCalendar extends JFormField
 					$date->setTimezone(new DateTimeZone($config->get('offset')));
 
 					// Transform the date string.
-					$this->value = $date->toMySQL(true);
+					$this->value = $db->toSQLDate($date, true);
 				}
 				break;
 
@@ -93,7 +93,7 @@ class JFormFieldCalendar extends JFormField
 					$date->setTimezone(new DateTimeZone($user->getParam('timezone', $config->get('offset'))));
 
 					// Transform the date string.
-					$this->value = $date->toMySQL(true);
+					$this->value = $db->toSQLDate($date, true);
 				}
 				break;
 		}

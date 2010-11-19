@@ -81,8 +81,9 @@ class ContentModelArticle extends JModelAdmin
 	protected function prepareTable($table)
 	{
 		// Set the publish date to now
+		$db = $this->getDbo();
 		if($table->state == 1 && intval($table->publish_up) == 0) {
-			$table->publish_up = JFactory::getDate()->toMySQL();
+			$table->publish_up = $db->toSQLDate(JFactory::getDate());
 		}
 
 		// Increment the content version number.

@@ -38,7 +38,7 @@ class plgContentPagenavigation extends JPlugin
 
 			$date	= JFactory::getDate();
 			$config	= JFactory::getConfig();
-			$now	= $date->toMySQL();
+			$now	= $db->toSQLDate($date);
 
 			$uid	= $row->id;
 			$option	= 'com_content';
