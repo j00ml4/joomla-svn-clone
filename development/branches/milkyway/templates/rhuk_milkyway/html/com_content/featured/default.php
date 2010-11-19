@@ -49,8 +49,7 @@ JHtml::core();
 <?php endif; ?>
 
 	<?php
-	$startIntroArticles = $this->pagination->limitstart + $this->params->get('num_leading_articles');
-	
+
 		$introcount=(count($this->intro_items));
 		$counter=0;
 	?>
@@ -62,12 +61,16 @@ JHtml::core();
 				$row = $counter / $this->columns ;
 		
 				if ($rowcount==1) : ?>
+					<div class="items-row cols-<?php echo (int) $this->columns;?> <?php echo 'row-'.$row ; ?>">
+				<?php endif; ?>	
+							<?php
+					$this->item = &$item;
+					echo $this->loadTemplate('item');
+				?>			
 					<div></div>
 						<?php $counter++; ?>
-						<?php if (($rowcount == $this->columns) or ($counter ==$introcount)): ?>
+						<?php if (($rowcount == $this->columns) or ($counter == $introcount)): ?>
 							<span class="row-separator"></span>
-							
-			
 						<?php endif; ?>
 					<table>
 						<tr>
@@ -78,20 +81,14 @@ JHtml::core();
 									$divider = '';?>
 							</td>
 						</tr>
-					</table>
-				<?php endif; ?>	
-				
-		
+					</table>		
 		<?php endforeach; ?>
 	<?php endif; ?>
-	<?php if ($this->params->def('num_links', 4) && ($i < $this->total)) : ?>
+	<?php if (!empty($this->link_items)) : ?>
 			<tr>
 				<td valign="top">
 					<div class="blog_more<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-						<?php
-							$this->links = array_splice($this->items, $i - $this->pagination->limitstart);
-				//			echo $this->loadTemplate('links');
-						?>
+					<?php echo $this->loadTemplate('links'); ?>
 					</div>
 				</td>
 			</tr>
