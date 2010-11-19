@@ -140,7 +140,7 @@ class CategoriesModelCategory extends JModelAdmin
 			if (intval($result->created_time)) {
 				$date = new JDate($result->created_time);
 				$date->setTimezone($tz);
-				$result->created_time = $date->toMySQL(true);
+				$result->created_time = $this->_db->toSQLDate($date, true);
 			} else {
 				$result->created_time = null;
 			}
@@ -148,7 +148,7 @@ class CategoriesModelCategory extends JModelAdmin
 			if (intval($result->modified_time)) {
 				$date = new JDate($result->modified_time);
 				$date->setTimezone($tz);
-				$result->modified_time = $date->toMySQL(true);
+				$result->modified_time = $this->_db->toSQLDate($date, true);
 			} else {
 				$result->modified_time = null;
 			}

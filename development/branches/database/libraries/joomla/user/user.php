@@ -457,8 +457,8 @@ class JUser extends JObject
 			$array['password'] = $crypt.':'.$salt;
 
 			// Set the registration timestamp
-
-			$this->set('registerDate', JFactory::getDate()->toMySQL());
+			$db = JFactory::getDbo();
+			$this->set('registerDate', $db->toSQLDate(JFactory::getDate()));
 
 			// Check that username is not greater than 150 characters
 			$username = $this->get('username');

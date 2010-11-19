@@ -105,7 +105,7 @@ class ContactModelContact extends JModelItem
 
 				// Filter by start and end dates.
 				$nullDate = $db->Quote($db->getNullDate());
-				$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+				$nowDate = $db->Quote($db->toSQLDate(JFactory::getDate()));
 
 
 				// Filter by published state.

@@ -489,6 +489,17 @@ abstract class JDatabase extends JObject
 	}
 
 	/**
+	 * Gets the date specific to the DB datetime string.
+	 *
+	 *
+	 * @param	boolean	True to return the date string in the local time zone, false to return it in GMT.
+	 * @return	string	The date string in SQL Server datetime format.
+	 * @since	1.6
+	 */
+	abstract public function toSQLDate(&$date, $local = false);
+
+	
+	/**
 	 * Sets the SQL query string for later execution.
 	 *
 	 * This function replaces a string identifier <code>#__</code> with the

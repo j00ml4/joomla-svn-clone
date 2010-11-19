@@ -158,6 +158,7 @@ class JLog extends JObject
 	 */
 	function _openLog()
 	{
+		$db = &JFactory::getDbo();
 		// Only open if not already opened...
 		if (is_resource($this->_file)) {
 			return true;
@@ -171,7 +172,7 @@ class JLog extends JObject
 			}
 			$header[] = "#<?php die('Direct Access To Log Files Not Permitted'); ?>";
 			$header[] = "#Version: 1.0";
-			$header[] = "#Date: " . JFactory::getDate()->toMySQL();
+			$header[] = "#Date: " . $db->toSQLDate(JFactory::getDate());
 
 			// Prepare the fields string
 			$fields = str_replace("{", "", $this->_format);
