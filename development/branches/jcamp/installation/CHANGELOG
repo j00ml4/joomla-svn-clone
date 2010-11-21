@@ -27,11 +27,51 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+21-Nov-2010 Christophe Demko
+ # $ Translating the label field instead of the name field in JLIB_FORM_VALIDATE_FIELD_INVALID error
+ # [#23409] Category Icon on Components Menu
+ # [#23278] media_manager from JToolbarHelper throws javascript errors
+
+21-Nov-2010 Jean-Marie Simonet
+ # [#23361] default template in component.php view always in use
+
+20-Nov-2010 Ian MacLennan
+ # [#22962] Mootools Library Upgrade
+
+20-Nov-2010 Jean-Marie Simonet
+ $ Updating xx-XX.com_media.ini to [#23370]
+ # [#23392] Use Article settings missing from some menu items. Thanks Bill.
+ #$ [#23416] Adding descriptions in the images modal
+ # [#23413] Module Article categories. Thanks Mark
+ # [#23303] Newfeed layouts should show unpublished feeds if logged in. Thanks Mark.
+ 
+20-Nov-2010 Mark Dexter
+ # [#23380] Category manager allows deleting a category that has items assigned to it
+ # [#21581] mod_articles_category Fixes. (Omar Ramos)
+
+20-Nov-2010 Christophe Demko
+ # [#23355] Access level special now manager and above (Elin Waring)
+ # [#23342] Front end editing not working in some layouts (bill richardson)
+ # [#21638] maximum upload size inconsistency (Ian MacLennan, Rouven Weßling, bill richardson)
+ # Fix a small issue in templatestyle field
+
+19-Nov-2010 Mark Dexter
+# Remove duplicate article in sample data
+
+19-Nov-2010 Christophe Demko
+ ^ Fix Check for request forgeries
+ # [#23397] return false; on config tabs throwing javascript error (Al Kent)
+ # [#23370] *Modal Non-flash Uploader does not work
+ # [#23359] com_contact template produces invalid markup (Rouven Weßling)
+
 19-Nov-2010 Jean-Marie Simonet
  # [#23367] The secure parameter in menu item is not used. Thanks Christophe.
  # [#23304] List Weblinks in a Category doesn't show unpublished weblinks for logged in users. Thanks Mark.
  # [#22525] Mod_menu menu image no span with link-title anymore. Thanks Angie.
  $ Deleting libraries strings from lang installation as the library is now loaded there.
+ $ Modifying a string value.
+ # [#23408] Keep UI consistent for default home page in multilingual site. Thanks Christophe.
+ # [#23388] mod_menu. Thanks James, Bill, Rouven
 
 18-Nov-2010 Jean-Marie Simonet
 $ Adding missing strings

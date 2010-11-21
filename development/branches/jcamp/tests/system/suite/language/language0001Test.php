@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: language0001Test.php 19348 2010-11-04 14:18:37Z chdemko $
+ * @version		$Id: language0001Test.php 19604 2010-11-21 05:58:32Z ian $
  * @package		Joomla.SystemTest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -1357,6 +1357,7 @@ class Language0001Test extends SeleniumJoomlaTestCase
     }
     $this->gotoAdmin();
     $this->doAdminLogout();
+	$this->deleteAllVisibleCookies();
   }
 }
-?>
+

@@ -53,20 +53,6 @@ class ProjectsHelper
 		);
 		
 		
-		switch ($option){
-			case 'com_categories':
-				// All Views
-				JToolBarHelper::preferences('com_projects');
-				JToolBarHelper::divider();
-				break;
-			
-			case 'com_projects':
-			default:
-				JToolBarHelper::divider();
-				JToolBarHelper::preferences('com_projects');
-				JToolBarHelper::divider();
-				JToolBarHelper::help('COM_PROJECTS_HELP_PATH', false, 'http://jcamp.3den.org/');	
-		}
 				
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: menu0002Test.php 19285 2010-10-29 10:45:01Z eddieajau $
+ * @version		$Id: menu0002Test.php 19604 2010-11-21 05:58:32Z ian $
  * @package		Joomla.SystemTest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -119,6 +119,7 @@ class Menu0002 extends SeleniumJoomlaTestCase
 
 		$this->doAdminLogout();
 		echo "finishing testSelectTypeWithoutSave\n";
+		$this->deleteAllVisibleCookies();
 	}
 
 	public function testSelectAndSave()
@@ -221,5 +222,6 @@ class Menu0002 extends SeleniumJoomlaTestCase
 		$this->gotoAdmin();
 		$this->doAdminLogout();
 		echo "finishing testSelectAndSave\n";
+		$this->deleteAllVisibleCookies();
 	}
 }
