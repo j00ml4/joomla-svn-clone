@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: article0003Test.php 19285 2010-10-29 10:45:01Z eddieajau $
+ * @version		$Id: article0003Test.php 19604 2010-11-21 05:58:32Z ian $
  * @package		Joomla.SystemTest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -69,6 +69,7 @@ class Article0003 extends SeleniumJoomlaTestCase
 		$this->assertFalse($this->isElementPresent("link=Beginners"));
 
 		echo "Finished testArchivedCategories\n";
+		$this->deleteAllVisibleCookies();
 	}
 
 	function testSingleArticleState()
@@ -166,6 +167,7 @@ class Article0003 extends SeleniumJoomlaTestCase
 		$this->changeState('Getting Started', 'Article Manager', '', 'publish');
 		$this->doAdminLogout();
 		echo "finished testSingleArticleState\n";
+		$this->deleteAllVisibleCookies();
 	}
 
 	function testFeaturedState()
@@ -261,6 +263,8 @@ class Article0003 extends SeleniumJoomlaTestCase
 		$this->assertTrue($this->isElementPresent("link=Joomla!"));
 		$this->assertTrue($this->isElementPresent("link=Beginners"));
 		echo "Finished testFeaturedState\n";
+
+		$this->deleteAllVisibleCookies();
 	}
 
 	function testAllCategoriesState()
@@ -320,6 +324,8 @@ class Article0003 extends SeleniumJoomlaTestCase
 		$this->changeState('Park Site', 'Article Manager', 'Category', 'publish');
 		$this->doAdminLogout();
 		echo "Finished testAllCategoriesState\n";
+
+		$this->deleteAllVisibleCookies();
 	}
 
 	function testCategoryBlogState()
@@ -409,6 +415,8 @@ class Article0003 extends SeleniumJoomlaTestCase
 		$this->changeState('First Blog', 'Article Manager', '', 'publish');
 
 		echo "Finished testCategoryBlogState\n";
+
+		$this->deleteAllVisibleCookies();
 	}
 
 	function testCategoryListState()
@@ -500,6 +508,8 @@ class Article0003 extends SeleniumJoomlaTestCase
 		$this->doAdminLogout();
 
 		echo "Finished testCategoryListState\n";
+
+		$this->deleteAllVisibleCookies();
 	}
 
 }

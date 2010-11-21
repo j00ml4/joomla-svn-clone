@@ -5,23 +5,23 @@
 		label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC">
 		
-		<field name="access_tasks"
+		<field name="task.access"
 			type="accesslevel"
 			label="COM_PROJECTS_FIELD_ACCESS_TASKS_LABEL"
 			description="COM_PROJECTS_FIELD_ACCESS_TASKS_DESC" />
 			
 
-		<field name="access_tickets"
+		<field name="ticket.access"
 			type="accesslevel"
 			label="COM_PROJECTS_FIELD_ACCESS_TICKETS_LABEL"
 			description="COM_PROJECTS_FIELD_ACCESS_TICKETS_DESC" />
 
-		<field name="access_documents"
+		<field name="document.access"
 			type="accesslevel"
 			label="COM_PROJECTS_FIELD_ACCESS_DOCUMENTS_LABEL"
 			description="COM_PROJECTS_FIELD_ACCESS_DOCUMENTS_DESC" />
 		
-		<field name="access_members"
+		<field name="members.access"
 			type="accesslevel"
 			label="COM_PROJECTS_FIELD_ACCESS_MEMBERS_LABEL"
 			description="COM_PROJECTS_FIELD_ACCESS_MEMBERS_DESC" />
@@ -54,7 +54,6 @@
 			type="radio"
 			label="COM_PROJECTS_FIELD_SHOW_BACK_BUTTON_LABEL"
 			description="COM_PROJECTS_FIELD_SHOW_BACK_BUTTON_DESC"
-			class="inputbox"
 			size="1"
 			default="0">
 			<option	value="0">JNO</option>
@@ -70,7 +69,6 @@
 			type="text"
 			label="COM_PROJECTS_FIELD_NUMBER_LISTERS_ITEMS_LABEL"
 			description="COM_PROJECTS_FIELD_NUMBER_LISTERS_ITEMS_DESC"
-			class="inputbox"
 			size="5"
 			default="5" />
 
@@ -78,7 +76,6 @@
 			type="radio"
 			label="COM_PROJECTS_FIELD_LISTING_TASKS_LABEL"
 			description="COM_PROJECTS_FIELD_LISTING_TASKS_DESC"
-			class="inputbox"
 			size="1"
 			default="1">
 			<option	value="">COM_PROJECTS_FIELD_LISTING_TASKS_ALL</option>
@@ -92,7 +89,6 @@
 			type="radio"
 			label="COM_PROJECTS_FIELD_LISTING_TICKETS_LABEL"
 			description="COM_PROJECTS_FIELD_LISTING_TICKETS_DESC"
-			class="inputbox"
 			size="1"
 			default="1">
 			<option	value="">COM_PROJECTS_FIELD_LISTING_TICKETS_ALL</option>
@@ -114,7 +110,7 @@
 		<field name="use_content_plugins"
 			type="checkboxes"
 			label="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_LABEL"
-			class="inputbox"
+			class="radio"
 			description="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_DESC">
 			<option	value="portfolios">COM_PROJECTS_PORTFOLIOS</option>
 			<option	value="projects">COM_PROJECTS_PROJECTS</option>
@@ -126,7 +122,6 @@
 			type="radio"
 			label="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_PORTFOLIOS_LABEL"
 			description="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_PORTFOLIOS_DESC"
-			class="inputbox"
 			size="1"
 			default="1">
 			<option	value="0">JNO</option>
@@ -137,7 +132,6 @@
 			type="radio"
 			label="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_PROJECTS_LABEL"
 			description="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_PROJECTS_DESC"
-			class="inputbox"
 			size="1"
 			default="1">
 			<option	value="0">JNO</option>
@@ -148,7 +142,6 @@
 			type="radio"
 			label="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_DOCUMENTS_LABEL"
 			description="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_DOCUMENTS_DESC"
-			class="inputbox"
 			size="1"
 			default="1">
 			<option	value="0">JNO</option>
@@ -159,7 +152,6 @@
 			type="radio"
 			label="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_TASKS_LABEL"
 			description="COM_PROJECTS_FIELD_USE_CONTENT_PLUGINS_TASKS_DESC"
-			class="inputbox"
 			size="1"
 			default="1">
 			<option	value="0">JNO</option>
@@ -176,18 +168,18 @@
 		
 		<field name="menu_integration"
 			type="checkboxes"
+			class="radio"
 			label="COM_PROJECTS_FIELD_MENU_INTEGRATION_LABEL"
 			description="COM_PROJECTS_FIELD_MENU_INTEGRATION_DESC">
-			<option	value="portfolio">COM_PROJECTS_PORTFOLIOS</option>
-			<option	value="porject">COM_PROJECTS_PROJECTS</option>
-		
+			<option	value="portfolios">COM_PROJECTS_PORTFOLIOS</option>
+			<option	value="porjects">COM_PROJECTS_PROJECTS</option>
 		</field>
 		<field
-				name="menutype"
-				type="menu"
-				label="COM_PROJECTS_FIELD_MENUTYPE_LABEL"
-				description="COM_PROJECTS_FIELD_MENUTYPE_DESC" >
-				<option value="0">JOPTION_DO_NOT_USE</option>
+			name="menutype"
+			type="menu"
+			label="COM_PROJECTS_FIELD_MENUTYPE_LABEL"
+			description="COM_PROJECTS_FIELD_MENUTYPE_DESC" >
+			<option value="0">JOPTION_DO_NOT_USE</option>
 		</field>				
 	</fieldset>
 </config>

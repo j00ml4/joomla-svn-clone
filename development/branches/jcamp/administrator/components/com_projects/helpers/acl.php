@@ -50,7 +50,9 @@ abstract class ProjectsHelperACL {
      */
     public static function getActions($portfolio_id=0, $project_id=0, $record=null) {
         $user = JFactory::getUser();
+        $params	= JComponentHelper::getParams('com_projects');
         $assets = new JObject;
+		
         $is_member = self::isMember($project_id, $user->id);
         $assetName = empty($portfolio_id) ?
                 'com_projects' :
@@ -67,8 +69,9 @@ abstract class ProjectsHelperACL {
         }
 
         // is.authorized
+        $authorisedLevels = &$user->authorisedLevels();
         $is_authorised = (is_object($record) && !empty($record->access))? 
-        	in_array($record->access, $user->authorisedLevels()): 
+        	in_array($record->access, $authorisedLevels): 
         	true; 
         $assets->set('is.authorised', $is_authorised);        
         
@@ -82,12 +85,13 @@ abstract class ProjectsHelperACL {
         $actions = array(
             '.create',
             '.edit',
-            '.delete',
-            '.edit.state'
+        	'.edit.state',
+            '.delete', 
         );
 
         $assets->set('is.member', $is_member);
         foreach ($resources as &$resource) {
+
             // Actions
             foreach ($actions as &$action) {
                 $assets->set($resource . $action,
@@ -100,12 +104,15 @@ abstract class ProjectsHelperACL {
 
             // View
             $assets->set($resource . '.view',
-                    (
-                    $is_member &&
-                    $assets->get($resource . '.create') ||
-                    $assets->get($resource . '.edit') ||
-                    $assets->get($resource . '.delete')
-                    )
+                ( 
+                	in_array($params->get($resource.'.access'), $authorisedLevels) ||   
+            		(
+	                    $is_member &&
+	                    $assets->get($resource . '.create') ||
+	                    $assets->get($resource . '.edit') ||
+	                    $assets->get($resource . '.delete')
+                	)
+                )
             );
         }
          

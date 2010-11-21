@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: acl0005Test.php 19356 2010-11-05 15:50:12Z dextercowley $
+ * @version		$Id: acl0005Test.php 19604 2010-11-21 05:58:32Z ian $
  * @package		Joomla.SystemTest
  * @copyright	Copyright (C) 2005 - 2010 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -423,6 +423,7 @@ class Acl0005Test extends SeleniumJoomlaTestCase
 	    $this->deleteTestUsers();
 		$this->restoreDefaultGlobalPermissions();
 	    $this->doAdminLogOut();
+		$this->deleteAllVisibleCookies();
   }
 }
-?>
+

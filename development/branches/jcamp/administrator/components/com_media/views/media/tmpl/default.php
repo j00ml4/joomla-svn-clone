@@ -40,7 +40,7 @@ defined('_JEXEC') or die;
 				<input class="update-folder" type="hidden" name="folder" id="folder" value="<?php echo $this->state->folder; ?>" />
 			</form>
 
-			<form action="index.php?option=com_media&amp;task=folder.create" name="folderForm" id="folderForm" method="post">
+			<form action="index.php?option=com_media&amp;task=folder.create&amp;tmpl=<?php echo JRequest::getCmd('tmpl','index');?>" name="folderForm" id="folderForm" method="post">
 				<fieldset id="folderview">
 					<div class="view">
 						<iframe src="index.php?option=com_media&amp;view=mediaList&amp;tmpl=component&amp;folder=<?php echo $this->state->folder;?>" id="folderframe" name="folderframe" width="100%" marginwidth="0" marginheight="0" scrolling="auto" frameborder="0"></iframe>
@@ -59,7 +59,7 @@ defined('_JEXEC') or die;
 			<!-- File Upload Form -->
 			<form action="<?php echo JURI::base(); ?>index.php?option=com_media&amp;task=file.upload&amp;tmpl=component&amp;<?php echo $this->session->getName().'='.$this->session->getId(); ?>&amp;<?php echo JUtility::getToken();?>=1&amp;format=json" id="uploadForm" name="uploadForm" method="post" enctype="multipart/form-data">
 				<fieldset id="uploadform">
-										<legend><?php echo JText::_('COM_MEDIA_UPLOAD_FILES'); ?> (<?php echo JText::_('COM_MEDIA_MAXIMUM_SIZE'); ?>:&#160;<?php echo round($this->config->get('upload_maxsize') / (1024 * 1024) , 2 ); ?> MB)</legend>
+					<legend><?php echo $this->config->get('upload_maxsize')=='0' ? JText::_('COM_MEDIA_UPLOAD_FILES_NOLIMIT') : JText::sprintf('COM_MEDIA_UPLOAD_FILES', $this->config->get('upload_maxsize')); ?></legend>
 					<fieldset id="upload-noflash" class="actions">
 						<label for="upload-file" class="hidelabeltxt"><?php echo JText::_('COM_MEDIA_UPLOAD_FILE'); ?></label>
 						<input type="file" id="upload-file" name="Filedata" />

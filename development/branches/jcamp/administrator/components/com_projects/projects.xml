@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="1.6.0">
 	<name>COM_PROJECTS</name>
-	<creationDate>sep 2010</creationDate>
+	<creationDate>11/2010</creationDate>
 	<author>jCamp team</author>
 	<authorEmail>team.jcamp@gmail.com</authorEmail>
 	<authorUrl>jcamp.3den.org</authorUrl>
 	<copyright>(C) 2010 jCamp team. All rights reserved.</copyright>
 	<license>GNU General Public License version 2 or later</license>
-	<version>1.0</version>
+	<version>1.0 Alpha2</version>
 	<description>COM_PROJECTS_DESC</description>
-	<install> <!-- Runs on install -->
-		    <sql>
-		            <file driver="mysql" charset="utf8">sql/install.mysql.sql</file>
-		    </sql>
+	<install> 
+		<!-- Runs on install -->
+		<sql>
+        	<file driver="mysql" charset="utf8">sql/install.mysql.sql</file>
+		</sql>
 	</install>
 	<uninstall> <!-- Runs on uninstall -->
-		    <sql>
-		            <file driver="mysql" charset="utf8">sql/uninstall.mysql.sql</file>
-		    </sql>
+	    <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.sql</file>
+	    </sql>
 	</uninstall>
 	<update> <!-- Runs on update -->
-		    <sql>
-		            <file driver="mysql" charset="utf8">sql/install.mysql.sql</file>
-		    </sql>
+	    <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.sql</file>
+	    </sql>
 	</update>
 	<files folder="site">
 		    <filename>controller.php</filename>
@@ -38,17 +39,17 @@
 		<folder>css</folder>
 		<folder>images</folder>
 	</media>
-	<languages folder="site/language">
-		<language tag="en-GB">en-GB.com_projects.ini</language>
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB.com_projects.ini</language>
 	</languages>
 
 	<administration>
 		    <menu link="index.php?option=com_projects">COM_PROJECTS</menu> 
 		    <submenu>
 		            <menu link="option=com_projects" img="class:article">COM_PROJECTS_PROJECTS</menu>
-		            <menu link="option=com_categories&amp;extension=com_projects" view="categories" img="class:category" alt="Portfolios">COM_PROJECTS_PORTFOLIOS</menu>
-		            <menu link="option=com_categories&amp;extension=com_projects.document" view="categories" img="class:category" alt="Document Categories">COM_PROJECTS_DOCUMENT_CATEGORIES</menu>
-					<menu link="option=com_categories&amp;extension=com_projects.task" view="categories" img="class:category" alt="Task Categories">COM_PROJECTS_TASK_CATEGORIES</menu>
+		            <menu link="option=com_categories&amp;view=categories&amp;extension=com_projects" img="class:category" alt="Portfolios">COM_PROJECTS_PORTFOLIOS</menu>
+		            <menu link="option=com_categories&amp;view=categories&amp;extension=com_projects.document" img="class:category" alt="COM_PROJECTS_DOCUMENT_CATEGORIES_DESC">COM_PROJECTS_DOCUMENT_CATEGORIES</menu>
+					<menu link="option=com_categories&amp;view=categories&amp;extension=com_projects.task" img="class:category" alt="COM_PROJECTS_TASK_CATEGORIES_DESC">COM_PROJECTS_TASK_CATEGORIES</menu>
 		    </submenu>  
 		    <files folder="admin">
 		            <filename>index.html</filename>
@@ -62,9 +63,9 @@
 		            <folder>tables</folder>
 					<folder>views</folder>
 		    </files>
-	    	<languages folder="admin/language">
-				<language tag="en-GB">en-GB.com_projects.ini</language>
-				<language tag="en-GB">en-GB.com_projects.sys.ini</language>
+	    	<languages folder="admin">
+				<language tag="en-GB">language/en-GB.com_projects.ini</language>
+				<language tag="en-GB">language/en-GB.com_projects.sys.ini</language>
 			</languages>
 	</administration>
 </extension>

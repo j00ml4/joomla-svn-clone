@@ -76,5 +76,9 @@ class ProjectsViewProjects extends JView
 		} else if ($canDo->get('core.edit.state')) {
 			JToolBarHelper::trash('projects.trash','JTOOLBAR_TRASH');
 		}
+		JToolBarHelper::divider();
+		JToolBarHelper::preferences('com_projects');
+		JToolBarHelper::divider();
+		JToolBarHelper::help('COM_PROJECTS_HELP_PATH', false, 'http://jcamp.3den.org/');	
 	}
 }
