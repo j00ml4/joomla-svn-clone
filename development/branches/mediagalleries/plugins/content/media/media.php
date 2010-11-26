@@ -214,6 +214,20 @@ class plgContentMedia extends JPlugin
 		// AutoStart
 		$autostart = (boolean)$autostart;
 		
+		$host=strtolower(parse_url($media,PHP_URL_HOST));
+		$uexplode= explode('.',$host);
+		$host='';
+		foreach($uexplode as $temp){
+			if(strcmp($temp,'www')){
+				//Stripping Off WWW
+			$host.=$temp;
+			}
+		} // Now host contains only what we want...like www.youtube.com is now youtubecom :D
+		
+		if(!file_exists("types".DS.$host.".php")){
+			return $host; 
+		}
+		/*
 		//The show begins...
 		$local=strtolower($_SERVER['SERVER_NAME']);
 		$host=strtolower(parse_url($media,PHP_URL_HOST)); //Get the host of the file...
@@ -257,7 +271,7 @@ class plgContentMedia extends JPlugin
 			
 			//Else give an error...
 		}
-		
+		*/
 	}
 
 
