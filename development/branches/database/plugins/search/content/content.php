@@ -137,32 +137,32 @@ class plgSearchContent extends JPlugin
 		if ($sContent && $limit > 0)
 		{
 			$query->clear();
-      //sqlsrv changes
-      $case_when = ' CASE WHEN ';
-      $case_when .= $query->charLength('a.alias');
-      $case_when .= ' THEN ';
-      $a_id = $query->castToChar('a.id');
-      $case_when .= $query->concat(array($a_id, 'a.alias'), ':');
-      $case_when .= ' ELSE ';
-      $case_when .= $a_id.' END as slug';   
-      
-      $case_when1 = ' CASE WHEN ';
-      $case_when1 .= $query->charLength('c.alias');
-      $case_when .= ' THEN ';
-      $c_id = $query->castToChar('c.id');
-      $case_when1 .= $query->concat(array($c_id, 'c.alias'), ':');
-      $case_when1 .= ' ELSE ';
-      $case_when1 .= $c_id.' END as catslug'; 
-      
+			//sqlsrv changes
+			$case_when = ' CASE WHEN ';
+			$case_when .= $query->charLength('a.alias');
+			$case_when .= ' THEN ';
+			$a_id = $query->castToChar('a.id');
+			$case_when .= $query->concat(array($a_id, 'a.alias'), ':');
+			$case_when .= ' ELSE ';
+			$case_when .= $a_id.' END as slug';
+
+			$case_when1 = ' CASE WHEN ';
+			$case_when1 .= $query->charLength('c.alias');
+			$case_when1 .= ' THEN ';
+			$c_id = $query->castToChar('c.id');
+			$case_when1 .= $query->concat(array($c_id, 'c.alias'), ':');
+			$case_when1 .= ' ELSE ';
+			$case_when1 .= $c_id.' END as catslug';
+
 			$query->select('a.title AS title, a.metadesc, a.metakey, a.created AS created, '
-						.'CONCAT(a.introtext, a.fulltext) AS text, c.title AS section, '
-							.$case_when.','.$case_when1.', '.'\'2\' AS browsernav');
+			.'CONCAT(a.introtext, a.fulltext) AS text, c.title AS section, '
+			.$case_when.','.$case_when1.', '.'\'2\' AS browsernav');
 			$query->from('#__content AS a');
 			$query->innerJoin('#__categories AS c ON c.id=a.catid');
 			$query->where('('. $where .')' . 'AND a.state=1 AND c.published = 1 AND a.access IN ('.$groups.') '
-						.'AND c.access IN ('.$groups.') '
-						.'AND (a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).') '
-						.'AND (a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')' );
+			.'AND c.access IN ('.$groups.') '
+			.'AND (a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).') '
+			.'AND (a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')' );
 			$query->group('a.id');
 			$query->order($order);
 
@@ -192,34 +192,34 @@ class plgSearchContent extends JPlugin
 			$searchArchived = JText::_('JARCHIVED');
 
 			$query->clear();
-      //sqlsrv changes
-      $case_when = ' CASE WHEN ';
-      $case_when .= $query->charLength('a.alias');
-      $case_when .= ' THEN ';
-      $a_id = $query->castToChar('a.id');
-      $case_when .= $query->concat(array($a_id, 'a.alias'), ':');
-      $case_when .= ' ELSE ';
-      $case_when .= $a_id.' END as slug';   
-      
-      $case_when1 = ' CASE WHEN ';
-      $case_when1 .= $query->charLength('c.alias');
-      $case_when .= ' THEN ';
-      $c_id = $query->castToChar('c.id');
-      $case_when1 .= $query->concat(array($c_id, 'c.alias'), ':');
-      $case_when1 .= ' ELSE ';
-      $case_when1 .= $c_id.' END as catslug'; 
-      
+			//sqlsrv changes
+			$case_when = ' CASE WHEN ';
+			$case_when .= $query->charLength('a.alias');
+			$case_when .= ' THEN ';
+			$a_id = $query->castToChar('a.id');
+			$case_when .= $query->concat(array($a_id, 'a.alias'), ':');
+			$case_when .= ' ELSE ';
+			$case_when .= $a_id.' END as slug';
+
+			$case_when1 = ' CASE WHEN ';
+			$case_when1 .= $query->charLength('c.alias');
+			$case_when1 .= ' THEN ';
+			$c_id = $query->castToChar('c.id');
+			$case_when1 .= $query->concat(array($c_id, 'c.alias'), ':');
+			$case_when1 .= ' ELSE ';
+			$case_when1 .= $c_id.' END as catslug';
+
 			$query->select('a.title AS title, a.metadesc, a.metakey, a.created AS created, '
-			      .$query->concat(array("a.introtext", "a.fulltext")).' AS text,'
-						.$case_when.','.$case_when1.', '
-						.'c.title AS section, \'2\' AS browsernav');
-						//.'CONCAT_WS("/", c.title) AS section, \'2\' AS browsernav' );
+			.$query->concat(array("a.introtext", "a.fulltext")).' AS text,'
+			.$case_when.','.$case_when1.', '
+			.'c.title AS section, \'2\' AS browsernav');
+			//.'CONCAT_WS("/", c.title) AS section, \'2\' AS browsernav' );
 			$query->from('#__content AS a');
 			$query->innerJoin('#__categories AS c ON c.id=a.catid AND c.access IN ('. $groups .')');
 			$query->where('('. $where .') AND a.state = 2 AND c.published = 1 AND a.access IN ('. $groups
-				.') AND c.access IN ('. $groups .') '
-				.'AND (a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).') '
-				.'AND (a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')' );
+			.') AND c.access IN ('. $groups .') '
+			.'AND (a.publish_up = '.$db->Quote($nullDate).' OR a.publish_up <= '.$db->Quote($now).') '
+			.'AND (a.publish_down = '.$db->Quote($nullDate).' OR a.publish_down >= '.$db->Quote($now).')' );
 			$query->order($order);
 
 
