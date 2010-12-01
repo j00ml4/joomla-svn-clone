@@ -64,7 +64,7 @@ class BannersModelBanners extends JModelList
 				'a.language, a.publish_up, a.publish_down'
 			)
 		);
-		$query->from($db->nameQuote('#__banners'),' AS a');
+		$query->from($db->nameQuote('#__banners').' AS a');
 
 		// Join over the language
 		$query->select('l.title AS language_title');
