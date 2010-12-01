@@ -72,23 +72,23 @@ class ContactModelContact extends JModelItem
 				$db = $this->getDbo();
 				$query = $db->getQuery(true);
 
-        //sqlsrv changes
-        $case_when = ' CASE WHEN ';
-        $case_when .= $query->charLength('a.alias');
-        $case_when .= ' THEN ';
-        $a_id = $query->castToChar('a.id');
-        $case_when .= $query->concat(array($a_id, 'a.alias'), ':');
-        $case_when .= ' ELSE ';
-        $case_when .= $a_id.' END as slug';   
-        
-        $case_when1 = ' CASE WHEN ';
-        $case_when1 .= $query->charLength('c.alias');
-        $case_when1 .= ' THEN ';
-        $c_id = $query->castToChar('c.id');
-        $case_when1 .= $query->concat(array($c_id, 'c.alias'), ':');
-        $case_when1 .= ' ELSE ';
-        $case_when1 .= $c_id.' END as catslug';
-        
+				//sqlsrv changes
+				$case_when = ' CASE WHEN ';
+				$case_when .= $query->charLength('a.alias');
+				$case_when .= ' THEN ';
+				$a_id = $query->castToChar('a.id');
+				$case_when .= $query->concat(array($a_id, 'a.alias'), ':');
+				$case_when .= ' ELSE ';
+				$case_when .= $a_id.' END as slug';
+
+				$case_when1 = ' CASE WHEN ';
+				$case_when1 .= $query->charLength('c.alias');
+				$case_when1 .= ' THEN ';
+				$c_id = $query->castToChar('c.id');
+				$case_when1 .= $query->concat(array($c_id, 'c.alias'), ':');
+				$case_when1 .= ' ELSE ';
+				$case_when1 .= $c_id.' END as catslug';
+
 				$query->select($this->getState('item.select', 'a.*') . ','.$case_when.','.$case_when1);
 				$query->from('#__contact_details AS a');
 
@@ -179,7 +179,7 @@ class ContactModelContact extends JModelItem
 				$this->_item[$pk]->profile = $extendedData->profile;
 			}
 		}
-  		return $this->_item[$pk];
+		return $this->_item[$pk];
 
 	}
 
@@ -195,22 +195,22 @@ class ContactModelContact extends JModelItem
 
 		$query	= $db->getQuery(true);
 		if ($pk) {
-		  //sqlsrv changes
-      $case_when = ' CASE WHEN ';
-      $case_when .= $query->charLength('a.alias');
-      $case_when .= ' THEN ';
-      $a_id = $query->castToChar('a.id');
-      $case_when .= $query->concat(array($a_id, 'a.alias'), ':');
-      $case_when .= ' ELSE ';
-      $case_when .= $a_id.' END as slug';   
-        
-      $case_when1 = ' CASE WHEN ';
-      $case_when1 .= $query->charLength('cc.alias');
-      $case_when1 .= ' THEN ';
-      $c_id = $query->castToChar('cc.id');
-      $case_when1 .= $query->concat(array($c_id, 'cc.alias'), ':');
-      $case_when1 .= ' ELSE ';
-      $case_when1 .= $c_id.' END as catslug';
+			//sqlsrv changes
+			$case_when = ' CASE WHEN ';
+			$case_when .= $query->charLength('a.alias');
+			$case_when .= ' THEN ';
+			$a_id = $query->castToChar('a.id');
+			$case_when .= $query->concat(array($a_id, 'a.alias'), ':');
+			$case_when .= ' ELSE ';
+			$case_when .= $a_id.' END as slug';
+
+			$case_when1 = ' CASE WHEN ';
+			$case_when1 .= $query->charLength('cc.alias');
+			$case_when1 .= ' THEN ';
+			$c_id = $query->castToChar('cc.id');
+			$case_when1 .= $query->concat(array($c_id, 'cc.alias'), ':');
+			$case_when1 .= ' ELSE ';
+			$case_when1 .= $c_id.' END as catslug';
 			$query->select('a.*, cc.access as category_access, cc.title as category_name, '
 			.$case_when.','.$case_when1);
 
@@ -231,17 +231,17 @@ class ContactModelContact extends JModelItem
 			try {
 				$db->setQuery($query);
 				$result = $db->loadObject();
-	
+
 				if ($error = $db->getErrorMsg()) {
 					throw new Exception($error);
 				}
-	
+
 				if (empty($result)) {
-						throw new JException(JText::_('COM_CONTACT_ERROR_CONTACT_NOT_FOUND'), 404);
+					throw new JException(JText::_('COM_CONTACT_ERROR_CONTACT_NOT_FOUND'), 404);
 				}
 
-			// If we are showing a contact list, then the contact parameters take priority
-			// So merge the contact parameters with the merged parameters
+				// If we are showing a contact list, then the contact parameters take priority
+				// So merge the contact parameters with the merged parameters
 				if ($this->getState('params')->get('show_contact_list')) {
 					$registry = new JRegistry;
 					$registry->loadJSON($result->params);
@@ -265,29 +265,29 @@ class ContactModelContact extends JModelItem
 				$articles = $db->loadObjectList();
 				$result->articles = $articles;
 
-			//get the profile information for the linked user
-			if ($result) {
+				//get the profile information for the linked user
+				if ($result) {
 					require_once JPATH_ADMINISTRATOR.DS.'components'.DS.'com_users'.DS.'models'.DS.'user.php';
 					$userModel = JModel::getInstance('User','UsersModel',array('ignore_request' => true));
-						$data = $userModel->getItem((int)$result->user_id);
-			
+					$data = $userModel->getItem((int)$result->user_id);
+						
 					JPluginHelper::importPlugin('user');
 					$form = new JForm('com_users.profile');
 					// Get the dispatcher.
 					$dispatcher	= JDispatcher::getInstance();
-	
+
 					// Trigger the form preparation event.
 					$dispatcher->trigger('onContentPrepareForm', array($form, $data));
 					// Trigger the data preparation event.
 					$dispatcher->trigger('onContentPrepareData', array('com_users.profile', $data));
-	
+
 					// Load the data into the form after the plugins have operated.
 					$form->bind($data);
 					$result->profile = $form;
 				}
 
-			$this->contact = $result;
-			return $result;
+				$this->contact = $result;
+				return $result;
 			}
 		}
 	}
