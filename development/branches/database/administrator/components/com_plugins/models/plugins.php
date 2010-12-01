@@ -114,7 +114,7 @@ class PluginsModelPlugins extends JModelList
 			if ($ordering == 'ordering') {
 				$query->order('a.folder ASC');
 			}
-			$query->order($this->_db->nameQuote($ordering) . ' ' . $this->getState('list.direction'));
+			$query->order($ordering . ' ' . $this->getState('list.direction'));
 			if($ordering == 'folder') {
 				$query->order('a.ordering ASC');
 			}
