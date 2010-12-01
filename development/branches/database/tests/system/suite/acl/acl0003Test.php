@@ -33,7 +33,7 @@ class Acl0003Test extends SeleniumJoomlaTestCase
 	    $this->waitForPageToLoad("30000");
 	    $component = 'Weblinks';
 	    $actions = array('Create', 'Delete', 'Edit', 'Edit State');
-	    $permissions = array ('Denied', 'Denied', 'Denied', 'Denied');
+	    $permissions = array ('Locked', 'Locked', 'Locked', 'Locked');
 	    $this->setPermissions($component, $groupName, $actions, $permissions);
 		$this->doAdminLogout();
 
