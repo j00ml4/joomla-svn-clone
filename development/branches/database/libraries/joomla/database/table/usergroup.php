@@ -163,7 +163,7 @@ class JTableUsergroup extends JTable
 		// Select the category ID and it's children
 		$db->setQuery(
 			'SELECT c.id' .
-			' FROM `'.$this->_tbl.'` AS c' .
+			' FROM '.$db->nameQuote($this->_tbl).' AS c' .
 			' WHERE c.lft >= '.(int) $this->lft.' AND c.rgt <= '.$this->rgt
 		);
 		$ids = $db->loadResultArray();
@@ -176,7 +176,7 @@ class JTableUsergroup extends JTable
 
 		// Delete the category and it's children
 		$db->setQuery(
-			'DELETE FROM `'.$this->_tbl.'`' .
+			'DELETE FROM '.$db->nameQuote($this->_tbl).
 			' WHERE id IN ('.implode(',', $ids).')'
 			);
 			if (!$db->query()) {
@@ -227,8 +227,8 @@ class JTableUsergroup extends JTable
 
 			// Delete the user to usergroup mappings for the group(s) from the database.
 			$db->setQuery(
-			'DELETE FROM `#__user_usergroup_map`' .
-			' WHERE `group_id` IN ('.implode(',', $ids).')'
+			'DELETE FROM '.$db->nameQuote('#__user_usergroup_map') .
+			' WHERE '.$db->nameQuote('group_id').' IN ('.implode(',', $ids).')'
 			);
 			$db->query();
 

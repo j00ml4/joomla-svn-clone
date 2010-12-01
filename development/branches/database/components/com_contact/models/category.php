@@ -89,24 +89,24 @@ class ContactModelCategory extends JModelList
 
 		// Select required fields from the categories.
 		//sqlsrv changes
-    $case_when = ' CASE WHEN ';
-    $case_when .= $query->charLength('a.alias');
-    $case_when .= ' THEN ';
-    $a_id = $query->castToChar('a.id');
-    $case_when .= $query->concat(array($a_id, 'a.alias'), ':');
-    $case_when .= ' ELSE ';
-    $case_when .= $a_id.' END as slug';   
-    
-    $case_when1 = ' CASE WHEN ';
-    $case_when1 .= $query->charLength('c.alias');
-    $case_when1 .= ' THEN ';
-    $c_id = $query->castToChar('c.id');
-    $case_when1 .= $query->concat(array($c_id, 'c.alias'), ':');
-    $case_when1 .= ' ELSE ';
-    $case_when1 .= $c_id.' END as catslug'; 
-    
+		$case_when = ' CASE WHEN ';
+		$case_when .= $query->charLength('a.alias');
+		$case_when .= ' THEN ';
+		$a_id = $query->castToChar('a.id');
+		$case_when .= $query->concat(array($a_id, 'a.alias'), ':');
+		$case_when .= ' ELSE ';
+		$case_when .= $a_id.' END as slug';
+
+		$case_when1 = ' CASE WHEN ';
+		$case_when1 .= $query->charLength('c.alias');
+		$case_when1 .= ' THEN ';
+		$c_id = $query->castToChar('c.id');
+		$case_when1 .= $query->concat(array($c_id, 'c.alias'), ':');
+		$case_when1 .= ' ELSE ';
+		$case_when1 .= $c_id.' END as catslug';
+
 		$query->select($this->getState('list.select', 'a.*') . ','.$case_when.','.$case_when1);
-		$query->from('`#__contact_details` AS a');
+		$query->from($db->nameQuote('#__contact_details').' AS a');
 		$query->where('a.access IN ('.$groups.')');
 
 		// Filter by category.
@@ -129,7 +129,7 @@ class ContactModelCategory extends JModelList
 			$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
 			$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
 		}
-		
+
 		// Filter by language
 		if ($this->getState('filter.language')) {
 			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
@@ -176,11 +176,11 @@ class ContactModelCategory extends JModelList
 		$id = JRequest::getVar('id', 0, '', 'int');
 		$this->setState('category.id', $id);
 
-		$user = JFactory::getUser();	
+		$user = JFactory::getUser();
 		if ((!$user->authorise('core.edit.state', 'com_contact')) &&  (!$user->authorise('core.edit', 'com_contact'))){
 			// limit to published for people who can't edit or edit.state.
 			$this->setState('filter.published', 1);
-			
+				
 			// Filter by start and end dates.
 			$this->setState('filter.publish_date', true);
 		}

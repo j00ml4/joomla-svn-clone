@@ -165,8 +165,8 @@ class JInstallerModule extends JAdapterInstance
 		// If it is, then update the table because if the files aren't there
 		// we can assume that it was (badly) uninstalled
 		// If it isn't, add an entry to extensions
-		$query = 'SELECT `extension_id`' .
-				' FROM `#__extensions` ' .
+		$query = 'SELECT '.$db->nameQuote('extension_id') .
+				' FROM '.$db->nameQuote('#__extensions').
 				' WHERE element = '.$db->Quote($element) .
 				' AND client_id = '.(int)$clientId;
 		$db->setQuery($query);
@@ -684,8 +684,8 @@ class JInstallerModule extends JAdapterInstance
 		$this->parent->removeFiles($this->manifest->languages, $row->client_id);
 
 		// Lets delete all the module copies for the type we are uninstalling
-		$query = 'SELECT `id`' .
-				' FROM `#__modules`' .
+		$query = 'SELECT '.$db->nameQuote('id') .
+				' FROM '.$db->nameQuote('#__modules') .
 				' WHERE module = '.$db->Quote($row->element) .
 				' AND client_id = '.(int)$row->client_id;
 		$db->setQuery($query);
@@ -740,7 +740,7 @@ class JInstallerModule extends JAdapterInstance
 
 		// Now we will no longer need the module object, so lets delete it and free up memory
 		$row->delete($row->extension_id);
-		$query = 'DELETE FROM `#__modules` WHERE module = '.$db->Quote($row->element) . ' AND client_id = ' . $row->client_id;
+		$query = 'DELETE FROM '.$db->nameQuote('#__modules').' WHERE module = '.$db->Quote($row->element) . ' AND client_id = ' . $row->client_id;
 		$db->setQuery($query);
 
 		try
@@ -779,7 +779,7 @@ class JInstallerModule extends JAdapterInstance
 
 		// Remove the entry from the #__modules_menu table
 		$query = 'DELETE' .
-				' FROM `#__modules_menu`' .
+				' FROM '.$db->nameQuote('#__modules_menu') .
 				' WHERE moduleid='.(int)$arg['id'];
 		$db->setQuery($query);
 
@@ -809,7 +809,7 @@ class JInstallerModule extends JAdapterInstance
 
 		// Remove the entry from the #__modules table
 		$query = 'DELETE' .
-				' FROM `#__modules`' .
+				' FROM '.$db->nameQuote('#__modules') .
 				' WHERE id='.(int)$arg['id'];
 		$db->setQuery($query);
 		try

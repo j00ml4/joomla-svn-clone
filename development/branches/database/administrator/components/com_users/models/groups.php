@@ -79,16 +79,16 @@ class UsersModelGroups extends JModelList
 				'a.*'
 			)
 		);
-		$query->from('`#__usergroups` AS a');
+		$query->from($db->nameQuote('#__usergroups').' AS a');
 
 		// Add the level in the tree.
 		$query->select('COUNT(DISTINCT c2.id) AS level');
-		$query->join('LEFT OUTER', '`#__usergroups` AS c2 ON a.lft > c2.lft AND a.rgt < c2.rgt');
+		$query->join('LEFT OUTER', $db->nameQuote('#__usergroups').' AS c2 ON a.lft > c2.lft AND a.rgt < c2.rgt');
 		$query->group('a.id, a.lft, a.rgt, map.group_id, a.parent_id, a.title');
 
 		// Count the objects in the user group.
 		$query->select('COUNT(DISTINCT map.user_id) AS user_count');
-		$query->join('LEFT', '`#__user_usergroup_map` AS map ON map.group_id = a.id');
+		$query->join('LEFT', $db->nameQuote('#__user_usergroup_map').' AS map ON map.group_id = a.id');
 		$query->group('a.id, a.lft, a.rgt, map.group_id, a.parent_id, a.title');
 
 		// Filter the comments over the search string if set.

@@ -72,7 +72,7 @@ class BannersTableBanner extends JTable
 			$this->ordering = 0;
 		} else if (empty($this->ordering)) {
 			// Set ordering to last if ordering was 0
-			$this->ordering = self::getNextOrder('`catid`=' . $this->_db->Quote($this->catid).' AND state>=0');
+			$this->ordering = self::getNextOrder($this->_db->nameQuote('catid').'=' . $this->_db->Quote($this->catid).' AND state>=0');
 		}
 
 		return true;
@@ -177,7 +177,7 @@ class BannersTableBanner extends JTable
 			if ($oldrow->state>=0 && ($this->state < 0 || $oldrow->catid != $this->catid))
 			{
 				// Reorder the oldrow
-				$this->reorder('`catid`=' . $this->_db->Quote($oldrow->catid).' AND state>=0');
+				$this->reorder($this->_db->nameQuote('catid').'=' . $this->_db->Quote($oldrow->catid).' AND state>=0');
 			}
 		}
 		return count($this->getErrors())==0;

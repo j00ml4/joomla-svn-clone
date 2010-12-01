@@ -303,7 +303,7 @@ class ContentModelForm extends JModelForm
 
 				// Featuring.
 				$this->_db->setQuery(
-					'INSERT INTO #__content_frontpage (`content_id`, `ordering`)' .
+					'INSERT INTO #__content_frontpage ('.$this->_db->nameQuote('content_id').', '.$this->_db->nameQuote('ordering').')' .
 					' VALUES ('.$table->id.',1)'
 				);
 				if (!$this->_db->query()) {

@@ -865,24 +865,25 @@ class JApplication extends JObject
 			// The modulus introduces a little entropy, making the flushing less accurate
 			// but fires the query less than half the time.
 			$db->setQuery(
-				'DELETE FROM `#__session`' .
-				' WHERE `time` < '.(int) ($time - $session->getExpire())
+				'DELETE FROM '.$db->nameQuote('#__session') .
+				' WHERE '.$db->nameQuote('time').' < '.(int) ($time - $session->getExpire())
 			);
 			$db->query();
 		}
 
 		// Check to see the the session already exists.
 		$db->setQuery(
-			'SELECT `session_id`' .
-			' FROM `#__session`' .
-			' WHERE `session_id` = '.$db->quote($session->getId())
+			'SELECT '.$db->nameQuote('session_id') .
+			' FROM '.$db->nameQuote('#__session') .
+			' WHERE '.$db->nameQuote('session_id').' = '.$db->quote($session->getId())
 		);
 		$exists = $db->loadResult();
 
 		// If the session doesn't exist initialise it.
 		if (!$exists) {
 			$db->setQuery(
-				'INSERT INTO `#__session` (`session_id`, `client_id`, `time`)' .
+				'INSERT INTO '.$db->nameQuote('#__session').' ('.$db->nameQuote('session_id').
+				', '.$db->nameQuote('client_id').', '.$db->nameQuote('time').')' .
 				' VALUES ('.$db->quote($session->getId()).', '.(int) $this->getClientId().', '.(int) time().')'
 			);
 

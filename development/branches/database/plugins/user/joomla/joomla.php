@@ -41,8 +41,8 @@ class plgUserJoomla extends JPlugin
 
 		$db = JFactory::getDbo();
 		$db->setQuery(
-			'DELETE FROM `#__session`' .
-			' WHERE `userid` = '.(int) $user['id']
+			'DELETE FROM '.$db->nameQuote('#__session') .
+			' WHERE '.$db->nameQuote('userid').' = '.(int) $user['id']
 		);
 		$db->Query();
 
@@ -163,11 +163,11 @@ class plgUserJoomla extends JPlugin
 		// Update the user related fields for the Joomla sessions table.
 		$db = JFactory::getDBO();
 		$db->setQuery(
-			'UPDATE `#__session`' .
-			' SET `guest` = '.$db->quote($instance->get('guest')).',' .
-			'	`username` = '.$db->quote($instance->get('username')).',' .
-			'	`userid` = '.(int) $instance->get('id') .
-			' WHERE `session_id` = '.$db->quote($session->getId())
+			'UPDATE '.$db->nameQuote('#__session') .
+			' SET '.$db->nameQuote('guest').' = '.$db->quote($instance->get('guest')).',' .
+			'	'.$db->nameQuote('username').' = '.$db->quote($instance->get('username')).',' .
+			'	'.$db->nameQuote('userid').' = '.(int) $instance->get('id') .
+			' WHERE '.$db->nameQuote('session_id').' = '.$db->quote($session->getId())
 		);
 		$db->query();
 

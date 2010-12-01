@@ -134,8 +134,8 @@ class JTableExtension extends JTable
 
 		// Update the publishing state for rows with the given primary keys.
 		$this->_db->setQuery(
-			'UPDATE `'.$this->_tbl.'`' .
-			' SET `enabled` = '.(int) $state .
+			'UPDATE '.$this->_db->nameQuote($this->_tbl).
+			' SET '.$this->_db->nameQuote('enabled').' = '.(int) $state .
 			' WHERE ('.$where.')' .
 			$checkin
 		);

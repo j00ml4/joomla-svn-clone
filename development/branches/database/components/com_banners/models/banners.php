@@ -75,90 +75,90 @@ class BannersModelBanners extends JModelList
 			'a.params as params,'.
 			'a.custombannercode as custombannercode,'.
 			'a.track_impressions as track_impressions'
-		);
-		$query->from('#__banners as a');
-		$query->where('a.state=1');
-		$query->where($query->now().' >= a.publish_up OR a.publish_up = '.$nullDate.')');
-		$query->where($query->now().' <= a.publish_down OR a.publish_down = '.$nullDate.')');
-		$query->where('(a.imptotal = 0 OR a.impmade = a.imptotal)');
+			);
+			$query->from('#__banners as a');
+			$query->where('a.state=1');
+			$query->where($query->now().' >= a.publish_up OR a.publish_up = '.$nullDate.')');
+			$query->where($query->now().' <= a.publish_down OR a.publish_down = '.$nullDate.')');
+			$query->where('(a.imptotal = 0 OR a.impmade = a.imptotal)');
 
-		if ($cid) {
-			$query->where('a.cid = ' . (int) $cid);
-			$query->join('LEFT', '#__banner_clients AS cl ON cl.id = a.cid');
-			$query->select('cl.track_impressions as client_track_impressions');
-			$query->where('cl.state = 1');
-		}
-
-		// Filter by a single or group of categories
-		$categoryId = $this->getState('filter.category_id');
-		$catid		= $this->getState('filter.category_id', array());
-
-		if (is_numeric($categoryId)) {
-			$type = $this->getState('filter.category_id.include', true) ? '= ' : '<> ';
-
-			// Add subcategory check
-			$includeSubcategories = $this->getState('filter.subcategories', false);
-			$categoryEquals = 'a.catid '.$type.(int) $categoryId;
-
-			if ($includeSubcategories) {
-				$levels = (int) $this->getState('filter.max_category_levels', '1');
-				// Create a subquery for the subcategory list
-				$subQuery = $db->getQuery(true);
-				$subQuery->select('sub.id');
-				$subQuery->from('#__categories as sub');
-				$subQuery->join('INNER', '#__categories as this ON sub.lft > this.lft AND sub.rgt < this.rgt');
-				$subQuery->where('this.id = '.(int) $categoryId);
-				$subQuery->where('sub.level <= this.level + '.$levels);
-
-				// Add the subquery to the main query
-				$query->where('('.$categoryEquals.' OR a.catid IN ('.$subQuery->__toString().'))');
-			} else {
-				$query->where($categoryEquals);
+			if ($cid) {
+				$query->where('a.cid = ' . (int) $cid);
+				$query->join('LEFT', '#__banner_clients AS cl ON cl.id = a.cid');
+				$query->select('cl.track_impressions as client_track_impressions');
+				$query->where('cl.state = 1');
 			}
-		} else if ((is_array($categoryId)) && (count($categoryId) > 0)) {
-			JArrayHelper::toInteger($categoryId);
-			$categoryId = implode(',', $categoryId);
-			$type = $this->getState('filter.category_id.include', true) ? 'IN' : 'NOT IN';
-			$query->where('a.catid '.$type.' ('.$categoryId.')');
-		}
 
-		if ($tagSearch) {
+			// Filter by a single or group of categories
+			$categoryId = $this->getState('filter.category_id');
+			$catid		= $this->getState('filter.category_id', array());
 
-			if (count($keywords) == 0) {
-				$query->where('0');
-			} else {
-				$temp = array();
-				$config = JComponentHelper::getParams('com_banners');
-				$prefix = $config->get('metakey_prefix');
+			if (is_numeric($categoryId)) {
+				$type = $this->getState('filter.category_id.include', true) ? '= ' : '<> ';
 
-				foreach ($keywords as $keyword) {
-					$keyword=trim($keyword);
-					$condition1 = "a.own_prefix=1 AND  a.metakey_prefix=SUBSTRING('".$keyword."',1,LENGTH( a.metakey_prefix)) OR a.own_prefix=0 AND cl.own_prefix=1 AND cl.metakey_prefix=SUBSTRING('".$keyword."',1,LENGTH(cl.metakey_prefix)) OR a.own_prefix=0 AND cl.own_prefix=0 AND ".($prefix==substr($keyword,0,strlen($prefix))?'1':'0');
+				// Add subcategory check
+				$includeSubcategories = $this->getState('filter.subcategories', false);
+				$categoryEquals = 'a.catid '.$type.(int) $categoryId;
 
-					$condition2="a.metakey REGEXP '[[:<:]]".$db->getEscaped($keyword) . "[[:>:]]'";
+				if ($includeSubcategories) {
+					$levels = (int) $this->getState('filter.max_category_levels', '1');
+					// Create a subquery for the subcategory list
+					$subQuery = $db->getQuery(true);
+					$subQuery->select('sub.id');
+					$subQuery->from('#__categories as sub');
+					$subQuery->join('INNER', '#__categories as this ON sub.lft > this.lft AND sub.rgt < this.rgt');
+					$subQuery->where('this.id = '.(int) $categoryId);
+					$subQuery->where('sub.level <= this.level + '.$levels);
 
-					if ($cid) {
-						$condition2.=" OR cl.metakey REGEXP '[[:<:]]".$db->getEscaped($keyword) . "[[:>:]]'";
-					}
-
-					if ($catid) {
-						$condition2.=" OR cat.metakey REGEXP '[[:<:]]".$db->getEscaped($keyword) . "[[:>:]]'";
-					}
-
-					$temp[]="($condition1) AND ($condition2)";
+					// Add the subquery to the main query
+					$query->where('('.$categoryEquals.' OR a.catid IN ('.$subQuery->__toString().'))');
+				} else {
+					$query->where($categoryEquals);
 				}
-				$query->where('(' . implode(' OR ', $temp). ')');
+			} else if ((is_array($categoryId)) && (count($categoryId) > 0)) {
+				JArrayHelper::toInteger($categoryId);
+				$categoryId = implode(',', $categoryId);
+				$type = $this->getState('filter.category_id.include', true) ? 'IN' : 'NOT IN';
+				$query->where('a.catid '.$type.' ('.$categoryId.')');
 			}
-		}
 
-		// Filter by language
-		if ($this->getState('filter.language')) {
-			$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
-		}
+			if ($tagSearch) {
 
-		$query->order('a.sticky DESC,'. ($randomise ? 'RAND()' : 'a.ordering'));
+				if (count($keywords) == 0) {
+					$query->where('0');
+				} else {
+					$temp = array();
+					$config = JComponentHelper::getParams('com_banners');
+					$prefix = $config->get('metakey_prefix');
 
-		return $query;
+					foreach ($keywords as $keyword) {
+						$keyword=trim($keyword);
+						$condition1 = "a.own_prefix=1 AND  a.metakey_prefix=SUBSTRING('".$keyword."',1,LENGTH( a.metakey_prefix)) OR a.own_prefix=0 AND cl.own_prefix=1 AND cl.metakey_prefix=SUBSTRING('".$keyword."',1,LENGTH(cl.metakey_prefix)) OR a.own_prefix=0 AND cl.own_prefix=0 AND ".($prefix==substr($keyword,0,strlen($prefix))?'1':'0');
+
+						$condition2="a.metakey REGEXP '[[:<:]]".$db->getEscaped($keyword) . "[[:>:]]'";
+
+						if ($cid) {
+							$condition2.=" OR cl.metakey REGEXP '[[:<:]]".$db->getEscaped($keyword) . "[[:>:]]'";
+						}
+
+						if ($catid) {
+							$condition2.=" OR cat.metakey REGEXP '[[:<:]]".$db->getEscaped($keyword) . "[[:>:]]'";
+						}
+
+						$temp[]="($condition1) AND ($condition2)";
+					}
+					$query->where('(' . implode(' OR ', $temp). ')');
+				}
+			}
+
+			// Filter by language
+			if ($this->getState('filter.language')) {
+				$query->where('a.language in (' . $db->Quote(JFactory::getLanguage()->getTag()) . ',' . $db->Quote('*') . ')');
+			}
+
+			$query->order('a.sticky DESC,'. ($randomise ? 'RAND()' : 'a.ordering'));
+
+			return $query;
 	}
 
 	/**
@@ -221,7 +221,7 @@ class BannersModelBanners extends JModelList
 			if ($trackImpressions > 0) {
 				// is track already created ?
 				$query->clear();
-				$query->select('`count`');
+				$query->select($db->nameQuote('count'));
 				$query->from('#__banner_tracks');
 				$query->where('track_type=1');
 				$query->where('banner_id='.(int) $id);
@@ -240,7 +240,7 @@ class BannersModelBanners extends JModelList
 				if ($count) {
 					// update count
 					$query->update('#__banner_tracks');
-					$query->set('`count` = (`count` + 1)');
+					$query->set($db->nameQuote('count').' = ('.$db->nameQuote('count').' + 1)');
 					$query->where('track_type=1');
 					$query->where('banner_id='.(int)$id);
 					$query->where('track_date='.$db->Quote($trackDate));
@@ -248,11 +248,11 @@ class BannersModelBanners extends JModelList
 					// insert new count
 					//sqlsrv change
 					$query->insertInto('#__banner_tracks');
-          $query->fields('count, track_type, banner_id, track_date');
-          $query->values('1');
-          $query->values('1');
-          $query->values((int)$id);
-          $query->values($db->Quote($trackDate));
+					$query->fields('count, track_type, banner_id, track_date');
+					$query->values('1');
+					$query->values('1');
+					$query->values((int)$id);
+					$query->values($db->Quote($trackDate));
 					//$query->insert('#__banner_tracks');
 					//$query->set('`count` = 1');
 					//$query->set('track_type=1');

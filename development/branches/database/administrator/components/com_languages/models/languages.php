@@ -82,7 +82,7 @@ class LanguagesModelLanguages extends JModelList
 
 		// Select all fields from the users table.
 		$query->select($this->getState('list.select', 'a.*'));
-		$query->from('`#__languages` AS a');
+		$query->from($db->nameQuote('#__languages').' AS a');
 
 		// Filter on the published state.
 		$published = $this->getState('filter.published');
