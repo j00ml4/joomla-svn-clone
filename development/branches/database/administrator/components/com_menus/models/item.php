@@ -388,9 +388,9 @@ class MenusModelItem extends JModelAdmin
 			if ($menuType != $table->menutype) {
 				// Add the child node ids to the children array.
 				$db->setQuery(
-					'SELECT `id`' .
-					' FROM `#__menu`' .
-					' WHERE `lft` BETWEEN '.(int) $table->lft.' AND '.(int) $table->rgt
+					'SELECT '.$db->nameQuote('id') .
+					' FROM '.$db->nameQuote('#__menu') .
+					' WHERE '.$db->nameQuote('lft').' BETWEEN '.(int) $table->lft.' AND '.(int) $table->rgt
 				);
 				$children = array_merge($children, (array) $db->loadResultArray());
 			}
@@ -416,9 +416,9 @@ class MenusModelItem extends JModelAdmin
 
 			// Update the menutype field in all nodes where necessary.
 			$db->setQuery(
-				'UPDATE `#__menu`' .
-				' SET `menutype` = '.$db->quote($menuType).
-				' WHERE `id` IN ('.implode(',', $children).')'
+				'UPDATE '.$db->nameQuote('#__menu') .
+				' SET '.$db->nameQuote('menutype').' = '.$db->quote($menuType).
+				' WHERE '.$db->nameQuote('id').' IN ('.implode(',', $children).')'
 			);
 			$db->query();
 

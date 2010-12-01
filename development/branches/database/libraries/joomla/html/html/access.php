@@ -42,7 +42,7 @@ abstract class JHtmlAccess
 		$query->from('#__viewlevels AS a');
 		$query->group('a.id, a.title, a.ordering');
 		$query->order('a.ordering ASC');
-		$query->order('`title` ASC');
+		$query->order($db->nameQuote('title').' ASC');
 
 		// Get the options.
 		$db->setQuery($query);
@@ -87,7 +87,7 @@ abstract class JHtmlAccess
 		$db->setQuery(
 			'SELECT a.id AS value, a.title AS text, COUNT(DISTINCT b.id) AS level' .
 			' FROM #__usergroups AS a' .
-			' LEFT JOIN `#__usergroups` AS b ON a.lft > b.lft AND a.rgt < b.rgt' .
+			' LEFT JOIN '.$db->nameQuote('#__usergroups').' AS b ON a.lft > b.lft AND a.rgt < b.rgt' .
 			' GROUP BY a.id, a.title, a.lft, a.rgt' .
 			' ORDER BY a.lft ASC'
 		);
@@ -134,7 +134,7 @@ abstract class JHtmlAccess
 		$db->setQuery(
 			'SELECT a.*, COUNT(DISTINCT b.id) AS level' .
 			' FROM #__usergroups AS a' .
-			' LEFT JOIN `#__usergroups` AS b ON a.lft > b.lft AND a.rgt < b.rgt' .
+			' LEFT JOIN '.$db->nameQuote('#__usergroups').' AS b ON a.lft > b.lft AND a.rgt < b.rgt' .
 			' GROUP BY a.id, a.title, a.lft, a.rgt, a.parent_id' .
 			' ORDER BY a.lft ASC'
 		);

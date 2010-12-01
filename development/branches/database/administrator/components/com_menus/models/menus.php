@@ -32,20 +32,20 @@ class MenusModelMenus extends JModelList
 
 		// Select all fields from the table.
 		$query->select($this->getState('list.select', 'a.*'));
-		$query->from('`#__menu_types` AS a');
+		$query->from($db->nameQuote('#__menu_types').' AS a');
 
 		// Self join to find the number of published menu items in the menu.
 		$query->select('COUNT(DISTINCT m1.id) AS count_published');
-		$query->join('LEFT', '`#__menu` AS m1 ON m1.menutype = a.menutype AND m1.published = 1');
+		$query->join('LEFT', $db->nameQuote('#__menu').' AS m1 ON m1.menutype = a.menutype AND m1.published = 1');
 
 
 		// Self join to find the number of unpublished menu items in the menu.
 		$query->select('COUNT(DISTINCT m2.id) AS count_unpublished');
-		$query->join('LEFT', '`#__menu` AS m2 ON m2.menutype = a.menutype AND m2.published = 0');
+		$query->join('LEFT', $db->nameQuote('#__menu').' AS m2 ON m2.menutype = a.menutype AND m2.published = 0');
 
 		// Self join to find the number of trashed menu items in the menu.
 		$query->select('COUNT(DISTINCT m3.id) AS count_trashed');
-		$query->join('LEFT', '`#__menu` AS m3 ON m3.menutype = a.menutype AND m3.published = -2');
+		$query->join('LEFT', $db->nameQuote('#__menu').' AS m3 ON m3.menutype = a.menutype AND m3.published = -2');
 
 		$query->group('a.id, a.menutype, a.title, a.description, m1.published');
 

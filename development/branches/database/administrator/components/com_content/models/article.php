@@ -279,7 +279,7 @@ class ContentModelArticle extends JModelAdmin
 					$tuples[] = '('.$pk.', '.(int)($i + 1).')';
 				}
 				$db->setQuery(
-					'INSERT INTO #__content_frontpage (`content_id`, `ordering`)' .
+					'INSERT INTO #__content_frontpage ('.$db->nameQuote('content_id').', '.$db->nameQuote('ordering').')' .
 					' VALUES '.implode(',', $tuples)
 				);
 				if (!$db->query()) {

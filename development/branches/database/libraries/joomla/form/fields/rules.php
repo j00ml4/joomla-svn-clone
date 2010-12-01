@@ -323,7 +323,7 @@ class JFormFieldRules extends JFormField
 		$query	= $db->getQuery(true)
 			->select('a.id AS value, a.title AS text, COUNT(DISTINCT b.id) AS level')
 			->from('#__usergroups AS a')
-			->leftJoin('`#__usergroups` AS b ON a.lft > b.lft AND a.rgt < b.rgt')
+			->leftJoin($db->nameQuote('#__usergroups').' AS b ON a.lft > b.lft AND a.rgt < b.rgt')
 			->group('a.id, a.title, a.lft, a.rgt')
 			->order('a.lft ASC');
 

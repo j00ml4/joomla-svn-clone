@@ -699,9 +699,9 @@ class CategoriesModelCategory extends JModelAdmin
 			if ($parentId != $table->parent_id) {
 				// Add the child node ids to the children array.
 				$db->setQuery(
-					'SELECT `id`' .
-					' FROM `#__categories`' .
-					' WHERE `lft` BETWEEN '.(int) $table->lft.' AND '.(int) $table->rgt
+					'SELECT '.$db->nameQuote('id') .
+					' FROM '.$db->nameQuote('#__categories') .
+					' WHERE '.$db->nameQuote('lft').' BETWEEN '.(int) $table->lft.' AND '.(int) $table->rgt
 				);
 				$children = array_merge($children, (array) $db->loadResultArray());
 			}

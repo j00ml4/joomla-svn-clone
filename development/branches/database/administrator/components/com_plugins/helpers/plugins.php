@@ -78,7 +78,7 @@ class PluginsHelper
 
 		$query->select('DISTINCT(folder) AS value, folder AS text, name');
 		$query->from('#__extensions');
-		$query->where('`type` = '.$db->quote('plugin'));
+		$query->where($db->nameQuote('type').' = '.$db->quote('plugin'));
 		$query->order('name');
 
 		$db->setQuery($query);

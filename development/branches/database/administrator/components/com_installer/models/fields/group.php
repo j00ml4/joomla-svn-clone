@@ -45,10 +45,10 @@ class JFormFieldGroup extends JFormField
 
 		$dbo = JFactory::getDbo();
 		$query = $dbo->getQuery(true);
-		$query->select('DISTINCT `folder`');
+		$query->select('DISTINCT '.$dbo->nameQuote('folder'));
 		$query->from('#__extensions');
-		$query->where('`folder` != '.$dbo->quote(''));
-		$query->order('`folder`');
+		$query->where($dbo->nameQuote('folder').' != '.$dbo->quote(''));
+		$query->order($dbo->nameQuote('folder'));
 		$dbo->setQuery((string)$query);
 		$folders = $dbo->loadResultArray();
 

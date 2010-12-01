@@ -144,8 +144,8 @@ class JInstallerPlugin extends JAdapterInstance
 		 * Check if we should enable overwrite settings
 		 */
 		// Check to see if a plugin by the same name is already installed
-		$query = 'SELECT `extension_id`' .
-				' FROM `#__extensions`' .
+		$query = 'SELECT '.$db->nameQuote('extension_id') .
+				' FROM '.$db->nameQuote('#__extensions') .
 				' WHERE folder = '.$db->Quote($group) .
 				' AND element = '.$db->Quote($element);
 		$db->setQuery($query);

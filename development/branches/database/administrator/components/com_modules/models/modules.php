@@ -172,11 +172,11 @@ class ModulesModelModules extends JModelList
 				'a.checked_out, a.checked_out_time, a.published, a.access, a.ordering, a.publish_up, a.publish_down'
 			)
 		);
-		$query->from('`#__modules` AS a');
+		$query->from($db->nameQuote('#__modules').' AS a');
 
 		// Join over the language
 		$query->select('l.title AS language_title');
-		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
+		$query->join('LEFT', $db->nameQuote('#__languages').' AS l ON l.lang_code = a.language');
 
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');

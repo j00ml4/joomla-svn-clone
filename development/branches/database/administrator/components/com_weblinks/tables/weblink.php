@@ -224,8 +224,8 @@ class WeblinksTableWeblink extends JTable
 
 		// Update the publishing state for rows with the given primary keys.
 		$this->_db->setQuery(
-			'UPDATE `'.$this->_tbl.'`' .
-			' SET `state` = '.(int) $state .
+			'UPDATE '.$this->_db->nameQuote($this->_tbl) .
+			' SET '.$this->_db->nameQuote('state').' = '.(int) $state .
 			' WHERE ('.$where.')' .
 		$checkin
 		);

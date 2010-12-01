@@ -56,9 +56,9 @@ class plgSystemRedirect extends JPlugin
 			// See if the current url exists in the database as a redirect.
 			$db = JFactory::getDBO();
 			$db->setQuery(
-				'SELECT `new_url`, `published`' .
-				' FROM `#__redirect_links`' .
-				' WHERE `old_url` = '.$db->quote($current),
+				'SELECT '.$db->nameQuote('new_url').', '.$db->nameQuote('published') .
+				' FROM '.$db->nameQuote('#__redirect_links') .
+				' WHERE '.$db->nameQuote('old_url').' = '.$db->quote($current),
 				0, 1
 			);
 			$link = $db->loadObject();
@@ -73,7 +73,8 @@ class plgSystemRedirect extends JPlugin
 
 				// If not, add the new url to the database.
 				$db->setQuery(
-					'INSERT INTO `#__redirect_links` (`old_url`, `referer`, `published`, `created_date`)' .
+					'INSERT INTO '.$db->nameQuote('#__redirect_links').' ('.$db->nameQuote('old_url').
+					', '.$db->nameQuote('referer').', '.$db->nameQuote('published').', '.$db->nameQuote('created_date').')' .
 					' VALUES ('.$db->Quote($current).', '.$db->Quote($referer).', 0, '.$db->Quote($db->toSQLDate(JFactory::getDate())).')'
 				);
 				$db->query();

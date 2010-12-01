@@ -162,9 +162,9 @@ class PluginsModelPlugins extends JModelList
 				' a.enabled, a.access, a.ordering'
 			)
 		);
-		$query->from('`#__extensions` AS a');
+		$query->from($db->nameQuote('#__extensions').' AS a');
 
-		$query->where('`type` = '.$db->quote('plugin'));
+		$query->where($db->nameQuote('type').' = '.$db->quote('plugin'));
 
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');

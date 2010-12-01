@@ -99,7 +99,7 @@ class UsersModelUsers extends JModelList
 				'a.*'
 			)
 		);
-		$query->from('`#__users` AS a');
+		$query->from($db->nameQuote('#__users').' AS a');
 
 		// Join over the group mapping table.
 		$query->select('COUNT(map.group_id) AS group_count');
@@ -160,10 +160,11 @@ a.password, a.registerDate, a.sendEmail, a.usertype');
 	//sqlsrv change
 	public function getUserGroups($user_id)
 	{
-		$sql = "SELECT title FROM `jos_usergroups` ug left join".
-				" `jos_user_usergroup_map` map on (ug.id = map.group_id)".
-				" WHERE map.user_id=".$user_id;
 		$db = &JFactory::getDbo();
+		$sql = "SELECT title FROM ".$db->nameQuote('jos_usergroups')." ug left join ".
+				$db->nameQuote('jos_user_usergroup_map')." map on (ug.id = map.group_id)".
+				" WHERE map.user_id=".$user_id;
+		
 		$db->setQuery($sql);
 		$result = $db->loadResultArray();
 		return implode("\n", $result);

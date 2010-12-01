@@ -879,8 +879,8 @@ abstract class JTable extends JObject
 		$db = JFactory::getDBO();
 		$db->setQuery(
 			'SELECT COUNT(userid)' .
-			' FROM `#__session`' .
-			' WHERE `userid` = '.(int) $against
+			' FROM '.$db->nameQuote('#__session') .
+			' WHERE '.$db->nameQuote('userid').' = '.(int) $against
 		);
 		$checkedOut = (boolean) $db->loadResult();
 
@@ -1230,10 +1230,10 @@ abstract class JTable extends JObject
 			$query	= $this->_db->getQuery(true);
 
 			// Setup the basic query.
-			$query->select('`'.$this->_tbl_key.'`');
-			$query->from('`'.$this->_tbl.'`');
-			$query->where('`'.$this->_tbl_key.'` = '.$this->_db->quote($this->$k));
-			$query->group('`'.$this->_tbl_key.'`');
+			$query->select($this->_db->nameQuote($this->_tbl_key));
+			$query->from($this->_db->nameQuote($this->_tbl));
+			$query->where($this->_db->nameQuote($this->_tbl_key).' = '.$this->_db->quote($this->$k));
+			$query->group($this->_db->nameQuote($this->_tbl_key));
 
 			// For each join add the select and join clauses to the query object.
 			foreach($joins as $table)
@@ -1324,7 +1324,7 @@ abstract class JTable extends JObject
 	protected function _lock()
 	{
 		// Lock the table for writing.
-		$this->_db->setQuery('LOCK TABLES `'.$this->_tbl.'` WRITE');
+		$this->_db->setQuery('LOCK TABLES '.$this->_db->nameQuote($this->_tbl).' WRITE');
 		$this->_db->query();
 
 		// Check for a database error.
