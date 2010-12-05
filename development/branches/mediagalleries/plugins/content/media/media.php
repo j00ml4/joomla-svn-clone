@@ -16,7 +16,7 @@ jimport( 'joomla.html.parameter' );
 // This lib adds the media 
 //include_once dirname(__FILE__).DS.'media'.DS.'htmlembed.php';
 //include_once dirname(__FILE__).DS.'media'.DS.'thumbnails.php';
-include_once dirname(__FILE__).DS.'host'.DS.'mediaserver.php';
+//include_once dirname(__FILE__).DS.'host'.DS.'mediaserver.php';
 
 
 /**
@@ -214,64 +214,34 @@ class plgContentMedia extends JPlugin
 		// AutoStart
 		$autostart = (boolean)$autostart;
 		
-		$host=strtolower(parse_url($media,PHP_URL_HOST));
-		$uexplode= explode('.',$host);
-		$host='';
-		foreach($uexplode as $temp){
-			if(strcmp($temp,'www')){
-				//Stripping Off WWW
-			$host.=$temp;
+		//First Check if we have the extension...
+		$type = substr( $media, strrpos($media, '.')+1 ); // type contains the text after the last '.'
+		if(ctype_alnum($type)){ // If the type is alphanumeric...
+			// Aha...include the file based on the extension...
+			if(!file_exists("types".DS.$type.".php")){
+				include_once "types".DS."default.php";
 			}
-		} // Now host contains only what we want...like www.youtube.com is now youtubecom :D
-		
-		if(!file_exists("types".DS.$host.".php")){
-			return $host; 
-		}
-		/*
-		//The show begins...
-		$local=strtolower($_SERVER['SERVER_NAME']);
-		$host=strtolower(parse_url($media,PHP_URL_HOST)); //Get the host of the file...
-		$media = $this->getHost('server');	
-		
-		return $media->getMedia();
-		
-		if(!strcmp($local,$host) || !$host)
-		{
-			//this is for sure that the file is on the server...
-			$type = substr($media, strrpos($media, '.') );			
-			$type = strtolower($type);
-			$filename="extensions".DS."embed".$type.".php";
-			if(@include_once($filename))
-			{
-				//CALL THE mediaembed() of THE RESPECTIVE FILE
-				$params=array('width'=>$width,'height'=>$height,'autostart'=>$autostart);
-				return extension( $media,$params );
-			}
-			else{
-				return "INVALID MEDIA";
-			}
-		}
-		else
-		{
+			else include_once "types".DS.$type.".php";
 			
-			//In this case...1 check the list of hosts...
-			//If the host is there...
 			
-			if(!include_once("hosts".DS.$host.".php"))
-			{
-				return "INVALID HOST";
-			}
-			else{
-				$params=array('width'=>$width,'height'=>$height,'autostart'=>$autostart);
-				//Add special parameters from the plugin configuration
-				//$params= self::addParams($params);
-				return host( $media,$params );
-			}
-			//Else see the extension...if available...and embed
-			
-			//Else give an error...
 		}
-		*/
+		else{
+			//This means that we don't know the extension of the file..
+			$host=strtolower(parse_url($media,PHP_URL_HOST));
+			$uexplode= explode('.',$host);
+			$host='';
+			foreach($uexplode as $temp){
+				if(strcmp($temp,'www')){
+					//Stripping Off WWW
+					$host.=$temp;
+				}
+			} // Now host contains only what we want...like www.youtube.com is now youtubecom :D
+		
+			if(!file_exists("types".DS.$host.".php")){
+				include_once "types".DS."default.php";
+			}
+			else include_once "types".DS.$host.".php";
+		}
 	}
 
 
