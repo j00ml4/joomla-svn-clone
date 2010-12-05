@@ -26,7 +26,7 @@ abstract class MediaType{
      * @param unknown_type $height
      * @param unknown_type $params
      */
-    public function getThumbnail($media, $width='', $height='', $params=array()){
+    public function getThumb($media, $width='', $height='', $params=array()){
     	
     	return '<img scr="defaultimag">';
     }
