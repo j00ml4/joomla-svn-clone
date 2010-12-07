@@ -490,7 +490,7 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 
 		// Check for a database error.
 		if ($db->getErrorNum()) {
-			$this->setError($db->getErrorMsg());
+			//$this->setError($db->getErrorMsg());
 
 			return false;
 		}
