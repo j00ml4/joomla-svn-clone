@@ -137,14 +137,14 @@ table.adminform td{
 	margin-left: 5px;
 }
 
-.jpane-toggler span,
-.jpane-toggler-down span {
+.pane-toggler span,
+.pane-toggler-down span {
 	background-position: right;
 	padding-right: 20px;
 	padding-left: 0px;
 }
 
-.jpane-toggler span{ background-image: url(../images/j_arrow_left.png); }
+.pane-toggler span{ background-image: url(../images/j_arrow_left.png); }
 
 div.toolbar {
 	float:left;
@@ -160,6 +160,10 @@ div.header {
 }
 
 .header{ background-position: right; }
+
+table.adminlist thead th.left {
+	text-align: right;
+}
 
 table.adminlist tbody tr{
 	text-align: right;
@@ -364,6 +368,30 @@ fieldset.panelform-legacy label,
 fieldset.adminform-legacy label {
 	float: right;
 }
+
+/* checkboxes */
+fieldset.adminform fieldset.checkboxes,
+fieldset.panelform fieldset.checkboxes,
+fieldset.adminform-legacy fieldset.checkboxes  {
+	float:right;
+	margin: 0 0 5px 0;
+	clear:left;
+}
+
+fieldset.adminform fieldset.checkboxes input[type="checkbox"],
+fieldset.panelform fieldset.checkboxes input[type="checkbox"] {
+	float: right;
+	clear: right;
+}
+
+fieldset.adminform fieldset.checkboxes label,
+fieldset.panelform fieldset.checkboxes label,
+fieldset.adminform fieldset.checkboxes span.faux-label,
+fieldset.panelform fieldset.checkboxes span.faux-label {
+	clear: left;
+}
+/* end checkboxes */
+
 dl.tabs {
 	float: right;
 }
@@ -449,7 +477,7 @@ span.icon-16-locked {
 	padding:0;
 }
 
-#permissions-sliders ul#rules .jpane-slider
+#permissions-sliders ul#rules .pane-slider
 {
     padding:0px;
     top:0px;
@@ -457,7 +485,7 @@ span.icon-16-locked {
     left: 0;
 }
 
-#permissions-sliders ul#rules li h3.jpane-toggler-down a
+#permissions-sliders ul#rules li h3.pane-toggler -down a
 {	
 	border:solid 0px;
 }
@@ -509,13 +537,13 @@ table.group-rules td select
     padding:4px;
 }
 
-#permissions-sliders .jpane-toggler span
+#permissions-sliders .pane-toggler  span
 {
 	/* padding-left:5px; */
 	padding-right: 5px;
 }
 
-#permissions-sliders .jpane-toggler-down span
+#permissions-sliders .pane-toggler-down span
 {
 	/* padding-left:5px */
 	padding-right: 5px;

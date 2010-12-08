@@ -72,7 +72,7 @@ $loggeduser = JFactory::getUser();
 					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_ACTIVATED', 'a.activation', $listDirn, $listOrder); ?>
 				</th>
 				<th class="nowrap" width="10%">
-					<?php echo JHtml::_('grid.sort', 'COM_USERS_HEADING_GROUPS', 'group_names', $listDirn, $listOrder); ?>
+					<?php echo JText::_('COM_USERS_HEADING_GROUPS'); ?>
 				</th>
 				<th class="nowrap" width="15%">
 					<?php echo JHtml::_('grid.sort', 'JGLOBAL_EMAIL', 'a.email', $listDirn, $listOrder); ?>
@@ -109,8 +109,8 @@ $loggeduser = JFactory::getUser();
 						<?php echo $this->escape($item->name); ?>
 					<?php endif; ?>
 					<?php if (JDEBUG) : ?>
-					<br /><div class="button2-left smallsub"><div class="blank"><a href="<?php echo JRoute::_('index.php?option=com_users&view=debuguser&user_id='.(int) $item->id);?>">
-						<?php echo JText::_('COM_USERS_DEBUG_USER');?></a></div></div>
+						<div class="fltrt"><div class="button2-left smallsub"><div class="blank"><a href="<?php echo JRoute::_('index.php?option=com_users&view=debuguser&user_id='.(int) $item->id);?>">
+						<?php echo JText::_('COM_USERS_DEBUG_USER');?></a></div></div></div>
 					<?php endif; ?>
 				</td>
 				<td class="center">

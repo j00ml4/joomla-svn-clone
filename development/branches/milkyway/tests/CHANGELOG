@@ -27,6 +27,22 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+08-Dec-2010 Mark Dexter
+# Fix failing sample_data0001Test.php 
+
+06-Dec-2010 Christophe Demko
+ # Test coverage for the JArrayHelper::fromObject method
+
+04-Dec-2010 Christophe Demko
+ # Test coverage for automatic generated field name
+
+30-Nov-2010 Mark Dexter
+# Fix failing JStringTest and JArrayHelperTest due to locale settings
+# Skip some string sort tests if MAC OS
+
+27-Nov-2010 Mark Dexter
+# Improved test coverage for JUserTest
+
 17-Nov-2010 Mark Dexter
 # Fix doInstall to allow selection of different database types
 ^ Added two methods to JFolderTest (Christophe Demoko) as part of [#22484]

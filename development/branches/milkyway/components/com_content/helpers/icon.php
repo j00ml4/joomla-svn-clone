@@ -32,16 +32,19 @@ class JHTMLIcon
 			$text = JText::_('JNEW').'&#160;';
 		}
 
-		$attribs	= array('title' => JText::_('JNEW'));
-		return JHTML::_('link',JRoute::_($url), $text, $attribs);
+		$button =  JHTML::_('link',JRoute::_($url), $text);
+		
+		$output = '<span class="hasTip" title="'.JText::_('COM_CONTENT_CREATE_ARTICLE').'">'.$button.'</span>';
+		return $output;
 	}
 
 	static function email($article, $params, $attribs = array())
 	{
 		$uri	= JURI::getInstance();
 		$base	= $uri->toString(array('scheme', 'host', 'port'));
+		$template = JFactory::getApplication()->getTemplate();
 		$link	= $base.JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid) , false);
-		$url	= 'index.php?option=com_mailto&tmpl=component&link='.base64_encode($link);
+		$url	= 'index.php?option=com_mailto&tmpl=component&template='.$template.'&link='.base64_encode($link);
 
 		$status = 'width=400,height=350,menubar=yes,resizable=yes';
 

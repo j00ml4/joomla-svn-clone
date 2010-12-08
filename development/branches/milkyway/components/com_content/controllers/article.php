@@ -283,7 +283,7 @@ class ContentControllerArticle extends JControllerForm
 			// Check we are holding the id in the edit list.
 			if (!$this->checkEditId($context, $recordId)) {
 				// Somehow the person just went to the form - we don't allow that.
-				$this->setError(JText::_('JLIB_APPLICATION_ERROR_UNHELD_ID'));
+				$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $recordId));
 				$this->setMessage($this->getError(), 'error');
 				$this->setRedirect($this->getReturnPage());
 
@@ -321,11 +321,16 @@ class ContentControllerArticle extends JControllerForm
 		$model		= $this->getModel();
 		$task		= $this->getTask();
 		$context	= "$this->option.edit.$this->context";
-		$recordId	= JRequest::getInt('id');
+		if (!in_array(JRequest::getWord('view'), array('category', 'categories'))) {
+			$recordId = JRequest::getInt('id');
+		} 
+		else {
+			$recordId = 0;
+		}
 
 		if (!$this->checkEditId($context, $recordId)) {
 			// Somehow the person just went to the form and saved it - we don't allow that.
-			$this->setError(JText::_('JLIB_APPLICATION_ERROR_UNHELD_ID'));
+			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $recordId));
 			$this->setMessage($this->getError(), 'error');
 			$this->setRedirect($this->getReturnPage());
 
@@ -418,7 +423,12 @@ class ContentControllerArticle extends JControllerForm
 			return false;
 		}
 
-		$this->setMessage(JText::_('COM_CONTENT_ARTICLE_SAVE_SUCCESS'));
+		if ($recordId == 0) {
+			$this->setMessage(JText::_('COM_CONTENT_SUBMIT_SAVE_SUCCESS'));
+		} 
+		else {
+			$this->setMessage(JText::_('COM_CONTENT_SAVE_SUCCESS'));
+		}
 
 		// Redirect the user and adjust session state based on the chosen task.
 		switch ($task)

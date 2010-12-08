@@ -12,6 +12,11 @@
 			default="0"			
 			readonly="true" />
 
+		<field 
+			name="asset_id" 
+			type="hidden" 
+			filter="unset" />	
+
 		<field
 			id="title"
 			name="title"
@@ -40,6 +45,7 @@
 			description="Content_Text_Desc"
 			class="inputbox"
 			filter="unset"
+			asset_id="com_content"
 		/>
 
 		<!-- and these two are for saving -->

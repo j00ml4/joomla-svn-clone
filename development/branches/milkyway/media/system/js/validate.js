@@ -77,6 +77,13 @@ var JFormValidator = new Class({
 	validate: function(el)
 	{
 		var el = $(el);
+    
+		// Ignore the element if its currently disabled, because are not submitted for the http-request. For those case return always true.
+		if(el.get('disabled')) {
+			this.handleResponse(true, el);
+			return true;
+		}
+    
 		// If the field is required make sure it has a value
 		if (el.hasClass('required')) {
 			if (el.get('tag')=='fieldset' && (el.hasClass('radio') || el.hasClass('checkboxes'))) {
@@ -156,13 +163,17 @@ var JFormValidator = new Class({
 		// Set the element and its label (if exists) invalid state
 		if (state == false) {
 			el.addClass('invalid');
+			el.set('aria-invalid', 'true');
 			if (el.labelref) {
 				document.id(el.labelref).addClass('invalid');
+				document.id(el.labelref).set('aria-invalid', 'true');
 			}
 		} else {
 			el.removeClass('invalid');
+			el.set('aria-invalid', 'false');
 			if (el.labelref) {
 				document.id(el.labelref).removeClass('invalid');
+				document.id(el.labelref).set('aria-invalid', 'false');
 			}
 		}
 	}

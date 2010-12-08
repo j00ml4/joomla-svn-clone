@@ -116,6 +116,10 @@ textarea {
 	border: 1px solid silver;
 }
 
+iframe {
+	border: 0;
+}
+
 .invalid {
 	color: red;
 	font-weight: bold;
@@ -560,26 +564,26 @@ textarea#mm_message {
 	border: 0 none;
 }
 
-.jpane-toggler span {
+.pane-toggler span {
 	background: transparent url(../images/j_arrow.png) 5px 50% no-repeat;
 	padding-left: 20px;
 }
 
-.jpane-toggler-down span {
+.pane-toggler-down span {
 	background: transparent url(../images/j_arrow_down.png) 5px 50% no-repeat;
 	padding-left: 20px;
 }
 
-.jpane-toggler-down {
+.pane-toggler-down {
 	border-bottom: 1px solid #ccc;
 }
 
-h3.jpane-toggler-down a:hover,
-h3.jpane-toggler a:hover {
+h3.pane-toggler-down a:hover,
+h3.pane-toggler a:hover {
 	text-decoration: none;
 }
 
-.jpane-slider ol li {
+.pane-slider ol li {
 	list-style: none;
 	margin-left: -25px;
 	margin-top: 10px;
@@ -955,14 +959,6 @@ label.required:after {
 	white-space: nowrap;
 }
 
-/* One-offs */
-
-/* Hide the extension name on create category page */
-label#jform_extension-lbl,
-input#jform_extension {
-	display: none;
-}
-
 /* -------- Batch Section ---------- */
 fieldset.batch {
 	margin: 20px 0px 10px 0px;
@@ -1154,6 +1150,33 @@ fieldset.panelform fieldset.radio label {
 	display:inline;
 }
 
+/* checkboxes */
+fieldset.adminform fieldset.checkboxes,
+fieldset.panelform fieldset.checkboxes,
+fieldset.adminform-legacy fieldset.checkboxes  {
+	border: 0;
+	float:left;
+	padding: 0;
+	margin: 0 0 5px 0;
+	clear:right;
+}
+
+
+fieldset.adminform fieldset.checkboxes input[type="checkbox"],
+fieldset.panelform fieldset.checkboxes input[type="checkbox"] {
+	float: left;
+	clear: left;
+}
+
+fieldset.adminform fieldset.checkboxes label,
+fieldset.panelform fieldset.checkboxes label,
+fieldset.adminform fieldset.checkboxes span.faux-label,
+fieldset.panelform fieldset.checkboxes span.faux-label {
+	clear: right;
+}
+
+/* end checkboxes */
+
 fieldset.panelform-legacy label,
 fieldset.adminform-legacy label {
 	min-width: 150px;
@@ -1161,12 +1184,12 @@ fieldset.adminform-legacy label {
 }
 
 /* JParameter classes on radio button labels  */
-fieldset.panelform-legacy label.radiobtn_jno,
-fieldset.panelform-legacy label.radiobtn_jyes,
-fieldset.panelform-legacy label.radiobtn_show,
-fieldset.panelform-legacy label.radiobtn_hide,
-fieldset.panelform-legacy label.radiobtn_off,
-fieldset.panelform-legacy label.radiobtn_on	{
+fieldset.panelform-legacy label.radiobtn-jno,
+fieldset.panelform-legacy label.radiobtn-jyes,
+fieldset.panelform-legacy label.radiobtn-show,
+fieldset.panelform-legacy label.radiobtn-hide,
+fieldset.panelform-legacy label.radiobtn-off,
+fieldset.panelform-legacy label.radiobtn-on	{
 	min-width: 40px !important;
 	clear: none !important;
 }
@@ -1469,7 +1492,7 @@ div#element-box div.m form table.adminlist tr td div.button2-left.smallsub a {
 }
 
 div#element-box div.m form table.adminlist tr td p.smallsub a,
-div#element-box div.m div.jpane-slider form table.adminlist a {
+div#element-box div.m div.pane-slider form table.adminlist a {
 	font-size: 1em;
 }
 
@@ -2006,6 +2029,9 @@ a.jgrid:hover {	text-decoration: none;}
 .toolbar-inactive					{	background-position: 0px 32px;  }
 
 /* -- HEADER ICON STYLES ----------------------------- */
+.icon-48-categories					{	background-image: url(../images/header/icon-48-category.png);	}
+.icon-48-category-edit				{	background-image: url(../images/header/icon-48-category.png);	}
+.icon-48-category-add				{	background-image: url(../images/header/icon-48-category-add.png);	}
 .icon-48-generic					{	background-image: url(../images/header/icon-48-generic.png);	}
 .icon-48-banners					{	background-image: url(../images/header/icon-48-banner.png);	}
 .icon-48-banners-categories			{	background-image: url(../images/header/icon-48-banner-categories.png);	}
@@ -2058,8 +2084,6 @@ a.jgrid:hover {	text-decoration: none;}
 .icon-48-content-categories			{	background-image: url(../images/header/icon-48-category.png);	}
 .icon-48-content-category-edit		{	background-image: url(../images/header/icon-48-category.png);	}
 .icon-48-content-category-add		{	background-image: url(../images/header/icon-48-category-add.png);	}
-.icon-48-categories					{	background-image: url(../images/header/icon-48-category.png);	}
-.icon-48-category-add				{	background-image: url(../images/header/icon-48-category-add.png);	}
 .icon-48-install					{	background-image: url(../images/header/icon-48-extension.png);	}
 .icon-48-dbbackup					{	background-image: url(../images/header/icon-48-backup.png);	}
 .icon-48-dbrestore					{	background-image: url(../images/header/icon-48-dbrestore.png);	}
@@ -2864,7 +2888,7 @@ ul#rules li .pane-sliders .panel h3.title
 	border:solid 0px #ccc;
 }
 
-#permissions-sliders ul#rules .jpane-slider
+#permissions-sliders ul#rules .pane-slider
 {
     padding:0px;
     position:absolute; 
@@ -2881,18 +2905,18 @@ ul#rules li .pane-sliders .panel h3.title
 	 font-weight:normal
 }
 
-#permissions-sliders ul#rules li h3.jpane-toggler-down a
+#permissions-sliders ul#rules li h3.pane-toggler-down a
 {	
 	border:solid 0px;
 }
 
-#permissions-sliders ul#rules li h3.jpane-toggler-down
+#permissions-sliders ul#rules li h3.pane-toggler-down
 { 
 	color:#000; 
 	background:#146295;
 }
     
-#permissions-sliders ul#rules li h3.jpane-toggler-down span
+#permissions-sliders ul#rules li h3.pane-toggler-down span
 { 
 	color:#fff; 
 }
@@ -2958,6 +2982,11 @@ ul#rules table.group-rules td label
 	margin:0 !important
 }
 
+ul#rules table.group-rules td span
+{
+	padding-bottom: 4px;
+}
+
 table.group-rules td select
 {
 	margin:0 !important
@@ -2994,17 +3023,17 @@ table.group-rules td select
 	background-image:none
 }
 
-#permissions-sliders .jpane-toggler span
+#permissions-sliders .pane-toggler span
 {
 	padding-left:5px;background-image:none
 }
 
-#permissions-sliders .jpane-toggler-down span
+#permissions-sliders .pane-toggler-down span
 	{
 	background-image:none;
 }
 
-#permissions-sliders .jpane-toggler-down span
+#permissions-sliders .pane-toggler-down span
 	{padding-left:5px}
 
 #permissions-sliders ul#rules .panel h3
@@ -3014,7 +3043,7 @@ table.group-rules td select
 	
 /* global_config permissions */
 
-#page-permissions  fieldset ul#rules  .jpane-slider
+#page-permissions  fieldset ul#rules  .pane-slider
 	{width:60%;}
 
 #permissions-sliders

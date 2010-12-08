@@ -27,6 +27,269 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+08-Dec-2010 Jean-Marie Simonet
+ # [#23677] RTL header issue in Bluestork. Thanks Andrea.
+
+08-Dec-2010 Mark Dexter
+# [#21207] Joomla 1.6 Beta 6 - not assigned to groups when via LDAP login. (Elin Waring)
+# [#23441] *Fatal error when saving a weblink from the new icon in a weblink category list
+# [#22992] Unpublished articles are still shown in user profile
+# [#22958] CSS class and id changes (cont'd) (Andrea Tarr)
+# [#22955] Upgrading plugin using method="upgrade" does not remove files omitted from xml (Sam Moffatt)
+
+07-Dec-2010 Mark Dexter
+# [#22957] Upgrading a template that uses method="upgrade" removes manually added files
+# [#22682] Users without edit state can change date on screen via the calendar
+# [#23366] Remove special treatment for Konqueror with regard to minified javascript (Rouven Weßling)
+
+07-Dec-2010 Jean-Marie Simonet
+ [#23666] Attempting to log in with a non-existent account get's "Username and password do not match" message. Thanks Matt and Bill.
+
+07-Dec-2010 Christophe Demko
+ + Adding an index.html file
+ # [#23663] Some modules does not load the jmodel class before using it
+ # [#23639] JFormValidator and disabled Elements (Reinhard Hiebl)
+ # [#23654] Com_categories don't save the params when a section is specified (Jonnathan S. Lima)
+
+06-Dec-2010 Christophe Demko
+ # [#23660] The menu system does not use attributes in metadata.xml files
+ # [#23227] JArrayHelper::fromObject doesnt work if the object contain an array of objects
+
+06-Dec-2010 Jean-Marie Simonet
+ # [#23288] instances of ® should be html encoded. Thanks Bill.
+ #$ Normalizing/implementing Submit/Save success strings/code for articles/weblinks in front-end
+ # [#23651] Save failed with the following error: Another article from this category has the same alias. Thanks Mark.
+ # [#23034] Article title tag is using menu title instead of article title. Thanks Mark.
+ # [#23622] Hathor clean up of CSS and parameters, plus file reduction. Thanks Andrea.
+
+05-Dec-2010 Jean-Marie Simonet
+ # [#23604] Can't load twice the same loadposition on same page. Thanks Christophe.
+
+05-Dec-2010 Christophe Demko
+ # [#23474] Script code injected into module edit screen for menu assignment does not validate. (bill richardson)
+ # [#23653] Differences between uncompressed and normal JS files (Rouven Weßling)
+ # [#23606] Saving Profile changes generates two php warning messages (Elin Waring)
+
+04-Dec-2010 Christophe Demko
+ # [#23436] Cannot utilize more than one spacer field type in component config.xml
+ # Omitting of commit in [#22606]
+
+04-Dec-2010 Jean-Marie Simonet
+ $ Adding missing ini string
+ #$ Adding Phnom Penh in time zones. Updating xx-XX.ini(s)
+ # Missing file in [#23016] breaks global config when debug on
+ # [#23649] Langfilter home page and user site language. Thanks Christophe.
+
+03-Dec-2010 Ian MacLennan
+ # [#23016] Use minified/uncompressed files for more Scripts (Rouven Weßling)
+
+03-Dec-2010 Mark Dexter
+# [#23133] Back end edit screens need ACL
+# [#23562] Categories & Menus Batch ACL checks missing
+# [#23554] Alternative layout example (Elin Waring)
+# [#23558] Customer Group cannot save article from category list
+# [#23590] Clean up commented code in weblinks (Elin Waring)
+# [#23169] Remove the border and frameborder attributes. (Rouven Weßling)
+# [#21765] Codemirror doesn't work with XHTML is served with an XML MIME type (Rouven Weßling)
+# [#22664] Issue with displayed records after change of filters
+# [#23599] Add a tooltip that a password needs to have at least 4 characters.
+
+03-Dec-2010 Christophe Demko
+ # [#22033] Apostrophe du mode hors ligne
+ # [#23568] Media field needs to cope with com_media ACL
+ # [#23433] Skip the automaticall loading of plugin language file
+ # [#22606] Unable to create several groups with the same name
+
+03-Dec-2010 Jean-Marie Simonet
+ $ Modifications of the installation ini files.
+ # [#22351] component messages - my settings wrong display. Thanks Andrea.
+ # [#23635] "Debug Permissions Report" buttons improvement. Thanks Dennis.
+ # [#23636] Invalid using of JLIB_APPLICATION_ERROR_UNHELD_ID. Thanks Dennis.
+ # [#23608] Sort by user group 500 error. Thanks Mark. Temporary fix.
+ # [#23492] Aria-invalid missing on some invalid inputs. Thanks Andrea.
+
+02-Dec-2010 Mark Dexter
+# Typo in language file
+
+02-Dec-2010 Christophe Demko
+ # [#23615] Implementing tooltip for the filters settings in Content Options (Jean-Marie Simonet)
+ # [#23607] Profile fields not displaying in profile form. (Elin Waring)
+ # [#23611] The extension manager does *not* display messages when uninstalling
+
+02-Dec-2010 Jean-Marie Simonet
+ # [#23605] Adding the string Select in the batch dropdowns
+ # [#23587] com_content archive template produces invalid markup. Thanks Bill.
+ # [#23613] Adding a tooltip to Select access levels in the batch layouts
+
+01-Dec-2010 Christophe Demko
+ # [#23581] Component installer does not use the key from the menu tag
+ # [#23534] Method signatures don't match causing PHP strict errors - Features model populateState (Ian MacLennan)
+ # [#23533] Method signatures don't match causing PHP strict errors - articles model populate state (Ian MacLennan)
+
+01-Dec-2010 Jean-Marie Simonet
+ $^ Enabling custom translation of types in installer messages
+ # [#23602] Login redirect form does not redirect to the return parameter passed as GET parameter. Thanks Christophe.
+ # [#22039] Using loadposition to load an articles category module returns Fatal error on front. Thanks Angie.
+ $ [#23598] The word "warning" cannot be translated. + ordered some strings and updated xx-XX.ini
+ # [#23586] Discovering of plugins by the extension manager consider them as installed. Thanks Christophe.
+ $ [#23585] Correct Batch Menu Copy/Move Label. Thanks Michael
+ 
+30-Nov-2010 Christophe Demko
+ # [#23532] Strict errors - issues with JCacheController (Ian MacLennan)
+ # [#23537] Method signatures don't match causing PHP strict errors - JRouter (Ian MacLennan)
+ # [#23536] Method signatures don't match causing PHP strict errors - JDate (Ian MacLennan)
+ # [#23535] Method signatures don't match causing PHP strict errors - articles model get items (Ian MacLennan)
+ # [#23580] 500 Errors going to Article Manager in Hathor (Andrea Tarr)
+
+30-Nov-2010 Jean-Marie Simonet
+ # Updating JLanguageTest
+ # Corrected JArrayHelperTest unicode corruption
+ # [#23569] When adding a form as plugin into article "JLIB_APPLICATION_ERROR_UNHELD_ID" is thrown. Thanks Mark.
+ # [#23439] redundant code in components/com_weblinks/controllers/weblink.php. Thanks Bill.
+
+-------------------- 1.6.0 Beta15 Release [29-Nov-2010] ------------------
+
+29-Nov-2010 Mark Dexter
+# Sample data fixes (Elin Waring)
+
+29-Nov-2010 Christophe Demko
+ # [#23525] Access to media manager & ACL
+ # [#23559] Installer does not initialize the asset table when component is installed
+
+29-Nov-2010 Jean-Marie Simonet
+ # [#23340] sort order Extension Manager: Manage (filter). Thanks Klas and Christophe.
+ # [#23555] Duplicate alias error in home page removes home page of the site. Thanks Mark
+ # [#23376] Confirm password reset fails with invalid token. Thanks Ian.
+ $ Missing lines in en-GB.xml and xx-XX.xml, missing ini files in xx-XX.
+ # [#23539] Administrator custom module causes fatal error when used with com_content. Thanks Ian.
+ $ Consolidated some string, adding missing string.
+ # [#23557] Super admin requesting password reminder gets wrong Notice. Thanks Christophe.
+ # [#23527] Add css3 support for rounded corners to the mozilla/webkit corners in Hathor. Thanks Andrea.
+ # [#23450] mod_articles_category register to readmore and alternative readmore Patch attached. Thanks Angie
+ 
+28-Nov-2010 Jean-Marie Simonet
+ # [#22623] stressed titles / utf8 characters don't make it through the return parameter. Thanks Christophe.
+
+28-Nov-2010 Mark Dexter
+# [#23501] Custom groups assignment not being honoured in user edit form.
+# [#23419] group with create in a single category only (e.g. customer group) user getting 403 errors
+
+27-Nov-2010 Ian MacLennan
+ # [#23513] Incorrect PHP function referenced in date()'s phpdoc for second parameter
+
+27-Nov-2010 Mark Dexter
+# [#23524] JUser has incorrect static variable $isRoot
+
+27-Nov-2010 Jean-Marie Simonet
+ $ Moving a string to library ini.
+ 
+27-Nov-2010 Christophe Demko
+ # [#23523] Add Hathor override for the new My Profile view (Andrea Tarr)
+ # [#23526] mod_login module does not display correct URL while redirecting
+ $ Typos in behavior.php
+
+26-Nov-2010 Jean-Marie Simonet
+ $ [#23449] confusing language in acl tootltip for categories and content
+ # [#23476] code editor textarea missing border. Thanks Andrea.
+
+26-Nov-2010 Andrew Eddie
+ # Fixed issue [#23495] ACL for Image Manager access to the uploader (Elin Waring, Christophe Demko).
+
+25-Nov-2010 Jean-Marie Simonet
+ # Hiding and correcting related to [#23117]
+ # [#23505] SEF off url inconsistencies in category routes. Thanks Andrew.
+ 
+25-Nov-2010 Christophe Demko
+ # [#23462] Checkboxes Form Field is not displayed correctly Options panel (Andrea Tarr)
+ # [#23460] com_plugins uses wrong JPATH constants (Ian MacLennan)
+ # [#23461] Wrong JPATH constant use in JHtmlEditor (Ian MacLennan)
+ # [#23465] Incorrect group attribute set for content search plugin (CY Lee)
+ # [#23451] Bring com_search closer to XHTML strict (site) (Rouven Weßling)
+ $ [#23473] Default Access Level tooltip (bill richardson)
+
+25-Nov-2010 Andrew Eddie
+ # Fixed issue [#23469] Category field for save is showing unauthorized categories (Elin Waring).
+ # Fixed issue [#23445] Display of categories layouts has changed and is now incorrect (Elin Waring, bill richardson, Omar Ramos).
+ # Fixed issue [#23454] Article Select in modal won't select if you've searched or filtered in Hathor (Andrea Tarr).
+
+24-Nov-2010 Ian MacLennan
+ # [#23430] some jhtml behavior's load twice code
+ # [#23425] Use the correct Icon for a new Article in Category List view
+ # [#23117] Add missing fields to Category Edit
+
+24-Nov-2010 Jean-Marie Simonet
+ $ Changing module manager state filter to Published/Unpublished to be consequent.
+ #$ [#23448] typo in en-GB.ini language file. Normalizing strings to use global.
+ $^ Adding a string accidentally deleted, code cleaning.
+ #$ [#23475] Redirect manager state - published or enabled. Thanks Bill.
+
+23-Nov-2010 Christophe Demko
+ # [#23432] The installer has some issues with schema updates
+ $^ hiding the 'extension' field (no longer needed) while editing a category + set the 'rules' field label not translatable
+
+23-Nov-2010 Jean-Marie Simonet
+ $ Deleting unused strings. Reordering strings in some ini files.
+ # [#23447] image truncated by row height. Thanks Andrea.
+ $^ Deleting unused strings and css, completing setting the 'rules' field label not translatable
+ $ Updating xx-XX plg_user.ini and ordering some strings.
+
+22-Nov-2010 Christophe Demko
+ #$ Fix a language loading file
+ # [#23434] Installer outputs closing tag at the end of configuration.php (Ian MacLennan)
+
+22-Nov-2010 Jean-Marie Simonet
+ # [#23368] Missing styles for unpublished items in the list views. Thanks Elin and Bill.
+ # [#23276] Fix left edge of header lines. Thanks Viet and Michael.
+
+21-Nov-2010 Mark Dexter
+# Sample data fixes (Elin Waring)
+
+21-Nov-2010 Christophe Demko
+ # $ Translating the label field instead of the name field in JLIB_FORM_VALIDATE_FIELD_INVALID error
+ # [#23409] Category Icon on Components Menu
+ # [#23278] media_manager from JToolbarHelper throws javascript errors
+
+21-Nov-2010 Jean-Marie Simonet
+ # [#23361] default template in component.php view always in use
+
+20-Nov-2010 Ian MacLennan
+ # [#22962] Mootools Library Upgrade
+
+20-Nov-2010 Jean-Marie Simonet
+ $ Updating xx-XX.com_media.ini to [#23370]
+ # [#23392] Use Article settings missing from some menu items. Thanks Bill.
+ #$ [#23416] Adding descriptions in the images modal
+ # [#23413] Module Article categories. Thanks Mark
+ # [#23303] Newfeed layouts should show unpublished feeds if logged in. Thanks Mark.
+ 
+20-Nov-2010 Mark Dexter
+ # [#23380] Category manager allows deleting a category that has items assigned to it
+ # [#21581] mod_articles_category Fixes. (Omar Ramos)
+
+20-Nov-2010 Christophe Demko
+ # [#23355] Access level special now manager and above (Elin Waring)
+ # [#23342] Front end editing not working in some layouts (bill richardson)
+ # [#21638] maximum upload size inconsistency (Ian MacLennan, Rouven Weßling, bill richardson)
+ # Fix a small issue in templatestyle field
+
+19-Nov-2010 Mark Dexter
+# Remove duplicate article in sample data
+
+19-Nov-2010 Christophe Demko
+ ^ Fix Check for request forgeries
+ # [#23397] return false; on config tabs throwing javascript error (Al Kent)
+ # [#23370] *Modal Non-flash Uploader does not work
+ # [#23359] com_contact template produces invalid markup (Rouven Weßling)
+
+19-Nov-2010 Jean-Marie Simonet
+ # [#23367] The secure parameter in menu item is not used. Thanks Christophe.
+ # [#23304] List Weblinks in a Category doesn't show unpublished weblinks for logged in users. Thanks Mark.
+ # [#22525] Mod_menu menu image no span with link-title anymore. Thanks Angie.
+ $ Deleting libraries strings from lang installation as the library is now loaded there.
+ $ Modifying a string value.
+ # [#23408] Keep UI consistent for default home page in multilingual site. Thanks Christophe.
+ # [#23388] mod_menu. Thanks James, Bill, Rouven
+
 18-Nov-2010 Jean-Marie Simonet
 $ Adding missing strings
 

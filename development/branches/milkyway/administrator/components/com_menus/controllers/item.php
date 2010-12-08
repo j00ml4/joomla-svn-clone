@@ -140,7 +140,7 @@ class MenusControllerItem extends JControllerForm
 
 		if (!$this->checkEditId($context, $recordId)) {
 			// Somehow the person just went to the form and saved it - we don't allow that.
-			$this->setError(JText::_('JLIB_APPLICATION_ERROR_UNHELD_ID'));
+			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $recordId));
 			$this->setMessage($this->getError(), 'error');
 			$this->setRedirect(JRoute::_('index.php?option=com_menus&view=items'.$this->getRedirectToListAppend(), false));
 
@@ -305,17 +305,9 @@ class MenusControllerItem extends JControllerForm
 				$component = JComponentHelper::getComponent($type->request->option);
 				$data['component_id'] = $component->id;
 
-				if (isset($type->request->layout)) {
-					$app->setUserState(
-						'com_menus.edit.item.link',
-						'index.php?option='.$type->request->option.'&view='.$type->request->view.'&layout='.$type->request->layout
-					);
-				}
-				else {
-					$app->setUserState(
-						'com_menus.edit.item.link',
-						'index.php?option='.$type->request->option.'&view='.$type->request->view);
-				}
+				$app->setUserState(
+					'com_menus.edit.item.link',
+					'index.php?' . JURI::buildQuery((array)$type->request));
 			}
 		}
 		// If the type is alias you just need the item id from the menu item referenced.

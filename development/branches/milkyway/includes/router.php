@@ -79,7 +79,7 @@ class JRouterSite extends JRouter
 		return $vars;
 	}
 
-	public function &build($url)
+	public function build($url)
 	{
 		$uri = parent::build($url);
 
@@ -226,7 +226,7 @@ class JRouterSite extends JRouter
 
 		//Set the variables
 		$this->setVars($vars);
-		
+
 		/*
 		 * Parse the component route
 		 */

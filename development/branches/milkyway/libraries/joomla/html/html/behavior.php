@@ -46,9 +46,7 @@ abstract class JHtmlBehavior
 			$debug = $config->get('debug');
 		}
 
-		// TODO NOTE: Here we are checking for Konqueror - If they fix thier issue with compressed, we will need to update this
-		$konkcheck		= isset($_SERVER['HTTP_USER_AGENT']) ? strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'konqueror') : null;
-		$uncompressed	= ($debug || $konkcheck) ? '-uncompressed' : '';
+		$uncompressed	= $debug ? '-uncompressed' : '';
 
 		if ($type != 'core' && empty($loaded['core'])) {
 			self::framework(false);
@@ -81,7 +79,8 @@ abstract class JHtmlBehavior
 	 */
 	public static function caption()
 	{
-		JHtml::_('script','system/caption.js', true, true);
+		$uncompressed	= JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
+		JHtml::_('script','system/caption'.$uncompressed.'.js', true, true);
 	}
 
 	/**
@@ -97,7 +96,8 @@ abstract class JHtmlBehavior
 	 */
 	public static function formvalidation()
 	{
-		JHtml::_('script','system/validate.js', true, true);
+		$uncompressed	= JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
+		JHtml::_('script','system/validate'.$uncompressed.'.js', true, true);
 	}
 
 	/**
@@ -109,7 +109,15 @@ abstract class JHtmlBehavior
 	 */
 	public static function switcher()
 	{
-		JHtml::_('script','system/switcher.js', true, true);
+		static $loaded = false;
+
+		// only load once
+		if ($loaded) {
+			return;
+		}
+
+		$uncompressed	= JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
+		JHtml::_('script','system/switcher'.$uncompressed.'.js', true, true);
 
 		$script = "
 			document.switcher = null;
@@ -122,6 +130,7 @@ abstract class JHtmlBehavior
 			});";
 
 		JFactory::getDocument()->addScriptDeclaration($script);
+		$loaded = true;
 	}
 
 	/**
@@ -135,7 +144,8 @@ abstract class JHtmlBehavior
 	 */
 	public static function combobox()
 	{
-		JHtml::_('script','system/combobox.js', true, true);
+		$uncompressed	= JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
+		JHtml::_('script','system/combobox'.$uncompressed.'.js', true, true);
 	}
 
 	/**
@@ -242,7 +252,8 @@ abstract class JHtmlBehavior
 		// Load the necessary files if they haven't yet been loaded
 		if (!isset($included)) {
 			// Load the javascript and css
-			JHtml::_('script','system/modal.js', true, true);
+			$uncompressed	= JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
+			JHtml::_('script','system/modal'.$uncompressed.'.js', true, true);
 			JHtml::_('stylesheet','system/modal.css', array(), true);
 
 			$included = true;
@@ -299,9 +310,10 @@ abstract class JHtmlBehavior
 	 */
 	public static function uploader($id='file-upload', $params = array(), $upload_queue='upload-queue')
 	{
-		JHtml::_('script','system/swf.js', true, true);
-		JHtml::_('script','system/progressbar.js', true, true);
-		JHtml::_('script','system/uploader.js', true, true);
+		$uncompressed	= JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
+		JHtml::_('script','system/swf'.$uncompressed.'.js', true, true);
+		JHtml::_('script','system/progressbar'.$uncompressed.'.js', true, true);
+		JHtml::_('script','system/uploader'.$uncompressed.'.js', true, true);
 
 		$document = JFactory::getDocument();
 
@@ -330,6 +342,7 @@ abstract class JHtmlBehavior
 			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_ERROR_HTTPSTATUS');
 			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_ERROR_SECURITYERROR');
 			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_ERROR_IOERROR');
+			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_ALL_FILES');
 		}
 
 		if (isset($uploaders[$id]) && ($uploaders[$id])) {
@@ -371,7 +384,7 @@ abstract class JHtmlBehavior
 		$opt['fileListMax']			= (isset($params['fileListMax']) && ($params['fileListMax'])) ? (int)$params['fileListMax'] : $opt['fileListMax'];
 		$opt['fileListSizeMax']		= (isset($params['fileListSizeMax']) && ($params['fileListSizeMax'])) ? (int)$params['fileListSizeMax'] : null;
 		// types is the old parameter name.  Remove in 1.7
-		$opt['typeFilter']			= (isset($params['types'])) ? '\\'.$params['types'] : '\\{Joomla.JText._(\'JPLOADER_ALL_FILES\'): \'*.*\'}';
+		$opt['typeFilter']			= (isset($params['types'])) ? '\\'.$params['types'] : '\\{Joomla.JText._(\'JLIB_HTML_BEHAVIOR_UPLOADER_ALL_FILES\'): \'*.*\'}';
 		$opt['typeFilter']			= (isset($params['typeFilter'])) ? '\\'.$params['typeFilter'] : $opt['typeFilter'];
 
 		// Optional functions
@@ -459,7 +472,8 @@ abstract class JHtmlBehavior
 		}
 
 		// Include mootools framework
-		JHtml::_('script','system/mootree.js', true, true, false, false);
+		$uncompressed	= JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
+		JHtml::_('script','system/mootree'.$uncompressed.'.js', true, true, false, false);
 		JHtml::_('stylesheet','system/mootree.css', array(), true);
 
 		if (isset($trees[$id]) && ($trees[$id])) {
@@ -577,9 +591,18 @@ abstract class JHtmlBehavior
 	 */
 	public static function noframes($location='top.location.href')
 	{
+		static $loaded = false;
+
+		// only load once
+		if ($loaded) {
+			return;
+		}
+		
 		$js = "window.addEvent('domready', function () {if (top != self) {top.location.replace(".$location.");}});";
 		$document = JFactory::getDocument();
 		$document->addScriptDeclaration($js);
+		
+		$loaded = true;
 	}
 
 	/**

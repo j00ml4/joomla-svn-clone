@@ -32,6 +32,7 @@ class SampleData0001 extends SeleniumJoomlaTestCase
 		$this->assertTrue($this->isElementPresent("//dl[@id='system-message'][contains(., 'success')]"));
 		$this->doAdminLogout();
 		print("Finish testModuleOrder" . "\n");
+		$this->deleteAllVisibleCookies();
 	}
 
 	function testMenuItems()
@@ -54,7 +55,7 @@ class SampleData0001 extends SeleniumJoomlaTestCase
 		$this->assertTrue($this->isTextPresent("Sample Sites"));
 		$this->click("link=Home");
 		print("Load search" . "\n");
-		$this->type("mod_search_searchword", "search");
+		$this->type("mod-search-searchword", "search");
 		$this->waitForPageToLoad("30000");
 
 		$this->click("link=Home");
@@ -112,7 +113,7 @@ class SampleData0001 extends SeleniumJoomlaTestCase
 		$this->gotoAdmin();
 		$this->doAdminLogout();
 		print("Finish testMenuItems" . "\n");
+		$this->deleteAllVisibleCookies();
 	}
 
 }
-?>
