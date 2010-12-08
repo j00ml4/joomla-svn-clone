@@ -43,12 +43,10 @@ $pageClass = $this->params->get('pageclass_sfx');
 	</div>
 	<?php endif; ?>
 
-	<div class="cat-items">			
+	<div class="cat-items">
 		<?php echo $this->loadTemplate('articles'); ?>
-	
 	</div>
-	
-	
+
 	<?php if (!empty($this->children[$this->category->id])&& $this->maxLevel != 0) : ?>
 	<div class="cat-children">
 		<h3>
@@ -56,10 +54,6 @@ $pageClass = $this->params->get('pageclass_sfx');
 		</h3>
 
 		<?php echo $this->loadTemplate('children'); ?>
-
 	</div>
 	<?php endif; ?>
-
-	
-
 </div>

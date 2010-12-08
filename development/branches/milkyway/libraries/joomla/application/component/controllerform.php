@@ -161,7 +161,9 @@ class JControllerForm extends JController
 	 */
 	protected function allowAdd($data = array())
 	{
-		return JFactory::getUser()->authorise('core.create', $this->option);
+		$user = JFactory::getUser();
+		return ($user->authorise('core.create', $this->option) ||
+			count($user->getAuthorisedCategories($this->option, 'core.create')));
 	}
 
 	/**
@@ -233,7 +235,7 @@ class JControllerForm extends JController
 			// Check we are holding the id in the edit list.
 			if (!$this->checkEditId($context, $recordId)) {
 				// Somehow the person just went to the form - we don't allow that.
-				$this->setError(JText::_('JLIB_APPLICATION_ERROR_UNHELD_ID'));
+				$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $recordId));
 				$this->setMessage($this->getError(), 'error');
 				$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list.$this->getRedirectToListAppend(), false));
 
@@ -264,11 +266,12 @@ class JControllerForm extends JController
 	 * Method to edit an existing record.
 	 *
 	 * @param	string	$key	The name of the primary key of the URL variable.
+	 * @param	string	$urlVar	The name of the URL variable if different from the primary key (sometimes required to avoid router collisions).
 	 *
 	 * @return	Boolean	True if access level check and checkout passes, false otherwise.
 	 * @since	1.6
 	 */
-	public function edit($key = null)
+	public function edit($key = null, $urlVar = null)
 	{
 		// Initialise variables.
 		$app		= JFactory::getApplication();
@@ -278,12 +281,18 @@ class JControllerForm extends JController
 		$context	= "$this->option.edit.$this->context";
 		$append		= '';
 
+		// Determine the name of the primary key for the data.
 		if (empty($key)) {
 			$key = $table->getKeyName();
 		}
 
+		// The urlVar may be different from the primary key to avoid data collisions.
+		if (empty($urlVar)) {
+			$urlVar = $key;
+		}
+
 		// Get the previous record id (if any) and the current record id.
-		$recordId	= (int) (count($cid) ? $cid[0] : JRequest::getInt($key));
+		$recordId	= (int) (count($cid) ? $cid[0] : JRequest::getInt($urlVar));
 		$checkin	= property_exists($table, 'checked_out');
 
 		// Access check.
@@ -300,7 +309,7 @@ class JControllerForm extends JController
 			// Check-out failed, display a notice but allow the user to see the record.
 			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_CHECKOUT_FAILED', $model->getError()));
 			$this->setMessage($this->getError(), 'error');
-			$this->setRedirect('index.php?option='.$this->option.'&view='.$this->view_item.$this->getRedirectToItemAppend($recordId, $key));
+			$this->setRedirect('index.php?option='.$this->option.'&view='.$this->view_item.$this->getRedirectToItemAppend($recordId, $key, $urlVar));
 
 			return false;
 		}
@@ -308,7 +317,7 @@ class JControllerForm extends JController
 			// Check-out succeeded, push the new record id into the session.
 			$this->holdEditId($context, $recordId);
 			$app->setUserState($context.'.data', null);
-			$this->setRedirect('index.php?option='.$this->option.'&view='.$this->view_item.$this->getRedirectToItemAppend($recordId, $key));
+			$this->setRedirect('index.php?option='.$this->option.'&view='.$this->view_item.$this->getRedirectToItemAppend($recordId, $key, $urlVar));
 
 			return true;
 		}
@@ -337,12 +346,12 @@ class JControllerForm extends JController
 	 * Gets the URL arguments to append to an item redirect.
 	 *
 	 * @param	int		$recordId	The primary key id for the item.
-	 * @param	string	$key		The name of the primary key variable.
+	 * @param	string	$urlVar		The name of the URL variable for the id.
 	 *
 	 * @return	string	The arguments to append to the redirect URL.
 	 * @since	1.6
 	 */
-	protected function getRedirectToItemAppend($recordId = null, $key = 'id')
+	protected function getRedirectToItemAppend($recordId = null, $urlVar = 'id')
 	{
 		$tmpl		= JRequest::getString('tmpl');
 		$layout		= JRequest::getString('layout', 'edit');
@@ -358,7 +367,7 @@ class JControllerForm extends JController
 		}
 
 		if ($recordId) {
-			$append .= '&'.$key.'='.$recordId;
+			$append .= '&'.$urlVar.'='.$recordId;
 		}
 
 		return $append;
@@ -386,12 +395,13 @@ class JControllerForm extends JController
 	/**
 	 * Function that allows child controller access to model data after the data has been saved.
 	 *
-	 * @param	JModel	$model	The data model object.
+	 * @param	JModel	$model		The data model object.
+	 * @param	array	$validData	The validated data.
 	 *
 	 * @return	void
 	 * @since	1.6
 	 */
-	protected function postSaveHook(JModel &$model)
+	protected function postSaveHook(JModel &$model, $validData)
 	{
 	}
 
@@ -399,11 +409,12 @@ class JControllerForm extends JController
 	 * Method to save a record.
 	 *
 	 * @param	string	$key	The name of the primary key of the URL variable.
+	 * @param	string	$urlVar	The name of the URL variable if different from the primary key (sometimes required to avoid router collisions).
 	 *
 	 * @return	Boolean	True if successful, false otherwise.
 	 * @since	1.6
 	 */
-	public function save($key = null)
+	public function save($key = null, $urlVar = null)
 	{
 		// Check for request forgeries.
 		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
@@ -418,18 +429,24 @@ class JControllerForm extends JController
 		$context	= "$this->option.edit.$this->context";
 		$task		= $this->getTask();
 
+		// Determine the name of the primary key for the data.
 		if (empty($key)) {
 			$key = $table->getKeyName();
 		}
 
-		$recordId	= JRequest::getInt($key);
+		// The urlVar may be different from the primary key to avoid data collisions.
+		if (empty($urlVar)) {
+			$urlVar = $key;
+		}
+
+		$recordId	= JRequest::getInt($urlVar);
 
 		$session	= JFactory::getSession();
 		$registry	= $session->get('registry');
 
 		if (!$this->checkEditId($context, $recordId)) {
 			// Somehow the person just went to the form and saved it - we don't allow that.
-			$this->setError(JText::_('JLIB_APPLICATION_ERROR_UNHELD_ID'));
+			$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $recordId));
 			$this->setMessage($this->getError(), 'error');
 			$this->setRedirect(JRoute::_('index.php?option='.$this->option.'&view='.$this->view_list.$this->getRedirectToListAppend(), false));
 
@@ -529,7 +546,7 @@ class JControllerForm extends JController
 			return false;
 		}
 
-		$this->setMessage(JText::_(($lang->hasKey($this->text_prefix.'_SAVE_SUCCESS') ? $this->text_prefix : 'JLIB_APPLICATION') .  '_SAVE_SUCCESS'));
+		$this->setMessage(JText::_(($lang->hasKey($this->text_prefix.($recordId==0 && $app->isSite() ? '_SUBMIT' : '').'_SAVE_SUCCESS') ? $this->text_prefix : 'JLIB_APPLICATION') . ($recordId==0 && $app->isSite() ? '_SUBMIT' : '') . '_SAVE_SUCCESS'));
 
 		// Redirect the user and adjust session state based on the chosen task.
 		switch ($task)
@@ -564,7 +581,7 @@ class JControllerForm extends JController
 		}
 
 		// Invoke the postSave method to allow for the child class to access the model.
-		$this->postSaveHook($model);
+		$this->postSaveHook($model, $validData);
 
 		return true;
 	}

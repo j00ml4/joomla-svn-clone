@@ -27,7 +27,7 @@ class ContentModelArticles extends JModelList
 	 * @return	void
 	 * @since	1.6
 	 */
-	protected function populateState()
+	protected function populateState($ordering = null, $direction = null)
 	{
 		$app = JFactory::getApplication();
 
@@ -282,8 +282,10 @@ class ContentModelArticles extends JModelList
 		else if (is_array($categoryId) && (count($categoryId) > 0)) {
 			JArrayHelper::toInteger($categoryId);
 			$categoryId = implode(',', $categoryId);
-			$type = $this->getState('filter.category_id.include', true) ? 'IN' : 'NOT IN';
-			$query->where('a.catid '.$type.' ('.$categoryId.')');
+			if (!empty($categoryId)) {
+				$type = $this->getState('filter.category_id.include', true) ? 'IN' : 'NOT IN';
+				$query->where('a.catid '.$type.' ('.$categoryId.')');
+			}
 		}
 
 		// Filter by author
@@ -423,7 +425,7 @@ class ContentModelArticles extends JModelList
 	 * @return	mixed	An array of objects on success, false on failure.
 	 * @since	1.6
 	 */
-	public function &getItems()
+	public function getItems()
 	{
 		$items	= parent::getItems();
 		$user	= JFactory::getUser();

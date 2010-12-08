@@ -31,6 +31,7 @@ class CategoriesViewCategory extends JView
 		$this->form		= $this->get('Form');
 		$this->item		= $this->get('Item');
 		$this->state	= $this->get('State');
+		$this->canDo	= CategoriesHelper::getActions($this->state->get('category.component'));
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -98,7 +99,7 @@ class CategoriesViewCategory extends JView
 		JHtml::_('stylesheet',$component.'/administrator/categories.css', array(), true);
 
 		// Prepare the toolbar.
-		JToolBarHelper::title($title, substr($component,4).($section?"-$section":'').'-category-'.($isNew?'add':'edit').'.png');
+		JToolBarHelper::title($title, 'category-'.($isNew?'add':'edit').' '.substr($component,4).($section?"-$section":'').'-category-'.($isNew?'add':'edit'));
 
 		// For new records, check the create permission.
 		if ($isNew && $canDo->get('core.create')) {

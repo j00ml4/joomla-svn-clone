@@ -10,25 +10,25 @@
 // no direct access
 defined('_JEXEC') or die;
 
-// Get the user object.
-//$user = JFactory::getUser();
-$params = &$this->item->params;
-// Check if user is allowed to add/edit based on content permissions.
-
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
 JHtml::core();
 
-$n = count($this->items);
+// Create some shortcuts.
+$params		= &$this->item->params;
+$n			= count($this->items);
 $listOrder	= $this->state->get('list.ordering');
 $listDirn	= $this->state->get('list.direction');
 ?>
 
 <?php if (empty($this->items)) : ?>
-		<?php if ($this->params->get('show_no_articles',1)) : ?>
-		<p><?php echo JText::_('COM_CONTENT_NO_ARTICLES'); ?></p>
-		<?php endif; ?>
+
+	<?php if ($this->params->get('show_no_articles',1)) : ?>
+	<p><?php echo JText::_('COM_CONTENT_NO_ARTICLES'); ?></p>
+	<?php endif; ?>
+
 <?php else : ?>
+
 <form action="<?php echo JFilterOutput::ampReplace(JFactory::getURI()->toString()); ?>" method="post" name="adminForm" id="adminForm">
 	<?php if ($this->params->get('filter_field') != 'hide') :?>
 	<fieldset class="filters">
@@ -53,15 +53,13 @@ $listDirn	= $this->state->get('list.direction');
 	</fieldset>
 	<?php endif; ?>
 
-	<table class="category" border="1">
+	<table class="category">
 		<?php if ($this->params->get('show_headings')) :?>
 		<thead>
 			<tr>
-
 				<th class="list-title" id="tableOrdering">
 					<?php  echo JHTML::_('grid.sort', 'JGLOBAL_TITLE', 'a.title', $listDirn, $listOrder) ; ?>
 				</th>
-
 
 				<?php if ($date = $this->params->get('list_show_date')) : ?>
 				<th class="list-date" id="tableOrdering2">
@@ -87,23 +85,24 @@ $listDirn	= $this->state->get('list.direction');
 		<tbody>
 
 		<?php foreach ($this->items as $i => $article) : ?>
-			<tr class="cat-list-row<?php echo $i % 2; ?>">
-
+			<?php if ($this->items[$i]->state == 0) : ?>
+				<tr class="system-unpublished cat-list-row<?php echo $i % 2; ?>">
+			<?php else: ?>
+				<tr class="cat-list-row<?php echo $i % 2; ?>" >
+			<?php endif; ?>
 				<?php if (in_array($article->access, $this->user->getAuthorisedViewLevels())) : ?>
 
 					<td class="list-title">
-
 						<a href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid)); ?>">
-						<?php echo $this->escape($article->title); ?></a>
+							<?php echo $this->escape($article->title); ?></a>
 
 						<?php if ($article->params->get('access-edit')) : ?>
-							<ul class="actions">
-								<li class="edit-icon">
-									<?php echo JHtml::_('icon.edit',$article, $params); ?>
-								</li>
-							</ul>
+						<ul class="actions">
+							<li class="edit-icon">
+								<?php echo JHtml::_('icon.edit',$article, $params); ?>
+							</li>
+						</ul>
 						<?php endif; ?>
-
 					</td>
 
 					<?php if ($this->params->get('list_show_date')) : ?>
@@ -113,51 +112,57 @@ $listDirn	= $this->state->get('list.direction');
 					</td>
 					<?php endif; ?>
 
-					<?php if ($this->params->get('list_show_author',1) && !empty($article->author )) : ?>	
-							<td class="createdby"> 
-								<?php $author =  $article->author ?>
-								<?php $author = ($article->created_by_alias ? $article->created_by_alias : $author);?>
-				
-									<?php if (!empty($article->contactid ) &&  $this->params->get('link_author') == true):?>
-										<?php 	echo 
-										 JHTML::_('link',JRoute::_('index.php?option=com_contact&view=contact&id='.$article->contactid),$author); ?>
-						
-									<?php else :?>
-										<?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', $author); ?>
-									<?php endif; ?>
-							</td>
-					<?php endif; ?>	
+					<?php if ($this->params->get('list_show_author',1) && !empty($article->author )) : ?>
+					<td class="createdby">
+						<?php $author =  $article->author ?>
+						<?php $author = ($article->created_by_alias ? $article->created_by_alias : $author);?>
+
+						<?php if (!empty($article->contactid ) &&  $this->params->get('link_author') == true):?>
+							<?php echo JHTML::_(
+									'link',
+									JRoute::_('index.php?option=com_contact&view=contact&id='.$article->contactid),
+									$author
+							); ?>
+
+						<?php else :?>
+							<?php echo JText::sprintf('COM_CONTENT_WRITTEN_BY', $author); ?>
+						<?php endif; ?>
+					</td>
+					<?php endif; ?>
+
 					<?php if ($this->params->get('list_show_hits',1)) : ?>
 					<td class="list-hits">
 						<?php echo $article->hits; ?>
 					</td>
 					<?php endif; ?>
 
-				<?php else : ?>
-				<td>
-					<?php
-						echo $this->escape($article->title).' : ';
-						$menu		= JFactory::getApplication()->getMenu();
-						$active		= $menu->getActive();
-						$itemId		= $active->id;
-						$link = JRoute::_('index.php?option=com_users&view=login&Itemid='.$itemId);
-						$returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug));
-						$fullURL = new JURI($link);
-						$fullURL->setVar('return', base64_encode($returnURL));
-					?>
-					<a href="<?php echo $fullURL; ?>" class="register">
-						<?php echo JText::_( 'COM_CONTENT_REGISTER_TO_READ_MORE' ); ?></a>
-				</td>
+				<?php else : // Show unauth links. ?>
+					<td>
+						<?php
+							echo $this->escape($article->title).' : ';
+							$menu		= JFactory::getApplication()->getMenu();
+							$active		= $menu->getActive();
+							$itemId		= $active->id;
+							$link = JRoute::_('index.php?option=com_users&view=login&Itemid='.$itemId);
+							$returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug));
+							$fullURL = new JURI($link);
+							$fullURL->setVar('return', base64_encode($returnURL));
+						?>
+						<a href="<?php echo $fullURL; ?>" class="register">
+							<?php echo JText::_( 'COM_CONTENT_REGISTER_TO_READ_MORE' ); ?></a>
+					</td>
 				<?php endif; ?>
-
-			</tr>
-			<?php endforeach; ?>
+				</tr>
+			<?php if ($this->items[$i]->state == 0) : ?>
+			</div>
+			<?php endif; ?>
+		<?php endforeach; ?>
 		</tbody>
 	</table>
+
 <?php // Code to add a link to submit an article. ?>
 <?php if ($this->category->getParams()->get('access-create')) : ?>
-<span class="hasTip" title="<?php echo JText::_('COM_CONTENT_CREATE_ARTICLE'); ?>"><a href="<?php echo JRoute::_('index.php?option=com_content&task=article.add');?>">
-	<img src="media/system/images/edit.png" alt="Edit" /></a></span>
+	<?php echo JHtml::_('icon.create', $article, $article->params); ?>
 <?php  endif; ?>
 	<?php if (($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2)) && ($this->pagination->get('pages.total') > 1)) : ?>
 	<div class="pagination">

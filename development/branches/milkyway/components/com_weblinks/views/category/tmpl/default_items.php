@@ -46,7 +46,7 @@ $listDirn	= $this->state->get('list.direction');
 		<?php if ($this->params->get('show_headings')==1) : ?>
 
 		<thead><tr>
-			
+
 			<th class="title">
 					<?php echo JHtml::_('grid.sort',  'COM_WEBLINKS_GRID_TITLE', 'title', $listDirn, $listOrder); ?>
 			</th>
@@ -60,8 +60,12 @@ $listDirn	= $this->state->get('list.direction');
 	<?php endif; ?>
 	<tbody>
 	<?php foreach ($this->items as $i => $item) : ?>
-		<tr class="<?php echo $i % 2 ? 'odd' : 'even';?>">
-			
+		<?php if ($this->items[$i]->state == 0) : ?>
+			<tr class="system-unpublished cat-list-row<?php echo $i % 2; ?>">
+		<?php else: ?>
+			<tr class="cat-list-row<?php echo $i % 2; ?>" >
+		<?php endif; ?>
+
 			<td class="title">
 			<p>
 				<?php if ($this->params->get('link_icons') <> -1) : ?>
@@ -99,14 +103,14 @@ $listDirn	= $this->state->get('list.direction');
 					}
 				?>
 				<?php // Code to add the edit link for the weblink. ?>
-	
+
 						<?php if ($canEdit) : ?>
 							<ul class="actions">
 								<li class="edit-icon">
 									<?php echo JHtml::_('icon.edit',$item, $params); ?>
 								</li>
 							</ul>
-						<?php endif; ?>		
+						<?php endif; ?>
 			</p>
 
 			<?php if (($this->params->get('show_link_description')) AND ($item->description !='')): ?>
@@ -126,10 +130,7 @@ $listDirn	= $this->state->get('list.direction');
 </table>
 
 	<?php // Code to add a link to submit a weblink. ?>
-	<?php if ($canCreate) : ?>
-		<span class="hasTip" title="<?php echo JText::_('COM_WEBLINKS_FORM_EDIT_WEBLINK'); ?>"><a href="<?php echo JRoute::_(WeblinksHelperRoute::getFormRoute(0));?>">
-		<img src="media/system/images/edit.png" alt="Edit" /></a></span>
-	<?php  endif; ?>
+	<?php //TODO: restore submit a weblink code button when it works correctly. ?>
 		<?php if ($this->params->get('show_pagination')) : ?>
 		 <div class="pagination">
 			<?php if ($this->params->def('show_pagination_results', 1)) : ?>

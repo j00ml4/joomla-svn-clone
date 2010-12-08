@@ -26,7 +26,7 @@ class JUser extends JObject
 	 * A cached switch for if this user has root access rights.
 	 * @var	boolean
 	 */
-	protected static $isRoot = null;
+	protected $isRoot = null;
 
 	/**
 	 * Unique id
@@ -271,8 +271,8 @@ class JUser extends JObject
 	public function authorise($action, $assetname = null)
 	{
 		// Make sure we only check for core.admin once during the run.
-		if (self::$isRoot === null) {
-			self::$isRoot = false;
+		if ($this->isRoot === null) {
+			$this->isRoot = false;
 
 			// Check for the configuration file failsafe.
 			$config		= JFactory::getConfig();
@@ -280,10 +280,10 @@ class JUser extends JObject
 
 			// The root_user variable can be a numeric user ID or a username.
 			if (is_numeric($rootUser) && $this->id > 0 && $this->id == $rootUser) {
-				self::$isRoot = true;
+				$this->isRoot = true;
 			}
 			else if ($this->username && $this->username == $rootUser) {
-				self::$isRoot = true;
+				$this->isRoot = true;
 			}
 			else {
 				// Get all groups against which the user is mapped.
@@ -291,13 +291,13 @@ class JUser extends JObject
 				array_unshift($identities, $this->id * -1);
 
 				if (JAccess::getAssetRules(1)->allow('core.admin', $identities)) {
-					self::$isRoot = true;
+					$this->isRoot = true;
 					return true;
 				}
 			}
 		}
 
-		return self::$isRoot ? true : JAccess::check($this->id, $action, $assetname);
+		return $this->isRoot ? true : JAccess::check($this->id, $action, $assetname);
 	}
 
 	/**
@@ -307,6 +307,36 @@ class JUser extends JObject
 	{
 		return $this->getAuthorisedViewLevels();
 	}
+	
+	/**
+	 * Method to return a list of all categories that a user has permission for a given action
+	 *
+	 * @param	string	$component	The component from which to retrieve the categories
+	 * @param	string	$action		The name of the section within the component from which to retrieve the actions.
+	 *
+	 * @return	array	List of categories that this group can do this action to (empty array if none). Categories must be published.
+	 * @since	1.6
+	 */
+	public function getAuthorisedCategories($component, $action) {
+		// Brute force method: get all published category rows for the component and check each one
+		// TODO: Modify the way permissions are stored in the db to allow for faster implementation and better scaling
+		$db = JFactory::getDbo();
+		$query	= $db->getQuery(true)
+			->select('c.id AS id, a.name as asset_name')
+			->from('#__categories c')
+			->innerJoin('#__assets a ON c.asset_id = a.id')
+			->where('c.extension = ' . $db->quote($component))
+			->where('c.published = 1');
+		$db->setQuery($query);
+		$allCategories = $db->loadObjectList('id');
+		$allowedCategories = array();
+		foreach ($allCategories as $category) {
+			if ($this->authorise($action, $category->asset_name)) {
+				$allowedCategories[] = (int) $category->id;	
+			}
+		}
+		return $allowedCategories;
+	}	
 
 	/**
 	 * Gets an array of the authorised access levels for the user
@@ -326,7 +356,7 @@ class JUser extends JObject
 
 		return $this->_authLevels;
 	}
-
+	
 	/**
 	 * Pass through method to the table for setting the last visit date
 	 *
@@ -546,7 +576,6 @@ class JUser extends JObject
 		$table			= $this->getTable();
 		$this->params	= (string) $this->_params;
 		$table->bind($this->getProperties());
-		$table->groups	= $this->groups;
 
 		// Allow an exception to be thrown.
 		try
@@ -585,27 +614,29 @@ class JUser extends JObject
 			$iAmSuperAdmin	= JAccess::check($my->id, 'core.admin');
 
 			// We are only worried about edits to this account if I am not a Super Admin.
-			if (!$iAmSuperAdmin) {
+			if ($iAmSuperAdmin != true) {
 				if ($isNew) {
 					// Check if the new user is being put into a Super Admin group.
 					foreach (array_keys($this->groups) as $groupId)
 					{
 						if (JAccess::checkGroup($groupId, 'core.admin')) {
-							throw new Exception(JText::_('COM_USERS_ERROR_NOT_SUPERADMIN'));
+							throw new Exception(JText::_('JLIB_USER_ERROR_NOT_SUPERADMIN'));
 						}
 					}
 				}
 				else {
 					// I am not a Super Admin, and this one is, so fail.
 					if (JAccess::check($this->id, 'core.admin')) {
-						throw new Exception(JText::_('COM_USERS_ERROR_NOT_SUPERADMIN'));
+						throw new Exception(JText::_('JLIB_USER_ERROR_NOT_SUPERADMIN'));
 					}
 
+					if ($this->groups != null) {
 					// I am not a Super Admin and I'm trying to make one.
-					foreach (array_keys($this->groups) as $groupId)
-					{
-						if (JAccess::checkGroup($groupId, 'core.admin')) {
-							throw new Exception(JText::_('COM_USERS_ERROR_NOT_SUPERADMIN'));
+						foreach (array_keys($this->groups) as $groupId)
+						{
+							if (JAccess::checkGroup($groupId, 'core.admin')) {
+								throw new Exception(JText::_('JLIB_USER_ERROR_NOT_SUPERADMIN'));
+							}
 						}
 					}
 				}

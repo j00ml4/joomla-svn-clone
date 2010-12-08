@@ -11,14 +11,23 @@
 defined('_JEXEC') or die;
 
 // Access check.
-if (!JFactory::getUser()->authorise('core.manage', 'com_media')) {
-	return JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
+
+$user = JFactory::getUser();
+$asset = JRequest::getCmd('asset');
+$author = JRequest::getCmd('author');
+if (	!$user->authorise('core.manage', 'com_media')
+	&&	(!$asset or
+			!$user->authorise('core.edit', $asset)
+		&&	!$user->authorise('core.create', $asset)
+		&&	!($user->id==$author && $user->authorise('core.edit.own', $asset))))
+{
+	return JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
 $params = JComponentHelper::getParams('com_media');
 
 // Load the admin HTML view
-require_once JPATH_COMPONENT.DS.'helpers'.DS.'media.php';
+require_once JPATH_COMPONENT.'/helpers/media.php';
 
 // Set the path definitions
 $popup_upload = JRequest::getCmd('pop_up',null);
@@ -29,7 +38,7 @@ if (substr(strtolower($view),0,6) == "images" || $popup_upload == 1) {
 	$path = "image_path";
 }
 
-define('COM_MEDIA_BASE',	JPATH_ROOT.DS.$params->get($path, 'images'));
+define('COM_MEDIA_BASE',	JPATH_ROOT.'/'.$params->get($path, 'images'));
 define('COM_MEDIA_BASEURL', JURI::root().$params->get($path, 'images'));
 
 // Include dependancies
