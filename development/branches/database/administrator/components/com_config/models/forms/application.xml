@@ -232,6 +232,51 @@
 			size="50" />
 	</fieldset>
 
+		<fieldset
+		name="cloud_server"
+		label="COM_CONFIG_CLOUD_SERVER_LABEL">
+		<field
+			name="storage_type"
+			type="list"
+			label="COM_CONFIG_CLOUD_STORAGE_TYPE_LABEL"
+			description="COM_CONFIG_CLOUD_STORAGE_TYPE_DESC"
+			filter="string">
+			<option
+				value="local">COM_CONFIG_FIELD_VALUE_LOCAL</option>
+			<option
+				value="winazure">COM_CONFIG_FIELD_VALUE_WINAZURE</option>
+			<option
+				value="amazon">COM_CONFIG_FIELD_VALUE_AMAZON</option>
+		</field>
+
+		<field
+			name="cloud_acc_name"
+			type="text"
+			label="COM_CONFIG_FIELD_ACC_NAME_LABEL"
+			description="COM_CONFIG_FIELD_ACC_NAME_DESC"
+			filter="string"
+			size="30"
+			required="true" />
+
+		<field
+			name="cloud_access_key"
+			type="text"
+			label="COM_CONFIG_FIELD_ACCESS_KEY_LABEL"
+			description="COM_CONFIG_FIELD_ACCESS_KEY_DESC"
+			filter="string"
+			size="30"
+			required="true" />
+
+		<field
+			name="domain_name"
+			type="text"
+			label="COM_CONFIG_FIELD_DOMAIN_NAME_LABEL"
+			description="COM_CONFIG_FIELD_DOMAIN_NAME_DESC"
+			filter="string"
+			size="30" />
+
+	</fieldset>
+
 	<fieldset
 		name="locale"
 		label="CONFIG_LOCATION_SETTINGS_LABEL">

@@ -389,7 +389,12 @@ class JInstallationModelSetup extends JModel
 		if ($form === false) {
 			return false;
 		}
-
+		//Windows Azure change		
+		if(isset($data['storage_type']) && $data['storage_type'] == 'local')
+		{
+			$form->setFieldAttribute('acc_name', 'required', 'false');
+			$form->setFieldAttribute('access_key', 'required', 'false');
+		}
 		// Filter and validate the form data.
 		$data = $form->filter($data);
 		$return	= $form->validate($data);

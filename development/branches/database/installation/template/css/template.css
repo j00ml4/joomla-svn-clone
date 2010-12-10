@@ -404,6 +404,7 @@ div#stepbar {
 
 div#installer {
   background: #fff;
+  padding-bottom: 10px;
 }
 
 div#installer div.install-body div.m {

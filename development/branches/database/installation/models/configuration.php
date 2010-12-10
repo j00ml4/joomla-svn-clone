@@ -80,6 +80,12 @@ class JInstallationModelConfiguration extends JModel
 		$registry->set('ftp_root', $options->ftp_save ? $options->ftp_root : '');
 		$registry->set('ftp_enable', $options->ftp_enable);
 
+		/* Cloud Server Settings */
+		$registry->set('storage_type', $options->storage_type);
+		$registry->set('cloud_acc_name', $options->acc_name);
+		$registry->set('cloud_access_key', $options->access_key);
+		$registry->set('domain_name', $options->domain_name);
+		
 		/* Locale Settings */
 		$registry->set('offset', 'UTC');
 		$registry->set('offset_user', 'UTC');

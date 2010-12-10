@@ -259,4 +259,42 @@ class ConfigModelApplication extends JModelForm
 
 		return true;
 	}
+	
+	/**
+	 * Method to validate the form data.
+	 *
+	 * @param	object		$form		The form to validate against.
+	 * @param	array		$data		The data to validate.
+	 * @return	mixed		Array of filtered data if valid, false otherwise.
+	 * @since	1.1
+	 */
+	function validate($form, $data)
+	{
+		if(isset($data['storage_type']) && $data['storage_type'] == 'local')
+		{
+			$form->setFieldAttribute('cloud_acc_name', 'required', 'false');
+			$form->setFieldAttribute('cloud_access_key', 'required', 'false');
+		}
+		// Filter and validate the form data.
+		$data	= $form->filter($data);
+		$return	= $form->validate($data);
+
+		// Check for an error.
+		if (JError::isError($return)) {
+			$this->setError($return->getMessage());
+			return false;
+		}
+
+		// Check the validation results.
+		if ($return === false) {
+			// Get the validation messages from the form.
+			foreach ($form->getErrors() as $message) {
+				$this->setError($message);
+			}
+
+			return false;
+		}
+
+		return $data;
+	}
 }
