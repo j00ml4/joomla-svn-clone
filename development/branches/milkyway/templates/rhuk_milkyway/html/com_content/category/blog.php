@@ -21,17 +21,17 @@ $cparams = JComponentHelper::getParams('com_media');
 <tr>
 	<td valign="top">
 	<?php if ($this->params->get('show_description_image') && $this->category->image) : ?>
-		<img src="<?php echo $this->baseurl . '/' . $cparams->get('image_path') . '/'. $this->category->image;?>" align="<?php echo $this->category->image_position;?>" hspace="6" alt="" />
+		<img src="<?php echo $this->category->getParams()->get('image'); ?>"/>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_description') && $this->category->description) : ?>
-		<?php echo $this->category->description; ?>
+		<?php echo JHtml::_('content.prepare', $this->category->description); ?>
 	<?php endif; ?>
 		<br />
 		<br />
 	</td>
 </tr>
 <?php endif; ?>
-<?php if ($this->params->get('num_leading_articles')) : ?>
+
 <tr>
 	<td valign="top">
 <?php $leadingcount=0 ; ?>
@@ -50,21 +50,25 @@ $cparams = JComponentHelper::getParams('com_media');
 	<?php endforeach; ?>
 </div>
 <?php endif; ?>
+
 <?php
-	$introcount=(count($this->intro_items));
+	$introcount=(count($this->intro_items)); 
 	$counter=0;
 ?>
 <?php if (!empty($this->intro_items)) : ?>
 
 	<?php foreach ($this->intro_items as $key => &$item) : ?>
 	<?php
-		$key= ($key-$leadingcount)+1;
+		$key= ($key-$leadingcount)+1; 
 		$rowcount=( ((int)$key-1) %	(int) $this->columns) +1;
 		$row = $counter / $this->columns ;
-
-		if ($rowcount==1) : ?>
-	<div class="items-row cols-<?php echo (int) $this->columns;?> <?php echo 'row-'.$row ; ?>">
-	<?php endif; ?>
+				
+				//	$rows = (int) ($this->intro_items) / $this->params->get('num_columns');
+				//	$cols = ($this->params->get('intro_items', 4) % $this->params->get('num_columns'));
+		
+	//	if  ($row==1) : ?>
+	<div class="items-row cols-<?php echo (int) $this->columns;?> <?php // echo 'column-'.$rowcount ; ?>">
+	<?php // endif; ?>
 	<div class="item column-<?php echo $rowcount;?><?php echo $item->state == 0 ? ' system-unpublished' : null; ?>">
 		<?php
 			$this->item = &$item;
@@ -76,14 +80,12 @@ $cparams = JComponentHelper::getParams('com_media');
 				<span class="row-separator"></span>
 				</div>
 
-			<?php endif; ?>
+	<?php endif; ?>
 	<?php endforeach; ?>
-
-
-<?php endif; ?>
+<?php  endif; ?>
 	</td>
 </tr>
-<?php else : $i = $this->pagination->limitstart; endif; ?>
+
 
 
 <tr>
