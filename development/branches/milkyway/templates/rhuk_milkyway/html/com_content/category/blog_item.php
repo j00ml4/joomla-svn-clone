@@ -61,7 +61,7 @@ endif; ?>
 <?php if (($params->get('show_category')) or  ($params->get('show_parent_category'))) : ?>
 <tr>
 	<td>
-		<?php if ($this->item->params->get('show_section') && $this->item->sectionid && isset($this->item->section)) : ?>
+		<?php if ($this->item->params->get('show_parent_category') && ($this->item->parent_id )) : ?>
 			<span>
 				<?php if ($params->get('show_parent_category')) : ?>
 							<?php $title = $this->escape($this->item->parent_title);
