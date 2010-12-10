@@ -17,7 +17,22 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 JHtml::_('script', 'installation/template/js/installation.js', true, false, false, false);
 ?>
-
+<script type="text/javascript">
+window.addEvent('domready', function(){
+	if(document.id('jform_storage_type').get("value")=='local'){
+		$$('.server_details_req').set('style', 'display:none');
+	}
+	document.id('jform_storage_type').addEvent('change',function() {
+		if(this.get("value")!='local'){
+			$$('.server_details_req').fade('in');
+			$$('.server_details_req').set('style', 'display:true');
+		  }else{
+			  $$('.server_details_req').fade('out');
+			  $$('.server_details_req').set('style', 'display:none');
+		  }
+	});
+});
+</script>
 <div id="stepbar">
 	<div class="t">
 		<div class="t">
@@ -167,6 +182,100 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 								</tr>
 							</table>
 						</div>
+						<div class="clr"></div>
+					</div>
+					<div class="b">
+						<div class="b">
+							<div class="b"></div>
+						</div>
+					</div>
+					<div class="clr"></div>
+				</div>
+				<div class="clr"></div>
+			</div>
+			<div class="b">
+				<div class="b">
+					<div class="b"></div>
+				</div>
+			</div>
+		</div>
+		<div id="installer">
+			<div class="t">
+				<div class="t">
+					<div class="t"></div>
+				</div>
+			</div>
+			<div class="m">
+				<h2>
+					<?php echo JText::_('INSTL_CLOUD_CONFIG_TITLE'); ?>
+				</h2>
+				<div class="install-text">
+					<?php echo JText::_('INSTL_CLOUD_DESC'); ?>
+				</div>
+				<div class="install-body">
+					<div class="t">
+						<div class="t">
+							<div class="t"></div>
+						</div>
+					</div>
+					<div class="m">
+						<h3 class="title-smenu" title="<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>">
+							<?php echo JText::_('INSTL_CLOUD_HEAD'); ?>
+						</h3>
+						<div class="section-smenu">
+							<table class="content2">
+							<tr valign="top">
+					       <td>
+										<?php echo $this->form->getLabel('storage_type'); ?>
+									</td>
+									<td>
+										<?php echo $this->form->getInput('storage_type'); ?>
+									</td>
+					      </tr>
+							
+								<tr class="server_details_req">
+									<td>
+										<?php echo $this->form->getLabel('acc_name'); ?>
+									</td>
+									<td>
+										<?php echo $this->form->getInput('acc_name'); ?>
+									</td>
+									<td>
+										<em>
+										<?php echo JText::_('INSTL_CLOUD_ACC_NAME_DESC'); ?>
+										</em>
+									</td>	
+								</tr>
+								<tr  class="server_details_req">
+									<td>
+										<?php echo $this->form->getLabel('access_key'); ?>
+									</td>
+									<td>
+										<?php echo $this->form->getInput('access_key'); ?>
+									</td>
+									<td>
+										<em>
+										<?php echo JText::_('INSTL_CLOUD_ACCESS_KEY_DESC'); ?>
+										</em>
+									</td>
+								</tr>
+								<tr  class="server_details_req">
+						       <td>
+										<?php echo $this->form->getLabel('domain_name'); ?>
+									</td>
+									<td>
+										<?php echo $this->form->getInput('domain_name'); ?>
+									</td><td>
+									<em>
+										<?php echo JText::_('INSTL_CLOUD_DOMAIN_NAME_DESC'); ?>
+										</em>
+						        </td>
+						      </tr>
+						     
+							</table>
+
+						</div>
+
 						<div class="clr"></div>
 					</div>
 					<div class="b">
