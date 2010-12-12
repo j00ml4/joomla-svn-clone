@@ -23,19 +23,19 @@ JHtml::core();
 
 <?php $leadingcount=0 ; ?>
 <?php if (!empty($this->lead_items)) : ?>
-<div class="items-leading">
-	<?php foreach ($this->lead_items as &$item) : ?>
-		<div class="leading-<?php echo $leadingcount; ?><?php echo $item->state == 0 ? 'class="system-unpublished"' : null; ?>">
+	<div class="items-leading">
+		<?php foreach ($this->lead_items as &$item) : ?>
+			<div class="leading-<?php echo $leadingcount; ?><?php echo $item->state == 0 ? 'class="system-unpublished"' : null; ?>">
+				<?php
+					$this->item = &$item;
+					echo $this->loadTemplate('item');
+				?>
+			</div>
 			<?php
-				$this->item = &$item;
-				echo $this->loadTemplate('item');
+				$leadingcount++;
 			?>
-		</div>
-		<?php
-			$leadingcount++;
-		?>
-	<?php endforeach; ?>
-</div>
+		<?php endforeach; ?>
+	</div>
 <?php endif; ?>
 	
 <?php
@@ -50,7 +50,7 @@ JHtml::core();
 		$rowcount=( ((int)$key-1) %	(int) $this->columns) +1;
 		$row = $counter / $this->columns ; ?>
 
-	<div class="items-row cols-<?php echo (int) $this->columns;?> <?php // echo 'column-'.$rowcount ; ?>">
+	<div class="items-row cols-<?php echo (int) $this->columns;?>">
 
 	<div class="item column-<?php echo $rowcount;?><?php echo $item->state == 0 ? ' system-unpublished' : null; ?>">
 		<?php
@@ -60,13 +60,13 @@ JHtml::core();
 	</div>
 	<?php $counter++; ?>
 	<?php if (($rowcount == $this->columns) or ($counter ==$introcount)): ?>
-			</div>	
+		</div>	
 				
 
-<span class="row-separator"></span>
+		<span class="row-separator"></span>
 				</div>
 
-<div class="clr"></div>
+
 
 	<?php endif; ?>
 
@@ -98,6 +98,6 @@ JHtml::core();
 
 <?php endif; ?>
 </div>
-</div>
-</div>
+
+
 
