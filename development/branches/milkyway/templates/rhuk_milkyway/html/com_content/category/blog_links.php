@@ -13,10 +13,10 @@ defined('_JEXEC') or die; ?>
 	<strong><?php echo JText::_( 'MORE_ARTICLES' ); ?></strong>
 </div>
 <ul>
-<?php foreach ($this->links as $link) : ?>
+<?php foreach ($this->link_items as &$item) : ?>
 	<li>
 			<a class="blogsection" href="<?php echo JRoute::_(ContentHelperRoute::getArticleRoute($link->slug, $link->catslug, $link->sectionid)); ?>">
-			<?php echo $this->escape($link->title); ?></a>
+			<?php echo $item->title; ?></a>
 	</li>
 <?php endforeach; ?>
 </ul>
