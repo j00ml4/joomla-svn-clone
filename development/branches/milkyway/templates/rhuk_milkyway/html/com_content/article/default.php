@@ -134,6 +134,5 @@ $canEdit	= $params->get('access-edit');
 
 	<?php echo $this->item->text; ?>
 
-	<?php echo $this->item->event->afterDisplayContent; ?>
 </div>
 
