@@ -108,6 +108,4 @@ $cparams = JComponentHelper::getParams('com_media');
 
 <?php endif; ?>
 </div>
-</div>
-</div>
 

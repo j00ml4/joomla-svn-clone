@@ -120,6 +120,7 @@ defined('_JEXEC') or die;
 									and JRequest::getCmd('layout') != 'form') : ?>
                 <div class="greyline">&#160;</div>
                 <jdoc:include type="modules" name="right" style="xhtml"/>
+                <jdoc:include type="modules" name="position-6" style="xhtml"/>                
                 <jdoc:include type="modules" name="position-3" style="xhtml"/>
                 <jdoc:include type="modules" name="position-4" style="xhtml"/>
                 <?php endif; ?>
