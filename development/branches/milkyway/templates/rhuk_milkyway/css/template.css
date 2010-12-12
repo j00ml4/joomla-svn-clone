@@ -148,6 +148,7 @@ div#footerspacer {
         width: auto;
         margin-top: -2px;
         margin-right: 250px;
+        margin-left: 10px;
         text-align: left;
 }
 
@@ -312,7 +313,7 @@ td.pill_r {
         width: 100%;
 }
 
-table.nopad {
+div.nopad {
         width: 100%;
         border-collapse: collapse;
         padding: 0;
@@ -320,7 +321,7 @@ table.nopad {
         margin-bottom: 15px;
 }
 
-table.nopad td.middle_pad {
+div.nopad middle_pad {
         width: 20px;
 }
 
@@ -543,18 +544,17 @@ td.sectiontableheader {
   font-weight: bold;
   padding: 4px;
   border-right: 1px solid #fff;
+  font-size: 11px;
 }
 
-tr.sectiontableentry0 td,
-tr.sectiontableentry1 td,
-tr.sectiontableentry2 td {
+tr.sectiontableentry td {
   padding: 4px;
+  font-size: 11px;
 }
 
-td.sectiontableentry0,
-td.sectiontableentry1,
-td.sectiontableentry2 {
+td.sectiontableentry{
   padding: 3px;
+  font-size: 11px;
 }
 
 
@@ -625,8 +625,8 @@ div.module_menu div div div div {
 }
 
 div.module_menu ul {
-        margin: 10px 0;
-        padding-left: 20px;
+        margin: 10px 3px;
+        padding-left: 10px;
 }
 
 div.module_menu ul li a:link, div.module_menu ul li a:visited {
@@ -888,7 +888,7 @@ fieldset.filters {
 
 .cols-2 .column-2
 {
-        width:46%;
+       /* width:46%; */
         float:right;
         margin:0
 }
@@ -896,7 +896,7 @@ fieldset.filters {
 .cols-3 .column-1
 {
         float:left;
-        width:29%;
+        width:33%;
         padding:10px 5px;
         margin-right:4%
 
@@ -904,14 +904,14 @@ fieldset.filters {
 .cols-3 .column-2
 {
         float:left;
-        width:29%;
+        width:48%;
         margin-left:0;
         padding:10px 5px
 }
 .cols-3 .column-3
 {
         float:right;
-        width:29%;
+        width:95%;
         padding:10px 5px
 }
 
@@ -929,14 +929,14 @@ fieldset.filters {
 
 .column-2
 {
-        width:55%;
-        margin-left:40%;
+        /* width:55%; */
+       /* margin-left:40%;*/
 }
 
 .column-3
 {
 
-        width:30%
+       /* width:30% */
 }
 
 /* ++++++++++++++  Modal popups with adminlist grid  ++++++++++++++ */
@@ -959,4 +959,21 @@ fieldset.filters {
 
 .contentpane .list-footer .limit {
 	margin-bottom: 9px;
+}
+ul.actions{
+	float:right;
+	display:block;
+}
+ul.actions li{
+	display: inline-block;
+}
+ul.pagenav{
+	margin: 0 auto;
+	display: block;
+	text-align: center;
+}
+ul.pagenav li{
+	display: inline-block;
+	margin-left: 3px;
+	margin-right: 3px;
 }

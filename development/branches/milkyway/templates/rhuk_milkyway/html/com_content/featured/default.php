@@ -15,98 +15,89 @@ JHtml::_('behavior.tooltip');
 JHtml::core();
 ?>
 <?php if ($this->params->get('show_page_heading', 1)) : ?>
-	<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-		<?php echo $this->escape($this->params->get('page_title')); ?>
-	</div>
+<div class="componentheading<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
+	<?php echo $this->escape($this->params->get('page_title')); ?>
+</div>
 <?php endif; ?>
-<table class="blog<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" cellpadding="0" cellspacing="0">
-<?php  ?>	
-	<?php ?>
+<div class="blog<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" cellpadding="0" cellspacing="0">
+
+<?php $leadingcount=0 ; ?>
 <?php if (!empty($this->lead_items)) : ?>
-	<?php ?>
-		<tr>
-			<td valign="top">
-			<?php // for ($i = $this->pagination->limitstart; $i < ($this->pagination->limitstart + $this->params->get('num_leading_articles')); $i++) : ?>
-				<?php $leadingcount=0 ; ?>
-
-				<?php if (!empty($this->lead_items)) : ?>
-					<?php foreach ($this->lead_items as &$item) : ?>
-						<div>
-						<?php
-							$this->item = &$item;
-							echo $this->loadTemplate('item');
-						?>
-						</div>
-						<?php
-							$leadingcount++;
-						?>
-					<?php endforeach; ?>
-
-					</td>
-				</tr>		
-			<?php else : $i = $this->pagination->limitstart; ?>
-			<?php endif; ?>
-<?php endif; ?>
-
-	<?php
-
-		$introcount=(count($this->intro_items));
-		$counter=0;
-	?>
-	<?php if (!empty($this->intro_items)) : ?>
-		<?php foreach ($this->intro_items as $key => &$item) : ?>
+<div class="items-leading">
+	<?php foreach ($this->lead_items as &$item) : ?>
+		<div class="leading-<?php echo $leadingcount; ?><?php echo $item->state == 0 ? 'class="system-unpublished"' : null; ?>">
 			<?php
-				$key= ($key-$leadingcount)+1;
-				$rowcount=( ((int)$key-1) %	(int) $this->columns) +1;
-				$row = $counter / $this->columns ;
-		
-				if ($rowcount==1) : ?>
-					<div class="items-row cols-<?php echo (int) $this->columns;?> <?php echo 'row-'.$row ; ?>">
-				<?php endif; ?>	
-							<?php
-					$this->item = &$item;
-					echo $this->loadTemplate('item');
-				?>			
-					<div></div>
-						<?php $counter++; ?>
-						<?php if (($rowcount == $this->columns) or ($counter == $introcount)): ?>
-							<span class="row-separator"></span>
-						<?php endif; ?>
-					<table>
-						<tr>
-							<td valign="top">
-								<table width="100%"  cellpadding="0" cellspacing="0">
-								<tr>
-								<?php
-									$divider = '';?>
-							</td>
-						</tr>
-					</table>		
-		<?php endforeach; ?>
-	<?php endif; ?>
-	<?php if (!empty($this->link_items)) : ?>
-			<tr>
-				<td valign="top">
-					<div class="blog_more<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
-					<?php echo $this->loadTemplate('links'); ?>
-					</div>
-				</td>
-			</tr>
-	<?php endif; ?>
+				$this->item = &$item;
+				echo $this->loadTemplate('item');
+			?>
+		</div>
+		<?php
+			$leadingcount++;
+		?>
+	<?php endforeach; ?>
+</div>
+<?php endif; ?>
 	
-	<?php if ($this->params->def('show_pagination', 2) == 1  || ($this->params->get('show_pagination') == 2 && $this->pagination->get('pages.total') > 1)) : ?>
-		<tr>
-		<td valign="top" align="center">
-			<?php echo $this->pagination->getPagesLinks(); ?>
-			<br /><br />
-		</td>
-		</tr>
-		<?php if ($this->params->def('show_pagination_results', 1)) : ?>
-			<tr>
-				<td valign="top" align="center">
-					<?php echo $this->pagination->getPagesCounter(); ?>
-				</td>
-			</tr>
-		<?php endif; ?>
+<?php
+	$introcount=(count($this->intro_items)); 
+	$counter=0;
+?>
+<?php if (!empty($this->intro_items)) : ?>
+
+	<?php foreach ($this->intro_items as $key => &$item) : ?>
+	<?php
+		$key= ($key-$leadingcount)+1; 
+		$rowcount=( ((int)$key-1) %	(int) $this->columns) +1;
+		$row = $counter / $this->columns ; ?>
+
+	<div class="items-row cols-<?php echo (int) $this->columns;?> <?php // echo 'column-'.$rowcount ; ?>">
+
+	<div class="item column-<?php echo $rowcount;?><?php echo $item->state == 0 ? ' system-unpublished' : null; ?>">
+		<?php
+			$this->item = &$item;
+			echo $this->loadTemplate('item');
+		?>
+	</div>
+	<?php $counter++; ?>
+	<?php if (($rowcount == $this->columns) or ($counter ==$introcount)): ?>
+			</div>	
+				
+
+<span class="row-separator"></span>
+				</div>
+
+<div class="clr"></div>
+
 	<?php endif; ?>
-</table>
+
+	<?php endforeach; ?>
+<?php  endif; ?>
+
+
+
+
+
+		<div class="blog_more<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
+<?php if (!empty($this->link_items)) : ?>
+
+	<?php echo $this->loadTemplate('links'); ?>
+
+<?php endif; ?>
+		</div>
+
+
+<?php if ($this->params->get('show_pagination')) : ?>
+
+		<?php echo $this->pagination->getPagesLinks(); ?>
+		<br /><br />
+
+<?php endif; ?>
+<?php if ($this->params->get('show_pagination_results')) : ?>
+
+		<?php echo $this->pagination->getPagesCounter(); ?>
+
+<?php endif; ?>
+</div>
+</div>
+</div>
+

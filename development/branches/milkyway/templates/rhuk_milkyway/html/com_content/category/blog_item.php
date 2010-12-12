@@ -184,5 +184,5 @@ endif; ?>
 <?php if ($this->item->state == 0) : ?>
 	</div>
 <?php endif; ?>
-<span class="article_separator">&#160;</span>
-<?php echo $this->item->event->afterDisplayContent; ?>
+
+

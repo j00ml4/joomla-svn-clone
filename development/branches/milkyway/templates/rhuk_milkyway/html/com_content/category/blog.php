@@ -16,10 +16,9 @@ $cparams = JComponentHelper::getParams('com_media');
 	<?php echo $this->escape($this->params->get('page_title')); ?>
 </div>
 <?php endif; ?>
-<table class="blog<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" cellpadding="0" cellspacing="0">
+<div class="blog<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" cellpadding="0" cellspacing="0">
 <?php if ($this->params->def('show_description', 1) || $this->params->def('show_description_image', 1)) :?>
-<tr>
-	<td valign="top">
+
 	<?php if ($this->params->get('show_description_image') && $this->category->image) : ?>
 		<img src="<?php echo $this->category->getParams()->get('image'); ?>"/>
 	<?php endif; ?>
@@ -28,12 +27,10 @@ $cparams = JComponentHelper::getParams('com_media');
 	<?php endif; ?>
 		<br />
 		<br />
-	</td>
-</tr>
+
 <?php endif; ?>
 
-<tr>
-	<td valign="top">
+
 <?php $leadingcount=0 ; ?>
 <?php if (!empty($this->lead_items)) : ?>
 <div class="items-leading">
@@ -61,14 +58,10 @@ $cparams = JComponentHelper::getParams('com_media');
 	<?php
 		$key= ($key-$leadingcount)+1; 
 		$rowcount=( ((int)$key-1) %	(int) $this->columns) +1;
-		$row = $counter / $this->columns ;
-				
-				//	$rows = (int) ($this->intro_items) / $this->params->get('num_columns');
-				//	$cols = ($this->params->get('intro_items', 4) % $this->params->get('num_columns'));
-		
-	//	if  ($row==1) : ?>
+		$row = $counter / $this->columns ; ?>
+
 	<div class="items-row cols-<?php echo (int) $this->columns;?> <?php // echo 'column-'.$rowcount ; ?>">
-	<?php // endif; ?>
+
 	<div class="item column-<?php echo $rowcount;?><?php echo $item->state == 0 ? ' system-unpublished' : null; ?>">
 		<?php
 			$this->item = &$item;
@@ -77,19 +70,23 @@ $cparams = JComponentHelper::getParams('com_media');
 	</div>
 	<?php $counter++; ?>
 	<?php if (($rowcount == $this->columns) or ($counter ==$introcount)): ?>
-				<span class="row-separator"></span>
+			</div>	
+				
+
+<span class="row-separator"></span>
 				</div>
 
+<div class="clr"></div>
+
 	<?php endif; ?>
+
 	<?php endforeach; ?>
 <?php  endif; ?>
-	</td>
-</tr>
 
 
 
-<tr>
-	<td valign="top">
+
+
 		<div class="blog_more<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
 <?php if (!empty($this->link_items)) : ?>
 
@@ -97,22 +94,20 @@ $cparams = JComponentHelper::getParams('com_media');
 
 <?php endif; ?>
 		</div>
-	</td>
-</tr>
+
 
 <?php if ($this->params->get('show_pagination')) : ?>
-<tr>
-	<td valign="top" align="center">
+
 		<?php echo $this->pagination->getPagesLinks(); ?>
 		<br /><br />
-	</td>
-</tr>
+
 <?php endif; ?>
 <?php if ($this->params->get('show_pagination_results')) : ?>
-<tr>
-	<td valign="top" align="center">
+
 		<?php echo $this->pagination->getPagesCounter(); ?>
-	</td>
-</tr>
+
 <?php endif; ?>
-</table>
+</div>
+</div>
+</div>
+
