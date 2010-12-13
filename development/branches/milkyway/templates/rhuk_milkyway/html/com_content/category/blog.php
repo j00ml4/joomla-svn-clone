@@ -19,7 +19,7 @@ $cparams = JComponentHelper::getParams('com_media');
 <div class="blog<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" cellpadding="0" cellspacing="0">
 <?php if ($this->params->def('show_description', 1) || $this->params->def('show_description_image', 1)) :?>
 
-	<?php if ($this->params->get('show_description_image') && $this->category->image) : ?>
+	<?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
 		<img src="<?php echo $this->category->getParams()->get('image'); ?>"/>
 	<?php endif; ?>
 	<?php if ($this->params->get('show_description') && $this->category->description) : ?>
