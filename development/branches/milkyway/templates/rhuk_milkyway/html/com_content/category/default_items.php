@@ -76,7 +76,7 @@ defined('_JEXEC') or die;?>
 <?php foreach ($this->items as $item) : ?>
 <tr class="sectiontableentry<?php echo ($item->odd +1 ) . $this->escape($this->params->get('pageclass_sfx')); ?>" >
 	<td align="right">
-		<?php echo $this->pagination->getRowOffset( $item->count ); ?>
+		<?php  echo $this->pagination->getRowOffset( $item->count );  ?>
 	</td>
 	<?php if ($this->params->get('show_title')) : ?>
 	<?php if ($item->access <= $this->user->get('aid', 0)) : ?>

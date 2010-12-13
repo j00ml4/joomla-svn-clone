@@ -62,7 +62,7 @@ defined('_JEXEC') or die; ?>
 	<tr>
 		<td>
 			<br />
-			<?php echo $this->result; ?>
+			
 		</td>
 	</tr>
 </table>

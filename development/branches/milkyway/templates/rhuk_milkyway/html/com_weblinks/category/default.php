@@ -31,6 +31,11 @@ $listDirn	= $this->state->get('list.direction');
 		<?php echo $this->escape($this->params->get('page_title')); ?>
 	</div>
 <?php endif; ?>
+<?php if($this->params->get('show_category_title', 1)) : ?>
+<h2>
+	<?php echo JHtml::_('content.prepare', $this->category->title); ?>
+</h2>
+<?php endif; ?>
 
 <?php if ( ($this->params->def('image', -1) != -1) || $this->params->def('show_comp_description', 1) ) : ?>
 <table width="100%" cellpadding="4" cellspacing="0" border="0" align="center" class="contentpane<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>">
