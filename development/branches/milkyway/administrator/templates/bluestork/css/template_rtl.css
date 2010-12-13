@@ -67,6 +67,10 @@ body{
 	background:transparent url(../images/j_button2_image_rtl.png) no-repeat scroll 0% 0pt;
 }
 
+.button2-left .article {
+	background:transparent url(../images/j_button2_readmore_rtl.png) no-repeat scroll 0% 0pt;
+}
+
 .button2-left .pagebreak {
 	background:transparent url(../images/j_button2_pagebreak_rtl.png) no-repeat scroll 0% 0pt;
 }
@@ -123,6 +127,8 @@ body{
 #module-status .loggedin-users     { background-position: right 3px; }
 #module-status .logout             { background-position: right 3px; }
 #module-status .viewsite 		  { background-position: right 5px; }
+#module-status .backloggedin-users     { background-position: right 3px; }
+
 
 fieldset.filter {border: 0; padding: 0; margin:0 0 10px;}
 div.left { float: right; }
@@ -335,6 +341,7 @@ fieldset img,
 fieldset button {
 	float: right;
 	text-align:right;
+	margin: 5px 5px 0 5px;
 }
 
 #jform_id {

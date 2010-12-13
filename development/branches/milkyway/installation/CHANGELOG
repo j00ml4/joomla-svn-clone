@@ -27,6 +27,74 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+12-Dec-2010 Mark Dexter
+# [#23741] Menu -> Content -> Featured Articles gives error 500
+^ [#22758] Controlling module parameters for <jdoc:include type="module" /> (Dennis Hermatski)
+# [#22531] Private Message recipient not checking for backend access
+^ [#23745] Add a system plugin event called onBeforeCompileHead (Louis Landry)
+# [#23737] Number of list results not taken into account on listing view
+# [#22097] Records in #__session aren't deleted after user's logout; Joomla checks #__session too often (Dennis Hermatski)
+# [#21138] Article manager - no filter on created by (Roland Dalmulder)
+# [#23728] Content of the mail from is not retained if an error occurs
+# [#23725] Duplicate contradicting messages on send mail error
+# [#23696] Menus creation fail with 1.5-style menus metadata: using SimpleXMLElement attributes missing (string) typecast (Beat)
+# [#23697] Menus with default view have a view=(empty) in URL and are missing other defined attributes and 1.5-type-menu-metada does not display menu type correctly in backend (Beat)
+# Fix up error trying to run installation with [#23745]  
+
+
+12-Dec-2010 Christophe Demko
+ # Checking the table when copy a menu item (missing in [#23721])
+ # [#23740] *RTL menu display issue in beez 2.0 (Jean-Marie Simonet)
+
+12-Dec-2010 Jean-Marie Simonet
+ # [#23721] SEF-URLs with mod_rewrite is not working for certain menu-aliases. Thanks Christophe.
+ # [#23723] Various RTL issues with single contact display with Beez2. Thanks Iztik and Andrea.
+ # [#23729] List Contacts in Category missing ID column of table on front-end. Thanks Bill.
+ # [#23730] Backend - 500 an error has occurred when sorting an empty contact list. Thanks Bill.
+
+11-Dec-2010 Jean-Marie Simonet
+ # [#23715] Add Site Name to Page Title not working for articles/newsfeeds/weblinks selected via a category. Thanks Mark
+ 
+11-Dec-2010 Christophe Demko
+ # [#23720] *Changing Home set to ALL languages to another language and reverting = 500 + unpublish message
+ # [#22648] function isCompatible incorrectly checks current version (Mark Dexter)
+ # [#23498] Use Mootools Build-In Cookie Class in hide.js (Rouven Weßling)
+ # [#23196] Articles created in front end have no rules saved in asset table* (Mark Dexter)
+ # [#23480] Addition of missing handler parameter for JHTML modal behavior and fullScreen capability (Omar Ramos)
+ # [#23424] Minor improvements to md_stylechanger.js (Rouven Weßling)
+ # [#23719] Single Newsfeed SEF urls don't contain alias (Elin Waring)
+ # [#23708] backend - missing RTL css definition for backloggedin-users (Andrea Tarr)
+ # [#23372] Make Title in Read more button optional (bill richardson)
+ # [#23707] Missing option to translate accordion section headers in backend main page
+ # [#23291] Improve JBrowser (Rouven Weßling)
+
+10-Dec-2010 Mark Dexter
+^ [#22730] Assign usergroup to guests (Dennis Hermacki) 
+
+10-Dec-2010 Christophe Demko
+ # [#23589] mod_latestnews ignores "show featured" setting
+
+10-Dec-2010 Jean-Marie Simonet
+ # [#23710] Improve fieldset input CSS definition for RTL language. Thanks Itzik and Andrea.
+ # [#23709] add new article - missing RTL css definition for editor article button. Thanks Itzik and Andrea.
+ # [#23711] Allowing default text to be translatable in form fields. Thanks Christophe
+ $- [#22091] Global configuration System: help server string updated. helpsites-15.xml deleted. helpsites-16.xml updated.
+ # [#23714] Misc Hathor css fixes. Thanks Andrea.
+ $ [#23713] "User Manager: Edit Access Level" has some small errors. Thanks Peter and Bill.
+ $ [#23712] "User Manager: Add New View Permission Level" label is not logical. Thanks Peter and Bill
+ 
+09-Dec-2010 Mark Dexter
+# [#23695] Apply patch 23034 to contacts and newsfeeds
+# [#23690] Fullpath disclosure in template error files
+
+09-Dec-2010 Christophe Demko
+ # [#22725] Update Manager Fails (Dennis Hermacki)
+ # [#23700] Lang switcher is redirecting users to home page depending of languages when lang filter is off + SEF plugin is doing some work when SEF is OFF
+ # [#23702] Javascript out of sync between normal and uncompressed file (Rouven Weßling)
+
+09-Dec-2010 Jean-Marie Simonet
+[#23671] some Chinese glyphs break SEF when using unicode urls. Thanks Mark.
+
 08-Dec-2010 Jean-Marie Simonet
  # [#23677] RTL header issue in Bluestork. Thanks Andrea.
 

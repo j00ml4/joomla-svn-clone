@@ -43,8 +43,14 @@ class JTableMenu extends JTableNested
 	public function bind($array, $ignore = '')
 	{
 		// Verify that the default home menu is not unset
-		if ($this->home=='1' && $this->language=='*' && ($array['home']=='0' || $array['language']!='*' || $array['published']=='0')) {
+		if ($this->home=='1' && $this->language=='*' && ($array['home']=='0' || $array['language']!='*')) {
 			$this->setError(JText::_('JLIB_DATABASE_ERROR_MENU_CANNOT_UNSET_DEFAULT'));
+			return false;
+		}
+
+		// Verify that the default home menu is not unpublished
+		if ($this->home=='1' && $this->language=='*' && $array['published']=='0') {
+			$this->setError(JText::_('JLIB_DATABASE_ERROR_MENU_UNPUBLISH_DEFAULT_HOME'));
 			return false;
 		}
 
@@ -85,6 +91,13 @@ class JTableMenu extends JTableNested
 		// Verify that a first level menu item alias is not 'component'.
 		if ($this->parent_id==1 && $this->alias == 'component') {
 			$this->setError(JText::_('JLIB_DATABASE_ERROR_MENU_ROOT_ALIAS_COMPONENT'));
+			return false;
+		}
+
+		// Verify that a first level menu item alias is not the name of a folder.
+		jimport('joomla.filesystem.folders');
+		if ($this->parent_id==1 && in_array($this->alias, JFolder::folders(JPATH_ROOT))) {
+			$this->setError(JText::sprintf('JLIB_DATABASE_ERROR_MENU_ROOT_ALIAS_FOLDER', $this->alias, $this->alias));
 			return false;
 		}
 
