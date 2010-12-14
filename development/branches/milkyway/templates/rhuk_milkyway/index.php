@@ -73,6 +73,7 @@ defined('_JEXEC') or die;
       </div>
       <div id="whitebox_m">
         <div id="area">
+          <jdoc:include type="message" />
           <div id="leftcolumn">
             <?php if ($this->countModules('left')
 								or $this->countModules('position-7')
@@ -88,44 +89,48 @@ defined('_JEXEC') or die;
             <?php else: ?>
             <div id="maincolumn_full">
               <?php endif; ?>
-              <?php if ($this->countModules('user1')  or  $this->countModules('user2')
+             <?php if ($this->countModules('user1')  or  $this->countModules('user2')
 							or ($this->countModules('position-9')  or  $this->countModules('position-10') ) ) : ?>
-              <div class="nopad user1user2">
-                <?php if ($this->countModules('user1') or $this->countModules('position-9')) : ?>
-                <jdoc:include type="modules" name="user1" style="xhtml" />
-                <jdoc:include type="modules" name="position-9" style="xhtml" />
-                <?php endif; ?>
-                <?php if ($this->countModules('user1') or $this->countModules('position-9')
+              <table class="nopad user1user2">
+                <tr valign="top">
+                  <?php if ($this->countModules('user1') or $this->countModules('position-9')
 										and $this->countModules('user2') or $this->countModules('position-10')) : ?>
                 <div class="greyline">&#160;</div>
                 <?php endif; ?>
-                <?php if ($this->countModules('user2') or $this->countModules('position-10')) : ?>
-                <jdoc:include type="modules" name="user2" style="xhtml" />
+                  <?php if ($this->countModules('user2') or $this->countModules('position-10')
+				  ) : ?>
+                  <td><jdoc:include type="modules" name="user2" style="xhtml" />
                 <jdoc:include type="modules" name="position-10" style="xhtml" />
-                <?php endif; ?>
-              </div>
+                  </td>
+                  <?php endif; ?>
+                </tr>
+              </table>
               <div id="maindivider"></div>
               <?php endif; ?>
-              <div class="nopad">
-                <jdoc:include type="message" />
-                <jdoc:include type="component" />
-                <jdoc:include type="modules" name="footer" style="xhtml"/>
-                <jdoc:include type="modules" name="position-5" style="xhtml" />
-                <jdoc:include type="modules" name="position-8"  style="xhtml" />
-                <jdoc:include type="modules" name="position-11"  style="xhtml" />
-                <?php if (($this->countModules('right') or
+              <table class="nopad">
+                <tr valign="top">
+                  <td><jdoc:include type="component" />
+                    <jdoc:include type="modules" name="footer" style="xhtml"/>
+                    <jdoc:include type="modules" name="position-5" style="xhtml" />
+                    <jdoc:include type="modules" name="position-8"  style="xhtml" />
+                    <jdoc:include type="modules" name="position-11"  style="xhtml" />
+                  </td>
+                  <?php if (($this->countModules('right') or
 											$this->countModules('position-3') or
 											$this->countModules('position-4')
 											)
 									and JRequest::getCmd('layout') != 'form') : ?>
                 <div class="greyline">&#160;</div>
-                <jdoc:include type="modules" name="right" style="xhtml"/>
+                  <td width="170"><jdoc:include type="modules" name="right" style="xhtml"/>
                 <jdoc:include type="modules" name="position-6" style="xhtml"/>                
                 <jdoc:include type="modules" name="position-3" style="xhtml"/>
                 <jdoc:include type="modules" name="position-4" style="xhtml"/>
-                <?php endif; ?>
-              </div>
+                  </td>
+                  <?php endif; ?>
+                </tr>
+              </table>
             </div>
+            <div class="clr"></div>
           </div>
           <div class="clr"></div>
         </div>

@@ -81,7 +81,7 @@ $listDirn	= $this->state->get('list.direction')
 	</td>
 	<?php endif; ?>
 	<?php if ($this->params->get('list_show_hits',1)) : ?>
-	<td align="center" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" width="5%" class="nowrap">
+	<td align="center" class="sectiontableheader<?php echo $this->escape($this->params->get('pageclass_sfx')); ?>" width="5%">
 		<?php echo JHTML::_('grid.sort', 'JGLOBAL_HITS', 'a.hits', $listDirn, $listOrder); ?>
 	</td>
 	<?php endif; ?>
