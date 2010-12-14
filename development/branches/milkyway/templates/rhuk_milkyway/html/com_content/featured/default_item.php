@@ -21,7 +21,7 @@ JHtml::core();
 
 <div class="system-unpublished">
   <?php endif; ?>
-  <?php if ($params->get('show_print_icon') || $params->get('show_email_icon') || $canEdit) : ?>
+  <?php if ($params->get('show_print_icon') || $params->get('show_email_icon') || $canEdit || $this->item->params->get('show_title')) : ?>
   <table class="contentpaneopen<?php echo $this->escape($this->item->params->get( 'pageclass_sfx' )); ?>">
     <tr>
       <?php if ($this->item->params->get('show_title')) : ?>
