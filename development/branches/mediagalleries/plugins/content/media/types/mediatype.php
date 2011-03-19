@@ -18,7 +18,7 @@ abstract class MediaType{
     	return 'Invalid Server';
     }
 
-    public function extension( $video,$params ){
+    public function html4Player( $video,$params ){
 	return 	'<object '. $params['a'] .' class="mediagalleries" style="'.$params['width'] . $params['height'].'" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">'
 		. '<param name="movie" value="'. $video .'" />'
 		. '<param name="wmode" value="transparent" />'

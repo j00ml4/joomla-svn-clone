@@ -1,8 +1,5 @@
 <?php
-
-include("swf.php");
-
-class MediaTypeYoutubeCom extends MediaType {
+class MediaTypeYoutube extends MediaType {
 
     public function getMedia($media='', $width='', $height='', $params=array()) {
         //$vparams[] = 'autoplay='.$autostart;
@@ -35,6 +32,6 @@ class MediaTypeYoutubeCom extends MediaType {
         $params['a'] = '';
         $params['p'] = '';
         //Call the SWF's extension function
-        return extension($player, $params);
+        return $this->html4Player($player, $params);
     }
 }
