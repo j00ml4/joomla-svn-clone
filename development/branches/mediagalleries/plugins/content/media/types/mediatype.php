@@ -6,14 +6,14 @@
 
 
 
-abstract class MediaType{
+class MediaType{
 	
 	/**
 	 * get the code
 	 * Enter description here ...
 	 * @param $media
 	 */
-    public function getMedia($media='', $width='', $height='', $params=array()){
+    public function getMedia($media='',  $params=array()){
     	
     	return 'Invalid Server';
     }
@@ -52,5 +52,13 @@ abstract class MediaType{
     	return '<img scr="defaultimag">';
     }
     
+}
+
+class MediaTypeImage extends MediaType{
+	public function getMedia($media='', $params=array()){
+    	
+    	return "<img src='".$media."'". "style='".$params['width']." ".$params['height']."' >";
+    }
+	
 }
 ?>

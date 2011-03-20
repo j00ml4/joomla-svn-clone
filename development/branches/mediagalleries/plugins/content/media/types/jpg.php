@@ -1,10 +1,6 @@
 <?php 
-class MediaTypejpg extends MediaType{
+class MediaTypejpg extends MediaTypeImage{
 	
-	public function getMedia($media='', $width='', $height='', $params=array()){
-    	
-    	return "<img src='".$media."'". "style='".$width." ".$height."' >";
-    }
     
 	public function getThumb($media='', $width='', $height=''){
 		return "here";
