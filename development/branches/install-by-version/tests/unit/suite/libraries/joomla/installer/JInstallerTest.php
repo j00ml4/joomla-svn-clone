@@ -633,6 +633,17 @@ class JInstallerTest extends JoomlaTestCase
 		'This test has not been implemented yet.'
 		);
 	}
+	
+	/**
+	 * @todo Implement testSetManifest().
+	 */
+	public function testSetManifest()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+		'This test has not been implemented yet.'
+		);
+	}
 
 	/**
 	 * @todo Implement testGenerateManifestCache().

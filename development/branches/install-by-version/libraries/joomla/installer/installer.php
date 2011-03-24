@@ -1605,6 +1605,11 @@ class JInstaller extends JAdapter
 	{
 		// Get an array of all the xml files from the installation directory
 		$xmlfiles = JFolder::files($this->getPath('source'), '.xml$', 1, true);
+		
+		$possible = array();
+		$version = new JVersion();
+		$base = false;
+		
 		// If at least one xml file exists
 		if (!empty($xmlfiles))
 		{
@@ -1612,28 +1617,61 @@ class JInstaller extends JAdapter
 			{
 				// Is it a valid joomla installation manifest file?
 				$manifest = $this->isManifest($file);
+				
 				if (!is_null($manifest))
 				{
-					// If the root method attribute is set to upgrade, allow file overwrite
-					if ((string)$manifest->attributes()->method == 'upgrade')
+					// If this is the first manifest to be found, set the base to only look at install files found
+					// in that folder. This is to avoid loading all xml files from deeper in the file tree.
+					if (!$base)
 					{
-						$this->_upgrade = true;
-						$this->_overwrite = true;
+						$base = dirname($file);
 					}
-
-					// If the overwrite option is set, allow file overwriting
-					if ((string)$manifest->attributes()->overwrite == 'true') {
-						$this->_overwrite = true;
+					
+					// If the file is in the same base as the first install file, it should be considered
+					if ($base == dirname($file)) 
+					{
+						// Build the major release version of the extension requirements
+						$manifest_version = explode('.', $manifest->attributes()->version);
+						$extension_version = $manifest_version[0].'.'.$manifest_version[1];
+						
+						// Check if the manifest is for this version of Joomla
+						if ($version->getRelease() == $extension_version)
+						{
+							$this->setManifest($manifest, $file);
+							return true;
+						}
+						// If manifest isn't equal to current Joomla version, queue to compare at end
+						else
+						{
+							$possible[$extension_version] = array('manifest' => $manifest, 'file' => $file);
+						}
 					}
-
-					// Set the manifest object and path
-					$this->manifest = $manifest;
-					$this->setPath('manifest', $file);
-
-					// Set the installation source path to that of the manifest file
-					$this->setPath('source', dirname($file));
-					return true;
 				}
+			}
+			
+			// If possible manifests were found
+			if (count($possible))
+			{
+				$closest_version = $version->getRelease();
+				// Step down a major release version searching for the most recent valid install file, down to version 1
+				while (!array_key_exists((string) $closest_version, $possible) && $closest_version > 1)
+				{
+					$closest_version = $closest_version - 0.1;
+				}
+			}
+			
+			// If none of the installation files meet or exceed current Joomla version, fail
+			if ($closest_version <= 1)
+			{
+				// None of the xml files found were valid install files
+				JError::raiseWarning(1, JText::_('JLIB_INSTALLER_ERROR_NOTCOMPATIBLEWITHCURRENTJOOMLAVERSION'));
+				return false;
+			}
+			else
+			{
+				// Set the manifest and move along
+				$this->setManifest($possible[$closest_version]['manifest'], $possible[$closest_version]['file']);
+				return true;
 			}
 
 			// None of the xml files found were valid install files
@@ -1646,6 +1684,30 @@ class JInstaller extends JAdapter
 			JError::raiseWarning(1, JText::_('JLIB_INSTALLER_ERROR_NOTFINDXMLSETUPFILE'));
 			return false;
 		}
+	}
+	
+	public function setManifest($manifest, $file)
+	{
+		// If the root method attribute is set to upgrade, allow file overwrite
+		if ((string)$manifest->attributes()->method == 'upgrade')
+		{
+			$this->_upgrade = true;
+			$this->_overwrite = true;
+		}
+
+		// If the overwrite option is set, allow file overwriting
+		if ((string)$manifest->attributes()->overwrite == 'true') {
+			$this->_overwrite = true;
+		}
+
+		// Set the manifest object and path
+		$this->manifest = $manifest;
+		$this->setPath('manifest', $file);
+
+		// Set the installation source path to that of the manifest file
+		$this->setPath('source', dirname($file));
+		
+		return true;
 	}
 
 	/**

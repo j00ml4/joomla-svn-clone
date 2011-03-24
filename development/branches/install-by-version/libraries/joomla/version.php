@@ -61,6 +61,15 @@ class JVersion
 	public function getShortVersion() {
 		return $this->RELEASE .'.'. $this->DEV_LEVEL;
 	}
+	
+	/**
+	 * Method to get the major release version information.
+	 * 
+	 * @return	string	Major release version format.
+	 */
+	public function getRelease() {
+		return (string) $this->RELEASE;
+	}
 
 	/**
 	 * Method to get the help file version.
