@@ -104,7 +104,7 @@ class ContentViewArchive extends ContentView
 		// Year Field
 		$years = array();
 		$years[] = JHTML::_('select.option',  null, JText::_( 'Year' ) );
-		for ($i=2000; $i <= 2010; $i++) {
+		for ($l = date('Y'), $i = $l - 10; $i <= $l; $i++) {
 			$years[] = JHTML::_('select.option',  $i, $i );
 		}
 		$form->yearField	= JHTML::_('select.genericlist',   $years, 'year', 'size="1" class="inputbox"', 'value', 'text', $year );
