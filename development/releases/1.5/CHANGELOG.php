@@ -36,6 +36,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+31-Mar-2011 Mark Dexter
+ # [#22520] Articles archive years are HARDCODED!!!
+
 
 -------------------- 1.5.22 Stable Release [03-November-2010] ------------------
 
