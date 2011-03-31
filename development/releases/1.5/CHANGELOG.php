@@ -43,6 +43,7 @@ $ -> Language fix or change
  # [#23135] Section blog ordering changed in 1.5.22
  # [#16149] **PDFs not showing when icon clicked in IE...
  # [#25024] Upgrade Geshi to 1.0.8.10
+ # [#21252] Password reset invalid token
 
 -------------------- 1.5.22 Stable Release [03-November-2010] ------------------
 
