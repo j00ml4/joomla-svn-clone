@@ -224,7 +224,7 @@ class TemplatesController
 			$return = JFile::write($file, $txt);
 
 			// Try to make the params file unwriteable
-			if (!$ftp['enabled'] && JPath::isOwner($file) && !JPath::setPermissions($file, '0555')) {
+			if (!$ftp['enabled'] && JPath::isOwner($file) && !JPath::setPermissions($file, '0644')) {
 				JError::raiseNotice('SOME_ERROR_CODE', JText::_('Could not make the template parameter file unwritable'));
 			}
 
@@ -352,7 +352,7 @@ class TemplatesController
 		$return = JFile::write($file, $filecontent);
 
 		// Try to make the template file unwriteable
-		if (!$ftp['enabled'] && !JPath::setPermissions($file, '0555')) {
+		if (!$ftp['enabled'] && !JPath::setPermissions($file, '0644')) {
 			JError::raiseNotice('SOME_ERROR_CODE', JText::_('Could not make the template file unwritable'));
 		}
 
@@ -474,7 +474,7 @@ class TemplatesController
 		$return = JFile::write($file, $filecontent);
 
 		// Try to make the css file unwriteable
-		if (!$ftp['enabled'] && JPath::isOwner($file) && !JPath::setPermissions($file, '0555')) {
+		if (!$ftp['enabled'] && JPath::isOwner($file) && !JPath::setPermissions($file, '0644')) {
 			JError::raiseNotice('SOME_ERROR_CODE', JText::_('Could not make the css file unwritable'));
 		}
 
