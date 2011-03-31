@@ -126,7 +126,7 @@ class UserModelReset extends JModel
 		$row = $db->loadObject();
 
 		// Verify the token
-		if (!($row = $db->loadObject()))
+		if (!$row)
 		{
 			$this->setError(JText::_('INVALID_TOKEN'));
 			return false;
