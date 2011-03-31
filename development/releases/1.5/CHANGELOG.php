@@ -41,7 +41,8 @@ $ -> Language fix or change
  # [#25162] *SQL installation issue with TYPE
  # [#23053] 1.5.21 admin template params.ini error
  # [#23135] Section blog ordering changed in 1.5.22
- # [#16149] **PDFs not showing when icon clicked in IE... 
+ # [#16149] **PDFs not showing when icon clicked in IE...
+ # [#25024] Upgrade Geshi to 1.0.8.10
 
 -------------------- 1.5.22 Stable Release [03-November-2010] ------------------
 
