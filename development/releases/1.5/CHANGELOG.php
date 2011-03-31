@@ -40,6 +40,7 @@ $ -> Language fix or change
  # [#22520] Articles archive years are HARDCODED!!!
  # [#25162] *SQL installation issue with TYPE
  # [#23053] 1.5.21 admin template params.ini error
+ # [#23135] Section blog ordering changed in 1.5.22
 
 
 -------------------- 1.5.22 Stable Release [03-November-2010] ------------------
