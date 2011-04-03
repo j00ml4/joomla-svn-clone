@@ -36,6 +36,14 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+03-Apr-2011 Mark Dexter
+ # [#20234] security string missing on file toolbar.php
+ # [#23746] Add a system plugin event called onBeforeCompileHead
+ # [#25090] Improve .htaccess rewrite efficency
+ # [#21676] Article Manager - Select Author
+ # [#20423] Warning: realpath() [function.realpath]: Unable to access .../path.php 
+ # [#16605] PHP notice when selecting a menu type
+
 31-Mar-2011 Mark Dexter
  # [#22520] Articles archive years are HARDCODED!!!
  # [#25162] *SQL installation issue with TYPE
@@ -44,12 +52,6 @@ $ -> Language fix or change
  # [#16149] **PDFs not showing when icon clicked in IE...
  # [#25024] Upgrade Geshi to 1.0.8.10
  # [#21252] Password reset invalid token
- # [#20234] security string missing on file toolbar.php
- # [#23746] Add a system plugin event called onBeforeCompileHead
- # [#25090] Improve .htaccess rewrite efficency
- # [#21676] Article Manager - Select Author
- # [#20423] Warning: realpath() [function.realpath]: Unable to access .../path.php 
- # [#16605] PHP notice when selecting a menu type
 
 -------------------- 1.5.22 Stable Release [03-November-2010] ------------------
 
