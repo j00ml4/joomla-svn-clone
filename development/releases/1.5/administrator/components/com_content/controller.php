@@ -187,8 +187,8 @@ class ContentController extends JController
 				' LEFT JOIN #__users AS u ON u.id = c.created_by' .
 				' WHERE c.state <> -1' .
 				' AND c.state <> -2' .
-				' GROUP BY u.name' .
-				' ORDER BY u.name';
+				' GROUP BY u.id' .
+				' ORDER BY u.name, u.id';
 		$authors[] = JHTML::_('select.option', '0', '- '.JText::_('Select Author').' -', 'created_by', 'name');
 		$db->setQuery($query);
 		$authors = array_merge($authors, $db->loadObjectList());
