@@ -49,6 +49,7 @@ $ -> Language fix or change
  # [#25090] Improve .htaccess rewrite efficency
  # [#21676] Article Manager - Select Author
  # [#20423] Warning: realpath() [function.realpath]: Unable to access .../path.php 
+ # [#16605] PHP notice when selecting a menu type
 
 -------------------- 1.5.22 Stable Release [03-November-2010] ------------------
 

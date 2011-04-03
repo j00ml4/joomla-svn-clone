@@ -221,9 +221,7 @@ class iLink extends JTree
 					if ($data) {
 						if ($data->attributes('hidden') != 'true') {
 							$m = $data->getElementByPath('message');
-							if ($m) {
-								$message = $m->data();
-							}
+							$message = ($m) ? $m->data() : '';
 							unset($node);
 							$node = new iLinkNode($data->attributes('title'), $url, $message);
 							$this->addChild($node);
