@@ -45,6 +45,7 @@ $ -> Language fix or change
  # [#25024] Upgrade Geshi to 1.0.8.10
  # [#21252] Password reset invalid token
  # [#20234] security string missing on file toolbar.php
+ # [#23746] Add a system plugin event called onBeforeCompileHead
 
 -------------------- 1.5.22 Stable Release [03-November-2010] ------------------
 
