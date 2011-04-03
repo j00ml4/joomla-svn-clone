@@ -44,6 +44,7 @@ $ -> Language fix or change
  # [#16149] **PDFs not showing when icon clicked in IE...
  # [#25024] Upgrade Geshi to 1.0.8.10
  # [#21252] Password reset invalid token
+ # [#20234] security string missing on file toolbar.php
 
 -------------------- 1.5.22 Stable Release [03-November-2010] ------------------
 
