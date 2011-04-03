@@ -47,6 +47,7 @@ $ -> Language fix or change
  # [#20234] security string missing on file toolbar.php
  # [#23746] Add a system plugin event called onBeforeCompileHead
  # [#25090] Improve .htaccess rewrite efficency
+ # [#21676] Article Manager - Select Author
 
 -------------------- 1.5.22 Stable Release [03-November-2010] ------------------
 
