@@ -43,6 +43,7 @@ $ -> Language fix or change
  # [#21676] Article Manager - Select Author
  # [#20423] Warning: realpath() [function.realpath]: Unable to access .../path.php 
  # [#16605] PHP notice when selecting a menu type
+ # [#20536] Category Blog Layout - View Article - Editing Article - Click Images - 500 Layout "blog" not found
 
 31-Mar-2011 Mark Dexter
  # [#22520] Articles archive years are HARDCODED!!!
