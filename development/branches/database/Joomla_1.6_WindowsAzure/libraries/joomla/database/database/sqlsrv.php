@@ -208,7 +208,10 @@ class JDatabaseSQLSrv extends JDatabase
 		$result = str_replace('\"', '"', $result);
 		//$result = str_replace("\\", "''", $result);
 		if ($extra) {
-			$result = addcslashes($result, '%_');
+			/***********We need the below str_replace since the search in sql server doesnt recognize _ character******************/
+			$result = str_replace('_', '[_]', $result);
+			//$result = str_replace('__', '[__]', $result);
+			//$result = addcslashes($result, '%_');
 		}
 		return $result;
 	}
