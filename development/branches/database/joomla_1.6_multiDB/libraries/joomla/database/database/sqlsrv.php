@@ -228,7 +228,6 @@ class JDatabaseSQLSrv extends JDatabase
 		// Take a local copy so that we don't modify the original query and cause issues later
 		$sql = $this->replacePrefix((string) $this->_sql);
 		//$sql = str_replace('`', '', $sql);
-
 		if ($this->_limit > 0 || $this->_offset > 0) {
 			//$i = $this->_limit + $this->_offset;
 			//$sql = preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$i.' ', $sql);
