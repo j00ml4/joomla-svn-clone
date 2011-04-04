@@ -38,6 +38,7 @@ $ -> Language fix or change
 
 04-Apr-2011 Mark Dexter
  # [#25450] Mootools 1.2.4 Squeezebox Problems in MSIE 9
+ # [#24289] com_mailto Spam Email Relay
 
 03-Apr-2011 Mark Dexter
  # [#20234] security string missing on file toolbar.php

@@ -17,6 +17,7 @@ defined('_JEXEC') or die('Restricted access');
 
 jimport('joomla.application.component.helper');
 
+require_once( JPATH_COMPONENT.DS.'helpers'.DS.'mailto.php');
 require_once( JPATH_COMPONENT.DS.'controller.php' );
 
 $controller	= new MailtoController( );
