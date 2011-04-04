@@ -208,7 +208,10 @@ class JDatabaseSQLSrv extends JDatabase
 		$result = str_replace('\"', '"', $result);
 		//$result = str_replace("\\", "''", $result);
 		if ($extra) {
-			$result = addcslashes($result, '%_');
+			/***********We need the below str_replace since the search in sql server doesnt recognize _ character******************/
+			$result = str_replace('_', '[_]', $result);
+			//$result = str_replace('__', '[__]', $result);
+			//$result = addcslashes($result, '%_');
 		}
 		return $result;
 	}
@@ -228,6 +231,7 @@ class JDatabaseSQLSrv extends JDatabase
 		// Take a local copy so that we don't modify the original query and cause issues later
 		$sql = $this->replacePrefix((string) $this->_sql);
 		//$sql = str_replace('`', '', $sql);
+
 		if ($this->_limit > 0 || $this->_offset > 0) {
 			//$i = $this->_limit + $this->_offset;
 			//$sql = preg_replace('/(^\SELECT (DISTINCT)?)/i','\\1 TOP '.$i.' ', $sql);
