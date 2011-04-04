@@ -36,6 +36,8 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+-------------------- 1.5.23 Stable Release [04-March-2011] ------------------
+
 04-Apr-2011 Mark Dexter
  # [#25450] Mootools 1.2.4 Squeezebox Problems in MSIE 9
  # [#24289] com_mailto Spam Email Relay
