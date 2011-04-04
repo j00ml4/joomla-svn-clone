@@ -64,7 +64,7 @@ class plgSystemPlg_azure extends JPlugin
 			$pattern = "/(href|src)\s*=\s*(\'|\")\/+([^\'\"]*)(\'|\")/i";
 			$body = preg_replace($pattern, '$1=$2'.$host.'/$3$4', $body);
 			
-			
+			 
 			//from format: abc/def/xyz.jpg (relative path)
 			$path = str_replace($_SERVER['DOCUMENT_ROOT'], '', $_SERVER['SCRIPT_FILENAME']);
 			$path = JPath::clean($path, "/");
@@ -79,9 +79,10 @@ class plgSystemPlg_azure extends JPlugin
 			}
 			
 			$currUrl =WinAzureHelper::getBaseUrl().'/';
-			
+			preg_match('#<img[^>]*>#i', $currUrl, $matches);
+			if($matches){
 			$body = preg_replace("/(href|src)\s*=\s*(\'|\")((?!(?:\w+)\:\/*)[^\/\#][^\'\"]*)(\'|\")/i", '$1=$2'.$currUrl.'$3$4', $body);
-			
+			}
 			JResponse::setBody($body);
 		
 	}
