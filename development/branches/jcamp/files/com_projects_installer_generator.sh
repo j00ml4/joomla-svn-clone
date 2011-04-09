@@ -1,5 +1,4 @@
 cd /Volumes/WORK/svn/jsop/jcamp/
-rm -R files/com_projects
 rm -R files/com_projects.tar.gz
 
 mkdir files/com_projects
@@ -21,5 +20,5 @@ cp -R media/com_projects files/com_projects/media
 
 mv files/com_projects/administrator/components/com_projects/projects.xml files/com_projects
 find files/com_projects -name ".svn" | xargs rm -Rf
-tar -cvf files/com_projects.tar.gz files/projects
+tar -cvf files/com_projects.tar.gz files/com_projects
 rm -R files/com_projects
