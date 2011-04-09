@@ -18,7 +18,8 @@ cp administrator/language/en-GB/en-GB.com_projects.ini files/com_projects/admini
 cp administrator/language/en-GB/en-GB.com_projects.sys.ini files/com_projects/administrator/language/en-GB
 cp -R media/com_projects files/com_projects/media
 
-mv files/com_projects/administrator/components/com_projects/projects.xml files/com_projects
-find files/com_projects -name ".svn" | xargs rm -Rf
-tar -cvf files/com_projects.tar.gz files/com_projects
-rm -R files/com_projects
+cd ./files
+mv com_projects/administrator/components/com_projects/projects.xml com_projects
+find com_projects -name ".svn" | xargs rm -Rf
+tar -cvf com_projects.tar.gz com_projects/
+rm -R com_projects
