@@ -79,10 +79,8 @@ class plgSystemPlg_azure extends JPlugin
 			}
 			
 			$currUrl =WinAzureHelper::getBaseUrl().'/';
-			preg_match('#<img[^>]*>#i', $currUrl, $matches);
-			if($matches){
-			$body = preg_replace("/(href|src)\s*=\s*(\'|\")((?!(?:\w+)\:\/*)[^\/\#][^\'\"]*)(\'|\")/i", '$1=$2'.$currUrl.'$3$4', $body);
-			}
+			$body = preg_replace("/(<img src)\s*=\s*(\'|\")((?!(?:\w+)\:\/*)[^\/\#][^\'\"]*)(\'|\")/i", '$1=$2'.$currUrl.'$3$4', $body);
+			//$body = preg_replace("/(href|src)\s*=\s*(\'|\")((?!(?:\w+)\:\/*)[^\/\#][^\'\"]*)(\'|\")/i", '$1=$2'.$currUrl.'$3$4', $body);
 			JResponse::setBody($body);
 		
 	}
