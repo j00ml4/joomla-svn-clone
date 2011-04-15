@@ -8,7 +8,7 @@
 // No direct access
 defined('_JEXEC') or die;
 ini_set('include_path', JPATH_LIBRARIES);
-require_once 'components\com_media\helpers\winazure.php';
+require_once JPATH_SITE.'/administrator/components/com_media/helpers/winazure.php';
 jimport('joomla.application.component.model');
 jimport('joomla.filesystem.folder');
 

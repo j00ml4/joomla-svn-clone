@@ -35,22 +35,48 @@ class MediaController extends JController
 		JPluginHelper::importPlugin('content');
 		$vName = JRequest::getCmd('view', 'images');
 
+		
 		switch ($vName)
 		{
+			case 'images':
+				$vLayout = JRequest::getCmd('layout', 'default');
+				if(JFactory::checkAzureExists())
+					$mName = 'azuremanager';
+				else
+					$mName = 'manager';
+
+				break;
+
 			case 'imagesList':
-				$mName = 'list';
+				if(JFactory::checkAzureExists())
+					$mName = 'azurelist';
+				else
+					$mName = 'list';
 				$vLayout = JRequest::getCmd('layout', 'default');
 
 				break;
 
-			case 'images':
-			default:
-				$vLayout = JRequest::getCmd('layout', 'default');
-				$mName = 'manager';
-				$vName = 'images';
+			case 'mediaList':
+				$app	= JFactory::getApplication();
+				if(JFactory::checkAzureExists())
+					$mName = 'azurelist';
+				else
+					$mName = 'list';
+				$vLayout = $app->getUserStateFromRequest('media.list.layout', 'layout', 'thumbs', 'word');
 
+				break;
+
+			case 'media':
+			default:
+				$vName = 'media';
+				$vLayout = JRequest::getCmd('layout', 'default');
+				if(JFactory::checkAzureExists())
+					$mName = 'azuremanager';
+				else
+					$mName = 'manager';
 				break;
 		}
+		
 
 		$document = JFactory::getDocument();
 		$vType		= $document->getType();
@@ -64,7 +90,18 @@ class MediaController extends JController
 			// Push the model into the view (as default)
 			$view->setModel($model, true);
 		}
-
+		
+	if($mName == 'azuremanager')
+			$model->syncLocaltoAzure();
+			
+		//Enable Azure plugin if windows azure
+		if(JFactory::checkAzureExists()) {
+			$db = JFactory::getDBO();
+			$db->setQuery("update #__extensions set enabled=1 where extension_id=436");
+			if (!$db->query()) {
+				JError::raiseWarning(500,'Could not update the azure plugin- enable manually from "Plugin Manager"');
+			}
+		}
 		// Set the layout
 		$view->setLayout($vLayout);
 
