@@ -285,13 +285,15 @@ class JApplication extends JObject
 		// If we don't start with a http we need to fix this before we proceed
 		// We could validly start with something else (e.g. ftp), though this would
 		// be unlikely and isn't supported by this API
-		if(!preg_match( '#^http#i', $url )) {
+		if (!preg_match( '#^http#i', $url )) {
 			$uri =& JURI::getInstance();
 			$prefix = $uri->toString(Array('scheme', 'user', 'pass', 'host', 'port'));
-			if($url[0] == '/') {
+
+			if ($url[0] == '/') {
 				// we just need the prefix since we have a path relative to the root
 				$url = $prefix . $url;
-			} else {
+			}
+			else {
 				// its relative to where we are now, so lets add that
 				$parts = explode('/', $uri->toString(Array('path')));
 				array_pop($parts);
@@ -307,8 +309,7 @@ class JApplication extends JObject
 		}
 
 		// Persist messages if they exist
-		if (count($this->_messageQueue))
-		{
+		if (count($this->_messageQueue)) {
 			$session =& JFactory::getSession();
 			$session->set('application.queue', $this->_messageQueue);
 		}
@@ -317,10 +318,19 @@ class JApplication extends JObject
 		// so we will output a javascript redirect statement.
 		if (headers_sent()) {
 			echo "<script>document.location.href='$url';</script>\n";
-		} else {
-			header($moved ? 'HTTP/1.1 301 Moved Permanently' : 'HTTP/1.1 303 See other');
-			header('Location: '.$url);
 		}
+		else {
+			if (!$moved && strstr(strtolower($_SERVER['HTTP_USER_AGENT']), 'webkit') !== false) {
+				// WebKit browser - Do not use 303, as it causes subresources reload (https://bugs.webkit.org/show_bug.cgi?id=38690)
+				echo '<html><head><meta http-equiv="refresh" content="0;'. $url .'" /></head><body></body></html>';
+			}
+			else {
+				// All other browsers, use the more efficient HTTP header method
+				header($moved ? 'HTTP/1.1 301 Moved Permanently' : 'HTTP/1.1 303 See other');
+				header('Location: '.$url);
+			}
+		}
+
 		$this->close();
 	}
 
@@ -534,7 +544,7 @@ class JApplication extends JObject
 			// we fork the session to prevent session fixation issues
 			$session->fork();
 			$this->_createSession($session->getId());
-			
+
 			// Import the user plugin group
 			JPluginHelper::importPlugin('user');
 
