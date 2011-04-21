@@ -30,8 +30,8 @@ class JHtmlNewsfeed
 			0	=> array('publish_x.png',	'newsfeeds.publish',		'JUNPUBLISHED',		'COM_NEWSFEEDS_PUBLISH_ITEM')
 		);
 		$state	= JArrayHelper::getValue($states, (int) $value, $states[0]);
-		$html	= '<a href="javascript:void(0);" onclick="return listItemTask(\'cb'.$i.'\',\''.$state[1].'\')" title="'.JText::_($state[3]).'">'
-				. JHTML::_('image','admin/'.$state[0], JText::_($state[2]), NULL, true).'</a>';
+		$html	= '<a href="#" onclick="return listItemTask(\'cb'.$i.'\',\''.$state[1].'\')" title="'.JText::_($state[3]).'">'
+				. JHtml::_('image','admin/'.$state[0], JText::_($state[2]), NULL, true).'</a>';
 
 		return $html;
 	}
@@ -52,7 +52,7 @@ class JHtmlNewsfeed
 		$options[]	= JHtml::_('select.option', '0', JText::_('JUNPUBLISHED'));
 
 
-		return JHTML::_('select.genericlist', $options, 'filter_published',
+		return JHtml::_('select.genericlist', $options, 'filter_published',
 			array(
 				'list.attr' => 'class="inputbox" onchange="this.form.submit();"',
 				'list.select' => $selected

@@ -9,6 +9,7 @@
 
 // No direct access.
 defined('_JEXEC') or die;
+JHtml::_('behavior.framework');
 ?>
 <form action="<?php echo JRoute::_('index.php?option=com_messages'); ?>" method="post" name="adminForm" id="adminForm">
 	<div class="width-60 fltlft">
@@ -17,7 +18,7 @@ defined('_JEXEC') or die;
 		<?php echo $this->item->get('from_user_name');?></li>
 
 		<li><?php echo JText::_('COM_MESSAGES_FIELD_DATE_TIME_LABEL'); ?>
-		<?php echo JHTML::_('date',$this->item->date_time);?></li>
+		<?php echo JHtml::_('date',$this->item->date_time);?></li>
 
 		<li><?php echo JText::_('COM_MESSAGES_FIELD_SUBJECT_LABEL'); ?>
 		<?php echo $this->item->subject;?></li>

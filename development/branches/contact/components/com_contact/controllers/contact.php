@@ -7,7 +7,7 @@
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-defined('JPATH_BASE') or die;
+defined('_JEXEC') or die;
 
 jimport('joomla.application.component.controllerform');
 
@@ -33,10 +33,7 @@ class ContactControllerContact extends JControllerForm
 		$data = JRequest::getVar('jform', array(), 'post', 'array');
 		
 		$contact = $model->getItem($id);
-		if ($contact->email_to == '' && $contact->user_id != 0) {
-			$contact_user = JUser::getInstance($contact->user_id);
-			$contact->email_to = $contact_user->get('email');
-		}
+
 		
 		$params->merge($contact->params);
 
@@ -127,7 +124,10 @@ class ContactControllerContact extends JControllerForm
 	{
 			$app		= JFactory::getApplication();
 			$params 	= JComponentHelper::getParams('com_contact');
-
+			if ($contact->email_to == '' && $contact->user_id != 0) {
+			$contact_user = JUser::getInstance($contact->user_id);
+			$contact->email_to = $contact_user->get('email');
+		}
 			$mailfrom	= $app->getCfg('mailfrom');
 			$fromname	= $app->getCfg('fromname');
 			$sitename	= $app->getCfg('sitename');

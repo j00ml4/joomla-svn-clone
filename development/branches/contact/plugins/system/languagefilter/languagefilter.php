@@ -1,7 +1,6 @@
 <?php
 /**
  * @version		$Id$
- * @package		Joomla
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -13,10 +12,10 @@ jimport('joomla.language.helper');
 jimport('joomla.plugin.plugin');
 
 /**
-* Joomla! Language Filter Plugin
-*
- * @package		Joomla
- * @subpackage	System
+ * Joomla! Language Filter Plugin
+ *
+ * @package		Joomla.Plugin
+ * @subpackage	System.languagefilter
  * @since		1.6
  */
 class plgSystemLanguageFilter extends JPlugin
@@ -174,7 +173,9 @@ class plgSystemLanguageFilter extends JPlugin
 				$sef = isset(self::$lang_codes[$lang_code]) ? self::$lang_codes[$lang_code]->sef : self::$default_sef;
 				$uri->setPath($sef . '/' . $path);
 				
-				if ($_SERVER['REQUEST_METHOD'] != "POST" || empty($_POST)) {
+				$post = JRequest::get('POST');
+				if (JRequest::getMethod() != "POST" || count($post) == 0)
+				{
 					$app = JFactory::getApplication();
 					if ($app->getCfg('sef_rewrite')) {
 						$app->redirect($uri->base().$uri->toString(array('path', 'query', 'fragment')));
@@ -195,8 +196,12 @@ class plgSystemLanguageFilter extends JPlugin
 			if (!isset(self::$sefs[$sef])) {
 				$sef = isset(self::$lang_codes[$lang_code]) ? self::$lang_codes[$lang_code]->sef : self::$default_sef;
 				$uri->setVar('lang', $sef);
-				$app = JFactory::getApplication();
-				$app->redirect(JURI::base(true).'/index.php?'.$uri->getQuery());
+				$post = JRequest::get('POST');
+				if (JRequest::getMethod() != "POST" || count($post) == 0)
+				{
+					$app = JFactory::getApplication();
+					$app->redirect(JURI::base(true).'/index.php?'.$uri->getQuery());
+				}
 			}
 		}
 

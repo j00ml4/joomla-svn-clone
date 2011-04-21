@@ -641,6 +641,7 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 					$doAction = 'login.admin';
 					break;
 				case 'Configure':
+				case 'Super Admin':
 					$doAction = 'core.admin';
 					break;
 				case 'Access Component':
@@ -658,10 +659,17 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 				case 'Edit State':
 					$doAction = 'edit.state';
 					break;
+				case 'Edit Own':
+					$doAction = 'edit.own';
+					break;
 			}
 
 			$this->select("//select[contains(@id,'$doAction')][contains(@title,'$group')]", "label=$permission");
 		}
+
+		echo "Close panel for group '$group'\n";
+		$this->click("//ul[@id='rules']//li/div[@class='panel']//h3[contains(.,'Public')]");
+		
 		if ($component == 'Global Configuration') {
 			$this->click("//li[@id='toolbar-save']/a/span");
 			$this->waitForPageToLoad("30000");
@@ -743,7 +751,57 @@ class SeleniumJoomlaTestCase extends PHPUnit_Extensions_SeleniumTestCase
 		$this->waitForPageToLoad("30000");
 		$this->click("//button[@type='button']");
 		$this->waitForPageToLoad("30000");
+		$this->select($filter, "label=- Select Status -");
+		$this->waitForPageToLoad("30000");
 		$this->gotoAdmin();
+	}
+	
+	function changeCategory($title = null, $menu = 'Article Manager', $newCategory = 'Uncategorised')
+	{
+		echo "Changing category for $title in $menu to $newCategory\n";
+		$this->gotoAdmin();
+		$this->click("link=$menu");
+		$this->waitForPageToLoad("30000");
+		$this->type("filter_search", $title);
+		$this->click("//button[@type='submit']");
+		$this->waitForPageToLoad("30000");
+		$this->click("link=$title");
+		$this->waitForPageToLoad("30000");
+		$this->select("jform_catid", "label=*$newCategory*");
+		$this->click("//li[@id='toolbar-save']/a/span");
+		$this->waitForPageToLoad("30000");	
+				
+	}
+	/**
+	 * 
+	 * Sets caching option
+	 * 
+	 * @param string $level	Options are off, on-basic, on-full
+	 */
+	function setCache($level = 'off')
+	{
+		$this->gotoAdmin();
+		$this->jClick('Global Configuration');
+		$this->click("system");
+		echo "Set caching to $level\n";
+		switch ($level)
+		{
+			case 'on-basic':
+				$this->select("jform_caching", "label=ON - Conservative caching");
+				break;
+
+			case 'on-full' :
+				$this->select("jform_caching", "label=ON - Progressive caching");
+				break;
+
+			case 'off'	:
+			default:
+				$this->select("jform_caching", "label=OFF - Caching disabled");
+				break;
+		}
+
+		$this->click("//li[@id='toolbar-save']/a/span");
+		$this->waitForPageToLoad("30000");
 	}
 
 	function checkNotices()

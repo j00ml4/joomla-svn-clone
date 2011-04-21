@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Site
- * @subpackage	mod_related_items
+ * @subpackage	mod_weblinks
  * @copyright	Copyright (C) 2005 - 2009 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -66,7 +66,7 @@ class modWeblinksHelper
 		/*
 		 $query->where('(a.checked_out = 0 OR a.checked_out = '.$user->id.')');
 		 */
-		for ($i =0; $i < count($items); $i++) {
+		for ($i =0, $count = count($items); $i < $count; $i++) {
 			$item = &$items[$i];
 			if ($item->params->get('count_clicks', $params->get('count_clicks')) == 1) {
 				$item->link	= JRoute::_('index.php?option=com_weblinks&task=weblink.go&catid='.$item->catslug.'&id='. $item->slug);
