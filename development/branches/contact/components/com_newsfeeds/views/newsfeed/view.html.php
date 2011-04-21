@@ -1,8 +1,8 @@
 <?php
 /**
  * version $Id$
- * @package		Joomla
- * @subpackage	Newsfeeds
+ * @package		Joomla.Site
+ * @subpackage	com_newsfeeds
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  *
@@ -17,8 +17,8 @@ jimport('joomla.application.component.view');
  * HTML View class for the Newsfeeds component
  *
  * @static
- * @package		Joomla
- * @subpackage	Newsfeeds
+ * @package		Joomla.Site
+ * @subpackage	com_newsfeeds
  * @since 1.0
  */
 class NewsfeedsViewNewsfeed extends JView
@@ -265,7 +265,7 @@ class NewsfeedsViewNewsfeed extends JView
 		if (empty($title)) {
 			$title = $this->item->name;
 		}
-		$this->document->setTitle($title);		
+		$this->document->setTitle($title);
 
 		if ($this->item->metadesc)
 		{
@@ -283,6 +283,11 @@ class NewsfeedsViewNewsfeed extends JView
 		elseif (!$this->item->metakey && $this->params->get('menu-meta_keywords')) 
 		{
 			$this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
+		}
+
+		if ($this->params->get('robots')) 
+		{
+			$this->document->setMetadata('robots', $this->params->get('robots'));
 		}
 
 		if ($app->getCfg('MetaTitle') == '1') {

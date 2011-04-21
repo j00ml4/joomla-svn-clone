@@ -1,8 +1,8 @@
 <?php
 /**
  * version $Id$
- * @package		Joomla
- * @subpackage	Newsfeeds
+ * @package		Joomla.Site
+ * @subpackage	com_newsfeeds
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -179,6 +179,11 @@ class NewsfeedsViewCategory extends JView
 		elseif (!$this->category->metakey && $this->params->get('menu-meta_keywords')) 
 		{
 			$this->document->setMetadata('keywords', $this->params->get('menu-meta_keywords'));
+		}
+
+		if ($this->params->get('robots')) 
+		{
+			$this->document->setMetadata('robots', $this->params->get('robots'));
 		}
 
 		if ($app->getCfg('MetaTitle') == '1') {

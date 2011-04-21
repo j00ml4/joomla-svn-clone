@@ -2,7 +2,7 @@
 /**
  * @version		$Id$
  * @package		Joomla.Site
- * @subpackage	com_newsfeeds
+ * @subpackage	com_weblinks
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -29,7 +29,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 		<?php  else: ?>
 			<?php //Otherwise get one from the database if it exists. ?>
 			<?php  if ($this->parent->description) : ?>
-				<div class="category-desc base-desc"">
+				<div class="category-desc base-desc">
 					<?php  echo JHtml::_('content.prepare', $this->parent->description); ?>
 				</div>
 			<?php  endif; ?>

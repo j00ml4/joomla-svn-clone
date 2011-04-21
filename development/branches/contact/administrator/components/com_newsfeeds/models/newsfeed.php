@@ -34,18 +34,23 @@ class NewsfeedsModelNewsfeed extends JModelAdmin
 	 */
 	protected function canDelete($record)
 	{
-		$user = JFactory::getUser();
-
-		if (!empty($record->catid)) {
-			return $user->authorise('core.delete', 'com_newsfeed.category.'.(int) $record->catid);
-		}
-		else {
-			return parent::canDelete($record);
-		}
+		if (!empty($record->id)) {
+			if ($record->published != -2) {
+				return ;
+			}
+			$user = JFactory::getUser();
+	
+			if (!empty($record->catid)) {
+				return $user->authorise('core.delete', 'com_newsfeed.category.'.(int) $record->catid);
+			}
+			else {
+				return parent::canDelete($record);
+			}
+		}	
 	}
 
 	/**
-	 * Method to test whether a record can be deleted.
+	 * Method to test whether a record can have its state changed.
 	 *
 	 * @param	object	A record object.
 	 * @return	boolean	True if allowed to change the state of the record. Defaults to the permission set in the component.
@@ -198,6 +203,25 @@ class NewsfeedsModelNewsfeed extends JModelAdmin
 			//$table->modified	= $date->toMySQL();
 			//$table->modified_by	= $user->get('id');
 		}
+	}
+
+	/**
+	 * Method to change the published state of one or more records.
+	 *
+	 * @param	array	$pks	A list of the primary keys to change.
+	 * @param	int		$value	The value of the published state.
+	 *
+	 * @return	boolean	True on success.
+	 * @since	1.6
+	 */
+	function publish(&$pks, $value = 1)
+	{
+		$result = parent::publish($pks, $value);
+		
+		// Clean extra cache for newsfeeds
+		$this->cleanCache('feed_parser');
+
+		return $result;
 	}
 
 	/**

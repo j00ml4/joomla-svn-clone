@@ -11,8 +11,9 @@
 defined( '_JEXEC' ) or die( 'Access denied' );
 
 /**
- * @package		Joomla.Administrator
+ * @package		Joomla.Framework
  * @subpackage	Parameter
+ * @deprecated	JParameter is deprecated and will be removed in a future version. Use JForm instead.
  * @since		1.6
 **/
 class JElementTemplateStyle extends JElement {
@@ -39,7 +40,7 @@ class JElementTemplateStyle extends JElement {
 		array_unshift( $data, $default );
 
 		$selected = $this->_getSelected();
-		$html = JHTML::_( 'select.genericlist', $data, $control_name.'['.$name.']', 'class="inputbox" size="6"', 'id', 'description', $selected );
+		$html = JHtml::_( 'select.genericlist', $data, $control_name.'['.$name.']', 'class="inputbox" size="6"', 'id', 'description', $selected );
 		return $html;
 	}
 

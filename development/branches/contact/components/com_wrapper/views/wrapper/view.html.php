@@ -14,7 +14,7 @@ jimport('joomla.application.component.view');
 
 /**
  * @package		Joomla.Site
- * @subpackage	Wrapper
+ * @subpackage	com_wrapper
  */
 class WrapperViewWrapper extends JView
 {
@@ -47,6 +47,11 @@ class WrapperViewWrapper extends JView
 		if ($params->get('menu-meta_keywords')) 
 		{
 			$this->document->setMetadata('keywords', $params->get('menu-meta_keywords'));
+		}
+
+		if ($params->get('robots')) 
+		{
+			$this->document->setMetadata('robots', $params->get('robots'));
 		}
 
 		$wrapper = new stdClass();

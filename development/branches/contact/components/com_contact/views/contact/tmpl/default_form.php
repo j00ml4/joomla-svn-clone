@@ -3,14 +3,14 @@
  /**
  * @version		$Id: default_form.php 11845 2009-05-27 23:28:59Z robs
  * @package		Joomla.Site
- * @subpackage	Contact
+ * @subpackage	com_contact
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('_JEXEC') or die;
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidation');
-
+JHtml::_('behavior.tooltip');
  if (isset($this->error)) : ?>
 	<div class="contact-error">
 		<?php echo $this->error; ?>
@@ -30,17 +30,17 @@ JHtml::_('behavior.formvalidation');
 				<dd><?php echo $this->form->getInput('contact_subject'); ?></dd>
 				<dt><?php echo $this->form->getLabel('contact_message'); ?></dt>
 				<dd><?php echo $this->form->getInput('contact_message'); ?></dd>
-			<?php 	if ($this->params->get(show_email_copy)){ ?>
-					<dt><?php echo $this->form->getLabel('contact_email_copy'); ?></dt>
-					<dd><?php echo $this->form->getInput('contact_email_copy'); ?></dd>
-			<?php 	} ?>
+				<?php 	if ($this->params->get('show_email_copy')){ ?>
+						<dt><?php echo $this->form->getLabel('contact_email_copy'); ?></dt>
+						<dd><?php echo $this->form->getInput('contact_email_copy'); ?></dd>
+				<?php 	} ?>
+				<dt></dt>
+				<dd><button class="button validate" type="submit"><?php echo JText::_('COM_CONTACT_CONTACT_SEND'); ?></button>
+					<input type="hidden" name="option" value="com_contact" />
+					<input type="hidden" name="task" value="contact.submit" />
+					<input type="hidden" name="return" value="<?php echo $this->return_page;?>" />
+					<?php echo JHtml::_( 'form.token' ); ?>
+				</dd>
 			</dl>
-		<div>
-			<button class="button validate" type="submit"><?php echo JText::_('COM_CONTACT_CONTACT_SEND'); ?></button>
-			<input type="hidden" name="option" value="com_contact" />
-			<input type="hidden" name="task" value="contact.submit" />
-			<input type="hidden" name="return" value="<?php echo $this->return_page;?>" />
-			<?php echo JHTML::_( 'form.token' ); ?>
-		</div>
 	</form>
 </div>

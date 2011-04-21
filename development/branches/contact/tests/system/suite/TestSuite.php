@@ -32,13 +32,16 @@ require_once 'com_users/group0001Test.php';
 require_once 'com_users/group0002Test.php';
 require_once 'com_users/group0003Test.php';
 require_once 'modules/module0001Test.php';
+require_once 'redirect/redirect0001Test.php';
 require_once 'sample_data/sample_data0001Test.php';
 require_once 'acl/acl0001Test.php';
 require_once 'acl/acl0002Test.php';
 require_once 'acl/acl0003Test.php';
 require_once 'acl/acl0004Test.php';
 require_once 'acl/acl0005Test.php';
+require_once 'acl/acl0006Test.php';
 require_once 'language/language0001Test.php';
+require_once 'cache/cache0001Test.php';
 
 
 class TestSuite
@@ -70,6 +73,7 @@ class TestSuite
 		$suite->addTestSuite('Group0002Test');
 		$suite->addTestSuite('Group0003Test');
 		$suite->addTestSuite('Module0001');
+		$suite->addTestSuite('Redirect0001Test');
 		$suite->addTestSuite('SampleData0001');
 		$suite->addTestSuite('Acl0001Test');
 		$suite->addTestSuite('Acl0002Test');
@@ -77,7 +81,9 @@ class TestSuite
 		$suite->addTestSuite('Acl0003Test');
 		$suite->addTestSuite('Acl0004Test');
 		$suite->addTestSuite('Acl0005Test');
+		$suite->addTestSuite('Acl0006Test');
 		$suite->addTestSuite('Language0001Test');
+		$suite->addTestSuite('Cache0001Test');
 		return $suite;
 	}
 }

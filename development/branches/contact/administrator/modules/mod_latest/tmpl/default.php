@@ -17,7 +17,7 @@ defined('_JEXEC') or die;
 				<?php echo JText::_('MOD_LATEST_LATEST_ITEMS'); ?>
 			</th>
 			<th>
-				<strong><?php echo JText::_('JPUBLISHED'); ?></strong>
+				<strong><?php echo JText::_('JSTATUS'); ?></strong>
 			</th>
 			<th>
 				<strong><?php echo JText::_('MOD_LATEST_CREATED'); ?></strong>
@@ -47,7 +47,7 @@ defined('_JEXEC') or die;
 				<?php echo JHtml::_('jgrid.published', $item->state, $i, '', false); ?>
 			</td>
 			<td class="center">
-				<?php echo JHTML::_('date',$item->created, 'Y-m-d H:i:s'); ?>
+				<?php echo JHtml::_('date',$item->created, 'Y-m-d H:i:s'); ?>
 			</td>
 			<td class="center">
 				<?php echo $item->author_name;?>

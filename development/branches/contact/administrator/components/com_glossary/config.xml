@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : config.xml
+    Created on : 28 October 2009, 11:11
+    Author     : martin
+    Description:
+        Purpose of the document follows.
+-->
+
+<config>
+	<params addpath="/administrator/components/com_glossary/elements">
+		<param name="glossid" type="glossaries" label="Select Glossary" description="Which glossary should the user see first?" default="0" />
+	</params>
+</config>
