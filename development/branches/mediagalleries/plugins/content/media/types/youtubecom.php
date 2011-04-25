@@ -1,8 +1,8 @@
 <?php
-class MediaTypeYoutube extends MediaType {
+class MediaTypeYoutubecom extends MediaType {
 
-    public function getMedia($media='', $width='', $height='', $params=array()) {
-        //$vparams[] = 'autoplay='.$autostart;
+    public function getMedia() {
+        $vparams[] = 'autoplay='.$autostart;
         $vparams[] = 'rel=' . $params['youtube_rel']; //, 'advanced');
         $vparams[] = 'loop=' . $params['youtube_loop']; //, 'advanced');
         //$vparams[] = 'enablejsapi='.$params['youtube_enablejsapi'];
@@ -31,6 +31,7 @@ class MediaTypeYoutube extends MediaType {
 
         $params['a'] = '';
         $params['p'] = '';
+
         //Call the SWF's extension function
         return $this->html4Player($player, $params);
     }
