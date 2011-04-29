@@ -9,8 +9,8 @@
 
 defined('JPATH_PLATFORM') or die;
 
-jimport('joomla.database.databaseexception');
 jimport('joomla.filesystem.folder');
+JLoader::register('DatabaseException', JPATH_PLATFORM.'/joomla/database/databaseexception.php');
 
 /**
  * Database connector class.

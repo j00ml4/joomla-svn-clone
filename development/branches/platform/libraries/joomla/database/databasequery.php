@@ -347,8 +347,8 @@ abstract class JDatabaseQuery
 				$this->order = null;
 				$this->columns = null;
 
-				$this->_values = null;
-				$this->_auto_increment_field = null;
+				$this->values = null;
+				$this->auto_increment_field = null;
 				break;
 		}
 
@@ -433,8 +433,8 @@ abstract class JDatabaseQuery
 	 */
 	public function delete($table = null)
 	{
-		$this->_type	= 'delete';
-		$this->_delete	= new JDatabaseQueryElement('DELETE', null);
+		$this->type	= 'delete';
+		$this->delete	= new JDatabaseQueryElement('DELETE', null);
 
 		if (!empty($table)) {
 			$this->from($table);
@@ -468,11 +468,11 @@ abstract class JDatabaseQuery
 	 */
 	public function from($tables)
 	{
-		if (is_null($this->_from)) {
-			$this->_from = new JDatabaseQueryElement('FROM', $tables);
+		if (is_null($this->from)) {
+			$this->from = new JDatabaseQueryElement('FROM', $tables);
 		}
 		else {
-			$this->_from->append($tables);
+			$this->from->append($tables);
 		}
 
 		return $this;
@@ -489,11 +489,11 @@ abstract class JDatabaseQuery
 	 */
 	public function group($columns)
 	{
-		if (is_null($this->_group)) {
-			$this->_group = new JDatabaseQueryElement('GROUP BY', $columns);
+		if (is_null($this->group)) {
+			$this->group = new JDatabaseQueryElement('GROUP BY', $columns);
 		}
 		else {
-			$this->_group->append($columns);
+			$this->group->append($columns);
 		}
 
 		return $this;
@@ -511,12 +511,12 @@ abstract class JDatabaseQuery
 	 */
 	public function having($conditions, $glue='AND')
 	{
-		if (is_null($this->_having)) {
+		if (is_null($this->having)) {
 			$glue = strtoupper($glue);
-			$this->_having = new JDatabaseQueryElement('HAVING', $conditions, " $glue ");
+			$this->having = new JDatabaseQueryElement('HAVING', $conditions, " $glue ");
 		}
 		else {
-			$this->_having->append($conditions);
+			$this->having->append($conditions);
 		}
 
 		return $this;
@@ -551,8 +551,8 @@ abstract class JDatabaseQuery
 	 */
 	public function insert($table)
 	{
-		$this->_type	= 'insert';
-		$this->_insert	= new JDatabaseQueryElement('INSERT INTO', $table);
+		$this->type	= 'insert';
+		$this->insert	= new JDatabaseQueryElement('INSERT INTO', $table);
 
 		return $this;
 	}
@@ -569,10 +569,10 @@ abstract class JDatabaseQuery
 	 */
 	public function join($type, $conditions)
 	{
-		if (is_null($this->_join)) {
-			$this->_join = array();
+		if (is_null($this->join)) {
+			$this->join = array();
 		}
-		$this->_join[] = new JDatabaseQueryElement(strtoupper($type) . ' JOIN', $conditions);
+		$this->join[] = new JDatabaseQueryElement(strtoupper($type) . ' JOIN', $conditions);
 
 		return $this;
 	}
@@ -701,11 +701,11 @@ abstract class JDatabaseQuery
 	 */
 	public function order($columns)
 	{
-		if (is_null($this->_order)) {
-			$this->_order = new JDatabaseQueryElement('ORDER BY', $columns);
+		if (is_null($this->order)) {
+			$this->order = new JDatabaseQueryElement('ORDER BY', $columns);
 		}
 		else {
-			$this->_order->append($columns);
+			$this->order->append($columns);
 		}
 
 		return $this;
@@ -741,13 +741,13 @@ abstract class JDatabaseQuery
 	 */
 	public function select($columns)
 	{
-		$this->_type = 'select';
+		$this->type = 'select';
 
-		if (is_null($this->_select)) {
-			$this->_select = new JDatabaseQueryElement('SELECT', $columns);
+		if (is_null($this->select)) {
+			$this->select = new JDatabaseQueryElement('SELECT', $columns);
 		}
 		else {
-			$this->_select->append($columns);
+			$this->select->append($columns);
 		}
 
 		return $this;
@@ -765,12 +765,12 @@ abstract class JDatabaseQuery
 	 */
 	public function set($conditions, $glue=',')
 	{
-		if (is_null($this->_set)) {
+		if (is_null($this->set)) {
 			$glue = strtoupper($glue);
-			$this->_set = new JDatabaseQueryElement('SET', $conditions, "\n\t$glue ");
+			$this->set = new JDatabaseQueryElement('SET', $conditions, "\n\t$glue ");
 		}
 		else {
-			$this->_set->append($conditions);
+			$this->set->append($conditions);
 		}
 
 		return $this;
@@ -789,8 +789,8 @@ abstract class JDatabaseQuery
 	 */
 	public function update($tables)
 	{
-		$this->_type = 'update';
-		$this->_update = new JDatabaseQueryElement('UPDATE', $tables);
+		$this->type = 'update';
+		$this->update = new JDatabaseQueryElement('UPDATE', $tables);
 
 		return $this;
 	}
@@ -806,7 +806,7 @@ abstract class JDatabaseQuery
 	 */
 	function values($values)
 	{
-		if (is_null($this->_values)) {
+		if (is_null($this->values)) {
 			$this->values = new JDatabaseQueryElement('()', $values, '), (');
 		}
 		else {
@@ -828,12 +828,12 @@ abstract class JDatabaseQuery
 	 */
 	public function where($conditions, $glue = 'AND')
 	{
-		if (is_null($this->_where)) {
+		if (is_null($this->where)) {
 			$glue = strtoupper($glue);
-			$this->_where = new JDatabaseQueryElement('WHERE', $conditions, " $glue ");
+			$this->where = new JDatabaseQueryElement('WHERE', $conditions, " $glue ");
 		}
 		else {
-			$this->_where->append($conditions);
+			$this->where->append($conditions);
 		}
 
 		return $this;
@@ -938,15 +938,15 @@ abstract class JDatabaseQuery
 			case 'insert_into':
 				$query .= (string) $this->insert_into;
 
-				if ($this->_fields) {
-					$query .= (string) $this->_fields;
+				if ($this->fields) {
+					$query .= (string) $this->fields;
 					$query .= ')';
 				}
 
-				$query .= (string) $this->_values;
+				$query .= (string) $this->values;
 				$query .= ')';
 
-				if($this->_auto_increment_field)
+				if($this->auto_increment_field)
 				$query = $this->auto_increment($query);
 
 				break;
