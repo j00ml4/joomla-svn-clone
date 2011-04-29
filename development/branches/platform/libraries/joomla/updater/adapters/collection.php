@@ -19,7 +19,7 @@ class JUpdaterCollection extends JUpdateAdapter {
 	/**
 	 * @var object Root of the tree
 	 */
-	private $base;
+	protected $base;
 	/**
 	 * @var array Tree of objects
 	 */
