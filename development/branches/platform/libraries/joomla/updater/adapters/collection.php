@@ -20,18 +20,22 @@ class JUpdaterCollection extends JUpdateAdapter {
 	 * @var object Root of the tree
 	 */
 	protected $base;
+
 	/**
 	 * @var array Tree of objects
 	 */
 	protected $parent = Array(0);
+
 	/**
 	 * @var boolean Used to control if an item has a child or not
 	 */
 	protected $pop_parent = 0;
+
 	/**
 	 * @var array A list of discovered update sites
 	 */
 	protected $update_sites;
+
 	/**
 	 * @var array A list of discovered updates
 	 */
@@ -128,11 +132,11 @@ class JUpdaterCollection extends JUpdateAdapter {
 
 	/**
 	 * Closing an XML element
-	 * Note: This is a private function though has to be exposed externally as a callback
+	 * Note: This is a protected function though has to be exposed externally as a callback
 	 * @param object parser object
 	 * @param string name of the element closing
 	 */
-	public function _endElement($parser, $name)
+	protected function _endElement($parser, $name)
 	{
 		$lastcell = array_pop($this->_stack);
 		switch($name)

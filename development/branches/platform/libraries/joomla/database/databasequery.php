@@ -118,7 +118,7 @@ abstract class JDatabaseQuery
 	 * @var    resource  The database connection resource.
 	 * @since  11.1
 	 */
-	protected $connection = null;
+	protected $db = null;
 
 	/**
 	 * @var    string  The query type.
@@ -225,6 +225,38 @@ abstract class JDatabaseQuery
 	 * @since  11.1
 	 */
 	protected $null_date = '';
+
+	/**
+	 * Magic method to provide method alias support for quote() and nameQuote().
+	 *
+	 * @param   string  $method  The called method.
+	 * @param   array   $args    The array of arguments passed to the method.
+	 *
+	 * @return  string  The aliased method's return value or null.
+	 *
+	 * @since   11.1
+	 */
+	public function __call($method, $args)
+	{
+		if (empty($args)) {
+			return;
+		}
+
+		switch ($method)
+		{
+			case 'q':
+				return $this->quote($args[0], isset($args[1]) ? $args[1] : true);
+				break;
+
+			case 'qn':
+				return $this->quoteName($args[0]);
+				break;
+
+			case 'e':
+				return $this->escape($args[0], isset($args[1]) ? $args[1] : false);
+				break;
+		}
+	}
 
 	/**
 	 * Class constructor.
@@ -346,9 +378,7 @@ abstract class JDatabaseQuery
 				$this->having = null;
 				$this->order = null;
 				$this->columns = null;
-
 				$this->values = null;
-				$this->auto_increment_field = null;
 				break;
 		}
 
@@ -929,25 +959,6 @@ abstract class JDatabaseQuery
 					$query .= 'VALUES ';
 					$query .= (string) $this->values;
 				}
-
-				break;
-
-
-
-
-			case 'insert_into':
-				$query .= (string) $this->insert_into;
-
-				if ($this->fields) {
-					$query .= (string) $this->fields;
-					$query .= ')';
-				}
-
-				$query .= (string) $this->values;
-				$query .= ')';
-
-				if($this->auto_increment_field)
-				$query = $this->auto_increment($query);
 
 				break;
 		}
