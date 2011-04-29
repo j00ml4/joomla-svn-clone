@@ -27,7 +27,7 @@ abstract class modLoggedHelper
 		// Initialise variables
 		$db = JFactory::getDbo();
 		$user = JFactory::getUser();
-		$query = new JDatabaseQuery;
+		$query = $db->getQuery(true);
 
 		$query->select('s.time, s.client_id, u.id, u.name, u.username');
 		$query->from('#__session AS s');

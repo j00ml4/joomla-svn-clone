@@ -9,6 +9,8 @@
 
 defined('JPATH_PLATFORM') or die;
 
+jimport('joomla.filter.filteroutput');
+
 //Register the renderer class with the loader
 JLoader::register('JDocumentRenderer', dirname(__FILE__).DS.'renderer.php');
 

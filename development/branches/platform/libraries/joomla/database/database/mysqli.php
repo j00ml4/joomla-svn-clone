@@ -274,7 +274,7 @@ class JDatabaseMySQLi extends JDatabase
 	{
 		if ($new) {
 			// Make sure we have a query class for this driver.
-			if (!class_exists('JDatabaseQueryMySQL')) {
+			if (!class_exists('JDatabaseQueryMySQLi')) {
 				throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_QUERY'));
 			}
 			return new JDatabaseQueryMySQLi($this);
