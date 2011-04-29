@@ -112,7 +112,7 @@ class JArrayHelper
 	}
 
 	/**
-	 * Private Utility function to map an object|array to an array
+	 * Utility function to map an object|array to an array
 	 *
 	 * @param	array|object	The source object|array
 	 * @param	boolean			True to recurve through multi-level objects
@@ -309,7 +309,7 @@ class JArrayHelper
 	}
 
 	/**
-	 * Private callback function for sorting an array of objects on a key
+	 * Callback function for sorting an array of objects on a key
 	 *
 	 * @static
 	 * @param	array	$a	An array of objects
@@ -319,7 +319,7 @@ class JArrayHelper
 	 * @since	11.1
 	 * @see		JArrayHelper::sortObjects()
 	 */
-	public static function _sortObjects(&$a, &$b)
+	protected static function _sortObjects(&$a, &$b)
 	{
 		$params = $GLOBALS['JAH_so'];
 

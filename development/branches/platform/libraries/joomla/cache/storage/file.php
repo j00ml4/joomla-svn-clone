@@ -509,7 +509,7 @@ class JCacheStorageFile extends JCacheStorage
 		return $arr;
 	}
 
-	/**
+/**
 	 * Utility function to read the folders in a folder.
 	 *
 	 * @param	string	The path of the folder to read.
