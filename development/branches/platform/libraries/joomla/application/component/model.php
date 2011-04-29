@@ -129,7 +129,7 @@ abstract class JModel extends JObject
 	 * @return	string	The filename
 	 * @since	11.1
 	 */
-	private static function _createFileName($type, $parts = array())
+	protected static function _createFileName($type, $parts = array())
 	{
 		$filename = '';
 
@@ -299,7 +299,7 @@ abstract class JModel extends JObject
 	 * @since	11.1
 	 * @see		JTable::getInstance
 	 */
-	private function _createTable($name, $prefix = 'Table', $config = array())
+	protected function _createTable($name, $prefix = 'Table', $config = array())
 	{
 		// Clean the model name
 		$name	= preg_replace('/[^A-Z0-9_]/i', '', $name);

@@ -83,99 +83,99 @@ class JDocument extends JObject
 	 *
 	 * @var		string
 	 */
-	private $_tab = "\11";
+	public $_tab = "\11";
 
 	/**
 	 * Contains the line end string
 	 *
 	 * @var		string
 	 */
-	private $_lineEnd = "\12";
+	public $_lineEnd = "\12";
 
 	/**
 	 * Contains the character encoding string
 	 *
 	 * @var	string
 	 */
-	private $_charset = 'utf-8';
+	public $_charset = 'utf-8';
 
 	/**
 	 * Document mime type
 	 *
 	 * @var		string
 	 */
-	private $_mime = '';
+	public $_mime = '';
 
 	/**
 	 * Document namespace
 	 *
 	 * @var		string
 	 */
-	private $_namespace = '';
+	public $_namespace = '';
 
 	/**
 	 * Document profile
 	 *
 	 * @var		string
 	 */
-	private $_profile = '';
+	public $_profile = '';
 
 	/**
 	 * Array of linked scripts
 	 *
 	 * @var		array
 	 */
-	private $_scripts = array();
+	public $_scripts = array();
 
 	/**
 	 * Array of scripts placed in the header
 	 *
 	 * @var  array
 	 */
-	private $_script = array();
+	public $_script = array();
 
 	/**
 	 * Array of linked style sheets
 	 *
 	 * @var	array
 	 */
-	private $_styleSheets = array();
+	public $_styleSheets = array();
 
 	/**
 	 * Array of included style declarations
 	 *
 	 * @var	array
 	 */
-	private $_style = array();
+	public $_style = array();
 
 	/**
 	 * Array of meta tags
 	 *
 	 * @var	array
 	 */
-	private $_metaTags = array();
+	public $_metaTags = array();
 
 	/**
 	 * The rendering engine
 	 *
 	 * @var	object
 	 */
-	private $_engine = null;
+	public $_engine = null;
 
 	/**
 	 * The document type
 	 *
 	 * @var	string
 	 */
-	private $_type = null;
+	public $_type = null;
 
 	/**
 	 * Array of buffered output
 	 *
 	 * @var		mixed (depends on the renderer)
-	 * @access	private
+	 * @access	protected
 	 */
-	protected static $_buffer = null;
+	public static $_buffer = null;
 
 
 	/**
@@ -183,7 +183,7 @@ class JDocument extends JObject
 	*
 	* @param	array	$options Associative array of options
 	*/
-	protected function __construct($options = array())
+	public function __construct($options = array())
 	{
 		parent::__construct();
 
@@ -688,7 +688,7 @@ class JDocument extends JObject
 	 *
 	 * @return	string
 	 */
-	private function _getLineEnd() {
+	public function _getLineEnd() {
 		return $this->_lineEnd;
 	}
 
@@ -708,7 +708,7 @@ class JDocument extends JObject
 	 *
 	 * @return	string
 	 */
-	private function _getTab() {
+	public function _getTab() {
 		return $this->_tab;
 	}
 

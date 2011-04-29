@@ -121,7 +121,7 @@ class JArrayHelper
 	 * @return	array			The array mapped from the given object
 	 * @since	11.1
 	 */
-	private static function _fromObject($item, $recurse, $regex)
+	protected static function _fromObject($item, $recurse, $regex)
 	{
 		if (is_object($item))
 		{

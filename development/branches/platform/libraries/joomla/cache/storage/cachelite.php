@@ -21,12 +21,12 @@ class JCacheStorageCachelite extends JCacheStorage
 	/**
 	 * @since	11.1
 	 */
-	private static $CacheLiteInstance = null;
+	protected static $CacheLiteInstance = null;
 
 	/**
 	 * @since	11.1
 	 */
-	private $_root;
+	protected $_root;
 
 	/**
 	 * Constructor
@@ -62,7 +62,7 @@ class JCacheStorageCachelite extends JCacheStorage
 	 * @param array $options optional parameters
 	 * @since		11.1
 	 */
-	private function initCache($cloptions)
+	protected function initCache($cloptions)
 	{
 		require_once 'Cache/Lite.php';
 		self::$CacheLiteInstance = new Cache_Lite($cloptions);
