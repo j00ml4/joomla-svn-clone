@@ -10,7 +10,8 @@ class MediaType{
      * @var String 
      */
     protected $media;
-
+    protected $thumb;
+    
     /**
      * @var Array genearated by JParams
      */
@@ -23,6 +24,7 @@ class MediaType{
      */
     public function MediaType($media, $params){
         $this->media  = $media;
+        $this->thumb  = $media;
         $this->params = $params;
     }
     
@@ -45,7 +47,7 @@ class MediaType{
      * @param unknown_type $params
      */
     public function getThumb(){
-    	return "<img src='".$this->media."'".
+    	return "<img src='".$this->thumb."'".
                     "style='".$this->params['thumb_width']." ".$this->params['thumb_height']."' >";
     }
 
