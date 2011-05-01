@@ -1,5 +1,5 @@
 # Change this line to fit your path
-cd /Volumes/WORK/svn/jsop/mediagalleries/
+cd /home/amangautam/workspace2/jsop/plugins/content/media
 
 rm -R plg_media
 mkdir plg_media
