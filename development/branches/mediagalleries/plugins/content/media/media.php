@@ -62,24 +62,29 @@ class plgContentMedia extends JPlugin {
 
             // Params
             $pcount = count($parts);
+            $width  = $params->get('width', 400);
+            $height = $params->get('height', 0);
+            $thumb_width  = $params->get('thumb_width', 150);
+            $thumb_height = $params->get('thumb_height', 0);
+            
+            // Width
+            if ($pcount > 1 && is_numeric($parts[1]) && $parts[1] > 0 ) {
+                $width = $parts[1];
+                $height = $width * 0.7;
+                $thumb_width = $width;
+                $thumb_height = $height;
+            }
+
+            // Height
+            if ($pcount > 2 && is_numeric($parts[2]) && $parts[2] > 0) {
+                $height = $parts[2];
+                $width = ($parts[1]) ? $parts[1] : $height * 1.3;
+                $thumb_width = $width;
+                $thumb_height = $height;
+            }
+
             switch ($type) {
                 case 'media':
-                    // Width
-                    if ($pcount > 1) {
-                        $width = (is_numeric($parts[1]) && $parts[1] > 0)? 
-                            $parts[1] : 
-                            $params->get('width', 400);
-                        $height = $width * 0.7;
-                    }
-
-                    // Height
-                    if ($pcount > 2) {
-                        $height = (is_numeric($parts[2]) && $parts[2] > 0)? 
-                            $parts[2] : 
-                            $params->get('height', 0);
-                        $width = ($parts[1]) ? $parts[1] : $height * 1.3;
-                    }
-
                     // autoStart
                     if ($pcount > 3) {
                         $params->set('autostart', (boolean) $parts[3]);
@@ -99,25 +104,9 @@ class plgContentMedia extends JPlugin {
                     break;
 
                 case 'thumb':
-                    // Width
-                    if ($pcount > 1) {
-                        $width = (is_numeric($parts[1]) && $parts[1] > 0)? 
-                            $parts[1] : 
-                            $params->get('thumb_width', 150);
-                        $height = $width * 0.7;
-                    }
-
-                    // Height
-                    if ($pcount > 2) {
-                        $height = (is_numeric($parts[2]) && $parts[2] > 0)? 
-                            $parts[2] : 
-                            $params->get('thumb_height', 0);
-                        $width = ($parts[1]) ? $parts[1] : $height * 1.3;
-                    }
-                    
                     // Size
-                    $params->set('thumb_width', $width);
-                    $params->set('thumb_height', $height);
+                    $params->set('thumb_width', $thumb_width);
+                    $params->set('thumb_height', $thumb_height);
 
                     // get media Object
                     $media = $this->getMediaObject($media, $params);
@@ -127,8 +116,13 @@ class plgContentMedia extends JPlugin {
                             . $media->getThumb()
                             . '</span>';
                     break;
+                
+                default:
+                    $replace = '';
+                    break;
             }
 
+            var_dump($params);
             // Replace code
             $row->text = str_replace($match, $replace, $row->text);
         }
@@ -189,7 +183,6 @@ class plgContentMedia extends JPlugin {
         $media = strpos($media, "http://") ?
                 $media : // Custom PATH
                 $params->get('default_path', 'images/') . $media; // Default PATH
-        
         //First Check if we have the file extension
         $type = substr($media, strrpos($media, '.') + 1);
         if (ctype_alnum($type)) { // If the type is alphanumeric...
@@ -213,10 +206,10 @@ class plgContentMedia extends JPlugin {
 
         // Now I get the media object
         $file = dirname(__FILE__) . DS . 'types' . DS . $type . '.php';
-        
+
         // The Object params are an array
-        $params = $params->toArray(); 
-        
+        $params = $params->toArray();
+
         // If there is no file load the parent
         if (!file_exists($file)) {
             //return new MediaType();
