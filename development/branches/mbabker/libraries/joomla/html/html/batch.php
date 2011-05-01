@@ -55,7 +55,7 @@ abstract class JHtmlBatch
 		// Create the batch selector to change select the category by which to move or copy.
 		$lines = array(
 			'<label id="batch-choose-action-lbl" for="batch-choose-action">',
-			JText::_('JGLOBAL_BATCH_CATEGORY_LABEL'),
+			JText::_('JGLOBAL_BATCH_MENU_LABEL'),
 			'</label>',
 			'<fieldset id="batch-choose-action" class="combo">',
 				'<select name="batch[category_id]" class="inputbox" id="batch-category-id">',
