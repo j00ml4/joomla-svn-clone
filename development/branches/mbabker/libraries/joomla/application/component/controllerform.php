@@ -206,6 +206,31 @@ class JControllerForm extends JController
 	}
 
 	/**
+	 * Method to run batch operations.
+	 *
+	 * @return	void
+	 * @since	11.1
+	 */
+	protected function batch($model)
+	{
+		// Initialise variables.
+		$app	= JFactory::getApplication();
+		$vars	= JRequest::getVar('batch', array(), 'post', 'array');
+		$cid	= JRequest::getVar('cid', array(), 'post', 'array');
+
+		// Attempt to run the batch operation.
+		if ($model->batch($vars, $cid)) {
+			$this->setMessage(JText::_('JGLOBAL_BATCH_SUCCESS'));
+
+			return true;
+		}
+		else {
+			$this->setMessage(JText::sprintf('JGLOBAL_ERROR_BATCH_FAILED', $model->getError()));
+			return false;
+		}
+	}
+
+	/**
 	 * Method to cancel an edit.
 	 *
 	 * @param	string	$key	The name of the primary key of the URL variable.
