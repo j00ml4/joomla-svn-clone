@@ -211,7 +211,7 @@ class JControllerForm extends JController
 	 * @return	void
 	 * @since	11.1
 	 */
-	protected function batch($model)
+	public function batch($model)
 	{
 		// Initialise variables.
 		$app	= JFactory::getApplication();

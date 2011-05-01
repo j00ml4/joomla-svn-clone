@@ -113,7 +113,7 @@ class CategoriesControllerCategory extends JControllerForm
 	 *
 	 * @return	void
 	 */
-	public function batch()
+	public function batch($model)
 	{
 		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
