@@ -159,6 +159,9 @@ abstract class JModelAdmin extends JModelForm
 			return false;
 		}
 
+		// Clear the cache
+		$this->cleanCache();
+
 		return true;
 	}
 
