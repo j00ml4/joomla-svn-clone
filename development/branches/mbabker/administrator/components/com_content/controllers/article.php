@@ -121,7 +121,7 @@ class ContentControllerArticle extends JControllerForm
 	 * @return	void
 	 * @since	1.6
 	 */
-	protected function batch($model = null)
+	protected function batch($model)
 	{
 		JRequest::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 
