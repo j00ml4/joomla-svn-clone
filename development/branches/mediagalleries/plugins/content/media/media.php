@@ -83,6 +83,7 @@ class plgContentMedia extends JPlugin {
                 $thumb_height = $height;
             }
 
+            
             switch ($type) {
                 case 'media':
                     // autoStart
@@ -122,7 +123,6 @@ class plgContentMedia extends JPlugin {
                     break;
             }
 
-            var_dump($params);
             // Replace code
             $row->text = str_replace($match, $replace, $row->text);
         }
