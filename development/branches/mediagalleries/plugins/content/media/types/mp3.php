@@ -20,14 +20,15 @@ class MediaTypemp3 extends MediaType{
 				},
 
 				clip: {
-					autoPlay: '.$params['autostart'].'
+					autoPlay : false
+					//autoPlay: '.$params['autostart'].'
 				}
 
 				});
 					</script>';
     	//echo $text;
     	
-    	return "<div id='audio' style='display:block;width:800px;height:50px' href='$media'></div> $text";
+    	return "$text <div id='audio' style='display:block;width:800px;height:50px' href='$media'></div> ";
     	//return "<div id='audio' style='display:block;".$params['width'].";".$params['height']."' href='".$media."' ></div> $text" ;
     }
 
