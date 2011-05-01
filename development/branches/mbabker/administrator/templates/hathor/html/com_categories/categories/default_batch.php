@@ -21,21 +21,18 @@ $extension	= $this->escape($this->state->get('filter.extension'));
 <fieldset class="batch">
 	<legend><?php echo JText::_('COM_CATEGORIES_BATCH_OPTIONS');?></legend>
 
-			<label id="batch-access-lbl" for="batch-access" class="hasTip" title="<?php echo JText::_('JGLOBAL_BATCH_ACCESS_LABEL').'::'.JText::_('JGLOBAL_BATCH_ACCESS_LABEL_DESC'); ?>">
-				<?php echo JText::_('JGLOBAL_BATCH_ACCESS_LABEL') ?>
-			</label>
-			<?php echo JHtml::_('access.assetgrouplist', 'batch[assetgroup_id]', '', 'class="inputbox"', array('title' => JText::_('JGLOBAL_BATCH_NOCHANGE'), 'id' => 'batch-access'));?>
+		<?php echo JHtml::_('batch.access');?>
 
-			<?php if ($published >= 0) : ?>
-				<label id="batch-choose-action-lbl" for="batch-category-id">
-					<?php echo JText::_('COM_CATEGORIES_BATCH_CATEGORY_LABEL'); ?>
-				</label>
-					<select name="batch[category_id]" class="inputbox" id="batch-category-id">
-						<option value=""><?php echo JText::_('JSELECT') ?></option>
-						<?php echo JHtml::_('select.options', JHtml::_('category.categories', $extension, array('published' => $published)));?>
-					</select>
-					<?php echo JHtml::_( 'select.radiolist', $options, 'batch[move_copy]', '', 'value', 'text', 'm'); ?>
-			<?php endif; ?>
+		<?php if ($published >= 0) : ?>
+			<label id="batch-choose-action-lbl" for="batch-category-id">
+				<?php echo JText::_('COM_CATEGORIES_BATCH_CATEGORY_LABEL'); ?>
+			</label>
+			<select name="batch[category_id]" class="inputbox" id="batch-category-id">
+				<option value=""><?php echo JText::_('JSELECT') ?></option>
+				<?php echo JHtml::_('select.options', JHtml::_('category.categories', $extension, array('published' => $published)));?>
+			</select>
+			<?php echo JHtml::_( 'select.radiolist', $options, 'batch[move_copy]', '', 'value', 'text', 'm'); ?>
+		<?php endif; ?>
 
 		<button type="submit" onclick="submitbutton('category.batch');">
 			<?php echo JText::_('JGLOBAL_BATCH_PROCESS'); ?>
