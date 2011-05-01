@@ -41,12 +41,19 @@ class plgContentMedia extends JPlugin {
     public function onContentPrepare($context, &$row, &$params, $limitstart) {
 
         // Regular Expression
-        $regex = '/\{(media|thumb)(.*?)}/i';
+        $regex = '/\{(media|thumb)\W+(.*?)}/i';
         $total = preg_match_all($regex, $row->text, $matches, PREG_SET_ORDER);
         if (!$total) {
             return true;
         }
 
+        // 
+        $w = $this->params->get('width', 400);
+        $h = $this->params->get('height', 350);
+        $a = $this->params->get('autostart', 0);
+        $thumb_w = $this->params->get('thumb_width', 150);
+        $thumb_h = $this->params->get('thumb_height', 100);       
+        
         // Loop
         for ($x = 0; $x < $total; $x++) {
             // Params
@@ -60,15 +67,18 @@ class plgContentMedia extends JPlugin {
             $parts = explode(' ', $parts); // Split
             $media = $parts[0];
 
-            // Params
+            // Default Params
+            $width      = $w;
+            $height     = $h;
+            $autostart  = $a;
+            $thumb_width    = $thumb_w;
+            $thumb_height   = $thumb_h;
+            
+            // Count parts
             $pcount = count($parts);
-            $width  = $params->get('width', 400);
-            $height = $params->get('height', 350);
-            $thumb_width  = $params->get('thumb_width', 150);
-            $thumb_height = $params->get('thumb_height', 100);
             
             // Width
-            if ($pcount > 1 && is_numeric($parts[1]) && $parts[1] > 0 ) {
+            if ($pcount > 1 && is_numeric($parts[1]) && $parts[1] > 0) {
                 $width = $parts[1];
                 $height = $width * 0.7;
                 $thumb_width = $width;
@@ -83,15 +93,15 @@ class plgContentMedia extends JPlugin {
                 $thumb_height = $height;
             }
 
-            
+            // autoStart
+            if ($pcount > 3) {
+                $autostart = (boolean) $parts[3];
+            }
+
             switch ($type) {
                 case 'media':
-                    // autoStart
-                    if ($pcount > 3) {
-                        $params->set('autostart', (boolean) $parts[3]);
-                    }
-
-                    // Size
+                    // Set params
+                    $params->set('autostart', $autostart);
                     $params->set('width', $width);
                     $params->set('height', $height);
 
@@ -117,7 +127,7 @@ class plgContentMedia extends JPlugin {
                             . $media->getThumb()
                             . '</span>';
                     break;
-                
+
                 default:
                     $replace = '';
                     break;
@@ -180,7 +190,7 @@ class plgContentMedia extends JPlugin {
         $params = $this->params;
 
         // Here we fix Media UrL
-        $media = strpos($media, "http://") ?
+        $media = strpos($media, "http://") !== false ?
                 $media : // Custom PATH
                 $params->get('default_path', 'images/') . $media; // Default PATH
         //First Check if we have the file extension
