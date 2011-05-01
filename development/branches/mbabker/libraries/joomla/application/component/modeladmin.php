@@ -548,6 +548,36 @@ abstract class JModelAdmin extends JModelForm
 	}
 
 	/**
+	 * Method to change the title & alias.
+	 *
+	 * @param	int     The value of the category.
+	 * @param   sting   The value of the Alias.
+	 * @param   sting   The value of the Title.
+	 * @return	array   Contains title and alias.
+	 * @since	11.1
+	 */
+	protected function generateNewTitle($category_id, $alias, $title)
+	{
+		// Alter the title & alias
+		$table = $this->getTable();
+		while($table->load(array('alias'=>$alias, 'catid'=>$category_id))){
+			$m = null;
+			if (preg_match('#-(\d+)$#', $alias, $m)) {
+				$alias = preg_replace('#-(\d+)$#', '-'.($m[1] + 1).'', $alias);
+			} else {
+				$alias .= '-2';
+			}
+			if (preg_match('#\((\d+)\)$#', $title, $m)) {
+				$title = preg_replace('#\(\d+\)$#', '('.($m[1] + 1).')', $title);
+			} else {
+				$title .= ' (2)';
+			}
+		}
+
+		return array($title, $alias);
+	}
+
+	/**
 	 * Method to get a single record.
 	 *
 	 * @param	integer	$pk	The id of the primary key.

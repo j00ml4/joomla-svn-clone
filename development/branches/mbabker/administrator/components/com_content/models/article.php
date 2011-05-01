@@ -336,36 +336,6 @@ class ContentModelArticle extends JModelAdmin
 	}
 
 	/**
-	 * Method to change the title & alias.
-	 *
-	 * @param	int     The value of the article category.
-	 * @param   sting   The value of the article Alias.
-	 * @param   sting   The value of the article Title.
-	 * @return	array   Contains title and alias.
-	 * @since	1.6
-	 */
-	function generateNewTitle($category_id, $alias, $title)
-	{
-		// Alter the title & alias
-		$articleTable = JTable::getInstance('Content');
-		while($articleTable->load(array('alias'=>$alias, 'catid'=>$category_id))){
-			$m = null;
-			if (preg_match('#-(\d+)$#', $alias, $m)) {
-				$alias = preg_replace('#-(\d+)$#', '-'.($m[1] + 1).'', $alias);
-			} else {
-				$alias .= '-2';
-			}
-			if (preg_match('#\((\d+)\)$#', $title, $m)) {
-				$title = preg_replace('#\(\d+\)$#', '('.($m[1] + 1).')', $title);
-			} else {
-				$title .= ' (2)';
-			}
-		}
-
-		return array($title ,$alias);
-	}
-
-	/**
 	 * Custom clean the cache of com_content and content modules
 	 *
 	 * @since	1.6
