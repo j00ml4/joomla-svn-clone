@@ -63,9 +63,9 @@ class plgContentMedia extends JPlugin {
             // Params
             $pcount = count($parts);
             $width  = $params->get('width', 400);
-            $height = $params->get('height', 0);
+            $height = $params->get('height', 350);
             $thumb_width  = $params->get('thumb_width', 150);
-            $thumb_height = $params->get('thumb_height', 0);
+            $thumb_height = $params->get('thumb_height', 100);
             
             // Width
             if ($pcount > 1 && is_numeric($parts[1]) && $parts[1] > 0 ) {
