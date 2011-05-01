@@ -62,40 +62,59 @@ class plgContentMedia extends JPlugin {
 
             // Params
             $pcount = count($parts);
-
-            // Width
-            if ($pcount > 1) {
-                $width = (is_numeric($parts[1]) && $parts[1] > 0) ? $parts[1] : $w;
-                $height = $width * 0.7;
-            }
-
-            // Height
-            if ($pcount > 2) {
-                $height = (is_numeric($parts[2]) && $parts[2] > 0) ? $parts[2] : $h;
-                $width = ($parts[1]) ? $parts[1] : $height * 1.3;
-            }
-
             switch ($type) {
                 case 'media':
-                    // Size
-                    $params->set('width', $width);
-                    $params->set('height', $height);
+                    // Width
+                    if ($pcount > 1) {
+                        $width = (is_numeric($parts[1]) && $parts[1] > 0)? 
+                            $parts[1] : 
+                            $params->get('width', 400);
+                        $height = $width * 0.7;
+                    }
+
+                    // Height
+                    if ($pcount > 2) {
+                        $height = (is_numeric($parts[2]) && $parts[2] > 0)? 
+                            $parts[2] : 
+                            $params->get('height', 0);
+                        $width = ($parts[1]) ? $parts[1] : $height * 1.3;
+                    }
 
                     // autoStart
                     if ($pcount > 3) {
                         $params->set('autostart', (boolean) $parts[3]);
                     }
 
+                    // Size
+                    $params->set('width', $width);
+                    $params->set('height', $height);
+
                     // get media Object
                     $media = $this->getMediaObject($media, $params);
 
                     // Put Video inside the content
-                    $replace = '<span id="media_' . $x . '" class="'. $params->get('media_class', '') .'" style="position:relative">'
+                    $replace = '<span id="media_' . $x . '" class="' . $params->get('media_class', '') . '" style="position:relative">'
                             . $media->getMedia()
                             . '</span>';
                     break;
 
                 case 'thumb':
+                    // Width
+                    if ($pcount > 1) {
+                        $width = (is_numeric($parts[1]) && $parts[1] > 0)? 
+                            $parts[1] : 
+                            $params->get('thumb_width', 150);
+                        $height = $width * 0.7;
+                    }
+
+                    // Height
+                    if ($pcount > 2) {
+                        $height = (is_numeric($parts[2]) && $parts[2] > 0)? 
+                            $parts[2] : 
+                            $params->get('thumb_height', 0);
+                        $width = ($parts[1]) ? $parts[1] : $height * 1.3;
+                    }
+                    
                     // Size
                     $params->set('thumb_width', $width);
                     $params->set('thumb_height', $height);
@@ -104,7 +123,7 @@ class plgContentMedia extends JPlugin {
                     $media = $this->getMediaObject($media, $params);
 
                     // Put Video inside the content
-                    $replace = '<span id="thumb_' . $x . '" class="'. $params->get('thumb_class', '') .'" style="position:relative">'
+                    $replace = '<span id="thumb_' . $x . '" class="' . $params->get('thumb_class', '') . '" style="position:relative">'
                             . $media->getThumb()
                             . '</span>';
                     break;
@@ -164,7 +183,7 @@ class plgContentMedia extends JPlugin {
     public function getMediaObject($media, $params=array()) {
         //Preprocess the media data to make it standard for the functions...
         $this->params->merge($params);
-        $params = $this->params->toArray();
+        $params = $this->params;
 
         // Here we fix Media UrL
         $media = strpos($media, "http://") ?
@@ -194,7 +213,10 @@ class plgContentMedia extends JPlugin {
 
         // Now I get the media object
         $file = dirname(__FILE__) . DS . 'types' . DS . $type . '.php';
-
+        
+        // The Object params are an array
+        $params = $params->toArray(); 
+        
         // If there is no file load the parent
         if (!file_exists($file)) {
             //return new MediaType();
@@ -206,4 +228,5 @@ class plgContentMedia extends JPlugin {
         $class = 'MediaType' . $type;
         return new $class($media, $params);
     }
+
 }
