@@ -24,7 +24,7 @@ final class JVersion
 	// Product name.
 	const PRODUCT = 'Joomla Platform';
 	// Release version.
-	const RELEASE = '11.1';
+	const RELEASE = '1.6';
 	// Maintenance version.
 	const MAINTENANCE = '0';
 	// Development STATUS.
