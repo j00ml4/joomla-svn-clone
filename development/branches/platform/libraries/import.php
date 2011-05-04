@@ -51,6 +51,13 @@ JLoader::import('joomla.factory');
 JLoader::import('joomla.error.error');
 JLoader::import('joomla.error.exception');
 
+// Utilities.
+JLoader::import('joomla.utilities.arrayhelper');
+
+// Filters.
+JLoader::import('joomla.filter.filterinput');
+JLoader::import('joomla.filter.filteroutput');
+
 /*
  * If the HTTP_HOST environment variable is set we assume a Web request and
  * thus we import the request library and most likely clean the request input.
