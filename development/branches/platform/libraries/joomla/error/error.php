@@ -40,7 +40,7 @@ abstract class JError
 	 *               existing JError API in Joomla.
 	 * @since  11.1
 	 */
-	public static $legacy = false;
+	public static $legacy = true;
 
 	protected static $levels = array(
 		E_NOTICE => 'Notice',
