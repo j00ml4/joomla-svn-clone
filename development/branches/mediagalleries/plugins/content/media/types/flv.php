@@ -23,20 +23,31 @@ class MediaTypeflv extends MediaType {
     }
 
        
-    
+ 
 	public function html4Player($video, $params){
 		$document = &JFactory::getDocument();
 		$document->addScript( 'media/mediagalleries/player/flowplayer-3.2.6.min.js' );
+		$params['autostart'] = isset($params['autostart'])?'false':(boolean) $params['autostart'];
+		
 		$html ='<div
 				href="'.$video.'" 
 				style="display:block;'.$params['width'].';'.$params['height'].';" 
 				id="flvplayer"></div>';
-		$tag=	'<script language="JavaScript">
-				flowplayer("player", "media/mediagalleries/player/sflowplayer-3.2.7.swf");
-				</script>';
+		
+		$tag='<script language="JavaScript">
+				$f("flvplayer", "media/mediagalleries/player/flowplayer-3.2.7.swf", {
+				
+				clip: {
+					autoPlay : false
+					//autoPlay: '.$params['autostart'].'
+				}
 
-		return $html;
+				});
+					</script>';
+
+		return $html.$tag;
 		
     }
+
 
 }
