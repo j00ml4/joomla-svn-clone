@@ -12,14 +12,15 @@ defined('JPATH_PLATFORM') or die;
 jimport('joomla.access.rule');
 
 /**
- * @package		Joomla.Platform
- * @subpackage	Access
- * @since		11.1
+ * @package     Joomla.Platform
+ * @subpackage  Access
+ * @since       11.1
  */
 class JRules
 {
 	/**
-	 * @var	array	A named array
+	 * @var    array      A named array
+	 * @since  11.1
 	 */
 	protected $_data = array();
 
@@ -29,7 +30,7 @@ class JRules
 	 * The input array must be in the form: array('action' => array(-42 => true, 3 => true, 4 => false))
 	 * or an equivalent JSON encoded string, or an object where properties are arrays.
 	 *
-	 * @param	mixed	A JSON format string (probably from the database), or a nested array.
+	 * @param     mixed    A JSON format string (probably from the database) or a nested array.
 	 */
 	public function __construct($input = '')
 	{
@@ -53,7 +54,7 @@ class JRules
 	/**
 	 * Get the data for the action.
 	 *
-	 * @return	array	A named array of JRule objects.
+	 * @return    array    A named array of JRule objects.
 	 */
 	public function getData()
 	{
@@ -63,7 +64,7 @@ class JRules
 	/**
 	 * Method to merge a collection of JRules.
 	 *
-	 * @param	mixed
+	 * @param     mixed
 	 */
 	public function mergeCollection($input)
 	{
@@ -79,7 +80,7 @@ class JRules
 	/**
 	 * Method to merge actions with this object.
 	 *
-	 * @param	mixed
+	 * @param     mixed
 	 */
 	public function merge($actions)
 	{
@@ -104,7 +105,8 @@ class JRules
 	}
 
 	/**
-	 * @param	string	The name of the action.
+	 * @param     string   The name of the action.
+	 * @param     array    An array of identities
 	 */
 	public function mergeAction($action, $identities)
 	{
@@ -126,10 +128,10 @@ class JRules
 	 * The identity is an integer where +ve represents a user group,
 	 * and -ve represents a user.
 	 *
-	 * @param	string	The name of the action.
-	 * @param	mixed	An integer representing the identity, or an array of identities
+	 * @param     string   The name of the action.
+	 * @param     mixed    An integer representing the identity, or an array of identities
 	 *
-	 * @return	mixed
+	 * @return    mixed  
 	 */
 	public function allow($action, $identity)
 	{
@@ -143,7 +145,9 @@ class JRules
 	/**
 	 * Get the allowed actions for an identity.
 	 *
-	 * @param	mixed	An integer representing the identity, or an array of identities
+	 * @param     mixed    An integer representing the identity, or an array of identities
+	 * 
+	 * @return    object   Allowed actions for the identity or identities
 	 */
 	function getAllowed($identity)
 	{
@@ -161,7 +165,7 @@ class JRules
 	/**
 	 * Magic method to convert the object to JSON string representation.
 	 *
-	 * @return	string
+	 * @return    string   JSON representation of the actions array
 	 */
 	public function __toString()
 	{

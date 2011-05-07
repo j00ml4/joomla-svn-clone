@@ -13,19 +13,18 @@ defined('JPATH_PLATFORM') or die;
  * JArrayHelper is an array utility class for doing all sorts of odds and ends with arrays.
  *
  * @static
- * @package		Joomla.Platform
- * @subpackage	Utilities
- * @since		11.1
+ * @package     Joomla.Platform
+ * @subpackage  Utilities
+ * @since       11.1
  */
 class JArrayHelper
 {
 	/**
 	 * Function to convert array to integer values
 	 *
-	 * @static
-	 * @param	array	$array		The source array to convert
-	 * @param	mixed	$default	A default value (int|array) to assign if $array is not an array
-	 * @since	11.1
+	 * @param     array    $array		The source array to convert
+	 * @param     mixed    $default	A default value (int|array) to assign if $array is not an array
+	 * @since     11.1
 	 */
 	public static function toInteger(&$array, $default = null)
 	{
@@ -281,14 +280,14 @@ class JArrayHelper
 	/**
 	 * Utility function to sort an array of objects on a given field
 	 *
-	 * @param	array			$arr			An array of objects
-	 * @param	string|array	$k				The key or a array of key to sort on
-	 * @param	int|array		$direction		Direction or an array of direction to sort in [1 = Ascending] [-1 = Descending]
-	 * @param	bool|array		$casesensitive	Let sort occur case sensitive or insensitive
-	 * @param	bool|array		$locale			Let sort occur using the locale language or not
+	 * @param     array    $arr			An array of objects
+	 * @param     string|array	$k				The key or a array of key to sort on
+	 * @param    integer   array		$direction		Direction or an array of direction to sort in [1 = Ascending] [-1 = Descending]
+	 * @param     bool|array		$casesensitive	Let sort occur case sensitive or insensitive
+	 * @param     bool|array		$locale			Let sort occur using the locale language or not
 	 *
-	 * @return	array							The sorted array of objects
-	 * @since	11.1
+	 * @return    array    						The sorted array of objects
+	 * @since     11.1
 	 */
 	public static function sortObjects(&$a, $k, $direction=1, $casesensitive = true, $locale = false)
 	{

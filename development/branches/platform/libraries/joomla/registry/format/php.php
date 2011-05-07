@@ -22,9 +22,9 @@ class JRegistryFormatPHP extends JRegistryFormat {
 	 * Converts an object into a php class string.
 	 *	- NOTE: Only one depth level is supported.
 	 *
-	 * @param	object	Data Source Object
-	 * @param	array	Parameters used by the formatter
-	 * @return	string	Config class formatted string
+	 * @param     object   Data Source Object
+	 * @param     array    Parameters used by the formatter
+	 * @return    string   Config class formatted string
 	 */
 	public function objectToString($object, $params = array())
 	{
@@ -53,7 +53,7 @@ class JRegistryFormatPHP extends JRegistryFormat {
 	/**
 	 * Placeholder method
 	 *
-	 * @return boolean True
+	 * @return    boolean  True
 	 */
 	function stringToObject($data, $namespace='')
 	{

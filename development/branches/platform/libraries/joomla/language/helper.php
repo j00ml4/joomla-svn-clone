@@ -10,8 +10,8 @@
 defined('JPATH_PLATFORM') or die;
 
 /**
- * @package		Joomla.Platform
- * @subpackage	Language
+ * @package     Joomla.Platform
+ * @subpackage  Language
  * @static
  * @since   11.1
  */
@@ -68,8 +68,8 @@ class JLanguageHelper
 	/**
 	 * Tries to detect the language.
 	 *
-	 * @return	string locale or null if not found
-	 * @since	11.1
+	 * @return    string   locale or null if not found
+	 * @since     11.1
 	 */
 	public static function detectLanguage()
 	{

@@ -15,9 +15,9 @@ jimport('joomla.database.table');
  * Update table
  * Stores updates temporarily
  *
- * @package		Joomla.Platform
- * @subpackage	Table
- * @since		11.1
+ * @package     Joomla.Platform
+ * @subpackage  Table
+ * @since       11.1
  */
 class JTableUpdate extends JTable
 {
@@ -35,7 +35,7 @@ class JTableUpdate extends JTable
 	* Overloaded check function
 	*
 	* @access public
-	* @return boolean True if the object is ok
+	* @return    boolean  True if the object is ok
 	* @see JTable:bind
 	*/
 	function check()
@@ -52,10 +52,10 @@ class JTableUpdate extends JTable
 	* Overloaded bind function
 	*
 	* @access public
-	* @param array $hash named array
+	* @param     array    $hash named array
 	* @return null|string	null is operation was satisfactory, otherwise returns an error
 	* @see JTable:bind
-	* @since 11.1
+	* @since     11.1
 	*/
 	function bind($array, $ignore = '')
 	{

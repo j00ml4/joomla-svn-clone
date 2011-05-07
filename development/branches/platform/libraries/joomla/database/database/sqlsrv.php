@@ -241,7 +241,7 @@ class JDatabaseSQLSrv extends JDatabase
 	/**
 	 * Gets an exporter class object.
 	 *
-	 * @return  JDatabaseExporterSQLAzure  An exporter object.
+	 * @return  JDatbaseExporterSQLAzure  An exporter object.
 	 *
 	 * @since   11.1
 	 * @throws  DatabaseException
@@ -249,11 +249,11 @@ class JDatabaseSQLSrv extends JDatabase
 	public function getExporter()
 	{
 		// Make sure we have an exporter class for this driver.
-		if (!class_exists('JDatabaseExporterSQLAzure')) {
+		if (!class_exists('JDatbaseExporterSQLAzure')) {
 			throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_EXPORTER'));
 		}
 
-		$o = new JDatabaseExporterSQLAzure;
+		$o = new JDatbaseExporterSQLAzure;
 		$o->setDbo($this);
 
 		return $o;
@@ -262,7 +262,7 @@ class JDatabaseSQLSrv extends JDatabase
 	/**
 	 * Gets an importer class object.
 	 *
-	 * @return  JDatabaseImporterSQLAzure  An importer object.
+	 * @return  JDatbaseImporterSQLAzure  An importer object.
 	 *
 	 * @since   11.1
 	 * @throws  DatabaseException
@@ -270,11 +270,11 @@ class JDatabaseSQLSrv extends JDatabase
 	public function getImporter()
 	{
 		// Make sure we have an importer class for this driver.
-		if (!class_exists('JDatabaseImporterSQLAzure')) {
+		if (!class_exists('JDatbaseImporterSQLAzure')) {
 			throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_IMPORTER'));
 		}
 
-		$o = new JDatabaseImporterSQLAzure;
+		$o = new JDatbaseImporterSQLAzure;
 		$o->setDbo($this);
 
 		return $o;

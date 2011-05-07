@@ -24,7 +24,7 @@ class JHttp
 	 * Server connection resources array.
 	 *
 	 * @var    array
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $_connections = array();
 
@@ -32,7 +32,7 @@ class JHttp
 	 * Timeout limit in seconds for the server connection.
 	 *
 	 * @var    int
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $_timeout = 5;
 
@@ -40,7 +40,7 @@ class JHttp
 	 * Server response string.
 	 *
 	 * @var    string
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $_response;
 
@@ -174,7 +174,7 @@ class JHttp
 	 * @param   string  Command to send to the server.
 	 * @param   mixed   Valid response code or array of response codes.
 	 *
-	 * @return 	bool  True on success.
+	 * @return    bool  True on success.
 	 *
 	 * @since   11.1
 	 * @throws  JException
@@ -242,10 +242,9 @@ class JHttp
 	/**
 	 * Method to get a response object from a server response.
 	 *
-	 * @return	JHttpResponse
-	 *
-	 * @since   11.1
-	 * @throws  JException
+	 * @return    JHttpResponse
+	 * @since     11.1
+	 * @throws    JException
 	 */
 	protected function _getResponseObject()
 	{
@@ -347,7 +346,7 @@ class JHttpResponse
 	 * The server response code.
 	 *
 	 * @var    int
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	public $code;
 
@@ -355,7 +354,7 @@ class JHttpResponse
 	 * Response headers.
 	 *
 	 * @var    array
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	public $headers = array();
 
@@ -363,7 +362,7 @@ class JHttpResponse
 	 * Server response body.
 	 *
 	 * @var    string
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	public $body;
 }

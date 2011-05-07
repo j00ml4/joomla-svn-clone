@@ -28,43 +28,43 @@ class JLoggerDatabase extends JLogger
 {
 	/**
 	 * @var    string  The name of the database driver to use for connecting to the database.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $driver = 'mysql';
 
 	/**
 	 * @var    string  The host name (or IP) of the server with which to connect for the logger.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $host = '127.0.0.1';
 
 	/**
 	 * @var    string  The database server user to connect as for the logger.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $user = 'root';
 
 	/**
 	 * @var    string  The password to use for connecting to the database server.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $password = '';
 
 	/**
 	 * @var    string  The name of the database table to use for the logger.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $database = 'logging';
 
 	/**
 	 * @var    string  The database table to use for logging entries.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $table = 'jos_';
 
 	/**
 	 * @var    JDatabase  The database connection object for the logger.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $dbo;
 

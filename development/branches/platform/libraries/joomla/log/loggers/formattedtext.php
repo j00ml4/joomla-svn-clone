@@ -27,32 +27,32 @@ class JLoggerFormattedText extends JLogger
 {
 	/**
 	 * @var    resource  The file pointer for the log file.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $file;
 
 	/**
 	 * @var    string  The format for which each entry follows in the log file.  All fields must be named
 	 *                 in all caps and be within curly brackets eg. {FOOBAR}.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $format = '{DATETIME}	{PRIORITY}	{CATEGORY}	{MESSAGE}';
 
 	/**
 	 * @var    array  The parsed fields from the format string.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $fields = array();
 
 	/**
 	 * @var    string  The full filesystem path for the log file.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $path;
 
 	/**
 	 * @var    array  Translation array for JLogEntry priorities to text strings.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $priorities = array(
 		JLog::EMERGENCY => 'EMERGENCY',
