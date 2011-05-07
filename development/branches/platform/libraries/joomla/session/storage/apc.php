@@ -12,9 +12,9 @@ defined('JPATH_PLATFORM') or die;
 /**
 * APC session storage handler for PHP
 *
- * @package		Joomla.Platform
- * @subpackage	Session
- * @since		11.1
+ * @package     Joomla.Platform
+ * @subpackage  Session
+ * @since       11.1
  * @see http://www.php.net/manual/en/function.session-set-save-handler.php
  */
 class JSessionStorageApc extends JSessionStorage
@@ -88,7 +88,7 @@ class JSessionStorageApc extends JSessionStorage
 	 * Destroy the data for a particular session identifier in the
 	 * SessionHandler backend.
 	 *
-	 * @param string $id  The session identifier.
+	 * @param     string   $id  The session identifier.
 	 * @return boolean  True on success, false otherwise.
 	 */
 	public function destroy($id)

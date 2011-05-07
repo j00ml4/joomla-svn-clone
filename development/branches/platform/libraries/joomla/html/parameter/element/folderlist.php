@@ -23,7 +23,7 @@ class JElementFolderlist extends JElement
 	/**
 	* Element name
 	*
-	* @var		string
+	* @var    string
 	*/
 	protected $_name = 'Folderlist';
 

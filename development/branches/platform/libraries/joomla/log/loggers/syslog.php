@@ -28,7 +28,7 @@ class JLoggerSysLog extends JLogger
 {
 	/**
 	 * @var    array  Translation array for JLogEntry priorities to SysLog priority names.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $priorities = array(
 		JLog::EMERGENCY => 'EMERG',

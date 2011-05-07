@@ -17,9 +17,9 @@ jimport('joomla.filesystem.support.stringcontroller');
  * This class allows you to use a PHP string like
  * you would normally use a regular stream wrapper
  *
- * @package		Joomla.Platform
- * @subpackage	FileSystem
- * @since		11.1
+ * @package     Joomla.Platform
+ * @subpackage  FileSystem
+ * @since       11.1
  */
 class JStreamString
 {
@@ -40,13 +40,13 @@ class JStreamString
 	protected $_stat;
 
 	/**
-	 * @param	$path
-	 * @param	$mode
-	 * @param	$options
-	 * @param	$opened_path
+	 * @param     $path
+	 * @param     $mode
+	 * @param     $options
+	 * @param     $opened_path
 	 *
-	 * @return	boolean
-	 * @since	11.1
+	 * @return    boolean
+	 * @since     11.1
 	 */
 	function stream_open($path, $mode, $options, &$opened_path)
 	{
@@ -60,13 +60,14 @@ class JStreamString
 			return true;
 		}
 		else {
+
 			return false;
 		}
 	}
 
 	/**
 	 * @return
-	 * @since	11.1
+	 * @since     11.1
 	 */
 	function stream_stat()
 	{
@@ -74,11 +75,11 @@ class JStreamString
 	}
 
 	/**
-	 * @param	$path
-	 * @param	$flags
+	 * @param     $path
+	 * @param     $flags
 	 *
 	 * @return
-	 * @since	11.1
+	 * @since     11.1
 	 */
 	function url_stat($path, $flags = 0)
 	{
@@ -104,10 +105,10 @@ class JStreamString
 	}
 
 	/**
-	 * @param	$count
+	 * @param     $count
 	 *
 	 * @return
-	 * @since	11.1
+	 * @since     11.1
 	 */
 	function stream_read($count)
 	{
@@ -118,8 +119,8 @@ class JStreamString
 	}
 
 	/**
-	 * @return	boolean
-	 * @since	11.1
+	 * @return    boolean
+	 * @since     11.1
 	 */
 	function stream_write($data)
 	{
@@ -129,7 +130,7 @@ class JStreamString
 
 	/**
 	 * @return
-	 * @since	11.1
+	 * @since     11.1
 	 */
 	function stream_tell()
 	{
@@ -137,8 +138,8 @@ class JStreamString
 	}
 
 	/**
-	 * @return	boolean
-	 * @since	11.1
+	 * @return    boolean
+	 * @since     11.1
 	 */
 	function stream_eof()
 	{
@@ -150,11 +151,11 @@ class JStreamString
 	}
 
 	/**
-	 * @param	$offset
-	 * @param	$whence
+	 * @param     $offset
+	 * @param     $whence
 	 *
 	 * @return
-	 * @since	11.1
+	 * @since     11.1
 	 */
 	function stream_seek($offset, $whence)
 	{
@@ -188,8 +189,8 @@ class JStreamString
 	}
 
 	/**
-	 * @return	boolean
-	 * @since	11.1
+	 * @return    boolean
+	 * @since     11.1
 	 */
 	function stream_flush()
 	{

@@ -12,28 +12,28 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Component helper class
  *
- * @package		Joomla.Platform
- * @subpackage	Application
- * @since		11.1
+ * @package     Joomla.Platform
+ * @subpackage  Application
+ * @since       11.1
  */
 class JComponentHelper
 {
 	/**
 	 * The component list cache
 	 *
-	 * @var		array
-	 * @since	11.1
+	 * @var    array
+	 * @since  11.1
 	 */
 	protected static $_components = array();
 
 	/**
 	 * Get the component information.
 	 *
-	 * @param	string	$option	The component option.
-	 * @param	boolean	$string	If set and the component does not exist, the enabled attribue will be set to false
+	 * @param     string   $option  The component option.
+	 * @param     boolean  $string  If set and the component does not exist, the enabled attribue will be set to false
 	 *
-	 * @return	object	An object with the fields for the component.
-	 * @since	11.1
+	 * @return    object   An object with the information for the component.
+	 * @since     11.1
 	 */
 	public static function getComponent($option, $strict = false)
 	{
@@ -55,11 +55,11 @@ class JComponentHelper
 	/**
 	 * Checks if the component is enabled
 	 *
-	 * @param	string	$option	The component option.
-	 * @param	boolean	$string	If set and the component does not exist, false will be returned
+	 * @param     string   $option  The component option.
+	 * @param     boolean  $string  If set and the component does not exist, false will be returned
 	 *
-	 * @return	boolean
-	 * @since	11.1
+	 * @return    boolean
+	 * @since     11.1
 	 */
 	public static function isEnabled($option, $strict = false)
 	{
@@ -71,11 +71,12 @@ class JComponentHelper
 	/**
 	 * Gets the parameter object for the component
 	 *
-	 * @param	string		The option for the component.
-	 * @param	boolean		If set and the component does not exist, false will be returned
-	 *
-	 * @return	JRegistry	As of 1.6, this method returns a JRegistry (previous versions returned JParameter).
-	 * @since	11.1
+	 * @param     string   $option  The option for the component.
+	 * @param     boolean  $strict  If set and the component does not exist, false will be returned
+	 * @see       JRegistry
+	 * 
+	 * @return    JRegistry         A JRegistry object.
+	 * @since     11.1
 	 */
 	public static function getParams($option, $strict = false)
 	{
@@ -87,10 +88,11 @@ class JComponentHelper
 	/**
 	 * Render the component.
 	 *
-	 * @param	string	The component option.
+	 * @param     string   The component option.
+	 * @param     array    The component parameters
 	 *
-	 * @return	void
-	 * @since	11.1
+	 * @return    void
+	 * @since     11.1
 	 */
 	public static function renderComponent($option, $params = array())
 	{
@@ -173,9 +175,11 @@ class JComponentHelper
 
 	/**
 	 * Load the installed components into the _components property.
+	 * 
+	 * @param     string   The element value for the extension
 	 *
-	 * @return	boolean
-	 * @since	11.1
+	 * @return    boolean  True on success
+	 * @since     11.1
 	 */
 	protected static function _load($option)
 	{
