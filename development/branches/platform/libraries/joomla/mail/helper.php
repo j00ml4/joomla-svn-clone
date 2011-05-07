@@ -16,17 +16,18 @@ defined('JPATH_PLATFORM') or die;
  * TODO: Test these methods as the regex work is first run and not tested thoroughly
  *
  * @static
- * @package     Joomla.Platform
- * @subpackage  Mail
- * @since       11.1
+ * @package		Joomla.Platform
+ * @subpackage	Mail
+ * @since		11.1
  */
 abstract class JMailHelper
 {
 	/**
 	 * Cleans single line inputs.
 	 *
-	 * @param     string   $value	String to be cleaned.
-	 * @return    string   Cleaned string.
+	 * @static
+	 * @param	string	$value	String to be cleaned.
+	 * @return	string	Cleaned string.
 	 */
 	public static function cleanLine($value)
 	{
@@ -36,8 +37,9 @@ abstract class JMailHelper
 	/**
 	 * Cleans multi-line inputs.
 	 *
-	 * @param     string   $value	Multi-line string to be cleaned.
-	 * @return    string   Cleaned multi-line string.
+	 * @static
+	 * @param	string	$value	Multi-line string to be cleaned.
+	 * @return	string	Cleaned multi-line string.
 	 */
 	public static function cleanText($value)
 	{
@@ -47,9 +49,10 @@ abstract class JMailHelper
 	/**
 	 * Cleans any injected headers from the email body.
 	 *
-	 * @param     string   $body	email body string.
-	 * @return    string   Cleaned email body string.
-	 * @since     11.1
+	 * @static
+	 * @param	string	$body	email body string.
+	 * @return	string	Cleaned email body string.
+	 * @since	11.1
 	 */
 	public static function cleanBody($body)
 	{
@@ -60,9 +63,10 @@ abstract class JMailHelper
 	/**
 	 * Cleans any injected headers from the subject string.
 	 *
-	 * @param     string   $subject	email subject string.
-	 * @return    string   Cleaned email subject string.
-	 * @since     11.1
+	 * @static
+	 * @param	string	$subject	email subject string.
+	 * @return	string	Cleaned email subject string.
+	 * @since	11.1
 	 */
 	public static function cleanSubject($subject)
 	{
@@ -72,9 +76,10 @@ abstract class JMailHelper
 	/**
 	 * Verifies that an email address does not have any extra headers injected into it.
 	 *
-	 * @param     string   $address	email address.
-	 * @return    string   false	email address string or boolean false if injected headers are present.
-	 * @since     11.1
+	 * @static
+	 * @param	string	$address	email address.
+	 * @return	string|false	email address string or boolean false if injected headers are present.
+	 * @since	11.1
 	 */
 	public static function cleanAddress($address)
 	{
@@ -87,9 +92,10 @@ abstract class JMailHelper
 	/**
 	 * Verifies that the string is in a proper email address format.
 	 *
-	 * @param     string   $email	String to be verified.
-	 * @return    boolean  True if string has the correct format; false otherwise.
-	 * @since     11.1
+	 * @static
+	 * @param	string	$email	String to be verified.
+	 * @return	boolean	True if string has the correct format; false otherwise.
+	 * @since	11.1
 	 */
 	public static function isEmailAddress($email)
 	{

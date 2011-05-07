@@ -13,9 +13,9 @@ defined('JPATH_PLATFORM') or die;
  * Extension table
  * Replaces plugins table
  *
- * @package     Joomla.Platform
- * @subpackage  Table
- * @since     11.1
+ * @package		Joomla.Platform
+ * @subpackage		Table
+ * @since	11.1
  */
 class JTableExtension extends JTable
 {
@@ -33,7 +33,7 @@ class JTableExtension extends JTable
 	* Overloaded check function
 	*
 	* @access public
-	* @return    boolean  True if the object is ok
+	* @return boolean True if the object is ok
 	* @see JTable:bind
 	*/
 	function check()
@@ -50,10 +50,10 @@ class JTableExtension extends JTable
 	* Overloaded bind function
 	*
 	* @access public
-	* @param     array    $hash named array
+	* @param array $hash named array
 	* @return null|string	null is operation was satisfactory, otherwise returns an error
 	* @see JTable:bind
-	* @since     11.1
+	* @since 11.1
 	*/
 	function bind($array, $ignore = '')
 	{
@@ -91,11 +91,11 @@ class JTableExtension extends JTable
 	 * table.  The method respects checked out rows by other users and will attempt
 	 * to checkin rows that it can after adjustments are made.
 	 *
-	 * @param     mixed    An optional array of primary key values to update.  If not
+	 * @param	mixed	An optional array of primary key values to update.  If not
 	 *					set the instance property value is used.
-	 * @param     integer The publishing state. eg. [0 = unpublished, 1 = published]
-	 * @param     integer The user id of the user performing the operation.
-	 * @return    boolean  True on success.
+	 * @param	integer The publishing state. eg. [0 = unpublished, 1 = published]
+	 * @param	integer The user id of the user performing the operation.
+	 * @return	boolean	True on success.
 	 */
 	public function publish($pks = null, $state = 1, $userId = 0)
 	{

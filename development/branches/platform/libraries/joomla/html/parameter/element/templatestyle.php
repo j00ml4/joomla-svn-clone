@@ -10,10 +10,10 @@
 defined('JPATH_PLATFORM') or die;
 
 /**
- * @package     Joomla.Platform
- * @subpackage  Parameter
- * @since       11.1
- * @deprecated  Use JForm instead
+ * @package		Joomla.Platform
+ * @subpackage	Parameter
+ * @since		11.1
+ * @deprecated	JParameter is deprecated and will be removed in a future version. Use JForm instead.
 **/
 class JElementTemplateStyle extends JElement {
 
@@ -21,7 +21,7 @@ class JElementTemplateStyle extends JElement {
 	* Element name
 	*
 	* @access	protected
-	* @var    string
+	* @var		string
 	**/
 	protected	$_name = 'TemplateStyle';
 

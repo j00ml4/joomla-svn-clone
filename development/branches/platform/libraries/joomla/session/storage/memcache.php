@@ -14,9 +14,9 @@ defined('JPATH_PLATFORM') or die;
  *
  * -- Inspired in both design and implementation by the Horde memcache handler --
  *
- * @package     Joomla.Platform
- * @subpackage  Session
- * @since       11.1
+ * @package		Joomla.Platform
+ * @subpackage	Session
+ * @since		11.1
  * @see http://www.php.net/manual/en/function.session-set-save-handler.php
  */
 class JSessionStorageMemcache extends JSessionStorage
@@ -162,7 +162,7 @@ class JSessionStorageMemcache extends JSessionStorage
 	 *
 	 *	-- Not Applicable in memcache --
 	 *
-	 * @param     integer  $maxlifetime  The maximum age of a session.
+	 * @param integer $maxlifetime  The maximum age of a session.
 	 * @return boolean  True on success, false otherwise.
 	 */
 	public function gc($maxlifetime = null)

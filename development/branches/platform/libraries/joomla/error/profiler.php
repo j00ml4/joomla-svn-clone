@@ -13,17 +13,16 @@ defined('JPATH_PLATFORM') or die;
  * Utility class to assist in the process of benchmarking the execution
  * of sections of code to understand where time is being spent.
  *
- * @package     Joomla.Platform
- * @subpackage  Error
- * @since       11.1
+ * @package		Joomla.Platform
+ * @subpackage	Error
+ * @since		11.1
  */
 class JProfiler extends JObject
 {
 	/**
 	 * The start time.
 	 *
-	 * @var     integer
-	 * @since   11.1
+	 * @var int
 	 */
 	protected $_start = 0;
 
@@ -37,35 +36,34 @@ class JProfiler extends JObject
 	/**
 	 * The buffer of profiling messages.
 	 *
-	 * @var     array
-	 * @since   11.1
+	 * @var array
 	 */
 	protected $_buffer= null;
 
 	/**
-	 * @var    float
-	 * @since  11.1
+	 * @var float
+	 * @since 11.1
 	 */
 	protected $_previous_time = 0.0;
 
 	/**
-	 * @var    float
-	 * @since  11.1
+	 * @var float
+	 * @since 11.1
 	 */
 	protected $_previous_mem = 0.0;
 
 	/**
 	 * Boolean if the OS is Windows.
 	 *
-	 * @var    boolean
-	 * @since  11.1
+	 * @var boolean
+	 * @since 11.1
 	 */
 	protected $_iswin = false;
 
 	/**
 	 * Constructor
 	 *
-	 * @param     string Prefix for mark messages
+	 * @param string Prefix for mark messages
 	 */
 	public function __construct($prefix = '')
 	{
@@ -79,10 +77,8 @@ class JProfiler extends JObject
 	 * Returns the global Profiler object, only creating it
 	 * if it doesn't already exist.
 	 *
-	 * @param     string   Prefix used to distinguish profiler objects.
-	 * 
-	 * @return    object   JProfiler    The Profiler object.
-	 * @since     11.1
+	 * @param	string		Prefix used to distinguish profiler objects.
+	 * @return	JProfiler	The Profiler object.
 	 */
 	public static function getInstance($prefix = '')
 	{
@@ -105,10 +101,8 @@ class JProfiler extends JObject
 	 * The mark is returned as text enclosed in <div> tags
 	 * with a CSS class of 'profiler'.
 	 *
-	 * @param     string   $label  A label for the time mark
-	 * 
-	 * @return    string   Mark enclosed in <div> tags
-	 * @since      11.1
+	 * @param string A label for the time mark
+	 * @return string Mark enclosed in <div> tags
 	 */
 	public function mark($label)
 	{
@@ -145,8 +139,7 @@ class JProfiler extends JObject
 	/**
 	 * Get the current time.
 	 *
-	 * @return  float The current time
-	 * @since   11.1
+	 * @return float The current time
 	 */
 	public static function getmicrotime()
 	{
@@ -158,10 +151,8 @@ class JProfiler extends JObject
 	/**
 	 * Get information about current memory usage.
 	 *
-	 * @link      PHP_MANUAL#memory_get_usage
-	 * 
-	 * @return    integer  	The memory usage
-	 * @since   11.1
+	 * @return	int		The memory usage
+	 * @link	PHP_MANUAL#memory_get_usage
 	 */
 	public function getMemory()
 	{
@@ -194,7 +185,7 @@ class JProfiler extends JObject
 	 * Returns an array of all marks created since the Profiler object
 	 * was instantiated.  Marks are strings as per {@link JProfiler::mark()}.
 	 *
-	 * @return    array    Array of profiler marks
+	 * @return	array	Array of profiler marks
 	 */
 	public function getBuffer()
 	{

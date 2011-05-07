@@ -12,17 +12,18 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Custom session storage handler for PHP
  *
- * @package     Joomla.Platform
- * @subpackage  Session
- * @since       11.1
- * @see         http://www.php.net/manual/en/function.session-set-save-handler.php
+ * @abstract
+ * @package		Joomla.Platform
+ * @subpackage	Session
+ * @since		11.1
+ * @see http://www.php.net/manual/en/function.session-set-save-handler.php
  */
 abstract class JSessionStorage extends JObject
 {
 	/**
 	* Constructor
 	*
-	* @param     array    $options	Optional parameters.
+	* @param	array	$options	Optional parameters.
 	*/
 	public function __construct($options = array())
 	{
@@ -33,9 +34,9 @@ abstract class JSessionStorage extends JObject
 	 * Returns a session storage handler object, only creating it
 	 * if it doesn't already exist.
 	 *
-	 * @param     name		$name The session store to instantiate
+	 * @param	name		$name The session store to instantiate
 	 *
-	 * @return    database	A JSessionStorage object
+	 * @return	database	A JSessionStorage object
 	 * @since   11.1
 	 */
 	public static function getInstance($name = 'none', $options = array())
@@ -71,7 +72,7 @@ abstract class JSessionStorage extends JObject
 	/**
 	* Register the functions of this class with PHP's session handler
 	*
-	* @param     array    $options optional parameters
+	* @param array $options optional parameters
 	*/
 	public function register($options = array())
 	{

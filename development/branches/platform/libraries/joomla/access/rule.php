@@ -10,15 +10,14 @@
 defined('JPATH_PLATFORM') or die;
 
 /**
- * @package     Joomla.Platform
- * @subpackage  Access
- * @since       11.1
+ * @package		Joomla.Platform
+ * @subpackage	Access
+ * @since		11.1
  */
 class JRule
 {
 	/**
-	 * @var    array      A named array
-	 * @since  11.1
+	 * @var	array	A named array
 	 */
 	protected $_data = array();
 
@@ -28,7 +27,7 @@ class JRule
 	 * The input array must be in the form: array(-42 => true, 3 => true, 4 => false)
 	 * or an equivalent JSON encoded string.
 	 *
-	 * @param     mixed    A JSON format string (probably from the database), or a named array.
+	 * @param	mixed	A JSON format string (probably from the database), or a named array.
 	 */
 	public function __construct($identities)
 	{
@@ -43,7 +42,7 @@ class JRule
 	/**
 	 * Get the data for the action.
 	 *
-	 * @return    array    A named array
+	 * @return	array	A named array identities.
 	 */
 	public function getData()
 	{
@@ -52,9 +51,6 @@ class JRule
 
 	/**
 	 * Merges the identities
-	 * 
-	 * @param    mixed   An integer or array of integers representing the identities to check.
-	 * 
 	 */
 	public function mergeIdentities($identities)
 	{
@@ -71,11 +67,10 @@ class JRule
 	}
 
 	/**
-	 * Merges the values for an identity.
+	 * Merges the value for an identity.
 	 *
-	 * @param     integer  The identity.
-	 * @param     boolean  The value for the identity (true == allow, false == deny).
-	 * 
+	 * @param	int		The identity.
+	 * @param	boolean	The value for the identity (true == allow, false == deny).
 	 */
 	public function mergeIdentity($identity, $allow)
 	{
@@ -101,9 +96,9 @@ class JRule
 	 * The identity is an integer where +ve represents a user group,
 	 * and -ve represents a user.
 	 *
-	 * @param     mixed   An integer or array of integers representing the identities to check.
+	 * @param	mixed		An integer or array of integers representing the identities to check.
 	 *
-	 * @return    mixed   True if allowed, false for an explicit deny, null for an implicit deny.
+	 * @return	mixed		True if allowed, false for an explicit deny, null for an implicit deny.
 	 */
 	public function allow($identities)
 	{
@@ -142,7 +137,7 @@ class JRule
 	/**
 	 * Convert this object into a JSON encoded string.
 	 *
-	 * @return    string   JSON encoded string
+	 * @return	string
 	 */
 	public function __toString()
 	{

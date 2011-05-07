@@ -22,14 +22,14 @@ class JInputCLI extends JInput
 {
 	/**
 	 * @var    string  The executable that was called to urn the CLI script.
-	 * @since       11.1
+	 * @since  11.1
 	 */
 	public $executable;
 
 	/**
 	 * @var    array  The additional arguments passed to the script that are not associated
 	 *                with a specific argument name.
-	 * @since       11.1
+	 * @since  11.1
 	 */
 	public $args = array();
 

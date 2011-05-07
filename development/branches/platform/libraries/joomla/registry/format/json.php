@@ -36,9 +36,9 @@ class JRegistryFormatJSON extends JRegistryFormat
 	 *
 	 * If the string is not in JSON format, this method will attempt to parse it as INI format.
 	 *
-	 * @param     string   JSON formatted string to convert.
-	 * @param     array    Options used by the formatter.
-	 * @return    object   Data object.
+	 * @param	string	JSON formatted string to convert.
+	 * @param	array	Options used by the formatter.
+	 * @return	object	Data object.
 	 */
 	public function stringToObject($data, $process_sections = false)
 	{

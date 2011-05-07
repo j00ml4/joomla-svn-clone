@@ -23,7 +23,7 @@ class JElementPassword extends JElement
 	/**
 	* Element name
 	*
-	* @var    string
+	* @var		string
 	*/
 	protected $_name = 'Password';
 

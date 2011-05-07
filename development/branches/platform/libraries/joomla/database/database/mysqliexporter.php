@@ -20,31 +20,31 @@ class JDatabaseExporterMySQLi
 {
 	/**
 	 * @var    array  An array of cached data.
-	 * @since       11.1
+	 * @since  11.1
 	 */
 	protected $cache = array();
 
 	/**
 	 * @var    JDatabaseMySQLi  The database connector to use for exporting structure and/or data.
-	 * @since       11.1
+	 * @since  11.1
 	 */
 	protected $db = null;
 
 	/**
 	 * @var    array  An array input sources (table names).
-	 * @since       11.1
+	 * @since  11.1
 	 */
 	protected $from = array();
 
 	/**
 	 * @var    string  The type of output format (xml).
-	 * @since       11.1
+	 * @since  11.1
 	 */
 	protected $asFormat = 'xml';
 
 	/**
 	 * @var    JObject  An array of options for the exporter.
-	 * @since       11.1
+	 * @since  11.1
 	 */
 	protected $options = null;
 

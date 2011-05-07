@@ -12,35 +12,33 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Adapter Instance Class
  *
- * @package     Joomla.Platform
- * @subpackage  Base
- * @since       11.1
+ * @package		Joomla.Platform
+ * @subpackage	Base
+ * @since		11.1
  */
 class JAdapterInstance extends JObject {
 
 	/**
-	 * Parent
-	 * @var    object
-	 * @since  11.1
+	 * @var		object	Parent
+	 * @since	11.1
 	 */
 	protected $parent = null;
 
 	/**
-	 * Database
-	 * 
-	 * @var    object
-	 * @since  11.1
+	 * @var		object	Database
+	 * @since	11.1
 	 */
 	protected $db = null;
 
 	/**
 	 * Constructor
 	 *
-	 * @param     object   $parent     Parent object [JAdapter instance]
-	 * @param     object   $db         Database object [JDatabase instance]
-	 * @param     array    $options    Configuration Options
+	 * @param	object	$parent		Parent object [JAdapter instance]
+	 * @param	object	$db			Database object [JDatabase instance]
+	 * @param 	array	$options	Configuration Options
 	 *
-	 * @since     11.1
+	 * @return	void
+	 * @since	11.1
 	 */
 	public function __construct(&$parent, &$db, $options = Array())
 	{
@@ -56,8 +54,8 @@ class JAdapterInstance extends JObject {
 	/**
 	 * Retrieves the parent object
 	 *
-	 * @return    object parent
-	 * @since     11.1
+	 * @return 	object parent
+	 * @since 	11.1
 	 */
 	public function getParent()
 	{

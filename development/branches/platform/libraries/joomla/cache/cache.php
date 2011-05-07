@@ -18,37 +18,32 @@ JLoader::register('JCacheController', dirname(__FILE__).DS.'controller.php');
 /**
  * Joomla! Cache base object
  *
- * @package     Joomla.Platform
- * @subpackage  Cache
- * @since       11.1
+ * @abstract
+ * @package		Joomla.Platform
+ * @subpackage	Cache
+ * @since		11.1
  */
 
-// Almost everything must be public here to allow overloading.
+// ALMOST EVERYTHING MUST BE PUBLIC HERE TO ALLOW OVERLOADING!
 
-abstract class JCache extends JObject
+class JCache extends JObject
 {
 	/**
-	 * Storage handler
-	 * 
-	 * @var    object
-	 * @since  11.1
+	 *
+	 * @var		object	Storage Handler
+	 * @since	11.1
 	 */
 	public static $_handler = array();
 
 	/**
-	 * Options
-	 * 
-	 * @var    
-	 * @since  11.1
+	 * @since	11.1
 	 */
 	public $_options;
 
 	/**
 	 * Constructor
 	 *
-	 * @param     array    $options  options
-	 * 
-	 * @since     11.1
+	 * @param	array	$options	options
 	 */
 	public function __construct($options)
 	{
@@ -81,11 +76,9 @@ abstract class JCache extends JObject
 	/**
 	 * Returns a reference to a cache adapter object, always creating it
 	 *
-	 * @param     string   $type     The cache object type to instantiate
-	 * @param     array    $options  The array of options
-	 * 
-	 * @return    JCache   A JCache object
-	 * @since     11.1
+	 * @param	string	$type	The cache object type to instantiate
+	 * @return	object	A JCache object
+	 * @since	11.1
 	 */
 	public static function getInstance($type = 'output', $options = array())
 	{
@@ -95,8 +88,8 @@ abstract class JCache extends JObject
 	/**
 	 * Get the storage handlers
 	 *
-	 * @return    array    An array of available storage handlers
-	 * @since     11.1
+	 * @return	array	An array of available storage handlers
+	 * @since	11.1
 	 */
 	public static function getStores()
 	{
@@ -123,10 +116,9 @@ abstract class JCache extends JObject
 	/**
 	 * Set caching enabled state
 	 *
-	 * @param     boolean  $enabled	True to enable caching
-	 * 
-	 * @return    void
-	 * @since     11.1
+	 * @param	boolean	$enabled	True to enable caching
+	 * @return	void
+	 * @since	11.1
 	 */
 	public function setCaching($enabled)
 	{
@@ -136,8 +128,8 @@ abstract class JCache extends JObject
 	/**
 	 * Get caching state
 	 *
-	 * @return    boolean Caching state
-	 * @since     11.1
+	 * @return	boolean Caching state
+	 * @since	11.1
 	 */
 	public function getCaching()
 	{
@@ -147,10 +139,9 @@ abstract class JCache extends JObject
 	/**
 	 * Set cache lifetime
 	 *
-	 * @param     integer   $lt  Cache lifetime
-	 * 
-	 * @return    void
-	 * @since     11.1
+	 * @param	int	$lt	Cache lifetime
+	 * @return	void
+	 * @since	11.1
 	 */
 	public function setLifeTime($lt)
 	{
@@ -160,11 +151,10 @@ abstract class JCache extends JObject
 	/**
 	 * Get cached data by id and group
 	 *
-	 * @param     string   $id      The cache data id
-	 * @param     string   $group   The cache data group
-	 * 
-	 * @return    mixed    boolean  False on failure or a cached data string
-	 * @since     11.1
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @return	mixed	Boolean false on failure or a cached data string
+	 * @since	11.1
 	 */
 	public function get($id, $group=null)
 	{
@@ -182,8 +172,8 @@ abstract class JCache extends JObject
 	/**
 	 * Get a list of all cached data
 	 *
-	 * @return    mixed    Boolean false on failure or an object with a list of cache groups and data
-	 * @since     11.1
+	 * @return	mixed	Boolean false on failure or an object with a list of cache groups and data
+	 * @since	11.1
 	 */
 	public function getAll()
 	{
@@ -198,12 +188,11 @@ abstract class JCache extends JObject
 	/**
 	 * Store the cached data by id and group
 	 *
-	 * @param     string   $id     The cache data id
-	 * @param     string   $group  The cache data group
-	 * @param     mixed    $data   The data to store
-	 * 
-	 * @return    boolean  True if cache stored
-	 * @since     11.1
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @param	mixed	$data	The data to store
+	 * @return	boolean	True if cache stored
+	 * @since	11.1
 	 */
 	public function store($data, $id, $group=null)
 	{
@@ -222,11 +211,10 @@ abstract class JCache extends JObject
 	/**
 	 * Remove a cached data entry by id and group
 	 *
-	 * @param     string   $id      The cache data id
-	 * @param     string   $group   The cache data group
-	 * 
-	 * @return    boolean  True on success, false otherwise
-	 * @since     11.1
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @return	boolean	True on success, false otherwise
+	 * @since	11.1
 	 */
 	public function remove($id, $group=null)
 	{
@@ -244,14 +232,13 @@ abstract class JCache extends JObject
 	/**
 	 * Clean cache for a group given a mode.
 	 *
-	 * group mode       : cleans all cache in the group
-	 * notgroup mode    : cleans all cache not in the group
+	 * group mode		: cleans all cache in the group
+	 * notgroup mode	: cleans all cache not in the group
 	 *
-	 * @param     string   $group   The cache data group
-	 * @param     string   $mode    The mode for cleaning cache [group|notgroup]
-	 * 
-	 * @return    boolean  True on success, false otherwise
-	 * @since     11.1
+	 * @param	string	$group	The cache data group
+	 * @param	string	$mode	The mode for cleaning cache [group|notgroup]
+	 * @return	boolean	True on success, false otherwise
+	 * @since	11.1
 	 */
 	public function clean($group=null, $mode='group')
 	{
@@ -269,8 +256,8 @@ abstract class JCache extends JObject
 	/**
 	 * Garbage collect expired cache data
 	 *
-	 * @return    boolean  True on success, false otherwise.
-	 * @since     11.1
+	 * @return boolean  True on success, false otherwise.
+	 * @since	11.1
 	 */
 	public function gc()
 	{
@@ -285,12 +272,10 @@ abstract class JCache extends JObject
 	/**
 	 * Set lock flag on cached item
 	 *
-	 * @param     string   $id       The cache data id
-	 * @param     string   $group    The cache data group
-	 * @param              $locktime
-	 * 
-	 * @return    boolean  True on success, false otherwise.
-	 * @since     11.1
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @return	boolean	True on success, false otherwise.
+	 * @since	11.1
 	 */
 	public function lock($id,$group=null,$locktime=null)
 	{
@@ -302,7 +287,7 @@ abstract class JCache extends JObject
 		// Get the default locktime
 		$locktime = ($locktime) ? $locktime : $this->_options['locktime'];
 
-		// Allow storage handlers to perform locking on their own
+		//allow storage handlers to perform locking on their own
 		// NOTE drivers with lock need also unlock or unlocking will fail because of false $id
 		$handler = $this->_getStorage();
 		if (!JError::isError($handler) && $this->_options['locking'] == true && $this->_options['caching'] == true) {
@@ -350,20 +335,20 @@ abstract class JCache extends JObject
 			$returning->locked = $this->store(1, $id2, $group);
 		}
 
-		// revert lifetime to previous one
+		// revert lifetime to previuos one
 		$this->_options['lifetime'] = $curentlifetime;
 
+		//return $lock;
 		return $returning;
 	}
 
 	/**
 	 * Unset lock flag on cached item
 	 *
-	 * @param     string   $id		The cache data id
-	 * @param     string   $group	The cache data group
-	 * 
-	 * @return    boolean  True on success, false otherwise.
-	 * @since     11.1
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @return	boolean	True on success, false otherwise.
+	 * @since	11.1
 	 */
 	public function unlock($id,$group=null)
 	{
@@ -389,8 +374,8 @@ abstract class JCache extends JObject
 	/**
 	 * Get the cache storage handler
 	 *
-	 * @return    JCacheStorage   A JCacheStorage object
-	 * @since     11.1
+	 * @return	object	A JCacheStorage object
+	 * @since	11.1
 	 */
 	public function &_getStorage()
 	{
@@ -403,11 +388,9 @@ abstract class JCache extends JObject
 	/**
 	 * Perform workarounds on retrieved cached data
 	 *
-	 * @param     string   Cached data
-	 * @param     array    Array of options 
-	 * 
-	 * @return    string   Body of cached data
-	 * @since     11.1
+	 * @param	string	$data		Cached data
+	 * @return	string	$body		Body of cached data
+	 * @since	11.1
 	 */
 	public static function getWorkarounds($data,$options=array()) {
 
@@ -430,7 +413,7 @@ abstract class JCache extends JObject
 			$pathway->setPathway($data['pathway']);
 		}
 
-		// @todo check if the following is needed, seems like it should be in page cache
+		// @todo chech if the following is needed, seems like it should be in page cache
 		// If a module buffer is set in the cache data, get it.
 		if (isset($data['module']) && is_array($data['module'])) {
 			// Iterate through the module positions and push them into the document buffer.
@@ -440,7 +423,7 @@ abstract class JCache extends JObject
 		}
 
 		if (isset($data['body'])) {
-			// The following code searches for a token in the cached page and replaces it with the
+			// the following code searches for a token in the cached page and replaces it with the
 			// proper token.
 			$token			= JUtility::getToken();
 			$search 		= '#<input type="hidden" name="[0-9a-f]{32}" value="1" />#';
@@ -456,11 +439,9 @@ abstract class JCache extends JObject
 	/**
 	 * Create workarounded data to be cached
 	 *
-	 * @param     string    $data    Cached data
-	 * @param     array     $options  Array of options
-	 * 
-	 * @return    string    Data to be cached
-	 * @since     11.1
+	 * @param	string	$data		Cached data
+	 * @return	string	$cached		Data to be cached
+	 * @since	11.1
 	 */
 	public static function setWorkarounds($data,$options=array())
 	{
@@ -520,7 +501,7 @@ abstract class JCache extends JObject
 		}
 
 		if ($loptions['nomodules'] != 1) {
-			// @todo Check if the following is needed, seems like it should be in page cache
+			// @todo chech if the following is needed, seems like it should be in page cache
 			// Get the module buffer after component execution.
 			$buffer2 = $document->getBuffer();
 
@@ -539,13 +520,13 @@ abstract class JCache extends JObject
 	/**
 	 * Create safe id for cached data from url parameters set by plugins and framework
 	 *
-	 * @return    string   md5 encoded cacheid
-	 * @since     11.1
+	 * @return	string	md5 encoded cacheid
+	 * @since	11.1
 	 */
 	public static function makeId()
 	{
 		$app = JFactory::getApplication();
-		// Get url parameters set by plugins
+		// get url parameters set by plugins
 		$registeredurlparams = $app->get('registeredurlparams');
 
 		if (empty($registeredurlparams)) {
@@ -558,7 +539,7 @@ abstract class JCache extends JObject
 
 			return md5(serialize(JRequest::getURI()));   // provided for backwards compatibility - THIS IS NOT SAFE!!!!
 		}
-		// Framework defaults
+		// framework defaults
 		$registeredurlparams->format 	= 'WORD';
 		$registeredurlparams->option 	= 'WORD';
 		$registeredurlparams->view		= 'WORD';
@@ -579,10 +560,9 @@ abstract class JCache extends JObject
 	 * Add a directory where JCache should search for handlers. You may
 	 * either pass a string or an array of directories.
 	 *
-	 * @param     string   A path to search.
-	 * 
-	 * @return    array    An array with directory elements
-	 * @since     11.1
+	 * @param	string	A path to search.
+	 * @return	array	An array with directory elements
+	 * @since	11.1
 	 */
 	public static function addIncludePath($path='')
 	{

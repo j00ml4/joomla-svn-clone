@@ -12,22 +12,23 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Client helper class
  *
- * @package     Joomla.Platform
- * @subpackage  Client
- * @since       11.1
+ * @static
+ * @package		Joomla.Platform
+ * @subpackage	Client
+ * @since		11.1
  */
 class JClientHelper
 {
 	/**
 	 * Method to return the array of client layer configuration options
 	 *
-	 * @param     string   $client  Client name, currently only 'ftp' is supported
-	 * @param     boolean  $force   Forces re-creation of the login credentials. Set this to
-	 *                              true if login credentials in the session storage have changed
+	 * @param	string	Client name, currently only 'ftp' is supported
+	 * @param	boolean	Forces re-creation of the login credentials. Set this to
+	 *					true if login credentials in the session storage have changed
 	 *
-	 * @return    array    Client layer configuration options, consisting of at least
-	 *                     these fields: enabled, host, port, user, pass, root
-	 * @since     11.1
+	 * @return	array	Client layer configuration options, consisting of at least
+	 *					these fields: enabled, host, port, user, pass, root
+	 * @since	11.1
 	 */
 	public static function getCredentials($client, $force=false)
 	{
@@ -86,12 +87,12 @@ class JClientHelper
 	/**
 	 * Method to set client login credentials
 	 *
-	 * @param     string   $client   Client name, currently only 'ftp' is supported
-	 * @param     string   $user     Username
-	 * @param     string   $pass     Password
+	 * @param	string	Client name, currently only 'ftp' is supported
+	 * @param	string	Username
+	 * @param	string	Password
 	 *
-	 * @return    boolean  True if the given login credentials have been set and are valid
-	 * @since     11.1
+	 * @return	boolean	True if the given login credentials have been set and are valid
+	 * @since	11.1
 	 */
 	public static function setCredentials($client, $user, $pass)
 	{
@@ -142,10 +143,10 @@ class JClientHelper
 	/**
 	 * Method to determine if client login credentials are present
 	 *
-	 * @param     string   Client name, currently only 'ftp' is supported
-	 * 
-	 * @return    boolean  True if login credentials are available
-	 * @since     11.1
+	 * @static
+	 * @param	string	Client name, currently only 'ftp' is supported
+	 * @return	boolean	True if login credentials are available
+	 * @since	11.1
 	 */
 	public static function hasCredentials($client)
 	{
@@ -192,16 +193,14 @@ class JClientHelper
 	}
 
 	/**
-	 * Determine whether input fields for client settings need to be shown
+	 * Determine wether input fields for client settings need to be shown
 	 *
 	 * If valid credentials were passed along with the request, they are saved to the session.
-	 * This functions returns an exception if invalid credentials have been given or if the
+	 * This functions returns an exeption if invalid credentials have been given or if the
 	 * connection to the server failed for some other reason.
-	 * 
-	 * @param    string    $client
-	 * 
-	 * @return   mixed     True, if FTP settings should be shown or an exception
-	 * @since     11.1
+	 *
+	 * @return  boolean|JExeption  True, if FTP settings should be shown, or an exeption
+	 * @since	11.1
 	 */
 	public static function setCredentialsFromRequest($client)
 	{

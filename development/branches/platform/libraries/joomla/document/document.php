@@ -16,72 +16,66 @@ jimport('joomla.filter.filteroutput');
 /**
  * Document class, provides an easy interface to parse and display a document
  *
- * @package     Joomla.Platform
- * @subpackage  Document
- * @since       11.1
+ * @abstract
+ * @package		Joomla.Platform
+ * @subpackage	Document
+ * @since		11.1
  */
 class JDocument extends JObject
 {
 	/**
 	 * Document title
 	 *
-	 * @var     string
-	 * @since   11.1
+	 * @var	string
 	 */
 	public $title = '';
 
 	/**
 	 * Document description
 	 *
-	 * @var     string
-	 * @since   11.1
+	 * @var	string
 	 */
 	public $description = '';
 
 	/**
 	 * Document full URL
 	 *
-	 * @var     string
-	 * @since   11.1
+	 * @var	string
 	 */
 	public $link = '';
 
 	/**
 	 * Document base URL
 	 *
-	 * @var     string
-	 * @since   11.1
+	 * @var	string
 	 */
 	public $base = '';
 
 	/**
 	 * Contains the document language setting
 	 *
-	 * @var     string
-	 * @since   11.1
+	 * @var	string
 	 */
 	public $language = 'en-gb';
 
 	/**
 	 * Contains the document direction setting
 	 *
-	 * @var     string
-	 * @since   11.1
+	 * @var	string
 	 */
 	public $direction = 'ltr';
 
 	/**
 	 * Document generator
 	 *
-	 * @var    string
+	 * @var		string
 	 */
 	public $_generator = 'Joomla! 1.6 - Open Source Content Management';
 
 	/**
 	 * Document modified date
 	 *
-	 * @var     string
-	 * @since   11.1
+	 * @var		string
 	 */
 	public $_mdate = '';
 
@@ -172,15 +166,14 @@ class JDocument extends JObject
 	/**
 	 * The document type
 	 *
-	 * @var     string
-	 * @since   11.1
+	 * @var	string
 	 */
 	public $_type = null;
 
 	/**
 	 * Array of buffered output
 	 *
-	 * @var    mixed (depends on the renderer)
+	 * @var		mixed (depends on the renderer)
 	 */
 	public static $_buffer = null;
 
@@ -230,11 +223,9 @@ class JDocument extends JObject
 	 * Returns the global JDocument object, only creating it
 	 * if it doesn't already exist.
 	 *
-	 * @param     string     $type       The document type to instantiate
-	 * @param     array      $attribues  Array of attributes
-	 * 
-	 * @return    object    The document object.
-	 * @since     11.1
+	 * @param type $type The document type to instantiate
+	 *
+	 * @return object  The document object.
 	 */
 	public static function getInstance($type = 'html', $attributes = array())
 	{
@@ -285,10 +276,7 @@ class JDocument extends JObject
 	/**
 	 * Set the document type
 	 *
-	 * @param     string   $type
-	 * 
-	 * @return  
-	 * @since   11.1
+	 * @param	string $type
 	 */
 	public function setType($type)
 	{
@@ -298,8 +286,7 @@ class JDocument extends JObject
 	/**
 	 * Returns the document type
 	 *
-	 * @return    string
-	 * @since     11.1
+	 * @return	string
 	 */
 	public function getType()
 	{
@@ -309,8 +296,7 @@ class JDocument extends JObject
 	/**
 	 * Get the document head data
 	 *
-	 * @return    array    The document head data in array form
-	 * @since   11.1
+	 * @return	array	The document head data in array form
 	 */
 	public function getHeadData()
 	{
@@ -320,10 +306,7 @@ class JDocument extends JObject
 	/**
 	 * Set the document head data
 	 *
-	 * @param     array    $data	The document head data in array form
-	 * 
-	 * @return    void
-	 * @since     11.1
+	 * @param	array	$data	The document head data in array form
 	 */
 	public function setHeadData($data)
 	{
@@ -333,10 +316,7 @@ class JDocument extends JObject
 	/**
 	 * Set the document head data
 	 *
-	 * @param     array    $data	The document head data in array form
-	 * 
-	 * @return    
-	 * @since     11.1
+	 * @param	array	$data	The document head data in array form
 	 */
 	public function mergeHeadData($data)
 	{
@@ -346,8 +326,7 @@ class JDocument extends JObject
 	/**
 	 * Get the contents of the document buffer
 	 *
-	 * @return     The contents of the document buffer
-	 * @since      11.1
+	 * @return	The contents of the document buffer
 	 */
 	public function getBuffer()
 	{
@@ -357,11 +336,8 @@ class JDocument extends JObject
 	/**
 	 * Set the contents of the document buffer
 	 *
-	 * @param     string   $content	The content to be set in the buffer.
-	 * @param     array    $options	Array of optional elements.
-	 * 
-	 * @return    void
-	 * @@since    11.1
+	 * @param	string	$content	The content to be set in the buffer.
+	 * @param	array	$options	Array of optional elements.
 	 */
 	public function setBuffer($content, $options = array())
 	{
@@ -371,11 +347,10 @@ class JDocument extends JObject
 	/**
 	 * Gets a meta tag.
 	 *
-	 * @param     string   $name   Value of name or http-equiv tag
-	 * @param     bool   $http_equiv	META type "http-equiv" defaults to null
-	 * 
-	 * @return    string
-	 * @@since      11.1
+	 * @param	string	$name			Value of name or http-equiv tag
+	 * @param	bool	$http_equiv	META type "http-equiv" defaults to null
+	 *
+	 * @return	string
 	 */
 	public function getMetaData($name, $http_equiv = false)
 	{
@@ -402,13 +377,12 @@ class JDocument extends JObject
 	/**
 	 * Sets or alters a meta tag.
 	 *
-	 * @param     string   $name        Value of name or http-equiv tag
-	 * @param     string   $content     Value of the content tag
-	 * @param     boolean  $http_equiv  META type "http-equiv" defaults to null
-	 * @param     boolean  $sync        Should http-equiv="content-type" by synced with HTTP-header?
+	 * @param string	$name			Value of name or http-equiv tag
+	 * @param string	$content		Value of the content tag
+	 * @param bool		$http_equiv		META type "http-equiv" defaults to null
+	 * @param bool		$sync			Should http-equiv="content-type" by synced with HTTP-header?
 	 *
-	 * @return    void
-	 * @@since    11.1
+	 * @return void
 	 */
 	public function setMetaData($name, $content, $http_equiv = false, $sync = true)
 	{
@@ -438,12 +412,10 @@ class JDocument extends JObject
 	/**
 	 * Adds a linked script to the page
 	 *
-	 * @param     string  $url		URL to the linked script
-	 * @param     string  $type		Type of script. Defaults to 'text/javascript'
-	 * @param     boolean $defer		Adds the defer attribute.
-	 * @param     boolean $async		Adds the async attribute.
-	 * @return
-	 * @since      11.1
+	 * @param	string  $url		URL to the linked script
+	 * @param	string  $type		Type of script. Defaults to 'text/javascript'
+	 * @param	bool	$defer		Adds the defer attribute.
+	 * @param	bool	$async		Adds the async attribute.
 	 */
 	public function addScript($url, $type = "text/javascript", $defer = false, $async = false)
 	{
@@ -455,11 +427,9 @@ class JDocument extends JObject
 	/**
 	 * Adds a script to the page
 	 *
-	 * @param     string  $content	Script
-	 * @param     string  $type	Scripting mime (defaults to 'text/javascript')
-	 * 
-	 * @return    void
-	 * @@since    11.1
+	 * @param	string  $content	Script
+	 * @param	string  $type	Scripting mime (defaults to 'text/javascript')
+	 * @return	void
 	 */
 	public function addScriptDeclaration($content, $type = 'text/javascript')
 	{
@@ -474,13 +444,9 @@ class JDocument extends JObject
 	/**
 	 * Adds a linked stylesheet to the page
 	 *
-	 * @param     string  $url      URL to the linked style sheet
-	 * @param     string  $type     Mime encoding type
-	 * @param     string  $media    Media type that this stylesheet applies to
-	 * @param     array   $attribs  Array of attributes 
-	 * 
-	 * @return    void
-	 * @@since    11.1
+	 * @param	string  $url	URL to the linked style sheet
+	 * @param	string  $type	Mime encoding type
+	 * @param	string  $media  Media type that this stylesheet applies to
 	 */
 	public function addStyleSheet($url, $type = 'text/css', $media = null, $attribs = array())
 	{
@@ -792,10 +758,9 @@ class JDocument extends JObject
 	/**
 	* Load a renderer
 	*
-	* @param     string   The renderer type
-	* 
-	* @return    mixed    Object or null if class does not exist
-	* @since     11.1
+	* @param	string	The renderer type
+	* @return	object
+	* @since   11.1
 	*/
 	public function loadRenderer($type)
 	{

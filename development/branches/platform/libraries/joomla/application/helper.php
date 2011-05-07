@@ -12,9 +12,10 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Application helper functions
  *
- * @package     Joomla.Platform
- * @subpackage  Application
- * @since       11.1
+ * @static
+ * @package		Joomla.Platform
+ * @subpackage	Application
+ * @since		11.1
  */
 class JApplicationHelper
 {
@@ -26,9 +27,9 @@ class JApplicationHelper
 	/**
 	 * Return the name of the request component [main component]
 	 *
-	 * @param     string   $default The default option
-	 * @return    string   Option
-	 * @since     11.1
+	 * @param	string $default The default option
+	 * @return	string Option
+	 * @since	11.1
 	 */
 	public static function getComponentName($default = NULL)
 	{
@@ -55,11 +56,10 @@ class JApplicationHelper
 	 * This method will return a client information array if called
 	 * with no arguments which can be used to add custom application information.
 	 *
-	 * @param     integer  	$id		A client identifier
-	 * @param     boolean  	$byName	If True, find the client by its name
-	 * 
-	 * @return    mixed    Object describing the client or false if not known
-	 * @since     11.1
+	 * @param	int			$id		A client identifier
+	 * @param	boolean		$byName	If True, find the client by its name
+	 * @return	mixed	Object describing the client or false if not known
+	 * @since	11.1
 	 */
 	public static function getClientInfo($id = null, $byName = false)
 	{
@@ -115,10 +115,9 @@ class JApplicationHelper
 	/**
 	 * Adds information for a client.
 	 *
-	 * @param     mixed    A client identifier either an array or object
-	 * 
-	 * @return    boolean  True if the information is added. False on error
-	 * @since     11.1
+	 * @param	mixed	A client identifier either an array or object
+	 * @return	boolean	True if the information is added. False on error
+	 * @since	11.1
 	 */
 	public static function addClientInfo($client)
 	{
@@ -144,15 +143,14 @@ class JApplicationHelper
 	/**
 	* Get a path
 	*
-	* @param     string   $varname
-	* @param     string   $user_option
-	* 
-	* @return    string   The requested path
-	* @since     11.1
+	* @param string $varname
+	* @param string $user_option
+	* @return string The requested path
+	* @since 1.0
 	*/
 	public static function getPath($varname, $user_option=null)
 	{
-		// Check needed for handling of custom/new module XML file loading
+		// Check needed for handling of custom/new module xml file loading
 		$check = (($varname == 'mod0_xml') || ($varname == 'mod1_xml'));
 
 		if (!$user_option && !$check) {
@@ -257,12 +255,9 @@ class JApplicationHelper
 
 	/**
 	 * Parse a XML install manifest file.
-	 * 
-	 * XML Root tag should be 'install' except for languages which use meta file. 
 	 *
-	 * @param     string   $path Full path to XML file.
-	 * 
-	 * @return    array    XML metadata.
+	 * @param string $path Full path to xml file.
+	 * @return array XML metadata.
 	 */
 	public static function parseXMLInstallFile($path)
 	{
@@ -272,11 +267,12 @@ class JApplicationHelper
 			return false;
 		}
 
-		 // Check for a valid XML root tag.
-		
-		 // Should be 'install', but for backward compatability we will accept 'extension'.
-		 // Languages use 'metafile' instead
-
+		/*
+		 * Check for a valid XML root tag.
+		 *
+		 * Should be 'install', but for backward compatability we will accept 'extension'.
+		 * Languages are annoying and use 'metafile' instead
+		 */
 		if($xml->getName() != 'install'
 		&& $xml->getName() != 'extension'
 		&& $xml->getName() != 'metafile')
@@ -307,15 +303,6 @@ class JApplicationHelper
 		return $data;
 	}
 
-	/**
-	 * Parse a XML language meta file.
-	 * 
-	 * XML Root tag  for languages which is meta file. 
-	 *
-	 * @param     string   $path Full path to XML file.
-	 * 
-	 * @return    array    XML metadata.
-	 */
 	public static function parseXMLLangMetaFile($path)
 	{
 		// Read the file to see if it's a valid component XML file
@@ -357,11 +344,9 @@ class JApplicationHelper
 	/**
 	 * Tries to find a file in the administrator or site areas
 	 *
-	 * @param     string   A file name
-	 * @param     integer  0 to check site only, 1 to check site and admin, -1 to check admin only
-	 * 
-	 * @return    string   File name or null
-	 * @since     11.1
+	 * @param	string	A file name
+	 * @param	integer	0 to check site only, 1 to check site and admin, -1 to check admin only
+	 * @since	11.1
 	 */
 	protected static function _checkPath($path, $checkAdmin=1)
 	{

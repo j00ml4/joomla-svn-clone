@@ -12,34 +12,31 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Abstract class for a renderer
  *
- * @package     Joomla.Platform
- * @subpackage  Document
- * @since       11.1
+ * @abstract
+ * @package		Joomla.Platform
+ * @subpackage	Document
+ * @since		11.1
  */
 class JDocumentRenderer extends JObject
 {
 	/**
 	* Reference to the JDocument object that instantiated the renderer
 	*
-	* @var    object
-	* @since  11.1
+	* @var		object
 	*/
 	protected	$_doc = null;
 
 	/**
 	 * Renderer mime type
 	 *
-	 * @var    string
-	 * @since  11.1
+	 * @var		string
 	 */
 	protected $_mime = "text/html";
 
 	/**
 	* Class constructor
 	*
-	* @param     object   $doc  A reference to the JDocument object that instantiated the renderer
-	* 
-	* @since     11.1
+	* @param object A reference to the JDocument object that instantiated the renderer
 	*/
 	public function __construct(&$doc)
 	{
@@ -49,12 +46,11 @@ class JDocumentRenderer extends JObject
 	/**
 	 * Renders a script and returns the results as a string
 	 *
-	 * @param     string   $name     The name of the element to render
-	 * @param     array    $array    Array of values
-	 * @param     string   $content  Override the output of the renderer
-	 * 
-	 * @return    string   The output of the script
-	 * @since     11.1
+	 * @param string	$name		The name of the element to render
+	 * @param array		$array		Array of values
+	 * @param string	$content	Override the output of the renderer
+	 *
+	 * @return string	The output of the script
 	 */
 	public function render($name, $params = null, $content = null)
 	{
@@ -63,8 +59,7 @@ class JDocumentRenderer extends JObject
 	/**
 	 * Return the content type of the renderer
 	 *
-	 * @return    string   The contentType
-	 * @since     11.1
+	 * @return string The contentType
 	 */
 	function getContentType() {
 		return $this->_mime;

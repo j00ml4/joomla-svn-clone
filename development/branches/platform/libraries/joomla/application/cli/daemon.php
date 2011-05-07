@@ -16,9 +16,9 @@ jimport('joomla.filesystem.folder');
 /**
  * Class to turn JCli applications into daemons.  It requires CLI and PCNTL support built into PHP.
  *
- * @package     Joomla.Platform
- * @subpackage  Application
- * @since       11.1
+ * @package		Joomla.Platform
+ * @subpackage	Application
+ * @since		11.1
  */
 class JDaemon extends JCli
 {
@@ -35,7 +35,7 @@ class JDaemon extends JCli
 	);
 
 	/**
-	 * @var    boolean  True if the daemon is in the process of exiting.
+	 * @var    bool  True if the daemon is in the process of exiting.
 	 * @since  11.1
 	 */
 	protected $exiting = false;
@@ -47,13 +47,15 @@ class JDaemon extends JCli
 	protected $processId = 0;
 
 	/**
-	 * @var    boolean  True if the daemon is currently running.
+	 * @var    bool  True if the daemon is currently running.
 	 * @since  11.1
 	 */
 	protected $running = false;
 
 	/**
 	 * Class constructor.
+	 *
+	 * @param   array  $config  A configuration array.
 	 *
 	 * @return  void
 	 *
@@ -144,7 +146,7 @@ class JDaemon extends JCli
 	 * Check to see if the daemon is active.  This does not assume that $this daemon is active, but
 	 * only if an instance of the application is active as a daemon.
 	 *
-	 * @return  boolean .True if daemon is active.
+	 * @return  bool
 	 *
 	 * @since   11.1
 	 */
@@ -188,6 +190,7 @@ class JDaemon extends JCli
 	 * @param   mixed  $data  Either an array or object to be loaded into the configuration object.
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	public function loadConfiguration($data)
@@ -291,7 +294,7 @@ class JDaemon extends JCli
 	/**
 	 * Spawn daemon process.
 	 *
-	 * @return  boolean  True if successfully spawned
+	 * @return  bool
 	 *
 	 * @since   11.1
 	 */
@@ -330,6 +333,7 @@ class JDaemon extends JCli
 	 * Stop daemon process.
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	public function stop()
@@ -341,7 +345,7 @@ class JDaemon extends JCli
 	/**
 	 * Method to change the identity of the daemon process and resources.
 	 *
-	 * @return  boolean  True if identitye successfully changed
+	 * @return  bool
 	 *
 	 * @since   11.1
 	 * @see     posix_setuid()
@@ -397,7 +401,7 @@ class JDaemon extends JCli
 	/**
 	 * Method to put the application into the background.
 	 *
-	 * @return  boolean
+	 * @return  bool
 	 *
 	 * @since   11.1
 	 * @throws  ApplicationException
@@ -507,6 +511,7 @@ class JDaemon extends JCli
 	 * stat cache.  We will probably call this method pretty regularly in our main loop.
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	protected function gc()
