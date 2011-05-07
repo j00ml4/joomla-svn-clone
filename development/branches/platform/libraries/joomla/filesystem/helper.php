@@ -17,9 +17,9 @@ jimport('joomla.filesystem.folder');
  *
  * Holds support functions for the filesystem, particularly the stream
  *
- * @package     Joomla.Platform
- * @subpackage  FileSystem
- * @since       11.1
+ * @package		Joomla.Platform
+ * @subpackage	FileSystem
+ * @since		11.1
  */
 class JFilesystemHelper
 {
@@ -30,11 +30,11 @@ class JFilesystemHelper
 	/**
 	 * Remote file size function for streams that don't support it
 	 *
-	 * @param     string   $url	TODO Add text
+	 * @param	string	$url	TODO Add text
+	 *
+	 * @return	mixed
+	 * @since	11.1
 	 * @see		http://www.php.net/manual/en/function.filesize.php#71098
-	 * 
-	 * @return    mixed  
-	 * @since     11.1
 	 */
 	function remotefsize($url)
 	{
@@ -112,13 +112,12 @@ class JFilesystemHelper
 	/**
 	 * Quick FTP chmod
 	 *
-	 * @param     string   $url	TODO Add text
-	 * @param     integer  $mode	The new permissions, given as an octal value.
-	 * @see		http://www.php.net/manual/en/function.ftp-chmod.php
+	 * @param	string	$url	TODO Add text
+	 * @param	int		$mode	The new permissions, given as an octal value.
 	 *
-	 * @return    mixed  
-	 * @since     11.1
-
+	 * @return	mixed
+	 * @since	11.1
+	 * @see		http://www.php.net/manual/en/function.ftp-chmod.php
 	 */
 	function ftpChmod($url, $mode)
 	{
@@ -180,8 +179,8 @@ class JFilesystemHelper
 	/**
 	 * Modes that require a write operation
 	 *
-	 * @return    array
-	 * @since     11.1
+	 * @return	array
+	 * @since	11.1
 	 */
 	static function getWriteModes()
 	{
@@ -194,8 +193,8 @@ class JFilesystemHelper
 	 * Returns the supported streams, in addition to direct file access
 	 * Also includes Joomla! streams as well as PHP streams
 	 *
-	 * @return    array    Streams
-	 * @since     11.1
+	 * @return	array	Streams
+	 * @since	11.1
 	 */
 	function getSupported()
 	{
@@ -215,8 +214,8 @@ class JFilesystemHelper
 	/**
 	 * Returns a list of transports
 	 *
-	 * @return    array
-	 * @since     11.1
+	 * @return	array
+	 * @since	11.1
 	 */
 	function getTransports()
 	{
@@ -227,8 +226,8 @@ class JFilesystemHelper
 	/**
 	 * Returns a list of filters
 	 *
-	 * @return    array
-	 * @since     11.1
+	 * @return	array
+	 * @since	11.1
 	 */
 	function getFilters()
 	{
@@ -240,8 +239,7 @@ class JFilesystemHelper
 	/**
 	 * Returns a list of J! streams
 	 *
-	 * @return    array    
-	 * @since     11.1
+	 * @return	array		 * @since	11.1
 	 */
 	function getJStreams()
 	{
@@ -258,12 +256,12 @@ class JFilesystemHelper
 	}
 
 	/**
-	 * Determine if a stream is a Joomla stream.
+	 * TODO Add description
 	 *
-	 * @param     string   $streamname   The name of a stream
+	 * @param	string	$streamname	TODO Add text, confirm type
 	 *
-	 * @return    boolean   True for a Joomla Stream
-	 * @since     11.1
+	 * @return	boolean
+	 * @since	11.1
 	 */
 	function isJoomlaStream($streamname)
 	{

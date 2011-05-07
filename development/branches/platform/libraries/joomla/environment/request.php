@@ -30,17 +30,18 @@ define('JREQUEST_ALLOWHTML',4);
  * request variables.  This includes $_POST, $_GET, and naturally $_REQUEST.  Variables
  * can be passed through an input filter to avoid injection or returned raw.
  *
- * @package     Joomla.Platform
- * @subpackage  Environment
+ * @static
+ * @package		Joomla.Platform
+ * @subpackage	Environment
  * @deprecated	Get the JInput object from the application instead
- * @since       11.1
+ * @since		11.1
  */
 class JRequest
 {
 	/**
 	 * Gets the full request path.
 	 *
-	 * @return    string
+	 * @return string
 	 */
 	public static function getURI()
 	{
@@ -51,7 +52,7 @@ class JRequest
 	/**
 	 * Gets the request method.
 	 *
-	 * @return    string
+	 * @return string
 	 */
 	public static function getMethod()
 	{
@@ -69,23 +70,23 @@ class JRequest
 	 *
 	 * You can force the source by setting the $hash parameter:
 	 *
-	 *	post    $_POST
-	 *	get     $_GET
-	 *	files   $_FILES
-	 *	cookie  $_COOKIE
-	 *	env     $_ENV
-	 *	server  $_SERVER
-	 *	method  via current $_SERVER['REQUEST_METHOD']
-	 *	default $_REQUEST
+	 *	post	$_POST
+	 *	get		$_GET
+	 *	files	$_FILES
+	 *	cookie	$_COOKIE
+	 *	env		$_ENV
+	 *	server	$_SERVER
+	 *	method	via current $_SERVER['REQUEST_METHOD']
+	 *	default	$_REQUEST
 	 *
-	 * @param     string   $name     Variable name.
-	 * @param     string   $default  Default value if the variable does not exist.
-	 * @param     string   $hash     Where the var should come from (POST, GET, FILES, COOKIE, METHOD).
-	 * @param     string   $type     Return type for the variable, for valid values see {@link JFilterInput::clean()}.
-	 * @param     integer  $mask     Filter mask for the variable.
-	 * 
-	 * @return    mixed    Requested variable.
-	 * @since     11.1
+	 * @param	string	$name		Variable name.
+	 * @param	string	$default	Default value if the variable does not exist.
+	 * @param	string	$hash		Where the var should come from (POST, GET, FILES, COOKIE, METHOD).
+	 * @param	string	$type		Return type for the variable, for valid values see {@link JFilterInput::clean()}.
+	 * @param	int		$mask		Filter mask for the variable.
+	 *
+	 * @return	mixed	Requested variable.
+	 * @since	11.1
 	 */
 	public static function getVar($name, $default = null, $hash = 'default', $type = 'none', $mask = 0)
 	{
@@ -233,20 +234,18 @@ class JRequest
 	}
 
 	/**
-	 * Cmd (Word and Integer0 filter
-	 *  
 	 * Fetches and returns a given filtered variable. The cmd
 	 * filter only allows the characters [A-Za-z0-9.-_]. This is
 	 * currently only a proxy function for getVar().
 	 *
 	 * See getVar() for more in-depth documentation on the parameters.
 	 *
-	 * @param     string   $name     Variable name
-	 * @param     string   $default  Default value if the variable does not exist
-	 * @param     string   $hash     Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
+	 * @param	string	$name		Variable name
+	 * @param	string	$default	Default value if the variable does not exist
+	 * @param	string	$hash		Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
 	 *
-	 * @return    string   Requested variable
-	 * @since     11.1
+	 * @return	string	Requested variable
+	 * @since	11.1
 	 */
 	public static function getCmd($name, $default = '', $hash = 'default')
 	{
@@ -260,13 +259,13 @@ class JRequest
 	 *
 	 * See getVar() for more in-depth documentation on the parameters.
 	 *
-	 * @param     string   $name     Variable name
-	 * @param     string   $default  Default value if the variable does not exist
-	 * @param     string   $hash     Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
-	 * @param     integer  $mask     Filter mask for the variable
+	 * @param	string	$name		Variable name
+	 * @param	string	$default	Default value if the variable does not exist
+	 * @param	string	$hash		Where the var should come from (POST, GET, FILES, COOKIE, METHOD)
+	 * @param	int		$mask		Filter mask for the variable
 	 *
-	 * @return    string   Requested variable
-	 * @since     11.1
+	 * @return	string	Requested variable
+	 * @since	11.1
 	 */
 	public static function getString($name, $default = '', $hash = 'default', $mask = 0)
 	{
@@ -277,13 +276,13 @@ class JRequest
 	/**
 	 * Set a variabe in one of the request variables.
 	 *
-	 * @param     string   $name       Name
-	 * @param     string   $value      Value
-	 * @param     string   $hash       Hash
-	 * @param     boolean  $overwrite  Boolean
+	 * @param	string	$name		Name
+	 * @param	string	$value		Value
+	 * @param	string	$hash		Hash
+	 * @param	boolean	$overwrite	Boolean
 	 *
-	 * @return    string   Previous value
-	 * @since     11.1
+	 * @return	string	Previous value
+	 * @since	11.1
 	 */
 	public static function setVar($name, $value = null, $hash = 'method', $overwrite = true)
 	{
@@ -344,20 +343,19 @@ class JRequest
 	 *
 	 * You can force the source by setting the $hash parameter:
 	 *
-	 *  post     $_POST
-	 *  get      $_GET
-	 *  files    $_FILES
-	 *  cookie   $_COOKIE
-	 *  env      $_ENV
-	 *  server   $_SERVER
-	 *  method   via current $_SERVER['REQUEST_METHOD']
-	 *  default  $_REQUEST
+	 *	post	$_POST
+	 *	get		$_GET
+	 *	files	$_FILES
+	 *	cookie	$_COOKIE
+	 *	env		$_ENV
+	 *	server	$_SERVER
+	 *	method	via current $_SERVER['REQUEST_METHOD']
+	 *	default	$_REQUEST
 	 *
-	 * @param     string   $hash    to get (POST, GET, FILES, METHOD).
-	 * @param     integer  $mask    Filter mask for the variable.
-	 * 
-	 * @return    mixed    Request hash.
-	 * @since     11.1
+	 * @param	string	$hash	to get (POST, GET, FILES, METHOD).
+	 * @param	int		$mask	Filter mask for the variable.
+	 * @return	mixed	Request hash.
+	 * @since	11.1
 	 */
 	public static function get($hash = 'default', $mask = 0)
 	{
@@ -411,11 +409,9 @@ class JRequest
 	/**
 	 * Sets a request variable.
 	 *
-	 * @param     array    An associative array of key-value pairs.
-	 * @param     string   The request variable to set (POST, GET, FILES, METHOD).
-	 * 
-	 * @param     boolean  If true and an existing key is found, the value is overwritten, otherwise it is ignored.
-	 * @since     11.1
+	 * @param	array	An associative array of key-value pairs.
+	 * @param	string	The request variable to set (POST, GET, FILES, METHOD).
+	 * @param	boolean	If true and an existing key is found, the value is overwritten, otherwise it is ignored.
 	 */
 	public static function set($array, $hash = 'default', $overwrite = true)
 	{
@@ -429,8 +425,8 @@ class JRequest
 	 *
 	 * Use in conjuction with JHtml::_('form.token').
 	 *
-	 * @param     string   The request method in which to look for the token key.
-	 * @return    boolean  True if found and valid, false otherwise.
+	 * @param	string	The request method in which to look for the token key.
+	 * @return	boolean	True if found and valid, false otherwise.
 	 */
 	public static function checkToken($method = 'post')
 	{
@@ -455,8 +451,8 @@ class JRequest
 	/**
 	 * Cleans the request from script injection.
 	 *
-	 * @return    void
-	 * @since     11.1
+	 * @return	void
+	 * @since	11.1
 	 */
 	public static function clean()
 	{
@@ -508,11 +504,9 @@ class JRequest
 	/**
 	 * Adds an array to the GLOBALS array and checks that the GLOBALS variable is not being attacked.
 	 *
-	 * @param     array    $array	Array to clean.
-	 * @param     boolean  True if the array is to be added to the GLOBALS.
-	 * 
-	 * @return
-	 * @since     11.1
+	 * @param	array	$array	Array to clean.
+	 * @param	boolean	True if the array is to be added to the GLOBALS.
+	 * @since	11.1
 	 */
 	static function _cleanArray(&$array, $globalise=false)
 	{
@@ -537,20 +531,14 @@ class JRequest
 	/**
 	 * Clean up an input variable.
 	 *
-	 * @param     mixed    $var   The input variable.
-	 * @param     integer  $mask   Filter bit mask. 
-	 *                             1=no trim: If this flag is cleared and the
-	 *                             input is a string, the string will have leading and trailing whitespace
-	 *                             trimmed. 
-	 *                             2=allow_raw: If set, no more filtering is performed, higher bits
-	 *                             are ignored. 
-	 *                             4=allow_html: HTML is allowed, but passed through a safe
-	 *                             HTML filter first. If set, no more filtering is performed. If no bits
-	 *                             other than the 1 bit is set, a strict filter is applied.
-	 * @param     string   $type   The variable type {@see JFilterInput::clean()}.
-	 * 
-	 * @return    mixed    Same as $var
-	 * @since     11.1
+	 * @param mixed The input variable.
+	 * @param int Filter bit mask. 1=no trim: If this flag is cleared and the
+	 * input is a string, the string will have leading and trailing whitespace
+	 * trimmed. 2=allow_raw: If set, no more filtering is performed, higher bits
+	 * are ignored. 4=allow_html: HTML is allowed, but passed through a safe
+	 * HTML filter first. If set, no more filtering is performed. If no bits
+	 * other than the 1 bit is set, a strict filter is applied.
+	 * @param string The variable type {@see JFilterInput::clean()}.
 	 */
 	static function _cleanVar($var, $mask = 0, $type=null)
 	{
@@ -571,7 +559,7 @@ class JRequest
 		}
 		elseif ($mask & 4)
 		{
-			// If the allow HTML flag is set, apply a safe HTML filter to the variable
+			// If the allow html flag is set, apply a safe html filter to the variable
 			if (is_null($safeHtmlFilter)) {
 				$safeHtmlFilter = JFilterInput::getInstance(null, null, 1, 1);
 			}
@@ -592,10 +580,8 @@ class JRequest
 	/**
 	 * Strips slashes recursively on an array.
 	 *
-	 * @param     array    $value   Array or (nested arrays) of strings.
-	 * 
-	 * @return    array    The input array with stripshlashes applied to it.
-	 * @since     11.1
+	 * @param	array	$array		Array of (nested arrays of) strings.
+	 * @return	array	The input array with stripshlashes applied to it.
 	 */
 	protected static function _stripSlashesRecursive($value)
 	{

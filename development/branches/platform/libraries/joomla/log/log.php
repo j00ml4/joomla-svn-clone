@@ -203,7 +203,7 @@ class JLog
 	 * @param  array   $options  The object configuration array.
 	 * @param  string  $path     The base path for the log file.
 	 *
-	 * @return    JLog
+	 * @return	    JLog
 	 *
 	 * @deprecated  11.2
 	 * @since	    11.1

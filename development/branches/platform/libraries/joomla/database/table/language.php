@@ -15,15 +15,15 @@ jimport('joomla.database.table');
  * Languages table.
  *
  * @package		Joomla.Administrator
- * @subpackage  com_languages
- * @since       11.1
+ * @subpackage	com_languages
+ * @since		11.1
  */
 class JTableLanguage extends JTable
 {
 	/**
 	 * Constructor
 	 *
-	 * @param     JDatabase
+	 * @param	JDatabase
 	 */
 	public function __construct(&$db)
 	{
@@ -33,7 +33,7 @@ class JTableLanguage extends JTable
 	/**
 	 * Overloaded check method to ensure data integrity
 	 *
-	 * @return    boolean  True on success
+	 * @return boolean True on success
 	 */
 	public function check()
 	{

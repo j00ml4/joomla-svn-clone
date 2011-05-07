@@ -12,9 +12,9 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Session table
  *
- * @package     Joomla.Platform
- * @subpackage  Table
- * @since       11.1
+ * @package		Joomla.Platform
+ * @subpackage	Table
+ * @since		11.1
  */
 class JTableSession extends JTable
 {
@@ -83,8 +83,8 @@ class JTableSession extends JTable
 	/**
 	* Purge old sessions
 	*
-	* @param    integer   Session age in seconds
-	* @return    mixed    Resource on success, null on fail
+	* @param int	Session age in seconds
+	* @return mixed Resource on success, null on fail
 	*/
 	function purge($maxLifetime = 1440)
 	{
@@ -98,8 +98,8 @@ class JTableSession extends JTable
 	/**
 	 * Find out if a user has a one or more active sessions
 	 *
-	 * @param     integer  $userid The identifier of the user
-	 * @return    boolean  True if a session for this user exists
+	 * @param int $userid The identifier of the user
+	 * @return boolean True if a session for this user exists
 	 */
 	function exists($userid)
 	{

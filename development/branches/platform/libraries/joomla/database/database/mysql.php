@@ -16,9 +16,9 @@ JLoader::register('JDatabaseImporterMySQL', dirname(__FILE__).'/mysqlimporter.ph
 /**
  * MySQL database driver
  *
- * @package     Joomla.Platform
- * @subpackage  Database
- * @since       11.1
+ * @package		Joomla.Platform
+ * @subpackage	Database
+ * @since		11.1
  */
 class JDatabaseMySQL extends JDatabase
 {
@@ -147,15 +147,13 @@ class JDatabaseMySQL extends JDatabase
 	}
 
 	/**
-	 * Method to get a JDate object represented as a datetime string in a format recognized by the database server.
+	 * Drops a table from the database.
 	 *
-	 * @param   JDate   $date   The JDate object with which to return the datetime string.
-	 * @param   bool    $local  True to return the date string in the local time zone, false to return it in GMT.
+	 * @param   string  $tableName  The name of the database table to drop.
+	 * @param   bool    $ifExists   Optionally specify that the table must exist before it is dropped.
 	 *
-	 * @return  string  The datetime string in the format recognized for the database system.
-	 *
+	 * @return  JDatabaseSQLSrv  Returns this object to support chaining.
 	 * @since   11.1
-	 * @link    http://dev.mysql.com/doc/refman/5.0/en/datetime.html
 	 */
 	function dropTable($tableName, $ifExists = true)
 	{
@@ -205,18 +203,18 @@ class JDatabaseMySQL extends JDatabase
 	/**
 	 * Gets an exporter class object.
 	 *
-	 * @return  JDatbaseExporterMySQL  An exporter object.
+	 * @return  JDatabaseExporterMySQL  An exporter object.
 	 *
 	 * @since   11.1
 	 */
 	public function getExporter()
 	{
 		// Make sure we have an exporter class for this driver.
-		if (!class_exists('JDatbaseExporterMySQL')) {
+		if (!class_exists('JDatabaseExporterMySQL')) {
 			throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_EXPORTER'));
 		}
 
-		$o = new JDatbaseExporterMySQL;
+		$o = new JDatabaseExporterMySQL;
 		$o->setDbo($this);
 
 		return $o;
@@ -225,18 +223,18 @@ class JDatabaseMySQL extends JDatabase
 	/**
 	 * Gets an importer class object.
 	 *
-	 * @return  JDatbaseImporterMySQL  An importer object.
+	 * @return  JDatabaseImporterMySQL  An importer object.
 	 *
 	 * @since   11.1
 	 */
 	public function getImporter()
 	{
 		// Make sure we have an importer class for this driver.
-		if (!class_exists('JDatbaseImporterMySQL')) {
+		if (!class_exists('JDatabaseImporterMySQL')) {
 			throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_IMPORTER'));
 		}
 
-		$o = new JDatbaseImporterMySQL;
+		$o = new JDatabaseImporterMySQL;
 		$o->setDbo($this);
 
 		return $o;

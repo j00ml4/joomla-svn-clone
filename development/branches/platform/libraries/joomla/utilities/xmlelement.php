@@ -12,9 +12,9 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Wrapper class for php SimpleXMLElement.
  *
- * @package     Joomla.Platform
+ * @package		Joomla.Platform
  * @subpackage  Utilities
- * @since       11.1
+ * @since		11.1
  */
 class JXMLElement extends SimpleXMLElement
 {
@@ -23,7 +23,7 @@ class JXMLElement extends SimpleXMLElement
 	 *
 	 * Warning: don't use getName() as it's broken up to php 5.2.3
 	 *
-	 * @return    string
+	 * @return	string
 	 */
 	public function name()
 	{
@@ -38,7 +38,7 @@ class JXMLElement extends SimpleXMLElement
 	/**
 	 * Legacy method to get the element data.
 	 *
-	 * @return    string
+	 * @return		string
 	 * @deprecated	1.6 - Feb 5, 2010
 	 */
 	public function data()

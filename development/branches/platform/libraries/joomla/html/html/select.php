@@ -13,9 +13,9 @@ defined('JPATH_PLATFORM') or die;
  * Utility class for creating HTML select lists
  *
  * @static
- * @package     Joomla.Platform
- * @subpackage  HTML
- * @since       11.1
+ * @package		Joomla.Platform
+ * @subpackage	HTML
+ * @since		11.1
  */
 abstract class JHtmlSelect
 {
@@ -41,10 +41,10 @@ abstract class JHtmlSelect
 	/**
 	* Generates a yes/no radio list.
 	*
-	* @param     string The value of the HTML name attribute
-	* @param     string Additional HTML attributes for the <select> tag
-	* @param     mixed The key that is selected
-	* @return    string   HTML for the radio list
+	* @param string The value of the HTML name attribute
+	* @param string Additional HTML attributes for the <select> tag
+	* @param mixed The key that is selected
+	* @return string HTML for the radio list
 	*/
 	public static function booleanlist(
 		$name, $attribs = null, $selected = null, $yes = 'JYES', $no = 'JNO', $id = false
@@ -59,9 +59,9 @@ abstract class JHtmlSelect
 	/**
 	 * Generates an HTML selection list.
 	 *
-	 * @param     array    An array of objects, arrays, or scalars.
-	 * @param     string  The value of the HTML name attribute.
-	 * @param     mixed    Additional HTML attributes for the <select> tag. This
+	 * @param	array	An array of objects, arrays, or scalars.
+	 * @param	string  The value of the HTML name attribute.
+	 * @param	mixed	Additional HTML attributes for the <select> tag. This
 	 * 					can be an array of attributes, or an array of options. Treated as options
 	 * 					if it is the last argument passed. Valid options are:
 	 * 						Format options, see {@see JHtml::$formatOptions}.
@@ -134,10 +134,10 @@ abstract class JHtmlSelect
 	/**
 	 * Generates a grouped HTML selection list from nested arrays.
 	 *
-	 * @param     array    An array of groups, each of which is an array of
+	 * @param	array	An array of groups, each of which is an array of
 	 * options.
-	 * @param     string  The value of the HTML name attribute
-	 * @param     array    Options, an array of key/value pairs. Valid options are:
+	 * @param	string  The value of the HTML name attribute
+	 * @param	array	Options, an array of key/value pairs. Valid options are:
 	 * 					Format options, {@see JHtml::$formatOptions}.
 	 * 					Selection options. See {@see JTtmlSelect::options()}.
 	 * 					group.id: The property in each group to use as the group id
@@ -335,15 +335,11 @@ abstract class JHtmlSelect
 	/**
 	 * Create a placeholder for an option group.
 	 *
-	 * @param     string  $text    The text for the option
-	 * @param     string  $optkey  The returned object property name for the value
-	 * @param     string  $optText The returned object property name for the text
-	 * 
-	 * @see JHtmlSelect::groupedList()
-	 * 
-	 * @return    object
-	 * @since     11.1
-	 * @deprecated         Use JHtmlSelect::groupedList()
+	 * @deprecated From version 1.6. See {@see JHtmlSelect::groupedList()}.
+	 * @param	string  The text for the option
+	 * @param	string  The returned object property name for the value
+	 * @param	string  The returned object property name for the text
+	 * @return  object
 	 */
 	public static function optgroup($text, $optKey = 'value', $optText = 'text')
 	{
@@ -562,13 +558,13 @@ abstract class JHtmlSelect
 				$text = $element;
 			}
 
-			//
-			// The use of options that contain optgroup HTML elements was
-			// somewhat hacked for J1.5. J1.6 introduces the grouplist() method
-			// to handle this better. The old solution is retained through the
-			// "groups" option, which defaults true in J1.6, but should be
-			// deprecated at some point in the future.
-
+			/*
+			 * The use of options that contain optgroup HTML elements was
+			 * somewhat hacked for J1.5. J1.6 introduces the grouplist() method
+			 * to handle this better. The old solution is retained through the
+			 * "groups" option, which defaults true in J1.6, but should be
+			 * deprecated at some point in the future.
+			 */
 			$key = (string) $key;
 			if ($options['groups'] && $key == '<OPTGROUP>') {
 				$html .= $baseIndent . '<optgroup label="'

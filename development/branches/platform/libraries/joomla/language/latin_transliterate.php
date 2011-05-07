@@ -9,8 +9,8 @@
 
 defined('JPATH_PLATFORM') or die;
 /**
- * @package     Joomla.Platform
- * @subpackage  Language
+ * @package		Joomla.Platform
+ * @subpackage	Language
  * @static
  * @since   11.1
  */

@@ -39,12 +39,13 @@ class JDatabaseQueryElement
 	/**
 	 * Constructor.
 	 *
-	 * @param     string   $name		The name of the element.
-	 * @param     mixed    $elements	String or array.
-	 * @param     string   $glue		The glue for elements.
+	 * @param   string	$name      The name of the element.
+	 * @param   mixed	$elements  String or array.
+	 * @param   string	$glue      The glue for elements.
 	 *
-	 * @return    object   JDatabaseQueryElement
-	 * @since     11.1
+	 * @return  JDatabaseQueryElement
+	 *
+	 * @since   11.1
 	 */
 	public function __construct($name, $elements, $glue = ',')
 	{
@@ -58,8 +59,9 @@ class JDatabaseQueryElement
 	/**
 	 * Magic function to convert the query element to a string.
 	 *
-	 * @return    string
-	 * @since     11.1
+	 * @return  string
+	 *
+	 * @since   11.1
 	 */
 	public function __toString()
 	{
@@ -74,10 +76,11 @@ class JDatabaseQueryElement
 	/**
 	 * Appends element parts to the internal list.
 	 *
-	 * @param     mixed    String or array.
+	 * @param   mixed  String or array.
 	 *
-	 * @return    void
-	 * @since     11.1
+	 * @return  void
+	 *
+	 * @since   11.1
 	 */
 	public function append($elements)
 	{

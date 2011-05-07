@@ -12,9 +12,9 @@ defined('JPATH_PLATFORM') or die;
 /**
 * WINCACHE session storage handler for PHP
 *
-* @package     Joomla.Platform
-* @subpackage  Session
-* @since       11.1
+* @package		Joomla.Platform
+* @subpackage	Session
+* @since		11.1
 * @see http://www.php.net/manual/en/function.session-set-save-handler.php
 */
 class JSessionStorageWincache extends JSessionStorage

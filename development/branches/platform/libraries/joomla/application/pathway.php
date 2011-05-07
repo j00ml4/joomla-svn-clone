@@ -12,25 +12,23 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Class to maintain a pathway.
  *
- * The user's navigated path within the application.
+ * Main example of use so far is the mod_breadcrumbs module that keeps track of
+ * the user's navigated path within the Joomla application.
  *
- * @package     Joomla.Platform
- * @subpackage  Application
- * @since       11.1
+ * @abstract
+ * @package		Joomla.Platform
+ * @subpackage	Application
+ * @since		11.1
  */
 class JPathway extends JObject
 {
 	/**
 	 * Array to hold the pathway item objects
-	 * @var     array
-	 * @since   11.1
 	 */
 	protected $_pathway = null;
 
 	/**
 	 * Integer number of items in the pathway
-	 * @var     integer
-	 * @since   11.1
 	 */
 	protected $_count = 0;
 
@@ -46,11 +44,11 @@ class JPathway extends JObject
 	/**
 	 * Returns a JPathway object
 	 *
-	 * @param     string   $client  The name of the client
-	 * @param     array    $options An associative array of options
-	 * 
-	 * @return    JPathway          A JPathway object.
-	 * @since     11.1
+	 * @param	string		$client  The name of the client
+	 * @param	array		$options An associative array of options
+	 *
+	 * @return	JPathway	A pathway object.
+	 * @since	11.1
 	 */
 	public static function getInstance($client, $options = array())
 	{
@@ -89,7 +87,7 @@ class JPathway extends JObject
 	/**
 	 * Return the JPathWay items array
 	 *
-	 * @return    array    Array of pathway items
+	 * @return array Array of pathway items
 	 * @since   11.1
 	 */
 	public function getPathway()
@@ -103,10 +101,9 @@ class JPathway extends JObject
 	/**
 	 * Set the JPathway items array.
 	 *
-	 * @param     array    $pathway	An array of pathway objects.
-	 * 
-	 * @return    array    The previous pathway data.
-	 * @since     11.1
+	 * @param	array	$pathway	An array of pathway objects.
+	 * @return	array	The previous pathway data.
+	 * @since	11.1
 	 */
 	public function setPathway($pathway)
 	{
@@ -122,7 +119,7 @@ class JPathway extends JObject
 	/**
 	 * Create and return an array of the pathway names.
 	 *
-	 * @return    array    Array of names of pathway items
+	 * @return array Array of names of pathway items
 	 * @since   11.1
 	 */
 	public function getPathwayNames()
@@ -142,10 +139,10 @@ class JPathway extends JObject
 	/**
 	 * Create and add an item to the pathway.
 	 *
-	 * @param     string   $name
-	 * @param     string   $link
-	 * 
-	 * @return    boolean  True on success
+	 * @param	string	$name
+	 * @param	string	$link
+	 *
+	 * @return	boolean	True on success
 	 * @since   11.1
 	 */
 	public function addItem($name, $link='')
@@ -164,10 +161,9 @@ class JPathway extends JObject
 	/**
 	 * Set item name.
 	 *
-	 * @param     integer  $id
-	 * @param     string   $name
-	 * 
-	 * @return    boolean  True on success
+	 * @param	integer $id
+	 * @param	string	$name
+	 * @return	boolean	True on success
 	 * @since   11.1
 	 */
 	public function setItemName($id, $name)
@@ -186,10 +182,10 @@ class JPathway extends JObject
 	/**
 	 * Create and return a new pathway object.
 	 *
-	 * @param     string   $name  Name of the item
-	 * @param     string   $link  Link to the item
-	 * 
-	 * @return    JPathway        Pathway item object
+	 * @param string $name Name of the item
+	 * @param string $link Link to the item
+	 *
+	 * @return object Pathway item object
 	 * @since   11.1
 	 */
 	protected function _makeItem($name, $link)

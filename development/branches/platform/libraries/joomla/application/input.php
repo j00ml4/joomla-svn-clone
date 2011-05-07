@@ -54,6 +54,8 @@ class JInput
 	 * @param   array  $source   Source data (Optional, default is $_REQUEST)
 	 * @param   array  $options  Array of configuration parameters (Optional)
 	 *
+	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	public function __construct($source = null, $options = array())
@@ -80,6 +82,7 @@ class JInput
 	 * @param   mixed   $name  Name of the input object to retrieve.
 	 *
 	 * @return  JInput  The request input object
+	 *
 	 * @since   11.1
 	 */
 	public function __get($name)
@@ -111,6 +114,7 @@ class JInput
 	 * @param   string  $filter   Filter to apply to the value.
 	 *
 	 * @return  mixed  The filtered input value.
+	 *
 	 * @since   11.1
 	 */
 	public function get($name, $default = null, $filter = 'cmd')
@@ -125,10 +129,11 @@ class JInput
 	/**
 	 * Gets an array of values from the request.
 	 *
-	 * @param   array    $vars        Associative array of keys and filter types to apply.
-	 * @param   mixed    $datasource  Array to retrieve data from, or null
+	 * @param   array   $vars        Associative array of keys and filter types to apply.
+	 * @param	mixed	$datasource  Array to retrieve data from, or null
 	 *
-	 * @return  mixed     The filtered input data.
+	 * @return  mixed  The filtered input data.
+	 *
 	 * @since   11.1
 	 */
 	public function getArray($vars, $datasource = null)
@@ -161,6 +166,7 @@ class JInput
 	 * @param   mixed   $value  Value to assign to the input.
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	public function set($name, $value)
@@ -174,7 +180,8 @@ class JInput
 	 * @param   mixed    $name     Name of the value to get.
 	 * @param   string   $default  Default value to return if variable does not exist.
 	 *
-	 * @return  boolean  The filtered boolean input value.
+	 * @return  bool     The filtered boolean input value.
+	 *
 	 * @since   11.1
 	 */
 	public function __call($name, $arguments)
@@ -196,6 +203,7 @@ class JInput
 	 * Gets the request method.
 	 *
 	 * @return  string     The request method.
+	 *
 	 * @since   11.1
 	 */
 	public function getMethod($name, $arguments)

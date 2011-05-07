@@ -44,8 +44,7 @@ class JUpdaterCollection extends JUpdateAdapter {
 	/**
 	 * Gets the reference to the current direct parent
 	 *
-	 * @return    object
-	 * @since     11.1
+	 * @return object
 	 */
 	protected function _getStackLocation()
 	{
@@ -55,7 +54,7 @@ class JUpdaterCollection extends JUpdateAdapter {
 
 	/**
 	 * Get the parent tag
-	 * @return    string   parent
+	 * @return string parent
 	 */
 	protected function _getParent()
 	{

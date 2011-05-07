@@ -53,14 +53,14 @@ class JUtility
 	/**
 	 * Sends mail to administrator for approval of a user submission
 	 *
-	 * @param     string   $adminName	Name of administrator
-	 * @param     string   $adminEmail	Email address of administrator
-	 * @param     string   $email		[NOT USED TODO: Deprecate?]
-	 * @param     string   $type		Type of item to approve
-	 * @param     string   $title		Title of item to approve
-	 * @param     string   $author		Author of item to approve
+	 * @param	string	$adminName	Name of administrator
+	 * @param	string	$adminEmail	Email address of administrator
+	 * @param	string	$email		[NOT USED TODO: Deprecate?]
+	 * @param	string	$type		Type of item to approve
+	 * @param	string	$title		Title of item to approve
+	 * @param	string	$author		Author of item to approve
 	 *
-	 * @return    boolean  True on success
+	 * @return	boolean True on success
 	 *
 	 * @deprecated  1.6
 	 * @see			JMail::sendAdminMail()
@@ -78,9 +78,9 @@ class JUtility
 	/**
 	 * Provides a secure hash based on a seed
 	 *
-	 * @param     string   $seed	Seed string.
+	 * @param	string	$seed	Seed string.
 	 *
-	 * @return    string
+	 * @return	string
 	 *
 	 * @deprecated  1.6
 	 * @see			JApplication:getHash()
@@ -95,9 +95,9 @@ class JUtility
 	/**
 	 * Method to determine a hash for anti-spoofing variable names
 	 *
-	 * @return    string   Hashed var name
+	 * @return	string	Hashed var name
 	 *
-	 * @since       11.1
+	 * @since		11.1
 	 * @deprecated  1.6
 	 * @see			JApplication:getHash()
 	 */
@@ -109,13 +109,13 @@ class JUtility
 	}
 
 	/**
-	 * Method to extract key/value pairs out of a string with XML style attributes
+	 * Method to extract key/value pairs out of a string with xml style attributes
 	 *
-	 * @param     string   $string	String containing XML style attributes
+	 * @param	string	$string	String containing xml style attributes
 	 *
-	 * @return    array    Key/Value pairs for the attributes
+	 * @return	array	Key/Value pairs for the attributes
 	 *
-	 * @since       11.1
+	 * @since		11.1
 	 */
 	public static function parseAttributes($string)
 	{
@@ -140,9 +140,9 @@ class JUtility
 	/**
 	 * Method to determine if the host OS is  Windows
 	 *
-	 * @return    boolean  True if Windows OS.
+	 * @return	boolean	True if Windows OS.
 	 *
-	 * @since       11.1
+	 * @since		11.1
 	 * @deprecated  1.6
 	 * @see			JApplication::isWinOS()
 	 */
@@ -156,12 +156,12 @@ class JUtility
 	/**
 	 * Method to dump the structure of a variable for debugging purposes
 	 *
-	 * @param     mixed    $var		A variable
-	 * @param     boolean  $htmlSafe	True to ensure all characters are htmlsafe
+	 * @param	mixed	$var		A variable
+	 * @param	boolean	$htmlSafe	True to ensure all characters are htmlsafe
 	 *
-	 * @return    string
+	 * @return	string
 	 *
-	 * @since       11.1
+	 * @since		11.1
 	 * @deprecated  1.6
 	 */
 	public static function dump(&$var, $htmlSafe = true)
@@ -175,12 +175,12 @@ class JUtility
 	 * Prepend a reference to an element to the beginning of an array.
 	 * Renumbers numeric keys, so $value is always inserted to $array[0]
 	 *
-	 * @param     $array array
-	 * @param     $value mixed
+	 * @param	$array array
+	 * @param	$value mixed
 	 *
-	 * @return   integer  
+	 * @return	int
 	 *
-	 * @since       11.1
+	 * @since		11.1
 	 * @deprecated  1.6
 	 * @see			http://www.php.net/manual/en/function.array-unshift.php#40270
 	 */
@@ -195,11 +195,11 @@ class JUtility
 	/**
 	 * Return the byte value of a particular string
 	 *
-	 * @param     string   $val	String optionally with G, M or K suffix
+	 * @param	string	$val	String optionally with G, M or K suffix
 	 *
-	 * @return    integer  size in bytes
+	 * @return	int size in bytes
 	 *
-	 * @since       11.1
+	 * @since		11.1
 	 * @deprecated  1.6
 	 * @see			JHtmlNumber::bytes
 	 */

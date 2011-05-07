@@ -83,9 +83,9 @@ abstract class JUserHelper
 	/**
 	 * Method to get a list of groups a user is in.
 	 *
-	 * @param     integer  $userId		The id of the user.
-	 * @return    mixed    	Array on success, JException on error.
-	 * @since     11.1
+	 * @param	integer		$userId		The id of the user.
+	 * @return	mixed		Array on success, JException on error.
+	 * @since	11.1
 	 */
 	public static function getUserGroups($userId)
 	{
@@ -98,10 +98,10 @@ abstract class JUserHelper
 	/**
 	 * Method to remove a user from a group.
 	 *
-	 * @param     integer  $userId		The id of the user.
-	 * @param     integer  $groupId	The id of the group.
-	 * @return    mixed    	Boolean true on success, JException on error.
-	 * @since     11.1
+	 * @param	integer		$userId		The id of the user.
+	 * @param	integer		$groupId	The id of the group.
+	 * @return	mixed		Boolean true on success, JException on error.
+	 * @since	11.1
 	 */
 	public static function removeUserFromGroup($userId, $groupId)
 	{
@@ -280,17 +280,17 @@ abstract class JUserHelper
 	/**
 	 * Formats a password using the current encryption.
 	 *
-	 * @param     string   $plaintext	The plaintext password to encrypt.
-	 * @param     string   $salt		The salt to use to encrypt the password. []
+	 * @param	string	$plaintext	The plaintext password to encrypt.
+	 * @param	string	$salt		The salt to use to encrypt the password. []
 	 *								If not present, a new salt will be
 	 *								generated.
-	 * @param     string   $encryption	The kind of pasword encryption to use.
+	 * @param	string	$encryption	The kind of pasword encryption to use.
 	 *								Defaults to md5-hex.
-	 * @param     boolean  $show_encrypt  Some password systems prepend the kind of
+	 * @param	boolean	$show_encrypt  Some password systems prepend the kind of
 	 *								encryption to the crypted password ({SHA},
 	 *								etc). Defaults to false.
 	 *
-	 * @return    string    The encrypted password.
+	 * @return string  The encrypted password.
 	 */
 	public static function getCryptedPassword($plaintext, $salt = '', $encryption = 'md5-hex', $show_encrypt = false)
 	{
@@ -376,15 +376,15 @@ abstract class JUserHelper
 	 * of an existing password, or for encryption types that use the plaintext
 	 * in the generation of the salt.
 	 *
-	 * @param     string   $encryption  The kind of pasword encryption to use.
+	 * @param string $encryption  The kind of pasword encryption to use.
 	 *							Defaults to md5-hex.
-	 * @param     string   $seed		The seed to get the salt from (probably a
+	 * @param string $seed		The seed to get the salt from (probably a
 	 *							previously generated password). Defaults to
 	 *							generating a new seed.
-	 * @param     string   $plaintext	The plaintext password that we're generating
+	 * @param string $plaintext	The plaintext password that we're generating
 	 *							a salt for. Defaults to none.
 	 *
-	 * @return    string    The generated or extracted salt.
+	 * @return string  The generated or extracted salt.
 	 */
 	public static function getSalt($encryption = 'md5-hex', $seed = '', $plaintext = '')
 	{
@@ -462,9 +462,10 @@ abstract class JUserHelper
 	/**
 	 * Generate a random password
 	 *
-	 * @param     integer  $length	Length of the password to generate
-	 * @return    string   		Random Password
-	 * @since     11.1
+	 * @static
+	 * @param	int		$length	Length of the password to generate
+	 * @return	string			Random Password
+	 * @since	11.1
 	 */
 	public static function genRandomPassword($length = 8)
 	{

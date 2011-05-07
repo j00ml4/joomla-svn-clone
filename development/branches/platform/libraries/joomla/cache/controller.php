@@ -12,31 +12,28 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Public cache handler
  *
- * @package     Joomla.Platform
- * @subpackage  Cache
- * @since       11.1
+ * @abstract
+ * @package		Joomla.Platform
+ * @subpackage	Cache
+ * @since		11.1
  */
-abstract class JCacheController
+class JCacheController
 {
 	/**
-	 * 
-	 * @var
-	 * @since     11.1
+	 * @since	11.1
 	 */
 	public $cache;
 
 	/**
-	 * Array of options
-	 * @var     array
-	 * @since   11.1
+	 * @since	11.1
 	 */
 	public $options;
 
 	/**
 	 * Constructor
 	 *
-	 * @param     array    $options Array of options
-	 * @since     11.1
+	 * @param	array	$options	options
+	 * @since	11.1
 	 */
 	public function __construct($options)
 	{
@@ -52,10 +49,7 @@ abstract class JCacheController
 	}
 
 	/**
-	 * 
-	 * @param     ......$name
-	 * @param     ......$arguments
-	 * @since     11.1
+	 * @since	11.1
 	 */
 	public function __call ($name, $arguments)
 	{
@@ -66,11 +60,10 @@ abstract class JCacheController
 	/**
 	 * Returns a reference to a cache adapter object, always creating it
 	 *
-	 * @param     string   $type     The cache object type to instantiate; default is output.
-	 * @param     array    $options  Array of options
-	 * 
-	 * @return    JCache             A JCache object
-	 * @since     11.1
+	 * @param	string	$type	The cache object type to instantiate
+	 *
+	 * @return	object	A JCache object
+	 * @since	11.1
 	 */
 	public static function getInstance($type = 'output', $options = array())
 	{
@@ -97,10 +90,10 @@ abstract class JCacheController
 	/**
 	 * Set caching enabled state
 	 *
-	 * @param     boolean  $enabled  True to enable caching
-	 * 
-	 * @return    void
-	 * @since     11.1
+	 * @param	boolean	$enabled	True to enable caching
+	 *
+	 * @return	void
+	 * @since	11.1
 	 */
 	public function setCaching($enabled)
 	{
@@ -110,10 +103,10 @@ abstract class JCacheController
 	/**
 	 * Set cache lifetime
 	 *
-	 * @param     integer  $lt  Cache lifetime
-	 * 
-	 * @return    void
-	 * @since     11.1
+	 * @param	int		$lt	Cache lifetime
+	 *
+	 * @return	void
+	 * @since	11.1
 	 */
 	public function setLifeTime($lt)
 	{
@@ -124,10 +117,9 @@ abstract class JCacheController
 	 * Add a directory where JCache should search for controllers. You may
 	 * either pass a string or an array of directories.
 	 *
-	 * @param     string   A path to search.
-	 * 
-	 * @return    array    An array with directory elements
-	 * @since     11.1
+	 * @param	string	A path to search.
+	 * @return	array	An array with directory elements
+	 * @since	11.1
 	 */
 	public static function addIncludePath($path='')
 	{
@@ -146,11 +138,10 @@ abstract class JCacheController
 	/**
 	 * Get stored cached data by id and group
 	 *
-	 * @param     string   $id     The cache data id
-	 * @param     string   $group  The cache data group
-	 * 
-	 * @return    mixed    False on no result, cached object otherwise
-	 * @since     11.1
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @return	mixed	False on no result, cached object otherwise
+	 * @since	11.1
 	 */
 	public function get($id, $group=null)
 	{
@@ -178,12 +169,11 @@ abstract class JCacheController
 	/**
 	 * Store data to cache by id and group
 	 *
-	 * @param     string   $id      The cache data id
-	 * @param     string   $group   The cache data group
-	 * @param     mixed    $data    The data to store
-	 * 
-	 * @return    boolean  True if cache was stored
-	 * @since     11.1
+	 * @param	string	$id		The cache data id
+	 * @param	string	$group	The cache data group
+	 * @param	mixed	$data	The data to store
+	 * @return	boolean	True if cache was stored
+	 * @since	11.1
 	 */
 	public function store($data, $id, $group=null)
 	{
