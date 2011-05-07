@@ -26,13 +26,14 @@ class MediaType {
         $this->media = $media;
         $this->thumb = $media;
         $this->params = &$params;
-
+		
         // Fix size
         $params['width'] = 'width:' . $params['width'] . 'px;';
         $params['height'] = 'height:' . $params['height'] . 'px;';
-
-        $params['thumb_width'] = 'width:' . $params['thumb_width'] . 'px;';
-        $params['thumb_height'] = 'height:' . $params['thumb_height'] . 'px;';
+		
+        
+      	$params['thumbwidth'] = 'width:' . $params['thumbwidth'] . 'px;';
+       	$params['thumbheight'] = 'height:' . $params['thumbheight'] . 'px;';
     }
 
     /**
@@ -55,7 +56,7 @@ class MediaType {
      */
     public function getThumb() {
         return '<img src="' . $this->thumb . '"' .
-        'style="' . $this->params['thumb_width'] . $this->params['thumb_height'] . '" />';
+        'style="' . $this->params['thumbwidth'] . $this->params['thumbheight'] . '" />';
     }
 
     /**

@@ -3,7 +3,7 @@
  * For JPG, GIF, PNG...
  */
 class MediaTypeImage extends MediaType{
-    public function getMedia(){
+    public function getMedia(){    	
     	return "<img src='".$this->media."'".
                     "style='".$this->params['width']." ".$this->params['height']."' >";
     }
