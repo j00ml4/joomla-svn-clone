@@ -1,17 +1,4 @@
 <?php 
-class MediaTypemp3_old extends MediaType{
-	
-	public function getMedia($media='', $params=array()){
-				
-        return $this->html4Player($this->media, $this->params);
-		$document = &JFactory::getDocument();
-		
-    	//	return "$text <div id='audio' style='display:block;width:800px;height:50px' href='$media'></div> ";
-    	//return "<div id='audio' style='display:block;".$params['width'].";".$params['height']."' href='".$media."' ></div> $text" ;
-    }
-
-}
-
 class MediaTypemp3 extends MediaType {
 
     /**
@@ -36,10 +23,10 @@ class MediaTypemp3 extends MediaType {
 		$document = &JFactory::getDocument();
 		$document->addScript( 'media/mediagalleries/player/flowplayer-3.2.6.min.js' );
 		$params['autostart'] = isset($params['autostart'])?'false':(boolean) $params['autostart'];
-		
+		$height="height:32px;";
 		$html ='<div
 				href="'.$this->media.'" 
-				style="display:block;'.$params['width'].';'.$params['height'].';" 
+				style="display:block;'.$params['width'].';'.$height.';" 
 				id="mp3player"></div>';
 		
 		$tag='<script language="JavaScript">
