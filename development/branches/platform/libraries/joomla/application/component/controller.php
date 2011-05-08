@@ -19,7 +19,7 @@ defined('JPATH_PLATFORM') or die;
  * @subpackage  Application
  * @since       11.1
  */
-abstract class JController extends JObject
+class JController extends JObject
 {
 	/**
 	 * ACO Section for the controller.

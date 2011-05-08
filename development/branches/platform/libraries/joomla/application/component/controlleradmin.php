@@ -21,7 +21,7 @@ jimport('joomla.application.component.controller');
  * @subpackage  Application
  * @since       11.1
  */
-abstract class JControllerAdmin extends JController
+class JControllerAdmin extends JController
 {
 	/**
 	 * @var    string	The URL option for the component.
