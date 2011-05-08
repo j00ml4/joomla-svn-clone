@@ -25,7 +25,7 @@ JLoader::register('JCacheController', dirname(__FILE__).DS.'controller.php');
 
 // Almost everything must be public here to allow overloading.
 
-abstract class JCache extends JObject
+class JCache extends JObject
 {
 	/**
 	 * Storage handler

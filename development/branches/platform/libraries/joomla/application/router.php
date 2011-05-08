@@ -303,7 +303,9 @@ class JRouter extends JObject
 	 * @return             Raw Route
 	 * @since     11.1
 	 */
-	protected abstract function _buildRawRoute(&$uri);
+	protected function _buildRawRoute(&$uri)
+	{
+	}
 
 	/**
 	 * Function to build a sef route
@@ -313,7 +315,10 @@ class JRouter extends JObject
 	 * @return    string   The SEF route
 	 * @since   11.1
 	 */
-	protected abstract function _buildSefRoute(&$uri);
+	protected function _buildSefRoute(&$uri)
+	{
+		
+	}
 	
 	/**
 	 * Process the parsed router variables based on custom defined rules

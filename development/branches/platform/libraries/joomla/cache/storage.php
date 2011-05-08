@@ -16,7 +16,7 @@ defined('JPATH_PLATFORM') or die;
  * @subpackage  Cache
  * @since       11.1
  */
-abstract class JCacheStorage
+class JCacheStorage
 {
 	/**
 	 * Rawname

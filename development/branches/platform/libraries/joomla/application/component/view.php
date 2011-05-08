@@ -18,7 +18,7 @@ defined('JPATH_PLATFORM') or die;
  * @subpackage  Application
  * @since       11.1
  */
-abstract class JView extends JObject
+class JView extends JObject
 {
 	/**
 	 * The name of the view

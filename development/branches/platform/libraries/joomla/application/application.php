@@ -25,7 +25,7 @@ jimport('joomla.log.log');
  * @since       11.1
  */
 
-abstract class JApplication extends JObject
+class JApplication extends JObject
 {
 	/**
 	 * The client identifier.

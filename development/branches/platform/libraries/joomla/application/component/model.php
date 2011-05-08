@@ -410,7 +410,10 @@ abstract class JModel extends JObject
 	 * @return    void
 	 * @since     11.1
 	 */
-	protected abstract function populateState();
+	protected function populateState()
+	{
+
+	}
 
 	/**
 	 * Method to set the database connector object
