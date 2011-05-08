@@ -17,11 +17,12 @@ jimport('joomla.base.observable');
  * This is the Observable part of the Observer design pattern
  * for the event architecture.
  *
- * @package		Joomla.Platform
- * @subpackage	Event
- * @since		11.1
- * @see			JPlugin
- * @link		http://docs.joomla.org/Tutorial:Plugins Plugin tutorials
+ * @package     Joomla.Platform
+ * @subpackage  Event
+ * @since       11.1
+ * 
+ * @see	        JPlugin
+ * @link        http://docs.joomla.org/Tutorial:Plugins Plugin tutorials
  */
 class JDispatcher extends JObservable
 {
@@ -29,8 +30,8 @@ class JDispatcher extends JObservable
 	 * Returns the global Event Dispatcher object, only creating it
 	 * if it doesn't already exist.
 	 *
-	 * @return	JDispatcher		The EventDispatcher object.
-	 * @since	11.1
+	 * @return    object   JDispatcher    The EventDispatcher object.
+	 * @since     11.1
 	 */
 	public static function getInstance()
 	{
@@ -46,11 +47,11 @@ class JDispatcher extends JObservable
 	/**
 	 * Registers an event handler to the event dispatcher
 	 *
-	 * @param	string	$event		Name of the event to register handler for
-	 * @param	string	$handler	Name of the event handler
-	 *
-	 * @return	void
-	 * @since	11.1
+	 * @param     string   $event    Name of the event to register handler for
+	 * @param     string   $handler  Name of the event handler
+	 * 
+	 * @return    void
+	 * @since     11.1
 	 */
 	public function register($event, $handler)
 	{
@@ -76,11 +77,11 @@ class JDispatcher extends JObservable
 	 * Triggers an event by dispatching arguments to all observers that handle
 	 * the event and returning their return values.
 	 *
-	 * @param	string	$event		The event to trigger.
-	 * @param	array	$args		An array of arguments.
-	 *
-	 * @return	array	An array of results from each function call.
-	 * @since	11.1
+	 * @param     string   $event     The event to trigger.
+	 * @param     array    $args      An array of arguments.
+	 * 
+	 * @return    array    An array of results from each function call.
+	 * @since     11.1
 	 */
 	public function trigger($event, $args = array())
 	{

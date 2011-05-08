@@ -18,20 +18,19 @@ jimport('joomla.filesystem.path');
  * Installer helper class
  *
  * @static
- * @package		Joomla.Platform
- * @subpackage	Installer
- * @since		11.1
+ * @package     Joomla.Platform
+ * @subpackage  Installer
+ * @since       11.1
  */
 abstract class JInstallerHelper
 {
 	/**
 	 * Downloads a package
 	 *
-	 * @static
-	 * @param string URL of file to download
-	 * @param string Download target filename [optional]
-	 *
-	 * @return mixed Path to downloaded package or boolean false on failure
+	 * @param     string URL of file to download
+	 * @param     string Download target filename [optional]
+	 * 
+	 * @return    mixed    Path to downloaded package or boolean false on failure
 	 * @since   11.1
 	 */
 	public static function downloadPackage($url, $target = false)
@@ -104,10 +103,9 @@ abstract class JInstallerHelper
 	 * Unpacks a file and verifies it as a Joomla element package
 	 * Supports .gz .tar .tar.gz and .zip
 	 *
-	 * @static
-	 * @param string $p_filename The uploaded package filename or install directory
-	 *
-	 * @return Array Two elements - extractdir and packagefile
+	 * @param     string   $p_filename The uploaded package filename or install directory
+	 * 
+	 * @return    array    Two elements - extractdir and packagefile
 	 * @since   11.1
 	 */
 	public static function unpack($p_filename)
@@ -175,15 +173,14 @@ abstract class JInstallerHelper
 	/**
 	 * Method to detect the extension type from a package directory
 	 *
-	 * @static
-	 * @param string $p_dir Path to package directory
-	 *
-	 * @return mixed Extension type string or boolean false on fail
+	 * @param     string   $p_dir Path to package directory
+	 * 
+	 * @return    mixed    Extension type string or boolean false on fail
 	 * @since   11.1
 	 */
 	public static function detectType($p_dir)
 	{
-		// Search the install dir for an xml file
+		// Search the install dir for an XML file
 		$files = JFolder::files($p_dir, '\.xml$', 1, true);
 
 		if ( ! count($files))
@@ -220,10 +217,9 @@ abstract class JInstallerHelper
 	/**
 	 * Gets a file name out of a url
 	 *
-	 * @static
-	 * @param string $url URL to get name from
-	 *
-	 * @return mixed String filename or boolean false if failed
+	 * @param     string   $url URL to get name from
+	 * 
+	 * @return    mixed    String filename or boolean false if failed
 	 * @since   11.1
 	 */
 	public static function getFilenameFromURL($url)
@@ -239,11 +235,10 @@ abstract class JInstallerHelper
 	/**
 	 * Clean up temporary uploaded package and unpacked extension
 	 *
-	 * @static
-	 * @param string $package Path to the uploaded package file
-	 * @param string $resultdir Path to the unpacked extension
-	 *
-	 * @return boolean True on success
+	 * @param     string   $package Path to the uploaded package file
+	 * @param     string   $resultdir Path to the unpacked extension
+	 * 
+	 * @return    boolean  True on success
 	 * @since   11.1
 	 */
 	public static function cleanupInstall($package, $resultdir)
@@ -271,9 +266,9 @@ abstract class JInstallerHelper
 	 *
 	 * Splits contents of a sql file into array of discreet queries
 	 * queries need to be delimited with end of statement marker ';'
-	 * @param string
-	 *
-	 * @return array
+	 * @param     string
+	 * 
+	 * @return    array
 	 */
 	public static function splitSql($sql)
 	{
