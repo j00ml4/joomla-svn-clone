@@ -46,7 +46,7 @@ abstract class JDatabase
 	protected $cursor;
 
 	/**
-	 * @var    bool  The database driver debugging state.
+	 * @var    boolean  The database driver debugging state.
 	 * @since  11.1
 	 */
 	protected $debug = false;
@@ -95,12 +95,12 @@ abstract class JDatabase
 
 	/**
 	 * @var    string  The common database table prefix.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $tablePrefix;
 
 	/**
-	 * @var    bool  True if the database engine supports UTF-8 character encoding.
+	 * @var    boolean  True if the database engine supports UTF-8 character encoding.
 	 * @since  11.1
 	 */
 	protected $utf = false;
@@ -143,8 +143,6 @@ abstract class JDatabase
 	 * Constructor.
 	 *
 	 * @param   array  $options  List of options used to configure the connection
-	 *
-	 * @return  void
 	 *
 	 * @since   11.1
 	 */
@@ -353,7 +351,6 @@ abstract class JDatabase
 	 * @param   string  Input SQL string with which to split into individual queries.
 	 *
 	 * @return  array   The queries from the input string separated into an array.
-	 *
 	 * @since   11.1
 	 */
 	public static function splitSql($sql)
@@ -1301,7 +1298,6 @@ abstract class JDatabase
 	 * @param   mixed  $cursor  The optional result set cursor from which to fetch the row.
 	 *
 	 * @return  mixed  Either the next row from the result set or false if there are no more rows.
-	 *
 	 * @since   11.1
 	 */
 	abstract protected function fetchAssoc($cursor = null);

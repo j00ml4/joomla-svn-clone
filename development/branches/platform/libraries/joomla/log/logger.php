@@ -25,7 +25,7 @@ abstract class JLogger
 {
 	/**
 	 * @var    array  Options array for the JLog instance.
-	 * @since  11.1
+	 * @since       11.1
 	 */
 	protected $options = array();
 

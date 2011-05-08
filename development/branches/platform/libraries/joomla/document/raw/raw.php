@@ -12,9 +12,9 @@ defined('JPATH_PLATFORM') or die;
 /**
  * DocumentRAW class, provides an easy interface to parse and display raw output
  *
- * @package		Joomla.Platform
- * @subpackage	Document
- * @since		11.1
+ * @package     Joomla.Platform
+ * @subpackage  Document
+ * @since       11.1
  */
 
 jimport('joomla.document.document');
@@ -25,7 +25,7 @@ class JDocumentRAW extends JDocument
 	/**
 	 * Class constructor
 	 *
-	 * @param	array	$options Associative array of options
+	 * @param     array    $options Associative array of options
 	 */
 	protected function __construct($options = array())
 	{

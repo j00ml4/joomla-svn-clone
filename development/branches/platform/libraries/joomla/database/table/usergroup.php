@@ -14,8 +14,8 @@ jimport('joomla.database.table');
 /**
  * Usergroup table class.
  *
- * @package		Joomla.Platform
- * @subpackage	Database
+ * @package     Joomla.Platform
+ * @subpackage  Database
  * @version		1.0
  */
 class JTableUsergroup extends JTable
@@ -23,9 +23,9 @@ class JTableUsergroup extends JTable
 	/**
 	 * Constructor
 	 *
-	 * @param	object	Database object
-	 * @return	void
-	 * @since	11.1
+	 * @param     object   Database object
+	 * @return    void
+	 * @since     11.1
 	 */
 	public function __construct(&$db)
 	{
@@ -35,8 +35,8 @@ class JTableUsergroup extends JTable
 	/**
 	 * Method to check the current record to save
 	 *
-	 * @return	boolean	True on success
-	 * @since	11.1
+	 * @return    boolean  True on success
+	 * @since     11.1
 	 */
 	public function check()
 	{
@@ -68,11 +68,11 @@ class JTableUsergroup extends JTable
 	/**
 	 * Method to recursively rebuild the nested set tree.
 	 *
-	 * @param	integer	The root of the tree to rebuild.
-	 * @param	integer	The left id to start with in building the tree.
+	 * @param     integer  The root of the tree to rebuild.
+	 * @param     integer  The left id to start with in building the tree.
 	 *
-	 * @return	boolean	True on success
-	 * @since	11.1
+	 * @return    boolean  True on success
+	 * @since     11.1
 	 */
 	public function rebuild($parent_id = 0, $left = 0)
 	{
@@ -121,10 +121,10 @@ class JTableUsergroup extends JTable
 	/**
 	 * Inserts a new row if id is zero or updates an existing row in the database table
 	 *
-	 * @param	boolean		$updateNulls	If false, null object variables are not updated
+	 * @param     boolean  	$updateNulls	If false, null object variables are not updated
 	 *
-	 * @return	boolean		True successful, false otherwise and an internal error message is set
-	 * @since	11.1
+	 * @return    boolean		True successful, false otherwise and an internal error message is set
+	 * @since     11.1
 	 */
 	function store($updateNulls = false)
 	{
@@ -139,10 +139,10 @@ class JTableUsergroup extends JTable
 	/**
 	 * Delete this object and it's dependancies
 	 *
-	 * @param	int		$oid	The primary key of the user group to delete.
+	 * @param     integer  $oid	The primary key of the user group to delete.
 	 *
-	 * @return	mixed	Boolean or Exception.
-	 * @since	11.1
+	 * @return    mixed    Boolean or Exception.
+	 * @since     11.1
 	 */
 	function delete($oid = null)
 	{

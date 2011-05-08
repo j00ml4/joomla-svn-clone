@@ -23,7 +23,7 @@ class JElementSQL extends JElement
 	/**
 	* Element name
 	*
-	* @var		string
+	* @var    string
 	*/
 	protected $_name = 'SQL';
 
