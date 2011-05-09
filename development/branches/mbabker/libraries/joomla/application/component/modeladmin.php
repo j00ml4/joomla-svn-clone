@@ -155,7 +155,7 @@ abstract class JModelAdmin extends JModelForm
 		}
 
 		if (!$done) {
-			$this->setError(JText::_('JGLOBAL_ERROR_INSUFFICIENT_BATCH_INFORMATION'));
+			$this->setError(JText::_('JLIB_APPLICATION_ERROR_INSUFFICIENT_BATCH_INFORMATION'));
 			return false;
 		}
 
@@ -180,7 +180,7 @@ abstract class JModelAdmin extends JModelForm
 		$extension = JRequest::getCmd('option');
 		$user	= JFactory::getUser();
 		if (!$user->authorise('core.edit', $extension)) {
-			$this->setError(JText::_('JGLOBAL_BATCH_CANNOT_EDIT'));
+			$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
 			return false;
 		}
 		
@@ -230,14 +230,14 @@ abstract class JModelAdmin extends JModelForm
 					return false;
 				}
 				else {
-					$this->setError(JText::_('JGLOBAL_BATCH_MOVE_CATEGORY_NOT_FOUND'));
+					$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_MOVE_CATEGORY_NOT_FOUND'));
 					return false;
 				}
 			}
 		}
 
 		if (empty($categoryId)) {
-			$this->setError(JText::_('JGLOBAL_BATCH_MOVE_CATEGORY_NOT_FOUND'));
+			$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_MOVE_CATEGORY_NOT_FOUND'));
 			return false;
 		}
 		
@@ -245,7 +245,7 @@ abstract class JModelAdmin extends JModelForm
 		$extension = JRequest::getCmd('option');
 		$user = JFactory::getUser();
 		if (!$user->authorise('core.create', $extension)) {
-			$this->setError(JText::_('JGLOBAL_BATCH_CANNOT_CREATE'));
+			$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_CREATE'));
 			return false;
 		}
 
@@ -266,7 +266,7 @@ abstract class JModelAdmin extends JModelForm
 				}
 				else {
 					// Not fatal error
-					$this->setError(JText::sprintf('JGLOBAL_BATCH_MOVE_ROW_NOT_FOUND', $pk));
+					$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_BATCH_MOVE_ROW_NOT_FOUND', $pk));
 					continue;
 				}
 			}
@@ -330,14 +330,14 @@ abstract class JModelAdmin extends JModelForm
 					return false;
 				}
 				else {
-					$this->setError(JText::_('JGLOBAL_BATCH_MOVE_CATEGORY_NOT_FOUND'));
+					$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_MOVE_CATEGORY_NOT_FOUND'));
 					return false;
 				}
 			}
 		}
 
 		if (empty($categoryId)) {
-			$this->setError(JText::_('JGLOBAL_BATCH_MOVE_CATEGORY_NOT_FOUND'));
+			$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_MOVE_CATEGORY_NOT_FOUND'));
 			return false;
 		}
 		
@@ -345,12 +345,12 @@ abstract class JModelAdmin extends JModelForm
 		$extension = JRequest::getCmd('option');
 		$user	= JFactory::getUser();
 		if (!$user->authorise('core.create', $extension)) {
-			$this->setError(JText::_('JGLOBAL_BATCH_CANNOT_CREATE'));
+			$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_CREATE'));
 			return false;
 		}
 		
 		if (!$user->authorise('core.edit', $extension)) {
-			$this->setError(JText::_('JGLOBAL_BATCH_CANNOT_EDIT'));
+			$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
 			return false;
 		}
 		
@@ -366,7 +366,7 @@ abstract class JModelAdmin extends JModelForm
 				}
 				else {
 					// Not fatal error
-					$this->setError(JText::sprintf('JGLOBAL_BATCH_MOVE_ROW_NOT_FOUND', $pk));
+					$this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_BATCH_MOVE_ROW_NOT_FOUND', $pk));
 					continue;
 				}
 			}
