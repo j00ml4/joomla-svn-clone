@@ -18,7 +18,7 @@ $color              = $params->get('templatecolor');
 $navposition        = $params->get('navposition');
 
 ?>
-<?php 
+<?php
 $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 ?>
 
@@ -39,7 +39,7 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/position.css" type="text/css" media="screen,projection" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/layout.css" type="text/css" media="screen,projection" />
 		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/print.css" type="text/css" media="Print" />
-		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/<?php echo htmlspecialchars($color); ?>.css" type="text/css" />     
+		<link rel="stylesheet" href="<?php echo $this->baseurl ?>/templates/beez_20/css/<?php echo htmlspecialchars($color); ?>.css" type="text/css" />
 <?php
 	$files = JHtml::_('stylesheet','templates/beez5/css/general.css',null,false,true);
 	if ($files):
@@ -62,19 +62,19 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 		<!--[if IE 7]>
 			<link href="<?php echo $this->baseurl ?>/templates/beez_20/css/ie7only.css" rel="stylesheet" type="text/css" />
 		<![endif]-->
-	
-	
+
+
 <style type="text/css">
 			<!--
 			#errorboxbody
 			{margin:30px}
 			#errorboxbody h2
-			{font-weight:normal; 
+			{font-weight:normal;
 			font-size:1.5em}
-			#searchbox 
-			{background:#eee; 
-			padding:10px; 
-			margin-top:20px; 
+			#searchbox
+			{background:#eee;
+			padding:10px;
+			margin-top:20px;
 			border:solid 1px #ddd
 			}
 			-->
@@ -89,13 +89,13 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 		<div id="back">
 
 		<div id="header">
-		
+
 					<div class="logoheader">
 						<?php
 								$params = JFactory::getApplication()->getTemplate(true)->params;
-								$logo =  $params->get('logo'); 
+								$logo =  $params->get('logo');
 							?>
-						
+
 							<?php jimport( 'joomla.application.module.helper' ); ?>
 
 						 <h1 id="logo">
@@ -110,29 +110,29 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
                                         <?php echo htmlspecialchars($params->get('sitedescription'));?>
                                         </span></h1>
 					</div><!-- end logoheader -->
-	
+
 						<ul class="skiplinks">
 							<li><a href="#wrapper2" class="u2"><?php echo JText::_('TPL_BEEZ2_SKIP_TO_ERROR_CONTENT'); ?></a></li>
 							<li><a href="#nav" class="u2"><?php echo JText::_('TPL_BEEZ2_ERROR_JUMP_TO_NAV'); ?></a></li>
-							
+
 						</ul>
 						<div id="line"></div>
-					
-				
-	
+
+
+
 				</div><!-- end header -->
-		
+
 		<div id="contentarea2" >
-			
-				
+
+
 							<div class="left1" id="nav">
-					
+
 				<h2 class="unseen"><?php echo JText::_('TPL_BEEZ2_NAVIGATION'); ?></h2>
 											<?php $module = JModuleHelper::getModule( 'menu' );
 											echo JModuleHelper::renderModule( $module);	?>
-				
+
 							</div>
-					
+
 					<!-- end navi -->
 			<div id="wrapper2">
 			<div id="errorboxbody">
@@ -146,8 +146,8 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 									echo JModuleHelper::renderModule( $module);	?>
 									</div>
 								<?php endif; ?>
-								<div>	 
-								<p><a href="<?php echo $this->baseurl; ?>/index.php" title="<?php echo JText::_('JERROR_LAYOUT_GO_TO_THE_HOME_PAGE'); ?>"><?php echo JText::_('JERROR_LAYOUT_HOME_PAGE'); ?></a></p>	
+								<div>
+								<p><a href="<?php echo $this->baseurl; ?>/index.php" title="<?php echo JText::_('JERROR_LAYOUT_GO_TO_THE_HOME_PAGE'); ?>"><?php echo JText::_('JERROR_LAYOUT_HOME_PAGE'); ?></a></p>
 								</div>
 
 						<h3><?php echo JText::_('JERROR_LAYOUT_PLEASE_CONTACT_THE_SYSTEM_ADMINISTRATOR'); ?></h3>
@@ -161,14 +161,14 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 						<?php if ($this->debug) :
 							echo $this->renderBacktrace();
 						endif; ?>
-					
+
 
 			</div>  <!--end all -->
-			
+
 			</div>
-			</div> 
+			</div>
 			 <div id="footer-outer">
-		
+
 			<div id="footer-sub">
 
 
@@ -179,18 +179,18 @@ $templateparams	=  JFactory::getApplication()->getTemplate(true)->params;
 
                                 </div><!-- end footer -->
                          </div><!-- end footer-sub -->
-              
+
                        </div>
-            
+
 
 
 </body>
 </html>
 <?php } else { ?>
-<?php 
+<?php
 if (!isset($this->error)) {
 	$this->error = JError::raiseWarning(404, JText::_('JERROR_ALERTNOAUTHOR'));
-	$this->debug = false; 
+	$this->debug = false;
 }
 ?>
 	<link rel="stylesheet" href="<?php echo $this->baseurl; ?>/templates/system/css/error.css" type="text/css" />
