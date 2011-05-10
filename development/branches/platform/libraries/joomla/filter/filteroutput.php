@@ -12,7 +12,6 @@ defined('JPATH_PLATFORM') or die;
 /**
  * JFilterOutput
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  Filter
  * @since       11.1
@@ -55,9 +54,9 @@ class JFilterOutput
 	/**
 	 * This method processes a string and replaces all instances of & with &amp; in links only.
 	 *
-	 * @param   string   $input	String to process
+	 * @param   string  $input	String to process
 	 *
-	 * @return  string   Processed string
+	 * @return  string  Processed string
 	 * @since   11.1
 	 */
 	public static function linkXHTMLSafe($input)
@@ -70,8 +69,8 @@ class JFilterOutput
 	 * This method processes a string and replaces all accented UTF-8 characters by unaccented
 	 * ASCII-7 "equivalents", whitespaces are replaced by hyphens and the string is lowercased.
 	 *
-	 * @param   string   $input	String to process
-	 * @return  string   Processed string
+	 * @param   string  $input	String to process
+	 * @return  string  Processed string
 	 * @since   11.1
 	 */
 	public static function stringURLSafe($string)
@@ -97,8 +96,8 @@ class JFilterOutput
 	/**
 	 * This method implements unicode slugs instead of transliteration.
 	 *
-	 * @param   string   $input	String to process
-	 * @return  string   Processed string
+	 * @param   string  $input	String to process
+	 * @return  string  Processed string
 	 * @since   11.1
 	*/
 	public static function stringURLUnicodeSlug($string)
@@ -149,9 +148,9 @@ class JFilterOutput
 	/**
 	 * Callback method for replacing & with &amp; in a string
 	 *
-	 * @param   string   $m	String to process
+	 * @param   string  $m	String to process
 	 *
-	 * @return  string   Replaced string
+	 * @return  string  Replaced string
 	 * @since   11.1
 	 */
 	public static function _ampReplaceCallback($m)
