@@ -73,6 +73,8 @@ if (JDEBUG) {
 jimport('joomla.application.menu');
 jimport('joomla.user.user');
 jimport('joomla.environment.uri');
+jimport('joomla.filter.filterinput');
+jimport('joomla.filter.filteroutput');
 jimport('joomla.html.html');
 jimport('joomla.utilities.utility');
 jimport('joomla.event.event');
