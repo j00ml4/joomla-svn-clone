@@ -12,7 +12,6 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Extended Utility class for all HTML drawing classes.
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  HTML
  * @since       11.1
@@ -27,7 +26,7 @@ abstract class JHtmlRules
 	 * @param   string   Additional attributes to add to the select field.
 	 * @param   boolean  True to add "All Sections" option.
 	 *
-	 * @return  string   The required HTML for the SELECT tag.
+	 * @return  string  The required HTML for the SELECT tag.
 	 */
 	public static function assetFormWidget($actions, $assetId = null, $parent = null, $control = 'jform[rules]', $idPrefix = 'jform_rules')
 	{

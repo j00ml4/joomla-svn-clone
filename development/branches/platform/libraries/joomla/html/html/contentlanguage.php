@@ -12,7 +12,6 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Utility class working with content language select lists
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  HTML
  * @since       11.1
@@ -20,7 +19,7 @@ defined('JPATH_PLATFORM') or die;
 abstract class JHtmlContentLanguage
 {
 	/**
-	 * @var    array      Cached array of the content language items.
+	 * @var    array  Cached array of the content language items.
 	 */
 	protected static $items = null;
 

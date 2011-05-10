@@ -12,7 +12,6 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Utility class for creating different select lists
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  HTML
  * @since       11.1
@@ -67,7 +66,7 @@ abstract class JHtmlList
 	 * @param   string   $sql		SQL with ordering As value and 'name field' AS text
 	 * @param   integer  $chop	The length of the truncated headline
 	 *
-	 * @return  array    An array of objects formatted for JHtml list processing
+	 * @return  array  An array of objects formatted for JHtml list processing
 	 * @since   11.1
 	 */
 	public static function genericordering($sql, $chop = '30')

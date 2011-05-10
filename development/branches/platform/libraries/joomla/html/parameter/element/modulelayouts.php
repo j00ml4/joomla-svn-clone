@@ -16,7 +16,7 @@ require_once dirname(__FILE__).'/list.php';
  *
  * @package     Joomla.Platform
  * @subpackage  Parameter
- * deprecated    Use JForm instead
+ * @deprecated  Use JForm instead
  */
 class JElementModuleLayouts extends JElementList
 {

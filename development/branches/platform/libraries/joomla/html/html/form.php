@@ -14,7 +14,7 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package     Joomla.Platform
  * @subpackage  HTML
- * @version		1.5
+ * @version     11.1
  */
 abstract class JHtmlForm
 {

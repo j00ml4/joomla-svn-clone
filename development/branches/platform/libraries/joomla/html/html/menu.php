@@ -12,7 +12,6 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Utility class working with menu select lists
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  HTML
  * @since       11.1
@@ -20,12 +19,12 @@ defined('JPATH_PLATFORM') or die;
 abstract class JHtmlMenu
 {
 	/**
-	 * @var    array      Cached array of the menus.
+	 * @var    array  Cached array of the menus.
 	 */
 	protected static $menus = null;
 
 	/**
-	 * @var    array      Cached array of the menus items.
+	 * @var    array  Cached array of the menus items.
 	 */
 	protected static $items = null;
 
@@ -54,7 +53,7 @@ abstract class JHtmlMenu
 	/**
 	 * Returns an array of menu items groups by menu.
 	 *
-	 * @param   array    An array of configuration options.
+	 * @param   array  An array of configuration options.
 	 *
 	 * @return  array
 	 */

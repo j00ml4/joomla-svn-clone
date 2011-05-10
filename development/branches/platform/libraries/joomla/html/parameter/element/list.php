@@ -30,7 +30,7 @@ class JElementList extends JElement
 	/**
 	 * Get the options for the element
 	 *
-	 * @param   object   The current XML node.
+	 * @param   object  The current XML node.
 	 * @return  array
 	 * @since   11.1
 	 */

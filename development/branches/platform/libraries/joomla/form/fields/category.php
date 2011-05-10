@@ -25,7 +25,7 @@ class JFormFieldCategory extends JFormFieldList
 {
 	/**
 	 * @var    string	The form field type.
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	public $type = 'Category';
 

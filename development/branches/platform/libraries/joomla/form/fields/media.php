@@ -24,7 +24,7 @@ class JFormFieldMedia extends JFormField
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	protected $type = 'Media';
 
@@ -32,14 +32,14 @@ class JFormFieldMedia extends JFormField
 	 * The initialised state of the document object.
 	 *
 	 * @var    boolean
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	protected static $initialised = false;
 
 	/**
 	 * Method to get the field input markup.
 	 *
-	 * @return  string   The field input markup.
+	 * @return  string  The field input markup.
 	 * @since   11.1
 	 */
 	protected function getInput()

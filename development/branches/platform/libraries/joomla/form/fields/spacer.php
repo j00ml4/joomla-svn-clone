@@ -24,14 +24,14 @@ class JFormFieldSpacer extends JFormField
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	protected $type = 'Spacer';
 
 	/**
 	 * Method to get the field input markup.
 	 *
-	 * @return  string   The field input markup.
+	 * @return  string  The field input markup.
 	 * @since   11.1
 	 */
 	protected function getInput()
@@ -42,7 +42,7 @@ class JFormFieldSpacer extends JFormField
 	/**
 	 * Method to get the field label markup.
 	 *
-	 * @return  string   The field label markup.
+	 * @return  string  The field label markup.
 	 * @since   11.1
 	 */
 	protected function getLabel()
@@ -84,10 +84,11 @@ class JFormFieldSpacer extends JFormField
 		$html[] = '</span>';
 		return implode('',$html);
 	}
+
 	/**
 	 * Method to get the field title.
 	 *
-	 * @return  string   The field title.
+	 * @return  string  The field title.
 	 * @since   11.1
 	 */
 	protected function getTitle()

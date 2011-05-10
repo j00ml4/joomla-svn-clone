@@ -14,7 +14,7 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package     Joomla.Platform
  * @subpackage  HTML
- * @version		1.5
+ * @version		11.1
  */
 abstract class JHtmlBehavior
 {
@@ -274,8 +274,8 @@ abstract class JHtmlBehavior
 	 * - onShow
 	 * - onHide
 	 *
-	 * @param   string   $selector	The class selector for which a modal behaviour is to be applied.
-	 * @param   array    $params		An array of parameters for the modal behaviour.
+	 * @param   string  $selector	The class selector for which a modal behaviour is to be applied.
+	 * @param   array   $params		An array of parameters for the modal behaviour.
 	 *
 	 * @return  void
 	 * @since   11.1
@@ -349,9 +349,9 @@ abstract class JHtmlBehavior
 	/**
 	 * Add unobtrusive javascript support for the advanced uploader.
 	 *
-	 * @param   string   $id
-	 * @param   array    $params	An array of options for the uploader.
-	 * @param   string   $upload_queue
+	 * @param   string  $id
+	 * @param   array   $params	An array of options for the uploader.
+	 * @param   string  $upload_queue
 	 *
 	 * @return  void
 	 * @since   11.1
@@ -676,9 +676,9 @@ abstract class JHtmlBehavior
 	/**
 	 * Internal method to get a JavaScript object notation string from an array
 	 *
-	 * @param   array    $array	The array to convert to JavaScript object notation
+	 * @param   array  $array	The array to convert to JavaScript object notation
 	 *
-	 * @return  string   JavaScript object notation representation of the array
+	 * @return  string  JavaScript object notation representation of the array
 	 * @since   11.1
 	 */
 	protected static function _getJSObject($array=array())
@@ -732,7 +732,7 @@ abstract class JHtmlBehavior
 	/**
 	 * Internal method to translate the JavaScript Calendar
 	 *
-	 * @return  string   JavaScript that translates the object
+	 * @return  string  JavaScript that translates the object
 	 * @since   11.1
 	 */
 	protected static function _calendartranslation()

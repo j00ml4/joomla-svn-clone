@@ -48,7 +48,6 @@ abstract class JPane extends JObject
 
 	/**
 	 * Ends the pane.
-	 *
 	 */
 	abstract public function endPane();
 
@@ -85,7 +84,7 @@ class JPaneTabs extends JPane
 	/**
 	 * Constructor.
 	 *
-	 * @param   array    $params		Associative array of values.
+	 * @param   array  $params		Associative array of values.
 	 */
 	function __construct($params = array())
 	{

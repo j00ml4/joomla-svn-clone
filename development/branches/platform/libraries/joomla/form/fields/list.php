@@ -25,14 +25,14 @@ class JFormFieldList extends JFormField
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	protected $type = 'List';
 
 	/**
 	 * Method to get the field input markup.
 	 *
-	 * @return  string   The field input markup.
+	 * @return  string  The field input markup.
 	 * @since   11.1
 	 */
 	protected function getInput()
@@ -74,7 +74,7 @@ class JFormFieldList extends JFormField
 	/**
 	 * Method to get the field options.
 	 *
-	 * @return  array    The field option objects.
+	 * @return  array  The field option objects.
 	 * @since   11.1
 	 */
 	protected function getOptions()

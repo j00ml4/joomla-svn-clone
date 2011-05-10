@@ -59,7 +59,7 @@ class JPagination extends JObject
 	 * may be useful for filters and extra values when dealing with lists and GET requests.
 	 *
 	 * @var    array
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	protected $_additionalUrlParams = array();
 
@@ -406,12 +406,12 @@ class JPagination extends JObject
 	/**
 	 * Return the icon to move an item UP.
 	 *
-	 * @param   integer  		$i			The row index.
-	 * @param   boolean  		$condition	True to show the icon.
-	 * @param   string   	$task		The task to fire.
-	 * @param   string   	$alt		The image alternative text string.
-	 * @param   boolean  		$enabled	An optional setting for access control on the action.
-	 * @param   string   	$checkbox	An optional prefix for checkboxes.
+	 * @param   integer  $i			The row index.
+	 * @param   boolean  $condition	True to show the icon.
+	 * @param   string   $task		The task to fire.
+	 * @param   string   $alt		The image alternative text string.
+	 * @param   boolean  $enabled	An optional setting for access control on the action.
+	 * @param   string   $checkbox	An optional prefix for checkboxes.
 	 *
 	 * @return  string   Either the icon to move an item up or a space.
 	 * @since	1.0
@@ -429,13 +429,13 @@ class JPagination extends JObject
 	/**
 	 * Return the icon to move an item DOWN.
 	 *
-	 * @param   integer  		$i			The row index.
-	 * @param   integer  		$n			The number of items in the list.
-	 * @param   boolean  		$condition	True to show the icon.
-	 * @param   string   	$task		The task to fire.
-	 * @param   string   	$alt		The image alternative text string.
-	 * @param   boolean  		$enabled	An optional setting for access control on the action.
-	 * @param   string   	$checkbox	An optional prefix for checkboxes.
+	 * @param   integer  $i			The row index.
+	 * @param   integer  $n			The number of items in the list.
+	 * @param   boolean  $condition	True to show the icon.
+	 * @param   string   $task		The task to fire.
+	 * @param   string   $alt		The image alternative text string.
+	 * @param   boolean  $enabled	An optional setting for access control on the action.
+	 * @param   string   $checkbox	An optional prefix for checkboxes.
 	 *
 	 * @return  string   Either the icon to move an item down or a space.
 	 * @since	1.0
@@ -511,7 +511,7 @@ class JPagination extends JObject
 	/**
 	 * Create and return the pagination data object.
 	 *
-	 * @return  object   Pagination data object.
+	 * @return  object  Pagination data object.
 	 * @since   11.1
 	 */
 	protected function _buildDataObject()
