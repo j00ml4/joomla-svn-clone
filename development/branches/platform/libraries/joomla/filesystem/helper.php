@@ -30,10 +30,11 @@ class JFilesystemHelper
 	/**
 	 * Remote file size function for streams that don't support it
 	 *
-	 * @param   string   $url	TODO Add text
-	 * @see		http://www.php.net/manual/en/function.filesize.php#71098
+	 * @param   string  $url  TODO Add text
 	 *
 	 * @return  mixed
+	 *
+	 * @see		http://www.php.net/manual/en/function.filesize.php#71098
 	 * @since   11.1
 	 */
 	function remotefsize($url)
@@ -114,11 +115,11 @@ class JFilesystemHelper
 	 *
 	 * @param   string   $url	TODO Add text
 	 * @param   integer  $mode	The new permissions, given as an octal value.
-	 * @see		http://www.php.net/manual/en/function.ftp-chmod.php
 	 *
 	 * @return  mixed
+	 *
+	 * @see		http://www.php.net/manual/en/function.ftp-chmod.php
 	 * @since   11.1
-
 	 */
 	function ftpChmod($url, $mode)
 	{
@@ -194,7 +195,7 @@ class JFilesystemHelper
 	 * Returns the supported streams, in addition to direct file access
 	 * Also includes Joomla! streams as well as PHP streams
 	 *
-	 * @return  array    Streams
+	 * @return  array  Streams
 	 * @since   11.1
 	 */
 	function getSupported()
@@ -260,9 +261,9 @@ class JFilesystemHelper
 	/**
 	 * Determine if a stream is a Joomla stream.
 	 *
-	 * @param   string   $streamname   The name of a stream
+	 * @param   string  $streamname  The name of a stream
 	 *
-	 * @return  boolean   True for a Joomla Stream
+	 * @return  boolean  True for a Joomla Stream
 	 * @since   11.1
 	 */
 	function isJoomlaStream($streamname)

@@ -31,81 +31,70 @@ class JStream extends JObject
 {
 	// Publicly settable vars (protected to let our parent read them)
 	/**
-	 * File Mode
-	 * @var    integer
+	 * @var    integer  File Mode
 	 * @since  11.1
 	 * */
 	protected $filemode = 0644;
 
 	/**
-	 * Directory Mode
-	 * @var   integer
+	 * @var   integer  Directory Mode
 	 * @since  11.1
 	 * */
 	protected $dirmode = 0755;
 
 	/**
-	 * Default Chunk Size
-	 * @var  integer
+	 * @var    integer  Default Chunk Size
 	 * @since  11.1
 	 */
 	protected $chunksize = 8192;
 
 	/**
-	 * Filename
-	 * @var    string
+	 * @var    string  Filename
 	 * @since  11.1
-	 * */
+	 */
 	protected $filename;
 
 	/**
-	 * Prefix of the connection for writing
-	 * @var    string
+	 * @var    string  Prefix of the connection for writing
 	 * @since  11.1
 	 */
 	protected $writeprefix;
 
 	/**
-	 * Prefix of the connection for reading
-	 * @var    string
+	 * @var    string  Prefix of the connection for reading
 	 * @since  11.1
 	 */
 	protected $readprefix;
 
 	/**
-	 * Read Processing method: gz, bz, f
-	 *
-	 * If a scheme is detected, fopen will be defaulted
-	 * To use compression with a network stream use a filter
-	 * @var    string
+	/** @var   string  Read Processing method: gz, bz, f
+	 *                 If a scheme is detected, fopen will be defaulted
+	 *                 To use compression with a network stream use a filter
 	 * @since  11.1
 	 */
 	protected $processingmethod = 'f';
 
 	/**
-	 * Filters applied to the current stream
-	 * @var array
+	 * @var    array  Filters applied to the current stream
 	 * @since  11.1
 	 */
 	protected $filters = Array();
 
 	/**
-	 * File Handle
-	 * @var    array
+	 * @var    array  File Handle
 	 * @since  11.1
 	 */
 	protected $_fh;
 
 	/**
-	 * File size
-	 * @var    integer
+	 * @var    integer  File size
 	 * @since  11.1
 	 */
 	protected $_filesize;
 
 	/**
-	 * Context to use when opening the connection
-	 * @var
+	 * 
+	 * @var    Context to use when opening the connection
 	 * @since  11.1
 	 */
 	protected $_context = null;
@@ -125,9 +114,9 @@ class JStream extends JObject
 	/**
 	 * Constructor
 	 *
-	 * @param   string	$writeprefix	Prefix of the stream; Note: unlike the JPATH_*, this has a final path seperator!
-	 * @param   string   $readprefix
-	 * @param   string   $context
+	 * @param   string  $writeprefix	Prefix of the stream; Note: unlike the JPATH_*, this has a final path seperator!
+	 * @param   string  $readprefix
+	 * @param   string  $context
 	 *
 	 * @return  JStream
 	 *
@@ -160,13 +149,13 @@ class JStream extends JObject
 	 *  Generic File Operations
 	 *
 	 * Open a stream with some lazy loading smarts
-	 * @param   string   $filename				Filename
-	 * @param   string   $mode					Mode string to use
-	 * @param   bool		$use_include_path		Use the PHP include path
-	 * @param   resource	$context				Context to use when opening
-	 * @param   bool		$use_prefix				Use a prefix to open the file
-	 * @param   bool		$relative				Filename is a relative path (if false, strips JPATH_ROOT to make it relative)
-	 * @param   bool		$detectprocessingmode	Detect the processing method for the file and use the appropriate function to handle output automatically
+	 * @param   string    $filename				Filename
+	 * @param   string    $mode					Mode string to use
+	 * @param   bool      $use_include_path		Use the PHP include path
+	 * @param   resource  $context				Context to use when opening
+	 * @param   bool      $use_prefix				Use a prefix to open the file
+	 * @param   bool      $relative				Filename is a relative path (if false, strips JPATH_ROOT to make it relative)
+	 * @param   bool      $detectprocessingmode	Detect the processing method for the file and use the appropriate function to handle output automatically
 	 *
 	 * @return  boolean
 	 *
@@ -227,17 +216,17 @@ class JStream extends JObject
 		// Decide which context to use:
 		switch($this->processingmethod)
 		{
-			// Gzip doesn't support contexts or streams
+			// gzip doesn't support contexts or streams
 			case 'gz':
 				$this->_fh = gzopen($filename, $mode, $use_include_path);
 				break;
 
-			// Bzip2 is much like gzip except it doesn't use the include path
+			// bzip2 is much like gzip except it doesn't use the include path
 			case 'bz':
 				$this->_fh = bzopen($filename, $mode);
 				break;
 
-			// Fopen can handle streams
+			// fopen can handle streams
 			case 'f':
 			default:
 				// One supplied at open; overrides everything
@@ -686,9 +675,10 @@ class JStream extends JObject
 	 * @param   string   $string  Reference to the string to write
 	 * @param   integer  $length  Length of the string to write
 	 * @param   integer  $chunk  Size of chunks to write in
-	 * @see       http://php.net/manual/en/function.fwrite.php
 	 *
 	 * @return  boolean
+	 *
+	 * @see       http://php.net/manual/en/function.fwrite.php
 	 * @since   11.1
 	 */
 	function write(&$string, $length=0, $chunk=0)
@@ -813,9 +803,9 @@ class JStream extends JObject
 	/**
 	 * Get the stream metadata
 	 *
-	 * @see		http://php.net/manual/en/function.stream-get-meta-data.php
+	 * @return  array  header/metadata
 	 *
-	 * @return  array    header/metadata
+	 * @see		http://php.net/manual/en/function.stream-get-meta-data.php
 	 * @since   11.1
 	 */
 	function get_meta_data()
@@ -853,11 +843,11 @@ class JStream extends JObject
 	 *
 	 * Format is the same as the options for stream_context_create
 	 *
-	 * @param   array    $context	Options to create the context with
-	 *
-	 * @see       http://php.net/stream_context_create
+	 * @param   array  $context  Options to create the context with
 	 *
 	 * @return  void
+	 *
+	 * @see       http://php.net/stream_context_create
 	 * @since   11.1
 	 */
 	function setContextOptions($context)
@@ -869,15 +859,14 @@ class JStream extends JObject
 	/**
 	 * Adds a particular options to the context
 	 *
-	 * @param   string   $wrapper	The wrapper to use
-	 * @param   string   $name		The option to set
-	 * @param   string   $value		The value of the option
-	 *
-	 * @see       http://php.net/stream_context_create Stream Context Creation
-	 * @see       http://php.net/manual/en/context.php Context Options for various streams
+	 * @param   string  $wrapper	The wrapper to use
+	 * @param   string  $name		The option to set
+	 * @param   string  $value		The value of the option
 	 *
 	 * @return  void
 	 *
+	 * @see     http://php.net/stream_context_create Stream Context Creation
+	 * @see     http://php.net/manual/en/context.php Context Options for various streams
 	 * @since   11.1
 	 */
 	function addContextEntry($wrapper, $name, $value)
@@ -889,8 +878,8 @@ class JStream extends JObject
 	/**
 	 * Deletes a particular setting from a context
 	 *
-	 * @param   string   $wrapper   The wrapper to use
-	 * @param   string   $name      The option to unset
+	 * @param   string  $wrapper  The wrapper to use
+	 * @param   string  $name     The option to unset
 	 *
 	 * @return  void
 	 *
@@ -1310,6 +1299,7 @@ class JStream extends JObject
 	 * @param   boolean  $relative    Determines if the filename given is relative. Relative paths do not have JPATH_ROOT stripped.
 	 *
 	 * @return  string
+	 *
 	 * @since   11.1
 	 */
 	function _getFilename($filename, $mode, $use_prefix, $relative)
@@ -1343,6 +1333,7 @@ class JStream extends JObject
 	 * Return the internal file handle
 	 *
 	 * @return  File handler
+	 *
 	 * @since   11.1
 	 */
 	function getFileHandle()

@@ -126,7 +126,7 @@ class JArchiveGzip extends JObject
 	/**
 	 * Get file data offset for archive
 	 *
-	 * @return  integer  	Data position marker for archive
+	 * @return  integer  Data position marker for archive
 	 * @since   11.1
 	 */
 	function _getFilePosition()
