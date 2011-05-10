@@ -27,15 +27,16 @@ abstract class JEvent extends JObserver
 	 * If the method exists it is called and returns its return value. If it does not exist it
 	 * returns null.
 	 *
-	 * @param   array   &$args  Arguments
+	 * @param   array  &$args  Arguments
 	 *
-	 * @return  mixed   Routine return value
+	 * @return  mixed  Routine return value
+	 *
 	 * @since   11.1
 	 */
 	public function update(&$args)
 	{
-		 // First let's get the event from the argument array.  Next we will unset the
-		 // event argument as it has no bearing on the method to handle the event.
+		// First let's get the event from the argument array.  Next we will unset the
+		// event argument as it has no bearing on the method to handle the event.
 		$event = $args['event'];
 		unset($args['event']);
 
@@ -45,10 +46,9 @@ abstract class JEvent extends JObserver
 		 */
 		if (method_exists($this, $event)) {
 			return call_user_func_array(array($this, $event), $args);
-
-		} else {
+		}
+		else {
 			return null;
-
 		}
 	}
 }

@@ -26,7 +26,7 @@ class JDocument extends JObject
 	 * Document title
 	 *
 	 * @var    string
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	public $title = '';
 
@@ -34,7 +34,7 @@ class JDocument extends JObject
 	 * Document description
 	 *
 	 * @var    string
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	public $description = '';
 
@@ -50,7 +50,7 @@ class JDocument extends JObject
 	 * Document base URL
 	 *
 	 * @var    string
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	public $base = '';
 
@@ -66,7 +66,7 @@ class JDocument extends JObject
 	 * Contains the document direction setting
 	 *
 	 * @var    string
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	public $direction = 'ltr';
 
@@ -81,7 +81,7 @@ class JDocument extends JObject
 	 * Document modified date
 	 *
 	 * @var    string
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	public $_mdate = '';
 
@@ -173,7 +173,7 @@ class JDocument extends JObject
 	 * The document type
 	 *
 	 * @var    string
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	public $_type = null;
 
@@ -230,10 +230,10 @@ class JDocument extends JObject
 	 * Returns the global JDocument object, only creating it
 	 * if it doesn't already exist.
 	 *
-	 * @param   string     $type       The document type to instantiate
-	 * @param   array      $attribues  Array of attributes
+	 * @param   string  $type       The document type to instantiate
+	 * @param   array   $attribues  Array of attributes
 	 *
-	 * @return  object    The document object.
+	 * @return  object  The document object.
 	 * @since   11.1
 	 */
 	public static function getInstance($type = 'html', $attributes = array())
@@ -285,7 +285,7 @@ class JDocument extends JObject
 	/**
 	 * Set the document type
 	 *
-	 * @param   string   $type
+	 * @param   string  $type
 	 *
 	 * @return
 	 * @since   11.1
@@ -309,7 +309,7 @@ class JDocument extends JObject
 	/**
 	 * Get the document head data
 	 *
-	 * @return  array    The document head data in array form
+	 * @return  array  The document head data in array form
 	 * @since   11.1
 	 */
 	public function getHeadData()
@@ -320,7 +320,7 @@ class JDocument extends JObject
 	/**
 	 * Set the document head data
 	 *
-	 * @param   array    $data	The document head data in array form
+	 * @param   array  $data  The document head data in array form
 	 *
 	 * @return  void
 	 * @since   11.1
@@ -333,7 +333,7 @@ class JDocument extends JObject
 	/**
 	 * Set the document head data
 	 *
-	 * @param   array    $data	The document head data in array form
+	 * @param   array  $data  The document head data in array form
 	 *
 	 * @return
 	 * @since   11.1
@@ -346,8 +346,8 @@ class JDocument extends JObject
 	/**
 	 * Get the contents of the document buffer
 	 *
-	 * @return   The contents of the document buffer
-	 * @since    11.1
+	 * @return  The contents of the document buffer
+	 * @since   11.1
 	 */
 	public function getBuffer()
 	{
@@ -357,11 +357,11 @@ class JDocument extends JObject
 	/**
 	 * Set the contents of the document buffer
 	 *
-	 * @param   string   $content	The content to be set in the buffer.
-	 * @param   array    $options	Array of optional elements.
+	 * @param   string  $content  The content to be set in the buffer.
+	 * @param   array   $options  Array of optional elements.
 	 *
 	 * @return  void
-	 * @@since    11.1
+	 * @since   11.1
 	 */
 	public function setBuffer($content, $options = array())
 	{
@@ -371,11 +371,11 @@ class JDocument extends JObject
 	/**
 	 * Gets a meta tag.
 	 *
-	 * @param   string   $name   Value of name or http-equiv tag
-	 * @param   bool   $http_equiv	META type "http-equiv" defaults to null
+	 * @param   string  $name        Value of name or http-equiv tag
+	 * @param   bool    $http_equiv  META type "http-equiv" defaults to null
 	 *
 	 * @return  string
-	 * @@since    11.1
+	 * @since   11.1
 	 */
 	public function getMetaData($name, $http_equiv = false)
 	{
@@ -404,11 +404,11 @@ class JDocument extends JObject
 	 *
 	 * @param   string   $name        Value of name or http-equiv tag
 	 * @param   string   $content     Value of the content tag
-	 * @param   boolean  $http_equiv  META type "http-equiv" defaults to null
-	 * @param   boolean  $sync        Should http-equiv="content-type" by synced with HTTP-header?
+	 * @param   bool     $http_equiv  META type "http-equiv" defaults to null
+	 * @param   bool     $sync        Should http-equiv="content-type" by synced with HTTP-header?
 	 *
 	 * @return  void
-	 * @@since    11.1
+	 * @since   11.1
 	 */
 	public function setMetaData($name, $content, $http_equiv = false, $sync = true)
 	{
@@ -440,8 +440,8 @@ class JDocument extends JObject
 	 *
 	 * @param   string  $url		URL to the linked script
 	 * @param   string  $type		Type of script. Defaults to 'text/javascript'
-	 * @param   boolean $defer		Adds the defer attribute.
-	 * @param   boolean $async		Adds the async attribute.
+	 * @param   bool    $defer		Adds the defer attribute.
+	 * @param   bool    $async		Adds the async attribute.
 	 * @return
 	 * @since    11.1
 	 */
@@ -459,7 +459,7 @@ class JDocument extends JObject
 	 * @param   string  $type	Scripting mime (defaults to 'text/javascript')
 	 *
 	 * @return  void
-	 * @@since    11.1
+	 * @since    11.1
 	 */
 	public function addScriptDeclaration($content, $type = 'text/javascript')
 	{
@@ -480,7 +480,7 @@ class JDocument extends JObject
 	 * @param   array   $attribs  Array of attributes
 	 *
 	 * @return  void
-	 * @@since    11.1
+	 * @since    11.1
 	 */
 	public function addStyleSheet($url, $type = 'text/css', $media = null, $attribs = array())
 	{
@@ -492,8 +492,8 @@ class JDocument extends JObject
 	/**
 	 * Adds a stylesheet declaration to the page
 	 *
-	 * @param	string  $content	Style declarations
-	 * @param	string  $type		Type of stylesheet (defaults to 'text/css')
+	 * @param	string  $content  Style declarations
+	 * @param	string  $type     Type of stylesheet (defaults to 'text/css')
 	 *
 	 * @return	void
 	 */
@@ -510,7 +510,7 @@ class JDocument extends JObject
 	/**
 	 * Sets the document charset
 	 *
-	 * @param	string	$type  Charset encoding string
+	 * @param	string  $type  Charset encoding string
 	 *
 	 * @return  void
 	 */
@@ -709,8 +709,9 @@ class JDocument extends JObject
 	 * ({@link http://www.w3.org/TR/xhtml-media-types/
 	 * http://www.w3.org/TR/xhtml-media-types/}) for more details.
 	 *
-	 * @param	string		$type
-	 * @param	boolean		Should the type be synced with HTML?
+	 * @param	string  $type
+	 * @param	bool    $sync  Should the type be synced with HTML?
+	 *
 	 * @return	void
 	 */
 	public function setMimeEncoding($type = 'text/html', $sync = true)
@@ -770,7 +771,7 @@ class JDocument extends JObject
 	/**
 	 * Sets the string used to indent HTML
 	 *
-	 * @param	string	$string	String used to indent ("\11", "\t", '  ', etc.).
+	 * @param	string  $string  String used to indent ("\11", "\t", '  ', etc.).
 	 *
 	 * @return	void
 	 */
@@ -792,9 +793,9 @@ class JDocument extends JObject
 	/**
 	* Load a renderer
 	*
-	* @param   string   The renderer type
+	* @param   string  $type  The renderer type
 	*
-	* @return  mixed    Object or null if class does not exist
+	* @return  mixed  Object or null if class does not exist
 	* @since   11.1
 	*/
 	public function loadRenderer($type)

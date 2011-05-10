@@ -22,22 +22,19 @@ defined('JPATH_PLATFORM') or die;
 class JResponse
 {
 	/**
-	 * Body
-	 * @var    array
+	 * @var    array  Body
 	 * @since  11.1
 	 */
 	protected static $body = array();
 
 	/**
-	 * Cachable
-	 * @var    boolean
+	 * @var    boolean  Cachable
 	 * @since  11.1
 	 */
 	protected static $cachable = false;
 
 	/**
-	 * Headers
-	 * @var    array
+	 * @var    array  Headers
 	 * @since  11.1
 	 */
 	protected static $headers = array();
@@ -183,7 +180,7 @@ class JResponse
 	 *
 	 * @param   boolean  $toArray	Whether or not to return the body content as an array of strings or as a single string; defaults to false.
 	 *
-	 * @return  string   array
+	 * @return  string  array
 	 * @since   11.1
 	 */
 	public static function getBody($toArray = false)
@@ -235,10 +232,12 @@ class JResponse
 	 * Checks the accept encoding of the browser and compresses the data before
 	 * sending it to the client.
 	 *
-	 * @param   string   $data	data
+	 * @param   string  $data	data
 	 *
-	 * @return  string   compressed data
-	 * @since   11.1		Replaces _compress method in 11.1
+	 * @return  string  compressed data
+	 *
+	 * @note    Replaces _compress method in 11.1
+	 * @since   11.1
 	 */
 	protected static function compress($data)
 	{
@@ -286,7 +285,8 @@ class JResponse
 	 * Check, whether client supports compressed data
 	 *
 	 * @return  boolean
-	 * @since   11.1		Replaces _clientEncoding method from 11.1
+	 * @since   11.1
+	 * @note    Replaces _clientEncoding method from 11.1
 	 */
 	protected static function clientEncoding()
 	{

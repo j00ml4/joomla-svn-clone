@@ -84,7 +84,7 @@ class JRequest
 	 * @param   string   $type     Return type for the variable, for valid values see {@link JFilterInput::clean()}.
 	 * @param   integer  $mask     Filter mask for the variable.
 	 *
-	 * @return  mixed    Requested variable.
+	 * @return  mixed  Requested variable.
 	 * @since   11.1
 	 */
 	public static function getVar($name, $default = null, $hash = 'default', $type = 'none', $mask = 0)
@@ -186,7 +186,7 @@ class JRequest
 	 * @param	string	$default	Default value if the variable does not exist.
 	 * @param	string	$hash		Where the var should come from (POST, GET, FILES, COOKIE, METHOD).
 	 *
-	 * @return	float	Requested variable.
+	 * @return	float  Requested variable.
 	 * @since	11.1
 	 */
 	public static function getFloat($name, $default = 0.0, $hash = 'default')
@@ -205,7 +205,7 @@ class JRequest
 	 * @param	string	$default	Default value if the variable does not exist.
 	 * @param	string	$hash		Where the var should come from (POST, GET, FILES, COOKIE, METHOD).
 	 *
-	 * @return	bool	Requested variable.
+	 * @return	bool  Requested variable.
 	 * @since	11.1
 	 */
 	public static function getBool($name, $default = false, $hash = 'default')
@@ -224,7 +224,7 @@ class JRequest
 	 * @param	string	$default	Default value if the variable does not exist.
 	 * @param	string	$hash		Where the var should come from (POST, GET, FILES, COOKIE, METHOD).
 	 *
-	 * @return	string	Requested variable.
+	 * @return	string  Requested variable.
 	 * @since	11.1
 	 */
 	public static function getWord($name, $default = '', $hash = 'default')
@@ -592,9 +592,9 @@ class JRequest
 	/**
 	 * Strips slashes recursively on an array.
 	 *
-	 * @param   array    $value   Array or (nested arrays) of strings.
+	 * @param   array  $value  Array or (nested arrays) of strings.
 	 *
-	 * @return  array    The input array with stripshlashes applied to it.
+	 * @return  array  The input array with stripshlashes applied to it.
 	 * @since   11.1
 	 */
 	protected static function _stripSlashesRecursive($value)
