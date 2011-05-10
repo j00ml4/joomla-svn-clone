@@ -82,7 +82,7 @@ class JRegistry
 	/**
 	 * Check if a registry path exists.
 	 *
-	 * @param   string   Registry path (e.g. joomla.content.showauthor)
+	 * @param   string  Registry path (e.g. joomla.content.showauthor)
 	 * @return  boolean
 	 * @since   11.1
 	 */
@@ -501,7 +501,7 @@ class JRegistry
 	 * object where in 1.5 a JParameter object existed.  Because many extensions may call this method
 	 * we add it here as a means of "pain relief" until the 1.7 release.
 	 *
-	 * @return    boolean  True.
+	 * @return  boolean  True.
 	 *
 	 * @deprecated  1.6 - Jun 17, 2010
 	 * @todo        Remove this method for the 1.7 release.

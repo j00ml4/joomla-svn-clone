@@ -12,7 +12,6 @@ defined('JPATH_PLATFORM') or die;
 /**
  * JArrayHelper is an array utility class for doing all sorts of odds and ends with arrays.
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  Utilities
  * @since       11.1

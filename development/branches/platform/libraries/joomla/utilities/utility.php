@@ -53,12 +53,12 @@ class JUtility
 	/**
 	 * Sends mail to administrator for approval of a user submission
 	 *
-	 * @param   string   $adminName	Name of administrator
-	 * @param   string   $adminEmail	Email address of administrator
-	 * @param   string   $email		[NOT USED TODO: Deprecate?]
-	 * @param   string   $type		Type of item to approve
-	 * @param   string   $title		Title of item to approve
-	 * @param   string   $author		Author of item to approve
+	 * @param   string  $adminName	Name of administrator
+	 * @param   string  $adminEmail	Email address of administrator
+	 * @param   string  $email		[NOT USED TODO: Deprecate?]
+	 * @param   string  $type		Type of item to approve
+	 * @param   string  $title		Title of item to approve
+	 * @param   string  $author		Author of item to approve
 	 *
 	 * @return  boolean  True on success
 	 *
@@ -78,7 +78,7 @@ class JUtility
 	/**
 	 * Provides a secure hash based on a seed
 	 *
-	 * @param   string   $seed	Seed string.
+	 * @param   string  $seed  Seed string.
 	 *
 	 * @return  string
 	 *
@@ -95,7 +95,7 @@ class JUtility
 	/**
 	 * Method to determine a hash for anti-spoofing variable names
 	 *
-	 * @return  string   Hashed var name
+	 * @return  string  Hashed var name
 	 *
 	 * @since       11.1
 	 * @deprecated  1.6
@@ -111,9 +111,9 @@ class JUtility
 	/**
 	 * Method to extract key/value pairs out of a string with XML style attributes
 	 *
-	 * @param   string   $string	String containing XML style attributes
+	 * @param   string  $string  String containing XML style attributes
 	 *
-	 * @return  array    Key/Value pairs for the attributes
+	 * @return  array  Key/Value pairs for the attributes
 	 *
 	 * @since       11.1
 	 */
@@ -178,7 +178,7 @@ class JUtility
 	 * @param   $array array
 	 * @param   $value mixed
 	 *
-	 * @return   integer
+	 * @return  integer
 	 *
 	 * @since       11.1
 	 * @deprecated  1.6
@@ -195,7 +195,7 @@ class JUtility
 	/**
 	 * Return the byte value of a particular string
 	 *
-	 * @param   string   $val	String optionally with G, M or K suffix
+	 * @param   string  $val  String optionally with G, M or K suffix
 	 *
 	 * @return  integer  size in bytes
 	 *

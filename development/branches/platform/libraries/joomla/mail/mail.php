@@ -37,9 +37,9 @@ class JMail extends PHPMailer
 	 * NOTE: If you need an instance to use that does not have the global configuration
 	 * values, use an id string that is not 'Joomla'.
 	 *
-	 * @param   string   $id		The id string for the JMail instance [optional]
+	 * @param   string  $id  The id string for the JMail instance [optional]
 	 *
-	 * @return  object   The global JMail object
+	 * @return  object  The global JMail object
 	 * @since   11.1
 	 */
 	public static function getInstance($id = 'Joomla')
@@ -60,7 +60,7 @@ class JMail extends PHPMailer
 	/**
 	 * Send the mail
 	 *
-	 * @return  mixed    True if successful, a JError object otherwise
+	 * @return  mixed  True if successful, a JError object otherwise
 	 * @since   11.1
 	 */
 	public function Send()
@@ -82,12 +82,12 @@ class JMail extends PHPMailer
 	/**
 	 * Set the email sender
 	 *
-	 * @param   array    email address and Name of sender
+	 * @param   array  email address and Name of sender
 	 *		<pre>
 	 *			array([0] => email Address [1] => Name)
 	 *		</pre>
 	 *
-	 * @return  object   JMail	Returns this object for chaining.
+	 * @return  object  JMail	Returns this object for chaining.
 	 * @since   11.1
 	 */
 	public function setSender($from)
@@ -129,9 +129,9 @@ class JMail extends PHPMailer
 	/**
 	 * Set the email body
 	 *
-	 * @param   string   $content	Body of the email
+	 * @param   string  $content	Body of the email
 	 *
-	 * @return  object   JMail	Returns this object for chaining.
+	 * @return  object  JMail	Returns this object for chaining.
 	 * @since   11.1
 	 */
 	public function setBody($content)
@@ -148,9 +148,9 @@ class JMail extends PHPMailer
 	/**
 	 * Add recipients to the email
 	 *
-	 * @param   mixed    $recipient	Either a string or array of strings [email address(es)]
+	 * @param   mixed  $recipient	Either a string or array of strings [email address(es)]
 	 *
-	 * @return  object   JMail	Returns this object for chaining.
+	 * @return  object  JMail	Returns this object for chaining.
 	 * @since   11.1
 	 */
 	public function addRecipient($recipient)
@@ -174,9 +174,9 @@ class JMail extends PHPMailer
 	/**
 	 * Add carbon copy recipients to the email
 	 *
-	 * @param   mixed    $cc		Either a string or array of strings [email address(es)]
+	 * @param   mixed  $cc  Either a string or array of strings [email address(es)]
 	 *
-	 * @return  object   JMail	Returns this object for chaining.
+	 * @return  object  JMail	Returns this object for chaining.
 	 * @since   11.1
 	 */
 	public function addCC($cc)
@@ -202,9 +202,9 @@ class JMail extends PHPMailer
 	/**
 	 * Add blind carbon copy recipients to the email
 	 *
-	 * @param   mixed    $bcc	Either a string or array of strings [email address(es)]
+	 * @param   mixed  $bcc	Either a string or array of strings [email address(es)]
 	 *
-	 * @return  object   JMail	Returns this object for chaining.
+	 * @return  object  JMail	Returns this object for chaining.
 	 * @since   11.1
 	 */
 	public function addBCC($bcc)
@@ -230,9 +230,9 @@ class JMail extends PHPMailer
 	/**
 	 * Add file attachments to the email
 	 *
-	 * @param   mixed    $attachment	Either a string or array of strings [filenames]
+	 * @param   mixed  $attachment	Either a string or array of strings [filenames]
 	 *
-	 * @return  object   JMail	Returns this object for chaining.
+	 * @return  object  JMail	Returns this object for chaining.
 	 * @since   11.1
 	 */
 	public function addAttachment($attachment)
@@ -256,12 +256,12 @@ class JMail extends PHPMailer
 	/**
 	 * Add Reply to email address(es) to the email
 	 *
-	 * @param   array    $replyto	Either an array or multi-array of form
+	 * @param   array  $replyto	Either an array or multi-array of form
 	 *		<pre>
 	 *			array([0] => email Address [1] => Name)
 	 *		</pre>
 	 *
-	 * @return  object   JMail	Returns this object for chaining.
+	 * @return  object  JMail	Returns this object for chaining.
 	 * @since   11.1
 	 */
 	public function addReplyTo($replyto)
@@ -399,13 +399,13 @@ class JMail extends PHPMailer
 	/**
 	 * Sends mail to administrator for approval of a user submission
 	 *
-	 * @param   string   $adminName	Name of administrator
-	 * @param   string   $adminEmail	Email address of administrator
-	 * @param   string   $email		[NOT USED TODO: Deprecate?]
-	 * @param   string   $type		Type of item to approve
-	 * @param   string   $title		Title of item to approve
-	 * @param   string   $author		Author of item to approve
-	 * @param   string   $url
+	 * @param   string  $adminName	Name of administrator
+	 * @param   string  $adminEmail	Email address of administrator
+	 * @param   string  $email		[NOT USED TODO: Deprecate?]
+	 * @param   string  $type		Type of item to approve
+	 * @param   string  $title		Title of item to approve
+	 * @param   string  $author		Author of item to approve
+	 * @param   string  $url
 	 *
 	 * @return  boolean  True on success
 	 * @since   11.1

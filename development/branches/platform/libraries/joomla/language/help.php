@@ -142,7 +142,7 @@ class JHelp
 	 * @param   string   $pathToXml	Path to an XML file.
 	 * @param   string   $selected	Language tag to select (if exists).
 	 *
-	 * @return  array    An array of arrays (text, value, selected).
+	 * @return  array  An array of arrays (text, value, selected).
 	 * @since   11.1
 	 */
 	static function createSiteList($pathToXml, $selected = null)

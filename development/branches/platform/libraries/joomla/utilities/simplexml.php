@@ -142,7 +142,7 @@ class JSimpleXML extends JObject
 	 * @param   string  Well-formed XML string data
 	 * @param   string  currently ignored
 	 *
-	 * @return  object   JSimpleXMLElement
+	 * @return  object  JSimpleXMLElement
 	 */
 	function loadString($string, $classname = null) {
 		$this->_parse($string);
@@ -187,9 +187,9 @@ class JSimpleXML extends JObject
 	 * This new object can then be used as a native JSimpleXML element. If any errors occur,
 	 * it returns FALSE.
 	 *
-	 * @param   string   DOM  document
-	 * @param   string   currently ignored
-	 * @return  object   JSimpleXMLElement
+	 * @param   string  DOM  document
+	 * @param   string  currently ignored
+	 * @return  object  JSimpleXMLElement
 	 */
 	function importDOM($node, $classname = null) {
 		return false;
@@ -267,8 +267,8 @@ class JSimpleXML extends JObject
 	 * Handler function for the start of a tag
 	 *
 	 * @param resource $parser
-	 * @param   string   $name
-	 * @param   array    $attrs
+	 * @param   string  $name
+	 * @param   array   $attrs
 	 */
 	protected function _startElement($parser, $name, $attrs = array())
 	{
@@ -300,8 +300,8 @@ class JSimpleXML extends JObject
 	/**
 	 * Handler function for the end of a tag
 	 *
-	 * @param resource $parser
-	 * @param   string   $name
+	 * @param   resource  $parser
+	 * @param   string    $name
 	 */
 	protected function _endElement($parser, $name)
 	{
@@ -312,8 +312,8 @@ class JSimpleXML extends JObject
 	/**
 	 * Handler function for the character data within a tag
 	 *
-	 * @param resource $parser
-	 * @param   string   $data
+	 * @param   resource  $parser
+	 * @param   string    $data
 	 */
 	protected function _characterData($parser, $data)
 	{
@@ -414,9 +414,9 @@ class JSimpleXMLElement extends JObject
 	/**
 	 * Get the an attribute of the element
 	 *
-	 * @param   string   $attribute	The name of the attribute
+	 * @param   string  $attribute	The name of the attribute
 	 *
-	 * @return  mixed    If an attribute is given will return the attribute if it exist.
+	 * @return  mixed  If an attribute is given will return the attribute if it exist.
 	 *				If no attribute is given will return the complete attributes array
 	 */
 	public function attributes($attribute = null)
@@ -440,7 +440,7 @@ class JSimpleXMLElement extends JObject
 	/**
 	 * Set the data of the element
 	 *
-	 * @param   string   $data
+	 * @param   string  $data
 	 * @return  string
 	 */
 	public function setData($data) {
@@ -468,8 +468,8 @@ class JSimpleXMLElement extends JObject
 	/**
 	 * Adds an attribute to the element
 	 *
-	 * @param   string   $name
-	 * @param   array  $attrs
+	 * @param   string  $name
+	 * @param   array   $attrs
 	 */
 	function addAttribute($name, $value)
 	{
@@ -480,7 +480,7 @@ class JSimpleXMLElement extends JObject
 	/**
 	 * Removes an attribute from the element
 	 *
-	 * @param   string   $name
+	 * @param   string  $name
 	 */
 	function removeAttribute($name)
 	{
@@ -582,8 +582,8 @@ class JSimpleXMLElement extends JObject
 	 * Traverses the tree calling the $callback(JSimpleXMLElement
 	 * $this, mixed $args=array()) function with each JSimpleXMLElement.
 	 *
-	 * @param   string   $callback function name
-	 * @param   array    $args
+	 * @param   string  $callback function name
+	 * @param   array   $args
 	 */
 	function map($callback, $args=array())
 	{

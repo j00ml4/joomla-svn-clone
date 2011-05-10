@@ -75,7 +75,7 @@ abstract class JPluginHelper
 	 *
 	 * @param   string   $type	The plugin type, relates to the sub-directory in the plugins directory.
 	 * @param   string   $plugin	The plugin name.
-	 * @param   boolean  	$autocreate
+	 * @param   bool     $autocreate
 	 * @param   JDispatcher	$dispatcher	Optionally allows the plugin to use a different dispatcher.
 	 *
 	 * @return  boolean		True on success.

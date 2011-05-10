@@ -24,7 +24,7 @@ class JInstallerLibrary extends JAdapterInstance
 	/**
 	 * Custom loadLanguage method
 	 *
-	 * @param   string   $path the path where to find language files
+	 * @param   string  $path the path where to find language files
 	 * @since   11.1
 	 */
 	public function loadLanguage($path=null)
@@ -299,7 +299,7 @@ class JInstallerLibrary extends JAdapterInstance
 	/**
 	 * Custom discover method
 	 *
-	 * @return  array    JExtension) list of extensions available
+	 * @return  array  JExtension) list of extensions available
 	 * @since   11.1
 	 */
 	public function discover()

@@ -39,7 +39,6 @@ jimport('phputf8.strcasecmp');
  * Wraps the phputf8 library
  * All functions assume the validity of utf-8 strings.
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  Utilities
  * @since       11.1
@@ -70,9 +69,11 @@ abstract class JString
 	 * UTF-8 aware alternative to strrpos
 	 * Finds position of last occurrence of a string
 	 *
-	 * @param $str - string String being examined
-	 * @param $search - string String being searced for
-	 * @return  mixed    Number of characters before the last match or FALSE on failure
+	 * @param   $str - string String being examined
+	 * @param   $search - string String being searced for
+	 *
+	 * @return  mixed  Number of characters before the last match or FALSE on failure
+	 *
 	 * @see http://www.php.net/strrpos
 	 */
 	public static function strrpos($str, $search, $offset = false)

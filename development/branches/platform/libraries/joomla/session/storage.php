@@ -22,7 +22,7 @@ abstract class JSessionStorage extends JObject
 	/**
 	* Constructor
 	*
-	* @param   array    $options	Optional parameters.
+	* @param   array  $options	Optional parameters.
 	*/
 	public function __construct($options = array())
 	{
@@ -71,7 +71,7 @@ abstract class JSessionStorage extends JObject
 	/**
 	* Register the functions of this class with PHP's session handler
 	*
-	* @param   array    $options optional parameters
+	* @param   array  $options optional parameters
 	*/
 	public function register($options = array())
 	{
@@ -89,8 +89,8 @@ abstract class JSessionStorage extends JObject
 	/**
 	 * Open the SessionHandler backend.
 	 *
-	 * @param   string   $save_path		The path to the session object.
-	 * @param   string   $session_name	The name of the session.
+	 * @param   string  $save_path		The path to the session object.
+	 * @param   string  $session_name	The name of the session.
 	 *
 	 * @return boolean  True on success, false otherwise.
 	 */
@@ -113,8 +113,8 @@ abstract class JSessionStorage extends JObject
 	 * Read the data for a particular session identifier from the
 	 * SessionHandler backend.
 	 *
-	 * @param   string   $id  The session identifier.
-	 * @return  string    The session data.
+	 * @param   string  $id  The session identifier.
+	 * @return  string  The session data.
 	 */
 	public function read($id)
 	{
@@ -124,8 +124,9 @@ abstract class JSessionStorage extends JObject
 	/**
 	 * Write session data to the SessionHandler backend.
 	 *
-	 * @param   string   $id				The session identifier.
-	 * @param   string   $session_data	The session data.
+	 * @param   string  $id				The session identifier.
+	 * @param   string  $session_data	The session data.
+	 *
 	 * @return  boolean  True on success, false otherwise.
 	 */
 	public function write($id, $session_data)
@@ -137,7 +138,7 @@ abstract class JSessionStorage extends JObject
 	 * Destroy the data for a particular session identifier in the
 	 * SessionHandler backend.
 	 *
-	 * @param   string   $id  The session identifier.
+	 * @param   string  $id  The session identifier.
 	 *
 	 * @return  boolean  True on success, false otherwise.
 	 */

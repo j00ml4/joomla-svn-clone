@@ -12,7 +12,6 @@ defined('JPATH_PLATFORM') or die;
 /**
  * @package     Joomla.Platform
  * @subpackage  Language
- * @static
  * @since   11.1
  */
 class JLanguageHelper
@@ -24,7 +23,7 @@ class JLanguageHelper
 	 * @param   string   Base path to use
 	 * @param   array    An array of arrays (text, value, selected)
 	 *
-	 * @return  array    	List of system languages
+	 * @return  array  List of system languages
 	 * @since   11.1
 	 */
 	public static function createLanguageList($actualLanguage, $basePath = JPATH_BASE, $caching = false, $installed = false)
@@ -68,7 +67,7 @@ class JLanguageHelper
 	/**
 	 * Tries to detect the language.
 	 *
-	 * @return  string   locale or null if not found
+	 * @return  string  locale or null if not found
 	 * @since   11.1
 	 */
 	public static function detectLanguage()
@@ -112,7 +111,7 @@ class JLanguageHelper
 	 *
 	 * @param   string array key
 	 *
-	 * @return  array    of published languages
+	 * @return  array  of published languages
 	 * @since   11.1
 	 */
 	public static function getLanguages($key='default')

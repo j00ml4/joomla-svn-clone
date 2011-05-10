@@ -26,7 +26,7 @@ class JInstallerFile extends JAdapterInstance
 	/**
 	 * Custom loadLanguage method
 	 *
-	 * @param   string   $path the path where to find language files
+	 * @param   string  $path the path where to find language files
 	 * @since   11.1
 	 */
 	public function loadLanguage($path)
@@ -248,7 +248,7 @@ class JInstallerFile extends JAdapterInstance
 	/**
 	 * Custom uninstall method
 	 *
-	 * @param   string   $id	The id of the file to uninstall
+	 * @param   string  $id	The id of the file to uninstall
 	 *
 	 * @return  boolean  True on success
 	 * @since   11.1
@@ -354,7 +354,7 @@ class JInstallerFile extends JAdapterInstance
 	/**
 	 * Function used to check if extension is already installed
 	 *
-	 * @param   string   $element The element name of the extension to install
+	 * @param   string  $element The element name of the extension to install
 	 *
 	 * @return  boolean  True if extension exists
 	 * @since   11.1
