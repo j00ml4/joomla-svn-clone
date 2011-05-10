@@ -142,6 +142,28 @@ class JDatabaseMySQLi extends JDatabase
 		}
 	}
 
+
+	/**
+	 * Method to escape a string for usage in an SQL statement.
+	 *
+	 * @param   string  $text   The string to be escaped.
+	 * @param   bool    $extra  Optional parameter to provide extra escaping.
+	 *
+	 * @return  string  The escaped string.
+	 *
+	 * @since   11.1
+	 */
+	public function escape($text, $extra = false)
+	{
+		$result = mysqli_real_escape_string($this->getConnection(), $text);
+
+		if ($extra) {
+			$result = addcslashes($result, '%_');
+		}
+
+		return $result;
+	}
+
 	/**
 	 * Test to see if the MySQL connector is available.
 	 *
@@ -223,7 +245,7 @@ class JDatabaseMySQLi extends JDatabase
 	/**
 	 * Gets an exporter class object.
 	 *
-	 * @return  JDatbaseExporterMySQLi  An exporter object.
+	 * @return  JDatabaseExporterMySQLi  An exporter object.
 	 *
 	 * @since   11.1
 	 * @throws  DatabaseException
@@ -231,11 +253,11 @@ class JDatabaseMySQLi extends JDatabase
 	public function getExporter()
 	{
 		// Make sure we have an exporter class for this driver.
-		if (!class_exists('JDatbaseExporterMySQLi')) {
+		if (!class_exists('JDatabaseExporterMySQLi')) {
 			throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_EXPORTER'));
 		}
 
-		$o = new JDatbaseExporterMySQLi;
+		$o = new JDatabaseExporterMySQLi;
 		$o->setDbo($this);
 
 		return $o;
@@ -244,7 +266,7 @@ class JDatabaseMySQLi extends JDatabase
 	/**
 	 * Gets an importer class object.
 	 *
-	 * @return  JDatbaseImporterMySQLi  An importer object.
+	 * @return  JDatabaseImporterMySQLi  An importer object.
 	 *
 	 * @since   11.1
 	 * @throws  DatabaseException
@@ -252,11 +274,11 @@ class JDatabaseMySQLi extends JDatabase
 	public function getImporter()
 	{
 		// Make sure we have an importer class for this driver.
-		if (!class_exists('JDatbaseImporterMySQLi')) {
+		if (!class_exists('JDatabaseImporterMySQLi')) {
 			throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_IMPORTER'));
 		}
 
-		$o = new JDatbaseImporterMySQLi;
+		$o = new JDatabaseImporterMySQLi;
 		$o->setDbo($this);
 
 		return $o;
@@ -663,7 +685,7 @@ class JDatabaseMySQLi extends JDatabase
 	/**
 	 * Diagnostic method to return explain information for a query.
 	 *
-	 * @return    string  The explain output.
+	 * @return      string  The explain output.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -720,7 +742,7 @@ class JDatabaseMySQLi extends JDatabase
 	/**
 	 * Execute a query batch.
 	 *
-	 * @return    mixed  A database resource if successful, false if not.
+	 * @return      mixed  A database resource if successful, false if not.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2

@@ -39,11 +39,12 @@ class JDatabaseQueryElement
 	/**
 	 * Constructor.
 	 *
-	 * @param   string   $name		The name of the element.
-	 * @param   mixed    $elements	String or array.
-	 * @param   string   $glue		The glue for elements.
+	 * @param   string	$name      The name of the element.
+	 * @param   mixed	$elements  String or array.
+	 * @param   string	$glue      The glue for elements.
 	 *
-	 * @return  object   JDatabaseQueryElement
+	 * @return  JDatabaseQueryElement
+	 *
 	 * @since   11.1
 	 */
 	public function __construct($name, $elements, $glue = ',')
@@ -59,6 +60,7 @@ class JDatabaseQueryElement
 	 * Magic function to convert the query element to a string.
 	 *
 	 * @return  string
+	 *
 	 * @since   11.1
 	 */
 	public function __toString()
@@ -74,9 +76,10 @@ class JDatabaseQueryElement
 	/**
 	 * Appends element parts to the internal list.
 	 *
-	 * @param   mixed    String or array.
+	 * @param   mixed  String or array.
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	public function append($elements)
@@ -208,23 +211,7 @@ abstract class JDatabaseQuery
 	protected $order = null;
 
 	/**
-	 * @var    string  The character(s) used to quote SQL statement names such as table names or field names,
-	 *                 etc.  The child classes should define this as necessary.  If a single character string the
-	 *                 same character is used for both sides of the quoted name, else the first character will be
-	 *                 used for the opening quote and the second for the closing quote.
-	 * @since       11.1
-	 */
-	protected $name_quotes = '';
-
-	/**
-	 * @var    string  The null or zero representation of a timestamp for the database driver.  This should be
-	 *                 defined in child classes to hold the appropriate value for the engine.
-	 * @since  11.1
-	 */
-	protected $null_date = '';
-
-	/**
-	 * Magic method to provide method alias support for quote() and nameQuote().
+	 * Magic method to provide method alias support for quote() and quoteName().
 	 *
 	 * @param   string  $method  The called method.
 	 * @param   array   $args    The array of arguments passed to the method.
@@ -263,9 +250,106 @@ abstract class JDatabaseQuery
 	 * @return  JDatabaseQuery
 	 * @since   11.1
 	 */
-	public function __construct(JDatabase $db)
+	public function __construct(JDatabase $db = null)
 	{
 		$this->db = $db;
+	}
+
+	/**
+	 * Magic function to convert the query to a string.
+	 *
+	 * @return  string	The completed query.
+	 *
+	 * @since   11.1
+	 */
+	public function __toString()
+	{
+		$query = '';
+
+		switch ($this->type)
+		{
+			case 'element':
+				$query .= (string) $this->element;
+				break;
+
+			case 'select':
+				$query .= (string) $this->select;
+				$query .= (string) $this->from;
+				if ($this->join) {
+					// special case for joins
+					foreach ($this->join as $join)
+					{
+						$query .= (string) $join;
+					}
+				}
+
+				if ($this->where) {
+					$query .= (string) $this->where;
+				}
+
+				if ($this->group) {
+					$query .= (string) $this->group;
+				}
+
+				if ($this->having) {
+					$query .= (string) $this->having;
+				}
+
+				if ($this->order) {
+					$query .= (string) $this->order;
+				}
+
+				break;
+
+			case 'delete':
+				$query .= (string) $this->delete;
+				$query .= (string) $this->from;
+
+				if ($this->join) {
+					// special case for joins
+					foreach ($this->join as $join)
+					{
+						$query .= (string) $join;
+					}
+				}
+
+				if ($this->where) {
+					$query .= (string) $this->where;
+				}
+
+				break;
+
+			case 'update':
+				$query .= (string) $this->update;
+				$query .= (string) $this->set;
+
+				if ($this->where) {
+					$query .= (string) $this->where;
+				}
+
+				break;
+
+			case 'insert':
+				$query .= (string) $this->insert;
+
+				// Set method
+				if ($this->set) {
+					$query .= (string) $this->set;
+				}
+				// Columns-Values method
+				else if ($this->values) {
+					if ($this->columns) {
+						$query .= (string) $this->columns;
+					}
+
+					$query .= 'VALUES ';
+					$query .= (string) $this->values;
+				}
+
+				break;
+		}
+
+		return $query;
 	}
 
 	/**
@@ -359,6 +443,14 @@ abstract class JDatabaseQuery
 
 			case 'order':
 				$this->order = null;
+				break;
+
+			case 'columns':
+				$this->columns = null;
+				break;
+
+			case 'values':
+				$this->values = null;
 				break;
 
 			default:
@@ -478,9 +570,17 @@ abstract class JDatabaseQuery
 	 *
 	 * @return  string  The escaped string.
 	 *
-	 * @since       11.1
+	 * @since   11.1
+	 * @throws  DatabaseError if the internal db property is not a valid object.
 	 */
-	abstract public function escape($text, $extra = false);
+	public function escape($text, $extra = false)
+	{
+		if (!($this->db instanceof JDatabase)) {
+			throw new DatabaseException('JLIB_DATABASE_ERROR_INVALID_DB_OBJECT');
+		}
+
+		$this->db->escape($text, $extra);
+	}
 
 	/**
 	 * Add a table to the FROM clause of the query.
@@ -637,68 +737,6 @@ abstract class JDatabaseQuery
 	}
 
 	/**
-	 * Method to quote and optionally escape a string to database requirements for insertion into the database.
-	 *
-	 * @param   string  $text    The string to quote.
-	 * @param   bool    $escape  True to escape the string, false to leave it unchanged.
-	 *
-	 * @return  string  The quoted input string.
-	 *
-	 * @since   11.1
-	 */
-	public function quote($text, $escape = true)
-	{
-		return '\''.($escape ? $this->escape($text) : $text).'\'';
-	}
-
-	/**
-	 * Wrap an SQL statement identifier name such as column, table or database names in quotes to prevent injection
-	 * risks and reserved word conflicts.
-	 *
-	 * @param   string  $name  The identifier name to wrap in quotes.
-	 *
-	 * @return  string  The quote wrapped name.
-	 *
-	 * @since   11.1
-	 */
-	public function quoteName($name)
-	{
-		// Don't quote names with dot-notation.
-		if (strpos($name, '.') !== false) {
-			return $name;
-		}
-		else {
-			$q = $this->name_quotes;
-
-			if (strlen($q) == 2) {
-				return $q[0].$name.$q[1];
-			}
-			else if (strlen($q) == 1) {
-				return $q.$name.$q;
-			}
-			else {
-				return $name;
-			}
-		}
-	}
-
-	/**
-	 * Add an OUTER JOIN clause to the query.
-	 *
-	 * @param   string  $conditions  A string or array of conditions.
-	 *
-	 * @return  JDatabaseQuery  Returns this object to allow chaining.
-	 *
-	 * @since   11.1
-	 */
-	public function outerJoin($conditions)
-	{
-		$this->join('OUTER', $conditions);
-
-		return $this;
-	}
-
-	/**
 	 * Get the null or zero representation of a timestamp for the database driver.
 	 *
 	 * @param   boolean  $quoted  Optionally wraps the null date in database quotes (true by default).
@@ -709,12 +747,17 @@ abstract class JDatabaseQuery
 	 */
 	public function nullDate($quoted = true)
 	{
+		if (!($this->db instanceof JDatabase)) {
+			throw new DatabaseException('JLIB_DATABASE_ERROR_INVALID_DB_OBJECT');
+		}
+
+		$result = $this->db->getNullDate($quoted);
+
 		if ($quoted) {
-			return $this->quote($this->null_date);
+			return $this->db->quote($result);
 		}
-		else {
-			return $this->null_date;
-		}
+
+		return $result;
 	}
 
 	/**
@@ -736,6 +779,62 @@ abstract class JDatabaseQuery
 		}
 
 		return $this;
+	}
+
+	/**
+	 * Add an OUTER JOIN clause to the query.
+	 *
+	 * @param   string  $conditions  A string or array of conditions.
+	 *
+	 * @return  JDatabaseQuery  Returns this object to allow chaining.
+	 *
+	 * @since   11.1
+	 */
+	public function outerJoin($conditions)
+	{
+		$this->join('OUTER', $conditions);
+
+		return $this;
+	}
+
+	/**
+	 * Method to quote and optionally escape a string to database requirements for insertion into the database.
+	 *
+	 * @param   string  $text    The string to quote.
+	 * @param   bool    $escape  True to escape the string, false to leave it unchanged.
+	 *
+	 * @return  string  The quoted input string.
+	 *
+	 * @since   11.1
+	 * @throws  DatabaseError if the internal db property is not a valid object.
+	 */
+	public function quote($text, $escape = true)
+	{
+		if (!($this->db instanceof JDatabase)) {
+			throw new DatabaseException('JLIB_DATABASE_ERROR_INVALID_DB_OBJECT');
+		}
+
+		return $this->db->quote(($escape ? $this->db->escape($text) : $text));
+	}
+
+	/**
+	 * Wrap an SQL statement identifier name such as column, table or database names in quotes to prevent injection
+	 * risks and reserved word conflicts.
+	 *
+	 * @param   string  $name  The identifier name to wrap in quotes.
+	 *
+	 * @return  string  The quote wrapped name.
+	 *
+	 * @since   11.1
+	 * @throws  DatabaseError if the internal db property is not a valid object.
+	 */
+	public function quoteName($name)
+	{
+		if (!($this->db instanceof JDatabase)) {
+			throw new DatabaseException('JLIB_DATABASE_ERROR_INVALID_DB_OBJECT');
+		}
+
+		return $this->db->quoteName($name);
 	}
 
 	/**
@@ -864,102 +963,5 @@ abstract class JDatabaseQuery
 		}
 
 		return $this;
-	}
-
-	/**
-	 * Magic function to convert the query to a string.
-	 *
-	 * @return  string	The completed query.
-	 *
-	 * @since   11.1
-	 */
-	public function __toString()
-	{
-		$query = '';
-
-		switch ($this->type)
-		{
-			case 'element':
-				$query .= (string) $this->element;
-				break;
-
-			case 'select':
-				$query .= (string) $this->select;
-				$query .= (string) $this->from;
-				if ($this->join) {
-					// special case for joins
-					foreach ($this->join as $join)
-					{
-						$query .= (string) $join;
-					}
-				}
-
-				if ($this->where) {
-					$query .= (string) $this->where;
-				}
-
-				if ($this->group) {
-					$query .= (string) $this->group;
-				}
-
-				if ($this->having) {
-					$query .= (string) $this->having;
-				}
-
-				if ($this->order) {
-					$query .= (string) $this->order;
-				}
-
-				break;
-
-			case 'delete':
-				$query .= (string) $this->delete;
-				$query .= (string) $this->from;
-
-				if ($this->join) {
-					// special case for joins
-					foreach ($this->join as $join)
-					{
-						$query .= (string) $join;
-					}
-				}
-
-				if ($this->where) {
-					$query .= (string) $this->where;
-				}
-
-				break;
-
-			case 'update':
-				$query .= (string) $this->update;
-				$query .= (string) $this->set;
-
-				if ($this->where) {
-					$query .= (string) $this->where;
-				}
-
-				break;
-
-			case 'insert':
-				$query .= (string) $this->insert;
-
-				// Set method
-				if ($this->set) {
-					$query .= (string) $this->set;
-				}
-				// Columns-Values method
-				else if ($this->values) {
-					if ($this->columns) {
-						$query .= (string) $this->columns;
-					}
-
-					$query .= 'VALUES ';
-					$query .= (string) $this->values;
-				}
-
-				break;
-		}
-
-		return $query;
 	}
 }

@@ -177,6 +177,35 @@ class JDatabaseSQLAzure extends JDatabase
 	}
 
 	/**
+	 * Method to escape a string for usage in an SQL statement.
+	 *
+	 * The escaping for MSSQL isn't handled in the driver though that would be nice.  Because of this we need
+	 * to handle the escaping ourselves.
+	 *
+	 * @param   string  The string to be escaped.
+	 * @param   bool    Optional parameter to provide extra escaping.
+	 *
+	 * @return  string  The escaped string.
+	 *
+	 * @since   11.1
+	 */
+	public function escape($text, $extra = false)
+	{
+		// TODO: MSSQL Compatible escaping
+		$result = addslashes($text);
+		$result = str_replace("\'", "''", $result);
+		$result = str_replace('\"', '"', $result);
+		//$result = str_replace("\\", "''", $result);
+
+		if ($extra) {
+			// We need the below str_replace since the search in sql server doesnt recognize _ character.
+			$result = str_replace('_', '[_]', $result);
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Determines if the connection to the server is active.
 	 *
 	 * @return  bool  True if connected to the database engine.
@@ -241,7 +270,7 @@ class JDatabaseSQLAzure extends JDatabase
 	/**
 	 * Gets an exporter class object.
 	 *
-	 * @return  JDatbaseExporterSQLAzure  An exporter object.
+	 * @return  JDatabaseExporterSQLAzure  An exporter object.
 	 *
 	 * @since   11.1
 	 * @throws  DatabaseException
@@ -249,11 +278,11 @@ class JDatabaseSQLAzure extends JDatabase
 	public function getExporter()
 	{
 		// Make sure we have an exporter class for this driver.
-		if (!class_exists('JDatbaseExporterSQLAzure')) {
+		if (!class_exists('JDatabaseExporterSQLAzure')) {
 			throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_EXPORTER'));
 		}
 
-		$o = new JDatbaseExporterSQLAzure;
+		$o = new JDatabaseExporterSQLAzure;
 		$o->setDbo($this);
 
 		return $o;
@@ -262,7 +291,7 @@ class JDatabaseSQLAzure extends JDatabase
 	/**
 	 * Gets an importer class object.
 	 *
-	 * @return  JDatbaseImporterSQLAzure  An importer object.
+	 * @return  JDatabaseImporterSQLAzure  An importer object.
 	 *
 	 * @since   11.1
 	 * @throws  DatabaseException
@@ -270,11 +299,11 @@ class JDatabaseSQLAzure extends JDatabase
 	public function getImporter()
 	{
 		// Make sure we have an importer class for this driver.
-		if (!class_exists('JDatbaseImporterSQLAzure')) {
+		if (!class_exists('JDatabaseImporterSQLAzure')) {
 			throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_IMPORTER'));
 		}
 
-		$o = new JDatbaseImporterSQLAzure;
+		$o = new JDatabaseImporterSQLAzure;
 		$o->setDbo($this);
 
 		return $o;
@@ -685,7 +714,7 @@ class JDatabaseSQLAzure extends JDatabase
 	/**
 	 * Diagnostic method to return explain information for a query.
 	 *
-	 * @return    string  The explain output.
+	 * @return      string  The explain output.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -749,7 +778,7 @@ class JDatabaseSQLAzure extends JDatabase
 	/**
 	 * Execute a query batch.
 	 *
-	 * @return    mixed  A database resource if successful, false if not.
+	 * @return      mixed  A database resource if successful, false if not.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
