@@ -155,7 +155,7 @@ class JDocumentFeed extends JDocument
 	/**
 	 * Class constructor
 	 *
-	 * @param   array    $options Associative array of options
+	 * @param   array  $options Associative array of options
 	 */
 	protected function __construct($options = array())
 	{
@@ -232,7 +232,7 @@ class JDocumentFeed extends JDocument
  *
  * @package     Joomla.Platform
  * @subpackage  Document
- * @since   11.1
+ * @since       11.1
  */
 class JFeedItem extends JObject
 {
@@ -350,7 +350,7 @@ class JFeedItem extends JObject
 	 /**
 	 * Set the JFeedEnclosure for this item
 	 *
-	 * @param   object   $enclosure The JFeedItem to add to the feed.
+	 * @param   object  $enclosure  The JFeedItem to add to the feed.
 	 */
 	 public function setEnclosure($enclosure)	{
 		 $this->enclosure = $enclosure;

@@ -23,7 +23,7 @@ class JProfiler extends JObject
 	 * The start time.
 	 *
 	 * @var    integer
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	protected $_start = 0;
 
@@ -38,7 +38,7 @@ class JProfiler extends JObject
 	 * The buffer of profiling messages.
 	 *
 	 * @var    array
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	protected $_buffer= null;
 
@@ -79,9 +79,9 @@ class JProfiler extends JObject
 	 * Returns the global Profiler object, only creating it
 	 * if it doesn't already exist.
 	 *
-	 * @param   string   Prefix used to distinguish profiler objects.
+	 * @param   string  Prefix used to distinguish profiler objects.
 	 *
-	 * @return  object   JProfiler    The Profiler object.
+	 * @return  JProfiler  The Profiler object.
 	 * @since   11.1
 	 */
 	public static function getInstance($prefix = '')
@@ -105,10 +105,11 @@ class JProfiler extends JObject
 	 * The mark is returned as text enclosed in <div> tags
 	 * with a CSS class of 'profiler'.
 	 *
-	 * @param   string   $label  A label for the time mark
+	 * @param   string  $label  A label for the time mark
 	 *
-	 * @return  string   Mark enclosed in <div> tags
-	 * @since    11.1
+	 * @return  string  Mark enclosed in <div> tags
+	 *
+	 * @since   11.1
 	 */
 	public function mark($label)
 	{
@@ -158,9 +159,9 @@ class JProfiler extends JObject
 	/**
 	 * Get information about current memory usage.
 	 *
-	 * @link      PHP_MANUAL#memory_get_usage
+	 * @return  integer  The memory usage
 	 *
-	 * @return  integer  	The memory usage
+	 * @link    PHP_MANUAL#memory_get_usage
 	 * @since   11.1
 	 */
 	public function getMemory()
@@ -194,7 +195,7 @@ class JProfiler extends JObject
 	 * Returns an array of all marks created since the Profiler object
 	 * was instantiated.  Marks are strings as per {@link JProfiler::mark()}.
 	 *
-	 * @return  array    Array of profiler marks
+	 * @return  array  Array of profiler marks
 	 */
 	public function getBuffer()
 	{

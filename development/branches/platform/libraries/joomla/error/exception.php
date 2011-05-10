@@ -19,22 +19,19 @@ defined('JPATH_PLATFORM') or die;
 class JException extends Exception
 {
 	/**
-	 * Error level
-	 * @var    string
+	 * @var    string  Error level
 	 * @since  11.1
 	 */
 	protected $level		= null;
 
 	/**
-	 * Error code
-	 * @var    string
+	 * @var    string  Error code
 	 * @since  11.1
 	 */
 	protected $code = null;
 
 	/**
-	 * Error message
-	 * @var    string
+	 * @var    string  Error message
 	 * @since  11.1
 	 */
 	protected $message = null;
@@ -100,12 +97,11 @@ class JException extends Exception
 	 * Constructor
 	 *	- used to set up the error with all needed error details.
 	 *
-	 * @access	protected
-	 * @param   string   $msg         The error message
-	 * @param   string   $code        The error code from the application
-	 * @param   integer  $level       The error level (use the PHP constants E_ALL, E_NOTICE etc.).
-	 * @param   string   $info        Optional: The additional error information.
-	 * @param   boolean  $backtrace   True if backtrace information is to be collected
+	 * @param   string   $msg        The error message
+	 * @param   string   $code       The error code from the application
+	 * @param   integer  $level      The error level (use the PHP constants E_ALL, E_NOTICE etc.).
+	 * @param   string   $info       Optional: The additional error information.
+	 * @param   boolean  $backtrace  True if backtrace information is to be collected
 	 *
 	 * @since   11.1
 	 */
@@ -159,7 +155,8 @@ class JException extends Exception
 	/**
 	 * Returns to error message
 	 *
-	 * @return  string   Error message
+	 * @return  string  Error message
+	 *
 	 * @since   11.1
 	 */
 	public function __toString()
@@ -171,12 +168,13 @@ class JException extends Exception
 	 * Returns to error message
 	 *
 	 * @return  string   Error message
+	 *
 	 * @since   11.1
 	 * @deprecated
 	 */
 	public function toString()
 	{
-		return (string)$this;
+		return (string) $this;
 	}
 
 	/**
@@ -185,9 +183,9 @@ class JException extends Exception
 	 * @param   string   $property  The name of the property
 	 * @param   mixed    $default   The default value
 	 *
-	 * @see       getProperties()
+	 * @return  mixed  The value of the property or null
 	 *
-	 * @return  mixed    The value of the property or null
+	 * @see     getProperties()
 	 * @since   11.1
 	 */
 	public function get($property, $default=null)
@@ -201,10 +199,11 @@ class JException extends Exception
 	/**
 	 * Returns an associative array of object properties
 	 *
-	 * @param   boolean  $public   If true, returns only the public properties
-	 * @see       get()
+	 * @param   boolean  $public  If true, returns only the public properties
 	 *
-	 * @return  array    Object properties
+	 * @return  array  Object properties
+	 *
+	 * @see     get()
 	 * @since   11.1
 	 */
 	public function getProperties($public = true)
@@ -228,7 +227,8 @@ class JException extends Exception
 	 * @param   integer  $i Option error index
 	 * @param   boolean  $toString Indicates if JError objects should return their error message
 	 *
-	 * @return  string   Error message
+	 * @return  string  Error message
+	 *
 	 * @since   11.1
 	 */
 	public function getError($i = null, $toString = true)
@@ -258,7 +258,8 @@ class JException extends Exception
 	/**
 	 * Return all errors, if any
 	 *
-	 * @return  array    Array of error messages or JErrors
+	 * @return  array  Array of error messages or JErrors
+	 *
 	 * @since   11.1
 	 */
 	public function getErrors()
@@ -273,9 +274,9 @@ class JException extends Exception
 	 * @param   string   $property  The name of the property
 	 * @param   mixed    $value     The value of the property to set
 	 *
-	 * @see       setProperties()
+	 * @return  mixed  Previous value of the property
 	 *
-	 * @return  mixed    Previous value of the property
+	 * @see     setProperties()
 	 * @since   11.1
 	 */
 	public function set($property, $value = null)
@@ -286,15 +287,15 @@ class JException extends Exception
 	}
 
 	/**
-	* Set the object properties based on a named array/hash
-	*
-	* @access	protected
-	* @param   $array  mixed Either and associative array or another object
-	* @see       set()
-	*
-	* @return  boolean
-	* @since   11.1
-	*/
+	 * Set the object properties based on a named array/hash
+	 *
+	 * @param   $array  mixed Either and associative array or another object
+	 *
+	 * @return  boolean
+	 *
+	 * @see     set()
+	 * @since   11.1
+	 */
 	public function setProperties($properties)
 	{
 		// Cast to an array
@@ -315,14 +316,14 @@ class JException extends Exception
 	/**
 	 * Add an error message
 	 *
-	 * @param   string   $error Error message
+	 * @param   string  $error  Error message
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	public function setError($error)
 	{
 		array_push($this->_errors, $error);
 	}
-
 }

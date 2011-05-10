@@ -30,8 +30,8 @@ class JDocumentError extends JDocument
 	/**
 	 * Class constructor
 	 *
-	 * @param   string   $type		(either HTML or text)
-	 * @param   array    $attributes Associative array of attributes
+	 * @param   string  $type        (either HTML or text)
+	 * @param   array   $attributes  Associative array of attributes
 	 */
 	public function __construct($options = array())
 	{
@@ -47,7 +47,7 @@ class JDocumentError extends JDocument
 	/**
 	 * Set error object
 	 *
-	 * @param   object   $error	Error object to set
+	 * @param   object  $error	Error object to set
 	 *
 	 * @return  boolean  True on success
 	 * @since   11.1
@@ -103,10 +103,10 @@ class JDocumentError extends JDocument
 	/**
 	 * Load a template file
 	 *
-	 * @param   string   $template	The name of the template
-	 * @param   string   $filename	The actual filename
+	 * @param   string  $template	The name of the template
+	 * @param   string  $filename	The actual filename
 	 *
-	 * @return  string   The contents of the template
+	 * @return  string  The contents of the template
 	 */
 	function _loadTemplate($directory, $filename)
 	{

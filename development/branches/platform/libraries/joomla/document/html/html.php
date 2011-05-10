@@ -60,7 +60,7 @@ class JDocumentHTML extends JDocument
 	/**
 	 * Class constructor
 	 *
-	 * @param   array    $options Associative array of options
+	 * @param   array  $options Associative array of options
 	 */
 	public function __construct($options = array())
 	{
@@ -77,7 +77,7 @@ class JDocumentHTML extends JDocument
 	/**
 	 * Get the HTML document head data
 	 *
-	 * @return  array    The document head data in array form
+	 * @return  array  The document head data in array form
 	 */
 	public function getHeadData()
 	{
@@ -98,7 +98,7 @@ class JDocumentHTML extends JDocument
 	/**
 	 * Set the HTML document head data
 	 *
-	 * @param   array    $data	The document head data in array form
+	 * @param   array  $data	The document head data in array form
 	 */
 	public function setHeadData($data)
 	{
@@ -121,7 +121,7 @@ class JDocumentHTML extends JDocument
 	/**
 	 * Merge the HTML document head data
 	 *
-	 * @param   array    $data	The document head data in array form
+	 * @param   array  $data	The document head data in array form
 	 */
 	public function mergeHeadData($data)
 	{
@@ -182,7 +182,7 @@ class JDocumentHTML extends JDocument
 	 * @param   string  $href		The link that is being related.
 	 * @param   string  $relation	Relation of link.
 	 * @param   string  $relType	Relation type attribute.  Either rel or rev (default: 'rel').
-	 * @param   array    $attributes Associative array of remaining attributes.
+	 * @param   array   $attributes Associative array of remaining attributes.
 	 *
 	 * @return  void
 	 */
@@ -213,7 +213,7 @@ class JDocumentHTML extends JDocument
 	/**
 	 * Adds a custom HTML string to the head block
 	 *
-	 * @param   string The HTML to add to the head
+	 * @param   string  $html  The HTML to add to the head
 	 * @return  void
 	 */
 
@@ -225,9 +225,9 @@ class JDocumentHTML extends JDocument
 	/**
 	 * Get the contents of a document include
 	 *
-	 * @param   string   $type	The type of renderer
-	 * @param   string   $name	The name of the element to render
-	 * @param   array    $attribs Associative array of remaining attributes.
+	 * @param   string  $type	The type of renderer
+	 * @param   string  $name	The name of the element to render
+	 * @param   array   $attribs Associative array of remaining attributes.
 	 *
 	 * @return  The output of the renderer
 	 */
@@ -284,8 +284,8 @@ class JDocumentHTML extends JDocument
 	/**
 	 * Set the contents a document includes
 	 *
-	 * @param   string   $content	The content to be set in the buffer.
-	 * @param   array    $options	Array of optional elements.
+	 * @param   string  $content	The content to be set in the buffer.
+	 * @param   array   $options	Array of optional elements.
 	 */
 	public function setBuffer($content, $options = array())
 	{
@@ -302,7 +302,7 @@ class JDocumentHTML extends JDocument
 	/**
 	 * Parses the template and populates the buffer
 	 *
-	 * @param   array parameters for fetching the template
+	 * @param   array  $params  parameters for fetching the template
 	 */
 	public function parse($params = array()) {
 		$this->_fetchTemplate($params);
@@ -334,8 +334,9 @@ class JDocumentHTML extends JDocument
 	/**
 	 * Count the modules based on the given condition
 	 *
-	 * @param  string	$condition	The condition to use
-	 * @return  integer   Number of modules found
+	 * @param   string	$condition	The condition to use
+	 *
+	 * @return  integer  Number of modules found
 	 */
 	public function countModules($condition)
 	{
@@ -430,7 +431,7 @@ class JDocumentHTML extends JDocument
 	/**
 	 * Fetch the template, and initialise the params
 	 *
-	 * @param   array parameters to determine the template
+	 * @param   array  $params  parameters to determine the template
 	 */
 	protected function _fetchTemplate($params = array())
 	{

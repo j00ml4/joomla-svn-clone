@@ -26,65 +26,55 @@ defined('JPATH_PLATFORM') or die;
 class JBrowser extends JObject
 {
 	/**
-	 * Major version number.
-	 *  @var    integer
-	 *  @since  11.1
+	 * @var    integer  Major version number.
+	 * @since  11.1
 	 */
 	protected $_majorVersion = 0;
 
 	/**
-	 * Minor version number
-	 * @var    integer
+	 * @var    integer  Minor version number
 	 * @since  11.1
 	 */
 	protected $_minorVersion = 0;
 
 	/**
-	 * Browser name.
-	 *  @var    string
+	 *  @var    string  Browser name.
 	 *  @since  11.1
 	 */
 	protected $_browser = '';
 
 	/**
-	 * Full user agent string.
-	 * @var string
+	 * @var    string  Full user agent string.
 	 * @since  11.1
 	 */
 	protected $_agent = '';
 
 	/**
-	 * Lower-case user agent string.
-	 *
-	 * @var    string
+	 * @var    string  Lower-case user agent string.
 	 * @since  11.1
 	 */
 	protected $_lowerAgent = '';
 
 	/**
-	 * @var string HTTP_ACCEPT string.
+	 * @var    string  HTTP_ACCEPT string.
 	 * @since  11.1
 	 */
 	protected $_accept = '';
 
 	/**
-	 * Parsed HTTP_ACCEPT string
-	 * @var array
+	 * @var    array  Parsed HTTP_ACCEPT string
 	 * @since  11.1
 	 */
 	protected $_accept_parsed = array();
 
 	/**
-	 * Platform the browser is running on.
-	 *
-	 * @var    string
+	 * @var    string  Platform the browser is running on.
 	 * @since  11.1
 	 */
 	protected $_platform = '';
 
 	/**
-	 * Known robots.
-	 * @var    array
+	 * @var    array  Known robots.
 	 * @since  11.1
 	 */
 	protected $_robots = array(
@@ -143,8 +133,7 @@ class JBrowser extends JObject
 	protected $_mobile = false;
 
 	/**
-	 * Features.
-	 * @var    array
+	 * @var    array  Features.
 	 * @since  11.1
 	 */
 	protected $_features = array(
@@ -168,8 +157,7 @@ class JBrowser extends JObject
 	);
 
 	/**
-	 * Quirks.
-	 * @var array
+	 * @var    array  Quirks.
 	 * @since  11.1
 	 */
 	protected $_quirks = array(
@@ -192,10 +180,9 @@ class JBrowser extends JObject
 	);
 
 	/**
-	 * List of viewable image MIME subtypes.
 	 * This list of viewable images works for IE and Netscape/Mozilla.
 	 *
-	 * @var   array
+	 * @var   array  List of viewable image MIME subtypes.
 	 * @since  11.1
 	 */
 	protected $_images = array('jpeg', 'gif', 'png', 'pjpeg', 'x-png', 'bmp');
@@ -204,8 +191,8 @@ class JBrowser extends JObject
 	/**
 	 * Create a browser instance (constructor).
 	 *
-	 * @param   string   $userAgent  The browser string to parse.
-	 * @param   string   $accept	The HTTP_ACCEPT settings to use.
+	 * @param   string  $userAgent  The browser string to parse.
+	 * @param   string  $accept	The HTTP_ACCEPT settings to use.
 	 *
 	 * @since   11.1
 	 */
@@ -218,8 +205,8 @@ class JBrowser extends JObject
 	 * Returns the global Browser object, only creating it
 	 * if it doesn't already exist.
 	 *
-	 * @param   string   $userAgent  The browser string to parse.
-	 * @param   string   $accept	The HTTP_ACCEPT settings to use.
+	 * @param   string  $userAgent  The browser string to parse.
+	 * @param   string  $accept	The HTTP_ACCEPT settings to use.
 	 *
 	 * @return JBrowser  The Browser object.
 	 * @since  11.1
@@ -258,8 +245,8 @@ class JBrowser extends JObject
 	 * Parses the user agent string and inititializes the object with
 	 * all the known features and quirks for the given browser.
 	 *
-	 * @param   string   $userAgent  The browser string to parse.
-	 * @param   string   $accept     The HTTP_ACCEPT settings to use.
+	 * @param   string  $userAgent  The browser string to parse.
+	 * @param   string  $accept     The HTTP_ACCEPT settings to use.
 	 *
 	 * @return
 	 * @since   11.1
@@ -664,33 +651,31 @@ class JBrowser extends JObject
 	/**
 	 * Return the currently matched platform.
 	 *
-	 * @return  string    The user's platform.
+	 * @return  string  The user's platform.
 	 * @since   11.1
 	 */
 	public function getPlatform()
 	{
-
 		return $this->_platform;
 	}
 
 	/**
 	 * Sets the current browser.
 	 *
-	 * @param   string   $browser  The browser to set as current.
+	 * @param   string  $browser  The browser to set as current.
 	 *
 	 * @return
 	 * @since   11.1
 	 */
 	public function setBrowser($browser)
 	{
-
 		$this->_browser = $browser;
 	}
 
 	/**
 	 * Retrieve the current browser.
 	 *
-	 * @return  string    The current browser.
+	 * @return  string  The current browser.
 	 * @since   11.1
 	 */
 	public function getBrowser()
@@ -701,7 +686,7 @@ class JBrowser extends JObject
 	/**
 	 * Retrieve the current browser's major version.
 	 *
-	 * @return  integer   The current browser's major version
+	 * @return  integer  The current browser's major version
 	 * @since   11.1.
 	 */
 	public function getMajor()
@@ -712,7 +697,7 @@ class JBrowser extends JObject
 	/**
 	 * Retrieve the current browser's minor version.
 	 *
-	 * @return  integer   The current browser's minor version.
+	 * @return  integer  The current browser's minor version.
 	 * @since   11.1
 	 */
 	public function getMinor()
@@ -723,7 +708,7 @@ class JBrowser extends JObject
 	/**
 	 * Retrieve the current browser's version.
 	 *
-	 * @return  string    The current browser's version.
+	 * @return  string  The current browser's version.
 	 * @since   11.1
 	 */
 	public function getVersion()
@@ -734,7 +719,7 @@ class JBrowser extends JObject
 	/**
 	 * Return the full browser agent string.
 	 *
-	 * @return  string    The browser agent string
+	 * @return  string  The browser agent string
 	 * @since   11.1
 	 */
 	public function getAgentString()
@@ -745,7 +730,7 @@ class JBrowser extends JObject
 	/**
 	 * Returns the server protocol in use on the current server.
 	 *
-	 * @return  string    The HTTP server protocol version.
+	 * @return  string  The HTTP server protocol version.
 	 * @since   11.1
 	 */
 	public function getHTTPProtocol()
@@ -761,8 +746,8 @@ class JBrowser extends JObject
 	/**
 	 * Set unique behavior for the current browser.
 	 *
-	 * @param   string   $quirk  The behavior to set.
-	 * @param   string   $value  Special behavior parameter.
+	 * @param   string  $quirk  The behavior to set.
+	 * @param   string  $value  Special behavior parameter.
 	 *
 	 * @return
 	 * @since   11.1
@@ -775,7 +760,7 @@ class JBrowser extends JObject
 	/**
 	 * Check unique behavior for the current browser.
 	 *
-	 * @param   string   $quirk  The behavior to check.
+	 * @param   string  $quirk  The behavior to check.
 	 *
 	 * @return  boolean  Does the browser have the behavior set?
 	 * @since   11.1
@@ -788,9 +773,9 @@ class JBrowser extends JObject
 	/**
 	 * Retrieve unique behavior for the current browser.
 	 *
-	 * @param   string   $quirk  The behavior to retrieve.
+	 * @param   string  $quirk  The behavior to retrieve.
 	 *
-	 * @return  string    The value for the requested behavior.
+	 * @return  string  The value for the requested behavior.
 	 * @since   11.1
 	 */
 	public function getQuirk($quirk)
@@ -803,8 +788,8 @@ class JBrowser extends JObject
 	/**
 	 * Set capabilities for the current browser.
 	 *
-	 * @param   string   $feature  The capability to set.
-	 * @param   string   $value Special capability parameter.
+	 * @param   string  $feature  The capability to set.
+	 * @param   string  $value Special capability parameter.
 	 *
 	 * @return
 	 * @since   11.1
@@ -818,7 +803,7 @@ class JBrowser extends JObject
 	/**
 	 * Check the current browser capabilities.
 	 *
-	 * @param   string   $feature  The capability to check.
+	 * @param   string  $feature  The capability to check.
 	 *
 	 * @return  boolean  Does the browser have the capability set?
 	 * @since   11.1
@@ -831,9 +816,9 @@ class JBrowser extends JObject
 	/**
 	 * Retrieve the current browser capability.
 	 *
-	 * @param   string   $feature  The capability to retrieve.
+	 * @param   string  $feature  The capability to retrieve.
 	 *
-	 * @return  string    The value of the requested capability.
+	 * @return  string  The value of the requested capability.
 	 * @since   11.1
 	 */
 	public function getFeature($feature)
@@ -850,7 +835,7 @@ class JBrowser extends JObject
 	 * entity, but Mozilla doesn't seem to want to accept the latter.
 	 * For our purposes, we will treat them the same.
 	 *
-	 * @param   string   $mimetype  The MIME type to check.
+	 * @param   string  $mimetype  The MIME type to check.
 	 *
 	 * @return  boolean  True if the browser can display the MIME type.
 	 * @since   11.1
@@ -896,7 +881,7 @@ class JBrowser extends JObject
 	/**
 	 * Determine if the given browser is the same as the current.
 	 *
-	 * @param   string   $browser  The browser to check.
+	 * @param   string  $browser  The browser to check.
 	 *
 	 * @return  boolean  Is the given browser the same as the current?
 	 * @since   11.1

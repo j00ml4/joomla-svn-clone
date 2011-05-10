@@ -18,8 +18,8 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package     Joomla.Platform
  * @subpackage  Document
- * @see http://www.atomenabled.org/developers/syndication/atom-format-spec.php
- * @since   11.1
+ * @see         http://www.atomenabled.org/developers/syndication/atom-format-spec.php
+ * @since       11.1
  */
 
  class JDocumentRendererAtom extends JDocumentRenderer

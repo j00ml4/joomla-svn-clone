@@ -63,7 +63,7 @@ class JDocumentRenderer extends JObject
 	/**
 	 * Return the content type of the renderer
 	 *
-	 * @return  string   The contentType
+	 * @return  string  The contentType
 	 * @since   11.1
 	 */
 	function getContentType() {
