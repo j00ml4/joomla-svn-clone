@@ -67,12 +67,12 @@ class JArchiveTar extends JObject
 	/**
 	* Extract a ZIP compressed file to a given path
 	*
-	* @param     string   $archive		Path to ZIP archive to extract
-	* @param     string   $destination	Path to extract archive into
-	* @param     array    $options		Extraction options [unused]
+	* @param   string   $archive		Path to ZIP archive to extract
+	* @param   string   $destination	Path to extract archive into
+	* @param   array    $options		Extraction options [unused]
 	*
-	* @return    boolean  True if successful
-	* @since     11.1
+	* @return  boolean  True if successful
+	* @since   11.1
 	*/
 	public function extract($archive, $destination, $options = array ())
 	{

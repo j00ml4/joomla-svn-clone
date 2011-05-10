@@ -41,10 +41,10 @@ abstract class JHtmlSelect
 	/**
 	* Generates a yes/no radio list.
 	*
-	* @param     string The value of the HTML name attribute
-	* @param     string Additional HTML attributes for the <select> tag
-	* @param     mixed The key that is selected
-	* @return    string   HTML for the radio list
+	* @param   string The value of the HTML name attribute
+	* @param   string Additional HTML attributes for the <select> tag
+	* @param   mixed The key that is selected
+	* @return  string   HTML for the radio list
 	*/
 	public static function booleanlist(
 		$name, $attribs = null, $selected = null, $yes = 'JYES', $no = 'JNO', $id = false
@@ -59,9 +59,9 @@ abstract class JHtmlSelect
 	/**
 	 * Generates an HTML selection list.
 	 *
-	 * @param     array    An array of objects, arrays, or scalars.
-	 * @param     string  The value of the HTML name attribute.
-	 * @param     mixed    Additional HTML attributes for the <select> tag. This
+	 * @param   array    An array of objects, arrays, or scalars.
+	 * @param   string  The value of the HTML name attribute.
+	 * @param   mixed    Additional HTML attributes for the <select> tag. This
 	 * 					can be an array of attributes, or an array of options. Treated as options
 	 * 					if it is the last argument passed. Valid options are:
 	 * 						Format options, see {@see JHtml::$formatOptions}.
@@ -134,10 +134,10 @@ abstract class JHtmlSelect
 	/**
 	 * Generates a grouped HTML selection list from nested arrays.
 	 *
-	 * @param     array    An array of groups, each of which is an array of
+	 * @param   array    An array of groups, each of which is an array of
 	 * options.
-	 * @param     string  The value of the HTML name attribute
-	 * @param     array    Options, an array of key/value pairs. Valid options are:
+	 * @param   string  The value of the HTML name attribute
+	 * @param   array    Options, an array of key/value pairs. Valid options are:
 	 * 					Format options, {@see JHtml::$formatOptions}.
 	 * 					Selection options. See {@see JTtmlSelect::options()}.
 	 * 					group.id: The property in each group to use as the group id
@@ -335,14 +335,14 @@ abstract class JHtmlSelect
 	/**
 	 * Create a placeholder for an option group.
 	 *
-	 * @param     string  $text    The text for the option
-	 * @param     string  $optkey  The returned object property name for the value
-	 * @param     string  $optText The returned object property name for the text
-	 * 
+	 * @param   string  $text    The text for the option
+	 * @param   string  $optkey  The returned object property name for the value
+	 * @param   string  $optText The returned object property name for the text
+	 *
 	 * @see JHtmlSelect::groupedList()
-	 * 
-	 * @return    object
-	 * @since     11.1
+	 *
+	 * @return  object
+	 * @since   11.1
 	 * @deprecated         Use JHtmlSelect::groupedList()
 	 */
 	public static function optgroup($text, $optKey = 'value', $optText = 'text')

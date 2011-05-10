@@ -42,8 +42,8 @@ class JInstallerPackage extends JAdapterInstance
 	/**
 	 * Custom install method
 	 *
-	 * @return    boolean  True on success
-	 * @since     11.1
+	 * @return  boolean  True on success
+	 * @since   11.1
 	 */
 	public function install()
 	{
@@ -320,7 +320,7 @@ class JInstallerPackage extends JAdapterInstance
 	/**
 	 * Refreshes the extension table cache
 	 * @return  boolean result of operation, true if updated, false on failure
-	 * @since     11.1
+	 * @since   11.1
 	 */
 	public function refreshManifestCache()
 	{

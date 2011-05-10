@@ -24,14 +24,14 @@ class JButtonHelp extends JButton
 	protected $_name = 'Help';
 
 	/**
-	 * @param     string   $type		Unused string.
-	 * @param     string   $ref		The name of the help screen (its key reference).
-	 * @param     boolean  $com		Use the help file in the component directory.
-	 * @param     string   $override	Use this URL instead of any other.
-	 * @param     string   $component	Name of component to get Help (null for current component)
+	 * @param   string   $type		Unused string.
+	 * @param   string   $ref		The name of the help screen (its key reference).
+	 * @param   boolean  $com		Use the help file in the component directory.
+	 * @param   string   $override	Use this URL instead of any other.
+	 * @param   string   $component	Name of component to get Help (null for current component)
 	 *
-	 * @return    string
-	 * @since     11.1
+	 * @return  string
+	 * @since   11.1
 	 */
 	public function fetchButton($type = 'Help', $ref = '', $com = false, $override = null, $component = null)
 	{
@@ -53,7 +53,7 @@ class JButtonHelp extends JButton
 	 *
 	 * Redefined from JButton class
 	 *
-	 * @return    string	Button CSS Id
+	 * @return  string	Button CSS Id
 	 * @since       11.1
 	 */
 	public function fetchId()
@@ -64,13 +64,13 @@ class JButtonHelp extends JButton
 	/**
 	 * Get the JavaScript command for the button
 	 *
-	 * @param     string   $ref		The name of the help screen (its key reference).
-	 * @param     boolean  $com		Use the help file in the component directory.
-	 * @param     string   $override	Use this URL instead of any other.
-	 * @param     string   $component	Name of component to get Help (null for current component)
+	 * @param   string   $ref		The name of the help screen (its key reference).
+	 * @param   boolean  $com		Use the help file in the component directory.
+	 * @param   string   $override	Use this URL instead of any other.
+	 * @param   string   $component	Name of component to get Help (null for current component)
 	 *
-	 * @return    string   JavaScript command string
-	 * @since     11.1
+	 * @return  string   JavaScript command string
+	 * @since   11.1
 	 */
 	protected function _getCommand($ref, $com, $override, $component)
 	{

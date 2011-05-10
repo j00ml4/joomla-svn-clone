@@ -21,9 +21,9 @@ abstract class JHtmlContent
 	/**
 	 * Fire onContentPrepare for content that isn't part of an article.
 	 *
-	 * @param     string   The content to be transformed.
-	 * @param     array    The content params.
-	 * @return    string   The content after transformation.
+	 * @param   string   The content to be transformed.
+	 * @param   array    The content params.
+	 * @return  string   The content after transformation.
 	 */
 	public static function prepare($text, $params = null)
 	{

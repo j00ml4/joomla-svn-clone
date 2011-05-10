@@ -29,10 +29,10 @@ class JSimpleCrypt extends JObject
 	 * Object Constructor takes an optional key to be used for encryption/decryption.  If no key is given then the
 	 * secret word from the configuration object is used.
 	 *
-	 * @param     string   $key	Optional encryption key
-	 * 
-	 * @return    void
-	 * @since     11.1
+	 * @param   string   $key	Optional encryption key
+	 *
+	 * @return  void
+	 * @since   11.1
 	 */
 	public function __construct($key = null)
 	{
@@ -45,11 +45,11 @@ class JSimpleCrypt extends JObject
 	}
 	/**
 	 * Decrypt
-	 * 
-	 * @param     string   $s	
-	 * 
-	 * @return    string
-	 * @since     11.1
+	 *
+	 * @param   string   $s
+	 *
+	 * @return  string
+	 * @since   11.1
 	 */
 	public function decrypt($s)
 	{
@@ -59,11 +59,11 @@ class JSimpleCrypt extends JObject
 	}
 	/**
 	 * Encrypt
-	 * 
-	 * @param     string   $s	
-	 * 
-	 * @return    string
-	 * @since     11.1
+	 *
+	 * @param   string   $s
+	 *
+	 * @return  string
+	 * @since   11.1
 	 */
 	public function encrypt($s)
 	{
@@ -75,12 +75,12 @@ class JSimpleCrypt extends JObject
 	}
 	/**
 	 * HextoInt
-	 * 
-	 * @param     string   $s	
-	 * @param     integer		$i
-	 * 
-	 * @return    integer
-	 * @since     11.1
+	 *
+	 * @param   string   $s
+	 * @param   integer		$i
+	 *
+	 * @return  integer
+	 * @since   11.1
 	 */
 	protected function _hexToInt($s, $i)
 	{
@@ -150,11 +150,11 @@ class JSimpleCrypt extends JObject
 	}
 	/**
 	 * HexToIntArray
-	 * 
-	 * @param     string   $s	
-	 * 
-	 * @return    array
-	 * @since     11.1
+	 *
+	 * @param   string   $s
+	 *
+	 * @return  array
+	 * @since   11.1
 	 */
 	protected function _hexToIntArray($s)
 	{
@@ -170,11 +170,11 @@ class JSimpleCrypt extends JObject
 	}
 	/**
 	 * CharToInt
-	 * 
-	 * @param     string   $c	
-	 * 
-	 * @return    integer  ger
-	 * @since     11.1
+	 *
+	 * @param   string   $c
+	 *
+	 * @return  integer  ger
+	 * @since   11.1
 	 */
 	protected function _charToInt($c)
 	{
@@ -183,11 +183,11 @@ class JSimpleCrypt extends JObject
 	}
 	/**
 	 * XorString
-	 * 
-	 * @param     string   $ai	
-	 * 
-	 * @return    string
-	 * @since     11.1
+	 *
+	 * @param   string   $ai
+	 *
+	 * @return  string
+	 * @since   11.1
 	 */
 	protected function _xorString($ai)
 	{
@@ -208,11 +208,11 @@ class JSimpleCrypt extends JObject
 	}
 	/**
 	 * inToHex
-	 * 
-	 * @param     integer  $i	
-	 * 
-	 * @return    string
-	 * @since     11.1
+	 *
+	 * @param   integer  $i
+	 *
+	 * @return  string
+	 * @since   11.1
 	 */
 	protected function _intToHex($i)
 	{
@@ -229,11 +229,11 @@ class JSimpleCrypt extends JObject
 	}
 	/**
 	 * Decrypt
-	 * 
-	 * @param     string   $s	
-	 * 
-	 * @return    
-	 * @since     11.1
+	 *
+	 * @param   string   $s
+	 *
+	 * @return
+	 * @since   11.1
 	 */
 	protected function _xorCharString($s)
 	{

@@ -643,7 +643,7 @@ class JDatabaseMySQL extends JDatabase
 	/**
 	 * Diagnostic method to return explain information for a query.
 	 *
-	 * @return      string  The explain output.
+	 * @return    string  The explain output.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -700,7 +700,7 @@ class JDatabaseMySQL extends JDatabase
 	/**
 	 * Execute a query batch.
 	 *
-	 * @return      mixed  A database resource if successful, false if not.
+	 * @return    mixed  A database resource if successful, false if not.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2

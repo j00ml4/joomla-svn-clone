@@ -30,9 +30,9 @@ class JElementList extends JElement
 	/**
 	 * Get the options for the element
 	 *
-	 * @param     object   The current XML node.
-	 * @return    array
-	 * @since     11.1
+	 * @param   object   The current XML node.
+	 * @return  array
+	 * @since   11.1
 	 */
 	protected function _getOptions(&$node)
 	{
@@ -49,10 +49,10 @@ class JElementList extends JElement
 	/**
 	 * Fetch the HTML code for the parameter element.
 	 *
-	 * @param     string   The field name.
-	 * @param     mixed    The value of the field.
-	 * @param     object   The current XML node.
-	 * @param     string   The name of the HTML control.
+	 * @param   string   The field name.
+	 * @param   mixed    The value of the field.
+	 * @param   object   The current XML node.
+	 * @param   string   The name of the HTML control.
 	 */
 	public function fetchElement($name, $value, &$node, $control_name)
 	{

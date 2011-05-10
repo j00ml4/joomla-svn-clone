@@ -23,7 +23,7 @@ class JLoggerEcho extends JLogger
 {
 	/**
 	 * @var    array  Translation array for JLogEntry priorities to text strings.
-	 * @since       11.1
+	 * @since  11.1
 	 */
 	protected $priorities = array(
 		JLog::EMERGENCY => 'EMERGENCY',

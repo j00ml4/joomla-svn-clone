@@ -30,7 +30,7 @@ class JLoggerW3C extends JLoggerFormattedText
 	/**
 	 * @var    string  The format which each entry follows in the log file.  All fields must be
 	 *                 named in all caps and be within curly brackets eg. {FOOBAR}.
-	 * @since       11.1
+	 * @since  11.1
 	 */
 	protected $format = '{DATE}	{TIME}	{PRIORITY}	{CLIENTIP}	{CATEGORY}	{MESSAGE}';
 

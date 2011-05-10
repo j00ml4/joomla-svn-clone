@@ -19,16 +19,13 @@ defined('JPATH_PLATFORM') or die;
 class JAdapterInstance extends JObject {
 
 	/**
-	 * Parent
-	 * @var    object
+	 * @var   object  Parent
 	 * @since  11.1
 	 */
 	protected $parent = null;
 
 	/**
-	 * Database
-	 * 
-	 * @var    object
+	 * @var    object  Database
 	 * @since  11.1
 	 */
 	protected $db = null;
@@ -36,11 +33,13 @@ class JAdapterInstance extends JObject {
 	/**
 	 * Constructor
 	 *
-	 * @param     object   $parent     Parent object [JAdapter instance]
-	 * @param     object   $db         Database object [JDatabase instance]
-	 * @param     array    $options    Configuration Options
+	 * @param   object  $parent   Parent object [JAdapter instance]
+	 * @param   object  $db       Database object [JDatabase instance]
+	 * @param   array   $options  Configuration Options
 	 *
-	 * @since     11.1
+	 * @return  JAdapterInstance
+	 *
+	 * @since   11.1
 	 */
 	public function __construct(&$parent, &$db, $options = Array())
 	{
@@ -56,8 +55,8 @@ class JAdapterInstance extends JObject {
 	/**
 	 * Retrieves the parent object
 	 *
-	 * @return    object parent
-	 * @since     11.1
+	 * @return  object parent
+	 * @since   11.1
 	 */
 	public function getParent()
 	{

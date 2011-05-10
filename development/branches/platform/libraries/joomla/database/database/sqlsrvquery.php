@@ -14,7 +14,7 @@ jimport('joomla.database.databasequery');
 /**
  * Query Building Class.
  *
- * @package		Joomla.Platform
+ * @package     Joomla.Platform
  * @subpackage	Database
  * @since		11.1
  */

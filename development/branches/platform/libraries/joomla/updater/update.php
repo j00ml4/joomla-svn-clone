@@ -41,8 +41,8 @@ class JUpdate extends JObject
 	/**
 	 * Gets the reference to the current direct parent
 	 *
-	 * @return     object
-	 * @since      11.1
+	 * @return   object
+	 * @since    11.1
 	 */
 	protected function _getStackLocation()
 	{
@@ -52,7 +52,7 @@ class JUpdate extends JObject
 	/**
 	 * Get the last position in stack count
 	 *
-	 * @return    string
+	 * @return  string
 	 */
 	protected function _getLastTag()
 	{

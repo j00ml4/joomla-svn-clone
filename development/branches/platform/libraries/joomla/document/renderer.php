@@ -37,9 +37,9 @@ class JDocumentRenderer extends JObject
 	/**
 	* Class constructor
 	*
-	* @param     object   $doc  A reference to the JDocument object that instantiated the renderer
-	* 
-	* @since     11.1
+	* @param   object   $doc  A reference to the JDocument object that instantiated the renderer
+	*
+	* @since   11.1
 	*/
 	public function __construct(&$doc)
 	{
@@ -49,12 +49,12 @@ class JDocumentRenderer extends JObject
 	/**
 	 * Renders a script and returns the results as a string
 	 *
-	 * @param     string   $name     The name of the element to render
-	 * @param     array    $array    Array of values
-	 * @param     string   $content  Override the output of the renderer
-	 * 
-	 * @return    string   The output of the script
-	 * @since     11.1
+	 * @param   string   $name     The name of the element to render
+	 * @param   array    $array    Array of values
+	 * @param   string   $content  Override the output of the renderer
+	 *
+	 * @return  string   The output of the script
+	 * @since   11.1
 	 */
 	public function render($name, $params = null, $content = null)
 	{
@@ -63,8 +63,8 @@ class JDocumentRenderer extends JObject
 	/**
 	 * Return the content type of the renderer
 	 *
-	 * @return    string   The contentType
-	 * @since     11.1
+	 * @return  string   The contentType
+	 * @since   11.1
 	 */
 	function getContentType() {
 		return $this->_mime;
