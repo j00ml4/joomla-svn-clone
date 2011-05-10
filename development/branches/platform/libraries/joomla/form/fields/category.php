@@ -25,15 +25,15 @@ class JFormFieldCategory extends JFormFieldList
 {
 	/**
 	 * @var    string	The form field type.
-	 * @since     11.1
+	 * @since   11.1
 	 */
 	public $type = 'Category';
 
 	/**
 	 * Method to get the field options.
 	 *
-	 * @return    array    The field option objects.
-	 * @since     11.1
+	 * @return  array    The field option objects.
+	 * @since   11.1
 	 */
 	protected function getOptions()
 	{

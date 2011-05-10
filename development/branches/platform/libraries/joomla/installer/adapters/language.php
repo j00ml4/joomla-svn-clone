@@ -32,8 +32,8 @@ class JInstallerLanguage extends JAdapterInstance
 	 * the ability to install multiple distinct packs in one install. The
 	 * preferred method is to use a package to install multiple language packs.
 	 *
-	 * @return    boolean  True on success
-	 * @since     11.1
+	 * @return  boolean  True on success
+	 * @since   11.1
 	 */
 	public function install()
 	{
@@ -248,8 +248,8 @@ class JInstallerLanguage extends JAdapterInstance
 	/**
 	 * Custom update method
 	 *
-	 * @return    boolean  True on success, false on failure
-	 * @since     11.1
+	 * @return  boolean  True on success, false on failure
+	 * @since   11.1
 	 */
 	public function update()
 	{
@@ -400,10 +400,10 @@ class JInstallerLanguage extends JAdapterInstance
 	/**
 	 * Custom uninstall method
 	 *
-	 * @param     string   $tag		The tag of the language to uninstall
-	 * @param     integer  $clientId	The id of the client (unused)
-	 * @return    mixed    Return value for uninstall method in component uninstall file
-	 * @since     11.1
+	 * @param   string   $tag		The tag of the language to uninstall
+	 * @param   integer  $clientId	The id of the client (unused)
+	 * @return  mixed    Return value for uninstall method in component uninstall file
+	 * @since   11.1
 	 */
 	public function uninstall($eid)
 	{
@@ -575,9 +575,9 @@ class JInstallerLanguage extends JAdapterInstance
 
 	/**
 	 * Refreshes the extension table cache
-	 * 
+	 *
 	 * @return  boolean result of operation, true if updated, false on failure
-	 * @since     11.1
+	 * @since   11.1
 	 */
 	public function refreshManifestCache()
 	{

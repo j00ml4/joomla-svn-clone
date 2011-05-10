@@ -29,9 +29,11 @@ abstract class JObserver extends JObject
 	/**
 	 * Constructor
 	 *
-	 * @param     object   $subject	The object to observe.
-	 * 
-	 * @since     11.1
+	 * @param   object  $subject  The object to observe.
+	 *
+	 * @return  JObserver
+	 *
+	 * @since   11.1
 	 */
 	public function __construct(&$subject)
 	{
@@ -45,10 +47,10 @@ abstract class JObserver extends JObject
 	/**
 	 * Method to update the state of observable objects
 	 *
-	 * @param     array   $args  An array of arguments to pass to the listener.
-	 * 
-	 * @return    mixed
-	 * @since     11.1
+	 * @param   array  $args  An array of arguments to pass to the listener.
+	 *
+	 * @return  mixed
+	 * @since   11.1
 	 */
 	public abstract function update(&$args);
 }

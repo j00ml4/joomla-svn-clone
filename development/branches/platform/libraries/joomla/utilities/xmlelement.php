@@ -23,7 +23,7 @@ class JXMLElement extends SimpleXMLElement
 	 *
 	 * Warning: don't use getName() as it's broken up to php 5.2.3
 	 *
-	 * @return    string
+	 * @return  string
 	 */
 	public function name()
 	{
@@ -38,7 +38,7 @@ class JXMLElement extends SimpleXMLElement
 	/**
 	 * Legacy method to get the element data.
 	 *
-	 * @return    string
+	 * @return  string
 	 * @deprecated	1.6 - Feb 5, 2010
 	 */
 	public function data()
@@ -49,9 +49,9 @@ class JXMLElement extends SimpleXMLElement
 	/**
 	 * Legacy method gets an elements attribute by name.
 	 *
-	 * @param     string
-	 * 
-	 * @return    string
+	 * @param   string
+	 *
+	 * @return  string
 	 * @deprecated	1.6 - Feb 5, 2010
 	 */
 	public function getAttribute($name)
@@ -62,10 +62,10 @@ class JXMLElement extends SimpleXMLElement
 	/**
 	 * Return a well-formed XML string based on SimpleXML element
 	 *
-	 * @param     boolean  Should we use indentation and newlines ?
-	 * @param     integer  Indentaion level.
-	 * 
-	 * @return    string
+	 * @param   boolean  Should we use indentation and newlines ?
+	 * @param   integer  Indentaion level.
+	 *
+	 * @return  string
 	 */
 	public function asFormattedXML($compressed = false, $indent = "\t", $level = 0)
 	{

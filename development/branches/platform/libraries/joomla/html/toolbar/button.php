@@ -49,7 +49,7 @@ abstract class JButton extends JObject
 	/**
 	 * Get the element name
 	 *
-	 * @return    string   type of the parameter
+	 * @return  string   type of the parameter
 	 */
 	public function getName()
 	{
@@ -83,9 +83,9 @@ abstract class JButton extends JObject
 	 *
 	 * Can be redefined in the final class
 	 *
-	 * @param     string   $identifier	Icon identification string
-	 * @return    string   CSS class name
-	 * @since     11.1
+	 * @param   string   $identifier	Icon identification string
+	 * @return  string   CSS class name
+	 * @since   11.1
 	 */
 	public function fetchIconClass($identifier)
 	{

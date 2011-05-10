@@ -25,7 +25,7 @@ class JDocumentRAW extends JDocument
 	/**
 	 * Class constructor
 	 *
-	 * @param     array    $options Associative array of options
+	 * @param   array    $options Associative array of options
 	 */
 	protected function __construct($options = array())
 	{

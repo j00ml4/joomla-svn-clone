@@ -19,7 +19,7 @@ defined('JPATH_PLATFORM') or die;
  * @package     Joomla.Platform
  * @subpackage  Document
  * @see http://www.atomenabled.org/developers/syndication/atom-format-spec.php
- * @since     11.1
+ * @since   11.1
  */
 
  class JDocumentRendererAtom extends JDocumentRenderer
@@ -34,7 +34,7 @@ defined('JPATH_PLATFORM') or die;
 	/**
 	 * Render the feed
 	 *
-	 * @return    string
+	 * @return  string
 	 */
 	public function render()
 	{

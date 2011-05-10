@@ -32,9 +32,12 @@ class JObject
 	/**
 	 * Class constructor, overridden in descendant classes.
 	 *
-	 * @param     mixed    $properties	Either and associative array or another 
-	 *                     object to set the initial properties of the object.
-	 * @since     11.1
+	 * @param   mixed  $properties	Either and associative array or another
+	 *                 object to set the initial properties of the object.
+	 *
+	 * @return  JObject
+	 *
+	 * @since   11.1
 	 */
 	public function __construct($properties = null)
 	{
@@ -46,8 +49,8 @@ class JObject
 	/**
 	 * Magic method to convert the object to a string gracefully.
 	 *
-	 * @return    string   The classname.
-	 * @since     11.1
+	 * @return  string  The classname.
+	 * @since   11.1
 	 */
 	public function __toString()
 	{
@@ -57,11 +60,11 @@ class JObject
 	/**
 	 * Sets a default value if not alreay assigned
 	 *
-	 * @param     string   $property   The name of the property.
-	 * @param     mixed    $default    The default value.
-	 * 
-	 * @return    mixed
-	 * @since     11.1
+	 * @param   string  $property  The name of the property.
+	 * @param   mixed   $default   The default value.
+	 *
+	 * @return  mixed
+	 * @since   11.1
 	 */
 	public function def($property, $default=null)
 	{
@@ -72,13 +75,13 @@ class JObject
 	/**
 	 * Returns a property of the object or the default value if the property is not set.
 	 *
-	 * @param     string   $property  The name of the property.
-	 * @param     mixed    $default     The default value.
-	 * 
-	 * @see       getProperties()
-	 * 
-	 * @return    mixed    The value of the property.
-	 * @since     11.1
+	 * @param   string  $property  The name of the property.
+	 * @param   mixed   $default   The default value.
+	 *
+	 * @return  mixed    The value of the property.
+	 *
+	 * @see     getProperties()
+	 * @since   11.1
 	 */
 	public function get($property, $default=null)
 	{
@@ -91,12 +94,12 @@ class JObject
 	/**
 	 * Returns an associative array of object properties.
 	 *
-	 * @param     boolean  $public   If true, returns only the public properties.
+	 * @param   boolean  $public  If true, returns only the public properties.
+	 *
+	 * @return  array
 	 *
 	 * @see		get()
-	 * 
-	 * @return    array
-	 * @since     11.1
+	 * @since   11.1
 	 */
 	public function getProperties($public = true)
 	{
@@ -117,11 +120,11 @@ class JObject
 	/**
 	 * Get the most recent error message.
 	 *
-	 * @param     integer  $i         Option error index.
-	 * @param     boolean  $toString  Indicates if JError objects should return their error message.
-	 * 
-	 * @return    string   Error message
-	 * @since     11.1
+	 * @param   integer  $i         Option error index.
+	 * @param   boolean  $toString  Indicates if JError objects should return their error message.
+	 *
+	 * @return  string   Error message
+	 * @since   11.1
 	 */
 	public function getError($i = null, $toString = true)
 	{
@@ -151,8 +154,8 @@ class JObject
 	/**
 	 * Return all errors, if any.
 	 *
-	 * @return    array    Array of error messages or JErrors.
-	 * @since     11.1
+	 * @return  array  Array of error messages or JErrors.
+	 * @since   11.1
 	 */
 	public function getErrors()
 	{
@@ -162,11 +165,11 @@ class JObject
 	/**
 	 * Modifies a property of the object, creating it if it does not already exist.
 	 *
-	 * @param     string   $property   The name of the property.
-	 * @param     mixed    $value      The value of the property to set.
+	 * @param   string  $property  The name of the property.
+	 * @param   mixed   $value     The value of the property to set.
 	 *
-	 * @return    mixed    Previous value of the property.
-	 * @since     11.1
+	 * @return  mixed  Previous value of the property.
+	 * @since   11.1
 	 */
 	public function set($property, $value = null)
 	{
@@ -178,12 +181,12 @@ class JObject
 	/**
 	 * Set the object properties based on a named array/hash.
 	 *
-	 * @param     mixed    $properties	Either an associative array or another object.
-	 * @@see      set()
-	 * 
-	 * return    boolean
-	 * 
-	 * @since     11.1
+	 * @param   mixed  $properties  Either an associative array or another object.
+	 *
+	 * @return  boolean
+	 *
+	 * @see     set()
+	 * @since   11.1
 	 */
 	public function setProperties($properties)
 	{
@@ -203,10 +206,10 @@ class JObject
 	/**
 	 * Add an error message.
 	 *
-	 * @param     string   $error   Error message.
-	 * 
-	 * @return    array   updated array or errors
-	 * @since     11.1
+	 * @param   string  $error  Error message.
+	 *
+	 * @return  array  updated array or errors
+	 * @since   11.1
 	 */
 	public function setError($error)
 	{
@@ -214,10 +217,12 @@ class JObject
 	}
 
 	/**
-	 * @see __toString()
-	 * 
-	 * @since         11.1
-	 * @deprecated    Use __toString()
+	 * @return  string
+	 *
+	 * @deprecated
+	 * @note   Use magic method __toString()
+	 * @see    __toString()
+	 * @since  11.1
 	 */
 	function toString()
 	{

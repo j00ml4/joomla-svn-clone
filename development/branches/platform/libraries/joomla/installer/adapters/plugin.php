@@ -34,8 +34,8 @@ class JInstallerPlugin extends JAdapterInstance
 	/**
 	 * Custom loadLanguage method
 	 *
-	 * @param     string   $path the path where to find language files
-	 * @since     11.1
+	 * @param   string   $path the path where to find language files
+	 * @since   11.1
 	 */
 	public function loadLanguage($path=null)
 	{
@@ -80,8 +80,8 @@ class JInstallerPlugin extends JAdapterInstance
 	/**
 	 * Custom install method
 	 *
-	 * @return    boolean  True on success
-	 * @since     11.1
+	 * @return  boolean  True on success
+	 * @since   11.1
 	 */
 	public function install()
 	{
@@ -434,10 +434,10 @@ class JInstallerPlugin extends JAdapterInstance
 
 	/**
 	 * Custom uninstall method
-	 * @param     integer  $id	The id of the plugin to uninstall
+	 * @param   integer  $id	The id of the plugin to uninstall
 
-	 * @return    boolean  True on success
-	 * @since     11.1
+	 * @return  boolean  True on success
+	 * @since   11.1
 	 */
 	public function uninstall($id)
 	{
@@ -616,8 +616,8 @@ class JInstallerPlugin extends JAdapterInstance
 	/**
 	 * Custom discover method
 	 *
-	 * @return    array    JExtension) list of extensions available
-	 * @since     11.1
+	 * @return  array    JExtension) list of extensions available
+	 * @since   11.1
 	 */
 	function discover()
 	{
@@ -670,10 +670,10 @@ class JInstallerPlugin extends JAdapterInstance
 	/**
 	 * Custom discover_install method
 	 *
-	 * @param     integer  $id The id of the extension to install
-	 * 
-	 * @return    mixed  
-	 * @since     11.1
+	 * @param   integer  $id The id of the extension to install
+	 *
+	 * @return  mixed
+	 * @since   11.1
 	 */
 	public function discover_install()
 	{
@@ -715,7 +715,7 @@ class JInstallerPlugin extends JAdapterInstance
 	/**
 	 * Refreshes the extension table cache
 	 * @return  boolean result of operation, true if updated, false on failure
-	 * @since     11.1
+	 * @since   11.1
 	 */
 	public function refreshManifestCache()
 	{

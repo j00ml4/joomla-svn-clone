@@ -27,7 +27,7 @@ class JDatabaseMySQLi extends JDatabase
 	 * @since  11.1
 	 */
 	public $name = 'mysqli';
-	
+
 	/**
 	 * @var    string  The character(s) used to quote SQL statement names such as table names or field names,
 	 *                 etc.  The child classes should define this as necessary.  If a single character string the
@@ -36,7 +36,7 @@ class JDatabaseMySQLi extends JDatabase
 	 * @since  11.1
 	 */
 	protected $nameQuote = '`';
-	
+
 	/**
 	 * @var    string  The null or zero representation of a timestamp for the database driver.  This should be
 	 *                 defined in child classes to hold the appropriate value for the engine.
@@ -663,7 +663,7 @@ class JDatabaseMySQLi extends JDatabase
 	/**
 	 * Diagnostic method to return explain information for a query.
 	 *
-	 * @return      string  The explain output.
+	 * @return    string  The explain output.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -720,7 +720,7 @@ class JDatabaseMySQLi extends JDatabase
 	/**
 	 * Execute a query batch.
 	 *
-	 * @return      mixed  A database resource if successful, false if not.
+	 * @return    mixed  A database resource if successful, false if not.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2

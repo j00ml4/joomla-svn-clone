@@ -27,8 +27,8 @@ abstract class JHtmlContentLanguage
 	/**
 	 * Get a list of the available content language items.
 	 *
-	 * @return    string
-	 * @since     11.1
+	 * @return  string
+	 * @since   11.1
 	 */
 	public static function existing($all = false, $translate=false)
 	{

@@ -9,14 +9,14 @@
 
 defined('JPATH_PLATFORM') or die;
 
-// True for Windows based hosts 
+// True for Windows based hosts
 define('JPATH_ISWIN', (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN'));
 
 // True for Mac based hosts
 define('JPATH_ISMAC', (strtoupper(substr(PHP_OS, 0, 3)) === 'MAC'));
 
 if (!defined('DS')) {
-	// String Shortcut for the DIRECTORY_SEPARATOR define 
+	// String Shortcut for the DIRECTORY_SEPARATOR define
 	define('DS', DIRECTORY_SEPARATOR);
 }
 
@@ -37,10 +37,10 @@ class JPath
 	/**
 	 * Checks if a path's permissions can be changed
 	 *
-	 * @param     string   Path to check
-	 * 
-	 * @return    boolean  True if path can have mode changed
-	 * @since     11.1
+	 * @param   string   Path to check
+	 *
+	 * @return  boolean  True if path can have mode changed
+	 * @since   11.1
 	 */
 	public static function canChmod($path)
 	{
@@ -58,12 +58,12 @@ class JPath
 	/**
 	 * Chmods files and directories recursivly to given permissions
 	 *
-	 * @param     string   $path        Root path to begin changing mode [without trailing slash]
-	 * @param     string   $filemode    Octal representation of the value to change file mode to [null = no change]
-	 * @param     string   $foldermode  Octal representation of the value to change folder mode to [null = no change]
-	 * 
-	 * @return    boolean  True if successful [one fail means the whole operation failed]
-	 * @since     11.1
+	 * @param   string   $path        Root path to begin changing mode [without trailing slash]
+	 * @param   string   $filemode    Octal representation of the value to change file mode to [null = no change]
+	 * @param   string   $foldermode  Octal representation of the value to change folder mode to [null = no change]
+	 *
+	 * @return  boolean  True if successful [one fail means the whole operation failed]
+	 * @since   11.1
 	 */
 	public static function setPermissions($path, $filemode = '0644', $foldermode = '0755')
 	{
@@ -107,10 +107,10 @@ class JPath
 	/**
 	 * Get the permissions of the file/folder at a give path
 	 *
-	 * @param     string   $path  The path of a file/folder
-	 * 
-	 * @return    string   Filesystem permissions
-	 * @since     11.1
+	 * @param   string   $path  The path of a file/folder
+	 *
+	 * @return  string   Filesystem permissions
+	 * @since   11.1
 	 */
 	public static function getPermissions($path)
 	{
@@ -137,24 +137,24 @@ class JPath
 	/**
 	 * Checks for snooping outside of the file system root
 	 *
-	 * @param     string   A file system path to check
-	 * @param     string   Directory separator (optional)
-	 * 
-	 * @return    string   A cleaned version of the path or exit on error
-	 * @since     11.1
+	 * @param   string   A file system path to check
+	 * @param   string   Directory separator (optional)
+	 *
+	 * @return  string   A cleaned version of the path or exit on error
+	 * @since   11.1
 	 */
 	public static function check($path, $ds = DIRECTORY_SEPARATOR)
 	{
 		if (strpos($path, '..') !== false) {
 			// Don't translate
-			JError::raiseError(20, 'JPath::check Use of relative paths not permitted'); 
+			JError::raiseError(20, 'JPath::check Use of relative paths not permitted');
 			jexit();
 		}
 
 		$path = JPath::clean($path);
 		if (strpos($path, JPath::clean(JPATH_ROOT)) !== 0) {
 			// Don't translate
-			JError::raiseError(20, 'JPath::check Snooping out of bounds @ '.$path); 
+			JError::raiseError(20, 'JPath::check Snooping out of bounds @ '.$path);
 			jexit();
 		}
 
@@ -164,10 +164,10 @@ class JPath
 	/**
 	 * Function to strip additional / or \ in a path name
 	 *
-	 * @param     string   The path to clean
-	 * @param     string   Directory separator (optional)
-	 * @return    string   The cleaned path
-	 * @since     11.1
+	 * @param   string   The path to clean
+	 * @param   string   Directory separator (optional)
+	 * @return  string   The cleaned path
+	 * @since   11.1
 	 */
 	public static function clean($path, $ds = DIRECTORY_SEPARATOR)
 	{
@@ -186,10 +186,10 @@ class JPath
 	/**
 	 * Method to determine if script owns the path
 	 *
-	 * @param     string   Path to check ownership
-	 * 
-	 * @return    boolean  True if the php script owns the path passed
-	 * @since     11.1
+	 * @param   string   Path to check ownership
+	 *
+	 * @return  boolean  True if the php script owns the path passed
+	 * @since   11.1
 	 */
 	public static function isOwner($path)
 	{
@@ -227,11 +227,11 @@ class JPath
 	/**
 	 * Searches the directory paths for a given file.
 	 *
-	 * @param     mixed     An path string or array of path strings to search in
-	 * @param     string    The file name to look for.
-	 * 
-	 * @return    mixed     The full path and file name for the target file, or boolean false if the file is not found in any of the paths.
-	 * @since     11.1
+	 * @param   mixed     An path string or array of path strings to search in
+	 * @param   string    The file name to look for.
+	 *
+	 * @return  mixed     The full path and file name for the target file, or boolean false if the file is not found in any of the paths.
+	 * @since   11.1
 	 */
 	public static function find($paths, $file)
 	{
@@ -255,7 +255,7 @@ class JPath
 			// Non-registered directores are not accessible via directory
 			// Traversal attempts.
 			if (file_exists($fullname) && substr($fullname, 0, strlen($path)) == $path) {
-			
+
 				return $fullname;
 			}
 		}

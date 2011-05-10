@@ -21,10 +21,10 @@ class JDocumentRendererComponent extends JDocumentRenderer
 	/**
 	 * Renders a component script and returns the results as a string
 	 *
-	 * @param     string   $component	The name of the component to render
-	 * @param     array    $params		Associative array of values
-	 * 
-	 * @return    string   			The output of the script
+	 * @param   string   $component	The name of the component to render
+	 * @param   array    $params		Associative array of values
+	 *
+	 * @return  string   			The output of the script
 	 */
 	public function render($component = null, $params = array(), $content = null)
 	{

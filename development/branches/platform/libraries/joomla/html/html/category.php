@@ -27,10 +27,10 @@ abstract class JHtmlCategory
 	/**
 	 * Returns an array of categories for the given extension.
 	 *
-	 * @param     string   The extension option.
-	 * @param     array    An array of configuration options. By default, only published and unpulbished categories are returned.
+	 * @param   string   The extension option.
+	 * @param   array    An array of configuration options. By default, only published and unpulbished categories are returned.
 	 *
-	 * @return    array
+	 * @return  array
 	 */
 	public static function options($extension, $config = array('filter.published' => array(0,1)))
 	{
@@ -79,10 +79,10 @@ abstract class JHtmlCategory
 	/**
 	 * Returns an array of categories for the given extension.
 	 *
-	 * @param     string   The extension option.
-	 * @param     array    An array of configuration options. By default, only published and unpulbished categories are returned.
+	 * @param   string   The extension option.
+	 * @param   array    An array of configuration options. By default, only published and unpulbished categories are returned.
 	 *
-	 * @return    array
+	 * @return  array
 	 */
 	public static function categories($extension, $config = array('filter.published' => array(0,1)))
 	{

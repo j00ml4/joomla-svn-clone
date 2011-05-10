@@ -31,10 +31,10 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Custom loadLanguage method
 	 *
-	 * @param     string   $path the path where to find language files
+	 * @param   string   $path the path where to find language files
 	 *
-	 * @return    void
-	 * @since     11.1
+	 * @return  void
+	 * @since   11.1
 	 */
 	public function loadLanguage($path=null)
 	{
@@ -82,8 +82,8 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Custom install method for components
 	 *
-	 * @return    boolean  True on success
-	 * @since     11.1
+	 * @return  boolean  True on success
+	 * @since   11.1
 	 */
 	public function install()
 	{
@@ -483,8 +483,8 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Custom update method for components
 	 *
-	 * @return    boolean  True on success
-	 * @since     11.1
+	 * @return  boolean  True on success
+	 * @since   11.1
 	 */
 	public function update()
 	{
@@ -904,9 +904,9 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Custom uninstall method for components
 	 *
-	 * @param     integer  $id	The unique extension id of the component to uninstall
+	 * @param   integer  $id	The unique extension id of the component to uninstall
 	 *
-	 * @return    mixed    Return value for uninstall method in component uninstall file
+	 * @return  mixed    Return value for uninstall method in component uninstall file
 	 * @since	1.0
 	 */
 	public function uninstall($id)
@@ -1151,8 +1151,8 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Method to build menu database entries for a component
 	 *
-	 * @return    boolean  True if successful
-	 * @since     11.1
+	 * @return  boolean  True if successful
+	 * @since   11.1
 	 */
 	protected function _buildAdminMenus()
 	{
@@ -1336,10 +1336,10 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Method to remove admin menu references to a component
 	 *
-	 * @param     object   $component	Component table object
+	 * @param   object   $component	Component table object
 	 *
-	 * @return    boolean  True if successful
-	 * @since     11.1
+	 * @return  boolean  True if successful
+	 * @since   11.1
 	 */
 	protected function _removeAdminMenus(&$row)
 	{
@@ -1388,10 +1388,10 @@ class JInstallerComponent extends JAdapterInstance
 	 * Custom rollback method
 	 * - Roll back the component menu item
 	 *
-	 * @param     array    $arg	Installation step to rollback
+	 * @param   array    $arg	Installation step to rollback
 	 *
-	 * @return    boolean  True on success
-	 * @since     11.1
+	 * @return  boolean  True on success
+	 * @since   11.1
 	 */
 	protected function _rollback_menu()
 	{
@@ -1401,8 +1401,8 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Discover unregistered extensions.
 	 *
-	 * @return    array    A list of extensions.
-	 * @since     11.1
+	 * @return  array    A list of extensions.
+	 * @since   11.1
 	 */
 	public function discover()
 	{
@@ -1443,8 +1443,8 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Install unregistered extensions that have been discovered.
 	 *
-	 * @return    mixed  
-	 * @since     11.1
+	 * @return  mixed
+	 * @since   11.1
 	 */
 	public function discover_install()
 	{
@@ -1703,7 +1703,7 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Refreshes the extension table cache
 	 * @return  boolean result of operation, true if updated, false on failure
-	 * @since     11.1
+	 * @since   11.1
 	 */
 	public function refreshManifestCache()
 	{

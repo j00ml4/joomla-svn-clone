@@ -21,7 +21,7 @@ class JButtonSeparator extends JButton
 	/**
 	 * Button type
 	 *
-	 * @var    string
+	 * @var   string
 	 */
 	protected $_name = 'Separator';
 

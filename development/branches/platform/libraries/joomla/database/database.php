@@ -68,7 +68,7 @@ abstract class JDatabase
 	 *                 etc.  The child classes should define this as necessary.  If a single character string the
 	 *                 same character is used for both sides of the quoted name, else the first character will be
 	 *                 used for the opening quote and the second for the closing quote.
-	 * @since      11.1
+	 * @since    11.1
 	 * @deprecated 12.1
 	 */
 	protected $nameQuote;
@@ -76,7 +76,7 @@ abstract class JDatabase
 	/**
 	 * @var    string  The null or zero representation of a timestamp for the database driver.  This should be
 	 *                 defined in child classes to hold the appropriate value for the engine.
-	 * @since      11.1
+	 * @since    11.1
 	 * @deprecated 12.1
 	 */
 	protected $nullDate;
@@ -106,28 +106,28 @@ abstract class JDatabase
 	protected $utf = false;
 
 	/**
-	 * @var         integer  The database error number
+	 * @var        integer  The database error number
 	 * @since       11.1
 	 * @deprecated  11.2
 	 */
 	protected $errorNum = 0;
 
 	/**
-	 * @var         string  The database error message
+	 * @var        string  The database error message
 	 * @since       11.1
 	 * @deprecated  11.2
 	 */
 	protected $errorMsg;
 
 	/**
-	 * @var         bool  If true then there are fields to be quoted for the query.
+	 * @var        bool  If true then there are fields to be quoted for the query.
 	 * @since       11.1
 	 * @deprecated  11.2
 	 */
 	protected $hasQuoted = false;
 
 	/**
-	 * @var         array  The fields that are to be quoted.
+	 * @var        array  The fields that are to be quoted.
 	 * @since       11.1
 	 * @deprecated  11.2
 	 */
@@ -858,7 +858,7 @@ abstract class JDatabase
 	 *
 	 * @return  string  The quote wrapped name.
 	 *
-	 * @since      11.1
+	 * @since    11.1
 	 * @deprecate  12.1
 	 */
 	public function nameQuote($name)
@@ -888,7 +888,7 @@ abstract class JDatabase
 	 *
 	 * @return  string  The quoted input string.
 	 *
-	 * @since      11.1
+	 * @since    11.1
 	 * @depracted  12.1
 	 */
 	public function quote($text, $escape = true)
@@ -1328,9 +1328,9 @@ abstract class JDatabase
 	/**
 	 * Adds a field or array of field names to the list that are to be quoted.
 	 *
-	 * @param       mixed  $quoted  Field name or array of names.
+	 * @param     mixed  $quoted  Field name or array of names.
 	 *
-	 * @return      void
+	 * @return    void
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -1353,9 +1353,9 @@ abstract class JDatabase
 	/**
 	 * Sets the debug level on or off
 	 *
-	 * @param       integer  $level  0 to disable debugging and 1 to enable it.
+	 * @param     integer  $level  0 to disable debugging and 1 to enable it.
 	 *
-	 * @return      void
+	 * @return    void
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -1371,9 +1371,9 @@ abstract class JDatabase
 	/**
 	 * Gets the error message from the database connection.
 	 *
-	 * @param       bool  $escaped  True to escape the message string for use in JavaScript.
+	 * @param     bool  $escaped  True to escape the message string for use in JavaScript.
 	 *
-	 * @return      string  The error message for the most recent query.
+	 * @return    string  The error message for the most recent query.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -1393,7 +1393,7 @@ abstract class JDatabase
 	/**
 	 * Gets the error number from the database connection.
 	 *
-	 * @return      integer  The error number for the most recent query.
+	 * @return    integer  The error number for the most recent query.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -1444,7 +1444,7 @@ abstract class JDatabase
 	/**
 	 * Get the total number of SQL statements executed by the database driver.
 	 *
-	 * @return      integer
+	 * @return    integer
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -1460,9 +1460,9 @@ abstract class JDatabase
 	/**
 	 * Checks if field name needs to be quoted.
 	 *
-	 * @param       string  $field  The field name to be checked.
+	 * @param     string  $field  The field name to be checked.
 	 *
-	 * @return      bool
+	 * @return    bool
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -1483,9 +1483,9 @@ abstract class JDatabase
 	/**
 	 * Return the most recent error message for the database connector.
 	 *
-	 * @param       bool  True to display the SQL statement sent to the database as well as the error.
+	 * @param     bool  True to display the SQL statement sent to the database as well as the error.
 	 *
-	 * @return      string  The error message for the most recent query.
+	 * @return    string  The error message for the most recent query.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -1507,7 +1507,7 @@ abstract class JDatabase
 	/**
 	 * Diagnostic method to return explain information for a query.
 	 *
-	 * @return      string  The explain output.
+	 * @return    string  The explain output.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -1566,7 +1566,7 @@ abstract class JDatabase
 	/**
 	 * Execute a query batch.
 	 *
-	 * @return      mixed  A database resource if successful, false if not.
+	 * @return    mixed  A database resource if successful, false if not.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2

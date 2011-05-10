@@ -28,17 +28,13 @@ JLoader::register('JCacheController', dirname(__FILE__).DS.'controller.php');
 class JCache extends JObject
 {
 	/**
-	 * Storage handler
-	 * 
-	 * @var    object
+	 * @var    object  Storage handler
 	 * @since  11.1
 	 */
 	public static $_handler = array();
 
 	/**
-	 * Options
-	 * 
-	 * @var    
+	 * @var    Options
 	 * @since  11.1
 	 */
 	public $_options;
@@ -46,9 +42,9 @@ class JCache extends JObject
 	/**
 	 * Constructor
 	 *
-	 * @param     array    $options  options
-	 * 
-	 * @since     11.1
+	 * @param   array  $options  options
+	 *
+	 * @since   11.1
 	 */
 	public function __construct($options)
 	{
@@ -81,11 +77,11 @@ class JCache extends JObject
 	/**
 	 * Returns a reference to a cache adapter object, always creating it
 	 *
-	 * @param     string   $type     The cache object type to instantiate
-	 * @param     array    $options  The array of options
-	 * 
-	 * @return    JCache   A JCache object
-	 * @since     11.1
+	 * @param   string   $type     The cache object type to instantiate
+	 * @param   array    $options  The array of options
+	 *
+	 * @return  JCache   A JCache object
+	 * @since   11.1
 	 */
 	public static function getInstance($type = 'output', $options = array())
 	{
@@ -95,8 +91,8 @@ class JCache extends JObject
 	/**
 	 * Get the storage handlers
 	 *
-	 * @return    array    An array of available storage handlers
-	 * @since     11.1
+	 * @return  array    An array of available storage handlers
+	 * @since   11.1
 	 */
 	public static function getStores()
 	{
@@ -123,10 +119,10 @@ class JCache extends JObject
 	/**
 	 * Set caching enabled state
 	 *
-	 * @param     boolean  $enabled	True to enable caching
-	 * 
-	 * @return    void
-	 * @since     11.1
+	 * @param   boolean  $enabled	True to enable caching
+	 *
+	 * @return  void
+	 * @since   11.1
 	 */
 	public function setCaching($enabled)
 	{
@@ -136,8 +132,8 @@ class JCache extends JObject
 	/**
 	 * Get caching state
 	 *
-	 * @return    boolean Caching state
-	 * @since     11.1
+	 * @return  boolean Caching state
+	 * @since   11.1
 	 */
 	public function getCaching()
 	{
@@ -147,10 +143,10 @@ class JCache extends JObject
 	/**
 	 * Set cache lifetime
 	 *
-	 * @param     integer   $lt  Cache lifetime
-	 * 
-	 * @return    void
-	 * @since     11.1
+	 * @param   integer   $lt  Cache lifetime
+	 *
+	 * @return  void
+	 * @since   11.1
 	 */
 	public function setLifeTime($lt)
 	{
@@ -160,11 +156,11 @@ class JCache extends JObject
 	/**
 	 * Get cached data by id and group
 	 *
-	 * @param     string   $id      The cache data id
-	 * @param     string   $group   The cache data group
-	 * 
-	 * @return    mixed    boolean  False on failure or a cached data string
-	 * @since     11.1
+	 * @param   string   $id      The cache data id
+	 * @param   string   $group   The cache data group
+	 *
+	 * @return  mixed    boolean  False on failure or a cached data string
+	 * @since   11.1
 	 */
 	public function get($id, $group=null)
 	{
@@ -182,8 +178,8 @@ class JCache extends JObject
 	/**
 	 * Get a list of all cached data
 	 *
-	 * @return    mixed    Boolean false on failure or an object with a list of cache groups and data
-	 * @since     11.1
+	 * @return  mixed    Boolean false on failure or an object with a list of cache groups and data
+	 * @since   11.1
 	 */
 	public function getAll()
 	{
@@ -198,12 +194,12 @@ class JCache extends JObject
 	/**
 	 * Store the cached data by id and group
 	 *
-	 * @param     string   $id     The cache data id
-	 * @param     string   $group  The cache data group
-	 * @param     mixed    $data   The data to store
-	 * 
-	 * @return    boolean  True if cache stored
-	 * @since     11.1
+	 * @param   string   $id     The cache data id
+	 * @param   string   $group  The cache data group
+	 * @param   mixed    $data   The data to store
+	 *
+	 * @return  boolean  True if cache stored
+	 * @since   11.1
 	 */
 	public function store($data, $id, $group=null)
 	{
@@ -222,11 +218,11 @@ class JCache extends JObject
 	/**
 	 * Remove a cached data entry by id and group
 	 *
-	 * @param     string   $id      The cache data id
-	 * @param     string   $group   The cache data group
-	 * 
-	 * @return    boolean  True on success, false otherwise
-	 * @since     11.1
+	 * @param   string   $id      The cache data id
+	 * @param   string   $group   The cache data group
+	 *
+	 * @return  boolean  True on success, false otherwise
+	 * @since   11.1
 	 */
 	public function remove($id, $group=null)
 	{
@@ -247,11 +243,11 @@ class JCache extends JObject
 	 * group mode       : cleans all cache in the group
 	 * notgroup mode    : cleans all cache not in the group
 	 *
-	 * @param     string   $group   The cache data group
-	 * @param     string   $mode    The mode for cleaning cache [group|notgroup]
-	 * 
-	 * @return    boolean  True on success, false otherwise
-	 * @since     11.1
+	 * @param   string   $group   The cache data group
+	 * @param   string   $mode    The mode for cleaning cache [group|notgroup]
+	 *
+	 * @return  boolean  True on success, false otherwise
+	 * @since   11.1
 	 */
 	public function clean($group=null, $mode='group')
 	{
@@ -269,8 +265,8 @@ class JCache extends JObject
 	/**
 	 * Garbage collect expired cache data
 	 *
-	 * @return    boolean  True on success, false otherwise.
-	 * @since     11.1
+	 * @return  boolean  True on success, false otherwise.
+	 * @since   11.1
 	 */
 	public function gc()
 	{
@@ -285,12 +281,12 @@ class JCache extends JObject
 	/**
 	 * Set lock flag on cached item
 	 *
-	 * @param     string   $id       The cache data id
-	 * @param     string   $group    The cache data group
-	 * @param              $locktime
-	 * 
-	 * @return    boolean  True on success, false otherwise.
-	 * @since     11.1
+	 * @param   string   $id       The cache data id
+	 * @param   string   $group    The cache data group
+	 * @param            $locktime
+	 *
+	 * @return  boolean  True on success, false otherwise.
+	 * @since   11.1
 	 */
 	public function lock($id,$group=null,$locktime=null)
 	{
@@ -359,11 +355,11 @@ class JCache extends JObject
 	/**
 	 * Unset lock flag on cached item
 	 *
-	 * @param     string   $id		The cache data id
-	 * @param     string   $group	The cache data group
-	 * 
-	 * @return    boolean  True on success, false otherwise.
-	 * @since     11.1
+	 * @param   string   $id		The cache data id
+	 * @param   string   $group	The cache data group
+	 *
+	 * @return  boolean  True on success, false otherwise.
+	 * @since   11.1
 	 */
 	public function unlock($id,$group=null)
 	{
@@ -389,8 +385,8 @@ class JCache extends JObject
 	/**
 	 * Get the cache storage handler
 	 *
-	 * @return    JCacheStorage   A JCacheStorage object
-	 * @since     11.1
+	 * @return  JCacheStorage   A JCacheStorage object
+	 * @since   11.1
 	 */
 	public function &_getStorage()
 	{
@@ -403,11 +399,11 @@ class JCache extends JObject
 	/**
 	 * Perform workarounds on retrieved cached data
 	 *
-	 * @param     string   Cached data
-	 * @param     array    Array of options 
-	 * 
-	 * @return    string   Body of cached data
-	 * @since     11.1
+	 * @param   string   Cached data
+	 * @param   array    Array of options
+	 *
+	 * @return  string   Body of cached data
+	 * @since   11.1
 	 */
 	public static function getWorkarounds($data,$options=array()) {
 
@@ -456,11 +452,11 @@ class JCache extends JObject
 	/**
 	 * Create workarounded data to be cached
 	 *
-	 * @param     string    $data    Cached data
-	 * @param     array     $options  Array of options
-	 * 
-	 * @return    string    Data to be cached
-	 * @since     11.1
+	 * @param   string    $data    Cached data
+	 * @param   array     $options  Array of options
+	 *
+	 * @return  string    Data to be cached
+	 * @since   11.1
 	 */
 	public static function setWorkarounds($data,$options=array())
 	{
@@ -539,8 +535,8 @@ class JCache extends JObject
 	/**
 	 * Create safe id for cached data from url parameters set by plugins and framework
 	 *
-	 * @return    string   md5 encoded cacheid
-	 * @since     11.1
+	 * @return  string   md5 encoded cacheid
+	 * @since   11.1
 	 */
 	public static function makeId()
 	{
@@ -579,10 +575,10 @@ class JCache extends JObject
 	 * Add a directory where JCache should search for handlers. You may
 	 * either pass a string or an array of directories.
 	 *
-	 * @param     string   A path to search.
-	 * 
-	 * @return    array    An array with directory elements
-	 * @since     11.1
+	 * @param   string   A path to search.
+	 *
+	 * @return  array    An array with directory elements
+	 * @since   11.1
 	 */
 	public static function addIncludePath($path='')
 	{

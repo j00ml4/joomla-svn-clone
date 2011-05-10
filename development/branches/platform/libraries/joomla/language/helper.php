@@ -20,12 +20,12 @@ class JLanguageHelper
 	/**
 	 * Builds a list of the system languages which can be used in a select option
 	 *
-	 * @param     string   Client key for the area
-	 * @param     string   Base path to use
-	 * @param     array    An array of arrays (text, value, selected)
-	 * 
-	 * @return    array    	List of system languages
-	 * @since     11.1
+	 * @param   string   Client key for the area
+	 * @param   string   Base path to use
+	 * @param   array    An array of arrays (text, value, selected)
+	 *
+	 * @return  array    	List of system languages
+	 * @since   11.1
 	 */
 	public static function createLanguageList($actualLanguage, $basePath = JPATH_BASE, $caching = false, $installed = false)
 	{
@@ -68,8 +68,8 @@ class JLanguageHelper
 	/**
 	 * Tries to detect the language.
 	 *
-	 * @return    string   locale or null if not found
-	 * @since     11.1
+	 * @return  string   locale or null if not found
+	 * @since   11.1
 	 */
 	public static function detectLanguage()
 	{
@@ -110,10 +110,10 @@ class JLanguageHelper
 	/**
 	 * Get available languages
 	 *
-	 * @param     string array key
-	 * 
-	 * @return    array    of published languages
-	 * @since     11.1
+	 * @param   string array key
+	 *
+	 * @return  array    of published languages
+	 * @since   11.1
 	 */
 	public static function getLanguages($key='default')
 	{

@@ -20,8 +20,8 @@ class JStringController {
 
 	/**
 	 *
-	 * @return    array
-	 * @since     11.1
+	 * @return  array
+	 * @since   11.1
 	 */
 	function _getArray() {
 		static $strings = Array();

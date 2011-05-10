@@ -83,8 +83,9 @@ class JTableSession extends JTable
 	/**
 	* Purge old sessions
 	*
-	* @param    integer   Session age in seconds
-	* @return    mixed    Resource on success, null on fail
+	* @param   integer  Session age in seconds
+	*
+	* @return  mixed    Resource on success, null on fail
 	*/
 	function purge($maxLifetime = 1440)
 	{
@@ -98,8 +99,11 @@ class JTableSession extends JTable
 	/**
 	 * Find out if a user has a one or more active sessions
 	 *
-	 * @param     integer  $userid The identifier of the user
-	 * @return    boolean  True if a session for this user exists
+	 * @param   integer  $userid The identifier of the user
+	 *
+	 * @return  boolean  True if a session for this user exists
+	 *
+	 * @since   11.1
 	 */
 	function exists($userid)
 	{
@@ -120,7 +124,6 @@ class JTableSession extends JTable
 	 *
 	 * We must override it because of the non-integer primary key
 	 *
-	 * @access public
 	 * @return true if successful otherwise returns and error message
 	 */
 	function delete($oid=null)

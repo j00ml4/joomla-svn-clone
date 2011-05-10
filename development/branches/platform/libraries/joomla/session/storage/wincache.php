@@ -22,7 +22,7 @@ class JSessionStorageWincache extends JSessionStorage
 	/**
 	* Constructor
 	*
-	* @param     array    $options optional parameters
+	* @param   array    $options optional parameters
 	*/
 	public function __construct( $options = array() )
 	{
@@ -36,9 +36,9 @@ class JSessionStorageWincache extends JSessionStorage
 	/**
 	 * Open the SessionHandler backend.
 	 *
-	 * @param     string   $save_path     The path to the session object.
-	 * @param     string   $session_name  The name of the session.
-	 * 
+	 * @param   string   $save_path     The path to the session object.
+	 * @param   string   $session_name  The name of the session.
+	 *
 	 * @return boolean  True on success, false otherwise.
 	 */
 	public function open($save_path, $session_name)
@@ -60,9 +60,9 @@ class JSessionStorageWincache extends JSessionStorage
  	 * Read the data for a particular session identifier from the
  	 * SessionHandler backend.
  	 *
- 	 * @param     string   $id  The session identifier.
- 	 * 
- 	 * @return    string    The session data.
+ 	 * @param   string   $id  The session identifier.
+ 	 *
+ 	 * @return  string    The session data.
  	 */
 	public function read($id)
 	{
@@ -73,9 +73,9 @@ class JSessionStorageWincache extends JSessionStorage
 	/**
 	 * Write session data to the SessionHandler backend.
 	 *
-	 * @param     string   $id            The session identifier.
-	 * @param     string   $session_data  The session data.
-	 * 
+	 * @param   string   $id            The session identifier.
+	 * @param   string   $session_data  The session data.
+	 *
 	 * @return boolean  True on success, false otherwise.
 	 */
 	public function write($id, $session_data)
@@ -88,8 +88,8 @@ class JSessionStorageWincache extends JSessionStorage
 	  * Destroy the data for a particular session identifier in the
 	  * SessionHandler backend.
 	  *
-	  * @param     string   $id  The session identifier.
-	  * 
+	  * @param   string   $id  The session identifier.
+	  *
 	  * @return boolean  True on success, false otherwise.
 	  */
 	public function destroy($id)
@@ -101,8 +101,8 @@ class JSessionStorageWincache extends JSessionStorage
 	/**
 	 * Garbage collect stale sessions from the SessionHandler backend.
 	 *
-	 * @param     integer  $maxlifetime  The maximum age of a session.
-	 * 
+	 * @param   integer  $maxlifetime  The maximum age of a session.
+	 *
 	 * @return boolean  True on success, false otherwise.
 	 */
 	public function gc($maxlifetime = null)

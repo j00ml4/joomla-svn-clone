@@ -83,7 +83,7 @@ class JLibraryManifest extends JObject
 
 	/**
 	 * Constructor
-	 * @param     string   $xmlpath Path to an XML file to load the manifest from
+	 * @param   string   $xmlpath Path to an XML file to load the manifest from
 	 */
 	function __construct($xmlpath='')
 	{
@@ -92,7 +92,7 @@ class JLibraryManifest extends JObject
 
 	/**
 	 * Load a manifest from a file
-	 * @param     string   $xmlfile Path to file to load
+	 * @param   string   $xmlfile Path to file to load
 	 */
 	function loadManifestFromXML($xmlfile)
 	{

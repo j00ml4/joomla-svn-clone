@@ -31,8 +31,8 @@ class JElementContentLanguages extends JElementList
 	/**
 	 * Get the options for the element
 	 *
-	 * @param     object   $node
-	 * @return    array
+	 * @param   object   $node
+	 * @return  array
 	 */
 	protected function _getOptions(&$node)
 	{

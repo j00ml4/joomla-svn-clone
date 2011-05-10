@@ -37,21 +37,24 @@ class JTree extends JObject
 	/**
 	 * Constructor
 	 *
-	 * @since     11.1
+	 * @return  JTree
+	 *
+	 * @since   11.1
 	 */
 	function __construct()
 	{
 		$this->_root = new JNode('ROOT');
 		$this->_current = & $this->_root;
 	}
+
 	/**
 	 * Method to add a child
 	 *
-	 * @param     array   $node.
-	 * @param     boolean $setCurrent
-	 * 
-	 * @return    mixed
-	 * @since     11.1
+	 * @param   array   $node.
+	 * @param   boolean $setCurrent
+	 *
+	 * @return  mixed
+	 * @since   11.1
 	 */
 	function addChild(&$node, $setCurrent = false)
 	{
@@ -63,9 +66,9 @@ class JTree extends JObject
 
 	/**
 	 * Method to get the parent
-	 * 
-	 * @return    
-	 * @since     11.1
+	 *
+	 * @return
+	 * @since   11.1
 	 */
 	function getParent()
 	{
@@ -74,13 +77,12 @@ class JTree extends JObject
 
 	/**
 	 * Method to get the parent
-	 * 
-	 * @return    
-	 * @since     11.1
+	 *
+	 * @return
+	 * @since   11.1
 	 */
 	function reset()
 	{
 		$this->_current = &$this->_root;
 	}
 }
-

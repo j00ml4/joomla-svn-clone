@@ -27,15 +27,15 @@ class JFormFieldTemplateStyle extends JFormFieldGroupedList
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since     11.1
+	 * @since   11.1
 	 */
 	public $type = 'TemplateStyle';
 
 	/**
 	 * Method to get the field option groups.
 	 *
-	 * @return    array    The field option objects as a nested array in groups.
-	 * @since     11.1
+	 * @return  array    The field option objects as a nested array in groups.
+	 * @since   11.1
 	 */
 	protected function getGroups()
 	{

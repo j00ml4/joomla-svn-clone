@@ -25,38 +25,27 @@ jimport('joomla.registry.registry');
 class JCli
 {
 	/**
-	 * The application input object.
-	 * 
-	 * @var    object
+	 * @var    JInput  The application input object.
 	 * @since  11.1
 	 */
 	public $input;
 
 	/**
-	 * The application configuration object.
-	 * 
-	 * @var    object
+	 * @var    JRegistry  The application configuration object.
 	 * @since  11.1
 	 */
 	protected $config;
 
 	/**
-	 * The name of the program.
-	 * 
 	 * @var    JCli  The application instance.
 	 * @since  11.1
 	 */
 	protected static $instance;
 
 	/**
-	 * The instantiated CLI objects by name.
-	 * 
-	 * @var    array
-	 * @since  11.1
-	 */
-
-	/**
 	 * Class constructor.
+	 *
+	 * @return  void
 	 *
 	 * @since   11.1
 	 */
@@ -90,7 +79,7 @@ class JCli
 	 *
 	 * This method must be invoked as: $cli = JCli::getInstance();
 	 *
-	 * @return  JCli        A JCli object
+	 * @return  JCli  A JCli object
 	 * @since   11.1
 	 */
 	public static function & getInstance()
@@ -107,6 +96,7 @@ class JCli
 	 * Execute the application.
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	public function execute()
@@ -120,6 +110,7 @@ class JCli
 	 * @param   integer  $code  Exit code.
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	public function close($code = 0)
@@ -133,6 +124,7 @@ class JCli
 	 * @param   mixed  $data  Either an array or object to be loaded into the configuration object.
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	public function loadConfiguration($data)
@@ -149,10 +141,11 @@ class JCli
 	/**
 	 * Write a string to standard output.
 	 *
-	 * @param   string   $text  The text to display.
-	 * @param   boolean  $nl    True to append a new line at the end of the output string.
+	 * @param   string  $text  The text to display.
+	 * @param   bool    $nl    True to append a new line at the end of the output string.
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	public function out($text = '', $nl = true)
@@ -164,6 +157,7 @@ class JCli
 	 * Get a value from standard input.
 	 *
 	 * @return  string  The input string from standard input.
+	 *
 	 * @since   11.1
 	 */
 	public function in()
@@ -178,6 +172,7 @@ class JCli
 	 * @param   callback  $handler  The handler, a function or an instance of a event object.
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	function registerEvent($event, $handler)
@@ -192,6 +187,7 @@ class JCli
 	 * @param   array   $args   An array of arguments.
 	 *
 	 * @return  array   An array of results from each function call.
+	 *
 	 * @since   11.1
 	 */
 	function triggerEvent($event, $args = null)
@@ -206,6 +202,7 @@ class JCli
 	 * @param   mixed   $default  The default value if none is set.
 	 *
 	 * @return  mixed   The value of the configuration.
+	 *
 	 * @since   11.1
  	 */
 	public function get($key, $default = null)
@@ -220,6 +217,7 @@ class JCli
 	 * @param   mixed   $value  The value of the property to set
 	 *
 	 * @return  mixed   Previous value of the property
+	 *
 	 * @since   11.1
 	 */
 	public function set($key, $value = null)
@@ -235,6 +233,7 @@ class JCli
 	 * for your specific application.
 	 *
 	 * @return  mixed  Either an array or object to be loaded into the configuration object.
+	 *
 	 * @since   11.1
 	 */
 	protected function fetchConfigurationData()
