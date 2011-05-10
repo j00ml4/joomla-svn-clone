@@ -46,7 +46,7 @@ abstract class JDatabase
 	protected $cursor;
 
 	/**
-	 * @var    boolean  The database driver debugging state.
+	 * @var    bool  The database driver debugging state.
 	 * @since  11.1
 	 */
 	protected $debug = false;
@@ -68,16 +68,14 @@ abstract class JDatabase
 	 *                 etc.  The child classes should define this as necessary.  If a single character string the
 	 *                 same character is used for both sides of the quoted name, else the first character will be
 	 *                 used for the opening quote and the second for the closing quote.
-	 * @since    11.1
-	 * @deprecated 12.1
+	 * @since  11.1
 	 */
 	protected $nameQuote;
 
 	/**
 	 * @var    string  The null or zero representation of a timestamp for the database driver.  This should be
 	 *                 defined in child classes to hold the appropriate value for the engine.
-	 * @since    11.1
-	 * @deprecated 12.1
+	 * @since  11.1
 	 */
 	protected $nullDate;
 
@@ -95,39 +93,39 @@ abstract class JDatabase
 
 	/**
 	 * @var    string  The common database table prefix.
-	 * @since       11.1
+	 * @since  11.1
 	 */
 	protected $tablePrefix;
 
 	/**
-	 * @var    boolean  True if the database engine supports UTF-8 character encoding.
+	 * @var    bool  True if the database engine supports UTF-8 character encoding.
 	 * @since  11.1
 	 */
 	protected $utf = false;
 
 	/**
-	 * @var        integer  The database error number
+	 * @var         integer  The database error number
 	 * @since       11.1
 	 * @deprecated  11.2
 	 */
 	protected $errorNum = 0;
 
 	/**
-	 * @var        string  The database error message
+	 * @var         string  The database error message
 	 * @since       11.1
 	 * @deprecated  11.2
 	 */
 	protected $errorMsg;
 
 	/**
-	 * @var        bool  If true then there are fields to be quoted for the query.
+	 * @var         bool  If true then there are fields to be quoted for the query.
 	 * @since       11.1
 	 * @deprecated  11.2
 	 */
 	protected $hasQuoted = false;
 
 	/**
-	 * @var        array  The fields that are to be quoted.
+	 * @var         array  The fields that are to be quoted.
 	 * @since       11.1
 	 * @deprecated  11.2
 	 */
@@ -138,59 +136,6 @@ abstract class JDatabase
 	 * @since  11.1
 	 */
 	protected static $instances = array();
-
-	/**
-	 * Constructor.
-	 *
-	 * @param   array  $options  List of options used to configure the connection
-	 *
-	 * @since   11.1
-	 */
-	protected function __construct($options)
-	{
-		// Initialise object variables.
-		$this->tablePrefix = (isset($options['prefix'])) ? $options['prefix'] : 'jos_';
-		$this->count       = 0;
-		$this->errorNum    = 0;
-		$this->log         = array();
-		$this->quoted      = array();
-		$this->hasQuoted   = false;
-
-		// Determine UTF-8 support.
-		$this->utf = $this->hasUTF();
-
-		// Set charactersets (needed for MySQL 4.1.2+).
-		if ($this->utf){
-			$this->setUTF();
-		}
-	}
-
-	/**
-	 * Magic method to provide method alias support for quote() and nameQuote().
-	 *
-	 * @param   string  $method  The called method.
-	 * @param   array   $args    The array of arguments passed to the method.
-	 *
-	 * @return  string  The aliased method's return value or null.
-	 *
-	 * @since   11.1
-	 */
-	public function __call($method, $args)
-	{
-		if (empty($args)) {
-			return;
-		}
-
-		switch ($method)
-		{
-			case 'q':
-				return $this->quote($args[0], isset($args[1]) ? $args[1] : true);
-				break;
-			case 'nq':
-				return $this->nameQuote($args[0]);
-				break;
-		}
-	}
 
 	/**
 	 * Get a list of available database connectors.  The list will only be populated with connectors that both
@@ -351,6 +296,7 @@ abstract class JDatabase
 	 * @param   string  Input SQL string with which to split into individual queries.
 	 *
 	 * @return  array   The queries from the input string separated into an array.
+	 *
 	 * @since   11.1
 	 */
 	public static function splitSql($sql)
@@ -395,6 +341,180 @@ abstract class JDatabase
 	}
 
 	/**
+	 * Test to see if the connector is available.
+	 *
+	 * @return  bool  True on success, false otherwise.
+	 *
+	 * @since   11.1
+	 */
+	abstract public static function test();
+
+	/**
+	 * Magic method to provide method alias support for quote() and quoteName().
+	 *
+	 * @param   string  $method  The called method.
+	 * @param   array   $args    The array of arguments passed to the method.
+	 *
+	 * @return  string  The aliased method's return value or null.
+	 *
+	 * @since   11.1
+	 */
+	public function __call($method, $args)
+	{
+		if (empty($args)) {
+			return;
+		}
+
+		switch ($method)
+		{
+			case 'q':
+				return $this->quote($args[0], isset($args[1]) ? $args[1] : true);
+				break;
+			case 'nq':
+			case 'qn':
+				return $this->quoteName($args[0]);
+				break;
+		}
+	}
+
+	/**
+	 * Constructor.
+	 *
+	 * @param   array  $options  List of options used to configure the connection
+	 *
+	 * @return  void
+	 *
+	 * @since   11.1
+	 */
+	protected function __construct($options)
+	{
+		// Initialise object variables.
+		$this->tablePrefix = (isset($options['prefix'])) ? $options['prefix'] : 'jos_';
+		$this->count       = 0;
+		$this->errorNum    = 0;
+		$this->log         = array();
+		$this->quoted      = array();
+		$this->hasQuoted   = false;
+
+		// Determine UTF-8 support.
+		$this->utf = $this->hasUTF();
+
+		// Set charactersets (needed for MySQL 4.1.2+).
+		if ($this->utf){
+			$this->setUTF();
+		}
+	}
+
+	/**
+	 * Adds a field or array of field names to the list that are to be quoted.
+	 *
+	 * @param       mixed  $quoted  Field name or array of names.
+	 *
+	 * @return      void
+	 *
+	 * @since       11.1
+	 * @deprecated  11.2
+	 */
+	public function addQuoted($quoted)
+	{
+		// Deprecation warning.
+		JLog::add('JDatabase::addQuoted() is deprecated.', JLog::WARNING, 'deprecated');
+
+		if (is_string($quoted)) {
+			$this->quoted[] = $quoted;
+		}
+		else {
+			$this->quoted = array_merge($this->quoted, (array) $quoted);
+		}
+
+		$this->hasQuoted = true;
+	}
+
+	/**
+	 * Determines if the connection to the server is active.
+	 *
+	 * @return  bool  True if connected to the database engine.
+	 *
+	 * @since   11.1
+	 */
+	abstract public function connected();
+
+	/**
+	 * Method to escape a string for usage in an SQL statement.
+	 *
+	 * @param   string  The string to be escaped.
+	 * @param   bool    Optional parameter to provide extra escaping.
+	 *
+	 * @return  string  The escaped string.
+	 *
+	 * @since   11.1
+	 */
+	abstract public function escape($text, $extra = false);
+
+	/**
+	 * Method to fetch a row from the result set cursor as an array.
+	 *
+	 * @param   mixed  $cursor  The optional result set cursor from which to fetch the row.
+	 *
+	 * @return  mixed  Either the next row from the result set or false if there are no more rows.
+	 *
+	 * @since   11.1
+	 */
+	abstract protected function fetchArray($cursor = null);
+
+	/**
+	 * Method to fetch a row from the result set cursor as an associative array.
+	 *
+	 * @param   mixed  $cursor  The optional result set cursor from which to fetch the row.
+	 *
+	 * @return  mixed  Either the next row from the result set or false if there are no more rows.
+	 *
+	 * @since   11.1
+	 */
+	abstract protected function fetchAssoc($cursor = null);
+
+	/**
+	 * Method to fetch a row from the result set cursor as an object.
+	 *
+	 * @param   mixed   $cursor  The optional result set cursor from which to fetch the row.
+	 * @param   string  $class   The class name to use for the returned row object.
+	 *
+	 * @return  mixed   Either the next row from the result set or false if there are no more rows.
+	 *
+	 * @since   11.1
+	 */
+	abstract protected function fetchObject($cursor = null, $class = 'stdClass');
+
+	/**
+	 * Method to free up the memory used for the result set.
+	 *
+	 * @param   mixed  $cursor  The optional result set cursor from which to fetch the row.
+	 *
+	 * @return  void
+	 *
+	 * @since   11.1
+	 */
+	abstract protected function freeResult($cursor = null);
+
+	/**
+	 * Get the number of affected rows for the previous executed SQL statement.
+	 *
+	 * @return  integer  The number of affected rows.
+	 *
+	 * @since   11.1
+	 */
+	abstract public function getAffectedRows();
+
+	/**
+	 * Method to get the database collation in use by sampling a text field of a table in the database.
+	 *
+	 * @return  mixed  The collation in use by the database or boolean false if not supported.
+	 *
+	 * @since   11.1
+	 */
+	abstract public function getCollation();
+
+	/**
 	 * Method that provides access to the underlying database connection. Useful for when you need to call a
 	 * proprietary method such as postgresql's lo_* methods.
 	 *
@@ -420,6 +540,18 @@ abstract class JDatabase
 	}
 
 	/**
+	 * Returns a PHP date() function compliant date format for the database driver.
+	 *
+	 * @return  string  The format string.
+	 *
+	 * @since   11.1
+	 */
+	public function getDateFormat()
+	{
+		return 'Y-m-d H:i:s';
+	}
+
+	/**
 	 * Get the database driver SQL statement log.
 	 *
 	 * @return  array  SQL statements executed by the database driver.
@@ -430,6 +562,29 @@ abstract class JDatabase
 	{
 		return $this->log;
 	}
+
+	/**
+	 * Get the null or zero representation of a timestamp for the database driver.
+	 *
+	 * @return  string  Null or zero representation of a timestamp.
+	 *
+	 * @since   11.1
+	 */
+	public function getNullDate()
+	{
+		return $this->nullDate;
+	}
+
+	/**
+	 * Get the number of returned rows for the previous executed SQL statement.
+	 *
+	 * @param   resource  $cursor  An optional database cursor resource to extract the row count from.
+	 *
+	 * @return  integer   The number of returned rows.
+	 *
+	 * @since   11.1
+	 */
+	abstract public function getNumRows($cursor = null);
 
 	/**
 	 * Get the common table prefix for the database driver.
@@ -444,6 +599,65 @@ abstract class JDatabase
 	}
 
 	/**
+	 * Get the current or query, or new JDatabaseQuery object.
+	 *
+	 * @param   bool   $new  False to return the last query set, True to return a new JDatabaseQuery object.
+	 *
+	 * @return  mixed  The current value of the internal SQL variable or a new JDatabaseQuery object.
+	 *
+	 * @since   11.1
+	 * @throws  DatabaseException
+	 */
+	abstract public function getQuery($new = false);
+
+	/**
+	 * Retrieves field information about the given tables.
+	 *
+	 * @param   mixed  $tables    A table name or a list of table names.
+	 * @param   bool   $typeOnly  True to only return field types.
+	 *
+	 * @return  array  An array of fields by table.
+	 *
+	 * @since   11.1
+	 * @throws  DatabaseException
+	 */
+	abstract public function getTableColumns($tables, $typeOnly = true);
+
+	/**
+	 * Shows the table CREATE statement that creates the given tables.
+	 *
+	 * @param   mixed  $tables  A table name or a list of table names.
+	 *
+	 * @return  array  A list of the create SQL for the tables.
+	 *
+	 * @since   11.1
+	 * @throws  DatabaseException
+	 */
+	abstract public function getTableCreate($tables);
+
+	/**
+	 * Retrieves field information about the given tables.
+	 *
+	 * @param   mixed  $tables    A table name or a list of table names.
+	 *
+	 * @return  array  An array of keys for the table(s).
+	 *
+	 * @since   11.1
+	 * @throws  DatabaseException
+	 */
+	abstract public function getTableKeys($tables);
+
+	/**
+	 * Method to get an array of all tables in the database.
+	 *
+	 * @return  array  An array of all the tables in the database.
+	 *
+	 * @since   11.1
+	 * @throws  DatabaseException
+	 */
+	abstract public function getTableList();
+
+	/**
 	 * Determine whether or not the database engine supports UTF-8 character encoding.
 	 *
 	 * @return  bool  True if the database engine supports UTF-8 character encoding.
@@ -454,6 +668,33 @@ abstract class JDatabase
 	{
 		return $this->utf;
 	}
+
+	/**
+	 * Get the version of the database connector
+	 *
+	 * @return  string  The database connector version.
+	 *
+	 * @since   11.1
+	 */
+	abstract public function getVersion();
+
+	/**
+	 * Determines if the database engine supports UTF-8 character encoding.
+	 *
+	 * @return  boolean  True if supported.
+	 *
+	 * @since   11.1
+	 */
+	abstract public function hasUTF();
+
+	/**
+	 * Method to get the auto-incremented value from the last INSERT statement.
+	 *
+	 * @return  integer  The value of the auto-increment field from the last inserted row.
+	 *
+	 * @since   11.1
+	 */
+	abstract public function insertid();
 
 	/**
 	 * Inserts a row into a table based on an object's properties.
@@ -474,7 +715,7 @@ abstract class JDatabase
 		$values = array();
 
 		// Create the base insert statement.
-		$statement = 'INSERT INTO '.$this->nameQuote($table).' (%s) VALUES (%s)';
+		$statement = 'INSERT INTO '.$this->quoteName($table).' (%s) VALUES (%s)';
 
 		// Iterate over the object variables to build the query fields and values.
 		foreach (get_object_vars($object) as $k => $v)
@@ -490,7 +731,7 @@ abstract class JDatabase
 			}
 
 			// Prepare and sanitize the fields and values for the database query.
-			$fields[] = $this->nameQuote($k);
+			$fields[] = $this->quoteName($k);
 			$values[] = $this->isQuoted($k) ? $this->quote($v) : (int) $v;
 		}
 
@@ -576,6 +817,39 @@ abstract class JDatabase
 			else {
 				$array[] = $value;
 			}
+		}
+
+		// Free up system resources and return.
+		$this->freeResult($cursor);
+
+		return $array;
+	}
+
+	/**
+	 * Method to get an array of values from the <var>$offset</var> field in each row of the result set from
+	 * the database query.
+	 *
+	 * @param   integer  $offset  The row offset to use to build the result array.
+	 *
+	 * @return  mixed    The return value or null if the query failed.
+	 *
+	 * @since   11.1
+	 * @throws  DatabaseException
+	 */
+	public function loadColumn($offset = 0)
+	{
+		// Initialise variables.
+		$array = array();
+
+		// Execute the query and get the result set cursor.
+		if (!($cursor = $this->query())) {
+			return null;
+		}
+
+		// Get all of the rows from the result set as arrays.
+		while ($row = $this->fetchArray($cursor))
+		{
+			$array[] = $row[$offset];
 		}
 
 		// Free up system resources and return.
@@ -747,39 +1021,6 @@ abstract class JDatabase
 	}
 
 	/**
-	 * Method to get an array of values from the <var>$offset</var> field in each row of the result set from
-	 * the database query.
-	 *
-	 * @param   integer  $offset  The row offset to use to build the result array.
-	 *
-	 * @return  mixed    The return value or null if the query failed.
-	 *
-	 * @since   11.1
-	 * @throws  DatabaseException
-	 */
-	public function loadColumn($offset = 0)
-	{
-		// Initialise variables.
-		$array = array();
-
-		// Execute the query and get the result set cursor.
-		if (!($cursor = $this->query())) {
-			return null;
-		}
-
-		// Get all of the rows from the result set as arrays.
-		while ($row = $this->fetchArray($cursor))
-		{
-			$array[] = $row[$offset];
-		}
-
-		// Free up system resources and return.
-		$this->freeResult($cursor);
-
-		return $array;
-	}
-
-	/**
 	 * Method to get the first row of the result set from the database query as an array.  Columns are indexed
 	 * numerically so the first column in the result set would be accessible via <var>$row[0]</var>, etc.
 	 *
@@ -851,34 +1092,14 @@ abstract class JDatabase
 	}
 
 	/**
-	 * Wrap an SQL statement identifier name such as column, table or database names in quotes to prevent injection
-	 * risks and reserved word conflicts.
+	 * Execute the SQL statement.
 	 *
-	 * @param   string  $name  The identifier name to wrap in quotes.
+	 * @return  mixed  A database cursor resource on success, boolean false on failure.
 	 *
-	 * @return  string  The quote wrapped name.
-	 *
-	 * @since    11.1
-	 * @deprecate  12.1
+	 * @since   11.1
+	 * @throws  DatabaseException
 	 */
-	public function nameQuote($name)
-	{
-		// Deprecation warning.
-		JLog::add('JDatabase::nameQuote() is deprecated, use JDatabaseQuery::quoteName.', JLog::WARNING, 'deprecated');
-
-		// Don't quote names with dot-notation.
-		if (strpos($name, '.') !== false) {
-			return $name;
-		}
-		else {
-			$q = $this->nameQuote;
-			if (strlen($q) == 1) {
-				return $q.$name.$q;
-			} else {
-				return $q{0}.$name.$q{1};
-			}
-		}
-	}
+	abstract public function query();
 
 	/**
 	 * Method to quote and optionally escape a string to database requirements for insertion into the database.
@@ -888,118 +1109,39 @@ abstract class JDatabase
 	 *
 	 * @return  string  The quoted input string.
 	 *
-	 * @since    11.1
-	 * @depracted  12.1
+	 * @since   11.1
 	 */
 	public function quote($text, $escape = true)
 	{
-		// Deprecation warning.
-		JLog::add('JDatabase::quote() is deprecated, use JDatabaseQuery::quote.', JLog::WARNING, 'deprecated');
-
-		return $this->getQuery(true)->quote($text, $escape);
+		return '\''.($escape ? $this->escape($text) : $text).'\'';
 	}
 
 	/**
-	 * Sets the database debugging state for the driver.
+	 * Wrap an SQL statement identifier name such as column, table or database names in quotes to prevent injection
+	 * risks and reserved word conflicts.
 	 *
-	 * @param   bool  $level  True to enable debugging.
+	 * @param   string  $name  The identifier name to wrap in quotes.
 	 *
-	 * @return  bool  The old debugging level.
-	 *
-	 * @since   11.1
-	 */
-	public function setDebug($level)
-	{
-		$previous = $this->debug;
-		$this->debug = (bool) $level;
-
-		return $previous;
-	}
-
-	/**
-	 * Sets the SQL statement string for later execution.
-	 *
-	 * @param   mixed    $query   The SQL statement to set either as a JDatabaseQuery object or a string.
-	 * @param   integer  $offset  The affected row offset to set.
-	 * @param   integer  $limit   The maximum affected rows to set.
-	 *
-	 * @return  JDatabase  This object to support method chaining.
+	 * @return  string  The quote wrapped name.
 	 *
 	 * @since   11.1
 	 */
-	public function setQuery($query, $offset = 0, $limit = 0)
+	public function quoteName($name)
 	{
-		$this->sql		= $query;
-		$this->limit	= (int) $limit;
-		$this->offset	= (int) $offset;
+		// Don't quote names with dot-notation.
+		if (strpos($name, '.') !== false) {
+			return $name;
+		}
+		else {
+			$q = $this->nameQuote;
 
-		return $this;
-	}
-
-	/**
-	 * Updates a row in a table based on an object's properties.
-	 *
-	 * @param   string  $table   The name of the database table to update.
-	 * @param   object  $object  A reference to an object whose public properties match the table fields.
-	 * @param   string  $key     The name of the primary key.
-	 * @param   bool    $nulls   True to update null fields or false to ignore them.
-	 *
-	 * @return  bool    True on success.
-	 *
-	 * @since   11.1
-	 * @throws  DatabaseException
-	 */
-	public function updateObject($table, & $object, $key, $nulls=false)
-	{
-		// Initialise variables.
-		$fields = array();
-		$where  = '';
-
-		// Create the base update statement.
-		$statement = 'UPDATE '.$this->nameQuote($table).' SET %s WHERE %s';
-
-		// Iterate over the object variables to build the query fields/value pairs.
-		foreach (get_object_vars($object) as $k => $v)
-		{
-			// Only process scalars that are not internal fields.
-			if (is_array($v) or is_object($v) or $k[0] == '_') {
-				continue;
+			if (strlen($q) == 1) {
+				return $q.$name.$q;
 			}
-
-			// Set the primary key to the WHERE clause instead of a field to update.
-			if ($k == $key) {
-				$where = $this->nameQuote($k).'='.$this->quote($v);
-				continue;
-			}
-
-			// Prepare and sanitize the fields and values for the database query.
-			if ($v === null) {
-				// If the value is null and we want to update nulls then set it.
-				if ($nulls) {
-					$val = 'NULL';
-				}
-				// If the value is null and we do not want to update nulls then ignore this field.
-				else {
-					continue;
-				}
-			}
-			// The field is not null so we prep it for update.
 			else {
-				$val = $this->isQuoted($k) ? $this->quote($v) : (int) $v;
+				return $q{0}.$name.$q{1};
 			}
-
-			// Add the field to be updated.
-			$fields[] = $this->nameQuote($k).'='.$val;
 		}
-
-		// We don't have any fields to update.
-		if (empty($fields)) {
-			return true;
-		}
-
-		// Set the query and execute the update.
-		$this->setQuery(sprintf($statement, implode(",", $fields) , $where));
-		return $this->query();
 	}
 
 	/**
@@ -1088,149 +1230,6 @@ abstract class JDatabase
 	}
 
 	/**
-	 * Test to see if the connector is available.
-	 *
-	 * @return  bool  True on success, false otherwise.
-	 *
-	 * @since   11.1
-	 */
-	abstract public static function test();
-
-	/**
-	 * Determines if the connection to the server is active.
-	 *
-	 * @return  bool  True if connected to the database engine.
-	 *
-	 * @since   11.1
-	 */
-	abstract public function connected();
-
-	/**
-	 * Get the number of affected rows for the previous executed SQL statement.
-	 *
-	 * @return  integer  The number of affected rows.
-	 *
-	 * @since   11.1
-	 */
-	abstract public function getAffectedRows();
-
-	/**
-	 * Method to get the database collation in use by sampling a text field of a table in the database.
-	 *
-	 * @return  mixed  The collation in use by the database or boolean false if not supported.
-	 *
-	 * @since   11.1
-	 */
-	abstract public function getCollation();
-
-	/**
-	 * Get the number of returned rows for the previous executed SQL statement.
-	 *
-	 * @param   resource  $cursor  An optional database cursor resource to extract the row count from.
-	 *
-	 * @return  integer   The number of returned rows.
-	 *
-	 * @since   11.1
-	 */
-	abstract public function getNumRows($cursor = null);
-
-	/**
-	 * Get the current or query, or new JDatabaseQuery object.
-	 *
-	 * @param   bool   $new  False to return the last query set, True to return a new JDatabaseQuery object.
-	 *
-	 * @return  mixed  The current value of the internal SQL variable or a new JDatabaseQuery object.
-	 *
-	 * @since   11.1
-	 * @throws  DatabaseException
-	 */
-	abstract public function getQuery($new = false);
-
-	/**
-	 * Shows the table CREATE statement that creates the given tables.
-	 *
-	 * @param   mixed  $tables  A table name or a list of table names.
-	 *
-	 * @return  array  A list of the create SQL for the tables.
-	 *
-	 * @since   11.1
-	 * @throws  DatabaseException
-	 */
-	abstract public function getTableCreate($tables);
-
-	/**
-	 * Retrieves field information about the given tables.
-	 *
-	 * @param   mixed  $tables    A table name or a list of table names.
-	 * @param   bool   $typeOnly  True to only return field types.
-	 *
-	 * @return  array  An array of fields by table.
-	 *
-	 * @since   11.1
-	 * @throws  DatabaseException
-	 */
-	abstract public function getTableColumns($tables, $typeOnly = true);
-
-	/**
-	 * Retrieves field information about the given tables.
-	 *
-	 * @param   mixed  $tables    A table name or a list of table names.
-	 *
-	 * @return  array  An array of keys for the table(s).
-	 *
-	 * @since   11.1
-	 * @throws  DatabaseException
-	 */
-	abstract public function getTableKeys($tables);
-
-	/**
-	 * Method to get an array of all tables in the database.
-	 *
-	 * @return  array  An array of all the tables in the database.
-	 *
-	 * @since   11.1
-	 * @throws  DatabaseException
-	 */
-	abstract public function getTableList();
-
-	/**
-	 * Get the version of the database connector
-	 *
-	 * @return  string  The database connector version.
-	 *
-	 * @since   11.1
-	 */
-	abstract public function getVersion();
-
-	/**
-	 * Determines if the database engine supports UTF-8 character encoding.
-	 *
-	 * @return  boolean  True if supported.
-	 *
-	 * @since   11.1
-	 */
-	abstract public function hasUTF();
-
-	/**
-	 * Method to get the auto-incremented value from the last INSERT statement.
-	 *
-	 * @return  integer  The value of the auto-increment field from the last inserted row.
-	 *
-	 * @since   11.1
-	 */
-	abstract public function insertid();
-
-	/**
-	 * Execute the SQL statement.
-	 *
-	 * @return  mixed  A database cursor resource on success, boolean false on failure.
-	 *
-	 * @since   11.1
-	 * @throws  DatabaseException
-	 */
-	abstract public function query();
-
-	/**
 	 * Select a database for use.
 	 *
 	 * @param   string  $database  The name of the database to select for use.
@@ -1241,6 +1240,43 @@ abstract class JDatabase
 	 * @throws  DatabaseException
 	 */
 	abstract public function select($database);
+
+	/**
+	 * Sets the database debugging state for the driver.
+	 *
+	 * @param   bool  $level  True to enable debugging.
+	 *
+	 * @return  bool  The old debugging level.
+	 *
+	 * @since   11.1
+	 */
+	public function setDebug($level)
+	{
+		$previous = $this->debug;
+		$this->debug = (bool) $level;
+
+		return $previous;
+	}
+
+	/**
+	 * Sets the SQL statement string for later execution.
+	 *
+	 * @param   mixed    $query   The SQL statement to set either as a JDatabaseQuery object or a string.
+	 * @param   integer  $offset  The affected row offset to set.
+	 * @param   integer  $limit   The maximum affected rows to set.
+	 *
+	 * @return  JDatabase  This object to support method chaining.
+	 *
+	 * @since   11.1
+	 */
+	public function setQuery($query, $offset = 0, $limit = 0)
+	{
+		$this->sql		= $query;
+		$this->limit	= (int) $limit;
+		$this->offset	= (int) $offset;
+
+		return $this;
+	}
 
 	/**
 	 * Set the connection to use UTF-8 character encoding.
@@ -1282,80 +1318,81 @@ abstract class JDatabase
 	abstract public function transactionStart();
 
 	/**
-	 * Method to fetch a row from the result set cursor as an array.
+	 * Updates a row in a table based on an object's properties.
 	 *
-	 * @param   mixed  $cursor  The optional result set cursor from which to fetch the row.
+	 * @param   string  $table   The name of the database table to update.
+	 * @param   object  $object  A reference to an object whose public properties match the table fields.
+	 * @param   string  $key     The name of the primary key.
+	 * @param   bool    $nulls   True to update null fields or false to ignore them.
 	 *
-	 * @return  mixed  Either the next row from the result set or false if there are no more rows.
-	 *
-	 * @since   11.1
-	 */
-	abstract protected function fetchArray($cursor = null);
-
-	/**
-	 * Method to fetch a row from the result set cursor as an associative array.
-	 *
-	 * @param   mixed  $cursor  The optional result set cursor from which to fetch the row.
-	 *
-	 * @return  mixed  Either the next row from the result set or false if there are no more rows.
-	 * @since   11.1
-	 */
-	abstract protected function fetchAssoc($cursor = null);
-
-	/**
-	 * Method to fetch a row from the result set cursor as an object.
-	 *
-	 * @param   mixed   $cursor  The optional result set cursor from which to fetch the row.
-	 * @param   string  $class   The class name to use for the returned row object.
-	 *
-	 * @return  mixed   Either the next row from the result set or false if there are no more rows.
+	 * @return  bool    True on success.
 	 *
 	 * @since   11.1
+	 * @throws  DatabaseException
 	 */
-	abstract protected function fetchObject($cursor = null, $class = 'stdClass');
-
-	/**
-	 * Method to free up the memory used for the result set.
-	 *
-	 * @param   mixed  $cursor  The optional result set cursor from which to fetch the row.
-	 *
-	 * @return  void
-	 *
-	 * @since   11.1
-	 */
-	abstract protected function freeResult($cursor = null);
-
-	/**
-	 * Adds a field or array of field names to the list that are to be quoted.
-	 *
-	 * @param     mixed  $quoted  Field name or array of names.
-	 *
-	 * @return    void
-	 *
-	 * @since       11.1
-	 * @deprecated  11.2
-	 */
-	public function addQuoted($quoted)
+	public function updateObject($table, & $object, $key, $nulls=false)
 	{
-		// Deprecation warning.
-		JLog::add('JDatabase::addQuoted() is deprecated.', JLog::WARNING, 'deprecated');
+		// Initialise variables.
+		$fields = array();
+		$where  = '';
 
-		if (is_string($quoted)) {
-			$this->quoted[] = $quoted;
-		}
-		else {
-			$this->quoted = array_merge($this->quoted, (array) $quoted);
+		// Create the base update statement.
+		$statement = 'UPDATE '.$this->quoteName($table).' SET %s WHERE %s';
+
+		// Iterate over the object variables to build the query fields/value pairs.
+		foreach (get_object_vars($object) as $k => $v)
+		{
+			// Only process scalars that are not internal fields.
+			if (is_array($v) or is_object($v) or $k[0] == '_') {
+				continue;
+			}
+
+			// Set the primary key to the WHERE clause instead of a field to update.
+			if ($k == $key) {
+				$where = $this->quoteName($k).'='.$this->quote($v);
+				continue;
+			}
+
+			// Prepare and sanitize the fields and values for the database query.
+			if ($v === null) {
+				// If the value is null and we want to update nulls then set it.
+				if ($nulls) {
+					$val = 'NULL';
+				}
+				// If the value is null and we do not want to update nulls then ignore this field.
+				else {
+					continue;
+				}
+			}
+			// The field is not null so we prep it for update.
+			else {
+				$val = $this->isQuoted($k) ? $this->quote($v) : (int) $v;
+			}
+
+			// Add the field to be updated.
+			$fields[] = $this->quoteName($k).'='.$val;
 		}
 
-		$this->hasQuoted = true;
+		// We don't have any fields to update.
+		if (empty($fields)) {
+			return true;
+		}
+
+		// Set the query and execute the update.
+		$this->setQuery(sprintf($statement, implode(",", $fields) , $where));
+		return $this->query();
 	}
+
+	//
+	// Deprecated methods.
+	//
 
 	/**
 	 * Sets the debug level on or off
 	 *
-	 * @param     integer  $level  0 to disable debugging and 1 to enable it.
+	 * @param       integer  $level  0 to disable debugging and 1 to enable it.
 	 *
-	 * @return    void
+	 * @return      void
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -1369,11 +1406,21 @@ abstract class JDatabase
 	}
 
 	/**
+	 * Diagnostic method to return explain information for a query.
+	 *
+	 * @return      string  The explain output.
+	 *
+	 * @since       11.1
+	 * @deprecated  11.2
+	 */
+	abstract public function explain();
+
+	/**
 	 * Gets the error message from the database connection.
 	 *
-	 * @param     bool  $escaped  True to escape the message string for use in JavaScript.
+	 * @param       bool  $escaped  True to escape the message string for use in JavaScript.
 	 *
-	 * @return    string  The error message for the most recent query.
+	 * @return      string  The error message for the most recent query.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -1393,7 +1440,7 @@ abstract class JDatabase
 	/**
 	 * Gets the error number from the database connection.
 	 *
-	 * @return    integer  The error number for the most recent query.
+	 * @return      integer  The error number for the most recent query.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -1409,110 +1456,21 @@ abstract class JDatabase
 	/**
 	 * Method to escape a string for usage in an SQL statement.
 	 *
-	 * @param   string  $text   The string to be escaped.
-	 * @param   bool    $extra  Optional parameter to provide extra escaping.
+	 * @param   string  The string to be escaped.
+	 * @param   bool    Optional parameter to provide extra escaping.
 	 *
 	 * @return  string  The escaped string.
 	 *
-	 * @since       11.1
+	 * @since   11.1
 	 * @deprecated  11.1
 	 */
 	public function getEscaped($text, $extra = false)
 	{
 		// Deprecation warning.
-		JLog::add('JDatabase::getEscaped() is deprecated, use JDatabaseQuery::escape.', JLog::WARNING, 'deprecated');
+		JLog::add('JDatabase::getEscaped() is deprecated. Use JDatabase::escape().', JLog::WARNING, 'deprecated');
 
-		return $this->getQuery(true)->escape($text, $extra);
+		return $this->escape($text, $extra);
 	}
-
-	/**
-	 * Get the null or zero representation of a timestamp for the database driver.
-	 *
-	 * @return  string  Null or zero representation of a timestamp.
-	 *
-	 * @since       11.1
-	 * @deprecated  11.1
-	 */
-	public function getNullDate()
-	{
-		// Deprecation warning.
-		JLog::add('JDatabase::getNullDate() is deprecated, use JDatabaseQuery::getNullDate.', JLog::WARNING, 'deprecated');
-
-		return $this->getQuery(true)->nullDate(false);
-	}
-
-	/**
-	 * Get the total number of SQL statements executed by the database driver.
-	 *
-	 * @return    integer
-	 *
-	 * @since       11.1
-	 * @deprecated  11.2
-	 */
-	public function getTicker()
-	{
-		// Deprecation warning.
-		JLog::add('JDatabase::getTicker() is deprecated, use JDatabase::getCount() instead.', JLog::NOTICE, 'deprecated');
-
-		return $this->count;
-	}
-
-	/**
-	 * Checks if field name needs to be quoted.
-	 *
-	 * @param     string  $field  The field name to be checked.
-	 *
-	 * @return    bool
-	 *
-	 * @since       11.1
-	 * @deprecated  11.2
-	 */
-	public function isQuoted($field)
-	{
-		// Deprecation warning.
-		JLog::add('JDatabase::isQuoted() is deprecated.', JLog::WARNING, 'deprecated');
-
-		if ($this->hasQuoted) {
-			return in_array($field, $this->quoted);
-		}
-		else {
-			return true;
-		}
-	}
-
-	/**
-	 * Return the most recent error message for the database connector.
-	 *
-	 * @param     bool  True to display the SQL statement sent to the database as well as the error.
-	 *
-	 * @return    string  The error message for the most recent query.
-	 *
-	 * @since       11.1
-	 * @deprecated  11.2
-	 */
-	public function stderr($showSQL = false)
-	{
-		// Deprecation warning.
-		JLog::add('JDatabase::stderr() is deprecated.', JLog::WARNING, 'deprecated');
-
-		if ($this->errorNum != 0) {
-			return JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $this->errorNum, $this->errorMsg)
-			.($showSQL ? "<br />SQL = <pre>$this->sql</pre>" : '');
-		}
-		else {
-			return JText::_('JLIB_DATABASE_FUNCTION_NOERROR');
-		}
-	}
-
-	/**
-	 * Diagnostic method to return explain information for a query.
-	 *
-	 * @return    string  The explain output.
-	 *
-	 * @since       11.1
-	 * @deprecated  11.2
-	 */
-	abstract public function explain();
 
 	/**
 	 * Retrieves field information about the given tables.
@@ -1544,6 +1502,45 @@ abstract class JDatabase
 	}
 
 	/**
+	 * Get the total number of SQL statements executed by the database driver.
+	 *
+	 * @return      integer
+	 *
+	 * @since       11.1
+	 * @deprecated  11.2
+	 */
+	public function getTicker()
+	{
+		// Deprecation warning.
+		JLog::add('JDatabase::getTicker() is deprecated, use JDatabase::getCount() instead.', JLog::NOTICE, 'deprecated');
+
+		return $this->count;
+	}
+
+	/**
+	 * Checks if field name needs to be quoted.
+	 *
+	 * @param       string  $field  The field name to be checked.
+	 *
+	 * @return      bool
+	 *
+	 * @since       11.1
+	 * @deprecated  11.2
+	 */
+	public function isQuoted($field)
+	{
+		// Deprecation warning.
+		JLog::add('JDatabase::isQuoted() is deprecated.', JLog::WARNING, 'deprecated');
+
+		if ($this->hasQuoted) {
+			return in_array($field, $this->quoted);
+		}
+		else {
+			return true;
+		}
+	}
+
+	/**
 	 * Method to get an array of values from the <var>$offset</var> field in each row of the result set from
 	 * the database query.
 	 *
@@ -1564,12 +1561,55 @@ abstract class JDatabase
 	}
 
 	/**
+	 * Wrap an SQL statement identifier name such as column, table or database names in quotes to prevent injection
+	 * risks and reserved word conflicts.
+	 *
+	 * @param   string  $name  The identifier name to wrap in quotes.
+	 *
+	 * @return  string  The quote wrapped name.
+	 *
+	 * @since   11.1
+	 * @deprecated  11.1
+	 */
+	public function nameQuote($name)
+	{
+		// Deprecation warning.
+		JLog::add('JDatabase::nameQuote() is deprecated. Use JDatabase::quoteName().', JLog::WARNING, 'deprecated');
+
+		return $this->quoteName($name);
+	}
+
+	/**
 	 * Execute a query batch.
 	 *
-	 * @return    mixed  A database resource if successful, false if not.
+	 * @return      mixed  A database resource if successful, false if not.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
 	 */
 	abstract public function queryBatch($abortOnError = true, $transactionSafe = false);
+
+	/**
+	 * Return the most recent error message for the database connector.
+	 *
+	 * @param       bool  True to display the SQL statement sent to the database as well as the error.
+	 *
+	 * @return      string  The error message for the most recent query.
+	 *
+	 * @since       11.1
+	 * @deprecated  11.2
+	 */
+	public function stderr($showSQL = false)
+	{
+		// Deprecation warning.
+		JLog::add('JDatabase::stderr() is deprecated.', JLog::WARNING, 'deprecated');
+
+		if ($this->errorNum != 0) {
+			return JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $this->errorNum, $this->errorMsg)
+			.($showSQL ? "<br />SQL = <pre>$this->sql</pre>" : '');
+		}
+		else {
+			return JText::_('JLIB_DATABASE_FUNCTION_NOERROR');
+		}
+	}
 }

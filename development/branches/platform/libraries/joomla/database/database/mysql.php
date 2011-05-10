@@ -119,6 +119,27 @@ class JDatabaseMySQL extends JDatabase
 	}
 
 	/**
+	 * Method to escape a string for usage in an SQL statement.
+	 *
+	 * @param   string  $text   The string to be escaped.
+	 * @param   bool    $extra  Optional parameter to provide extra escaping.
+	 *
+	 * @return  string  The escaped string.
+	 *
+	 * @since   11.1
+	 */
+	public function escape($text, $extra = false)
+	{
+		$result = mysql_real_escape_string($text, $this->getConnection());
+
+		if ($extra) {
+			$result = addcslashes($result, '%_');
+		}
+
+		return $result;
+	}
+
+	/**
 	 * Test to see if the MySQL connector is available.
 	 *
 	 * @return  bool  True on success, false otherwise.
@@ -147,15 +168,13 @@ class JDatabaseMySQL extends JDatabase
 	}
 
 	/**
-	 * Method to get a JDate object represented as a datetime string in a format recognized by the database server.
+	 * Drops a table from the database.
 	 *
-	 * @param   JDate   $date   The JDate object with which to return the datetime string.
-	 * @param   bool    $local  True to return the date string in the local time zone, false to return it in GMT.
+	 * @param   string  $tableName  The name of the database table to drop.
+	 * @param   bool    $ifExists   Optionally specify that the table must exist before it is dropped.
 	 *
-	 * @return  string  The datetime string in the format recognized for the database system.
-	 *
+	 * @return  JDatabaseSQLSrv  Returns this object to support chaining.
 	 * @since   11.1
-	 * @link    http://dev.mysql.com/doc/refman/5.0/en/datetime.html
 	 */
 	function dropTable($tableName, $ifExists = true)
 	{
@@ -205,18 +224,18 @@ class JDatabaseMySQL extends JDatabase
 	/**
 	 * Gets an exporter class object.
 	 *
-	 * @return  JDatbaseExporterMySQL  An exporter object.
+	 * @return  JDatabaseExporterMySQL  An exporter object.
 	 *
 	 * @since   11.1
 	 */
 	public function getExporter()
 	{
 		// Make sure we have an exporter class for this driver.
-		if (!class_exists('JDatbaseExporterMySQL')) {
+		if (!class_exists('JDatabaseExporterMySQL')) {
 			throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_EXPORTER'));
 		}
 
-		$o = new JDatbaseExporterMySQL;
+		$o = new JDatabaseExporterMySQL;
 		$o->setDbo($this);
 
 		return $o;
@@ -225,18 +244,18 @@ class JDatabaseMySQL extends JDatabase
 	/**
 	 * Gets an importer class object.
 	 *
-	 * @return  JDatbaseImporterMySQL  An importer object.
+	 * @return  JDatabaseImporterMySQL  An importer object.
 	 *
 	 * @since   11.1
 	 */
 	public function getImporter()
 	{
 		// Make sure we have an importer class for this driver.
-		if (!class_exists('JDatbaseImporterMySQL')) {
+		if (!class_exists('JDatabaseImporterMySQL')) {
 			throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_IMPORTER'));
 		}
 
-		$o = new JDatbaseImporterMySQL;
+		$o = new JDatabaseImporterMySQL;
 		$o->setDbo($this);
 
 		return $o;
@@ -643,7 +662,7 @@ class JDatabaseMySQL extends JDatabase
 	/**
 	 * Diagnostic method to return explain information for a query.
 	 *
-	 * @return    string  The explain output.
+	 * @return      string  The explain output.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
@@ -700,7 +719,7 @@ class JDatabaseMySQL extends JDatabase
 	/**
 	 * Execute a query batch.
 	 *
-	 * @return    mixed  A database resource if successful, false if not.
+	 * @return      mixed  A database resource if successful, false if not.
 	 *
 	 * @since       11.1
 	 * @deprecated  11.2
