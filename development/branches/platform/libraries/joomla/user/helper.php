@@ -15,7 +15,6 @@ defined('JPATH_PLATFORM') or die;
  *
  * This class has influences and some method logic from the Horde Auth package
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  User
  * @since       11.1
@@ -84,7 +83,7 @@ abstract class JUserHelper
 	 * Method to get a list of groups a user is in.
 	 *
 	 * @param   integer  $userId		The id of the user.
-	 * @return  mixed    	Array on success, JException on error.
+	 * @return  mixed  Array on success, JException on error.
 	 * @since   11.1
 	 */
 	public static function getUserGroups($userId)
@@ -100,7 +99,7 @@ abstract class JUserHelper
 	 *
 	 * @param   integer  $userId		The id of the user.
 	 * @param   integer  $groupId	The id of the group.
-	 * @return  mixed    	Boolean true on success, JException on error.
+	 * @return  mixed  Boolean true on success, JException on error.
 	 * @since   11.1
 	 */
 	public static function removeUserFromGroup($userId, $groupId)
@@ -139,7 +138,7 @@ abstract class JUserHelper
 	 * @param   integer  $userId		The id of the user.
 	 * @param   array    $groups		An array of group ids to put the user in.
 	 *
-	 * @return  mixed    	Boolean true on success, JException on error.
+	 * @return  mixed  Boolean true on success, JException on error.
 	 * @since   11.1
 	 */
 	public static function setUserGroups($userId, $groups)
@@ -218,7 +217,7 @@ abstract class JUserHelper
 	 *
 	 * @param   string   $activation	Activation string
 	 *
-	 * @return  boolean			True on success
+	 * @return  boolean  True on success
 	 * @since   11.1
 	 */
 	public static function activateUser($activation)
@@ -290,7 +289,7 @@ abstract class JUserHelper
 	 *								encryption to the crypted password ({SHA},
 	 *								etc). Defaults to false.
 	 *
-	 * @return  string    The encrypted password.
+	 * @return  string  The encrypted password.
 	 */
 	public static function getCryptedPassword($plaintext, $salt = '', $encryption = 'md5-hex', $show_encrypt = false)
 	{
@@ -384,7 +383,7 @@ abstract class JUserHelper
 	 * @param   string   $plaintext	The plaintext password that we're generating
 	 *							a salt for. Defaults to none.
 	 *
-	 * @return  string    The generated or extracted salt.
+	 * @return  string  The generated or extracted salt.
 	 */
 	public static function getSalt($encryption = 'md5-hex', $seed = '', $plaintext = '')
 	{
@@ -463,7 +462,7 @@ abstract class JUserHelper
 	 * Generate a random password
 	 *
 	 * @param   integer  $length	Length of the password to generate
-	 * @return  string   		Random Password
+	 * @return  string  Random Password
 	 * @since   11.1
 	 */
 	public static function genRandomPassword($length = 8)
@@ -490,7 +489,7 @@ abstract class JUserHelper
 	 * @param   string  $value
 	 * @param   integer  $count
 	 *
-	 * @return  string    $value converted to the 64 MD5 characters.
+	 * @return  string  $value converted to the 64 MD5 characters.
 	 * @since   11.1
 	 */
 	protected static function _toAPRMD5($value, $count)
@@ -512,7 +511,7 @@ abstract class JUserHelper
 	 *
 	 * @param   string   $hex  Hex data.
 	 *
-	 * @return  string    Binary data.
+	 * @return  string  Binary data.
 	 * @since   11.1
 	 */
 	private static function _bin($hex)

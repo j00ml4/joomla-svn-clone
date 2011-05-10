@@ -21,8 +21,7 @@ jimport('joomla.base.adapterinstance');
 class JInstallerLanguage extends JAdapterInstance
 {
 	/**
-	 * Core language pack flag
-	 * @var    boolean
+	 * @var    boolean  Core language pack flag
 	 */
 	protected $_core = false;
 

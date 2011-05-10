@@ -39,7 +39,8 @@ class JXMLElement extends SimpleXMLElement
 	 * Legacy method to get the element data.
 	 *
 	 * @return  string
-	 * @deprecated	1.6 - Feb 5, 2010
+	 *
+	 * @deprecated
 	 */
 	public function data()
 	{
@@ -52,7 +53,8 @@ class JXMLElement extends SimpleXMLElement
 	 * @param   string
 	 *
 	 * @return  string
-	 * @deprecated	1.6 - Feb 5, 2010
+	 *
+	 * @deprecated
 	 */
 	public function getAttribute($name)
 	{

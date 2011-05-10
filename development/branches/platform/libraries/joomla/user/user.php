@@ -17,7 +17,7 @@ jimport('joomla.registry.registry');
  *
  * @package     Joomla.Platform
  * @subpackage  User
- * @since       11.1
+ * @since      11.1
  */
 class JUser extends JObject
 {
@@ -108,7 +108,7 @@ class JUser extends JObject
 	/**
 	 * Associative array of user names => group ids
 	 *
-	 * @since   11.1
+	 * @since  11.1
 	 * @var    array
 	 */
 	public $groups = array();
@@ -152,9 +152,9 @@ class JUser extends JObject
 	/**
 	 * Constructor activating the default information of the language
 	 *
-	 * @param   integer  $identifier	The primary key of the user to load (optional).
+	 * @param   integer  $identifier  The primary key of the user to load (optional).
 	 *
-	 * @return  object   JUser
+	 * @return  object  JUser
 	 * @since   11.1
 	 */
 	public function __construct($identifier = 0)
@@ -486,7 +486,7 @@ class JUser extends JObject
 	/**
 	 * Method to bind an associative array of data to a user object
 	 *
-	 * @param   array    $array	The associative array to bind to the object
+	 * @param   array  $array	The associative array to bind to the object
 	 *
 	 * @return  boolean  True on success
 	 * @since   11.1
@@ -734,7 +734,7 @@ class JUser extends JObject
 	/**
 	 * Method to load a JUser object by user id number
 	 *
-	 * @param   mixed    $id	The user id of the user to load
+	 * @param   mixed  $id  The user id of the user to load
 	 *
 	 * @return  boolean  True on success
 	 * @since   11.1

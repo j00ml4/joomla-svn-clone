@@ -41,8 +41,8 @@ class JUpdate extends JObject
 	/**
 	 * Gets the reference to the current direct parent
 	 *
-	 * @return   object
-	 * @since    11.1
+	 * @return  object
+	 * @since   11.1
 	 */
 	protected function _getStackLocation()
 	{
@@ -146,8 +146,8 @@ class JUpdate extends JObject
 	 * Character Parser Function
 	 * Note: This is public because its called externally
 	 *
-	 * @param		data
-	 * @param		parser
+	 * @param		$data
+	 * @param		$parser
 	 *
 	 */
 	public function _characterData($parser, $data) {

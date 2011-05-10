@@ -17,7 +17,6 @@ jimport('joomla.filesystem.path');
 /**
  * Installer helper class
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  Installer
  * @since       11.1
@@ -175,7 +174,7 @@ abstract class JInstallerHelper
 	 *
 	 * @param   string   $p_dir Path to package directory
 	 *
-	 * @return  mixed    Extension type string or boolean false on fail
+	 * @return  mixed  Extension type string or boolean false on fail
 	 * @since   11.1
 	 */
 	public static function detectType($p_dir)
@@ -217,9 +216,9 @@ abstract class JInstallerHelper
 	/**
 	 * Gets a file name out of a url
 	 *
-	 * @param   string   $url URL to get name from
+	 * @param   string  $url URL to get name from
 	 *
-	 * @return  mixed    String filename or boolean false if failed
+	 * @return  mixed  String filename or boolean false if failed
 	 * @since   11.1
 	 */
 	public static function getFilenameFromURL($url)
@@ -235,8 +234,8 @@ abstract class JInstallerHelper
 	/**
 	 * Clean up temporary uploaded package and unpacked extension
 	 *
-	 * @param   string   $package Path to the uploaded package file
-	 * @param   string   $resultdir Path to the unpacked extension
+	 * @param   string  $package Path to the uploaded package file
+	 * @param   string  $resultdir Path to the unpacked extension
 	 *
 	 * @return  boolean  True on success
 	 * @since   11.1

@@ -31,7 +31,7 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Custom loadLanguage method
 	 *
-	 * @param   string   $path the path where to find language files
+	 * @param   string  $path the path where to find language files
 	 *
 	 * @return  void
 	 * @since   11.1
@@ -906,7 +906,7 @@ class JInstallerComponent extends JAdapterInstance
 	 *
 	 * @param   integer  $id	The unique extension id of the component to uninstall
 	 *
-	 * @return  mixed    Return value for uninstall method in component uninstall file
+	 * @return  mixed  Return value for uninstall method in component uninstall file
 	 * @since	1.0
 	 */
 	public function uninstall($id)
@@ -1336,7 +1336,7 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Method to remove admin menu references to a component
 	 *
-	 * @param   object   $component	Component table object
+	 * @param   object  $component	Component table object
 	 *
 	 * @return  boolean  True if successful
 	 * @since   11.1
@@ -1388,7 +1388,7 @@ class JInstallerComponent extends JAdapterInstance
 	 * Custom rollback method
 	 * - Roll back the component menu item
 	 *
-	 * @param   array    $arg	Installation step to rollback
+	 * @param   array  $arg	Installation step to rollback
 	 *
 	 * @return  boolean  True on success
 	 * @since   11.1
@@ -1401,7 +1401,7 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Discover unregistered extensions.
 	 *
-	 * @return  array    A list of extensions.
+	 * @return  array  A list of extensions.
 	 * @since   11.1
 	 */
 	public function discover()

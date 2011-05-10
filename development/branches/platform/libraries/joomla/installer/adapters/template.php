@@ -28,7 +28,7 @@ class JInstallerTemplate extends JAdapterInstance
 	/**
 	 * Custom loadLanguage method
 	 *
-	 * @param   string   $path the path where to find language files
+	 * @param   string  $path the path where to find language files
 	 *
 	 * @since   11.1
 	 */
@@ -366,7 +366,7 @@ class JInstallerTemplate extends JAdapterInstance
 	/**
 	 * Discover existing but uninstalled templates
 	 *
-	 * @return  array    JExtensionTable list
+	 * @return  array  JExtensionTable list
 	 */
 	function discover()
 	{
