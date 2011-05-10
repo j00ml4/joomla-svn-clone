@@ -24,14 +24,14 @@ class JFormFieldUser extends JFormField
 	 * The form field type.
 	 *
 	 * @var    string
-	 * @since   11.1
+	 * @since  11.1
 	 */
 	public $type = 'User';
 
 	/**
 	 * Method to get the field input markup.
 	 *
-	 * @return  string   The field input markup.
+	 * @return  string  The field input markup.
 	 * @since   11.1
 	 */
 	protected function getInput()
@@ -103,7 +103,7 @@ class JFormFieldUser extends JFormField
 	/**
 	 * Method to get the filtering groups (null means no filtering)
 	 *
-	 * @return  array    null	array of filtering groups or null.
+	 * @return  mixed  array of filtering groups or null.
 	 * @since   11.1
 	 */
 	protected function getGroups()
@@ -114,7 +114,7 @@ class JFormFieldUser extends JFormField
 	/**
 	 * Method to get the users to exclude from the list of users
 	 *
-	 * @return  array    null array of users to exclude or null to to not exclude them
+	 * @return  mixed  array of users to exclude or null to to not exclude them
 	 * @since   11.1
 	 */
 	protected function getExcluded()

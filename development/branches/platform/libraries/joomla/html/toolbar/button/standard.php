@@ -43,7 +43,7 @@ class JButtonStandard extends JButton
 	/**
 	 * Get the button CSS Id
 	 *
-	 * @return  string   Button CSS Id
+	 * @return  string  Button CSS Id
 	 * @since   11.1
 	 */
 	public function fetchId($type='Standard', $name = '', $text = '', $task = '', $list = true, $hideMenu = false)
@@ -54,7 +54,6 @@ class JButtonStandard extends JButton
 	/**
 	 * Get the JavaScript command for the button
 	 *
-	 * @access	private
 	 * @param   string   $name	The task name as seen by the user
 	 * @param   string   $task	The task used by the application
 	 * @param   ???		$list
@@ -74,7 +73,6 @@ class JButtonStandard extends JButton
 		else {
 			$cmd = "javascript:Joomla.submitbutton('$task')";
 		}
-
 
 		return $cmd;
 	}

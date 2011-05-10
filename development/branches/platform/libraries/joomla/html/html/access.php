@@ -14,13 +14,12 @@ defined('JPATH_PLATFORM') or die;
  *
  * @package     Joomla.Platform
  * @subpackage  HTML
- * @static
  * @since       11.1
  */
 abstract class JHtmlAccess
 {
 	/**
-	 * @var    array      A cached array of the asset groups
+	 * @var    array  A cached array of the asset groups
 	 */
 	protected static $asset_groups = null;
 
@@ -229,7 +228,7 @@ abstract class JHtmlAccess
 	 *
 	 * @param   array    $config	An array of options for the options
 	 *
-	 * @return  mixed    		An array or false if an error occurs
+	 * @return  mixed  An array or false if an error occurs
 	 */
 	public static function assetgroups($config = array())
 	{
@@ -263,7 +262,7 @@ abstract class JHtmlAccess
 	 * @param   string   $attribs	Optional attributes for the select field
 	 * @param   array    $config	An array of options for the control
 	 *
-	 * @return  mixed    		An HTML string or null if an error occurs
+	 * @return  mixed  An HTML string or null if an error occurs
 	 */
 	public static function assetgrouplist($name, $selected, $attribs = null, $config = array())
 	{

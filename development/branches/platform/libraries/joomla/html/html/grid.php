@@ -12,7 +12,6 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Utility class for creating HTML Grids
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  HTML
  * @since       11.1
@@ -28,7 +27,7 @@ abstract class JHtmlGrid
 	 * @param   string   Task to turn the boolean setting off.
 	 *
 	 * @return  string   The boolean setting widget.
-	 * @since	1.0
+	 * @since	11.1
 	 */
 	static function boolean($i, $value, $taskOn = null, $taskOff = null)
 	{

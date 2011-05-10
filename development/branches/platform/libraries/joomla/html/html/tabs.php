@@ -12,7 +12,6 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Utility class for Tabs elements.
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  HTML
  * @version		1.6
@@ -22,8 +21,8 @@ abstract class JHtmlTabs
 	/**
 	 * Creates a panes and creates the JavaScript object for it.
 	 *
-	 * @param   string   The pane identifier
-	 * @param   array    An array of option.
+	 * @param   string  The pane identifier
+	 * @param   array   An array of option.
 	 * @return  string
 	 * @since   11.1
 	 */
@@ -48,8 +47,8 @@ abstract class JHtmlTabs
 	/**
 	 * Begins the display of a new panel.
 	 *
-	 * @param   string   Text to display.
-	 * @param   string   Identifier of the panel.
+	 * @param   string  Text to display.
+	 * @param   string  Identifier of the panel.
 	 * @return  string
 	 * @since   11.1
 	 */
@@ -61,8 +60,8 @@ abstract class JHtmlTabs
 	/**
 	 * Load the JavaScript behavior.
 	 *
-	 * @param   string   The pane identifier.
-	 * @param   array    Array of options.
+	 * @param   string  The pane identifier.
+	 * @param   array  Array of options.
 	 * @return  void
 	 * @since   11.1
 	 */

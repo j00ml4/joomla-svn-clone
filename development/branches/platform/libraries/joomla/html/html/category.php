@@ -12,7 +12,6 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Utility class for categories
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  HTML
  * @since       11.1
@@ -20,15 +19,15 @@ defined('JPATH_PLATFORM') or die;
 abstract class JHtmlCategory
 {
 	/**
-	 * @var    array      Cached array of the category items.
+	 * @var    array  Cached array of the category items.
 	 */
 	protected static $items = array();
 
 	/**
 	 * Returns an array of categories for the given extension.
 	 *
-	 * @param   string   The extension option.
-	 * @param   array    An array of configuration options. By default, only published and unpulbished categories are returned.
+	 * @param   string  The extension option.
+	 * @param   array   An array of configuration options. By default, only published and unpulbished categories are returned.
 	 *
 	 * @return  array
 	 */
@@ -79,8 +78,8 @@ abstract class JHtmlCategory
 	/**
 	 * Returns an array of categories for the given extension.
 	 *
-	 * @param   string   The extension option.
-	 * @param   array    An array of configuration options. By default, only published and unpulbished categories are returned.
+	 * @param   string  The extension option.
+	 * @param   array   An array of configuration options. By default, only published and unpulbished categories are returned.
 	 *
 	 * @return  array
 	 */

@@ -40,8 +40,6 @@ class JElement extends JObject
 
 	/**
 	 * Constructor
-	 *
-	 * @access protected
 	 */
 	public function __construct($parent = null)
 	{
@@ -51,7 +49,7 @@ class JElement extends JObject
 	/**
 	* Get the element name
 	*
-	* @return  string   type of the parameter
+	* @return  string  type of the parameter
 	*/
 	public function getName() {
 		return $this->_name;

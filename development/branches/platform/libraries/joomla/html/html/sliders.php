@@ -12,7 +12,6 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Utility class for Sliders elements
  *
- * @static
  * @package     Joomla.Platform
  * @subpackage  HTML
  * @since       11.1
@@ -23,8 +22,8 @@ abstract class JHtmlSliders
 	/**
 	 * Creates a panes and loads the javascript behavior for it.
 	 *
-	 * @param   string   The pane identifier.
-	 * @param   array    An array of options.
+	 * @param   string  The pane identifier.
+	 * @param   array   An array of options.
 	 * @return  string
 	 * @since   11.1
 	 */
@@ -48,8 +47,8 @@ abstract class JHtmlSliders
 	/**
 	 * Begins the display of a new panel.
 	 *
-	 * @param   string   Text to display.
-	 * @param   string   Identifier of the panel.
+	 * @param   string  Text to display.
+	 * @param   string  Identifier of the panel.
 	 * @return  string
 	 * @since   11.1
 	 */
@@ -61,8 +60,8 @@ abstract class JHtmlSliders
 	/**
 	 * Load the JavaScript behavior.
 	 *
-	 * @param   string   The pane identifier.
-	 * @param   array    Array of options.
+	 * @param   string  The pane identifier.
+	 * @param   array   Array of options.
 	 * @return  void
 	 * @since   11.1
 	 */

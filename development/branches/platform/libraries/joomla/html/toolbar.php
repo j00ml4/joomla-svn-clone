@@ -52,7 +52,7 @@ class JToolBar extends JObject
 	/**
 	 * Constructor
 	 *
-	 * @param   string   The toolbar name.
+	 * @param   string  The toolbar name.
 	 */
 	public function __construct($name = 'toolbar')
 	{
@@ -67,7 +67,7 @@ class JToolBar extends JObject
 	 * Returns the global JToolBar object, only creating it if it
 	 * doesn't already exist.
 	 *
-	 * @param   string   $name  The name of the toolbar.
+	 * @param   string  $name  The name of the toolbar.
 	 *
 	 * @return  JToolBar	The JToolBar object.
 	 */
@@ -89,10 +89,10 @@ class JToolBar extends JObject
 	/**
 	 * Set a value
 	 *
-	 * @param   string   The name of the parameter.
-	 * @param   string   The value of the parameter.
+	 * @param   string  The name of the parameter.
+	 * @param   string  The value of the parameter.
 	 *
-	 * @return  string   The set value.
+	 * @return  string  The set value.
 	 */
 	public function appendButton()
 	{
@@ -127,8 +127,8 @@ class JToolBar extends JObject
 	/**
 	 * Get a value.
 	 *
-	 * @param   string   The name of the parameter.
-	 * @param   mixed    The default value if not found.
+	 * @param   string  The name of the parameter.
+	 * @param   mixed   The default value if not found.
 	 *
 	 * @return  string
 	 */
@@ -143,9 +143,9 @@ class JToolBar extends JObject
 	/**
 	 * Render.
 	 *
-	 * @param   string   The name of the control, or the default text area if a setup file is not found.
+	 * @param   string  The name of the control, or the default text area if a setup file is not found.
 	 *
-	 * @return  string   HTML
+	 * @return  string  HTML
 	 */
 	public function render()
 	{
@@ -171,10 +171,10 @@ class JToolBar extends JObject
 	/**
 	 * Render a parameter type.
 	 *
-	 * @param   object   A param tag node.
-	 * @param   string   The control name.
+	 * @param   object  A param tag node.
+	 * @param   string  The control name.
 	 *
-	 * @return  array    Any array of the label, the form element and the tooltip.
+	 * @return  array  Any array of the label, the form element and the tooltip.
 	 */
 	public function renderButton(&$node)
 	{
@@ -193,7 +193,7 @@ class JToolBar extends JObject
 	/**
 	 * Loads a button type.
 	 *
-	 * @param   string   buttonType
+	 * @param   string  buttonType
 	 *
 	 * @return  object
 	 * @since   11.1
