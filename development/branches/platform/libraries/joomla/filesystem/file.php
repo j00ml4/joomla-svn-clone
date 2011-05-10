@@ -23,9 +23,9 @@ class JFile
 	/**
 	 * Gets the extension of a file name
 	 *
-	 * @param   string   $file	The file name
+	 * @param   string  $file	The file name
 	 *
-	 * @return  string   The file extension
+	 * @return  string  The file extension
 	 * @since   11.1
 	 */
 	public static function getExt($file)
@@ -38,9 +38,9 @@ class JFile
 	/**
 	 * Strips the last extension off of a file name
 	 *
-	 * @param   string   $file  The file name
+	 * @param   string  $file  The file name
 	 *
-	 * @return  string   The file name without the extension
+	 * @return  string  The file name without the extension
 	 * @since   11.1
 	 */
 	public static function stripExt($file)
@@ -51,9 +51,9 @@ class JFile
 	/**
 	 * Makes file name safe to use
 	 *
-	 * @param   string   $file	The name of the file [not full path]
+	 * @param   string  $file	The name of the file [not full path]
 	 *
-	 * @return  string   The sanitised string
+	 * @return  string  The sanitised string
 	 * @since   11.1
 	 */
 	public static function makeSafe($file)
@@ -66,9 +66,9 @@ class JFile
 	/**
 	 * Copies a file
 	 *
-	 * @param   string   $src    The path to the source file
-	 * @param   string   $dest   The path to the destination file
-	 * @param   string   $path   An optional base path to prefix to the file names
+	 * @param   string  $src   The path to the source file
+	 * @param   string  $dest  The path to the destination file
+	 * @param   string  $path  An optional base path to prefix to the file names
 	 *
 	 * @return  boolean  True on success
 	 * @since   11.1
@@ -138,7 +138,7 @@ class JFile
 	/**
 	 * Delete a file or array of files
 	 *
-	 * @param   mixed    $file The file name or an array of file names
+	 * @param   mixed  $file  The file name or an array of file names
 	 *
 	 * @return  boolean  True on success
 	 * @since   11.1
@@ -194,9 +194,9 @@ class JFile
 	/**
 	 * Moves a file
 	 *
-	 * @param   string   $src     The path to the source file
-	 * @param   string   $dest    The path to the destination file
-	 * @param   string   $path    An optional base path to prefix to the file names
+	 * @param   string  $src   The path to the source file
+	 * @param   string  $dest  The path to the destination file
+	 * @param   string  $path  An optional base path to prefix to the file names
 	 *
 	 * @return  boolean  True on success
 	 * @since   11.1
@@ -259,13 +259,13 @@ class JFile
 	/**
 	 * Read the contents of a file
 	 *
-	 * @param   string   $filename     The full file path
-	 * @param   boolean  $incpath      Use include path
-	 * @param   integer  $amount       Amount of file to read
-	 * @param   integer  $chunksize    Size of chunks to read
-	 * @param   integer  $offset       Offset of the file
+	 * @param   string   $filename   The full file path
+	 * @param   boolean  $incpath    Use include path
+	 * @param   integer  $amount     Amount of file to read
+	 * @param   integer  $chunksize  Size of chunks to read
+	 * @param   integer  $offset     Offset of the file
 	 *
-	 * @return  mixed    Returns file contents or boolean False if failed
+	 * @return  mixed  Returns file contents or boolean False if failed
 	 * @since   11.1
 	 */
 	public static function read($filename, $incpath = false, $amount = 0, $chunksize = 8192, $offset = 0)
@@ -313,8 +313,8 @@ class JFile
 	/**
 	 * Write contents to a file
 	 *
-	 * @param   string   $file The full file path
-	 * @param   string   $buffer The buffer to write
+	 * @param   string  $file The full file path
+	 * @param   string  $buffer The buffer to write
 	 *
 	 * @return  boolean  True on success
 	 * @since   11.1
@@ -364,8 +364,8 @@ class JFile
 	/**
 	 * Moves an uploaded file to a destination folder
 	 *
-	 * @param   string   $src   The name of the php (temporary) uploaded file
-	 * @param   string   $dest   The path (including filename) to move the uploaded file to
+	 * @param   string  $src   The name of the php (temporary) uploaded file
+	 * @param   string  $dest  The path (including filename) to move the uploaded file to
 	 *
 	 * @return  boolean  True on success
 	 * @since   11.1
@@ -432,7 +432,7 @@ class JFile
 	/**
 	 * Wrapper for the standard file_exists function
 	 *
-	 * @param   string   $file    File path
+	 * @param   string  $file  File path
 	 *
 	 * @return  boolean  True if path is a file
 	 * @since   11.1
@@ -445,9 +445,9 @@ class JFile
 	/**
 	 * Returns the name, without any path.
 	 *
-	 * @param   string   $file     File path
+	 * @param   string  $file  File path
 	 *
-	 * @return  string   filename
+	 * @return  string  filename
 	 * @since   11.1
 	 */
 	public static function getName($file)

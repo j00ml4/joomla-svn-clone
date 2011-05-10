@@ -128,7 +128,7 @@ class JArchiveTar extends JObject
 	 *         'size'  --  Original file size
 	 *         'type'  --  File type
 	 * </pre>
-	 * @since	1.5
+	 * @since	11.1
 	 */
 	protected function _getTarInfo(& $data)
 	{

@@ -145,7 +145,7 @@ class JArchiveZip extends JObject
 	/**
 	 * Checks to see if the data is a valid ZIP file.
 	 *
-	 * @param   string   &$data	ZIP archive data buffer.
+	 * @param   string  &$data	ZIP archive data buffer.
 	 *
 	 * @return  boolean  True if valid, false if invalid.
 	 * @since   11.1
@@ -289,9 +289,9 @@ class JArchiveZip extends JObject
 	 *		'type'	--  File type
 	 * </pre>
 	 *
-	 * @param   string   &$data	The ZIP archive buffer.
+	 * @param   string  &$data	The ZIP archive buffer.
 	 *
-	 * @return  array    Archive metadata array.
+	 * @return  array  Archive metadata array.
 	 * @since   11.1
 	 */
 	protected function _getZipInfo(&$data)
@@ -374,7 +374,7 @@ class JArchiveZip extends JObject
 	 *
 	 * @param   integer  $key	The position of the file in the archive.
 	 *
-	 * @return  string   Uncompressed file data buffer.
+	 * @return  string  Uncompressed file data buffer.
 	 * @since   11.1
 	 */
 	protected function _getFileData($key)
@@ -411,7 +411,7 @@ class JArchiveZip extends JObject
 	 * (date in high 2-bytes, time in low 2-bytes allowing magnitude
 	 * comparison).
 	 *
-	 * @param    integer   $unixtime	The current UNIX timestamp.
+	 * @param    integer  $unixtime	The current UNIX timestamp.
 	 *
 	 * @return  integer  The current date in a 4-byte DOS format.
 	 * @since   11.1
@@ -435,9 +435,9 @@ class JArchiveZip extends JObject
 	/**
 	 * Adds a "file" to the ZIP archive.
 	 *
-	 * @param   array    &$file		File data array to add
-	 * @param   array    &$contents	An array of existing zipped files.
-	 * @param   array    &$ctrldir	An array of central directory information.
+	 * @param   array  &$file		File data array to add
+	 * @param   array  &$contents	An array of existing zipped files.
+	 * @param   array  &$ctrldir	An array of central directory information.
 	 *
 	 * @return  void
 	 * @since   11.1
@@ -544,9 +544,9 @@ class JArchiveZip extends JObject
 	 *
 	 * Official ZIP file format: http://www.pkware.com/appnote.txt
 	 *
-	 * @param   array    &$contents	An array of existing zipped files.
-	 * @param   array    &$ctrlDir	An array of central directory information.
-	 * @param   string   $path		The path to store the archive.
+	 * @param   array   &$contents	An array of existing zipped files.
+	 * @param   array   &$ctrlDir	An array of central directory information.
+	 * @param   string  $path		The path to store the archive.
 	 *
 	 * @return  boolean  True if successful
 	 * @since   11.1
