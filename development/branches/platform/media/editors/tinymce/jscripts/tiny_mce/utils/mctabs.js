@@ -38,21 +38,21 @@ MCTabs.prototype.showTab =function(tab){
 
 MCTabs.prototype.hideTab =function(tab){
 	var t=this;
-	tab.className = '';  
-	tab.setAttribute("aria-selected",false);  
+	tab.className = '';
+	tab.setAttribute("aria-selected",false);
 	tab.setAttribute("aria-expanded", false);
 	tab.tabIndex=-1;
 };
 
 MCTabs.prototype.showPanel = function(panel) {
-	panel.className = 'current'; 
+	panel.className = 'current';
 	panel.setAttribute("aria-hidden", false);
 };
 
 MCTabs.prototype.hidePanel = function(panel) {
-	panel.className = 'panel';   
+	panel.className = 'panel';
 	panel.setAttribute("aria-hidden", true);
-}; 
+};
 
 MCTabs.prototype.getPanelForTab = function(tabElm) {
 	return tinyMCEPopup.dom.getAttrib(tabElm, "aria-controls");
@@ -90,7 +90,7 @@ MCTabs.prototype.displayTab = function(tab_id, panel_id, avoid_focus) {
 			if (nodes[i].nodeName == "DIV")
 				t.hidePanel(nodes[i]);
 		}
-		if (!avoid_focus) { 
+		if (!avoid_focus) {
 			tabElm.focus();
 		}
 		// Show selected panel
@@ -115,7 +115,7 @@ tinyMCEPopup.onInit.add(function() {
 	var tinymce = tinyMCEPopup.getWin().tinymce, dom = tinyMCEPopup.dom, each = tinymce.each;
 	each(dom.select('div.tabs'), function(tabContainerElm) {
 		var keyNav;
-		dom.setAttrib(tabContainerElm, "role", "tablist"); 
+		dom.setAttrib(tabContainerElm, "role", "tablist");
 		var items = tinyMCEPopup.dom.select('li', tabContainerElm);
 		var action = function(id) {
 			mcTabs.displayTab(id, mcTabs.getPanelForTab(id));

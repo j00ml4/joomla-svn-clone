@@ -77,7 +77,7 @@ function init() {
 		if (col)
 			updateLight(col.r, col.g, col.b);
 	}
-	
+
 	for (key in named) {
 		value = named[key];
 		namedLookup[value.replace(/\s+/, '').toLowerCase()] = key.replace(/#/, '').toLowerCase();
@@ -257,7 +257,7 @@ function generateNamedColors() {
 function enableKeyboardNavigation(el) {
 	tinyMCEPopup.editor.windowManager.createInstance('tinymce.ui.KeyboardNavigation', {
     	root: el,
-    	items: tinyMCEPopup.dom.select('a', el)    	
+    	items: tinyMCEPopup.dom.select('a', el)
     }, tinyMCEPopup.dom);
 }
 
