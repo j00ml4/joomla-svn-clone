@@ -58,11 +58,11 @@ class MenusModelItem extends JModelAdmin
 		if (!empty($record->id)) {
 			if ($record->published != -2) {
 				return ;
-			}	
+			}
 			$user = JFactory::getUser();
 
 		return $user->authorise('core.delete', 'com_menus.item.'.(int) $record->id);
-		}	
+		}
 	}
 
 	/**
@@ -183,7 +183,7 @@ class MenusModelItem extends JModelAdmin
 				return false;
 			}
 		}
-		
+
 		// Check that user has create permission for menus
 		$user	= JFactory::getUser();
 		if (!$user->authorise('core.create', 'com_menus')) {
@@ -300,7 +300,7 @@ class MenusModelItem extends JModelAdmin
 
 		// Clean the cache
 		$this->cleanCache();
-				
+
 		return true;
 	}
 
@@ -339,7 +339,7 @@ class MenusModelItem extends JModelAdmin
 				}
 			}
 		}
-		
+
 		// Check that user has create and edit permission for menus
 		$user	= JFactory::getUser();
 		if (!$user->authorise('core.create', 'com_menus')) {
@@ -431,7 +431,7 @@ class MenusModelItem extends JModelAdmin
 
 		// Clean the cache
 		$this->cleanCache();
-				
+
 		return true;
 	}
 
@@ -833,9 +833,9 @@ class MenusModelItem extends JModelAdmin
 					$path = JPath::clean($base.'/metadata.xml');
 					if (JFile::exists($path)) {
 						$formFile = $path;
-					}						
-				}			
-			}	
+					}
+				}
+			}
 		}
 
 		if ($formFile) {
@@ -880,7 +880,7 @@ class MenusModelItem extends JModelAdmin
 				throw new Exception(JText::_('JERROR_LOADFILE_FAILED'));
 			}
 		}
-		
+
 
 		// Load the specific type file
 		if (!$form->loadFile('item_'.$type, false, false)) {
@@ -943,7 +943,7 @@ class MenusModelItem extends JModelAdmin
 
 		// Clean the cache
 		$this->cleanCache();
-				
+
 		return true;
 	}
 
@@ -1010,7 +1010,7 @@ class MenusModelItem extends JModelAdmin
 
 		// Clean the cache
 		$this->cleanCache();
-				
+
 		if (isset($data['link'])) {
 			$base 	= JURI::base();
 			$juri 	= JURI::getInstance($base.$data['link']);
@@ -1046,7 +1046,7 @@ class MenusModelItem extends JModelAdmin
 
 		// Clean the cache
 		$this->cleanCache();
-				
+
 		return true;
 	}
 
@@ -1116,7 +1116,7 @@ class MenusModelItem extends JModelAdmin
 
 		// Clean the cache
 		$this->cleanCache();
-				
+
 		return true;
 	}
 
@@ -1150,7 +1150,7 @@ class MenusModelItem extends JModelAdmin
 
 		// Clean the cache
 		$this->cleanCache();
-				
+
 		return parent::publish($pks,$value);
 	}
 
@@ -1183,7 +1183,7 @@ class MenusModelItem extends JModelAdmin
 
 		return array($title ,$alias);
 	}
-	
+
 	/**
 	 * Custom clean cache method
 	 *
@@ -1192,6 +1192,6 @@ class MenusModelItem extends JModelAdmin
 	function cleanCache() {
 		parent::cleanCache('com_modules');
 		parent::cleanCache('mod_menu');
-	}	
-	
+	}
+
 }

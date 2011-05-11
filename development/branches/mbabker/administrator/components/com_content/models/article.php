@@ -287,10 +287,10 @@ class ContentModelArticle extends JModelAdmin
 				if (!is_array($old_featured = $db->loadResultArray())) {
 					throw new Exception($db->getErrorMsg());
 				}
-				
+
 				// we diff the arrays to get a list of the articles that are newly featured
 				$new_featured = array_diff($pks, $old_featured);
-				
+
 				// Featuring.
 				$tuples = array();
 				foreach ($new_featured as $pk) {
@@ -349,5 +349,5 @@ class ContentModelArticle extends JModelAdmin
 		parent::cleanCache('mod_articles_latest');
 		parent::cleanCache('mod_articles_news');
 		parent::cleanCache('mod_articles_popular');
-	}	
+	}
 }
