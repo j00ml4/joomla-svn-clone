@@ -293,7 +293,7 @@
 				}
 			}
 
-			// Check if we should use the new auto process method			
+			// Check if we should use the new auto process method
 			if (getParam(ed, "paste_auto_cleanup_on_paste")) {
 				// Is it's Opera or older FF use key handler
 				if (tinymce.isOpera || /Firefox\/2/.test(navigator.userAgent)) {
@@ -354,7 +354,7 @@
 						h = h.replace(v[0], v[1]);
 				});
 			}
-			
+
 			if (ed.settings.paste_enable_default_filters == false) {
 				return;
 			}
@@ -580,7 +580,7 @@
 			if (ed.settings.paste_enable_default_filters == false) {
 				return;
 			}
-			
+
 			if (o.wordContent) {
 				// Remove named anchors or TOC links
 				each(dom.select('a', o.node), function(a) {
@@ -936,8 +936,8 @@
 				// plain text take the same style as the existing paragraph.)
 				if ((pos = h.indexOf("</p><p>")) != -1) {
 					rpos = h.lastIndexOf("</p><p>");
-					node = sel.getNode(); 
-					breakElms = [];		// Get list of elements to break 
+					node = sel.getNode();
+					breakElms = [];		// Get list of elements to break
 
 					do {
 						if (node.nodeType == 1) {

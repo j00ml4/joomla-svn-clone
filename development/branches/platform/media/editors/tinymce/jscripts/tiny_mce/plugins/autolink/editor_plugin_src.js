@@ -21,7 +21,7 @@
 
 		init : function(ed, url) {
 			var t = this;
-        
+
             // Internet Explorer has built-in automatic linking
             if (tinyMCE.isIE)
                 return;
@@ -33,7 +33,7 @@
                 if (e.shiftKey && e.keyCode == 48)
                     return t.handleEclipse(ed);
             });
-            
+
             // Add a key up handler
 			ed.onKeyUp.add(function(ed, e) {
                 if (e.keyCode == 32)
@@ -44,11 +44,11 @@
         handleEclipse : function(ed) {
             this.parseCurrentLine(ed, -1, '(', true);
         },
-        
+
         handleSpacebar : function(ed) {
             this.parseCurrentLine(ed, 0, '', true);
         },
-        
+
         handleEnter : function(ed) {
             this.parseCurrentLine(ed, -1, '', false);
         },
@@ -60,7 +60,7 @@
             // hence, at minimum, five characters from the beginning of the line.
             r = ed.selection.getRng().cloneRange();
             if (r.startOffset < 5) {
-                // During testing, the caret is placed inbetween two text nodes. 
+                // During testing, the caret is placed inbetween two text nodes.
                 // The previous text node contains the URL.
                 prev = r.endContainer.previousSibling;
                 if (prev == null) {
@@ -117,7 +117,7 @@
                 }
 
                 bookmark = ed.selection.getBookmark();
-                
+
                 ed.selection.setRng(r);
                 tinyMCE.execCommand('mceInsertLink',false, matches[1] + matches[2]);
                 ed.selection.moveToBookmark(bookmark);

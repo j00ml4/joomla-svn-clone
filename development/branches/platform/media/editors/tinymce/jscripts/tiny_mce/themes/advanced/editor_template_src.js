@@ -62,14 +62,14 @@
 
 		init : function(ed, url) {
 			var t = this, s, v, o;
-	
+
 			t.editor = ed;
 			t.url = url;
 			t.onResolveName = new tinymce.util.Dispatcher(this);
 
 			ed.forcedHighContrastMode = ed.settings.detect_highcontrast && t._isHighContrast();
 			ed.settings.skin = ed.forcedHighContrastMode ? 'highcontrast' : ed.settings.skin;
-			
+
 			// Default settings
 			t.settings = s = extend({
 				theme_advanced_path : true,
@@ -164,7 +164,7 @@
 			if (s.skin_variant)
 				DOM.loadCSS(url + "/skins/" + ed.settings.skin + "/ui_" + s.skin_variant + ".css");
 		},
-		
+
 		_isHighContrast : function() {
 			var actualColor, div = DOM.add(DOM.getRoot(), 'div', {'style': 'background-color: rgb(171,239,86);'});
 
@@ -546,7 +546,7 @@
 			if (DOM.get(ed.id + '_path_row')) {
 				Event.add(ed.id + '_tbl', 'mouseover', function(e) {
 					var re;
-	
+
 					e = e.target;
 
 					if (e.nodeName == 'SPAN' && DOM.hasClass(e.parentNode, 'mceButton')) {
@@ -570,7 +570,7 @@
 
 			t.deltaHeight = o.deltaHeight;
 			o.targetNode = null;
-			
+
 			ed.onKeyDown.add(function(ed, evt) {
 				var DOM_VK_F10 = 121, DOM_VK_F11 = 122;
 				if (evt.altKey) {
@@ -583,7 +583,7 @@
 					}
 				}
 			});
-			
+
 			// alt+0 is the UK recommended shortcut for accessing the list of access controls.
 			ed.addShortcut('alt+0', '', 'mceShortcuts', t);
 
@@ -809,10 +809,10 @@
 				'tab_focus_toolbar':ed.getParam('theme_advanced_tab_focus_toolbar')
 			});
 			t.toolbarGroup = toolbarGroup;
-			
+
 			a = s.theme_advanced_toolbar_align.toLowerCase();
 			a = 'mce' + t._ufirst(a);
-      
+
 			n = DOM.add(DOM.add(c, 'tr'), 'td', {'class' : 'mceToolbar ' + a});
 
 			// Create toolbar and add the controls
@@ -913,7 +913,7 @@
 			o.deltaHeight -= 21;
 			n = tb = null;
 		},
-		
+
 		_updateUndoStatus : function(ed) {
 			var cm = ed.controlManager;
 			cm.setDisabled('undo', !ed.undoManager.hasUndo() && !ed.typing);
@@ -999,7 +999,7 @@
 
 					if (!fn && n.style.fontFamily)
 						fn = n.style.fontFamily.replace(/[\"\']+/g, '').replace(/^([^,]+).*/, '$1').toLowerCase();
-					
+
 					if (!fc && n.style.color)
 						fc = n.style.color;
 
@@ -1030,7 +1030,7 @@
 						return true;
 				});
 			}
-			
+
 			if (s.theme_advanced_show_current_color) {
 				function updateColor(controlId, color) {
 					if (c = cm.get(controlId)) {
@@ -1148,7 +1148,7 @@
 						p.insertBefore(pi, p.firstChild);
 					} else
 						p.appendChild(pi);
-					
+
 				}, ed.getBody());
 
 				if (DOM.select('a', p).length > 0) {
@@ -1208,7 +1208,7 @@
 				theme_url : this.url
 			});
 		},
-		
+
 		_mceShortcuts : function() {
 			var ed = this.editor;
 			ed.windowManager.open({
