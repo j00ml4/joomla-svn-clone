@@ -258,9 +258,9 @@ class ContentModelArticle extends JModelAdmin
 			$db = $this->getDbo();
 
 			$db->setQuery(
-				'UPDATE #__content ' .
-				' SET featured = '.(int) $value.
-				' WHERE id IN ('.implode(',', $pks).')'
+				'UPDATE #__content AS a' .
+				' SET a.featured = '.(int) $value.
+				' WHERE a.id IN ('.implode(',', $pks).')'
 			);
 			if (!$db->query()) {
 				throw new Exception($db->getErrorMsg());

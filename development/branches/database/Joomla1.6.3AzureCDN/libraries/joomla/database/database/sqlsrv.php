@@ -270,17 +270,17 @@ class JDatabaseSQLSrv extends JDatabase
 
 	private function _limit($sql, $limit, $offset)
 	{
-		$order_by  = stristr($sql1, 'ORDER BY');
+		$order_by  = stristr($sql, 'ORDER BY');
 		if(is_null($order_by) || empty($order_by))
 		$order_by = 'ORDER BY (select 0)';
-		$sql = str_ireplace($order_by, '', $sql1);
+		$sql = str_ireplace($order_by, '', $sql);
 
 		$row_number_text = ',ROW_NUMBER() OVER ('.$order_by.') AS RowNumber FROM ';
 
-		$sql = preg_replace('/\\s+FROM/','\\1 '.$row_number_text.' ', $sql1, 1);
-		$sql = 'SELECT TOP '.$this->_limit.' * FROM ('.$sql1.') _myResults WHERE RowNumber > '.$this->_offset;
+		$sql = preg_replace('/\\s+FROM/','\\1 '.$row_number_text.' ', $sql, 1);
+		$sql = 'SELECT TOP '.$this->_limit.' * FROM ('.$sql.') _myResults WHERE RowNumber > '.$this->_offset;
 
-		return $sql1;
+		return $sql;
 	}
 	/**
 	 * Get the current or query, or new JDatabaseQuery object.
