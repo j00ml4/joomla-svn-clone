@@ -15,12 +15,10 @@ defined('_JEXEC') or die;
 $user = JFactory::getUser();
 $asset = JRequest::getCmd('asset');
 $author = JRequest::getCmd('author');
- 
 if (	!$user->authorise('core.manage', 'com_media')
-	&&	(!$asset or (
+	&&	(!$asset or
 			!$user->authorise('core.edit', $asset)
-		&&	!$user->authorise('core.create', $asset) 
-		&& 	count($user->getAuthorisedCategories($asset, 'core.create')) == 0)
+		&&	!$user->authorise('core.create', $asset)
 		&&	!($user->id==$author && $user->authorise('core.edit.own', $asset))))
 {
 	return JError::raiseWarning(403, JText::_('JERROR_ALERTNOAUTHOR'));

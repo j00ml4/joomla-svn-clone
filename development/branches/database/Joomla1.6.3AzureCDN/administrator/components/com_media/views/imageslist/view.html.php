@@ -28,9 +28,10 @@ class MediaViewImagesList extends JView
 
 		$lang	= JFactory::getLanguage();
 
-		JHtml::_('stylesheet','media/popup-imagelist.css', array(), true);
+		JHtml::_('behavior.framework', true);
+		JHTML::_('stylesheet','media/popup-imagelist.css', array(), true);
 		if ($lang->isRTL()) :
-			JHtml::_('stylesheet','media/popup-imagelist_rtl.css', array(), true);
+			JHTML::_('stylesheet','media/popup-imagelist_rtl.css', array(), true);
 		endif;
 
 		$document = JFactory::getDocument();
