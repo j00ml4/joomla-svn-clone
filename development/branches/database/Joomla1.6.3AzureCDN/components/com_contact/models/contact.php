@@ -256,8 +256,7 @@ class ContactModelContact extends JModelForm
 			$case_when1 .= ' ELSE ';
 			$case_when1 .= $c_id.' END as catslug';
 			$query->select('a.*, cc.access as category_access, cc.title as category_name, '
-			. ' CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
-			. ' CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(\':\', cc.id, cc.alias) ELSE cc.id END AS catslug ');
+			.$case_when.','.$case_when1);
 
 			$query->from('#__contact_details AS a');
 
