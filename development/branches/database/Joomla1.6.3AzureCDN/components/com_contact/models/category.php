@@ -136,6 +136,7 @@ class ContactModelCategory extends JModelList
 		// Filter by category.
 		if ($categoryId = $this->getState('category.id')) {
 			$query->where('a.catid = '.(int) $categoryId);
+			$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 			$query->where('c.access IN ('.$groups.')');
 		}
 
