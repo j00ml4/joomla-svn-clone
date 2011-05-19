@@ -40,8 +40,13 @@ class JFormFieldUser extends JFormField
 		$html = array();
 		$groups = $this->getGroups();
 		$excluded = $this->getExcluded();
+<<<<<<< .mine
+		$link = 'index.php?option=com_users&amp;view=users&amp;layout=modal&amp;tmpl=component&amp;field='.$this->id;
+		
+=======
 		$link = 'index.php?option=com_users&amp;view=users&amp;layout=modal&amp;tmpl=component&amp;field='.$this->id;
 
+>>>>>>> .r21369
 		// Initialize some field attributes.
 		$attr = $this->element['class'] ? ' class="'.(string) $this->element['class'].'"' : '';
 		$attr .= $this->element['size'] ? ' size="'.(int) $this->element['size'].'"' : '';
