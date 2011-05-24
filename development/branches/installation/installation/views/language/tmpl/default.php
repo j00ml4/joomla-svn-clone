@@ -12,11 +12,6 @@ defined('_JEXEC') or die;
 	<div id="right">
 		<div id="rightpad">
 			<div id="step">
-				<div class="t">
-					<div class="t">
-						<div class="t"></div>
-					</div>
-				</div>
 				<div class="m">
 					<div class="far-right">
 					<?php if ($this->document->direction == 'ltr') : ?>
@@ -25,50 +20,26 @@ defined('_JEXEC') or die;
 						<div class="button1-right"><div class="prev"><a href="#" onclick="Install.submitform('setup.setlanguage');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 					<?php endif; ?>
 					</div>
-					<span class="step"><?php echo JText::_('INSTL_LANGUAGE_TITLE'); ?></span>
-				</div>
-				<div class="b">
-					<div class="b">
-						<div class="b"></div>
-					</div>
+					<span class="steptitle"><?php echo JText::_('INSTL_LANGUAGE_TITLE'); ?></span>
 				</div>
 			</div>
 			<div id="installer">
-				<div class="t">
-					<div class="t">
-						<div class="t"></div>
-					</div>
-				</div>
+
 				<div class="m">
 					<h2><?php echo JText::_('INSTL_SELECT_LANGUAGE_TITLE'); ?></h2>
 					<div class="install-text">
 						<?php echo JText::_('INSTL_SELECT_LANGUAGE_DESC'); ?>
 					</div>
 					<div class="install-body">
-						<div class="t">
-							<div class="t">
-								<div class="t"></div>
-							</div>
-						</div>
 						<div class="m">
 							<fieldset>
 								<?php echo $this->form->getInput('language'); ?>
 							</fieldset>
 							<div class="clr"></div>
 						</div>
-						<div class="b">
-							<div class="b">
-								<div class="b"></div>
-							</div>
-						</div>
 						<div class="clr"></div>
 					</div>
 					<div class="clr"></div>
-				</div>
-				<div class="b">
-					<div class="b">
-						<div class="b"></div>
-					</div>
 				</div>
 			</div>
 		</div>

@@ -12,11 +12,6 @@ defined('_JEXEC') or die;
 <div id="right">
 	<div id="rightpad">
 		<div id="step">
-			<div class="t">
-				<div class="t">
-					<div class="t"></div>
-				</div>
-			</div>
 			<div class="m">
 				<div class="far-right">
 <?php if ($this->document->direction == 'ltr') : ?>
@@ -27,29 +22,14 @@ defined('_JEXEC') or die;
 					<div class="button1-left"><div class="next"><a href="index.php?view=preinstall" onclick="return Install.goToPage('preinstall');" rel="prev" title="<?php echo JText::_('JPREVIOUS'); ?>"><?php echo JText::_('JPREVIOUS'); ?></a></div></div>
 <?php endif; ?>
 				</div>
-				<span class="step"><?php echo JText::_('INSTL_LICENSE'); ?></span>
-			</div>
-			<div class="b">
-				<div class="b">
-					<div class="b"></div>
-				</div>
+				<span class="steptitle"><?php echo JText::_('INSTL_LICENSE'); ?></span>
 			</div>
 		</div>
 		<div id="installer">
-			<div class="t">
-				<div class="t">
-					<div class="t"></div>
-				</div>
-			</div>
 			<div class="m">
 				<h2><?php echo JText::_('INSTL_GNU_GPL_LICENSE'); ?></h2>
 				<iframe src="gpl.html" class="license" marginwidth="25" scrolling="auto"></iframe>
 				<div class="clr"></div>
-			</div>
-			<div class="b">
-				<div class="b">
-					<div class="b"></div>
-				</div>
 			</div>
 		</div>
 	</div>
