@@ -12,18 +12,16 @@ defined('_JEXEC') or die;
 <div id="right">
 	<div id="rightpad">
 		<div id="step">
-			<div class="m">
-				<div class="far-right">
+			<div class="far-right">
 <?php if ($this->document->direction == 'ltr') : ?>
-					<div class="button1-right"><div class="prev"><a href="index.php?view=database" onclick="return Install.goToPage('database');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
-					<div class="button1-left"><div class="next"><a href="#" onclick="Install.submitform('setup.filesystem');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+				<div class="button1-right"><div class="prev"><a href="index.php?view=database" onclick="return Install.goToPage('database');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
+				<div class="button1-left"><div class="next"><a href="#" onclick="Install.submitform('setup.filesystem');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 <?php elseif ($this->document->direction == 'rtl') : ?>
-					<div class="button1-right"><div class="prev"><a href="#" onclick="Install.submitform('setup.filesystem');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
-					<div class="button1-left"><div class="next"><a href="index.php?view=database" onclick="return Install.goToPage('database');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
+				<div class="button1-right"><div class="prev"><a href="#" onclick="Install.submitform('setup.filesystem');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+				<div class="button1-left"><div class="next"><a href="index.php?view=database" onclick="return Install.goToPage('database');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
 <?php endif; ?>
-				</div>
-				<span class="steptitle"><?php echo JText::_('INSTL_FTP'); ?></span>
 			</div>
+			<span class="steptitle"><?php echo JText::_('INSTL_FTP'); ?></span>
 		</div>
 		<div id="installer">
 			<div class="m">
@@ -120,9 +118,7 @@ defined('_JEXEC') or die;
 								</tr>
 							</table>
 						</div>
-						<div class="clr"></div>
 					</div>
-					<div class="clr"></div>
 				</div>
 				<div class="clr"></div>
 			</div>
@@ -131,5 +127,4 @@ defined('_JEXEC') or die;
 	<input type="hidden" name="task" value="" />
 	<?php echo JHtml::_('form.token'); ?>
 </div>
-<div class="clr"></div>
 </form>

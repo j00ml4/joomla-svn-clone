@@ -70,6 +70,7 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 				<div id="main-content">
 					<jdoc:include type="installation" />
 				</div>
+				<div class="clr"></div>
 			</div>
 		</div>
 		<div id="copyright">

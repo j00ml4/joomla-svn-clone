@@ -442,10 +442,6 @@ div.m {
   padding: 0 8px;
 }
 
-div#step div.m {
-  padding: 0;
-}
-
 div#installer div.m {
   padding-bottom: 1px !important;
   padding-bottom: 0px;
