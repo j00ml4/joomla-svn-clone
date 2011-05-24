@@ -255,7 +255,7 @@ class JInstallationControllerSetup extends JController
 
 		// Ensure a language was set.
 		if (!$return) {
-			$this->setMessage($configuration->getError(), 'notice');
+			$app->enqueueMessage($configuration->getError(), 'notice');
 			$r->view = 'site';
 		} else {
 			$r->view = 'complete';
