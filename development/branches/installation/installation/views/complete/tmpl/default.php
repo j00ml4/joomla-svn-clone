@@ -12,18 +12,16 @@ defined('_JEXEC') or die;
 <div id="right">
 	<div id="rightpad">
 		<div id="step">
-			<div class="m">
-				<div class="far-right">
+			<div class="far-right">
 <?php if ($this->document->direction == 'ltr') : ?>
-					<div class="button1-left"><div class="site"><a href="<?php echo JURI::root(); ?>" title="<?php echo JText::_('JSITE'); ?>"><?php echo JText::_('JSITE'); ?></a></div></div>
-					<div class="button1-left"><div class="admin"><a href="<?php echo JURI::root(); ?>administrator/" title="<?php echo JText::_('JADMINISTRATOR'); ?>"><?php echo JText::_('JADMINISTRATOR'); ?></a></div></div>
+				<div class="button1-left"><div class="site"><a href="<?php echo JURI::root(); ?>" title="<?php echo JText::_('JSITE'); ?>"><?php echo JText::_('JSITE'); ?></a></div></div>
+				<div class="button1-left"><div class="admin"><a href="<?php echo JURI::root(); ?>administrator/" title="<?php echo JText::_('JADMINISTRATOR'); ?>"><?php echo JText::_('JADMINISTRATOR'); ?></a></div></div>
 <?php elseif ($this->document->direction == 'rtl') : ?>
-					<div class="button1-left"><div class="admin"><a href="<?php echo JURI::root(); ?>administrator/" title="<?php echo JText::_('JADMINISTRATOR'); ?>"><?php echo JText::_('JADMINISTRATOR'); ?></a></div></div>
-					<div class="button1-left"><div class="site"><a href="<?php echo JURI::root(); ?>" title="<?php echo JText::_('JSITE'); ?>"><?php echo JText::_('JSITE'); ?></a></div></div>
+				<div class="button1-left"><div class="admin"><a href="<?php echo JURI::root(); ?>administrator/" title="<?php echo JText::_('JADMINISTRATOR'); ?>"><?php echo JText::_('JADMINISTRATOR'); ?></a></div></div>
+				<div class="button1-left"><div class="site"><a href="<?php echo JURI::root(); ?>" title="<?php echo JText::_('JSITE'); ?>"><?php echo JText::_('JSITE'); ?></a></div></div>
 <?php endif; ?>
-				</div>
-				<span class="steptitle"><?php echo JText::_('INSTL_COMPLETE'); ?></span>
 			</div>
+			<span class="steptitle"><?php echo JText::_('INSTL_COMPLETE'); ?></span>
 		</div>
 		<div id="installer">
 			<div class="m">
@@ -102,9 +100,7 @@ defined('_JEXEC') or die;
 								<?php endif; ?>
 							</table>
 						</fieldset>
-						<div class="clr"></div>
 					</div>
-					<div class="clr"></div>
 				</div>
 				<div class="clr"></div>
 			</div>
@@ -113,5 +109,4 @@ defined('_JEXEC') or die;
 	<input type="hidden" name="task" value="" />
 	<?php echo JHtml::_('form.token'); ?>
 </div>
-<div class="clr"></div>
 </form>
