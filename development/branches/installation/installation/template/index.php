@@ -67,8 +67,10 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 						</div>
 					</noscript>
 				</div>
-				<div id="main-content">
-					<jdoc:include type="installation" />
+				<div id="right">
+					<div id="rightpad">
+						<jdoc:include type="installation" />
+					</div>
 				</div>
 				<div class="clr"></div>
 			</div>

@@ -19,49 +19,50 @@ defined('_JEXEC') or die;
 	});
 </script>
 <?php endif; ?>
-<div id="right">
-	<div id="rightpad">
-		<div id="step">
-			<div class="far-right">
-<?php if ($this->document->direction == 'ltr') : ?>
-				<div class="button1-right"><div class="prev"><a href="index.php?view=filesystem" onclick="return Install.goToPage('filesystem');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
-				<div class="button1-left"><div class="next"><a href="#" onclick="Install.submitform('setup.saveconfig');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
-<?php elseif ($this->document->direction == 'rtl') : ?>
-				<div class="button1-right"><div class="prev"><a href="#" onclick="Install.submitform('setup.saveconfig');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
-				<div class="button1-left"><div class="next"><a href="index.php?view=filesystem" onclick="return Install.goToPage('filesystem');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
-<?php endif; ?>
-			</div>
-			<span class="steptitle"><?php echo JText::_('INSTL_SITE'); ?></span>
-		</div>
-		<div id="installer">
-			<div class="m">
-				<form action="index.php" method="post" id="adminForm" class="form-validate">
-				<h2><?php echo JText::_('INSTL_SITE_NAME_TITLE'); ?></h2>
-				<div class="install-text">
-					<?php echo JText::_('INSTL_SITE_NAME_DESC'); ?>
-				</div>
-				<div class="install-body">
-					<div class="m">
-						<h3 class="title-smenu" title="<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>">
-							<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>
-						</h3>
-						<div class="section-smenu">
-							<table class="content2">
-								<tr>
-									<td class="item">
-										<?php echo $this->form->getLabel('site_name'); ?>
-									</td>
-									<td>
-										<?php echo $this->form->getInput('site_name'); ?>
-									</td>
-								</tr></table>
-								</div>
 
-						<h3 class="title-smenu moofx-toggler" title="<?php echo JText::_('INSTL_SITE_META_ADVANCED_SETTINGS'); ?>">
-							<a href="#"><?php echo JText::_('INSTL_SITE_META_ADVANCED_SETTINGS'); ?></a>
-						</h3>
-						<div class="section-smenu moofx-slider">
-								<table class="content2">
+<div id="step">
+	<div class="far-right">
+<?php if ($this->document->direction == 'ltr') : ?>
+		<div class="button1-right"><div class="prev"><a href="index.php?view=filesystem" onclick="return Install.goToPage('filesystem');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
+		<div class="button1-left"><div class="next"><a href="#" onclick="Install.submitform('setup.saveconfig');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+<?php elseif ($this->document->direction == 'rtl') : ?>
+		<div class="button1-right"><div class="prev"><a href="#" onclick="Install.submitform('setup.saveconfig');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+		<div class="button1-left"><div class="next"><a href="index.php?view=filesystem" onclick="return Install.goToPage('filesystem');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
+<?php endif; ?>
+	</div>
+	<span class="steptitle"><?php echo JText::_('INSTL_SITE'); ?></span>
+</div>
+		
+<div id="installer">
+	<div class="m">
+		<form action="index.php" method="post" id="adminForm" class="form-validate">
+			<h2><?php echo JText::_('INSTL_SITE_NAME_TITLE'); ?></h2>
+			<div class="install-text">
+				<?php echo JText::_('INSTL_SITE_NAME_DESC'); ?>
+			</div>
+			<div class="install-body">
+				<div class="m">
+					<h3 class="title-smenu" title="<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>">
+						<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>
+					</h3>
+					<div class="section-smenu">
+						<table class="content2">
+							<tr>
+								<td class="item">
+									<?php echo $this->form->getLabel('site_name'); ?>
+								</td>
+								<td>
+									<?php echo $this->form->getInput('site_name'); ?>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<h3 class="title-smenu moofx-toggler" title="<?php echo JText::_('INSTL_SITE_META_ADVANCED_SETTINGS'); ?>">
+						<a href="#"><?php echo JText::_('INSTL_SITE_META_ADVANCED_SETTINGS'); ?></a>
+					</h3>
+					<div class="section-smenu moofx-slider">
+							<table class="content2">
 								<tr>
 									<td title="<?php echo JText::_('INSTL_SITE_METADESC_TITLE_LABEL'); ?>">
 										<?php echo $this->form->getLabel('site_metadesc'); ?>
@@ -79,7 +80,7 @@ defined('_JEXEC') or die;
 									</td>
 								</tr>
 							</table>
-							</div>
+						</div>
 					</div>
 				</div>
 
@@ -146,41 +147,39 @@ defined('_JEXEC') or die;
 					<p><?php echo JText::_('INSTL_SITE_LOAD_SAMPLE_DESC8'); ?></p>
 				</div>
 				<div class="install-body">
-				<div class="m">
-					<fieldset>
-						<table class="content2 sample-data">
+					<div class="m">
+						<fieldset>
+							<table class="content2 sample-data">
 
-							<tr>
-								<td><?php echo $this->form->getLabel('sample_file'); ?></td>
-								<td><?php echo $this->form->getInput('sample_file'); ?></td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<span id="theDefault"><input class="button" type="button" name="instDefault" value="<?php echo JText::_('INSTL_SITE_INSTALL_SAMPLE_LABEL'); ?>" onclick="Install.sampleData(this, <?php echo $this->form->getField('sample_file')->id;?>);"/></span>
-								</td>
-							</tr>
-							<tr>
-								<td>&#160;</td>
-								<td>
-									<em><?php echo JText::_('INSTL_SITE_INSTALL_SAMPLE_DESC'); ?></em>
-								</td>
-							</tr>
-						</table>
-					</fieldset>
-					<div class="message inlineError" id="theDefaultError" style="display: none">
-						<dl>
-							<dt class="error"><?php echo JText::_('JERROR'); ?></dt>
-							<dd id="theDefaultErrorMessage"></dd>
-						</dl>
+								<tr>
+									<td><?php echo $this->form->getLabel('sample_file'); ?></td>
+									<td><?php echo $this->form->getInput('sample_file'); ?></td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<span id="theDefault"><input class="button" type="button" name="instDefault" value="<?php echo JText::_('INSTL_SITE_INSTALL_SAMPLE_LABEL'); ?>" onclick="Install.sampleData(this, <?php echo $this->form->getField('sample_file')->id;?>);"/></span>
+									</td>
+								</tr>
+								<tr>
+									<td>&#160;</td>
+									<td>
+										<em><?php echo JText::_('INSTL_SITE_INSTALL_SAMPLE_DESC'); ?></em>
+									</td>
+								</tr>
+							</table>
+						</fieldset>
+						<div class="message inlineError" id="theDefaultError" style="display: none">
+							<dl>
+								<dt class="error"><?php echo JText::_('JERROR'); ?></dt>
+								<dd id="theDefaultErrorMessage"></dd>
+							</dl>
+						</div>
 					</div>
+					<?php echo $this->form->getInput('type'); ?>
+					<?php echo JHtml::_('form.token'); ?>
 				</div>
-				<?php echo $this->form->getInput('type'); ?>
-				<?php echo JHtml::_('form.token'); ?>
-			</div>
-		</form>
+			</form>
 
 		<div class="clr"></div>
-		</div>
-		</div>
 	</div>
 </div>

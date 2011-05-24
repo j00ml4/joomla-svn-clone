@@ -48,7 +48,7 @@ Install.goToPage = function(page) {
 		method: 'get',
 		url: url,
 		onSuccess: function (r) {
-			document.id('main-content').empty().adopt(r);
+			document.id('rightpad').empty().adopt(r);
 
 			//Re-attach the validator
 			var forms = $$('form.form-validate');
