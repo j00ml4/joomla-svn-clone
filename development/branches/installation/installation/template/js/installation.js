@@ -11,10 +11,11 @@ if (typeof(Install) === 'undefined') {
 	var Install = {};
 };
 
-Install.submitform = function(task) {
+Install.submitform = function() {
 	var url = baseUrl+'?tmpl=body';
 	var content = document.id('main-content');
 	var form = document.id('adminForm');
+
 	var req = new Request.JSON({
 		method: 'post',
 		url: url,
@@ -37,7 +38,7 @@ Install.submitform = function(task) {
 			}
 		}
 	});
-	req.post(form.toQueryString()+'&task='+task+'&format=json');
+	req.post(form.toQueryString()+'&task='+form.task.value+'&format=json');
 
 	return false;
 };

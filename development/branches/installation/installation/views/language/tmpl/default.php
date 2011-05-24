@@ -11,9 +11,9 @@ defined('_JEXEC') or die;
 <div id="step">
 	<div class="far-right">
 	<?php if ($this->document->direction == 'ltr') : ?>
-		<div class="button1-left"><div class="next"><a href="#" onclick="Install.submitform('setup.setlanguage');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+		<div class="button1-left"><div class="next"><a href="#" onclick="Install.submitform();" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 	<?php elseif ($this->document->direction == 'rtl') : ?>
-		<div class="button1-right"><div class="prev"><a href="#" onclick="Install.submitform('setup.setlanguage');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+		<div class="button1-right"><div class="prev"><a href="#" onclick="Install.submitform();" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 	<?php endif; ?>
 	</div>
 	<span class="steptitle"><?php echo JText::_('INSTL_LANGUAGE_TITLE'); ?></span>
@@ -36,6 +36,6 @@ defined('_JEXEC') or die;
 			<div class="clr"></div>
 		</div>
 	</div>
-	<input type="hidden" name="task" value="" />
+	<input type="hidden" name="task" value="setup.setlanguage" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
