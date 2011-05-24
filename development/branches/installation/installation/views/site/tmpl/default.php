@@ -22,11 +22,6 @@ defined('_JEXEC') or die;
 <div id="right">
 	<div id="rightpad">
 		<div id="step">
-			<div class="t">
-				<div class="t">
-					<div class="t"></div>
-				</div>
-			</div>
 			<div class="m">
 				<div class="far-right">
 <?php if ($this->document->direction == 'ltr') : ?>
@@ -37,20 +32,10 @@ defined('_JEXEC') or die;
 					<div class="button1-left"><div class="next"><a href="index.php?view=filesystem" onclick="return Install.goToPage('filesystem');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
 <?php endif; ?>
 				</div>
-				<span class="step"><?php echo JText::_('INSTL_SITE'); ?></span>
-			</div>
-			<div class="b">
-				<div class="b">
-					<div class="b"></div>
-				</div>
+				<span class="steptitle"><?php echo JText::_('INSTL_SITE'); ?></span>
 			</div>
 		</div>
 		<div id="installer">
-			<div class="t">
-				<div class="t">
-					<div class="t"></div>
-				</div>
-			</div>
 			<div class="m">
 				<form action="index.php" method="post" id="adminForm" class="form-validate">
 				<h2><?php echo JText::_('INSTL_SITE_NAME_TITLE'); ?></h2>
@@ -58,11 +43,6 @@ defined('_JEXEC') or die;
 					<?php echo JText::_('INSTL_SITE_NAME_DESC'); ?>
 				</div>
 				<div class="install-body">
-					<div class="t">
-						<div class="t">
-							<div class="t"></div>
-						</div>
-					</div>
 					<div class="m">
 						<h3 class="title-smenu" title="<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>">
 							<?php echo JText::_('INSTL_BASIC_SETTINGS'); ?>
@@ -103,11 +83,6 @@ defined('_JEXEC') or die;
 							</table>
 							</div>
 					</div>
-					<div class="b">
-						<div class="b">
-							<div class="b"></div>
-						</div>
-					</div>
 					<div class="clr"></div>
 				</div>
 
@@ -118,11 +93,6 @@ defined('_JEXEC') or die;
 					<?php echo JText::_('INSTL_SITE_CONF_DESC'); ?>
 				</div>
 				<div class="install-body">
-					<div class="t">
-						<div class="t">
-							<div class="t"></div>
-						</div>
-					</div>
 					<div class="m">
 						<fieldset>
 							<table class="content2">
@@ -161,11 +131,6 @@ defined('_JEXEC') or die;
 							</table>
 						</fieldset>
 					</div>
-					<div class="b">
-						<div class="b">
-							<div class="b"></div>
-						</div>
-					</div>
 					<div class="clr"></div>
 					<input type="hidden" name="task" value="" />
 					<?php echo JHtml::_('form.token'); ?>
@@ -185,11 +150,6 @@ defined('_JEXEC') or die;
 					<p><?php echo JText::_('INSTL_SITE_LOAD_SAMPLE_DESC8'); ?></p>
 				</div>
 				<div class="install-body">
-				<div class="t">
-					<div class="t">
-						<div class="t"></div>
-					</div>
-				</div>
 				<div class="m">
 					<fieldset>
 						<table class="content2 sample-data">
@@ -218,22 +178,12 @@ defined('_JEXEC') or die;
 						</dl>
 					</div>
 				</div>
-				<div class="b">
-					<div class="b">
-						<div class="b"></div>
-					</div>
-				</div>
 				<?php echo $this->form->getInput('type'); ?>
 				<?php echo JHtml::_('form.token'); ?>
 			</div>
 		</form>
 
 		<div class="clr"></div>
-		</div>
-		<div class="b">
-			<div class="b">
-				<div class="b"></div>
-			</div>
 		</div>
 		</div>
 	</div>

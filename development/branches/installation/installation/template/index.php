@@ -10,8 +10,18 @@ defined('_JEXEC') or die;
 
 jimport('joomla.html.html');
 
+$doc = JFactory::getDocument();
+
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
+
+// Add Stylesheets
+$doc->addStyleSheet('../media/system/css/system.css');
+$doc->addStyleSheet('template/css/template.css');
+
+if ($this->direction == 'rtl') {
+	$doc->addStyleSheet('template/css/template_rtl.css');
+}
 
 // Load the JavaScript behaviors
 JHtml::_('behavior.framework', true);
@@ -24,12 +34,6 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>" >
 	<head>
 		<jdoc:include type="head" />
-
-		<link href="../media/system/css/system.css" rel="stylesheet" type="text/css" />
-		<link href="template/css/template.css" rel="stylesheet" type="text/css" />
-		<?php if ($this->direction == 'rtl') : ?>
-			<link href="template/css/template_rtl.css" rel="stylesheet" type="text/css" />
-		<?php endif; ?>
 
 		<!--[if IE 7]>
 			<link href="template/css/ie7.css" rel="stylesheet" type="text/css" />
@@ -51,19 +55,9 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 		<div id="content-box">
 			<div id="content-pad">
 				<div id="stepbar">
-					<div class="t">
-						<div class="t">
-							<div class="t"></div>
-						</div>
-					</div>
 					<div class="m">
 						<?php echo JHtml::_('installation.stepbar'); ?>
 						<div class="box"></div>
-					</div>
-					<div class="b">
-						<div class="b">
-							<div class="b"></div>
-						</div>
 					</div>
 				</div>
 				<div id="warning">
@@ -76,11 +70,6 @@ JHtml::_('script', 'installation/template/js/installation.js', true, false, fals
 				<div id="main-content">
 					<jdoc:include type="installation" />
 				</div>
-			</div>
-		</div>
-		<div id="footer1">
-			<div id="footer2">
-				<div id="footer3"></div>
 			</div>
 		</div>
 		<div id="copyright">

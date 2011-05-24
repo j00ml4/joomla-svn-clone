@@ -12,11 +12,6 @@ defined('_JEXEC') or die;
 <div id="right">
 	<div id="rightpad">
 		<div id="step">
-			<div class="t">
-				<div class="t">
-					<div class="t"></div>
-				</div>
-			</div>
 			<div class="m">
 				<div class="far-right">
 <?php if ($this->document->direction == 'ltr') : ?>
@@ -33,31 +28,16 @@ defined('_JEXEC') or die;
 					<div class="button1-left"><div class="refresh"><a href="index.php?view=preinstall" onclick="return Install.goToPage('preinstall');" title="<?php echo JText::_('JCheck_Again'); ?>"><?php echo JText::_('JCheck_Again'); ?></a></div></div>
 <?php endif; ?>
 				</div>
-				<span class="step"><?php echo JText::_('INSTL_PRECHECK_TITLE'); ?></span>
-			</div>
-			<div class="b">
-				<div class="b">
-					<div class="b"></div>
-				</div>
+				<span class="steptitle"><?php echo JText::_('INSTL_PRECHECK_TITLE'); ?></span>
 			</div>
 		</div>
 		<div id="installer">
-			<div class="t">
-				<div class="t">
-					<div class="t"></div>
-				</div>
-			</div>
 			<div class="m">
 				<h2><?php echo JText::sprintf('INSTL_PRECHECK_FOR_VERSION', $this->version->getLongVersion()); ?></h2>
 				<div class="install-text">
 					<?php echo JText::_('INSTL_PRECHECK_DESC'); ?>
 				</div>
 				<div class="install-body">
-					<div class="t">
-						<div class="t">
-							<div class="t"></div>
-						</div>
-					</div>
 					<div class="m">
 						<fieldset>
 							<table class="content">
@@ -81,12 +61,6 @@ defined('_JEXEC') or die;
 							</table>
 						</fieldset>
 					</div>
-					<div class="b">
-						<div class="b">
-							<div class="b"></div>
-						</div>
-					</div>
-
 					<div class="clr"></div>
 				</div>
 
@@ -140,19 +114,9 @@ defined('_JEXEC') or die;
 							</table>
 						</fieldset>
 					</div>
-					<div class="b">
-						<div class="b">
-							<div class="b"></div>
-						</div>
-					</div>
 					<div class="clr"></div>
 				</div>
 				<div class="clr"></div>
-			</div>
-			<div class="b">
-				<div class="b">
-					<div class="b"></div>
-				</div>
 			</div>
 		</div>
 	</div>

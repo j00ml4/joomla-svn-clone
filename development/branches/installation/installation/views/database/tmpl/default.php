@@ -12,11 +12,6 @@ defined('_JEXEC') or die;
 <div id="right">
 	<div id="rightpad">
 		<div id="step">
-			<div class="t">
-				<div class="t">
-					<div class="t"></div>
-				</div>
-			</div>
 			<div class="m">
 				<div class="far-right">
 <?php if ($this->document->direction == 'ltr') : ?>
@@ -27,20 +22,10 @@ defined('_JEXEC') or die;
 					<div class="button1-left"><div class="next"><a href="index.php?view=license" onclick="return Install.goToPage('license');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
 <?php endif; ?>
 				</div>
-				<span class="step"><?php echo JText::_('INSTL_DATABASE'); ?></span>
-			</div>
-			<div class="b">
-				<div class="b">
-					<div class="b"></div>
-				</div>
+				<span class="steptitle"><?php echo JText::_('INSTL_DATABASE'); ?></span>
 			</div>
 		</div>
 		<div id="installer">
-			<div class="t">
-				<div class="t">
-					<div class="t"></div>
-				</div>
-			</div>
 			<div class="m">
 				<h2><?php echo JText::_('INSTL_DATABASE_TITLE'); ?></h2>
 				<div class="install-text">
@@ -151,19 +136,9 @@ defined('_JEXEC') or die;
 						</div>
 						<div class="clr"></div>
 					</div>
-					<div class="b">
-						<div class="b">
-							<div class="b"></div>
-						</div>
-					</div>
 					<div class="clr"></div>
 				</div>
 				<div class="clr"></div>
-			</div>
-			<div class="b">
-				<div class="b">
-					<div class="b"></div>
-				</div>
 			</div>
 		</div>
 	</div>
