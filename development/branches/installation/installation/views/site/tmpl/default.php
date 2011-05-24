@@ -24,9 +24,9 @@ defined('_JEXEC') or die;
 	<div class="far-right">
 <?php if ($this->document->direction == 'ltr') : ?>
 		<div class="button1-right"><div class="prev"><a href="index.php?view=filesystem" onclick="return Install.goToPage('filesystem');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
-		<div class="button1-left"><div class="next"><a href="#" onclick="Install.submitform('setup.saveconfig');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+		<div class="button1-left"><div class="next"><a href="#" onclick="Install.submitform();" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 <?php elseif ($this->document->direction == 'rtl') : ?>
-		<div class="button1-right"><div class="prev"><a href="#" onclick="Install.submitform('setup.saveconfig');" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
+		<div class="button1-right"><div class="prev"><a href="#" onclick="Install.submitform();" rel="next" title="<?php echo JText::_('JNext'); ?>"><?php echo JText::_('JNext'); ?></a></div></div>
 		<div class="button1-left"><div class="next"><a href="index.php?view=filesystem" onclick="return Install.goToPage('filesystem');" rel="prev" title="<?php echo JText::_('JPrevious'); ?>"><?php echo JText::_('JPrevious'); ?></a></div></div>
 <?php endif; ?>
 	</div>
@@ -129,7 +129,7 @@ defined('_JEXEC') or die;
 							</table>
 						</fieldset>
 					</div>
-					<input type="hidden" name="task" value="" />
+					<input type="hidden" name="task" value="setup.saveconfig" />
 					<?php echo JHtml::_('form.token'); ?>
 					<?php echo $this->form->getInput('sample_installed'); ?>
 				</div>
@@ -150,7 +150,6 @@ defined('_JEXEC') or die;
 					<div class="m">
 						<fieldset>
 							<table class="content2 sample-data">
-
 								<tr>
 									<td><?php echo $this->form->getLabel('sample_file'); ?></td>
 									<td><?php echo $this->form->getInput('sample_file'); ?></td>
