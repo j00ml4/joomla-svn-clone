@@ -41,11 +41,17 @@ class JDocumentRendererRSS extends JDocumentRenderer
 		$url = $uri->toString(array('scheme', 'user', 'pass', 'host', 'port'));
 		$syndicationURL = JRoute::_('&format=feed&type=rss');
 
-		$feed_title = htmlspecialchars(
-			$app->getCfg('sitename_pagetitles',0)?
-			JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $data->title):
-			$data->title
-		, ENT_COMPAT, 'UTF-8');
+		if ($app->getCfg('sitename_pagetitles', 0) == 1) {
+			$title = JText::sprintf('JPAGETITLE', $app->getCfg('sitename'), $data->title);
+		}
+		elseif ($app->getCfg('sitename_pagetitles', 0) == 2) {
+			$title = JText::sprintf('JPAGETITLE', $data->title, $app->getCfg('sitename'));
+		}
+		else {
+			$title = $data->title;
+		}
+		
+		$feed_title = htmlspecialchars($title, ENT_COMPAT, 'UTF-8');
 
 		$feed = "<rss version=\"2.0\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n";
 		$feed.= "	<channel>\n";
@@ -187,7 +193,7 @@ class JDocumentRendererRSS extends JDocumentRenderer
 	public function _relToAbs($text)
 	{
 		$base = JURI::base();
-		$text = preg_replace("/(href|src)=\"(?!http|ftp|https|mailto)([^\"]*)\"/", "$1=\"$base\$2\"", $text);
+		$text = preg_replace("/(href|src)=\"(?!http|ftp|https|mailto|data)([^\"]*)\"/", "$1=\"$base\$2\"", $text);
 
 		return $text;
 	}
