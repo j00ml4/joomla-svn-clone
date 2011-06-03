@@ -463,13 +463,15 @@
 
 		<field
 			name="sitename_pagetitles"
-			type="radio"
+			type="list"
 			default="0"
 			label="COM_CONFIG_FIELD_SITENAME_PAGETITLES_LABEL"
 			description="COM_CONFIG_FIELD_SITENAME_PAGETITLES_DESC"
 			filter="integer">
 			<option
-				value="1">JYES</option>
+				value="2">COM_CONFIG_FIELD_VALUE_AFTER</option>
+			<option
+				value="1">COM_CONFIG_FIELD_VALUE_BEFORE</option>
 			<option
 				value="0">JNO</option>
 		</field>
@@ -744,6 +746,10 @@
 				name="core.login.admin"
 				title="JACTION_LOGIN_ADMIN"
 				description="COM_CONFIG_ACTION_LOGIN_ADMIN_DESC" />
+			<action
+				name="core.login.offline"
+				title="JACTION_LOGIN_OFFLINE"
+				description="COM_CONFIG_ACTION_LOGIN_OFFLINE_DESC" />
 			<action
 				name="core.admin"
 				title="JACTION_ADMIN_GLOBAL"
