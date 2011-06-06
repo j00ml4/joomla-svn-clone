@@ -27,6 +27,82 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+06-Jun-2011 Jean-Marie Simonet
+ $ [#26055] Category spelling error in help text. Thanks Bill.
+ # [#26052] Improve com_categories batchCopy. Thanks Michael.
+ # [#26025] Article - save as copy. Thanks Michael.
+ # [#25873] *Featured Articles Menu Option does not show option to select category as intended
+
+05-Jun-2011 Jean-Marie Simonet
+ # [#26051] Copy tasks allow multiple home menu items to be set. Thanks Michael.
+
+-------------------- 1.7.0 Alpha Release [04-Jun-2011] ------------------
+
+04-Jun-2011 Mark Dexter
+ # Revert [#25873] *Featured Articles Menu Option change since this causes errors on new install
+
+04-Jun-2011 Jean-Marie Simonet
+ # [#25873] *Featured Articles Menu Option does not show option to select category as intended
+ - [#26013] The Flag Image for the Language Tamil ( ta) is Incorrect
+ 
+04-Jun-2011 Mark Dexter
+ # [#26028] Fix backward incompatible changes to JVersion
+ # [#25634] Extension Manager: wrong installer method called during update
+ # [#25635] Extension Manager: possibility to set redirect during update
+ # [#25923] Possible error in JModuleHelper
+ # [#24338] Autoupdate fails for components after applying a patch from issue #24305
+ # [#25085] Media Manager changes directory after file upload or directory creation
+ + Feature [#22590] Make copy/move consistent across components
+ + Feature [#25313] Update TinyMCE to version 3.4.2
+ # [#25852] Cache and mod_menu problem
+ # [#26039] Latest News Module redirects to incorrect login URL
+ 
+04-Jun-2011 Andrew Eddie
+ + Feature [#25866] Add support to log deprecated API.
+ + Feature [#25987] JToolBarHelper functions for Save and Create New and Save as Copy (Joseph LeBlanc).
+ + Feature [#25732] Add JFormRuleOptions rule to validate type="list" parameters (Mark Dexter).
+ + Feature [#25461] Mod_custom with backgroundimages (Angie Radtke).
+ + Feature [#25119] Allow preselection of categories in com_content (Peter Kneisel, Ole Bang Ottosen, Jean-Marie Simonet).
+ 
+03-Jun-2011 Jean-Marie Simonet
+ + [#26035] *Adding the possibility for language packs to include a css file for back-end font change
+ # [#25918] *Error when Login Module try to get the return URL of the current page when SEF turn on and the page is redirect forever
+
+01-Jun-2011 Jean-Marie Simonet
+ #$ [#26023] *Preventing setting more than 1 default home menu item per menu
+
+31-May-2011 Mark Dexter
+ # [#25058] While the site is offline managers and administrators can't login.
+ # [#25905] Purge Expired Cache remove administrator/cache/index.html file
+ # [#25971] Administrator language file en-GB.com_languages.ini. unclosed 'em' tag at Definition COM_LANGUAGES_FIELD_LANG_CODE_DESC text
+
+31-May-2011 Jean-Marie Simonet
+ # [#26012] *Archives Module & Related Articles Module do not use localised calendar date
+ 
+30-May-2011 Mark Dexter
+ # [#26004] *Back-end language change broken by framework patch in tracker #25925
+ # [#25956] Improve accessibility in admin modules
+ # [#25904] loadposition: modules with double slashes and slash dollar return without leading slash
+ # [#25675] module messages not displayed if they are defined before the "jdoc:include message" tag in the template
+ # [#25921] Optimize the bluestork template
+ # [#25246] Move the example plugins to the test folder
+ # [#25687] Embedded image converted to data in RSS feed : data URI get's corrupted
+ # [#25477] Missing $key argument in call to ::allowSave() in JControllerForm::save()
+ # [#25988] Fix missing author contact itemid in com_content
+ # [#25730] Incorrect call of onUserBeforeSave while blocking/activating user in backend, plugins aren't loaded for activating user in backend
+ # [#25720] JHTML::tooltip quote problem
+
+26-May-2011 Mark Dexter
+ # [#25733] Direct access as no defined('_JEXEC') or die; in com_mailto/helpers/mailto.php
+ # [#25919] com_contact: onSubmitContact $post variable
+ # [#25915] inconsistent beahviour com_content / com_wrapper
+ # [#25790] Some queries not correctly dealing with trash
+ # [#25925] Platform sync: new getUserState default argument; JAccess:getActions fix
+ # [#25462] Unable to run scriptfile on plg_editors-xtd type plugin
+ # [#25941] Menu Item Help URL Not Translated
+ # Revert 25790 (breaks Featured Articles)
+ # [#25452] No JavaScript form validation on users reset and remind page
+
 24-May-2011 Mark Dexter
  # [#25908] Code Style improvements for the installation
 
