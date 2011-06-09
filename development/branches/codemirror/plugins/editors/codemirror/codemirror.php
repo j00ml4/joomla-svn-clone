@@ -152,8 +152,8 @@ class plgEditorCodemirror extends JPlugin
 
 		$theme = 'default';
 
-		// Default syntax
-		$parserName = 'xml';
+		// Default CSS
+		$parserCss = null;
 
 		// Look if we need special syntax coloring.
 		$syntax = JFactory::getApplication()->getUserState('editor.source.syntax');
@@ -162,29 +162,33 @@ class plgEditorCodemirror extends JPlugin
 			switch($syntax)
 			{
 				case 'css':
-					$parserName = 'css';
+					$parserFile = array('css');
 					break;
 
 				case 'js':
-					// @todo Do we edit javascript ?
-					$parserName = 'js';
+					$parserFile = array('js');
 					break;
 
 				case 'php':
-					$parserName = 'php';
+					$parserFile = array('xml', 'js', 'css', 'clike', 'php');
+					$parserCss	= array('clike');
 					break;
 
-				/* case 'html':
-					$parserName = 'htmlmixed';
-					break; */
-				// TODO: Depends on CSS, XML and JS need to handle that
+				case 'htmlmixed':
+					$parserFile = array('xml', 'js', 'css', 'htmlmixed');
+					break;
 
 				case 'xml':
-					$parserName = 'xml';
+					$parserFile = array('xml');
+					break;
+					
+				case 'clike':
+					$parserFile = array('clike');
+					$parserCss	= array('clike');
 					break;
 
 				default:
-					;
+					$parserFile = 'xml';
 					break;
 			} //switch
 		}
@@ -192,13 +196,9 @@ class plgEditorCodemirror extends JPlugin
 		$options	= new stdClass;
 
 		$options->path			= JURI::root(true).'/'.$this->_basePath.'js/';
-		$options->mode			= $parserName;
-		//$options->height		= $height;
-		//$options->width			= $width;
+		$options->mode			= $syntax;
 		$options->theme			= $theme;
 		$options->continuousScanning = 500;
-		
-		
 
 		if ($this->params->get('linenumbers', 0)) {
 			$options->lineNumbers	= true;
@@ -209,7 +209,18 @@ class plgEditorCodemirror extends JPlugin
 			$options->tabMode = 'shift';
 		}
 
-		JHtml::_('script', $this->_basePath . 'js/modes/'.$parserName.'.js', false, false, false, false);
+		foreach ($parserFile as $name)
+		{
+			JHtml::_('script', $this->_basePath . 'js/modes/'.$name.'.js', false, false, false, false);
+		}
+
+		if (!is_null($parserCss)) {
+			foreach ($parserCss as $name)
+			{
+				JHtml::_('stylesheet', $this->_basePath . 'css/modes/'.$name.'.css');
+			}
+		}
+
 		JHtml::_('stylesheet', $this->_basePath . 'css/theme/'.$theme.'.css');
 
 		$html = array();
