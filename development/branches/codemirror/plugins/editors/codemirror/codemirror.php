@@ -132,9 +132,13 @@ class plgEditorCodemirror extends JPlugin
 		if (is_numeric($height)) {
 			$height .= 'px';
 		}
-		
+
 		$document->addStyleDeclaration('.CodeMirror {
 			width: '.$width.';
+			font-size: 13px;
+		}
+		
+		.CodeMirror-scroll {
 			height: '.$height.';
 		}');
 
@@ -167,9 +171,10 @@ class plgEditorCodemirror extends JPlugin
 					$parserName = 'php';
 					break;
 
-				case 'html':
+				/* case 'html':
 					$parserName = 'htmlmixed';
-					break;
+					break; */
+				// TODO: Depends on CSS, XML and JS need to handle that
 
 				case 'xml':
 					$parserName = 'xml';
