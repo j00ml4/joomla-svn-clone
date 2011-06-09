@@ -133,13 +133,16 @@ class plgEditorCodemirror extends JPlugin
 			$height .= 'px';
 		}
 
+		
 		$document->addStyleDeclaration('.CodeMirror {
-			width: '.$width.';
 			font-size: 13px;
 		}
 		
 		.CodeMirror-scroll {
+			overflow-y: auto;
+  overflow-x: scroll;
 			height: '.$height.';
+			width: '.$width.';
 		}');
 
 		// Must pass the field id to the buttons in this editor.
