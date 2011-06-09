@@ -33,8 +33,8 @@ class plgEditorCodemirror extends JPlugin
 	{
 		JHtml::_('core');
 		$uncompressed	= JFactory::getApplication()->getCfg('debug') ? '-uncompressed' : '';
-		JHtml::_('script',$this->_basePath . 'js/codemirror'.$uncompressed.'.js', false, false, false, false);
-		JHtml::_('stylesheet',$this->_basePath . 'css/codemirror.css');
+		JHtml::_('script', $this->_basePath . 'js/codemirror'.$uncompressed.'.js', false, false, false, false);
+		JHtml::_('stylesheet', $this->_basePath . 'css/codemirror.css');
 
 		return '';
 	}
@@ -48,7 +48,7 @@ class plgEditorCodemirror extends JPlugin
 	 */
 	public function onSave($id)
 	{
-		return "document.getElementById('$id').value = Joomla.editors.instances['$id'].getCode();\n";
+		return "Joomla.editors.instances['$id'].save();\n";
 	}
 
 	/**
@@ -60,7 +60,7 @@ class plgEditorCodemirror extends JPlugin
 	 */
 	public function onGetContent($id)
 	{
-		return "Joomla.editors.instances['$id'].getCode();\n";
+		return "Joomla.editors.instances['$id'].getValue();\n";
 	}
 
 	/**
@@ -118,6 +118,8 @@ class plgEditorCodemirror extends JPlugin
 	 */
 	public function onDisplay($name, $content, $width, $height, $col, $row, $buttons = true, $id = null, $asset = null, $author = null, $params = array())
 	{
+		$document = JFactory::getDocument();
+
 		if (empty($id)) {
 			$id = $name;
 		}
@@ -130,15 +132,21 @@ class plgEditorCodemirror extends JPlugin
 		if (is_numeric($height)) {
 			$height .= 'px';
 		}
+		
+		$document->addStyleDeclaration('.CodeMirror {
+			width: '.$width.';
+			height: '.$height.';
+		}');
 
 		// Must pass the field id to the buttons in this editor.
 		$buttons = $this->_displayButtons($id, $buttons, $asset, $author);
 
 		$compressed	= JFactory::getApplication()->getCfg('debug') ? '-uncompressed' : '';
 
+		$theme = 'default';
+
 		// Default syntax
-		$parserFile = 'parsexml.js';
-		$styleSheet = 'xmlcolors.css';
+		$parserName = 'xml';
 
 		// Look if we need special syntax coloring.
 		$syntax = JFactory::getApplication()->getUserState('editor.source.syntax');
@@ -147,18 +155,24 @@ class plgEditorCodemirror extends JPlugin
 			switch($syntax)
 			{
 				case 'css':
-					$parserFile = 'parsecss.js';
-					$styleSheet = 'csscolors.css';
+					$parserName = 'css';
 					break;
 
 				case 'js':
 					// @todo Do we edit javascript ?
-					$parserFile = array('tokenizejavascript.js', 'parsejavascript.js');
-					$styleSheet = 'jscolors.css';
+					$parserName = 'js';
 					break;
 
 				case 'php':
-					// @todo CodeMirror comes with a parsephp.js file which has a BSD license - can we include this ?
+					$parserName = 'php';
+					break;
+
+				case 'html':
+					$parserName = 'htmlmixed';
+					break;
+
+				case 'xml':
+					$parserName = 'xml';
 					break;
 
 				default:
@@ -169,13 +183,14 @@ class plgEditorCodemirror extends JPlugin
 
 		$options	= new stdClass;
 
-		$options->basefiles		= array('basefiles'.$compressed.'.js');
 		$options->path			= JURI::root(true).'/'.$this->_basePath.'js/';
-		$options->parserfile	= $parserFile;
-		$options->stylesheet	= JURI::root(true).'/'.$this->_basePath.'css/'.$styleSheet;
-		$options->height		= $height;
-		$options->width			= $width;
+		$options->mode			= $parserName;
+		//$options->height		= $height;
+		//$options->width			= $width;
+		$options->theme			= $theme;
 		$options->continuousScanning = 500;
+		
+		
 
 		if ($this->params->get('linenumbers', 0)) {
 			$options->lineNumbers	= true;
@@ -186,12 +201,15 @@ class plgEditorCodemirror extends JPlugin
 			$options->tabMode = 'shift';
 		}
 
+		JHtml::_('script', $this->_basePath . 'js/modes/'.$parserName.'.js', false, false, false, false);
+		JHtml::_('stylesheet', $this->_basePath . 'css/theme/'.$theme.'.css');
+
 		$html = array();
 		$html[]	= "<textarea name=\"$name\" id=\"$id\" cols=\"$col\" rows=\"$row\">$content</textarea>";
 		$html[] = $buttons;
 		$html[] = '<script type="text/javascript">';
 		$html[] = '(function() {';
-		$html[] = 'var editor = CodeMirror.fromTextArea("'.$id.'", '.json_encode($options).');';
+		$html[] = 'var editor = CodeMirror.fromTextArea(document.getElementById("'.$id.'"), '.json_encode($options).');';
 		$html[] = 'Joomla.editors.instances[\''.$id.'\'] = editor;';
 		$html[] = '})()';
 		$html[] = '</script>';
