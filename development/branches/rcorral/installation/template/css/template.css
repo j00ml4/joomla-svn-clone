@@ -153,6 +153,11 @@ td.item + td {
 	background: url(../images/j_divider.png) 0 100% repeat-x;
 }
 
+#stepbar > * {
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
 .step,
 .step-grey {
 	padding-top: 10px;
@@ -539,4 +544,18 @@ div.inlineError {
 /* required field star color */
 .star {
 	color: #cc0000;
+}
+
+/* Spinner */
+.spinner {
+	position: absolute;
+	opacity: 0.9;
+	z-index: 999;
+	background: #fff;
+}
+
+.spinner-img {
+	background: url('../images/spinner.gif') no-repeat;
+	width: 66px;
+	height: 66px;
 }
