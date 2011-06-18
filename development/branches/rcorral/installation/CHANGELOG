@@ -27,6 +27,29 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+17-Jun-2011 Mark Dexter
+ # [#26124] Namespace the checkAll() function
+
+17-Jun-2011 Christophe Demko
+ # [#24887] Incorrect redirection after saving an admin module (Rune Sjøen)
+ # [#26164] More Hathor/Bluestork/Installation sync and cleanup (Rouven Weßling)
+ # [#26159] Multiselect failing depending on selection (Rouven Weßling)
+ # [#25703] com_contact - Line is missing in default_form.php
+
+16-Jun-2011 Christophe Demko
+ ^ Commit #21329 breaks commit #21093 ([#25571] admin templates does not add a border on fielset when using tabs)
+
+16-Jun-2011 Jean-Marie Simonet
+ $ Alpha Ordering ini strings in com_search ini and com_users.ini. Updating xx-XX
+ 
+16-Jun-2011 Christophe Demko
+ + [#26073] Make single contact view ready to use dynamic forms
+ + [#26120] [patch] JToolBar cleanup for Save and Create New and Save as Copy
+ + [#26072] Add ability to save a search in a menu item
+ + [#21905] Mass Mail - exclude disabled user
+ # [#26162] Add spinner to the installation (Rouven Weßling)
+ # [#26166] Unused XML file in com_weblinks (Mark Dexter)
+
 14-Jun-2011 Christophe Demko
  # [#26070] The com_categories component is looking in the 3rd party component directory for a category.xml file
 
