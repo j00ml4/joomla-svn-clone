@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="PhpOnAzure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="1" osVersion="*">
+  <Role name="PhpOnAzure.Web">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <!-- Please provide Windows Azure Storage: Needed for Diagnostics -->
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=*****;AccountKey=*****" />
+      
+      <Setting name="offline" value="" /> 
+      <Setting name="offline_message" value="" /> 
+      <Setting name="sitename" value="" /> 
+      <Setting name="editor" value="" /> 
+      <Setting name="list_limit" value="" /> 
+      <Setting name="access" value="" /> 
+      <Setting name="debug" value="" /> 
+      <Setting name="debug_lang" value="" /> 
+      <Setting name="dbtype" value="" /> 
+      <Setting name="host" value="" /> 
+      <Setting name="user" value="" /> 
+      <Setting name="password" value="" /> 
+      <Setting name="db" value="" /> 
+      <Setting name="dbprefix" value="" /> 
+      <Setting name="live_site" value="" /> 
+      <Setting name="secret" value="" /> 
+      <Setting name="gzip" value="" /> 
+      <Setting name="error_reporting" value="" /> 
+      <Setting name="helpurl" value="" /> 
+      <Setting name="ftp_host" value="" /> 
+      <Setting name="ftp_port" value="" /> 
+      <Setting name="ftp_user" value="" /> 
+      <Setting name="ftp_pass" value="" /> 
+      <Setting name="ftp_root" value="" /> 
+      <Setting name="ftp_enable" value="" /> 
+      <Setting name="storage_type" value="" /> 
+      <Setting name="cloud_acc_name" value="" /> 
+      <Setting name="cloud_access_key" value="" /> 
+      <Setting name="offset" value="" /> 
+      <Setting name="offset_user" value="" /> 
+      <Setting name="mailer" value="" /> 
+      <Setting name="mailfrom" value="" /> 
+      <Setting name="fromname" value="" /> 
+      <Setting name="sendmail" value="" /> 
+      <Setting name="smtpauth" value="" /> 
+      <Setting name="smtpuser" value="" /> 
+      <Setting name="smtppass" value="" /> 
+      <Setting name="smtphost" value="" /> 
+      <Setting name="smtpsecure" value="" /> 
+      <Setting name="smtpport" value="" /> 
+      <Setting name="caching" value="" /> 
+      <Setting name="cache_handler" value="" /> 
+      <Setting name="cachetime" value="" /> 
+      <Setting name="MetaDesc" value="" /> 
+      <Setting name="MetaKeys" value="" /> 
+      <Setting name="MetaTitle" value="" /> 
+      <Setting name="MetaAuthor" value="" /> 
+      <Setting name="sef" value="" /> 
+      <Setting name="sef_rewrite" value="" /> 
+      <Setting name="sef_suffix" value="" /> 
+      <Setting name="unicodeslugs" value="" /> 
+      <Setting name="feed_limit" value="" /> 
+      <Setting name="lifetime" value="" /> 
+      <Setting name="session_handler" value="" /> 
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2021-05-12T23:59:59.0000000-07:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>
