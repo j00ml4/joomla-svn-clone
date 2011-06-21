@@ -247,8 +247,9 @@
 				value="local">COM_CONFIG_FIELD_VALUE_LOCAL</option>
 			<option
 				value="winazure">COM_CONFIG_FIELD_VALUE_WINAZURE</option>
+				<!--
 			<option
-				value="amazon">COM_CONFIG_FIELD_VALUE_AMAZON</option>
+				value="amazon">COM_CONFIG_FIELD_VALUE_AMAZON</option> -->
 		</field>
 
 		<field
@@ -271,59 +272,7 @@
 
 	</fieldset>
 	
-	<fieldset
-		name="azure_config"
-		label="COM_CONFIG_AZURE_CONFIG_LABEL">
-		<field
-			name="subscription_id"
-			type="text"
-			label="COM_CONFIG_FIELD_SUBSCRIPTION_ID_LABEL"
-			description="COM_CONFIG_FIELD_SUBSCRIPTION_ID_DESC"
-			filter="string"
-			size="30"
-			required="false" />
-
-		<field
-			name="service_name"
-			type="text"
-			label="COM_CONFIG_FIELD_SERVICE_NAME_LABEL"
-			description="COM_CONFIG_FIELD_SERVICE_NAME_DESC"
-			filter="string"
-			size="30"
-			required="false" />
-
-		<field
-			name="deployment_slot"
-			type="list"
-			label="COM_CONFIG_CLOUD_DEPLOYMENT_SLOT_LABEL"
-			description="COM_CONFIG_CLOUD_DEPLOYMENT_SLOT_DESC"
-			filter="string">
-			<option
-				value="staging">COM_CONFIG_FIELD_VALUE_STAGING</option>
-			<option
-				value="production">COM_CONFIG_FIELD_VALUE_PRODUCTION</option>
-			
-		</field>
-		<field
-			name="deployment_name"
-			type="text"
-			label="COM_CONFIG_FIELD_DEPLOYMENT_NAME_LABEL"
-			description="COM_CONFIG_FIELD_DEPLOYMENT_NAME_DESC"
-			filter="string"
-			size="30"
-			required="false" />
-			
-			<field
-			name="instance_count"
-			type="text"
-			label="COM_CONFIG_FIELD_INSTANCE_COUNT_LABEL"
-			description="COM_CONFIG_FIELD_INSTANCE_COUNT_DESC"
-			filter="string"
-			size="30"
-			required="false" />
-
-
-	</fieldset>
+	
 
 
 	<fieldset
