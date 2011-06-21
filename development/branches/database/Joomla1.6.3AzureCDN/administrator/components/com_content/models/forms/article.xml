@@ -16,6 +16,9 @@
 
 		<field name="alias" type="text" label="JFIELD_ALIAS_LABEL"
 			description="JFIELD_ALIAS_DESC" class="inputbox" size="45" />
+			
+		<field name="tags" type="textarea" label="JFIELD_TAGS_LABEL"
+			description="JFIELD_TAGS_DESC" class="inputbox" size="45" />
 
 		<field name="articletext" type="editor" class="inputbox"
 			label="COM_CONTENT_FIELD_ARTICLETEXT_LABEL" description="COM_CONTENT_FIELD_ARTICLETEXT_DESC"
