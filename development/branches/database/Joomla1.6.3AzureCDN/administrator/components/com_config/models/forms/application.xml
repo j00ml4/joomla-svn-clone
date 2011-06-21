@@ -106,8 +106,7 @@
 				value="sqlsrv">COM_CONFIG_FIELD_VALUE_SQLSRV2008</option>
 			<option
 				value="sqlazure">COM_CONFIG_FIELD_VALUE_SQL_AZURE</option>
-			<option
-				value="sqlsrv2005">COM_CONFIG_FIELD_VALUE_SQLSRV2005</option>
+			
 		</field>
 
 		<field
