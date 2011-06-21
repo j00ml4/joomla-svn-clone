@@ -34,6 +34,16 @@ class JInstallationViewPreinstall extends JView
 		$this->options		= $this->get('PhpOptions');
 		$this->sufficient	= $this->get('PhpOptionsSufficient');
 		$this->version		= new JVersion;
+		
+		$arr = 0;
+		$arr = ini_get_all('sqlsrv');
+		if(count($arr) > 0) {
+			$obj = new stdClass();
+			$obj->label = 'SQLAzure Driver configured!';
+			$obj->state = 1;
+			$obj->notice = '';
+			$this->options[] = $obj;
+		}
 
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
