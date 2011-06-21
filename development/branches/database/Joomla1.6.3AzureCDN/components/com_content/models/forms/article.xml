@@ -35,6 +35,9 @@
 			description="JFIELD_ALIAS_DESC"
 			class="inputbox"
 			size="45" />
+			
+		<field id="alias" name="tags" type="textarea" label="JFIELD_TAGS_LABEL"
+		description="JFIELD_TAGS_DESC" class="inputbox" size="45" />
 
 		<field
 			name="articletext"

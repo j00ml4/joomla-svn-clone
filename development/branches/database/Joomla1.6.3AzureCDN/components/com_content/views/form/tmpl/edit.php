@@ -44,6 +44,11 @@ $params = $this->state->get('params');
 			<?php echo $this->form->getLabel('title'); ?>
 			<?php echo $this->form->getInput('title'); ?>
 			</div>
+			
+			<div class="formelm">
+			<?php echo $this->form->getLabel('tags'); ?>
+			<?php echo $this->form->getInput('tags'); ?>
+			</div>
 
 		<?php if (is_null($this->item->id)):?>
 			<div class="formelm">
