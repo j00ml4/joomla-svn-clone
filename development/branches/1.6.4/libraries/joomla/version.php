@@ -30,7 +30,7 @@ class JVersion
 	/** @public string Codename */
 	public $CODENAME	= 'Onward';
 	/** @public string Date */
-	public $RELDATE	= '28-Jun-2011';
+	public $RELDATE	= '23-Jun-2011';
 	/** @public string Time */
 	public $RELTIME	= '23:00';
 	/** @public string Timezone */
