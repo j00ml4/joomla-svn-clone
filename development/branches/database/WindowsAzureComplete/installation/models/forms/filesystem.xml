@@ -51,8 +51,8 @@
 				default="local"
 			>
 				<option value="local">Local</option>
-				<option value="winazure">Windows Azure Storage</option>
-				<option value="amazon">Amazon</option>
+				<option value="winazure">Windows Azure CDN</option>
+				<!-- <option value="amazon">Amazon</option> -->
 			</field>
 			<field name="acc_name" type="text" id="acc_name" class="inputbox"
 				label="INSTL_CLOUD_ACC_NAME"
