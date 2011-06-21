@@ -560,6 +560,17 @@ class JDatabaseQuery
 
 		return $this;
 	}
+	
+	/**
+   * @param string $name  A string 
+   * 
+   * @return  Show table query syntax
+   * Implemented in the sub classes - specific to db query builder
+   * @since 1.6
+   */
+   function showTables($name) {
+   	
+   }
 
 	/**
 	 * Magic function to convert the query to a string.
