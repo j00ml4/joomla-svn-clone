@@ -40,7 +40,10 @@ JHtml::_('behavior.keepalive');
 
 				<li><?php echo $this->form->getLabel('alias'); ?>
 				<?php echo $this->form->getInput('alias'); ?></li>
-
+				
+				<li><?php echo $this->form->getLabel('tags'); ?>
+				<?php echo $this->form->getInput('tags'); ?>
+				</li>
 				<li><?php echo $this->form->getLabel('catid'); ?>
 				<?php echo $this->form->getInput('catid'); ?></li>
 
