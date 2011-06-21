@@ -284,6 +284,16 @@ class JInstallationModelSetup extends JModel
 		$option->state  = (is_writable('../configuration.php') || (!file_exists('../configuration.php') && is_writable('../')));
 		$option->notice = ($option->state) ? null : JText::_('INSTL_NOTICEYOUCANSTILLINSTALL');
 		$options[] = $option;
+		
+		$arr = 0;
+		$arr = ini_get_all('sqlsrv');
+		if(count($arr) > 0) {
+			$option = new stdClass();
+			$option->label = JText::_('INSTL_SQLSERVER_DRIVER_AVAILABLE');
+			$option->state = 1;
+			$option->notice = null;
+			$options[] = $option;
+		}
 
 		return $options;
 	}
