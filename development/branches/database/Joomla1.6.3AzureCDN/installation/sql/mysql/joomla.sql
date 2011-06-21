@@ -1,4 +1,3 @@
-# $Id: joomla.sql 20947 2011-03-10 11:25:04Z infograf768 $
 
 
 #
@@ -1060,3 +1059,23 @@ INSERT INTO `#__viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 INSERT INTO `#__extensions` (`extension_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) 
 VALUES(436, 'System - Windows Azure', 'plugin', 'plg_azure', 'system', 0, 0, 1, 0, '', '{"protocol":"=http\n"}', '', '', 0, '1900-01-01 00:00:00', 1, 0)
 
+#
+# Tagging Support
+#
+CREATE TABLE IF NOT EXISTS `#__content_tags` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  `alias` varchar(255) NOT NULL,
+  `published` tinyint(1) NOT NULL,
+  `checked_out` int(11) unsigned NOT NULL default '0',
+  `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`id`)
+) TYPE=MyISAM CHARACTER SET `utf8` COLLATE `utf8_general_ci`;
+
+CREATE TABLE IF NOT EXISTS `#__content_tags_relation` (
+  `taq_id` int(11) NOT NULL default '0',
+  `article_id` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`taq_id`,`article_id`),
+  KEY `tid` (`taq_id`),
+  KEY `itemid` (`article_id`)
+) TYPE=MyISAM CHARACTER SET `utf8` COLLATE `utf8_general_ci`;
