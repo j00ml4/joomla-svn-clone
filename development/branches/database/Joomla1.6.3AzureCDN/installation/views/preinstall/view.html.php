@@ -34,18 +34,6 @@ class JInstallationViewPreinstall extends JView
 		$this->options		= $this->get('PhpOptions');
 		$this->sufficient	= $this->get('PhpOptionsSufficient');
 		$this->version		= new JVersion;
-		$arr = 0;
-		
-		
-		$arr = ini_get_all('sqlsrv');
-		if(count($arr) > 0) {
-			$obj = new stdClass();
-			$obj->label = 'SQLServer 2008 Driver configured!';
-			$obj->state = 1;
-			$obj->notice = '';
-			$this->options[] = $obj;
-		}
-		
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
 			JError::raiseError(500, implode("\n", $errors));
