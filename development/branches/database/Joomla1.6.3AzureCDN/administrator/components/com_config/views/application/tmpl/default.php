@@ -64,7 +64,7 @@ $this->document->setBuffer($this->loadTemplate('navigation'), 'modules', 'submen
 					<?php echo $this->loadTemplate('locale'); ?>
 					<?php echo $this->loadTemplate('ftp'); ?>
 					<?php echo $this->loadTemplate('cloud_server'); ?>
-					<?php echo $this->loadTemplate('azure_config'); ?>
+					<?php //echo $this->loadTemplate('azure_config'); ?>
 				</div>
 				<div class="width-40 fltrt">
 					<?php echo $this->loadTemplate('database'); ?>
