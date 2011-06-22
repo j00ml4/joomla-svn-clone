@@ -470,4 +470,4 @@ SET IDENTITY_INSERT #__assets  OFF;
 
 
 
-End;ALTER TABLE [#__content] ADD tags nvarchar(MAX) NULL
+End;End;ALTER TABLE [#__content] ADD tags nvarchar(MAX) NULL;
