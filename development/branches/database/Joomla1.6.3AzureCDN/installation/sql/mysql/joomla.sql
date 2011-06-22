@@ -1,4 +1,4 @@
-
+ting
 
 #
 # Table structure for table `#__assets`
@@ -1057,7 +1057,7 @@ INSERT INTO `#__viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 
 # -------------------------------------------------------
 INSERT INTO `#__extensions` (`extension_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) 
-VALUES(436, 'System - Windows Azure', 'plugin', 'plg_azure', 'system', 0, 0, 1, 0, '', '{"protocol":"=http\n"}', '', '', 0, '1900-01-01 00:00:00', 1, 0)
+VALUES(436, 'System - Windows Azure', 'plugin', 'plg_azure', 'system', 0, 0, 1, 0, '', '{"protocol":"=http\n"}', '', '', 0, '1900-01-01 00:00:00', 1, 0);
 
 
 ALTER TABLE `#__content` ADD `tags` TEXT NOT NULL AFTER `title_alias` 

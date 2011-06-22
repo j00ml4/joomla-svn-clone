@@ -469,5 +469,5 @@ SELECT 31, 25, 56, 57, 2, 'com_weblinks.category.6', 'Uncategorised', '{"core.cr
 SET IDENTITY_INSERT #__assets  OFF;
 
 
-
-ALTER TABLE [#__content] ADD tags nvarchar(MAX) NULL
+End;
+ALTER TABLE [#__content] ADD tags nvarchar(MAX) NULL;
