@@ -1047,6 +1047,8 @@ CREATE TABLE IF NOT EXISTS `jos_viewlevels` (
   UNIQUE KEY `idx_assetgroup_title_lookup` (`title`)
 )   DEFAULT CHARSET=utf8 ENGINE = InnoDB;
 
+ALTER TABLE `#__content` ADD `tags` TEXT NOT NULL AFTER `title_alias` ;
+
 #
 # Dumping data for table `jos_viewlevels`
 #
@@ -1059,5 +1061,3 @@ INSERT INTO `jos_viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 # -------------------------------------------------------
 INSERT INTO `jos_extensions` (`extension_id`, `name`, `type`, `element`, `folder`, `client_id`, `enabled`, `access`, `protected`, `manifest_cache`, `params`, `custom_data`, `system_data`, `checked_out`, `checked_out_time`, `ordering`, `state`) 
 VALUES(436, 'System - Windows Azure', 'plugin', 'plg_azure', 'system', 0, 0, 1, 0, '', '{"protocol":"=http\n"}', '', '', 0, '1900-01-01 00:00:00', 1, 0)
-
-ALTER TABLE `#__content` ADD `tags` TEXT NOT NULL AFTER `title_alias` 
