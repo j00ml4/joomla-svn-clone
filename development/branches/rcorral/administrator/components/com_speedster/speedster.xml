@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="1.7" method="upgrade">
+	<name>com_speedster</name>
+	<author>Rafael Corral</author>
+	<creationDate>June 2011</creationDate>
+	<copyright>(C) 2011. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>rafael@corephp.com</authorEmail>
+	<authorUrl>www.rafaelcorral.com</authorUrl>
+	<version>1.0.0</version>
+	<description>DESC</description>
+
+	<files folder="site">
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<filename>hook.php</filename>
+		<filename>speedster.php</filename>
+	</files>
+	<administration>
+		<!-- <menu link="option=com_speedster">Speedster</menu> -->
+		<files folder="admin">
+		</files>
+	</administration>
+</extension>
