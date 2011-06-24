@@ -155,10 +155,21 @@ abstract class JPluginHelper
 					$className = 'plg'.$plugin->type.$plugin->name;
 					if (class_exists($className)) {
 						// Load the plugin from the database.
-						$plugin = self::getPlugin($plugin->type, $plugin->name);
+						if ( !isset( $plugin->params ) ) {
+							// Seems like this could just go bye bye completely
+							$plugin = self::getPlugin($plugin->type, $plugin->name);
+						}
 
 						// Instantiate and register the plugin.
-						new $className($dispatcher, (array)($plugin));
+						$task = JRequest::getVar( 'task' );
+						if ( in_array( $plugin->type, array( 'hookinit', 'hook2init' ) ) ) {
+							$_p = new $className();
+							$_p->init( (array)($plugin) );
+						} elseif ( in_array( $plugin->type, array( 'hook', 'hook2' ) ) ) {
+							new $className( (array)($plugin) );
+						} else {
+							new $className($dispatcher, (array)($plugin));
+						}
 					}
 				}
 			} else {
