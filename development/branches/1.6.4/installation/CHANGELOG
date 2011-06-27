@@ -29,6 +29,9 @@ $ -> Language fix or change
 
 -------------------- 1.6.4 Stable Release [27-Jun-2011] ------------------
 
+27-Jun-2011 Mark Dexter
+ # [#25696] Updating from J1.6.2 to J1.6.3 removes all files!
+
 21-Jun-2011 Mark Dexter
  # [#26171] Automatic DB update (Christophe Demko)
 
