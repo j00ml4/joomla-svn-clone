@@ -60,7 +60,7 @@ class JInstallerFile extends JAdapterInstance
 
 		// Set element
 		$manifestPath = JPath::clean($this->parent->getPath('manifest'));
-		$element = explode('/',$manifestPath);
+		$element = explode(DS, $manifestPath);
 		$element = $element[count($element) - 1];
 		$element = preg_replace('/\.xml/', '', $element);
 		$this->set('element', $element);
@@ -105,7 +105,7 @@ class JInstallerFile extends JAdapterInstance
 		$manifestScript = (string)$this->manifest->scriptfile;
 
 		if ($manifestScript) {
-			$manifestScriptFile = $this->parent->getPath('source').DS.$manifestScript;
+			$manifestScriptFile = $this->parent->getPath('source').'/'.$manifestScript;
 
 			if (is_file($manifestScriptFile)) {
 				// load the file
