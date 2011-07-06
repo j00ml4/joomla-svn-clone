@@ -1361,7 +1361,7 @@ class JInstaller extends JAdapter
 					JError::raiseWarning(1, JText::sprintf('JLIB_INSTALLER_ERROR_NO_FILE', $filesource));
 					return false;
 				}
-				elseif ($exists = file_exists($filedest) && !$overwrite)
+				elseif (($exists = file_exists($filedest)) && !$overwrite)
 				{
 					/*
 					 * It's okay if the manifest already exists
