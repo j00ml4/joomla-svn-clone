@@ -7,7 +7,7 @@ Admin (All work is concentrated in com_content and com_categories (if necessary)
 -- Model
 --- Change save function to convert the array of ID's to a JSON string for DB saving (done - 8Jul11)
 -- Form
---- Change category field to allow multiple selections
+--- Change category field to allow multiple selections (done - 8Jul11)
 - List view 
 -- Model
 --- Refactor getListQuery to create a replacement for the #__categories join (a separate query foreach catid post getListQuery, possibly optimized to look if that catid hasn't been queried?) NOTE - Ensure featured model is updated as well!
@@ -16,3 +16,7 @@ Admin (All work is concentrated in com_content and com_categories (if necessary)
 -- When edit/edit.state is allowed for multi-category articles (all or any?)
 
 Front-end (All work is concentrated in com_content until implementation is complete):
+
+// END TODO HERE, BEGIN RUNNING SQL CHANGES FOR A UPDATE FILE
+
+ALTER TABLE `#__content` CHANGE `catid` `catid` varchar(255) NOT NULL default '0';
