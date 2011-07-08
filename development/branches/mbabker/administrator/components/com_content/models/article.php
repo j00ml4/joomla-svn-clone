@@ -202,6 +202,9 @@ class ContentModelArticle extends JModelAdmin
 		if (empty($data)) {
 			$data = $this->getItem();
 
+			// Decode catid into an array
+			$data->catid	= json_decode($data->catid);
+
 			// Prime some default values.
 			if ($this->getState('article.id') == 0) {
 				$app = JFactory::getApplication();
@@ -228,6 +231,9 @@ class ContentModelArticle extends JModelAdmin
 			$data['title']	= $title;
 			$data['alias']	= $alias;
 		}
+
+		// Encode the catid field as a JSON
+		$data['catid']	= json_encode($data['catid']);
 
 		if (parent::save($data)) {
 			if (isset($data['featured'])) {
