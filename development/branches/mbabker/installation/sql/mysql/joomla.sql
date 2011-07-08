@@ -285,7 +285,7 @@ CREATE TABLE `#__content` (
   `state` tinyint(3) NOT NULL default '0',
   `sectionid` integer unsigned NOT NULL default '0',
   `mask` integer unsigned NOT NULL default '0',
-  `catid` integer unsigned NOT NULL default '0',
+  `catid` varchar(255) NOT NULL default '0',
   `created` datetime NOT NULL default '0000-00-00 00:00:00',
   `created_by` integer unsigned NOT NULL default '0',
   `created_by_alias` varchar(255) NOT NULL default '',
