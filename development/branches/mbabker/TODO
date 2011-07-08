@@ -1,0 +1,18 @@
+Changes to make for multi-category feature:
+
+Admin (All work is concentrated in com_content and com_categories (if necessary) until implementation is complete):
+- DB Changes
+-- Change catid field to accomodate a JSON string of ID's (done - 8Jul11)
+- Single item view
+-- Model
+--- Change save function to convert the array of ID's to a JSON string for DB saving (done - 8Jul11)
+-- Form
+--- Change category field to allow multiple selections
+- List view 
+-- Model
+--- Refactor getListQuery to create a replacement for the #__categories join (a separate query foreach catid post getListQuery, possibly optimized to look if that catid hasn't been queried?) NOTE - Ensure featured model is updated as well!
+--- State processing to get the catid out of the JSON string when handling filters
+- ACL Implementation
+-- When edit/edit.state is allowed for multi-category articles (all or any?)
+
+Front-end (All work is concentrated in com_content until implementation is complete):
