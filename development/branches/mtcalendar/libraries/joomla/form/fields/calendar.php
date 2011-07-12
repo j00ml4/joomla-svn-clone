@@ -51,10 +51,18 @@ class JFormFieldCalendar extends JFormField
 			JHtml::_('behavior.calendar');
 			JHtml::_('behavior.tooltip');
 			
+			if (JFactory::getDocument()->getDirection() == 'rtl') {
+				$options['rtl'] = true;
+			}
+
 			$options['format'] = $format;
 			$options['pickerClass'] = 'datepicker_dashboard';
-			$optionsText = JHtmlBehavior::_getJSObject($options);
+			$options['startDay'] = JFactory::getLanguage()->getFirstDay();
 			
+			$options['blockKeydown'] = false;
+
+			$optionsText = JHtmlBehavior::_getJSObject($options);
+
 			JFactory::getDocument()->addScriptDeclaration('
 					window.addEvent(\'domready\', function() {
 						new Picker.Date(document.id(\''.$this->id.'\'), '.$optionsText.');

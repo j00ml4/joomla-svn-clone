@@ -26,7 +26,9 @@ var Picker = new Class({
 		positionOffset: {x: 0, y: 0},
 		pickerPosition: 'bottom',
 		draggable: true,
-		showOnInit: true
+		showOnInit: true,
+		columns: 1,
+		footer: false
 	},
 
 	initialize: function(options){
@@ -47,6 +49,7 @@ var Picker = new Class({
 				opacity: 0
 			}
 		}).inject(options.inject || document.body);
+		picker.addClass('column_' + options.columns);
 
 		if (options.useFadeInOut){
 			picker.set('tween', {
@@ -58,15 +61,20 @@ var Picker = new Class({
 		// Build the header
 		var header = this.header = new Element('div.header').inject(picker);
 
+		var title = this.title = new Element('div.title').inject(header);
+		this.titleText = new Element('div.titleText').inject(title);
+
 		this.closeButton = new Element('div.closeButton[text=x]')
 			.addEvent('click', this.close.pass(false, this))
 			.inject(header);
 
-		var title = this.title = new Element('div.title').inject(header);
-		this.titleText = new Element('div.titleText').inject(title);
-
 		// Build the body of the picker
 		var body = this.body = new Element('div.body').inject(picker);
+
+		if (options.footer){
+			this.footer = new Element('div.footer').inject(picker);
+			picker.addClass('footer');
+		}
 
 		// oldContents and newContents are used to slide from the old content to a new one.
 		var slider = this.slider = new Element('div.slider', {
@@ -94,6 +102,9 @@ var Picker = new Class({
 				left: 0
 			}
 		}).inject(slider);
+
+		this.originalColumns = options.columns;
+		this.setColumns(options.columns);
 
 		// IFrameShim for select fields in IE
 		var shim = this.shim = window['IframeShim'] ? new IframeShim(picker) : null;
@@ -203,6 +214,7 @@ var Picker = new Class({
 
 	setBodySize: function(){
 		var bodysize = this.bodysize = this.body.getSize();
+
 		this.slider.setStyles({
 			width: 2 * bodysize.x,
 			height: bodysize.y
@@ -218,11 +230,50 @@ var Picker = new Class({
 		});
 	},
 
-	setContent: function(){
-		var content = Array.from(arguments), fx;
+	setColumnContent: function(column, content){
+		var columnElement = this.columns[column];
+		if (!columnElement) return this;
 
-		if (['right', 'left', 'fade'].contains(content[1])) fx = content[1];
-		if (content.length == 1 || fx) content = content[0];
+		var type = typeOf(content);
+		if (['string', 'number'].contains(type)) columnElement.set('text', content);
+		else columnElement.empty().adopt(content);
+
+		return this;
+	},
+
+	setColumnsContent: function(content, fx){
+		var old = this.columns;
+		this.columns = this.newColumns;
+		this.newColumns = old;
+
+		content.forEach(function(_content, i){
+			this.setColumnContent(i, _content);
+		}, this);
+		return this.setContent(null, fx);
+	},
+
+	setColumns: function(columns, tween){
+
+		var _columns = this.columns = new Elements, _newColumns = this.newColumns = new Elements;
+		for (var i = columns; i--;){
+			_columns.push(new Element('div.column').addClass('column_' + (columns - i)));
+			_newColumns.push(new Element('div.column').addClass('column_' + (columns - i)));
+		}
+
+		var oldClass = 'column_' + this.options.columns, newClass = 'column_' + columns;
+		var picker = this.picker.setStyle('width', null).removeClass(oldClass).addClass(newClass);
+		if (tween){
+			var newWidth = picker.getStyle('width');
+			picker.removeClass(newClass).addClass(oldClass);
+			picker.tween('width', newWidth);
+			picker.removeClass(oldClass).addClass(newClass);
+		}
+		this.options.columns = columns;
+		return this;
+	},
+
+	setContent: function(content, fx){
+		if (content) return this.setColumnsContent([content], fx);
 
 		// swap contents so we can fill the newContents again and animate
 		var old = this.oldContents;
@@ -230,9 +281,7 @@ var Picker = new Class({
 		this.newContents = old;
 		this.newContents.empty();
 
-		var type = typeOf(content);
-		if (['string', 'number'].contains(type)) this.newContents.set('text', content);
-		else this.newContents.adopt(content);
+		this.newContents.adopt(this.columns);
 
 		this.setBodySize();
 
@@ -277,7 +326,8 @@ var Picker = new Class({
 	},
 
 	setTitle: function(text){
-		this.titleText.set('text', text);
+		if (!(/(elements|array)/.test(typeOf(text)))) text = new Element('div.column', {text: text}).addClass('column_1');
+		this.titleText.empty().adopt(text);
 		return this;
 	},
 
@@ -289,7 +339,6 @@ var Picker = new Class({
 	}
 
 });
-
 /*
 ---
 name: Picker.Attach
@@ -363,7 +412,9 @@ Picker.Attach = new Class({
 
 		var getOpenEvent = function(element){
 			return function(event){
-				if (event.target.get('tag') == 'a') event.stop();
+				var tag = event.target.get('tag');
+				if (tag == 'input' && event.type == 'click' && !element.match(':focus')) return;
+				if (tag == 'a') event.stop();
 				self.fireEvent('attachedEvent', [event, element]);
 				self.position(element);
 				self.open();
@@ -449,7 +500,6 @@ Picker.Attach = new Class({
 	}
 
 });
-
 /*
 ---
 name: Picker.Date
@@ -483,6 +533,7 @@ this.DatePicker = Picker.Date = new Class({
 		yearsPerPage: 20,
 
 		startDay: 1, // Sunday (0) through Saturday (6) - be aware that this may affect your layout, since the days on the right might have a different margin
+		rtl: true,
 
 		startView: 'days', // allowed values: {time, days, months, years}
 		pickOnly: false, // 'years', 'months', 'days', 'time'
@@ -493,14 +544,20 @@ this.DatePicker = Picker.Date = new Class({
 		months_abbr: null,
 		days_abbr: null,
 		years_title: function(date, options){
-			var year = date.get('year');
-			return year + '-' + (year + options.yearsPerPage - 1);
+			return Array.from(date).map(function(_date, i){
+				var year = _date.get('year');
+				return new Element('div.column', {text: year + '-' + (year + options.yearsPerPage - 1)}).addClass('column_' + (i + 1));
+			});
 		},
 		months_title: function(date, options){
-			return date.get('year');
+			return Array.from(date).map(function(_date, i){
+				return new Element('div.column', {text: _date.get('year')}).addClass('column_' + (i + 1));
+			});
 		},
 		days_title: function(date, options){
-			return date.format('%b %Y');
+			return Array.from(date).map(function(_date, i){
+				return new Element('div.column', {text: _date.format('%b %Y')}).addClass('column_' + (i + 1));
+			});
 		},
 		time_title: function(date, options){
 			return (options.pickOnly == 'time') ? Locale.get('DatePicker.select_a_time') : date.format('%d %B, %Y');
@@ -529,11 +586,7 @@ this.DatePicker = Picker.Date = new Class({
 		// backward compatibility for startView
 		var newViews = ['days', 'months', 'years'];
 		['month', 'year', 'decades'].some(function(what, i){
-			if (options.startView == what){
-				options.startView = newViews[i];
-				return true;
-			}
-			return false;
+			return (options.startView == what) && (options.startView = newViews[i]);
 		});
 
 		options.canAlwaysGoUp = options.canAlwaysGoUp ? Array.from(options.canAlwaysGoUp) : [];
@@ -554,41 +607,33 @@ this.DatePicker = Picker.Date = new Class({
 		}
 
 		// This is where we store the selected date
-		this.date = limitDate(new Date(), options.minDate, options.maxDate);
+		this.currentView = options.startView;
 
 		// Some link or input has fired an event!
 		this.addEvent('attachedEvent', function(event, element){
+			this.date = limitDate(new Date(), options.minDate, options.maxDate);
 			var tag = element.get('tag'), input;
-			if (tag == 'input'){
-				input = element;
-			} else {
+			if (tag == 'input') input = element;
+			else {
 				var index = this.toggles.indexOf(element);
 				if (this.inputs[index]) input = this.inputs[index];
 			}
-			this.date = new Date();
-			if (input){
-				var date = Date.parse(input.get('value'));
-				if (date == null || !date.isValid()){
-					var storeDate = input.retrieve('datepicker:value');
-					if (storeDate) date = Date.parse(storeDate);
-				}
-				if (date != null && date.isValid()) this.date = date;
-			}
+			this.getInputDate(input);
 			this.input = input;
+			this.setColumns(this.originalColumns);
 		}.bind(this), true);
 
+	},
 
-		// Start rendering the default view.
-		this.currentView = options.startView;
-		this.addEvent('open', function(){
-			var view = this.currentView,
-				cap = view.capitalize();
-			if (this['render' + cap]){
-				this['render' + cap](this.date.clone());
-				this.currentView = view;
-			}
-		}.bind(this));
-
+	getInputDate: function(input){
+		this.date = new Date();
+		if (!input) return;
+		var date = Date.parse(input.get('value'));
+		if (date == null || !date.isValid()){
+			var storeDate = input.retrieve('datepicker:value');
+			if (storeDate) date = Date.parse(storeDate);
+		}
+		if (date != null && date.isValid()) this.date = date;
 	},
 
 	// Control the previous and next elements
@@ -596,22 +641,26 @@ this.DatePicker = Picker.Date = new Class({
 	constructPicker: function(){
 		this.parent();
 
-		this.previous = new Element('div.previous[html=&#171;]').inject(this.header);
-		this.next = new Element('div.next[html=&#187;]').inject(this.header);
-	},
+		if (!this.options.rtl){
+			this.previous = new Element('div.previous[html=&#171;]').inject(this.header);
+			this.next = new Element('div.next[html=&#187;]').inject(this.header);
+		} else {
+			this.next = new Element('div.previous[html=&#171;]').inject(this.header);
+			this.previous = new Element('div.next[html=&#187;]').inject(this.header);
+		}	},
 
-	hidePrevious: function($next, $show){
-		this[$next ? 'next' : 'previous'].setStyle('display', $show ? 'block' : 'none');
+	hidePrevious: function(_next, _show){
+		this[_next ? 'next' : 'previous'].setStyle('display', _show ? 'block' : 'none');
 		return this;
 	},
 
-	showPrevious: function($next){
-		return this.hidePrevious($next, true);
+	showPrevious: function(_next){
+		return this.hidePrevious(_next, true);
 	},
 
-	setPreviousEvent: function(fn, $next){
-		this[$next ? 'next' : 'previous'].removeEvents('click');
-		if (fn) this[$next ? 'next' : 'previous'].addEvent('click', fn);
+	setPreviousEvent: function(fn, _next){
+		this[_next ? 'next' : 'previous'].removeEvents('click');
+		if (fn) this[_next ? 'next' : 'previous'].addEvent('click', fn);
 		return this;
 	},
 
@@ -627,26 +676,48 @@ this.DatePicker = Picker.Date = new Class({
 		return this.setPreviousEvent(fn, true);
 	},
 
+	setColumns: function(columns, tween, view, date, viewFx){
+		var ret = this.parent(columns, tween), method;
+
+		if ((view || this.currentView)
+			&& (method = 'render' + (view || this.currentView).capitalize())
+			&& this[method]
+		) this[method](date || this.date.clone(), viewFx);
+
+		return ret;
+	},
+
 	// Render the Pickers
 
 	renderYears: function(date, fx){
-
-		var options = this.options;
+		var options = this.options, pages = options.columns, perPage = options.yearsPerPage,
+			_columns = [], _dates = [];
+		this.dateElements = [];
 
 		// start neatly at interval (eg. 1980 instead of 1987)
-		while (date.get('year') % options.yearsPerPage > 0) date.decrement('year', 1);
+		date = date.clone().decrement('year', date.get('year') % perPage);
+	
+		var iterateDate = date.clone().decrement('year', Math.floor((pages - 1) / 2) * perPage);
 
-		this.setTitle(options.years_title(date, options));
+		for (var i = pages; i--;){
+			var _date = iterateDate.clone();
+			_dates.push(_date);
+			_columns.push(renderers.years(
+				timesSelectors.years(options, _date.clone()),
+				options,
+				this.date.clone(),
+				this.dateElements,
+				function(date){
+					if (options.pickOnly == 'years') this.select(date);
+					else this.renderMonths(date, 'fade');
+					this.date = date;
+				}.bind(this)
+			));
+			iterateDate.increment('year', perPage);
+		}
 
-		this.setContent(renderers.years(
-			options,
-			date.clone(),
-			this.date.clone(),
-			function(date){
-				if (options.pickOnly == 'years') this.select(date);
-				else this.renderMonths(date, 'fade');
-			}.bind(this)
-		), fx);
+		this.setColumnsContent(_columns, fx);
+		this.setTitle(options.years_title(_dates, options));
 
 		// Set limits
 		var limitLeft = (options.minDate && date.get('year') <= options.minDate.get('year')),
@@ -655,30 +726,43 @@ this.DatePicker = Picker.Date = new Class({
 		this[(limitRight ? 'hide' : 'show') + 'Next']();
 
 		this.setPreviousEvent(function(){
-			this.renderYears(date.decrement('year', options.yearsPerPage), 'left');
+			this.renderYears(date.decrement('year', perPage), 'left');
 		}.bind(this));
 
 		this.setNextEvent(function(){
-			this.renderYears(date.increment('year', options.yearsPerPage), 'right');
+			this.renderYears(date.increment('year', perPage), 'right');
 		}.bind(this));
 
 		// We can't go up!
 		this.setTitleEvent(null);
+
+		this.currentView = 'years';
 	},
 
 	renderMonths: function(date, fx){
-		var options = this.options;
-		this.setTitle(options.months_title(date, options));
+		var options = this.options, years = options.columns, _columns = [], _dates = [],
+			iterateDate = date.clone().decrement('year', Math.floor((years - 1) / 2));
+		this.dateElements = [];
 
-		this.setContent(renderers.months(
-			options,
-			date.clone(),
-			this.date.clone(),
-			function(date){
-				if (options.pickOnly == 'months') this.select(date);
-				else this.renderDays(date, 'fade');
-			}.bind(this)
-		), fx);
+		for (var i = years; i--;){
+			var _date = iterateDate.clone();
+			_dates.push(_date);
+			_columns.push(renderers.months(
+				timesSelectors.months(options, _date.clone()),
+				options,
+				this.date.clone(),
+				this.dateElements,
+				function(date){
+					if (options.pickOnly == 'months') this.select(date);
+					else this.renderDays(date, 'fade');
+					this.date = date;
+				}.bind(this)
+			));
+			iterateDate.increment('year', 1);
+		}
+
+		this.setColumnsContent(_columns, fx);
+		this.setTitle(options.months_title(_dates, options));
 
 		// Set limits
 		var year = date.get('year'),
@@ -688,11 +772,11 @@ this.DatePicker = Picker.Date = new Class({
 		this[(limitRight ? 'hide' : 'show') + 'Next']();
 
 		this.setPreviousEvent(function(){
-			this.renderMonths(date.decrement('year', 1), 'left');
+			this.renderMonths(date.decrement('year', years), 'left');
 		}.bind(this));
 
 		this.setNextEvent(function(){
-			this.renderMonths(date.increment('year', 1), 'right');
+			this.renderMonths(date.increment('year', years), 'right');
 		}.bind(this));
 
 		var canGoUp = options.yearPicker && (options.pickOnly != 'months' || options.canAlwaysGoUp.contains('months'));
@@ -700,21 +784,34 @@ this.DatePicker = Picker.Date = new Class({
 			this.renderYears(date, 'fade');
 		}.bind(this) : null;
 		this.setTitleEvent(titleEvent);
+
+		this.currentView = 'months';
 	},
 
 	renderDays: function(date, fx){
-		var options = this.options;
-		this.setTitle(options.days_title(date, options));
+		var options = this.options, months = options.columns, _columns = [], _dates = [],
+			iterateDate = date.clone().decrement('month', Math.floor((months - 1) / 2));
+		this.dateElements = [];
 
-		this.setContent(renderers.days(
-			options,
-			date.clone(),
-			this.date.clone(),
-			function(date){
-				if (options.pickOnly == 'days' || !options.timePicker) this.select(date)
-				else this.renderTime(date, 'fade');
-			}.bind(this)
-		), fx);
+		for (var i = months; i--;){
+			_date = iterateDate.clone();
+			_dates.push(_date);
+			_columns.push(renderers.days(
+				timesSelectors.days(options, _date.clone()),
+				options,
+				this.date.clone(),
+				this.dateElements,
+				function(date){
+					if (options.pickOnly == 'days' || !options.timePicker) this.select(date)
+					else this.renderTime(date, 'fade');
+					this.date = date;
+				}.bind(this)
+			));
+			iterateDate.increment('month', 1);
+		}
+
+		this.setColumnsContent(_columns, fx);
+		this.setTitle(options.days_title(_dates, options));
 
 		var yearmonth = date.format('%Y%m').toInt(),
 			limitLeft = (options.minDate && yearmonth <= options.minDate.format('%Y%m')),
@@ -723,11 +820,11 @@ this.DatePicker = Picker.Date = new Class({
 		this[(limitRight ? 'hide' : 'show') + 'Next']();
 
 		this.setPreviousEvent(function(){
-			this.renderDays(date.decrement('month', 1), 'left');
+			this.renderDays(date.decrement('month', months), 'left');
 		}.bind(this));
 
 		this.setNextEvent(function(){
-			this.renderDays(date.increment('month', 1), 'right');
+			this.renderDays(date.increment('month', months), 'right');
 		}.bind(this));
 
 		var canGoUp = options.pickOnly != 'days' || options.canAlwaysGoUp.contains('days');
@@ -735,16 +832,21 @@ this.DatePicker = Picker.Date = new Class({
 			this.renderMonths(date, 'fade');
 		}.bind(this) : null;
 		this.setTitleEvent(titleEvent);
+
+		this.currentView = 'days';
 	},
 
 	renderTime: function(date, fx){
 		var options = this.options;
 		this.setTitle(options.time_title(date, options));
 
+		var originalColumns = this.originalColumns = options.columns;
+		this.currentView = null; // otherwise you'd get crazy recursion
+		this.setColumns(1, true);
+
 		this.setContent(renderers.time(
 			options,
 			date.clone(),
-			this.date.clone(),
 			function(date){
 				this.select(date);
 			}.bind(this)
@@ -758,9 +860,11 @@ this.DatePicker = Picker.Date = new Class({
 
 		var canGoUp = options.pickOnly != 'time' || options.canAlwaysGoUp.contains('time');
 		var titleEvent = (canGoUp) ? function(){
-			this.renderDays(date, 'fade');
+			this.setColumns(originalColumns, true, 'days', date, 'fade');
 		}.bind(this) : null;
 		this.setTitleEvent(titleEvent);
+
+		this.currentView = 'time';
 	},
 
 	select: function(date, all){
@@ -784,67 +888,94 @@ this.DatePicker = Picker.Date = new Class({
 
 // Renderers only output elements and calculate the limits!
 
+var timesSelectors = {
+
+	years: function(options, date){
+		var times = [];
+		for (var i = 0; i < options.yearsPerPage; i++){
+			times.push(+date);
+			date.increment('year', 1);
+		}
+		return times;
+	},
+
+	months: function(options, date){
+		var times = [];
+		date.set('month', 0);
+		for (var i = 0; i <= 11; i++){
+			times.push(+date);
+			date.increment('month', 1);
+		}
+		return times;
+	},
+
+	days: function(options, date){
+		var times = [];
+		date.set('date', 1);
+		while (date.get('day') != options.startDay) date.set('date', date.get('date') - 1);
+		for (var i = 0; i < 42; i++){
+			times.push(+date);
+			date.increment('day',  1);
+		}
+		return times;
+	}
+
+};
+
 var renderers = {
 
-	years: function(options, date, currentDate, fn){
+	years: function(years, options, currentDate, dateElements, fn){
 		var container = new Element('div.years'),
-			today = new Date(),
-			year, element, classes;
+			today = new Date(), element, classes;
 
-		for (var i = 0; i < options.yearsPerPage; i++){
-			year = date.get('year');
+		years.each(function(_year, i){
+			var date = new Date(_year), year = date.get('year');
 
 			classes = '.year.year' + i;
 			if (year == today.get('year')) classes += '.today';
 			if (year == currentDate.get('year')) classes += '.selected';
 			element = new Element('div' + classes, {text: year}).inject(container);
+			dateElements.push({element: element, time: _year});
 
 			if (isUnavailable('year', date, options)) element.addClass('unavailable');
-			else element.addEvent('click', fn.pass(date.clone()));
-
-			date.increment('year', 1);
-		}
+			else element.addEvent('click', fn.pass(date));
+		});
 
 		return container;
 	},
 
-	months: function(options, date, currentDate, fn){
+	months: function(months, options, currentDate, dateElements, fn){
 		var today = new Date(),
 			month = today.get('month'),
-			thisyear = (date.get('year') == today.get('year')),
-			selectedyear = (date.get('year') == currentDate.get('year')),
+			thisyear = today.get('year'),
+			selectedyear = currentDate.get('year'),
 			container = new Element('div.months'),
-			months = options.months_abbr || Locale.get('Date.months_abbr'),
+			monthsAbbr = options.months_abbr || Locale.get('Date.months_abbr'),
 			element, classes;
 
-		date.set('month', 0);
-		if (options.minDate){
-			date.decrement('month', 1);
-			date.set('date', date.get('lastdayofmonth'));
-			date.increment('month', 1);
-		}
+		months.each(function(_month, i){
+			var date = new Date(_month), year = date.get('year');
+			var where = 'bottom';
 
-		date.set('date', date.get('lastdayofmonth'));
-
-		for (var i = 0; i <= 11; i++){
+			if (options.rtl){
+				where = 'top';
+			}
 
 			classes = '.month.month' + (i + 1);
-			if (i == month && thisyear) classes += '.today';
-			if (i == currentDate.get('month') && selectedyear) classes += '.selected';
-			element = new Element('div' + classes, {text: months[i]}).inject(container);
+			if (i == month && year == thisyear) classes += '.today';
+			if (i == currentDate.get('month') && year == selectedyear) classes += '.selected';
+			element = new Element('div' + classes, {text: monthsAbbr[i]}).inject(container, where);
+			dateElements.push({element: element, time: _month});
 
 			if (isUnavailable('month', date, options)) element.addClass('unavailable');
-			else element.addEvent('click', fn.pass(date.clone()));
-
-			date.increment('month', 1);
-			date.set('date', date.get('lastdayofmonth'));
-		}
+			else element.addEvent('click', fn.pass(date));
+		});
 
 		return container;
 	},
 
-	days: function(options, date, currentDate, fn){
-		var month = date.get('month'),
+	days: function(days, options, currentDate, dateElements, fn){
+		var month = new Date(days[14]).get('month'),
 			todayString = new Date().toDateString(),
 			currentString = currentDate.toDateString(),
 			container = new Element('div.days'),
@@ -852,16 +983,27 @@ var renderers = {
 			localeDaysShort = options.days_abbr || Locale.get('Date.days_abbr'),
 			day, classes, element, weekcontainer, dateString;
 
-		date.setDate(1);
-		while (date.getDay() != options.startDay) date.setDate(date.getDate() - 1);
-
-		for (day = options.startDay; day < (options.startDay + 7); day++){
-			new Element('div.title.day.day' + (day % 7), {
-				text: localeDaysShort[(day % 7)]
-			}).inject(titles);
+		if (!options.rtl){
+			for (day = options.startDay; day < (options.startDay + 7); day++){
+				new Element('div.title.day.day' + (day % 7), {
+					text: localeDaysShort[(day % 7)]
+				}).inject(titles);
+			}
+		} else {
+			for (day = 6 - options.startDay; day > (options.startDay -1); day--){
+				new Element('div.title.day.day' + (day % 7), {
+					text: localeDaysShort[(day % 7)]
+				}).inject(titles);
+			}
 		}
 
-		for (var i = 0; i < 42; i++){
+		days.each(function(_date, i){
+			var date = new Date(_date);
+			var where = 'bottom';
+
+			if (options.rtl){
+				where = 'top';
+			}
 
 			if (i % 7 == 0){
 				weekcontainer = new Element('div.week.week' + (Math.floor(i / 7))).inject(container);
@@ -873,18 +1015,17 @@ var renderers = {
 			if (dateString == currentString) classes += '.selected';
 			if (date.get('month') != month) classes += '.otherMonth';
 
-			element = new Element('div' + classes, {text: date.getDate()}).inject(weekcontainer);
+			element = new Element('div' + classes, {text: date.getDate()}).inject(weekcontainer, where);
+			dateElements.push({element: element, time: _date});
 
 			if (isUnavailable('date', date, options)) element.addClass('unavailable');
 			else element.addEvent('click', fn.pass(date.clone()));
-
-			date.increment('day',  1);
-		}
+		});
 
 		return container;
 	},
 
-	time: function(options, date, currentDate, fn){
+	time: function(options, date, fn){
 		var container = new Element('div.time'),
 			// make sure that the minutes are timeWheelStep * k
 			initMinutes = (date.get('minutes') / options.timeWheelStep).round() * options.timeWheelStep
@@ -959,7 +1100,6 @@ Picker.Date.defineRenderer = function(name, fn){
 	renderers[name] = fn;
 	return this;
 };
-
 
 var limitDate = function(date, min, max){
 	if (min && date < min) return min;
