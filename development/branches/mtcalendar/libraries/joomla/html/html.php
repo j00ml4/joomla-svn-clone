@@ -721,61 +721,6 @@ abstract class JHtml
 	}
 
 	/**
-	 * Displays a calendar control field
-	 *
-	 * @param   string  $value    The date value
-	 * @param   string  $name     The name of the text field
-	 * @param   string  $id       The id of the text field
-	 * @param   string  $format   The date format
-	 * @param   array   $attribs  Additional HTML attributes
-	 *
-	 * @return
-	 * @since   11.1
-	 */
-	public static function calendar($value, $name, $id, $format = '%Y-%m-%d', $attribs = null)
-	{
-		static $done;
-
-		if ($done === null) {
-			$done = array();
-		}
-
-		$readonly = isset($attribs['readonly']) && $attribs['readonly'] == 'readonly';
-		$disabled = isset($attribs['disabled']) && $attribs['disabled'] == 'disabled';
-		if (is_array($attribs)) {
-			$attribs = JArrayHelper::toString($attribs);
-		}
-
-		if ((!$readonly) && (!$disabled)) {
-			// Load the calendar behavior
-			JHtml::_('behavior.calendar');
-			JHtml::_('behavior.tooltip');
-
-			// Only display the triggers once for each control.
-			if (!in_array($id, $done))
-			{
-				$document = JFactory::getDocument();
-				$document->addScriptDeclaration('window.addEvent(\'domready\', function() {Calendar.setup({
-				// Id of the input field
-				inputField: "'.$id.'",
-				// Format of the input field
-				ifFormat: "'.$format.'",
-				// Trigger for the calendar (button ID)
-				button: "'.$id.'_img",
-				// Alignment (defaults to "Bl")
-				align: "Tl",
-				singleClick: true,
-				firstDay: '.JFactory::getLanguage()->getFirstDay().'
-				});});');
-				$done[] = $id;
-			}
-		}
-
-		return '<input type="text" title="'.(0!==(int)$value ? JHtml::_('date',$value):'').'" name="'.$name.'" id="'.$id.'" value="'.htmlspecialchars($value, ENT_COMPAT, 'UTF-8').'" '.$attribs.' />'.
-				($readonly ? '' : JHtml::_('image','system/calendar.png', JText::_('JLIB_HTML_CALENDAR'), array( 'class' => 'calendar', 'id' => $id.'_img'), true));
-	}
-
-	/**
 	 * Add a directory where JHtml should search for helpers. You may
 	 * either pass a string or an array of directories.
 	 *

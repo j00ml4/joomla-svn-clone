@@ -40,25 +40,26 @@ class JFormFieldCalendar extends JFormField
 		// Initialize some field attributes.
 		$format = $this->element['format'] ? (string) $this->element['format'] : '%Y-%m-%d';
 
-		// Build the attributes array.
-		$attributes = array();
-		if ($this->element['size']) {
-			$attributes['size'] = (int) $this->element['size'];
-		}
-		if ($this->element['maxlength']) {
-			$attributes['maxlength'] = (int) $this->element['maxlength'];
-		}
-		if ($this->element['class']) {
-			$attributes['class'] = (string) $this->element['class'];
-		}
-		if ((string) $this->element['readonly'] == 'true') {
-			$attributes['readonly'] = 'readonly';
-		}
-		if ((string) $this->element['disabled'] == 'true') {
-			$attributes['disabled'] = 'disabled';
-		}
-		if ($this->element['onchange']) {
-			$attributes['onchange'] = (string) $this->element['onchange'];
+		$readonly	= ((string) $this->element['readonly'] == 'true') ? ' readonly="readonly"' : '';
+		$disabled	= ((string) $this->element['disabled'] == 'true') ? ' disabled="disabled"' : '';
+		$size		= $this->element['size'] ? ' size="'.(int) $this->element['size'].'"' : '';
+		$maxLength	= $this->element['maxlength'] ? ' maxlength="'.(int) $this->element['maxlength'].'"' : '';
+		$classes	= (string) $this->element['class'];
+		
+		if ((!$readonly) && (!$disabled)) {
+			// Load the calendar behavior
+			JHtml::_('behavior.calendar');
+			JHtml::_('behavior.tooltip');
+			
+			$options['format'] = $format;
+			$options['pickerClass'] = 'datepicker_dashboard';
+			$optionsText = JHtmlBehavior::_getJSObject($options);
+			
+			JFactory::getDocument()->addScriptDeclaration('
+					window.addEvent(\'domready\', function() {
+						new Picker.Date(document.id(\''.$this->id.'\'), '.$optionsText.');
+					});');
+			$classes .= 'calendar-custom';
 		}
 
 		// Handle the special case for "now".
@@ -98,6 +99,9 @@ class JFormFieldCalendar extends JFormField
 				break;
 		}
 
-		return JHtml::_('calendar', $this->value, $this->name, $this->id, $format, $attributes);
+		$class		= $classes ? ' class="'.trim($classes).'"' : '';
+
+		//return JHtml::_('calendar', $this->value, $this->name, $this->id, $format, $attributes);
+		return '<input type="text" value="'.htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8').'" name="'.$this->name.'" id="'.$this->id.'"'.$size.$maxLength.$class.' />';
 	}
 }
