@@ -652,16 +652,24 @@ abstract class JHtmlBehavior
 
 		JFactory::getDocument()->addScriptDeclaration("
 			window.addEvent('domready', function(){
+				var nativeColorUi = false;
+				if (Browser.opera && (Browser.version >= 11.5)) {
+					nativeColorUi = true;
+				}
 				var elems = $$('.input-colorpicker');
 				elems.each(function(item){
-					new MooRainbow(item, 
-					{
-						imgPath: '".JURI::root(true)."/media/system/images/mooRainbow/',
-						onComplete: function(color) {
-							this.element.value = color.hex;
-						},
-						startColor: item.value.hexToRgb(true)
-					})
+					if (nativeColorUi) {
+						item.type = 'color';
+					} else {					
+						new MooRainbow(item, 
+						{
+							imgPath: '".JURI::root(true)."/media/system/images/mooRainbow/',
+							onComplete: function(color) {
+								this.element.value = color.hex;
+							},
+							startColor: item.value.hexToRgb(true)
+						});
+					}
 				});
 			});
 		");
