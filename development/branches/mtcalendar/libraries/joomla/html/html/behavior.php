@@ -628,6 +628,48 @@ abstract class JHtmlBehavior
 	}
 
 	/**
+	 * Add unobtrusive javascript support for a color picker.
+	 *
+	 * @return  void
+	 * @since   11.1
+	 */
+	public static function colorpicker()
+	{
+		static $loaded = false;
+
+		// Only load once
+		if ($loaded) {
+			return;
+		}
+
+		// Include MooTools framework
+		self::framework(true);
+
+		//Add uncompressed versions when debug is enabled
+		$uncompressed	= JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
+		JHtml::_('stylesheet','system/mooRainbow.css', array('media' => 'all'), true);
+		JHtml::_('script','system/mooRainbow.js', false, true);
+
+		JFactory::getDocument()->addScriptDeclaration("
+			window.addEvent('domready', function(){
+				var elems = $$('.input-colorpicker');
+				elems.each(function(item){
+					new MooRainbow(item, 
+					{
+						imgPath: '".JURI::root(true)."/media/system/images/mooRainbow/',
+						onComplete: function(color) {
+							this.element.value = color.hex;
+						},
+						startColor: item.value.hexToRgb(true)
+					})
+				});
+			});
+		");
+
+		$loaded = true;
+	}
+
+	/**
 	 * Keep session alive, for example, while editing or creating an article.
 	 *
 	 * @return  void
