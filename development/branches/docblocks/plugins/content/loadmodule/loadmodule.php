@@ -12,6 +12,12 @@ defined('_JEXEC') or die;
 
 jimport('joomla.plugin.plugin');
 
+/**
+* Loadmodule plugin class.
+*
+ * @package		Joomla.Plugin
+ * @subpackage	Content.loadmodule
+*/
 class plgContentLoadmodule extends JPlugin
 {
 	protected static $modules = array();

@@ -1,6 +1,8 @@
 <?php
 /**
  * @version		$Id: weblinks.php 16731 2010-05-04 05:40:37Z eddieajau $
+ * @package		Joomla.Plugin
+ * @subpackage	Extension.joomla
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -14,7 +16,7 @@ jimport('joomla.plugin.plugin');
  * Joomla! master extension plugin.
  *
  * @package		Joomla.Plugin
- * @subpackage	Extension.Joomla
+ * @subpackage	Extension.joomla
  * @since		1.6
  */
 class plgExtensionJoomla extends JPlugin
