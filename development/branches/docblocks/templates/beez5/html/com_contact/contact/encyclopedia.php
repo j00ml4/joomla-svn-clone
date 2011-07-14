@@ -1,8 +1,8 @@
 <?php
  /**
  * $Id:
- * @package		Joomla.Site
- * @subpackage	Templates.beez5
+ * @package	Joomla.Site
+ * @subpackage	template.beez5
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
  */
