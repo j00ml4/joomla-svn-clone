@@ -12,6 +12,12 @@ defined('_JEXEC') or die;
 
 jimport('joomla.plugin.plugin');
 
+/**
+* Geshi plugin class.
+*
+* @package		Joomla.Plugin
+* @subpackage	Content.geshi
+*/
 class plgContentGeshi extends JPlugin
 {
 	/**
