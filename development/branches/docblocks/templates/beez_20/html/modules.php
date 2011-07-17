@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @package	Joomla.Site
+ * @package		Joomla.Site
  * @subpackage	template.beez_20
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -13,7 +13,13 @@ defined('_JEXEC') or die;
 /**
  * beezDivision chrome.
  *
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ * 
  * @since	1.6
+ * 
+ * @return	void
  */
 function modChrome_beezDivision($module, &$params, &$attribs)
 {
@@ -29,7 +35,13 @@ function modChrome_beezDivision($module, &$params, &$attribs)
 /**
  * beezHide chrome.
  *
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ * 
  * @since	1.6
+ * 
+ * @return	void
  */
 function modChrome_beezHide($module, &$params, &$attribs)
 {
@@ -57,7 +69,13 @@ function modChrome_beezHide($module, &$params, &$attribs)
 /**
  * beezTabs chrome.
  *
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ * 
  * @since	1.6
+ * 
+ * @return	void
  */
 function modChrome_beezTabs($module, $params, $attribs)
 {

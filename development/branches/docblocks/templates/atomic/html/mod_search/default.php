@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id: default.php 17780 2010-06-20 09:03:02Z dextercowley $
- * @package	Joomla.Site
+ * @package		Joomla.Site
  * @subpackage	template.atomic
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt

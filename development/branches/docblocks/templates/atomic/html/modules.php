@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id: modules.php 14276 2010-01-18 14:20:28Z louis $
- * @package	Joomla.Site
+ * @package		Joomla.Site
  * @subpackage	template.atomic
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -29,6 +29,17 @@ defined('_JEXEC') or die;
  * function uses the "sidebar" style to change the header on the sidebar to H3.
  */
 
+/**
+ * container chrome.
+ *
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ *
+ * @since	1.6
+ *
+ * @return	void
+ */
 function modChrome_container($module, &$params, &$attribs)
 {
 	if (!empty ($module->content)) : ?>
@@ -37,6 +48,18 @@ function modChrome_container($module, &$params, &$attribs)
 		</div>
 	<?php endif;
 }
+
+/**
+* bottommodule chrome.
+*
+* @param   object   $module
+* @param   object   $params
+* @param   object   $attribs
+*
+* @since	1.6
+*
+* @return	void
+*/
 function modChrome_bottommodule($module, &$params, &$attribs)
 {
 	if (!empty ($module->content)) : ?>
@@ -46,6 +69,18 @@ function modChrome_bottommodule($module, &$params, &$attribs)
 		<?php echo $module->content; ?>
 	<?php endif;
 }
+
+/**
+* sidebar chrome.
+*
+* @param   object   $module
+* @param   object   $params
+* @param   object   $attribs
+*
+* @since	1.6
+*
+* @return	void
+*/
 function modChrome_sidebar($module, &$params, &$attribs)
 {
 	if (!empty ($module->content)) : ?>
