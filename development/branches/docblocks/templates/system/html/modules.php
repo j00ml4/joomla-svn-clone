@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id$
- * @package	Joomla.Site
+ * @package		Joomla.Site
  * @subpackage	template.system
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
@@ -10,16 +10,28 @@
 // no direct access
 defined('_JEXEC') or die;
 
-/*
- * none (output raw module content)
+/**
+ * Module chrome that outputs raw module content
+ * 
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ *
+ * @return  void
  */
 function modChrome_none($module, &$params, &$attribs)
 {
 	echo $module->content;
 }
 
-/*
+/**
  * Module chrome that wraps the module in a table
+ * 
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ *
+ * @return  void
  */
 function modChrome_table($module, &$params, &$attribs)
 { ?>
@@ -40,8 +52,14 @@ function modChrome_table($module, &$params, &$attribs)
 	<?php
 }
 
-/*
+/**
  * Module chrome that wraps the tabled module output in a <td> tag of another table
+ * 
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ *
+ * @return  void
  */
 function modChrome_horz($module, &$params, &$attribs)
 { ?>
@@ -55,8 +73,14 @@ function modChrome_horz($module, &$params, &$attribs)
 	<?php
 }
 
-/*
- * xhtml (divs and font headder tags)
+/**
+ * Module chrome that wraps the tabled module output in xhtml (divs and font header tags)
+ * 
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ *
+ * @return  void
  */
 function modChrome_xhtml($module, &$params, &$attribs)
 {
@@ -70,8 +94,14 @@ function modChrome_xhtml($module, &$params, &$attribs)
 	<?php endif;
 }
 
-/*
+/**
  * Module chrome that allows for rounded corners by wrapping in nested div tags
+ * 
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ *
+ * @return  void
  */
 function modChrome_rounded($module, &$params, &$attribs)
 { ?>
@@ -90,8 +120,14 @@ function modChrome_rounded($module, &$params, &$attribs)
 	<?php
 }
 
-/*
+/**
  * Module chrome that add preview information to the module
+ * 
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ *
+ * @return  void
  */
 function modChrome_outline($module, &$params, &$attribs)
 {

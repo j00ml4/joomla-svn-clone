@@ -13,7 +13,13 @@ defined('_JEXEC') or die;
 /**
  * beezDivision chrome.
  *
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ * 
  * @since	1.6
+ * 
+ * @return	void
  */
 function modChrome_beezDivision($module, &$params, &$attribs)
 {
@@ -29,7 +35,13 @@ function modChrome_beezDivision($module, &$params, &$attribs)
 /**
  * beezHide chrome.
  *
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ * 
  * @since	1.6
+ * 
+ * @return	void
  */
 function modChrome_beezHide($module, &$params, &$attribs)
 {
@@ -57,7 +69,13 @@ function modChrome_beezHide($module, &$params, &$attribs)
 /**
  * beezTabs chrome.
  *
+ * @param   object   $module
+ * @param   object   $params
+ * @param   object   $attribs
+ * 
  * @since	1.6
+ * 
+ * @return	void
  */
 function modChrome_beezTabs($module, $params, $attribs)
 {

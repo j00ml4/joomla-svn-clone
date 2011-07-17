@@ -1,7 +1,7 @@
 <?php
 /**
  * @version		$Id: default.php 17137 2010-05-17 07:00:07Z infograf768 $
- * @package	Joomla.Site
+ * @package		Joomla.Site
  * @subpackage	template.beez5
  * @copyright	Copyright (C) 2005 - 2011 Open Source Matters, Inc. All rights reserved.
  * @license		GNU General Public License version 2 or later; see LICENSE.txt
