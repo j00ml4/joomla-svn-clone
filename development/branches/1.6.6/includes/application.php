@@ -174,12 +174,12 @@ final class JSite extends JApplication
 					$document->setMetaData('rights', $this->getCfg('MetaRights'));
 					$document->setMetaData('language', $lang_code);
 					if ($router->getMode() == JROUTER_MODE_SEF) {
-						$document->setBase(JURI::current());
+						$document->setBase(htmlspecialchars(JURI::current()));
 					}
 					break;
 
 				case 'feed':
-					$document->setBase(JURI::current());
+					$document->setBase(htmlspecialchars(JURI::current()));
 					break;
 			}
 
