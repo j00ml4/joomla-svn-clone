@@ -611,6 +611,7 @@ class JCategoryNode extends JObject
 	 * @param   $category
 	 *
 	 * @return  JCategoryNode
+	 *
 	 * @since   11.1
 	 */
 	public function __construct($category = null, &$constructor = null)
@@ -632,7 +633,7 @@ class JCategoryNode extends JObject
 	 *
 	 * If the category already has a parent, the link is unset
 	 *
-	 * @param   JCategoryNode|null	$parent	The parent to be setted
+	 * @param   mixed   $parent  JCategoryNode for the parent to be set or null
 	 *
 	 * @return  void
 	 * @since   11.1
@@ -671,7 +672,7 @@ class JCategoryNode extends JObject
 	 *
 	 * If the child already has a parent, the link is unset
 	 *
-	 * @param   JNode	$child	The child to be added.
+	 * @param   JNode  $child   The child to be added.
 	 *
 	 * @return  void
 	 * @since   11.1
@@ -686,9 +687,10 @@ class JCategoryNode extends JObject
 	/**
 	 * Remove a specific child
 	 *
-	 * @param   integer  $id	ID of a category
+	 * @param   integer  $id  ID of a category
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	function removeChild($id)
@@ -700,9 +702,9 @@ class JCategoryNode extends JObject
 	/**
 	 * Get the children of this node
 	 *
-	 * @param   boolean  $recursive
+	 * @param   boolean  $recursive    False by default 
 	 *
-	 * @return  array    the children
+	 * @return  array    The children
 	 * @since   11.1
 	 */
 	function &getChildren($recursive = false)
@@ -733,7 +735,8 @@ class JCategoryNode extends JObject
 	/**
 	 * Get the parent of this node
 	 *
-	 * @return  JNode|null the parent
+	 * @return  mixed  JNode or null
+	 *
 	 * @since   11.1
 	 */
 	function &getParent()
@@ -744,7 +747,8 @@ class JCategoryNode extends JObject
 	/**
 	 * Test if this node has children
 	 *
-	 * @return  boolean
+	 * @return  boolean  True if there is a child
+	 *
 	 * @since   11.1
 	 */
 	function hasChildren()
@@ -756,6 +760,7 @@ class JCategoryNode extends JObject
 	 * Test if this node has a parent
 	 *
 	 * @return  boolean    True if there is a parent
+	 *
 	 * @since   11.1
 	 */
 	function hasParent()
@@ -767,8 +772,11 @@ class JCategoryNode extends JObject
 	 * Function to set the left or right sibling of a category
 	 *
 	 * @param   object   $sibling  JCategoryNode object for the sibling
-	 * @param   boolean  $right if set to false, the sibling is the left one
-	 * @return void
+	 * @param   boolean  $right    If set to false, the sibling is the left one
+	 *
+	 * @return  void
+	 * 
+	 * @since   11.1
 	 */
 	function setSibling($sibling, $right = true)
 	{
@@ -786,7 +794,9 @@ class JCategoryNode extends JObject
 	 * @param   boolean  $right        If set to false, returns the left sibling
 	 *
 	 * @return  JCategoryNode or null  JCategoryNode object with the sibling information or
-	 *                                   null if there is no sibling on that side.
+	 *                                 null if there is no sibling on that side.
+	 *
+	 * @since   11.1
 	 */
 	function getSibling($right = true)
 	{
@@ -810,6 +820,7 @@ class JCategoryNode extends JObject
 	 * Returns the category parameters
 	 *
 	 * @return  JRegistry
+	 *
 	 * @since   11.1
 	 */
 	function getParams()
@@ -827,6 +838,7 @@ class JCategoryNode extends JObject
 	 * Returns the category metadata
 	 *
 	 * @return  JRegistry  A JRegistry object containing the metadata
+	 *
 	 * @since   11.1
 	 */
 	function getMetadata()
@@ -844,6 +856,8 @@ class JCategoryNode extends JObject
 	 * Returns the category path to the root category
 	 *
 	 * @return  array
+	 *
+	 * @since   11.1
 	 */
 	function getPath()
 	{
@@ -851,11 +865,13 @@ class JCategoryNode extends JObject
 	}
 
 	/**
-	 * Returns the user that authored the category
+	 * Returns the user that created the category
 	 *
-	 * @param   boolean  $modified_user	Returns the modified_user when set to true
+	 * @param   boolean  $modified_user   Returns the modified_user when set to true
 	 *
 	 * @return  JUser    A JUser object containing a userid
+	 *
+	 * @since   11.1
 	 */
 	function getAuthor($modified_user = false)
 	{
@@ -866,6 +882,13 @@ class JCategoryNode extends JObject
 		return JFactory::getUser($this->created_user_id);
 	}
 
+	/**
+	 * Set to load all children
+	 *
+	 * @return  void
+	 *
+	 * @since 11.1
+	 */
 	function setAllLoaded()
 	{
 		$this->_allChildrenloaded = true;
@@ -875,6 +898,15 @@ class JCategoryNode extends JObject
 		}
 	}
 
+	/**
+	 * Returns the number of items. 
+	 *
+	 * @param    boolean  $recursive  If false number of children, if true number of descendants
+	 *
+	 * @return   integer  Number of children or descendants
+	 *
+	 * @since 11.1
+	 */
 	function getNumItems($recursive = false)
 	{
 		if ($recursive) {

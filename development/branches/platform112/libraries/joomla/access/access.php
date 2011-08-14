@@ -140,7 +140,8 @@ class JAccess
 		// Get parent groups and leaf group
 		if (!isset($paths[$groupId])) {
 			$paths[$groupId] = array();
-			foreach($groups as $group)
+
+			foreach ($groups as $group)
 			{
 				if ($group->lft <= $groups[$groupId]->lft && $group->rgt >= $groups[$groupId]->rgt) {
 					$paths[$groupId][] = $group->id;

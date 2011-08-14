@@ -82,7 +82,7 @@ class JRules
 	 */
 	public function mergeCollection($input)
 	{
-		// Check if the input is a
+		// Check if the input is an array.
 		if (is_array($input)) {
 			foreach ($input as $actions)
 			{
