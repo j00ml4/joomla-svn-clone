@@ -644,7 +644,7 @@ class JApplication extends JObject
 			// Import the user plugin group.
 			JPluginHelper::importPlugin('user');
 
-			// OK, the credentials are authenticated.  Lets fire the onLogin event.
+			// OK, the credentials are authenticated and user is authorised.  Lets fire the onLogin event.
 			$results = $this->triggerEvent('onUserLogin', array((array)$response, $options));
 
 			/*
@@ -686,7 +686,7 @@ class JApplication extends JObject
 			return false;
 		}
 
-		// If status is success, any error will ahve been raised by the user plugin
+		// If status is success, any error will have been raised by the user plugin
 		if ($response->status !== JAUTHENTICATE_STATUS_SUCCESS) {
 			JError::raiseWarning('SOME_ERROR_CODE', JText::_('JLIB_LOGIN_AUTHENTICATE'));
 		}

@@ -76,7 +76,8 @@ class JRule
 		}
 
 		if (is_array($identities)) {
-			foreach ($identities as $identity => $allow) {
+			foreach ($identities as $identity => $allow)
+			{
 				$this->mergeIdentity($identity, $allow);
 			}
 		}
