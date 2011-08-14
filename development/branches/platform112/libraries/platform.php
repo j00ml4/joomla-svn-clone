@@ -26,8 +26,8 @@ final class JPlatform
 	const STATUS = 'Stable+Modified';
 	// Build number.
 	const BUILD = 0;
-	// Code name.Omar
-	const CODE_NAME = 'Ember';
+	// Code name.
+	const CODE_NAME = 'Omar';
 	// Release date.
 	const RELEASE_DATE = '27-Jul-2011';
 	// Release time.

@@ -61,7 +61,7 @@ class JCategories
 	/**
 	 * Name of the category field
 	 *
-	 * @var string
+	 * @var    string
 	 * @since  11.1
 	 */
 	protected $_field = null;
@@ -69,7 +69,7 @@ class JCategories
 	/**
 	 * Name of the key field
 	 *
-	 * @var string
+	 * @var    string
 	 * @since  11.1
 	 */
 	protected $_key = null;
@@ -77,7 +77,7 @@ class JCategories
 	/**
 	 * Name of the items state field
 	 *
-	 * @var string
+	 * @var    string
 	 * @since  11.1
 	 */
 	protected $_statefield = null;
@@ -85,7 +85,7 @@ class JCategories
 	/**
 	 * Array of options
 	 *
-	 * @var array
+	 * @var    array
 	 * @since  11.1
 	 */
 	protected $_options = null;
@@ -95,7 +95,8 @@ class JCategories
 	 *
 	 * @param   array  $options  Array of options
 	 *
-	 * @return  JCategories  JCategories object
+	 * @return  JCategories object
+	 *
 	 * @since   11.1
 	 */
 	public function __construct($options)
@@ -118,7 +119,8 @@ class JCategories
 	 * @param   string  $extension  Name of the categories extension
 	 * @param   array   $options    An array of options
 	 *
-	 * @return  Jcategories  Jcategories object
+	 * @return  Jcategories         Jcategories object
+	 *
 	 * @since   11.1
 	 */
 	public static function getInstance($extension, $options = array())
@@ -129,10 +131,10 @@ class JCategories
 			return self::$instances[$hash];
 		}
 
-		$parts = explode('.',$extension);
+		$parts = explode('.', $extension);
 		$component = 'com_'.strtolower($parts[0]);
 		$section = count($parts) > 1 ? $parts[1] : '';
-		$classname = ucfirst(substr($component,4)).ucfirst($section).'Categories';
+		$classname = ucfirst(substr($component, 4)).ucfirst($section).'Categories';
 
 		if (!class_exists($classname)) {
 			$path = JPATH_SITE . '/components/' . $component . '/helpers/category.php';
@@ -153,9 +155,10 @@ class JCategories
 	 * Loads a specific category and all its children in a JCategoryNode object
 	 *
 	 * @param   mixed    $id         an optional id integer or equal to 'root'
-	 * @param   boolean  $forceload
+	 * @param   boolean  $forceload  True to force  the _load method to execute
 	 *
-	 * @return  JCategoryNode|null
+	 * @return  mixed    JCategoryNode object or null if $id is not valid
+	 *
 	 * @since   11.1
 	 */
 	public function get($id = 'root', $forceload = false)
@@ -185,11 +188,12 @@ class JCategories
 		return false;
 	}
 	/**
-	 * Load
+	 * Load method
 	 *
-	 * @param   integer    $id
+	 * @param   integer    $id  Id of category to load
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	protected function _load($id)
@@ -333,99 +337,224 @@ class JCategories
 class JCategoryNode extends JObject
 {
 	/**
-	 *  @var int Primary key
+	 * Primary key
+	 *
+	 *  @var    integer
 	 *  @since  11.1
 	 */
 	public $id					= null;
 
+	/**
+	 * The id of the category in the asset table
+	 *
+	 * @var    integer
+	 * @since  11.1
+	 */
 	public $asset_id			= null;
 
+	/**
+	 * The id of the parent of category in the asset table, 0 for category root
+	 *
+	 * @var    integer
+	 * @since  11.1
+	 */
+	
 	public $parent_id			= null;
 
+	/**
+	 * The lft value for this category in the category tree
+	 *
+	 * @var    integer
+	 * @since  11.1
+	 */
+	
 	public $lft					= null;
 
+	/**
+	 * The rgt value for this category in the category tree
+	 *
+	 * @var    integer
+	 * @since  11.1
+	 */
 	public $rgt					= null;
-
+	/**
+	 * The depth of this category's position in the category tree
+	 *
+	 * @var    integer
+	 * @since  11.1
+	 */
 	public $level				= null;
 
+	/**
+	 * The extension this category is associated with
+	 *
+	 * @var    integer
+	 * @since  11.1
+	 */
 	public $extension			= null;
 
 	/**
-	 * @var string The menu title for the category (a short name)
+	 * The menu title for the category (a short name)
+	 *
+	 * @var string
 	 * @since  11.1
 	 */
 	public $title				= null;
 
 	/**
-	 * @var string The the alias for the category
+	 * The the alias for the category
+	 *
+	 * @var    string
 	 * @since  11.1
 	 */
 	public $alias				= null;
 
 	/**
-	 *  @var string
+	 * Description of the category.
+	 *
+	 * @var string
+	 * @since  11.1
 	 */
 	public $description			= null;
 
 	/**
-	 * @var boolean
+	 * The publication status of the category
+	 * 
+	 * @var    boolean
 	 * @since  11.1
 	 */
 	public $published			= null;
 
 	/**
+	 * Whether the category is or is not checked out
+	 *
 	 * @var boolean
 	 * @since  11.1
 	 */
 	public $checked_out			= 0;
 
 	/**
-	 * @var time
+	 * The time at which the category was checked out 
+	 *
+	 * @var    time
 	 * @since  11.1
 	 */
 	public $checked_out_time	= 0;
 
 	/**
-	 * @var int
+	 * Access level for the category
+	 *
+	 * @var integer
 	 * @since  11.1
 	 */
 	public $access				= null;
 
 	/**
+	 * JSON string of parameters
+	 *
 	 * @var string
 	 * @since  11.1
 	 */
-
 	public $params				= null;
 
+	/**
+	 * Metadata description
+	 *
+	 * @var string
+	 * @since  11.1
+	 */
+	
 	public $metadesc			= null;
 
+	/**
+	 * Key words for meta data
+	 *
+	 * @var string
+	 * @since  11.1
+	 */
 	public $metakey				= null;
 
+	/**
+	 * JSON string of other meta data
+	 *
+	 * @var string
+	 * @since  11.1
+	 */
 	public $metadata			= null;
 
 	public $created_user_id		= null;
 
+	/**
+	 * The time at which the category was created
+	 *
+	 * @var    time
+	 * @since  11.1
+	 */
 	public $created_time		= null;
 
 	public $modified_user_id	= null;
 
+	/**
+	 * The time at which the category was modified
+	 *
+	 * @var    time
+	 * @since  11.1
+	 */
 	public $modified_time		= null;
 
+	/**
+	 * Nmber of times the category has been viewed
+	 *
+	 * @var    integer
+	 * @since  11.1
+	 */
 	public $hits				= null;
 
+	/**
+	 * The language for the category in xx-XX format 
+	 *
+	 * @var    time
+	 * @since  11.1
+	 */
 	public $language			= null;
 
+	/**
+	 * Number of items in this category or descendants of this category
+	 *
+	 * @var    integer
+	 * @since  11.1
+	 */
 	public $numitems			= null;
 
+	/**
+	 * Number of children items
+	 *
+	 * @var
+	 * @since  11.1
+	 */
+	
 	public $childrennumitems	= null;
 
+	/**
+	 * Slug fo the category (used in URL)
+	 *
+	 * @var    string
+	 * @since  11.1
+	 */
 	public $slug				= null;
 
+	/**
+	 * Array of  assets
+	 *
+	 * @var    array
+	 * @since  11.1
+	 */
 	public $assets				= null;
 
 	/**
-	 * @var Parent Category
+	 * Parent Category object
+	 *
+	 * @var    object
 	 * @since  11.1
 	 */
 	protected $_parent = null;
@@ -437,31 +566,41 @@ class JCategoryNode extends JObject
 	protected $_children = array();
 
 	/**
-	 * @var Path from root to this category
+	 * Path from root to this category
+	 *
+	 * @var    array
 	 * @since  11.1
 	 */
 	protected $_path = array();
 
 	/**
-	 * @var Category left of this one
+	 * Category left of this one
+	 *
+	 * @var    integer
 	 * @since  11.1
 	 */
 	protected $_leftSibling = null;
 
 	/**
-	 * @var Category right of this one
+	 * Category right of this one
+	 *
+	 * @var 
 	 * @since  11.1
 	 */
 	protected $_rightSibling = null;
 
 	/**
-	 * @var boolean true if all children have been loaded
+	 * true if all children have been loaded
+	 *
+	 * @var boolean 
 	 * @since  11.1
 	 */
 	protected $_allChildrenloaded = false;
 
 	/**
-	 * @var Constructor of this tree
+	 * Constructor of this tree
+	 *
+	 * @var 
 	 * @since  11.1
 	 */
 	protected $_constructor = null;
