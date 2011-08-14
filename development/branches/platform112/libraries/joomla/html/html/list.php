@@ -55,7 +55,7 @@ abstract class JHtmlList
 		}
 
 		if (!$javascript) {
-			$javascript = "onchange=\"if (document.forms.adminForm." . $name . ".options[selectedIndex].value!='') {document.imagelib.src='..$directory' + document.forms.adminForm." . $name . ".options[selectedIndex].value} else {document.imagelib.src='templates/bluestork/images/admin/blank.png'}\"";
+			$javascript = "onchange=\"if (document.forms.adminForm." . $name . ".options[selectedIndex].value!='') {document.imagelib.src='..$directory' + document.forms.adminForm." . $name . ".options[selectedIndex].value} else {document.imagelib.src='media/system/images/blank.png'}\"";
 		}
 
 		jimport('joomla.filesystem.folder');
@@ -219,6 +219,7 @@ abstract class JHtmlList
 		$and = '';
 		if ($reg) {
 		// Does not include registered users in the list
+		// @deprecated
 			$and = ' AND m.group_id != 2';
 		}
 
