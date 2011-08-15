@@ -26,7 +26,7 @@ class JInstallerFile extends JAdapterInstance
 	/**
 	 * Custom loadLanguage method
 	 *
-	 * @param   string  $path the path where to find language files
+	 * @param   string  $path  The path on which to find language files
 	 *
 	 * @since   11.1
 	 */
@@ -157,8 +157,8 @@ class JInstallerFile extends JAdapterInstance
 					return false;
 				}
 
-				 // Since we created a directory and will want to remove it if we have to roll back
-				 // the installation due to some errors, lets add it to the installation step stack
+				 // Since we created a directory and will want to remove it if we have to roll back.
+				 // the installation due to some errors, lets add it to the installation step stack.
 
 				if ($created) {
 					$this->parent->pushStep(array ('type' => 'folder', 'path' => $folder));
@@ -355,7 +355,7 @@ class JInstallerFile extends JAdapterInstance
 	/**
 	 * Custom uninstall method
 	 *
-	 * @param   string  $id	The id of the file to uninstall
+	 * @param   string   $id   The id of the file to uninstall
 	 *
 	 * @return  boolean  True on success
 	 *
@@ -495,7 +495,7 @@ class JInstallerFile extends JAdapterInstance
 						}
 					}
 
-					// Delete any folders that don't have any content in them
+					// Delete any folders that don't have any content in them.
 					foreach($folderList as $folder)
 					{
 						$files = JFolder::files($folder);
@@ -563,7 +563,7 @@ class JInstallerFile extends JAdapterInstance
 	/**
 	 * Function used to populate files and folder list
 	 *
-	 * @return  boolean	none
+	 * @return  boolean  none
 	 *
 	 * @since   11.1
 	 */
@@ -605,11 +605,11 @@ class JInstallerFile extends JAdapterInstance
 			}
 
 
-			//Create folder path
-			$sourceFolder = empty($folder)?$packagePath:$packagePath . '/' . $folder;
-			$targetFolder = empty($target)?$jRootPath:$jRootPath . '/' . $target;
+			// Create folder path
+			$sourceFolder = empty($folder) ? $packagePath:$packagePath . '/' . $folder;
+			$targetFolder = empty($target) ? $jRootPath:$jRootPath . '/' . $target;
 
-			//Check if source folder exists
+			// Check if source folder exists
 			if (! JFolder::exists($sourceFolder)) {
 				JError::raiseWarning(1, JText::sprintf('JLIB_INSTALLER_ABORT_FILE_INSTALL_FAIL_SOURCE_DIRECTORY', $sourceFolder));
 				// If installation fails, rollback

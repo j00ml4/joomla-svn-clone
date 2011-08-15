@@ -204,7 +204,7 @@ class JInstallerComponent extends JAdapterInstance
 			}
 			else if (!$this->parent->getOverwrite()) {
 				// Overwrite is set.
-				// We didn't have overwrite set, find an update function or find an update tag so lets call it safe
+				// We didn't have overwrite set, find an update function or find an update tag so let's call it safe
 				if (file_exists($this->parent->getPath('extension_site'))) {
 					// If the site exists say so.
 					JError::raiseWarning(1, JText::sprintf('JLIB_INSTALLER_ERROR_COMP_INSTALL_DIR_SITE', $this->parent->getPath('extension_site')));
@@ -219,7 +219,7 @@ class JInstallerComponent extends JAdapterInstance
 
 		// Installer Trigger Loading
 
-		// If there is an manifest class file, lets load it; we'll copy it later (don't have dest yet)
+		// If there is an manifest class file, let's load it; we'll copy it later (don't have dest yet)
 		$manifestScript = (string)$this->manifest->scriptfile;
 
 		if ($manifestScript) {
@@ -322,7 +322,7 @@ class JInstallerComponent extends JAdapterInstance
 		$this->parent->parseLanguages($this->manifest->administration->languages, 1);
 
 		// Deprecated install, remove after 1.6
-		// If there is an install file, lets copy it.
+		// If there is an install file, let's copy it.
 		$installFile = (string)$this->manifest->installfile;
 
 		if ($installFile) {
@@ -406,7 +406,7 @@ class JInstallerComponent extends JAdapterInstance
 		 */
 
 		/*
-		 * If we have an install script, lets include it, execute the custom
+		 * If we have an install script, let's include it, execute the custom
 		 * install method, and append the return value from the custom install
 		 * method to the installation message.
 		 */
@@ -556,7 +556,7 @@ class JInstallerComponent extends JAdapterInstance
 		// Get a database connector object
 		$db = $this->parent->getDbo();
 
-		// set the overwrite setting
+		// Set the overwrite setting
 		$this->parent->setOverwrite(true);
 
 		// Get the extension manifest object
@@ -600,7 +600,7 @@ class JInstallerComponent extends JAdapterInstance
 		$old_manifest = null;
 		// Create a new installer because findManifest sets stuff
 		// Look in the administrator first
-		$tmpInstaller = new JInstaller;
+		$tmpInstaller = new JInstaller; 
 		$tmpInstaller->setPath('source', $this->parent->getPath('extension_administrator'));
 
 		if (!$tmpInstaller->findManifest()) {
@@ -641,7 +641,7 @@ class JInstallerComponent extends JAdapterInstance
 		 * Installer Trigger Loading
 		 * ---------------------------------------------------------------------------------------------
 		 */
-		// If there is an manifest class file, lets load it; we'll copy it later (don't have dest yet)
+		// If there is an manifest class file, let's load it; we'll copy it later (don't have dest yet)
 		$manifestScript = (string)$this->manifest->scriptfile;
 
 		if ($manifestScript) {
@@ -656,9 +656,9 @@ class JInstallerComponent extends JAdapterInstance
 			$classname = $element.'InstallerScript';
 
 			if (class_exists($classname)) {
-				// create a new instance
+				// Create a new instance
 				$this->parent->manifestClass = new $classname($this);
-				// and set this so we can copy it later
+				// And set this so we can copy it later
 				$this->set('manifest_script', $manifestScript);
 				// Note: if we don't find the class, don't bother to copy the file
 			}
@@ -677,7 +677,8 @@ class JInstallerComponent extends JAdapterInstance
 			}
 		}
 
-		$msg = ob_get_contents(); // create msg object; first use here
+		 // Create msg object; first use here
+		$msg = ob_get_contents();
 		ob_end_clean();
 
 		/**
@@ -686,7 +687,7 @@ class JInstallerComponent extends JAdapterInstance
 		 * ---------------------------------------------------------------------------------------------
 		 */
 
-		// If the component directory does not exist, lets create it
+		// If the component directory does not exist, let's create it
 		$created = false;
 
 		if (!file_exists($this->parent->getPath('extension_site'))) {
@@ -699,13 +700,13 @@ class JInstallerComponent extends JAdapterInstance
 
 		/*
 		 * Since we created the component directory and will want to remove it if we have to roll back
-		 * the installation, lets add it to the installation step stack
+		 * the installation, let's add it to the installation step stack
 		 */
 		if ($created) {
 			$this->parent->pushStep(array ('type' => 'folder', 'path' => $this->parent->getPath('extension_site')));
 		}
 
-		// If the component admin directory does not exist, lets create it
+		// If the component admin directory does not exist, let's create it
 		$created = false;
 
 		if (!file_exists($this->parent->getPath('extension_administrator'))) {
@@ -720,7 +721,7 @@ class JInstallerComponent extends JAdapterInstance
 
 		/*
 		 * Since we created the component admin directory and we will want to remove it if we have to roll
-		 * back the installation, lets add it to the installation step stack
+		 * back the installation, let's add it to the installation step stack
 		 */
 		if ($created) {
 			$this->parent->pushStep(array ('type' => 'folder', 'path' => $this->parent->getPath('extension_administrator')));
@@ -751,7 +752,7 @@ class JInstallerComponent extends JAdapterInstance
 		$this->parent->parseLanguages($this->manifest->administration->languages, 1);
 
 		// Deprecated install, remove after 1.6
-		// If there is an install file, lets copy it.
+		// If there is an install file, let's copy it.
 		$installFile = (string)$this->manifest->installfile;
 
 		if ($installFile) {
@@ -771,7 +772,7 @@ class JInstallerComponent extends JAdapterInstance
 		}
 
 		// Deprecated uninstall, remove after 1.6
-		// If there is an uninstall file, lets copy it.
+		// If there is an uninstall file, let's copy it.
 		$uninstallFile = (string)$this->manifest->uninstallfile;
 
 		if ($uninstallFile) {
@@ -789,7 +790,7 @@ class JInstallerComponent extends JAdapterInstance
 			}
 		}
 
-		// If there is a manifest script, lets copy it.
+		// If there is a manifest script, let's copy it.
 		if ($this->get('manifest_script')) {
 			$path['src'] = $this->parent->getPath('source') . '/' . $this->get('manifest_script');
 			$path['dest'] = $this->parent->getPath('extension_administrator') . '/' . $this->get('manifest_script');
@@ -847,7 +848,7 @@ class JInstallerComponent extends JAdapterInstance
 		 */
 
 		/*
-		 * If we have an install script, lets include it, execute the custom
+		 * If we have an install script, let's include it, execute the custom
 		 * install method, and append the return value from the custom install
 		 * method to the installation message.
 		 */
@@ -875,7 +876,7 @@ class JInstallerComponent extends JAdapterInstance
 		}
 
 		/*
-		 * If we have an update script, lets include it, execute the custom
+		 * If we have an update script, let's include it, execute the custom
 		 * update method, and append the return value from the custom update
 		 * method to the installation message.
 		 */
@@ -1052,7 +1053,7 @@ class JInstallerComponent extends JAdapterInstance
 		 * Installer Trigger Loading and Uninstall
 		 * ---------------------------------------------------------------------------------------------
 		 */
-		// If there is an manifest class file, lets load it; we'll copy it later (don't have dest yet)
+		// If there is an manifest class file, let's load it; we'll copy it later (don't have dest yet)
 		$scriptFile = (string)$this->manifest->scriptfile;
 
 		if ($scriptFile) {
@@ -1092,7 +1093,7 @@ class JInstallerComponent extends JAdapterInstance
 		 * ---------------------------------------------------------------------------------------------
 		 */
 
-		// Now lets load the uninstall file if there is one and execute the uninstall function if it exists.
+		// Now let's load the uninstall file if there is one and execute the uninstall function if it exists.
 		$uninstallFile = (string)$this->manifest->uninstallfile;
 
 		if ($uninstallFile) {
@@ -1215,7 +1216,7 @@ class JInstallerComponent extends JAdapterInstance
 				}
 			}
 
-			// Now we will no longer need the extension object, so lets delete it and free up memory
+			// Now we will no longer need the extension object, so let's delete it and free up memory
 			$row->delete($row->extension_id);
 			unset ($row);
 
@@ -1271,7 +1272,7 @@ class JInstallerComponent extends JAdapterInstance
 			$component_id = $componentrow->extension_id;
 		}
 		else {
-			// Lets Find the extension id
+			// let's Find the extension id
 			$query->clear();
 			$query->select('e.extension_id');
 			$query->from('#__extensions AS e');
@@ -1614,7 +1615,7 @@ class JInstallerComponent extends JAdapterInstance
 		 * Installer Trigger Loading
 		 * ---------------------------------------------------------------------------------------------
 		 */
-		// If there is an manifest class file, lets load it; we'll copy it later (don't have dest yet)
+		// If there is an manifest class file, let's load it; we'll copy it later (don't have dest yet)
 		$manifestScript = (string)$this->manifest->scriptfile;
 
 		if ($manifestScript) {
@@ -1653,7 +1654,7 @@ class JInstallerComponent extends JAdapterInstance
 		$msg = ob_get_contents(); // create msg object; first use here
 		ob_end_clean();
 
-		// Normally we would copy files and create directories, lets skip to the optional files
+		// Normally we would copy files and create directories, let's skip to the optional files
 		// Note: need to dereference things!
 		// Parse optional tags
 		//$this->parent->parseMedia($this->manifest->media);
@@ -1670,11 +1671,11 @@ class JInstallerComponent extends JAdapterInstance
 
 		/*
 		 * Let's run the install queries for the component
-		 *	If Joomla 1.5 compatible, with discreet sql files - execute appropriate
-		 *	file for utf-8 support or non-utf-8 support
+		 * If Joomla 1.5 compatible, with discreet sql files - execute appropriate
+		 * file for utf-8 support or non-utf-8 support
 		 */
-		// try for Joomla 1.5 type queries
-		// second argument is the utf compatible version attribute
+		// Try for Joomla 1.5 type queries
+		// Second argument is the utf compatible version attribute
 		if (isset($this->manifest->install->sql)) {
 			$utfresult = $this->parent->parseSQLFiles($this->manifest->install->sql);
 
@@ -1701,7 +1702,7 @@ class JInstallerComponent extends JAdapterInstance
 		 */
 
 		/*
-		 * If we have an install script, lets include it, execute the custom
+		 * If we have an install script, let's include it, execute the custom
 		 * install method, and append the return value from the custom install
 		 * method to the installation message.
 		 */
