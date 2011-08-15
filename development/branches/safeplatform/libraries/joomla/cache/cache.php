@@ -33,16 +33,20 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
  * @subpackage  Access
  * @since       11.1
  */
- class JCache extends JObject
+class JCache extends JObject
 {
 	/**
-	 * @var    object  Storage handler
+	 * Storage handler
+	 * 
+	 * @var    object
 	 * @since  11.1
 	 */
 	public static $_handler = array();
 
 	/**
-	 * @var    Options
+	 * Options
+	 *
+	 * @var    Array
 	 * @since  11.1
 	 */
 	public $_options;
@@ -89,6 +93,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * @param   array    $options  The array of options
 	 *
 	 * @return  JCache   A JCache object
+	 *
 	 * @since   11.1
 	 */
 	public static function getInstance($type = 'output', $options = array())
@@ -100,6 +105,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * Get the storage handlers
 	 *
 	 * @return  array    An array of available storage handlers
+	 *
 	 * @since   11.1
 	 */
 	public static function getStores()
@@ -130,6 +136,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * @param   boolean  $enabled	True to enable caching
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	public function setCaching($enabled)
@@ -141,6 +148,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * Get caching state
 	 *
 	 * @return  boolean Caching state
+	 *
 	 * @since   11.1
 	 */
 	public function getCaching()
@@ -154,6 +162,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * @param   integer   $lt  Cache lifetime
 	 *
 	 * @return  void
+	 *
 	 * @since   11.1
 	 */
 	public function setLifeTime($lt)
@@ -168,6 +177,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * @param   string   $group   The cache data group
 	 *
 	 * @return  mixed    boolean  False on failure or a cached data string
+	 *
 	 * @since   11.1
 	 */
 	public function get($id, $group=null)
@@ -187,6 +197,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * Get a list of all cached data
 	 *
 	 * @return  mixed    Boolean false on failure or an object with a list of cache groups and data
+	 *
 	 * @since   11.1
 	 */
 	public function getAll()
@@ -207,6 +218,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * @param   mixed    $data   The data to store
 	 *
 	 * @return  boolean  True if cache stored
+	 *
 	 * @since   11.1
 	 */
 	public function store($data, $id, $group=null)
@@ -230,6 +242,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * @param   string   $group   The cache data group
 	 *
 	 * @return  boolean  True on success, false otherwise
+	 *
 	 * @since   11.1
 	 */
 	public function remove($id, $group=null)
@@ -255,6 +268,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * @param   string   $mode    The mode for cleaning cache [group|notgroup]
 	 *
 	 * @return  boolean  True on success, false otherwise
+	 *
 	 * @since   11.1
 	 */
 	public function clean($group=null, $mode='group')
@@ -274,6 +288,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * Garbage collect expired cache data
 	 *
 	 * @return  boolean  True on success, false otherwise.
+	 *
 	 * @since   11.1
 	 */
 	public function gc()
@@ -294,6 +309,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * @param            $locktime
 	 *
 	 * @return  boolean  True on success, false otherwise.
+	 *
 	 * @since   11.1
 	 */
 	public function lock($id,$group=null,$locktime=null)
@@ -367,6 +383,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * @param   string   $group	The cache data group
 	 *
 	 * @return  boolean  True on success, false otherwise.
+	 *
 	 * @since   11.1
 	 */
 	public function unlock($id,$group=null)
@@ -394,6 +411,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * Get the cache storage handler
 	 *
 	 * @return  JCacheStorage   A JCacheStorage object
+	 *
 	 * @since   11.1
 	 */
 	public function &_getStorage()
@@ -411,6 +429,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * @param   array    Array of options
 	 *
 	 * @return  string   Body of cached data
+	 *
 	 * @since   11.1
 	 */
 	public static function getWorkarounds($data, $options = array())
@@ -464,6 +483,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * @param   array     $options  Array of options
 	 *
 	 * @return  string    Data to be cached
+	 *
 	 * @since   11.1
 	 */
 	public static function setWorkarounds($data,$options=array())
@@ -544,6 +564,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * Create safe id for cached data from url parameters set by plugins and framework
 	 *
 	 * @return  string   md5 encoded cacheid
+	 *
 	 * @since   11.1
 	 */
 	public static function makeId()
@@ -586,6 +607,7 @@ JLoader::register('JCacheController', dirname(__FILE__) . '/controller.php');
 	 * @param   string   A path to search.
 	 *
 	 * @return  array    An array with directory elements
+	 *
 	 * @since   11.1
 	 */
 	public static function addIncludePath($path='')

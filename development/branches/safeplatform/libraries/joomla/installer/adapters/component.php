@@ -137,10 +137,12 @@ class JInstallerComponent extends JAdapterInstance
 		||	$lang->load($extension.'.sys', $source, $lang->getDefault(), false, false)
 		||	$lang->load($extension.'.sys', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false);
 	}
+
 	/**
 	 * Custom install method for components
 	 *
 	 * @return  boolean  True on success
+	 *
 	 * @since   11.1
 	 */
 	public function install()
@@ -153,7 +155,7 @@ class JInstallerComponent extends JAdapterInstance
 
 		// Manifest Document Setup Section
 
-		// Set the extensions name
+		// Set the extension's name
 		$name = strtolower(JFilterInput::getInstance()->clean((string)$this->manifest->name, 'cmd'));
 		if (substr($name, 0, 4)=="com_") {
 			$element = $name;
@@ -171,7 +173,9 @@ class JInstallerComponent extends JAdapterInstance
 		// Set the installation target paths
 		$this->parent->setPath('extension_site', JPath::clean(JPATH_SITE . '/components/' . $this->get('element')));
 		$this->parent->setPath('extension_administrator', JPath::clean(JPATH_ADMINISTRATOR . '/components/' . $this->get('element')));
-		$this->parent->setPath('extension_root', $this->parent->getPath('extension_administrator')); // copy this as its used as a common base
+
+		// copy this as its used as a common base
+		$this->parent->setPath('extension_root', $this->parent->getPath('extension_administrator'));
 
 		// Basic Checks Section
 
@@ -542,6 +546,7 @@ class JInstallerComponent extends JAdapterInstance
 	 * Custom update method for components
 	 *
 	 * @return  boolean  True on success
+	 *
 	 * @since   11.1
 	 */
 	public function update()
@@ -962,10 +967,11 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Custom uninstall method for components
 	 *
-	 * @param   integer  $id	The unique extension id of the component to uninstall
+	 * @param   integer  $id   The unique extension id of the component to uninstall
 	 *
-	 * @return  mixed  Return value for uninstall method in component uninstall file
-	 * @since	1.0
+	 * @return  mixed    Return value for uninstall method in component uninstall file
+	 *
+	 * @since    11.1
 	 */
 	public function uninstall($id)
 	{
@@ -1223,6 +1229,7 @@ class JInstallerComponent extends JAdapterInstance
 	 * Method to build menu database entries for a component
 	 *
 	 * @return  boolean  True if successful
+	 *
 	 * @since   11.1
 	 */
 	protected function _buildAdminMenus()
@@ -1407,7 +1414,7 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Method to remove admin menu references to a component
 	 *
-	 * @param   object  $component	Component table object
+	 * @param   object   $component  Component table object
 	 *
 	 * @return  boolean  True if successful
 	 * @since   11.1
@@ -1459,9 +1466,10 @@ class JInstallerComponent extends JAdapterInstance
 	 * Custom rollback method
 	 * - Roll back the component menu item
 	 *
-	 * @param   array  $arg	Installation step to rollback
+	 * @param   array    $arg  Installation step to rollback
 	 *
 	 * @return  boolean  True on success
+	 *
 	 * @since   11.1
 	 */
 	protected function _rollback_menu()
@@ -1473,6 +1481,7 @@ class JInstallerComponent extends JAdapterInstance
 	 * Discover unregistered extensions.
 	 *
 	 * @return  array  A list of extensions.
+	 *
 	 * @since   11.1
 	 */
 	public function discover()
@@ -1515,6 +1524,7 @@ class JInstallerComponent extends JAdapterInstance
 	 * Install unregistered extensions that have been discovered.
 	 *
 	 * @return  mixed
+	 *
 	 * @since   11.1
 	 */
 	public function discover_install()
@@ -1773,7 +1783,9 @@ class JInstallerComponent extends JAdapterInstance
 
 	/**
 	 * Refreshes the extension table cache
-	 * @return  boolean result of operation, true if updated, false on failure
+	 *
+	 * @return  boolean  Result of operation, true if updated, false on failure
+	 *
 	 * @since   11.1
 	 */
 	public function refreshManifestCache()

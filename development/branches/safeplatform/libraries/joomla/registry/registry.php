@@ -31,7 +31,9 @@ class JRegistry
 	/**
 	 * Constructor
 	 *
-	 * @return  JRegistry
+	 * @param   mixed  $data  The data to bind to the new JRegistry object.
+	 *
+	 * @return  void
 	 *
 	 * @since   11.1
 	 */
@@ -108,7 +110,8 @@ class JRegistry
 			$node = $this->data;
 
 			// Traverse the registry to find the correct node for the result.
-			for ($i = 0,$n = count($nodes); $i < $n; $i++) {
+			for ($i = 0,$n = count($nodes); $i < $n; $i++)
+			{
 				if (isset($node->$nodes[$i])) {
 					$node = $node->$nodes[$i];
 				} else {
@@ -139,8 +142,7 @@ class JRegistry
 		// Initialise variables.
 		$result = $default;
 
-		if(!strpos($path, '.'))
-		{
+		if (!strpos($path, '.')) {
 			return (isset($this->data->$path) && $this->data->$path !== null && $this->data->$path !== '') ? $this->data->$path : $default;
 		}
 		// Explode the registry path into an array
@@ -150,7 +152,8 @@ class JRegistry
 		$node = $this->data;
 		$found = false;
 		// Traverse the registry to find the correct node for the result.
-		foreach ($nodes as $n) {
+		foreach ($nodes as $n)
+		{
 			if (isset($node->$n)) {
 				$node = $node->$n;
 				$found = true;
@@ -282,7 +285,8 @@ class JRegistry
 	{
 		if ($source instanceof JRegistry) {
 			// Load the variables into the registry's default namespace.
-			foreach ($source->toArray() as $k => $v) {
+			foreach ($source->toArray() as $k => $v)
+			{
 				if (($v !== null) && ($v !== '')){
 					$this->data->$k = $v;
 				}
@@ -385,13 +389,14 @@ class JRegistry
 	protected function bindData(& $parent, $data)
 	{
 		// Ensure the input data is an array.
-		if(is_object($data)) {
+		if (is_object($data)) {
 			$data = get_object_vars($data);
 		} else {
 			$data = (array) $data;
 		}
 
-		foreach ($data as $k => $v) {
+		foreach ($data as $k => $v)
+		{
 			if ((is_array($v) && JArrayHelper::isAssociative($v)) || is_object($v)) {
 				$parent->$k = new stdClass;
 				$this->bindData($parent->$k, $v);
@@ -414,7 +419,8 @@ class JRegistry
 	{
 		$array = array();
 
-		foreach (get_object_vars((object) $data) as $k => $v) {
+		foreach (get_object_vars((object) $data) as $k => $v)
+		{
 			if (is_object($v)) {
 				$array[$k] = $this->asArray($v);
 			} else {

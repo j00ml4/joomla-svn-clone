@@ -140,7 +140,8 @@ class JAccess
 		// Get parent groups and leaf group
 		if (!isset($paths[$groupId])) {
 			$paths[$groupId] = array();
-			foreach($groups as $group) {
+			foreach ($groups as $group)
+			{
 				if ($group->lft <= $groups[$groupId]->lft && $group->rgt >= $groups[$groupId]->rgt) {
 					$paths[$groupId][] = $group->id;
 				}
@@ -230,9 +231,9 @@ class JAccess
 			// Guest user
 			if (empty($userId)) {
 				$result = array(JComponentHelper::getParams('com_users')->get('guest_usergroup', 1));
- 			}
- 			// Registered user
- 			else {
+			}
+			// Registered user
+			else {
 				$db = JFactory::getDbo();
 
 				// Build the database query to get the rules for the asset.
@@ -260,7 +261,7 @@ class JAccess
 				else {
 					$result = array_unique($result);
 				}
- 			}
+			}
 
 			$results[$storeId] = $result;
 		}
@@ -332,7 +333,8 @@ class JAccess
 			$db->setQuery((string) $query);
 
 			// Build the view levels array.
-			foreach ($db->loadAssocList() as $level) {
+			foreach ($db->loadAssocList() as $level)
+			{
 				self::$viewLevels[$level['id']] = (array) json_decode($level['rules']);
 			}
 		}
@@ -383,7 +385,8 @@ class JAccess
 			foreach ($xml->children() as $child)
 			{
 				if ($section == (string) $child['name']) {
-					foreach ($child->children() as $action) {
+					foreach ($child->children() as $action)
+					{
 						$actions[] = (object) array('name' => (string) $action['name'], 'title' => (string) $action['title'], 'description' => (string) $action['description']);
 					}
 

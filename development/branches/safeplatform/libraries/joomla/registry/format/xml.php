@@ -76,7 +76,8 @@ class JRegistryFormatXML extends JRegistryFormat
 		// Parse the XML string.
 		$xml = simplexml_load_string($data);
 
-		foreach ($xml->children() as $node) {
+		foreach ($xml->children() as $node)
+		{
 			$obj->$node['name'] = $this->_getValueFromNode($node);
 		}
 
@@ -112,13 +113,15 @@ class JRegistryFormatXML extends JRegistryFormat
 				break;
 			case 'array':
 				$value = array();
-				foreach ($node->children() as $child) {
+				foreach ($node->children() as $child)
+				{
 					$value[(string) $child['name']] = $this->_getValueFromNode($child);
 				}
 				break;
 			default:
 				$value = new stdClass;
-				foreach ($node->children() as $child) {
+				foreach ($node->children() as $child)
+				{
 					$value->$child['name'] = $this->_getValueFromNode($child);
 				}
 				break;
