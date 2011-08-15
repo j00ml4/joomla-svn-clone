@@ -20,20 +20,78 @@ jimport('joomla.base.adapterinstance');
  */
 class JInstallerComponent extends JAdapterInstance
 {
+	/**
+	 * Copy of the XML manifest file
+	 *
+	 * @var    string
+	 * @since  11.1
+	 * */
 	protected $manifest = null;
+
+	/**
+	 * Name of the extension
+	 *
+	 * @var    string
+	 * @since  11.1
+	 * */
 	protected $name = null;
+
+	/**
+	 * The unique identifier for the extension (e.g. mod_login)
+	 *
+	 * @var    string
+	 * @since  11.1
+	 * */
 	protected $element = null;
+
+	/**
+	 *
+	 * The list of current files fo the Joomla! CMS adminisrator that are installed and is read
+	 * from the manifest on disk in the update area to handle doing a diff
+	 * and deleting files that are in the old files list and not in the new
+	 * files list.
+	 *
+	 * @var    array
+	 * @since  11.1
+	 * */
 	protected $oldAdminFiles = null;
+
+	/**
+	 * The list of current files that are installed and is read
+	 * from the manifest on disk in the update area to handle doing a diff
+	 * and deleting files that are in the old files list and not in the new
+	 * files list.
+	 *
+	 * @var    array
+	 * @since  11.1
+	 * */
 	protected $oldFiles = null;
+
+	/**
+	 * A path to the PHP file that the scriptfile declaration in 
+	 * the manifest refers to.
+	 * 
+	 * @var    string
+	 * @since  11.1
+	 * */
 	protected $manifest_script = null;
+
+	/**
+	 * For legacy installations this is a path to the PHP file that the scriptfile declaration in the
+	 * manifest refers to.
+	 * 
+	 * @var    string
+	 * @since  11.1
+	 * */
 	protected $install_script = null;
 
 	/**
 	 * Custom loadLanguage method
 	 *
-	 * @param   string  $path the path where to find language files
+	 * @param   string  $path  The path language files are on.
 	 *
 	 * @return  void
+	 * 
 	 * @since   11.1
 	 */
 	public function loadLanguage($path=null)
@@ -79,10 +137,12 @@ class JInstallerComponent extends JAdapterInstance
 		||	$lang->load($extension.'.sys', $source, $lang->getDefault(), false, false)
 		||	$lang->load($extension.'.sys', JPATH_ADMINISTRATOR, $lang->getDefault(), false, false);
 	}
+
 	/**
 	 * Custom install method for components
 	 *
 	 * @return  boolean  True on success
+	 *
 	 * @since   11.1
 	 */
 	public function install()
@@ -484,6 +544,7 @@ class JInstallerComponent extends JAdapterInstance
 	 * Custom update method for components
 	 *
 	 * @return  boolean  True on success
+	 *
 	 * @since   11.1
 	 */
 	public function update()
@@ -904,10 +965,11 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Custom uninstall method for components
 	 *
-	 * @param   integer  $id	The unique extension id of the component to uninstall
+	 * @param   integer  $id   The unique extension id of the component to uninstall
 	 *
-	 * @return  mixed  Return value for uninstall method in component uninstall file
-	 * @since	1.0
+	 * @return  mixed    Return value for uninstall method in component uninstall file
+	 *
+	 * @since    11.1
 	 */
 	public function uninstall($id)
 	{
@@ -1165,6 +1227,7 @@ class JInstallerComponent extends JAdapterInstance
 	 * Method to build menu database entries for a component
 	 *
 	 * @return  boolean  True if successful
+	 *
 	 * @since   11.1
 	 */
 	protected function _buildAdminMenus()
@@ -1349,7 +1412,7 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * Method to remove admin menu references to a component
 	 *
-	 * @param   object  $component	Component table object
+	 * @param   object   $component  Component table object
 	 *
 	 * @return  boolean  True if successful
 	 * @since   11.1
@@ -1401,9 +1464,10 @@ class JInstallerComponent extends JAdapterInstance
 	 * Custom rollback method
 	 * - Roll back the component menu item
 	 *
-	 * @param   array  $arg	Installation step to rollback
+	 * @param   array    $arg  Installation step to rollback
 	 *
 	 * @return  boolean  True on success
+	 *
 	 * @since   11.1
 	 */
 	protected function _rollback_menu()
@@ -1415,6 +1479,7 @@ class JInstallerComponent extends JAdapterInstance
 	 * Discover unregistered extensions.
 	 *
 	 * @return  array  A list of extensions.
+	 *
 	 * @since   11.1
 	 */
 	public function discover()
@@ -1457,6 +1522,7 @@ class JInstallerComponent extends JAdapterInstance
 	 * Install unregistered extensions that have been discovered.
 	 *
 	 * @return  mixed
+	 *
 	 * @since   11.1
 	 */
 	public function discover_install()
@@ -1715,7 +1781,9 @@ class JInstallerComponent extends JAdapterInstance
 
 	/**
 	 * Refreshes the extension table cache
-	 * @return  boolean result of operation, true if updated, false on failure
+	 *
+	 * @return  boolean  Result of operation, true if updated, false on failure
+	 *
 	 * @since   11.1
 	 */
 	public function refreshManifestCache()

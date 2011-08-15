@@ -40,11 +40,6 @@ if (!class_exists('JLoader')) {
     require_once JPATH_PLATFORM.'/loader.php';
 }
 
-// Define the Joomla Platform version if not already defined.
-if (!defined('JPLATFORM')) {
-	define('JPLATFORM', JPlatform::getShortVersion());
-}
-
 /**
  * Import the base Joomla Platform libraries.
  */
