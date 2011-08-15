@@ -199,7 +199,7 @@ class JInstallerComponent extends JAdapterInstance
 			// Update function available or
 			// Update tag detected
 
-			if ($this->parent->getUpgrade() || ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'update')) || $updateElement) {
+			if ($this->parent->getUpgrade() || ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'update')) || $updateElement) {
 				return $this->update(); // transfer control to the update function
 			}
 			else if (!$this->parent->getOverwrite()) {
@@ -246,7 +246,7 @@ class JInstallerComponent extends JAdapterInstance
 		ob_start();
 		ob_implicit_flush(false);
 
-		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'preflight')) {
+		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'preflight')) {
 			if ($this->parent->manifestClass->preflight('install', $this) === false) {
 				// Install failed, rollback changes
 				$this->parent->abort(JText::_('JLIB_INSTALLER_ABORT_COMP_INSTALL_CUSTOM_INSTALL_FAILURE'));
@@ -438,7 +438,7 @@ class JInstallerComponent extends JAdapterInstance
 		ob_start();
 		ob_implicit_flush(false);
 
-		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'install')) {
+		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'install')) {
 			if ($this->parent->manifestClass->install($this) === false) {
 				// Install failed, rollback changes
 				$this->parent->abort(JText::_('JLIB_INSTALLER_ABORT_COMP_INSTALL_CUSTOM_INSTALL_FAILURE'));
@@ -529,7 +529,7 @@ class JInstallerComponent extends JAdapterInstance
 		ob_start();
 		ob_implicit_flush(false);
 
-		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'postflight')) {
+		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'postflight')) {
 			$this->parent->manifestClass->postflight('install', $this);
 		}
 
@@ -668,7 +668,7 @@ class JInstallerComponent extends JAdapterInstance
 		ob_start();
 		ob_implicit_flush(false);
 
-		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'preflight')) {
+		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'preflight')) {
 			if ($this->parent->manifestClass->preflight('update', $this) === false) {
 				// Install failed, rollback changes
 				$this->parent->abort(JText::_('JLIB_INSTALLER_ABORT_COMP_INSTALL_CUSTOM_INSTALL_FAILURE'));
@@ -959,9 +959,8 @@ class JInstallerComponent extends JAdapterInstance
 		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'postflight')) {
 			$this->parent->manifestClass->postflight('update', $this);
 		}
-
 		// Append messages
-		$msg .= ob_get_contents();
+		$msg .= ob_get_contents(); 
 		ob_end_clean();
 
 		if ($msg != '') {
@@ -1115,7 +1114,7 @@ class JInstallerComponent extends JAdapterInstance
 				}
 
 				// append this in case there was something else
-				$msg .= ob_get_contents(); 
+				$msg .= ob_get_contents();
 				ob_end_clean();
 			}
 		}
@@ -1132,11 +1131,11 @@ class JInstallerComponent extends JAdapterInstance
 
 		/*
 		 * Let's run the uninstall queries for the component
-		 *	If Joomla 1.5 compatible, with discreet sql files - execute appropriate
-		 *	file for utf-8 support or non-utf support
+		 * If Joomla 1.5 compatible, with discreet sql files - execute appropriate
+		 * file for utf-8 support or non-utf support
 		 */
 		// Try for Joomla 1.5 type queries
-		// second argument is the utf compatible version attribute
+		// Second argument is the utf compatible version attribute
 		if (isset($this->manifest->uninstall->sql)) {
 			$utfresult = $this->parent->parseSQLFiles($this->manifest->uninstall->sql);
 
@@ -1155,7 +1154,7 @@ class JInstallerComponent extends JAdapterInstance
 		 * ---------------------------------------------------------------------------------------------
 		 */
 
-		// Let's remove language files and media in the JROOT/images/ folder that are
+		// Let's remove those language files and media in the JROOT/images/ folder that are
 		// associated with the component we are uninstalling
 		$this->parent->removeFiles($this->manifest->media);
 		$this->parent->removeFiles($this->manifest->languages);
@@ -1397,7 +1396,7 @@ class JInstallerComponent extends JAdapterInstance
 					$request[] = 'sub='.$child->attributes()->sub;
 				}
 
-				$qstring = (count($request)) ? '&'.implode('&',$request) : '';
+				$qstring = (count($request)) ? '&'.implode('&', $request) : '';
 				$data['link'] = 'index.php?option='.$option.$qstring;
 			}
 
@@ -1674,8 +1673,8 @@ class JInstallerComponent extends JAdapterInstance
 
 		/*
 		 * Let's run the install queries for the component
-		 *  If Joomla 1.5 compatible, with discreet sql files - execute appropriate
-		 *  file for utf-8 support or non-utf-8 support
+		 *	If Joomla 1.5 compatible, with discreet sql files - execute appropriate
+		 *	file for utf-8 support or non-utf-8 support
 		 */
 		// Try for Joomla 1.5 type queries
 		// second argument is the utf compatible version attribute
@@ -1693,7 +1692,7 @@ class JInstallerComponent extends JAdapterInstance
 		// Time to build the admin menus
 		if (!$this->_buildAdminMenus($this->parent->extension->extension_id)) {
 			JError::raiseWarning(100, JText::_('JLIB_INSTALLER_ABORT_COMP_BUILDADMINMENUS_FAILED'));
-			// $this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT_COMP_INSTALL_ROLLBACK', $db->stderr(true)));
+			//$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT_COMP_INSTALL_ROLLBACK', $db->stderr(true)));
 
 			//return false;
 		}
@@ -1709,7 +1708,7 @@ class JInstallerComponent extends JAdapterInstance
 		 * install method, and append the return value from the custom install
 		 * method to the installation message.
 		 */
-		// Start legacy support
+		// start legacy support
 		if ($this->get('install_script')) {
 
 			if (is_file($this->parent->getPath('extension_administrator') . '/' . $this->get('install_script'))) {
@@ -1737,7 +1736,7 @@ class JInstallerComponent extends JAdapterInstance
 		ob_start();
 		ob_implicit_flush(false);
 
-		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'discover_install')) {
+		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'discover_install')) {
 
 			if ($this->parent->manifestClass->install($this) === false) {
 				// Install failed, rollback changes
@@ -1776,7 +1775,7 @@ class JInstallerComponent extends JAdapterInstance
 		ob_start();
 		ob_implicit_flush(false);
 
-		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'postflight')) {
+		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'postflight')) {
 			$this->parent->manifestClass->postflight('discover_install', $this);
 		}
 
