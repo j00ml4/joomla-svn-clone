@@ -504,6 +504,7 @@ class JInstallerModule extends JAdapterInstance
 	 * Custom discover method
 	 *
 	 * @return  array  JExtension list of extensions available
+	 *
 	 * @since   11.1
 	 */
 	public function discover()
@@ -547,6 +548,7 @@ class JInstallerModule extends JAdapterInstance
 	 * @param   integer  $id The id of the extension to install
 	 *
 	 * @return void
+	 *
 	 * @since   11.1
 	 */
 	function discover_install()
@@ -585,7 +587,9 @@ class JInstallerModule extends JAdapterInstance
 
 	/**
 	 * Refreshes the extension table cache
+	 *
 	 * @return  boolean result of operation, true if updated, false on failure
+	 *
 	 * @since   11.1
 	 */
 	public function refreshManifestCache()
@@ -614,6 +618,7 @@ class JInstallerModule extends JAdapterInstance
 	 * @param   integer  $id  The id of the module to uninstall
 	 *
 	 * @return  boolean  True on success
+	 *
 	 * @since   11.1
 	 */
 	public function uninstall($id)
@@ -816,6 +821,7 @@ class JInstallerModule extends JAdapterInstance
 	 * @param   array  $arg  Installation step to rollback
 	 *
 	 * @return  boolean  True on success
+	 *
 	 * @since   11.1
 	 */
 	protected function _rollback_menu($arg)
@@ -846,6 +852,7 @@ class JInstallerModule extends JAdapterInstance
 	 * @param   array  $arg	Installation step to rollback
 	 *
 	 * @return  boolean  True on success
+	 *
 	 * @since   11.1
 	 */
 	protected function _rollback_module($arg)

@@ -27,6 +27,7 @@ class JInstallerFile extends JAdapterInstance
 	 * Custom loadLanguage method
 	 *
 	 * @param   string  $path the path where to find language files
+	 *
 	 * @since   11.1
 	 */
 	public function loadLanguage($path)
@@ -45,6 +46,7 @@ class JInstallerFile extends JAdapterInstance
 	 * Custom install method
 	 *
 	 * @return  boolean  True on success
+	 *
 	 * @since   11.1
 	 */
 	public function install()
@@ -88,8 +90,6 @@ class JInstallerFile extends JAdapterInstance
 				$this->route = 'update';
 			}
 		}
-
-
 		// Set the file root path
 		$this->parent->setPath('extension_root', JPATH_ROOT);
 
@@ -243,7 +243,6 @@ class JInstallerFile extends JAdapterInstance
 			$this->parent->pushStep(array ('type' => 'extension', 'extension_id' => $row->extension_id));
 		}
 
-
 		/*
 		 * Let's run the queries for the file
 		 */
@@ -339,6 +338,7 @@ class JInstallerFile extends JAdapterInstance
 	 * Custom update method
 	 *
 	 * @return  boolean  True on success
+	 *
 	 * @since   11.1
 	 */
 	public function update()
@@ -358,6 +358,7 @@ class JInstallerFile extends JAdapterInstance
 	 * @param   string  $id	The id of the file to uninstall
 	 *
 	 * @return  boolean  True on success
+	 *
 	 * @since   11.1
 	 */
 	public function uninstall($id)
@@ -526,6 +527,7 @@ class JInstallerFile extends JAdapterInstance
 	 * @param   string  $element The element name of the extension to install
 	 *
 	 * @return  boolean  True if extension exists
+	 *
 	 * @since   11.1
 	 */
 
@@ -562,6 +564,7 @@ class JInstallerFile extends JAdapterInstance
 	 * Function used to populate files and folder list
 	 *
 	 * @return  boolean	none
+	 *
 	 * @since   11.1
 	 */
 	protected function populateFilesAndFolderList()
@@ -646,7 +649,9 @@ class JInstallerFile extends JAdapterInstance
 
 	/**
 	 * Refreshes the extension table cache
+	 *
 	 * @return  boolean result of operation, true if updated, false on failure
+	 *
 	 * @since   11.1
 	 */
 	public function refreshManifestCache()

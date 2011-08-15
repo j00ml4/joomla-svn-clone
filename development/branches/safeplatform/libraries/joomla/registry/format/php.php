@@ -82,11 +82,11 @@ class JRegistryFormatPHP extends JRegistryFormat
 	{
 		$s = 'array(';
 		$i = 0;
-		foreach ($a as $k => $v) {
+		foreach ($a as $k => $v)
+		{
 			$s .= ($i) ? ', ' : '';
 			$s .= '"'.$k.'" => ';
-			if (is_array($v))
-			{
+			if (is_array($v)) {
 				$s .= $this->_getArrayString($v);
 			} else {
 				$s .= '"'.addslashes($v).'"';

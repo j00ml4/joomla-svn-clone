@@ -100,7 +100,8 @@ class JRegistryFormatINI extends JRegistryFormat
 		$lines = explode("\n", $data);
 
 		// Process the lines.
-		foreach ($lines as $line) {
+		foreach ($lines as $line)
+		{
 			// Trim any unnecessary whitespace.
 			$line = trim($line);
 
