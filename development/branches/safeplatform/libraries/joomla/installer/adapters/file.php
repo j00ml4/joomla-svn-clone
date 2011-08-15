@@ -158,7 +158,7 @@ class JInstallerFile extends JAdapterInstance
 				}
 
 				 // Since we created a directory and will want to remove it if we have to roll back.
-				 // the installation due to some errors, lets add it to the installation step stack.
+				 // the installation due to some errors, let's add it to the installation step stack.
 
 				if ($created) {
 					$this->parent->pushStep(array ('type' => 'folder', 'path' => $folder));
@@ -300,21 +300,20 @@ class JInstallerFile extends JAdapterInstance
 			return false;
 		}
 
-                // Clobber any possible pending updates
-                $update = JTable::getInstance('update');
-                $uid = $update->find(
-                        array(
-                                'element'       => $this->get('element'),
-                                'type'          => 'file',
-                                'client_id'     => '',
-                                'folder'        => ''
-                        )
-                );
+        // Clobber any possible pending updates
+        $update = JTable::getInstance('update');
+        $uid = $update->find(
+                array(
+                        'element'       => $this->get('element'),
+                        'type'          => 'file',
+                        'client_id'     => '',
+                        'folder'        => ''
+                )
+        );
 
-                if ($uid) {
-                        $update->delete($uid);
-                }
-
+        if ($uid) {
+            $update->delete($uid);
+        }
 
 		// And now we run the postflight
 		ob_start();
@@ -606,8 +605,8 @@ class JInstallerFile extends JAdapterInstance
 
 
 			// Create folder path
-			$sourceFolder = empty($folder) ? $packagePath:$packagePath . '/' . $folder;
-			$targetFolder = empty($target) ? $jRootPath:$jRootPath . '/' . $target;
+			$sourceFolder = empty($folder) ? $packagePath : $packagePath . '/' . $folder;
+			$targetFolder = empty($target) ? $jRootPath : $jRootPath . '/' . $target;
 
 			// Check if source folder exists
 			if (! JFolder::exists($sourceFolder)) {
