@@ -26,9 +26,11 @@ class JRegistryFormatINI extends JRegistryFormat
 	 *		levels deep.  Therefore we will only go through the first two levels of
 	 *		the object.
 	 *
-	 * @param   object   Data source object.
-	 * @param   array    Options used by the formatter.
-	 * @return  string   INI formatted string.
+	 * @param   object  $object   Data source object.
+	 * @param   array   $options  Options used by the formatter.
+	 *
+	 * @return  string  INI formatted string.
+	 *
 	 * @since   11.1
 	 */
 	public function objectToString($object, $options = array())
@@ -38,7 +40,8 @@ class JRegistryFormatINI extends JRegistryFormat
 		$global = array();
 
 		// Iterate over the object to set the properties.
-		foreach (get_object_vars($object) as $key => $value) {
+		foreach (get_object_vars($object) as $key => $value)
+		{
 			// If the value is an object then we need to put it in a local section.
 			if (is_object($value)) {
 				// Add the section line.
@@ -46,7 +49,8 @@ class JRegistryFormatINI extends JRegistryFormat
 				$local[] = '['.$key.']';
 
 				// Add the properties for this section.
-				foreach (get_object_vars($value) as $k => $v) {
+				foreach (get_object_vars($value) as $k => $v)
+				{
 					$local[] = $k.'='.$this->_getValueAsINI($v);
 				}
 			} else {
@@ -61,12 +65,12 @@ class JRegistryFormatINI extends JRegistryFormat
 	/**
 	 * Parse an INI formatted string and convert it into an object.
 	 *
-	 * @param   string   INI formatted string to convert.
-	 * @param   mixed    An array of options used by the formatter, or a boolean setting to process sections.
+	 * @param   string  $data     INI formatted string to convert.
+	 * @param   mixed   $options  An array of options used by the formatter, or a boolean setting to process sections.
 	 *
 	 * @return  object   Data object.
-	 * @since   11.1
 	 *
+	 * @since   11.1
 	 */
 	public function stringToObject($data, $options = array())
 	{
@@ -179,8 +183,10 @@ class JRegistryFormatINI extends JRegistryFormat
 	/**
 	 * Method to get a value in an INI format.
 	 *
-	 * @param   mixed    The value to convert to INI format.
-	 * @return  string   The value in INI format.
+	 * @param   mixed  $value  The value to convert to INI format.
+	 *
+	 * @return  string  The value in INI format.
+	 *
 	 * @since   11.1
 	 */
 	protected function _getValueAsINI($value)

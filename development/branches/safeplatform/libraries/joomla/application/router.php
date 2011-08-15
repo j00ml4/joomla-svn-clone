@@ -75,6 +75,7 @@ class JRouter extends JObject
 	 * @param   array   $options An associative array of options
 	 *
 	 * @return  JRouter  A JRouter object.
+	 *
 	 * @since   11.1
 	 */
 	public static function getInstance($client, $options = array())
@@ -113,6 +114,7 @@ class JRouter extends JObject
 	 *  @param   string   $uri
 	 *
 	 *  @return  array
+	 *
 	 *  @since   11.1
 	 */
 	public function parse(&$uri)
@@ -141,6 +143,7 @@ class JRouter extends JObject
 	 * @param   string  The internal URL
 	 *
 	 * @return  string  The absolute search engine friendly URL
+	 *
 	 * @since   11.1
 	 */
 	public function build($url)
@@ -176,8 +179,10 @@ class JRouter extends JObject
 	}
 
 	/**
-	 * Get the router mode
+	 * Set the router mode
+	 *
 	 * @return
+	 *
 	 * @since   11.1
 	 */
 	public function setMode($mode)
@@ -193,6 +198,7 @@ class JRouter extends JObject
 	 * @param   boolean  $create  If True, the variable will be created if it doesn't exist yet
 	 *
 	 * @return
+	 *
 	 * @since   11.1
 	 */
 	public function setVar($key, $value, $create = true)
