@@ -99,7 +99,10 @@ class JInstallerComponent extends JAdapterInstance
 		$source = $this->parent->getPath('source');
 
 		if (!$source) {
-			$this->parent->setPath('source', ($this->parent->extension->client_id ? JPATH_ADMINISTRATOR : JPATH_SITE).'/components/'.$this->parent->extension->element);
+			$this->parent->setPath(
+				'source',
+				($this->parent->extension->client_id ? JPATH_ADMINISTRATOR : JPATH_SITE).'/components/'.$this->parent->extension->element
+			);
 		}
 
 		$this->manifest = $this->parent->getManifest();
