@@ -193,6 +193,25 @@ class JAuthentication extends JObservable
 
 		return $response;
 	}
+	
+	/**
+	 * Authorises that a particular user should be able to login
+	 * 
+	 * @access public
+	 * @param JAuthenticationResponse username of the user to authorise
+	 * @param Array list of options 
+	 * @return Array[JAuthenticationResponse] results of authorisation
+	 * @since  11.1
+	 */
+	public static function authorise($response, $options=Array())
+	{
+		// Get plugins in case they haven't been loaded already
+		JPluginHelper::getPlugin('user');
+		JPluginHelper::getPlugin('authentication');
+		$dispatcher = JDispatcher::getInstance();
+		$results = $dispatcher->trigger('onUserAuthorisation', Array($response, $options));
+		return $results;
+	}
 }
 
 /**
