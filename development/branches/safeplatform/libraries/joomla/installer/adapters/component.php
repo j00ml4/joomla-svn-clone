@@ -1134,7 +1134,7 @@ class JInstallerComponent extends JAdapterInstance
 
 		/*
 		 * Let's run the uninstall queries for the component
-		 * If Joomla CMS 1.5 compatible, with discreet sql files - execute appropriate
+		 * If Joomla CMS 1.5 compatible, with discrete sql files - execute appropriate
 		 * file for utf-8 support or non-utf support
 		 */
 		// Try for Joomla 1.5 type queries
@@ -1727,7 +1727,6 @@ class JInstallerComponent extends JAdapterInstance
 						return false;
 					}
 				}
-
 				// Append messages
 				$msg .= ob_get_contents(); 
 				ob_end_clean();
@@ -1749,8 +1748,7 @@ class JInstallerComponent extends JAdapterInstance
 			}
 		}
 
-		// Append messages
-		$msg .= ob_get_contents();
+		$msg .= ob_get_contents(); // append messages
 		ob_end_clean();
 
 		/**
