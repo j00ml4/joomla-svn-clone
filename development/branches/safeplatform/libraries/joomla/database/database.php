@@ -738,7 +738,7 @@ abstract class JDatabase implements JDatabaseInterface
 		}
 
 		// Set the query and execute the insert.
-		$this->setQuery(sprintf($statement, implode(',', $fields) ,  implode(',', $values)));
+		$this->setQuery(sprintf($statement, implode(',', $fields),  implode(',', $values)));
 		if (!$this->query()) {
 			return false;
 		}
@@ -1188,7 +1188,7 @@ abstract class JDatabase implements JDatabaseInterface
 				$j = $n;
 			}
 
-			$literal .= str_replace($prefix, $this->tablePrefix,substr($sql, $startPos, $j - $startPos));
+			$literal .= str_replace($prefix, $this->tablePrefix, substr($sql, $startPos, $j - $startPos));
 			$startPos = $j;
 
 			$j = $startPos + 1;
@@ -1381,7 +1381,7 @@ abstract class JDatabase implements JDatabaseInterface
 		}
 
 		// Set the query and execute the update.
-		$this->setQuery(sprintf($statement, implode(",", $fields) , $where));
+		$this->setQuery(sprintf($statement, implode(",", $fields), $where));
 		return $this->query();
 	}
 
