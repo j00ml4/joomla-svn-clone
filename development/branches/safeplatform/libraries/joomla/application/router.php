@@ -27,21 +27,24 @@ class JRouter extends JObject
 	/**
 	 * The rewrite mode
 	 *
-	 * @var integer
+	 * @var    integer
+	 * @since  11.1
 	 */
 	protected $_mode = null;
 
 	/**
 	 * An array of variables
 	 *
-	 * @var array
+	 * @var     array
+	 * @since   11.1
 	 */
 	protected $_vars = array();
 
 	/**
 	 * An array of rules
 	 *
-	 * @var array
+	 * @var    array
+	 * @since  11.1
 	 */
 	protected $_rules = array(
 		'build' => array(),
@@ -50,6 +53,10 @@ class JRouter extends JObject
 
 	/**
 	 * Class constructor
+	 *
+	 * @params   array  $options  Array of options
+	 *
+	 * @since 11.1
 	 */
 	public function __construct($options = array())
 	{

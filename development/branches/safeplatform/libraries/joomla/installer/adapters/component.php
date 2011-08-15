@@ -20,20 +20,78 @@ jimport('joomla.base.adapterinstance');
  */
 class JInstallerComponent extends JAdapterInstance
 {
+	/**
+	 * Copy of the XML manifest file
+	 *
+	 * @var    string
+	 * @since  11.1
+	 * */
 	protected $manifest = null;
+
+	/**
+	 * Name of the extension
+	 *
+	 * @var    string
+	 * @since  11.1
+	 * */
 	protected $name = null;
+
+	/**
+	 * The unique identifier for the extension (e.g. mod_login)
+	 *
+	 * @var    string
+	 * @since  11.1
+	 * */
 	protected $element = null;
+
+	/**
+	 *
+	 * The list of current files fo the Joomla! CMS adminisrator that are installed and is read
+	 * from the manifest on disk in the update area to handle doing a diff
+	 * and deleting files that are in the old files list and not in the new
+	 * files list.
+	 *
+	 * @var    array
+	 * @since  11.1
+	 * */
 	protected $oldAdminFiles = null;
+
+	/**
+	 * The list of current files that are installed and is read
+	 * from the manifest on disk in the update area to handle doing a diff
+	 * and deleting files that are in the old files list and not in the new
+	 * files list.
+	 *
+	 * @var    array
+	 * @since  11.1
+	 * */
 	protected $oldFiles = null;
+
+	/**
+	 * A path to the PHP file that the scriptfile declaration in 
+	 * the manifest refers to.
+	 * 
+	 * @var    string
+	 * @since  11.1
+	 * */
 	protected $manifest_script = null;
+
+	/**
+	 * For legacy installations this is a path to the PHP file that the scriptfile declaration in the
+	 * manifest refers to.
+	 * 
+	 * @var    string
+	 * @since  11.1
+	 * */
 	protected $install_script = null;
 
 	/**
 	 * Custom loadLanguage method
 	 *
-	 * @param   string  $path the path where to find language files
+	 * @param   string  $path  The path language files are on.
 	 *
 	 * @return  void
+	 * 
 	 * @since   11.1
 	 */
 	public function loadLanguage($path=null)

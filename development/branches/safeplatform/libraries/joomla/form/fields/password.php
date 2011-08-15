@@ -33,7 +33,7 @@ class JFormFieldPassword extends JFormField
 	protected $type = 'Password';
 
 	/**
-	 * Method to get the field input markup.
+	 * Method to get the field input markup for password.
 	 *
 	 * @return  string  The field input markup.
 	 * @since   11.1

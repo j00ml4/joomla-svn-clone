@@ -61,7 +61,7 @@ class JCategories
 	/**
 	 * Name of the category field
 	 *
-	 * @var string
+	 * @var    string
 	 * @since  11.1
 	 */
 	protected $_field = null;
@@ -69,7 +69,7 @@ class JCategories
 	/**
 	 * Name of the key field
 	 *
-	 * @var string
+	 * @var    string
 	 * @since  11.1
 	 */
 	protected $_key = null;
@@ -77,7 +77,7 @@ class JCategories
 	/**
 	 * Name of the items state field
 	 *
-	 * @var string
+	 * @var    string
 	 * @since  11.1
 	 */
 	protected $_statefield = null;
@@ -85,7 +85,7 @@ class JCategories
 	/**
 	 * Array of options
 	 *
-	 * @var array
+	 * @var    array
 	 * @since  11.1
 	 */
 	protected $_options = null;
@@ -95,7 +95,8 @@ class JCategories
 	 *
 	 * @param   array  $options  Array of options
 	 *
-	 * @return  JCategories  JCategories object
+	 * @return  JCategories object
+	 *
 	 * @since   11.1
 	 */
 	public function __construct($options)
