@@ -653,7 +653,7 @@ class JCategoryNode extends JObject
 			$this->_parent = & $parent;
 
 			if ($this->id != 'root') {
-				if ($this->parent_id != 1 ) {
+			if ($this->parent_id != 1 ) {
 					$this->_path = $parent->getPath();
 				}
 				$this->_path[] = $this->id.':'.$this->alias;
@@ -711,12 +711,10 @@ class JCategoryNode extends JObject
 	{
 		if (!$this->_allChildrenloaded) {
 			$temp = $this->_constructor->get($this->id, true);
-			if ($temp) {
-				$this->_children = $temp->getChildren();
-				$this->_leftSibling = $temp->getSibling(false);
-				$this->_rightSibling = $temp->getSibling(true);
-				$this->setAllLoaded();
-			}
+			$this->_children = $temp->getChildren();
+			$this->_leftSibling = $temp->getSibling(false);
+			$this->_rightSibling = $temp->getSibling(true);
+			$this->setAllLoaded();
 		}
 
 		if ($recursive) {

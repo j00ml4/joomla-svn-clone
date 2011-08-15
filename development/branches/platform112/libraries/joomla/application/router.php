@@ -131,7 +131,7 @@ class JRouter extends JObject
 
 		// Parse SEF URL
 		if ($this->_mode == JROUTER_MODE_SEF) {
-			$vars += $vars + $this->_parseSefRoute($uri);
+			$vars += $this->_parseSefRoute($uri);
 		}
 
 		return array_merge($this->getVars(), $vars);
@@ -203,9 +203,7 @@ class JRouter extends JObject
 	 */
 	public function setVar($key, $value, $create = true)
 	{
-		if (!$create && array_key_exists($key, $this->_vars)) {
-			$this->_vars[$key] = $value;
-		} else {
+		if ($create || array_key_exists($key, $this->_vars)) {
 			$this->_vars[$key] = $value;
 		}
 	}
@@ -354,7 +352,7 @@ class JRouter extends JObject
 		$vars = array();
 
 		foreach($this->_rules['parse'] as $rule) {
-			$vars = call_user_func_array($rule, array(&$this, &$uri));
+			$vars += call_user_func_array($rule, array(&$this, &$uri));
 		}
 
 		return $vars;

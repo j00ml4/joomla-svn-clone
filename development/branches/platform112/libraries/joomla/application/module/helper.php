@@ -348,12 +348,7 @@ abstract class JModuleHelper
 
 				// Only accept modules without explicit exclusions.
 				if (!$negHit) {
-					//determine if this is a custom module
-					$file				= $module->module;
-					$custom				= substr($file, 0, 4) == 'mod_' ?  0 : 1;
-					$module->user		= $custom;
-					// Custom module name is given by the title field, otherwise strip off "mod_"
-					$module->name		= $custom ? $module->title : substr($file, 4);
+					$module->name		=  substr($module->module , 4);
 					$module->style		= null;
 					$module->position	= strtolower($module->position);
 					$clean[$module->id]	= $module;
@@ -414,7 +409,8 @@ abstract class JModuleHelper
 			$cache->setCaching(false);
 		}
 
-		$cache->setLifeTime($moduleparams->get('cache_time', $conf->get('cachetime') * 60));
+		// module cache is set in seconds, global cache in minutes, setLifeTime works in minutes
+		$cache->setLifeTime($moduleparams->get('cache_time', $conf->get('cachetime') * 60) / 60);
 
 		$wrkaroundoptions = array (
 			'nopathway' 	=> 1,

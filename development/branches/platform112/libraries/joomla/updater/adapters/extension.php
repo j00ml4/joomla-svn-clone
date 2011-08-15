@@ -95,7 +95,7 @@ class JUpdaterExtension extends JUpdateAdapter
 		$tag = $this->_getLastTag();
 		//if(!isset($this->$tag->_data)) $this->$tag->_data = '';
 		//$this->$tag->_data .= $data;
-		if(in_array($tag, $this->_updatecols)) {
+		if(in_array($tag, $this->_updatecols) || $tag == 'INFOURL') {
 			$tag = strtolower($tag);
 			$this->current_update->$tag .= $data;
 		}
