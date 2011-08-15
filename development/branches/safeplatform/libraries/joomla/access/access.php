@@ -22,13 +22,17 @@ jimport('joomla.utilities.arrayhelper');
 class JAccess
 {
 	/**
-	 * @var    array  Array of view levels
+	 * Array of view levels
+	 *
+	 * @var    array
 	 * @since  11.1
 	 */
 	protected static $viewLevels = array();
 
 	/**
-	 * @var    array  Array of rules for the asset
+	 * Array of rules for the asset
+	 *
+	 * @var    array
 	 * @since  11.1
 	 */
 	protected static $assetRules = array();
@@ -267,14 +271,13 @@ class JAccess
 	/**
 	 * Method to return a list of user Ids contained in a Group
 	 *
-	 * @param   integer   $groupId    The group Id
-	 * @param   boolean   $recursive  Recursively include all child groups (optional)
+	 * @param   integer  $groupId    The group Id
+	 * @param   boolean  $recursive  Recursively include all child groups (optional)
 	 *
 	 * @return  array
 	 *
 	 * @since   11.1
-	 *
-	 * @todo      This method should move somewhere else?
+	 * @todo    This method should move somewhere else
 	 */
 	public static function getUsersByGroup($groupId, $recursive = false)
 	{
@@ -360,13 +363,15 @@ class JAccess
 	/**
 	 * Method to return a list of actions for which permissions can be set given a component and section.
 	 *
-	 * @param   string   $component  The component from which to retrieve the actions.
-	 * @param   string   $section    The name of the section within the component from which to retrieve the actions.
+	 * @param   string  $component  The component from which to retrieve the actions.
+	 * @param   string  $section    The name of the section within the component from which to retrieve the actions.
 	 *
-	 * @return  array    List of actions available for the given component and section.
+	 * @return  array  List of actions available for the given component and section.
 	 *
 	 * @since   11.1
-	 * @todo    Need to decouple this method from the CMS. Maybe check if $component is a valid file (or create a getActionsFromFile method).
+	 *
+	 * @todo    Need to decouple this method from the CMS. Maybe check if $component is a
+	 *          valid file (or create a getActionsFromFile method).
 	 */
 	public static function getActions($component, $section = 'component')
 	{

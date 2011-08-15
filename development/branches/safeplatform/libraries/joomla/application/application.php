@@ -342,8 +342,9 @@ class JApplication extends JObject
 	 *
 	 * @return  void  Calls exit().
 	 *
-	 * @see     JApplication::enqueueMessage()
 	 * @since   11.1
+	 *
+	 * @see     JApplication::enqueueMessage()
 	 */
 	public function redirect($url, $msg='', $msgType='message', $moved = false)
 	{
@@ -817,8 +818,8 @@ class JApplication extends JObject
 	/**
 	 * Returns the application JPathway object.
 	 *
-	 * @param   string  $name     The name of the application.
-	 * @param   array   $options  An optional associative array of configuration settings.
+	 * @param   string    $name     The name of the application.
+	 * @param   array     $options  An optional associative array of configuration settings.
 	 *
 	 * @return  JPathway  A JPathway object
 	 *
@@ -887,7 +888,7 @@ class JApplication extends JObject
 	 *
 	 * @param   string  $file  The path to the configuration file
 	 *
-	 * return   object  A JConfig object
+	 * @return   object  A JConfig object
 	 *
 	 * @since   11.1
 	 */
@@ -898,7 +899,7 @@ class JApplication extends JObject
 		require_once $file;
 
 		// Create the JConfig object.
-		$config = new JConfig();
+		$config = new JConfig;
 
 		// Get the global configuration object.
 		$registry = JFactory::getConfig();
@@ -917,7 +918,7 @@ class JApplication extends JObject
 	 * If a new session, a session id is generated and a record is created in
 	 * the #__sessions table.
 	 *
-	 * @param   string  $name  The sessions name.
+	 * @param   string    $name  The sessions name.
 	 *
 	 * @return  JSession  JSession on success. May call exit() on database error.
 	 *
