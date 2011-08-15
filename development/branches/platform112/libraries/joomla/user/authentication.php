@@ -14,17 +14,20 @@ jimport('joomla.plugin.helper');
 jimport('joomla.event.dispatcher');
 
 /**
- * This is the status code returned when the authentication is success.
+ * This is the status code returned when the authentication is success (permit login)
+ * @deprecated Use JAuthentication::STATUS_SUCCESS
  */
 define('JAUTHENTICATE_STATUS_SUCCESS', 1);
 
 /**
- * Status to indicate cancellation of authentication.
+ * Status to indicate cancellation of authentication (unused)
+ * @deprecated 
  */
 define('JAUTHENTICATE_STATUS_CANCEL', 2);
 
 /**
- * This is the status code returned when the authentication failed
+ * This is the status code returned when the authentication failed (prevent login if no success)
+ * @deprecated Use JAuthentication::STATUS_FAILURE
  */
 define('JAUTHENTICATE_STATUS_FAILURE', 4);
 
@@ -37,6 +40,51 @@ define('JAUTHENTICATE_STATUS_FAILURE', 4);
  */
 class JAuthentication extends JObservable
 {
+	// Shared success status
+	/**
+	 * This is the status code returned when the authentication is success (permit login)
+	 * @const  STATUS_SUCCESS successful response
+	 * @since  11.2
+	 */
+	const STATUS_SUCCESS = 1;
+
+	// These are for authentication purposes (username and password is valid)
+	/**
+	 * Status to indicate cancellation of authentication (unused)
+	 * @const  STATUS_CANCEL cancelled request (unused)
+	 * @since  11.2
+	 */
+	const STATUS_CANCEL = 2;
+
+	/**
+	 * This is the status code returned when the authentication failed (prevent login if no success)
+	 * @const  STATUS_FAILURE failed request
+	 * @since  11.2
+	 */
+	const STATUS_FAILURE = 4;
+
+	// These are for authorisation purposes (can the user login)
+	/**
+	 * This is the status code returned when the account has expired (prevent login)
+	 * @const  STATUS_EXPIRED an expired account (will prevent login)
+	 * @since  11.2
+	 */
+	const STATUS_EXPIRED = 8;
+
+	/**
+	 * This is the status code returned when the account has been denied (prevent login)
+	 * @const  STATUS_DENIED denied request (will prevent login)
+	 * @since  11.2
+	 */
+	const STATUS_DENIED = 16;
+
+	/**
+	 * This is the status code returned when the account doesn't exist (not an error)
+	 * @const  STATUS_UNKNOWN unknown account (won't permit or prevent login)
+	 * @since  11.2
+	 */
+	const STATUS_UNKNOWN = 32;
+
 	/**
 	 * Constructor
 	 *
@@ -81,15 +129,14 @@ class JAuthentication extends JObservable
 	 * objects to run their respective authentication routines.
 	 *
 	 * @param   array  $credentials  Array holding the user credentials
-	 * @param   array  $options      Array of options
+	 * @param   array  $options      Array holding user options
 	 *
-	 * @return  mixed  Integer userid for valid user if credentials are valid or
-	 *                 boolean false if they are not
-	 *
+	 * @return  JAuthenticationResponse Response object with status variable filled 
+	 *                                 in for last plugin or first successful plugin
 	 * @see     JAuthenticationResponse
 	 * @since   11.1
 	 */
-	public function authenticate($credentials, $options)
+	public static function authenticate($credentials, $options=Array())
 	{
 		// Initialise variables.
 		$auth = false;
@@ -123,7 +170,7 @@ class JAuthentication extends JObservable
 			$plugin->onUserAuthenticate($credentials, $options, $response);
 
 			// If authentication is successful break out of the loop
-			if ($response->status === JAUTHENTICATE_STATUS_SUCCESS)
+			if ($response->status === JAuthentication::STATUS_SUCCESS)
 			{
 				if (empty($response->type)) {
 					$response->type = isset($plugin->_name) ? $plugin->_name : $plugin->name;
@@ -146,6 +193,25 @@ class JAuthentication extends JObservable
 
 		return $response;
 	}
+	
+	/**
+	 * Authorises that a particular user should be able to login
+	 * 
+	 * @access public
+	 * @param JAuthenticationResponse username of the user to authorise
+	 * @param Array list of options 
+	 * @return Array[JAuthenticationResponse] results of authorisation
+	 * @since  11.1
+	 */
+	public static function authorise($response, $options=Array())
+	{
+		// Get plugins in case they haven't been loaded already
+		JPluginHelper::getPlugin('user');
+		JPluginHelper::getPlugin('authentication');
+		$dispatcher = JDispatcher::getInstance();
+		$results = $dispatcher->trigger('onUserAuthorisation', Array($response, $options));
+		return $results;
+	}
 }
 
 /**
@@ -163,7 +229,7 @@ class JAuthenticationResponse extends JObject
 	 * @var    string
 	 * @since  11.1
 	 */
-	public $status		= JAUTHENTICATE_STATUS_FAILURE;
+	public $status		= JAuthentication::STATUS_FAILURE;
 
 	/**
 	 * The type of authentication that was successful

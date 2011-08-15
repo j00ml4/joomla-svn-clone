@@ -637,10 +637,41 @@ class JApplication extends JObject
 		// Get the global JAuthentication object.
 		jimport('joomla.user.authentication');
 
-		$authenticate = JAuthentication::getInstance();
-		$response	= $authenticate->authenticate($credentials, $options);
+		$response	= JAuthentication::authenticate($credentials, $options);
 
-		if ($response->status === JAUTHENTICATE_STATUS_SUCCESS) {
+		if ($response->status === JAuthentication::STATUS_SUCCESS) {
+			// validate that the user should be able to login (different to being authenticated)
+			// this permits authentication plugins blocking the user
+			$authorisations = JAuthentication::authorise($response, $options);
+			foreach($authorisation as $authorisation)
+			{
+				$denied_states = Array(JAuthentication::STATUS_EXPIRED,JAuthentication::STATUS_DENIED);
+				if(in_array($authorisation->status, $denied_states))
+				{
+					// Trigger onUserAuthorisationFailure Event.
+					$this->triggerEvent('onUserAuthorisationFailure', array((array)$authorisation));
+
+					// If silent is set, just return false.
+					if (isset($options['silent']) && $options['silent']) {
+						return false;
+					}
+			
+					// Return the error.
+					switch($authorisation->status)
+					{
+						case JAuthentication::STATUS_EXPIRED:
+							return JError::raiseWarning('102002', JText::_('JLIB_LOGIN_EXPIRED'));
+							break;
+						case JAuthentication::STATUS_DENIED:
+							return JError::raiseWarning('102003', JText::_('JLIB_LOGIN_DENIED'));
+							break;
+						default:
+							return JError::raiseWarning('102004', JText::_('JLIB_LOGIN_AUTHORISATION'));
+							break;
+					}
+				}
+			}
+			
 			// Import the user plugin group.
 			JPluginHelper::importPlugin('user');
 
@@ -687,8 +718,8 @@ class JApplication extends JObject
 		}
 
 		// If status is success, any error will have been raised by the user plugin
-		if ($response->status !== JAUTHENTICATE_STATUS_SUCCESS) {
-			JError::raiseWarning('SOME_ERROR_CODE', JText::_('JLIB_LOGIN_AUTHENTICATE'));
+		if ($response->status !== JAuthentication::STATUS_SUCCESS) {
+			JError::raiseWarning('102001', JText::_('JLIB_LOGIN_AUTHENTICATE'));
 		}
 
 		return false;
@@ -955,9 +986,10 @@ class JApplication extends JObject
 		if ($time % 2) {
 			// The modulus introduces a little entropy, making the flushing less accurate
 			// but fires the query less than half the time.
+			$query = $db->getQuery(true);
 			$db->setQuery(
-				'DELETE FROM `#__session`' .
-				' WHERE `time` < '.(int) ($time - $session->getExpire())
+				'DELETE FROM '.$query->qn('#__session') .
+				' WHERE '.$query->qn('time').' < '.(int) ($time - $session->getExpire())
 			);
 			$db->query();
 		}
@@ -990,10 +1022,11 @@ class JApplication extends JObject
 		$session 	= JFactory::getSession();
 		$user		= JFactory::getUser();
 
+		$query = $db->getQuery(true);
 		$db->setQuery(
-			'SELECT `session_id`' .
-			' FROM `#__session`' .
-			' WHERE `session_id` = '.$db->quote($session->getId()), 0, 1
+			'SELECT '.$query->qn('session_id') .
+			' FROM '.$query->qn('#__session') .
+			' WHERE '.$query->qn('session_id').' = '.$query->q($session->getId()), 0, 1
 		);
 		$exists = $db->loadResult();
 
@@ -1001,14 +1034,14 @@ class JApplication extends JObject
 		if (!$exists) {
 			if ($session->isNew()) {
 				$db->setQuery(
-					'INSERT INTO `#__session` (`session_id`, `client_id`, `time`)' .
-					' VALUES ('.$db->quote($session->getId()).', '.(int) $this->getClientId().', '.(int) time().')'
+					'INSERT INTO '.$query->qn('#__session').' ('.$query->qn('session_id').', '.$query->qn('client_id').', '.$query->qn('time').')' .
+					' VALUES ('.$query->q($session->getId()).', '.(int) $this->getClientId().', '.(int) time().')'
 				);
 			}
 			else {
 				$db->setQuery(
-					'INSERT INTO `#__session` (`session_id`, `client_id`, `guest`, `time`, `userid`, `username`)' .
-					' VALUES ('.$db->quote($session->getId()).', '.(int) $this->getClientId().', '.(int) $user->get('guest').', '.(int) $session->get('session.timer.start').', '.(int) $user->get('id').', '.$db->quote($user->get('username')).')'
+					'INSERT INTO '.$query->qn('#__session').' ('.$query->qn('session_id').', '.$query->qn('client_id').', '.$query->qn('guest').', '.$query->qn('time').', '.$query->qn('userid').', '.$query->qn('username').')' .
+					' VALUES ('.$query->q($session->getId()).', '.(int) $this->getClientId().', '.(int) $user->get('guest').', '.(int) $session->get('session.timer.start').', '.(int) $user->get('id').', '.$query->q($user->get('username')).')'
 				);
 			}
 
