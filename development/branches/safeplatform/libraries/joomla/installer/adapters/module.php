@@ -243,7 +243,7 @@ class JInstallerModule extends JAdapterInstance
 			}
 			else if (!$this->parent->getOverwrite()) {
 				// Overwrite is set
-				// We didn't have overwrite set, find an udpate function or find an update tag so let's call it safe
+				// We didn't have overwrite set, find an udpate function or find an update tag so lets call it safe
 				$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT_MOD_INSTALL_DIRECTORY', JText::_('JLIB_INSTALLER_'.$this->route), $this->parent->getPath('extension_root')));
 
 				return false;
@@ -252,7 +252,7 @@ class JInstallerModule extends JAdapterInstance
 
 		// Installer Trigger Loading
 
-		// If there is an manifest class file, let's load it; we'll copy it later (don't have dest yet)
+		// If there is an manifest class file, let's load it; we'll copy it later (don't have destination yet)
 		$this->scriptElement = $this->manifest->scriptfile;
 		$manifestScript = (string)$this->manifest->scriptfile;
 
@@ -268,11 +268,11 @@ class JInstallerModule extends JAdapterInstance
 			$classname = $element.'InstallerScript';
 
 			if (class_exists($classname)) {
-				// Create a new instance
+				// Create a new instance.
 				$this->parent->manifestClass = new $classname($this);
-				// and set this so we can copy it later
+				// and set this so we can copy it later.
 				$this->set('manifest_script', $manifestScript);
-				// Note: if we don't find the class, don't bother to copy the file
+				// Note: if we don't find the class, don't bother to copy the file.
 			}
 		}
 
@@ -295,7 +295,7 @@ class JInstallerModule extends JAdapterInstance
 
 		// Filesystem Processing Section
 
-		// If the module directory does not exist, let's create it
+		// If the module directory does not exist, lets create it
 		$created = false;
 
 		if (!file_exists($this->parent->getPath('extension_root'))) {
@@ -404,7 +404,7 @@ class JInstallerModule extends JAdapterInstance
 
 
 		// Let's run the queries for the module
-		// If Joomla 1.5 compatible, with discreet sql files - execute appropriate
+		// If Joomla 1.5 compatible, with discreet sql files, execute appropriate
 		// file for utf-8 support or non-utf-8 support
 
 		// Try for Joomla 1.5 type queries
@@ -587,9 +587,8 @@ class JInstallerModule extends JAdapterInstance
 
 	/**
 	 * Refreshes the extension table cache
-	 *
-	 * @return  boolean result of operation, true if updated, false on failure
-	 *
+	 * 
+	 * @return  boolean  Result of operation, true if updated, false on failure
 	 * @since   11.1
 	 */
 	public function refreshManifestCache()
@@ -658,7 +657,7 @@ class JInstallerModule extends JAdapterInstance
 		$this->parent->setPath('source', $this->parent->getPath('extension_root'));
 
 		// Get the package manifest objecct
-		// We do findManifest to avoid problem when uninstalling a list of extensions: getManifest cache its manifest file
+		// We do findManifest to avoid problem when uninstalling a list of extensions: getManifest cache its manifest file.
 		$this->parent->findManifest();
 		$this->manifest = $this->parent->getManifest();
 
@@ -795,12 +794,12 @@ class JInstallerModule extends JAdapterInstance
 
 		try
 		{
-			// clean up any other ones that might exist as well
+			// Clean up any other ones that might exist as well
 			$db->Query();
 		}
 		catch(JException $e)
 		{
-			//Ignore the error...
+			// Ignore the error...
 		}
 
 		unset ($row);
