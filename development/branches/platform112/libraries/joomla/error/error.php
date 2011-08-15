@@ -41,7 +41,7 @@ abstract class JError
 	 *
 	 * @since  11.1
 	 */
-	public static $legacy = false;
+	public static $legacy = true;
 
 	/**
 	 * Array of message lvwls
