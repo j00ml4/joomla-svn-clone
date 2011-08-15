@@ -129,11 +129,10 @@ class JAuthentication extends JObservable
 	 * objects to run their respective authentication routines.
 	 *
 	 * @param   array  $credentials  Array holding the user credentials
-	 * @param   array  $options      Array of options
+	 * @param   array  $options      Array holding user options
 	 *
-	 * @return  mixed  Integer userid for valid user if credentials are valid or
-	 *                 boolean false if they are not
-	 *
+	 * @return  JAuthenticationResponse Response object with status variable filled 
+	 *                                 in for last plugin or first successful plugin
 	 * @see     JAuthenticationResponse
 	 * @since   11.1
 	 */
