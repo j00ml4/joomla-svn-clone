@@ -51,7 +51,7 @@ class JRegistryFormatXML extends JRegistryFormat
 				$n->addAttribute('name', $k);
 				$n->addAttribute('type', gettype($v));
 
-				$this->_getXmlChildren($n, $v, $nodeName);
+				$this->getXmlChildren($n, $v, $nodeName);
 			}
 		}
 
@@ -78,7 +78,7 @@ class JRegistryFormatXML extends JRegistryFormat
 
 		foreach ($xml->children() as $node)
 		{
-			$obj->$node['name'] = $this->_getValueFromNode($node);
+			$obj->$node['name'] = $this->getValueFromNode($node);
 		}
 
 		return $obj;
@@ -93,7 +93,7 @@ class JRegistryFormatXML extends JRegistryFormat
 	 *
 	 * @since   11.1
 	 */
-	protected function _getValueFromNode($node)
+	protected function getValueFromNode($node)
 	{
 		switch ($node['type']) {
 			case 'integer':
@@ -115,14 +115,14 @@ class JRegistryFormatXML extends JRegistryFormat
 				$value = array();
 				foreach ($node->children() as $child)
 				{
-					$value[(string) $child['name']] = $this->_getValueFromNode($child);
+					$value[(string) $child['name']] = $this->getValueFromNode($child);
 				}
 				break;
 			default:
 				$value = new stdClass;
 				foreach ($node->children() as $child)
 				{
-					$value->$child['name'] = $this->_getValueFromNode($child);
+					$value->$child['name'] = $this->getValueFromNode($child);
 				}
 				break;
 		}
@@ -141,7 +141,7 @@ class JRegistryFormatXML extends JRegistryFormat
 	 *
 	 * @since   11.1
 	 */
-	protected function _getXmlChildren(& $node, $var, $nodeName)
+	protected function getXmlChildren(&$node, $var, $nodeName)
 	{
 		// Iterate over the object members.
 		foreach ((array) $var as $k => $v)
@@ -155,7 +155,7 @@ class JRegistryFormatXML extends JRegistryFormat
 				$n->addAttribute('name', $k);
 				$n->addAttribute('type', gettype($v));
 
-				$this->_getXmlChildren($n, $v, $nodeName);
+				$this->getXmlChildren($n, $v, $nodeName);
 			}
 		}
 	}

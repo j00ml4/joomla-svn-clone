@@ -61,7 +61,7 @@ class JElementTemplateStyle extends JElement {
 		$db = JFactory::getDBO();
 		$query = 'SELECT `template_style_id` FROM `#__menu` '
 			. 'WHERE id = '.$id[0];
-		$db->setQuery( $query );
+		$db->setQuery($query);
 		$result = $db->loadResult();
 		return $result;
 	}

@@ -51,11 +51,11 @@ class JRegistryFormatINI extends JRegistryFormat
 				// Add the properties for this section.
 				foreach (get_object_vars($value) as $k => $v)
 				{
-					$local[] = $k.'='.$this->_getValueAsINI($v);
+					$local[] = $k.'='.$this->getValueAsINI($v);
 				}
 			} else {
 				// Not in a section so add the property to the global array.
-				$global[] = $key.'='.$this->_getValueAsINI($value);
+				$global[] = $key.'='.$this->getValueAsINI($value);
 			}
 		}
 
@@ -190,7 +190,7 @@ class JRegistryFormatINI extends JRegistryFormat
 	 *
 	 * @since   11.1
 	 */
-	protected function _getValueAsINI($value)
+	protected function getValueAsINI($value)
 	{
 		// Initialize variables.
 		$string = '';
