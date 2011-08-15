@@ -252,7 +252,7 @@ abstract class JDatabase implements JDatabaseInterface
 				else {
 
 					// Legacy error handling switch based on the JError::$legacy switch.
-					// @deprecated  11.3
+					// @deprecated  12.1
 					if (JError::$legacy) {
 						JError::setErrorHandling(E_ERROR, 'die');
 						return JError::raiseError(500, JText::sprintf('JLIB_DATABASE_ERROR_LOAD_DATABASE_DRIVER', $options['driver']));
@@ -1425,7 +1425,7 @@ abstract class JDatabase implements JDatabaseInterface
 	 * @return      string  The error message for the most recent query.
 	 *
 	 * @since       11.1
-	 * @deprecated  11.2
+	 * @deprecated  12.1
 	 */
 	public function getErrorMsg($escaped = false)
 	{
@@ -1445,7 +1445,7 @@ abstract class JDatabase implements JDatabaseInterface
 	 * @return      integer  The error number for the most recent query.
 	 *
 	 * @since       11.1
-	 * @deprecated  11.2
+	 * @deprecated  12.1
 	 */
 	public function getErrorNum()
 	{
@@ -1509,7 +1509,7 @@ abstract class JDatabase implements JDatabaseInterface
 	 * @return      integer
 	 *
 	 * @since       11.1
-	 * @deprecated  11.2
+	 * @deprecated  12.1
 	 */
 	public function getTicker()
 	{
@@ -1527,7 +1527,7 @@ abstract class JDatabase implements JDatabaseInterface
 	 * @return      bool
 	 *
 	 * @since       11.1
-	 * @deprecated  11.2
+	 * @deprecated  12.1
 	 */
 	public function isQuoted($field)
 	{
@@ -1587,7 +1587,7 @@ abstract class JDatabase implements JDatabaseInterface
 	 * @return      mixed  A database resource if successful, false if not.
 	 *
 	 * @since       11.1
-	 * @deprecated  11.2
+	 * @deprecated  12.1
 	 */
 	abstract public function queryBatch($abortOnError = true, $transactionSafe = false);
 
@@ -1599,7 +1599,7 @@ abstract class JDatabase implements JDatabaseInterface
 	 * @return      string  The error message for the most recent query.
 	 *
 	 * @since       11.1
-	 * @deprecated  11.2
+	 * @deprecated  12.1
 	 */
 	public function stderr($showSQL = false)
 	{
