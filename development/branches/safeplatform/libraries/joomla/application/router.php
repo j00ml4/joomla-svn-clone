@@ -364,6 +364,7 @@ class JRouter extends JObject
 	 * Process the build uri query data based on custom defined rules
 	 *
 	 * @param   string   The URI
+	 *
 	 * @return
 	 *
 	 * @since   11.1

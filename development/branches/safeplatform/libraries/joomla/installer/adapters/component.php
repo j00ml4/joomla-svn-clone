@@ -195,18 +195,18 @@ class JInstallerComponent extends JAdapterInstance
 		if (file_exists($this->parent->getPath('extension_site')) || file_exists($this->parent->getPath('extension_administrator'))) {
 			// Look for an update function or update tag
 			$updateElement = $this->manifest->update;
-			// Upgrade manually set
-			// Update function available
+			// Upgrade manually set or
+			// Update function available or
 			// Update tag detected
 
 			if ($this->parent->getUpgrade() || ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'update')) || $updateElement) {
 				return $this->update(); // transfer control to the update function
 			}
 			else if (!$this->parent->getOverwrite()) {
-				// Overwrite is set
+				// Overwrite is set.
 				// We didn't have overwrite set, find an update function or find an update tag so lets call it safe
 				if (file_exists($this->parent->getPath('extension_site'))) {
-					// If the site exists say so
+					// If the site exists say so.
 					JError::raiseWarning(1, JText::sprintf('JLIB_INSTALLER_ERROR_COMP_INSTALL_DIR_SITE', $this->parent->getPath('extension_site')));
 				}
 				else {
@@ -290,7 +290,7 @@ class JInstallerComponent extends JAdapterInstance
 
 		/*
 		 * Since we created the component admin directory and we will want to remove it if we have to roll
-		 * back the installation, lets add it to the installation step stack
+		 * back the installation, let's add it to the installation step stack
 		 */
 		if ($created) {
 			$this->parent->pushStep(array ('type' => 'folder', 'path' => $this->parent->getPath('extension_administrator')));
@@ -343,7 +343,7 @@ class JInstallerComponent extends JAdapterInstance
 		}
 
 		// Deprecated uninstall, remove after 1.6
-		// If there is an uninstall file, lets copy it.
+		// If there is an uninstall file, let's copy it.
 		$uninstallFile = (string)$this->manifest->uninstallfile;
 
 		if ($uninstallFile) {
@@ -360,7 +360,7 @@ class JInstallerComponent extends JAdapterInstance
 			}
 		}
 
-		// If there is a manifest script, lets copy it.
+		// If there is a manifest script, let's copy it.
 		if ($this->get('manifest_script')) {
 			$path['src'] = $this->parent->getPath('source') . '/' . $this->get('manifest_script');
 			$path['dest'] = $this->parent->getPath('extension_administrator') . '/' . $this->get('manifest_script');
@@ -410,7 +410,7 @@ class JInstallerComponent extends JAdapterInstance
 		 * install method, and append the return value from the custom install
 		 * method to the installation message.
 		 */
-		// start legacy support
+		// Start legacy support
 		if ($this->get('install_script')) {
 			if (is_file($this->parent->getPath('extension_administrator') . '/' . $this->get('install_script')) || $this->parent->getOverwrite()) {
 				$notdef = false;
@@ -433,7 +433,7 @@ class JInstallerComponent extends JAdapterInstance
 			}
 		}
 
-		// end legacy support
+		// End legacy support
 		// Start Joomla! 1.6
 		ob_start();
 		ob_implicit_flush(false);
@@ -447,7 +447,8 @@ class JInstallerComponent extends JAdapterInstance
 			}
 		}
 
-		$msg .= ob_get_contents(); // append messages
+		// Append messages
+		$msg .= ob_get_contents();
 		ob_end_clean();
 
 		/**
@@ -532,7 +533,8 @@ class JInstallerComponent extends JAdapterInstance
 			$this->parent->manifestClass->postflight('install', $this);
 		}
 
-		$msg .= ob_get_contents(); // append messages
+		// Append messages
+		$msg .= ob_get_contents();
 		ob_end_clean();
 
 		if ($msg != '') {
@@ -566,7 +568,7 @@ class JInstallerComponent extends JAdapterInstance
 		 * ---------------------------------------------------------------------------------------------
 		 */
 
-		// Set the extensions name
+		// Set the extension's name
 		$name = strtolower(JFilterInput::getInstance()->clean((string)$this->manifest->name, 'cmd'));
 		if (substr($name, 0, 4)=="com_") {
 			$element = $name;
@@ -596,12 +598,13 @@ class JInstallerComponent extends JAdapterInstance
 		 * Hunt for the original XML file
 		 */
 		$old_manifest = null;
-		$tmpInstaller = new JInstaller(); // create a new installer because findManifest sets stuff
-		// look in the administrator first
+		// Create a new installer because findManifest sets stuff
+		// Look in the administrator first
+		$tmpInstaller = new JInstaller;
 		$tmpInstaller->setPath('source', $this->parent->getPath('extension_administrator'));
 
 		if (!$tmpInstaller->findManifest()) {
-			// then the site
+			// Then the site
 			$tmpInstaller->setPath('source', $this->parent->getPath('extension_site'));
 			if ($tmpInstaller->findManifest()) {
 				$old_manifest = $tmpInstaller->getManifest();
@@ -611,7 +614,7 @@ class JInstallerComponent extends JAdapterInstance
 			$old_manifest = $tmpInstaller->getManifest();
 		}
 
-		// should do this above perhaps?
+		// Should do this above perhaps?
 		if ($old_manifest) {
 			$this->oldAdminFiles = $old_manifest->administration->files;
 			$this->oldFiles = $old_manifest->files;
@@ -645,7 +648,7 @@ class JInstallerComponent extends JAdapterInstance
 			$manifestScriptFile = $this->parent->getPath('source') . '/' . $manifestScript;
 
 			if (is_file($manifestScriptFile)) {
-				// load the file
+				// Load the file
 				include_once $manifestScriptFile;
 			}
 
@@ -661,7 +664,7 @@ class JInstallerComponent extends JAdapterInstance
 			}
 		}
 
-		// run preflight if possible (since we know we're not an update)
+		// Run preflight if possible (since we know we're not an update)
 		ob_start();
 		ob_implicit_flush(false);
 
@@ -1127,7 +1130,7 @@ class JInstallerComponent extends JAdapterInstance
 		 *	If Joomla 1.5 compatible, with discreet sql files - execute appropriate
 		 *	file for utf-8 support or non-utf support
 		 */
-		// try for Joomla 1.5 type queries
+		// Try for Joomla 1.5 type queries
 		// second argument is the utf compatible version attribute
 		if (isset($this->manifest->uninstall->sql)) {
 			$utfresult = $this->parent->parseSQLFiles($this->manifest->uninstall->sql);
@@ -1723,7 +1726,7 @@ class JInstallerComponent extends JAdapterInstance
 				ob_end_clean();
 			}
 		}
-		// end legacy support
+		// End legacy support
 
 		// Start Joomla! 1.6
 		ob_start();

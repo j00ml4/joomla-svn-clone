@@ -140,6 +140,7 @@ class JAccess
 		// Get parent groups and leaf group
 		if (!isset($paths[$groupId])) {
 			$paths[$groupId] = array();
+
 			foreach ($groups as $group)
 			{
 				if ($group->lft <= $groups[$groupId]->lft && $group->rgt >= $groups[$groupId]->rgt) {
@@ -310,7 +311,7 @@ class JAccess
 	 *
 	 * @param   integer  $userId  Id of the user for which to get the list of authorised view levels.
 	 *
-	 * @return  array  List of view levels for which the user is authorised.
+	 * @return  array    List of view levels for which the user is authorised.
 	 *
 	 * @since   11.1
 	 */
@@ -387,7 +388,11 @@ class JAccess
 				if ($section == (string) $child['name']) {
 					foreach ($child->children() as $action)
 					{
-						$actions[] = (object) array('name' => (string) $action['name'], 'title' => (string) $action['title'], 'description' => (string) $action['description']);
+						$actions[] = (object) array(
+							'name' => (string) $action['name'],
+							'title' => (string) $action['title'],
+							'description' => (string) $action['description']
+						);
 					}
 
 					break;
