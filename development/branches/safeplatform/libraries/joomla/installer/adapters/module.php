@@ -243,7 +243,7 @@ class JInstallerModule extends JAdapterInstance
 			}
 			else if (!$this->parent->getOverwrite()) {
 				// Overwrite is set
-				// We didn't have overwrite set, find an udpate function or find an update tag so lets call it safe
+				// We didn't have overwrite set, find an udpate function or find an update tag so let's call it safe
 				$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT_MOD_INSTALL_DIRECTORY', JText::_('JLIB_INSTALLER_'.$this->route), $this->parent->getPath('extension_root')));
 
 				return false;
@@ -252,7 +252,7 @@ class JInstallerModule extends JAdapterInstance
 
 		// Installer Trigger Loading
 
-		// If there is an manifest class file, lets load it; we'll copy it later (don't have dest yet)
+		// If there is an manifest class file, let's load it; we'll copy it later (don't have dest yet)
 		$this->scriptElement = $this->manifest->scriptfile;
 		$manifestScript = (string)$this->manifest->scriptfile;
 
@@ -276,7 +276,7 @@ class JInstallerModule extends JAdapterInstance
 			}
 		}
 
-		// run preflight if possible (since we know we're not an update)
+		// Run preflight if possible (since we know we're not an update)
 		ob_start();
 		ob_implicit_flush(false);
 
@@ -295,7 +295,7 @@ class JInstallerModule extends JAdapterInstance
 
 		// Filesystem Processing Section
 
-		// If the module directory does not exist, lets create it
+		// If the module directory does not exist, let's create it
 		$created = false;
 
 		if (!file_exists($this->parent->getPath('extension_root'))) {
@@ -307,7 +307,7 @@ class JInstallerModule extends JAdapterInstance
 		}
 
 		// Since we created the module directory and will want to remove it if
-		// we have to roll back the installation, lets add it to the
+		// we have to roll back the installation, let's add it to the
 		// installation step stack
 
 		if ($created) {
@@ -322,7 +322,7 @@ class JInstallerModule extends JAdapterInstance
 			return false;
 		}
 
-		// If there is a manifest script, lets copy it.
+		// If there is a manifest script, let's copy it.
 		if ($this->get('manifest_script')) {
 			$path['src'] = $this->parent->getPath('source') . '/' . $this->get('manifest_script');
 			$path['dest'] = $this->parent->getPath('extension_root') . '/' . $this->get('manifest_script');
@@ -788,7 +788,7 @@ class JInstallerModule extends JAdapterInstance
 			}
 		}
 
-		// Now we will no longer need the module object, so lets delete it and free up memory
+		// Now we will no longer need the module object, so let's delete it and free up memory
 		$row->delete($row->extension_id);
 		$query = 'DELETE FROM `#__modules` WHERE module = '.$db->Quote($row->element) . ' AND client_id = ' . $row->client_id;
 		$db->setQuery($query);

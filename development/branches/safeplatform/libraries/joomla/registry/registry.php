@@ -80,7 +80,6 @@ class JRegistry
 	 *
 	 * @param   string  $key      The name of the parameter.
 	 * @param   string  $default  An optional value for the parameter.
-	 * @param   string            An optional group for the parameter.
 	 *
 	 * @return  string  The value set, or the default if the value was not previously set (or null).
 	 *
@@ -217,7 +216,6 @@ class JRegistry
 	 * Load the public variables of the object into the default namespace.
 	 *
 	 * @param   object  $object  The object holding the publics to load
-	 * @param   string           Namespace to load the INI string into [optional]
 	 *
 	 * @return  boolean  True on success
 	 *
@@ -275,7 +273,7 @@ class JRegistry
 	/**
 	 * Merge a JRegistry object into this one
 	 *
-	 * @param   object  $source  Source JRegistry object to merge.
+	 * @param   object  &$source  Source JRegistry object to merge.
 	 *
 	 * @return  boolean  True on success
 	 *
@@ -287,7 +285,7 @@ class JRegistry
 			// Load the variables into the registry's default namespace.
 			foreach ($source->toArray() as $k => $v)
 			{
-				if (($v !== null) && ($v !== '')){
+				if (($v !== null) && ($v !== '')) {
 					$this->data->$k = $v;
 				}
 			}
@@ -316,7 +314,8 @@ class JRegistry
 			$node = $this->data;
 
 			// Traverse the registry to find the correct node for the result.
-			for ($i = 0, $n = count($nodes) - 1; $i < $n; $i++) {
+			for ($i = 0, $n = count($nodes) - 1; $i < $n; $i++)
+			{
 				if (!isset($node->$nodes[$i]) && ($i != $n)) {
 					$node->$nodes[$i] = new stdClass;
 				}
@@ -333,8 +332,6 @@ class JRegistry
 	/**
 	 * Transforms a namespace to an array
 	 *
-	 * @param   string  Namespace to return [optional: null returns the default namespace]
-	 *
 	 * @return  array  An associative array holding the namespace data
 	 *
 	 * @since   11.1
@@ -346,8 +343,6 @@ class JRegistry
 
 	/**
 	 * Transforms a namespace to an object
-	 *
-	 * @param   string   Namespace to return [optional: null returns the default namespace]
 	 *
 	 * @return  object   An an object holding the namespace data
 	 *
@@ -379,14 +374,14 @@ class JRegistry
 	/**
 	 * Method to recursively bind data to a parent object.
 	 *
-	 * @param   object  $parent  The parent object on which to attach the data values.
-	 * @param   mixed   $data    An array or object of data to bind to the parent object.
+	 * @param   object  &$parent  The parent object on which to attach the data values.
+	 * @param   mixed   $data     An array or object of data to bind to the parent object.
 	 *
 	 * @return  void
 	 *
 	 * @since   11.1
 	 */
-	protected function bindData(& $parent, $data)
+	protected function bindData(&$parent, $data)
 	{
 		// Ensure the input data is an array.
 		if (is_object($data)) {
@@ -438,13 +433,14 @@ class JRegistry
 	/**
 	 * Load an XML string into the registry into the given namespace [or default if a namespace is not given]
 	 *
-	 * @param   string   XML formatted string to load into the registry
-	 * @param   string   Namespace to load the XML string into [optional]
+	 * @param   string  $data       XML formatted string to load into the registry
+	 * @param   string  $namespace  Namespace to load the XML string into [optional]
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @deprecated
 	 * @since   11.1
+	 *
+	 * @deprecated  12.1
 	 */
 	public function loadXML($data, $namespace = null)
 	{
@@ -460,8 +456,9 @@ class JRegistry
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @deprecated
 	 * @since   11.1
+	 *
+	 * @deprecated  12.1
 	 */
 	public function loadINI($data, $namespace = null, $options = array())
 	{
@@ -475,7 +472,7 @@ class JRegistry
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @deprecated
+	 * @deprecated    12.1
 	 * @note    Use loadString instead.
 	 * @since   11.1
 	 */
@@ -487,11 +484,11 @@ class JRegistry
 	/**
 	 * Create a namespace
 	 *
-	 * @param   string   Name of the namespace to create
+	 * @param   string  $namespace  Name of the namespace to create
 	 *
 	 * @return  boolean  True on success
 	 *
-	 * @deprecated
+	 * @deprecated    12.1
 	 * @note    Namespaces are no longer supported.
 	 * @since   11.1
 	 */
@@ -506,7 +503,7 @@ class JRegistry
 	 *
 	 * @return  array    List of namespaces
 	 *
-	 * @deprecated
+	 * @deprecated    12.1
 	 * @note    Namespaces are no longer supported.
 	 * @since   11.1
 	 */
@@ -519,12 +516,12 @@ class JRegistry
 	/**
 	 * Get a registry value
 	 *
-	 * @param   string   Registry path (e.g. joomla.content.showauthor)
-	 * @param   mixed    Optional default value
+	 * @param   string  $path     Registry path (e.g. joomla.content.showauthor)
+	 * @param   mixed   $default  Optional default value
 	 *
 	 * @return  mixed    Value of entry or null
 	 *
-	 * @deprecated
+	 * @deprecated    12.1
 	 * @note    Use get instead.
 	 * @since   11.1
 	 */
@@ -541,12 +538,12 @@ class JRegistry
 	/**
 	 * Set a registry value
 	 *
-	 * @param   string   Registry Path (e.g. joomla.content.showauthor)
-	 * @param   mixed    Value of entry
+	 * @param   string  $path   Registry Path (e.g. joomla.content.showauthor)
+	 * @param   mixed   $value  Value of entry
 	 *
 	 * @return  mixed    The value after setting.
 	 *
-	 * @deprecated
+	 * @deprecated    12.1
 	 * @note    Use set instead.
 	 * @since   11.1
 	 */
@@ -567,7 +564,7 @@ class JRegistry
 	 *
 	 * @return  boolean  True.
 	 *
-	 * @deprecated
+	 * @deprecated    12.1
 	 * @note    Load no longer supported.
 	 * @since   11.1
 	 */
