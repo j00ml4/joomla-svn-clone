@@ -134,7 +134,7 @@ class JRouter extends JObject
 			$vars += $vars + $this->_parseSefRoute($uri);
 		}
 
-		return  array_merge($this->getVars(), $vars);
+		return array_merge($this->getVars(), $vars);
 	}
 
 	/**
@@ -231,9 +231,10 @@ class JRouter extends JObject
 	/**
 	 * Get a router variable
 	 *
-	 * @param   string   The name of the variable
+	 * @param   string   $key  The name of the variable
 	 *
 	 * @return  mixed    Value of the variable
+	 *
 	 * @since   11.1
 	 */
 	public function getVar($key)
@@ -249,6 +250,7 @@ class JRouter extends JObject
 	 * Get the router variable array
 	 *
 	 * @return  array    An associative array of router variables
+	 *
 	 * @since   11.1
 	 */
 	public function getVars()
@@ -262,6 +264,7 @@ class JRouter extends JObject
 	 * @param  string  callback  The function to be called
 	 *
 	 * @return
+	 *
 	 * @since   11.1.
 	 */
 	public function attachBuildRule($callback)
@@ -275,6 +278,7 @@ class JRouter extends JObject
 	 * @param   string  $callback   The function to be called.
 	 *
 	 * @return
+	 *
 	 * @since   11.1
 	 */
 	public function attachParseRule($callback)
@@ -288,6 +292,7 @@ class JRouter extends JObject
 	 * @param   string   The raw route
 	 *
 	 * @return
+	 *
 	 * @since   11.1
 	 */
 	protected function _parseRawRoute(&$uri)
@@ -301,6 +306,7 @@ class JRouter extends JObject
 	 * @param   string   The sef URI
 	 *
 	 * @return  string   Internal URI
+	 *
 	 * @since   11.1
 	 */
 	protected function _parseSefRoute(&$uri)
@@ -314,6 +320,7 @@ class JRouter extends JObject
 	 * @param   string   The internal URL
 	 *
 	 * @return           Raw Route
+	 *
 	 * @since   11.1
 	 */
 	protected function _buildRawRoute(&$uri)
@@ -326,6 +333,7 @@ class JRouter extends JObject
 	 * @param   string   The uri
 	 *
 	 * @return  string   The SEF route
+	 *
 	 * @since   11.1
 	 */
 	protected function _buildSefRoute(&$uri)
@@ -338,6 +346,7 @@ class JRouter extends JObject
 	 * @param   string   The URI to parse
 	 *
 	 * @return  array    The array of processed URI variables
+	 *
 	 * @since   11.1
 	 */
 	protected function _processParseRules(&$uri)
@@ -371,7 +380,8 @@ class JRouter extends JObject
 	 *
 	 * @param   string   $url  The URI
 	 *
-	 * @return  JURI           A JURI object
+	 * @return  A JURI object
+	 *
 	 * @since   11.1
 	 */
 	protected function _createURI($url)
@@ -406,6 +416,7 @@ class JRouter extends JObject
 	 * @param   array    An array of route segments
 	 *
 	 * @return  array    Array of encoded route segments
+	 *
 	 * @since   11.1
 	 */
 	protected function _encodeSegments($segments)
@@ -424,6 +435,7 @@ class JRouter extends JObject
 	 * @param   array    $segments  An array of route segments
 	 *
 	 * @return  array    Array of decoded route segments
+	 *
 	 * @since 11,1
 	 */
 	protected function _decodeSegments($segments)

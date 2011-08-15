@@ -225,9 +225,9 @@ function jexit($message = 0)
 /**
  * Intelligent file importer.
  *
- * @param   string  $path  A dot syntax path.
+ * @param   string   $path  A dot syntax path.
  *
- * @return  bool    True on success.
+ * @return  boolean  True on success.
  *
  * @since   11.1
  */

@@ -33,7 +33,8 @@ class JRegistryFormatPHP extends JRegistryFormat
 	{
 		// Build the object variables string
 		$vars = '';
-		foreach (get_object_vars($object) as $k => $v) {
+		foreach (get_object_vars($object) as $k => $v)
+		{
 			if (is_scalar($v)) {
 				$vars .= "\tpublic $". $k . " = '" . addcslashes($v, '\\\'') . "';\n";
 			} else if (is_array($v)) {
@@ -84,7 +85,8 @@ class JRegistryFormatPHP extends JRegistryFormat
 		foreach ($a as $k => $v) {
 			$s .= ($i) ? ', ' : '';
 			$s .= '"'.$k.'" => ';
-			if (is_array($v)) {
+			if (is_array($v))
+			{
 				$s .= $this->_getArrayString($v);
 			} else {
 				$s .= '"'.addslashes($v).'"';

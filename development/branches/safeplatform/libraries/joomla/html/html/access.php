@@ -64,7 +64,7 @@ abstract class JHtmlAccess
 
 		// If params is an array, push these options to the array
 		if (is_array($params)) {
-			$options = array_merge($params,$options);
+			$options = array_merge($params, $options);
 		}
 		// If all levels is allowed, push it into the array.
 		elseif ($params) {
@@ -80,7 +80,6 @@ abstract class JHtmlAccess
 		);
 	}
 
-	
 	/**
 	 * Displays a list of the available user groups.
 	 *
@@ -113,7 +112,7 @@ abstract class JHtmlAccess
 			return null;
 		}
 
-		for ($i=0,$n=count($options); $i < $n; $i++) {
+		for ($i = 0, $n=count($options); $i < $n; $i++) {
 			$options[$i]->text = str_repeat('- ',$options[$i]->level).$options[$i]->text;
 		}
 
