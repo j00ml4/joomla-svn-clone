@@ -270,7 +270,7 @@ class JInstallerModule extends JAdapterInstance
 			if (class_exists($classname)) {
 				// Create a new instance.
 				$this->parent->manifestClass = new $classname($this);
-				// and set this so we can copy it later.
+				// And set this so we can copy it later.
 				$this->set('manifest_script', $manifestScript);
 				// Note: if we don't find the class, don't bother to copy the file.
 			}
@@ -404,7 +404,7 @@ class JInstallerModule extends JAdapterInstance
 
 
 		// Let's run the queries for the module
-		// If Joomla 1.5 compatible, with discreet sql files, execute appropriate
+		// If Joomla 1.5 compatible, with discrete sql files, execute appropriate
 		// file for utf-8 support or non-utf-8 support
 
 		// Try for Joomla 1.5 type queries

@@ -641,7 +641,7 @@ class JInstallerComponent extends JAdapterInstance
 		 * Installer Trigger Loading
 		 * ---------------------------------------------------------------------------------------------
 		 */
-		// If there is an manifest class file, let's load it; we'll copy it later (don't have dest yet)
+		// If there is an manifest class file, lets load it; we'll copy it later (don't have dest yet)
 		$manifestScript = (string)$this->manifest->scriptfile;
 
 		if ($manifestScript) {
@@ -836,9 +836,9 @@ class JInstallerComponent extends JAdapterInstance
 		// Time to build the admin menus
 		if (!$this->_buildAdminMenus($eid)) {
 			JError::raiseWarning(100, JText::_('JLIB_INSTALLER_ABORT_COMP_BUILDADMINMENUS_FAILED'));
-			//$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT_COMP_INSTALL_ROLLBACK', $db->stderr(true)));
+			// $this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT_COMP_INSTALL_ROLLBACK', $db->stderr(true)));
 
-			// return false;
+			// Return false;
 		}
 
 		/**
@@ -852,7 +852,7 @@ class JInstallerComponent extends JAdapterInstance
 		 * install method, and append the return value from the custom install
 		 * method to the installation message.
 		 */
-		// start legacy support
+		// Start legacy support
 		if ($this->get('install_script')) {
 			if (is_file($this->parent->getPath('extension_administrator') . '/' . $this->get('install_script')) || $this->parent->getOverwrite()) {
 				$notdef = false;
@@ -892,8 +892,9 @@ class JInstallerComponent extends JAdapterInstance
 				return false;
 			}
 		}
-
-		$msg .= ob_get_contents(); // append messages
+		
+		// Append messages
+		$msg .= ob_get_contents();
 		ob_end_clean();
 
 		/**
@@ -955,11 +956,12 @@ class JInstallerComponent extends JAdapterInstance
 		ob_start();
 		ob_implicit_flush(false);
 
-		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'postflight')) {
+		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'postflight')) {
 			$this->parent->manifestClass->postflight('update', $this);
 		}
 
-		$msg .= ob_get_contents(); // append messages
+		// Append messages
+		$msg .= ob_get_contents();
 		ob_end_clean();
 
 		if ($msg != '') {
@@ -1054,7 +1056,7 @@ class JInstallerComponent extends JAdapterInstance
 		 * Installer Trigger Loading and Uninstall
 		 * ---------------------------------------------------------------------------------------------
 		 */
-		// If there is an manifest class file, let's load it; we'll copy it later (don't have dest yet)
+		// If there is an manifest class file, lets load it; we'll copy it later (don't have dest yet)
 		$scriptFile = (string)$this->manifest->scriptfile;
 
 		if ($scriptFile) {
@@ -1081,7 +1083,7 @@ class JInstallerComponent extends JAdapterInstance
 		ob_implicit_flush(false);
 
 		// run uninstall if possible
-		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'uninstall')) {
+		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'uninstall')) {
 			$this->parent->manifestClass->uninstall($this);
 		}
 
@@ -1090,7 +1092,7 @@ class JInstallerComponent extends JAdapterInstance
 
 		/**
 		 * ---------------------------------------------------------------------------------------------
-		 * Custom Uninstallation Script Section; Legacy 1.5 Support
+		 * Custom Uninstallation Script Section; Legacy CMS 1.5 Support
 		 * ---------------------------------------------------------------------------------------------
 		 */
 
@@ -1112,7 +1114,8 @@ class JInstallerComponent extends JAdapterInstance
 					}
 				}
 
-				$msg .= ob_get_contents(); // append this in case there was something else
+				// append this in case there was something else
+				$msg .= ob_get_contents(); 
 				ob_end_clean();
 			}
 		}
@@ -1642,7 +1645,7 @@ class JInstallerComponent extends JAdapterInstance
 		ob_start();
 		ob_implicit_flush(false);
 
-		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'preflight')) {
+		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'preflight')) {
 
 			if ($this->parent->manifestClass->preflight('discover_install', $this) === false) {
 				// Install failed, rollback changes
