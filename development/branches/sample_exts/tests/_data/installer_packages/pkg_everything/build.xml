@@ -19,8 +19,10 @@
 		<zip destfile="packages/tpl_simple.zip" basedir="../tpl_simple" />
 		<zip destfile="pkg_everything.zip">
 			<fileset dir=".">
+				<include name="language/**" />
 				<include name="packages/**" />
 				<include name="pkg_everything.xml" />
+				<include name="everything.scriptfile.php" />
 			</fileset>
 		</zip>
 	</target>
