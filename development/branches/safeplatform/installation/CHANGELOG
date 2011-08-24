@@ -27,6 +27,27 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+23-Aug-2011 Mark Dexter
+ # [#26631] Sync more changes from platform 11.2
+ # Revert [#26631] (use branch merge instead)
+
+23-Aug-2011 Jean-Marie Simonet
+ # [#26683] Language switcher module wrong link with menu associations when no SEF. Thanks Kelsang.
+ 
+22-Aug-2011 Jean-Marie Simonet
+ # [#26454] mod_languages: cache does not work properly with menu associations
+ # [#26654] Incorrect references to com_user. Thanks Michael.
+ # Deleted obsolete admin modules mod_online and mod_unread from joomla.sql
+ $ String missing in en-GB.plg_content_joomla.sys.ini
+ $ Sync beez2 ini files in beez language folder vs core language.
+ 
+19-Aug-2011 Jean-Marie Simonet
+ # [#26655] *Ordering column issue for _menu table in sample_data.sql
+
+18-Aug-2011 Jean-Marie Simonet
+ # [#26612] Contacts Component sets Reply-To incorrectly in 1.7. Thanks Piotr.
+ # [#26318] CSS for system message should be the same in installation screen and the rest?. Thanks Rouven.
+
 12-Aug-2011 Mark Dexter
  # [#26448] global configuration broken in IE9
  # [#26533] Sync more changes from platform 11.2
