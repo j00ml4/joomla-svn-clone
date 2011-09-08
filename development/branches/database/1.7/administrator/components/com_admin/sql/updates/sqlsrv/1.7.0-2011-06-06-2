@@ -1,0 +1,3 @@
+ALTER TABLE #__languages ADD ordering int NOT NULL default 0;
+CREATE INDEX idx_ordering on #__languages (ordering);
+
