@@ -1,4 +1,4 @@
-CREATE TABLE #__newsfeeds`(
+CREATE TABLE #__newsfeeds(
 	[catid] [int] NOT NULL,
 	[id] [bigint] IDENTITY(1,1) NOT NULL,
 	[name] [nvarchar](100) NOT NULL,
