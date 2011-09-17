@@ -9,7 +9,7 @@
 defined('JPATH_PLATFORM') or die;
 
 // Register JLoader::load as an autoload class handler.
-spl_autoload_register(array('JLoader','load'));
+spl_autoload_register(array('JLoader', 'load'));
 
 /**
  * Static class to handle loading of libraries.
@@ -58,7 +58,8 @@ abstract class JLoader
 			$path		= str_replace('.', DS, $key);
 
 			// Handle special case for helper classes.
-			if ($class == 'helper') {
+			if ($class == 'helper')
+			{
 				$class = ucfirst(array_pop($parts)).ucfirst($class);
 			}
 			// Standard class.
@@ -73,7 +74,8 @@ abstract class JLoader
 				$class	= 'J'.$class;
 
 				// Only register the class for autoloading if the file exists.
-				if (is_file($base . '/' . $path.'.php')) {
+				if (is_file($base . '/' . $path.'.php'))
+				{
 					self::$_classes[strtolower($class)] = $base . '/' . $path.'.php';
 					$success = true;
 				}
@@ -86,7 +88,8 @@ abstract class JLoader
 			else {
 
 				// If the file exists attempt to include it.
-				if (is_file($base . '/' . $path.'.php')) {
+				if (is_file($base . '/' . $path.'.php'))
+				{
 					$success = (bool) include_once $base . '/' . $path.'.php' ;
 				}
 			}
@@ -128,7 +131,8 @@ abstract class JLoader
 					$path  = $parentPath.'/'.$entry;
 
 					// Register the class with the autoloader if not already registered or the force flag is set.
-					if (empty(self::$_classes[$class]) || $force) {
+					if (empty(self::$_classes[$class]) || $force)
+					{
 						JLoader::register($class, $path);
 					}
 				}
@@ -168,10 +172,12 @@ abstract class JLoader
 		$class = strtolower($class);
 
 		// Only attempt to register the class if the name and file exist.
-		if (!empty($class) && is_file($path)) {
+		if (!empty($class) && is_file($path))
+		{
 
 			// Register the class with the autoloader if not already registered or the force flag is set.
-			if (empty(self::$_classes[$class]) || $force) {
+			if (empty(self::$_classes[$class]) || $force)
+			{
 				self::$_classes[$class] = $path;
 			}
 		}
@@ -192,12 +198,14 @@ abstract class JLoader
 		$class = strtolower($class);
 
 		// If the class already exists do nothing.
-		if (class_exists($class)) {
+		if (class_exists($class))
+		{
 			  return;
 		}
 
 		// If the class is registered include the file.
-		if (isset(self::$_classes[$class])) {
+		if (isset(self::$_classes[$class]))
+		{
 			include_once self::$_classes[$class] ;
 			return true;
 		}

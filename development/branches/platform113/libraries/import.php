@@ -38,13 +38,13 @@ if (!defined('IS_UNIX'))
 // Import the platform version library if necessary.
 if (!class_exists('JPlatform'))
 {
-    require_once JPATH_PLATFORM.'/platform.php';
+	require_once JPATH_PLATFORM.'/platform.php';
 }
 
 // Import the library loader if necessary.
 if (!class_exists('JLoader'))
 {
-    require_once JPATH_PLATFORM.'/loader.php';
+	require_once JPATH_PLATFORM.'/loader.php';
 }
 
 /**
@@ -67,7 +67,8 @@ if (isset($_SERVER['HTTP_HOST']))
 	JLoader::import('joomla.environment.request');
 
 	// If an application flags it doesn't want this, adhere to that.
-	if (!defined('_JREQUEST_NO_CLEAN')) {
+	if (!defined('_JREQUEST_NO_CLEAN'))
+	{
 		JRequest::clean();
 	}
 }
@@ -76,5 +77,5 @@ if (isset($_SERVER['HTTP_HOST']))
 JLoader::import('joomla.base.object');
 
 // Register classes that don't follow one file per class naming conventions.
-JLoader::register('JText',	JPATH_PLATFORM . '/joomla/methods.php');
+JLoader::register('JText',  JPATH_PLATFORM . '/joomla/methods.php');
 JLoader::register('JRoute', JPATH_PLATFORM . '/joomla/methods.php');
