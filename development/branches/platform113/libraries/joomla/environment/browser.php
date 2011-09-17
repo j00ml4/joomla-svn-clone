@@ -7,7 +7,7 @@
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
-defined('JPATH_PLATFORM') or die;
+defined('JPATH_PLATFORM') or die();
 
 /**
  * Browser class, provides capability information about the current web client.
@@ -228,6 +228,16 @@ class JBrowser extends JObject
 		return $instances[$signature];
 	}
 
+	/**
+	 * Identify which of two types is preferred
+	 *
+	 * @param   string  $a  The first item in the comparision
+	 * @param   string  $b  The second item in the comparison
+	 *
+	 * @return  void
+	 *
+	 * @since   11.1
+	 */
 	public static function _sortMime($a, $b)
 	{
 		if ($a[1] > $b[1]) {

@@ -148,7 +148,7 @@ abstract class JHtmlBehavior
 		self::framework();
 
 		$uncompressed = JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
-		JHtml::_('script', 'system/validate'.$uncompressed.'.js', true, true);
+		JHtml::_('script', 'system/validate' . $uncompressed . '.js', true, true);
 		$loaded = true;
 	}
 
@@ -174,7 +174,7 @@ abstract class JHtmlBehavior
 		self::framework();
 
 		$uncompressed = JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
-		JHtml::_('script', 'system/switcher'.$uncompressed.'.js', true, true);
+		JHtml::_('script', 'system/switcher' . $uncompressed . '.js', true, true);
 
 		$script = "
 			document.switcher = null;
@@ -214,7 +214,7 @@ abstract class JHtmlBehavior
 		self::framework();
 
 		$uncompressed = JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
-		JHtml::_('script', 'system/combobox'.$uncompressed.'.js', true, true);
+		JHtml::_('script', 'system/combobox' . $uncompressed . '.js', true, true);
 		$loaded = true;
 	}
 
@@ -243,7 +243,7 @@ abstract class JHtmlBehavior
 	 *
 	 * @since   11.1
 	 */
-	public static function tooltip($selector='.hasTip', $params = array())
+	public static function tooltip($selector = '.hasTip', $params = array())
 	{
 		static $tips;
 
@@ -255,7 +255,7 @@ abstract class JHtmlBehavior
 		// Include MooTools framework
 		self::framework(true);
 
-		$sig = md5(serialize(array($selector,$params)));
+		$sig = md5(serialize(array($selector, $params)));
 		if (isset($tips[$sig]) && ($tips[$sig]))
 		{
 			return;
@@ -391,25 +391,50 @@ abstract class JHtmlBehavior
 	/**
 	 * JavaScript behavior to allow shift select in grids
 	 *
+	 * @param   string  $id  The id of the form for which a multiselect behaviour is to be applied.
+	 *
 	 * @return  void
 	 *
 	 * @since   11.1
 	 */
-	public static function multiselect()
+	public static function multiselect($id = 'adminForm')
 	{
+		static $multiselect;
+
+		if (!isset($multiselect))
+		{
+			$multiselect = array();
+		}
+
+		// Only load once
+		if (isset($multiselect[$id]))
+		{
+			return;
+		}
+
 		// Include MooTools framework
 		self::framework();
+
 		JHtml::_('script', 'system/multiselect.js', true, true);
 
+		// Attach multiselect to document
+		JFactory::getDocument()->addScriptDeclaration(
+			"window.addEvent('domready', function() {
+				new Joomla.JMultiSelect('".$id."');
+			});"
+		);
+
+		// Set static array
+		$multiselect[$id] = true;
 		return;
 	}
 
 	/**
 	 * Add unobtrusive javascript support for the advanced uploader.
 	 *
-	 * @param   string  $id
-	 * @param   array   $params  An array of options for the uploader.
-	 * @param   string  $upload_queue
+	 * @param   string  $id            An index.
+	 * @param   array   $params        An array of options for the uploader.
+	 * @param   string  $upload_queue  The HTML id of the upload queue element (??).
 	 *
 	 * @return  void
 	 *
@@ -780,7 +805,7 @@ abstract class JHtmlBehavior
 	 *
 	 * @since   11.1
 	 */
-	public static function noframes($location='top.location.href')
+	public static function noframes($location = 'top.location.href')
 	{
 		static $loaded = false;
 
