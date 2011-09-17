@@ -37,25 +37,28 @@ abstract class JHtmlBehavior
 		$type = $extras ? 'more' : 'core';
 
 		// Only load once
-		if (!empty($loaded[$type])) {
+		if (!empty($loaded[$type]))
+		{
 			return;
 		}
 
 		JHtml::core($debug);
 
 		// If no debugging value is set, use the configuration setting
-		if ($debug === null) {
+		if ($debug === null)
+		{
 			$config = JFactory::getConfig();
 			$debug = $config->get('debug');
 		}
 
-		$uncompressed	= $debug ? '-uncompressed' : '';
+		$uncompressed = $debug ? '-uncompressed' : '';
 
-		if ($type != 'core' && empty($loaded['core'])) {
+		if ($type != 'core' && empty($loaded['core']))
+		{
 			self::framework(false, $debug);
 		}
 
-		JHtml::_('script', 'system/mootools-'.$type.$uncompressed.'.js', false, true, false, false);
+		JHtml::_('script', 'system/mootools-' . $type.$uncompressed . '.js', false, true, false, false);
 		$loaded[$type] = true;
 
 		return;
@@ -74,6 +77,8 @@ abstract class JHtmlBehavior
 	 */
 	public static function mootools($debug = null)
 	{
+		JLog::add('JBehavior::mootools is deprecated.', JLog::WARNING, 'deprecated');
+
 		self::framework(true, $debug);
 	}
 
@@ -84,7 +89,7 @@ abstract class JHtmlBehavior
 	 *
 	 * @since   11.1
 	 */
-	public static function caption()
+	public static function caption($selector = 'img.caption')
 	{
 		static $loaded = false;
 

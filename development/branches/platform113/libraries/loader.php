@@ -219,7 +219,7 @@ abstract class JLoader
  */
 function jexit($message = 0)
 {
-    exit($message);
+	exit($message);
 }
 
 /**
