@@ -43,7 +43,7 @@ class JBuffer
 	 * @var    array
 	 * @since  11.1
 	 */
-	var $_buffers = array ();
+	var $_buffers = array();
 
 	/**
 	 * Function to open file or url
@@ -52,13 +52,13 @@ class JBuffer
 	 * @param   string   $mode         Mode used to open the file @see fopen
 	 * @param   integer  $options      Flags used by the API, may be STREAM_USE_PATH and
 	 *                                 STREAM_REPORT_ERRORS
-	 * @param   string   $opened_path  Full path of the resource. Used with STREAN_USE_PATH option
+	 * @param   string   &$opened_path Full path of the resource. Used with STREAN_USE_PATH option
 	 *
 	 * @return  boolean
 	 * @since   11.1
 	 * @see     streamWrapper::stream_open
 	 */
-	function stream_open($path, $mode, $options, & $opened_path)
+	function stream_open($path, $mode, $options, &$opened_path)
 	{
 		$url = parse_url($path);
 		$this->name = $url["host"];
@@ -119,7 +119,7 @@ class JBuffer
 		return $this->position;
 	}
 
-	 /**
+	/**
 	 * Function to test for end of file pointer
 	 *
 	 * @return  boolean  True if the pointer is at the end of the stream
@@ -127,11 +127,12 @@ class JBuffer
 	 *
 	 * @see streamWrapper::stream_eof
 	 */
-	function stream_eof() {
+	function stream_eof()
+	{
 		return $this->position >= strlen($this->_buffers[$this->name]);
 	}
 
-	 /**
+	/**
 	 * The read write position updates in response to $offset and $whence
 	 *
 	 * @param   integer  $offset  The offset in bytes
@@ -147,34 +148,42 @@ class JBuffer
 	{
 		switch ($whence)
 		{
-			case SEEK_SET :
-				if ($offset < strlen($this->_buffers[$this->name]) && $offset >= 0) {
+			case SEEK_SET:
+				if ($offset < strlen($this->_buffers[$this->name]) && $offset >= 0)
+				{
 					$this->position = $offset;
 					return true;
-				} else {
+				}
+				else
+				{
 					return false;
 				}
 				break;
 
-			case SEEK_CUR :
+			case SEEK_CUR:
 				if ($offset >= 0) {
 					$this->position += $offset;
 					return true;
-				} else {
+				}
+				else
+				{
 					return false;
 				}
 				break;
 
-			case SEEK_END :
-				if (strlen($this->_buffers[$this->name]) + $offset >= 0) {
+			case SEEK_END:
+				if (strlen($this->_buffers[$this->name]) + $offset >= 0)
+				{
 					$this->position = strlen($this->_buffers[$this->name]) + $offset;
 					return true;
-				} else {
+				}
+				else
+				{
 					return false;
 				}
 				break;
 
-			default :
+			default:
 				return false;
 		}
 	}

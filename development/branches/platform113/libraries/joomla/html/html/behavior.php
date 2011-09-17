@@ -58,7 +58,7 @@ abstract class JHtmlBehavior
 			self::framework(false, $debug);
 		}
 
-		JHtml::_('script', 'system/mootools-' . $type.$uncompressed . '.js', false, true, false, false);
+		JHtml::_('script', 'system/mootools-' . $type . $uncompressed . '.js', false, true, false, false);
 		$loaded[$type] = true;
 
 		return;
@@ -77,6 +77,7 @@ abstract class JHtmlBehavior
 	 */
 	public static function mootools($debug = null)
 	{
+		// Deprecation warning.
 		JLog::add('JBehavior::mootools is deprecated.', JLog::WARNING, 'deprecated');
 
 		self::framework(true, $debug);
@@ -91,10 +92,16 @@ abstract class JHtmlBehavior
 	 */
 	public static function caption($selector = 'img.caption')
 	{
-		static $loaded = false;
+		static $caption;
+
+		if (!isset($caption))
+		{
+			$caption = array();
+		}
 
 		// Only load once
-		if ($loaded) {
+		if (isset($caption[$selector]))
+		{
 			return;
 		}
 
@@ -102,8 +109,17 @@ abstract class JHtmlBehavior
 		self::framework();
 
 		$uncompressed = JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
-		JHtml::_('script', 'system/caption'.$uncompressed.'.js', true, true);
-		$loaded = true;
+		JHtml::_('script', 'system/caption' . $uncompressed . '.js', true, true);
+
+		// Attach caption to document
+		JFactory::getDocument()->addScriptDeclaration(
+			"window.addEvent('load', function() {
+				new JCaption('".$selector."');
+			});"
+		);
+
+		// Set static array
+		$tips[$selector] = true;
 	}
 
 	/**
@@ -123,7 +139,8 @@ abstract class JHtmlBehavior
 		static $loaded = false;
 
 		// Only load once
-		if ($loaded) {
+		if ($loaded)
+		{
 			return;
 		}
 
@@ -148,7 +165,8 @@ abstract class JHtmlBehavior
 		static $loaded = false;
 
 		// Only load once
-		if ($loaded) {
+		if ($loaded)
+		{
 			return;
 		}
 
@@ -187,7 +205,8 @@ abstract class JHtmlBehavior
 		static $loaded = false;
 
 		// Only load once
-		if ($loaded) {
+		if ($loaded)
+		{
 			return;
 		}
 
@@ -228,7 +247,8 @@ abstract class JHtmlBehavior
 	{
 		static $tips;
 
-		if (!isset($tips)) {
+		if (!isset($tips))
+		{
 			$tips = array();
 		}
 
@@ -236,7 +256,8 @@ abstract class JHtmlBehavior
 		self::framework(true);
 
 		$sig = md5(serialize(array($selector,$params)));
-		if (isset($tips[$sig]) && ($tips[$sig])) {
+		if (isset($tips[$sig]) && ($tips[$sig]))
+		{
 			return;
 		}
 
@@ -306,7 +327,8 @@ abstract class JHtmlBehavior
 		$document = JFactory::getDocument();
 
 		// Load the necessary files if they haven't yet been loaded
-		if (!isset($included)) {
+		if (!isset($included))
+		{
 			// Include MooTools framework
 			self::framework();
 
@@ -318,12 +340,14 @@ abstract class JHtmlBehavior
 			$included = true;
 		}
 
-		if (!isset($modals)) {
+		if (!isset($modals))
+		{
 			$modals = array();
 		}
 
 		$sig = md5(serialize(array($selector,$params)));
-		if (isset($modals[$sig]) && ($modals[$sig])) {
+		if (isset($modals[$sig]) && ($modals[$sig]))
+		{
 			return;
 		}
 
@@ -391,7 +415,7 @@ abstract class JHtmlBehavior
 	 *
 	 * @since   11.1
 	 */
-	public static function uploader($id='file-upload', $params = array(), $upload_queue='upload-queue')
+	public static function uploader($id = 'file-upload', $params = array(), $upload_queue = 'upload-queue')
 	{
 		// Include MooTools framework
 		self::framework();
@@ -405,7 +429,8 @@ abstract class JHtmlBehavior
 
 		static $uploaders;
 
-		if (!isset($uploaders)) {
+		if (!isset($uploaders))
+		{
 			$uploaders = array();
 
 			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_FILENAME');
@@ -431,7 +456,8 @@ abstract class JHtmlBehavior
 			JText::script('JLIB_HTML_BEHAVIOR_UPLOADER_ALL_FILES');
 		}
 
-		if (isset($uploaders[$id]) && ($uploaders[$id])) {
+		if (isset($uploaders[$id]) && ($uploaders[$id]))
+		{
 			return;
 		}
 
@@ -481,11 +507,13 @@ abstract class JHtmlBehavior
 		$opt['onComplete'] 			= (isset($params['onComplete'])) ? '\\'.$params['onComplete'] : null;
 		$opt['onFileSuccess'] 		= (isset($params['onFileSuccess'])) ? '\\'.$params['onFileSuccess'] : $onFileSuccess;
 
-		if (!isset($params['startButton'])) {
+		if (!isset($params['startButton']))
+		{
 			$params['startButton'] = 'upload-start';
 		}
 
-		if (!isset($params['clearButton'])) {
+		if (!isset($params['clearButton']))
+		{
 			$params['clearButton'] = 'upload-clear';
 		}
 
@@ -554,7 +582,8 @@ abstract class JHtmlBehavior
 	{
 		static $trees;
 
-		if (!isset($trees)) {
+		if (!isset($trees))
+		{
 			$trees = array();
 		}
 
@@ -565,7 +594,8 @@ abstract class JHtmlBehavior
 		JHtml::_('script', 'system/mootree'.$uncompressed.'.js', true, true, false, false);
 		JHtml::_('stylesheet', 'system/mootree.css', array(), true);
 
-		if (isset($trees[$id]) && ($trees[$id])) {
+		if (isset($trees[$id]) && ($trees[$id]))
+		{
 			return;
 		}
 
@@ -622,7 +652,8 @@ abstract class JHtmlBehavior
 		static $loaded = false;
 
 		// Only load once
-		if ($loaded) {
+		if ($loaded)
+		{
 			return;
 		}
 
@@ -643,6 +674,61 @@ abstract class JHtmlBehavior
 	}
 
 	/**
+	 * Add unobtrusive javascript support for a color picker.
+	 *
+	 * @return  void
+	 *
+	 * @since   11.2
+	 */
+	public static function colorpicker()
+	{
+		static $loaded = false;
+
+		// Only load once
+		if ($loaded)
+		{
+			return;
+		}
+
+		// Include MooTools framework
+		self::framework(true);
+
+		//Add uncompressed versions when debug is enabled
+		$uncompressed = JFactory::getConfig()->get('debug') ? '-uncompressed' : '';
+		JHtml::_('stylesheet', 'system/mooRainbow.css', array('media' => 'all'), true);
+		JHtml::_('script', 'system/mooRainbow.js', false, true);
+
+		JFactory::getDocument()
+			->addScriptDeclaration(
+				"window.addEvent('domready', function(){
+				var nativeColorUi = false;
+				if (Browser.opera && (Browser.version >= 11.5)) {
+					nativeColorUi = true;
+				}
+				var elems = $$('.input-colorpicker');
+				elems.each(function(item){
+					if (nativeColorUi) {
+						item.type = 'color';
+					} else {
+						new MooRainbow(item,
+						{
+							imgPath: '" . JURI::root(true)
+					. "/media/system/images/mooRainbow/',
+							onComplete: function(color) {
+								this.element.value = color.hex;
+							},
+							startColor: item.value.hexToRgb(true)
+						});
+					}
+				});
+			});
+		"
+		);
+
+		$loaded = true;
+	}
+
+	/**
 	 * Keep session alive, for example, while editing or creating an article.
 	 *
 	 * @return  void
@@ -654,7 +740,8 @@ abstract class JHtmlBehavior
 		static $loaded = false;
 
 		// Only load once
-		if ($loaded) {
+		if ($loaded)
+		{
 			return;
 		}
 
@@ -698,7 +785,8 @@ abstract class JHtmlBehavior
 		static $loaded = false;
 
 		// Only load once
-		if ($loaded) {
+		if ($loaded)
+		{
 			return;
 		}
 
@@ -724,20 +812,23 @@ abstract class JHtmlBehavior
 	 *
 	 * @since   11.1
 	 */
-	protected static function _getJSObject($array=array())
+	protected static function _getJSObject($array = array())
 	{
 		// Initialise variables.
 		$object = '{';
 
 		// Iterate over array to build objects
-		foreach ((array)$array as $k => $v)
+		foreach ((array) $array as $k => $v)
 		{
-			if (is_null($v)) {
+			if (is_null($v))
+			{
 				continue;
 			}
 
-			if (is_bool($v)) {
-				if ($k === 'fullScreen') {
+			if (is_bool($v))
+			{
+				if ($k === 'fullScreen')
+				{
 					$object .= 'size: { ';
 					$object .= 'x: ';
 					$object .= 'window.getSize().x-80';
@@ -783,7 +874,8 @@ abstract class JHtmlBehavior
 	{
 		static $jsscript = 0;
 
-		if ($jsscript == 0) {
+		if ($jsscript == 0)
+		{
 			$return =
 			'Calendar._DN = new Array ("'
 				.JText::_('SUNDAY', true).'", "'
