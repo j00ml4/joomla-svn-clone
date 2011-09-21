@@ -27,6 +27,8 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+-------------------- 1.7.1 Stable Release [21-Sep-2011] ------------------
+
 21-Sep-2011 Mark Dexter
  # Fix sample data to correct #__redirect_links table definition
 
