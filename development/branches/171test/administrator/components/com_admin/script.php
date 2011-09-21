@@ -303,19 +303,13 @@ class joomlaInstallerScript
 		);
 
 		foreach ($files as $file) {
-			if (JFile::exists(JPATH_ROOT . $file)) {
-				JFile::delete(JPATH_ROOT . $file);
-			}
-			else {
+			if (JFile::exists(JPATH_ROOT . $file) && !JFile::delete(JPATH_ROOT . $file)) {
 				echo JText::sprintf('FILES_JOOMLA_ERROR_FILE_FOLDER', $file).'<br />';
 			}
 		}
 
 		foreach ($folders as $folder) {
-			if (JFolder::exists(JPATH_ROOT . $folder)) {
-				JFolder::delete(JPATH_ROOT . $folder);
-			}
-			else {
+			if (JFolder::exists(JPATH_ROOT . $folder) && !JFolder::delete(JPATH_ROOT . $folder)) {
 				echo JText::sprintf('FILES_JOOMLA_ERROR_FILE_FOLDER', $folder).'<br />';
 			}
 		}
