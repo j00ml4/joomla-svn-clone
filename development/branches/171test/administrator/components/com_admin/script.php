@@ -32,7 +32,7 @@ class joomlaInstallerScript
 	}
 	protected function updateManifestCaches()
 	{
-		// TODO Remove this for 1.8
+		// TODO Remove this for 2.5
 		if (!JTable::getInstance('Extension')->load(array('element'=> 'pkg_joomla', 'type'=>'package'))) {
 			// Create the package pkg_joomla
 			$db = JFactory::getDbo();
@@ -54,25 +54,43 @@ class joomlaInstallerScript
 			}
 		}
 
-		// TODO Remove this for 1.8
+		// TODO Remove this for 2.5
 		$table = JTable::getInstance('Extension');
 		if ($table->load(array('element'=> 'mod_online', 'type'=>'module', 'client_id'=>1))) {
-			// Mark this extension as unprotected
-			$table->protected = 0;
-			if (!$table->store()) {
-				echo $table->getError().'<br />';
-				return;
+			if (!file_exists(JPATH_ADMINISTRATOR . '/modules/mod_online')) {
+				// Delete this extension
+				if (!$table->delete()) {
+					echo $table->getError().'<br />';
+					return;
+				}
+			}
+			else {
+				// Mark this extension as unprotected
+				$table->protected = 0;
+				if (!$table->store()) {
+					echo $table->getError().'<br />';
+					return;
+				}
 			}
 		}
 
-		// TODO Remove this for 1.8
+		// TODO Remove this for 2.5
 		$table = JTable::getInstance('Extension');
 		if ($table->load(array('element'=> 'mod_unread', 'type'=>'module', 'client_id'=>1))) {
-			// Mark this extension as unprotected
-			$table->protected = 0;
-			if (!$table->store()) {
-				echo $table->getError().'<br />';
-				return;
+			if (!file_exists(JPATH_ADMINISTRATOR . '/modules/mod_unread')) {
+				// Delete this extension
+				if (!$table->delete()) {
+					echo $table->getError().'<br />';
+					return;
+				}
+			}
+			else {
+				// Mark this extension as unprotected
+				$table->protected = 0;
+				if (!$table->store()) {
+					echo $table->getError().'<br />';
+					return;
+				}
 			}
 		}
 
