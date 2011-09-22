@@ -252,6 +252,7 @@ class joomlaInstallerScript
 	{
 		$files = array(
 			'/templates/atomic/css/blueprint/src/blueprintcss-0-9-1-cheatsheet-3-5-3-gjms.pdf',
+			'/administrator/components/com_installer/views/update/tmpl/default_item.php',
 			'/administrator/manifests/packages/joomla.xml',
 			'/administrator/templates/bluestork/css/rounded.css',
 			'/administrator/templates/bluestork/css/norounded.css',
