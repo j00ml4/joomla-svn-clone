@@ -42,9 +42,9 @@ abstract class JUserHelper
 			// Get the title of the group.
 			$db	= JFactory::getDbo();
 			$db->setQuery(
-				'SELECT `title`' .
-				' FROM `#__usergroups`' .
-				' WHERE `id` = '. (int) $groupId
+				'SELECT title' .
+				' FROM #__usergroups' .
+				' WHERE id = '. (int) $groupId
 			);
 			$title = $db->loadResult();
 
@@ -159,9 +159,9 @@ abstract class JUserHelper
 		// Get the titles for the user groups.
 		$db = JFactory::getDbo();
 		$db->setQuery(
-			'SELECT `id`, `title`' .
-			' FROM `#__usergroups`' .
-			' WHERE `id` = '.implode(' OR `id` = ', $user->groups)
+			'SELECT id, title' .
+			' FROM #__usergroups' .
+			' WHERE id = '.implode(' OR id = ', $user->groups)
 		);
 		$results = $db->loadObjectList();
 

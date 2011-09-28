@@ -63,9 +63,9 @@ class JSessionStorageDatabase extends JSessionStorage
 
 		// Get the session data from the database table.
 		$db->setQuery(
-			'SELECT `data`' .
-			' FROM `#__session`' .
-			' WHERE `session_id` = '.$db->quote($id)
+			'SELECT '.$db->nameQuote('data') .
+			' FROM '.$db->nameQuote('#__session') .
+			' WHERE '.$db->nameQuote('session_id').' = '.$db->quote($id)
 		);
 		return (string) $db->loadResult();
 	}
@@ -89,10 +89,10 @@ class JSessionStorageDatabase extends JSessionStorage
 
 		// Try to update the session data in the database table.
 		$db->setQuery(
-			'UPDATE `#__session`' .
-			' SET `data` = '.$db->quote($data).',' .
-			'	  `time` = '.(int) time() .
-			' WHERE `session_id` = '.$db->quote($id)
+			'UPDATE '.$db->nameQuote('#__session') .
+			' SET '.$db->nameQuote('data').' = '.$db->quote($data).',' .
+			'	  '.$db->nameQuote('time').' = '.(int) time() .
+			' WHERE '.$db->nameQuote('session_id').' = '.$db->quote($id)
 		);
 		if (!$db->query()) {
 			return false;
@@ -103,7 +103,8 @@ class JSessionStorageDatabase extends JSessionStorage
 		} else {
 			// If the session does not exist, we need to insert the session.
 			$db->setQuery(
-				'INSERT INTO `#__session` (`session_id`, `data`, `time`)' .
+				'INSERT INTO '.$db->nameQuote('#__session').' ('.$db->nameQuote('session_id').
+					', '.$db->nameQuote('data').', '.$db->nameQuote('time').')' .
 				' VALUES ('.$db->quote($id).', '.$db->quote($data).', '.(int) time().')'
 			);
 			return (boolean) $db->query();
@@ -129,8 +130,8 @@ class JSessionStorageDatabase extends JSessionStorage
 
 		// Remove a session from the database.
 		$db->setQuery(
-			'DELETE FROM `#__session`' .
-			' WHERE `session_id` = '.$db->quote($id)
+			'DELETE FROM '.$db->nameQuote('#__session') .
+			' WHERE '.$db->nameQuote('session_id').' = '.$db->quote($id)
 		);
 		return (boolean) $db->query();
 	}
@@ -155,8 +156,8 @@ class JSessionStorageDatabase extends JSessionStorage
 
 		// Remove expired sessions from the database.
 		$db->setQuery(
-			'DELETE FROM `#__session`' .
-			' WHERE `time` < '.(int) $past
+			'DELETE FROM '.$db->nameQuote('#__session') .
+			' WHERE '.$db->nameQuote('time').' < '.(int) $past
 		);
 		return (boolean) $db->query();
 	}

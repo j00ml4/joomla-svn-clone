@@ -113,7 +113,7 @@ class ContactModelFeatured extends JModelList
 
 		// Select required fields from the categories.
 		$query->select($this->getState('list.select', 'a.*'));
-		$query->from('`#__contact_details` AS a');
+		$query->from($db->nameQuote('#__contact_details').' AS a');
 		$query->where('a.access IN ('.$groups.')');
 		$query->where('a.featured=1');
 		$query->join('INNER', '#__categories AS c ON c.id = a.catid');
@@ -142,7 +142,7 @@ class ContactModelFeatured extends JModelList
 
 			// Filter by start and end dates.
 			$nullDate = $db->Quote($db->getNullDate());
-			$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+			$nowDate = $db->Quote($db->toSQLDate(JFactory::getDate()));
 			$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
 			$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');
 			$query->where($publishedWhere . ' = ' . (int) $state);

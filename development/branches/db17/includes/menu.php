@@ -37,6 +37,7 @@ class JMenuSite extends JMenu
 
 			$query->select('m.id, m.menutype, m.title, m.alias, m.path AS route, m.link, m.type, m.level, m.language');
 			$query->select('m.browserNav, m.access, m.params, m.home, m.img, m.template_style_id, m.component_id, m.parent_id');
+			$query->select('m.language');
 			$query->select('e.element as component');
 			$query->from('#__menu AS m');
 			$query->leftJoin('#__extensions AS e ON m.component_id = e.extension_id');
@@ -44,7 +45,8 @@ class JMenuSite extends JMenu
 			$query->where('m.parent_id > 0');
 			$query->where('m.client_id = 0');
 			$query->order('m.lft');
-			$query->where('m.access IN (' . $levels . ')');
+			$groups = implode(',', $user->getAuthorisedViewLevels());
+			$query->where('m.access IN (' . $groups . ')');
 
 			// Set the query
 			$db->setQuery($query);

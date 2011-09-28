@@ -1133,7 +1133,7 @@ class JForm
 					$offset	= JFactory::getConfig()->get('offset');
 
 					// Return a MySQL formatted datetime string in UTC.
-					$return = JFactory::getDate($value, $offset)->toMySQL();
+					$return = JFactory::getDate($value, $offset)->toSQL();					
 				}
 				else {
 					$return = '';
@@ -1147,7 +1147,8 @@ class JForm
 					$offset	= JFactory::getUser()->getParam('timezone', JFactory::getConfig()->get('offset'));
 
 					// Return a MySQL formatted datetime string in UTC.
-					$return = JFactory::getDate($value, $offset)->toMySQL();
+					//$return = $db->toSQLDate(JFactory::getDate($value, $offset));
+					$return = JFactory::getDate($value, $offset)->toSQL();
 				}
 				else {
 					$return = '';

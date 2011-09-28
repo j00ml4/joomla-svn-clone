@@ -64,12 +64,12 @@ class TemplatesViewStyles extends JView
 		if ($canDo->get('core.edit')) {
 			JToolBarHelper::editList('style.edit');
 		}
-		if ($canDo->get('core.create')) {
+		if ($canDo->get('core.create') && $isSite) {
 			JToolBarHelper::custom('styles.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
 			JToolBarHelper::divider();
 		}
 
-		if ($canDo->get('core.delete')) {
+		if ($canDo->get('core.delete') && $isSite) {
 			JToolBarHelper::deleteList('', 'styles.delete');
 			JToolBarHelper::divider();
 		}

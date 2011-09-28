@@ -957,8 +957,8 @@ class JApplication extends JObject
 			// but fires the query less than half the time.
 			$query = $db->getQuery(true);
 			$db->setQuery(
-				'DELETE FROM '.$query->qn('#__session') .
-				' WHERE '.$query->qn('time').' < '.(int) ($time - $session->getExpire())
+				'DELETE FROM '.$db->nameQuote('#__session') .
+				' WHERE '.$db->nameQuote('time').' < '.(int) ($time - $session->getExpire())
 			);
 			$db->query();
 		}
@@ -993,9 +993,9 @@ class JApplication extends JObject
 
 		$query = $db->getQuery(true);
 		$db->setQuery(
-			'SELECT '.$query->qn('session_id') .
-			' FROM '.$query->qn('#__session') .
-			' WHERE '.$query->qn('session_id').' = '.$query->q($session->getId()), 0, 1
+			'SELECT '.$db->nameQuote('session_id') .
+			' FROM '.$db->nameQuote('#__session') .
+			' WHERE '.$db->nameQuote('session_id').' = '.$db->quote($session->getId()), 0, 1
 		);
 		$exists = $db->loadResult();
 
@@ -1003,13 +1003,15 @@ class JApplication extends JObject
 		if (!$exists) {
 			if ($session->isNew()) {
 				$db->setQuery(
-					'INSERT INTO `#__session` (`session_id`, `client_id`, `time`)' .
+				'INSERT INTO '.$db->nameQuote('#__session').' ('.$db->nameQuote('session_id').
+				', '.$db->nameQuote('client_id').', '.$db->nameQuote('time').')' .
 					' VALUES ('.$db->quote($session->getId()).', '.(int) $this->getClientId().', '.(int) time().')'
 				);
 			}
 			else {
 				$db->setQuery(
-					'INSERT INTO `#__session` (`session_id`, `client_id`, `guest`, `time`, `userid`, `username`)' .
+					'INSERT INTO '.$db->nameQuote('#__session').' ('.$db->nameQuote('session_id').', '.$db->nameQuote('client_id').', '.$db->nameQuote('guest').
+					', '.$db->nameQuote('time').', '.$db->nameQuote('userid').', '.$db->nameQuote('username').')' .
 					' VALUES ('.$db->quote($session->getId()).', '.(int) $this->getClientId().', '.(int) $user->get('guest').', '.(int) $session->get('session.timer.start').', '.(int) $user->get('id').', '.$db->quote($user->get('username')).')'
 				);
 			}

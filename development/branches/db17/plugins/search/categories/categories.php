@@ -106,8 +106,16 @@ class plgSearchCategories extends JPlugin
 
 		$return = array();
 		if (!empty($state)) {
+		  //sqlsrv changes
+      $case_when = ' CASE WHEN ';
+      $case_when .= $query->charLength('a.alias');
+      $case_when .= ' THEN ';
+      $a_id = $query->castToChar('a.id');
+      $case_when .= $query->concat(array($a_id, 'a.alias'), ':');
+      $case_when .= ' ELSE ';
+      $case_when .= $a_id.' END as slug'; 
 			$query->select('a.title, a.description AS text, "" AS created, "2" AS browsernav, a.id AS catid, '
-						.'CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(":", a.id, a.alias) ELSE a.id END as slug');
+						.$case_when);
 			$query->from('#__categories AS a');
 			$query->where('(a.title LIKE '. $text .' OR a.description LIKE '. $text .') AND a.published IN ('.implode(',',$state).') AND a.extension = \'com_content\''
 						.'AND a.access IN ('. $groups .')' );

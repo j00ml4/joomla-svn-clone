@@ -55,6 +55,11 @@ class JDatabaseQuerySQLAzure extends JDatabaseQuery
 			case 'insert':
 				$query .= (string) $this->insert;
 
+				if ($this->fields) {
+					$query .= (string) $this->fields;
+					$query .= ')';
+				}
+				
 				// Set method
 				if ($this->set) {
 					$query .= (string) $this->set;
@@ -74,6 +79,30 @@ class JDatabaseQuerySQLAzure extends JDatabaseQuery
 						$query .
 						'SET IDENTITY_INSERT '.$tableName.' OFF;';
 				}
+
+				break;
+				case 'insert_into':
+				$query .= (string) $this->insert_into;
+
+				if ($this->fields) {
+					$query .= (string) $this->fields;
+					$query .= ')';
+				}
+				//$query .= ' VALUES ';
+				$query .= (string) $this->values;
+				$query .= ')';
+
+				/* Columns-Values method
+				else if ($this->values) {
+					if ($this->columns) {
+						$query .= (string) $this->columns;
+					}
+					//$query .= ' VALUES ';
+					$query .= (string) $this->values;
+				}*/
+
+				if($this->auto_increment_field)
+				$query = $this->auto_increment($query);
 
 				break;
 

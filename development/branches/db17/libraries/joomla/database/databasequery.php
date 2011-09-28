@@ -112,7 +112,7 @@ class JDatabaseQueryElement
  * @subpackage  Database
  * @since       11.1
  */
-abstract class JDatabaseQuery
+class JDatabaseQuery
 {
 	/**
 	 * @var    resource  The database connection resource.
@@ -209,6 +209,48 @@ abstract class JDatabaseQuery
 	 * @since  11.1
 	 */
 	protected $order = null;
+	
+	/**
+	 * @var   object  The show table element.
+	 * @since 11.1
+	 */
+	protected $show_tables = null;
+	
+	/**
+	 * @var   object  The drop table element.
+	 * @since 11.1
+	 */
+	protected $drop = null;
+	
+	/**
+	 * @var   object  The rename table element.
+	 * @since 11.1
+	 */
+	protected $rename = null;
+	
+	/**
+	 * @var   object  The insert element.
+	 * @since 11.1
+	 */
+	protected $insert_into = null;
+	
+	/**
+	 * @var   object  The insert value element.
+	 * @since 11.1
+	 */
+
+
+	/**
+	 * @var   object  The insert field element.
+	 * @since 11.1
+	 */
+	protected $fields = null;
+
+	/**
+	 * @var   object  The auto increment insert field element.
+	 * @since 11.1
+	 */
+	protected $auto_increment_field = null;
 
 	/**
 	 * Magic method to provide method alias support for quote() and quoteName().
@@ -346,9 +388,45 @@ abstract class JDatabaseQuery
 					$query .= (string) $this->values;
 				}
 
-				break;
-		}
 
+				if ($this->where) {
+					$query .= (string) $this->where;
+				}
+
+				break;
+				
+			case 'showTables':
+				$query .= (string) $this->show_tables;
+
+				break;
+
+			case 'drop':
+				$query .= (string) $this->drop;
+
+				break;
+
+			case 'rename':
+				$query .= (string) $this->rename;
+
+				break;
+
+			case 'insert_into':
+				$query .= (string) $this->insert_into;
+
+				if ($this->fields) {
+					$query .= (string) $this->fields;
+					$query .= ')';
+				}
+				
+				$query .= (string) $this->values;
+				$query .= ')';
+			
+				if($this->auto_increment_field)
+				$query = $this->auto_increment($query);
+
+				break;
+
+		}
 		return $query;
 	}
 
@@ -465,6 +543,25 @@ abstract class JDatabaseQuery
 			case 'values':
 				$this->values = null;
 				break;
+				
+			case 'showTables':
+				$this->show_tables = null;
+				break;
+
+			case 'drop':
+				$this->drop = null;
+				break;
+
+			case 'rename':
+				$this->rename = null;
+				break;
+
+			case 'insert_into':
+				$this->insert_into = null;
+				$this->fields = null;
+				$this->values = null;
+				$this->auto_increment_field = null;
+				break;
 
 			default:
 				$this->type = null;
@@ -481,6 +578,12 @@ abstract class JDatabaseQuery
 				$this->order = null;
 				$this->columns = null;
 				$this->values = null;
+				$this->show_tables = null;
+				$this->drop = null;
+				$this->rename = null;
+				$this->insert_into = null;
+				$this->fields = null;
+				$this->auto_increment_field = null;
 				break;
 		}
 
@@ -551,6 +654,22 @@ abstract class JDatabaseQuery
 	{
 		return 'Y-m-d H:i:s';
 	}
+	
+	/**
+	 * Returns a PHP insertInto() function.
+	 *
+	 * @return  object to allow  inserting the statments
+	 *
+	 * @since   11.1
+	 */
+	
+	public function insertInto($table_name, $increment_field=false)
+   	{
+     		$this->type = 'insert_into';
+     		$this->insert_into = new JDatabaseQueryElement('INSERT INTO', $table_name);
+     
+      		return $this;
+   	}
 
 	/**
 	 * Add a table name to the DELETE clause of the query.
@@ -793,6 +912,19 @@ abstract class JDatabaseQuery
 
 		return $this;
 	}
+	
+	/**
+   	* @param string $name  A string 
+   	* 
+   	* @return  Show table query syntax
+   	* Implemented in the sub classes - specific to db query builder
+	*
+   	* @since 11.1
+   	*/
+   	function showTables($name) 
+	{
+   	
+   	}
 
 	/**
 	 * Add an OUTER JOIN clause to the query.
@@ -946,12 +1078,22 @@ abstract class JDatabaseQuery
 	function values($values)
 	{
 		if (is_null($this->values)) {
-			$this->values = new JDatabaseQueryElement('()', $values, '), (');
+			$this->values = new JDatabaseQueryElement('VALUES (', $values, ',');
 		}
 		else {
 			$this->values->append($values);
 		}
 
+		return $this;
+	}
+	
+	function fields($fields){
+		if (is_null($this->fields)){
+			$this->fields = new JDatabaseQueryElement('(', $fields, ',');
+		}
+		else{
+			$this->fields->append($fields);
+		}
 		return $this;
 	}
 

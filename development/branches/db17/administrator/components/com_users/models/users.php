@@ -170,7 +170,7 @@ class UsersModelUsers extends JModelList
 				->group('map.user_id')
 
 			// Join over the user groups table.
-				->select('GROUP_CONCAT(g2.title SEPARATOR '.$db->Quote("\n").') AS group_names')
+				//->select('GROUP_CONCAT(g2.title SEPARATOR '.$db->Quote("\n").') AS group_names')
 				->join('LEFT', '#__usergroups AS g2 ON g2.id = map.group_id');
 
 			$db->setQuery($query);
@@ -220,7 +220,8 @@ class UsersModelUsers extends JModelList
 				'a.*'
 			)
 		);
-		$query->from('`#__users` AS a');
+
+		$query->from($db->nameQuote('#__users').' AS a');
 
 		// If the model is set to check item state, add to the query.
 		$state = $this->getState('filter.state');
@@ -236,8 +237,8 @@ class UsersModelUsers extends JModelList
 			if ($active == '0') {
 				$query->where('a.activation = '.$db->quote(''));
 			}
-			else if ($active == '1') {
-				$query->where('LENGTH(a.activation) = 32');
+			 else if ($active == '1') {
+				$query->where($query->length('a.activation').' = 32');
 			}
 		}
 
@@ -281,5 +282,17 @@ class UsersModelUsers extends JModelList
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
+	}
+	//sqlsrv change
+	public function getUserDisplayedGroups($user_id)
+	{
+		$db = &JFactory::getDbo();
+		$sql = "SELECT title FROM ".$db->nameQuote('jos_usergroups')." ug left join ".
+				$db->nameQuote('jos_user_usergroup_map')." map on (ug.id = map.group_id)".
+				" WHERE map.user_id=".$user_id;
+		
+		$db->setQuery($sql);
+		$result = $db->loadResultArray();
+		return implode("\n", $result);
 	}
 }

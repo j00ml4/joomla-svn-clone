@@ -385,9 +385,9 @@ class MenusModelItem extends JModelAdmin
 			if ($menuType != $table->menutype) {
 				// Add the child node ids to the children array.
 				$db->setQuery(
-					'SELECT `id`' .
-					' FROM `#__menu`' .
-					' WHERE `lft` BETWEEN '.(int) $table->lft.' AND '.(int) $table->rgt
+					'SELECT '.$db->nameQuote('id') .
+					' FROM '.$db->nameQuote('#__menu') .
+					' WHERE '.$db->nameQuote('lft').' BETWEEN '.(int) $table->lft.' AND '.(int) $table->rgt
 				);
 				$children = array_merge($children, (array) $db->loadResultArray());
 			}
@@ -419,11 +419,11 @@ class MenusModelItem extends JModelAdmin
 
 			// Update the menutype field in all nodes where necessary.
 			$db->setQuery(
-				'UPDATE `#__menu`' .
-				' SET `menutype` = '.$db->quote($menuType).
-				' WHERE `id` IN ('.implode(',', $children).')'
-				);
-				$db->query();
+				'UPDATE '.$db->nameQuote('#__menu') .
+				' SET '.$db->nameQuote('menutype').' = '.$db->quote($menuType).
+				' WHERE '.$db->nameQuote('id').' IN ('.implode(',', $children).')'
+			);
+			$db->query();
 
 				// Check for a database error.
 				if ($db->getErrorNum()) {
@@ -672,10 +672,9 @@ class MenusModelItem extends JModelAdmin
 		// Join on the module-to-menu mapping table.
 		// We are only interested if the module is displayed on ALL or THIS menu item (or the inverse ID number).
 		$query->select('map.menuid');
-		$query->select('map2.menuid < 0 as except');
 		$query->join('LEFT', '#__modules_menu AS map ON map.moduleid = a.id AND (map.menuid = 0 OR ABS(map.menuid) = '.(int) $this->getState('item.id').')');
-		$query->join('LEFT', '#__modules_menu AS map2 ON map2.moduleid = a.id AND map2.menuid < 0');
-		$query->group('a.id');
+		
+		
 
 		// Join on the asset groups table.
 		$query->select('ag.title AS access_title');
@@ -776,6 +775,8 @@ class MenusModelItem extends JModelAdmin
 	 */
 	protected function preprocessForm(JForm $form, $data, $group = 'content')
 	{
+		jimport('joomla.filesystem.file');
+		jimport('joomla.filesystem.folder');
 
 		// Initialise variables.
 		$link = $this->getState('item.link');
