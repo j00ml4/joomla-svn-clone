@@ -30,7 +30,7 @@ interface JDatabaseInterface {
  * @subpackage  Database
  * @since       11.1
  */
-abstract class JDatabase implements JDatabaseInterface
+abstract class JDatabase
 {
 	/**
 	 * @var    string  The name of the database driver.
@@ -101,6 +101,12 @@ abstract class JDatabase implements JDatabaseInterface
 	 * @since  11.1
 	 */
 	protected $sql;
+	/**
+	 * The number of queries performed by the object instance
+	 *
+	 * @var int
+	 */
+	protected $ticker = 0;
 
 	/**
 	 * @var    string  The common database table prefix.
@@ -352,6 +358,15 @@ abstract class JDatabase implements JDatabaseInterface
 	}
 
 	/**
+	 * Test to see if the connector is available.
+	 *
+	 * @return  bool  True on success, false otherwise.
+	 *
+	 * @since   12.1
+	 */
+	abstract public static function test();
+
+	/**
 	 * Magic method to provide method alias support for quote() and quoteName().
 	 *
 	 * @param   string  $method  The called method.
@@ -440,6 +455,17 @@ abstract class JDatabase implements JDatabaseInterface
 	 * @since   11.1
 	 */
 	abstract public function connected();
+	
+	/**
+	 * Database object destructor
+	 *
+	 * @return	boolean
+	 * @since	12.1
+	 */
+	public function __destruct()
+	{
+		return true;
+	}
 
 	/**
 	 * Method to escape a string for usage in an SQL statement.
@@ -1102,7 +1128,17 @@ abstract class JDatabase implements JDatabaseInterface
 	 * @throws  DatabaseException
 	 */
 	abstract public function query();
-
+	
+	/**
+	 * Gets the date specific to the DB datetime string.
+	 *
+	 *
+	 * @param	boolean	True to return the date string in the local time zone, false to return it in GMT.
+	 * @return	string	The date string in SQL Server datetime format.
+	 * @since	12.1
+	 */
+	abstract public function toSQLDate(&$date, $local = false);
+	
 	/**
 	 * Method to quote and optionally escape a string to database requirements for insertion into the database.
 	 *

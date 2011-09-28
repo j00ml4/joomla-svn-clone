@@ -11,7 +11,7 @@ defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.database.database');
 jimport('joomla.utilities.string');
-
+jimport('joomla.database.databasequerysqlsrv');
 JLoader::register('JDatabaseQuerySQLSrv', dirname(__FILE__).'/sqlsrvquery.php');
 
 /**
@@ -51,6 +51,18 @@ class JDatabaseSQLSrv extends JDatabase
 	 * @since  11.1
 	 */
 	protected $nullDate = '1900-01-01 00:00:00';
+
+	/**
+	 * Test to see if the SQLSRV connector is available.
+	 *
+	 * @return  boolean  True on success, false otherwise.
+	 *
+	 * @since   11.1
+	 */
+	public static function test()
+	{
+		return (function_exists('sqlsrv_connect'));
+	}
 
 	/**
 	 * Constructor.
@@ -203,15 +215,23 @@ class JDatabaseSQLSrv extends JDatabase
 	}
 
 	/**
-	 * Test to see if the SQLSRV connector is available.
+	 * This global function loads the first row of a query into an object
 	 *
-	 * @return  boolean  True on success, false otherwise.
-	 *
+	 * @access	public
+	 * @return 	object
 	 * @since   11.1
 	 */
-	public static function test()
+	function loadObject($className = 'stdClass')
 	{
-		return (function_exists('sqlsrv_connect'));
+		if (!($cur = $this->query())) {
+			return null;
+		}
+		$ret = null;
+		if ($object = sqlsrv_fetch_object( $cur )) {
+			$ret = $object;
+		}
+		sqlsrv_free_stmt( $cur );
+		return $ret;
 	}
 
 	/**
@@ -228,12 +248,101 @@ class JDatabaseSQLSrv extends JDatabase
 	}
 
 	/**
+	 * This method loads the first field of the first row returned by the query.
+	 *
+	 * @access	public
+	 * @return The value returned in the query or null if the query failed.
+	 */
+	function loadResult()
+	{
+		if (!($cur = $this->query())) {
+			return null;
+		}
+		$ret = null;
+		if ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
+			$ret = $row[0];
+		}
+		$ret = stripslashes($ret);
+		sqlsrv_free_stmt( $cur );
+		return $ret;
+	}
+	
+	/**
+	 * Load an array of single field results into an array
+	 *
+	 * @access	public
+	 */
+	function loadResultArray($numinarray = 0)
+	{
+		if (!($cur = $this->query())) {
+			return null;
+		}
+		$array = array();
+		while ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
+			$array[] = $row[$numinarray];
+		}
+		sqlsrv_free_stmt( $cur );
+		return $array;
+	}
+
+	/**
+	 * Load the next row returned by the query.
+	 *
+	 * @return      mixed   The result of the query as an array, false if there are no more rows, or null on an error.
+	 *
+	 * @since       11.1
+	 */
+	public function loadNextRow()
+	{
+		static $cur;
+
+		if (!($cur = $this->query())) {
+			return $this->errorNum ? null : false;
+		}
+
+		if ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
+			return $row;
+		}
+
+		sqlsrv_free_stmt($cur);
+		$cur = null;
+
+		return false;
+	}
+	
+	/**
+	 * Load the next row returned by the query.
+	 *
+	 * @return      mixed   The result of the query as an object, false if there are no more rows, or null on an error.
+	 *
+	 * @since       11.1
+	 */
+	public function loadNextObject($className = 'stdClass')
+	{
+		static $cur;
+
+		if (!($cur = $this->query())) {
+			return $this->errorNum ? null : false;
+		}
+
+		if ($row =  sqlsrv_fetch_object( $cur )) {
+			return $row;
+		}
+
+		sqlsrv_free_stmt($cur);
+		$cur = null;
+
+		return false;
+	}
+
+	/**
 	 * Drops a table from the database.
 	 *
 	 * @param   string   $tableName  The name of the database table to drop.
 	 * @param   boolean  $ifExists   Optionally specify that the table must exist before it is dropped.
 	 *
 	 * @return  JDatabaseSQLSrv  Returns this object to support chaining.
+	 *
 	 * @since   11.1
 	 */
 	function dropTable($tableName, $ifExists = true)
@@ -258,6 +367,202 @@ class JDatabaseSQLSrv extends JDatabase
 	 *
 	 * @since   11.1
 	 */
+	 
+	 /**
+	 * Fetch a result row as an associative array
+	 *
+	 * @access	public
+	 * @return array
+	 */
+	function loadAssoc()
+	{
+		if (!($cur = $this->query())) {
+			return null;
+		}
+		$ret = null;
+		if ($array = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_ASSOC )) {
+			$ret = $array;
+		}
+		sqlsrv_free_stmt( $cur );
+		return $ret;
+	}
+	
+	/**
+	 * Load a assoc list of database rows
+	 *
+	 * @access	public
+	 * @param string The field name of a primary key
+	 * @return array If <var>key</var> is empty as sequential list of returned records.
+	 */
+	function loadAssocList( $key='', $column = null )
+	{
+		if (!($cur = $this->query())) {
+			return null;
+		}
+		$array = array();
+		while ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_ASSOC )) {
+			$value = ($column) ? (isset($row[$column]) ? $row[$column] : $row) : $row;
+			if ($key) {
+				$array[$row[$key]] = $value;
+			} else {
+				$array[] = $value;
+			}
+		}
+		sqlsrv_free_stmt( $cur );
+		return $array;
+	}
+	
+	/**
+	 * Load a list of database objects
+	 *
+	 * If <var>key</var> is not empty then the returned array is indexed by the value
+	 * the database key.  Returns <var>null</var> if the query fails.
+	 *
+	 * @access	public
+	 * @param string The field name of a primary key
+	 * @return array If <var>key</var> is empty as sequential list of returned records.
+	 */
+	function loadObjectList( $key='', $className = 'stdClass' )
+	{
+		if (!($cur = $this->query())) {
+			return null;
+		}
+		$array = array();
+		while ($row = sqlsrv_fetch_object( $cur )) {
+			if ($key) {
+				$array[$row->$key] = $row;
+			} else {
+				$array[] = $row;
+			}
+		}
+		sqlsrv_free_stmt( $cur );
+		return $array;
+	}
+	
+	/**
+	 * Description
+	 *
+	 * @access	public
+	 * @return The first row of the query.
+	 */
+	function loadRow()
+	{
+		if (!($cur = $this->query())) {
+			return null;
+		}
+		$ret = null;
+		if ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
+			$ret = $row;
+		}
+		sqlsrv_free_stmt( $cur );
+		return $ret;
+	}
+	
+	
+	/**
+	 * Load a list of database rows (numeric column indexing)
+	 *
+	 * @access public
+	 * @param string The field name of a primary key
+	 * @return array If <var>key</var> is empty as sequential list of returned records.
+	 * If <var>key</var> is not empty then the returned array is indexed by the value
+	 * the database key.  Returns <var>null</var> if the query fails.
+	 */
+	function loadRowList( $key=null )
+	{
+		if (!($cur = $this->query())) {
+			return null;
+		}
+		$array = array();
+		while ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
+			if ($key !== null) {
+				$array[$row[$key]] = $row;
+			} else {
+				$array[] = $row;
+			}
+		}
+		sqlsrv_free_stmt( $cur );
+		return $array;
+	}
+	
+	/**
+	 * Inserts a row into a table based on an objects properties
+	 *
+	 * @access	public
+	 * @param	string	The name of the table
+	 * @param	object	An object whose properties match table fields
+	 * @param	string	The name of the primary key. If provided the object property is updated.
+	 */
+	public function insertObject($table, &$object, $keyName = NULL)
+	{
+		$fmtsql = 'INSERT INTO '.$this->nameQuote($table).' ( %s ) VALUES ( %s ) ';
+		$fields = array();
+		foreach (get_object_vars( $object ) as $k => $v) {
+			if (is_array($v) or is_object($v)) {
+				continue;
+			}
+			if(!$this->_checkFieldExists($table, $k))
+			continue;
+			if ($k[0] == '_') { // internal field
+				continue;
+			}
+			if($k == $keyName && $keyName == 0)
+			continue;
+			$fields[] = $this->nameQuote( $k );
+			$values[] = $this->isQuoted( $k ) ? $this->Quote( $v ) : (int) $v;
+		}
+		$this->setQuery( sprintf( $fmtsql, implode( ",", $fields ) ,  implode( ",", $values ) ) );
+		if (!$this->query()) {
+			return false;
+		}
+		$id = $this->insertid();
+		if ($keyName && $id) {
+			$object->$keyName = $id;
+		}
+		return true;
+	}
+	
+	/**
+	 * Description
+	 *
+	 * @access public
+	 * @param [type] $updateNulls
+	 */
+	public	function updateObject( $table, &$object, $keyName, $updateNulls=true )
+	{
+		$fmtsql = 'UPDATE '.$this->nameQuote($table).' SET %s WHERE %s';
+		$tmp = array();
+		foreach (get_object_vars( $object ) as $k => $v)
+		{
+			if( is_array($v) or is_object($v) or $k[0] == '_' ) { // internal or NA field
+				continue;
+			}
+			if( $k == $keyName ) { // PK not to be updated
+				$where = $keyName . '=' . $this->Quote( $v );
+				continue;
+			}
+			if ($v === null)
+			{
+				if ($updateNulls) {
+					$val = 'NULL';
+				} else {
+					continue;
+				}
+			} else {
+				$val = $this->isQuoted( $k ) ? $this->Quote( $v ) : (int) $v;
+			}
+			$tmp[] = $this->nameQuote( $k ) . '=' . $val;
+		}
+
+		// Nothing to update.
+		if (empty($tmp)) {
+			return true;
+		}
+
+		$this->setQuery( sprintf( $fmtsql, implode( ",", $tmp ) , $where ) );
+		return $this->query();
+	}
+	
 	public function getAffectedRows()
 	{
 		return sqlsrv_rows_affected($this->cursor);
@@ -297,6 +602,41 @@ class JDatabaseSQLSrv extends JDatabase
 		return $o;
 	}
 
+	/**
+	 * Retrieves information about the given tables
+	 *
+	 * @access	public
+	 * @param 	array|string 	A table name or a list of table names
+	 * @param	boolean			Only return field types, default true
+	 * @return	array An array of fields by table
+	 */
+	function getTableFields( $tables, $typeonly = true )
+	{
+		settype($tables, 'array'); //force to array
+		$result = array();
+
+		foreach ($tables as $tblval) {
+			//$this->setQuery('SHOW FIELDS FROM ' . $tblval);
+
+			$tblval_temp = $this->replacePrefix((string) $tblval);
+
+			$this->setQuery('select column_name as Field, data_type as Type, is_nullable as \'Null\', column_default as \'Default\' from information_schema.columns where table_name= ' . $this->Quote($tblval_temp));
+			$fields = $this->loadObjectList();
+
+			if ($typeonly) {
+				foreach ($fields as $field) {
+					$result[$tblval][$field->Field] = preg_replace("/[(0-9)]/",'', $field->Type);
+				}
+			} else {
+				foreach ($fields as $field) {
+					$result[$tblval][$field->Field] = $field;
+				}
+			}
+		}
+
+		return $result;
+	}
+	
 	/**
 	 * Gets an importer class object.
 	 *
@@ -345,14 +685,10 @@ class JDatabaseSQLSrv extends JDatabase
 	public function getQuery($new = false)
 	{
 		if ($new) {
-			// Make sure we have a query class for this driver.
-			if (!class_exists('JDatabaseQuerySQLAzure')) {
-				throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_QUERY'));
-			}
-			return new JDatabaseQuerySQLAzure($this);
-		}
-		else {
-			return $this->sql;
+			jimport('joomla.database.databasequerysqlsrv');
+			return new JDatabaseQuerySQLSrv;
+		} else {
+			return $this->_sql;
 		}
 	}
 
@@ -521,6 +857,7 @@ class JDatabaseSQLSrv extends JDatabase
 
 		// Take a local copy so that we don't modify the original query and cause issues later
 		$sql = $this->replacePrefix((string) $this->sql);
+		echo $sql.'<br />'; 
 		if ($this->limit > 0 || $this->offset > 0) {
 			$sql = $this->_limit($sql, $this->limit, $this->offset);
 		}
@@ -540,6 +877,7 @@ class JDatabaseSQLSrv extends JDatabase
 		$this->errorMsg = '';
 
 		// sqlsrv_num_rows requires a static or keyset cursor.
+		jimport("joomla.utilities.string");
 		if (JString::startsWith(ltrim(strtoupper($sql)), 'SELECT')) {
 			$array = array('Scrollable' => SQLSRV_CURSOR_KEYSET);
 		}
@@ -884,5 +1222,14 @@ class JDatabaseSQLSrv extends JDatabase
 		$sql = 'SELECT TOP '.$this->limit.' * FROM ('.$sql.') _myResults WHERE RowNumber > '.$this->offset;
 
 		return $sql;
+	}
+	 /**
+	 * Method to Change the date to SQL SERVER format
+	 *
+	 * @since   11.1
+	 */
+	public function toSQLDate(&$date, $local = false)
+	{
+		return $date->toSQLSrv($local);
 	}
 }

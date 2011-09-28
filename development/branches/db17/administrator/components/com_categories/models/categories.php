@@ -147,7 +147,7 @@ class CategoriesModelCategories extends JModelList
 
 		// Join over the language
 		$query->select('l.title AS language_title');
-		$query->join('LEFT', '`#__languages` AS l ON l.lang_code = a.language');
+		$query->join('LEFT', $db->nameQuote('#__languages').' AS l ON l.lang_code = a.language');
 
 		// Join over the users for the checked out user.
 		$query->select('uc.name AS editor');
@@ -212,9 +212,11 @@ class CategoriesModelCategories extends JModelList
 		if ($language = $this->getState('filter.language')) {
 			$query->where('a.language = '.$db->quote($language));
 		}
-
+		$ordering_o = $this->getState('list.ordering', 'a.title');
+		if($ordering_o == 'access_level')
+			$ordering_o = 'ag.title';
 		// Add the list ordering clause.
-		$query->order($db->getEscaped($this->getState('list.ordering', 'a.title')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		$query->order($db->getEscaped($this->getState('ordering_o', 'ag.title')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;

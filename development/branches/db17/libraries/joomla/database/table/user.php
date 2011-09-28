@@ -196,7 +196,7 @@ class JTableUser extends JTable
 
 		// Set the registration timestamp
 		if ($this->registerDate == null || $this->registerDate == $this->_db->getNullDate() ) {
-			$this->registerDate = JFactory::getDate()->toMySQL();
+			$this->registerDate = $this->_db->toSQLDate(JFactory::getDate());
 		}
 
 
@@ -430,7 +430,7 @@ class JTableUser extends JTable
 		$db = $this->_db;
 		$query = $db->getQuery(true);
 		$query->update($db->quoteName($this->_tbl));
-		$query->set($db->quoteName('lastvisitDate') . '=' . $db->quote($date->format($db->getDateFormat())));
+		$query->set($db->quoteName('lastvisitDate') . '=' . $db->quote($date->format($db->toSQLDate($date))));
 		$query->where($db->quoteName('id') . '=' . (int)$userId);
 		$db->setQuery($query);
 		$db->query();

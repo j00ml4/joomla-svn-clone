@@ -123,8 +123,8 @@ class JLoggerDatabase extends JLogger
 			$this->connect();
 		}
 
-		// Convert the date.
-		$entry->date = $entry->date->toMySQL();
+		// Convert the date.  
+		$entry->date = $entry->date->toSQLDate($Date);
 
 		$this->dbo->insertObject($this->table, $entry);
 	}

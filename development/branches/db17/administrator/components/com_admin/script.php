@@ -37,7 +37,7 @@ class joomlaInstallerScript
 			// Create the package pkg_joomla
 			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
-			$query->insert('#__extensions');
+			$query->insertInto('#__extensions');
 			$query->set('name='.$db->quote('joomla'));
 			$query->set('type='.$db->quote('package'));
 			$query->set('element='.$db->quote('pkg_joomla'));
@@ -213,7 +213,7 @@ class joomlaInstallerScript
 		$query->select('*');
 		$query->from('#__extensions');
 		foreach ($extensions as $extension) {
-			$query->where('`type`='.$db->quote($extension[0]).' AND `element`='.$db->quote($extension[1]).' AND `folder`='.$db->quote($extension[2]).' AND `client_id`='.$extension[3], 'OR');
+			$query->where('type='.$db->quote($extension[0]).' AND element =.$db->quote($extension[1]). AND folder = .$db->quote($extension[2]). AND client_id = .$extension[3], OR);
 		}
 		$db->setQuery($query);
 		$extensions = $db->loadObjectList();

@@ -173,13 +173,17 @@ class JAccess
 		$query	= $db->getQuery(true);
 		$query->select($recursive ? 'b.rules' : 'a.rules');
 		$query->from('#__assets AS a');
-
+    //sqlsrv change
+    $query->group($recursive ? 'b.id, b.rules, b.lft' : 'a.id, a.rules, a.lft');
+   
 		// If the asset identifier is numeric assume it is a primary key, else lookup by name.
 		if (is_numeric($asset)) {
-			$query->where('a.id = '.(int) $asset);
+			// Get the root even if the asset is not found
+			$query->where('(a.id = '.(int) $asset.($recursive ? ' OR a.parent_id=0':'').')');
 		}
 		else {
-			$query->where('a.name = '.$db->quote($asset));
+			// Get the root even if the asset is not found
+			$query->where('(a.name = '.$db->quote($asset).($recursive ? ' OR a.parent_id=0':'').')');
 		}
 
 		// If we want the rules cascading up to the global asset node we need a self-join.
@@ -292,8 +296,8 @@ class JAccess
 		$query	= $db->getQuery(true);
 		$query->select('DISTINCT(user_id)');
 		$query->from('#__usergroups as ug1');
-		$query->join('INNER', '#__usergroups AS ug2 ON ug2.lft'.$test.'ug1.lft AND ug1.rgt'.$test.'ug2.rgt');
-		$query->join('INNER', '#__user_usergroup_map AS m ON ug2.id=m.group_id');
+		$query->join('INNER','#__usergroups AS ug2 ON ug2.lft'.$test.'ug1.lft AND ug1.rgt'.$test.'ug2.rgt');
+		$query->join('INNER','#__user_usergroup_map AS m ON ug2.id=m.group_id');
 		$query->where('ug1.id='.$db->Quote($groupId));
 
 		$db->setQuery($query);
@@ -328,7 +332,7 @@ class JAccess
 			// Build the base query.
 			$query	= $db->getQuery(true);
 			$query->select('id, rules');
-			$query->from($query->qn('#__viewlevels'));
+			$query->from($db->nameQuote('#__viewlevels'));
 
 			// Set the query for execution.
 			$db->setQuery((string) $query);
