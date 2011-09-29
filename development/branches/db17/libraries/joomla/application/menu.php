@@ -59,7 +59,8 @@ class JMenu extends JObject
 		foreach ($this->_items as $k => $item)
 		{
 			if ($item->home) {
-				$this->_default[$item->language] = $item->id;
+			//sql srv change
+				$this->_default[trim($item->language)] = $item->id;
 			}
 
 			// Decode the item params

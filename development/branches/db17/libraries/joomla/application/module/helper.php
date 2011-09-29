@@ -297,7 +297,7 @@ abstract class JModuleHelper
 			$query->where('e.enabled = 1');
 
 			$date = JFactory::getDate();
-			$now = $date->toMySQL();
+			$now = $db->toSQLDate($date);
 			$nullDate = $db->getNullDate();
 			$query->where('(m.publish_up = '.$db->Quote($nullDate).' OR m.publish_up <= '.$db->Quote($now).')');
 			$query->where('(m.publish_down = '.$db->Quote($nullDate).' OR m.publish_down >= '.$db->Quote($now).')');
@@ -414,8 +414,7 @@ abstract class JModuleHelper
 			$cache->setCaching(false);
 		}
 
-		// module cache is set in seconds, global cache in minutes, setLifeTime works in minutes
-		$cache->setLifeTime($moduleparams->get('cache_time', $conf->get('cachetime') * 60) / 60);
+		$cache->setLifeTime($moduleparams->get('cache_time', $conf->get('cachetime') * 60));
 
 		$wrkaroundoptions = array (
 			'nopathway' 	=> 1,
