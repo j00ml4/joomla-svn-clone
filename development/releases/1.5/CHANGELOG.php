@@ -36,6 +36,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+30-Sept-2011 Jean-Marie Simonet
+ +$ Adding ka-GE installation language
+ 
 19-Apri-2011 Andrew Eddie
  # Fixed [#21622] 303 redirections cause page subresources to be reloaded on WebKit browsers (Nicholas Dionysopoulos).
 
