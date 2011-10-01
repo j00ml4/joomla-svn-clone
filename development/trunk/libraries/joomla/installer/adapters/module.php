@@ -22,7 +22,7 @@ class JInstallerModule extends JAdapterInstance
 {
 	/**
 	 * Install function routing
-	 * 
+	 *
 	 * @var    string
 	 * @since 11.1
 	 */
@@ -30,41 +30,41 @@ class JInstallerModule extends JAdapterInstance
 	protected $route = 'Install';
 
 	/**
-	 * 
-	 * 
-	 * @var    
+	 *
+	 *
+	 * @var
 	 * @since 11.1
 	 */
 	protected $manifest = null;
 
 	/**
-	 * 
-	 * 
-	 * @var    
+	 *
+	 *
+	 * @var
 	 * @since 11.1
 	 */
-	
+
 	protected $manifest_script = null;
 
 	/**
 	 * Extension name
-	 * 
-	 * @var    
+	 *
+	 * @var
 	 * @since   11.1
 	 */
 	protected $name = null;
 
 	/**
-	 * 
-	 * 
-	 * @var    
+	 *
+	 *
+	 * @var
 	 * @since  11.1
 	 */
 	protected $element = null;
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 * @var    string
 	 * @since 11.1
 	 */
@@ -587,7 +587,7 @@ class JInstallerModule extends JAdapterInstance
 
 	/**
 	 * Refreshes the extension table cache
-	 * 
+	 *
 	 * @return  boolean  Result of operation, true if updated, false on failure
 	 * @since   11.1
 	 */

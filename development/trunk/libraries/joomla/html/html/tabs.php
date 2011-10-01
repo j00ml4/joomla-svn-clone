@@ -39,7 +39,7 @@ abstract class JHtmlTabs
 	 * Close the current pane
 	 *
 	 * @return  string  HTML to close the pane
-	 * 
+	 *
 	 * @since   11.1
 	 */
 	public static function end()

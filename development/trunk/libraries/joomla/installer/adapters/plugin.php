@@ -31,7 +31,7 @@ class JInstallerPlugin extends JAdapterInstance
 	/**
 	 * The installation manifest XML object
 	 *
-	 * @var    
+	 * @var
 	 * @since  11.1
 	 * */
 	protected $manifest = null;
@@ -39,7 +39,7 @@ class JInstallerPlugin extends JAdapterInstance
 	/**
 	 *
 	 *
-	 * @var    
+	 * @var
 	 * @since  11.1
 	 * */
 
@@ -48,7 +48,7 @@ class JInstallerPlugin extends JAdapterInstance
 	/**
 	 *
 	 *
-	 * @var    
+	 * @var
 	 * @since  11.1
 	 * */
 	protected $name = null;
@@ -56,7 +56,7 @@ class JInstallerPlugin extends JAdapterInstance
 	/**
 	 *
 	 *
-	 * @var    
+	 * @var
 	 * @since  11.1
 	 * */
 	protected $scriptElement = null;
@@ -64,7 +64,7 @@ class JInstallerPlugin extends JAdapterInstance
 	/**
 	 *
 	 *
-	 * @var    
+	 * @var
 	 * @since  11.1
 	 * */
 	protected $oldFiles = null;

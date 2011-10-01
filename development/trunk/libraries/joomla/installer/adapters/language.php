@@ -30,7 +30,7 @@ class JInstallerLanguage extends JAdapterInstance
 
 	/**
 	 * Custom install method
-	 * 
+	 *
 	 * Note: This behaves badly due to hacks made in the middle of 1.5.x to add
 	 * the ability to install multiple distinct packs in one install. The
 	 * preferred method is to use a package to install multiple language packs.
@@ -416,7 +416,7 @@ class JInstallerLanguage extends JAdapterInstance
 	 *
 	 * @param   string   $tag       The tag of the language to uninstall
 	 * @param   integer  $clientId  The id of the client (unused)
-	 * 
+	 *
 	 * @return  mixed    Return value for uninstall method in component uninstall file
 	 *
 	 * @since   11.1
@@ -599,7 +599,7 @@ class JInstallerLanguage extends JAdapterInstance
 	 * Refreshes the extension table cache
 	 *
 	 * @return  boolean result of operation, true if updated, false on failure
-	 * 
+	 *
 	 * @since   11.1
 	 */
 	public function refreshManifestCache()

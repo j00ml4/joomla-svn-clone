@@ -114,15 +114,15 @@ abstract class JHtmlGrid
 
 	/**
 	 * Deprecated method to change access level in a grid
-	 * 
+	 *
 	 * @param   integer   $row        Row id
 	 * @param   integer   $i          Row index
 	 * @param   boolean   $archived   True if the item is archived
-	 * 
+	 *
 	 * @return  string
-	 * 
+	 *
 	 * @since   11.1
-	 * 
+	 *
 	 * @deprecated    12.1
 	 * @note          This method is incompatible with JAccess
 	 */
@@ -194,7 +194,7 @@ abstract class JHtmlGrid
 	 * @param   string   $prefix  An optional prefix for the task
 	 *
 	 * @return  string
-	 * 
+	 *
 	 * @since   11.1
 	 */
 	public static function published($value, $i, $img1 = 'tick.png', $img0 = 'publish_x.png', $prefix='')
@@ -226,7 +226,7 @@ abstract class JHtmlGrid
 	 * @param   string   $trashed       The JText string for Trashed
 	 *
 	 * @return  string
-	 * 
+	 *
 	 * @since   11.1
 	 */
 	public static function state(
@@ -269,7 +269,7 @@ abstract class JHtmlGrid
 	 * @param   string   $task   The task to use, defaults to save order
 	 *
 	 * @return  string
-	 * 
+	 *
 	 * @since   11.1
 	 */
 	public static function order($rows, $image = 'filesave.png', $task = 'saveorder')
@@ -287,7 +287,7 @@ abstract class JHtmlGrid
 	 * @param   boolean  $overlib  True if an overlib with checkout information should be created.
 	 *
 	 * @return  string   HTMl for the icon and ovelib
-	 * 
+	 *
 	 * @since   11.1
 	 */
 	protected static function _checkedOut(&$row, $overlib = 1)
@@ -309,7 +309,7 @@ abstract class JHtmlGrid
 	}
 	/**
 	 * Method to build the behavior script and add it to the document head.
-	 * 
+	 *
 	 * @since   11.1
 	 */
 	static function behavior()

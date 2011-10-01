@@ -39,7 +39,7 @@ class JFormFieldTemplateStyle extends JFormFieldGroupedList
 	 * Use the template attribute to specify a specific template
 	 *
 	 * @return  array  The field option objects as a nested array in groups.
-	 * 
+	 *
 	 * @since   11.1
 	 */
 	protected function getGroups()

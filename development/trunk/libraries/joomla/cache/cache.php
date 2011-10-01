@@ -37,7 +37,7 @@ class JCache extends JObject
 {
 	/**
 	 * Storage handler
-	 * 
+	 *
 	 * @var    object
 	 * @since  11.1
 	 */

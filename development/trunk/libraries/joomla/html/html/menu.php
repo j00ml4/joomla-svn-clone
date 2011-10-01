@@ -162,10 +162,10 @@ abstract class JHtmlMenu
 
 	/**
 	 * Build the select list for Menu Ordering
-	 * 
+	 *
 	 * @param  object   $row  The row object
 	 * @param  integer  $id   The id for the row. Must exist to enable menu ordering
-	 * 
+	 *
 	 */
 	public static function ordering(&$row, $id)
 	{
