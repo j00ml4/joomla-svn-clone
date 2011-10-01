@@ -1391,7 +1391,7 @@ abstract class JTable extends JObject
 	 *
 	 * @since   11.1
 	 */
-	protected function _lock()
+	protected function _lock($_tbl, $_db)
 	{
 		// Lock the table for writing.
 		$this->_db->setQuery('LOCK TABLES '.$this->_db->quoteName($this->_tbl).' WRITE');

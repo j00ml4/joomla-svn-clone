@@ -351,7 +351,7 @@ class JTableNested extends JTable
 		}
 
 		// Lock the table for writing.
-		if (!$query->$this->_lock($this->_tbl, $this->_db)) {
+		if (!$query->_lock($this->_tbl, $this->_db)){
 			return false;
 		}
 		else
@@ -539,10 +539,12 @@ class JTableNested extends JTable
 		
 		// Lock the table for writing.
 		if (!$query->_lock($this->_tbl, $this->_db)){
-			return false;}
-		else{
-			$this->_locked = true;}
-	
+			// Error message set in lock method.
+			return false;
+		}
+		else
+			$this->_locked = true;
+
 		// If tracking assets, remove the asset first.
 		if ($this->_trackAssets)
 		{
@@ -550,21 +552,22 @@ class JTableNested extends JTable
 			$asset		= JTable::getInstance('Asset');
 
 			// Lock the table for writing.
-			if (!$query->_lock($asset->_tbl, $this->_db))
+			if (!$query->lock($asset->_tbl, $this->_db))
 				return false;
 			else
 				$asset->_locked = true;
-			if (!$asset->_lock()) {
+			//sqlsrv change
+			/*if (!$asset->_lock()) 
+			{
 				// Error message set in lock method.
 				return false;
-			}
+			}*/
 
 			if ($asset->loadByName($name)) {
 				// Delete the node in assets table.
-				if (!$asset->delete(null, $children))
-				{
+				if (!$asset->delete(null, $children)) {
 					$this->setError($asset->getError());
-					$query->unlock($this->_db);
+					$query->_unlock($this->_db);
 					$asset->_locked=false;
 					return false;
 				}
@@ -742,7 +745,7 @@ class JTableNested extends JTable
 				// Lock the table for writing.
 				if (!$this->_locked = $query->_lock($this->_tbl, $this->_db)) {
 					// Error message set in lock method.
-					return false;
+					//return false;
 				}
 
 				// We are inserting a node relative to the last root node.
@@ -839,8 +842,10 @@ class JTableNested extends JTable
 			}
 
 			// Lock the table for writing.
-			if (!$query->_lock($this->_tbl, $this->_db)) 
+			if (!$query->_lock($this->_tbl, $this->_db)) {
+				// Error message set in lock method.
 				return false;
+			}
 			else
 				$this->_locked = true;
 		}
@@ -1022,8 +1027,9 @@ class JTableNested extends JTable
 		$query = $this->_db->getQuery(true);
 		
 		// Lock the table for writing.
-		if (!$query->_lock($this->_tbl, $this->_db)) 
+		if (!$query->_lock($this->_tbl, $this->_db)) {
 			return false;
+		}	
 		else
 			$this->_locked = true;
 
@@ -1125,8 +1131,9 @@ class JTableNested extends JTable
 		$query = $this->_db->getQuery(true);
 		
 		// Lock the table for writing.
-		if (!$query->_lock($this->_tbl, $this->_db))
+		if (!$query->_lock($this->_tbl, $this->_db)){
 			return false;
+		}
 		else
 			$this->_locked = true;
 	
