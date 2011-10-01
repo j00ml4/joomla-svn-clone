@@ -22,7 +22,7 @@ $GLOBALS['_JREQUEST'] = array();
  */
 define('JREQUEST_NOTRIM',	1);
 define('JREQUEST_ALLOWRAW',	2);
-define('JREQUEST_ALLOWHTML',4);
+define('JREQUEST_ALLOWHTML', 4);
 
 /**
  * JRequest Class

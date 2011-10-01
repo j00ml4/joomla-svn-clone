@@ -165,7 +165,7 @@ class JInstallerLanguage extends JAdapterInstance
 			// Upgrade manually set or
 			// Update function available or
 			// Update tag detected
-			if ($this->parent->getUpgrade() || ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'update')) || is_a($updateElement, 'JXMLElement')) {
+			if ($this->parent->getUpgrade() || ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'update')) || is_a($updateElement, 'JXMLElement')) {
 				return $this->update(); // transfer control to the update function
 			}
 			else if (!$this->parent->getOverwrite())
@@ -398,7 +398,7 @@ class JInstallerLanguage extends JAdapterInstance
 		// And now we run the postflight
 		ob_start();
 		ob_implicit_flush(false);
-		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass,'postflight'))
+		if ($this->parent->manifestClass && method_exists($this->parent->manifestClass, 'postflight'))
 		{
 			$this->parent->manifestClass->postflight('update', $this);
 		}
@@ -498,7 +498,7 @@ class JInstallerLanguage extends JAdapterInstance
 			$registry = new JRegistry;
 			$registry->loadString($user->params);
 			if ($registry->get($param_name)==$element) {
-				$registry->set($param_name,'');
+				$registry->set($param_name, '');
 				$query=$db->getQuery(true);
 				$query->update('#__users');
 				$query->set('params='.$db->quote($registry));

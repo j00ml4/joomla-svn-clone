@@ -585,13 +585,13 @@ class JSimpleXMLElement extends JObject
 	function removeChild(&$child)
 	{
 		$name = $child->name();
-		for ($i=0,$n=count($this->_children);$i<$n;$i++)
+		for ($i=0, $n=count($this->_children);$i<$n;$i++)
 		{
 			if ($this->_children[$i] == $child) {
 				unset($this->_children[$i]);
 			}
 		}
-		for ($i=0,$n=count($this->{$name});$i<$n;$i++)
+		for ($i=0, $n=count($this->{$name});$i<$n;$i++)
 		{
 			if ($this->{$name}[$i] == $child) {
 				unset($this->{$name}[$i]);

@@ -58,7 +58,7 @@ abstract class JError
 	protected static $handlers = array(
 		E_NOTICE	=> array('mode' => 'message'),
 		E_WARNING	=> array('mode' => 'message'),
-		E_ERROR	=> array('mode' => 'callback', 'options' => array('JError','customErrorPage'))
+		E_ERROR	=> array('mode' => 'callback', 'options' => array('JError', 'customErrorPage'))
 	);
 
 	protected static $stack = array();
@@ -209,7 +209,7 @@ abstract class JError
 
 		$function = 'handle'.ucfirst($handler['mode']);
 		if (is_callable(array('JError', $function))) {
-			$reference = call_user_func_array(array('JError',$function), array(&$exception, (isset($handler['options'])) ? $handler['options'] : array()));
+			$reference = call_user_func_array(array('JError', $function), array(&$exception, (isset($handler['options'])) ? $handler['options'] : array()));
 		}
 		else {
 			// This is required to prevent a very unhelpful white-screen-of-death
@@ -353,7 +353,7 @@ abstract class JError
 
 		$function = 'handle'.ucfirst($mode);
 
-		if (!is_callable(array ('JError',$function))) {
+		if (!is_callable(array ('JError', $function))) {
 			return JError::raiseError(E_ERROR, 'JError:'.JERROR_ILLEGAL_MODE, 'Error Handling mode is not known', 'Mode: '.$mode.' is not implemented.');
 		}
 
@@ -671,7 +671,7 @@ abstract class JError
 
 		$entry['level'] = $error->get('level');
 		$entry['code'] = $error->get('code');
-		$entry['message'] = str_replace(array ("\r","\n"), array ('','\\n'), $error->get('message'));
+		$entry['message'] = str_replace(array ("\r", "\n"), array ('', '\\n'), $error->get('message'));
 		$log->addEntry($entry);
 
 		return $error;

@@ -96,10 +96,10 @@ class JFormFieldMedia extends JFormField
 
 		$directory = (string)$this->element['directory'];
 		if ($this->value && file_exists(JPATH_ROOT . '/' . $this->value)) {
-			$folder = explode ('/',$this->value);
+			$folder = explode ('/', $this->value);
 			array_shift($folder);
 			array_pop($folder);
-			$folder = implode('/',$folder);
+			$folder = implode('/', $folder);
 		}
 		elseif (file_exists(JPATH_ROOT . '/' . JComponentHelper::getParams('com_media')->get('image_path', 'images') . '/' . $directory)) {
 			$folder = $directory;
