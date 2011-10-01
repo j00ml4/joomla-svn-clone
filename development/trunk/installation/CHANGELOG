@@ -32,6 +32,7 @@ $ -> Language fix or change
  # [#26911] Merge some code style changes from platform 11.3 (Rouven Weßling)
  # [#26912] Merge some code style changes from platform 11.3 (Rouven Weßling)
  # [#24664] Back-end language switching is working only when Default is selected
+ # [#26907] *Adding tip to batch function (Jean-Marie Simonet)
 
 30-Sep-2011 Christophe Demko
  - [#26903] Remove batch process code from com_contact (Michael Babker)
