@@ -71,12 +71,12 @@ class JFormFieldEditor extends JFormField
 			$buttons = explode(',', $buttons);
 		}
 
-		$hide = ((string) $this->element['hide']) ? explode(',',(string) $this->element['hide']) : array();
+		$hide = ((string) $this->element['hide']) ? explode(',', (string) $this->element['hide']) : array();
 
 		// Get an editor object.
 		$editor = $this->getEditor();
 
-		return $editor->display($this->name, htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8'), $width, $height, $cols, $rows, $buttons ? (is_array($buttons) ? array_merge($buttons,$hide) : $hide) : false, $this->id, $asset, $this->form->getValue($authorField));
+		return $editor->display($this->name, htmlspecialchars($this->value, ENT_COMPAT, 'UTF-8'), $width, $height, $cols, $rows, $buttons ? (is_array($buttons) ? array_merge($buttons, $hide) : $hide) : false, $this->id, $asset, $this->form->getValue($authorField));
 	}
 
 	/**

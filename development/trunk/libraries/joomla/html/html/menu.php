@@ -105,7 +105,7 @@ abstract class JHtmlMenu
 				}
 				$lookup[$item->menutype][] = &$item;
 
-				$item->text = str_repeat('- ',$item->level).$item->text;
+				$item->text = str_repeat('- ', $item->level).$item->text;
 			}
 			self::$items = array();
 

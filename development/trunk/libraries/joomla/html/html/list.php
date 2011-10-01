@@ -111,7 +111,7 @@ abstract class JHtmlList
 		{
 			$items[$i]->text = JText::_($items[$i]->text);
 			if (JString::strlen($items[$i]->text) > $chop) {
-				$text = JString::substr($items[$i]->text,0,$chop)."...";
+				$text = JString::substr($items[$i]->text, 0, $chop)."...";
 			} else {
 				$text = $items[$i]->text;
 			}

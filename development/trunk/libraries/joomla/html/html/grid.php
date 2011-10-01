@@ -84,7 +84,7 @@ abstract class JHtmlGrid
 		$html .= JText::_($title);
 
 		if ($order == $selected) {
-			$html .= JHtml::_('image','system/'.$images[$index], '', NULL, true);
+			$html .= JHtml::_('image', 'system/'.$images[$index], '', NULL, true);
 		}
 
 		$html .= '</a>';
@@ -210,7 +210,7 @@ abstract class JHtmlGrid
 
 		$href = '
 		<a href="#" onclick="return listItemTask(\'cb'. $i .'\',\''. $prefix.$task .'\')" title="'. $action .'">'.
-		JHtml::_('image','admin/'.$img, $alt, NULL, true).'</a>'
+		JHtml::_('image', 'admin/'.$img, $alt, NULL, true).'</a>'
 		;
 
 		return $href;
@@ -297,13 +297,13 @@ abstract class JHtmlGrid
 		if ($overlib) {
 			$text = addslashes(htmlspecialchars($row->editor, ENT_COMPAT, 'UTF-8'));
 
-			$date	= JHtml::_('date',$row->checked_out_time, JText::_('DATE_FORMAT_LC1'));
-			$time	= JHtml::_('date',$row->checked_out_time, 'H:i');
+			$date	= JHtml::_('date', $row->checked_out_time, JText::_('DATE_FORMAT_LC1'));
+			$time	= JHtml::_('date', $row->checked_out_time, 'H:i');
 
 			$hover = '<span class="editlinktip hasTip" title="'. JText::_('JLIB_HTML_CHECKED_OUT') .'::'. $text .'<br />'. $date .'<br />'. $time .'">';
 		}
 
-		$checked = $hover .JHtml::_('image','admin/checked_out.png', NULL, NULL, true).'</span>';
+		$checked = $hover .JHtml::_('image', 'admin/checked_out.png', NULL, NULL, true).'</span>';
 
 		return $checked;
 	}

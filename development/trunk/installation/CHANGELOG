@@ -30,6 +30,7 @@ $ -> Language fix or change
 01-Oct-2011 Christophe Demko
  # [#26813] Misplaced Bracket on Language Titles in Multilingual Sites Using RTL Language (James Brice)
  # [#26911] Merge some code style changes from platform 11.3 (Rouven Weßling)
+ # [#26912] Merge some code style changes from platform 11.3 (Rouven Weßling)
 
 30-Sep-2011 Christophe Demko
  - [#26903] Remove batch process code from com_contact (Michael Babker)

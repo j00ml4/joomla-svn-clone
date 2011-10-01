@@ -49,8 +49,8 @@ abstract class JHtmlRules
 		$html = array();
 
 		$html[] = '<div class="acl-options">';
-		$html[] = 		JHtml::_('tabs.start','acl-rules-'.$assetId, array('useCookie'=>1));
-		$html[] = 		JHtml::_('tabs.panel',JText::_('JLIB_HTML_ACCESS_SUMMARY'), 'summary');
+		$html[] = 		JHtml::_('tabs.start', 'acl-rules-'.$assetId, array('useCookie'=>1));
+		$html[] = 		JHtml::_('tabs.panel', JText::_('JLIB_HTML_ACCESS_SUMMARY'), 'summary');
 		$html[] = '			<p>'.JText::_('JLIB_HTML_ACCESS_SUMMARY_DESC').'</p>';
 		$html[] = '			<table class="aclsummary-table" summary="'.JText::_('JLIB_HTML_ACCESS_SUMMARY_DESC').'">';
 		$html[] = '			<caption>'.JText::_('JLIB_HTML_ACCESS_SUMMARY_DESC_CAPTION').'</caption>';
@@ -85,7 +85,7 @@ abstract class JHtmlRules
 		{
 			$actionTitle = JText::_($action->title);
 			$actionDesc	= JText::_($action->description);
-			$html[] = 		JHtml::_('tabs.panel',$actionTitle, $action->name);
+			$html[] = 		JHtml::_('tabs.panel', $actionTitle, $action->name);
 			$html[] = '			<p>'.$actionDesc.'</p>';
 			$html[] = '			<table class="aclmodify-table" summary="'.strip_tags($actionDesc).'">';
 			$html[] = '			<caption>'.JText::_('JLIB_HTML_ACCESS_MODIFY_DESC_CAPTION_ACL').' '.$actionTitle.' '.JText::_('JLIB_HTML_ACCESS_MODIFY_DESC_CAPTION_TABLE').'</caption>';
