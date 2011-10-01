@@ -28,9 +28,9 @@ abstract class JHtmlRules
 	 * @param   string   $idPrefix  Prefix for the ids assigned to specific action-group pairs
 	 *
 	 * @return  string   HTML for the permissions widget
-	 * 
+	 *
 	 * @since   11.1
-	 * 
+	 *
 	 * @see     JAccess
 	 * @see     JFormFieldRules
 	 */
@@ -156,7 +156,7 @@ abstract class JHtmlRules
 	/**
 	 * Get the user groups
 	 *
-	 * @return  array  Array of user groups 
+	 * @return  array  Array of user groups
 	 *
 	 * @since   11.1
 	 */

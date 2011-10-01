@@ -68,9 +68,9 @@ class JInstallerComponent extends JAdapterInstance
 	protected $oldFiles = null;
 
 	/**
-	 * A path to the PHP file that the scriptfile declaration in 
+	 * A path to the PHP file that the scriptfile declaration in
 	 * the manifest refers to.
-	 * 
+	 *
 	 * @var    string
 	 * @since  11.1
 	 * */
@@ -79,7 +79,7 @@ class JInstallerComponent extends JAdapterInstance
 	/**
 	 * For legacy installations this is a path to the PHP file that the scriptfile declaration in the
 	 * manifest refers to.
-	 * 
+	 *
 	 * @var    string
 	 * @since  11.1
 	 * */
@@ -91,7 +91,7 @@ class JInstallerComponent extends JAdapterInstance
 	 * @param   string  $path  The path language files are on.
 	 *
 	 * @return  void
-	 * 
+	 *
 	 * @since   11.1
 	 */
 	public function loadLanguage($path=null)
@@ -451,7 +451,7 @@ class JInstallerComponent extends JAdapterInstance
 		}
 
 		// Append messages
-		$msg .= ob_get_contents(); 
+		$msg .= ob_get_contents();
 		ob_end_clean();
 
 		/**
@@ -537,7 +537,7 @@ class JInstallerComponent extends JAdapterInstance
 		}
 
 		// Append messages
-		$msg .= ob_get_contents(); 
+		$msg .= ob_get_contents();
 		ob_end_clean();
 
 		if ($msg != '') {
@@ -603,7 +603,7 @@ class JInstallerComponent extends JAdapterInstance
 		$old_manifest = null;
 		// Create a new installer because findManifest sets stuff
 		// Look in the administrator first
-		$tmpInstaller = new JInstaller; 
+		$tmpInstaller = new JInstaller;
 		$tmpInstaller->setPath('source', $this->parent->getPath('extension_administrator'));
 
 		if (!$tmpInstaller->findManifest()) {
@@ -895,7 +895,7 @@ class JInstallerComponent extends JAdapterInstance
 				return false;
 			}
 		}
-		
+
 		// Append messages
 		$msg .= ob_get_contents();
 		ob_end_clean();
@@ -963,7 +963,7 @@ class JInstallerComponent extends JAdapterInstance
 			$this->parent->manifestClass->postflight('update', $this);
 		}
 		// Append messages
-		$msg .= ob_get_contents(); 
+		$msg .= ob_get_contents();
 		ob_end_clean();
 
 		if ($msg != '') {
@@ -1728,7 +1728,7 @@ class JInstallerComponent extends JAdapterInstance
 					}
 				}
 				// Append messages
-				$msg .= ob_get_contents(); 
+				$msg .= ob_get_contents();
 				ob_end_clean();
 			}
 		}

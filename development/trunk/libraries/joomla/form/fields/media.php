@@ -13,7 +13,7 @@ jimport('joomla.form.formfield');
 
 /**
  * Form Field class for the Joomla Platform.
- * Provides a modal media selector including upload mechanism 
+ * Provides a modal media selector including upload mechanism
  *
  * @package     Joomla.Platform
  * @subpackage  Form

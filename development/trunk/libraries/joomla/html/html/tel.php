@@ -70,7 +70,7 @@ abstract class JHtmlTel
 			$display[3] = $countrycode;
 			$display[4] = '.e164.arpa';
 		}
-		
+
 		$display = implode($display, '');
 
 		return $display;

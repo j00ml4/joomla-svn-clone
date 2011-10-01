@@ -174,7 +174,7 @@ class JSimpleXML extends JObject
 	 *
 	 * @param   string  Path to XML file containing a well-formed XML document
 	 * @param   string  currently ignored
-	 * 
+	 *
 	 * @return  boolean  True if successful, false if file empty
 	 *
 	 * @since   11.1

@@ -33,7 +33,7 @@ abstract class JHtmlContentLanguage
 	 * @param   boolean  $translate  True to translate All
 	 *
 	 * @return  string
-	 * 
+	 *
 	 * @since   11.1
 	 *
 	 * @see     JFormFieldContentLanguage

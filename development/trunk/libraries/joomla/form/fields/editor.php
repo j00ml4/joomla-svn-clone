@@ -19,7 +19,7 @@ jimport('joomla.form.formfield');
  * @package     Joomla.Platform
  * @subpackage  Form
  * @since       11.1
- * 
+ *
  * @see         JFormfieldEditors
  * @see         JEditor
  */
