@@ -134,10 +134,8 @@ class ContactModelContact extends JModelForm
 				$case_when1 .= $query->concat(array($c_id, 'c.alias'), ':');
 				$case_when1 .= ' ELSE ';
 				$case_when1 .= $c_id.' END as catslug';
-				$query->select($this->getState('item.select', 'a.*') . ','
-			
-			//	. ' CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
-			//	. ' CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(\':\', c.id, c.alias) ELSE c.id END AS catslug ');
+
+				$query->select($this->getState('item.select', 'a.*') . ','.$case_when.','.$case_when1);
 				$query->from('#__contact_details AS a');
 
 				// Join on category table.
@@ -259,8 +257,6 @@ class ContactModelContact extends JModelForm
 			$case_when1 .= $c_id.' END as catslug';
 			$query->select('a.*, cc.access as category_access, cc.title as category_name, '
 			.$case_when.','.$case_when1);
-		//	. ' CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
-		//	. ' CASE WHEN CHAR_LENGTH(cc.alias) THEN CONCAT_WS(\':\', cc.id, cc.alias) ELSE cc.id END AS catslug ');
 
 			$query->from('#__contact_details AS a');
 

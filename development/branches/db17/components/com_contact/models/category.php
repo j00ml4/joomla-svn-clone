@@ -135,7 +135,7 @@ class ContactModelCategory extends JModelList
 	//	. ' CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
 	//	. ' CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(\':\', c.id, c.alias) ELSE c.id END AS catslug ');
 		$query->from($db->nameQuote('#__contact_details').' AS a');
-	//	$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
+		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 		$query->where('a.access IN ('.$groups.')');
 
 		// Filter by category.
@@ -151,7 +151,7 @@ class ContactModelCategory extends JModelList
 		}
 		// Filter by start and end dates.
 		$nullDate = $db->Quote($db->getNullDate());
-		$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
+		$nowDate = $db->Quote($db->toSQLDate(JFactory::getDate()));
 
 		if ($this->getState('filter.publish_date')){
 			$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
