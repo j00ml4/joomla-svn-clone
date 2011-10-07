@@ -244,10 +244,10 @@ class JInstallationModelConfiguration extends JModel
       $query->where('id = 42');
     }else{
       $query = $db->getQuery(true);
-      $fields = 'id,name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params';
+      $fields = 'name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params';
       $query->insertInto('#__users', true);
       $query->fields($fields);
-      $query->values('42');
+      //$query->values('42');
       $query->values($db->quote('Super User'));
       $query->values($db->quote($options->admin_user));
       $query->values($db->quote($options->admin_email));
