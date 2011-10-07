@@ -552,7 +552,7 @@ class JTableNested extends JTable
 			$asset		= JTable::getInstance('Asset');
 
 			// Lock the table for writing.
-			if (!$query->lock($asset->_tbl, $this->_db))
+			if (!$query->_lock($asset->_tbl, $this->_db))
 				return false;
 			else
 				$asset->_locked = true;
@@ -844,7 +844,7 @@ class JTableNested extends JTable
 			// Lock the table for writing.
 			if (!$query->_lock($this->_tbl, $this->_db)) {
 				// Error message set in lock method.
-				return false;
+				//return false;
 			}
 			else
 				$this->_locked = true;
@@ -979,11 +979,11 @@ class JTableNested extends JTable
 
 			// Update and cascade the publishing state.
 			$query = $this->_db->getQuery(true)
-				->update($this->_db->quoteName($this->_tbl).' AS n')
-				->set('n.published = '.(int) $state)
+				->update($this->_db->nameQuote($this->_tbl))
+				->set('published = '.(int) $state)
 				->where(
-					'(n.lft > '.(int) $this->lft.' AND n.rgt < '.(int) $this->rgt.')' .
-					' OR n.'.$k.' = '.(int) $pk
+					'(lft > '.(int) $this->lft.' AND rgt < '.(int) $this->rgt.')' .
+					' OR '.$k.' = '.(int) $pk
 				);
 			$this->_db->setQuery($query);
 
@@ -1481,7 +1481,8 @@ class JTableNested extends JTable
 				{
 					$e = new JException(JText::sprintf('JLIB_DATABASE_ERROR_REORDER_FAILED', get_class($this), $this->_db->getErrorMsg()));
 					$this->setError($e);
-					$this->_unlock();
+					$query->_unlock($this->_db);
+					$this->_locked=false;
 					return false;
 				}
 
