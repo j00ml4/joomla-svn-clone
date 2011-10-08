@@ -27,6 +27,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+08-Oct-2011 Mark Dexter
+ # [#26927] upgrade from 1.6.3 and 1.6.4 to 1.7.2
+
 -------------------- 1.7.1 Stable Release [26-Sep-2011] ------------------
 
 26-Sep-2011 Jean-Marie Simonet
