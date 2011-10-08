@@ -540,7 +540,7 @@ class JTableNested extends JTable
 		// Lock the table for writing.
 		if (!$query->_lock($this->_tbl, $this->_db)){
 			// Error message set in lock method.
-			return false;
+			//sql srv change
 		}
 		else
 			$this->_locked = true;
@@ -552,8 +552,9 @@ class JTableNested extends JTable
 			$asset		= JTable::getInstance('Asset');
 
 			// Lock the table for writing.
-			if (!$query->_lock($asset->_tbl, $this->_db))
-				return false;
+			if (!$query->_lock($asset->_tbl, $this->_db)){
+			//sql srv change
+			}	
 			else
 				$asset->_locked = true;
 			//sqlsrv change
