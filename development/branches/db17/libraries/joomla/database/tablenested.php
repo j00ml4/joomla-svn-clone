@@ -352,7 +352,7 @@ class JTableNested extends JTable
 
 		// Lock the table for writing.
 		if (!$query->_lock($this->_tbl, $this->_db)){
-			return false;
+			//sqlsrv change
 		}
 		else
 			$this->_locked = true;
