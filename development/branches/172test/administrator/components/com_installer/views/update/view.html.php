@@ -17,6 +17,7 @@ include_once dirname(__FILE__).'/../default/view.php';
  * @subpackage	com_installer
  * @since		1.6
  */
+
 class InstallerViewUpdate extends InstallerViewDefault
 {
 	/**
