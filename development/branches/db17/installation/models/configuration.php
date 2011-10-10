@@ -260,13 +260,12 @@ class JInstallationModelConfiguration extends JModel
       $query->values($db->quote($nullDate));
       $query->values($db->quote('0'));
       $query->values($db->quote(''));
-    }
+    }//sqlsrv change
     else{
 	  $query = $db->getQuery(true);
 	  $fields = 'name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params';
       $query->insertInto('#__users', true);
       $query->fields($fields);
-      //$query->values('42');
       $query->values($db->quote('Super User'));
       $query->values($db->quote($options->admin_user));
       $query->values($db->quote($options->admin_email));
