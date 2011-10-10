@@ -243,7 +243,7 @@ class JInstallationModelConfiguration extends JModel
       $query->set('params = '.$db->quote(''));
       $query->where('id = 42');
     }else{
-	  if($options->db_type ==mysql || $options->db_type == mysqli){
+	  if($options->db_type =='mysql' || $options->db_type == 'mysqli'){
       $query = $db->getQuery(true);
       $fields = 'id,name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params';
       $query->insertInto('#__users', true);
