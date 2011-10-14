@@ -147,23 +147,46 @@ abstract class JModelAdmin extends JModelForm
 
 		$done = false;
 
-		if (!empty($commands['assetgroup_id'])) {
-			if (!$this->batchAccess($commands['assetgroup_id'], $pks)) {
+		if (!empty($commands['category_id']))
+		{
+			$cmd = JArrayHelper::getValue($commands, 'move_copy', 'c');
+
+			if ($cmd == 'c')
+			{
+				$result = $this->batchCopy($commands['category_id'], $pks);
+				if (is_array($result))
+				{
+					$pks = $result;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else if ($cmd == 'm' && !$this->batchMove($commands['category_id'], $pks))
+			{
+				return false;
+			}
+			$done = true;
+		}
+
+		if (!empty($commands['assetgroup_id']))
+		{
+			if (!$this->batchAccess($commands['assetgroup_id'], $pks))
+			{
 				return false;
 			}
 
 			$done = true;
 		}
 
-		if (!empty($commands['category_id'])) {
-			$cmd = JArrayHelper::getValue($commands, 'move_copy', 'c');
+		if (!empty($commands['language_id']))
+		{
+			if (!$this->batchLanguage($commands['language_id'], $pks))
+			{
+				return false;
+			}
 
-			if ($cmd == 'c' && !$this->batchCopy($commands['category_id'], $pks)) {
-				return false;
-			}
-			else if ($cmd == 'm' && !$this->batchMove($commands['category_id'], $pks)) {
-				return false;
-			}
 			$done = true;
 		}
 
@@ -223,7 +246,7 @@ abstract class JModelAdmin extends JModelForm
 	 * @param   integer  $value  The new category.
 	 * @param   array    $pks    An array of row IDs.
 	 *
-	 * @return  boolean  True if successful, false otherwise and internal error is set.
+	 * @return  mixed  An array of new IDs on success, boolean false on failure.
 	 *
 	 * @since	11.1
 	 */
@@ -233,6 +256,7 @@ abstract class JModelAdmin extends JModelForm
 
 		$table	= $this->getTable();
 		$db		= $this->getDbo();
+		$i		= 0;
 
 		// Check that the category exists
 		if ($categoryId) {
@@ -307,6 +331,55 @@ abstract class JModelAdmin extends JModelForm
 
 			// Store the row.
 			if (!$table->store()) {
+				$this->setError($table->getError());
+				return false;
+			}
+
+			// Get the new item ID
+			$newId = $table->get('id');
+
+			// Add the new ID to the array
+			$newIds[$i]	= $newId;
+			$i++;
+		}
+
+		// Clean the cache
+		$this->cleanCache();
+
+		return $newIds;
+	}
+
+	/**
+	 * Batch language changes for a group of rows.
+	 *
+	 * @param   string  $value  The new value matching a language.
+	 * @param   array   $pks    An array of row IDs.
+	 *
+	 * @return  booelan  True if successful, false otherwise and internal error is set.
+	 *
+	 * @since   11.3
+	 */
+	protected function batchLanguage($value, $pks)
+	{
+		// Check that user has edit permission for items
+		$extension = JRequest::getCmd('option');
+		$user = JFactory::getUser();
+		if (!$user->authorise('core.edit', $extension))
+		{
+			$this->setError(JText::_('JLIB_APPLICATION_ERROR_BATCH_CANNOT_EDIT'));
+			return false;
+		}
+
+		$table = $this->getTable();
+
+		foreach ($pks as $pk)
+		{
+			$table->reset();
+			$table->load($pk);
+			$table->language = $value;
+
+			if (!$table->store())
+			{
 				$this->setError($table->getError());
 				return false;
 			}

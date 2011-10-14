@@ -220,7 +220,7 @@
 			type="password"
 			label="COM_CONFIG_FIELD_FTP_PASSWORD_LABEL"
 			description="COM_CONFIG_FIELD_FTP_PASSWORD_DESC"
-			filter="string"
+			filter="raw"
 			autocomplete="off"
 			size="25" />
 
@@ -343,7 +343,7 @@
 			type="password"
 			label="COM_CONFIG_FIELD_MAIL_SMTP_PASSWORD_LABEL"
 			description="COM_CONFIG_FIELD_MAIL_SMTP_PASSWORD_DESC"
-			filter="string"
+			filter="raw"
 			size="30" />
 
 		<field
@@ -501,18 +501,20 @@
 		<field
 			name="error_reporting"
 			type="list"
-			default="-1"
+			default="default"
 			label="COM_CONFIG_FIELD_ERROR_REPORTING_LABEL"
 			description="COM_CONFIG_FIELD_ERROR_REPORTING_DESC"
-			filter="integer">
+			filter="cmd">
 			<option
-				value="-1">COM_CONFIG_FIELD_VALUE_SYSTEM_DEFAULT</option>
+				value="default">COM_CONFIG_FIELD_VALUE_SYSTEM_DEFAULT</option>
 			<option
-				value="0">COM_CONFIG_FIELD_VALUE_NONE</option>
+				value="none">COM_CONFIG_FIELD_VALUE_NONE</option>
 			<option
-				value="7">COM_CONFIG_FIELD_VALUE_SIMPLE</option>
+				value="simple">COM_CONFIG_FIELD_VALUE_SIMPLE</option>
 			<option
-				value="6143">COM_CONFIG_FIELD_VALUE_MAXIMUM</option>
+				value="maximum">COM_CONFIG_FIELD_VALUE_MAXIMUM</option>
+			<option
+				value="development">COM_CONFIG_FIELD_VALUE_DEVELOPMENT</option>
 		</field>
 
 		<field
@@ -578,6 +580,21 @@
 				value="1">JYES</option>
 			<option
 				value="0">JNO</option>
+		</field>
+
+		<field
+			name="display_offline_message"
+			type="radio"
+			default="1"
+			label="COM_CONFIG_FIELD_SITE_DISPLAY_MESSAGE_LABEL"
+			description="COM_CONFIG_FIELD_SITE_DISPLAY_MESSAGE_DESC"
+			filter="integer">
+			<option
+				value="0">JHIDE</option>
+			<option
+				value="1">COM_CONFIG_FIELD_VALUE_DISPLAY_OFFLINE_MESSAGE_CUSTOM</option>
+			<option
+				value="2">COM_CONFIG_FIELD_VALUE_DISPLAY_OFFLINE_MESSAGE_LANGUAGE</option>
 		</field>
 
 		<field

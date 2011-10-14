@@ -455,6 +455,7 @@ class ContentModelArticles extends JModelList
 
 		// Add the list ordering clause.
 		$query->order($this->getState('list.ordering', 'a.ordering').' '.$this->getState('list.direction', 'ASC'));
+		$query->group('a.id');		
 
 		return $query;
 	}
@@ -527,7 +528,7 @@ class ContentModelArticles extends JModelList
 			}
 
 			// get display date
-			switch ($item->params->get('show_date'))
+			switch ($item->params->get('list_show_date'))
 			{
 				case 'modified':
 					$item->displayDate = $item->modified;

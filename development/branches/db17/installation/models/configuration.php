@@ -52,6 +52,7 @@ class JInstallationModelConfiguration extends JModel
 		/* Site Settings */
 		$registry->set('offline', 0);
 		$registry->set('offline_message', JText::_('INSTL_STD_OFFLINE_MSG'));
+		$registry->set('display_offline_message', 1);
 		$registry->set('sitename', $options->site_name);
 		$registry->set('editor', 'tinymce');
 		$registry->set('list_limit', 20);
@@ -73,7 +74,7 @@ class JInstallationModelConfiguration extends JModel
 		$registry->set('live_site', '');
 		$registry->set('secret', JUserHelper::genRandomPassword(16));
 		$registry->set('gzip', 0);
-		$registry->set('error_reporting', -1);
+		$registry->set('error_reporting', 'default');
 		$registry->set('helpurl', 'http://help.joomla.org/proxy/index.php?option=com_help&amp;keyref=Help{major}{minor}:{keyref}');
 		$registry->set('ftp_host', $options->ftp_host);
 		$registry->set('ftp_port', $options->ftp_port);

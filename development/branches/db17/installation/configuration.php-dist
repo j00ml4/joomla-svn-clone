@@ -21,6 +21,7 @@ class JConfig {
 	/* Site Settings */
 	public $offline = '0';
 	public $offline_message = 'This site is down for maintenance.<br /> Please check back again soon.';
+	public $display_offline_message = '1';
 	public $sitename = 'Joomla!';				// Name of Joomla site
 	public $editor = 'tinymce';
 	public $list_limit = '20';
@@ -38,7 +39,7 @@ class JConfig {
 	/* Server Settings */
 	public $secret = 'FBVtggIk5lAzEU9H'; 		// Change this to something more secure
 	public $gzip = '0';
-	public $error_reporting = '-1';
+	public $error_reporting = 'default';
 	public $helpurl = 'http://help.joomla.org/proxy/index.php?option=com_help&amp;keyref=Help{major}{minor}:{keyref}';
 	public $ftp_host = '';
 	public $ftp_port = '';
