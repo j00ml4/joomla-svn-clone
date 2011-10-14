@@ -27,15 +27,133 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+13-Oct-2011 Jean-Marie Simonet
+Pushed to github the following missing SVN commits when joomla-cms was moved
+ # [#26911] Merge some code style changes from platform 11.3 (Rouven Weßling)
+ # [#26912] Merge some code style changes from platform 11.3 (Rouven Weßling)
+ # [#24664] Back-end language switching is working only when Default is selected
+ # [#26907] *Adding tip to batch function (Jean-Marie Simonet)
+ # [#26427] header items in the administrator panel are not in the right order on RTL template
+ 
+12-Oct-2011 Jean-Marie Simonet
+ $ Add new language key to 1.7.2 com_installer file
+ $ Updating uk-UA installation.ini
+ 
+10-Oct-2011 Jean-Marie Simonet
+ + [#26913] Hathor missing notice images in rtl & some colors. Thanks Andrea
+ #+ [#26866] notices in RTL doesn't mirroring. Thanks Ofer.
+
+09-Oct-2011 Jean-Marie Simonet
+ -$ Removing both en-GB.override.ini as they overwrite the existing ones when updating.
+
+09-Oct-2011 Christophe Demko
+ # [#26788] Add language field to batch widget (Michael Babker)
+
+03-Oct-2011 Christophe Demko
+ # [#26915] Remove Specific Author Information from Bluestork (Jean-Marie Simonet)
+ # [#26914] Merge some code style changes from platform 11.3 (Rouven Weßling)
+
+01-Oct-2011 Christophe Demko
+ # [#26813] Misplaced Bracket on Language Titles in Multilingual Sites Using RTL Language (James Brice)
+ # [#26911] Merge some code style changes from platform 11.3 (Rouven Weßling)
+ # [#26912] Merge some code style changes from platform 11.3 (Rouven Weßling)
+ # [#24664] Back-end language switching is working only when Default is selected
+ # [#26907] *Adding tip to batch function (Jean-Marie Simonet)
+ # [#26427] header items in the administrator panel are not in the right order on RTL template
+
+30-Sep-2011 Christophe Demko
+ - [#26903] Remove batch process code from com_contact (Michael Babker)
+
+30-Sep-2011 Jean-Marie Simonet
+ #$ [#26868] *Implementing default offline message per language. Thanks Christophe
+ # [#25199] Problem with preg_quote in function utf8_ireplace. Thanks Nikolai and Christophe
+ # [#26150] JRouterSite or JURI fails not sure if it's a bug. Thanks Bill and Morten
+ # [#26596] replacePrefix return a null string due to __call() function. Thanks Nikolai
+
+29-Sep-2011 Christophe Demko
+ $ [#26692] poor english grammar (Tim Plummer)
+ # [#26724] PHP Error Reporting Level cannot be set to "None". (Nikolai Plath)
+ $ [#26853] Some bluestork strings are no longer needed due to the commit of 25921 (Peter Chovancak)
+ $ [#26857] Wrong English Grammar
+ # [#25565] "Language string failed to load" showing up when sending an email
+ + Adding missing index.html files
+
+27-Sep-2011 Christophe Demko
+ # [#26640] Code fixes for end of line inconsistencies (partial commit)
+
+-------------------- 1.7.1 Stable Release [26-Sep-2011] ------------------
+
+26-Sep-2011 Jean-Marie Simonet
+ # [#26872] Problem installing with another language than default
+
+25-Sep-2011 Mark Dexter
+ # [#24654] No change in 'Menu Manager: Menus', if module was assigned to other menu in shadowbox showed after click to link in 'Modules Linked to the Menu' column in 'Menu Manager: Menus'
+ # [#26390] Database password with '<' fails with Connector returned number: Unable to connect to the Database
+ # [#26574] Weblinks - several issues
+ # [#26695] Search word is required for com_search view
+ # [#26867] Updating README
+ # Small sample data fix
+
+23-Sep-2011 Christophe Demko
+ # [#26844] Improvements to batch processing
+
+22-Sep-2011 Mark Dexter
+ # [#26756] Prepare 1.7.1 upgrade process
+ # [#26522] Client does not properly display in Extension Manager Update view
+ # [#26824] Sync more changes form platform 11.2
+ # [#26822] Fix some minor code style differences between trunk and 11.2
+ # [#26715] Add stats toolbar icon
+
+22-Sep-2011 Jean-Marie Simonet
+ $ Updating installation ini files: sk-SK. Correcting a typo in com_languages.ini
+ + Added Macedonian flag to media/mod_languages/images/ . Thanks Ilija
+ $ [#26852] *mod_multilangstatus missing case
+
+21-Sep-2011 Mark Dexter
+ # Fix sample data to correct #__redirect_links table definition
+
+21-Sep-2011 Jean-Marie Simonet
+ $ Updating installation ini files: pt-PT, pt-BR
+ # [#26552] Languagefilter plugin - wrong default for menu_association
+ $ Adding installation Basque language: eu-ES
+
+20-Sep-2011 Mark Dexter
+ # Sample data fixes (Elin Waring)
+ # [#26451] Favicon disappears
+ # [#24275] Submenu items in deeper menu-levels appear although they have no active parent item
+
+20-Sep-2011 Christophe Demko
+ # [#26803] xx-XX.lib_joomla.ini file not installed into /language/xx-XX folder (Jean-Marie Simonet)
+ # [#26829] Sample data module pages new styling and style corrections. (Jennifer Marriott, Elin Waring)
+ # [#26793] Add joomlacms and cli folders (Elin Waring)
+ # [#26836] Update robots.txt due to the commit of 26793
+ # [#26837] *Wrong param in display date in category listing (Jean-Marie Simonet)
+ # [#26673] Front end article display duplication/omission when author linked to trashed contact or when two contacts linked to same user (Elin Waring)
+ # [#26823] Sync JParameter changes from platform 11.2 (Rouven Weßling)
+
+18-Sep-2011 Jean-Marie Simonet
+ # [#26827] Loadmodule plugin ignores its style setting. Thanks Elin
+ $ Updating installation ini files: pl-PL
+ # [#26818] File and package installations are not updateable via the Joomla! Updater. Thanks Michael.
+
+17-Sep-2011 Mark Dexter
+ # [#25471] JUpdate target platform test
+ # [#26781] Sync more changes form platform 11.2
+
+17-Sep-2011 Jean-Marie Simonet
+ $ Updating installation ini files: nl-NL
+ # [#26814] [#26423] com contact - rendered extra string via var_dump(). Thanks Peter.
+ # [#26792] Modules position filter looks odd and behaves wrongly in modules view. Thanks Elin and Dennis. Includes joomla.sql and 170to171.sql updates
+
 16-Sep-2011 Jean-Marie Simonet
-$ Updating installation ini files: et-ET, he-IL, tr-TR
-$ Updating installation ini files: gd-GB
-$ Updating installation ini files: az-AZ
+ $ Updating installation ini files: et-ET, he-IL, tr-TR
+ $ Updating installation ini files: gd-GB
+ $ Updating installation ini files: az-AZ
 
 15-Sep-2011 Jean-Marie Simonet
  $ Updating installation ini files: ro-RO, fa-IR, fr-FR
  $ Updating installation ini files: ca-ES, th-TH
- 
+
 14-Sep-2011 Mark Dexter
  # [#26423] com contact -- add finishing touches to sortname fields*
  # [#26542] Modules manager showing error of undefined constant COM_MODULES_ERR_XML

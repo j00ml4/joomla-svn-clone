@@ -362,7 +362,7 @@ class JApplication extends JObject
 		// be unlikely and isn't supported by this API.
 		if (!preg_match('#^http#i', $url)) {
 			$uri = JURI::getInstance();
-			$prefix = $uri->toString(Array('scheme', 'user', 'pass', 'host', 'port'));
+			$prefix = $uri->toString(array('scheme', 'user', 'pass', 'host', 'port'));
 
 			if ($url[0] == '/') {
 				// We just need the prefix since we have a path relative to the root.
@@ -370,7 +370,7 @@ class JApplication extends JObject
 			}
 			else {
 				// It's relative to where we are now, so lets add that.
-				$parts = explode('/', $uri->toString(Array('path')));
+				$parts = explode('/', $uri->toString(array('path')));
 				array_pop($parts);
 				$path = implode('/', $parts).'/';
 				$url = $prefix . $path . $url;
@@ -392,7 +392,7 @@ class JApplication extends JObject
 		// If the headers have been sent, then we cannot send an additional location header
 		// so we will output a javascript redirect statement.
 		if (headers_sent()) {
-			echo "<script>document.location.href='$url';</script>\n";
+			echo "<script>document.location.href='".htmlspecialchars($url)."';</script>\n";
 		}
 		else {
 			$document = JFactory::getDocument();
@@ -401,10 +401,10 @@ class JApplication extends JObject
 			jimport('phputf8.utils.ascii');
 			if ($navigator->isBrowser('msie') && !utf8_is_ascii($url)) {
 				// MSIE type browser and/or server cause issues when url contains utf8 character,so use a javascript redirect method
- 				echo '<html><head><meta http-equiv="content-type" content="text/html; charset='.$document->getCharset().'" /><script>document.location.href=\''.$url.'\';</script></head><body></body></html>';
+ 				echo '<html><head><meta http-equiv="content-type" content="text/html; charset='.$document->getCharset().'" /><script>document.location.href=\''.htmlspecialchars($url).'\';</script></head></html>';
 			} elseif (!$moved and $navigator->isBrowser('konqueror')) {
 				// WebKit browser (identified as konqueror by Joomla!) - Do not use 303, as it causes subresources reload (https://bugs.webkit.org/show_bug.cgi?id=38690)
-				echo '<html><head><meta http-equiv="refresh" content="0; url='. $url .'" /><meta http-equiv="content-type" content="text/html; charset='.$document->getCharset().'" /></head><body></body></html>';
+				echo '<html><head><meta http-equiv="content-type" content="text/html; charset='.$document->getCharset().'" /><meta http-equiv="refresh" content="0; url='.htmlspecialchars($url).'" /></head></html>';
 			} else {
 				// All other browsers, use the more efficient HTTP header method
 				header($moved ? 'HTTP/1.1 301 Moved Permanently' : 'HTTP/1.1 303 See other');
@@ -641,6 +641,38 @@ class JApplication extends JObject
 		$response	= $authenticate->authenticate($credentials, $options);
 
 		if ($response->status === JAuthentication::STATUS_SUCCESS) {
+			// validate that the user should be able to login (different to being authenticated)
+			// this permits authentication plugins blocking the user
+			$authorisations = $authenticate->authorise($response, $options);
+			foreach ($authorisations as $authorisation)
+			{
+				$denied_states = array(JAuthentication::STATUS_EXPIRED, JAuthentication::STATUS_DENIED);
+				if(in_array($authorisation->status, $denied_states))
+				{
+					// Trigger onUserAuthorisationFailure Event.
+					$this->triggerEvent('onUserAuthorisationFailure', array((array)$authorisation));
+
+					// If silent is set, just return false.
+					if (isset($options['silent']) && $options['silent']) {
+						return false;
+					}
+
+					// Return the error.
+					switch($authorisation->status)
+					{
+						case JAuthentication::STATUS_EXPIRED:
+							return JError::raiseWarning('102002', JText::_('JLIB_LOGIN_EXPIRED'));
+							break;
+						case JAuthentication::STATUS_DENIED:
+							return JError::raiseWarning('102003', JText::_('JLIB_LOGIN_DENIED'));
+							break;
+						default:
+							return JError::raiseWarning('102004', JText::_('JLIB_LOGIN_AUTHORISATION'));
+							break;
+					}
+				}
+			}
+
 			// Import the user plugin group.
 			JPluginHelper::importPlugin('user');
 
@@ -957,8 +989,8 @@ class JApplication extends JObject
 			// but fires the query less than half the time.
 			$query = $db->getQuery(true);
 			$db->setQuery(
-				'DELETE FROM '.$db->nameQuote('#__session') .
-				' WHERE '.$db->nameQuote('time').' < '.(int) ($time - $session->getExpire())
+				'DELETE FROM '.$query->qn('#__session') .
+				' WHERE '.$query->qn('time').' < '.(int) ($time - $session->getExpire())
 			);
 			$db->query();
 		}
@@ -993,9 +1025,9 @@ class JApplication extends JObject
 
 		$query = $db->getQuery(true);
 		$db->setQuery(
-			'SELECT '.$db->nameQuote('session_id') .
-			' FROM '.$db->nameQuote('#__session') .
-			' WHERE '.$db->nameQuote('session_id').' = '.$db->quote($session->getId()), 0, 1
+			'SELECT '.$query->qn('session_id') .
+			' FROM '.$query->qn('#__session') .
+			' WHERE '.$query->qn('session_id').' = '.$query->q($session->getId()), 0, 1
 		);
 		$exists = $db->loadResult();
 
@@ -1003,15 +1035,13 @@ class JApplication extends JObject
 		if (!$exists) {
 			if ($session->isNew()) {
 				$db->setQuery(
-				'INSERT INTO '.$db->nameQuote('#__session').' ('.$db->nameQuote('session_id').
-				', '.$db->nameQuote('client_id').', '.$db->nameQuote('time').')' .
-					' VALUES ('.$db->quote($session->getId()).', '.(int) $this->getClientId().', '.(int) time().')'
+					'INSERT INTO '.$query->qn('#__session').' ('.$query->qn('session_id').', '.$query->qn('client_id').', '.$query->qn('time').')' .
+					' VALUES ('.$query->q($session->getId()).', '.(int) $this->getClientId().', '.(int) time().')'
 				);
 			}
 			else {
 				$db->setQuery(
-					'INSERT INTO '.$db->nameQuote('#__session').' ('.$db->nameQuote('session_id').', '.$db->nameQuote('client_id').', '.$db->nameQuote('guest').
-					', '.$db->nameQuote('time').', '.$db->nameQuote('userid').', '.$db->nameQuote('username').')' .
+					'INSERT INTO `#__session` (`session_id`, `client_id`, `guest`, `time`, `userid`, `username`)' .
 					' VALUES ('.$db->quote($session->getId()).', '.(int) $this->getClientId().', '.(int) $user->get('guest').', '.(int) $session->get('session.timer.start').', '.(int) $user->get('id').', '.$db->quote($user->get('username')).')'
 				);
 			}

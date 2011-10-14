@@ -35,7 +35,7 @@ class JInstallerPackage extends JAdapterInstance
 	/**
 	 * Load language from a path
 	 *
-	 * @param   string  $path  
+	 * @param   string  $path
 	 *
 	 * @since   11.1
 	 */
@@ -88,7 +88,7 @@ class JInstallerPackage extends JAdapterInstance
 		if (!empty($group))
 		{
 			// TODO: Remark this location
-			$this->parent->setPath('extension_root', JPATH_ROOT . '/packages/' . implode(DS,explode('/',$group)));
+			$this->parent->setPath('extension_root', JPATH_ROOT . '/packages/' . implode(DS, explode('/', $group)));
 		}
 		else
 		{
@@ -117,7 +117,7 @@ class JInstallerPackage extends JAdapterInstance
 				if (is_dir($file))
 				{
 					// If it's actually a directory then fill it up
-					$package = Array();
+					$package = array();
 					$package['dir'] = $file;
 					$package['type'] = JInstallerHelper::detectType($file);
 				}
@@ -145,7 +145,7 @@ class JInstallerPackage extends JAdapterInstance
 		// Extension Registration
 
 		$row = JTable::getInstance('extension');
-		$eid = $row->find(Array('element'=>strtolower($this->get('element')),
+		$eid = $row->find(array('element'=>strtolower($this->get('element')),
 						'type'=>'package'));
 		if($eid) {
 			$row->load($eid);
@@ -176,7 +176,7 @@ class JInstallerPackage extends JAdapterInstance
 		// Finalization and Cleanup Section
 
 		// Lastly, we will copy the manifest file to its appropriate place.
-		$manifest = Array();
+		$manifest = array();
 		$manifest['src'] = $this->parent->getPath('manifest');
 		$manifest['dest'] = JPATH_MANIFESTS . '/packages/' . basename($this->parent->getPath('manifest'));
 
@@ -186,14 +186,14 @@ class JInstallerPackage extends JAdapterInstance
 			$this->parent->abort(JText::sprintf('JLIB_INSTALLER_ABORT_PACK_INSTALL_COPY_SETUP', JText::_('JLIB_INSTALLER_ABORT_PACK_INSTALL_NO_FILES')));
 			return false;
 		}
-		return true;
+		return $row->extension_id;
 	}
 
 	/**
 	 * Updates a package
 	 * The only difference between an update and a full install
 	 * is how we handle the database
-	 * 
+	 *
 	 * @since  11.1
 	 */
 	public function update() {
@@ -205,7 +205,7 @@ class JInstallerPackage extends JAdapterInstance
 	 * Custom uninstall method
 	 *
 	 * @param    integer  $id   The id of the package to uninstall
-	 
+
 	 * @return   boolean  True on success
 	 *
 	 * @since    11.1
@@ -223,7 +223,7 @@ class JInstallerPackage extends JAdapterInstance
 			JError::raiseWarning(100, JText::_('JLIB_INSTALLER_ERROR_PACK_UNINSTALL_WARNCOREPACK'));
 			return false;
 		}
-		
+
 
 		$manifestFile = JPATH_MANIFESTS . '/packages/' . $row->get('element') .'.xml';
 		$manifest = new JPackageManifest($manifestFile);
@@ -265,7 +265,7 @@ class JInstallerPackage extends JAdapterInstance
 		{
 			$tmpInstaller = new JInstaller;
 			$id = $this->_getExtensionID($extension->type, $extension->id, $extension->client, $extension->group);
-			$client = JApplicationHelper::getClientInfo($extension->client,true);
+			$client = JApplicationHelper::getClientInfo($extension->client, true);
 			if ($id)
 			{
 				if(!$tmpInstaller->uninstall($extension->type, $id, $client->id)) {

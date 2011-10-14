@@ -28,15 +28,17 @@ class DoInstall extends SeleniumJoomlaTestCase
 		echo("Starting Installation\n");
 		echo "Page through screen 1\n";
 		$this->open($cfg->path ."/installation/index.php");
-		$this->click("link=Next");
+		$this->select("id=jform_language", "label=English (United Kingdom)");
+		
+		$this->click("//a[@rel=\"next\"]");
 		$this->waitforElement("//h3[contains(text(), 'Recommended settings')]");
 
 		echo "Page through screen 2\n";
-		$this->click("link=Next");
+		$this->click("//a[@rel=\"next\"]");
 		$this->waitforElement("//a[contains(text(), 'GNU GENERAL PUBLIC LICENSE')]");
 
 		echo "Page through screen 3\n";
-		$this->click("link=Next");
+		$this->click("//a[@rel=\"next\"]");
 		$this->waitforElement("//select[@id='jform_db_type']");
 
 		echo "Enter database information\n";
@@ -48,11 +50,11 @@ class DoInstall extends SeleniumJoomlaTestCase
 		$this->type("jform_db_prefix", $cfg->db_prefix);
 		$this->type("jform_db_name", $cfg->db_name);
 		$this->click("jform_db_old0");
-		$this->click("link=Next");
+		$this->click("//a[@rel=\"next\"]");
 		$this->waitforElement("//select[@id='jform_ftp_enable']");
 
 		echo "Enter site information\n";
-		$this->click("link=Next");
+		$this->click("//a[@rel=\"next\"]");
 		$this->waitforElement("//input[@id='jform_site_name']");
 
 		$this->type("jform_site_name", $cfg->site_name);
@@ -75,7 +77,7 @@ class DoInstall extends SeleniumJoomlaTestCase
 		}
 
 		echo "Finish installation\n";
-		$this->click("link=Next");
+		$this->click("//a[@rel=\"next\"]");
 		$this->waitforElement("//h3[contains(text(), 'Joomla! is now installed')]");
 
 		echo "Login to back end\n";

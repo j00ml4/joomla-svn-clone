@@ -1050,6 +1050,17 @@ fieldset label#batch-choose-action-lbl {
 	clear: left;
 	margin-top: 15px;
 }
+label#batch-language-lbl {
+	clear: left;
+	margin-right: 10px;
+	margin-top: 15px;
+}
+select#batch-language-id {
+	margin-top: 15px;
+}
+select#batch-category-id {
+	margin-right: 30px;
+}
 select#batch-menu-id {
 	margin-right: 30px;
 }
@@ -2112,6 +2123,7 @@ a.jgrid:hover {	text-decoration: none;}
 .icon-32-purge						{	background-image: url(../images/toolbar/icon-32-purge.png);	}
 .icon-32-remove						{	background-image: url(../images/toolbar/icon-32-remove.png);	}
 .icon-32-featured					{	background-image: url(../images/toolbar/icon-32-featured.png);	}
+.icon-32-stats						{	background-image: url(../images/toolbar/icon-32-stats.png);	}
 .toolbar-inactive					{	background-position: 0 32px;  }
 
 /* -- HEADER ICON STYLES ----------------------------- */

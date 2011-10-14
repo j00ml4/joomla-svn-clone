@@ -547,7 +547,7 @@ class CategoriesModelCategory extends JModelAdmin
 	 * @param	int		$value	The new category or sub-item.
 	 * @param	array	$pks	An array of row IDs.
 	 *
-	 * @return	booelan	True if successful, false otherwise and internal error is set.
+	 * @return	mixed  An array of new IDs on success, boolean false on failure.
 	 * @since	1.6
 	 */
 	protected function batchCopy($value, $pks)
@@ -560,6 +560,7 @@ class CategoriesModelCategory extends JModelAdmin
 		$db		= $this->getDbo();
 		$user	= JFactory::getUser();
 		$extension = JRequest::getWord('extension');
+		$i		= 0;
 
 		// Check that the parent exists
 		if ($parentId) {
@@ -683,6 +684,13 @@ class CategoriesModelCategory extends JModelAdmin
 				return false;
 			}
 
+			// Get the new item ID
+			$newId = $table->get('id');
+
+			// Add the new ID to the array
+			$newIds[$i]	= $newId;
+			$i++;
+
 			// Now we log the old 'parent' to the new 'parent'
 			$parents[$oldId] = $table->id;
 			$count--;
@@ -700,7 +708,7 @@ class CategoriesModelCategory extends JModelAdmin
 			return false;
 		}
 
-		return true;
+		return $newIds;
 	}
 
 	/**
