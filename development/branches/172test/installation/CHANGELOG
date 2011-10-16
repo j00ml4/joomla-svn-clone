@@ -27,7 +27,7 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
--------------------- 1.7.2 Stable Release [12-Oct-2011] ------------------
+-------------------- 1.7.2 Stable Release [17-Oct-2011] ------------------
 
 10-Oct-2011 Mark Dexter
  # Tag some files as changed to force including in 1.7.0 to 1.7.2 update patch archive
