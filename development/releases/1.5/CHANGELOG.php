@@ -36,7 +36,7 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
--------------------- 1.5.24 Stable Release [17-September-2011] ------------------
+-------------------- 1.5.24 Stable Release [17-October-2011] ------------------
 
 30-Sept-2011 Jean-Marie Simonet
  +$ Adding ka-GE installation language
