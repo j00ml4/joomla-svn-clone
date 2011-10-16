@@ -567,13 +567,16 @@ class JApplication extends JObject
 					jimport('joomla.utilities.simplecrypt');
 					jimport('joomla.utilities.utility');
 
-					//Create the encryption key, apply extra hardening using the user agent string
-					$key = JUtility::getHash(@$_SERVER['HTTP_USER_AGENT']);
-
-					$crypt = new JSimpleCrypt($key);
-					$rcookie = $crypt->encrypt(serialize($credentials));
-					$lifetime = time() + 365*24*60*60;
-					setcookie( JUtility::getHash('JLOGIN_REMEMBER'), $rcookie, $lifetime, '/' );
+					// Create the encryption key, apply extra hardening using the user agent string
+                    $agent = @$_SERVER['HTTP_USER_AGENT'];
+                    // Ignore empty and crackish user agents
+                    if ($agent != '' && $agent != 'JLOGIN_REMEMBER') {
+                        $key = JUtility::getHash($agent);
+                        $crypt = new JSimpleCrypt($key);
+                        $rcookie = $crypt->encrypt(serialize($credentials));
+                        $lifetime = time() + 365*24*60*60;
+                        setcookie(JUtility::getHash('JLOGIN_REMEMBER'), $rcookie, $lifetime, '/');
+                    }
 				}
 				return true;
 			}
