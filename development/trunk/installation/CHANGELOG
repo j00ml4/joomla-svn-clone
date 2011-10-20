@@ -27,12 +27,15 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+20-Oct-2011 Christophe Demko
+ # [#25031] Support Forum URL as language file option
+
 19-Oct-2011 Jean-Marie Simonet
  # [#26977] *Multilanguage: adding custom Site Name per Content Language
  + Adding Austria and Switzerland flags for mod_languages
  # Modifying version.php to 1.7.2
  
-16-Oct-2011 Christophe Demko
+18-Oct-2011 Christophe Demko
  # [#26897] JDatabasequery work in com_plugins
 
 17-Oct-2011 Jean-Marie Simonet
