@@ -211,10 +211,10 @@ class JCategories
 		$query->select('c.*');
     $case_when = ' CASE WHEN ';
     $case_when .= $query->charLength('c.alias');
-    $case_when .= ' THEN 0';
+    $case_when .= ' THEN ';
     $c_id = $query->castToChar('c.id');
     $case_when .= $query->concat(array($c_id, 'c.alias'), ':');
-    $case_when .= ' ELSE 0';
+    $case_when .= ' ELSE ';
     $case_when .= $c_id.' END as slug'; 
     $query->select($case_when); 
     
@@ -271,6 +271,7 @@ class JCategories
 
 		// Get the results
 		$db->setQuery($query);
+		//echo $query;
 		$results = $db->loadObjectList('id');
 		$childrenLoaded = false;
 
