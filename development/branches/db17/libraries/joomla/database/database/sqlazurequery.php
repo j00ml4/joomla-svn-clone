@@ -155,10 +155,10 @@ class JDatabaseQuerySQLAzure extends JDatabaseQuery
 	 */
 	function concatenate($values, $separator = null)
 	{
-		if ($separator) {
-			return '('.implode('+'.$this->quote($separator).'+', $values).')';
-		}
-		else{
+		if($separator)
+		{
+			return '('.implode("+'".$separator."'+", $values).')';
+		}else{
 			return '('.implode('+', $values).')';
 		}
 	}
