@@ -209,14 +209,15 @@ class JCategories
 
 		// Right join with c for category
 		$query->select('c.*');
-    $case_when = ' CASE WHEN ';
-    $case_when .= $query->charLength('c.alias');
-    $case_when .= ' THEN ';
-    $c_id = $query->castToChar('c.id');
-    $case_when .= $query->concat(array($c_id, 'c.alias'), ':');
-    $case_when .= ' ELSE ';
-    $case_when .= $c_id.' END as slug'; 
-    $query->select($case_when); 
+	    $case_when = ' CASE WHEN ';
+	    $case_when .= $query->charLength('c.alias');
+	    $case_when .= ' THEN ';
+	    $c_id = $query->castAsChar('c.id');
+	    $case_when .= $query->concatenate(array($c_id, 'c.alias'), ':');
+	    $case_when .= ' ELSE ';
+	    $case_when .= $c_id.' END as slug'; 
+	    $query->select($case_when); 
+	  
     
 		//$query->select('CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as slug');
 		$query->from('#__categories as c');
@@ -271,7 +272,7 @@ class JCategories
 
 		// Get the results
 		$db->setQuery($query);
-		//echo $query;
+		//echo $query;die();
 		$results = $db->loadObjectList('id');
 		$childrenLoaded = false;
 
