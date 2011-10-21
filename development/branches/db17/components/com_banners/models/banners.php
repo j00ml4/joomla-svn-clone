@@ -78,8 +78,8 @@ class BannersModelBanners extends JModelList
 			);
 			$query->from('#__banners as a');
 			$query->where('a.state=1');
-			$query->where($query->now().' >= a.publish_up OR a.publish_up = '.$nullDate.')');
-			$query->where($query->now().' <= a.publish_down OR a.publish_down = '.$nullDate.')');
+			$query->where('('.$query->now().' >= a.publish_up OR a.publish_up = '.$nullDate.')');
+			$query->where('('.$query->now().' <= a.publish_down OR a.publish_down = '.$nullDate.')');
 			$query->where('(a.imptotal = 0 OR a.impmade = a.imptotal)');
 
 		if ($cid) {
@@ -164,7 +164,6 @@ class BannersModelBanners extends JModelList
 		}
 
 		$query->order('a.sticky DESC,'. ($randomise ? 'RAND()' : 'a.ordering'));
-
 		return $query;
 	}
 
