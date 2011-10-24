@@ -1222,13 +1222,5 @@ class JDatabaseSQLSrv extends JDatabase
 
 		return $sql;
 	}
-	 /**
-	 * Method to Change the date to SQL SERVER format
-	 *
-	 * @since   11.1
-	 */
-	public function toSQLDate(&$date, $local = false)
-	{
-		return $date->toSQL($local);
-	}
+	
 }

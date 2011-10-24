@@ -42,8 +42,7 @@ class plgContentPagenavigation extends JPlugin
 			$config	= JFactory::getConfig();
 			
 			$now = $date->format('Y-m-d H:i:s');
-			//$db->toSQLDate($date);
-
+			
 			$uid	= $row->id;
 			$option	= 'com_content';
 			$canPublish = $user->authorise('core.edit.state', $option.'.article.'.$row->id);

@@ -132,25 +132,20 @@ class BannersHelper
 					$reset = $nullDate;
 					break;
 				case 2:
-					//$reset = JFactory::getDate('+1 year '.date('Y-m-d',strtotime('now')))->toMySQL();
 					$date = JFactory::getDate('+1 year '.date('Y-m-d',strtotime('now')));
 					$reset = $date->format('Y-m-d H:i:s');
-					//$reset = $db->toSQLDate(JFactory::getDate('+1 year '.date('Y-m-d',strtotime('now'))));
 					break;
 				case 3:
 					$date =JFactory::getDate('+1 month '.date('Y-m-d',strtotime('now')));
 					$reset = $date->format('Y-m-d H:i:s');
-					//$reset = $db->toSQLDate(JFactory::getDate('+1 month '.date('Y-m-d',strtotime('now'))));
 					break;
 				case 4:
 					$date =JFactory::getDate('+7 day '.date('Y-m-d',strtotime('now')));
 					$reset = $date->format('Y-m-d H:i:s');
-					//$reset = $db->toSQLDate(JFactory::getDate('+7 day '.date('Y-m-d',strtotime('now'))));
 					break;
 				case 5:
 					$date =JFactory::getDate('+1 day '.date('Y-m-d',strtotime('now')));
 					$reset = $date->format('Y-m-d H:i:s');
-					//$reset = $db->toSQLDate(JFactory::getDate('+1 day '.date('Y-m-d',strtotime('now'))));
 					break;
 			}
 
