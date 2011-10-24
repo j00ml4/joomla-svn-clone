@@ -1117,4 +1117,5 @@ class JDatabaseMySQLi extends JDatabase
 		}
 		return $error ? false : true;
 	}
+	
 }

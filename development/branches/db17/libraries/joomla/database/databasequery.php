@@ -1119,4 +1119,21 @@ class JDatabaseQuery
 
 		return $this;
 	}
+	
+	/**
+	 * Method to lock the database table for writing.
+	 *
+	 * @return boolean True on success.
+	 * @since 11.1
+	 */
+	public abstract function lock($table_name, &$db);
+	
+	/**
+	 * Method to unlock the database table for writing.
+	 *
+	 * @return boolean True on success.
+	 * @since 11.1
+	 */
+	public abstract function unlock(&$db);
+	
 }

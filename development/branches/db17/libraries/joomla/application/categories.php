@@ -217,7 +217,7 @@ class JCategories
 	    $case_when .= ' ELSE ';
 	    $case_when .= $c_id.' END as slug'; 
 	    $query->select($case_when); 
-	  
+		
     
 		//$query->select('CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(":", c.id, c.alias) ELSE c.id END as slug');
 		$query->from('#__categories as c');
