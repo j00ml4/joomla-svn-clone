@@ -118,7 +118,9 @@ class ContentModelArticle extends JModelItem
 
 				// Filter by start and end dates.
 				$nullDate = $db->Quote($db->getNullDate());
-				$nowDate = $db->Quote($db->toSQLDate(JFactory::getDate()));
+				$date = JFactory::getDate();
+				
+				$nowDate = $db->Quote($date->format('Y-m-d H:i:s'));
 
 				$query->where('(a.publish_up = ' . $nullDate . ' OR a.publish_up <= ' . $nowDate . ')');
 				$query->where('(a.publish_down = ' . $nullDate . ' OR a.publish_down >= ' . $nowDate . ')');

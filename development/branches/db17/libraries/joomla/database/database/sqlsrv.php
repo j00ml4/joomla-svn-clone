@@ -1229,6 +1229,6 @@ class JDatabaseSQLSrv extends JDatabase
 	 */
 	public function toSQLDate(&$date, $local = false)
 	{
-		return $date->toSQLSrv($local);
+		return $date->toSQL($local);
 	}
 }

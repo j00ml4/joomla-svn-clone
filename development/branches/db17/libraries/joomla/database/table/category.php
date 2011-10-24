@@ -194,7 +194,9 @@ class JTableCategory extends JTableNested
 		$db = $this->getDbo();
 		if ($this->id) {
 			// Existing category
-		$this->modified_time = $db->toSQLDate($date);
+		$this->modified_time = $date->format('Y-m-d H:i:s');
+		
+		//$db->toSQLDate($date);
 			$this->modified_user_id	= $user->get('id');
 		} else {
 			// New category
