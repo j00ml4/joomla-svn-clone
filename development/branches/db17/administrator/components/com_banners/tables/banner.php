@@ -27,7 +27,6 @@ class BannersTableBanner extends JTable
 		parent::__construct('#__banners', 'id', $_db);
 		$date = JFactory::getDate();
 		$this->created = $date->format('Y-m-d H:i:s');
-		//$this->_db->toSQLDate(JFactory::getDate());
 	}
 
 	function clicks()
@@ -150,22 +149,18 @@ class BannersTableBanner extends JTable
 				case 2:
 					$date = JFactory::getDate('+1 year '.date('Y-m-d',strtotime('now')));
 					$reset = $date->format('Y-m-d H:i:s');
-					//$this->_db->toSQLDate(JFactory::getDate('+1 year '.date('Y-m-d',strtotime('now'))));
 					break;
 				case 3:
 					$date = JFactory::getDate('+1 month '.date('Y-m-d',strtotime('now')));
 					$reset = $date->format('Y-m-d H:i:s');
-					//$this->reset = $this->_db->toSQLDate(JFactory::getDate('+1 month '.date('Y-m-d',strtotime('now'))));
 					break;
 				case 4:
 					$date = JFactory::getDate('+7 day '.date('Y-m-d',strtotime('now')));
 					$reset = $date->format('Y-m-d H:i:s');
-					//$this->reset = $this->_db->toSQLDate(JFactory::getDate('+7 day '.date('Y-m-d',strtotime('now'))));
 					break;
 				case 5:
 					$date = JFactory::getDate('+1 day '.date('Y-m-d',strtotime('now')));
 					$reset = $date->format('Y-m-d H:i:s');
-					//$this->reset = $this->_db->toSQLDate(JFactory::getDate('+1 day '.date('Y-m-d',strtotime('now'))));
 					break;
 			}
 			// Store the row

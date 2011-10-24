@@ -1130,16 +1130,6 @@ abstract class JDatabase
 	abstract public function query();
 	
 	/**
-	 * Gets the date specific to the DB datetime string.
-	 *
-	 *
-	 * @param	boolean	True to return the date string in the local time zone, false to return it in GMT.
-	 * @return	string	The date string in SQL Server datetime format.
-	 * @since	12.1
-	 */
-	abstract public function toSQLDate(&$date, $local = false);
-	
-	/**
 	 * Method to quote and optionally escape a string to database requirements for insertion into the database.
 	 *
 	 * @param   string  $text    The string to quote.

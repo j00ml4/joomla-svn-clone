@@ -66,14 +66,12 @@ class WeblinksTableWeblink extends JTable
 		if ($this->id) {
 			// Existing item
 			$this->modified		= $date->format('Y-m-d H:i:s');
-			//$this->_db->toSQLDate($date);
 			$this->modified_by	= $user->get('id');
 			} else {
 			// New article. An article created and created_by field can be set by the user,
 			// so we don't touch either of these if they are set.
 			if (!intval($this->created)) {
 				$this->created = $date->format('Y-m-d H:i:s');
-				//$this->_db->toSQLDate($date);
 			}
 			if (empty($this->created_by)) {
 				$this->created_by = $user->get('id');
@@ -84,14 +82,12 @@ class WeblinksTableWeblink extends JTable
 		if ($this->id) {
 			// Existing item
 			$this->modified		=$date->format('Y-m-d H:i:s');
-//			$this->_db->toSQLDate($date);
 			$this->modified_by	= $user->get('id');
 		} else {
 			// New weblink. A weblink created and created_by field can be set by the user,
 			// so we don't touch either of these if they are set.
 			if (!intval($this->created)) {
 				$this->created = $date->format('Y-m-d H:i:s');
-				//$this->_db->toSQLDate($date);
 			}
 			if (empty($this->created_by)) {
 				$this->created_by = $user->get('id');

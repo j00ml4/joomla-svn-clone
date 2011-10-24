@@ -1234,13 +1234,5 @@ class JDatabaseSQLAzure extends JDatabase
 
 		return $sql;
 	}
-	/**
-	* Method to Change the Date to SQL SERVER format
-	*
-	* @since   11.1
-	*/
-		public function toSQLDate(&$date, $local = false)
-	{
-		return $date->toSQLSrv($local);
-	}
+	
 }
