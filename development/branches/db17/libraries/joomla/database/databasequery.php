@@ -1120,13 +1120,29 @@ class JDatabaseQuery
 		return $this;
 	}
 	
-	/**
+	 /**
 	 * Method to lock the database table for writing.
 	 *
 	 * @return boolean True on success.
 	 * @since 11.1
 	 */
-	public abstract function lock($table_name, &$db);
+	public function lock($table_name, &$db)
+	{
+		 // Lock the table for writing.
+		 $db->setQuery('LOCK TABLES `'.$table_name.'` WRITE');
+		 $db->query();
+		
+		 // Check for a database error.
+		 if ($db->getErrorNum()) {
+		  //$this->setError($db->getErrorMsg());
+		
+		  return false;
+		 }
+	
+	 	return true;
+	}
+
+	
 	
 	/**
 	 * Method to unlock the database table for writing.
@@ -1134,6 +1150,20 @@ class JDatabaseQuery
 	 * @return boolean True on success.
 	 * @since 11.1
 	 */
-	public abstract function unlock(&$db);
+	public function unlock(&$db)
+	{
+		 // Unlock the table.
+		 $db->setQuery('UNLOCK TABLES');
+		 $db->query();
+		
+		 // Check for a database error.
+		 if ($db->getErrorNum()) {
+		  //$this->setError($db->getErrorMsg());
+		
+		  return false;
+		 }
+		
+		 return true;
+	}
 	
 }
