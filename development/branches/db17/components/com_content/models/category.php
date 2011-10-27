@@ -81,6 +81,7 @@ class ContentModelCategory extends JModelList
 				'access', 'a.access', 'access_level',
 				'created', 'a.created',
 				'created_by', 'a.created_by',
+				'modified', 'a.modified',
 				'ordering', 'a.ordering',
 				'featured', 'a.featured',
 				'language', 'a.language',
@@ -204,14 +205,7 @@ class ContentModelCategory extends JModelList
 	function getItems()
 	{
 		$params = $this->getState()->get('params');
-
-		// set limit for query. If list, use parameter. If blog, add blog parameters for limit.
-		if (JRequest::getString('layout') == 'blog') {
-			$limit = $params->get('num_leading_articles') + $params->get('num_intro_articles') + $params->get('num_links');
-		}
-		else {
-			$limit = $this->getState('list.limit');
-		}
+		$limit = $this->getState('list.limit');
 
 		if ($this->_articles === null && $category = $this->getCategory()) {
 			$model = JModel::getInstance('Articles', 'ContentModel', array('ignore_request' => true));
