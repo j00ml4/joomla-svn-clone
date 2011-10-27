@@ -287,8 +287,8 @@ class UsersModelUsers extends JModelList
 	public function getUserDisplayedGroups($user_id)
 	{
 		$db = &JFactory::getDbo();
-		$sql = "SELECT title FROM ".$db->nameQuote('jos_usergroups')." ug left join ".
-				$db->nameQuote('jos_user_usergroup_map')." map on (ug.id = map.group_id)".
+		$sql = "SELECT title FROM ".$db->nameQuote('#__usergroups')." ug left join ".
+				$db->nameQuote('#__user_usergroup_map')." map on (ug.id = map.group_id)".
 				" WHERE map.user_id=".$user_id;
 		
 		$db->setQuery($sql);
