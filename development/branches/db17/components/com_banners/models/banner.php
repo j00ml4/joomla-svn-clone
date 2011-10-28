@@ -93,8 +93,11 @@ class BannersModelBanner extends JModel
 			else {
 				// insert new count
 				//sqlsrv change
-				$query->insertInto('#__banner_tracks');
-		        $query->fields('count, track_type, banner_id, track_date');
+				$query->insert('#__banner_tracks');
+		        $query->columns('count');
+				$query->columns('track_type');
+				$query->columns('banner_id');
+				$query->columns('track_date');
 		        $query->values('1');
 		        $query->values('2');
 		        $query->values((int)$id);

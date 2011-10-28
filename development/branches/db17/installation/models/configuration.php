@@ -218,81 +218,80 @@ class JInstallationModelConfiguration extends JModel
 		date_default_timezone_set('UTC');
 		$installdate	= date('Y-m-d H:i:s');
 		$nullDate		= $db->getNullDate();
-    //sqlsrv change
-    $query = $db->getQuery(true);
-    $query->select('id');
-    $query->from('#__users');
-    $query->where('id = 42');
-    
-    $db->setQuery($query);
-    
-    if($db->loadResult())
-    {
-   
-      $query = $db->getQuery(true);
-      $query->update('#__users');
-      $query->set('name = '.$db->quote('Super User'));
-      $query->set('username = '.$db->quote($options->admin_user));
-      $query->set('email = '.$db->quote($options->admin_email));
-      $query->set('password = '.$db->quote($cryptpass));
-      $query->set('usertype = '.$db->quote('deprecated'));
-      $query->set('block = 0');
-      $query->set('sendEmail = 1');
-      $query->set('registerDate = '.$db->quote($installdate));
-      $query->set('lastvisitDate = '.$db->quote($nullDate));
-      $query->set('activation = '.$db->quote('0'));
-      $query->set('params = '.$db->quote(''));
-      $query->where('id = 42');
-    }else{
-	  if($options->db_type =='mysql' || $options->db_type == 'mysqli'){
-      $query = $db->getQuery(true);
-      $fields = 'id,name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params';
-      $query->insertInto('#__users', true);
-      $query->fields($fields);
-      $query->values('42');
-      $query->values($db->quote('Super User'));
-      $query->values($db->quote($options->admin_user));
-      $query->values($db->quote($options->admin_email));
-      $query->values($db->quote($cryptpass));
-      $query->values($db->quote('deprecated'));
-      $query->values('0');
-      $query->values('1');
-      $query->values($db->quote($installdate));
-      $query->values($db->quote($nullDate));
-      $query->values($db->quote('0'));
-      $query->values($db->quote(''));
-    }//sqlsrv change
-    else{
-	  $query = $db->getQuery(true);
-	  $fields = 'name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params';
-      $query->insertInto('#__users', true);
-      $query->fields($fields);
-      $query->values($db->quote('Super User'));
-      $query->values($db->quote($options->admin_user));
-      $query->values($db->quote($options->admin_email));
-      $query->values($db->quote($cryptpass));
-      $query->values($db->quote('deprecated'));
-      $query->values('0');
-      $query->values('1');
-      $query->values($db->quote($installdate));
-      $query->values($db->quote($nullDate));
-      $query->values($db->quote('0'));
-      $query->values($db->quote(''));
-	}
-	}
+		//sqlsrv change
+		$query = $db->getQuery(true);
+		$query->select('id');
+		$query->from('#__users');
+		$query->where('id = 42');
+		
 		$db->setQuery($query);
-		if (!$db->query()) {
-			$this->setError($db->getErrorMsg());
-			return false;
-		}
+		
+		if($db->loadResult())
+		{
+		  $query = $db->getQuery(true);
+		  $query->update('#__users');
+		  $query->set('name = '.$db->quote('Super User'));
+		  $query->set('username = '.$db->quote($options->admin_user));
+		  $query->set('email = '.$db->quote($options->admin_email));
+		  $query->set('password = '.$db->quote($cryptpass));
+		  $query->set('usertype = '.$db->quote('deprecated'));
+		  $query->set('block = 0');
+		  $query->set('sendEmail = 1');
+		  $query->set('registerDate = '.$db->quote($installdate));
+		  $query->set('lastvisitDate = '.$db->quote($nullDate));
+		  $query->set('activation = '.$db->quote('0'));
+		  $query->set('params = '.$db->quote(''));
+		  $query->where('id = 42');
+		} else {
+		  //if($options->db_type =='mysql' || $options->db_type == 'mysqli'){
+			  $query = $db->getQuery(true);
+			  $columns = 'id,name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params';
+			  $query->insert('#__users', true);
+			  $query->columns($columns);
+			  $query->values('42');
+			  $query->values($db->quote('Super User'));
+			  $query->values($db->quote($options->admin_user));
+			  $query->values($db->quote($options->admin_email));
+			  $query->values($db->quote($cryptpass));
+			  $query->values($db->quote('deprecated'));
+			  $query->values('0');
+			  $query->values('1');
+			  $query->values($db->quote($installdate));
+			  $query->values($db->quote($nullDate));
+			  $query->values($db->quote('0'));
+			  $query->values($db->quote(''));
+		//}//sqlsrv change
+		/*else {
+		  $query = $db->getQuery(true);
+		  $fields = 'name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params';
+		  $query->insert('#__users', true);
+		  $query->columns($fields);
+		  $query->values($db->quote('Super User'));
+		  $query->values($db->quote($options->admin_user));
+		  $query->values($db->quote($options->admin_email));
+		  $query->values($db->quote($cryptpass));
+		  $query->values($db->quote('deprecated'));
+		  $query->values('0');
+		  $query->values('1');
+		  $query->values($db->quote($installdate));
+		  $query->values($db->quote($nullDate));
+		  $query->values($db->quote('0'));
+		  $query->values($db->quote(''));
+		}*/
+	}
+	$db->setQuery($query);
+	if (!$db->query()) {
+		$this->setError($db->getErrorMsg());
+		return false;
+	}
 
-		// Map the super admin to the Super Admin Group
-$query = $db->getQuery(true);
-    $query->select('user_id');
-    $query->from('#__user_usergroup_map');
-    $query->where('user_id = 42');
-    
-    $db->setQuery($query);
+	// Map the super admin to the Super Admin Group
+	$query = $db->getQuery(true);
+	$query->select('user_id');
+	$query->from('#__user_usergroup_map');
+	$query->where('user_id = 42');
+		
+	$db->setQuery($query);
     
     if($db->loadResult())
     {
@@ -300,22 +299,26 @@ $query = $db->getQuery(true);
       $query->update('#__user_usergroup_map');
       $query->set('user_id = 42');
       $query->set('group_id = 8');
-    }else{
+    } else {
       $query = $db->getQuery(true);
-      $query->insertInto('#__user_usergroup_map');
-      $query->fields('user_id');
-      $query->fields('group_id');
-      $query->values('42');
-      $query->values('8');
+      $query->insert('#__user_usergroup_map', false);
+	  $query->columns('user_id');
+	  $query->columns('group_id');
+	  $query->values('42');
+	  $query->values('8');
+      //$query->fields('user_id');
+      //$query->fields('group_id');
+      //$query->values('42');
+      //$query->values('8');
 
     }
 
-		$db->setQuery($query);
-		if (!$db->query()) {
-			$this->setError($db->getErrorMsg());
-			return false;
-		}
+	$db->setQuery($query);
+	if (!$db->query()) {
+		$this->setError($db->getErrorMsg());
+		return false;
+	}
 
-		return true;
+	return true;
 	}
 }
