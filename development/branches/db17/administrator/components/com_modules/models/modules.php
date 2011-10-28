@@ -231,7 +231,6 @@ class ModulesModelModules extends JModelList
 		// Join over the module menus
 		$query->select('MIN(mm.menuid) AS pages');
 		$query->join('LEFT', '#__modules_menu AS mm ON mm.moduleid = a.id');
-		//$query->group('a.id');
 
 		// Join over the extensions
 		$query->select('e.name AS name');
