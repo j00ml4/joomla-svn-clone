@@ -137,7 +137,8 @@ class ContactModelCategory extends JModelList
 		$query->from($db->nameQuote('#__contact_details').' AS a');
 		$query->join('LEFT', '#__categories AS c ON c.id = a.catid');
 		$query->where('a.access IN ('.$groups.')');
-
+		
+		
 		// Filter by category.
 		if ($categoryId = $this->getState('category.id')) {
 			$query->where('a.catid = '.(int) $categoryId);
@@ -195,6 +196,7 @@ class ContactModelCategory extends JModelList
 			$query->order('a.ordering');
 			
 		}
+
 		return $query;
 	}
 

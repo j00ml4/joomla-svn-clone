@@ -130,8 +130,8 @@ class ContactModelContact extends JModelForm
 				$case_when1 = ' CASE WHEN ';
 				$case_when1 .= $query->charLength('c.alias');
 				$case_when1 .= ' THEN ';
-				$c_id = $query->castToChar('c.id');
-				$case_when1 .= $query->concat(array($c_id, 'c.alias'), ':');
+				$c_id = $query->castAsChar('c.id');
+				$case_when1 .= $query->concatenate(array($c_id, 'c.alias'), ':');
 				$case_when1 .= ' ELSE ';
 				$case_when1 .= $c_id.' END as catslug';
 
@@ -251,8 +251,8 @@ class ContactModelContact extends JModelForm
 			$case_when1 = ' CASE WHEN ';
 			$case_when1 .= $query->charLength('cc.alias');
 			$case_when1 .= ' THEN ';
-			$c_id = $query->castToChar('cc.id');
-			$case_when1 .= $query->concat(array($c_id, 'cc.alias'), ':');
+			$c_id = $query->castAsChar('cc.id');
+			$case_when1 .= $query->concatenate(array($c_id, 'cc.alias'), ':');
 			$case_when1 .= ' ELSE ';
 			$case_when1 .= $c_id.' END as catslug';
 			$query->select('a.*, cc.access as category_access, cc.title as category_name, '
