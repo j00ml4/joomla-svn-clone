@@ -69,14 +69,26 @@ class joomlaInstallerScript
 			// Create the package pkg_joomla
 			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
-			$query->insertInto('#__extensions');
-			$query->set('name='.$db->quote('joomla'));
+			$query->insert('#__extensions');
+			$query->columns('name');
+			$query->columns('type');
+			$query->columns('element');
+			$query->columns('enabled');
+			$query->columns('access');
+			$query->columns('protected');
+			$query->values($db->quote('joomla'));
+			$query->values($db->quote('package'));
+			$query->values($db->quote('pkg_joomla'));
+			$query->values(1);//enabled
+			$query->values(1);//access
+			$query->values(1);//protected
+			/*$query->set('name='.$db->quote('joomla'));
 			$query->set('type='.$db->quote('package'));
 			$query->set('element='.$db->quote('pkg_joomla'));
 			$query->set('enabled=1');
-			$query->set('access=1');
+			$query->set('access=1');*/
 			// !!! Mark the package as protected !!!
-			$query->set('protected=1');
+			//$query->set('protected=1');
 			$db->setQuery($query);
 			$db->query();
 			if ($db->getErrorNum())

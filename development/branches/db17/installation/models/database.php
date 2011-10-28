@@ -175,9 +175,9 @@ class JInstallationModelDatabase extends JModel
 				}
 			}
 			$query = $db->getQuery(true);
-			$query->insertInto('#__schemas');
-			$query->fields('extension_id');
-			$query->fields('version_id');
+			$query->insert('#__schemas');
+			$query->columns('extension_id');
+			$query->columns('version_id');
 			$query->values('700');
 			$query->values($db->quote($version));
 			//$query->values('700, '. $db->quote($version));
