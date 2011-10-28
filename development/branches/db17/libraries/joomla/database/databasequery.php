@@ -229,24 +229,6 @@ class JDatabaseQuery
 	protected $rename = null;
 	
 	/**
-	 * @var   object  The insert element.
-	 * @since 11.1
-	 */
-	protected $insert_into = null;
-	
-	/**
-	 * @var   object  The insert value element.
-	 * @since 11.1
-	 */
-
-
-	/**
-	 * @var   object  The insert field element.
-	 * @since 11.1
-	 */
-	protected $fields = null;
-
-	/**
 	 * @var   object  The auto increment insert field element.
 	 * @since 11.1
 	 */
@@ -410,22 +392,6 @@ class JDatabaseQuery
 
 				break;
 
-			case 'insert_into':
-				$query .= (string) $this->insert_into;
-
-				if ($this->fields) {
-					$query .= (string) $this->fields;
-					$query .= ')';
-				}
-				
-				$query .= (string) $this->values;
-				$query .= ')';
-			
-				if($this->auto_increment_field)
-				$query = $this->auto_increment($query);
-
-				break;
-
 		}
 		return $query;
 	}
@@ -506,6 +472,7 @@ class JDatabaseQuery
 			case 'insert':
 				$this->insert = null;
 				$this->type = null;
+				$this->auto_increment_field = null;
 				break;
 
 			case 'from':
@@ -556,13 +523,6 @@ class JDatabaseQuery
 				$this->rename = null;
 				break;
 
-			case 'insert_into':
-				$this->insert_into = null;
-				$this->fields = null;
-				$this->values = null;
-				$this->auto_increment_field = null;
-				break;
-
 			default:
 				$this->type = null;
 				$this->select = null;
@@ -581,8 +541,6 @@ class JDatabaseQuery
 				$this->show_tables = null;
 				$this->drop = null;
 				$this->rename = null;
-				$this->insert_into = null;
-				$this->fields = null;
 				$this->auto_increment_field = null;
 				break;
 		}
@@ -655,22 +613,6 @@ class JDatabaseQuery
 		return 'Y-m-d H:i:s';
 	}
 	
-	/**
-	 * Returns a PHP insertInto() function.
-	 *
-	 * @return  object to allow  inserting the statments
-	 *
-	 * @since   11.1
-	 */
-	
-	public function insertInto($table_name, $increment_field=false)
-   	{
-     		$this->type = 'insert_into';
-     		$this->insert_into = new JDatabaseQueryElement('INSERT INTO', $table_name);
-     
-      		return $this;
-   	}
-
 	/**
 	 * Add a table name to the DELETE clause of the query.
 	 *
@@ -808,10 +750,11 @@ class JDatabaseQuery
 	 *
 	 * @since   11.1
 	 */
-	public function insert($table)
+	public function insert($table, $increment_field=false)
 	{
 		$this->type	= 'insert';
 		$this->insert	= new JDatabaseQueryElement('INSERT INTO', $table);
+		$this->auto_increment_field = $increment_field;
 
 		return $this;
 	}
@@ -1078,7 +1021,7 @@ class JDatabaseQuery
 	function values($values)
 	{
 		if (is_null($this->values)) {
-			$this->values = new JDatabaseQueryElement('VALUES (', $values, ',');
+			$this->values = new JDatabaseQueryElement('()', $values, ',');
 		}
 		else {
 			$this->values->append($values);
@@ -1087,16 +1030,6 @@ class JDatabaseQuery
 		return $this;
 	}
 	
-	function fields($fields){
-		if (is_null($this->fields)){
-			$this->fields = new JDatabaseQueryElement('(', $fields, ',');
-		}
-		else{
-			$this->fields->append($fields);
-		}
-		return $this;
-	}
-
 	/**
 	 * Add a single condition, or an array of conditions to the WHERE clause of the query.
 	 *

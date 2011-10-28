@@ -70,7 +70,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 				// Columns-Values method
 				else if ($this->values) {
 					if ($this->columns) {
-						$query .= (string) $this->where;
+						$query .= (string) $this->columns;
 					}
 
 					$tableName = array_shift($this->insert->getElements());
@@ -78,37 +78,18 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 					$query .= 'VALUES ';
 					$query .= (string) $this->values;
 
-					$query = 'SET IDENTITY_INSERT '.$tableName.' ON;' .
-						$query .
-						'SET IDENTITY_INSERT '.$tableName.' OFF;';
-				}
-
-				break;
-				case 'insert_into':
-				$query .= (string) $this->insert_into;
-
-				if ($this->fields) {
-					$query .= (string) $this->fields;
-					$query .= ')';
-				}
-				//$query .= ' VALUES ';
-				$query .= (string) $this->values;
-				$query .= ')';
-
-				/* Columns-Values method
-				else if ($this->values) {
-					if ($this->columns) {
-						$query .= (string) $this->columns;
+					
+					if($this->auto_increment_field) {
+						$query = 'SET IDENTITY_INSERT '.$tableName.' ON;' .$query .'SET IDENTITY_INSERT '.$tableName.' OFF;';
 					}
-					//$query .= ' VALUES ';
-					$query .= (string) $this->values;
-				}*/
+					if ($this->where) {
+						$query .= (string) $this->where;
+					}
 
-				if($this->auto_increment_field)
-				$query = $this->auto_increment($query);
+				}
 
 				break;
-
+				
 			default:
 				$query = parent::__toString();
 				break;
