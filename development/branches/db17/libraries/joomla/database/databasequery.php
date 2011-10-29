@@ -211,22 +211,10 @@ class JDatabaseQuery
 	protected $order = null;
 	
 	/**
-	 * @var   object  The show table element.
-	 * @since 11.1
-	 */
-	protected $show_tables = null;
-	
-	/**
 	 * @var   object  The drop table element.
 	 * @since 11.1
 	 */
 	protected $drop = null;
-	
-	/**
-	 * @var   object  The rename table element.
-	 * @since 11.1
-	 */
-	protected $rename = null;
 	
 	/**
 	 * @var   object  The auto increment insert field element.
@@ -377,20 +365,11 @@ class JDatabaseQuery
 
 				break;
 				
-			case 'showTables':
-				$query .= (string) $this->show_tables;
-
-				break;
-
 			case 'drop':
 				$query .= (string) $this->drop;
 
 				break;
 
-			case 'rename':
-				$query .= (string) $this->rename;
-
-				break;
 
 		}
 		return $query;
@@ -511,16 +490,8 @@ class JDatabaseQuery
 				$this->values = null;
 				break;
 				
-			case 'showTables':
-				$this->show_tables = null;
-				break;
-
 			case 'drop':
 				$this->drop = null;
-				break;
-
-			case 'rename':
-				$this->rename = null;
 				break;
 
 			default:
@@ -538,9 +509,7 @@ class JDatabaseQuery
 				$this->order = null;
 				$this->columns = null;
 				$this->values = null;
-				$this->show_tables = null;
 				$this->drop = null;
-				$this->rename = null;
 				$this->auto_increment_field = null;
 				break;
 		}
@@ -864,7 +833,7 @@ class JDatabaseQuery
 	*
    	* @since 11.1
    	*/
-   	function showTables($name) 
+   	public function showTables($name) 
 	{
    	
    	}
