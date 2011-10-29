@@ -353,11 +353,8 @@ class JInstallationModelDatabase extends JModel
 
 		// Get the tables in the database.
 		//sqlsrv change
-		$query = $db->getQuery(true);
-	    $query->showTables($name);
-	    $db->setQuery($query);
-		
-		if ($tables = $db->loadResultArray())
+		$tables = $db->showTables($name);		
+		if ($tables)
 		{
 			foreach ($tables as $table)
 			{
@@ -368,11 +365,7 @@ class JInstallationModelDatabase extends JModel
 
 					// Drop the backup table.
 					//sqlsrv change
-					$query = $db->getQuery(true);
-          			$query->dropIfExists($backupTable);
-         			$db->setQuery($query);
-          
-					$db->query();
+					$query = $db->dropTable($backupTable);
 
 					// Check for errors.
 					if ($db->getErrorNum()) {
@@ -382,14 +375,8 @@ class JInstallationModelDatabase extends JModel
 
 					// Rename the current table to the backup table.
 			          //sqlsrv change
-			          $query = $db->getQuery(true);
-			          
-			          $query->renameTable($table, $db, $prefix, $backup);
-			          $query->renameTable($backupTable, $db);
-          
-         			  $db->setQuery($query);
-					  $db->query();
-
+			          $db->renameTable($table,$prefix, $backup,$backupTable);
+			       
 					// Check for errors.
 					if ($db->getErrorNum()) {
 						$this->setError($db->getErrorMsg());
@@ -451,11 +438,8 @@ class JInstallationModelDatabase extends JModel
 
 		// Get the tables in the database.
 	  	//sqlsrv change
-	    $query = $db->getQuery(true);
-	    $query->showTables($name);
-	    $db->setQuery($query);
-    
-		if ($tables = $db->loadResultArray())
+	    $tables = $db->showTables($name);
+		if ($tables)
 		{
 			foreach ($tables as $table)
 			{
@@ -463,14 +447,9 @@ class JInstallationModelDatabase extends JModel
 				if (strpos($table, $prefix) === 0) {
 					// Drop the table.
 					//sqlsrv change
-		            $query = $db->getQuery(true);
-		            $query->dropIfExists($table);
+		            $db->dropTable($table);
 		          
-		            $db->setQuery($query);
-          
-					$db->query();
-
-					// Check for errors.
+		          // Check for errors.
 					if ($db->getErrorNum()) {
 						$this->setError($db->getErrorMsg());
 						$return = false;
