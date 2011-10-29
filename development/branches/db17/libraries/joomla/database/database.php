@@ -1640,4 +1640,30 @@ abstract class JDatabase
 			return JText::_('JLIB_DATABASE_FUNCTION_NOERROR');
 		}
 	}
+	
+	/**
+	 * Drops a table from the database.
+	 *
+	 * @param   string   $table The name of the database table to drop.
+	 * @param   boolean  $ifExists   Optionally specify that the table must exist before it is dropped.
+	 *
+	 * @return  JDatabaseSQLSrv  Returns this object to support chaining.
+	 * @since   11.1
+	 */
+	public abstract function dropTable($table, $ifExists = true);
+	
+	/**
+	 * Show tables in the database
+	 * @param string $dbName
+	 */
+	public abstract function showTables($dbName);
+	
+	/*
+	 * Rename the table
+	 * @param string $oldTable the name of the table to be renamed
+	 * @param string $prefix for the table - used to rename constraints in non-mysql databases
+	 * @param string $backup table prefix
+	 * @param string $newTable newTable name
+	 */
+	public abstract function renameTable($oldTable, $prefix = null, $backup = null, $newTable) ;
 }

@@ -195,4 +195,5 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	{
 		 return true;
 	}
+	
 }

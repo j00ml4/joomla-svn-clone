@@ -46,4 +46,5 @@ class JDatabaseQueryMySQL extends JDatabaseQuery
 			return 'CONCAT('.implode(',', $values).')';
 		}
 	}
+   
 }

@@ -183,7 +183,7 @@ class JDatabaseMySQL extends JDatabase
 	 * @return  JDatabaseSQLSrv  Returns this object to support chaining.
 	 * @since   11.1
 	 */
-	function dropTable($tableName, $ifExists = true)
+	public function dropTable($tableName, $ifExists = true)
 	{
 		$query = $this->getQuery(true);
 
@@ -1092,5 +1092,29 @@ class JDatabaseMySQL extends JDatabase
 			}
 		}
 		return $error ? false : true;
+	}
+	/**
+	 * Show tables in the database
+	 */
+	public function showTables($dbName) {
+		$this->setQuery("SHOW TABLES FROM ". $dbName);
+		return $this->loadResultArray();
+	}
+	
+	/*
+	 * Rename the table
+	 * @param string $oldTable the name of the table to be renamed
+	 * @param string $prefix for the table - used to rename constraints in non-mysql databases
+	 * @param string $backup table prefix
+	 * @param string $newTable newTable name
+	 */
+	public function renameTable($oldTable, $prefix = null, $backup = null, $newTable) {
+		//RENAME TABLE current_db.tbl_name TO other_db.tbl_name;
+		$query = $this->getQuery(true);
+
+		$this->setQuery("RENAME TABLE ". $oldTable." TO ". $newTable);
+	
+		$this->query();
+
 	}
 }
