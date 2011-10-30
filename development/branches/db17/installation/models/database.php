@@ -353,7 +353,7 @@ class JInstallationModelDatabase extends JModel
 
 		// Get the tables in the database.
 		//sqlsrv change
-		$tables = $db->showTables($name);		
+		$tables = $db->showTables($name);	
 		if ($tables)
 		{
 			foreach ($tables as $table)
@@ -362,20 +362,20 @@ class JInstallationModelDatabase extends JModel
 				if (strpos($table, $prefix) === 0) {
 					// Backup table name.
 					$backupTable = str_replace($prefix, $backup, $table);
-
+			
 					// Drop the backup table.
 					//sqlsrv change
-					$query = $db->dropTable($backupTable);
-
+					$query = $db->dropTable($backupTable, true);
+					
 					// Check for errors.
 					if ($db->getErrorNum()) {
 						$this->setError($db->getErrorMsg());
 						$return = false;
 					}
-
+					
 					// Rename the current table to the backup table.
 			          //sqlsrv change
-			          $db->renameTable($table,$prefix, $backup,$backupTable);
+			          $db->renameTable($table, $prefix, $backup,$backupTable);
 			       
 					// Check for errors.
 					if ($db->getErrorNum()) {

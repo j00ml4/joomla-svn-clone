@@ -361,7 +361,7 @@ class JDatabaseSQLAzure extends JDatabase
 		$this->setQuery(
 			'IF EXISTS(SELECT TABLE_NAME FROM'.
 			' INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '.
-			$query->quote($tableName).') DROP TABLE'
+			$query->quote($tableName).') DROP TABLE '.$tableName
 		);
 
 		$this->query();
@@ -1239,15 +1239,8 @@ class JDatabaseSQLAzure extends JDatabase
 	 * Show tables in the database
 	 */
 	public function showTables($dbName) {
-		
-		$query = $this->getQuery(true);
-
-		$query->select('NAME');
-		$query->from($dbName.'..sysobjects');
-		$query->where('xtype = \'U\'');
-	
+		$this->setQuery("select NAME from ".$dbName."..sysobjects where xtype='U'");
 		return $this->loadResultArray();
-
 	}
 	
 	/*
