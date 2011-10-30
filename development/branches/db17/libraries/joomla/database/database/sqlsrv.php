@@ -352,11 +352,10 @@ class JDatabaseSQLSrv extends JDatabase
 		$this->setQuery(
 			'IF EXISTS(SELECT TABLE_NAME FROM'.
 			' INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '.
-			$query->quote($tableName).') DROP TABLE'
+			$query->quote($tableName).') DROP TABLE '.$tableName
 		);
 
 		$this->query();
-
 		return $this;
 	}
 
@@ -1227,15 +1226,9 @@ class JDatabaseSQLSrv extends JDatabase
 	 * Show tables in the database
 	 */
 	public function showTables($dbName) {
+		$this->setQuery("select NAME from ".$dbName."..sysobjects where xtype='U'");
 		
-		$query = $this->getQuery(true);
-
-		$query->select('NAME');
-		$query->from($dbName.'..sysobjects');
-		$query->where('xtype = \'U\'');
-	
 		return $this->loadResultArray();
-
 	}
 	
 	/*
@@ -1251,6 +1244,7 @@ class JDatabaseSQLSrv extends JDatabase
 		 if(!is_null($prefix) && !is_null($backup)){
 		 	$constraints = $this->_get_table_constraints($oldTable);
 		 }
+		 print_r($constraints);
 		 if(!empty($constraints))
 		 	$this->_renameConstraints($constraints, $prefix, $backup);
 		 $this->setQuery("sp_rename ".$oldTable." ".$newTable);
