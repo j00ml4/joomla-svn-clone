@@ -1262,4 +1262,21 @@ class JDatabaseSQLAzure extends JDatabase
 		 $this->query();
 	}
 	
+	/**
+	 * Locks the table - No op for SQLServer and SQLAzure
+	 * @param object $table
+	 * @return 
+	 */
+	public function lock($table) {
+		
+		return true;
+	}
+	/**
+	 * Unlocks the table  Locks the table - No op for SQLServer and SQLAzure
+	 * @return 
+	 */
+	public function unlock() {
+		return true;
+	}
+	
 }

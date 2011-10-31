@@ -1393,22 +1393,11 @@ abstract class JTable extends JObject
 	 *
 	 * @since   11.1
 	 */
-	protected function _lock($_tbl, $_db)
+	protected function _lock()
 	{
-	
-		// Lock the table for writing.
-		$this->_db->setQuery('LOCK TABLES '.$this->_db->quoteName($this->_tbl).' WRITE');
-		$this->_db->query();
-
-		// Check for a database error.
-		if ($this->_db->getErrorNum()) {
-			$this->setError($this->_db->getErrorMsg());
-
-			return false;
-		}
-
+		
+		$this->_db->lock($this->_tbl);
 		$this->_locked = true;
-
 		return true;
 	}
 
@@ -1421,19 +1410,8 @@ abstract class JTable extends JObject
 	 */
 	protected function _unlock()
 	{
-		// Unlock the table.
-		$this->_db->setQuery('UNLOCK TABLES');
-		$this->_db->query();
-
-		// Check for a database error.
-		if ($this->_db->getErrorNum()) {
-			$this->setError($this->_db->getErrorMsg());
-
-			return false;
-		}
-
+		$this->_db->unlock();
 		$this->_locked = false;
-
 		return true;
 	}
 }

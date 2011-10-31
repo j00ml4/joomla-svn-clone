@@ -1666,4 +1666,16 @@ abstract class JDatabase
 	 * @param string $newTable newTable name
 	 */
 	public abstract function renameTable($oldTable, $prefix = null, $backup = null, $newTable) ;
+	
+	/**
+	 * Locks the table - with over ride in mysql and mysqli only
+	 * @param object $table
+	 * @return 
+	 */
+	public abstract function lock($table);
+	/**
+	 * Unlocks the table with override in mysql and mysqli only
+	 * @return 
+	 */
+	public abstract function unlock();
 }
