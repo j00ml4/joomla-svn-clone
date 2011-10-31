@@ -58,11 +58,6 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 			case 'insert':
 				$query .= (string) $this->insert;
 
-				if ($this->fields) {
-					$query .= (string) $this->fields;
-					$query .= ')';
-				}
-				
 				// Set method
 				if ($this->set) {
 					$query .= (string) $this->set;

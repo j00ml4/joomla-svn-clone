@@ -351,11 +351,10 @@ class JTableNested extends JTable
 		}
 
 		// Lock the table for writing.
-		if (!$query->_lock($this->_tbl, $this->_db)){
-			//sqlsrv change
+		if (!$this->_lock())
+		{
+			return false;
 		}
-		else
-			$this->_locked = true;
 
 		/*
 		 * Move the sub-tree out of the nested sets by negating its left and right values.
@@ -408,7 +407,6 @@ class JTableNested extends JTable
 				return false;
 			}
 		}
-
 		// We are moving the tree to be the last child of the root node
 		else
 		{
@@ -530,10 +528,13 @@ class JTableNested extends JTable
 		// Initialise variables.
 		$k = $this->_tbl_key;
 		$pk = (is_null($pk)) ? $this->$k : $pk;
-		$query = $this->_db->getQuery(true);
-		
+
 		// Lock the table for writing.
-		$this->_lock();
+		if (!$this->_lock())
+		{
+			// Error message set in lock method.
+			return false;
+		}
 
 		// If tracking assets, remove the asset first.
 		if ($this->_trackAssets)
@@ -555,8 +556,7 @@ class JTableNested extends JTable
 					$asset->_unlock();
 					return false;
 				}
-				$this->_unlock();
-				
+				$asset->_unlock();
 			}
 			else {
 				$this->setError($asset->getError());
@@ -597,7 +597,6 @@ class JTableNested extends JTable
 			$query->where('rgt > '.(int) $node->rgt);
 			$this->_runQuery($query, 'JLIB_DATABASE_ERROR_DELETE_FAILED');
 		}
-
 		// Leave the children and move them up a level.
 		else
 		{
@@ -709,7 +708,6 @@ class JTableNested extends JTable
 			echo "\n".get_class($this)."::store\n";
 			$this->_logtable(true, false);
 		}
-		$query = $this->_db->getQuery(true);
 		/*
 		 * If the primary key is empty, then we assume we are inserting a new node into the
 		 * tree.  From this point we would need to determine where in the tree to insert it.
@@ -724,7 +722,8 @@ class JTableNested extends JTable
 			if ($this->_location_id >= 0)
 			{
 				// Lock the table for writing.
-				if (!$this->_lock()) {
+				if (!$this->_lock())
+				{
 					// Error message set in lock method.
 					return false;
 				}
@@ -749,11 +748,11 @@ class JTableNested extends JTable
 						$this->_unlock();
 						return false;
 					}
-					if ($this->_debug) {
+					if ($this->_debug)
+					{
 						$this->_logtable(false);
 					}
 				}
-
 				// We have a real node set as a location reference.
 				else
 				{
@@ -999,8 +998,7 @@ class JTableNested extends JTable
 		// Initialise variables.
 		$k = $this->_tbl_key;
 		$pk = (is_null($pk)) ? $this->$k : $pk;
-		$query = $this->_db->getQuery(true);
-		
+
 		// Lock the table for writing.
 		if (!$this->_lock())
 		{
@@ -1098,8 +1096,7 @@ class JTableNested extends JTable
 		// Initialise variables.
 		$k = $this->_tbl_key;
 		$pk = (is_null($pk)) ? $this->$k : $pk;
-		$query = $this->_db->getQuery(true);
-		
+
 		// Lock the table for writing.
 		if (!$this->_lock())
 		{
