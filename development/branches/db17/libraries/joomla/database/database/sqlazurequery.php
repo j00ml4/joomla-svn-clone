@@ -169,26 +169,5 @@ class JDatabaseQuerySQLAzure extends JDatabaseQuery
 	{
 		return 'LEN('.$value.')';
 	}
-	
-	/**
-	 * Method to lock the database table for writing.
-	 *
-	 * @return boolean True on success.
-	 * @since 11.1
-	 */
-	public function lock($table_name, &$db)
-	{
-		 return true;
-	}
 
-	/**
-	 * Method to unlock the database table for writing.
-	 *
-	 * @return boolean True on success.
-	 * @since 11.1
-	 */
-	public function unlock(&$db)
-	{
-		 return true;
-	}
 }
