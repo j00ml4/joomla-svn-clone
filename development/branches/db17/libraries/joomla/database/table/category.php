@@ -191,7 +191,6 @@ class JTableCategory extends JTableNested
 	{
 		$date	= JFactory::getDate();
 		$user	= JFactory::getUser();
-		$db = $this->getDbo();
 		if ($this->id) {
 			// Existing category
 		$this->modified_time = $date->format('Y-m-d H:i:s');
