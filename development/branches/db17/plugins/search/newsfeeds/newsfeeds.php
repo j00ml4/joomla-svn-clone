@@ -131,11 +131,29 @@ class plgSearchNewsfeeds extends JPlugin
 		$rows = array();
 		if (!empty($state)) {
 			$query	= $db->getQuery(true);
+			//sqlsrv changes
+			$case_when = ' CASE WHEN ';
+			$case_when .= $query->charLength('a.alias');
+			$case_when .= ' THEN ';
+			$a_id = $query->castAsChar('a.id');
+			$case_when .= $query->concatenate(array($a_id, 'a.alias'), ':');
+			$case_when .= ' ELSE ';
+			$case_when .= $a_id.' END as slug';
+
+			$case_when1 = ' CASE WHEN ';
+			$case_when1 .= $query->charLength('c.alias');
+			$case_when1 .= ' THEN ';
+			$c_id = $query->castAsChar('c.id');
+			$case_when1 .= $query->concatenate(array($c_id, 'c.alias'), ':');
+			$case_when1 .= ' ELSE ';
+			$case_when1 .= $c_id.' END as catslug';
+			
 			$query->select('a.name AS title, "" AS created, a.link AS text, '
-						.'CASE WHEN CHAR_LENGTH(a.alias) THEN CONCAT_WS(\':\', a.id, a.alias) ELSE a.id END as slug, '
-						.'CASE WHEN CHAR_LENGTH(c.alias) THEN CONCAT_WS(\':\', c.id, c.alias) ELSE c.id END as catslug, '
-						.'CONCAT_WS(" / ", '. $db->Quote($searchNewsfeeds) .', c.title) AS section,'
-						.'"1" AS browsernav');
+						.$case_when.","
+						.$case_when1);
+			$query->select($query->concatenate(array(" / ", $db->Quote($searchNewsfeeds), 'c.title')).' AS section');
+						//.'CONCAT_WS(" / ", '. $db->Quote($searchNewsfeeds) .', c.title) AS section,'
+			$query->select('"1" AS browsernav');
 			$query->from('#__newsfeeds AS a');
 			$query->innerJoin('#__categories as c ON c.id = a.catid');
 			$query->where('('. $where .')' . 'AND a.published IN ('.implode(',',$state).') AND c.published = 1 AND c.access IN ('. $groups .')');

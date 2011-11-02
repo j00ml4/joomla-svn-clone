@@ -105,27 +105,27 @@ class plgSearchContacts extends JPlugin
 		$rows = array();
 		if (!empty($state)) {
 			$query	= $db->getQuery(true);
-      //sqlsrv changes
-      $case_when = ' CASE WHEN ';
-      $case_when .= $query->charLength('a.alias');
-      $case_when .= ' THEN ';
-      $a_id = $query->castToChar('a.id');
-      $case_when .= $query->concat(array($a_id, 'a.alias'), ':');
-      $case_when .= ' ELSE ';
-      $case_when .= $a_id.' END as slug';   
-      
-      $case_when1 = ' CASE WHEN ';
-      $case_when1 .= $query->charLength('c.alias');
-      $case_when1 .= ' THEN ';
-      $c_id = $query->castToChar('c.id');
-      $case_when1 .= $query->concat(array($c_id, 'c.alias'), ':');
-      $case_when1 .= ' ELSE ';
-      $case_when1 .= $c_id.' END as catslug'; 
+	     	 //sqlsrv changes
+	      	$case_when = ' CASE WHEN ';
+	      	$case_when .= $query->charLength('a.alias');
+	      	$case_when .= ' THEN ';
+	      	$a_id = $query->castAsChar('a.id');
+	        $case_when .= $query->concatenate(array($a_id, 'a.alias'), ':');
+	        $case_when .= ' ELSE ';
+	        $case_when .= $a_id.' END as slug';   
+	      
+	        $case_when1 = ' CASE WHEN ';
+	        $case_when1 .= $query->charLength('c.alias');
+	        $case_when1 .= ' THEN ';
+	        $c_id = $query->castAsChar('c.id');
+	        $case_when1 .= $query->concatenate(array($c_id, 'c.alias'), ':');
+	        $case_when1 .= ' ELSE ';
+	        $case_when1 .= $c_id.' END as catslug'; 
       
 			$query->select('a.name AS title, \'\' AS created, '
-					.$case_when.','.$case_when.', '
-					. $query->concat(array("a.name", "a.con_position", "a.misc"), ",").' AS text,'
-          . $query->concat(array($db->Quote($section), "c.title"), " / ").' AS section,'
+					.$case_when.','.$case_when1.', '
+					. $query->concatenate(array("a.name", "a.con_position", "a.misc"), ",").' AS text,'
+                    . $query->concatenate(array($db->Quote($section), "c.title"), " / ").' AS section,'
 					. '\'2\' AS browsernav');
 			$query->from('#__contact_details AS a');
 			$query->innerJoin('#__categories AS c ON c.id = a.catid');
