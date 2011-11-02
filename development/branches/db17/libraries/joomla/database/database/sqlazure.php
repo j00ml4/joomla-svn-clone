@@ -182,7 +182,7 @@ class JDatabaseSQLAzure extends JDatabase
 	{
 		foreach($constraints as $constraint)
 		{
-			$this->setQuery('sp_rename '.$constraint.','.str_replace($prefix, $backup, $constraint));
+			$this->setQuery("sp_rename '".$constraint."'".",'".str_replace($prefix, $backup, $constraint)."'");
 			$this->query();
 		}
 	}
@@ -306,7 +306,7 @@ class JDatabaseSQLAzure extends JDatabase
 		static $cur;
 
 		if (!($cur = $this->query())) {
-			return $this->_errorNum ? null : false;
+			return $this->errorNum ? null : false;
 		}
 
 		if ($row = sqlsrv_fetch_array( $cur, SQLSRV_FETCH_NUMERIC )) {
@@ -331,7 +331,7 @@ class JDatabaseSQLAzure extends JDatabase
 		static $cur;
 
 		if (!($cur = $this->query())) {
-			return $this->_errorNum ? null : false;
+			return $this->errorNum ? null : false;
 		}
 
 		if ($row =  sqlsrv_fetch_object( $cur )) {
@@ -347,8 +347,8 @@ class JDatabaseSQLAzure extends JDatabase
 	/**
 	 * Drops a table from the database.
 	 *
-	 * @param   string  $tableName  The name of the database table to drop.
-	 * @param   bool    $ifExists   Optionally specify that the table must exist before it is dropped.
+	 * @param   string   $tableName  The name of the database table to drop.
+	 * @param   boolean  $ifExists   Optionally specify that the table must exist before it is dropped.
 	 *
 	 * @return  JDatabaseSQLSrv  Returns this object to support chaining.
 	 *
@@ -502,7 +502,7 @@ class JDatabaseSQLAzure extends JDatabase
 	 * @param	object	An object whose properties match table fields
 	 * @param	string	The name of the primary key. If provided the object property is updated.
 	 */
-	function insertObject( $table, &$object, $keyName = NULL )
+	public function insertObject($table, &$object, $keyName = NULL)
 	{
 		$fmtsql = 'INSERT INTO '.$this->nameQuote($table).' ( %s ) VALUES ( %s ) ';
 		$fields = array();
@@ -537,7 +537,7 @@ class JDatabaseSQLAzure extends JDatabase
 	 * @access public
 	 * @param [type] $updateNulls
 	 */
-	function updateObject( $table, &$object, $keyName, $updateNulls=true )
+	public	function updateObject( $table, &$object, $keyName, $updateNulls=true )
 	{
 		$fmtsql = 'UPDATE '.$this->nameQuote($table).' SET %s WHERE %s';
 		$tmp = array();
@@ -1152,7 +1152,7 @@ class JDatabaseSQLAzure extends JDatabase
 
 		// If the batch is meant to be transaction safe then we need to wrap it in a transaction.
 		if ($transactionSafe) {
-			$this->_sql = 'BEGIN TRANSACTION;'.$this->sql.'; COMMIT TRANSACTION;';
+			$sql = 'BEGIN TRANSACTION;'.$sql.'; COMMIT TRANSACTION;';
 		}
 
 		$queries = $this->splitSql($sql);
@@ -1258,8 +1258,9 @@ class JDatabaseSQLAzure extends JDatabase
 		 }
 		 if(!empty($constraints))
 		 	$this->_renameConstraints($constraints, $prefix, $backup);
-		 $this->setQuery("sp_rename ".$oldTable." ".$newTable);
-		 $this->query();
+		 $this->setQuery("sp_rename '".$oldTable."', '".$newTable."'");
+		 return $this->query();
+		 
 	}
 	
 	/**
