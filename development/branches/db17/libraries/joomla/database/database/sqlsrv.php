@@ -11,7 +11,7 @@ defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.database.database');
 jimport('joomla.utilities.string');
-jimport('joomla.database.databasequerysqlsrv');
+
 JLoader::register('JDatabaseQuerySQLSrv', dirname(__FILE__).'/sqlsrvquery.php');
 
 /**
@@ -180,7 +180,7 @@ class JDatabaseSQLSrv extends JDatabase
 	{
 		foreach($constraints as $constraint)
 		{
-			$this->setQuery('sp_rename '.$constraint.','.str_replace($prefix, $backup, $constraint));
+			$this->setQuery("sp_rename '".$constraint."'".",'".str_replace($prefix, $backup, $constraint)."'");
 			$this->query();
 		}
 	}
@@ -348,13 +348,11 @@ class JDatabaseSQLSrv extends JDatabase
 	public function dropTable($tableName, $ifExists = true)
 	{
 		$query = $this->getQuery(true);
-
 		$this->setQuery(
 			'IF EXISTS(SELECT TABLE_NAME FROM'.
 			' INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '.
 			$query->quote($tableName).') DROP TABLE '.$tableName
 		);
-
 		$this->query();
 		return $this;
 	}
@@ -684,10 +682,13 @@ class JDatabaseSQLSrv extends JDatabase
 	public function getQuery($new = false)
 	{
 		if ($new) {
-			jimport('joomla.database.databasequerysqlsrv');
-			return new JDatabaseQuerySQLSrv;
+			// Make sure we have a query class for this driver.
+			if (!class_exists('JDatabaseQuerySQLSrv')) {
+				throw new DatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_QUERY'));
+			}
+			return new JDatabaseQuerySQLSrv($this);
 		} else {
-			return $this->_sql;
+			return $this->sql;
 		}
 	}
 
@@ -1139,7 +1140,7 @@ class JDatabaseSQLSrv extends JDatabase
 
 		// If the batch is meant to be transaction safe then we need to wrap it in a transaction.
 		if ($transactionSafe) {
-			$this->_sql = 'BEGIN TRANSACTION;'.$this->sql.'; COMMIT TRANSACTION;';
+			$sql = 'BEGIN TRANSACTION;'.$sql.'; COMMIT TRANSACTION;';
 		}
 
 		$queries = $this->splitSql($sql);
@@ -1244,11 +1245,11 @@ class JDatabaseSQLSrv extends JDatabase
 		 if(!is_null($prefix) && !is_null($backup)){
 		 	$constraints = $this->_get_table_constraints($oldTable);
 		 }
-		 print_r($constraints);
 		 if(!empty($constraints))
 		 	$this->_renameConstraints($constraints, $prefix, $backup);
-		 $this->setQuery("sp_rename ".$oldTable." ".$newTable);
-		 $this->query();
+		 $this->setQuery("sp_rename '".$oldTable."', '".$newTable."'");
+		 return $this->query();
+		 
 	}
 	
 	/**
