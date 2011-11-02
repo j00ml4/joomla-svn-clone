@@ -1,4 +1,5 @@
 <?xml version="1.0" ?>
+<updates>
 <update>
 	<!-- Description -->
 	<name>Kunena</name>
@@ -64,4 +65,4 @@
 	<section>Testing</section>
 	<targetplatform name="joomla" version="1.6" />
 </update>
-
+</updates>
