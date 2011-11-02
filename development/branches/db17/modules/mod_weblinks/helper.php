@@ -63,8 +63,8 @@ class modWeblinksHelper
 		$case_when2 .= ' ELSE ';
 		$case_when2 .= $c_id.' END as slug';
 
-		$model->setState('list.select', 'a.*, c.published AS c_published,$case_when1,$case_when2,
-		DATE_FORMAT(a.date, "%Y-%m-%d") AS created');
+		$model->setState('list.select', 'a.*, c.published AS c_published,'.$case_when1.','.$case_when2.','.
+		'DATE_FORMAT(a.date, "%Y-%m-%d") AS created');
 
 		$model->setState('filter.c.published', 1);
 
