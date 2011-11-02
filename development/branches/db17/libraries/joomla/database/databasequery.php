@@ -826,19 +826,6 @@ class JDatabaseQuery
 	}
 	
 	/**
-   	* @param string $name  A string 
-   	* 
-   	* @return  Show table query syntax
-   	* Implemented in the sub classes - specific to db query builder
-	*
-   	* @since 11.1
-   	*/
-   	public function showTables($name) 
-	{
-   	
-   	}
-
-	/**
 	 * Add an OUTER JOIN clause to the query.
 	 *
 	 * @param   string  $conditions  A string or array of conditions.
