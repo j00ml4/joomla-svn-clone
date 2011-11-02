@@ -150,7 +150,6 @@ class ContentModelArchive extends ContentModelArticles
 	// JModel override to add alternating value for $odd
 	protected function _getList($query, $limitstart=0, $limit=0)
 	{
-		echo $query;
 		$result = &parent::_getList($query, $limitstart, $limit);
 
 		$odd = 1;
