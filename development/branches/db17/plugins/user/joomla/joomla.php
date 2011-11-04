@@ -132,7 +132,7 @@ class plgUserJoomla extends JPlugin
 
 		// If _getUser returned an error, then pass it back.
 		if (JError::isError($instance)) {
-			return $instance;
+			return false;
 		}
 
 		// If the user is blocked, redirect with an error
