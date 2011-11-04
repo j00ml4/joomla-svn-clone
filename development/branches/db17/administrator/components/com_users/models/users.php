@@ -162,17 +162,20 @@ class UsersModelUsers extends JModelList
 			// Get the counts from the database only for the users in the list.
 			$db		= $this->getDbo();
 			$query	= $db->getQuery(true);
+		
 
 			// Join over the group mapping table.
 			$query->select('map.user_id, COUNT(map.group_id) AS group_count')
 				->from('#__user_usergroup_map AS map')
 				->where('map.user_id IN ('.implode(',', $userIds).')')
 				->group('map.user_id')
-
-			// Join over the user groups table.
-				//->select('GROUP_CONCAT(g2.title SEPARATOR '.$db->Quote("\n").') AS group_names')
+				// Join over the user groups table.
 				->join('LEFT', '#__usergroups AS g2 ON g2.id = map.group_id');
 
+				//Group_Concat specific to MySQL
+				//To standardize - we implement "_getUserDisplayedGroups"
+				//->select('GROUP_CONCAT(g2.title SEPARATOR '.$db->Quote("\n").') AS group_names')
+				
 			$db->setQuery($query);
 
 			// Load the counts into an array indexed on the user id field.
@@ -190,7 +193,9 @@ class UsersModelUsers extends JModelList
 			{
 				if (isset($userGroups[$item->id])) {
 					$item->group_count = $userGroups[$item->id]->group_count;
-					$item->group_names = $userGroups[$item->id]->group_names;
+					//Group_concat in other databases is not supported
+					$item->group_names = $this->_getUserDisplayedGroups($item->id);
+					//$userGroups[$item->id]->group_names;
 				}
 			}
 
@@ -281,10 +286,11 @@ class UsersModelUsers extends JModelList
 		$query->order($db->getEscaped($this->getState('list.ordering', 'a.name')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
 
 		//echo nl2br(str_replace('#__','jos_',$query));
+		
 		return $query;
 	}
 	//sqlsrv change
-	public function getUserDisplayedGroups($user_id)
+	function _getUserDisplayedGroups($user_id)
 	{
 		$db = &JFactory::getDbo();
 		$sql = "SELECT title FROM ".$db->nameQuote('#__usergroups')." ug left join ".
