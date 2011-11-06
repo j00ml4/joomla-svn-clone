@@ -306,11 +306,7 @@ class JInstallationModelConfiguration extends JModel
 	  $query->columns('group_id');
 	  $query->values('42');
 	  $query->values('8');
-      //$query->fields('user_id');
-      //$query->fields('group_id');
-      //$query->values('42');
-      //$query->values('8');
-
+    
     }
 
 	$db->setQuery($query);

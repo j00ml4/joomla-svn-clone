@@ -82,13 +82,6 @@ class joomlaInstallerScript
 			$query->values(1);//enabled
 			$query->values(1);//access
 			$query->values(1);//protected
-			/*$query->set('name='.$db->quote('joomla'));
-			$query->set('type='.$db->quote('package'));
-			$query->set('element='.$db->quote('pkg_joomla'));
-			$query->set('enabled=1');
-			$query->set('access=1');*/
-			// !!! Mark the package as protected !!!
-			//$query->set('protected=1');
 			$db->setQuery($query);
 			$db->query();
 			if ($db->getErrorNum())

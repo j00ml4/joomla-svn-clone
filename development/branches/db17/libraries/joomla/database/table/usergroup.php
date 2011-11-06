@@ -224,8 +224,7 @@ class JTableUsergroup extends JTable
 		$query = $db->getQuery(true);
 		$query->set('rules='.str_repeat('replace(', 4*count($ids)).'rules'.implode('', $replace));
 		$query->update('#__viewlevels');
-				//$query->where('rules REGEXP "(,|\\\\[)('.implode('|', $ids).')(,|\\\\])"');
-				$query->where('id IN ('.implode(',', $match_ids).')');
+		$query->where('id IN ('.implode(',', $match_ids).')');
 		$db->setQuery($query);
 		if (!$db->query()) {
 			$this->setError($db->getErrorMsg());
