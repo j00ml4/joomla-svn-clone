@@ -180,7 +180,6 @@ class JInstallationModelDatabase extends JModel
 			$query->columns('version_id');
 			$query->values('700');
 			$query->values($db->quote($version));
-			//$query->values('700, '. $db->quote($version));
 			$db->setQuery($query);
 			$db->query();
 			if ($db->getErrorNum()) {

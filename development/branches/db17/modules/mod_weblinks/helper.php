@@ -53,7 +53,6 @@ class modWeblinksHelper
 		$case_when1 .= $query->concatenate(array($a_id, 'a.alias'), ':');
 		$case_when1 .= ' ELSE ';
 		$case_when1 .= $a_id.' END as slug';
-		//$query->select($case_when);
 		
 		$case_when2 = ' CASE WHEN ';
 		$case_when2 .= $query->charLength('c.alias');

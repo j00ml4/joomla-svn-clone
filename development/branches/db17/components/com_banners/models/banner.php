@@ -102,10 +102,6 @@ class BannersModelBanner extends JModel
 		        $query->values('2');
 		        $query->values((int)$id);
 		        $query->values($db->Quote($trackDate));
-				//$query->set('`count` = 1');
-				//$query->set('track_type=2');
-				//$query->set('banner_id='.(int)$id);
-				//$query->set('track_date='.$db->Quote($trackDate));
 			}
 
 			$db->setQuery((string) $query);

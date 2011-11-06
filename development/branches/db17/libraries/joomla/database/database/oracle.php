@@ -1059,8 +1059,6 @@ class JDatabaseOracle extends JDatabase
 			}
 		}
 		// Next two lines for debugging generated SQL statement
-		//$query = sprintf( $fmtsql, implode( ",", $fields ) ,  implode( ",", $values ) );
-		//return $query;
 		$this->setQuery( sprintf( $fmtsql, implode( ",", $fields ) ,  implode( ",", $values ) ) );
 		if (!$this->query()) {
 			return false;
