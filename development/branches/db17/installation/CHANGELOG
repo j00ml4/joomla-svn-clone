@@ -27,6 +27,61 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+15-Nov-2011 Jean-Marie Simonet
+ $ Correcting typo in ini file
+
+14-Nov-2011 Jean-Marie Simonet
+ Remove install checks
+
+-------------------- 1.7.3 Stable Release [14-Nov-2011] ------------------
+
+12-Nov-2011 Mark Dexter
+ # Revert [#26805] because it breaks modal close behavior in front end (issue 27149)
+
+11-Nov-2011 Jean-Marie Simonet
+ # [#26993] Weblinks entries do not delete correctly and display in the weblinks view. Thanks Denise.
+
+10-Nov-2011 Christophe Demko
+ #- [#27119] Remove unused title_alias column
+
+09-Nov-2011 Mark Dexter
+ # [#26439] Editors have problems with quotes in content plugins syntax
+
+09-Nov-2011 Christophe Demko
+ # [#27129] *Patch #26980 breaks menu item saving
+ # [#26805] Update MooTools to version 1.4.1
+ # [#27128] *Validation error in mod_languages (Jean-Marie Simonet)
+
+09-Nov-2011 Jean-Marie Simonet
+ # [#26830] xreference in 1.6+ is inconsistent with 1.5.  Thanks Elin and Andrea
+ # [#27129] *Patch #26980 breaks menu item saving. Thanks Christophe.
+
+08-Nov-2011 Mark Dexter
+ # [#27127] Merge more from the platform (images)
+
+08-Nov-2011 Jean-Marie Simonet
+ #$ [#26980] Missing menu ordering in edit. Thanks Christophe and Elin.
+ #$ [#25037] No option to remove the default language from the URL and links. Thanks Christophe.
+ # [#26979] *Ordering when editing in front-end
+ 
+07-Nov-2011 Jean-Marie Simonet
+ #$ [#27007] *mod_articles_category missing option to sort by feature articles ordering system. Thanks Denise.
+ $ [#24697] Tooltip partly matches the related options in Latest News module
+
+07-Nov-2011 Christophe Demko
+ + [#26940] Allow ability to upload file (eg: profile picture) through com_users profile (CY Lee)
+
+07-Nov-2011 Mark Dexter
+ # [#26927] upgrade from 1.6.3 and 1.6.4 to 1.7.2
+ # [#27090] Use elseif instead of else if (for platform files)
+ # [#26226] page break broke when 'Table of Contents' set to Hide
+ # [#27115] Use lowercase token
+
+06-Nov-2011 Jean-Marie Simonet
+ # [#26840] manifest_cache entry not generated for file packages on install. Thanks Michael
+ # [#27108] *Fatal Error in multilangstatus module when languagefilter plugin disabled
+ # [#26883] Start syncing to platform version 11.3 (media/system $id part)
+
 04-Nov-2011 Jean-Marie Simonet
  # [#27075] Make sure there is a blank line at the end of every PHP file. Thanks Rouven
  

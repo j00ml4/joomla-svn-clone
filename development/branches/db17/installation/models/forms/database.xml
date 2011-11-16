@@ -13,6 +13,7 @@
 				<option value="oracle">Oracle</option>
 				<option value="sqlsrv">SQL Server 2008</option>
 				<option value="sqlazure">SQL Azure</option>
+				<option value="postgres">postgres</option>
 			</field>
 			<field name="db_host" type="text" id="db_host" class="inputbox"
 				label="INSTL_DATABASE_HOST_LABEL"

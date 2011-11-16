@@ -14,12 +14,12 @@ jimport('joomla.filesystem.folder');
 
 interface JDatabaseInterface {
 	/**
-	* Test to see if the connector is available.
-	*
-	* @return  bool  True on success, false otherwise.
-	*
-	* @since   11.1
-	*/
+	 * Test to see if the connector is available.
+	 *
+	 * @return  bool  True on success, false otherwise.
+	 *
+	 * @since   11.1
+	 */
 	static function test();
 }
 
@@ -1634,7 +1634,7 @@ abstract class JDatabase
 
 		if ($this->errorNum != 0) {
 			return JText::sprintf('JLIB_DATABASE_ERROR_FUNCTION_FAILED', $this->errorNum, $this->errorMsg)
-			.($showSQL ? "<br />SQL = <pre>$this->sql</pre>" : '');
+				.($showSQL ? "<br />SQL = <pre>$this->sql</pre>" : '');
 		}
 		else {
 			return JText::_('JLIB_DATABASE_FUNCTION_NOERROR');
