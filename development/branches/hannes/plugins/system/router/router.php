@@ -22,10 +22,17 @@ class plgSystemRouter extends JPlugin
 	 * Cached menu to improve performance
 	 *
 	 * @var JMenu
-	 * @since 11.3
+	 * @since 2.5
 	 */
 	static protected $menu = null;
 
+	/**
+	 * Method to attach rules to router object
+	 * 
+	 * @return  void
+	 * 
+	 * @since   2.5
+	 */
 	function onAfterInitialise()
 	{
 		$app = JFactory::getApplication();
@@ -45,22 +52,17 @@ class plgSystemRouter extends JPlugin
 		}
 	}
 
+	/**
+	 * Method to display the list of available rules in a config dialog
+	 * 
+	 * @return  array  Array of rule names
+	 * 
+	 * @since 2.5
+	 */
 	function onRouterRules()
 	{
 		$this->loadLanguage();
 		return array('sef', 'force_ssl', 'sef_rewrite', 'sef_suffix', 'unicodeslugs');
-	}
-
-	function onComponentRouterRules($router = false)
-	{
-		if(!$router) {
-			return array('joomla');
-		}
-		$cfg = JFactory::getApplication()->getCfg('sef_component_rules', array());
-		if(in_array('joomla', $cfg)) {
-			$router->attachBuildRule(array('plgSystemRouter', 'buildComponentSEF'));
-			$router->attachParseRule(array('plgSystemRouter', 'parseComponentSEF'));
-		}
 	}
 
 	/**
@@ -169,6 +171,12 @@ class plgSystemRouter extends JPlugin
 		}
 	}
 
+	/**
+	 * Force SSL to on on all pages
+	 * 
+	 * @param JRouter $router Calling JRouter object 
+	 * @param JURI $uri URL to process
+	 */
 	public static function forceSSL(JRouter $router, JURI $uri)
 	{
 		if (strtolower($uri->getScheme()) != 'https') {
@@ -179,6 +187,12 @@ class plgSystemRouter extends JPlugin
 		return array();
 	}
 
+	/**
+	 * Cleanup the path of a URL
+	 * 
+	 * @param JRouter $router Calling JRouter object
+	 * @param JURI $uri URL to process
+	 */
 	public static function cleanupPath(JRouter $router, JURI $uri)
 	{
 		// Get the path
@@ -194,6 +208,16 @@ class plgSystemRouter extends JPlugin
 		$uri->setPath(trim($path , '/'));
 	}
 
+	/**
+	 * Parse the SEF portion of a URL
+	 * 
+	 * @param JRouter $router Calling JRouter object
+	 * @param JURI $uri URL to process
+	 * 
+	 * @return  void
+	 * 
+	 * @since 2.5
+	 */
 	public static function parseSEF(JRouter $router, JURI $uri)
 	{
 		$app	= JFactory::getApplication();
@@ -271,20 +295,28 @@ class plgSystemRouter extends JPlugin
 		$path = $uri->getPath();
 
 		//Remove the suffix
-		/**
-			if ($app->getCfg('sef_suffix') && !(substr($path, -9) == 'index.php' || substr($path, -1) == '/')) {
-				if ($suffix = pathinfo($path, PATHINFO_EXTENSION)) {
-					$path = str_replace('.'.$suffix, '', $path);
-					$vars['format'] = $suffix;
-				}
+		if ($app->getCfg('sef_suffix') && !(substr($path, -9) == 'index.php' || substr($path, -1) == '/')) {
+			if ($suffix = pathinfo($path, PATHINFO_EXTENSION)) {
+				$path = str_replace('.'.$suffix, '', $path);
+				$vars['format'] = $suffix;
 			}
-		**/
-
+		}
+		
 		JRequest::set($uri->getQuery(true));
 
 		return true;
 	}
 
+	/**
+	 * Parse a raw URL
+	 * 
+	 * @param JRouter $router Calling JRouter object
+	 * @param JURI $uri URL to process
+	 * 
+	 * @return void
+	 * 
+	 * @since 2.5
+	 */
 	public static function parseRAW(JRouter $router, JURI $uri)
 	{
 		$vars	= array();
@@ -310,177 +342,5 @@ class plgSystemRouter extends JPlugin
 		$menu->setActive($item->id);
 
 		return true;
-	}
-
-	public static function buildComponentSEF(JComponentRouter $crouter, &$query, &$segments)
-	{
-		if(!isset($query['Itemid'])) {
-			$segments[] = $query['view'];
-			$views = $crouter->getViews();
-			$map = $crouter->getViewMap($query['view']);
-			if(isset($views[$map[0]]->id)) {
-				$segments[] = $query[$views[$map[0]]->id];
-				unset($query[$views[$query['view']]->id]);
-			}
-			unset($query['view']);
-			unset($query['ts']);
-			return;
-		}
-		$item = self::$menu->getItem($query['Itemid']);
-
-		$path = array_reverse($crouter->getPath($query));
-		
-		$views = $crouter->getViews();
-		$map = $crouter->getViewMap($query['view']);		
-		if(isset($query['layout'])) {
-			$layout = $query['layout'];
-		} else {
-			$layout = 'default';
-		}
-		
-		foreach($map as $mapitem) {
-			if($views[$mapitem]->layout == $layout) {
-				$viewobj = $views[$mapitem];
-				break;
-			}
-		}
-		
-		foreach($path as $view => $element) {
-			if($item->query['view'] == $view) {
-				
-			}
-		}
-
-		var_dump($path, $query);
-		if(isset($item->query['view']) && $item->query['view'] == $query['view']) {
-			$view = $views[$query['view']];
-			if(isset($item->query[$view->id]) && $item->query[$view->id] == (int) $query[$view->id]) {
-				unset($query[$view->id]);
-				$view = $view->parent;
-				while($view) {
-					unset($query[$view->child_id]);
-					$view = $view->parent;
-				}
-				unset($query['view']);
-				unset($query['ts']);
-				unset($query['layout']);
-				return array();
-			}
-		}
-
-		$path = array_reverse($crouter->getPath($query));
-		$found = false;
-		$found2 = true;
-		for($i = 0, $j = count($path); $i < $j; $i++) {
-			reset($path);
-			$view = key($path);
-			if($found) {
-				$ids = array_shift($path);
-				if($views[$view]->nestable) {
-					foreach(array_reverse($ids) as $id) {
-						if($found2) {
-							$segments[] = $id;
-						} else {
-							if($item->query[$views[$view]->id] == (int) $id) {
-								$found2 = true;
-							}
-						}
-					}
-				} else {
-					if(is_bool($ids)) {
-						$segments[] = $views[$view]->title;
-					} else {
-						$segments[] = $ids[0];
-					}
-				}
-			} else {
-				if($item->query['view'] != $view) {
-					array_shift($path);
-				} else {
-					if(!$views[$view]->nestable) {
-						array_shift($path);
-					} else {
-						$i--;
-						$found2 = false;
-					}
-					$found = true;
-				}
-			}
-			unset($query[$views[$view]->child_id]);
-		}
-		if(isset($query['layout']) && isset($views[$view]->layouts[$query['layout']])) {
-			$segments[] = $views[$view]->layouts[$query['layout']];
-		}
-		unset($query['layout']);
-		unset($query['view']);
-		unset($query['ts']);
-		unset($query[$views[$view]->id]);
-		return;
-	}
-
-	public static function parseComponentSEF($router, $segments, $vars)
-	{
-		$views = $router->getViews();
-		$menus = JFactory::getApplication()->getMenu();
-		$active = $menus->getActive();
-		$cview = $views[$active->query['view']]->children;
-		if(isset($views[$active->query['view']]->layouts)) {
-			$layouts = $views[$active->query['view']]->layouts;
-		} else {
-			$layouts = false;
-		}
-		$nestable = false;
-		foreach ($segments as $segment) {
-			$found = false;
-			if(is_array($layouts)) {
-				foreach($layouts as $layout => $title) {
-					if($title == $segment) {
-						$vars['layout'] = $layout;
-						$found = true;
-						break;
-					}
-				}
-				if($found) {
-					continue;
-				}
-			}
-			list($id, $alias) = explode('-', $segment, 2);
-			for($i = 0; $i < count($cview); $i++) {
-				$view = $cview[$i];
-				if(isset($view->id) && (int) $id > 0) {
-					$found = true;
-					if($view->nestable) {
-						$item = call_user_func(array($router, 'get'.ucfirst($view->name)), $id);
-						if($item->alias != $alias) {
-							$found = false;
-							$cview = array_merge($cview, $view->children);
-							continue;
-						}
-						$nestable = true;
-					}
-					$vars['view'] = $view->name;
-					if(isset($view->parent->id) && isset($vars[$view->parent->id])) {
-						$vars[$view->parent_id] = $vars[$view->parent->id];
-					}
-					$vars[$view->id] = $id;
-
-				} elseif($view->title == $segment) {
-					$vars['view'] = $view->name;
-					$found = true;
-					break;
-				}
-			}
-			if($found) {
-				if(!$nestable) {
-					if(!isset($cview->children)) {
-						break;
-					}
-					$cview = $cview->children;
-				}
-				$nestable = false;
-			} else {
-				break;
-			}
-		}
 	}
 }
