@@ -9,15 +9,9 @@
 
 defined('JPATH_PLATFORM') or die;
 
-jimport('joomla.database.database');
-jimport('joomla.database.database.sqlsrv');
-jimport('joomla.utilities.string');
-jimport('joomla.filesystem.folder');
-JLoader::register('JDatabaseQuerySQLAzure', dirname(__FILE__).'/sqlazurequery.php');
-defined('JPATH_PLATFORM') or die;
-require_once JPATH_LIBRARIES.'/joomla/database/database/sqlsrv.php';
-require_once JPATH_LIBRARIES.'/joomla/database/database.php';
-JLoader::register('DatabaseException', JPATH_PLATFORM.'/joomla/database/databaseexception.php');
+require dirname(__FILE__) . '/sqlsrv.php';
+
+JLoader::register('JDatabaseQuerySQLAzure', dirname(__FILE__) . '/sqlazurequery.php');
 
 /**
  * SQL Server database driver

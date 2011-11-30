@@ -148,12 +148,8 @@ class plgSearchNewsfeeds extends JPlugin
 			$case_when1 .= ' ELSE ';
 			$case_when1 .= $c_id.' END as catslug';
 			
-			$query->select('a.name AS title, "" AS created, a.link AS text, '
-						.$case_when.","
-						.$case_when1);
-			//query->concatenate(array($db->Quote($section), "c.title"), " / ").' AS section,'
+			$query->select('a.name AS title, "" AS created, a.link AS text, ' . $case_when."," . $case_when1);
 			$query->select($query->concatenate(array($db->Quote($searchNewsfeeds), 'c.title'), " / ").' AS section');
-						//.'CONCAT_WS(" / ", '. $db->Quote($searchNewsfeeds) .', c.title) AS section,'
 			$query->select('"1" AS browsernav');
 			$query->from('#__newsfeeds AS a');
 			$query->innerJoin('#__categories as c ON c.id = a.catid');

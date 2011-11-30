@@ -59,12 +59,15 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 				$query .= (string) $this->insert;
 
 				// Set method
-				if ($this->set) {
+				if ($this->set)
+				{
 					$query .= (string) $this->set;
 				}
 				// Columns-Values method
-				elseif ($this->values) {
-					if ($this->columns) {
+				elseif ($this->values)
+				{
+					if ($this->columns)
+					{
 						$query .= (string) $this->columns;
 					}
 
@@ -75,8 +78,8 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 
 					
 					if($this->auto_increment_field) {
-						$query = 'SET IDENTITY_INSERT '.$tableName.' ON;' .$query .'SET IDENTITY_INSERT '.$tableName.' OFF;';
-					}
+					$query = 'SET IDENTITY_INSERT ' . $tableName . ' ON;' . $query . 'SET IDENTITY_INSERT ' . $tableName . ' OFF;';
+				}
 					if ($this->where) {
 						$query .= (string) $this->where;
 					}
@@ -84,7 +87,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 				}
 
 				break;
-				
+
 			default:
 				$query = parent::__toString();
 				break;
@@ -106,13 +109,13 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 */
 	function castAsChar($value)
 	{
-		return 'CAST('.$value.' as NVARCHAR(10))';
+		return 'CAST(' . $value . ' as NVARCHAR(10))';
 	}
 
 	/**
 	 * Gets the function to determine the length of a character string.
 	 *
-	 * @param   string  $value  A value.
+	 * @param   string  $field  A value.
 	 *
 	 * @return  string  The required char length call.
 	 *
@@ -120,7 +123,7 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 */
 	function charLength($field)
 	{
-		return 'DATALENGTH('.$field.') IS NOT NULL';
+		return 'DATALENGTH(' . $field . ') IS NOT NULL';
 	}
 
 	/**
@@ -135,11 +138,13 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 */
 	function concatenate($values, $separator = null)
 	{
-		if($separator)
+		if ($separator)
 		{
-			return '('.implode("+'".$separator."'+", $values).')';
-		}else{
-			return '('.implode('+', $values).')';
+			return '(' . implode('+' . $this->quote($separator) . '+', $values) . ')';
+		}
+		else
+		{
+			return '(' . implode('+', $values) . ')';
 		}
 	}
 
@@ -166,8 +171,6 @@ class JDatabaseQuerySQLSrv extends JDatabaseQuery
 	 */
 	function length($value)
 	{
-		return 'LEN('.$value.')';
+		return 'LEN(' . $value . ')';
 	}
-
-	
 }

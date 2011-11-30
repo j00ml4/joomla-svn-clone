@@ -8,7 +8,7 @@
 // No direct access
 defined('_JEXEC') or die;
 
-// Include dependancies.
+// Include dependencies.
 jimport('joomla.application.component.modeladmin');
 jimport('joomla.filesystem.file');
 jimport('joomla.filesystem.folder');
@@ -452,8 +452,8 @@ class MenusModelItem extends JModelAdmin
 				'UPDATE '.$db->nameQuote('#__menu') .
 				' SET '.$db->nameQuote('menutype').' = '.$db->quote($menuType).
 				' WHERE '.$db->nameQuote('id').' IN ('.implode(',', $children).')'
-			);
-			$db->query();
+				);
+				$db->query();
 
 				// Check for a database error.
 				if ($db->getErrorNum()) {
@@ -1044,30 +1044,44 @@ class MenusModelItem extends JModelAdmin
 			$table->load($pk);
 			$isNew = false;
 		}
+		if (!$isNew && $table->menutype == $data['menutype']) {
+			if ($table->parent_id == $data['parent_id'] ) {
 
-		// This is a new menu
-		if ($data['id'] == 0) {
+				// If first is chosen make the item the first child of the selected parent.
+				if ($data['menuordering'] == -1) {
+					$table->setLocation($data['parent_id'], 'first-child');
+				}
+				// If last is chosen make it the last child of the selected parent.
+				elseif ($data['menuordering'] == -2) {
+					$table->setLocation($data['parent_id'], 'last-child');
+				}
+				// Don't try to put an item after itself. All other ones put after the selected item.
+				elseif ($data['menuordering'] && ($table->id != $data['menuordering']))
+				{
+					$table->setLocation($data['menuordering'], 'after');
+				}
+				// Just leave it where it is if no change is made.
+				elseif ( $data['menuordering'] && ($table->id ==  $data['menuordering']))
+				{
+					unset( $data['menuordering']);
+				}
+			}
+			// Set the new parent id if parent id not matched and put in last position
+			else {
+				$table->setLocation($data['parent_id'],'last-child');
+
+			}
+		}
+		// We have a new item, so it is not a change.
+		elseif ($isNew) {
 			$table->setLocation($data['parent_id'], 'last-child');
 		}
-		// The menu type has changed, set the parent to be the root menu item
-		elseif ($table->menutype != $data['menutype']) {
+		// The menu type has changed so we need to just put this at the bottom
+		// of the root level.
+		else  {
 			$table->setLocation(1, 'last-child');
 		}
-		// Set the new parent id if parent id not matched
-		elseif ($table->parent_id != $data['parent_id']) {
-					$table->setLocation($data['parent_id'], 'last-child');
-		}
-		// If menuordering is -1 put the item at the beginning
-		elseif ($data['menuordering'] == -1)
-		{
-			$table->setLocation($data['parent_id'], 'first-child');
-		}
-		// Don't try to put an item after itself, just leave it where it is.
-		elseif ($table->id != $data['menuordering'])
-		{
-			$table->setLocation($data['menuordering'], 'after');
-		}
-		
+
 		// Bind the data.
 		if (!$table->bind($data)) {
 			$this->setError($table->getError());

@@ -11,6 +11,8 @@ defined('JPATH_PLATFORM') or die;
 
 jimport('joomla.database.databasequery');
 
+JLoader::register('JDatabaseQuerySQLSrv', dirname(__FILE__) . '/sqlsrvquery.php');
+
 /**
  * Query Building Class.
  *
@@ -27,15 +29,7 @@ class JDatabaseQuerySQLAzure extends JDatabaseQuery
 	 * used for the opening quote and the second for the closing quote.
 	 *
 	 * @var    string
-	 * @since  11.1
-	 */
-	protected $name_quotes = '';
-
-	/**
-	 * The null or zero representation of a timestamp for the database driver.  This should be
-	 * defined in child classes to hold the appropriate value for the engine.
 	 *
-	 * @var    string
 	 * @since  11.1
 	 */
 	protected $null_date = '1900-01-01 00:00:00';
