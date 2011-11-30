@@ -107,7 +107,7 @@ abstract class JHtmlAccess
 		$query->select('a.id AS value, a.title AS text, COUNT(DISTINCT b.id) AS level');
 		$query->from($db->quoteName('#__usergroups') . ' AS a');
 		$query->join('LEFT', $db->quoteName('#__usergroups') . ' AS b ON a.lft > b.lft AND a.rgt < b.rgt');
-		$query->group('a.id, a.title, a.ordering');
+		$query->group('a.id, a.title');
 		$query->order('a.lft ASC');
 		$db->setQuery($query);
 		$options = $db->loadObjectList();
