@@ -693,7 +693,7 @@ class JDatabaseSQLSrv extends JDatabase
 			if (!class_exists('JDatabaseQuerySQLSrv')) {
 				throw new JDatabaseException(JText::_('JLIB_DATABASE_ERROR_MISSING_QUERY'));
 			}
-			return new JDatabaseQuerySQLAzure($this);
+			return new JDatabaseQuerySQLSrv($this);
 		}
 		else
 		{
@@ -721,10 +721,11 @@ class JDatabaseSQLSrv extends JDatabase
 		settype($tables, 'array');
 		foreach ($tables as $table)
 		{
+			$table_temp = $this->replacePrefix((string) $table);
 			// Set the query to get the table fields statement.
 			$this->setQuery(
 				'SELECT column_name as Field, data_type as Type, is_nullable as \'Null\', column_default as \'Default\'' .
-				' FROM information_schema.columns' . ' WHERE table_name = ' . $this->quote($table)
+				' FROM information_schema.columns' . ' WHERE table_name = ' . $this->quote($table_temp)
 			);
 			$fields = $this->loadObjectList();
 
