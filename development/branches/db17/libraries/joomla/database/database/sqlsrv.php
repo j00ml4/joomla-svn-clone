@@ -874,7 +874,7 @@ class JDatabaseSQLSrv extends JDatabase
 		$sql = $this->replacePrefix((string) $this->sql);
 		if ($this->limit > 0 || $this->offset > 0)
 		{
-			$sql = $this->limit($sql, $this->limit, $this->offset);
+			$sql = $this->_limit($sql, $this->limit, $this->offset);
 		}
 
 		// If debugging is enabled then let's log the query.
@@ -1216,7 +1216,7 @@ class JDatabaseSQLSrv extends JDatabase
 	 *
 	 * @since   11.1
 	 */
-	protected function checkFieldExists($table, $field)
+	protected function _checkFieldExists($table, $field)
 	{
 		$table = $this->replacePrefix((string) $table);
 		$sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS" . " WHERE TABLE_NAME = '$table' AND COLUMN_NAME = '$field'" .
@@ -1244,7 +1244,7 @@ class JDatabaseSQLSrv extends JDatabase
 	 *
 	 * @since   11.1
 	 */
-	protected function limit($sql, $limit, $offset)
+	protected function _limit($sql, $limit, $offset)
 	{
 		$orderBy = stristr($sql, 'ORDER BY');
 		if (is_null($orderBy) || empty($orderBy))
