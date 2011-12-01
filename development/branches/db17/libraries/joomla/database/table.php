@@ -127,15 +127,15 @@ abstract class JTable extends JObject
 		{
 			// Lookup the fields for this table only once.
 			$name = $this->_tbl;
-			$fields = $this->_db->getTableColumns($name, false);
+			$fields	= $this->_db->getTableFields($name, false);
 
-			if (empty($fields))
+			if (!isset($fields[$name])) 
 			{
 				$e = new JException(JText::_('JLIB_DATABASE_ERROR_COLUMNS_NOT_FOUND'));
 				$this->setError($e);
 				return false;
 			}
-			$cache = $fields;
+			$cache = $fields[$name];
 		}
 
 		return $cache;
