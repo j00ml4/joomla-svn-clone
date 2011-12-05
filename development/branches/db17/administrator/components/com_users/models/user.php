@@ -567,7 +567,6 @@ class UsersModelUser extends JModelAdmin
 			}
 		}
 		else {
-			jimport('joomla.user.helper');
 			$result = JUserHelper::getUserGroups($userId);
 		}
 
