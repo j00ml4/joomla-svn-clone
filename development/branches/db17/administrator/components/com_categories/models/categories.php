@@ -212,9 +212,15 @@ class CategoriesModelCategories extends JModelList
 		if ($language = $this->getState('filter.language')) {
 			$query->where('a.language = '.$db->quote($language));
 		}
-
-		// Add the list ordering clause.
-		$query->order($db->getEscaped($this->getState('list.ordering', 'a.title')).' '.$db->getEscaped($this->getState('list.direction', 'ASC')));
+		
+		// Add the list ordering clause
+		$listOrdering = $this->getState('list.ordering', 'a.lft');
+		$listDirn = $db->getEscaped($this->getState('list.direction', 'ASC'));
+		if ($listOrdering == 'a.access') {
+			$query->order('a.access '.$listDirn.', a.lft '.$listDirn);
+		} else {
+			$query->order($db->getEscaped($listOrdering).' '.$listDirn);
+		}
 
 		//echo nl2br(str_replace('#__','jos_',$query));
 		return $query;
