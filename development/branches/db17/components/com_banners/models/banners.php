@@ -80,7 +80,7 @@ class BannersModelBanners extends JModelList
 			$query->where('a.state=1');
 			$query->where('('.$query->currentTimestamp().' >= a.publish_up OR a.publish_up = '.$nullDate.')');
 			$query->where('('.$query->currentTimestamp().' <= a.publish_down OR a.publish_down = '.$nullDate.')');
-			$query->where('(a.imptotal = 0 OR a.impmade = a.imptotal)');
+			$query->where('(a.imptotal = 0 OR a.impmade <= a.imptotal)');
 			
 			
 
@@ -259,7 +259,7 @@ class BannersModelBanners extends JModelList
 					// insert new count
 					//sqlsrv change
 					$query->insert('#__banner_tracks');
-					 $query->columns('count');
+					$query->columns('count');
 					$query->columns('track_type');
 					$query->columns('banner_id');
 					$query->columns('track_date');
