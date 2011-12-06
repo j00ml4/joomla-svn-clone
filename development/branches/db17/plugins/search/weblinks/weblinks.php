@@ -160,7 +160,7 @@ class plgSearchWeblinks extends JPlugin
       
 			$query->select('a.title AS title, a.description AS text, a.created AS created, a.url, '
 						.$case_when.','.$case_when1.', '
-						.$query->concat(array($db->Quote($section), "c.title"), " / ").' AS section, \'1\' AS browsernav');
+						.$query->concatenate(array($db->Quote($section), "c.title"), " / ").' AS section, \'1\' AS browsernav');
 			$query->from('#__weblinks AS a');
 			$query->innerJoin('#__categories AS c ON c.id = a.catid');
 			$query->where('('.$where.')' . ' AND a.state in ('.implode(',',$state).') AND  c.published=1 AND  c.access IN ('.$groups.')');
