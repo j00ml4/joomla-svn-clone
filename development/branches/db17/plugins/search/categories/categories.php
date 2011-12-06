@@ -85,6 +85,31 @@ class plgSearchCategories extends JPlugin
 		if ($text == '') {
 			return array();
 		}
+		
+		switch($phrase) {
+			case 'exact':
+				$text		= $db->Quote('%'.$db->getEscaped($text, true).'%', false);
+				$wheres2 	= array();
+				$wheres2[]	= 'a.title LIKE '.$text;
+				$wheres2[]	= 'a.description LIKE '.$text;
+				$where		= '(' . implode(') OR (', $wheres2) . ')';
+				break;
+			
+			case 'any':
+			case 'all';
+			default:
+				$words = explode(' ', $text);
+				$wheres = array();
+				foreach ($words as $word) {
+					$word		= $db->Quote('%'.$db->getEscaped($word, true).'%', false);
+					$wheres2 	= array();
+					$wheres2[]	= 'a.title LIKE '.$word;
+					$wheres2[]	= 'a.description LIKE '.$word;
+					$wheres[]	= implode(' OR ', $wheres2);
+				}
+				$where = '(' . implode(($phrase == 'all' ? ') AND (' : ') OR ('), $wheres) . ')';
+				break;
+		}
 
 		switch ($ordering) {
 			case 'alpha':
@@ -132,7 +157,6 @@ class plgSearchCategories extends JPlugin
 					$rows[$i]->section	= JText::_('JCATEGORY');
 				}
 
-				$return = array();
 				foreach($rows as $key => $category) {
 					if (searchHelper::checkNoHTML($category, $searchText, array('name', 'title', 'text'))) {
 						$return[] = $category;
