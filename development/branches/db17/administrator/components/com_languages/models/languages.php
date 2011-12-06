@@ -106,7 +106,7 @@ class LanguagesModelLanguages extends JModelList
 		$db = $this->getDbo();
 		$query = $db->getQuery(true);
 
-		// Select all fields from the users table.
+		// Select all fields from the languages table.
 		$query->select($this->getState('list.select', 'a.*', 'l.home'));
 		$query->from($db->nameQuote('#__languages').' AS a');
 
