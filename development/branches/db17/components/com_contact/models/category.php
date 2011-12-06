@@ -67,6 +67,7 @@ class ContactModelCategory extends JModelList
 				'state', 'a.state',
 				'country', 'a.country',
 				'ordering', 'a.ordering',
+				'sortname',
 				'sortname1', 'a.sortname1',
 				'sortname2', 'a.sortname2',
 				'sortname3', 'a.sortname3'
@@ -226,7 +227,15 @@ class ContactModelCategory extends JModelList
 		$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
 		$this->setState('list.start', $limitstart);
 
-		$orderCol	= JRequest::getCmd('filter_order', 'ordering');
+		// Get list ordering default from the parameters
+		$menuParams = new JRegistry();
+		if ($menu = $app->getMenu()->getActive()) {
+			$menuParams->loadString($menu->params); 
+		}
+		$mergedParams = clone $params;
+		$mergedParams->merge($menuParams);
+		
+		$orderCol	= JRequest::getCmd('filter_order', $mergedParams->get('initial_sort', 'ordering'));
 		if (!in_array($orderCol, $this->filter_fields)) {
 			$orderCol = 'ordering';
 		}

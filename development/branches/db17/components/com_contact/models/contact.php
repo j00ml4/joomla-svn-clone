@@ -150,8 +150,7 @@ class ContactModelContact extends JModelForm
 
 				// Filter by start and end dates.
 				$nullDate = $db->Quote($db->getNullDate());
-				$nowDate = $db->Quote(JFactory::getDate()->toMySQL());
-
+				$nowDate = $db->Quote(JFactory::getDate()->format('Y-m-d H:i:s'));
 
 				// Filter by published state.
 				$published = $this->getState('filter.published');
@@ -308,7 +307,7 @@ class ContactModelContact extends JModelForm
 				$query->order('state DESC, created DESC');
 				// filter per language if plugin published
 				if (JFactory::getApplication()->getLanguageFilter()) {
-					$query->where('language='.$db->quote(JFactory::getLanguage()->getTag()).' OR language ="*"');
+					$query->where('language='.$db->quote(JFactory::getLanguage()->getTag()).' OR language='.$db->quote('*'));
 				}
 				if (is_numeric($published)) {
 					$query->where('state IN (1,2)');
