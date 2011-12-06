@@ -48,7 +48,7 @@ class plgSearchContacts extends JPlugin
 	* The sql must return the following fields that are used in a common display
 	* routine: href, title, section, created, text, browsernav
 	* @param string Target search string
-	* @param string mathcing option, exact|any|all
+	* @param string matching option, exact|any|all
 	* @param string ordering option, newest|oldest|popular|alpha|category
 	 */
 	function onContentSearch($text, $phrase='', $ordering='', $areas=null)
