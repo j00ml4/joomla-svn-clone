@@ -156,7 +156,7 @@ class JDatabaseSQLSrv extends JDatabase
 	 *
 	 * @since   11.1
 	 */
-	protected function getTableConstraints($tableName)
+	protected function _get_table_constraints($tableName)
 	{
 		$query = $this->getQuery(true);
 
@@ -178,7 +178,7 @@ class JDatabaseSQLSrv extends JDatabase
 	 *
 	 * @since   11.1
 	 */
-	protected function renameConstraints($constraints = array(), $prefix = null, $backup = null)
+	protected function _renameConstraints($constraints = array(), $prefix = null, $backup = null)
 	{
 		foreach ($constraints as $constraint)
 		{
@@ -353,7 +353,7 @@ class JDatabaseSQLSrv extends JDatabase
 		$query = $this->getQuery(true);
 
 		$this->setQuery(
-			'IF EXISTS(SELECT TABLE_NAME FROM' . ' INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = ' . $query->quote($tableName) . ') DROP TABLE'
+			'IF EXISTS(SELECT TABLE_NAME FROM'.' INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '.$query->quote($tableName).') DROP TABLE '.$tableName
 		);
 
 		$this->query();
