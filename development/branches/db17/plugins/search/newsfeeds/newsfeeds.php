@@ -37,9 +37,9 @@ class plgSearchNewsfeeds extends JPlugin
 	function onContentSearchAreas()
 	{
 		static $areas = array(
-		'newsfeeds' => 'PLG_SEARCH_NEWSFEEDS_NEWSFEEDS'
-		);
-		return $areas;
+			'newsfeeds' => 'PLG_SEARCH_NEWSFEEDS_NEWSFEEDS'
+			);
+			return $areas;
 	}
 
 	/**
@@ -81,7 +81,6 @@ class plgSearchNewsfeeds extends JPlugin
 			return array();
 		}
 
-		$wheres = array();
 		switch ($phrase) {
 			case 'exact':
 				$text		= $db->Quote('%'.$db->getEscaped($text, true).'%', false);
