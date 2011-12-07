@@ -43,7 +43,7 @@ window.addEvent('resize', function() {
 		{    if($$('.mobilewrap'))
 				{
 	
-			
+		
 			$$('.mobilewrap').setStyle('display','block');
 			$$('.mobilewrap').setStyle('opacity','1');
 			
@@ -64,6 +64,7 @@ function openmenu(what)
 
 	if(state=='none')
 		{
+		document.id(what).style.visibility='visible';
 		document.id(what).style.display='block';
 		document.id(what).style.opacity='1';
 		document.id(what).setProperty('aria-expanded', 'true');
