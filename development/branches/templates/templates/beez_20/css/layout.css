@@ -682,7 +682,7 @@ dd.createdby
 {
     text-transform:none;
     display:inline-block;
-    padding:0 5px 0 0
+    padding:0 5px 0 0;
     margin:0 10px 0 0;
 }
 
@@ -832,7 +832,7 @@ p.counter
 }
 #right ul.categories-module ul
 {margin: 15px 0 15px 10px}
-}
+
 
 #right ul.category-module
 {
