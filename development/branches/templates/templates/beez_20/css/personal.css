@@ -71,13 +71,6 @@ fieldset
 	background:#eee
 }
 
-/* ##########################  back  ########################### */
-
-#back
-{
-
-}
-
 /* ##########################  logo  ########################### */
 
 #logo span
@@ -91,13 +84,15 @@ fieldset
 #all #header
 {padding-top:8.0em ;
 }
+
+/* angie*/
 .logoheader
 {
 
 	background:  #0c1a3e  URL(../images/personal/personal2.png) no-repeat bottom right ;
 	color:#fff;
 	min-height:200px;
-	margin:0em 10px 0 10px !important;
+	margin:0em 10px ;
 
 }
 
@@ -145,20 +140,21 @@ h1#logo
    /* top:62px; */
    top:5em;
 
-	padding: 0px 0px 0px 0 ;
+	padding: 0 ;
 	background:#e0e0e0  url(../images/personal/ecke.gif) top left repeat-x ;
 	border:0 ;
 	text-align:left;
 	left:0px;
 	 display:block;
-	 margin:0px 10px 0 10px;
+	 margin:0px 10px ;
 	 border-top:solid 1px #ddd;
 
 }
 
 
 #header ul.menu li
-{border:0; margin:0 !important;	   }
+{border:0; margin:0 !important;
+}
 #header ul.menu li a:link,
 #header ul.menu li a:visited
 {
@@ -166,11 +162,18 @@ h1#logo
 	color:#333;
 	border:0 ;
 	border-right:solid 1px #ddd;
-	margin:0px 0 0 0 ;
+	margin:0;
 	padding:12px 15px ;
 	position:relative;
 	background: #e0e0e0 url(../images/personal/ecke.gif) repeat-x top left;
-	display:inline-block
+	display:inline-block;
+	 -moz-transition: background-color 1s ease-out;
+	  -webkit-transition: background-color 1s ease-out;
+	  -ms-transition: background-color all 1s ease;
+       -o-transition:background-color all 1s ease;
+          transition: background-color all 1s ease;
+	
+
 
 }
 
@@ -188,6 +191,7 @@ h1#logo
 	color:#f5f5f5;
 	background:url(../images/personal/navi_active.png) ;
 	text-shadow: 1px 1px 1px #000;
+
 }
 
 
@@ -276,7 +280,8 @@ padding-right:1px ;
 	border:solid 1px #ccc;
 	border-bottom:0;
 	border-right:0;
-	padding:5px
+	padding:5px;
+	border-radius:5px
 
 }
 
@@ -361,15 +366,7 @@ h3.js_heading
 	font-family: 'Titillium Maps', Arial;
 }
 
-h3.js_heading span.backh
-{
-	border:solid 0px #000
-}
 
-h3.js_heading span.backh1
-{
-
-}
 
 h3.js_heading a
 {
@@ -389,36 +386,9 @@ h3.js_heading a.opencloselink:focus
 }
 
 
-#right h3 span.backh
-{
 
-}
 
-#right h3 span.backh2
-{
-	background:#fff;
-	color:#555;
-	border-bottom:solid 1px #ddd
-}
 
-#right h3 span.backh3
-{
-padding-left:0
-}
-
-h3.js_heading a:link,
-h3.js_heading a:visited,
-h3.js_heading a:hover,
-h3.js_heading a:active,
-h3.js_heading a:focus
-{
-
-}
-
-#nav h3.js_heading a:focus
-{
-
-}
 
 #nav form
 {
@@ -448,6 +418,7 @@ ul.menu
 	border:solid 0px #eee;
 }
 
+/* angie*/
 .module_content ul.menu
 {
 	border:0;
@@ -608,16 +579,6 @@ ul.menu li.active  ul li.active  ul li.active  ul li.active  ul li.active a:visi
 /* ##########################  content - main   ########################### */
 
 
-#main
-{
-
-}
-
-#main a:link,
-#main a:visited
-{
-
-}
 
 #main a:hover,
 #main a:active,
@@ -658,10 +619,7 @@ ul.menu li.active  ul li.active  ul li.active  ul li.active  ul li.active a:visi
 	border: solid 0px #333333;
 }
 
-#main ul li
-{
 
-}
 
 .small
 {
@@ -691,13 +649,6 @@ ul#archive-items li.row1
 {
 	border:solid 1px #ddd;
 	padding:2px
-}
-
-/* ++++++++++++++  leading  ++++++++++++++ */
-
-.items-leading
-{
-
 }
 
 
@@ -762,6 +713,7 @@ a.readmore:visited
 	color:#095197;
 	background:#eee url(../images/nature/arrow1.gif) no-repeat left top;
 	border:solid 1px #ddd;
+	border-radius:5px
 }
 
 .readmore a:hover,
@@ -843,10 +795,6 @@ table.contenttoc
 
 
 
-#right h3
-{
-
-}
 
 #right h4
 {
@@ -906,10 +854,7 @@ ul.newsfeed
 	border-bottom:solid 1px #ddd;
 }
 
-.newsfeed-item h5 a
-{
 
-}
 
 /* ++++++++++++++  newsflash  ++++++++++++++ */
 /* newsflash horizontal */
@@ -931,13 +876,6 @@ ul.newsflash-horiz li h4
 	font-family: 'Titillium Maps', Arial;
 }
 
-
-/* newsflash vertical */
-
-.newsflash-vert
-{
-
-}
 
 /* ++++++++++++++  banner  ++++++++++++++ */
 
@@ -1171,15 +1109,7 @@ label.invalid
 
 
 /* ##########################  tables   ########################### */
-table
-{
 
-}
-
-tbody
-{
-
-}
 
 tr.odd,
 .cat-list-row1
@@ -1187,11 +1117,6 @@ tr.odd,
 	background:url(../images/news.gif)  repeat-x;
 }
 
-table.newsfeeds td,
-table.weblinks td
-{
-
-}
 
 table.weblinks th,
 table.newsfeeds th,
@@ -1219,21 +1144,7 @@ td.table_footer
 	background:#ddd url(../images/table_footer.gif) bottom left repeat-x;
 }
 
-td.counter
-{
 
-}
-
-td.num,
-td.hits
-{
-
-}
-
-td p
-{
-
-}
 
 table.category th a img
 {
@@ -1270,10 +1181,6 @@ fieldset.filters
 	color:#000;
 }
 
-.contact .button
-{
-
-}
 
 .contact input.invalid,
 .contact textarea.invalid
@@ -1395,12 +1302,6 @@ table.pagenav td
 
 }
 
-.cat-children ul ul ul,
-.categories-list ul ul ul
-{
-
-
-}
 .categories-list .category-desc ul li
 {list-style-type:square
 }
@@ -1457,7 +1358,7 @@ table.pagenav td
 }
 #main .contact .panel h3
 {
-	margin:0px 0 0px 0;
+	margin:0;
 	padding: 0;
 	background:#eee;
 	border:0

@@ -41,7 +41,7 @@ body
 {
     display:block !important;
     position:relative;
-    padding:0px 0 0 0;
+    padding:0;
     overflow:hidden;
 }
 
@@ -122,7 +122,7 @@ body
 /* ++++++++++++++  nav before content  ++++++++++++++ */
 .left1
 {
-    padding:0px 0 0 0px;
+    padding:0;
     float: left;
     margin:10px 3% 10px 0px;
     width: 21%;
@@ -351,10 +351,37 @@ h1#logo
         padding:0px 5px
 }
 
+.cols-4 .column-1
+{
+        width:23%;
+        float:left
+}
+
+.cols-4 .column-2
+{
+        width:23%;
+        margin-left:1%;
+        float:left;
+}
+
+.cols-4 .column-3
+{
+        width:23%;
+        margin-left:1%;
+        float:left
+}
+
+.cols-4 .column-4
+{
+        width:23%;
+        margin-left:0;
+        float:right
+}
+
 .items-row
 {
         overflow:hidden;
-        margin-bottom:10px !important;
+        margin-bottom:10px 
 }
 
 .column-1,
@@ -419,3 +446,7 @@ h1#logo
 }
 
 img { border: 0 none; }
+.mobilewrap {display:block}
+.mobile_select {display:none}
+	
+

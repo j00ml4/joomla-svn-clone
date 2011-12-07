@@ -86,6 +86,7 @@ $doc->addScript($this->baseurl.'/templates/'.$this->template.'/javascript/md_sty
                         <link href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/ie7only.css" rel="stylesheet" type="text/css" />
                 <![endif]-->
                 <script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/javascript/hide.js"></script>
+                
 
                 <script type="text/javascript">
                         var big ='<?php echo (int)$this->params->get('wrapperLarge');?>%';
@@ -105,8 +106,15 @@ $doc->addScript($this->baseurl.'/templates/'.$this->template.'/javascript/md_sty
                         var smallerTitle='<?php echo JText::_('TPL_BEEZ2_DECREASE_SIZE'); ?>';
                 </script>
 
-        </head>
 
+<?php if($this->params->get('responsive')==1):?>
+<script type="text/javascript" src="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/javascript/mobile.js"></script>
+<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+<link rel="apple-touch-icon" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/images/mobile/iphon_icon.png"/>
+<link rel="apple-touch-startup-image" href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/images/mobile/startup.png" />
+<link rel="stylesheet" media="screen and (max-width: 481px)"  href="<?php echo $this->baseurl ?>/templates/<?php echo $this->template; ?>/css/mobile.css" />
+<?php endif; ?>
+        </head>
         <body>
 
 <div id="all">
