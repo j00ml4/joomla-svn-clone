@@ -1,0 +1,388 @@
+#all #header {
+	padding-top: 3em 
+}
+
+#header .logoheader {
+	min-height: 130px;
+	margin: 0 ;
+	border: 0;
+	background: url("../images/mobile/smallbg.jpg") bottom left;
+}
+
+#header .mobilewrap ul {
+	position: relative;
+	top: 0px ;
+	border: solid 1px #000;
+}
+
+#header .mobilewrap ul.menu li {
+	display: block;
+	float: none !important;
+	background: #fff
+}
+
+.mobile_select {
+	display: block;
+}
+
+#close {
+	display: none
+}
+
+#wrapper2,#nav,.item,.box,.search,.phrases-box,.ordering-box,p.counter,#right,#wrapper
+	{
+	float: none !important;
+	width: auto !important;
+	margin: 0;
+	border: 0
+}
+
+.box {
+	border-bottom: solid 1px #ddd
+}
+
+#fontsize {
+	display: none;
+	float: none
+}
+
+#main .items-row .item {
+	
+	padding: 20px 0 
+}
+
+.item img {
+	max-width: 100%
+}
+
+#main .items-row {
+	border: solid 0px;
+	margin: 0;
+	padding: 0 
+}
+
+#logo {
+	margin-top: 60px
+}
+
+#header   #line {
+	width: 100% !important;
+	right: 0;
+	background: #ccc;
+	text-align: center;
+	padding: 0 !important
+}
+
+#header form {
+	margin-top: 0 !important;
+	float: none;
+	padding: 5px 0;
+	width: 100%;
+	text-align: center;
+	display: block !important;
+	background: #333333; /* Old browsers */
+	background: -moz-linear-gradient(top, #333333 0%, #494645 50%, #636363 50%, #333333
+		50%, #111111 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #333333),
+		color-stop(50%, #494645), color-stop(50%, #636363),
+		color-stop(50%, #333333), color-stop(100%, #111111) );
+	/* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #333333 0%, #494645 50%, #636363 50%,
+		#333333 50%, #111111 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #333333 0%, #494645 50%, #636363 50%, #333333
+		50%, #111111 100%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, #333333 0%, #494645 50%, #636363 50%, #333333
+		50%, #111111 100%); /* IE10+ */
+	filter: progid :     DXImageTransform.Microsoft.gradient (     
+         startColorstr =  
+                  '#333333', endColorstr =     '#111111', GradientType =
+		  
+         0 ); /* IE6-9 */
+	background: linear-gradient(top, #333333 0%, #494645 50%, #636363 50%, #333333 50%,
+		#111111 100%); /* W3C */
+}
+
+.search {
+	padding: 0px;
+	text-align: center;
+	padding: 2px;
+	display: blocks
+}
+
+.search input {
+	border: solid 1px #555 !important;
+	border-radius: 5px;
+
+}
+
+.mobile_select {
+	cursor: default;
+	z-index: 1;
+	color: #fff;
+	background: #f6f8f9
+}
+
+.mobile_select a {
+	background: #2c6999 url(../images/mobile/menu.png) right center no-repeat ;
+	display: block;
+	min-height: 40px
+}
+
+.mobile_select a:hover .mobilewrap {
+	display: block !important;
+}
+
+.mobile_select a span {
+	position: absolute;
+	left: -3000px;
+	top: -3000px
+}
+
+.mobilewrap {
+	border: solid 0px #000;
+	overflow: hidden;
+	background: #fff;
+	-moz-transition: opacity 1s ease-in;
+	-webkit-transition: opacity 2s ease-in;
+	-ms-transition: opacity all 1s ease;
+	-o-transition: opacity all 1s ease;
+	transition: opacity all 1s ease;
+}
+
+#header          .mobilewrap ul li,.mobilewrap ul li {
+	float: none;
+	display: block;
+	background: #fff !important;
+	padding: 2px 0 !important
+}
+
+#header .mobilewrap ul {
+	border: 0 !important;
+	margin: 2px !important
+}
+
+#header          .mobilewrap ul li a {
+	border: 0 !important;
+	display: block !important;
+	border-radius: 5px;
+	border: solid 1px #ddd !important
+}
+
+.mobilewrap ul li ul {
+	position: relative !important;
+	left: 0;
+	top: 0;
+	width: auto;
+	padding: 10px !important;
+	border-radius: 0;
+	font-size: 1em;
+}
+
+#menuwrapper  li:hover ul {
+	left: 0;
+	top: 0em !important
+}
+
+h1#logo {
+	width: 100%;
+	overflow: hidden;
+	font-size: 2.7em;
+	margin-bottom: 0;
+}
+
+.box {
+	float: none;
+	width: 100%
+}
+
+#main {
+	padding: 0
+}
+
+.pane-slider,.pane-down {
+	margin: 0 !important;
+	padding: 5px !important
+}
+
+dl.search-results {
+	border-top: 0 !important;
+	background: #fff !important
+}
+
+#main dl.search-results dt.result-title {
+	color: #fff;
+	text-decoration: none;
+	padding: 10px 5px !important;
+	display: block;
+	background: #333 url(../images/mobile/arrow_white.png) center right
+		no-repeat;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: solid 0px #ccc;
+	border-bottom: 0;
+	text-align: left
+}
+
+#main dl.search-results dt.result-title:hover {
+	background: #095197
+}
+
+#main form fieldset.word {
+	background: #eee
+}
+
+.word input {
+	width: 60%;
+	float: left;
+	color: #333 !important
+}
+
+#main button.button {
+	float: left;
+	width: 25%;
+	overflow: hidden;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #555;
+	color: #fff
+}
+
+dl.search-results dt.result-title a {
+	color: #eee !important;
+	text-decoration: none;
+	display: block
+}
+
+dl.search-results dd {
+	background: #fff;
+	padding: 10px;
+	border: solid 0px #ccc;
+	border-top: 0;
+}
+
+dl.search-results dd.result-created {
+	padding-bottom: 10px;
+	-moz-border-radius: 0 0 10px 10px;
+	border-radius: 0 0 10px 10px;
+	margin-bottom: 10px
+}
+
+#main .search {
+	text-align: left;
+	background: #fff
+}
+
+#main  form fieldset>label {
+	padding: 0 10px;
+}
+
+#main form fieldset {
+	background: #fff;
+	border: 1px solid #A9ABAD;
+	margin: 10px auto;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	padding: 10px;
+	margin: 15px 0
+}
+
+#main  form fieldset legend {
+	text-transform: uppercase;
+	font-weight: bold;
+	text-shadow: #888 0 1px 0;
+	margin-left: 20px
+}
+
+#main form fieldset.only {
+	position: relative;
+	padding: 15px 0
+}
+
+input[type="checkbox"] {
+	position: absolute;
+	right: 10%
+}
+
+#main  form fieldset input[type="checkbox"]+label {
+	width: 90%;
+	height: 27px;
+	font: bold 14px/30px Arial, Sans-serif;
+	background: url(../images/mobile/checkbox.png) top right no-repeat;
+	position: relative;
+	/* text-indent: 100px;*/
+	display: block;
+	margin-bottom: 5px;
+	border-bottom: solid 1px #ddd;
+	padding-bottom: 10px
+}
+
+#main form fieldset input[type="checkbox"]:checked+label {
+	width: 90%;
+	height: 27px;
+	font: bold 14px/30px Arial, Sans-serif;
+	background: url(../images/mobile/checkbox_on.png) top right no-repeat;
+	position: relative;
+	display: block;
+	margin-bottom: 5px;
+	border-bottom: solid 1px #ddd;
+	padding-bottom: 10px
+}
+
+#main  form fieldset .phrases-box {
+	position: relative;
+	padding: 15px 0
+}
+
+input[type="radio"] {
+	position: absolute;
+	right: 0;
+	clear: both
+}
+
+#main form fieldset input[type="radio"]+label {
+	width: 100%;
+	height: 27px;
+	font: bold 14px/30px Arial, Sans-serif;
+	position: relative;
+	display: block;
+	margin-bottom: 5px;
+	border-bottom: solid 1px #ddd;
+	padding-bottom: 10px;
+	background: #fff
+}
+
+#main form fieldset input[type="radio"]:checked+label {
+	width: 100%;
+	height: 27px;
+	font: bold 14px/30px Arial, Sans-serif;
+	background: url(../images/mobile/radio.png) top right no-repeat;
+	position: relative;
+	display: block;
+	margin-bottom: 5px;
+	border-bottom: solid 1px #ddd;
+	padding-bottom: 10px;
+	margin-top:-2px
+}
+
+.ordering-box {
+	clear: both
+}
+
+.box1,.box2,.box3 {
+	border: 0 !important
+}
+
+form fieldset dt,form fieldset dd {
+	float: none !important
+}
+
+.contact input {
+	max-width: 100% !important
+}
+
+iframe {
+	max-width: 100%
+}

@@ -57,6 +57,11 @@
 	<config>
 		<fields name="params">
 			<fieldset name="advanced">
+			
+			 <field name="responsive" type="radio" default="1" label="TPL_BEEZ2_FIELD_RESPONSIVE_LABEL" description="TPL_BEEZ2_FIELD_RESPONSIVE_LABEL_DESC">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
 				<field name="wrapperSmall"  class="validate-numeric" type="text" default="53"
 					label="TPL_BEEZ2_FIELD_WRAPPERSMALL_LABEL"
 					description="TPL_BEEZ2_FIELD_WRAPPERSMALL_DESC"
