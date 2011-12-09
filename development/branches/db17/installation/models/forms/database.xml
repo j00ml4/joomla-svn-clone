@@ -3,14 +3,14 @@
 <form>
 	<fieldset>
 		<fieldset name="basic">
-	<field
-			name="dbtype"
+		<field
+			name="db_type"
 			type="databaseconnection"
 			supported="mysql,mysqli,sqlsrv,sqlazure"
 			default="mysqli"
-			label="COM_CONFIG_FIELD_DATABASE_TYPE_LABEL"
-			description="COM_CONFIG_FIELD_DATABASE_TYPE_DESC"
-			filter="string"/>
+			label="INSTL_DATABASE_TYPE_LABEL"
+			filter="string"
+			/>
 			<field name="db_host" type="text" id="db_host" class="inputbox"
 				label="INSTL_DATABASE_HOST_LABEL"
 				default="localhost"
