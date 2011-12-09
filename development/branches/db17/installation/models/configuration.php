@@ -240,29 +240,11 @@ class JInstallationModelConfiguration extends JModel
 		  $query->set('params = '.$db->quote(''));
 		  $query->where('id = 42');
 		} else {
-		  //if($options->db_type =='mysql' || $options->db_type == 'mysqli'){
-			  $query = $db->getQuery(true);
-			  $columns = 'id,name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params';
-			  $query->insert('#__users', true);
-			  $query->columns($columns);
-			  $query->values('42');
-			  $query->values($db->quote('Super User'));
-			  $query->values($db->quote($options->admin_user));
-			  $query->values($db->quote($options->admin_email));
-			  $query->values($db->quote($cryptpass));
-			  $query->values($db->quote('deprecated'));
-			  $query->values('0');
-			  $query->values('1');
-			  $query->values($db->quote($installdate));
-			  $query->values($db->quote($nullDate));
-			  $query->values($db->quote('0'));
-			  $query->values($db->quote(''));
-		//}//sqlsrv change
-		/*else {
 		  $query = $db->getQuery(true);
-		  $fields = 'name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params';
+		  $columns = 'id,name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params';
 		  $query->insert('#__users', true);
-		  $query->columns($fields);
+		  $query->columns($columns);
+		  $query->values('42');
 		  $query->values($db->quote('Super User'));
 		  $query->values($db->quote($options->admin_user));
 		  $query->values($db->quote($options->admin_email));
@@ -274,7 +256,6 @@ class JInstallationModelConfiguration extends JModel
 		  $query->values($db->quote($nullDate));
 		  $query->values($db->quote('0'));
 		  $query->values($db->quote(''));
-		}*/
 	}
 	$db->setQuery($query);
 	if (!$db->query()) {
