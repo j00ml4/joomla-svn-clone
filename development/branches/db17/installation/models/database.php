@@ -174,10 +174,11 @@ class JInstallationModelDatabase extends JModel
 			}
 			$query = $db->getQuery(true);
 			$query->insert('#__schemas');
-			$query->columns('extension_id');
-			$query->columns('version_id');
-			$query->values('700');
-			$query->values($db->quote($version));
+			$query->columns(
+                   array(
+                       $db->quoteName('extension_id'),
+                       $db->quoteName('version_id')));
+			$query->values('700' . ', '. $db->quote($version)) ;
 			$db->setQuery($query);
 			$db->query();
 			if ($db->getErrorNum()) {
