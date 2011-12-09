@@ -350,7 +350,7 @@ class JInstallationModelDatabase extends JModel
 
 		// Get the tables in the database.
 		//sqlsrv change
-		$tables = $db->showTables($name);	
+		$tables = $db->getTableList($name);	
 		if ($tables)
 		{
 			foreach ($tables as $table)
@@ -435,7 +435,7 @@ class JInstallationModelDatabase extends JModel
 
 		// Get the tables in the database.
 	  	//sqlsrv change
-	    $tables = $db->showTables($name);
+	    $tables = $db->getTableList($name);
 		if ($tables)
 		{
 			foreach ($tables as $table)

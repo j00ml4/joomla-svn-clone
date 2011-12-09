@@ -1776,12 +1776,6 @@ abstract class JDatabase
 	 */
 	public abstract function dropTable($table, $ifExists = true);
 	
-	/**
-	 * Show tables in the database
-	 * @param string $dbName
-	 */
-	public abstract function showTables($dbName);
-	
 	/*
 	 * Rename the table
 	 * @param string $oldTable the name of the table to be renamed
