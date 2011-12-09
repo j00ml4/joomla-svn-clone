@@ -1153,15 +1153,9 @@ class JDatabaseMySQLi extends JDatabase
 		return $error ? false : true;
 	}
 	
-	/**
-	 * Show tables in the database
-	 */
-	public function showTables($dbName) {
-		$this->setQuery("SHOW TABLES FROM ". $dbName);
-		return $this->loadResultArray();
-	}
 	
-	/*
+	
+	/**
 	 * Rename the table
 	 * @param string $oldTable the name of the table to be renamed
 	 * @param string $prefix for the table - used to rename constraints in non-mysql databases
