@@ -241,21 +241,19 @@ class JInstallationModelConfiguration extends JModel
 		  $query->where('id = 42');
 		} else {
 		  $query = $db->getQuery(true);
-		  $columns = 'id,name, username, email, password, usertype, block, sendEmail, registerDate, lastvisitDate, activation, params';
+		  $columns =  array($db->quoteName('id'),$db->quoteName('name'), $db->quoteName('username'), 
+							$db->quoteName('email'), $db->quoteName('password'), 
+							$db->quoteName('usertype'), 
+							$db->quoteName('block'), 
+							$db->quoteName('sendEmail'), $db->quoteName('registerDate'), 
+							$db->quoteName('lastvisitDate'), $db->quoteName('activation'), $db->quoteName('params'));
 		  $query->insert('#__users', true);
 		  $query->columns($columns);
-		  $query->values('42');
-		  $query->values($db->quote('Super User'));
-		  $query->values($db->quote($options->admin_user));
-		  $query->values($db->quote($options->admin_email));
-		  $query->values($db->quote($cryptpass));
-		  $query->values($db->quote('deprecated'));
-		  $query->values('0');
-		  $query->values('1');
-		  $query->values($db->quote($installdate));
-		  $query->values($db->quote($nullDate));
-		  $query->values($db->quote('0'));
-		  $query->values($db->quote(''));
+
+		  $query->values('42'. ', '. $db->quote('Super User'). ', '. $db->quote($options->admin_user). ', '. 
+					$db->quote($options->admin_email). ', '. $db->quote($cryptpass). ', '. $db->quote('deprecated').', '.$db->quote('0').', '.$db->quote('1').', '.
+					$db->quote($installdate).', '.$db->quote($nullDate).', '.$db->quote('0').', '.$db->quote(''));
+
 	}
 	$db->setQuery($query);
 	if (!$db->query()) {
@@ -280,10 +278,8 @@ class JInstallationModelConfiguration extends JModel
     } else {
       $query = $db->getQuery(true);
       $query->insert('#__user_usergroup_map', false);
-	  $query->columns('user_id');
-	  $query->columns('group_id');
-	  $query->values('42');
-	  $query->values('8');
+	  $query->columns(array($db->quoteName('user_id'),$db->quoteName('group_id')));
+	  $query->values('42'. ', '. '8');
     
     }
 
