@@ -372,8 +372,13 @@ class JAccess
 	public static function getAuthorisedViewLevels($userId)
 	{
 		// Get all groups that the user is mapped to recursively.
+		$app	= JFactory::getApplication();
 		$groups = self::getGroupsByUser($userId);
-
+		if ($app->isAdmin())
+		{
+			$groups[] = JComponentHelper::getParams('com_users')->get('guest_usergroup', 1);
+		}
+		
 		// Only load the view levels once.
 		if (empty(self::$viewLevels))
 		{

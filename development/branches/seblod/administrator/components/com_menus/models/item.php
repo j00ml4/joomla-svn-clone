@@ -694,8 +694,9 @@ class MenusModelItem extends JModelAdmin
 	 */
 	public function getModules()
 	{
-		$db = $this->getDbo();
-		$query = $db->getQuery(true);
+		$db		= $this->getDbo();
+		$query	= $db->getQuery(true);
+		$user	= JFactory::getUser();
 
 		$query->select('a.id, a.title, a.position, a.published');
 		$query->from('#__modules AS a');
@@ -706,6 +707,12 @@ class MenusModelItem extends JModelAdmin
 		$query->select('map2.menuid < 0 as except');
 		$query->join('LEFT', '#__modules_menu AS map ON map.moduleid = a.id AND (map.menuid = 0 OR ABS(map.menuid) = '.(int) $this->getState('item.id').')');
 		$query->join('LEFT', '#__modules_menu AS map2 ON map2.moduleid = a.id AND map2.menuid < 0');
+		// Implement View Level Access
+		if (!$user->authorise('core.admin'))
+		{
+			$groups	= implode(',', $user->getAuthorisedViewLevels());
+			$query->where('a.access IN ('.$groups.')');
+		}
 		$query->group('a.id');
 
 		// Join on the asset groups table.
