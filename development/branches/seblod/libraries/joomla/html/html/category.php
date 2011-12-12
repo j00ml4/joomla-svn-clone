@@ -43,9 +43,10 @@ abstract class JHtmlCategory
 
 		if (!isset(self::$items[$hash]))
 		{
-			$config = (array) $config;
-			$db = JFactory::getDbo();
-			$query = $db->getQuery(true);
+			$config	= (array) $config;
+			$db		= JFactory::getDbo();
+			$query	= $db->getQuery(true);
+			$user	= JFactory::getUser();
 
 			$query->select('a.id, a.title, a.level');
 			$query->from('#__categories AS a');
@@ -66,6 +67,13 @@ abstract class JHtmlCategory
 					JArrayHelper::toInteger($config['filter.published']);
 					$query->where('a.published IN (' . implode(',', $config['filter.published']) . ')');
 				}
+			}
+
+			// Implement View Level Access
+			if (!$user->authorise('core.admin'))
+			{
+				$groups	= implode(',', $user->getAuthorisedViewLevels());
+				$query->where('a.access IN ('.$groups.')');
 			}
 
 			$query->order('a.lft');

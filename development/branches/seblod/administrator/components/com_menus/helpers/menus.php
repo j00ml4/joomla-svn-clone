@@ -135,8 +135,9 @@ class MenusHelper
 	 */
 	public static function getMenuLinks($menuType = null, $parentId = 0, $mode = 0, $published=array(), $languages=array())
 	{
-		$db = JFactory::getDbo();
-		$query = $db->getQuery(true);
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
+		$user	= JFactory::getUser();
 
 		$query->select('a.id AS value, a.title AS text, a.level, a.menutype, a.type, a.template_style_id, a.checked_out');
 		$query->from('#__menu AS a');
@@ -153,6 +154,13 @@ class MenusHelper
 				$query->join('LEFT', '`#__menu` AS p ON p.id = '.(int) $parentId);
 				$query->where('(a.lft <= p.lft OR a.rgt >= p.rgt)');
 			}
+		}
+
+		// Implement View Level Access
+		if (!$user->authorise('core.admin'))
+		{
+			$groups	= implode(',', $user->getAuthorisedViewLevels());
+			$query->where('a.access IN ('.$groups.')');
 		}
 
 		if (!empty($languages)) {

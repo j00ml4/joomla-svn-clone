@@ -83,7 +83,8 @@ class BannersModelBanners extends JModelList
 		// Initialise variables.
 		$db		= $this->getDbo();
 		$query	= $db->getQuery(true);
-
+		$user	= JFactory::getUser();
+		
 		// Select the required fields from the table.
 		$query->select(
 			$this->getState(
@@ -129,7 +130,14 @@ class BannersModelBanners extends JModelList
 		if (is_numeric($categoryId)) {
 			$query->where('a.catid = '.(int) $categoryId);
 		}
-
+		
+		// Implement View Level Access (inherited from Category)
+		if (!$user->authorise('core.admin'))
+		{
+			$groups	= implode(',', $user->getAuthorisedViewLevels());
+			$query->where('c.access IN ('.$groups.')');
+		}
+		
 		// Filter by client.
 		$clientId = $this->getState('filter.client_id');
 		if (is_numeric($clientId)) {

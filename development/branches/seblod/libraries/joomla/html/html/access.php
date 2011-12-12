@@ -43,8 +43,9 @@ abstract class JHtmlAccess
 	 */
 	public static function level($name, $selected, $attribs = '', $params = true, $id = false)
 	{
-		$db = JFactory::getDbo();
-		$query = $db->getQuery(true);
+		$db		= JFactory::getDbo();
+		$query	= $db->getQuery(true);
+		$user	= JFactory::getUser();
 
 		$query->select('a.id AS value, a.title AS text');
 		$query->from('#__viewlevels AS a');
@@ -52,6 +53,13 @@ abstract class JHtmlAccess
 		$query->order('a.ordering ASC');
 		$query->order($query->qn('title') . ' ASC');
 
+		// Implement View Level Access
+		if (!$user->authorise('core.admin'))
+		{
+			$groups	= implode(',', $user->getAuthorisedViewLevels());
+			$query->where('a.id IN ('.$groups.')');
+		}
+		
 		// Get the options.
 		$db->setQuery($query);
 		$options = $db->loadObjectList();
@@ -264,13 +272,21 @@ abstract class JHtmlAccess
 	{
 		if (empty(JHtmlAccess::$asset_groups))
 		{
-			$db = JFactory::getDbo();
-			$query = $db->getQuery(true);
+			$db		= JFactory::getDbo();
+			$query	= $db->getQuery(true);
+			$user	= JFactory::getUser();
 
 			$query->select('a.id AS value, a.title AS text');
 			$query->from($db->quoteName('#__viewlevels') . ' AS a');
 			$query->group('a.id');
 			$query->order('a.ordering ASC');
+
+			// Implement View Level Access
+			if (!$user->authorise('core.admin'))
+			{
+				$groups	= implode(',', $user->getAuthorisedViewLevels());
+				$query->where('a.id IN ('.$groups.')');
+			}
 
 			$db->setQuery($query);
 			JHtmlAccess::$asset_groups = $db->loadObjectList();
