@@ -27,6 +27,10 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+06-Jan-2012 Christophe Demko
+ # [#24533] Last updated on article without updating it bugs (bill richardson)
+ # [#24712] Module, template, and plugin preprocess forms not passing content group or any group to allow editing via the onContentPrepareForm plugin event (Brian Towles)
+
 06-Jan-2012 Jean-Marie Simonet
  # [#27579] Smart Search search term highlighting not working. Thanks Rouven and Michael.
  # [#27540] Finder / Smart Search selectbox order. Thanks Brian
