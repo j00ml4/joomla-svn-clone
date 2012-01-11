@@ -27,6 +27,8 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+-------------------- 2.5.0 Beta2 Release [10-Jan-2012] ------------------
+
 10-Jan-2012 Jean-Marie Simonet
  $ Updating installation ini files az-AZ, bg-BG, ckb-IQ, da-DK, de-DE, es-ES, et-EE, fi-FI, hu-HU, it-IT, ja-JP, km-KH, mk-MK, nl-NL, sr-SR, sr-YU, sv-SE, ta-IN
  # [#27565] Move Smart Search content type-specific language strings into their respective plug-ins. Thanks Chris.
@@ -55,6 +57,7 @@ $ -> Language fix or change
  # [#27638] Web links metadata fields missing from user interface
  # [#27605] Smart Search caching issues.
  # [#27488] JInstaller: :Install: Error on upgrade 1.7.3 to 2.5 Beta 1
+ # [#27670] Something in 22409 broke frontend editing of weblinks
 
 09-Jan-2012 Jean-Marie Simonet
  # [#27671] Hathor Global configuration not working. Thanks Andrea.
