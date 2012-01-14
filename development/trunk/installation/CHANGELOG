@@ -26,6 +26,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+14-Jan-2012 Jean-Marie Simonet
+ [#27720] Remove unused strings from en-GB.com_finder.sys.ini. Thanks Michael
+
 13-Jan-2012 Christophe Demko
  ^ Updating copyright
  ^ Deleting remaining "$ Id $"
@@ -34,6 +37,7 @@ $ -> Language fix or change
  $ Updating installation ini files ar-AA, gd-GB
  # [#27707] *Regression: Debug on breaks template assignments to menu items.
  $ Updating installation ini file th-TH
+ $ Updating installation ini file ru-RU
 
 12-Jan-2012 Jean-Marie Simonet
  $ Updating installation ini files fa-IR, hr-HR, pl-PL, pt-PT
