@@ -9,6 +9,10 @@
 
 // no direct access
 defined('_JEXEC') or die;
+if (JFactory::getApplication()->isSite()) {
+	JRequest::checkToken('get') or die(JText::_('JINVALID_TOKEN'));
+}
+
 
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 JHtml::_('behavior.tooltip');
@@ -17,7 +21,7 @@ $function	= JRequest::getCmd('function', 'jSelectArticle');
 $listOrder	= $this->escape($this->state->get('list.ordering'));
 $listDirn	= $this->escape($this->state->get('list.direction'));
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_content&view=articles&layout=modal&tmpl=component&function='.$function);?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_content&view=articles&layout=modal&tmpl=component&function='.$function.'&'.JSession::getFormToken().'=1');?>" method="post" name="adminForm" id="adminForm">
 	<fieldset class="filter clearfix">
 		<div class="left">
 			<label for="filter_search">
