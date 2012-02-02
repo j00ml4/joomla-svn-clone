@@ -213,8 +213,8 @@ class ContactModelContacts extends JModelList
 		}
 
 		// Add the list ordering clause.
-		$orderCol	= $this->state->get('list.ordering');
-		$orderDirn	= $this->state->get('list.direction');
+		$orderCol	= $this->state->get('list.ordering', 'a.name');
+		$orderDirn	= $this->state->get('list.direction', 'asc');
 		if ($orderCol == 'a.ordering' || $orderCol == 'category_title') {
 			$orderCol = 'category_title '.$orderDirn.', a.ordering';
 		}
