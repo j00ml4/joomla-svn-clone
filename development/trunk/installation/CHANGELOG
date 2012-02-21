@@ -26,6 +26,11 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+21-Feb-2012 Jean-Marie Simonet
+ # [#28099] Editor buttons in Custom HTML module
+ # [#28088] Strict error with JSite::getMenu()
+ # [#28098] Entering link to article via Article button -making it Multilanguage aware
+ 
 20-Feb-2012 Jean-Marie Simonet
  $ Updating ko-KR installation ini file
  $ [#28090] Changes to the Administrator Language Strings (mostly English). Thanks Mig
