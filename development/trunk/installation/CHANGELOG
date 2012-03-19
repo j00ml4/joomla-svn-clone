@@ -26,6 +26,11 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+19-Mar-2012 Jean-Marie Simonet
+ $ Updating installation ini files fa-IR, he-IL, ko-KR, ug-CN, zh-TW
+ # [#28263] *27052 does not work as should for System Links menu items. Thanks Christophe.
+ # [#28262] Bug with Rebuild button in the Menu Manager. Thanks Rouven.
+
 18-Mar-2012 Jean-Marie Simonet
  # [#28226] Incorrect SQL statement for MenuItems in menuitem library. Thanks Ben.
  # [#28261] Error message contains the string Joomla 1.7. Thanks Nikolai
