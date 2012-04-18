@@ -28,6 +28,11 @@ $ -> Language fix or change
 
 18-Apr-2012 Jean-Marie Simonet
  # [#28351] Remove extra images from finder. Thanks Rouven and Michael
+ # [#28382] Make Atomic work with sample data. Thanks Elin
+ # [#28339] Incorrect parameter passed to onUserAfterDeleteGroup event. Thanks Dennis
+ # [#28149] ImageManager Javascript Error. Thanks Benjamin
+ # [#28364] JImage wrong JPEG support detection in PHP 5.2. Thanks Pavel and Rouven
+ # [#28276] Finder/Smart Search: Deleting an item does not remove it from Finder's index. Thanks CY Lee
 
 10-Apr-2012 Christophe Demko
  ^ [#28336] e-strict error in com_messages (Elin Waring)
