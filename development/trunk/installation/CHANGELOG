@@ -26,6 +26,14 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+03-June-2012 Jean-Marie Simonet
+ $ Updating installation ini files: nb-NO, nl-NL, nn-NO
+ # [#28602] *Menu Item Manager: Show Batch Processing only if allowed. Thanks Johannes
+ # [#28611] *ACL: Module Manager: Show Batch Processing only if allowed
+ # [#28536] Undefined variable $prev in com_config. Thanks Rouven
+ # [#28607] Missing direct access check for com_finder. Thanks Sander
+ ^ [#28609] Update joomlaupdate @SInCE tags missed in 61f5ee8. Thanks Rouven
+
 02-June-2012 Jean-Marie Simonet
  # [#28375] Remove blacklist code from FinderIndexerHelper. Thanks Michael
  # [#28605] ACL regression in com_finder. Thanks Sander
