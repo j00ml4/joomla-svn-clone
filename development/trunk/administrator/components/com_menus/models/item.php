@@ -614,8 +614,7 @@ class MenusModelItem extends JModelAdmin
 		// Check for a table object error.
 		if ($error = $table->getError()) {
 			$this->setError($error);
-			$false = false;
-			return $false;
+			return false;
 		}
 
 		// Prime required properties.
@@ -689,7 +688,7 @@ class MenusModelItem extends JModelAdmin
 
 		// Convert to the JObject before adding the params.
 		$properties = $table->getProperties(1);
-		$result = JArrayHelper::toObject($properties, 'JObject');
+		$result = JArrayHelper::toObject($properties);
 
 		// Convert the params field to an array.
 		$registry = new JRegistry;
@@ -718,7 +717,18 @@ class MenusModelItem extends JModelAdmin
 		}
 
 		// Load associated menu items
-		if (JFactory::getApplication()->get('menu_associations', 0)) {
+		$app = JFactory::getApplication();
+		if (isset($app->menu_associations))
+		{
+			$assoc = $app->menu_associations;
+		}
+		else
+		{
+			$assoc = 0;
+		}
+
+		if ($assoc)
+		{
 			if ($pk != null) {
 				$result->associations = MenusHelper::getAssociations($pk);
 			}
@@ -976,7 +986,17 @@ class MenusModelItem extends JModelAdmin
 		}
 
 		// Association menu items
-		if (JFactory::getApplication()->get('menu_associations', 0)) {
+		$app = JFactory::getApplication();
+		if (isset($app->menu_associations))
+		{
+			$assoc = $app->menu_associations;
+		}
+		else
+		{
+			$assoc = 0;
+		}
+
+		if ($assoc) {
 			$languages = JLanguageHelper::getLanguages('lang_code');
 
 			$addform = new JXMLElement('<form />');
@@ -1161,7 +1181,17 @@ class MenusModelItem extends JModelAdmin
 		$this->setState('item.menutype', $table->menutype);
 
 		// Load associated menu items
-		if (JFactory::getApplication()->get('menu_associations', 0)) {
+		$app = JFactory::getApplication();
+		if (isset($app->menu_associations))
+		{
+			$assoc = $app->menu_associations;
+		}
+		else
+		{
+			$assoc = 0;
+		}
+
+		if ($assoc) {
 			// Adding self to the association
 			$associations = $data['associations'];
 			foreach ($associations as $tag=>$id) {
