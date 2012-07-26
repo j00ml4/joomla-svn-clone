@@ -13,7 +13,7 @@
  */
 
 // Set flag that this is a parent file.
-define('_JEXEC', 1);
+const _JEXEC = 1;
 
 error_reporting(E_ALL | E_NOTICE);
 ini_set('display_errors', 1);
@@ -54,9 +54,6 @@ class Updatecron extends JApplicationCli
 	 */
 	public function doExecute()
 	{
-		// Purge all old records
-		$db = JFactory::getDBO();
-
 		// Get the update cache time
 		$component = JComponentHelper::getComponent('com_installer');
 
@@ -67,7 +64,7 @@ class Updatecron extends JApplicationCli
 		// Find all updates
 		$this->out('Fetching updates...');
 		$updater = JUpdater::getInstance();
-		$results = $updater->findUpdates(0, $cache_timeout);
+		$updater->findUpdates(0, $cache_timeout);
 		$this->out('Finished fetching updates');
 	}
 }
