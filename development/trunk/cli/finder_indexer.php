@@ -16,14 +16,14 @@
 const _JEXEC = 1;
 
 // Load system defines
-if (file_exists(dirname(dirname(__FILE__)) . '/defines.php'))
+if (file_exists(dirname(__DIR__) . '/defines.php'))
 {
-	require_once dirname(dirname(__FILE__)) . '/defines.php';
+	require_once dirname(__DIR__) . '/defines.php';
 }
 
 if (!defined('_JDEFINES'))
 {
-	define('JPATH_BASE', dirname(dirname(__FILE__)));
+	define('JPATH_BASE', dirname(__DIR__));
 	require_once JPATH_BASE . '/includes/defines.php';
 }
 
@@ -35,7 +35,6 @@ require_once JPATH_LIBRARIES . '/cms.php';
 
 // Import necessary classes not handled by the autoloaders
 jimport('joomla.environment.uri');
-jimport('joomla.utilities.arrayhelper');
 
 // Import the configuration.
 require_once JPATH_CONFIGURATION . '/configuration.php';
