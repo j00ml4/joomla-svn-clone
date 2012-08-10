@@ -56,7 +56,7 @@ class ModulesModelPositions extends JModelList
 		$state = $this->getUserStateFromRequest($this->context.'.filter.state', 'filter_state', '', 'string');
 		$this->setState('filter.state', $state);
 
-		$clientId = JRequest::getInt('client_id', 0);
+		$clientId = $app->input->getInt('client_id', 0);
 		$this->setState('filter.client_id', $clientId);
 
 		$template = $this->getUserStateFromRequest($this->context.'.filter.template', 'filter_template', '', 'string');
@@ -107,10 +107,14 @@ class ModulesModelPositions extends JModelList
 				}
 
 				$this->_db->setQuery($query);
-				$positions = $this->_db->loadObjectList('value');
-				// Check for a database error.
-				if ($error = $this->_db->getErrorMsg()) {
-					$this->setError($error);
+
+				try
+				{
+					$positions = $this->_db->loadObjectList('value');
+				}
+				catch (RuntimeException $e)
+				{
+					$this->setError($e->getMessage());
 					return false;
 				}
 				foreach ($positions as $value => $position)

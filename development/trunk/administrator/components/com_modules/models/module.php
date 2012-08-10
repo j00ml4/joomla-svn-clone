@@ -50,7 +50,8 @@ class ModulesModelModule extends JModelAdmin
 		$app = JFactory::getApplication('administrator');
 
 		// Load the User state.
-		if (!($pk = (int) JRequest::getInt('id')))
+		$pk = $app->input->getInt('id');
+		if (!$pk)
 		{
 			if ($extensionId = (int) $app->getUserState('com_modules.add.module.extension_id'))
 			{
@@ -454,9 +455,13 @@ class ModulesModelModule extends JModelAdmin
 			$query = 'INSERT INTO #__modules_menu (moduleid,menuid) VALUES '.implode(',', $tuples);
 			$this->_db->setQuery($query);
 
-			if (!$this->_db->execute())
+			try
 			{
-				return JError::raiseWarning(500, $this->_db->getErrorMsg());
+				$this->_db->execute();
+			}
+			catch (RuntimeException $e)
+			{
+				return JError::raiseWarning(500, $e->getMessage());
 			}
 		}
 
@@ -632,17 +637,19 @@ class ModulesModelModule extends JModelAdmin
 					$query->where('type = '.$db->quote('module'));
 					$db->setQuery($query);
 
-					$extension = $db->loadObject();
+					try
+					{
+						$extension = $db->loadObject();
+					}
+					catch (RuntimeException $e)
+					{
+						$this->setError($e->getMessage);
+						return false;
+					}
+
 					if (empty($extension))
 					{
-						if ($error = $db->getErrorMsg())
-						{
-							$this->setError($error);
-						}
-						else
-						{
-							$this->setError('COM_MODULES_ERROR_CANNOT_FIND_MODULE');
-						}
+						$this->setError('COM_MODULES_ERROR_CANNOT_FIND_MODULE');
 						return false;
 					}
 
@@ -867,8 +874,8 @@ class ModulesModelModule extends JModelAdmin
 	 */
 	public function save($data)
 	{
-		// Initialise variables;
 		$dispatcher = JEventDispatcher::getInstance();
+		$input      = JFactory::getApplication()->input;
 		$table		= $this->getTable();
 		$pk			= (!empty($data['id'])) ? $data['id'] : (int) $this->getState('module.id');
 		$isNew		= true;
@@ -884,7 +891,7 @@ class ModulesModelModule extends JModelAdmin
 		}
 
 		// Alter the title and published state for Save as Copy
-		if (JRequest::getVar('task') == 'save2copy')
+		if ($input->get('task') == 'save2copy')
 		{
 			$orig_data	= JRequest::getVar('jform', array(), 'post', 'array');
 			$orig_table = clone($this->getTable());
@@ -947,11 +954,14 @@ class ModulesModelModule extends JModelAdmin
 		$query->from('#__modules_menu');
 		$query->where('moduleid = ' . (int) $table->id);
 		$db->setQuery((string) $query);
-		$db->execute();
 
-		if (!$db->execute())
+		try
 		{
-			$this->setError($db->getErrorMsg());
+			$db->execute();
+		}
+		catch (RuntimeException $e)
+		{
+			$this->setError($e->getMessage());
 			return false;
 		}
 
@@ -982,9 +992,14 @@ class ModulesModelModule extends JModelAdmin
 				$query->columns(array($db->quoteName('moduleid'), $db->quoteName('menuid')));
 				$query->values((int) $table->id . ', 0');
 				$db->setQuery((string) $query);
-				if (!$db->execute())
+
+				try
 				{
-					$this->setError($db->getErrorMsg());
+					$db->execute();
+				}
+				catch (RuntimeException $e)
+				{
+					$this->setError($e->getMessage());
 					return false;
 				}
 			}
@@ -1005,9 +1020,13 @@ class ModulesModelModule extends JModelAdmin
 					implode(',', $tuples)
 				);
 
-				if (!$db->execute())
+				try
 				{
-					$this->setError($db->getErrorMsg());
+					$db->execute();
+				}
+				catch (RuntimeException $e)
+				{
+					$this->setError($e->getMessage());
 					return false;
 				}
 			}
@@ -1024,12 +1043,14 @@ class ModulesModelModule extends JModelAdmin
 		$query->where('m.id = '.(int) $table->id);
 		$db->setQuery($query);
 
-		$extensionId = $db->loadResult();
-
-		if ($error = $db->getErrorMsg())
+		try
 		{
-			JError::raiseWarning(500, $error);
-			return;
+			$extensionId = $db->loadResult();
+		}
+		catch (RuntimeException $e)
+		{
+			JError::raiseWarning(500, $e->getMessage());
+			return false;
 		}
 
 		$this->setState('module.extension_id', $extensionId);

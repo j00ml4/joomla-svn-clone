@@ -34,13 +34,15 @@ class MessagesModelMessage extends JModelAdmin
 	{
 		parent::populateState();
 
+		$input = JFactory::getApplication()->input;
+
 		$user = JFactory::getUser();
 		$this->setState('user.id', $user->get('id'));
 
-		$messageId = (int) JRequest::getInt('message_id');
+		$messageId = (int) $input->getInt('message_id');
 		$this->setState('message.id', $messageId);
 
-		$replyId = (int) JRequest::getInt('reply_id');
+		$replyId = (int) $input->getInt('reply_id');
 		$this->setState('reply.id', $replyId);
 	}
 
@@ -83,11 +85,14 @@ class MessagesModelMessage extends JModelAdmin
 						$query->select('subject, user_id_from');
 						$query->from('#__messages');
 						$query->where('message_id = '.(int) $replyId);
-						$message = $db->setQuery($query)->loadObject();
 
-						if ($error = $db->getErrorMsg())
+						try
 						{
-							$this->setError($error);
+							$message = $db->setQuery($query)->loadObject();
+						}
+						catch (RuntimeException $e)
+						{
+							$this->setError($e->getMessage());
 							return false;
 						}
 

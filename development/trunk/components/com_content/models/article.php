@@ -37,10 +37,10 @@ class ContentModelArticle extends JModelItem
 		$app = JFactory::getApplication('site');
 
 		// Load state from the request.
-		$pk = JRequest::getInt('id');
+		$pk = $app->input->getInt('id');
 		$this->setState('article.id', $pk);
 
-		$offset = JRequest::getUInt('limitstart');
+		$offset = $app->input->getUInt('limitstart');
 		$this->setState('list.offset', $offset);
 
 		// Load the parameters.
@@ -149,10 +149,6 @@ class ContentModelArticle extends JModelItem
 
 				$data = $db->loadObject();
 
-				if ($error = $db->getErrorMsg()) {
-					throw new Exception($error);
-				}
-
 				if (empty($data)) {
 					return JError::raiseError(404, JText::_('COM_CONTENT_ERROR_ARTICLE_NOT_FOUND'));
 				}
@@ -214,7 +210,7 @@ class ContentModelArticle extends JModelItem
 
 				$this->_item[$pk] = $data;
 			}
-			catch (JException $e)
+			catch (Exception $e)
 			{
 				if ($e->getCode() == 404) {
 					// Need to go thru the error handler to allow Redirect to work.
@@ -239,27 +235,31 @@ class ContentModelArticle extends JModelItem
 	 */
 	public function hit($pk = 0)
 	{
-			$hitcount = JRequest::getInt('hitcount', 1);
+		$input    = JFactory::getApplication()->input;
+		$hitcount = $input->getInt('hitcount', 1);
 
-			if ($hitcount)
+		if ($hitcount)
+		{
+			$pk = (!empty($pk)) ? $pk : (int) $this->getState('article.id');
+			$db = $this->getDbo();
+
+			$db->setQuery(
+					'UPDATE #__content' .
+					' SET hits = hits + 1' .
+					' WHERE id = '.(int) $pk
+			);
+
+			try
 			{
-				// Initialise variables.
-				$pk = (!empty($pk)) ? $pk : (int) $this->getState('article.id');
-				$db = $this->getDbo();
-
-				$db->setQuery(
-						'UPDATE #__content' .
-						' SET hits = hits + 1' .
-						' WHERE id = '.(int) $pk
-				);
-
-				if (!$db->execute()) {
-						$this->setError($db->getErrorMsg());
-						return false;
-				}
+				$db->execute();
 			}
-
-			return true;
+			catch (RuntimeException $e)
+			{
+				$this->setError($e->getMessage());
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public function storeVote($pk = 0, $rate = 0)
@@ -285,9 +285,14 @@ class ContentModelArticle extends JModelItem
 						' VALUES ( '.(int) $pk.', '.$db->Quote($userIP).', '.(int) $rate.', 1 )'
 				);
 
-				if (!$db->execute()) {
-						$this->setError($db->getErrorMsg());
-						return false;
+				try
+				{
+					$db->execute();
+				}
+				catch (RuntimeException $e)
+				{
+					$this->setError($e->getMessage);
+					return false;
 				}
 			} else {
 				if ($userIP != ($rating->lastip))
@@ -297,9 +302,15 @@ class ContentModelArticle extends JModelItem
 							' SET rating_count = rating_count + 1, rating_sum = rating_sum + '.(int) $rate.', lastip = '.$db->Quote($userIP) .
 							' WHERE content_id = '.(int) $pk
 					);
-					if (!$db->execute()) {
-							$this->setError($db->getErrorMsg());
-							return false;
+
+					try
+					{
+						$db->execute();
+					}
+					catch (RuntimeException $e)
+					{
+						$this->setError($e->getMessage);
+						return false;
 					}
 				} else {
 					return false;
