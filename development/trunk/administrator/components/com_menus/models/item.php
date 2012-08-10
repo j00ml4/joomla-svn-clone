@@ -237,11 +237,14 @@ class MenusModelItem extends JModelAdmin
 		$query->select('COUNT(id)');
 		$query->from($db->quoteName('#__menu'));
 		$db->setQuery($query);
-		$count = $db->loadResult();
 
-		if ($error = $db->getErrorMsg())
+		try
 		{
-			$this->setError($error);
+			$count = $db->loadResult();
+		}
+		catch (RuntimeException $e)
+		{
+			$this->setError($e->getMessage());
 			return false;
 		}
 
@@ -493,12 +496,14 @@ class MenusModelItem extends JModelAdmin
 			$query->set($db->quoteName('menutype') . ' = ' . $db->quote($menuType));
 			$query->where($db->quoteName('id') . ' IN (' . implode(',', $children) . ')');
 			$db->setQuery($query);
-			$db->execute();
 
-			// Check for a database error.
-			if ($db->getErrorNum())
+			try
 			{
-				$this->setError($db->getErrorMsg());
+				$db->execute();
+			}
+			catch (RuntimeException $e)
+			{
+				$this->setError($e->getMessage());
 				return false;
 			}
 		}
@@ -764,10 +769,14 @@ class MenusModelItem extends JModelAdmin
 		$query->order('a.position, a.ordering');
 
 		$db->setQuery($query);
-		$result = $db->loadObjectList();
 
-		if ($db->getErrorNum()) {
-			$this->setError($db->getErrorMsg());
+		try
+		{
+			$result = $db->loadObjectList();
+		}
+		catch (RuntimeException $e)
+		{
+			$this->setError($e->getMessage());
 			return false;
 		}
 
@@ -816,22 +825,24 @@ class MenusModelItem extends JModelAdmin
 		$app = JFactory::getApplication('administrator');
 
 		// Load the User state.
-		$pk = (int) JRequest::getInt('id');
+		$pk = $app->input->getInt('id');
 		$this->setState('item.id', $pk);
 
 		if (!($parentId = $app->getUserState('com_menus.edit.item.parent_id'))) {
-			$parentId = JRequest::getInt('parent_id');
+			$parentId = $app->input->getInt('parent_id');
 		}
 		$this->setState('item.parent_id', $parentId);
 
 		$menuType = $app->getUserState('com_menus.edit.item.menutype');
-		if (JRequest::getCmd('menutype', false)) {
-			$menuType = JRequest::getCmd('menutype', 'mainmenu');
+		if ($app->input->get('menutype', false))
+		{
+			$menuType = $app->input->get('menutype', 'mainmenu');
 		}
 		$this->setState('item.menutype', $menuType);
 
-		if (!($type = $app->getUserState('com_menus.edit.item.type'))){
-			$type = JRequest::getCmd('type');
+		if (!($type = $app->getUserState('com_menus.edit.item.type')))
+		{
+			$type = $app->input->get('type');
 			// Note a new menu item will have no field type.
 			// The field is required so the user has to change it.
 		}
@@ -1052,9 +1063,13 @@ class MenusModelItem extends JModelAdmin
 			'  AND params <> '.$db->quote('')
 		);
 
-		$items = $db->loadObjectList();
-		if ($error = $db->getErrorMsg()) {
-			$this->setError($error);
+		try
+		{
+			$items = $db->loadObjectList();
+		}
+		catch (RuntimeException $e)
+		{
+			$this->setError($e->getMessage());
 			return false;
 		}
 
@@ -1214,9 +1229,14 @@ class MenusModelItem extends JModelAdmin
 			$query->where('context='.$db->quote('com_menus.item'));
 			$query->where('id IN ('.implode(',', $associations).')');
 			$db->setQuery($query);
-			$db->execute();
-			if ($error = $db->getErrorMsg()) {
-				$this->setError($error);
+
+			try
+			{
+				$db->execute();
+			}
+			catch (RuntimeException $e)
+			{
+				$this->setError($e->getMessage());
 				return false;
 			}
 
@@ -1231,9 +1251,14 @@ class MenusModelItem extends JModelAdmin
 					$query->values($id.','.$db->quote('com_menus.item').','.$db->quote($key));
 				}
 				$db->setQuery($query);
-				$db->execute();
-				if ($error = $db->getErrorMsg()) {
-					$this->setError($error);
+
+				try
+				{
+					$db->execute();
+				}
+				catch (RuntimeException $e)
+				{
+					$this->setError($e->getMessage());
 					return false;
 				}
 			}

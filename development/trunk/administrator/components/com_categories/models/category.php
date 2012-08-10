@@ -106,14 +106,14 @@ class CategoriesModelCategory extends JModelAdmin
 	{
 		$app = JFactory::getApplication('administrator');
 
-		$parentId = JRequest::getInt('parent_id');
+		$parentId = $app->input->getInt('parent_id');
 		$this->setState('category.parent_id', $parentId);
 
 		// Load the User state.
-		$pk = (int) JRequest::getInt('id');
+		$pk = $app->input->getInt('id');
 		$this->setState($this->getName() . '.id', $pk);
 
-		$extension = JRequest::getCmd('extension', 'com_content');
+		$extension = $app->input->get('extension', 'com_content');
 		$this->setState('category.extension', $extension);
 		$parts = explode('.', $extension);
 
@@ -366,6 +366,7 @@ class CategoriesModelCategory extends JModelAdmin
 		// Initialise variables;
 		$dispatcher = JEventDispatcher::getInstance();
 		$table = $this->getTable();
+		$input = JFactory::getApplication()->input;
 		$pk = (!empty($data['id'])) ? $data['id'] : (int) $this->getState($this->getName() . '.id');
 		$isNew = true;
 
@@ -386,7 +387,7 @@ class CategoriesModelCategory extends JModelAdmin
 		}
 
 		// Alter the title for save as copy
-		if (JRequest::getVar('task') == 'save2copy')
+		if ($input->get('task') == 'save2copy')
 		{
 			list($title, $alias) = $this->generateNewTitle($data['parent_id'], $data['alias'], $data['title']);
 			$data['title'] = $title;
@@ -469,7 +470,7 @@ class CategoriesModelCategory extends JModelAdmin
 		if (parent::publish($pks, $value)) {
 			// Initialise variables.
 			$dispatcher	= JEventDispatcher::getInstance();
-			$extension	= JRequest::getCmd('extension');
+			$extension	= JFactory::getApplication()->input->get('extension');
 
 			// Include the content plugins for the change of category state event.
 			JPluginHelper::importPlugin('content');
@@ -609,11 +610,14 @@ class CategoriesModelCategory extends JModelAdmin
 		$query->select('COUNT(id)');
 		$query->from($db->quoteName('#__categories'));
 		$db->setQuery($query);
-		$count = $db->loadResult();
 
-		if ($error = $db->getErrorMsg())
+		try
 		{
-			$this->setError($error);
+			$count = $db->loadResult();
+		}
+		catch (RuntimeException $e)
+		{
+			$this->setError($e->getMessage());
 			return false;
 		}
 
@@ -819,7 +823,16 @@ class CategoriesModelCategory extends JModelAdmin
 				$query->from($db->quoteName('#__categories'));
 				$query->where($db->quoteName('lft') .' BETWEEN ' . (int) $table->lft . ' AND ' . (int) $table->rgt);
 				$db->setQuery($query);
-				$children = array_merge($children, (array) $db->loadColumn());
+
+				try
+				{
+					$children = array_merge($children, (array) $db->loadColumn());
+				}
+				catch (RuntimeException $e)
+				{
+					$this->setError($e->getMessage());
+					return false;
+				}
 			}
 
 			// Store the row.
@@ -843,13 +856,6 @@ class CategoriesModelCategory extends JModelAdmin
 			// Remove any duplicates and sanitize ids.
 			$children = array_unique($children);
 			JArrayHelper::toInteger($children);
-
-			// Check for a database error.
-			if ($db->getErrorNum())
-			{
-				$this->setError($db->getErrorMsg());
-				return false;
-			}
 		}
 
 		return true;
@@ -862,7 +868,7 @@ class CategoriesModelCategory extends JModelAdmin
 	 */
 	protected function cleanCache($group = null, $client_id = 0)
 	{
-		$extension = JRequest::getCmd('extension');
+		$extension = JFactory::getApplication()->input->get('extension');
 		switch ($extension)
 		{
 			case 'com_content':
